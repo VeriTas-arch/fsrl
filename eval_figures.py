@@ -1,4 +1,5 @@
 import argparse
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -13,6 +14,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 from sklearn.decomposition import PCA
 
+try:
+    from tqdm.auto import tqdm
+except ImportError:
+    def tqdm(iterable, **kwargs):
+        return iterable
+
 
 ROOT_DIR = Path(__file__).resolve().parent
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -20,6 +27,10 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 ADDINPUT = 4
 NUMRESPONSESTEP = 1
 ALPHABET = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
+
+
+def log(message):
+    print(message, flush=True)
 
 
 def default_params(batch_size):
@@ -149,9 +160,11 @@ def load_model_state(path):
 
 
 def load_network(params, model_path):
+    log(f"[model] Loading parameters from {model_path}")
     net = RetroModulRNN(params)
     net.load_state_dict(load_model_state(model_path))
     net.eval()
+    log(f"[model] Ready on {DEVICE}; batch_size={params['bs']}, hidden_size={params['hs']}")
     return net
 
 
@@ -221,6 +234,8 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
     batch_size = params["bs"]
     nbstimbits = 2 * params["cs"] + 1
     nb_episodes = 3 if linked_lists else 1
+    eval_name = "linked-list" if linked_lists else "single-list"
+    log(f"[eval:{eval_name}] Starting eval: episodes={nb_episodes}, batch_size={batch_size}, keep_rates={keep_rates}")
     if linked_lists:
         params["nbepsbwresets"] = 3
         params["nbiter"] = 3
@@ -234,7 +249,13 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
     cue_data = None
     results = []
 
-    for episode_index in range(nb_episodes):
+    for episode_index in tqdm(
+        range(nb_episodes),
+        desc=f"{eval_name} episodes",
+        unit="episode",
+        dynamic_ncols=True,
+        file=sys.stdout,
+    ):
         if linked_lists and episode_index == 2:
             params["nbtraintrials"] = 1 if linking_is_sham else 4
             params["nbtesttrials"] = 1
@@ -252,6 +273,7 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
             pw = pw.detach()
 
         if not linked_lists or episode_index == 0:
+            log(f"[eval:{eval_name}] Episode {episode_index + 1}/{nb_episodes}: generating cue vectors")
             cue_data = generate_cue_data(params, batch_size)
 
         iscorrect = np.zeros((batch_size, params["nbtrials"]))
@@ -272,7 +294,15 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
             _, _, _, hidden, et, pw = net(inputs_t, hidden, et, pw)
 
         numstep_ep = 0
-        for trial_index in range(params["nbtrials"]):
+        trial_iter = tqdm(
+            range(params["nbtrials"]),
+            desc=f"{eval_name} episode {episode_index + 1} trials",
+            unit="trial",
+            leave=False,
+            dynamic_ncols=True,
+            file=sys.stdout,
+        )
+        for trial_index in trial_iter:
             hidden = net.initialZeroState(batch_size)
             et = net.initialZeroET(batch_size)
 
@@ -345,6 +375,10 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
                 numstep_ep += 1
 
         old_cue_data.append(cue_data)
+        log(
+            f"[eval:{eval_name}] Episode {episode_index + 1}/{nb_episodes} complete: "
+            f"mean correct={np.mean(iscorrect):.3f}"
+        )
         results.append(
             EpisodeResult(
                 correct=iscorrect.astype(int),
@@ -358,6 +392,7 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
             )
         )
 
+    log(f"[eval:{eval_name}] Complete")
     return results[-1]
 
 
@@ -407,8 +442,10 @@ def nan_column_stat(values, reducer):
 
 
 def plot_pair_performance(result, params, output_path, linked_lists=False):
+    log(f"[plot] Computing pair performance for {output_path.name}")
     pairs, allperfs = per_pair_performance(result, params)
 
+    log(f"[plot] Drawing {output_path.name}")
     fig, ax = plt.subplots(figsize=(5, 3))
     start = 0
     offset = 0
@@ -474,6 +511,7 @@ def pca_for_trial20(result, params):
 
 
 def plot_fig4a(result, params, net, output_path):
+    log(f"[plot] Computing PCA for {output_path.name}")
     pca, mx_pca = pca_for_trial20(result, params)
     first_iscuenum, ordered = trial_labels(result, params)
     trial_index = 19
@@ -537,7 +575,14 @@ def single_item_alignment(result, params, net):
     allcorrs_s1 = []
     allcorrs_s2 = []
 
-    for cue_index in range(params["nbcues"]):
+    for cue_index in tqdm(
+        range(params["nbcues"]),
+        desc="single-item cues",
+        unit="cue",
+        leave=False,
+        dynamic_ncols=True,
+        file=sys.stdout,
+    ):
         inputs[:, :nbstimbits] = 0
         inputs[:, : params["cs"]] = cue_data[:, cue_index, :]
         inputs[:, nbstimbits + 0] = 1.0
@@ -563,8 +608,10 @@ def single_item_alignment(result, params, net):
 
 
 def plot_fig4b(result, params, net, output_path):
+    log(f"[plot] Computing single-item alignment for {output_path.name}")
     _, allcorrs_s2 = single_item_alignment(result, params, net)
 
+    log(f"[plot] Drawing {output_path.name}")
     fig, ax = plt.subplots(figsize=(3.33, 3))
     ax.set_xticks(np.arange(params["nbcues"]))
     ax.set_xticklabels(ALPHABET[: params["nbcues"]])
@@ -588,6 +635,7 @@ def save_figure(fig, output_path):
     fig.savefig(output_path.with_suffix(".png"), dpi=300)
     fig.savefig(output_path.with_suffix(".pdf"))
     plt.close(fig)
+    log(f"[plot] Saved {output_path.with_suffix('.png')} and {output_path.with_suffix('.pdf')}")
 
 
 def parse_args():
@@ -605,26 +653,36 @@ def main():
     figures = {"fig2a", "fig3a", "fig4a", "fig4b"} if "all" in args.figures else set(args.figures)
     output_dir = ROOT_DIR / args.output_dir
     model_path = resolve_model_path(args.model_path)
+    log(f"[start] Requested figures: {', '.join(sorted(figures))}")
+    log(f"[start] Output directory: {output_dir}")
     set_seed(args.seed)
+    if args.seed is not None:
+        log(f"[start] Random seed set to {args.seed}")
 
     if figures & {"fig2a", "fig4a", "fig4b"}:
+        log("[stage] Running standard single-list eval for Fig. 2a/4a/4b")
         params = default_params(args.batch_size)
         net = load_network(params, model_path)
         result = run_eval(params, net, keep_rates=bool(figures & {"fig4a"}))
         if "fig2a" in figures:
+            log("[stage] Plotting Fig. 2a")
             plot_pair_performance(result, params, output_dir / "fig2a_sde", linked_lists=False)
         if "fig4a" in figures:
+            log("[stage] Plotting Fig. 4a")
             plot_fig4a(result, params, net, output_dir / "fig4a_pca")
         if "fig4b" in figures:
+            log("[stage] Plotting Fig. 4b")
             plot_fig4b(result, params, net, output_dir / "fig4b_single_item_alignment")
 
     if "fig3a" in figures:
+        log("[stage] Running linked-list eval for Fig. 3a")
         params = default_params(args.batch_size)
         net = load_network(params, model_path)
         result = run_eval(params, net, linked_lists=True, linking_is_sham=False, keep_rates=False)
+        log("[stage] Plotting Fig. 3a")
         plot_pair_performance(result, params, output_dir / "fig3a_linked_sde", linked_lists=True)
 
-    print("Saved requested figures to", output_dir)
+    log(f"[done] Saved requested figures to {output_dir}")
 
 
 if __name__ == "__main__":
