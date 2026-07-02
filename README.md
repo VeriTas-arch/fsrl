@@ -3,6 +3,37 @@
 > [!NOTE]
 > For educational purposes, we modified the code to make it easier to read and understand. The original code used for the paper is at <https://github.com/ThomasMiconi/TransitiveInference>, and the original README is kept below for reference.
 
+## Environment setup
+
+Use Python 3.12.
+
+```bash
+conda create -n fsrl python=3.12
+conda activate fsrl
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+The default `requirements.txt` installs the standard PyPI build of PyTorch. If you need a CUDA-specific PyTorch build, install PyTorch first using the command from <https://pytorch.org/get-started/locally/>, then run:
+
+```bash
+pip install numpy matplotlib scipy scikit-learn tqdm
+```
+
+To generate the teaching figures extracted from `main.py`:
+
+```bash
+python eval_figures.py --figures all
+```
+
+Outputs are written to `figures/` by default. Use a smaller batch for quick demos:
+
+```bash
+python eval_figures.py --figures fig2a fig4b --batch-size 64 --seed 1
+```
+
+## Original README
+
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
 
 We also include parameter files for two pre-trained networks, representing each of the two strategies (active, list-linking and passive, not list-linking) described in the paper.
@@ -17,7 +48,7 @@ Note that the networks produced by `simple.ipynb` can be used in the EVAL (figur
 
 Consult the respecitve notebooks for more details.
 
-## To generate the figures from the paper
+### To generate the figures from the paper
 
 1. Copy `net_active.dat` to `net.dat` and upload it to where the notebook can access it.
 
@@ -29,7 +60,7 @@ This produces figures for the active strategy (capable of list-linking). Other f
 
 To produce similar figures for the passive strategy (not capable of list-linking), use `net_passive.dat` (and rename it to `net.dat`) instead.
 
-## To train your own networks from scratch
+### To train your own networks from scratch
 
 1. In line 207 of `main.ipynb`, set EVAL to `False`
 
