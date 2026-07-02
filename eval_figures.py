@@ -11,14 +11,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from sklearn.decomposition import PCA
 
-try:
-    from tqdm.auto import tqdm
-except ImportError:
-    def tqdm(iterable, **kwargs):
-        return iterable
+from tqdm.auto import tqdm
 
 
 ROOT_DIR = Path(__file__).resolve().parent
@@ -349,9 +344,9 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
                 if trial_index == 19 and numstep == 0:
                     pw_trial20_step1 = pw.detach().cpu().numpy().astype("float32")
 
-                y = F.softmax(y, dim=1)
+                y = torch.softmax(y, dim=1)
                 actionschosen = torch.distributions.Categorical(y).sample()
-                numactionschosen = actionschosen.data.cpu().numpy()
+                numactionschosen = actionschosen.detach().cpu().numpy()
                 actions[:, trial_index, numstep] = numactionschosen
 
                 reward = np.zeros(batch_size, dtype="float32")

@@ -25,16 +25,8 @@ ROOT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.
 myseed = -1
 
 
-# If running this code on a cluster, uncomment the following, and pass a RNG seed as the --seed parameter on the command line
-# parser  = argparse.ArgumentParser()
-# parser.add_argument('--seed', type=int, default=-1)
-# args = parser.parse_args()
-# myseed =  args.seed
-
-
 np.set_printoptions(precision=5)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-# device = 'cpu'
 
 
 # fmt: off
