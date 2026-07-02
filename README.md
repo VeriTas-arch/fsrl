@@ -1,5 +1,8 @@
 # Meta-training plastic networks for transitive inference
 
+> [!NOTE]
+> For educational purposes, we modified the code to make it easier to read and understand. The original code used for the paper is at <https://github.com/ThomasMiconi/TransitiveInference>, and the original README is kept below for reference.
+
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
 
 We also include parameter files for two pre-trained networks, representing each of the two strategies (active, list-linking and passive, not list-linking) described in the paper.
