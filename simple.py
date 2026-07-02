@@ -17,6 +17,10 @@ from numpy import random
 import torch.nn.functional as F
 import time
 import platform
+from pathlib import Path
+
+
+ROOT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
 
 myseed = -1
 
@@ -643,8 +647,8 @@ for numepisode in range(GG["nbiter"]):
         if numepisode > 0:
             # print("Saving model parameters...")
             # torch.save(net.state_dict(), 'net_'+suffix+'.dat')
-            torch.save(net.state_dict(), "netAE" + str(GG["rngseed"]) + ".dat")
-            torch.save(net.state_dict(), "net.dat")
+            torch.save(net.state_dict(), ROOT_DIR / ("netAE" + str(GG["rngseed"]) + ".dat"))
+            torch.save(net.state_dict(), ROOT_DIR / "net.dat")
 
         # with open('rewards_'+suffix+'.txt', 'w') as thefile:
         #     for item in all_mean_rewards_ep[::10]:
@@ -652,6 +656,6 @@ for numepisode in range(GG["nbiter"]):
         # with open('testrew_'+suffix+'.txt', 'w') as thefile:
         #     for item in all_mean_testrewards_ep[::10]:
         #             thefile.write("%s\n" % item)
-        with open("tAE" + str(GG["rngseed"]) + ".txt", "w") as thefile:
+        with open(ROOT_DIR / ("tAE" + str(GG["rngseed"]) + ".txt"), "w") as thefile:
             for item in all_mean_testrewards_ep[::10]:
                 thefile.write("%s\n" % item)

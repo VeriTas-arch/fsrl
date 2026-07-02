@@ -25,23 +25,57 @@
 # Based on the code for the Stimulus-response task as described in Miconi et al. ICLR 2019.
 
 import argparse
-import pdb
 import torch
 import torch.nn as nn
 import numpy as np
 from numpy import random
 import torch.nn.functional as F
-from torch import optim
-from torch.optim import lr_scheduler
-import random
-import sys
-import pickle
 import time
-import os
 import platform
+from pathlib import Path
 
-import numpy as np
-import glob
+ROOT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+
+
+def parse_runtime_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--model-path",
+        default=None,
+        help="Model state dict to load in EVAL mode. Defaults to net.dat, then net_active.dat in the repository root.",
+    )
+    args, _ = parser.parse_known_args()
+    return args
+
+
+runtime_args = parse_runtime_args()
+
+
+def resolve_model_path(model_path):
+    if model_path:
+        path = Path(model_path)
+        if not path.is_absolute():
+            path = ROOT_DIR / path
+        if not path.exists():
+            raise FileNotFoundError(f"Requested model file does not exist: {path}")
+        return path
+
+    for candidate in ("net.dat", "net_active.dat"):
+        path = ROOT_DIR / candidate
+        if path.exists():
+            return path
+
+    raise FileNotFoundError(
+        "No model file found. Expected net.dat or net_active.dat in the repository root, "
+        "or pass --model-path."
+    )
+
+
+def load_model_state(path):
+    try:
+        return torch.load(path, map_location=device, weights_only=True)
+    except TypeError:
+        return torch.load(path, map_location=device)
 
 
 
@@ -301,11 +335,13 @@ MIXNETWORKS = False
 print("Initializing network")
 net = RetroModulRNN(params)
 if EVAL:
-    net.load_state_dict(torch.load('net.dat'))
+    model_path = resolve_model_path(runtime_args.model_path)
+    print("Loading model parameters from", model_path)
+    net.load_state_dict(load_model_state(model_path))
     net.eval()
     if MIXNETWORKS:
         netB = RetroModulRNN(params)
-        netB.load_state_dict(torch.load('netB.dat'))
+        netB.load_state_dict(load_model_state(ROOT_DIR / 'netB.dat'))
         # net.i2h = netB.i2h
         net.h2o = netB.h2o
 
@@ -1507,7 +1543,6 @@ plt.plot(a[0, :10, -20:].T)  # Notice the T. 10 first neurons, 20 last timesteps
 
 
 import  sklearn.linear_model
-import sklearn.neural_network
 
 # biga = [];  bigcp  = []; bigcorr= []; bigresps = []; bigac = []
 # for numep in range(NBEPISODES):
@@ -2356,6 +2391,8 @@ for numstep in range(4):
     corrseachstep.append(corrsthiscue)
 
 corrseachstep = np.array(corrseachstep)
+step2corrdiffs = corrseachstep[2] - corrseachstep[1]
+step3corrdiffs = corrseachstep[3] - corrseachstep[2]
 
 
 # %%
