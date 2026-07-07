@@ -565,10 +565,10 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Readable training script for the plastic RNN transitive-inference task."
     )
-    parser.add_argument("--nbiter", type=int, default=30000)
+    parser.add_argument("--nbiter", type=int, default=300)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--seed", type=int, default=-1)
-    parser.add_argument("--save-every", type=int, default=200)
+    parser.add_argument("--save-every", type=int, default=100)
     parser.add_argument("--print-every", type=int, default=101)
     parser.add_argument("--output-dir", default=str(ROOT_DIR))
     parser.add_argument(
