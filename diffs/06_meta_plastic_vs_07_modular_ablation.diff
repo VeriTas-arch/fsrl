@@ -1,0 +1,312 @@
+--- /mnt/data/rank_mechanism_proposal_git_ready_v2/sources/06_meta_plastic_rnn_rank_attractor/meta_plastic_rank_rnn.py	2026-07-06 10:46:58.000000000 +0000
++++ /mnt/data/rank_mechanism_proposal_git_ready_v2/sources/07_modular_ablation_active_rank/meta_plastic_rank_rnn.py	2026-07-07 07:30:36.000000000 +0000
+@@ -134,6 +134,23 @@
+     straight_through_commit_weight: float = 0.15
+     train_commit_temperature: float = 0.75
+ 
++    # Modular ablation / input switches.  Defaults implement the requested
++    # RNN-derived reliability setting: no hand-coded distance salience enters
++    # write strength.
++    observation_mode: str = "distance"  # {distance, raw_bars}
++    reliability_mode: str = "rnn"  # {rnn, feature_rnn, manual_distance, constant, oracle_distance}
++    relation_encoding_mode: str = "rnn"  # {residual_observation, rnn}
++    rank_readout: str = "commit"  # {commit, top1_commit, posterior_mean}
++    ablate_rnn: bool = False
++    ablate_plasticity: bool = False
++    ablate_subject_latent: bool = False
++    ablate_item_vectors: bool = False
++    ablate_resource: bool = False
++    manual_distance_salience: float = 0.9
++    manual_subject_salience: float = 0.15
++    constant_reliability: float = 0.5
++    raw_bar_noise: float = 0.02
++
+     @property
+     def all_rank_pairs(self) -> list[tuple[int, int]]:
+         return list(combinations(range(self.n_items), 2))
+@@ -290,6 +307,9 @@
+             nn.Linear(h, 2),
+         )
+         self.resource_head = nn.Sequential(nn.Linear(h + z, h), nn.Tanh(), nn.Linear(h, 1))
++        # Reliability can be forced to arise from recurrent activity alone.
++        # This is the default mechanism used in the new ablation suite.
++        self.reliability_head = nn.Sequential(nn.Linear(h, h), nn.Tanh(), nn.Linear(h, 1))
+ 
+         # Bounded trainable likelihood parameters.  The bounds keep the rank
+         # module cognitively fuzzy rather than becoming an exact solver.
+@@ -348,7 +368,11 @@
+         if edge_dropout is None:
+             edge_dropout = cfg.train_edge_dropout if train_mode else cfg.eval_edge_dropout
+ 
+-        h = self.init_h(subject_z)
++        subject_input = torch.zeros_like(subject_z) if cfg.ablate_subject_latent else subject_z
++        item_vecs_input = torch.zeros_like(item_vecs) if cfg.ablate_item_vectors else item_vecs
++        h = self.init_h(subject_input)
++        if cfg.ablate_rnn:
++            h = torch.zeros_like(h)
+         plastic = torch.zeros(bsz, cfg.hidden_size, cfg.hidden_size, device=item_vecs.device)
+         mem_sum = torch.zeros(bsz, cfg.n_items, cfg.n_items, device=item_vecs.device)
+         strength = torch.zeros_like(mem_sum)
+@@ -366,44 +390,87 @@
+                 item_i = learning_edges[batch, edge_idx, 0]
+                 item_j = learning_edges[batch, edge_idx, 1]
+                 true_diff = gather_true_diff(true_pos, item_i, item_j)
+-                obs = true_diff
++                obs_diff = true_diff
+                 if noise_std > 0:
+-                    obs = (obs + noise_std * torch.randn_like(obs)).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
++                    obs_diff = (obs_diff + noise_std * torch.randn_like(obs_diff)).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
+                 if edge_dropout > 0:
+-                    keep = (torch.rand_like(obs) > edge_dropout).float()
++                    keep = (torch.rand_like(obs_diff) > edge_dropout).float()
+                     # Dropout means weak/no observation; the RNN receives the old
+                     # memory estimate rather than the ground-truth edge.
+                     old_strength = strength[batch, item_i, item_j]
+-                    old_est = torch.where(old_strength > 1e-5, mem_sum[batch, item_i, item_j] / old_strength.clamp_min(1e-5), torch.zeros_like(obs))
+-                    obs = keep * obs + (1.0 - keep) * old_est.detach()
++                    old_est = torch.where(old_strength > 1e-5, mem_sum[batch, item_i, item_j] / old_strength.clamp_min(1e-5), torch.zeros_like(obs_diff))
++                    obs_diff = keep * obs_diff + (1.0 - keep) * old_est.detach()
+ 
+-                vec_i = item_vecs[batch, item_i]
+-                vec_j = item_vecs[batch, item_j]
+-                obs_norm = obs / (cfg.n_items - 1)
++                vec_i = item_vecs_input[batch, item_i]
++                vec_j = item_vecs_input[batch, item_j]
++                obs_norm = obs_diff / (cfg.n_items - 1)
++                if cfg.observation_mode == "distance":
++                    obs_ch1 = obs_norm
++                    obs_ch2 = torch.zeros_like(obs_norm)
++                    encoded_observation = obs_diff
++                elif cfg.observation_mode == "raw_bars":
++                    # Raw sensory-style bars: the network sees two noisy absolute bar heights,
++                    # not a hand-provided symbolic distance/salience channel.  The relational
++                    # evidence available to memory is the observed bar difference.
++                    center = torch.empty_like(obs_norm).uniform_(-0.45, 0.45)
++                    obs_ch1 = center - 0.5 * obs_norm
++                    obs_ch2 = center + 0.5 * obs_norm
++                    if cfg.raw_bar_noise > 0:
++                        obs_ch1 = obs_ch1 + cfg.raw_bar_noise * torch.randn_like(obs_ch1)
++                        obs_ch2 = obs_ch2 + cfg.raw_bar_noise * torch.randn_like(obs_ch2)
++                    encoded_observation = ((obs_ch2 - obs_ch1) * (cfg.n_items - 1)).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
++                else:
++                    raise ValueError(f"Unknown observation_mode: {cfg.observation_mode}")
+                 features = torch.cat(
+                     [
+                         vec_i,
+                         vec_j,
+-                        subject_z,
+-                        obs_norm[:, None],
+-                        obs_norm.abs()[:, None],
++                        subject_input,
++                        obs_ch1[:, None],
++                        obs_ch2[:, None],
+                         torch.full((bsz, 1), block / max(1, cfg.n_learning_blocks - 1), device=item_vecs.device),
+                         strength[batch, item_i, item_j][:, None],
+                         torch.ones(bsz, 1, device=item_vecs.device),
+                     ],
+                     dim=1,
+                 )
+-                h, plastic, gate = self.plastic_step(h, plastic, features)
++                if cfg.ablate_rnn:
++                    h = torch.zeros_like(h)
++                    gate = torch.zeros(bsz, device=item_vecs.device)
++                    plastic = torch.zeros_like(plastic)
++                else:
++                    if cfg.ablate_plasticity:
++                        plastic = torch.zeros_like(plastic)
++                    h, plastic, gate = self.plastic_step(h, plastic, features)
++                    if cfg.ablate_plasticity:
++                        plastic = torch.zeros_like(plastic)
+                 head = self.edge_head(torch.cat([features, h], dim=1))
+-                # Strength contains a learned component plus a non-pair-specific
+-                # distance salience term.  This lets the network learn reliability
+-                # profiles from randomized episodes, while preserving the human-like
+-                # fact that large ordinal gaps are easier anchors.
+-                raw_strength = head[:, 0] + 0.9 * obs_norm.abs() + 0.15 * subject_z.mean(dim=1)
+-                write_strength = torch.sigmoid(raw_strength) * self.strength_gain().clamp(0.05, 3.0)
++
++                if cfg.reliability_mode == "rnn":
++                    raw_strength = self.reliability_head(h).squeeze(1)
++                    write_strength = torch.sigmoid(raw_strength) * self.strength_gain().clamp(0.05, 3.0)
++                elif cfg.reliability_mode == "feature_rnn":
++                    raw_strength = head[:, 0]
++                    write_strength = torch.sigmoid(raw_strength) * self.strength_gain().clamp(0.05, 3.0)
++                elif cfg.reliability_mode == "manual_distance":
++                    raw_strength = head[:, 0] + cfg.manual_distance_salience * obs_norm.abs() + cfg.manual_subject_salience * subject_input.mean(dim=1)
++                    write_strength = torch.sigmoid(raw_strength) * self.strength_gain().clamp(0.05, 3.0)
++                elif cfg.reliability_mode == "oracle_distance":
++                    raw_strength = cfg.manual_distance_salience * obs_norm.abs() + cfg.manual_subject_salience * subject_input.mean(dim=1)
++                    write_strength = torch.sigmoid(raw_strength) * self.strength_gain().clamp(0.05, 3.0)
++                elif cfg.reliability_mode == "constant":
++                    write_strength = torch.full_like(obs_norm, cfg.constant_reliability)
++                else:
++                    raise ValueError(f"Unknown reliability_mode: {cfg.reliability_mode}")
+                 write_strength = write_strength.clamp(1e-4, 1.0)
+-                diff_adjust = 0.35 * torch.tanh(head[:, 1])
+-                encoded = (obs + diff_adjust).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
++
++                if cfg.relation_encoding_mode == "residual_observation":
++                    diff_adjust = 0.35 * torch.tanh(head[:, 1])
++                    encoded = (encoded_observation + diff_adjust).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
++                elif cfg.relation_encoding_mode == "rnn":
++                    encoded = ((cfg.n_items - 1) * torch.tanh(head[:, 1])).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
++                else:
++                    raise ValueError(f"Unknown relation_encoding_mode: {cfg.relation_encoding_mode}")
+ 
+                 prev_s = strength[batch, item_i, item_j]
+                 prev_sum = mem_sum[batch, item_i, item_j]
+@@ -422,8 +489,11 @@
+ 
+         # Convert accumulated weighted sums to estimated relation memory.
+         memory = torch.where(strength > 1e-5, mem_sum / strength.clamp_min(1e-5), torch.zeros_like(mem_sum))
+-        resource_raw = self.resource_head(torch.cat([h, subject_z], dim=1)).squeeze(1)
+-        resource = 0.5 + F.softplus(resource_raw)
++        if cfg.ablate_resource:
++            resource = torch.ones(bsz, device=item_vecs.device)
++        else:
++            resource_raw = self.resource_head(torch.cat([h, subject_input], dim=1)).squeeze(1)
++            resource = 0.5 + F.softplus(resource_raw)
+         return {
+             "memory": memory,
+             "strength": strength.clamp(0.0, 4.0),
+@@ -742,16 +812,28 @@
+     chosen_indices = np.zeros(n_subj, dtype=np.int64)
+     chosen_orders = np.zeros((n_subj, config.n_items), dtype=np.int64)
+     for s in range(n_subj):
+-        chosen_indices[s] = int(rng.choice(posterior_np.shape[1], p=posterior_np[s]))
++        if config.rank_readout == "top1_commit":
++            chosen_indices[s] = int(np.argmax(posterior_np[s]))
++        else:
++            chosen_indices[s] = int(rng.choice(posterior_np.shape[1], p=posterior_np[s]))
+         chosen_orders[s] = hypo.permutations[chosen_indices[s]].cpu().numpy()
+ 
+     pair_list = config.all_rank_pairs
+     pair_acc = np.zeros((n_subj, len(pair_list)), dtype=np.float32)
+     pos_np = hypo.positions.cpu().numpy()
+-    for pidx, (a, b) in enumerate(pair_list):
+-        subjective_diff = pos_np[chosen_indices, b] - pos_np[chosen_indices, a]
+-        p_correct = config.eval_lapse * 0.5 + (1.0 - config.eval_lapse) / (1.0 + np.exp(-config.eval_choice_beta * subjective_diff))
+-        pair_acc[:, pidx] = rng.binomial(reps, p_correct) / reps
++    if config.rank_readout in {"commit", "top1_commit"}:
++        for pidx, (a, b) in enumerate(pair_list):
++            subjective_diff = pos_np[chosen_indices, b] - pos_np[chosen_indices, a]
++            p_correct = config.eval_lapse * 0.5 + (1.0 - config.eval_lapse) / (1.0 + np.exp(-config.eval_choice_beta * subjective_diff))
++            pair_acc[:, pidx] = rng.binomial(reps, p_correct) / reps
++    elif config.rank_readout == "posterior_mean":
++        for pidx, (a, b) in enumerate(pair_list):
++            diffs = pos_np[:, b] - pos_np[:, a]
++            p_ok_given_perm = 1.0 / (1.0 + np.exp(-config.eval_choice_beta * diffs))
++            p_correct = config.eval_lapse * 0.5 + (1.0 - config.eval_lapse) * (posterior_np @ p_ok_given_perm)
++            pair_acc[:, pidx] = rng.binomial(reps, p_correct) / reps
++    else:
++        raise ValueError(f"Unknown rank_readout: {config.rank_readout}")
+ 
+     learned_idx = hypo.learned_pair_indices
+     nonlearned_idx = hypo.nonlearned_pair_indices
+@@ -845,6 +927,17 @@
+ 
+     summary = {
+         "model": "meta_trained_plastic_rnn_differentiable_rank_attractor",
++        "ablation_signature": {
++            "observation_mode": config.observation_mode,
++            "reliability_mode": config.reliability_mode,
++            "relation_encoding_mode": config.relation_encoding_mode,
++            "rank_readout": config.rank_readout,
++            "ablate_rnn": config.ablate_rnn,
++            "ablate_plasticity": config.ablate_plasticity,
++            "ablate_subject_latent": config.ablate_subject_latent,
++            "ablate_item_vectors": config.ablate_item_vectors,
++            "ablate_resource": config.ablate_resource,
++        },
+         "config": asdict(config),
+         "eval_subjects": n_subj,
+         "eval_repetitions": reps,
+@@ -1052,6 +1145,21 @@
+     p.add_argument("--plastic-eta", type=float, default=0.075)
+     p.add_argument("--plastic-decay", type=float, default=0.92)
+     p.add_argument("--fast-weight-gain", type=float, default=0.75)
++    p.add_argument("--observation-mode", choices=["distance", "raw_bars"], default="distance")
++    p.add_argument("--reliability-mode", choices=["rnn", "feature_rnn", "manual_distance", "constant", "oracle_distance"], default="rnn")
++    p.add_argument("--relation-encoding-mode", choices=["residual_observation", "rnn"], default="rnn")
++    p.add_argument("--rank-readout", choices=["commit", "top1_commit", "posterior_mean"], default="commit")
++    p.add_argument("--ablate-rnn", action="store_true")
++    p.add_argument("--ablate-plasticity", action="store_true")
++    p.add_argument("--ablate-subject-latent", action="store_true")
++    p.add_argument("--ablate-item-vectors", action="store_true")
++    p.add_argument("--ablate-resource", action="store_true")
++    p.add_argument("--manual-distance-salience", type=float, default=0.9)
++    p.add_argument("--manual-subject-salience", type=float, default=0.15)
++    p.add_argument("--constant-reliability", type=float, default=0.5)
++    p.add_argument("--raw-bar-noise", type=float, default=0.02)
++    p.add_argument("--load-checkpoint", default=None, help="Load a checkpoint and evaluate or continue training from it.")
++    p.add_argument("--eval-only", action="store_true", help="Evaluate the loaded/untrained model without optimizer steps.")
+     p.add_argument("--eval-sweep", action="store_true")
+     p.add_argument("--no-train", action="store_true", help="Evaluate an untrained model; useful as a sanity check.")
+     return p.parse_args()
+@@ -1086,6 +1194,19 @@
+         plastic_eta=args.plastic_eta,
+         plastic_decay=args.plastic_decay,
+         fast_weight_gain=args.fast_weight_gain,
++        observation_mode=args.observation_mode,
++        reliability_mode=args.reliability_mode,
++        relation_encoding_mode=args.relation_encoding_mode,
++        rank_readout=args.rank_readout,
++        ablate_rnn=args.ablate_rnn,
++        ablate_plasticity=args.ablate_plasticity,
++        ablate_subject_latent=args.ablate_subject_latent,
++        ablate_item_vectors=args.ablate_item_vectors,
++        ablate_resource=args.ablate_resource,
++        manual_distance_salience=args.manual_distance_salience,
++        manual_subject_salience=args.manual_subject_salience,
++        constant_reliability=args.constant_reliability,
++        raw_bar_noise=args.raw_bar_noise,
+     )
+     out = Path(cfg.output_dir)
+     out.mkdir(parents=True, exist_ok=True)
+@@ -1093,10 +1214,45 @@
+     with open(out / "config_meta_plastic_rank_rnn.json", "w", encoding="utf-8") as f:
+         json.dump(asdict(cfg), f, indent=2, ensure_ascii=False)
+     hypo = make_rank_hypotheses(cfg)
+-    if args.no_train:
++    if args.load_checkpoint:
++        ckpt = torch.load(args.load_checkpoint, map_location=DEVICE)
++        # Command-line ablation switches deliberately override the stored config,
++        # so the same trained network can be re-evaluated under independent lesions.
++        model = PlasticRankRNN(cfg).to(DEVICE)
++        missing, unexpected = model.load_state_dict(ckpt["state_dict"], strict=False)
++        if missing or unexpected:
++            log(f"[load] non-strict checkpoint load: missing={list(missing)}, unexpected={list(unexpected)}")
++    elif args.no_train:
+         model = PlasticRankRNN(cfg).to(DEVICE)
+     else:
+         model = train(cfg, hypo)
++    if args.load_checkpoint and (not args.eval_only) and (not args.no_train):
++        # Continue training from the loaded checkpoint under the current switches.
++        opt = torch.optim.AdamW(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
++        rows = []
++        t0 = time.time()
++        for it in tqdm(range(1, cfg.nbiter + 1), desc="continued-meta-training", disable=os.environ.get("DISABLE_TQDM", "0") == "1"):
++            model.train()
++            opt.zero_grad(set_to_none=True)
++            stats = run_training_episode(cfg, model, hypo)
++            stats.loss.backward()
++            torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.grad_clip)
++            opt.step()
++            if it == 1 or it % cfg.print_every == 0 or it == cfg.nbiter:
++                row = {
++                    "iter": it, "loss": stats.loss_value, "choice_loss": stats.choice_loss,
++                    "commit_loss": stats.commit_loss, "entropy": stats.entropy, "edge_recon": stats.edge_recon,
++                    "accuracy_proxy": stats.accuracy_proxy, "sigma": stats.sigma, "order_bonus": stats.order_bonus,
++                    "precision": stats.precision, "mean_hebb_gate": stats.mean_hebb_gate,
++                    "mean_edge_strength": stats.mean_edge_strength, "elapsed_sec": time.time() - t0,
++                }
++                rows.append(row)
++                log(f"[cont {it:04d}] loss={row['loss']:.3f} p_acc={row['accuracy_proxy']:.3f} H={row['entropy']:.2f} edge={row['mean_edge_strength']:.2f}")
++        if rows:
++            with open(out / "continued_train_log.csv", "w", newline="", encoding="utf-8") as f:
++                writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
++                writer.writeheader(); writer.writerows(rows)
++        torch.save({"state_dict": model.state_dict(), "config": asdict(cfg)}, out / "meta_plastic_rank_rnn.pt")
+     result = evaluate_paper_task(cfg, model, hypo, fit_beta=True)
+     write_eval_outputs(out, result)
+     sweep_rows = run_eval_sweep(cfg, model, hypo, out) if args.eval_sweep else None

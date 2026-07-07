@@ -1,0 +1,4341 @@
+From 9d7a02c655c1a84bdcb1622375b637f4b9dcdafc Mon Sep 17 00:00:00 2001
+From: proposal-bot <proposal-bot@example.com>
+Date: Tue, 7 Jul 2026 09:13:14 +0000
+Subject: [PATCH 03/11] stage01: add behavior task score-coordinate baseline
+ and sweep results
+
+---
+ .../constructive_sweep_summary.json           |  182 +++
+ .../eval_sweep_results.json                   |   97 ++
+ .../exp_A_evidence20/config_constructive.json |   30 +
+ .../paper_task_eval_summary.json              |   28 +
+ .../exp_A_evidence20/train_log.csv            |   20 +
+ .../config_constructive.json                  |   30 +
+ .../paper_task_eval_summary.json              |   28 +
+ .../exp_B_moderate_idio/train_log.csv         |   21 +
+ .../exp_C_high_idio/config_constructive.json  |   30 +
+ .../paper_task_eval_summary.json              |   28 +
+ .../exp_C_high_idio/train_log.csv             |   21 +
+ .../exp_D_best_train/config_constructive.json |   31 +
+ .../paper_task_eval_summary.json              |   28 +
+ .../exp_D_best_train/train_log.csv            |   21 +
+ .../requirements.txt                          |    6 +
+ .../simple_neo.py                             | 1157 +++++++++++++++++
+ .../simple_neo_prev_param_sweep.py            |  773 +++++++++++
+ .../simple_neo_before_modular_mechanisms.py   | 1039 +++++++++++++++
+ .../snapshots/simple_neo_readable_original.py |  597 +++++++++
+ 19 files changed, 4167 insertions(+)
+ create mode 100644 results/01_constructive_score_coordinate/constructive_sweep_summary.json
+ create mode 100644 results/01_constructive_score_coordinate/eval_sweep_results.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_A_evidence20/config_constructive.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_A_evidence20/paper_task_eval_summary.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_A_evidence20/train_log.csv
+ create mode 100644 results/01_constructive_score_coordinate/exp_B_moderate_idio/config_constructive.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_B_moderate_idio/paper_task_eval_summary.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_B_moderate_idio/train_log.csv
+ create mode 100644 results/01_constructive_score_coordinate/exp_C_high_idio/config_constructive.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_C_high_idio/paper_task_eval_summary.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_C_high_idio/train_log.csv
+ create mode 100644 results/01_constructive_score_coordinate/exp_D_best_train/config_constructive.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_D_best_train/paper_task_eval_summary.json
+ create mode 100644 results/01_constructive_score_coordinate/exp_D_best_train/train_log.csv
+ create mode 100644 sources/01_behavior_task_score_coordinate/requirements.txt
+ create mode 100644 sources/01_behavior_task_score_coordinate/simple_neo.py
+ create mode 100644 sources/01_behavior_task_score_coordinate/simple_neo_prev_param_sweep.py
+ create mode 100644 sources/01_behavior_task_score_coordinate/snapshots/simple_neo_before_modular_mechanisms.py
+ create mode 100644 sources/01_behavior_task_score_coordinate/snapshots/simple_neo_readable_original.py
+
+diff --git a/results/01_constructive_score_coordinate/constructive_sweep_summary.json b/results/01_constructive_score_coordinate/constructive_sweep_summary.json
+new file mode 100644
+index 0000000..7af4d5d
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/constructive_sweep_summary.json
+@@ -0,0 +1,182 @@
++[
++  {
++    "experiment": "A_evidence",
++    "overall": 0.621196663974748,
++    "learned": 0.6316558471457525,
++    "nonlearned": 0.6170129907063463,
++    "consistent80": 0.09090909090909091,
++    "consistent100": 0.0,
++    "self_cons_majority": 0.7629870129870131,
++    "circular_majority": 4.740259740259741,
++    "kendall_tau": 0.9534713406893859,
++    "distance_acc": {
++      "1": 0.5467532525506001,
++      "2": 0.5839826886852583,
++      "3": 0.613506497771709,
++      "4": 0.6574675346446501,
++      "5": 0.6995671010249621,
++      "6": 0.7279220780768951,
++      "7": 0.8103896046613718
++    }
++  },
++  {
++    "experiment": "B_moderate",
++    "overall": 0.5993506531395253,
++    "learned": 0.6308441598621475,
++    "nonlearned": 0.5867532504504764,
++    "consistent80": 0.11688311688311688,
++    "consistent100": 0.012987012987012988,
++    "self_cons_majority": 0.7311688311688311,
++    "circular_majority": 5.376623376623376,
++    "kendall_tau": 0.8014842300556585,
++    "distance_acc": {
++      "1": 0.5267161454362639,
++      "2": 0.5798701345436759,
++      "3": 0.6031168886012845,
++      "4": 0.636688315297489,
++      "5": 0.6545454562355429,
++      "6": 0.692857142392691,
++      "7": 0.703896104902416
++    }
++  },
++  {
++    "experiment": "C_high_noise_train",
++    "overall": 0.6219387779976474,
++    "learned": 0.6537337686818141,
++    "nonlearned": 0.6092207817239808,
++    "consistent80": 0.37662337662337664,
++    "consistent100": 0.07792207792207792,
++    "self_cons_majority": 0.8506493506493507,
++    "circular_majority": 2.987012987012987,
++    "kendall_tau": 0.7510985255346156,
++    "distance_acc": {
++      "1": 0.5224489842252962,
++      "2": 0.5632034682414748,
++      "3": 0.6470129903067242,
++      "4": 0.6928571434328695,
++      "5": 0.7320346302026278,
++      "6": 0.7246753230400673,
++      "7": 0.7259740229550894
++    }
++  },
++  {
++    "experiment": "D_best_train",
++    "overall": 0.6128478679073377,
++    "learned": 0.637175326925013,
++    "nonlearned": 0.6031168843002676,
++    "consistent80": 0.6753246753246753,
++    "consistent100": 0.33766233766233766,
++    "self_cons_majority": 0.8551948051948053,
++    "circular_majority": 2.896103896103896,
++    "kendall_tau": 0.23171565276828435,
++    "distance_acc": {
++      "1": 0.5287569592912476,
++      "2": 0.580519483412628,
++      "3": 0.6153246764625822,
++      "4": 0.6587662336888251,
++      "5": 0.7086580103480971,
++      "6": 0.7090909082394141,
++      "7": 0.7194805212996223
++    }
++  },
++  {
++    "experiment": "sweep_C_eval_original_recalc",
++    "overall": 0.59615028230387,
++    "learned": 0.6165584450369919,
++    "nonlearned": 0.5879870172106213,
++    "consistent80": 0.18181818181818182,
++    "consistent100": 0.012987012987012988,
++    "self_cons_majority": 0.7240259740259739,
++    "circular_majority": 5.51948051948052,
++    "kendall_tau": 0.5563421540865149,
++    "distance_acc": {
++      "1": 0.5406308027886283,
++      "2": 0.562554117985618,
++      "3": 0.5877922117129549,
++      "4": 0.6282467568269023,
++      "5": 0.6567099593999066,
++      "6": 0.6844155853735162,
++      "7": 0.7415584422551192
++    }
++  },
++  {
++    "experiment": "sweep_D_beta8",
++    "overall": 0.647680892607332,
++    "learned": 0.6952922082953639,
++    "nonlearned": 0.6286363663321192,
++    "consistent80": 0.12987012987012986,
++    "consistent100": 0.05194805194805195,
++    "self_cons_majority": 0.868831168831169,
++    "circular_majority": 2.6233766233766236,
++    "kendall_tau": 0.6727370373986916,
++    "distance_acc": {
++      "1": 0.5495361828820604,
++      "2": 0.6196969722062995,
++      "3": 0.6615584444303018,
++      "4": 0.6685064947595457,
++      "5": 0.7359307349631281,
++      "6": 0.8012986985313428,
++      "7": 0.777922076451314
++    }
++  },
++  {
++    "experiment": "sweep_E_beta16",
++    "overall": 0.6584879427954748,
++    "learned": 0.6907467543595023,
++    "nonlearned": 0.6455844181698638,
++    "consistent80": 0.2987012987012987,
++    "consistent100": 0.03896103896103896,
++    "self_cons_majority": 0.8850649350649351,
++    "circular_majority": 2.2987012987012987,
++    "kendall_tau": 0.6238160335904698,
++    "distance_acc": {
++      "1": 0.5419295041343277,
++      "2": 0.624242427496812,
++      "3": 0.6781818207788777,
++      "4": 0.6957792209872564,
++      "5": 0.7748917739886743,
++      "6": 0.7967532469661205,
++      "7": 0.8064935006104507
++    }
++  },
++  {
++    "experiment": "sweep_F_more_idio_beta16",
++    "overall": 0.5916048264431599,
++    "learned": 0.6444805217906833,
++    "nonlearned": 0.5704545483041507,
++    "consistent80": 0.6883116883116883,
++    "consistent100": 0.3246753246753247,
++    "self_cons_majority": 0.8077922077922078,
++    "circular_majority": 3.844155844155844,
++    "kendall_tau": 0.3298017771701982,
++    "distance_acc": {
++      "1": 0.5304267195801566,
++      "2": 0.576190479293272,
++      "3": 0.5802597440295405,
++      "4": 0.617207793905944,
++      "5": 0.6385281406246223,
++      "6": 0.7201298703137157,
++      "7": 0.6688311693149728
++    }
++  },
++  {
++    "experiment": "sweep_G_strong_prior_beta16",
++    "overall": 0.6418831177429056,
++    "learned": 0.6689935072821069,
++    "nonlearned": 0.6310389619272251,
++    "consistent80": 0.5454545454545454,
++    "consistent100": 0.22077922077922077,
++    "self_cons_majority": 0.907792207792208,
++    "circular_majority": 1.844155844155844,
++    "kendall_tau": 0.36158578263841423,
++    "distance_acc": {
++      "1": 0.5426716169062483,
++      "2": 0.5891774913126772,
++      "3": 0.6675324695837962,
++      "4": 0.700649349454355,
++      "5": 0.7502164469136821,
++      "6": 0.7487012960694053,
++      "7": 0.7506493519652974
++    }
++  }
++]
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/eval_sweep_results.json b/results/01_constructive_score_coordinate/eval_sweep_results.json
+new file mode 100644
+index 0000000..d53ab30
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/eval_sweep_results.json
+@@ -0,0 +1,97 @@
++{
++  "C_eval_original_recalc": {
++    "overall_accuracy": 0.59615028230387,
++    "learned_pairs_accuracy": 0.6165584450369919,
++    "nonlearned_pairs_accuracy": 0.5879870172106213,
++    "consistent_error_subjects_80pct_ratio": 0.18181818181818182,
++    "consistent_error_subjects_100pct_ratio": 0.012987012987012988,
++    "mean_self_consistency_from_majority_choices": 0.7240259740259739,
++    "mean_circular_triads_from_majority_choices": 5.51948051948052,
++    "mean_inter_subject_kendall_tau": 0.5563421540865149,
++    "distance_accuracy": {
++      "1": 0.5406308027886283,
++      "2": 0.562554117985618,
++      "3": 0.5877922117129549,
++      "4": 0.6282467568269023,
++      "5": 0.6567099593999066,
++      "6": 0.6844155853735162,
++      "7": 0.7415584422551192
++    }
++  },
++  "D_beta8": {
++    "overall_accuracy": 0.647680892607332,
++    "learned_pairs_accuracy": 0.6952922082953639,
++    "nonlearned_pairs_accuracy": 0.6286363663321192,
++    "consistent_error_subjects_80pct_ratio": 0.12987012987012986,
++    "consistent_error_subjects_100pct_ratio": 0.05194805194805195,
++    "mean_self_consistency_from_majority_choices": 0.868831168831169,
++    "mean_circular_triads_from_majority_choices": 2.6233766233766236,
++    "mean_inter_subject_kendall_tau": 0.6727370373986916,
++    "distance_accuracy": {
++      "1": 0.5495361828820604,
++      "2": 0.6196969722062995,
++      "3": 0.6615584444303018,
++      "4": 0.6685064947595457,
++      "5": 0.7359307349631281,
++      "6": 0.8012986985313428,
++      "7": 0.777922076451314
++    }
++  },
++  "E_beta16": {
++    "overall_accuracy": 0.6584879427954748,
++    "learned_pairs_accuracy": 0.6907467543595023,
++    "nonlearned_pairs_accuracy": 0.6455844181698638,
++    "consistent_error_subjects_80pct_ratio": 0.2987012987012987,
++    "consistent_error_subjects_100pct_ratio": 0.03896103896103896,
++    "mean_self_consistency_from_majority_choices": 0.8850649350649351,
++    "mean_circular_triads_from_majority_choices": 2.2987012987012987,
++    "mean_inter_subject_kendall_tau": 0.6238160335904698,
++    "distance_accuracy": {
++      "1": 0.5419295041343277,
++      "2": 0.624242427496812,
++      "3": 0.6781818207788777,
++      "4": 0.6957792209872564,
++      "5": 0.7748917739886743,
++      "6": 0.7967532469661205,
++      "7": 0.8064935006104507
++    }
++  },
++  "F_more_idio_beta16": {
++    "overall_accuracy": 0.5916048264431599,
++    "learned_pairs_accuracy": 0.6444805217906833,
++    "nonlearned_pairs_accuracy": 0.5704545483041507,
++    "consistent_error_subjects_80pct_ratio": 0.6883116883116883,
++    "consistent_error_subjects_100pct_ratio": 0.3246753246753247,
++    "mean_self_consistency_from_majority_choices": 0.8077922077922078,
++    "mean_circular_triads_from_majority_choices": 3.844155844155844,
++    "mean_inter_subject_kendall_tau": 0.3298017771701982,
++    "distance_accuracy": {
++      "1": 0.5304267195801566,
++      "2": 0.576190479293272,
++      "3": 0.5802597440295405,
++      "4": 0.617207793905944,
++      "5": 0.6385281406246223,
++      "6": 0.7201298703137157,
++      "7": 0.6688311693149728
++    }
++  },
++  "G_strong_prior_beta16": {
++    "overall_accuracy": 0.6418831177429056,
++    "learned_pairs_accuracy": 0.6689935072821069,
++    "nonlearned_pairs_accuracy": 0.6310389619272251,
++    "consistent_error_subjects_80pct_ratio": 0.5454545454545454,
++    "consistent_error_subjects_100pct_ratio": 0.22077922077922077,
++    "mean_self_consistency_from_majority_choices": 0.907792207792208,
++    "mean_circular_triads_from_majority_choices": 1.844155844155844,
++    "mean_inter_subject_kendall_tau": 0.36158578263841423,
++    "distance_accuracy": {
++      "1": 0.5426716169062483,
++      "2": 0.5891774913126772,
++      "3": 0.6675324695837962,
++      "4": 0.700649349454355,
++      "5": 0.7502164469136821,
++      "6": 0.7487012960694053,
++      "7": 0.7506493519652974
++    }
++  }
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_A_evidence20/config_constructive.json b/results/01_constructive_score_coordinate/exp_A_evidence20/config_constructive.json
+new file mode 100644
+index 0000000..13d0c29
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_A_evidence20/config_constructive.json
+@@ -0,0 +1,30 @@
++{
++  "rngseed": 301,
++  "nbiter": 20,
++  "bs": 4,
++  "hidden_size": 8,
++  "item_dim": 15,
++  "subject_dim": 8,
++  "n_items": 8,
++  "n_learning_pairs": 8,
++  "n_learning_blocks": 4,
++  "relation_noise": 0.03,
++  "eval_relation_noise": 0.0,
++  "edge_dropout": 0.0,
++  "eval_edge_dropout": 0.0,
++  "init_score_noise": 0.0,
++  "subject_scale": 1.0,
++  "update_scale": 1.0,
++  "lr": 0.0007,
++  "eps": 1e-08,
++  "l2": 0.0,
++  "gc": 2.0,
++  "lambda_recon": 0.5,
++  "lambda_entropy": 0.005,
++  "lambda_score_l2": 0.0001,
++  "save_every": 0,
++  "pe": 10,
++  "output_dir": "/mnt/data/exp_A_evidence20",
++  "eval_subjects": 77,
++  "eval_repetitions": 10
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_A_evidence20/paper_task_eval_summary.json b/results/01_constructive_score_coordinate/exp_A_evidence20/paper_task_eval_summary.json
+new file mode 100644
+index 0000000..95eaf1c
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_A_evidence20/paper_task_eval_summary.json
+@@ -0,0 +1,28 @@
++{
++  "eval_subjects": 77,
++  "eval_repetitions": 10,
++  "overall_accuracy": 0.621196663974748,
++  "learned_pairs_accuracy": 0.6316558471457525,
++  "nonlearned_pairs_accuracy": 0.6170129907063463,
++  "consistent_error_subjects_80pct": 7,
++  "consistent_error_subjects_80pct_ratio": 0.09090909090909091,
++  "consistent_error_subjects_100pct": 0,
++  "consistent_error_subjects_100pct_ratio": 0.0,
++  "mean_self_consistency_from_scores": 1.0,
++  "mean_circular_triads_from_scores": 0.0,
++  "mean_self_consistency_from_majority_choices": 0.7629870129870131,
++  "mean_circular_triads_from_majority_choices": 4.740259740259741,
++  "mean_inter_subject_kendall_tau": 0.9534713406893859,
++  "distance_accuracy": {
++    "1": 0.5467532525506001,
++    "2": 0.5839826886852583,
++    "3": 0.613506497771709,
++    "4": 0.6574675346446501,
++    "5": 0.6995671010249621,
++    "6": 0.7279220780768951,
++    "7": 0.8103896046613718
++  },
++  "reconstruction_loss_after_learning": 0.14350733160972595,
++  "mean_update_gate": 0.4000472128391266,
++  "mean_abs_final_score": 0.20714087784290314
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_A_evidence20/train_log.csv b/results/01_constructive_score_coordinate/exp_A_evidence20/train_log.csv
+new file mode 100644
+index 0000000..fce900e
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_A_evidence20/train_log.csv
+@@ -0,0 +1,20 @@
++episode,loss,choice_loss,recon_loss,entropy_loss,test_acc,learned_acc,nonlearned_acc,mean_gate,mean_abs_score
++0,0.6807771325111389,0.6509037613868713,0.053011246025562286,0.6729574799537659,0.7589285969734192,0.84375,0.7250000238418579,0.398104190826416,0.13744275271892548
++1,0.6515509486198425,0.6024254560470581,0.09151643514633179,0.6728682518005371,0.7321428656578064,0.6875,0.75,0.38197755813598633,0.12827491760253906
++2,0.6796778440475464,0.6196960210800171,0.11317828297615051,0.6781125664710999,0.7232142686843872,0.75,0.7124999761581421,0.3852759599685669,0.11293084174394608
++3,0.6844379305839539,0.6406229734420776,0.08090309798717499,0.6720938086509705,0.6964285969734192,0.84375,0.637499988079071,0.38590553402900696,0.14810119569301605
++4,0.6287220120429993,0.5751466155052185,0.1004660576581955,0.6677337288856506,0.7767857313156128,0.90625,0.7250000238418579,0.40249425172805786,0.15335741639137268
++5,0.6636484265327454,0.6156058311462402,0.089340440928936,0.6739206910133362,0.7589285969734192,0.875,0.7124999761581421,0.37910449504852295,0.13184566795825958
++6,0.6716578006744385,0.6298904418945312,0.07670541107654572,0.682643711566925,0.7232142686843872,0.78125,0.699999988079071,0.3957715630531311,0.0983922928571701
++7,0.6792059540748596,0.634825587272644,0.08196254074573517,0.6794384717941284,0.6785714030265808,0.71875,0.6625000238418579,0.3873547315597534,0.11959437280893326
++8,0.6901209354400635,0.6412836313247681,0.09089198708534241,0.6778307557106018,0.6875,0.78125,0.6499999761581421,0.38460707664489746,0.11502854526042938
++9,0.6553251147270203,0.6252152323722839,0.05342358350753784,0.679236114025116,0.7589285969734192,0.8125,0.737500011920929,0.39804011583328247,0.10304084420204163
++10,0.6750314831733704,0.6368669867515564,0.06947475671768188,0.6852030158042908,0.7053571343421936,0.75,0.6875,0.3861646056175232,0.08542709797620773
++11,0.6612261533737183,0.6059985756874084,0.10376608371734619,0.6682066321372986,0.7410714030265808,0.8125,0.7124999761581421,0.4103386700153351,0.15521955490112305
++12,0.6211956143379211,0.6000081300735474,0.035581137984991074,0.6789879202842712,0.8125,0.90625,0.7749999761581421,0.39386940002441406,0.11459516733884811
++13,0.6725611686706543,0.6237050294876099,0.09089473634958267,0.6814354658126831,0.7410714030265808,0.8125,0.7124999761581421,0.4007871747016907,0.10862668603658676
++14,0.6668187379837036,0.6071497201919556,0.11272164434194565,0.6606764793395996,0.6517857313156128,0.75,0.612500011920929,0.3917444348335266,0.16681316494941711
++15,0.6937477588653564,0.6540118455886841,0.07264179736375809,0.6827158331871033,0.6607142686843872,0.625,0.675000011920929,0.3979501724243164,0.09874866157770157
++16,0.6175302863121033,0.5819315910339355,0.0644901841878891,0.670063316822052,0.7767857313156128,0.8125,0.762499988079071,0.3857220709323883,0.14425677061080933
++17,0.6873530745506287,0.6179389357566833,0.13208641111850739,0.67363041639328,0.7142857313156128,0.75,0.699999988079071,0.3984954357147217,0.13413918018341064
++18,0.636639416217804,0.6033774614334106,0.05970464646816254,0.6815983653068542,0.7678571343421936,0.78125,0.762499988079071,0.3929890990257263,0.10374073684215546
+diff --git a/results/01_constructive_score_coordinate/exp_B_moderate_idio/config_constructive.json b/results/01_constructive_score_coordinate/exp_B_moderate_idio/config_constructive.json
+new file mode 100644
+index 0000000..734a4fb
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_B_moderate_idio/config_constructive.json
+@@ -0,0 +1,30 @@
++{
++  "rngseed": 302,
++  "nbiter": 20,
++  "bs": 4,
++  "hidden_size": 8,
++  "item_dim": 15,
++  "subject_dim": 8,
++  "n_items": 8,
++  "n_learning_pairs": 8,
++  "n_learning_blocks": 4,
++  "relation_noise": 0.12,
++  "eval_relation_noise": 0.16,
++  "edge_dropout": 0.1,
++  "eval_edge_dropout": 0.1,
++  "init_score_noise": 0.08,
++  "subject_scale": 1.5,
++  "update_scale": 0.75,
++  "lr": 0.0007,
++  "eps": 1e-08,
++  "l2": 0.0,
++  "gc": 2.0,
++  "lambda_recon": 0.5,
++  "lambda_entropy": 0.005,
++  "lambda_score_l2": 0.0001,
++  "save_every": 0,
++  "pe": 10,
++  "output_dir": "/mnt/data/exp_B_moderate_idio",
++  "eval_subjects": 77,
++  "eval_repetitions": 10
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_B_moderate_idio/paper_task_eval_summary.json b/results/01_constructive_score_coordinate/exp_B_moderate_idio/paper_task_eval_summary.json
+new file mode 100644
+index 0000000..29c11dc
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_B_moderate_idio/paper_task_eval_summary.json
+@@ -0,0 +1,28 @@
++{
++  "eval_subjects": 77,
++  "eval_repetitions": 10,
++  "overall_accuracy": 0.5993506531395253,
++  "learned_pairs_accuracy": 0.6308441598621475,
++  "nonlearned_pairs_accuracy": 0.5867532504504764,
++  "consistent_error_subjects_80pct": 9,
++  "consistent_error_subjects_80pct_ratio": 0.11688311688311688,
++  "consistent_error_subjects_100pct": 1,
++  "consistent_error_subjects_100pct_ratio": 0.012987012987012988,
++  "mean_self_consistency_from_scores": 1.0,
++  "mean_circular_triads_from_scores": 0.0,
++  "mean_self_consistency_from_majority_choices": 0.7311688311688311,
++  "mean_circular_triads_from_majority_choices": 5.376623376623376,
++  "mean_inter_subject_kendall_tau": 0.8014842300556585,
++  "distance_accuracy": {
++    "1": 0.5267161454362639,
++    "2": 0.5798701345436759,
++    "3": 0.6031168886012845,
++    "4": 0.636688315297489,
++    "5": 0.6545454562355429,
++    "6": 0.692857142392691,
++    "7": 0.703896104902416
++  },
++  "reconstruction_loss_after_learning": 0.2225509136915207,
++  "mean_update_gate": 0.4971883296966553,
++  "mean_abs_final_score": 0.18031373620033264
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_B_moderate_idio/train_log.csv b/results/01_constructive_score_coordinate/exp_B_moderate_idio/train_log.csv
+new file mode 100644
+index 0000000..f180643
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_B_moderate_idio/train_log.csv
+@@ -0,0 +1,21 @@
++episode,loss,choice_loss,recon_loss,entropy_loss,test_acc,learned_acc,nonlearned_acc,mean_gate,mean_abs_score
++0,0.7040307521820068,0.630722165107727,0.13995474576950073,0.6654357314109802,0.625,0.78125,0.5625,0.4576629102230072,0.17124411463737488
++1,0.6829689741134644,0.6348442435264587,0.08945280313491821,0.6792619824409485,0.6517857313156128,0.84375,0.574999988079071,0.4686465263366699,0.11438045650720596
++2,0.6534321308135986,0.6085787415504456,0.08292265981435776,0.6779733896255493,0.7142857313156128,0.90625,0.637499988079071,0.43466508388519287,0.1156373992562294
++3,0.707940936088562,0.6431868672370911,0.12272828072309494,0.6775517463684082,0.6875,0.8125,0.637499988079071,0.4764021039009094,0.12434548884630203
++4,0.6574177145957947,0.5918952226638794,0.12441044300794601,0.6625638604164124,0.6964285969734192,0.75,0.675000011920929,0.4639696180820465,0.16385456919670105
++5,0.6566006541252136,0.6180931329727173,0.07020685076713562,0.68046635389328,0.7589285969734192,0.78125,0.75,0.4672505259513855,0.10655014216899872
++6,0.7273555397987366,0.682499349117279,0.08294166624546051,0.6766101717948914,0.6160714030265808,0.65625,0.6000000238418579,0.45948153734207153,0.12643100321292877
++7,0.5942264199256897,0.5626394748687744,0.056444235146045685,0.6723604202270508,0.8571428656578064,0.90625,0.8374999761581421,0.45864447951316833,0.14511322975158691
++8,0.6883572340011597,0.6378348469734192,0.09428590536117554,0.675388753414154,0.625,0.6875,0.6000000238418579,0.4428635835647583,0.12081032246351242
++9,0.6203920245170593,0.5866195559501648,0.0608026348054409,0.6736847758293152,0.75,0.8125,0.7250000238418579,0.47757667303085327,0.137701153755188
++10,0.6585196852684021,0.6231389045715332,0.06402333825826645,0.6732600331306458,0.7142857313156128,0.71875,0.7124999761581421,0.46012821793556213,0.14029280841350555
++11,0.7108064293861389,0.6427283883094788,0.12943066656589508,0.6719115376472473,0.6607142686843872,0.78125,0.612500011920929,0.44466036558151245,0.12889258563518524
++12,0.6634647846221924,0.6328891515731812,0.05435158312320709,0.6795879006385803,0.6964285969734192,0.84375,0.637499988079071,0.44577789306640625,0.1096038669347763
++13,0.6400187015533447,0.5901685357093811,0.09296863526105881,0.6725926995277405,0.7767857313156128,0.84375,0.75,0.449544757604599,0.13053497672080994
++14,0.6830096244812012,0.6322900056838989,0.09473598003387451,0.6696619987487793,0.6964285969734192,0.71875,0.6875,0.4921978712081909,0.1607268899679184
++15,0.6836152672767639,0.6433275938034058,0.07377312332391739,0.6798551678657532,0.6428571343421936,0.75,0.6000000238418579,0.46009618043899536,0.10307027399539948
++16,0.6524860262870789,0.5887941122055054,0.12067513912916183,0.6702314615249634,0.75,0.875,0.699999988079071,0.4761181175708771,0.15070252120494843
++17,0.681005597114563,0.6431646943092346,0.06890276074409485,0.6774672269821167,0.6339285969734192,0.8125,0.5625,0.4704110622406006,0.11801156401634216
++18,0.647203266620636,0.5986213684082031,0.09045067429542542,0.6706877946853638,0.7767857313156128,0.875,0.737500011920929,0.47706061601638794,0.1441887617111206
++19,0.687267005443573,0.6382251977920532,0.09133480489253998,0.6743538975715637,0.6517857313156128,0.8125,0.5874999761581421,0.4788866341114044,0.13598990440368652
+diff --git a/results/01_constructive_score_coordinate/exp_C_high_idio/config_constructive.json b/results/01_constructive_score_coordinate/exp_C_high_idio/config_constructive.json
+new file mode 100644
+index 0000000..1beaaaa
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_C_high_idio/config_constructive.json
+@@ -0,0 +1,30 @@
++{
++  "rngseed": 303,
++  "nbiter": 20,
++  "bs": 4,
++  "hidden_size": 8,
++  "item_dim": 15,
++  "subject_dim": 8,
++  "n_items": 8,
++  "n_learning_pairs": 8,
++  "n_learning_blocks": 4,
++  "relation_noise": 0.2,
++  "eval_relation_noise": 0.28,
++  "edge_dropout": 0.2,
++  "eval_edge_dropout": 0.25,
++  "init_score_noise": 0.18,
++  "subject_scale": 2.0,
++  "update_scale": 0.55,
++  "lr": 0.0007,
++  "eps": 1e-08,
++  "l2": 0.0,
++  "gc": 2.0,
++  "lambda_recon": 0.5,
++  "lambda_entropy": 0.005,
++  "lambda_score_l2": 0.0001,
++  "save_every": 0,
++  "pe": 10,
++  "output_dir": "/mnt/data/exp_C_high_idio",
++  "eval_subjects": 77,
++  "eval_repetitions": 10
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_C_high_idio/paper_task_eval_summary.json b/results/01_constructive_score_coordinate/exp_C_high_idio/paper_task_eval_summary.json
+new file mode 100644
+index 0000000..1e0d6dd
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_C_high_idio/paper_task_eval_summary.json
+@@ -0,0 +1,28 @@
++{
++  "eval_subjects": 77,
++  "eval_repetitions": 10,
++  "overall_accuracy": 0.6219387779976474,
++  "learned_pairs_accuracy": 0.6537337686818141,
++  "nonlearned_pairs_accuracy": 0.6092207817239808,
++  "consistent_error_subjects_80pct": 29,
++  "consistent_error_subjects_80pct_ratio": 0.37662337662337664,
++  "consistent_error_subjects_100pct": 6,
++  "consistent_error_subjects_100pct_ratio": 0.07792207792207792,
++  "mean_self_consistency_from_scores": 1.0,
++  "mean_circular_triads_from_scores": 0.0,
++  "mean_self_consistency_from_majority_choices": 0.8506493506493507,
++  "mean_circular_triads_from_majority_choices": 2.987012987012987,
++  "mean_inter_subject_kendall_tau": 0.7510985255346156,
++  "distance_accuracy": {
++    "1": 0.5224489842252962,
++    "2": 0.5632034682414748,
++    "3": 0.6470129903067242,
++    "4": 0.6928571434328695,
++    "5": 0.7320346302026278,
++    "6": 0.7246753230400673,
++    "7": 0.7259740229550894
++  },
++  "reconstruction_loss_after_learning": 0.15148434042930603,
++  "mean_update_gate": 0.658031165599823,
++  "mean_abs_final_score": 0.2827654480934143
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_C_high_idio/train_log.csv b/results/01_constructive_score_coordinate/exp_C_high_idio/train_log.csv
+new file mode 100644
+index 0000000..b883027
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_C_high_idio/train_log.csv
+@@ -0,0 +1,21 @@
++episode,loss,choice_loss,recon_loss,entropy_loss,test_acc,learned_acc,nonlearned_acc,mean_gate,mean_abs_score
++0,0.6518400311470032,0.6003461480140686,0.09636584669351578,0.6612386703491211,0.6785714030265808,0.8125,0.625,0.6064825057983398,0.1537446230649948
++1,0.7028946280479431,0.6360122561454773,0.12714752554893494,0.6607497930526733,0.6696428656578064,0.71875,0.6499999761581421,0.6352177858352661,0.1754816323518753
++2,0.6983519792556763,0.6132856607437134,0.16346076130867004,0.6664101481437683,0.7321428656578064,0.8125,0.699999988079071,0.6305574178695679,0.1614682972431183
++3,0.7442837357521057,0.6696456670761108,0.14250221848487854,0.6769368052482605,0.5714285969734192,0.71875,0.512499988079071,0.6420254707336426,0.11525947600603104
++4,0.6496012806892395,0.5983349084854126,0.09577307850122452,0.6754682660102844,0.75,0.75,0.75,0.6523000597953796,0.1233019232749939
++5,0.7530619502067566,0.6737290024757385,0.15190638601779938,0.6754673719406128,0.5714285969734192,0.6875,0.5249999761581421,0.6260033845901489,0.13564056158065796
++6,0.7199388742446899,0.6645323634147644,0.10407010465860367,0.6737405061721802,0.5089285969734192,0.5625,0.48750001192092896,0.6649812459945679,0.12197133153676987
++7,0.6942374110221863,0.6373386383056641,0.10701871663331985,0.6774367094039917,0.6517857313156128,0.71875,0.625,0.6465777158737183,0.11775784939527512
++8,0.7085000276565552,0.6328431367874146,0.14465893805027008,0.6646619439125061,0.6428571343421936,0.59375,0.6625000238418579,0.6497926712036133,0.16399796307086945
++9,0.6865171194076538,0.6184832453727722,0.1293431520462036,0.6718511581420898,0.7053571343421936,0.78125,0.675000011920929,0.63377845287323,0.1407615691423416
++10,0.724010705947876,0.647006630897522,0.14739680290222168,0.6601538062095642,0.625,0.78125,0.5625,0.663284957408905,0.17401745915412903
++11,0.6742323637008667,0.5991579294204712,0.14349766075611115,0.6642822623252869,0.7321428656578064,0.84375,0.6875,0.6269239783287048,0.1663336157798767
++12,0.7403021454811096,0.643422544002533,0.18702653050422668,0.6726844906806946,0.6607142686843872,0.71875,0.637499988079071,0.6449754238128662,0.14167843759059906
++13,0.7174109220504761,0.6495914459228516,0.12888246774673462,0.6751552224159241,0.6339285969734192,0.53125,0.675000011920929,0.6304372549057007,0.13075833022594452
++14,0.6831150054931641,0.6379721760749817,0.08355063199996948,0.6729310750961304,0.6071428656578064,0.6875,0.574999988079071,0.6209736466407776,0.14216099679470062
++15,0.7648997902870178,0.6954506635665894,0.13213863968849182,0.67546546459198,0.5089285969734192,0.625,0.4625000059604645,0.6397342681884766,0.12166909873485565
++16,0.7075088620185852,0.6492613554000854,0.10981640219688416,0.6670898795127869,0.6071428656578064,0.71875,0.5625,0.6595319509506226,0.15446737408638
++17,0.7603275775909424,0.6864271759986877,0.1410500556230545,0.6745462417602539,0.6339285969734192,0.53125,0.675000011920929,0.6632041335105896,0.13519206643104553
++18,0.7463105916976929,0.6630334258079529,0.15999937057495117,0.6543442606925964,0.5982142686843872,0.75,0.5375000238418579,0.6461061239242554,0.18729421496391296
++19,0.7053991556167603,0.6279237866401672,0.14842720329761505,0.6510776877403259,0.5982142686843872,0.65625,0.574999988079071,0.6399204730987549,0.19188210368156433
+diff --git a/results/01_constructive_score_coordinate/exp_D_best_train/config_constructive.json b/results/01_constructive_score_coordinate/exp_D_best_train/config_constructive.json
+new file mode 100644
+index 0000000..8f51e33
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_D_best_train/config_constructive.json
+@@ -0,0 +1,31 @@
++{
++  "rngseed": 304,
++  "nbiter": 20,
++  "bs": 4,
++  "hidden_size": 8,
++  "item_dim": 15,
++  "subject_dim": 8,
++  "n_items": 8,
++  "n_learning_pairs": 8,
++  "n_learning_blocks": 4,
++  "relation_noise": 0.24,
++  "eval_relation_noise": 0.24,
++  "edge_dropout": 0.2,
++  "eval_edge_dropout": 0.2,
++  "init_score_noise": 0.35,
++  "subject_scale": 3.0,
++  "update_scale": 0.35,
++  "eval_beta_override": 16.0,
++  "lr": 0.0007,
++  "eps": 1e-08,
++  "l2": 0.0,
++  "gc": 2.0,
++  "lambda_recon": 0.5,
++  "lambda_entropy": 0.005,
++  "lambda_score_l2": 0.0001,
++  "save_every": 0,
++  "pe": 10,
++  "output_dir": "/mnt/data/exp_D_best_train",
++  "eval_subjects": 77,
++  "eval_repetitions": 10
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_D_best_train/paper_task_eval_summary.json b/results/01_constructive_score_coordinate/exp_D_best_train/paper_task_eval_summary.json
+new file mode 100644
+index 0000000..a1bd2d3
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_D_best_train/paper_task_eval_summary.json
+@@ -0,0 +1,28 @@
++{
++  "eval_subjects": 77,
++  "eval_repetitions": 10,
++  "overall_accuracy": 0.6128478679073377,
++  "learned_pairs_accuracy": 0.637175326925013,
++  "nonlearned_pairs_accuracy": 0.6031168843002676,
++  "consistent_error_subjects_80pct": 52,
++  "consistent_error_subjects_80pct_ratio": 0.6753246753246753,
++  "consistent_error_subjects_100pct": 26,
++  "consistent_error_subjects_100pct_ratio": 0.33766233766233766,
++  "mean_self_consistency_from_scores": 1.0,
++  "mean_circular_triads_from_scores": 0.0,
++  "mean_self_consistency_from_majority_choices": 0.8551948051948053,
++  "mean_circular_triads_from_majority_choices": 2.896103896103896,
++  "mean_inter_subject_kendall_tau": 0.23171565276828435,
++  "distance_accuracy": {
++    "1": 0.5287569592912476,
++    "2": 0.580519483412628,
++    "3": 0.6153246764625822,
++    "4": 0.6587662336888251,
++    "5": 0.7086580103480971,
++    "6": 0.7090909082394141,
++    "7": 0.7194805212996223
++  },
++  "reconstruction_loss_after_learning": 0.29062318801879883,
++  "mean_update_gate": 0.47178953886032104,
++  "mean_abs_final_score": 0.2413097470998764
++}
+\ No newline at end of file
+diff --git a/results/01_constructive_score_coordinate/exp_D_best_train/train_log.csv b/results/01_constructive_score_coordinate/exp_D_best_train/train_log.csv
+new file mode 100644
+index 0000000..e6c41e2
+--- /dev/null
++++ b/results/01_constructive_score_coordinate/exp_D_best_train/train_log.csv
+@@ -0,0 +1,21 @@
++episode,loss,choice_loss,recon_loss,entropy_loss,test_acc,learned_acc,nonlearned_acc,mean_gate,mean_abs_score
++0,0.9316754937171936,0.7297011017799377,0.3977084755897522,0.6216206550598145,0.5267857313156128,0.5,0.5375000238418579,0.46274635195732117,0.2721548080444336
++1,0.7938805818557739,0.6809474229812622,0.2194100022315979,0.6440881490707397,0.5803571343421936,0.59375,0.574999988079071,0.4644010663032532,0.21469838917255402
++2,1.0104749202728271,0.812079131603241,0.39038586616516113,0.6389175653457642,0.4107142984867096,0.46875,0.38749998807907104,0.45312365889549255,0.24088361859321594
++3,0.8424293398857117,0.7295172810554504,0.21922744810581207,0.6586523056030273,0.4910714328289032,0.5625,0.4625000059604645,0.4553568363189697,0.18864810466766357
++4,0.8597621917724609,0.7211689352989197,0.2707703709602356,0.6399544477462769,0.5803571343421936,0.71875,0.5249999761581421,0.4602448344230652,0.22299200296401978
++5,0.8132638931274414,0.6754366159439087,0.26919394731521606,0.6445223689079285,0.5892857313156128,0.5625,0.6000000238418579,0.4645848572254181,0.20976239442825317
++6,0.860063374042511,0.7262765169143677,0.26107606291770935,0.6483345627784729,0.5,0.5625,0.4749999940395355,0.45494139194488525,0.2073238044977188
++7,0.8820618391036987,0.7630369067192078,0.23146280646324158,0.6576465368270874,0.4553571343421936,0.5,0.4375,0.47301197052001953,0.17915570735931396
++8,0.807604193687439,0.71720951795578,0.17423652112483978,0.6541029214859009,0.5714285969734192,0.65625,0.5375000238418579,0.4622955918312073,0.196689635515213
++9,0.9355281591415405,0.7953305244445801,0.2740805447101593,0.6294408440589905,0.4821428656578064,0.5625,0.44999998807907104,0.4556850790977478,0.2694345712661743
++10,0.8627861142158508,0.7317008972167969,0.25562289357185364,0.6535438299179077,0.4553571343421936,0.46875,0.44999998807907104,0.4606880843639374,0.19620980322360992
++11,0.9462414383888245,0.7636632323265076,0.3587358295917511,0.6403874158859253,0.4910714328289032,0.46875,0.5,0.4428291320800781,0.2258928269147873
++12,0.7501170039176941,0.637529194355011,0.21894186735153198,0.6210171580314636,0.6607142686843872,0.75,0.625,0.46421629190444946,0.2904703915119171
++13,0.8315956592559814,0.7204299569129944,0.21585290133953094,0.6463795900344849,0.4910714328289032,0.59375,0.44999998807907104,0.46656808257102966,0.2092980295419693
++14,0.849496603012085,0.732624351978302,0.22734807431697845,0.6379274725914001,0.5,0.625,0.44999998807907104,0.4682849943637848,0.23250766098499298
++15,0.8824283480644226,0.7489287257194519,0.2604266107082367,0.6561323404312134,0.4642857015132904,0.40625,0.48750001192092896,0.4637852609157562,0.18323814868927002
++16,0.9488321542739868,0.8234220147132874,0.24449454247951508,0.6304993033409119,0.4642857015132904,0.53125,0.4375,0.46204036474227905,0.25135135650634766
++17,0.8785926103591919,0.7342717051506042,0.28213146328926086,0.6497014164924622,0.5267857313156128,0.5625,0.512499988079071,0.46726125478744507,0.2129133641719818
++18,0.911474883556366,0.7414401769638062,0.3337981700897217,0.6248170733451843,0.5178571343421936,0.59375,0.48750001192092896,0.4767478406429291,0.2740401029586792
++19,0.8306452035903931,0.7103519439697266,0.23394662141799927,0.6631143689155579,0.6160714030265808,0.53125,0.6499999761581421,0.4756488800048828,0.16621382534503937
+diff --git a/sources/01_behavior_task_score_coordinate/requirements.txt b/sources/01_behavior_task_score_coordinate/requirements.txt
+new file mode 100644
+index 0000000..84e5057
+--- /dev/null
++++ b/sources/01_behavior_task_score_coordinate/requirements.txt
+@@ -0,0 +1,6 @@
++torch
++numpy
++matplotlib
++scipy
++scikit-learn
++tqdm
+diff --git a/sources/01_behavior_task_score_coordinate/simple_neo.py b/sources/01_behavior_task_score_coordinate/simple_neo.py
+new file mode 100644
+index 0000000..789a0dc
+--- /dev/null
++++ b/sources/01_behavior_task_score_coordinate/simple_neo.py
+@@ -0,0 +1,1157 @@
++"""
++Constructive-ranking baseline for the few-shot relational-learning task.
++
++This script replaces the original adjacent-pair reinforcement-learning episode in
++``simple_neo.py`` with a deliberately constrained neural mechanism:
++
++1. Each item has an internal scalar score stored in an episode-local memory.
++2. A learning observation (item_i, item_j, signed distance) is treated as a
++   constraint on the two scores, not as a reward.
++3. A small trainable update network learns how strongly to write each constraint
++   into the score memory.
++4. Test choices are forced to use one global score vector: choose by comparing
++   score(item_i) and score(item_j). This makes pairwise choices come from a
++   shared latent ranking rather than from independent pair classifiers.
++
++The meta-training distribution is intentionally broader than the behavioral
++paper's exact task. During training, item identities, rank-to-item mappings and
++sparse learning graphs are randomized. The behavioral paper's fixed 8-pair task
++is used in ``evaluate_paper_task`` as a held-out-style evaluation protocol.
++
++There is no within-episode reward. The only optimization signal is the outer-loop
++loss computed after running a full episode, matching an observation-only learning
++phase followed by no-feedback testing.
++"""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import json
++import math
++import random
++import sys
++import time
++from dataclasses import asdict, dataclass
++from itertools import combinations
++from pathlib import Path
++from typing import Iterable
++
++import numpy as np
++import torch
++import torch.nn as nn
++import torch.nn.functional as F
++from tqdm.auto import tqdm
++
++ROOT_DIR = Path(__file__).resolve().parent
++DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
++
++# Rank-space pairs from Liu/Wang/Luo behavioral task.
++# We use ranks 0..7 from low to high, so (0, 5) means A-F and the signed
++# distance for the oriented pair (A, F) is +5/7.
++PAPER_LEARNING_PAIRS_RANK = [
++    (0, 5),  # A-F
++    (1, 2),  # B-C
++    (1, 4),  # B-E
++    (2, 6),  # C-G
++    (3, 5),  # D-F
++    (3, 6),  # D-G
++    (4, 7),  # E-H
++    (0, 7),  # A-H
++]
++
++
++def log(message: str) -> None:
++    print(message, flush=True)
++
++
++@dataclass
++class TrainConfig:
++    # Small defaults are intentional: they make the training script quick to run
++    # and suitable for smoke tests. Increase nbiter/bs/hidden_size for real runs.
++    rngseed: int = 1
++    nbiter: int = 4
++    bs: int = 2
++    hidden_size: int = 8
++    item_dim: int = 15
++    subject_dim: int = 8
++    n_items: int = 8
++    n_learning_pairs: int = 8
++    n_learning_blocks: int = 4
++    relation_noise: float = 0.03
++    eval_relation_noise: float = 0.0
++    edge_dropout: float = 0.0
++    eval_edge_dropout: float = 0.0
++    init_score_noise: float = 0.0
++    subject_scale: float = 1.0
++    update_scale: float = 1.0
++    # Memory/forgetting mechanisms. "direct" is the previous score-updating baseline.
++    # "edge_online" stores local pair memories and updates the schema after each observation.
++    # "edge_block" stores local pair memories first and reconstructs the schema after each block.
++    memory_mode: str = "direct"
++    forget_rate: float = 0.0
++    memory_capacity: float = 10.0
++    memory_encoding_noise: float = 0.0
++    eval_memory_encoding_noise: float = 0.0
++    memory_attention_bias: float = 0.0
++    distance_salience: float = 0.0
++    # Subject-specific reliability terms. These are intended to model stable
++    # individual differences in which local relations are well encoded/retrieved,
++    # rather than adding pair-specific hand-tuned noise.
++    subject_attention_scale: float = 0.0
++    item_attention_scale: float = 0.0
++    pair_attention_scale: float = 0.0
++    distance_attention_scale: float = 0.0
++    reliability_temperature: float = 1.0
++    # Modular human-memory mechanisms added for exploratory runs.
++    # 1) schema-biased reconsolidation: weak local memories drift toward the
++    #    current subjective schema after a block, as in memory assimilation.
++    reconsolidation_strength: float = 0.0
++    reconsolidation_power: float = 1.0
++    reconsolidation_refresh: float = 0.0
++    # 2) schema-consistent encoding: current schema biases how a newly observed
++    #    local relation is encoded, especially when evidence is weak/noisy.
++    schema_encoding_bias: float = 0.0
++    # 3) internal replay: after each block, remembered edges are replayed to
++    #    consolidate the global score schema without external feedback.
++    replay_steps: int = 0
++    replay_strength: float = 1.0
++    replay_temperature: float = 1.0
++    schema_sweeps: int = 1
++    eval_beta_override: float = 0.0
++    lr: float = 3e-4
++    eps: float = 1e-8
++    l2: float = 0.0
++    gc: float = 2.0
++    lambda_recon: float = 0.5
++    lambda_entropy: float = 0.005
++    lambda_score_l2: float = 1e-4
++    save_every: int = 50
++    pe: int = 10
++    output_dir: str = "outputs_constructive"
++    eval_subjects: int = 8
++    eval_repetitions: int = 5
++
++    @property
++    def all_rank_pairs(self) -> list[tuple[int, int]]:
++        return list(combinations(range(self.n_items), 2))
++
++    @property
++    def rank_values(self) -> torch.Tensor:
++        # Centering removes an arbitrary global offset from the score coordinate.
++        values = torch.arange(self.n_items, dtype=torch.float32)
++        values = (values - values.mean()) / (self.n_items - 1)
++        return values
++
++
++class ConstructiveRankingNet(nn.Module):
++    """Trainable score-memory updater for sparse pairwise ranking evidence."""
++
++    def __init__(self, config: TrainConfig):
++        super().__init__()
++        self.config = config
++        z = config.subject_dim
++        d = config.item_dim
++        h = config.hidden_size
++
++        # Initial item score = function(item identity, subject latent state).
++        self.score_init = nn.Sequential(
++            nn.Linear(d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Constraint writing gate. It does not output the answer; it only decides
++        # how strongly the current relation-error should update the two item scores.
++        self.update_gate = nn.Sequential(
++            nn.Linear(2 * d + z + 4, h),
++            nn.Tanh(),
++            nn.Linear(h, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Attention/reliability of encoding an observed local edge into episodic memory.
++        # This is deliberately separate from the score-update gate: the model can encode
++        # an edge strongly yet update the global schema conservatively.
++        self.memory_attention = nn.Sequential(
++            nn.Linear(2 * d + z + 2, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Subject-specific reliability modules. The item branch gives each
++        # virtual subject stable item anchors; the pair branch allows stable
++        # edge reliability from item features; the distance branch lets subjects
++        # differ in whether they privilege large-distance anchor relations or
++        # local small-distance relations. All are shared functions of z and item
++        # identity, not hand-coded to a paper-specific pair.
++        self.item_reliability = nn.Sequential(
++            nn.Linear(d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++        self.pair_reliability = nn.Sequential(
++            nn.Linear(2 * d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++        self.distance_reliability = nn.Linear(z, 1)
++
++        # Global trainable learning-rate and choice inverse-temperature.
++        self.logit_step = nn.Parameter(torch.tensor(0.0))
++        self.log_beta = nn.Parameter(torch.tensor(math.log(4.0)))
++
++    def initial_scores(self, item_vecs: torch.Tensor, subject_z: torch.Tensor) -> torch.Tensor:
++        """Return episode-local initial scores, shape [B, N]."""
++        bsz, n_items, _ = item_vecs.shape
++        z_scaled = self.config.subject_scale * subject_z
++        z_rep = z_scaled[:, None, :].expand(bsz, n_items, subject_z.shape[-1])
++        raw = self.score_init(torch.cat([item_vecs, z_rep], dim=-1)).squeeze(-1)
++        if self.config.init_score_noise > 0:
++            raw = raw + self.config.init_score_noise * torch.randn_like(raw)
++        return self.center_scores(raw)
++
++    @staticmethod
++    def center_scores(scores: torch.Tensor) -> torch.Tensor:
++        return scores - scores.mean(dim=1, keepdim=True)
++
++    def update_scores(
++        self,
++        scores: torch.Tensor,
++        item_vecs: torch.Tensor,
++        subject_z: torch.Tensor,
++        item_i: torch.Tensor,
++        item_j: torch.Tensor,
++        observed_diff_j_minus_i: torch.Tensor,
++        external_weight: torch.Tensor | None = None,
++    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
++        """Apply one relation-error-driven update.
++
++        The observation says score(j) - score(i) should equal observed_diff.
++        The model learns a gate, but the sign and conservation structure of the
++        update are fixed so that learning has to operate on a shared score axis.
++        """
++        bsz = scores.shape[0]
++        batch_idx = torch.arange(bsz, device=scores.device)
++
++        score_i = scores[batch_idx, item_i]
++        score_j = scores[batch_idx, item_j]
++        pred_diff = score_j - score_i
++        error = observed_diff_j_minus_i - pred_diff
++
++        vec_i = item_vecs[batch_idx, item_i]
++        vec_j = item_vecs[batch_idx, item_j]
++        features = torch.cat(
++            [
++                vec_i,
++                vec_j,
++                self.config.subject_scale * subject_z,
++                observed_diff_j_minus_i[:, None],
++                observed_diff_j_minus_i.abs()[:, None],
++                pred_diff[:, None],
++                error[:, None],
++            ],
++            dim=1,
++        )
++        gate = torch.sigmoid(self.update_gate(features)).squeeze(1)
++        step = self.config.update_scale * torch.sigmoid(self.logit_step) * gate
++        if external_weight is not None:
++            step = step * external_weight.clamp(0.0, 1.0)
++        step = step.clamp(0.0, 1.0)
++        delta = 0.5 * step * error
++
++        next_scores = scores.clone()
++        next_scores[batch_idx, item_i] = next_scores[batch_idx, item_i] - delta
++        next_scores[batch_idx, item_j] = next_scores[batch_idx, item_j] + delta
++        next_scores = self.center_scores(next_scores)
++        return next_scores, pred_diff, error, gate
++
++    def encode_attention(
++        self,
++        item_vecs: torch.Tensor,
++        subject_z: torch.Tensor,
++        item_i: torch.Tensor,
++        item_j: torch.Tensor,
++        observed_diff_j_minus_i: torch.Tensor,
++    ) -> torch.Tensor:
++        """Return reliability of storing a pairwise relation into edge memory."""
++        bsz = item_vecs.shape[0]
++        batch_idx = torch.arange(bsz, device=item_vecs.device)
++        vec_i = item_vecs[batch_idx, item_i]
++        vec_j = item_vecs[batch_idx, item_j]
++        features = torch.cat(
++            [
++                vec_i,
++                vec_j,
++                self.config.subject_scale * subject_z,
++                observed_diff_j_minus_i[:, None],
++                observed_diff_j_minus_i.abs()[:, None],
++            ],
++            dim=1,
++        )
++        raw = self.memory_attention(features).squeeze(1)
++
++        if self.config.item_attention_scale != 0.0 or self.config.subject_attention_scale != 0.0:
++            zi = self.config.subject_scale * subject_z
++            item_i_raw = self.item_reliability(torch.cat([vec_i, zi], dim=1)).squeeze(1)
++            item_j_raw = self.item_reliability(torch.cat([vec_j, zi], dim=1)).squeeze(1)
++            # Stable item-anchor reliability: if either item is a strong anchor for
++            # a virtual subject, the local edge becomes more accessible.
++            item_anchor = 0.5 * (item_i_raw + item_j_raw)
++            raw = raw + self.config.item_attention_scale * item_anchor
++            # General subject-specific encoding tendency; affects all edges for a
++            # participant but does not itself select a paper-specific pair.
++            raw = raw + self.config.subject_attention_scale * zi.mean(dim=1)
++
++        if self.config.pair_attention_scale != 0.0:
++            pair_raw = self.pair_reliability(torch.cat([vec_i, vec_j, self.config.subject_scale * subject_z], dim=1)).squeeze(1)
++            raw = raw + self.config.pair_attention_scale * pair_raw
++
++        if self.config.distance_attention_scale != 0.0:
++            # Positive value means the subject tends to encode large-distance
++            # anchor edges more strongly; negative means relatively local edges.
++            dist_pref = self.distance_reliability(self.config.subject_scale * subject_z).squeeze(1)
++            raw = raw + self.config.distance_attention_scale * dist_pref * (observed_diff_j_minus_i.abs() - 0.5)
++
++        raw = raw + self.config.memory_attention_bias + self.config.distance_salience * observed_diff_j_minus_i.abs()
++        temp = max(1e-3, float(self.config.reliability_temperature))
++        return torch.sigmoid(raw / temp)
++
++    def choice_logits(self, scores: torch.Tensor, item_i: torch.Tensor, item_j: torch.Tensor) -> torch.Tensor:
++        """Two-class logits: class 0 means item_i higher; class 1 means item_j higher."""
++        batch_idx = torch.arange(scores.shape[0], device=scores.device)
++        beta = F.softplus(self.log_beta) + 1e-3
++        return beta * torch.stack([scores[batch_idx, item_i], scores[batch_idx, item_j]], dim=1)
++
++
++def set_seed(seed: int) -> None:
++    if seed < 0:
++        log("[setup] No random seed.")
++        return
++    log(f"[setup] Setting random seed {seed}")
++    random.seed(seed)
++    np.random.seed(seed)
++    torch.manual_seed(seed)
++    if torch.cuda.is_available():
++        torch.cuda.manual_seed_all(seed)
++
++
++def sample_item_vectors(batch_size: int, n_items: int, item_dim: int) -> torch.Tensor:
++    # Random identity-like binary codes. They do not reveal rank.
++    return (torch.randint(0, 2, (batch_size, n_items, item_dim), device=DEVICE).float() * 2.0) - 1.0
++
++
++def sample_subject_latents(batch_size: int, subject_dim: int) -> torch.Tensor:
++    return torch.randn(batch_size, subject_dim, device=DEVICE)
++
++
++def rank_to_item_maps(batch_size: int, n_items: int) -> torch.Tensor:
++    maps = [torch.randperm(n_items, device=DEVICE) for _ in range(batch_size)]
++    return torch.stack(maps, dim=0)
++
++
++def true_scores_by_item(rank_to_item: torch.Tensor, config: TrainConfig) -> torch.Tensor:
++    values = config.rank_values.to(DEVICE)
++    bsz = rank_to_item.shape[0]
++    scores = torch.empty(bsz, config.n_items, device=DEVICE)
++    for rank in range(config.n_items):
++        scores[:, rank_to_item[:, rank]] = values[rank]
++    return scores
++
++
++def _is_connected(edges: list[tuple[int, int]], n_items: int) -> bool:
++    neighbors = {i: set() for i in range(n_items)}
++    for a, b in edges:
++        neighbors[a].add(b)
++        neighbors[b].add(a)
++    seen = {0}
++    frontier = [0]
++    while frontier:
++        node = frontier.pop()
++        for nxt in neighbors[node]:
++            if nxt not in seen:
++                seen.add(nxt)
++                frontier.append(nxt)
++    return len(seen) == n_items
++
++
++def sample_sparse_rank_graph(config: TrainConfig) -> list[tuple[int, int]]:
++    """Sample a connected sparse graph in rank space."""
++    all_pairs = config.all_rank_pairs
++    for _ in range(1000):
++        idx = np.random.choice(len(all_pairs), size=config.n_learning_pairs, replace=False)
++        edges = [all_pairs[int(i)] for i in idx]
++        degrees = np.zeros(config.n_items, dtype=int)
++        for a, b in edges:
++            degrees[a] += 1
++            degrees[b] += 1
++        if np.all(degrees > 0) and _is_connected(edges, config.n_items):
++            return edges
++    # Fallback: a chain plus one random edge.
++    edges = [(i, i + 1) for i in range(config.n_items - 1)]
++    remaining = [p for p in all_pairs if p not in edges]
++    edges.append(random.choice(remaining))
++    return edges[: config.n_learning_pairs]
++
++
++def rank_edges_to_item_edges(
++    rank_edges: list[tuple[int, int]],
++    rank_to_item: torch.Tensor,
++    random_orientation: bool = True,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Convert rank-space edges to item-index edges for each batch element."""
++    bsz = rank_to_item.shape[0]
++    n_edges = len(rank_edges)
++    item_edges = torch.empty(bsz, n_edges, 2, dtype=torch.long, device=DEVICE)
++    rank_edges_tensor = torch.tensor(rank_edges, dtype=torch.long, device=DEVICE)
++    for b in range(bsz):
++        item_edges[b, :, 0] = rank_to_item[b, rank_edges_tensor[:, 0]]
++        item_edges[b, :, 1] = rank_to_item[b, rank_edges_tensor[:, 1]]
++    if random_orientation:
++        swap = torch.rand(bsz, n_edges, device=DEVICE) < 0.5
++        first = item_edges[:, :, 0].clone()
++        second = item_edges[:, :, 1].clone()
++        item_edges[:, :, 0] = torch.where(swap, second, first)
++        item_edges[:, :, 1] = torch.where(swap, first, second)
++    return item_edges, rank_edges_tensor
++
++
++def all_item_pairs(rank_to_item: torch.Tensor, config: TrainConfig) -> torch.Tensor:
++    rank_pairs = torch.tensor(config.all_rank_pairs, dtype=torch.long, device=DEVICE)
++    bsz = rank_to_item.shape[0]
++    pairs = torch.empty(bsz, len(config.all_rank_pairs), 2, dtype=torch.long, device=DEVICE)
++    for b in range(bsz):
++        pairs[b, :, 0] = rank_to_item[b, rank_pairs[:, 0]]
++        pairs[b, :, 1] = rank_to_item[b, rank_pairs[:, 1]]
++    return pairs
++
++
++def gather_true_diff(true_scores: torch.Tensor, item_i: torch.Tensor, item_j: torch.Tensor) -> torch.Tensor:
++    batch_idx = torch.arange(true_scores.shape[0], device=true_scores.device)
++    return true_scores[batch_idx, item_j] - true_scores[batch_idx, item_i]
++
++
++def apply_memory_decay_and_interference(
++    strength: torch.Tensor, config: TrainConfig
++) -> torch.Tensor:
++    """Decay edge accessibility and apply item-level capacity competition."""
++    if config.forget_rate > 0:
++        strength = strength * math.exp(-config.forget_rate)
++    if config.memory_capacity > 0 and config.memory_capacity < 1000:
++        # Each item can only maintain a limited total accessibility across its edges.
++        row_sum = strength.sum(dim=2, keepdim=True).clamp_min(1e-8)
++        scale = torch.clamp(config.memory_capacity / row_sum, max=1.0)
++        strength = strength * scale
++        # Keep the matrix symmetric enough for a relation memory; row capacity is the key constraint.
++        strength = 0.5 * (strength + strength.transpose(1, 2))
++    return strength
++
++
++def encode_edge_memory(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    item_i: torch.Tensor,
++    item_j: torch.Tensor,
++    observed_diff_j_minus_i: torch.Tensor,
++    train_mode: bool,
++    scores: torch.Tensor | None = None,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
++    """Store an observed local relation into directed edge memory.
++
++    memory[i,j] means recalled estimate of score(j)-score(i).
++    strength[i,j] is its accessibility/reliability.
++    """
++    bsz = memory.shape[0]
++    batch_idx = torch.arange(bsz, device=memory.device)
++    attn = net.encode_attention(item_vecs, subject_z, item_i, item_j, observed_diff_j_minus_i)
++    noise_std = config.memory_encoding_noise if train_mode else config.eval_memory_encoding_noise
++    encoded = observed_diff_j_minus_i
++    if noise_std > 0:
++        encoded = (encoded + noise_std * torch.randn_like(encoded)).clamp(-1.0, 1.0)
++    if config.schema_encoding_bias > 0 and scores is not None:
++        # A simple schema-consistent encoding module: current subjective score
++        # difference partially assimilates the encoded local relation. This is
++        # not pair-specific; it depends only on current schema and a global bias.
++        schema_diff = scores[batch_idx, item_j] - scores[batch_idx, item_i]
++        # Stronger attention protects the actual observation; weak attention is
++        # more vulnerable to schema assimilation.
++        mix = (config.schema_encoding_bias * (1.0 - attn)).clamp(0.0, 1.0)
++        encoded = ((1.0 - mix) * encoded + mix * schema_diff).clamp(-1.0, 1.0)
++
++    old_ij = memory[batch_idx, item_i, item_j]
++    new_ij = (1.0 - attn) * old_ij + attn * encoded
++    old_ji = memory[batch_idx, item_j, item_i]
++    new_ji = (1.0 - attn) * old_ji - attn * encoded
++    memory = memory.clone()
++    strength = strength.clone()
++    memory[batch_idx, item_i, item_j] = new_ij
++    memory[batch_idx, item_j, item_i] = new_ji
++
++    old_s_ij = strength[batch_idx, item_i, item_j]
++    new_s = 1.0 - (1.0 - old_s_ij) * (1.0 - attn)
++    strength[batch_idx, item_i, item_j] = new_s
++    strength[batch_idx, item_j, item_i] = new_s
++    return memory, strength, attn
++
++
++def update_scores_from_memory_pair(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    scores: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++    item_i: torch.Tensor,
++    item_j: torch.Tensor,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
++    batch_idx = torch.arange(scores.shape[0], device=scores.device)
++    target = memory[batch_idx, item_i, item_j]
++    weight = strength[batch_idx, item_i, item_j]
++    return net.update_scores(scores, item_vecs, subject_z, item_i, item_j, target, external_weight=weight)
++
++
++
++def schema_biased_reconsolidation(
++    config: TrainConfig,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++    scores: torch.Tensor,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Assimilate weak edge memories toward the current subjective schema.
++
++    This models post-encoding reconsolidation: after a coarse global ranking is
++    formed, low-reliability local memories can be rewritten toward what the
++    schema predicts. Strong memories are protected.
++    """
++    if config.reconsolidation_strength <= 0:
++        return memory, strength
++    schema_diff = scores[:, None, :] - scores[:, :, None]  # [B, i, j] = s_j - s_i
++    vulnerability = (1.0 - strength.clamp(0.0, 1.0)).pow(max(0.0, config.reconsolidation_power))
++    mix = (config.reconsolidation_strength * vulnerability).clamp(0.0, 1.0)
++    eye = torch.eye(memory.shape[1], device=memory.device)[None, :, :]
++    mix = mix * (1.0 - eye)
++    memory = (1.0 - mix) * memory + mix * schema_diff
++    if config.reconsolidation_refresh > 0:
++        strength = (strength + config.reconsolidation_refresh * mix).clamp(0.0, 1.0)
++        strength = 0.5 * (strength + strength.transpose(1, 2))
++    return memory, strength
++
++
++def replay_from_memory(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    scores: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Internally replay remembered edges to consolidate the score schema."""
++    if config.replay_steps <= 0:
++        return scores, torch.tensor(0.0, device=DEVICE)
++    bsz = scores.shape[0]
++    pair_list = list(combinations(range(config.n_items), 2))
++    pair_tensor = torch.tensor(pair_list, dtype=torch.long, device=DEVICE)
++    gate_values = []
++    # Use the same replay pair for all batch elements per replay step for speed;
++    # the effective strength remains subject-specific.
++    for _ in range(config.replay_steps):
++        with torch.no_grad():
++            pair_strength = strength[:, pair_tensor[:, 0], pair_tensor[:, 1]].mean(dim=0)
++            temp = max(1e-3, float(config.replay_temperature))
++            probs = torch.softmax(pair_strength / temp, dim=0)
++            idx = torch.multinomial(probs, 1).item()
++        a, b = pair_list[idx]
++        item_i = torch.full((bsz,), a, dtype=torch.long, device=DEVICE)
++        item_j = torch.full((bsz,), b, dtype=torch.long, device=DEVICE)
++        # replay_strength scales remembered-edge reliability without changing
++        # memory contents; it is an internal consolidation gain, not reward.
++        old_strength = strength.clone()
++        if config.replay_strength != 1.0:
++            strength = strength.clone()
++            strength[:, a, b] = (strength[:, a, b] * config.replay_strength).clamp(0.0, 1.0)
++            strength[:, b, a] = strength[:, a, b]
++        scores, _pred, _err, gate = update_scores_from_memory_pair(
++            config, net, scores, item_vecs, subject_z, memory, strength, item_i, item_j
++        )
++        strength = old_strength
++        gate_values.append(gate.mean())
++    mean_gate = torch.stack(gate_values).mean() if gate_values else torch.tensor(0.0, device=DEVICE)
++    return scores, mean_gate
++
++def schema_reconstruct_from_memory(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    scores: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Iteratively update the global score schema from all currently remembered edges."""
++    bsz = scores.shape[0]
++    pair_list = list(combinations(range(config.n_items), 2))
++    gate_values = []
++    for _ in range(max(1, config.schema_sweeps)):
++        random.shuffle(pair_list)
++        for a, b in pair_list:
++            item_i = torch.full((bsz,), a, dtype=torch.long, device=DEVICE)
++            item_j = torch.full((bsz,), b, dtype=torch.long, device=DEVICE)
++            scores, _pred, _err, gate = update_scores_from_memory_pair(
++                config, net, scores, item_vecs, subject_z, memory, strength, item_i, item_j
++            )
++            gate_values.append(gate.mean())
++    mean_gate = torch.stack(gate_values).mean() if gate_values else torch.tensor(0.0, device=DEVICE)
++    return scores, mean_gate
++
++
++def run_learning_phase(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    true_scores: torch.Tensor,
++    learning_item_edges: torch.Tensor,
++    train_mode: bool,
++    noise_std: float | None = None,
++    edge_dropout: float | None = None,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
++    """Run observation-only sparse-pair learning.
++
++    In direct mode this reproduces the previous baseline. In memory modes, local
++    pair evidence is first encoded into a decaying/interfering edge memory and the
++    global score schema is reconstructed from what remains accessible.
++    """
++    bsz, n_edges, _ = learning_item_edges.shape
++    scores = net.initial_scores(item_vecs, subject_z)
++    if noise_std is None:
++        noise_std = config.relation_noise if train_mode else config.eval_relation_noise
++    if edge_dropout is None:
++        edge_dropout = config.edge_dropout if train_mode else config.eval_edge_dropout
++    recon_losses = []
++    gates = []
++
++    if config.memory_mode == "direct":
++        for _block in range(config.n_learning_blocks):
++            orders = torch.stack([torch.randperm(n_edges, device=DEVICE) for _ in range(bsz)], dim=0)
++            for k in range(n_edges):
++                edge_idx = orders[:, k]
++                item_i = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 0]
++                item_j = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 1]
++                true_diff = gather_true_diff(true_scores, item_i, item_j)
++                if noise_std > 0:
++                    obs_diff = true_diff + noise_std * torch.randn_like(true_diff)
++                    obs_diff = obs_diff.clamp(-1.0, 1.0)
++                else:
++                    obs_diff = true_diff
++                if edge_dropout > 0:
++                    keep = (torch.rand_like(obs_diff) >= edge_dropout).float()
++                    pred_current = scores[torch.arange(bsz, device=DEVICE), item_j] - scores[torch.arange(bsz, device=DEVICE), item_i]
++                    obs_diff = keep * obs_diff + (1.0 - keep) * pred_current.detach()
++                scores, pred_diff, error, gate = net.update_scores(scores, item_vecs, subject_z, item_i, item_j, obs_diff)
++                recon_losses.append(error.pow(2).mean())
++                gates.append(gate.mean())
++    else:
++        memory = torch.zeros(bsz, config.n_items, config.n_items, device=DEVICE)
++        strength = torch.zeros_like(memory)
++        for _block in range(config.n_learning_blocks):
++            orders = torch.stack([torch.randperm(n_edges, device=DEVICE) for _ in range(bsz)], dim=0)
++            for k in range(n_edges):
++                edge_idx = orders[:, k]
++                item_i = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 0]
++                item_j = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 1]
++                true_diff = gather_true_diff(true_scores, item_i, item_j)
++                if noise_std > 0:
++                    obs_diff = (true_diff + noise_std * torch.randn_like(true_diff)).clamp(-1.0, 1.0)
++                else:
++                    obs_diff = true_diff
++                if edge_dropout > 0:
++                    keep = (torch.rand_like(obs_diff) >= edge_dropout).float()
++                    pred_current = memory[torch.arange(bsz, device=DEVICE), item_i, item_j]
++                    obs_diff = keep * obs_diff + (1.0 - keep) * pred_current.detach()
++                memory, strength, attn = encode_edge_memory(
++                    config, net, memory, strength, item_vecs, subject_z, item_i, item_j, obs_diff, train_mode, scores=scores
++                )
++                strength = apply_memory_decay_and_interference(strength, config)
++                # Reconstruction error tracks memory-content accuracy, not direct score accuracy.
++                recalled = memory[torch.arange(bsz, device=DEVICE), item_i, item_j]
++                rel = strength[torch.arange(bsz, device=DEVICE), item_i, item_j]
++                recon_losses.append((rel * (recalled - true_diff).pow(2)).mean())
++                gates.append(attn.mean())
++                if config.memory_mode in {"edge_online", "edge_hybrid"}:
++                    scores, _pred, error, gate = update_scores_from_memory_pair(
++                        config, net, scores, item_vecs, subject_z, memory, strength, item_i, item_j
++                    )
++                    recon_losses.append(error.pow(2).mean())
++                    gates.append(gate.mean())
++            # Optional internally generated replay after the external block.
++            if config.replay_steps > 0 and config.memory_mode in {"edge_online", "edge_block", "edge_hybrid"}:
++                scores, replay_gate = replay_from_memory(
++                    config, net, scores, item_vecs, subject_z, memory, strength
++                )
++                gates.append(replay_gate)
++            if config.memory_mode in {"edge_block", "edge_hybrid"}:
++                scores, block_gate = schema_reconstruct_from_memory(
++                    config, net, scores, item_vecs, subject_z, memory, strength
++                )
++                gates.append(block_gate)
++            # Optional schema-biased reconsolidation after block-level schema has
++            # been formed or updated. This changes future remembered constraints,
++            # not immediate external evidence.
++            if config.reconsolidation_strength > 0 and config.memory_mode in {"edge_online", "edge_block", "edge_hybrid"}:
++                memory, strength = schema_biased_reconsolidation(config, memory, strength, scores)
++
++    if recon_losses:
++        recon_loss = torch.stack(recon_losses).mean()
++        mean_gate = torch.stack(gates).mean()
++    else:
++        recon_loss = torch.tensor(0.0, device=DEVICE)
++        mean_gate = torch.tensor(0.0, device=DEVICE)
++    return scores, recon_loss, mean_gate
++
++
++@dataclass
++class EpisodeStats:
++    loss: torch.Tensor
++    loss_value: float
++    choice_loss: float
++    recon_loss: float
++    entropy_loss: float
++    test_acc: float
++    learned_acc: float
++    nonlearned_acc: float
++    mean_gate: float
++    mean_abs_score: float
++
++
++def run_training_episode(config: TrainConfig, net: ConstructiveRankingNet) -> EpisodeStats:
++    bsz = config.bs
++    item_vecs = sample_item_vectors(bsz, config.n_items, config.item_dim)
++    subject_z = sample_subject_latents(bsz, config.subject_dim)
++    r2i = rank_to_item_maps(bsz, config.n_items)
++    true_scores = true_scores_by_item(r2i, config)
++
++    # A broader task family: random connected sparse evidence graphs.
++    rank_edges_per_batch = [sample_sparse_rank_graph(config) for _ in range(bsz)]
++    learning_item_edges = torch.empty(bsz, config.n_learning_pairs, 2, dtype=torch.long, device=DEVICE)
++    for b, rank_edges in enumerate(rank_edges_per_batch):
++        edge_items, _ = rank_edges_to_item_edges(rank_edges, r2i[b : b + 1], random_orientation=True)
++        learning_item_edges[b] = edge_items[0]
++
++    scores, recon_loss, mean_gate = run_learning_phase(
++        config, net, item_vecs, subject_z, true_scores, learning_item_edges, train_mode=True
++    )
++
++    # Outer-loop query loss over all pairwise comparisons. No feedback is fed
++    # back into the episode; this is only the meta-training objective.
++    pairs = all_item_pairs(r2i, config)
++    choice_losses = []
++    entropies = []
++    correct = []
++    learned_correct = []
++    nonlearned_correct = []
++
++    learned_sets = [set(tuple(sorted(map(int, edge.tolist()))) for edge in learning_item_edges[b]) for b in range(bsz)]
++
++    for k in range(pairs.shape[1]):
++        item_i = pairs[:, k, 0]
++        item_j = pairs[:, k, 1]
++        logits = net.choice_logits(scores, item_i, item_j)
++        true_i = true_scores[torch.arange(bsz, device=DEVICE), item_i]
++        true_j = true_scores[torch.arange(bsz, device=DEVICE), item_j]
++        labels = (true_j > true_i).long()  # 0 if item_i higher, 1 if item_j higher.
++        choice_losses.append(F.cross_entropy(logits, labels))
++        probs = F.softmax(logits, dim=1)
++        entropies.append((-(probs * (probs + 1e-8).log()).sum(dim=1)).mean())
++        pred = torch.argmax(logits, dim=1)
++        corr = (pred == labels).float()
++        correct.append(corr)
++        for b in range(bsz):
++            pair_key = tuple(sorted([int(item_i[b]), int(item_j[b])]))
++            if pair_key in learned_sets[b]:
++                learned_correct.append(corr[b])
++            else:
++                nonlearned_correct.append(corr[b])
++
++    choice_loss = torch.stack(choice_losses).mean()
++    entropy_loss = torch.stack(entropies).mean()
++    correct_tensor = torch.stack(correct, dim=1)
++    learned_acc = torch.stack(learned_correct).mean() if learned_correct else torch.tensor(float("nan"), device=DEVICE)
++    nonlearned_acc = torch.stack(nonlearned_correct).mean() if nonlearned_correct else torch.tensor(float("nan"), device=DEVICE)
++
++    loss = (
++        choice_loss
++        + config.lambda_recon * recon_loss
++        + config.lambda_entropy * entropy_loss
++        + config.lambda_score_l2 * scores.pow(2).mean()
++    )
++
++    return EpisodeStats(
++        loss=loss,
++        loss_value=float(loss.detach()),
++        choice_loss=float(choice_loss.detach()),
++        recon_loss=float(recon_loss.detach()),
++        entropy_loss=float(entropy_loss.detach()),
++        test_acc=float(correct_tensor.mean().detach()),
++        learned_acc=float(learned_acc.detach()),
++        nonlearned_acc=float(nonlearned_acc.detach()),
++        mean_gate=float(mean_gate.detach()),
++        mean_abs_score=float(scores.abs().mean().detach()),
++    )
++
++
++def train(config: TrainConfig) -> ConstructiveRankingNet:
++    output_dir = Path(config.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    net = ConstructiveRankingNet(config).to(DEVICE)
++    optimizer = torch.optim.Adam(net.parameters(), lr=config.lr, eps=config.eps, weight_decay=config.l2)
++    log(f"[setup] Device: {DEVICE}")
++    log(f"[setup] Batch size: {config.bs}; episodes: {config.nbiter}; output: {output_dir}")
++    log(f"[setup] Parameter count: {sum(p.numel() for p in net.parameters())}")
++    log("[task] Inner-loop reward: none (reward_input = 0). Learning trials provide relation constraints only.")
++
++    log_path = output_dir / "train_log.csv"
++    with open(log_path, "w", newline="") as f:
++        writer = csv.DictWriter(
++            f,
++            fieldnames=[
++                "episode",
++                "loss",
++                "choice_loss",
++                "recon_loss",
++                "entropy_loss",
++                "test_acc",
++                "learned_acc",
++                "nonlearned_acc",
++                "mean_gate",
++                "mean_abs_score",
++            ],
++        )
++        writer.writeheader()
++
++    start = time.time()
++    episode_iter = tqdm(range(config.nbiter), desc="training episodes", unit="episode", dynamic_ncols=True, file=sys.stdout)
++    last_stats: EpisodeStats | None = None
++    for episode in episode_iter:
++        optimizer.zero_grad()
++        stats = run_training_episode(config, net)
++        stats.loss.backward()
++        torch.nn.utils.clip_grad_norm_(net.parameters(), config.gc)
++        optimizer.step()
++        last_stats = stats
++
++        if episode % config.pe == 0 or episode == config.nbiter - 1:
++            elapsed = time.time() - start
++            log(
++                f"Episode {episode} ==== {elapsed:.2f}s | "
++                f"loss={stats.loss_value:.4f} choice={stats.choice_loss:.4f} recon={stats.recon_loss:.4f} | "
++                f"acc={stats.test_acc:.3f} learned={stats.learned_acc:.3f} nonlearned={stats.nonlearned_acc:.3f} | "
++                f"gate={stats.mean_gate:.3f} | |score|={stats.mean_abs_score:.3f}"
++            )
++            start = time.time()
++
++        with open(log_path, "a", newline="") as f:
++            # Write manually because stats.loss is a tensor and not CSV friendly.
++            writer = csv.writer(f)
++            writer.writerow(
++                [
++                    episode,
++                    stats.loss_value,
++                    stats.choice_loss,
++                    stats.recon_loss,
++                    stats.entropy_loss,
++                    stats.test_acc,
++                    stats.learned_acc,
++                    stats.nonlearned_acc,
++                    stats.mean_gate,
++                    stats.mean_abs_score,
++                ]
++            )
++
++        if config.save_every > 0 and episode > 0 and episode % config.save_every == 0:
++            torch.save({"model_state": net.state_dict(), "config": asdict(config)}, output_dir / "net_constructive.pt")
++            log(f"[save] checkpoint: {output_dir / 'net_constructive.pt'}")
++
++    torch.save({"model_state": net.state_dict(), "config": asdict(config)}, output_dir / "net_constructive.pt")
++    log(f"[save] final checkpoint: {output_dir / 'net_constructive.pt'}")
++    if last_stats is not None:
++        log(f"[done] final train acc={last_stats.test_acc:.3f}, loss={last_stats.loss_value:.4f}")
++    return net
++
++
++def majority_preference_matrix(pair_correctness: np.ndarray, pair_choices_high_rank: np.ndarray, n_items: int) -> np.ndarray:
++    """Build a directed preference matrix pref[i,j]=1 if i is judged higher than j."""
++    pref = np.zeros((n_items, n_items), dtype=int)
++    for a in range(n_items):
++        for b in range(a + 1, n_items):
++            # Stored index follows combinations order.
++            pass
++    return pref
++
++
++def self_consistency_from_scores(scores: np.ndarray) -> tuple[float, int]:
++    """Score-derived rankings are transitive; this returns 1.0 unless ties are exact."""
++    n_items = scores.shape[0]
++    circular = 0
++    for a, b, c in combinations(range(n_items), 3):
++        # Majority preferences induced by scalar scores.
++        ab = scores[a] > scores[b]
++        bc = scores[b] > scores[c]
++        ac = scores[a] > scores[c]
++        # Cycles cannot occur for strict scalar scores. Ties are counted as non-cycles.
++        if (ab and bc and not ac) or ((not ab) and (not bc) and ac):
++            circular += 1
++    max_triads = (n_items**3 - 4 * n_items) // 24 if n_items % 2 == 0 else (n_items**3 - n_items) // 24
++    return 1.0 - circular / max_triads, circular
++
++
++
++
++def self_consistency_from_majority(pair_acc: np.ndarray, pair_list: list[tuple[int, int]], n_items: int) -> tuple[float, int]:
++    """Compute circular-triad consistency from majority choices.
++
++    pair_acc is accuracy for rank-ordered pairs (a,b) where b is ground-truth higher.
++    If accuracy >= 0.5, majority preference is b > a; otherwise a > b.
++    """
++    pref = np.zeros((n_items, n_items), dtype=bool)
++    for idx, (a, b) in enumerate(pair_list):
++        if pair_acc[idx] >= 0.5:
++            pref[b, a] = True
++        else:
++            pref[a, b] = True
++    circular = 0
++    for a, b, c in combinations(range(n_items), 3):
++        # Count a cycle if all three directed preferences form either orientation.
++        if (pref[a, b] and pref[b, c] and pref[c, a]) or (pref[a, c] and pref[c, b] and pref[b, a]):
++            circular += 1
++    max_triads = (n_items**3 - 4 * n_items) // 24 if n_items % 2 == 0 else (n_items**3 - n_items) // 24
++    return 1.0 - circular / max_triads, circular
++
++def kendall_tau_order(order_a: Iterable[int], order_b: Iterable[int]) -> float:
++    a = list(order_a)
++    b = list(order_b)
++    pos_a = {item: idx for idx, item in enumerate(a)}
++    pos_b = {item: idx for idx, item in enumerate(b)}
++    concordant = 0
++    discordant = 0
++    for i, j in combinations(a, 2):
++        sign_a = pos_a[i] - pos_a[j]
++        sign_b = pos_b[i] - pos_b[j]
++        if sign_a * sign_b > 0:
++            concordant += 1
++        elif sign_a * sign_b < 0:
++            discordant += 1
++    denom = concordant + discordant
++    return 0.0 if denom == 0 else (concordant - discordant) / denom
++
++
++@torch.no_grad()
++def evaluate_paper_task(config: TrainConfig, net: ConstructiveRankingNet) -> dict:
++    """Evaluate the behavioral paper's exact few-shot graph with virtual subjects."""
++    net.eval()
++    old_log_beta = None
++    if config.eval_beta_override and config.eval_beta_override > 0:
++        old_log_beta = net.log_beta.detach().clone()
++        net.log_beta.data.fill_(math.log(config.eval_beta_override))
++    n_subj = config.eval_subjects
++    reps = config.eval_repetitions
++    # Same item identities for all virtual subjects, matching identical external input.
++    one_item_set = sample_item_vectors(1, config.n_items, config.item_dim)
++    item_vecs = one_item_set.expand(n_subj, -1, -1).contiguous()
++    subject_z = sample_subject_latents(n_subj, config.subject_dim)
++    r2i = torch.arange(config.n_items, device=DEVICE)[None, :].expand(n_subj, -1).contiguous()
++    true_scores = true_scores_by_item(r2i, config)
++    learning_edges, _ = rank_edges_to_item_edges(PAPER_LEARNING_PAIRS_RANK, r2i, random_orientation=False)
++    scores, recon_loss, mean_gate = run_learning_phase(config, net, item_vecs, subject_z, true_scores, learning_edges, train_mode=False)
++
++    pair_list = config.all_rank_pairs
++    paper_pair_set = {tuple(p) for p in PAPER_LEARNING_PAIRS_RANK}
++    pair_acc = np.zeros((n_subj, len(pair_list)), dtype=float)
++    pair_error_prop = np.zeros_like(pair_acc)
++
++    beta_logits_all = []
++    for pidx, (ra, rb) in enumerate(pair_list):
++        item_i = torch.full((n_subj,), ra, dtype=torch.long, device=DEVICE)
++        item_j = torch.full((n_subj,), rb, dtype=torch.long, device=DEVICE)
++        labels = torch.ones(n_subj, dtype=torch.long, device=DEVICE)  # rb is higher than ra.
++        logits = net.choice_logits(scores, item_i, item_j)
++        beta_logits_all.append(float((logits[:, 1] - logits[:, 0]).mean().cpu()))
++        probs = F.softmax(logits, dim=1)
++        # Repeated no-feedback test choices.
++        choices = []
++        for _ in range(reps):
++            sampled = torch.distributions.Categorical(probs).sample()
++            choices.append((sampled == labels).float().cpu().numpy())
++        arr = np.stack(choices, axis=1)
++        pair_acc[:, pidx] = arr.mean(axis=1)
++        pair_error_prop[:, pidx] = 1.0 - pair_acc[:, pidx]
++
++    learned_idx = np.array([idx for idx, p in enumerate(pair_list) if p in paper_pair_set], dtype=int)
++    nonlearned_idx = np.array([idx for idx, p in enumerate(pair_list) if p not in paper_pair_set], dtype=int)
++    learned_acc = float(pair_acc[:, learned_idx].mean())
++    nonlearned_acc = float(pair_acc[:, nonlearned_idx].mean())
++    overall_acc = float(pair_acc.mean())
++
++    consistent_subjects_80 = int((pair_error_prop >= 0.8).any(axis=1).sum())
++    consistent_subjects_100 = int((pair_error_prop >= 1.0).any(axis=1).sum())
++
++    subject_orders = []
++    self_consistency = []
++    circular_counts = []
++    choice_self_consistency = []
++    choice_circular_counts = []
++    for b in range(n_subj):
++        score_np = scores[b].detach().cpu().numpy()
++        # Low-to-high subjective order.
++        order = list(np.argsort(score_np))
++        subject_orders.append(order)
++        sc, circ = self_consistency_from_scores(score_np)
++        self_consistency.append(sc)
++        circular_counts.append(circ)
++        csc, ccirc = self_consistency_from_majority(pair_acc[b], pair_list, config.n_items)
++        choice_self_consistency.append(csc)
++        choice_circular_counts.append(ccirc)
++
++    taus = []
++    for i, j in combinations(range(n_subj), 2):
++        taus.append(kendall_tau_order(subject_orders[i], subject_orders[j]))
++
++    # Distance effect proxy: mean accuracy by true rank distance.
++    distance_acc = {}
++    for dist in range(1, config.n_items):
++        idx = [pidx for pidx, (a, b) in enumerate(pair_list) if b - a == dist]
++        distance_acc[str(dist)] = float(pair_acc[:, idx].mean())
++
++    summary = {
++        "eval_subjects": n_subj,
++        "eval_repetitions": reps,
++        "overall_accuracy": overall_acc,
++        "learned_pairs_accuracy": learned_acc,
++        "nonlearned_pairs_accuracy": nonlearned_acc,
++        "consistent_error_subjects_80pct": consistent_subjects_80,
++        "consistent_error_subjects_80pct_ratio": consistent_subjects_80 / n_subj,
++        "consistent_error_subjects_100pct": consistent_subjects_100,
++        "consistent_error_subjects_100pct_ratio": consistent_subjects_100 / n_subj,
++        "mean_self_consistency_from_scores": float(np.mean(self_consistency)),
++        "mean_circular_triads_from_scores": float(np.mean(circular_counts)),
++        "mean_self_consistency_from_majority_choices": float(np.mean(choice_self_consistency)),
++        "mean_circular_triads_from_majority_choices": float(np.mean(choice_circular_counts)),
++        "mean_inter_subject_kendall_tau": float(np.mean(taus)) if taus else 0.0,
++        "distance_accuracy": distance_acc,
++        "reconstruction_loss_after_learning": float(recon_loss.cpu()),
++        "mean_update_gate": float(mean_gate.cpu()),
++        "mean_abs_final_score": float(scores.abs().mean().cpu()),
++    }
++    if old_log_beta is not None:
++        net.log_beta.data.copy_(old_log_beta)
++    return summary
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description="Constructive ranking baseline for few-shot relational learning.")
++    parser.add_argument("--nbiter", type=int, default=4)
++    parser.add_argument("--batch-size", type=int, default=2)
++    parser.add_argument("--hidden-size", type=int, default=8)
++    parser.add_argument("--seed", type=int, default=1)
++    parser.add_argument("--output-dir", default="outputs_constructive")
++    parser.add_argument("--save-every", type=int, default=50)
++    parser.add_argument("--print-every", type=int, default=10)
++    parser.add_argument("--eval-subjects", type=int, default=8)
++    parser.add_argument("--eval-repetitions", type=int, default=5)
++    parser.add_argument("--relation-noise", type=float, default=0.03)
++    parser.add_argument("--eval-relation-noise", type=float, default=0.0)
++    parser.add_argument("--edge-dropout", type=float, default=0.0)
++    parser.add_argument("--eval-edge-dropout", type=float, default=0.0)
++    parser.add_argument("--init-score-noise", type=float, default=0.0)
++    parser.add_argument("--subject-scale", type=float, default=1.0)
++    parser.add_argument("--update-scale", type=float, default=1.0)
++    parser.add_argument("--eval-beta-override", type=float, default=0.0)
++    parser.add_argument("--memory-mode", choices=["direct", "edge_online", "edge_block", "edge_hybrid"], default="direct")
++    parser.add_argument("--forget-rate", type=float, default=0.0)
++    parser.add_argument("--memory-capacity", type=float, default=10.0)
++    parser.add_argument("--memory-encoding-noise", type=float, default=0.0)
++    parser.add_argument("--eval-memory-encoding-noise", type=float, default=0.0)
++    parser.add_argument("--memory-attention-bias", type=float, default=0.0)
++    parser.add_argument("--distance-salience", type=float, default=0.0)
++    parser.add_argument("--subject-attention-scale", type=float, default=0.0)
++    parser.add_argument("--item-attention-scale", type=float, default=0.0)
++    parser.add_argument("--pair-attention-scale", type=float, default=0.0)
++    parser.add_argument("--distance-attention-scale", type=float, default=0.0)
++    parser.add_argument("--reliability-temperature", type=float, default=1.0)
++    parser.add_argument("--reconsolidation-strength", type=float, default=0.0)
++    parser.add_argument("--reconsolidation-power", type=float, default=1.0)
++    parser.add_argument("--reconsolidation-refresh", type=float, default=0.0)
++    parser.add_argument("--schema-encoding-bias", type=float, default=0.0)
++    parser.add_argument("--replay-steps", type=int, default=0)
++    parser.add_argument("--replay-strength", type=float, default=1.0)
++    parser.add_argument("--replay-temperature", type=float, default=1.0)
++    parser.add_argument("--schema-sweeps", type=int, default=1)
++    parser.add_argument("--lr", type=float, default=3e-4)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    config = TrainConfig(
++        rngseed=args.seed,
++        nbiter=args.nbiter,
++        bs=args.batch_size,
++        hidden_size=args.hidden_size,
++        output_dir=args.output_dir,
++        save_every=args.save_every,
++        pe=args.print_every,
++        eval_subjects=args.eval_subjects,
++        eval_repetitions=args.eval_repetitions,
++        relation_noise=args.relation_noise,
++        eval_relation_noise=args.eval_relation_noise,
++        edge_dropout=args.edge_dropout,
++        eval_edge_dropout=args.eval_edge_dropout,
++        init_score_noise=args.init_score_noise,
++        subject_scale=args.subject_scale,
++        update_scale=args.update_scale,
++        eval_beta_override=args.eval_beta_override,
++        memory_mode=args.memory_mode,
++        forget_rate=args.forget_rate,
++        memory_capacity=args.memory_capacity,
++        memory_encoding_noise=args.memory_encoding_noise,
++        eval_memory_encoding_noise=args.eval_memory_encoding_noise,
++        memory_attention_bias=args.memory_attention_bias,
++        distance_salience=args.distance_salience,
++        subject_attention_scale=args.subject_attention_scale,
++        item_attention_scale=args.item_attention_scale,
++        pair_attention_scale=args.pair_attention_scale,
++        distance_attention_scale=args.distance_attention_scale,
++        reliability_temperature=args.reliability_temperature,
++        reconsolidation_strength=args.reconsolidation_strength,
++        reconsolidation_power=args.reconsolidation_power,
++        reconsolidation_refresh=args.reconsolidation_refresh,
++        schema_encoding_bias=args.schema_encoding_bias,
++        replay_steps=args.replay_steps,
++        replay_strength=args.replay_strength,
++        replay_temperature=args.replay_temperature,
++        schema_sweeps=args.schema_sweeps,
++        lr=args.lr,
++    )
++    set_seed(config.rngseed)
++    output_dir = Path(config.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    with open(output_dir / "config_constructive.json", "w") as f:
++        json.dump(asdict(config), f, indent=2)
++
++    net = train(config)
++    summary = evaluate_paper_task(config, net)
++    with open(output_dir / "paper_task_eval_summary.json", "w") as f:
++        json.dump(summary, f, indent=2)
++    log("[eval] behavioral-paper task summary:")
++    for key, value in summary.items():
++        log(f"  {key}: {value}")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/sources/01_behavior_task_score_coordinate/simple_neo_prev_param_sweep.py b/sources/01_behavior_task_score_coordinate/simple_neo_prev_param_sweep.py
+new file mode 100644
+index 0000000..559c635
+--- /dev/null
++++ b/sources/01_behavior_task_score_coordinate/simple_neo_prev_param_sweep.py
+@@ -0,0 +1,773 @@
++"""
++Constructive-ranking baseline for the few-shot relational-learning task.
++
++This script replaces the original adjacent-pair reinforcement-learning episode in
++``simple_neo.py`` with a deliberately constrained neural mechanism:
++
++1. Each item has an internal scalar score stored in an episode-local memory.
++2. A learning observation (item_i, item_j, signed distance) is treated as a
++   constraint on the two scores, not as a reward.
++3. A small trainable update network learns how strongly to write each constraint
++   into the score memory.
++4. Test choices are forced to use one global score vector: choose by comparing
++   score(item_i) and score(item_j). This makes pairwise choices come from a
++   shared latent ranking rather than from independent pair classifiers.
++
++The meta-training distribution is intentionally broader than the behavioral
++paper's exact task. During training, item identities, rank-to-item mappings and
++sparse learning graphs are randomized. The behavioral paper's fixed 8-pair task
++is used in ``evaluate_paper_task`` as a held-out-style evaluation protocol.
++
++There is no within-episode reward. The only optimization signal is the outer-loop
++loss computed after running a full episode, matching an observation-only learning
++phase followed by no-feedback testing.
++"""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import json
++import math
++import random
++import sys
++import time
++from dataclasses import asdict, dataclass
++from itertools import combinations
++from pathlib import Path
++from typing import Iterable
++
++import numpy as np
++import torch
++import torch.nn as nn
++import torch.nn.functional as F
++from tqdm.auto import tqdm
++
++ROOT_DIR = Path(__file__).resolve().parent
++DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
++
++# Rank-space pairs from Liu/Wang/Luo behavioral task.
++# We use ranks 0..7 from low to high, so (0, 5) means A-F and the signed
++# distance for the oriented pair (A, F) is +5/7.
++PAPER_LEARNING_PAIRS_RANK = [
++    (0, 5),  # A-F
++    (1, 2),  # B-C
++    (1, 4),  # B-E
++    (2, 6),  # C-G
++    (3, 5),  # D-F
++    (3, 6),  # D-G
++    (4, 7),  # E-H
++    (0, 7),  # A-H
++]
++
++
++def log(message: str) -> None:
++    print(message, flush=True)
++
++
++@dataclass
++class TrainConfig:
++    # Small defaults are intentional: they make the training script quick to run
++    # and suitable for smoke tests. Increase nbiter/bs/hidden_size for real runs.
++    rngseed: int = 1
++    nbiter: int = 4
++    bs: int = 2
++    hidden_size: int = 8
++    item_dim: int = 15
++    subject_dim: int = 8
++    n_items: int = 8
++    n_learning_pairs: int = 8
++    n_learning_blocks: int = 4
++    relation_noise: float = 0.03
++    eval_relation_noise: float = 0.0
++    edge_dropout: float = 0.0
++    eval_edge_dropout: float = 0.0
++    init_score_noise: float = 0.0
++    subject_scale: float = 1.0
++    update_scale: float = 1.0
++    eval_beta_override: float = 0.0
++    lr: float = 3e-4
++    eps: float = 1e-8
++    l2: float = 0.0
++    gc: float = 2.0
++    lambda_recon: float = 0.5
++    lambda_entropy: float = 0.005
++    lambda_score_l2: float = 1e-4
++    save_every: int = 50
++    pe: int = 10
++    output_dir: str = "outputs_constructive"
++    eval_subjects: int = 8
++    eval_repetitions: int = 5
++
++    @property
++    def all_rank_pairs(self) -> list[tuple[int, int]]:
++        return list(combinations(range(self.n_items), 2))
++
++    @property
++    def rank_values(self) -> torch.Tensor:
++        # Centering removes an arbitrary global offset from the score coordinate.
++        values = torch.arange(self.n_items, dtype=torch.float32)
++        values = (values - values.mean()) / (self.n_items - 1)
++        return values
++
++
++class ConstructiveRankingNet(nn.Module):
++    """Trainable score-memory updater for sparse pairwise ranking evidence."""
++
++    def __init__(self, config: TrainConfig):
++        super().__init__()
++        self.config = config
++        z = config.subject_dim
++        d = config.item_dim
++        h = config.hidden_size
++
++        # Initial item score = function(item identity, subject latent state).
++        self.score_init = nn.Sequential(
++            nn.Linear(d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Constraint writing gate. It does not output the answer; it only decides
++        # how strongly the current relation-error should update the two item scores.
++        self.update_gate = nn.Sequential(
++            nn.Linear(2 * d + z + 4, h),
++            nn.Tanh(),
++            nn.Linear(h, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Global trainable learning-rate and choice inverse-temperature.
++        self.logit_step = nn.Parameter(torch.tensor(0.0))
++        self.log_beta = nn.Parameter(torch.tensor(math.log(4.0)))
++
++    def initial_scores(self, item_vecs: torch.Tensor, subject_z: torch.Tensor) -> torch.Tensor:
++        """Return episode-local initial scores, shape [B, N]."""
++        bsz, n_items, _ = item_vecs.shape
++        z_scaled = self.config.subject_scale * subject_z
++        z_rep = z_scaled[:, None, :].expand(bsz, n_items, subject_z.shape[-1])
++        raw = self.score_init(torch.cat([item_vecs, z_rep], dim=-1)).squeeze(-1)
++        if self.config.init_score_noise > 0:
++            raw = raw + self.config.init_score_noise * torch.randn_like(raw)
++        return self.center_scores(raw)
++
++    @staticmethod
++    def center_scores(scores: torch.Tensor) -> torch.Tensor:
++        return scores - scores.mean(dim=1, keepdim=True)
++
++    def update_scores(
++        self,
++        scores: torch.Tensor,
++        item_vecs: torch.Tensor,
++        subject_z: torch.Tensor,
++        item_i: torch.Tensor,
++        item_j: torch.Tensor,
++        observed_diff_j_minus_i: torch.Tensor,
++    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
++        """Apply one relation-error-driven update.
++
++        The observation says score(j) - score(i) should equal observed_diff.
++        The model learns a gate, but the sign and conservation structure of the
++        update are fixed so that learning has to operate on a shared score axis.
++        """
++        bsz = scores.shape[0]
++        batch_idx = torch.arange(bsz, device=scores.device)
++
++        score_i = scores[batch_idx, item_i]
++        score_j = scores[batch_idx, item_j]
++        pred_diff = score_j - score_i
++        error = observed_diff_j_minus_i - pred_diff
++
++        vec_i = item_vecs[batch_idx, item_i]
++        vec_j = item_vecs[batch_idx, item_j]
++        features = torch.cat(
++            [
++                vec_i,
++                vec_j,
++                self.config.subject_scale * subject_z,
++                observed_diff_j_minus_i[:, None],
++                observed_diff_j_minus_i.abs()[:, None],
++                pred_diff[:, None],
++                error[:, None],
++            ],
++            dim=1,
++        )
++        gate = torch.sigmoid(self.update_gate(features)).squeeze(1)
++        step = self.config.update_scale * torch.sigmoid(self.logit_step) * gate
++        step = step.clamp(0.0, 1.0)
++        delta = 0.5 * step * error
++
++        next_scores = scores.clone()
++        next_scores[batch_idx, item_i] = next_scores[batch_idx, item_i] - delta
++        next_scores[batch_idx, item_j] = next_scores[batch_idx, item_j] + delta
++        next_scores = self.center_scores(next_scores)
++        return next_scores, pred_diff, error, gate
++
++    def choice_logits(self, scores: torch.Tensor, item_i: torch.Tensor, item_j: torch.Tensor) -> torch.Tensor:
++        """Two-class logits: class 0 means item_i higher; class 1 means item_j higher."""
++        batch_idx = torch.arange(scores.shape[0], device=scores.device)
++        beta = F.softplus(self.log_beta) + 1e-3
++        return beta * torch.stack([scores[batch_idx, item_i], scores[batch_idx, item_j]], dim=1)
++
++
++def set_seed(seed: int) -> None:
++    if seed < 0:
++        log("[setup] No random seed.")
++        return
++    log(f"[setup] Setting random seed {seed}")
++    random.seed(seed)
++    np.random.seed(seed)
++    torch.manual_seed(seed)
++    if torch.cuda.is_available():
++        torch.cuda.manual_seed_all(seed)
++
++
++def sample_item_vectors(batch_size: int, n_items: int, item_dim: int) -> torch.Tensor:
++    # Random identity-like binary codes. They do not reveal rank.
++    return (torch.randint(0, 2, (batch_size, n_items, item_dim), device=DEVICE).float() * 2.0) - 1.0
++
++
++def sample_subject_latents(batch_size: int, subject_dim: int) -> torch.Tensor:
++    return torch.randn(batch_size, subject_dim, device=DEVICE)
++
++
++def rank_to_item_maps(batch_size: int, n_items: int) -> torch.Tensor:
++    maps = [torch.randperm(n_items, device=DEVICE) for _ in range(batch_size)]
++    return torch.stack(maps, dim=0)
++
++
++def true_scores_by_item(rank_to_item: torch.Tensor, config: TrainConfig) -> torch.Tensor:
++    values = config.rank_values.to(DEVICE)
++    bsz = rank_to_item.shape[0]
++    scores = torch.empty(bsz, config.n_items, device=DEVICE)
++    for rank in range(config.n_items):
++        scores[:, rank_to_item[:, rank]] = values[rank]
++    return scores
++
++
++def _is_connected(edges: list[tuple[int, int]], n_items: int) -> bool:
++    neighbors = {i: set() for i in range(n_items)}
++    for a, b in edges:
++        neighbors[a].add(b)
++        neighbors[b].add(a)
++    seen = {0}
++    frontier = [0]
++    while frontier:
++        node = frontier.pop()
++        for nxt in neighbors[node]:
++            if nxt not in seen:
++                seen.add(nxt)
++                frontier.append(nxt)
++    return len(seen) == n_items
++
++
++def sample_sparse_rank_graph(config: TrainConfig) -> list[tuple[int, int]]:
++    """Sample a connected sparse graph in rank space."""
++    all_pairs = config.all_rank_pairs
++    for _ in range(1000):
++        idx = np.random.choice(len(all_pairs), size=config.n_learning_pairs, replace=False)
++        edges = [all_pairs[int(i)] for i in idx]
++        degrees = np.zeros(config.n_items, dtype=int)
++        for a, b in edges:
++            degrees[a] += 1
++            degrees[b] += 1
++        if np.all(degrees > 0) and _is_connected(edges, config.n_items):
++            return edges
++    # Fallback: a chain plus one random edge.
++    edges = [(i, i + 1) for i in range(config.n_items - 1)]
++    remaining = [p for p in all_pairs if p not in edges]
++    edges.append(random.choice(remaining))
++    return edges[: config.n_learning_pairs]
++
++
++def rank_edges_to_item_edges(
++    rank_edges: list[tuple[int, int]],
++    rank_to_item: torch.Tensor,
++    random_orientation: bool = True,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Convert rank-space edges to item-index edges for each batch element."""
++    bsz = rank_to_item.shape[0]
++    n_edges = len(rank_edges)
++    item_edges = torch.empty(bsz, n_edges, 2, dtype=torch.long, device=DEVICE)
++    rank_edges_tensor = torch.tensor(rank_edges, dtype=torch.long, device=DEVICE)
++    for b in range(bsz):
++        item_edges[b, :, 0] = rank_to_item[b, rank_edges_tensor[:, 0]]
++        item_edges[b, :, 1] = rank_to_item[b, rank_edges_tensor[:, 1]]
++    if random_orientation:
++        swap = torch.rand(bsz, n_edges, device=DEVICE) < 0.5
++        first = item_edges[:, :, 0].clone()
++        second = item_edges[:, :, 1].clone()
++        item_edges[:, :, 0] = torch.where(swap, second, first)
++        item_edges[:, :, 1] = torch.where(swap, first, second)
++    return item_edges, rank_edges_tensor
++
++
++def all_item_pairs(rank_to_item: torch.Tensor, config: TrainConfig) -> torch.Tensor:
++    rank_pairs = torch.tensor(config.all_rank_pairs, dtype=torch.long, device=DEVICE)
++    bsz = rank_to_item.shape[0]
++    pairs = torch.empty(bsz, len(config.all_rank_pairs), 2, dtype=torch.long, device=DEVICE)
++    for b in range(bsz):
++        pairs[b, :, 0] = rank_to_item[b, rank_pairs[:, 0]]
++        pairs[b, :, 1] = rank_to_item[b, rank_pairs[:, 1]]
++    return pairs
++
++
++def gather_true_diff(true_scores: torch.Tensor, item_i: torch.Tensor, item_j: torch.Tensor) -> torch.Tensor:
++    batch_idx = torch.arange(true_scores.shape[0], device=true_scores.device)
++    return true_scores[batch_idx, item_j] - true_scores[batch_idx, item_i]
++
++
++def run_learning_phase(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    true_scores: torch.Tensor,
++    learning_item_edges: torch.Tensor,
++    train_mode: bool,
++    noise_std: float | None = None,
++    edge_dropout: float | None = None,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
++    """Run observation-only sparse-pair learning.
++
++    Returns final scores, accumulated reconstruction loss and mean update gate.
++    """
++    bsz, n_edges, _ = learning_item_edges.shape
++    scores = net.initial_scores(item_vecs, subject_z)
++    if noise_std is None:
++        noise_std = config.relation_noise if train_mode else config.eval_relation_noise
++    if edge_dropout is None:
++        edge_dropout = config.edge_dropout if train_mode else config.eval_edge_dropout
++    recon_losses = []
++    gates = []
++
++    for _block in range(config.n_learning_blocks):
++        orders = torch.stack([torch.randperm(n_edges, device=DEVICE) for _ in range(bsz)], dim=0)
++        for k in range(n_edges):
++            edge_idx = orders[:, k]
++            item_i = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 0]
++            item_j = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 1]
++            true_diff = gather_true_diff(true_scores, item_i, item_j)
++            if noise_std > 0:
++                obs_diff = true_diff + noise_std * torch.randn_like(true_diff)
++                obs_diff = obs_diff.clamp(-1.0, 1.0)
++            else:
++                obs_diff = true_diff
++            if edge_dropout > 0:
++                keep = (torch.rand_like(obs_diff) >= edge_dropout).float()
++                # If internally unattended, replace this observation by the current prediction, yielding no score update.
++                pred_current = scores[torch.arange(bsz, device=DEVICE), item_j] - scores[torch.arange(bsz, device=DEVICE), item_i]
++                obs_diff = keep * obs_diff + (1.0 - keep) * pred_current.detach()
++            scores, pred_diff, error, gate = net.update_scores(scores, item_vecs, subject_z, item_i, item_j, obs_diff)
++            recon_losses.append(error.pow(2).mean())
++            gates.append(gate.mean())
++
++    if recon_losses:
++        recon_loss = torch.stack(recon_losses).mean()
++        mean_gate = torch.stack(gates).mean()
++    else:
++        recon_loss = torch.tensor(0.0, device=DEVICE)
++        mean_gate = torch.tensor(0.0, device=DEVICE)
++    return scores, recon_loss, mean_gate
++
++
++@dataclass
++class EpisodeStats:
++    loss: torch.Tensor
++    loss_value: float
++    choice_loss: float
++    recon_loss: float
++    entropy_loss: float
++    test_acc: float
++    learned_acc: float
++    nonlearned_acc: float
++    mean_gate: float
++    mean_abs_score: float
++
++
++def run_training_episode(config: TrainConfig, net: ConstructiveRankingNet) -> EpisodeStats:
++    bsz = config.bs
++    item_vecs = sample_item_vectors(bsz, config.n_items, config.item_dim)
++    subject_z = sample_subject_latents(bsz, config.subject_dim)
++    r2i = rank_to_item_maps(bsz, config.n_items)
++    true_scores = true_scores_by_item(r2i, config)
++
++    # A broader task family: random connected sparse evidence graphs.
++    rank_edges_per_batch = [sample_sparse_rank_graph(config) for _ in range(bsz)]
++    learning_item_edges = torch.empty(bsz, config.n_learning_pairs, 2, dtype=torch.long, device=DEVICE)
++    for b, rank_edges in enumerate(rank_edges_per_batch):
++        edge_items, _ = rank_edges_to_item_edges(rank_edges, r2i[b : b + 1], random_orientation=True)
++        learning_item_edges[b] = edge_items[0]
++
++    scores, recon_loss, mean_gate = run_learning_phase(
++        config, net, item_vecs, subject_z, true_scores, learning_item_edges, train_mode=True
++    )
++
++    # Outer-loop query loss over all pairwise comparisons. No feedback is fed
++    # back into the episode; this is only the meta-training objective.
++    pairs = all_item_pairs(r2i, config)
++    choice_losses = []
++    entropies = []
++    correct = []
++    learned_correct = []
++    nonlearned_correct = []
++
++    learned_sets = [set(tuple(sorted(map(int, edge.tolist()))) for edge in learning_item_edges[b]) for b in range(bsz)]
++
++    for k in range(pairs.shape[1]):
++        item_i = pairs[:, k, 0]
++        item_j = pairs[:, k, 1]
++        logits = net.choice_logits(scores, item_i, item_j)
++        true_i = true_scores[torch.arange(bsz, device=DEVICE), item_i]
++        true_j = true_scores[torch.arange(bsz, device=DEVICE), item_j]
++        labels = (true_j > true_i).long()  # 0 if item_i higher, 1 if item_j higher.
++        choice_losses.append(F.cross_entropy(logits, labels))
++        probs = F.softmax(logits, dim=1)
++        entropies.append((-(probs * (probs + 1e-8).log()).sum(dim=1)).mean())
++        pred = torch.argmax(logits, dim=1)
++        corr = (pred == labels).float()
++        correct.append(corr)
++        for b in range(bsz):
++            pair_key = tuple(sorted([int(item_i[b]), int(item_j[b])]))
++            if pair_key in learned_sets[b]:
++                learned_correct.append(corr[b])
++            else:
++                nonlearned_correct.append(corr[b])
++
++    choice_loss = torch.stack(choice_losses).mean()
++    entropy_loss = torch.stack(entropies).mean()
++    correct_tensor = torch.stack(correct, dim=1)
++    learned_acc = torch.stack(learned_correct).mean() if learned_correct else torch.tensor(float("nan"), device=DEVICE)
++    nonlearned_acc = torch.stack(nonlearned_correct).mean() if nonlearned_correct else torch.tensor(float("nan"), device=DEVICE)
++
++    loss = (
++        choice_loss
++        + config.lambda_recon * recon_loss
++        + config.lambda_entropy * entropy_loss
++        + config.lambda_score_l2 * scores.pow(2).mean()
++    )
++
++    return EpisodeStats(
++        loss=loss,
++        loss_value=float(loss.detach()),
++        choice_loss=float(choice_loss.detach()),
++        recon_loss=float(recon_loss.detach()),
++        entropy_loss=float(entropy_loss.detach()),
++        test_acc=float(correct_tensor.mean().detach()),
++        learned_acc=float(learned_acc.detach()),
++        nonlearned_acc=float(nonlearned_acc.detach()),
++        mean_gate=float(mean_gate.detach()),
++        mean_abs_score=float(scores.abs().mean().detach()),
++    )
++
++
++def train(config: TrainConfig) -> ConstructiveRankingNet:
++    output_dir = Path(config.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    net = ConstructiveRankingNet(config).to(DEVICE)
++    optimizer = torch.optim.Adam(net.parameters(), lr=config.lr, eps=config.eps, weight_decay=config.l2)
++    log(f"[setup] Device: {DEVICE}")
++    log(f"[setup] Batch size: {config.bs}; episodes: {config.nbiter}; output: {output_dir}")
++    log(f"[setup] Parameter count: {sum(p.numel() for p in net.parameters())}")
++    log("[task] Inner-loop reward: none (reward_input = 0). Learning trials provide relation constraints only.")
++
++    log_path = output_dir / "train_log.csv"
++    with open(log_path, "w", newline="") as f:
++        writer = csv.DictWriter(
++            f,
++            fieldnames=[
++                "episode",
++                "loss",
++                "choice_loss",
++                "recon_loss",
++                "entropy_loss",
++                "test_acc",
++                "learned_acc",
++                "nonlearned_acc",
++                "mean_gate",
++                "mean_abs_score",
++            ],
++        )
++        writer.writeheader()
++
++    start = time.time()
++    episode_iter = tqdm(range(config.nbiter), desc="training episodes", unit="episode", dynamic_ncols=True, file=sys.stdout)
++    last_stats: EpisodeStats | None = None
++    for episode in episode_iter:
++        optimizer.zero_grad()
++        stats = run_training_episode(config, net)
++        stats.loss.backward()
++        torch.nn.utils.clip_grad_norm_(net.parameters(), config.gc)
++        optimizer.step()
++        last_stats = stats
++
++        if episode % config.pe == 0 or episode == config.nbiter - 1:
++            elapsed = time.time() - start
++            log(
++                f"Episode {episode} ==== {elapsed:.2f}s | "
++                f"loss={stats.loss_value:.4f} choice={stats.choice_loss:.4f} recon={stats.recon_loss:.4f} | "
++                f"acc={stats.test_acc:.3f} learned={stats.learned_acc:.3f} nonlearned={stats.nonlearned_acc:.3f} | "
++                f"gate={stats.mean_gate:.3f} | |score|={stats.mean_abs_score:.3f}"
++            )
++            start = time.time()
++
++        with open(log_path, "a", newline="") as f:
++            # Write manually because stats.loss is a tensor and not CSV friendly.
++            writer = csv.writer(f)
++            writer.writerow(
++                [
++                    episode,
++                    stats.loss_value,
++                    stats.choice_loss,
++                    stats.recon_loss,
++                    stats.entropy_loss,
++                    stats.test_acc,
++                    stats.learned_acc,
++                    stats.nonlearned_acc,
++                    stats.mean_gate,
++                    stats.mean_abs_score,
++                ]
++            )
++
++        if config.save_every > 0 and episode > 0 and episode % config.save_every == 0:
++            torch.save({"model_state": net.state_dict(), "config": asdict(config)}, output_dir / "net_constructive.pt")
++            log(f"[save] checkpoint: {output_dir / 'net_constructive.pt'}")
++
++    torch.save({"model_state": net.state_dict(), "config": asdict(config)}, output_dir / "net_constructive.pt")
++    log(f"[save] final checkpoint: {output_dir / 'net_constructive.pt'}")
++    if last_stats is not None:
++        log(f"[done] final train acc={last_stats.test_acc:.3f}, loss={last_stats.loss_value:.4f}")
++    return net
++
++
++def majority_preference_matrix(pair_correctness: np.ndarray, pair_choices_high_rank: np.ndarray, n_items: int) -> np.ndarray:
++    """Build a directed preference matrix pref[i,j]=1 if i is judged higher than j."""
++    pref = np.zeros((n_items, n_items), dtype=int)
++    for a in range(n_items):
++        for b in range(a + 1, n_items):
++            # Stored index follows combinations order.
++            pass
++    return pref
++
++
++def self_consistency_from_scores(scores: np.ndarray) -> tuple[float, int]:
++    """Score-derived rankings are transitive; this returns 1.0 unless ties are exact."""
++    n_items = scores.shape[0]
++    circular = 0
++    for a, b, c in combinations(range(n_items), 3):
++        # Majority preferences induced by scalar scores.
++        ab = scores[a] > scores[b]
++        bc = scores[b] > scores[c]
++        ac = scores[a] > scores[c]
++        # Cycles cannot occur for strict scalar scores. Ties are counted as non-cycles.
++        if (ab and bc and not ac) or ((not ab) and (not bc) and ac):
++            circular += 1
++    max_triads = (n_items**3 - 4 * n_items) // 24 if n_items % 2 == 0 else (n_items**3 - n_items) // 24
++    return 1.0 - circular / max_triads, circular
++
++
++
++
++def self_consistency_from_majority(pair_acc: np.ndarray, pair_list: list[tuple[int, int]], n_items: int) -> tuple[float, int]:
++    """Compute circular-triad consistency from majority choices.
++
++    pair_acc is accuracy for rank-ordered pairs (a,b) where b is ground-truth higher.
++    If accuracy >= 0.5, majority preference is b > a; otherwise a > b.
++    """
++    pref = np.zeros((n_items, n_items), dtype=bool)
++    for idx, (a, b) in enumerate(pair_list):
++        if pair_acc[idx] >= 0.5:
++            pref[b, a] = True
++        else:
++            pref[a, b] = True
++    circular = 0
++    for a, b, c in combinations(range(n_items), 3):
++        # Count a cycle if all three directed preferences form either orientation.
++        if (pref[a, b] and pref[b, c] and pref[c, a]) or (pref[a, c] and pref[c, b] and pref[b, a]):
++            circular += 1
++    max_triads = (n_items**3 - 4 * n_items) // 24 if n_items % 2 == 0 else (n_items**3 - n_items) // 24
++    return 1.0 - circular / max_triads, circular
++
++def kendall_tau_order(order_a: Iterable[int], order_b: Iterable[int]) -> float:
++    a = list(order_a)
++    b = list(order_b)
++    pos_a = {item: idx for idx, item in enumerate(a)}
++    pos_b = {item: idx for idx, item in enumerate(b)}
++    concordant = 0
++    discordant = 0
++    for i, j in combinations(a, 2):
++        sign_a = pos_a[i] - pos_a[j]
++        sign_b = pos_b[i] - pos_b[j]
++        if sign_a * sign_b > 0:
++            concordant += 1
++        elif sign_a * sign_b < 0:
++            discordant += 1
++    denom = concordant + discordant
++    return 0.0 if denom == 0 else (concordant - discordant) / denom
++
++
++@torch.no_grad()
++def evaluate_paper_task(config: TrainConfig, net: ConstructiveRankingNet) -> dict:
++    """Evaluate the behavioral paper's exact few-shot graph with virtual subjects."""
++    net.eval()
++    old_log_beta = None
++    if config.eval_beta_override and config.eval_beta_override > 0:
++        old_log_beta = net.log_beta.detach().clone()
++        net.log_beta.data.fill_(math.log(config.eval_beta_override))
++    n_subj = config.eval_subjects
++    reps = config.eval_repetitions
++    # Same item identities for all virtual subjects, matching identical external input.
++    one_item_set = sample_item_vectors(1, config.n_items, config.item_dim)
++    item_vecs = one_item_set.expand(n_subj, -1, -1).contiguous()
++    subject_z = sample_subject_latents(n_subj, config.subject_dim)
++    r2i = torch.arange(config.n_items, device=DEVICE)[None, :].expand(n_subj, -1).contiguous()
++    true_scores = true_scores_by_item(r2i, config)
++    learning_edges, _ = rank_edges_to_item_edges(PAPER_LEARNING_PAIRS_RANK, r2i, random_orientation=False)
++    scores, recon_loss, mean_gate = run_learning_phase(config, net, item_vecs, subject_z, true_scores, learning_edges, train_mode=False)
++
++    pair_list = config.all_rank_pairs
++    paper_pair_set = {tuple(p) for p in PAPER_LEARNING_PAIRS_RANK}
++    pair_acc = np.zeros((n_subj, len(pair_list)), dtype=float)
++    pair_error_prop = np.zeros_like(pair_acc)
++
++    beta_logits_all = []
++    for pidx, (ra, rb) in enumerate(pair_list):
++        item_i = torch.full((n_subj,), ra, dtype=torch.long, device=DEVICE)
++        item_j = torch.full((n_subj,), rb, dtype=torch.long, device=DEVICE)
++        labels = torch.ones(n_subj, dtype=torch.long, device=DEVICE)  # rb is higher than ra.
++        logits = net.choice_logits(scores, item_i, item_j)
++        beta_logits_all.append(float((logits[:, 1] - logits[:, 0]).mean().cpu()))
++        probs = F.softmax(logits, dim=1)
++        # Repeated no-feedback test choices.
++        choices = []
++        for _ in range(reps):
++            sampled = torch.distributions.Categorical(probs).sample()
++            choices.append((sampled == labels).float().cpu().numpy())
++        arr = np.stack(choices, axis=1)
++        pair_acc[:, pidx] = arr.mean(axis=1)
++        pair_error_prop[:, pidx] = 1.0 - pair_acc[:, pidx]
++
++    learned_idx = np.array([idx for idx, p in enumerate(pair_list) if p in paper_pair_set], dtype=int)
++    nonlearned_idx = np.array([idx for idx, p in enumerate(pair_list) if p not in paper_pair_set], dtype=int)
++    learned_acc = float(pair_acc[:, learned_idx].mean())
++    nonlearned_acc = float(pair_acc[:, nonlearned_idx].mean())
++    overall_acc = float(pair_acc.mean())
++
++    consistent_subjects_80 = int((pair_error_prop >= 0.8).any(axis=1).sum())
++    consistent_subjects_100 = int((pair_error_prop >= 1.0).any(axis=1).sum())
++
++    subject_orders = []
++    self_consistency = []
++    circular_counts = []
++    choice_self_consistency = []
++    choice_circular_counts = []
++    for b in range(n_subj):
++        score_np = scores[b].detach().cpu().numpy()
++        # Low-to-high subjective order.
++        order = list(np.argsort(score_np))
++        subject_orders.append(order)
++        sc, circ = self_consistency_from_scores(score_np)
++        self_consistency.append(sc)
++        circular_counts.append(circ)
++        csc, ccirc = self_consistency_from_majority(pair_acc[b], pair_list, config.n_items)
++        choice_self_consistency.append(csc)
++        choice_circular_counts.append(ccirc)
++
++    taus = []
++    for i, j in combinations(range(n_subj), 2):
++        taus.append(kendall_tau_order(subject_orders[i], subject_orders[j]))
++
++    # Distance effect proxy: mean accuracy by true rank distance.
++    distance_acc = {}
++    for dist in range(1, config.n_items):
++        idx = [pidx for pidx, (a, b) in enumerate(pair_list) if b - a == dist]
++        distance_acc[str(dist)] = float(pair_acc[:, idx].mean())
++
++    summary = {
++        "eval_subjects": n_subj,
++        "eval_repetitions": reps,
++        "overall_accuracy": overall_acc,
++        "learned_pairs_accuracy": learned_acc,
++        "nonlearned_pairs_accuracy": nonlearned_acc,
++        "consistent_error_subjects_80pct": consistent_subjects_80,
++        "consistent_error_subjects_80pct_ratio": consistent_subjects_80 / n_subj,
++        "consistent_error_subjects_100pct": consistent_subjects_100,
++        "consistent_error_subjects_100pct_ratio": consistent_subjects_100 / n_subj,
++        "mean_self_consistency_from_scores": float(np.mean(self_consistency)),
++        "mean_circular_triads_from_scores": float(np.mean(circular_counts)),
++        "mean_self_consistency_from_majority_choices": float(np.mean(choice_self_consistency)),
++        "mean_circular_triads_from_majority_choices": float(np.mean(choice_circular_counts)),
++        "mean_inter_subject_kendall_tau": float(np.mean(taus)) if taus else 0.0,
++        "distance_accuracy": distance_acc,
++        "reconstruction_loss_after_learning": float(recon_loss.cpu()),
++        "mean_update_gate": float(mean_gate.cpu()),
++        "mean_abs_final_score": float(scores.abs().mean().cpu()),
++    }
++    if old_log_beta is not None:
++        net.log_beta.data.copy_(old_log_beta)
++    return summary
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description="Constructive ranking baseline for few-shot relational learning.")
++    parser.add_argument("--nbiter", type=int, default=4)
++    parser.add_argument("--batch-size", type=int, default=2)
++    parser.add_argument("--hidden-size", type=int, default=8)
++    parser.add_argument("--seed", type=int, default=1)
++    parser.add_argument("--output-dir", default="outputs_constructive")
++    parser.add_argument("--save-every", type=int, default=50)
++    parser.add_argument("--print-every", type=int, default=10)
++    parser.add_argument("--eval-subjects", type=int, default=8)
++    parser.add_argument("--eval-repetitions", type=int, default=5)
++    parser.add_argument("--relation-noise", type=float, default=0.03)
++    parser.add_argument("--eval-relation-noise", type=float, default=0.0)
++    parser.add_argument("--edge-dropout", type=float, default=0.0)
++    parser.add_argument("--eval-edge-dropout", type=float, default=0.0)
++    parser.add_argument("--init-score-noise", type=float, default=0.0)
++    parser.add_argument("--subject-scale", type=float, default=1.0)
++    parser.add_argument("--update-scale", type=float, default=1.0)
++    parser.add_argument("--eval-beta-override", type=float, default=0.0)
++    parser.add_argument("--lr", type=float, default=3e-4)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    config = TrainConfig(
++        rngseed=args.seed,
++        nbiter=args.nbiter,
++        bs=args.batch_size,
++        hidden_size=args.hidden_size,
++        output_dir=args.output_dir,
++        save_every=args.save_every,
++        pe=args.print_every,
++        eval_subjects=args.eval_subjects,
++        eval_repetitions=args.eval_repetitions,
++        relation_noise=args.relation_noise,
++        eval_relation_noise=args.eval_relation_noise,
++        edge_dropout=args.edge_dropout,
++        eval_edge_dropout=args.eval_edge_dropout,
++        init_score_noise=args.init_score_noise,
++        subject_scale=args.subject_scale,
++        update_scale=args.update_scale,
++        eval_beta_override=args.eval_beta_override,
++        lr=args.lr,
++    )
++    set_seed(config.rngseed)
++    output_dir = Path(config.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    with open(output_dir / "config_constructive.json", "w") as f:
++        json.dump(asdict(config), f, indent=2)
++
++    net = train(config)
++    summary = evaluate_paper_task(config, net)
++    with open(output_dir / "paper_task_eval_summary.json", "w") as f:
++        json.dump(summary, f, indent=2)
++    log("[eval] behavioral-paper task summary:")
++    for key, value in summary.items():
++        log(f"  {key}: {value}")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/sources/01_behavior_task_score_coordinate/snapshots/simple_neo_before_modular_mechanisms.py b/sources/01_behavior_task_score_coordinate/snapshots/simple_neo_before_modular_mechanisms.py
+new file mode 100644
+index 0000000..1a38c9a
+--- /dev/null
++++ b/sources/01_behavior_task_score_coordinate/snapshots/simple_neo_before_modular_mechanisms.py
+@@ -0,0 +1,1039 @@
++"""
++Constructive-ranking baseline for the few-shot relational-learning task.
++
++This script replaces the original adjacent-pair reinforcement-learning episode in
++``simple_neo.py`` with a deliberately constrained neural mechanism:
++
++1. Each item has an internal scalar score stored in an episode-local memory.
++2. A learning observation (item_i, item_j, signed distance) is treated as a
++   constraint on the two scores, not as a reward.
++3. A small trainable update network learns how strongly to write each constraint
++   into the score memory.
++4. Test choices are forced to use one global score vector: choose by comparing
++   score(item_i) and score(item_j). This makes pairwise choices come from a
++   shared latent ranking rather than from independent pair classifiers.
++
++The meta-training distribution is intentionally broader than the behavioral
++paper's exact task. During training, item identities, rank-to-item mappings and
++sparse learning graphs are randomized. The behavioral paper's fixed 8-pair task
++is used in ``evaluate_paper_task`` as a held-out-style evaluation protocol.
++
++There is no within-episode reward. The only optimization signal is the outer-loop
++loss computed after running a full episode, matching an observation-only learning
++phase followed by no-feedback testing.
++"""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import json
++import math
++import random
++import sys
++import time
++from dataclasses import asdict, dataclass
++from itertools import combinations
++from pathlib import Path
++from typing import Iterable
++
++import numpy as np
++import torch
++import torch.nn as nn
++import torch.nn.functional as F
++from tqdm.auto import tqdm
++
++ROOT_DIR = Path(__file__).resolve().parent
++DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
++
++# Rank-space pairs from Liu/Wang/Luo behavioral task.
++# We use ranks 0..7 from low to high, so (0, 5) means A-F and the signed
++# distance for the oriented pair (A, F) is +5/7.
++PAPER_LEARNING_PAIRS_RANK = [
++    (0, 5),  # A-F
++    (1, 2),  # B-C
++    (1, 4),  # B-E
++    (2, 6),  # C-G
++    (3, 5),  # D-F
++    (3, 6),  # D-G
++    (4, 7),  # E-H
++    (0, 7),  # A-H
++]
++
++
++def log(message: str) -> None:
++    print(message, flush=True)
++
++
++@dataclass
++class TrainConfig:
++    # Small defaults are intentional: they make the training script quick to run
++    # and suitable for smoke tests. Increase nbiter/bs/hidden_size for real runs.
++    rngseed: int = 1
++    nbiter: int = 4
++    bs: int = 2
++    hidden_size: int = 8
++    item_dim: int = 15
++    subject_dim: int = 8
++    n_items: int = 8
++    n_learning_pairs: int = 8
++    n_learning_blocks: int = 4
++    relation_noise: float = 0.03
++    eval_relation_noise: float = 0.0
++    edge_dropout: float = 0.0
++    eval_edge_dropout: float = 0.0
++    init_score_noise: float = 0.0
++    subject_scale: float = 1.0
++    update_scale: float = 1.0
++    # Memory/forgetting mechanisms. "direct" is the previous score-updating baseline.
++    # "edge_online" stores local pair memories and updates the schema after each observation.
++    # "edge_block" stores local pair memories first and reconstructs the schema after each block.
++    memory_mode: str = "direct"
++    forget_rate: float = 0.0
++    memory_capacity: float = 10.0
++    memory_encoding_noise: float = 0.0
++    eval_memory_encoding_noise: float = 0.0
++    memory_attention_bias: float = 0.0
++    distance_salience: float = 0.0
++    # Subject-specific reliability terms. These are intended to model stable
++    # individual differences in which local relations are well encoded/retrieved,
++    # rather than adding pair-specific hand-tuned noise.
++    subject_attention_scale: float = 0.0
++    item_attention_scale: float = 0.0
++    pair_attention_scale: float = 0.0
++    distance_attention_scale: float = 0.0
++    reliability_temperature: float = 1.0
++    schema_sweeps: int = 1
++    eval_beta_override: float = 0.0
++    lr: float = 3e-4
++    eps: float = 1e-8
++    l2: float = 0.0
++    gc: float = 2.0
++    lambda_recon: float = 0.5
++    lambda_entropy: float = 0.005
++    lambda_score_l2: float = 1e-4
++    save_every: int = 50
++    pe: int = 10
++    output_dir: str = "outputs_constructive"
++    eval_subjects: int = 8
++    eval_repetitions: int = 5
++
++    @property
++    def all_rank_pairs(self) -> list[tuple[int, int]]:
++        return list(combinations(range(self.n_items), 2))
++
++    @property
++    def rank_values(self) -> torch.Tensor:
++        # Centering removes an arbitrary global offset from the score coordinate.
++        values = torch.arange(self.n_items, dtype=torch.float32)
++        values = (values - values.mean()) / (self.n_items - 1)
++        return values
++
++
++class ConstructiveRankingNet(nn.Module):
++    """Trainable score-memory updater for sparse pairwise ranking evidence."""
++
++    def __init__(self, config: TrainConfig):
++        super().__init__()
++        self.config = config
++        z = config.subject_dim
++        d = config.item_dim
++        h = config.hidden_size
++
++        # Initial item score = function(item identity, subject latent state).
++        self.score_init = nn.Sequential(
++            nn.Linear(d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Constraint writing gate. It does not output the answer; it only decides
++        # how strongly the current relation-error should update the two item scores.
++        self.update_gate = nn.Sequential(
++            nn.Linear(2 * d + z + 4, h),
++            nn.Tanh(),
++            nn.Linear(h, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Attention/reliability of encoding an observed local edge into episodic memory.
++        # This is deliberately separate from the score-update gate: the model can encode
++        # an edge strongly yet update the global schema conservatively.
++        self.memory_attention = nn.Sequential(
++            nn.Linear(2 * d + z + 2, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++
++        # Subject-specific reliability modules. The item branch gives each
++        # virtual subject stable item anchors; the pair branch allows stable
++        # edge reliability from item features; the distance branch lets subjects
++        # differ in whether they privilege large-distance anchor relations or
++        # local small-distance relations. All are shared functions of z and item
++        # identity, not hand-coded to a paper-specific pair.
++        self.item_reliability = nn.Sequential(
++            nn.Linear(d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++        self.pair_reliability = nn.Sequential(
++            nn.Linear(2 * d + z, h),
++            nn.Tanh(),
++            nn.Linear(h, 1),
++        )
++        self.distance_reliability = nn.Linear(z, 1)
++
++        # Global trainable learning-rate and choice inverse-temperature.
++        self.logit_step = nn.Parameter(torch.tensor(0.0))
++        self.log_beta = nn.Parameter(torch.tensor(math.log(4.0)))
++
++    def initial_scores(self, item_vecs: torch.Tensor, subject_z: torch.Tensor) -> torch.Tensor:
++        """Return episode-local initial scores, shape [B, N]."""
++        bsz, n_items, _ = item_vecs.shape
++        z_scaled = self.config.subject_scale * subject_z
++        z_rep = z_scaled[:, None, :].expand(bsz, n_items, subject_z.shape[-1])
++        raw = self.score_init(torch.cat([item_vecs, z_rep], dim=-1)).squeeze(-1)
++        if self.config.init_score_noise > 0:
++            raw = raw + self.config.init_score_noise * torch.randn_like(raw)
++        return self.center_scores(raw)
++
++    @staticmethod
++    def center_scores(scores: torch.Tensor) -> torch.Tensor:
++        return scores - scores.mean(dim=1, keepdim=True)
++
++    def update_scores(
++        self,
++        scores: torch.Tensor,
++        item_vecs: torch.Tensor,
++        subject_z: torch.Tensor,
++        item_i: torch.Tensor,
++        item_j: torch.Tensor,
++        observed_diff_j_minus_i: torch.Tensor,
++        external_weight: torch.Tensor | None = None,
++    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
++        """Apply one relation-error-driven update.
++
++        The observation says score(j) - score(i) should equal observed_diff.
++        The model learns a gate, but the sign and conservation structure of the
++        update are fixed so that learning has to operate on a shared score axis.
++        """
++        bsz = scores.shape[0]
++        batch_idx = torch.arange(bsz, device=scores.device)
++
++        score_i = scores[batch_idx, item_i]
++        score_j = scores[batch_idx, item_j]
++        pred_diff = score_j - score_i
++        error = observed_diff_j_minus_i - pred_diff
++
++        vec_i = item_vecs[batch_idx, item_i]
++        vec_j = item_vecs[batch_idx, item_j]
++        features = torch.cat(
++            [
++                vec_i,
++                vec_j,
++                self.config.subject_scale * subject_z,
++                observed_diff_j_minus_i[:, None],
++                observed_diff_j_minus_i.abs()[:, None],
++                pred_diff[:, None],
++                error[:, None],
++            ],
++            dim=1,
++        )
++        gate = torch.sigmoid(self.update_gate(features)).squeeze(1)
++        step = self.config.update_scale * torch.sigmoid(self.logit_step) * gate
++        if external_weight is not None:
++            step = step * external_weight.clamp(0.0, 1.0)
++        step = step.clamp(0.0, 1.0)
++        delta = 0.5 * step * error
++
++        next_scores = scores.clone()
++        next_scores[batch_idx, item_i] = next_scores[batch_idx, item_i] - delta
++        next_scores[batch_idx, item_j] = next_scores[batch_idx, item_j] + delta
++        next_scores = self.center_scores(next_scores)
++        return next_scores, pred_diff, error, gate
++
++    def encode_attention(
++        self,
++        item_vecs: torch.Tensor,
++        subject_z: torch.Tensor,
++        item_i: torch.Tensor,
++        item_j: torch.Tensor,
++        observed_diff_j_minus_i: torch.Tensor,
++    ) -> torch.Tensor:
++        """Return reliability of storing a pairwise relation into edge memory."""
++        bsz = item_vecs.shape[0]
++        batch_idx = torch.arange(bsz, device=item_vecs.device)
++        vec_i = item_vecs[batch_idx, item_i]
++        vec_j = item_vecs[batch_idx, item_j]
++        features = torch.cat(
++            [
++                vec_i,
++                vec_j,
++                self.config.subject_scale * subject_z,
++                observed_diff_j_minus_i[:, None],
++                observed_diff_j_minus_i.abs()[:, None],
++            ],
++            dim=1,
++        )
++        raw = self.memory_attention(features).squeeze(1)
++
++        if self.config.item_attention_scale != 0.0 or self.config.subject_attention_scale != 0.0:
++            zi = self.config.subject_scale * subject_z
++            item_i_raw = self.item_reliability(torch.cat([vec_i, zi], dim=1)).squeeze(1)
++            item_j_raw = self.item_reliability(torch.cat([vec_j, zi], dim=1)).squeeze(1)
++            # Stable item-anchor reliability: if either item is a strong anchor for
++            # a virtual subject, the local edge becomes more accessible.
++            item_anchor = 0.5 * (item_i_raw + item_j_raw)
++            raw = raw + self.config.item_attention_scale * item_anchor
++            # General subject-specific encoding tendency; affects all edges for a
++            # participant but does not itself select a paper-specific pair.
++            raw = raw + self.config.subject_attention_scale * zi.mean(dim=1)
++
++        if self.config.pair_attention_scale != 0.0:
++            pair_raw = self.pair_reliability(torch.cat([vec_i, vec_j, self.config.subject_scale * subject_z], dim=1)).squeeze(1)
++            raw = raw + self.config.pair_attention_scale * pair_raw
++
++        if self.config.distance_attention_scale != 0.0:
++            # Positive value means the subject tends to encode large-distance
++            # anchor edges more strongly; negative means relatively local edges.
++            dist_pref = self.distance_reliability(self.config.subject_scale * subject_z).squeeze(1)
++            raw = raw + self.config.distance_attention_scale * dist_pref * (observed_diff_j_minus_i.abs() - 0.5)
++
++        raw = raw + self.config.memory_attention_bias + self.config.distance_salience * observed_diff_j_minus_i.abs()
++        temp = max(1e-3, float(self.config.reliability_temperature))
++        return torch.sigmoid(raw / temp)
++
++    def choice_logits(self, scores: torch.Tensor, item_i: torch.Tensor, item_j: torch.Tensor) -> torch.Tensor:
++        """Two-class logits: class 0 means item_i higher; class 1 means item_j higher."""
++        batch_idx = torch.arange(scores.shape[0], device=scores.device)
++        beta = F.softplus(self.log_beta) + 1e-3
++        return beta * torch.stack([scores[batch_idx, item_i], scores[batch_idx, item_j]], dim=1)
++
++
++def set_seed(seed: int) -> None:
++    if seed < 0:
++        log("[setup] No random seed.")
++        return
++    log(f"[setup] Setting random seed {seed}")
++    random.seed(seed)
++    np.random.seed(seed)
++    torch.manual_seed(seed)
++    if torch.cuda.is_available():
++        torch.cuda.manual_seed_all(seed)
++
++
++def sample_item_vectors(batch_size: int, n_items: int, item_dim: int) -> torch.Tensor:
++    # Random identity-like binary codes. They do not reveal rank.
++    return (torch.randint(0, 2, (batch_size, n_items, item_dim), device=DEVICE).float() * 2.0) - 1.0
++
++
++def sample_subject_latents(batch_size: int, subject_dim: int) -> torch.Tensor:
++    return torch.randn(batch_size, subject_dim, device=DEVICE)
++
++
++def rank_to_item_maps(batch_size: int, n_items: int) -> torch.Tensor:
++    maps = [torch.randperm(n_items, device=DEVICE) for _ in range(batch_size)]
++    return torch.stack(maps, dim=0)
++
++
++def true_scores_by_item(rank_to_item: torch.Tensor, config: TrainConfig) -> torch.Tensor:
++    values = config.rank_values.to(DEVICE)
++    bsz = rank_to_item.shape[0]
++    scores = torch.empty(bsz, config.n_items, device=DEVICE)
++    for rank in range(config.n_items):
++        scores[:, rank_to_item[:, rank]] = values[rank]
++    return scores
++
++
++def _is_connected(edges: list[tuple[int, int]], n_items: int) -> bool:
++    neighbors = {i: set() for i in range(n_items)}
++    for a, b in edges:
++        neighbors[a].add(b)
++        neighbors[b].add(a)
++    seen = {0}
++    frontier = [0]
++    while frontier:
++        node = frontier.pop()
++        for nxt in neighbors[node]:
++            if nxt not in seen:
++                seen.add(nxt)
++                frontier.append(nxt)
++    return len(seen) == n_items
++
++
++def sample_sparse_rank_graph(config: TrainConfig) -> list[tuple[int, int]]:
++    """Sample a connected sparse graph in rank space."""
++    all_pairs = config.all_rank_pairs
++    for _ in range(1000):
++        idx = np.random.choice(len(all_pairs), size=config.n_learning_pairs, replace=False)
++        edges = [all_pairs[int(i)] for i in idx]
++        degrees = np.zeros(config.n_items, dtype=int)
++        for a, b in edges:
++            degrees[a] += 1
++            degrees[b] += 1
++        if np.all(degrees > 0) and _is_connected(edges, config.n_items):
++            return edges
++    # Fallback: a chain plus one random edge.
++    edges = [(i, i + 1) for i in range(config.n_items - 1)]
++    remaining = [p for p in all_pairs if p not in edges]
++    edges.append(random.choice(remaining))
++    return edges[: config.n_learning_pairs]
++
++
++def rank_edges_to_item_edges(
++    rank_edges: list[tuple[int, int]],
++    rank_to_item: torch.Tensor,
++    random_orientation: bool = True,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Convert rank-space edges to item-index edges for each batch element."""
++    bsz = rank_to_item.shape[0]
++    n_edges = len(rank_edges)
++    item_edges = torch.empty(bsz, n_edges, 2, dtype=torch.long, device=DEVICE)
++    rank_edges_tensor = torch.tensor(rank_edges, dtype=torch.long, device=DEVICE)
++    for b in range(bsz):
++        item_edges[b, :, 0] = rank_to_item[b, rank_edges_tensor[:, 0]]
++        item_edges[b, :, 1] = rank_to_item[b, rank_edges_tensor[:, 1]]
++    if random_orientation:
++        swap = torch.rand(bsz, n_edges, device=DEVICE) < 0.5
++        first = item_edges[:, :, 0].clone()
++        second = item_edges[:, :, 1].clone()
++        item_edges[:, :, 0] = torch.where(swap, second, first)
++        item_edges[:, :, 1] = torch.where(swap, first, second)
++    return item_edges, rank_edges_tensor
++
++
++def all_item_pairs(rank_to_item: torch.Tensor, config: TrainConfig) -> torch.Tensor:
++    rank_pairs = torch.tensor(config.all_rank_pairs, dtype=torch.long, device=DEVICE)
++    bsz = rank_to_item.shape[0]
++    pairs = torch.empty(bsz, len(config.all_rank_pairs), 2, dtype=torch.long, device=DEVICE)
++    for b in range(bsz):
++        pairs[b, :, 0] = rank_to_item[b, rank_pairs[:, 0]]
++        pairs[b, :, 1] = rank_to_item[b, rank_pairs[:, 1]]
++    return pairs
++
++
++def gather_true_diff(true_scores: torch.Tensor, item_i: torch.Tensor, item_j: torch.Tensor) -> torch.Tensor:
++    batch_idx = torch.arange(true_scores.shape[0], device=true_scores.device)
++    return true_scores[batch_idx, item_j] - true_scores[batch_idx, item_i]
++
++
++def apply_memory_decay_and_interference(
++    strength: torch.Tensor, config: TrainConfig
++) -> torch.Tensor:
++    """Decay edge accessibility and apply item-level capacity competition."""
++    if config.forget_rate > 0:
++        strength = strength * math.exp(-config.forget_rate)
++    if config.memory_capacity > 0 and config.memory_capacity < 1000:
++        # Each item can only maintain a limited total accessibility across its edges.
++        row_sum = strength.sum(dim=2, keepdim=True).clamp_min(1e-8)
++        scale = torch.clamp(config.memory_capacity / row_sum, max=1.0)
++        strength = strength * scale
++        # Keep the matrix symmetric enough for a relation memory; row capacity is the key constraint.
++        strength = 0.5 * (strength + strength.transpose(1, 2))
++    return strength
++
++
++def encode_edge_memory(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    item_i: torch.Tensor,
++    item_j: torch.Tensor,
++    observed_diff_j_minus_i: torch.Tensor,
++    train_mode: bool,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
++    """Store an observed local relation into directed edge memory.
++
++    memory[i,j] means recalled estimate of score(j)-score(i).
++    strength[i,j] is its accessibility/reliability.
++    """
++    bsz = memory.shape[0]
++    batch_idx = torch.arange(bsz, device=memory.device)
++    attn = net.encode_attention(item_vecs, subject_z, item_i, item_j, observed_diff_j_minus_i)
++    noise_std = config.memory_encoding_noise if train_mode else config.eval_memory_encoding_noise
++    encoded = observed_diff_j_minus_i
++    if noise_std > 0:
++        encoded = (encoded + noise_std * torch.randn_like(encoded)).clamp(-1.0, 1.0)
++
++    old_ij = memory[batch_idx, item_i, item_j]
++    new_ij = (1.0 - attn) * old_ij + attn * encoded
++    old_ji = memory[batch_idx, item_j, item_i]
++    new_ji = (1.0 - attn) * old_ji - attn * encoded
++    memory = memory.clone()
++    strength = strength.clone()
++    memory[batch_idx, item_i, item_j] = new_ij
++    memory[batch_idx, item_j, item_i] = new_ji
++
++    old_s_ij = strength[batch_idx, item_i, item_j]
++    new_s = 1.0 - (1.0 - old_s_ij) * (1.0 - attn)
++    strength[batch_idx, item_i, item_j] = new_s
++    strength[batch_idx, item_j, item_i] = new_s
++    return memory, strength, attn
++
++
++def update_scores_from_memory_pair(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    scores: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++    item_i: torch.Tensor,
++    item_j: torch.Tensor,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
++    batch_idx = torch.arange(scores.shape[0], device=scores.device)
++    target = memory[batch_idx, item_i, item_j]
++    weight = strength[batch_idx, item_i, item_j]
++    return net.update_scores(scores, item_vecs, subject_z, item_i, item_j, target, external_weight=weight)
++
++
++def schema_reconstruct_from_memory(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    scores: torch.Tensor,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    memory: torch.Tensor,
++    strength: torch.Tensor,
++) -> tuple[torch.Tensor, torch.Tensor]:
++    """Iteratively update the global score schema from all currently remembered edges."""
++    bsz = scores.shape[0]
++    pair_list = list(combinations(range(config.n_items), 2))
++    gate_values = []
++    for _ in range(max(1, config.schema_sweeps)):
++        random.shuffle(pair_list)
++        for a, b in pair_list:
++            item_i = torch.full((bsz,), a, dtype=torch.long, device=DEVICE)
++            item_j = torch.full((bsz,), b, dtype=torch.long, device=DEVICE)
++            scores, _pred, _err, gate = update_scores_from_memory_pair(
++                config, net, scores, item_vecs, subject_z, memory, strength, item_i, item_j
++            )
++            gate_values.append(gate.mean())
++    mean_gate = torch.stack(gate_values).mean() if gate_values else torch.tensor(0.0, device=DEVICE)
++    return scores, mean_gate
++
++
++def run_learning_phase(
++    config: TrainConfig,
++    net: ConstructiveRankingNet,
++    item_vecs: torch.Tensor,
++    subject_z: torch.Tensor,
++    true_scores: torch.Tensor,
++    learning_item_edges: torch.Tensor,
++    train_mode: bool,
++    noise_std: float | None = None,
++    edge_dropout: float | None = None,
++) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
++    """Run observation-only sparse-pair learning.
++
++    In direct mode this reproduces the previous baseline. In memory modes, local
++    pair evidence is first encoded into a decaying/interfering edge memory and the
++    global score schema is reconstructed from what remains accessible.
++    """
++    bsz, n_edges, _ = learning_item_edges.shape
++    scores = net.initial_scores(item_vecs, subject_z)
++    if noise_std is None:
++        noise_std = config.relation_noise if train_mode else config.eval_relation_noise
++    if edge_dropout is None:
++        edge_dropout = config.edge_dropout if train_mode else config.eval_edge_dropout
++    recon_losses = []
++    gates = []
++
++    if config.memory_mode == "direct":
++        for _block in range(config.n_learning_blocks):
++            orders = torch.stack([torch.randperm(n_edges, device=DEVICE) for _ in range(bsz)], dim=0)
++            for k in range(n_edges):
++                edge_idx = orders[:, k]
++                item_i = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 0]
++                item_j = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 1]
++                true_diff = gather_true_diff(true_scores, item_i, item_j)
++                if noise_std > 0:
++                    obs_diff = true_diff + noise_std * torch.randn_like(true_diff)
++                    obs_diff = obs_diff.clamp(-1.0, 1.0)
++                else:
++                    obs_diff = true_diff
++                if edge_dropout > 0:
++                    keep = (torch.rand_like(obs_diff) >= edge_dropout).float()
++                    pred_current = scores[torch.arange(bsz, device=DEVICE), item_j] - scores[torch.arange(bsz, device=DEVICE), item_i]
++                    obs_diff = keep * obs_diff + (1.0 - keep) * pred_current.detach()
++                scores, pred_diff, error, gate = net.update_scores(scores, item_vecs, subject_z, item_i, item_j, obs_diff)
++                recon_losses.append(error.pow(2).mean())
++                gates.append(gate.mean())
++    else:
++        memory = torch.zeros(bsz, config.n_items, config.n_items, device=DEVICE)
++        strength = torch.zeros_like(memory)
++        for _block in range(config.n_learning_blocks):
++            orders = torch.stack([torch.randperm(n_edges, device=DEVICE) for _ in range(bsz)], dim=0)
++            for k in range(n_edges):
++                edge_idx = orders[:, k]
++                item_i = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 0]
++                item_j = learning_item_edges[torch.arange(bsz, device=DEVICE), edge_idx, 1]
++                true_diff = gather_true_diff(true_scores, item_i, item_j)
++                if noise_std > 0:
++                    obs_diff = (true_diff + noise_std * torch.randn_like(true_diff)).clamp(-1.0, 1.0)
++                else:
++                    obs_diff = true_diff
++                if edge_dropout > 0:
++                    keep = (torch.rand_like(obs_diff) >= edge_dropout).float()
++                    pred_current = memory[torch.arange(bsz, device=DEVICE), item_i, item_j]
++                    obs_diff = keep * obs_diff + (1.0 - keep) * pred_current.detach()
++                memory, strength, attn = encode_edge_memory(
++                    config, net, memory, strength, item_vecs, subject_z, item_i, item_j, obs_diff, train_mode
++                )
++                strength = apply_memory_decay_and_interference(strength, config)
++                # Reconstruction error tracks memory-content accuracy, not direct score accuracy.
++                recalled = memory[torch.arange(bsz, device=DEVICE), item_i, item_j]
++                rel = strength[torch.arange(bsz, device=DEVICE), item_i, item_j]
++                recon_losses.append((rel * (recalled - true_diff).pow(2)).mean())
++                gates.append(attn.mean())
++                if config.memory_mode in {"edge_online", "edge_hybrid"}:
++                    scores, _pred, error, gate = update_scores_from_memory_pair(
++                        config, net, scores, item_vecs, subject_z, memory, strength, item_i, item_j
++                    )
++                    recon_losses.append(error.pow(2).mean())
++                    gates.append(gate.mean())
++            if config.memory_mode in {"edge_block", "edge_hybrid"}:
++                scores, block_gate = schema_reconstruct_from_memory(
++                    config, net, scores, item_vecs, subject_z, memory, strength
++                )
++                gates.append(block_gate)
++
++    if recon_losses:
++        recon_loss = torch.stack(recon_losses).mean()
++        mean_gate = torch.stack(gates).mean()
++    else:
++        recon_loss = torch.tensor(0.0, device=DEVICE)
++        mean_gate = torch.tensor(0.0, device=DEVICE)
++    return scores, recon_loss, mean_gate
++
++
++@dataclass
++class EpisodeStats:
++    loss: torch.Tensor
++    loss_value: float
++    choice_loss: float
++    recon_loss: float
++    entropy_loss: float
++    test_acc: float
++    learned_acc: float
++    nonlearned_acc: float
++    mean_gate: float
++    mean_abs_score: float
++
++
++def run_training_episode(config: TrainConfig, net: ConstructiveRankingNet) -> EpisodeStats:
++    bsz = config.bs
++    item_vecs = sample_item_vectors(bsz, config.n_items, config.item_dim)
++    subject_z = sample_subject_latents(bsz, config.subject_dim)
++    r2i = rank_to_item_maps(bsz, config.n_items)
++    true_scores = true_scores_by_item(r2i, config)
++
++    # A broader task family: random connected sparse evidence graphs.
++    rank_edges_per_batch = [sample_sparse_rank_graph(config) for _ in range(bsz)]
++    learning_item_edges = torch.empty(bsz, config.n_learning_pairs, 2, dtype=torch.long, device=DEVICE)
++    for b, rank_edges in enumerate(rank_edges_per_batch):
++        edge_items, _ = rank_edges_to_item_edges(rank_edges, r2i[b : b + 1], random_orientation=True)
++        learning_item_edges[b] = edge_items[0]
++
++    scores, recon_loss, mean_gate = run_learning_phase(
++        config, net, item_vecs, subject_z, true_scores, learning_item_edges, train_mode=True
++    )
++
++    # Outer-loop query loss over all pairwise comparisons. No feedback is fed
++    # back into the episode; this is only the meta-training objective.
++    pairs = all_item_pairs(r2i, config)
++    choice_losses = []
++    entropies = []
++    correct = []
++    learned_correct = []
++    nonlearned_correct = []
++
++    learned_sets = [set(tuple(sorted(map(int, edge.tolist()))) for edge in learning_item_edges[b]) for b in range(bsz)]
++
++    for k in range(pairs.shape[1]):
++        item_i = pairs[:, k, 0]
++        item_j = pairs[:, k, 1]
++        logits = net.choice_logits(scores, item_i, item_j)
++        true_i = true_scores[torch.arange(bsz, device=DEVICE), item_i]
++        true_j = true_scores[torch.arange(bsz, device=DEVICE), item_j]
++        labels = (true_j > true_i).long()  # 0 if item_i higher, 1 if item_j higher.
++        choice_losses.append(F.cross_entropy(logits, labels))
++        probs = F.softmax(logits, dim=1)
++        entropies.append((-(probs * (probs + 1e-8).log()).sum(dim=1)).mean())
++        pred = torch.argmax(logits, dim=1)
++        corr = (pred == labels).float()
++        correct.append(corr)
++        for b in range(bsz):
++            pair_key = tuple(sorted([int(item_i[b]), int(item_j[b])]))
++            if pair_key in learned_sets[b]:
++                learned_correct.append(corr[b])
++            else:
++                nonlearned_correct.append(corr[b])
++
++    choice_loss = torch.stack(choice_losses).mean()
++    entropy_loss = torch.stack(entropies).mean()
++    correct_tensor = torch.stack(correct, dim=1)
++    learned_acc = torch.stack(learned_correct).mean() if learned_correct else torch.tensor(float("nan"), device=DEVICE)
++    nonlearned_acc = torch.stack(nonlearned_correct).mean() if nonlearned_correct else torch.tensor(float("nan"), device=DEVICE)
++
++    loss = (
++        choice_loss
++        + config.lambda_recon * recon_loss
++        + config.lambda_entropy * entropy_loss
++        + config.lambda_score_l2 * scores.pow(2).mean()
++    )
++
++    return EpisodeStats(
++        loss=loss,
++        loss_value=float(loss.detach()),
++        choice_loss=float(choice_loss.detach()),
++        recon_loss=float(recon_loss.detach()),
++        entropy_loss=float(entropy_loss.detach()),
++        test_acc=float(correct_tensor.mean().detach()),
++        learned_acc=float(learned_acc.detach()),
++        nonlearned_acc=float(nonlearned_acc.detach()),
++        mean_gate=float(mean_gate.detach()),
++        mean_abs_score=float(scores.abs().mean().detach()),
++    )
++
++
++def train(config: TrainConfig) -> ConstructiveRankingNet:
++    output_dir = Path(config.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    net = ConstructiveRankingNet(config).to(DEVICE)
++    optimizer = torch.optim.Adam(net.parameters(), lr=config.lr, eps=config.eps, weight_decay=config.l2)
++    log(f"[setup] Device: {DEVICE}")
++    log(f"[setup] Batch size: {config.bs}; episodes: {config.nbiter}; output: {output_dir}")
++    log(f"[setup] Parameter count: {sum(p.numel() for p in net.parameters())}")
++    log("[task] Inner-loop reward: none (reward_input = 0). Learning trials provide relation constraints only.")
++
++    log_path = output_dir / "train_log.csv"
++    with open(log_path, "w", newline="") as f:
++        writer = csv.DictWriter(
++            f,
++            fieldnames=[
++                "episode",
++                "loss",
++                "choice_loss",
++                "recon_loss",
++                "entropy_loss",
++                "test_acc",
++                "learned_acc",
++                "nonlearned_acc",
++                "mean_gate",
++                "mean_abs_score",
++            ],
++        )
++        writer.writeheader()
++
++    start = time.time()
++    episode_iter = tqdm(range(config.nbiter), desc="training episodes", unit="episode", dynamic_ncols=True, file=sys.stdout)
++    last_stats: EpisodeStats | None = None
++    for episode in episode_iter:
++        optimizer.zero_grad()
++        stats = run_training_episode(config, net)
++        stats.loss.backward()
++        torch.nn.utils.clip_grad_norm_(net.parameters(), config.gc)
++        optimizer.step()
++        last_stats = stats
++
++        if episode % config.pe == 0 or episode == config.nbiter - 1:
++            elapsed = time.time() - start
++            log(
++                f"Episode {episode} ==== {elapsed:.2f}s | "
++                f"loss={stats.loss_value:.4f} choice={stats.choice_loss:.4f} recon={stats.recon_loss:.4f} | "
++                f"acc={stats.test_acc:.3f} learned={stats.learned_acc:.3f} nonlearned={stats.nonlearned_acc:.3f} | "
++                f"gate={stats.mean_gate:.3f} | |score|={stats.mean_abs_score:.3f}"
++            )
++            start = time.time()
++
++        with open(log_path, "a", newline="") as f:
++            # Write manually because stats.loss is a tensor and not CSV friendly.
++            writer = csv.writer(f)
++            writer.writerow(
++                [
++                    episode,
++                    stats.loss_value,
++                    stats.choice_loss,
++                    stats.recon_loss,
++                    stats.entropy_loss,
++                    stats.test_acc,
++                    stats.learned_acc,
++                    stats.nonlearned_acc,
++                    stats.mean_gate,
++                    stats.mean_abs_score,
++                ]
++            )
++
++        if config.save_every > 0 and episode > 0 and episode % config.save_every == 0:
++            torch.save({"model_state": net.state_dict(), "config": asdict(config)}, output_dir / "net_constructive.pt")
++            log(f"[save] checkpoint: {output_dir / 'net_constructive.pt'}")
++
++    torch.save({"model_state": net.state_dict(), "config": asdict(config)}, output_dir / "net_constructive.pt")
++    log(f"[save] final checkpoint: {output_dir / 'net_constructive.pt'}")
++    if last_stats is not None:
++        log(f"[done] final train acc={last_stats.test_acc:.3f}, loss={last_stats.loss_value:.4f}")
++    return net
++
++
++def majority_preference_matrix(pair_correctness: np.ndarray, pair_choices_high_rank: np.ndarray, n_items: int) -> np.ndarray:
++    """Build a directed preference matrix pref[i,j]=1 if i is judged higher than j."""
++    pref = np.zeros((n_items, n_items), dtype=int)
++    for a in range(n_items):
++        for b in range(a + 1, n_items):
++            # Stored index follows combinations order.
++            pass
++    return pref
++
++
++def self_consistency_from_scores(scores: np.ndarray) -> tuple[float, int]:
++    """Score-derived rankings are transitive; this returns 1.0 unless ties are exact."""
++    n_items = scores.shape[0]
++    circular = 0
++    for a, b, c in combinations(range(n_items), 3):
++        # Majority preferences induced by scalar scores.
++        ab = scores[a] > scores[b]
++        bc = scores[b] > scores[c]
++        ac = scores[a] > scores[c]
++        # Cycles cannot occur for strict scalar scores. Ties are counted as non-cycles.
++        if (ab and bc and not ac) or ((not ab) and (not bc) and ac):
++            circular += 1
++    max_triads = (n_items**3 - 4 * n_items) // 24 if n_items % 2 == 0 else (n_items**3 - n_items) // 24
++    return 1.0 - circular / max_triads, circular
++
++
++
++
++def self_consistency_from_majority(pair_acc: np.ndarray, pair_list: list[tuple[int, int]], n_items: int) -> tuple[float, int]:
++    """Compute circular-triad consistency from majority choices.
++
++    pair_acc is accuracy for rank-ordered pairs (a,b) where b is ground-truth higher.
++    If accuracy >= 0.5, majority preference is b > a; otherwise a > b.
++    """
++    pref = np.zeros((n_items, n_items), dtype=bool)
++    for idx, (a, b) in enumerate(pair_list):
++        if pair_acc[idx] >= 0.5:
++            pref[b, a] = True
++        else:
++            pref[a, b] = True
++    circular = 0
++    for a, b, c in combinations(range(n_items), 3):
++        # Count a cycle if all three directed preferences form either orientation.
++        if (pref[a, b] and pref[b, c] and pref[c, a]) or (pref[a, c] and pref[c, b] and pref[b, a]):
++            circular += 1
++    max_triads = (n_items**3 - 4 * n_items) // 24 if n_items % 2 == 0 else (n_items**3 - n_items) // 24
++    return 1.0 - circular / max_triads, circular
++
++def kendall_tau_order(order_a: Iterable[int], order_b: Iterable[int]) -> float:
++    a = list(order_a)
++    b = list(order_b)
++    pos_a = {item: idx for idx, item in enumerate(a)}
++    pos_b = {item: idx for idx, item in enumerate(b)}
++    concordant = 0
++    discordant = 0
++    for i, j in combinations(a, 2):
++        sign_a = pos_a[i] - pos_a[j]
++        sign_b = pos_b[i] - pos_b[j]
++        if sign_a * sign_b > 0:
++            concordant += 1
++        elif sign_a * sign_b < 0:
++            discordant += 1
++    denom = concordant + discordant
++    return 0.0 if denom == 0 else (concordant - discordant) / denom
++
++
++@torch.no_grad()
++def evaluate_paper_task(config: TrainConfig, net: ConstructiveRankingNet) -> dict:
++    """Evaluate the behavioral paper's exact few-shot graph with virtual subjects."""
++    net.eval()
++    old_log_beta = None
++    if config.eval_beta_override and config.eval_beta_override > 0:
++        old_log_beta = net.log_beta.detach().clone()
++        net.log_beta.data.fill_(math.log(config.eval_beta_override))
++    n_subj = config.eval_subjects
++    reps = config.eval_repetitions
++    # Same item identities for all virtual subjects, matching identical external input.
++    one_item_set = sample_item_vectors(1, config.n_items, config.item_dim)
++    item_vecs = one_item_set.expand(n_subj, -1, -1).contiguous()
++    subject_z = sample_subject_latents(n_subj, config.subject_dim)
++    r2i = torch.arange(config.n_items, device=DEVICE)[None, :].expand(n_subj, -1).contiguous()
++    true_scores = true_scores_by_item(r2i, config)
++    learning_edges, _ = rank_edges_to_item_edges(PAPER_LEARNING_PAIRS_RANK, r2i, random_orientation=False)
++    scores, recon_loss, mean_gate = run_learning_phase(config, net, item_vecs, subject_z, true_scores, learning_edges, train_mode=False)
++
++    pair_list = config.all_rank_pairs
++    paper_pair_set = {tuple(p) for p in PAPER_LEARNING_PAIRS_RANK}
++    pair_acc = np.zeros((n_subj, len(pair_list)), dtype=float)
++    pair_error_prop = np.zeros_like(pair_acc)
++
++    beta_logits_all = []
++    for pidx, (ra, rb) in enumerate(pair_list):
++        item_i = torch.full((n_subj,), ra, dtype=torch.long, device=DEVICE)
++        item_j = torch.full((n_subj,), rb, dtype=torch.long, device=DEVICE)
++        labels = torch.ones(n_subj, dtype=torch.long, device=DEVICE)  # rb is higher than ra.
++        logits = net.choice_logits(scores, item_i, item_j)
++        beta_logits_all.append(float((logits[:, 1] - logits[:, 0]).mean().cpu()))
++        probs = F.softmax(logits, dim=1)
++        # Repeated no-feedback test choices.
++        choices = []
++        for _ in range(reps):
++            sampled = torch.distributions.Categorical(probs).sample()
++            choices.append((sampled == labels).float().cpu().numpy())
++        arr = np.stack(choices, axis=1)
++        pair_acc[:, pidx] = arr.mean(axis=1)
++        pair_error_prop[:, pidx] = 1.0 - pair_acc[:, pidx]
++
++    learned_idx = np.array([idx for idx, p in enumerate(pair_list) if p in paper_pair_set], dtype=int)
++    nonlearned_idx = np.array([idx for idx, p in enumerate(pair_list) if p not in paper_pair_set], dtype=int)
++    learned_acc = float(pair_acc[:, learned_idx].mean())
++    nonlearned_acc = float(pair_acc[:, nonlearned_idx].mean())
++    overall_acc = float(pair_acc.mean())
++
++    consistent_subjects_80 = int((pair_error_prop >= 0.8).any(axis=1).sum())
++    consistent_subjects_100 = int((pair_error_prop >= 1.0).any(axis=1).sum())
++
++    subject_orders = []
++    self_consistency = []
++    circular_counts = []
++    choice_self_consistency = []
++    choice_circular_counts = []
++    for b in range(n_subj):
++        score_np = scores[b].detach().cpu().numpy()
++        # Low-to-high subjective order.
++        order = list(np.argsort(score_np))
++        subject_orders.append(order)
++        sc, circ = self_consistency_from_scores(score_np)
++        self_consistency.append(sc)
++        circular_counts.append(circ)
++        csc, ccirc = self_consistency_from_majority(pair_acc[b], pair_list, config.n_items)
++        choice_self_consistency.append(csc)
++        choice_circular_counts.append(ccirc)
++
++    taus = []
++    for i, j in combinations(range(n_subj), 2):
++        taus.append(kendall_tau_order(subject_orders[i], subject_orders[j]))
++
++    # Distance effect proxy: mean accuracy by true rank distance.
++    distance_acc = {}
++    for dist in range(1, config.n_items):
++        idx = [pidx for pidx, (a, b) in enumerate(pair_list) if b - a == dist]
++        distance_acc[str(dist)] = float(pair_acc[:, idx].mean())
++
++    summary = {
++        "eval_subjects": n_subj,
++        "eval_repetitions": reps,
++        "overall_accuracy": overall_acc,
++        "learned_pairs_accuracy": learned_acc,
++        "nonlearned_pairs_accuracy": nonlearned_acc,
++        "consistent_error_subjects_80pct": consistent_subjects_80,
++        "consistent_error_subjects_80pct_ratio": consistent_subjects_80 / n_subj,
++        "consistent_error_subjects_100pct": consistent_subjects_100,
++        "consistent_error_subjects_100pct_ratio": consistent_subjects_100 / n_subj,
++        "mean_self_consistency_from_scores": float(np.mean(self_consistency)),
++        "mean_circular_triads_from_scores": float(np.mean(circular_counts)),
++        "mean_self_consistency_from_majority_choices": float(np.mean(choice_self_consistency)),
++        "mean_circular_triads_from_majority_choices": float(np.mean(choice_circular_counts)),
++        "mean_inter_subject_kendall_tau": float(np.mean(taus)) if taus else 0.0,
++        "distance_accuracy": distance_acc,
++        "reconstruction_loss_after_learning": float(recon_loss.cpu()),
++        "mean_update_gate": float(mean_gate.cpu()),
++        "mean_abs_final_score": float(scores.abs().mean().cpu()),
++    }
++    if old_log_beta is not None:
++        net.log_beta.data.copy_(old_log_beta)
++    return summary
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description="Constructive ranking baseline for few-shot relational learning.")
++    parser.add_argument("--nbiter", type=int, default=4)
++    parser.add_argument("--batch-size", type=int, default=2)
++    parser.add_argument("--hidden-size", type=int, default=8)
++    parser.add_argument("--seed", type=int, default=1)
++    parser.add_argument("--output-dir", default="outputs_constructive")
++    parser.add_argument("--save-every", type=int, default=50)
++    parser.add_argument("--print-every", type=int, default=10)
++    parser.add_argument("--eval-subjects", type=int, default=8)
++    parser.add_argument("--eval-repetitions", type=int, default=5)
++    parser.add_argument("--relation-noise", type=float, default=0.03)
++    parser.add_argument("--eval-relation-noise", type=float, default=0.0)
++    parser.add_argument("--edge-dropout", type=float, default=0.0)
++    parser.add_argument("--eval-edge-dropout", type=float, default=0.0)
++    parser.add_argument("--init-score-noise", type=float, default=0.0)
++    parser.add_argument("--subject-scale", type=float, default=1.0)
++    parser.add_argument("--update-scale", type=float, default=1.0)
++    parser.add_argument("--eval-beta-override", type=float, default=0.0)
++    parser.add_argument("--memory-mode", choices=["direct", "edge_online", "edge_block", "edge_hybrid"], default="direct")
++    parser.add_argument("--forget-rate", type=float, default=0.0)
++    parser.add_argument("--memory-capacity", type=float, default=10.0)
++    parser.add_argument("--memory-encoding-noise", type=float, default=0.0)
++    parser.add_argument("--eval-memory-encoding-noise", type=float, default=0.0)
++    parser.add_argument("--memory-attention-bias", type=float, default=0.0)
++    parser.add_argument("--distance-salience", type=float, default=0.0)
++    parser.add_argument("--subject-attention-scale", type=float, default=0.0)
++    parser.add_argument("--item-attention-scale", type=float, default=0.0)
++    parser.add_argument("--pair-attention-scale", type=float, default=0.0)
++    parser.add_argument("--distance-attention-scale", type=float, default=0.0)
++    parser.add_argument("--reliability-temperature", type=float, default=1.0)
++    parser.add_argument("--schema-sweeps", type=int, default=1)
++    parser.add_argument("--lr", type=float, default=3e-4)
++    return parser.parse_args()
++
++
++def main() -> None:
++    args = parse_args()
++    config = TrainConfig(
++        rngseed=args.seed,
++        nbiter=args.nbiter,
++        bs=args.batch_size,
++        hidden_size=args.hidden_size,
++        output_dir=args.output_dir,
++        save_every=args.save_every,
++        pe=args.print_every,
++        eval_subjects=args.eval_subjects,
++        eval_repetitions=args.eval_repetitions,
++        relation_noise=args.relation_noise,
++        eval_relation_noise=args.eval_relation_noise,
++        edge_dropout=args.edge_dropout,
++        eval_edge_dropout=args.eval_edge_dropout,
++        init_score_noise=args.init_score_noise,
++        subject_scale=args.subject_scale,
++        update_scale=args.update_scale,
++        eval_beta_override=args.eval_beta_override,
++        memory_mode=args.memory_mode,
++        forget_rate=args.forget_rate,
++        memory_capacity=args.memory_capacity,
++        memory_encoding_noise=args.memory_encoding_noise,
++        eval_memory_encoding_noise=args.eval_memory_encoding_noise,
++        memory_attention_bias=args.memory_attention_bias,
++        distance_salience=args.distance_salience,
++        subject_attention_scale=args.subject_attention_scale,
++        item_attention_scale=args.item_attention_scale,
++        pair_attention_scale=args.pair_attention_scale,
++        distance_attention_scale=args.distance_attention_scale,
++        reliability_temperature=args.reliability_temperature,
++        schema_sweeps=args.schema_sweeps,
++        lr=args.lr,
++    )
++    set_seed(config.rngseed)
++    output_dir = Path(config.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    with open(output_dir / "config_constructive.json", "w") as f:
++        json.dump(asdict(config), f, indent=2)
++
++    net = train(config)
++    summary = evaluate_paper_task(config, net)
++    with open(output_dir / "paper_task_eval_summary.json", "w") as f:
++        json.dump(summary, f, indent=2)
++    log("[eval] behavioral-paper task summary:")
++    for key, value in summary.items():
++        log(f"  {key}: {value}")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/sources/01_behavior_task_score_coordinate/snapshots/simple_neo_readable_original.py b/sources/01_behavior_task_score_coordinate/snapshots/simple_neo_readable_original.py
+new file mode 100644
+index 0000000..abaf3b8
+--- /dev/null
++++ b/sources/01_behavior_task_score_coordinate/snapshots/simple_neo_readable_original.py
+@@ -0,0 +1,597 @@
++"""
++Readable training script for the plastic RNN transitive-inference task.
++
++This file keeps the learning rule, task structure, and saved model format of
++``simple.py`` while organizing the code into small functions for learning.
++"""
++
++import argparse
++import sys
++import time
++from dataclasses import dataclass
++from pathlib import Path
++
++import numpy as np
++import torch
++import torch.nn as nn
++
++from tqdm.auto import tqdm
++
++ROOT_DIR = Path(__file__).resolve().parent
++DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
++
++ADDINPUT = 4
++NUMRESPONSESTEP = 1
++
++
++def log(message):
++    print(message, flush=True)
++
++
++@dataclass
++class TrainConfig:
++    rngseed: int = -1
++    rew: float = 1.0
++    wp: float = 0.0
++    bent: float = 0.1
++    blossv: float = 0.1
++    gr: float = 0.9
++    hs: int = 200
++    bs: int = 32
++    gc: float = 2.0
++    eps: float = 1e-6
++    nbiter: int = 30000
++    save_every: int = 200
++    pe: int = 101
++    cs: int = 15
++    triallen: int = 4
++    nbtraintrials: int = 20
++    nbtesttrials: int = 10
++    testlmult: float = 3.0
++    l2: float = 0.0
++    lr: float = 1e-4
++    lpw: float = 1e-4
++    nbcues_min: int = 4
++    nbcues_max: int = 8
++
++    @property
++    def nbcuesrange(self):
++        return range(self.nbcues_min, self.nbcues_max + 1)
++
++    @property
++    def nbtrials(self):
++        return self.nbtraintrials + self.nbtesttrials
++
++    @property
++    def eplen(self):
++        return self.nbtrials * self.triallen
++
++    @property
++    def nbstimbits(self):
++        return 2 * self.cs + 1
++
++    @property
++    def outputsize(self):
++        return 2
++
++    @property
++    def inputsize(self):
++        return self.nbstimbits + ADDINPUT + self.outputsize
++
++    def to_model_dict(self):
++        """Return the dict shape expected by the original model code."""
++        return {
++            "rngseed": self.rngseed,
++            "rew": self.rew,
++            "wp": self.wp,
++            "bent": self.bent,
++            "blossv": self.blossv,
++            "gr": self.gr,
++            "hs": self.hs,
++            "bs": self.bs,
++            "gc": self.gc,
++            "eps": self.eps,
++            "nbiter": self.nbiter,
++            "save_every": self.save_every,
++            "pe": self.pe,
++            "nbcuesrange": self.nbcuesrange,
++            "cs": self.cs,
++            "triallen": self.triallen,
++            "nbtraintrials": self.nbtraintrials,
++            "nbtesttrials": self.nbtesttrials,
++            "nbtrials": self.nbtrials,
++            "eplen": self.eplen,
++            "testlmult": self.testlmult,
++            "l2": self.l2,
++            "lr": self.lr,
++            "lpw": self.lpw,
++            "outputsize": self.outputsize,
++            "inputsize": self.inputsize,
++        }
++
++
++class RetroModulRNN(nn.Module):
++    """RNN with neuromodulated recurrent plasticity.
++
++    ``et`` is the Hebbian eligibility trace. ``pw`` is the within-episode
++    plastic recurrent weight matrix. Only ``pw`` changes during an episode.
++    """
++
++    def __init__(self, config):
++        super().__init__()
++        for paramname in ["outputsize", "inputsize", "hs", "bs"]:
++            if paramname not in config:
++                raise KeyError("Must provide missing key in config: " + paramname)
++
++        nbda = 2
++        self.GG = config
++        self.activ = torch.tanh
++        self.i2h = torch.nn.Linear(config["inputsize"], config["hs"]).to(DEVICE)
++        self.w = torch.nn.Parameter(
++            (
++                (1.0 / np.sqrt(config["hs"]))
++                * (2.0 * torch.rand(config["hs"], config["hs"]) - 1.0)
++            ).to(DEVICE),
++            requires_grad=True,
++        )
++        self.alpha = torch.nn.Parameter(
++            (0.01 * (2.0 * torch.rand(config["hs"], config["hs"]) - 1.0)).to(DEVICE),
++            requires_grad=True,
++        )
++        self.etaet = torch.nn.Parameter(
++            (0.7 * torch.ones(1)).to(DEVICE), requires_grad=True
++        )
++        self.DAmult = torch.nn.Parameter(
++            (1.0 * torch.ones(1)).to(DEVICE), requires_grad=True
++        )
++        self.h2DA = torch.nn.Linear(config["hs"], nbda).to(DEVICE)
++        self.h2o = torch.nn.Linear(config["hs"], config["outputsize"]).to(DEVICE)
++        self.h2v = torch.nn.Linear(config["hs"], 1).to(DEVICE)
++
++    def forward(self, inputs, hidden, et, pw):
++        batch_size = inputs.shape[0]
++        hidden_size = self.GG["hs"]
++        assert pw.shape[0] == hidden.shape[0] == et.shape[0] == batch_size
++
++        hactiv = self.activ(
++            self.i2h(inputs).view(batch_size, hidden_size, 1)
++            + torch.matmul(
++                (self.w + torch.mul(self.alpha, pw)),
++                hidden.view(batch_size, hidden_size, 1),
++            )
++        ).view(batch_size, hidden_size)
++
++        activout = self.h2o(hactiv)
++        valueout = self.h2v(hactiv)
++
++        daout2 = torch.tanh(self.h2DA(hactiv))
++        daout = self.DAmult * (daout2[:, 0] - daout2[:, 1])[:, None]
++
++        pw = pw + daout.view(batch_size, 1, 1) * et
++        torch.clip_(pw, min=-50.0, max=50.0)
++
++        deltaet = torch.bmm(
++            hactiv.view(batch_size, hidden_size, 1),
++            hidden.view(batch_size, 1, hidden_size),
++        )
++        deltaet = torch.tanh(deltaet)
++        et = (1 - self.etaet) * et + self.etaet * deltaet
++
++        return activout, valueout, daout, hactiv, et, pw
++
++    def initialZeroET(self, batch_size):
++        return torch.zeros(
++            batch_size, self.GG["hs"], self.GG["hs"], requires_grad=False
++        ).to(DEVICE)
++
++    def initialZeroPlasticWeights(self, batch_size):
++        return torch.zeros(
++            batch_size, self.GG["hs"], self.GG["hs"], requires_grad=False
++        ).to(DEVICE)
++
++    def initialZeroState(self, batch_size):
++        return torch.zeros(batch_size, self.GG["hs"], requires_grad=False).to(DEVICE)
++
++
++@dataclass
++class EpisodeStats:
++    loss: torch.Tensor
++    loss_value: float
++    loss_objective: float
++    test_reward_mean: float
++    nbtesttrials: int
++    test_perf: float | None
++    test_perf_adjacent: float | None
++    test_perf_nonadjacent: float | None
++    final_pw: torch.Tensor
++
++
++def set_seed(seed):
++    if seed < 0:
++        log("[setup] No random seed.")
++        return
++    log(f"[setup] Setting random seed {seed}")
++    np.random.seed(seed)
++    torch.manual_seed(seed)
++
++
++def generate_cue_data(config, nbcues):
++    """Generate unique random binary cue vectors for each batch element."""
++    cue_data = []
++    for batch_index in range(config.bs):
++        cue_data.append([])
++        for cue_index in range(nbcues):
++            candidate = sample_unique_cue(config, cue_data[batch_index], cue_index)
++            cue_data[batch_index].append(candidate)
++    return cue_data
++
++
++def sample_unique_cue(config, existing_cues, cue_index):
++    attempts = 0
++    while True:
++        attempts += 1
++        if attempts > 10000:
++            raise ValueError("Could not generate a full list of different cues")
++
++        candidate = np.random.randint(2, size=config.cs) * 2 - 1
++        is_too_similar = False
++        for previous_index in range(cue_index):
++            if np.mean(existing_cues[previous_index] == candidate) > 0.66:
++                is_too_similar = True
++                break
++        if not is_too_similar:
++            return candidate
++
++
++def sample_trial_pair(nbcues, is_train_trial):
++    cue_pair = list(np.random.choice(range(nbcues), 2, replace=False))
++    if is_train_trial:
++        while abs(cue_pair[0] - cue_pair[1]) > 1:
++            cue_pair = list(np.random.choice(range(nbcues), 2, replace=False))
++    return cue_pair
++
++
++def build_step_inputs(
++    config, nbcues, cue_data, cues, reward, previous_actions, numstep, numstep_ep
++):
++    inputs = np.zeros((config.bs, config.inputsize), dtype="float32")
++
++    for batch_index in range(config.bs):
++        cue = cues[batch_index][numstep]
++        if isinstance(cue, (list, tuple, np.ndarray)):
++            inputs[batch_index, : config.nbstimbits - 1] = np.concatenate(
++                (cue_data[batch_index][cue[0]][:], cue_data[batch_index][cue[1]][:])
++            )
++        elif cue == nbcues:
++            inputs[batch_index, config.nbstimbits - 1] = 1
++
++        inputs[batch_index, config.nbstimbits + 0] = 1.0
++        inputs[batch_index, config.nbstimbits + 1] = numstep_ep / config.eplen
++        inputs[batch_index, config.nbstimbits + 2] = reward[batch_index]
++
++        if numstep == NUMRESPONSESTEP + 1:
++            inputs[
++                batch_index,
++                config.nbstimbits + ADDINPUT + previous_actions[batch_index],
++            ] = 1
++
++    return torch.from_numpy(inputs).detach().to(DEVICE)
++
++
++def prepare_trial(config, nbcues, nbtrials):
++    cues = []
++    cue_pairs = []
++    correct_order = np.zeros(config.bs)
++    adjacent = np.zeros(config.bs)
++
++    for batch_index in range(config.bs):
++        cue_pair = sample_trial_pair(
++            nbcues, nbtrials[batch_index] < config.nbtraintrials
++        )
++        assert nbtrials[batch_index] == int(nbtrials[batch_index])
++
++        correct_order[batch_index] = 1 if cue_pair[0] < cue_pair[1] else 0
++        adjacent[batch_index] = 1 if abs(cue_pair[0] - cue_pair[1]) == 1 else 0
++        cue_pairs.append(cue_pair)
++        cues.append([cue_pair, nbcues, -1, -1])
++
++    return cues, cue_pairs, correct_order, adjacent
++
++
++def run_episode(config, net, nbcues, print_trace=False):
++    """Run one full episode and return the differentiable training loss."""
++    hidden = net.initialZeroState(config.bs)
++    et = net.initialZeroET(config.bs)
++    pw = net.initialZeroPlasticWeights(config.bs)
++    cue_data = generate_cue_data(config, nbcues)
++
++    reward = np.zeros(config.bs, dtype="float32")
++    sumrewardtest = np.zeros(config.bs)
++    rewards = []
++    values = []
++    logprobs = []
++
++    correct_thisep = np.zeros((config.bs, config.nbtrials))
++    istest_thisep = np.zeros((config.bs, config.nbtrials))
++    nbtrials = np.zeros(config.bs)
++    previous_actions = np.zeros(config.bs, dtype="int32")
++
++    nbtesttrials = 0
++    nbtesttrials_correct = 0
++    nbtesttrials_adjacent = 0
++    nbtesttrials_adjacent_correct = 0
++    nbtesttrials_nonadjacent = 0
++    nbtesttrials_nonadjacent_correct = 0
++
++    loss = 0
++    lossv = 0
++
++    # Two blank steps before the episode, matching the original script.
++    blank_inputs = torch.zeros(config.bs, config.inputsize, requires_grad=False).to(
++        DEVICE
++    )
++    for _ in range(2):
++        _, _, _, hidden, et, pw = net(blank_inputs, hidden, et, pw)
++
++    numstep_ep = 0
++    for numtrial in range(config.nbtrials):
++        hidden = net.initialZeroState(config.bs)
++        et = net.initialZeroET(config.bs)
++        cues, cue_pairs, correct_order, adjacent = prepare_trial(
++            config, nbcues, nbtrials
++        )
++        istest_thisep[:, numtrial] = 1 if numtrial >= config.nbtraintrials else 0
++
++        correct_answer = np.zeros(config.bs)
++
++        for numstep in range(config.triallen):
++            inputs = build_step_inputs(
++                config,
++                nbcues,
++                cue_data,
++                cues,
++                reward,
++                previous_actions,
++                numstep,
++                numstep_ep,
++            )
++            y_raw, value, daout, hidden, et, pw = net(inputs, hidden, et, pw)
++
++            y = torch.softmax(y_raw, dim=1)
++            distrib = torch.distributions.Categorical(y)
++            actions = distrib.sample()
++            logprobs.append(distrib.log_prob(actions))
++            previous_actions = actions.detach().cpu().numpy()
++
++            if print_trace:
++                log_trace(
++                    config,
++                    numtrial,
++                    numstep,
++                    inputs,
++                    y,
++                    previous_actions,
++                    correct_order,
++                    reward,
++                    daout,
++                    cues,
++                )
++
++            reward = np.zeros(config.bs, dtype="float32")
++            for batch_index in range(config.bs):
++                if numstep == NUMRESPONSESTEP:
++                    correct_answer[batch_index] = 1
++                    chose_item_1 = previous_actions[batch_index] == 1
++                    if (correct_order[batch_index] and chose_item_1) or (
++                        (not correct_order[batch_index]) and not chose_item_1
++                    ):
++                        reward[batch_index] += config.rew
++                    else:
++                        reward[batch_index] -= config.rew
++                        correct_answer[batch_index] = 0
++                    correct_thisep[batch_index, numtrial] = correct_answer[batch_index]
++
++                if numstep == config.triallen - 1:
++                    nbtrials[batch_index] += 1
++
++            rewards.append(reward)
++            values.append(value)
++            if numtrial >= config.nbtrials - config.nbtesttrials:
++                sumrewardtest += reward
++
++            loss = loss + config.bent * y.pow(2).sum() / config.bs
++            numstep_ep += 1
++
++        if numtrial >= config.nbtrials - config.nbtesttrials:
++            sumrewardtest += reward
++            nbtesttrials += config.bs
++            nbtesttrials_correct += np.sum(correct_answer)
++            nbtesttrials_adjacent += np.sum(adjacent)
++            nbtesttrials_adjacent_correct += np.sum(adjacent * correct_answer)
++            nbtesttrials_nonadjacent += np.sum(1 - adjacent)
++            nbtesttrials_nonadjacent_correct += np.sum((1 - adjacent) * correct_answer)
++
++    bootstrap_return = torch.zeros(config.bs, requires_grad=False).to(DEVICE)
++    for numstepb in reversed(range(config.eplen)):
++        bootstrap_return = config.gr * bootstrap_return + torch.from_numpy(
++            rewards[numstepb]
++        ).detach().to(DEVICE)
++        advantage = bootstrap_return - values[numstepb][:, 0]
++        lossv = lossv + advantage.pow(2).sum() / config.bs
++        loss_multiplier = (
++            config.testlmult
++            if numstepb > config.eplen - config.triallen * config.nbtesttrials
++            else 1.0
++        )
++        loss = (
++            loss
++            - loss_multiplier
++            * (logprobs[numstepb] * advantage.detach()).sum()
++            / config.bs
++        )
++
++    loss_objective = float(loss.detach())
++    loss = loss + config.blossv * lossv
++    loss = loss / config.eplen
++    loss = loss + torch.mean(pw**2) * config.lpw
++
++    test_perf = None if nbtesttrials == 0 else nbtesttrials_correct / nbtesttrials
++    test_perf_adjacent = None
++    if nbtesttrials_adjacent > 0:
++        test_perf_adjacent = nbtesttrials_adjacent_correct / nbtesttrials_adjacent
++    test_perf_nonadjacent = None
++    if nbtesttrials_nonadjacent > 0:
++        test_perf_nonadjacent = (
++            nbtesttrials_nonadjacent_correct / nbtesttrials_nonadjacent
++        )
++
++    return EpisodeStats(
++        loss=loss,
++        loss_value=float(loss.detach()),
++        loss_objective=loss_objective,
++        test_reward_mean=float(sumrewardtest.mean()),
++        nbtesttrials=nbtesttrials,
++        test_perf=test_perf,
++        test_perf_adjacent=test_perf_adjacent,
++        test_perf_nonadjacent=test_perf_nonadjacent,
++        final_pw=pw.detach(),
++    )
++
++
++def log_trace(
++    config, numtrial, numstep, inputs, y, actions, correct_order, reward, daout, cues
++):
++    log(
++        "Tr {} Step {} Cue1(0): {} Cue2(0): {} Other inputs: {}\n"
++        " - Outputs(0): {} - action chosen(0): {} TrialLen: {} numstep {} "
++        "TTHCC(0): {} Reward(prev): {} DAout: {} cues(0): {}".format(
++            numtrial,
++            numstep,
++            inputs[0, : config.cs].detach().cpu().numpy(),
++            inputs[0, config.cs : 2 * config.cs].detach().cpu().numpy(),
++            inputs[0, 2 * config.cs :].detach().cpu().numpy(),
++            y.detach().cpu().numpy()[0, :],
++            actions[0],
++            config.triallen,
++            numstep,
++            correct_order[0],
++            reward[0],
++            float(daout[0].detach()),
++            cues[0],
++        )
++    )
++
++
++def print_episode_summary(config, episode_index, stats, start_time):
++    elapsed = time.time() - start_time
++    log(f"Episode {episode_index} ====")
++    log(f"Time spent on last {config.pe} iters: {elapsed:.2f}s")
++    log(f"Mean loss: {stats.loss_value:.6f}")
++    log(
++        "Test performance: {} | adjacent: {} | nonadjacent: {}".format(
++            "N/A" if stats.test_perf is None else f"{stats.test_perf:.3f}",
++            (
++                "N/A"
++                if stats.test_perf_adjacent is None
++                else f"{stats.test_perf_adjacent:.3f}"
++            ),
++            (
++                "N/A"
++                if stats.test_perf_nonadjacent is None
++                else f"{stats.test_perf_nonadjacent:.3f}"
++            ),
++        )
++    )
++    pw = stats.final_pw
++    log(f"mean-abs pw: {float(torch.mean(torch.abs(pw))):.6f}")
++
++
++def save_checkpoint(config, net, output_dir, test_rewards):
++    output_dir.mkdir(parents=True, exist_ok=True)
++    torch.save(net.state_dict(), output_dir / ("netAE" + str(config.rngseed) + ".dat"))
++    torch.save(net.state_dict(), output_dir / "net.dat")
++    with open(output_dir / ("tAE" + str(config.rngseed) + ".txt"), "w") as thefile:
++        for item in test_rewards[::10]:
++            thefile.write(f"{item}\n")
++    log(f"[save] Wrote checkpoint and test-reward log to {output_dir}")
++
++
++def train(config, output_dir, trace_steps=False):
++    model_config = config.to_model_dict()
++    net = RetroModulRNN(model_config)
++    optimizer = torch.optim.Adam(
++        net.parameters(), lr=config.lr, eps=config.eps, weight_decay=config.l2
++    )
++    test_rewards = []
++
++    log(f"[setup] Device: {DEVICE}")
++    log(
++        f"[setup] Batch size: {config.bs}; episodes: {config.nbiter}; output: {output_dir}"
++    )
++    log(f"[setup] Parameter shapes: {[x.size() for x in net.parameters()]}")
++
++    trace_start = time.time()
++    episode_iter = tqdm(
++        range(config.nbiter),
++        desc="training episodes",
++        unit="episode",
++        dynamic_ncols=True,
++        file=sys.stdout,
++    )
++    for episode_index in episode_iter:
++        should_print_summary = episode_index % config.pe == 0
++        print_trace = trace_steps and should_print_summary
++        nbcues = np.random.choice(list(config.nbcuesrange))
++
++        optimizer.zero_grad()
++        stats = run_episode(config, net, nbcues=nbcues, print_trace=print_trace)
++        stats.loss.backward()
++        torch.nn.utils.clip_grad_norm_(net.parameters(), config.gc)
++        if episode_index > 100:
++            optimizer.step()
++
++        test_rewards.append(stats.test_reward_mean)
++        if should_print_summary:
++            print_episode_summary(config, episode_index, stats, trace_start)
++            trace_start = time.time()
++
++        if episode_index % config.save_every == 0 and episode_index > 0:
++            save_checkpoint(config, net, output_dir, test_rewards)
++
++    return net
++
++
++def parse_args():
++    parser = argparse.ArgumentParser(
++        description="Readable training script for the plastic RNN transitive-inference task."
++    )
++    parser.add_argument("--nbiter", type=int, default=30000)
++    parser.add_argument("--batch-size", type=int, default=32)
++    parser.add_argument("--seed", type=int, default=-1)
++    parser.add_argument("--save-every", type=int, default=200)
++    parser.add_argument("--print-every", type=int, default=101)
++    parser.add_argument("--output-dir", default=str(ROOT_DIR))
++    parser.add_argument(
++        "--trace-steps",
++        action="store_true",
++        help="Print per-step debugging details on summary episodes.",
++    )
++    return parser.parse_args()
++
++
++def main():
++    args = parse_args()
++    config = TrainConfig(
++        rngseed=args.seed,
++        bs=args.batch_size,
++        nbiter=args.nbiter,
++        save_every=args.save_every,
++        pe=args.print_every,
++    )
++    np.set_printoptions(precision=5)
++    set_seed(config.rngseed)
++    train(config, Path(args.output_dir), trace_steps=args.trace_steps)
++
++
++if __name__ == "__main__":
++    main()
+-- 
+2.47.3
+

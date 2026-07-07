@@ -1,0 +1,417 @@
+From 5b75e6f0ea98485b0ba90e67c477f2ece09c4b4c Mon Sep 17 00:00:00 2001
+From: proposal-bot <proposal-bot@example.com>
+Date: Tue, 7 Jul 2026 09:13:14 +0000
+Subject: [PATCH 01/11] docs: add proposal scaffold and project roadmap
+
+---
+ .gitignore                     |  13 ++++
+ README.md                      |  58 +++++++++++++++
+ docs/MASTER_RESULTS_SUMMARY.md |  37 ++++++++++
+ docs/STAGE_ATTEMPT_REPORT.md   |  77 ++++++++++++++++++++
+ proposal.md                    | 128 +++++++++++++++++++++++++++++++++
+ references/REFERENCE_NOTES.md  |   6 ++
+ scripts/git_push_template.sh   |  17 +++++
+ scripts/run_quick_smoke.sh     |   5 ++
+ 8 files changed, 341 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 docs/MASTER_RESULTS_SUMMARY.md
+ create mode 100644 docs/STAGE_ATTEMPT_REPORT.md
+ create mode 100644 proposal.md
+ create mode 100644 references/REFERENCE_NOTES.md
+ create mode 100755 scripts/git_push_template.sh
+ create mode 100755 scripts/run_quick_smoke.sh
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..b80f5ad
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,13 @@
++__pycache__/
++*.pyc
++*.pt
++*.npy
++*.dat
++*.pdf
++*.ipynb
++*.png
++*.sqlite
++*.db
++.vs/
++outputs_*/
++.DS_Store
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..e5c9c73
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,58 @@
++# Git-ready package: meta-training plastic RNN to human constructive ranking
++
++本仓库包用于阶段性汇报与远端推送，整理了从原始 meta-training 代码阅读到多轮机制尝试、active-rank、ablation、auxiliary hidden targets 的完整过程。
++
++## 快速入口
++
++- `proposal.md`：汇报用 proposal 主文档。
++- `docs/STAGE_ATTEMPT_REPORT.md`：所有未汇报尝试和阶段结论。
++- `results/master_results_table.csv`：跨阶段总结果表。
++- `sources/`：各阶段源码完整覆盖版本。
++- `results/`：各阶段小批次/大批次结果摘要、报告和 CSV/JSON。
++- `diffs/`：阶段间源码 diff。
++- `scripts/git_push_template.sh`：远端推送模板。
++
++## 目录结构
++
++```text
++sources/
++  00_original_meta_training_code/
++  01_behavior_task_score_coordinate/
++  02_memory_forgetting_edge_memory/
++  03_subject_attention_reliability/
++  04_modular_memory_mechanisms/
++  05_active_rank_hypothesis_sampler/
++  06_meta_plastic_rnn_rank_attractor/
++  07_modular_ablation_active_rank/
++  08_rnn_hidden_aux_targets/
++results/
++  01_constructive_score_coordinate/
++  02_memory_forgetting/
++  03_subject_attention_reliability/
++  04_modular_memory_mechanisms/
++  05_active_rank_hypothesis_sampler/
++  06_meta_plastic_rnn_rank_attractor/
++  07_modular_active_rank_ablations/
++  08_rnn_hidden_aux_targets/
++```
++
++## 为什么没有直接放入所有二进制文件
++
++为了让仓库可以直接推送远端，本包默认不纳入大体积或不适合版本管理的文件，例如 `.pt`, `.npy`, `.dat`, `.pdf`, `.ipynb`, `.png`, `.pyc`。结果判断所需的 `summary.csv`, `summary.json`, `report.md`, `train_log.csv` 均已保留。原始上传包仍是本地完整归档来源。
++
++## 推送远端
++
++```bash
++cd rank_mechanism_proposal_git_ready_v2
++git status
++git log --oneline --decorate
++git remote add origin <你的远端仓库地址>
++git branch -M main
++git push -u origin main
++```
++
++## 当前汇报口径
++
++不建议说“RNN 必要性不高”作为最终结论。更稳妥的表述是：
++
++> 当前模型已能部分复现行为学现象，尤其是 subject-level ranking commitment 对稳定、自洽、个体化错误有明确作用；但 ablation 显示 RNN 尚未成为稳定的必要计算瓶颈，提示 active-rank / posterior 模块仍存在 bypass RNN 的 shortcut。下一阶段将从提高指标转向建立机制瓶颈：让 relation evidence 与 evidence precision 必须由 RNN hidden activity 产生，并通过预设 ablation 标准检验机制必要性。
+diff --git a/docs/MASTER_RESULTS_SUMMARY.md b/docs/MASTER_RESULTS_SUMMARY.md
+new file mode 100644
+index 0000000..d6f1544
+--- /dev/null
++++ b/docs/MASTER_RESULTS_SUMMARY.md
+@@ -0,0 +1,37 @@
++# Master results summary
++
++下表只列代表性结果；完整结果见 `results/master_results_table.csv`。
++
++| stage | attempt | overall | learned | nonlearned | c80 | self | tau | bimodal | note |
++|---|---|---:|---:|---:|---:|---:|---:|---:|---|
++| 01_score_coordinate | D_best_train | 0.613 | 0.637 | 0.603 | 0.675 | 0.855 | 0.232 |  | score-coordinate / parameter sweep |
++| 01_score_coordinate | sweep_G_strong_prior_beta16 | 0.642 | 0.669 | 0.631 | 0.545 | 0.908 | 0.362 |  | score-coordinate / parameter sweep |
++| 02_memory_forgetting | M4_edge_hybrid | 0.683 | 0.739 | 0.661 | 0.182 | 0.918 | 0.800 |  | edge memory/forgetting/interference |
++| 02_memory_forgetting | M2_strong_forgetting_beta30 | 0.554 | 0.573 | 0.547 | 0.610 | 0.800 | 0.574 |  | edge memory/forgetting/interference |
++| 03_subject_reliability | exp_R4_attn_online_short | 0.699 | 0.732 | 0.685 | 0.156 | 0.922 | 0.719 |  | subject-specific attention/reliability |
++| 03_subject_reliability | exp_R5_attn_lowtemp_commit_short | 0.597 | 0.581 | 0.603 | 0.649 | 0.848 | 0.384 |  | subject-specific attention/reliability |
++| 04_modular_memory | exp_T1_recon_moderate | 0.686 | 0.714 | 0.675 | 0.221 | 0.913 | 0.625 |  | reconsolidation/schema encoding/replay |
++| 04_modular_memory | exp_T2_recon_strong | 0.592 | 0.636 | 0.575 | 0.636 | 0.838 | 0.418 |  | reconsolidation/schema encoding/replay |
++| 04_modular_memory | exp_T3_schema_encoding | 0.635 | 0.709 | 0.606 | 0.571 | 0.882 | 0.553 |  | reconsolidation/schema encoding/replay |
++| 05_active_rank_sampler | active_rank_hypothesis_sampler | 0.854 | 0.916 | 0.829 | 0.948 | 1.000 | 0.625 | 16.000 | strong behavior match, but hand-designed attractor and manual salience |
++| 06_meta_plastic_rnn_attractor | meta_trained_plastic_RNN_rank_attractor_120ep | 0.831 | 0.904 | 0.802 | 0.883 | 1.000 | 0.548 | 22.000 | differentiable attractor attached to plastic RNN |
++| 07_modular_ablation_large3600 | distance_rnn_300 | 0.562 | 0.584 | 0.553 | 1.000 | 1.000 | 0.014 | 28.000 | larger ablation test; RNN necessity unstable |
++| 07_modular_ablation_large3600 | distance_no_rnn_300 | 0.526 | 0.564 | 0.510 | 1.000 | 1.000 | 0.077 | 28.000 | larger ablation test; RNN necessity unstable |
++| 07_modular_ablation_large3600 | distance_constant_reliability_300 | 0.647 | 0.826 | 0.575 | 1.000 | 1.000 | 0.369 | 25.000 | larger ablation test; RNN necessity unstable |
++| 07_modular_ablation_large3600 | distance_posterior_mean_300 | 0.541 | 0.581 | 0.526 | 0.636 | 0.517 | 0.014 | 0.000 | larger ablation test; RNN necessity unstable |
++| 07_modular_ablation_large3600 | raw_bars_rnn_100 | 0.480 | 0.516 | 0.466 | 1.000 | 1.000 | 0.094 | 28.000 | larger ablation test; RNN necessity unstable |
++| 08_hidden_aux_targets | general_aux_rnn | 0.632 | 0.768 | 0.578 | 1.000 | 1.000 | 0.173 | 28.000 | auxiliary hidden targets; did not restore RNN necessity |
++| 08_hidden_aux_targets | general_aux_no_rnn | 0.679 | 0.870 | 0.603 | 1.000 | 1.000 | 0.427 | 24.000 | auxiliary hidden targets; did not restore RNN necessity |
++| 08_hidden_aux_targets | distance_aux_rnn | 0.548 | 0.625 | 0.516 | 1.000 | 1.000 | 0.061 | 28.000 | auxiliary hidden targets; did not restore RNN necessity |
++| 08_hidden_aux_targets | distance_aux_no_rnn | 0.536 | 0.608 | 0.506 | 1.000 | 1.000 | 0.163 | 28.000 | auxiliary hidden targets; did not restore RNN necessity |
++| 08_hidden_aux_targets | distance_aux_strong_rnn | 0.587 | 0.572 | 0.593 | 1.000 | 1.000 | 0.335 | 26.000 | auxiliary hidden targets; did not restore RNN necessity |
++| 08_hidden_aux_targets | distance_aux_strong_no_rnn | 0.649 | 0.712 | 0.624 | 1.000 | 1.000 | 0.425 | 21.000 | auxiliary hidden targets; did not restore RNN necessity |
++| 08_hidden_aux_targets | raw_aux_rnn | 0.531 | 0.532 | 0.531 | 1.000 | 1.000 | 0.134 | 28.000 | auxiliary hidden targets; did not restore RNN necessity |
++
++## Reading this table
++
++- `overall/learned/nonlearned` 衡量基本 few-shot ranking performance。
++- `c80` 是至少一个 pair 上出现 >=80% stable error 的 virtual-subject 比例。
++- `self` 越高，说明 majority-choice 排序越接近传递自洽。
++- `tau` 越低，说明不同 virtual subjects 的主观排序越个体化；但过低且 accuracy 低时可能只是噪声。
++- `bimodal` 是 pair-level beta fit 中 bimodal pair 数，active-rank 后明显升高。
+\ No newline at end of file
+diff --git a/docs/STAGE_ATTEMPT_REPORT.md b/docs/STAGE_ATTEMPT_REPORT.md
+new file mode 100644
+index 0000000..89acd76
+--- /dev/null
++++ b/docs/STAGE_ATTEMPT_REPORT.md
+@@ -0,0 +1,77 @@
++# 阶段尝试汇总与未汇报结果
++
++本文件把从“阅读 meta-training 原始代码”到“active-rank 与 auxiliary targets”的全部未汇报尝试串起来。active-rank 是最后一类尝试之一，但不是全部工作。
++
++## 总线索
++
++项目起点是 Miconi & Kay 的 plastic RNN meta-training 源码。该源码的原目标是让带有 Hebbian plasticity 与 self-generated neuromodulation 的 RNN 在 episode 内学习序列，并在 transitive inference / list linking 上表现出人类和动物常见行为。目标项目则来自另一篇行为学论文：相同 few-shot local pair 输入后，人类会形成稳定、自洽但个体化的 global ranking。两者之间的差异决定了后续必须把 reward-based adjacent-pair 任务改成 observation-only fixed-pair ranking 任务。
++
++## 1. 原始 meta-training 代码整理
++
++- 输入包：`fsrl.zip`。
++- 主要文件：`main.py`, `simple.py`, `simple_neo.py`, `eval_figures.py`。
++- 结论：原代码适合理解 plastic RNN、neuromodulated Hebbian learning、active/passive solutions；但任务结构与目标行为论文不同，不能直接当作复现机制。
++
++## 2. 行为任务改写与 score-coordinate constructive baseline
++
++- 主要文件：`sources/01_behavior_task_score_coordinate/simple_neo.py`。
++- 代表结果：见 `results/01_constructive_score_coordinate/constructive_sweep_summary.json`。
++- 有用发现：统一 latent score schema 比 pair classifier 更合理，能让错误保持一定自洽。
++- 局限：个体化主要来自 prior/noise/temperature，仍偏手工。
++
++## 3. Edge memory + forgetting/interference
++
++- 结果：`results/02_memory_forgetting/memory_forgetting_experiment_summary.csv`。
++- 代表阳性：M4 edge_hybrid：overall 0.683, self-consistency 0.918。
++- 代表 trade-off：M2 strong forgetting 可提高 stable errors，但 overall/self-consistency 下降。
++- 判断：edge memory 是必要方向，但单靠 forgetting 很难得到“人类式”constructive ranking。
++
++## 4. Subject-specific attention/reliability
++
++- 结果：`results/03_subject_attention_reliability/subject_attention_experiment_summary.csv`。
++- 代表阳性：R4 online reliability overall 0.699, self 0.922。
++- 个体化方向：R5/R2 可降低 tau、提高 c80。
++- 判断：个体差异前移到学习阶段是合理方向，但强 reliability 仍会牺牲 accuracy。
++
++## 5. Modular memory mechanisms
++
++- 结果：`results/04_modular_memory_mechanisms/module_experiment_summary.csv`。
++- T1 moderate reconsolidation 同时提高 accuracy 与 self-consistency。
++- T2/T3 更容易产生 stable errors。
++- replay 更像稳定学习，而不是产生个体化错误的主因。
++- 判断：schema-guided encoding + reconsolidation 是后续最值得保留的心理/神经机制方向。
++
++## 6. Active-rank hypothesis sampler
++
++- 代码：`sources/05_active_rank_hypothesis_sampler/active_rank_hypothesis_sampler.py`。
++- 结果：overall 0.854, c80 0.948, self 1.000, bimodal pairs 16。
++- 价值：证明 testing 前的 global ranking commitment 可以自然产生稳定、自洽错误。
++- 局限：使用离散 ranking hypothesis 枚举和手工 salience，容易被质疑为“直接捏机制”。
++
++## 7. Meta-plastic RNN + differentiable rank-attractor
++
++- 代码：`sources/06_meta_plastic_rnn_rank_attractor/meta_plastic_rank_rnn.py`。
++- 结果：overall 0.831, c80 0.883, self 1.000, bimodal pairs 22。
++- 价值：把 active-rank 思路接到 observation-only plastic RNN 上，是从手工 sampler 向神经机制过渡的重要步骤。
++- 局限：ablation 之前不能说明 RNN 必要。
++
++## 8. Modular ablation / raw observation input
++
++- 代码：`sources/07_modular_ablation_active_rank/`。
++- smoke 一度显示 no-RNN/no-plasticity 明显下降；但 3600s 大测试中 RNN 必要性不稳定。
++- raw bars 输入没有自然学起来，说明原始观测到关系证据之间还缺 sensory encoder。
++- 判断：active-rank 模块太强，底层仍存在 bypass RNN 的 shortcut。
++
++## 9. RNN hidden auxiliary targets
++
++- 代码：`sources/08_rnn_hidden_aux_targets/`。
++- 新增 signed relation auxiliary head、reliability auxiliary head、write calibration loss。
++- 结果：没有明显改善；no-RNN 有时仍更好。
++- 结论：reliability 不应只作为 edge write strength，而应进入 posterior evidence precision / likelihood temperature。
++
++## 当前最可靠结论
++
++1. `commitment/readout` 是目前最稳定的阳性机制：去掉 commitment 后，自洽性和 bimodality 明显下降。
++2. `RNN-derived reliability` 目前还不是稳定必要瓶颈；不能在汇报中声称已经证明 RNN 必要。
++3. `schema encoding / reconsolidation` 虽然没有 active-rank 指标漂亮，但潜在解释性更自然，值得保留为后续方向。
++4. 下一阶段应强调“消除 shortcut、建立机制瓶颈”，而不是“为了让 RNN 重要而调参”。
+diff --git a/proposal.md b/proposal.md
+new file mode 100644
+index 0000000..4b2cc00
+--- /dev/null
++++ b/proposal.md
+@@ -0,0 +1,128 @@
++# Proposal：基于 meta-training 可塑 RNN 的 few-shot 关系学习个体化排序机制研究
++
++## 1. 题目
++
++**基于 meta-training 可塑 RNN 与全局排序吸引子的 few-shot 关系学习机制模拟：解释相同局部输入下的人类个体化主观排序**
++
++## 2. 研究背景
++
++本研究来自两个相关问题的交叉。第一，Miconi 与 Kay 的关系学习工作说明，带有神经调制 Hebbian 可塑性的 recurrent neural network 可以通过 meta-training 学会在 episode 内快速获得新序列，并表现出传递推理、symbolic distance effect、end-anchor / serial position effect 以及 list linking 等关系学习行为。该论文强调，成功模型并不是被手工指定学习算法，而是通过 outer-loop meta-training 发现 inner-loop 学习过程；其关键机制包括 plastic weights、自生成 neuromodulation，以及对既往 item 的 recoded reinstatement。
++
++第二，目标行为学论文提出了更强的现象：在 few-shot 条件下，所有被试接受相同的 8 条局部 pair 关系输入，但最终并不简单收敛到 ground-truth 排序，而是形成**稳定、自洽、但个体化的 subjective global rankings**。这种现象不仅要求模型能解释 group-level 的 learned/non-learned accuracy、serial position effect 和 symbolic distance effect，还要解释 individual-level 的 bimodal pair errors、consistent errors、自洽错误结构、低 inter-subject similarity 等结果。
++
++因此，本研究的核心动机是：能否从 meta-training plastic RNN 的神经机制出发，建立一个不是手工写死排序答案、而是通过 episode 内学习自然产生个体化全局排序的 simulation 模型，用来解释行为学论文中的 constructive ranking findings。
++
++## 3. 研究问题
++
++1. **机制复现问题**：meta-training plastic RNN 或其扩展模型能否复现目标行为论文中的 few-shot ranking findings，尤其是稳定、自洽、个体化的错误排序？
++2. **机制来源问题**：这些行为结果主要来自哪一类底层机制：RNN hidden activity、fast-weight plasticity、edge memory、subject-specific reliability、schema reconsolidation、internal replay，还是 testing 前的 global ranking commitment？
++3. **必要性问题**：如果去掉 RNN、plasticity、subject latent、item vectors、resource variability、reliability、commitment readout 等模块，哪些行为学 signatures 会明显消失？
++4. **去手工化问题**：如何避免模型通过手工 distance salience、显式 posterior shortcut 或直接可见 signed distance 绕过 RNN，从而得到看似好、但神经解释力不足的结果？
++
++## 4. 研究方法
++
++### 4.1 任务与评估数据
++
++本研究不直接训练人类数据，而是在论文固定行为任务上做 simulation。任务结构为：
++
++- 8 个 item 构成隐藏 ground-truth ranking；
++- learning phase 给出 8 条固定 non-adjacent local pairs，每条 pair 在 4 个 learning blocks 中出现一次；
++- testing phase 测试全部 28 个 possible pairs，每个 pair 重复若干次；
++- testing 无 feedback；
++- virtual subjects 默认对齐论文规模，常用 N=77，pair repetition=10。
++
++评估指标包括：
++
++- overall / learned / non-learned accuracy；
++- serial position effect；
++- symbolic distance effect；
++- pair-level beta fitting 与 bimodal pair count；
++- consistent error subjects，尤其是 >=80% 和 100% threshold；
++- circular triads / self-consistency coefficient；
++- HodgeRank-style reconstructed subjective rankings；
++- inter-subject Kendall tau；
++- ablation drop，例如 no-RNN drop、no-plasticity drop、posterior-mean readout drop。
++
++### 4.2 模型路线
++
++本项目采用分阶段建模，而不是一次性追求最终指标。已经尝试并保留的路线如下：
++
++1. **原始 meta-training plastic RNN 阅读与整理**：复现和梳理 Miconi & Kay 源码结构，包括 RNN、Hebbian plasticity、neuromodulation、active/passive solution、transitive inference 和 list-linking 评估。
++2. **score-coordinate constructive baseline**：将行为任务改写为统一 latent score schema，而不是 28 个 pair 的独立分类器。
++3. **edge memory + forgetting/interference**：引入局部边记忆、可靠性、遗忘、容量竞争，模拟 sparse learning 下的编码损坏和检索不稳定。
++4. **subject-specific attention/reliability**：让不同 virtual subjects 对 item、pair、distance 的编码可靠性不同，把个体差异前移到学习阶段。
++5. **modular memory mechanisms**：加入 schema-biased reconsolidation、schema-consistent encoding、internal replay/rehearsal，并进行模块化对照。
++6. **active-rank hypothesis sampler**：把学习后的状态从连续 score 改为离散 global ranking attractor，测试 subject-level commitment 对稳定、自洽错误的作用。
++7. **meta-plastic RNN + differentiable rank attractor**：将 active-rank posterior 接入 observation-only meta-trained plastic RNN，由 RNN 和 fast weights 处理学习输入。
++8. **modular ablations / raw observation input**：将 no-RNN、no-plasticity、constant reliability、posterior-mean readout、raw bars 等做成独立开关，测试 RNN 是否真正必要。
++9. **RNN hidden auxiliary targets**：给 hidden activity 增加 signed relation 和 reliability 辅助目标，尝试让 relation/reliability 更明确地从 RNN 活动产生。
++
++### 4.3 实验设计
++
++每个阶段都保留：
++
++- 完整可运行源码；
++- 小批次结果；
++- sweep / ablation summary；
++- 对行为学 findings 的解释；
++- 对下一步方向的判断。
++
++后续主要实验将使用两类测试预算：一般测试 800s，大批次测试 1800s 或以上；长测试采用 chunked continuation 和 checkpoint，避免单进程被环境杀掉后丢失结果。
++
++## 5. 已完成尝试与当前结果
++
++| 阶段 | 代表尝试 | 结果摘要 | 阶段性判断 |
++|---|---|---|---|
++| 原始 meta-training 代码阅读 | `fsrl.zip` / original TransitiveInference code | 已整理 RNN + plasticity + neuromodulation 结构，确认其原任务是 adjacent-trial learning + reward feedback + list linking，而目标行为任务是 observation-only few-shot pairs。 | 不能直接照搬；需要改成行为论文的 fixed 8-pair observation-only 任务。 |
++| score-coordinate baseline | D_best_train, G_strong_prior_beta16 | D: overall 0.613, c80 0.675, self 0.855, tau 0.232；G: overall 0.642, self 0.908。 | 统一 score schema 可产生稳定主观排序，但个体化主要来自 prior/noise，神经机制不足。 |
++| edge memory + forgetting | M4 edge_hybrid, M2 strong_forgetting_beta30 | M4: overall 0.683, learned 0.739, self 0.918，但 tau 0.800；M2_beta30: c80 0.610，但 overall 0.554。 | memory 能提高 accuracy/self-consistency；强 forgetting 可产生 stable errors，但像记忆损坏。 |
++| subject reliability | R4 online reliability, R5 low-temp reliability, R2 strong reliability | R4: overall 0.699, self 0.922；R5: c80 0.649, tau 0.384；R2: c80 0.623, tau 0.162。 | 个体化可以前移到学习阶段，但强可靠性差异会牺牲 accuracy 和自洽性。 |
++| modular memory mechanisms | T1-T7 | T1 reconsolidation: overall 0.686, self 0.913；T2 strong reconsolidation: c80 0.636；T3 schema encoding: c80 0.571；T4 replay: c80 0.416。 | reconsolidation/schema encoding 是潜在有用方向；replay 更像稳定学习，不是个体化主来源。 |
++| active-rank sampler | active_rank_hypothesis_sampler | overall 0.854, learned 0.916, nonlearned 0.829, c80 0.948, self 1.000, bimodal pairs 16。 | 行为形态非常好，说明 global ranking commitment 很关键；但该版本手工成分较强，不能作为最终神经机制。 |
++| meta-plastic RNN + rank attractor | 120-episode meta-plastic RNN | overall 0.831, learned 0.904, nonlearned 0.802, c80 0.883, self 1.000, tau 0.548, bimodal pairs 22。 | 把 active-rank 接入 RNN 后仍表现较好；但需要 ablation 验证 RNN 是否真是必要来源。 |
++| modular ablations + raw input | smoke / large3600 | smoke 中 no-RNN drop 明显；但 large3600 中 distance_rnn_300 overall 0.562，no-RNN 0.526，constant reliability 0.647，raw bars 仍接近 chance。 | RNN 必要性不稳定；active-rank/commitment 仍可能绕过 RNN。raw input 需要 sensory encoder。 |
++| RNN hidden auxiliary targets | aux general / large1800 / raw | general full 0.632, no-RNN 0.679；large default full 0.548, no-RNN 0.536；strong aux full 0.587, no-RNN 0.649；raw full 0.531。 | 辅助目标没有解决 RNN 必要性；reliability 仍应从 write strength 改成 posterior evidence precision / likelihood temperature。 |
++
++## 6. 预期结果
++
++理想结果不是单纯提高 accuracy，而是同时满足以下条件：
++
++1. group-level 上出现 learned/non-learned accuracy、serial position effect 和 symbolic distance effect；
++2. individual-level 上出现稳定错误、pair-level bimodality、自洽但错误的 subjective ranking、低 inter-subject similarity；
++3. no-RNN / no-plasticity / no-reliability / no-commitment ablation 产生可解释的 signature loss；
++4. raw observation 或接近 raw observation 的输入条件下，模型仍能通过内部学习生成 relation evidence，而不是依赖手工 distance salience；
++5. RNN hidden activity 中可以解码或解释 signed relation、confidence/reliability、以及后续 global ranking commitment 的形成过程。
++
++也可能出现的阶段性发现包括：
++
++- subject-level global ranking commitment 是稳定自洽错误的必要模块；
++- RNN hidden reliability 若只控制 edge write strength，容易塌缩为低 edge strength，不足以解释行为；
++- reliability 更可能应该控制 posterior likelihood precision，而不是单纯控制 memory write gate；
++- schema reconsolidation 和 schema-consistent encoding 可能是产生“错但自洽”的更自然机制。
++
++## 7. 意义
++
++这个小研究的价值不在于再做一个能拟合 accuracy 的模型，而在于建立一套**可被 ablation 证伪的机制模拟框架**。它可以帮助区分：
++
++- 传统 independent-value / Q-learning 类模型能解释的 group-level pattern；
++- human-like constructive ranking 需要的 individual-level global schema；
++- 哪些行为来自一般记忆噪声，哪些来自主动构造和主观排序 commitment；
++- meta-trained plastic RNN 中哪些神经活动确实承担了 relation encoding / reliability estimation / knowledge reassembly 的作用。
++
++如果后续能拿到 RNN 必要、且可解释行为学 findings 的机制，就可以把行为论文的 constructive ranking account 与 plastic neural network 的可解释机制连接起来。
++
++## 8. 当前进度与下一步计划
++
++当前进度可以概括为三点：
++
++1. **工程上**：已经把原始 meta-training 代码、行为任务评估、多个机制版本、active-rank、modular ablation、auxiliary hidden targets 全部整理为可复现源码和结果。
++2. **结果上**：active-rank / rank commitment 对稳定、自洽、个体化错误非常关键；但 RNN-derived reliability 目前还不是稳定必要瓶颈。
++3. **方向上**：下一步不应继续简单加 iteration 或手工调结果，而应改底层，使 relation evidence 和 evidence precision 必须通过 RNN hidden activity 产生，同时避免 active-rank posterior 直接吃到可绕过 RNN 的显式证据。
++
++下一步建议：
++
++- 把 reliability 从 edge write strength 改成 RNN-controlled posterior likelihood temperature / evidence precision；
++- signed relation evidence 必须从 hidden signed-relation head 输出，不再把显式 signed distance 直接给 active-rank posterior；
++- raw bars 输入前增加 sensory-difference encoder，并用辅助 signed-relation loss 预训练或联合训练；
++- 保留 posterior-mean readout 作为 commitment negative control；
++- 所有新底层都先写预期，再跑 full / no-RNN / no-plasticity / no-commitment / raw-input ablations。
+diff --git a/references/REFERENCE_NOTES.md b/references/REFERENCE_NOTES.md
+new file mode 100644
+index 0000000..a4857ed
+--- /dev/null
++++ b/references/REFERENCE_NOTES.md
+@@ -0,0 +1,6 @@
++# Reference notes
++
++This git-ready package does not redistribute the uploaded PDFs. The proposal is based on two papers:
++
++1. Miconi & Kay, "Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks". This paper motivates the meta-training plastic RNN, Hebbian plasticity, neuromodulation, active/passive solutions, and recoded reinstatement.
++2. Liu, Wang & Luo, "Human brains construct individualized global rankings from identical few-shot learning input". This paper provides the target behavior: identical few-shot local input leads to stable, self-consistent, idiosyncratic global rankings.
+diff --git a/scripts/git_push_template.sh b/scripts/git_push_template.sh
+new file mode 100755
+index 0000000..d6b36b4
+--- /dev/null
++++ b/scripts/git_push_template.sh
+@@ -0,0 +1,17 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++# Usage:
++#   bash scripts/git_push_template.sh git@github.com:<user>/<repo>.git
++
++REMOTE_URL="${1:-}"
++if [ -z "$REMOTE_URL" ]; then
++  echo "Please provide remote url, e.g. git@github.com:<user>/<repo>.git"
++  exit 1
++fi
++
++git status
++git remote remove origin 2>/dev/null || true
++git remote add origin "$REMOTE_URL"
++git branch -M main
++git push -u origin main
+diff --git a/scripts/run_quick_smoke.sh b/scripts/run_quick_smoke.sh
+new file mode 100755
+index 0000000..8893e5e
+--- /dev/null
++++ b/scripts/run_quick_smoke.sh
+@@ -0,0 +1,5 @@
++#!/usr/bin/env bash
++set -euo pipefail
++
++# Example smoke tests. Run from repository root.
++python sources/07_modular_ablation_active_rank/ablation_suite.py --smoke --timeout 800 --big-timeout 1800 --output-dir outputs_smoke_ablation
+-- 
+2.47.3
+

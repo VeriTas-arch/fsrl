@@ -1,69 +1,41 @@
-# Meta-training plastic networks for transitive inference
+# Git-ready package: meta-training plastic RNN to human constructive ranking
 
-> [!NOTE]
-> For educational purposes, we modified the code to make it easier to read and understand. The original code used for the paper is at <https://github.com/ThomasMiconi/TransitiveInference>, and the original README is kept below for reference.
+本仓库包用于阶段性汇报，整理了从原始 meta-training 代码阅读到多轮机制尝试、active-rank、ablation、auxiliary hidden targets 的过程。
 
-## Environment setup
+## 快速入口
 
-Use Python 3.12.
+- `proposal.md`：汇报用 proposal 主文档。
+- `docs/STAGE_ATTEMPT_REPORT.md`：所有未汇报尝试和阶段结论。
+- `results/master_results_table.csv`：跨阶段总结果表。
+- `sources/`：各阶段源码完整覆盖版本。
+- `results/`：各阶段小批次/大批次结果摘要、报告和 CSV/JSON。
+- `diffs/`：阶段间源码 diff。
+- `scripts/git_push_template.sh`：远端推送模板。
 
-```bash
-conda create -n fsrl python=3.12
-conda activate fsrl
-pip install --upgrade pip
-pip install -r requirements.txt
+## 目录结构
+
+```text
+sources/
+  00_original_meta_training_code/
+  01_behavior_task_score_coordinate/
+  02_memory_forgetting_edge_memory/
+  03_subject_attention_reliability/
+  04_modular_memory_mechanisms/
+  05_active_rank_hypothesis_sampler/
+  06_meta_plastic_rnn_rank_attractor/
+  07_modular_ablation_active_rank/
+  08_rnn_hidden_aux_targets/
+results/
+  01_constructive_score_coordinate/
+  02_memory_forgetting/
+  03_subject_attention_reliability/
+  04_modular_memory_mechanisms/
+  05_active_rank_hypothesis_sampler/
+  06_meta_plastic_rnn_rank_attractor/
+  07_modular_active_rank_ablations/
+  08_rnn_hidden_aux_targets/
 ```
 
-The default `requirements.txt` installs the standard PyPI build of PyTorch. If you need a CUDA-specific PyTorch build, install PyTorch first using the command from <https://pytorch.org/get-started/locally/>, then run:
+## 为什么没有直接放入所有二进制文件
 
-```bash
-pip install numpy matplotlib scipy scikit-learn tqdm
-```
-
-To generate the teaching figures extracted from `main.py`:
-
-```bash
-python eval_figures.py --figures all
-```
-
-Outputs are written to `figures/` by default. Use a smaller batch for quick demos:
-
-```bash
-python eval_figures.py --figures fig2a fig4b --batch-size 64 --seed 1
-```
-
-## Original README
-
-This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
-
-We also include parameter files for two pre-trained networks, representing each of the two strategies (active, list-linking and passive, not list-linking) described in the paper.
-
-The code consists of two notebooks. These notebooks are immediately usable on Google Colab, as-is.
-
-If you just want to understand how the system works, it is **highly** recommended to look at `simple.ipynb` first.
-
-The code actually used for the paper is in `main.ipynb`. This code includes a lot of additional code for running the various experiments from the paper. By contrast, the code in `simple.ipynb` (which only contains one large code cell) is a simplified version that only includes the basic code for meta-training a plastic network for transitive inference. The network structure and experimental settings are essentially idenctical between the two, with only the additional code for the various side experiments removed.
-
-Note that the networks produced by `simple.ipynb` can be used in the EVAL (figure-producing) mode of `main.ipynb`.
-
-Consult the respecitve notebooks for more details.
-
-### To generate the figures from the paper
-
-1. Copy `net_active.dat` to `net.dat` and upload it to where the notebook can access it.
-
-2. In line 207 of `main.ipynb`, set EVAL to `True`
-
-3. Run `main.ipynb` (making sure that `net.dat` is in the path of your notebook)
-
-This produces figures for the active strategy (capable of list-linking). Other figures may need more modifications, consult the relevant cells in `main.ipynb`.
-
-To produce similar figures for the passive strategy (not capable of list-linking), use `net_passive.dat` (and rename it to `net.dat`) instead.
-
-### To train your own networks from scratch
-
-1. In line 207 of `main.ipynb`, set EVAL to `False`
-
-2. Run `main.ipynb`
-
-This will run for 30000 iterations (which might take a few hours) and produce a fully meta-trained plastic network, stored in `net.dat`. You can then use `main.ipynb` (with EVAL set to `True` in line 207) to produce figures for this trained network.
+为了让仓库可以直接推送远端，本包默认不纳入大体积或不适合版本管理的文件，例如 `.pt`, `.npy`, `.dat`, `.pdf`, `.ipynb`, `.png`, `.pyc`。结果判断所需的 `summary.csv`, `summary.json`, `report.md`, `train_log.csv` 均已保留。

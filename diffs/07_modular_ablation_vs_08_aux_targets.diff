@@ -1,0 +1,228 @@
+--- /mnt/data/rank_mechanism_proposal_git_ready_v2/sources/07_modular_ablation_active_rank/meta_plastic_rank_rnn.py	2026-07-07 07:30:36.000000000 +0000
++++ /mnt/data/rank_mechanism_proposal_git_ready_v2/sources/08_rnn_hidden_aux_targets/meta_plastic_rank_rnn.py	2026-07-07 08:37:58.000000000 +0000
+@@ -114,6 +114,15 @@
+     posterior_entropy_weight: float = 0.005
+     strength_l1_weight: float = 0.002
+     edge_recon_weight: float = 0.03
++    # Auxiliary targets make RNN hidden activity explicitly encode the signed
++    # relation and a non-distance reliability/confidence signal. These losses
++    # are used only during meta-training; evaluation still obtains relation and
++    # reliability from the trained recurrent state.
++    aux_relation_weight: float = 0.10
++    aux_reliability_weight: float = 0.08
++    aux_write_calibration_weight: float = 0.06
++    reliability_target_high: float = 0.70
++    reliability_target_low: float = 0.08
+     sigma_prior_weight: float = 0.01
+     precision_prior_weight: float = 0.003
+ 
+@@ -310,6 +319,10 @@
+         # Reliability can be forced to arise from recurrent activity alone.
+         # This is the default mechanism used in the new ablation suite.
+         self.reliability_head = nn.Sequential(nn.Linear(h, h), nn.Tanh(), nn.Linear(h, 1))
++        # Auxiliary probes are trained from h only. They do not receive item IDs,
++        # hand-coded salience, or posterior information.
++        self.hidden_relation_aux_head = nn.Sequential(nn.Linear(h, h), nn.Tanh(), nn.Linear(h, 1))
++        self.hidden_reliability_aux_head = nn.Sequential(nn.Linear(h, h), nn.Tanh(), nn.Linear(h, 1))
+ 
+         # Bounded trainable likelihood parameters.  The bounds keep the rank
+         # module cognitively fuzzy rather than becoming an exact solver.
+@@ -379,6 +392,9 @@
+         gate_values: list[torch.Tensor] = []
+         edge_strength_values: list[torch.Tensor] = []
+         edge_recon_losses: list[torch.Tensor] = []
++        aux_relation_losses: list[torch.Tensor] = []
++        aux_reliability_losses: list[torch.Tensor] = []
++        aux_write_calibration_losses: list[torch.Tensor] = []
+         batch = torch.arange(bsz, device=item_vecs.device)
+ 
+         for block in range(cfg.n_learning_blocks):
+@@ -391,6 +407,7 @@
+                 item_j = learning_edges[batch, edge_idx, 1]
+                 true_diff = gather_true_diff(true_pos, item_i, item_j)
+                 obs_diff = true_diff
++                keep = torch.ones_like(obs_diff)
+                 if noise_std > 0:
+                     obs_diff = (obs_diff + noise_std * torch.randn_like(obs_diff)).clamp(-(cfg.n_items - 1), cfg.n_items - 1)
+                 if edge_dropout > 0:
+@@ -400,6 +417,15 @@
+                     old_strength = strength[batch, item_i, item_j]
+                     old_est = torch.where(old_strength > 1e-5, mem_sum[batch, item_i, item_j] / old_strength.clamp_min(1e-5), torch.zeros_like(obs_diff))
+                     obs_diff = keep * obs_diff + (1.0 - keep) * old_est.detach()
++                # Training-only auxiliary targets. Reliability is a confidence/availability
++                # target, not a symbolic distance salience target: good observations are
++                # trained toward high writeability, dropped observations toward low writeability.
++                aux_relation_target = (true_diff / (cfg.n_items - 1)).clamp(-1.0, 1.0)
++                aux_reliability_target = torch.where(
++                    keep > 0.5,
++                    torch.full_like(obs_diff, cfg.reliability_target_high),
++                    torch.full_like(obs_diff, cfg.reliability_target_low),
++                )
+ 
+                 vec_i = item_vecs_input[batch, item_i]
+                 vec_j = item_vecs_input[batch, item_j]
+@@ -445,6 +471,11 @@
+                     if cfg.ablate_plasticity:
+                         plastic = torch.zeros_like(plastic)
+                 head = self.edge_head(torch.cat([features, h], dim=1))
++                if train_mode:
++                    aux_rel_pred = self.hidden_relation_aux_head(h).squeeze(1)
++                    aux_rel_prob = torch.sigmoid(self.hidden_reliability_aux_head(h).squeeze(1))
++                    aux_relation_losses.append(F.mse_loss(torch.tanh(aux_rel_pred), aux_relation_target))
++                    aux_reliability_losses.append(F.binary_cross_entropy(aux_rel_prob.clamp(1e-5, 1.0 - 1e-5), aux_reliability_target.clamp(1e-5, 1.0 - 1e-5)))
+ 
+                 if cfg.reliability_mode == "rnn":
+                     raw_strength = self.reliability_head(h).squeeze(1)
+@@ -463,6 +494,8 @@
+                 else:
+                     raise ValueError(f"Unknown reliability_mode: {cfg.reliability_mode}")
+                 write_strength = write_strength.clamp(1e-4, 1.0)
++                if train_mode:
++                    aux_write_calibration_losses.append(F.mse_loss(write_strength, aux_reliability_target))
+ 
+                 if cfg.relation_encoding_mode == "residual_observation":
+                     diff_adjust = 0.35 * torch.tanh(head[:, 1])
+@@ -502,6 +535,9 @@
+             "mean_hebb_gate": torch.stack(gate_values).mean() if gate_values else torch.tensor(0.0, device=item_vecs.device),
+             "mean_edge_strength": torch.stack(edge_strength_values).mean() if edge_strength_values else torch.tensor(0.0, device=item_vecs.device),
+             "edge_recon_loss": torch.stack(edge_recon_losses).mean() if edge_recon_losses else torch.tensor(0.0, device=item_vecs.device),
++            "aux_relation_loss": torch.stack(aux_relation_losses).mean() if aux_relation_losses else torch.tensor(0.0, device=item_vecs.device),
++            "aux_reliability_loss": torch.stack(aux_reliability_losses).mean() if aux_reliability_losses else torch.tensor(0.0, device=item_vecs.device),
++            "aux_write_calibration_loss": torch.stack(aux_write_calibration_losses).mean() if aux_write_calibration_losses else torch.tensor(0.0, device=item_vecs.device),
+         }
+ 
+     def posterior_logits(
+@@ -516,21 +552,20 @@
+         cfg = self.config
+         bsz = memory.shape[0]
+         pcount = hypo.pos_diff.shape[0]
+-        logits = torch.empty(bsz, pcount, device=memory.device)
+         sigma = self.sigma_distance().clamp_min(0.2)
+         order_bonus = self.order_bonus()
+         precision = self.global_precision()
+-        for b in range(bsz):
+-            edges = learning_edges[b]
+-            ii = edges[:, 0]
+-            jj = edges[:, 1]
+-            target = memory[b, ii, jj]  # [E]
+-            w = strength[b, ii, jj].clamp(0.0, 4.0)
+-            cand = hypo.pos_diff[:, ii, jj]  # [P,E]
+-            signed_ok = (cand * target.sign()[None, :] > 0).float()
+-            dist_cost = ((cand - target[None, :]) ** 2) / (2.0 * sigma.pow(2))
+-            edge_logit = (-dist_cost + order_bonus * signed_ok) * w[None, :]
+-            logits[b] = edge_logit.sum(dim=1)
++        ii = learning_edges[:, :, 0]  # [B,E]
++        jj = learning_edges[:, :, 1]  # [B,E]
++        batch = torch.arange(bsz, device=memory.device)[:, None]
++        target = memory[batch, ii, jj]  # [B,E]
++        w = strength[batch, ii, jj].clamp(0.0, 4.0)  # [B,E]
++        flat = (ii * self.config.n_items + jj).reshape(-1)
++        cand = hypo.pos_diff.reshape(pcount, self.config.n_items * self.config.n_items)[:, flat]
++        cand = cand.reshape(pcount, bsz, -1).permute(1, 0, 2)  # [B,P,E]
++        signed_ok = (cand * target.sign()[:, None, :] > 0).float()
++        dist_cost = ((cand - target[:, None, :]) ** 2) / (2.0 * sigma.pow(2))
++        logits = ((-dist_cost + order_bonus * signed_ok) * w[:, None, :]).sum(dim=2)
+         mult = resource
+         if resource_multiplier is not None:
+             mult = mult * resource_multiplier
+@@ -600,6 +635,9 @@
+     commit_loss: float
+     entropy: float
+     edge_recon: float
++    aux_relation: float
++    aux_reliability: float
++    aux_write_calibration: float
+     accuracy_proxy: float
+     sigma: float
+     order_bonus: float
+@@ -647,6 +685,9 @@
+         + config.straight_through_commit_weight * commit_loss
+         - config.posterior_entropy_weight * entropy
+         + config.edge_recon_weight * state["edge_recon_loss"]
++        + config.aux_relation_weight * state["aux_relation_loss"]
++        + config.aux_reliability_weight * state["aux_reliability_loss"]
++        + config.aux_write_calibration_weight * state["aux_write_calibration_loss"]
+         + config.strength_l1_weight * strength_l1
+         + config.sigma_prior_weight * sigma_prior
+         + config.precision_prior_weight * precision_prior
+@@ -658,6 +699,9 @@
+         commit_loss=float(commit_loss.detach()),
+         entropy=float(entropy.detach()),
+         edge_recon=float(state["edge_recon_loss"].detach()),
++        aux_relation=float(state["aux_relation_loss"].detach()),
++        aux_reliability=float(state["aux_reliability_loss"].detach()),
++        aux_write_calibration=float(state["aux_write_calibration_loss"].detach()),
+         accuracy_proxy=acc_proxy,
+         sigma=float(model.sigma_distance().detach()),
+         order_bonus=float(model.order_bonus().detach()),
+@@ -693,6 +737,9 @@
+                 "commit_loss": stats.commit_loss,
+                 "entropy": stats.entropy,
+                 "edge_recon": stats.edge_recon,
++                "aux_relation": stats.aux_relation,
++                "aux_reliability": stats.aux_reliability,
++                "aux_write_calibration": stats.aux_write_calibration,
+                 "accuracy_proxy": stats.accuracy_proxy,
+                 "sigma": stats.sigma,
+                 "order_bonus": stats.order_bonus,
+@@ -963,6 +1010,9 @@
+         "mean_hebb_gate": float(state["mean_hebb_gate"].cpu()),
+         "mean_edge_strength": float(state["mean_edge_strength"].cpu()),
+         "edge_recon_loss": float(state["edge_recon_loss"].cpu()),
++        "aux_relation_loss": float(state["aux_relation_loss"].cpu()),
++        "aux_reliability_loss": float(state["aux_reliability_loss"].cpu()),
++        "aux_write_calibration_loss": float(state["aux_write_calibration_loss"].cpu()),
+         "learned_likelihood_sigma": float(model.sigma_distance().cpu()),
+         "learned_order_bonus": float(model.order_bonus().cpu()),
+         "learned_global_precision": float(model.global_precision().cpu()),
+@@ -1097,6 +1147,7 @@
+         f"- train-time choice beta = {summary['learned_train_choice_beta']:.3f}",
+         f"- mean Hebbian gate = {summary['mean_hebb_gate']:.3f}",
+         f"- mean edge write strength = {summary['mean_edge_strength']:.3f}",
++        f"- auxiliary relation / reliability / write losses = {summary.get('aux_relation_loss', 0.0):.3f} / {summary.get('aux_reliability_loss', 0.0):.3f} / {summary.get('aux_write_calibration_loss', 0.0):.3f}",
+         "",
+         "## 解释",
+         "",
+@@ -1142,6 +1193,11 @@
+     p.add_argument("--straight-through-commit-weight", type=float, default=0.15)
+     p.add_argument("--posterior-entropy-weight", type=float, default=0.005)
+     p.add_argument("--edge-recon-weight", type=float, default=0.03)
++    p.add_argument("--aux-relation-weight", type=float, default=0.10)
++    p.add_argument("--aux-reliability-weight", type=float, default=0.08)
++    p.add_argument("--aux-write-calibration-weight", type=float, default=0.06)
++    p.add_argument("--reliability-target-high", type=float, default=0.70)
++    p.add_argument("--reliability-target-low", type=float, default=0.08)
+     p.add_argument("--plastic-eta", type=float, default=0.075)
+     p.add_argument("--plastic-decay", type=float, default=0.92)
+     p.add_argument("--fast-weight-gain", type=float, default=0.75)
+@@ -1191,6 +1247,11 @@
+         straight_through_commit_weight=args.straight_through_commit_weight,
+         posterior_entropy_weight=args.posterior_entropy_weight,
+         edge_recon_weight=args.edge_recon_weight,
++        aux_relation_weight=args.aux_relation_weight,
++        aux_reliability_weight=args.aux_reliability_weight,
++        aux_write_calibration_weight=args.aux_write_calibration_weight,
++        reliability_target_high=args.reliability_target_high,
++        reliability_target_low=args.reliability_target_low,
+         plastic_eta=args.plastic_eta,
+         plastic_decay=args.plastic_decay,
+         fast_weight_gain=args.fast_weight_gain,
+@@ -1242,6 +1303,8 @@
+                 row = {
+                     "iter": it, "loss": stats.loss_value, "choice_loss": stats.choice_loss,
+                     "commit_loss": stats.commit_loss, "entropy": stats.entropy, "edge_recon": stats.edge_recon,
++                    "aux_relation": stats.aux_relation, "aux_reliability": stats.aux_reliability,
++                    "aux_write_calibration": stats.aux_write_calibration,
+                     "accuracy_proxy": stats.accuracy_proxy, "sigma": stats.sigma, "order_bonus": stats.order_bonus,
+                     "precision": stats.precision, "mean_hebb_gate": stats.mean_hebb_gate,
+                     "mean_edge_strength": stats.mean_edge_strength, "elapsed_sec": time.time() - t0,
+@@ -1281,3 +1344,9 @@
+ 
+ if __name__ == "__main__":
+     main()
++    # In this sandbox, PyTorch/tqdm worker cleanup can occasionally keep the
++    # interpreter alive after all outputs are written. Force a clean process exit
++    # so long ablation suites respect their timeout budget.
++    import sys as _sys, os as _os
++    _sys.stdout.flush(); _sys.stderr.flush()
++    _os._exit(0)
