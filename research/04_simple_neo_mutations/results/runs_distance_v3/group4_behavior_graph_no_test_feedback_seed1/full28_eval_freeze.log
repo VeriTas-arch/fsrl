@@ -1,0 +1,25 @@
+[setup] evaluator version: simple_neo_full28_eval_2026-07-09_distance_input_v3
+[setup] model script version: single_neo_mutants_distance_input_v3_checked_2026-07-09
+[setup] device: cuda; torch_num_threads=1
+[setup] checkpoint: runs_distance_v3/group4_behavior_graph_no_test_feedback_seed1/net.dat
+[setup] variant: behavior_graph_no_test_feedback; eval_episodes=512; batch=64
+[setup] full test orientation=random; action_mode=greedy; time_mode=clamp
+[setup] distance_input=True; train_only=True; distance_slot=nbstimbits+3
+[setup] Test reward is forced to zero for all full-28 test trials.
+[save] summary: runs_distance_v3/group4_behavior_graph_no_test_feedback_seed1/full28_eval_freeze/full28_eval_summary.json
+[save] pair metrics: runs_distance_v3/group4_behavior_graph_no_test_feedback_seed1/full28_eval_freeze/full28_pair_metrics.csv
+[summary]
+  overall_accuracy: 0.5249720982142857
+  learned_pairs_accuracy: 0.54052734375
+  nonlearned_pairs_accuracy: 0.51875
+  adjacent_accuracy: 0.5198102678571429
+  nonadjacent_accuracy: 0.5266927083333334
+  first10_test_accuracy: 0.5330078125
+  later_test_accuracy: 0.5205078125
+  mean_prob_correct: 0.51121099971741
+  mean_circular_triads: 10.40234375
+  mean_transitive_triplet_fraction: 0.8142438616071428
+  mean_kendall_tau_copeland_to_true: 0.06749901890021322
+  mean_abs_pw_after_learning: 2.2446851548738778
+  mean_abs_pw_after_full_test: 2.2446851548738778
+  distance_accuracy: {'1': 0.5198102678571429, '2': 0.521484375, '3': 0.51953125, '4': 0.53173828125, '5': 0.5234375, '6': 0.546875, '7': 0.54296875}

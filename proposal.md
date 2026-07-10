@@ -2,99 +2,46 @@
 
 ## 1. 题目
 
-基于 meta-training 可塑 RNN 的 few-shot 关系学习机制模拟尝试
+基于 meta-trained neuromodulated plastic RNN 的 few-shot constructive ranking 机制模拟
 
 ## 2. 研究背景
 
-研究来自两个相关问题的交叉。
+Miconi 与 Kay 表明，带有神经调制 Hebbian 可塑性的 RNN 可以通过 meta-training 学会 episode 内快速关系学习，并呈现 transitive inference、symbolic-distance 和 serial-position 等行为。其关键约束是：跨 trial 的学习必须进入 episode-local recurrent plastic state，而不是依赖预先设计的外部记忆表。
 
-Miconi 与 Kay 的关系学习工作说明，带有神经调制 Hebbian 可塑性的 RNN 可通过 meta-training 学会在 episode 内快速获得新序列，并表现出传递推理、symbolic distance effect、end-anchor / serial position effect 以及 list linking 等关系学习行为。论文强调，成功模型通过外层 meta-training 发现 inner-loop 学习过程，关键机制包括可塑性权重、自生成神经调制，以及对既往 item 的 recoded reinstatement。
-
-目标行为学论文提出了下述现象：在 few-shot 条件下，所有被试接受相同的 8 条局部 pair 关系输入，但最终并不简单收敛到 ground-truth 排序，而是形成**稳定、自洽、但个体化的主观全局排序**。这要求构建出的模型不仅能解释 group-level 的 learned/non-learned accuracy、serial position effect 和 symbolic distance effect，还要解释 individual-level 的 bimodal pair errors、consistent errors、自洽错误结构、低 inter-subject similarity 等结果。
+目标行为学任务则要求解释另一类现象：被试从相同的少量已知 distance 的局部 pair 关系出发，会形成稳定、自洽、但个体化的全局排序。模型既要匹配 learned/nonlearned accuracy、symbolic-distance 和 serial-position effect，也要解释 pair-level bimodality、稳定错误、自洽错误排序和跨主体差异。
 
 ## 3. 研究问题
 
-本 Proposal 的核心问题是：
+能否让 plastic RNN 在 learning phase 的稀疏关系观察后，形成可在 no-feedback test 中读取的 episode-persistent ranking state？该状态能否同时解释人类的群体级正确率与个体级、稳定且自洽的错误结构，而不是依赖显式 score、edge table 或直接可写的 item memory？
 
-能否从 meta-training plastic RNN 的神经机制出发，建立通过 episode 内学习自然产生个体化全局排序的模拟模型，用来解释行为学论文中的 constructive ranking findings？另外，如果能成功解释，这些行为结果主要来自哪一类底层机制？
+## 4. 方法
 
-## 4. 研究方法
+- 任务：8 个 item 构成隐藏排序；learning phase 呈现行为论文的 8 条 sparse non-adjacent pairs，test 覆盖全部 28 条 pair。
+- 训练：外层以 test choice loss meta-train；test 内不输入标签。v3 的 signed rank-distance 只在 learning pair 中输入，test 时为零。
+- 评估：overall、learned/nonlearned、distance slope、serial-position、循环三元组、Kendall tau、stable error、pair-level Beta 分类与 inter-subject similarity。
 
-### 4.1 任务与评估数据
+## 5. 路线与尝试
 
-本研究沿用论文固定行为任务做 simulation。任务结构为：
+1. **显式 score / edge-memory 基线**：直接维护 `score[i]` 或关系表，能够解题但将 rank-axis 预先写入模型；RNN/Hebbian 不构成必要瓶颈。
+2. **Implicit item-state writer**：移除标量 score，改为维护 item 的动态向量；但机制隔离显示 writer 而非 RNN/plasticity 是主要通道。
+3. **V5-V8 plastic representation transformer**：移除 direct writer，固定 item code，只让 global hidden、trace 和 plastic matrix 改变共享表征。该路线机制最干净，但目前仅形成局部 scaffold，未稳定学出全局排序。
+4. **`simple_neo` mutations（v2/v3）**：回到 Miconi-style plastic RNN 的有效内核，逐步改写为行为图、passive observation、no-feedback test 和 outer test loss；v3 再引入仅限 learning phase 的 signed distance。
 
-- 8 个 item 构成隐藏 ground-truth ranking；
-- learning phase 给出 8 条固定 non-adjacent local pairs，每条 pair 在 4 个 learning blocks 中出现一次；
-- testing phase 测试全部 28 个 possible pairs，每个 pair 重复若干次；
-- testing 无 feedback；
-- virtual subjects 默认对齐论文规模，常用 N=77，pair repetition=10。
+早期组织的 score、active-rank 和 rank-attractor 尝试已归档为历史证据，不再作为当前机制主线。
 
-评估指标包括：
+## 6. 当前进展
 
-- overall / learned / non-learned accuracy；
-- serial position effect；
-- symbolic distance effect；
-- pair-level beta fitting 与 bimodal pair count；
-- consistent error subjects，尤其是 >=80% 和 100% threshold；
-- circular triads / self-consistency coefficient；
-- HodgeRank-style reconstructed subjective rankings；
-- inter-subject Kendall tau；
-- ablation drop，例如 no-RNN drop、no-plasticity drop、posterior-mean readout drop。
+- `simple_neo` v2 证明：固定 8-item 行为图并非根本障碍；passive learning + no-feedback test + outer test loss 可以形成可泛化结构，且 test-plastic freeze 后表现仍保持。
+- v3 表明 signed distance 是有效的 learning input，但 distance 本身不足以在没有 test objective 时诱导全局排序。
+- 在 paper-aligned frozen evaluation 中，**G5-F** 最接近人类的 pair-level 结构（15 个 high-accuracy、13 个 bimodal pairs），并具有较合理的准确率、自洽性与 serial-position 效应。
+- **G7-F** 的 distance slope（约 0.042）、全局自洽性和 correct-ranker 比例最接近人类，但整体表现偏强、主体间排序过度趋同，缺少人类式 bimodal pair 和稳定错误。
 
-### 4.2 模型路线
+因此，当前已分别复现人类的群体级正确率、distance effect、全局自洽性和 pair-level 双峰结构，但与行为学论文完全对齐的严格 no-feedback 条件下目前只能复现部分表型。
 
-已经尝试的路线如下：
+## 7. 下一步
 
-1. **原始 meta-training plastic RNN 阅读与整理**：复现和梳理 Miconi & Kay 源码结构，包括 RNN、Hebbian plasticity、neuromodulation、active/passive solution、transitive inference 和 list-linking 评估。
-2. **score-coordinate constructive baseline**：将行为任务改写为统一 latent score schema，而不是 28 个 pair 的独立分类器。
-3. **edge memory + forgetting/interference**：引入局部边记忆、可靠性、遗忘、容量竞争，模拟 sparse learning 下的编码损坏和检索不稳定。
-4. **subject-specific attention/reliability**：让不同 virtual subjects 对 item、pair、distance 的编码可靠性不同，把个体差异前移到学习阶段。
-5. **modular memory mechanisms**：加入 schema-biased reconsolidation、schema-consistent encoding、internal replay/rehearsal，并进行模块化对照。
-6. **active-rank hypothesis sampler**：把学习后的状态从连续 score 改为离散 global ranking attractor，测试 subject-level commitment 对稳定、自洽错误的作用。
-7. **meta-plastic RNN + differentiable rank attractor**：将 active-rank posterior 接入 observation-only meta-trained plastic RNN，由 RNN 和 fast weights 处理学习输入。
-8. **modular ablations / raw observation input**：将 no-RNN、no-plasticity、constant reliability、posterior-mean readout、raw bars 等做成独立开关，测试 RNN 是否真正必要。
-9. **RNN hidden auxiliary targets**：给 hidden activity 增加 signed relation 和 reliability 辅助目标，尝试让 relation/reliability 更明确地从 RNN 活动产生。
+1. 在 G5 到 G7 之间进行 **test-reward 退火**：逐步移除 test reward，同时保留 G5 的人类式 pair-level 双峰和稳定错误。
+2. 引入 episode 内固定、跨重复稳定的 subject-specific relation distortion，例如 distance gain、pair reliability、item salience 或 relation encoding 的系统偏差，以产生可重复的个体化错误。
+3. 对 G5/G7 的 episode 数、test-loss 权重、随机种子进行系统 sweep，报告 frozen 与 active 评估的差异，避免把 test-time drift 误判为学习。
 
-## 5. 已完成尝试与当前结果
-
-| 阶段 | 代表尝试 | 结果摘要 | 阶段性判断 |
-|---|---|---|---|
-| 原始 meta-training 代码阅读 | `fsrl.zip` / original TransitiveInference code | 已整理 RNN + plasticity + neuromodulation 结构，确认其原任务是 adjacent-trial learning + reward feedback + list linking，而目标行为任务是 observation-only few-shot pairs。 | 需要改成行为论文的 fixed 8-pair observation-only 任务。 |
-| score-coordinate baseline | D_best_train, G_strong_prior_beta16 | D: overall 0.613, c80 0.675, self 0.855, tau 0.232；G: overall 0.642, self 0.908。 | 统一 score schema 可产生稳定主观排序，但个体化主要来自 prior/noise，神经机制不足。 |
-| edge memory + forgetting | M4 edge_hybrid, M2 strong_forgetting_beta30 | M4: overall 0.683, learned 0.739, self 0.918，但 tau 0.800；M2_beta30: c80 0.610，但 overall 0.554。 | memory 能提高 accuracy/self-consistency；强 forgetting 可产生 stable errors，但像记忆损坏。 |
-| subject reliability | R4 online reliability, R5 low-temp reliability, R2 strong reliability | R4: overall 0.699, self 0.922；R5: c80 0.649, tau 0.384；R2: c80 0.623, tau 0.162。 | 个体化可以前移到学习阶段，但强可靠性差异会牺牲 accuracy 和自洽性。 |
-| modular memory mechanisms | T1-T7 | T1 reconsolidation: overall 0.686, self 0.913；T2 strong reconsolidation: c80 0.636；T3 schema encoding: c80 0.571；T4 replay: c80 0.416。 | reconsolidation/schema encoding 是潜在有用方向；replay 更像稳定学习，不是个体化主来源。 |
-| active-rank sampler | active_rank_hypothesis_sampler | overall 0.854, learned 0.916, nonlearned 0.829, c80 0.948, self 1.000, bimodal pairs 16。 | 行为形态非常好，说明 global ranking commitment 很关键；但该版本手工成分较强，不能作为最终神经机制。 |
-| meta-plastic RNN + rank attractor | 120-episode meta-plastic RNN | overall 0.831, learned 0.904, nonlearned 0.802, c80 0.883, self 1.000, tau 0.548, bimodal pairs 22。 | 把 active-rank 接入 RNN 后仍表现较好；但需要 ablation 验证 RNN 是否真是必要来源。 |
-| modular ablations + raw input | smoke / large3600 | smoke 中 no-RNN drop 明显；但 large3600 中 distance_rnn_300 overall 0.562，no-RNN 0.526，constant reliability 0.647，raw bars 仍接近 chance。 | RNN 必要性不稳定；active-rank/commitment 仍可能绕过 RNN。raw input 需要 sensory encoder。 |
-| RNN hidden auxiliary targets | aux general / large1800 / raw | general full 0.632, no-RNN 0.679；large default full 0.548, no-RNN 0.536；strong aux full 0.587, no-RNN 0.649；raw full 0.531。 | 辅助目标没有解决 RNN 必要性；reliability 仍应从 write strength 改成 posterior evidence precision / likelihood temperature。 |
-
-## 6. 预期结果
-
-理想结果不是单纯提高 accuracy，而是同时满足以下条件：
-
-1. group-level 上出现 learned/non-learned accuracy、serial position effect 和 symbolic distance effect；
-2. individual-level 上出现稳定错误、pair-level bimodality、自洽但错误的 subjective ranking、低 inter-subject similarity；
-3. no-RNN / no-plasticity / no-reliability / no-commitment ablation 产生可解释的 signature loss；
-4. raw observation 或接近 raw observation 的输入条件下，模型仍能通过内部学习生成 relation evidence，而不是依赖手工 distance salience；
-5. RNN hidden activity 中可以解码或解释 signed relation、confidence/reliability、以及后续 global ranking commitment 的形成过程。
-
-## 7. 意义
-
-初步研究建立了一套**可被 ablation 证伪的机制模拟框架**。它可以帮助区分：
-
-- 传统 independent-value / Q-learning 类模型能解释的 group-level pattern；
-- human-like constructive ranking 需要的 individual-level global schema；
-- 哪些行为来自一般记忆噪声，哪些来自主动构造和主观排序 commitment；
-- meta-trained plastic RNN 中哪些神经活动确实承担了 relation encoding / reliability estimation / knowledge reassembly 的作用。
-
-如果后续能拿到 RNN 必要、且可解释行为学 findings 的机制，就可以把行为论文的 constructive ranking account 与 plastic neural network 的可解释机制连接起来。
-
-## 8. 当前进度与下一步计划
-
-当前进度可以概括为三点：
-
-1. **工程上**：已经把原始 meta-training 代码、行为任务评估、多个机制版本、active-rank、modular ablation、auxiliary hidden targets 全部整理为可复现源码和结果。
-2. **结果上**：active-rank / rank commitment 对稳定、自洽、个体化错误非常关键；但 RNN-derived reliability 目前还不是稳定必要瓶颈。
-3. **方向上**：需要考虑使 relation evidence 和 evidence precision 必须通过 RNN hidden activity 产生的办法，同时避免 active-rank posterior 直接吃到可绕过 RNN 的显式证据。
+完整机制说明、实验口径和数值结果见 `README_v3_results_updated.md`；当前目录与资产位置见 `README.md` 和 `STRUCTURE.md`。

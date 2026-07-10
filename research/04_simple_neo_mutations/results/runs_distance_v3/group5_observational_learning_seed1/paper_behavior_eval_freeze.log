@@ -1,0 +1,28 @@
+[setup] paper evaluator version: simple_neo_paper_behavior_eval_2026-07-09_distance_input_v3
+[setup] model script version: single_neo_mutants_distance_input_v3_checked_2026-07-09
+[setup] device: cuda; torch_num_threads=1
+[setup] checkpoint: runs_distance_v3/group5_observational_learning_seed1/net.dat
+[setup] variant: observational_learning; eval_subjects=512; batch=64
+[setup] learning_schedule=paper_blocks; learning_blocks=4; test_blocks=10
+[setup] test_orientation=random; action_mode=greedy; choice_temperature=1.0; time_mode=clamp; freeze_test_plastic=True
+[setup] distance_input=True; train_only=True; distance_slot=nbstimbits+3
+[setup] Test reward is forced to zero for all paper-style test trials.
+[save] summary: runs_distance_v3/group5_observational_learning_seed1/paper_behavior_eval_freeze/paper_behavior_summary.json
+[save] subject metrics: runs_distance_v3/group5_observational_learning_seed1/paper_behavior_eval_freeze/subject_metrics.csv
+[save] pair/beta/distance/serial CSVs written under: runs_distance_v3/group5_observational_learning_seed1/paper_behavior_eval_freeze
+[summary]
+  overall_accuracy: 0.9106584821428572
+  learned_pairs_accuracy: 0.967431640625
+  nonlearned_pairs_accuracy: 0.88794921875
+  adjacent_accuracy: 0.765625
+  nonadjacent_accuracy: 0.9590029761904763
+  mean_circular_triads: 0.193359375
+  mean_self_consistency_coefficient: 0.9903320312499999
+  mean_kendall_tau_hodge_to_true: 0.8270089285714286
+  mean_inter_subject_kendall_tau_hodge: 0.7410637842465753
+  distance_accuracy: {'1': 0.765624999999999, '2': 0.8888346354166659, '3': 0.9731249999999998, '4': 0.9891113281249999, '5': 0.9960286458333334, '6': 0.9979492187500001, '7': 1.0}
+  serial_position_accuracy: {'1': 0.9775390624999993, '2': 0.9180524553571405, '3': 0.8713727678571406, '4': 0.8580357142857121, '5': 0.901953124999998, '6': 0.9001953124999977, '7': 0.9108258928571394, '8': 0.9472935267857122}
+  symbolic_distance_slope: {'mean_slope': 0.03372349330357155, 't_vs_zero': None, 'p_vs_zero': None, 'n': 512}
+  ranking_class_counts: {'correct': 68, 'self_consistent_incorrect': 365, 'self_inconsistent': 79}
+  consistent_error_subject_counts_analysis: {'60': {'n': 444, 'proportion': 0.8671875}, '70': {'n': 403, 'proportion': 0.787109375}, '80': {'n': 359, 'proportion': 0.701171875}, '90': {'n': 343, 'proportion': 0.669921875}, '100': {'n': 340, 'proportion': 0.6640625}}
+  beta_pair_class_counts_analysis_subjects: {'unimodal': 0, 'high_accuracy': 3, 'low_accuracy': 0, 'bimodal': 25, 'boundary': 0, 'not_fit': 0}

@@ -1,0 +1,139 @@
+{
+  "script_version": "simple_neo_paper_behavior_eval_2026-07-10_paper_aligned_v4",
+  "model_script_version": "single_neo_mutants_distance_input_v3_checked_2026-07-09",
+  "variant": "behavior_graph_no_test_feedback",
+  "checkpoint": "runs_distance_v3/group4_behavior_graph_no_test_feedback_seed1/net.dat",
+  "eval_subjects_generated": 77,
+  "eligible_group_subjects": 36,
+  "excluded_below_chance_subjects": 41,
+  "excluded_high_accuracy_all_pairs_subjects": 0,
+  "analysis_subjects_after_filters": 36,
+  "paper_exclude_below_chance": true,
+  "paper_exclude_correct_rankers": true,
+  "learning_schedule": "paper_blocks",
+  "learning_blocks": 4,
+  "test_blocks": 10,
+  "test_trials_per_pair": 10,
+  "test_pairs_total_per_subject": 280,
+  "test_reward_forced_zero": true,
+  "freeze_test_plastic": true,
+  "action_mode": "sample",
+  "choice_temperature": 1.0,
+  "time_mode": "phase_rescale",
+  "cue_set_mode": "paper_shared_permuted",
+  "tie_policy": "incorrect",
+  "training_eplen_for_time_input": 120,
+  "distance_input": true,
+  "distance_input_train_only": true,
+  "distance_slot": "nbstimbits+3",
+  "overall_accuracy": 0.5273809523809523,
+  "learned_pairs_accuracy": 0.5395833333333333,
+  "nonlearned_pairs_accuracy": 0.5225,
+  "adjacent_accuracy": 0.5186507936507936,
+  "nonadjacent_accuracy": 0.5302910052910054,
+  "mean_prob_correct": 0.513592454550847,
+  "distance_accuracy": {
+    "1": 0.5186507936507936,
+    "2": 0.5013888888888888,
+    "3": 0.5222222222222221,
+    "4": 0.56875,
+    "5": 0.5490740740740743,
+    "6": 0.5277777777777779,
+    "7": 0.538888888888889
+  },
+  "serial_position_accuracy": {
+    "1": 0.546031746031746,
+    "2": 0.5575396825396824,
+    "3": 0.5055555555555556,
+    "4": 0.5107142857142857,
+    "5": 0.5329365079365079,
+    "6": 0.5095238095238097,
+    "7": 0.532142857142857,
+    "8": 0.5246031746031746
+  },
+  "symbolic_distance_slope": {
+    "mean_slope": 0.005012282690854192,
+    "t_vs_zero": null,
+    "p_vs_zero": null,
+    "n": 36
+  },
+  "mean_circular_triads": 11.666666666666666,
+  "mean_circular_triads_analysis": 11.666666666666666,
+  "mean_self_consistency_coefficient": 0.4166666666666667,
+  "mean_self_consistency_coefficient_analysis": 0.4166666666666667,
+  "mean_kendall_tau_hodge_to_true": 0.2142857142857143,
+  "mean_kendall_tau_hodge_to_true_analysis": 0.2142857142857143,
+  "ranking_class_counts": {
+    "correct": 0,
+    "self_consistent_incorrect": 0,
+    "self_inconsistent": 36
+  },
+  "ranking_class_counts_generated": {
+    "correct": 0,
+    "self_consistent_incorrect": 0,
+    "self_inconsistent": 77
+  },
+  "consistent_error_subject_counts_all": {
+    "60": {
+      "n": 36,
+      "proportion": 1.0
+    },
+    "70": {
+      "n": 36,
+      "proportion": 1.0
+    },
+    "80": {
+      "n": 33,
+      "proportion": 0.9166666666666666
+    },
+    "90": {
+      "n": 18,
+      "proportion": 0.5
+    },
+    "100": {
+      "n": 5,
+      "proportion": 0.1388888888888889
+    }
+  },
+  "consistent_error_subject_counts_analysis": {
+    "60": {
+      "n": 36,
+      "proportion": 1.0
+    },
+    "70": {
+      "n": 36,
+      "proportion": 1.0
+    },
+    "80": {
+      "n": 33,
+      "proportion": 0.9166666666666666
+    },
+    "90": {
+      "n": 18,
+      "proportion": 0.5
+    },
+    "100": {
+      "n": 5,
+      "proportion": 0.1388888888888889
+    }
+  },
+  "mean_fraction_consistent_error_pairs_analysis": {
+    "60": 0.34325396825396826,
+    "70": 0.17261904761904764,
+    "80": 0.06845238095238095,
+    "90": 0.021825396825396824,
+    "100": 0.00496031746031746
+  },
+  "beta_pair_class_counts_analysis_subjects": {
+    "unimodal": 28,
+    "high_accuracy": 0,
+    "low_accuracy": 0,
+    "bimodal": 0,
+    "boundary": 0,
+    "not_fit": 0
+  },
+  "mean_inter_subject_kendall_tau_hodge": 0.11065759637188208,
+  "std_inter_subject_kendall_tau_hodge": 0.2711714769281113,
+  "mean_abs_pw_after_learning": 2.806049790647295,
+  "mean_abs_pw_after_test": 2.806049790647295
+}
