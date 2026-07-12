@@ -245,16 +245,14 @@ def sample_unique_cue(config, existing_cues, cue_index):
 
 def sample_trial_pair(nbcues, is_train_trial):
     cue_pair = list(np.random.choice(range(nbcues), 2, replace=False))
-    if is_train_trial:
-        while abs(cue_pair[0] - cue_pair[1]) > 1:
-            cue_pair = list(np.random.choice(range(nbcues), 2, replace=False))
     return cue_pair
 
 
 def build_step_inputs(
-    config, nbcues, cue_data, cues, reward, previous_actions, numstep, numstep_ep
+    config, nbcues, cue_data, cues, reward, previous_actions, numstep, numstep_ep, is_train_trial
 ):
     inputs = np.zeros((config.bs, config.inputsize), dtype="float32")
+    input_reward = reward.copy()
 
     for batch_index in range(config.bs):
         cue = cues[batch_index][numstep]
@@ -262,12 +260,25 @@ def build_step_inputs(
             inputs[batch_index, : config.nbstimbits - 1] = np.concatenate(
                 (cue_data[batch_index][cue[0]][:], cue_data[batch_index][cue[1]][:])
             )
+            # ----- 距离信息：只在训练阶段给出 -----
+            if is_train_trial:
+                a, b = cue[0], cue[1]
+                distance = b - a
+                max_dist = nbcues - 1
+                norm_distance = distance / max_dist if max_dist > 0 else 0.0
+                inputs[batch_index, config.nbstimbits + 3] = norm_distance   # 索引 34
+            # else: 测试阶段，索引 34 保持 0（不填入）
         elif cue == nbcues:
             inputs[batch_index, config.nbstimbits - 1] = 1
+        
+        # ----- 奖励信息：只在测试阶段给出 -----
+        if not is_train_trial:
+            # 测试阶段，正常填入奖励（索引 33）
+            inputs[batch_index, config.nbstimbits + 2] = input_reward[batch_index]
+        # else: 训练阶段，索引 33 保持 0
 
         inputs[batch_index, config.nbstimbits + 0] = 1.0
         inputs[batch_index, config.nbstimbits + 1] = numstep_ep / config.eplen
-        inputs[batch_index, config.nbstimbits + 2] = reward[batch_index]
 
         if numstep == NUMRESPONSESTEP + 1:
             inputs[
@@ -345,6 +356,7 @@ def run_episode(config, net, nbcues, print_trace=False):
         correct_answer = np.zeros(config.bs)
 
         for numstep in range(config.triallen):
+            is_train_trial = (numtrial < config.nbtraintrials)
             inputs = build_step_inputs(
                 config,
                 nbcues,
@@ -354,6 +366,7 @@ def run_episode(config, net, nbcues, print_trace=False):
                 previous_actions,
                 numstep,
                 numstep_ep,
+                is_train_trial
             )
             y_raw, value, daout, hidden, et, pw = net(inputs, hidden, et, pw)
 
