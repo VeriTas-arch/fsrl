@@ -10,118 +10,28 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import torch.nn as nn
 from sklearn.decomposition import PCA
 
 from tqdm.auto import tqdm
 
+from .config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
+from .logging import log
+from .model import RetroModulRNN
 
-ROOT_DIR = Path(__file__).resolve().parent
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+ROOT_DIR = Path(__file__).resolve().parents[1]
 
-ADDINPUT = 4
-NUMRESPONSESTEP = 1
 ALPHABET = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
-
-
-def log(message):
-    print(message, flush=True)
+MODEL_FILENAMES = ("net.dat", "net_active.dat", "net_passive.dat")
 
 
 def default_params(batch_size):
-    params = {}
-    params["rngseed"] = -1
-    params["rew"] = 1.0
-    params["wp"] = 0.0
-    params["bent"] = 0.1
-    params["blossv"] = 0.1
-    params["gr"] = 0.9
-    params["hs"] = 200
-    params["bs"] = batch_size
-    params["gc"] = 2.0
-    params["eps"] = 1e-6
-    params["nbiter"] = 1
-    params["save_every"] = 200
-    params["pe"] = 101
-    params["nbcuesrange"] = range(4, 9)
-    params["cs"] = 15
-    params["triallen"] = 4
-    params["nbtraintrials"] = 20
-    params["nbtesttrials"] = 10
-    params["nbtrials"] = params["nbtraintrials"] + params["nbtesttrials"]
-    params["eplen"] = params["nbtrials"] * params["triallen"]
-    params["testlmult"] = 3.0
-    params["l2"] = 0
-    params["lr"] = 1e-4
-    params["lpw"] = 1e-4
+    config = TrainConfig(bs=batch_size, nbiter=1)
+    params = config.to_model_dict()
     params["lda"] = 0
     params["lhl1"] = 0
     params["nbepsbwresets"] = 1
     params["nbcues"] = 8
-
-    nbstimbits = 2 * params["cs"] + 1
-    params["outputsize"] = 2
-    params["inputsize"] = nbstimbits + ADDINPUT + params["outputsize"]
     return params
-
-
-class RetroModulRNN(nn.Module):
-    def __init__(self, params):
-        super().__init__()
-        for paramname in ["outputsize", "inputsize", "hs", "bs"]:
-            if paramname not in params:
-                raise KeyError("Must provide missing key in params: " + paramname)
-
-        nbda = 2
-        self.params = params
-        self.activ = torch.tanh
-        self.i2h = torch.nn.Linear(params["inputsize"], params["hs"]).to(DEVICE)
-        self.w = torch.nn.Parameter(
-            ((1.0 / np.sqrt(params["hs"])) * (2.0 * torch.rand(params["hs"], params["hs"]) - 1.0)).to(DEVICE),
-            requires_grad=True,
-        )
-        self.alpha = torch.nn.Parameter(
-            (0.01 * (2.0 * torch.rand(params["hs"], params["hs"]) - 1.0)).to(DEVICE),
-            requires_grad=True,
-        )
-        self.etaet = torch.nn.Parameter((0.7 * torch.ones(1)).to(DEVICE), requires_grad=True)
-        self.DAmult = torch.nn.Parameter((1.0 * torch.ones(1)).to(DEVICE), requires_grad=True)
-        self.h2DA = torch.nn.Linear(params["hs"], nbda).to(DEVICE)
-        self.h2o = torch.nn.Linear(params["hs"], params["outputsize"]).to(DEVICE)
-        self.h2v = torch.nn.Linear(params["hs"], 1).to(DEVICE)
-
-    def forward(self, inputs, hidden, et, pw):
-        batch_size = inputs.shape[0]
-        hs = self.params["hs"]
-        assert pw.shape[0] == hidden.shape[0] == et.shape[0] == batch_size
-
-        hactiv = self.activ(
-            self.i2h(inputs).view(batch_size, hs, 1)
-            + torch.matmul((self.w + torch.mul(self.alpha, pw)), hidden.view(batch_size, hs, 1))
-        ).view(batch_size, hs)
-        activout = self.h2o(hactiv)
-        valueout = self.h2v(hactiv)
-
-        daout2 = torch.tanh(self.h2DA(hactiv))
-        daout = self.DAmult * (daout2[:, 0] - daout2[:, 1])[:, None]
-
-        pw = pw + daout.view(batch_size, 1, 1) * et
-        torch.clip_(pw, min=-50.0, max=50.0)
-
-        deltaet = torch.bmm(hactiv.view(batch_size, hs, 1), hidden.view(batch_size, 1, hs))
-        deltaet = torch.tanh(deltaet)
-        et = (1 - self.etaet) * et + self.etaet * deltaet
-
-        return activout, valueout, daout, hactiv, et, pw
-
-    def initialZeroET(self, batch_size):
-        return torch.zeros(batch_size, self.params["hs"], self.params["hs"], requires_grad=False).to(DEVICE)
-
-    def initialZeroPlasticWeights(self, batch_size):
-        return torch.zeros(batch_size, self.params["hs"], self.params["hs"], requires_grad=False).to(DEVICE)
-
-    def initialZeroState(self, batch_size):
-        return torch.zeros(batch_size, self.params["hs"], requires_grad=False).to(DEVICE)
 
 
 @dataclass
@@ -139,12 +49,42 @@ class EpisodeResult:
 def resolve_model_path(model_path):
     if model_path:
         path = Path(model_path)
-        return path if path.is_absolute() else ROOT_DIR / path
-    for candidate in ("net.dat", "net_active.dat"):
+        path = path if path.is_absolute() else ROOT_DIR / path
+        if path.is_dir():
+            return resolve_model_path_from_dir(path)
+        if path.is_file():
+            return path
+        raise FileNotFoundError(f"Model path does not exist or is not a file: {path}")
+
+    for candidate in MODEL_FILENAMES:
         path = ROOT_DIR / candidate
         if path.exists():
             return path
-    raise FileNotFoundError("Expected net.dat or net_active.dat in the repository root, or pass --model-path.")
+
+    expected = ", ".join(MODEL_FILENAMES)
+    raise FileNotFoundError(
+        f"Expected one of {expected} in the repository root, or pass --model-path."
+    )
+
+
+def resolve_model_path_from_dir(path):
+    for candidate in MODEL_FILENAMES:
+        candidate_path = path / candidate
+        if candidate_path.is_file():
+            return candidate_path
+
+    netae_candidates = sorted(
+        path.glob("netAE*.dat"),
+        key=lambda candidate: (candidate.stat().st_mtime, candidate.name),
+        reverse=True,
+    )
+    if netae_candidates:
+        return netae_candidates[0]
+
+    expected = ", ".join(MODEL_FILENAMES)
+    raise FileNotFoundError(
+        f"Model directory {path} does not contain {expected} or netAE*.dat."
+    )
 
 
 def load_model_state(path):
@@ -633,30 +573,34 @@ def save_figure(fig, output_path):
     log(f"[plot] Saved {output_path.with_suffix('.png')} and {output_path.with_suffix('.pdf')}")
 
 
-def parse_args():
+def parse_args(args=None):
     parser = argparse.ArgumentParser(description="Teaching eval code for NN.pdf Fig. 2a, 3a, 4a, and 4b.")
     parser.add_argument("--figures", nargs="+", default=["all"], choices=["all", "fig2a", "fig3a", "fig4a", "fig4b"])
     parser.add_argument("--model-path", default=None)
     parser.add_argument("--batch-size", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--output-dir", default="figures")
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
-def main():
-    args = parse_args()
-    figures = {"fig2a", "fig3a", "fig4a", "fig4b"} if "all" in args.figures else set(args.figures)
-    output_dir = ROOT_DIR / args.output_dir
-    model_path = resolve_model_path(args.model_path)
+def main(args=None):
+    parsed_args = parse_args(args)
+    figures = (
+        {"fig2a", "fig3a", "fig4a", "fig4b"}
+        if "all" in parsed_args.figures
+        else set(parsed_args.figures)
+    )
+    output_dir = ROOT_DIR / parsed_args.output_dir
+    model_path = resolve_model_path(parsed_args.model_path)
     log(f"[start] Requested figures: {', '.join(sorted(figures))}")
     log(f"[start] Output directory: {output_dir}")
-    set_seed(args.seed)
-    if args.seed is not None:
-        log(f"[start] Random seed set to {args.seed}")
+    set_seed(parsed_args.seed)
+    if parsed_args.seed is not None:
+        log(f"[start] Random seed set to {parsed_args.seed}")
 
     if figures & {"fig2a", "fig4a", "fig4b"}:
         log("[stage] Running standard single-list eval for Fig. 2a/4a/4b")
-        params = default_params(args.batch_size)
+        params = default_params(parsed_args.batch_size)
         net = load_network(params, model_path)
         result = run_eval(params, net, keep_rates=bool(figures & {"fig4a"}))
         if "fig2a" in figures:
@@ -671,7 +615,7 @@ def main():
 
     if "fig3a" in figures:
         log("[stage] Running linked-list eval for Fig. 3a")
-        params = default_params(args.batch_size)
+        params = default_params(parsed_args.batch_size)
         net = load_network(params, model_path)
         result = run_eval(params, net, linked_lists=True, linking_is_sham=False, keep_rates=False)
         log("[stage] Plotting Fig. 3a")
