@@ -46,7 +46,7 @@ def parse_args() -> argparse.Namespace:
         default=str(Path(__file__).resolve().with_name("net.dat")),
         help="Path to the saved model state dict.",
     )
-    parser.add_argument("--seed", type=int, default=0, help="Random seed.")
+    parser.add_argument("--seed", type=int, default=40, help="Random seed.")
     parser.add_argument(
         "--cs",
         type=int,
@@ -191,6 +191,9 @@ def evaluate_episode(
     numstep_ep = 0
     with torch.no_grad():
         for trial in trials:
+            hidden = net.initialZeroState(config.bs)
+            et = net.initialZeroET(config.bs)
+
             base_pair = trial["pair"]
             phase = trial["phase"]
             assert isinstance(base_pair, tuple)
