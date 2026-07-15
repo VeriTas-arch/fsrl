@@ -1,4 +1,4 @@
-"""Evaluate a trained FSRL model on a fixed 8-item transitive-inference episode.
+"""Evaluate a trained FSRL model across many random seeds.
 
 Protocol:
 - 8 stimuli, indexed A..H -> 0..7.
@@ -8,15 +8,22 @@ Protocol:
 - Training trials carry a signed pair-distance signal in the former reward slot.
 - Test trials leave that slot at 0.
 
-The script prints the accuracy for all 28 test pairs.
+The script evaluates the same model under many random seeds, collects the
+28-pair test accuracies for each seed, and saves a 28-panel density plot.
 """
 
 from __future__ import annotations
 import csv
 import argparse
+from dataclasses import replace
 from itertools import combinations
 from pathlib import Path
 
+import matplotlib
+
+matplotlib.use("Agg")
+
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
@@ -36,17 +43,22 @@ TRAIN_PAIR_LABELS = [
     (0, 7),  # A-H
 ]
 
+PAIR_LIST = list(combinations(range(8), 2))
+PAIR_LABELS = {
+    pair: f"{chr(ord('A') + pair[0])}-{chr(ord('A') + pair[1])}" for pair in PAIR_LIST
+}
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Evaluate a trained FSRL model on a fixed 8-item TI episode."
+        description="Evaluate a trained FSRL model across many random seeds."
     )
     parser.add_argument(
         "--model-path",
         default=str(Path(__file__).resolve().with_name("net.dat")),
         help="Path to the saved model state dict.",
     )
-    parser.add_argument("--seed", type=int, default=40, help="Random seed.")
+    parser.add_argument("--seed", type=int, default=460, help="Random seed.")
     parser.add_argument(
         "--cs",
         type=int,
@@ -69,6 +81,23 @@ def parse_args() -> argparse.Namespace:
         "--stochastic",
         action="store_true",
         help="Sample actions from the policy instead of using argmax.",
+    )
+    parser.add_argument(
+        "--num-seeds",
+        type=int,
+        default=100,
+        help="Number of random seeds to evaluate.",
+    )
+    parser.add_argument(
+        "--seed-offset",
+        type=int,
+        default=123,
+        help="Offset added to each evaluation seed.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default="outputs",
+        help="Directory used to save the CSV and figure.",
     )
     return parser.parse_args()
 
@@ -231,9 +260,95 @@ def evaluate_episode(
     return pair_results
 
 
+def evaluate_many_seeds(
+    net: RetroModulRNN,
+    base_config: TrainConfig,
+    train_pairs: list[tuple[int, int]],
+    train_repeats: int,
+    test_repeats: int,
+    num_seeds: int,
+    seed_offset: int,
+    stochastic: bool,
+) -> tuple[dict[tuple[int, int], list[float]], list[dict[str, object]]]:
+    pair_distributions: dict[tuple[int, int], list[float]] = {
+        pair: [] for pair in PAIR_LIST
+    }
+    rows: list[dict[str, object]] = []
+
+    for seed_index in range(num_seeds):
+        seed = seed_offset + seed_index
+        set_seed(seed)
+        config = replace(base_config, rngseed=seed)
+        trial_rng = np.random.default_rng(seed)
+        trials = build_trial_schedule(
+            train_pairs=train_pairs,
+            train_repeats=train_repeats,
+            test_repeats=test_repeats,
+            rng=trial_rng,
+        )
+
+        pair_results = evaluate_episode(
+            net=net,
+            config=config,
+            trials=trials,
+            stochastic=stochastic,
+        )
+
+        for pair in PAIR_LIST:
+            stats = pair_results[pair]
+            total = stats["total"]
+            correct = stats["correct"]
+            accuracy = correct / total if total else float("nan")
+            pair_distributions[pair].append(accuracy)
+            rows.append(
+                {
+                    "seed": seed,
+                    "pair": PAIR_LABELS[pair],
+                    "total": total,
+                    "correct": correct,
+                    "accuracy": accuracy,
+                }
+            )
+
+    return pair_distributions, rows
+
+
+def plot_accuracy_distributions(
+    pair_distributions: dict[tuple[int, int], list[float]],
+    output_path: Path,
+) -> None:
+    fig, axes = plt.subplots(4, 7, figsize=(21, 12), sharex=True, sharey=True)
+    bins = np.linspace(0.0, 1.0, 11)
+
+    for axis, pair in zip(axes.flat, PAIR_LIST):
+        values = np.asarray(pair_distributions[pair], dtype=float)
+        values = values[~np.isnan(values)]
+        axis.hist(
+            values,
+            bins=bins,
+            density=True,
+            color="#2563eb",
+            alpha=0.85,
+            edgecolor="white",
+            linewidth=0.5,
+        )
+        axis.set_title(PAIR_LABELS[pair], fontsize=9)
+        axis.set_xlim(0, 1)
+        axis.grid(True, alpha=0.2)
+
+    for axis in axes[-1, :]:
+        axis.set_xlabel("Accuracy")
+    for axis in axes[:, 0]:
+        axis.set_ylabel("Density")
+
+    fig.suptitle("Per-pair accuracy distributions across seeds", y=0.995)
+    fig.tight_layout(rect=(0, 0, 1, 0.98))
+    fig.savefig(output_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> None:
     args = parse_args()
-    set_seed(args.seed)
 
     model_path = Path(args.model_path)
     if not model_path.exists():
@@ -257,67 +372,33 @@ def main() -> None:
     net.load_state_dict(load_state_dict(model_path))
     net.eval()
 
-    trial_rng = np.random.default_rng(args.seed)
-    trials = build_trial_schedule(
+    pair_distributions, rows = evaluate_many_seeds(
+        net=net,
+        base_config=config,
         train_pairs=train_pairs,
         train_repeats=train_repeats,
         test_repeats=test_repeats,
-        rng=trial_rng,
-    )
-
-    pair_results = evaluate_episode(
-        net=net,
-        config=config,
-        trials=trials,
+        num_seeds=args.num_seeds,
+        seed_offset=args.seed + args.seed_offset,
         stochastic=args.stochastic,
     )
 
-    letters = "ABCDEFGH"
-    correct_total = 0
-    trial_total = 0
-    rows = []
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-    print("Test pair accuracies:")
-    for pair in combinations(range(8), 2):
-        stats = pair_results[pair]
-        total = stats["total"]
-        correct = stats["correct"]
-        accuracy = correct / total if total else float("nan")
-        correct_total += correct
-        trial_total += total
-
-        pair_name = f"{letters[pair[0]]}-{letters[pair[1]]}"
-        print(f"  {pair_name}: {accuracy:.3f} ({correct}/{total})")
-        rows.append(
-            {
-                "seed": args.seed,
-                "pair": pair_name,
-                "total": total,
-                "correct": correct,
-                "accuracy": accuracy,
-            }
-        )
-
-    overall_accuracy = correct_total / trial_total if trial_total else float("nan")
-    print(f"Overall test accuracy: {overall_accuracy:.3f}")
-
-    rows.append(
-        {
-            "seed": args.seed,
-            "pair": "overall",
-            "total": trial_total,
-            "correct": correct_total,
-            "accuracy": overall_accuracy,
-        }
-    )
-
-    csv_path = "outputs/" + Path(parse_args().model_path).stem + "_test_results.csv"
+    csv_path = output_dir / f"{model_path.stem}_seed_distributions.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["seed", "pair", "total", "correct", "accuracy"])
+        writer = csv.DictWriter(
+            f, fieldnames=["seed", "pair", "total", "correct", "accuracy"]
+        )
         writer.writeheader()
         writer.writerows(rows)
 
+    figure_path = output_dir / f"{model_path.stem}_seed_distributions.png"
+    plot_accuracy_distributions(pair_distributions, figure_path)
+
     print(f"Saved CSV to {csv_path}")
+    print(f"Saved figure to {figure_path}")
 
 if __name__ == "__main__":
     main()
