@@ -38,6 +38,9 @@ def sample_trial_pair(nbcues, is_train_trial):
     if is_train_trial and random_scale < 0.5:
         while abs(cue_pair[0] - cue_pair[1]) > 1:
             cue_pair = list(np.random.choice(range(nbcues), 2, replace=False))
+    elif not is_train_trial and random_scale < 0.5:
+        while abs(cue_pair[0] - cue_pair[1]) == 1:
+            cue_pair = list(np.random.choice(range(nbcues), 2, replace=False))
     return cue_pair
 
 

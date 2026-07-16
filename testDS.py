@@ -96,7 +96,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-dir",
-        default="outputs",
+        default="figures/Seed Distributions",
         help="Directory used to save the CSV and figure.",
     )
     return parser.parse_args()
@@ -394,7 +394,7 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(rows)
 
-    figure_path = output_dir / f"{model_path.stem}_seed_distributions.png"
+    figure_path = output_dir / f"Raw figures/{model_path.stem}_seed_distributions.png"
     plot_accuracy_distributions(pair_distributions, figure_path)
 
     print(f"Saved CSV to {csv_path}")

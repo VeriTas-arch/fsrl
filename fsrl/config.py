@@ -21,14 +21,14 @@ class TrainConfig:
     bs: int = 32
     gc: float = 2.0
     eps: float = 1e-6
-    nbiter: int = 5000
+    nbiter: int = 2000
     save_every: int = 200
     pe: int = 101
     cs: int = 15
     triallen: int = 4
     nbtraintrials: int = 32
     nbtesttrials: int = 28
-    testlmult: float = 3.0
+    testlmult: float = 1.5
     l2: float = 0.0
     lr: float = 1e-4
     lpw: float = 1e-4

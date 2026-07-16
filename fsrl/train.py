@@ -86,7 +86,7 @@ def train(config, output_dir, trace_steps=False):
         stats = run_episode(config, net, nbcues=nbcues, print_trace=print_trace)
         stats.loss.backward()
         torch.nn.utils.clip_grad_norm_(net.parameters(), config.gc)
-        if episode_index > 50:
+        if episode_index > 100:
             optimizer.step()
 
         test_rewards.append(stats.test_reward_mean)
