@@ -603,13 +603,15 @@ def plot_results(data, results, save_dir='result_custom'):
     plt.savefig(f'{save_dir}/fig4_accuracy_matrix.png', dpi=150)
     plt.close()
 
-    # 图5
+    # ============ 图5 ============
     fig, axes = plt.subplots(4, 7, figsize=(20, 12))
     axes = axes.flatten()
     for idx in range(n_pairs):
         axes[idx].hist(accs[:, idx], bins=np.linspace(0, 1, 11), alpha=0.7,
-                       color='skyblue', edgecolor='black')
-        axes[idx].set_title(f'Pair {idx}')
+                   color='skyblue', edgecolor='black')
+    # 标题添加星号标记（如果该配对属于学习对）
+        star = '*' if idx in learning_idx else ''
+        axes[idx].set_title(f'Pair {idx}{star}')
         axes[idx].set_xlabel('Accuracy')
         axes[idx].set_ylabel('Count')
     for idx in range(n_pairs, len(axes)):
