@@ -128,7 +128,7 @@ def select_learning_pairs_for_order(true_order, n_items=8, max_adjacent=2, max_a
                         q.append(v)
         if unique and len(order) == n_items:
             return pairs
-    fallback = [(0,3), (1,4), (2,5), (3,6), (4,7), (0,6), (1,7), (2,7)]
+    fallback = [(0,5), (3,5), (1,2), (3,6), (1,4), (4,7), (2,6), (0,7)]
     return fallback
 
 def build_input(stim1, stim2, step, reward, action_prev):
