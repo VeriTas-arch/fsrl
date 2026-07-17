@@ -7,7 +7,7 @@ import seaborn as sns
 sns.set_theme(style='whitegrid', font_scale=1.2)
 
 # ---------- 1. 读取数据 ----------
-df = pd.read_csv('models/results/batch_test_results_seed_42.csv', index_col=0)
+df = pd.read_csv('models/results/batch_test_results_seed_40.csv', index_col=0)
 
 # 配对列表和网络名称
 pairs = df.index.tolist()

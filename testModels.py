@@ -61,7 +61,7 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Directory to save one density plot per test pair.",
     )
-    parser.add_argument("--seed", type=int, default=42, help="Random seed.")
+    parser.add_argument("--seed", type=int, default=44, help="Random seed.")
     parser.add_argument(
         "--cs",
         type=int,

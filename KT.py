@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # ---------- 1. 读取数据 ----------
-df = pd.read_csv('models/results/batch_test_results_seed_123.csv', index_col=0)
+df = pd.read_csv('models/results/batch_test_results_seed_40.csv', index_col=0)
 
 # 所有配对名称（按字母升序，共28个）
 pairs = df.index.tolist()
@@ -102,7 +102,7 @@ for i, net_i in enumerate(networks):
 sim_df = pd.DataFrame(sim_matrix, index=networks, columns=networks)
 
 plt.figure(figsize=(10, 8))
-sns.heatmap(sim_df, annot=True, fmt='.2f', cmap='RdBu_r', center=0,
+sns.heatmap(sim_df, annot=False, fmt='.2f', cmap='RdBu_r', center=0,
             square=True, linewidths=0.5, cbar_kws={'shrink': 0.8})
 plt.title('Network Similarity based on Kendall\'s tau (HodgeRank reconstructed ranks)')
 plt.tight_layout()
