@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-assembly-trajectory-loo-v1",
+  "registration_status": "frozen_after_assembly_review_before_implementation_and_execution",
+  "registration_parent_commit": "0b7387956765db97ef87fd2f16e6a4b0fe53e36a",
+  "scientific_question": "When and where does a frozen pilot network transform sparse subject-specific support evidence into an almost purely additive global logit potential?",
+  "claim_boundary": "This is a read-only two-seed mechanism diagnostic on frozen pilot checkpoints. It does not retrain, select checkpoints, change the architecture, touch formal seeds, or by itself identify a biological mechanism.",
+  "positive_evidence_backbone": [
+    "held-out sparse-graph transfer",
+    "episode-local fast-weight necessity",
+    "human-scale individuality under stable subject-specific omission",
+    "antisymmetric subjective-rank geometry",
+    "near-pure additive neural logit fields in both frozen pilot seeds"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "assembly_diagnostic_specification": {
+      "path": "benchmarks/assembly_diagnostics_v1.json",
+      "sha256": "e96cd83e0d025de9d595538ec00126681faea6c34c3f6d6c20b009a6853695a4"
+    },
+    "assembly_diagnostic_result": {
+      "path": "results/assembly_diagnostics_v1.json",
+      "sha256": "a768495fe84b2d74a4b258d0d14cbfb8d7057c2fd4c3675fc006b1f010a19500"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [
+      1901,
+      1902
+    ],
+    "training": "forbidden",
+    "architecture_change": "forbidden",
+    "checkpoint_selection": "forbidden",
+    "seed_filtering": "forbidden",
+    "formal_seed_access": "forbidden",
+    "support_prefixes": "P_0 after the registered two blank initialization steps, followed by P_1 through P_32 after each natural support trial",
+    "query_schedule": "all 28 unordered pairs in both orientations, with hidden state and eligibility reset before every query and fast weights frozen",
+    "zero_evidence_branch": "from the same natural P_(t-1), replay the same trial cues, orientation, time, and recurrent steps while setting only signed magnitude to zero",
+    "leave_one_relation_out": "replay all 32 registered support slots and set signed magnitude to zero for all four presentations of one support relation; preserve cues, orientation, block, and time",
+    "floating_zero_tolerance": 1e-07
+  },
+  "field_contract": {
+    "edge_order": "all unordered item pairs in lexicographic integer order",
+    "sign": "positive means the first item is preferred as higher",
+    "neural_logit_margin": "0.5 * (logit(i,j) - logit(j,i))",
+    "hodge_decomposition": "orthogonal complete-graph projection F_ij = (s_i - s_j) + c_ij with sum_i s_i = 0",
+    "normalized_potential": "center s, then divide by its L2 norm when nonzero",
+    "commitment_strength": "A_t = L2 norm of the centered neural potential s_t",
+    "exact_pair_field": "2 * P(i ranks higher than j | each subject's realized evidence prefix) - 1 at the frozen posterior temperature",
+    "exact_distributional_potential": "the normalized Hodge potential of the exact pair field",
+    "expected_rank_equivalence": "on a complete pair graph, the centered normalized exact Hodge potential is algebraically identical to centered negative posterior expected rank; report their numerical discrepancy as an implementation check, not as independent evidence",
+    "map_potential": "centered normalized negative item positions in the exact posterior MAP order",
+    "true_potential": "centered normalized negative item positions in the registered true order",
+    "alignment_metrics": [
+      "cosine of centered potentials",
+      "Pearson correlation of centered potentials",
+      "Kendall tau of induced item positions"
+    ]
+  },
+  "prefix_analysis": {
+    "states": "P_0 through P_32",
+    "primary_metrics": [
+      "neural logit Hodge gradient-energy fraction G_t",
+      "commitment strength A_t",
+      "alignment to final neural potential",
+      "alignment to true order",
+      "alignment to exact distributional potential",
+      "alignment to exact MAP potential"
+    ],
+    "primary_causal_estimand": "Delta m_(t,q) = m_q(P_t+) - m_q(P_t0), with both branches starting at the same natural P_(t-1)",
+    "effect_classes": {
+      "direct": "query q is the support relation shown on that subject's trial t",
+      "endpoint_sharing": "q shares exactly one endpoint with that support relation",
+      "remote": "q is disjoint from both endpoints"
+    },
+    "negative_control": "trials presenting that subject's stable-omitted relation must have zero primary causal effect within tolerance",
+    "interpretation": "nonzero retained remote effects establish immediate causal propagation beyond the written relation; natural P_t minus P_(t-1) remains descriptive because it also changes cues and time"
+  },
+  "leave_one_relation_out_analysis": {
+    "influence": "I_(e->q) = m_q(P_32) - m_q(P_32^(-e))",
+    "primary_metrics": [
+      "direct, endpoint-sharing, and remote mean absolute influence",
+      "Hodge gradient-energy fraction of each nonzero influence field",
+      "requested third-party energy fraction R_third",
+      "gauge-invariant third-party relational energy fraction R_third_rel",
+      "maximum absolute influence for stable-omitted relations"
+    ],
+    "requested_third_party_fraction": "sum over non-endpoint items of Delta s_k squared, divided by sum over all items of Delta s_k squared",
+    "gauge_invariant_refinement": "before measuring third-party energy, subtract the mean Delta s over non-endpoint items; this removes a common third-party shift induced only by the sum-zero gauge",
+    "primary_global_reassembly_evidence": "retained-relation remote pair influence and R_third_rel, because both detect changed relations among third-party items without depending on potential gauge",
+    "negative_control": "leaving out a relation already omitted for a subject must reproduce the intact endpoint within floating tolerance"
+  },
+  "baseline_analysis": {
+    "conditions": [
+      "P_0",
+      "intact P_32",
+      "reset after intact support",
+      "write-off during all blank and support steps",
+      "alpha=0 during all blank, support, and query steps"
+    ],
+    "metrics": [
+      "logit-field Hodge gradient-energy fraction",
+      "commitment strength",
+      "alignment to intact final neural and exact distributional potentials"
+    ],
+    "interpretation": "high form without episode-specific alignment indicates a learned architectural or readout form prior; intact-only content alignment indicates evidence-dependent assembly"
+  },
+  "query_time_localization": {
+    "states": [
+      "P_0",
+      "intact P_32"
+    ],
+    "steps": "all recurrent query steps k=0 through triallen-1",
+    "vector_hidden_field": "0.5 * (h_k(i,j) - h_k(j,i)) for every hidden unit",
+    "hidden_gradient_fraction": "G_h^k is gradient energy summed over edges and hidden units divided by total vector-field energy",
+    "output_projected_field": "l_ij^k = (w_1 - w_0)^T times the antisymmetric hidden field; output bias cancels",
+    "output_gradient_fraction": "G_l^k is the scalar Hodge gradient fraction of l^k",
+    "decision_logic": {
+      "early_dynamics": "high G_h at the first cue step and little subsequent increase supports additive structure already available to early query dynamics",
+      "recurrent_commitment": "a positive subject-bootstrap increase in G_h from the first cue step to the registered response step supports recurrent commitment during querying",
+      "readout_selection": "a positive subject-bootstrap G_l minus G_h contrast at a step supports selection of an additive hidden component by the fixed output direction"
+    },
+    "boundary": "G_h summarizes vector-field form, not hidden-state dimensionality; G_l localizes the component visible to the output direction"
+  },
+  "bootstrap": {
+    "unit": "virtual subject, averaging repeated trials or relations within subject before resampling",
+    "samples": 10000,
+    "interval": 0.95,
+    "seed": 20260823,
+    "paired_comparisons": "all within-seed target, branch, prefix, and query-step contrasts resample the same subjects",
+    "non_equivalence_rule": "failure of an interval to exclude zero is unresolved and must not be described as equivalence"
+  },
+  "directional_diagnosis": {
+    "distributional_projection_over_map": "for each seed, the final-prefix subject-bootstrap lower bound of exact distributional-potential minus MAP alignment is greater than zero",
+    "immediate_remote_propagation": "for each seed, retained trials have a lower confidence bound above zero for subject-averaged absolute remote Delta m, while stable-omitted trials remain within tolerance",
+    "episode_specific_global_reassembly": "for each seed, retained LOO interventions have lower confidence bounds above zero for remote influence and R_third_rel, stable-omitted LOO effects remain within tolerance, and intact content alignment exceeds reset/write-off controls",
+    "query_localization": "report the registered G_h and G_l contrasts without relabeling unresolved contrasts as absence",
+    "nonzero_strength_boundary": "confidence intervals above zero establish causal existence, not practical dominance; direct-to-remote ratios and absolute magnitudes remain required for strength interpretation"
+  },
+  "reporting": {
+    "all_pilot_seeds_required": true,
+    "positive_and_negative_results_required": true,
+    "raw_subject_level_metrics_required": true,
+    "temperature_refit": "forbidden",
+    "threshold_refit": "forbidden",
+    "next_step_rule": "revise the assembly mechanism from the joint prefix, LOO, baseline, target-alignment, and query-time pattern before any architecture change or formal-seed run"
+  }
+}
