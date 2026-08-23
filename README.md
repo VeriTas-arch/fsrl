@@ -76,6 +76,18 @@ assimilation by the fourth exposure. See
 and
 [`results/support_write_localization_v1.json`](results/support_write_localization_v1.json).
 
+The registered causal factor-swap diagnostic upgrades that decomposition into
+a transferable computation: matched eligibility moves relation-specific update
+direction almost exactly to a donor identity, DA changes downstream magnitude
+while preserving direction, and actual alpha places every retained write above
+all 32 norm-matched permutation nulls in local policy gain. Exposure-4 history
+primarily changes eligibility generation, but its full behavioral expression
+also depends on the recipient fast-weight baseline. The resulting algorithm is
+best described as state-dependent iterative relaxation toward a posterior-like
+terminal potential, not sequential exact Bayesian updating. See
+[`docs/support_factor_swap_v1.md`](docs/support_factor_swap_v1.md) and
+[`results/support_factor_swap_v1.json`](results/support_factor_swap_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

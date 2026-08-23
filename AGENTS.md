@@ -93,36 +93,47 @@ component. Do not describe this as independent correctness-propagating updates:
 remote absolute effects are robust, but their correctness-aligned contribution
 is unresolved or negative.
 
-The completed registered support-write localization assigns most
-relation-specific write direction and downstream policy change to eligibility,
-not to the matched DA difference. The modeled DA magnitude retains a weaker
-state- and innovation-sensitive gain signal after an explicitly exploratory
-exposure adjustment, but it is not an exact Bayesian surprise variable. Alpha
-causally amplifies norm-matched writes in the frozen query policy, yet it does
-not reproducibly beat scalar and shuffled controls in posterior-update
-direction. Keep amplification and directional mapping as distinct claims.
+The completed support-write and causal factor-swap diagnostics establish a
+functional division of labor. Matched `delta E` transfers a donor relation's
+natural neural-potential direction almost exactly when recipient DA, baseline,
+alpha, and effective-write norm are held fixed. High versus low natural DA
+factors change downstream policy magnitude while leaving direction almost
+unchanged. Treat eligibility as evidence-specific content/direction and DA as
+state-dependent gain; do not identify modeled DA with exact Bayesian surprise.
 
-Trial updates positively align with exact posterior expected-rank innovations,
-especially at the first relation exposure, but do not outperform a fixed
-true-order direction across the whole episode. Late attenuation occurs in
-write generation without literal clipping or replicated functional saturation.
-The no-prior-relation history control supports relation-specific assimilation
-by the fourth exposure, not a monotonic redundancy effect from the second
-exposure onward.
+Actual alpha places retained writes in systematically high-gain recurrent
+directions: it beats all 32 registered norm-matched permutation nulls in both
+pilot seeds. This supports a meta-learned sensitivity map, not a unique
+posterior-direction map. Keep gain placement and direction alignment separate.
 
-Before scaling formal seeds or changing the architecture, prioritize a
-registered within-exposure factor-swap diagnostic. Exchange DA scalars and
-eligibility matrices among matched trials while holding the pre-query state and
-alpha expression map fixed; test whether eligibility transfers update direction
-and DA transfers magnitude. Contrast natural and no-prior-relation histories to
-localize late assimilation to DA, eligibility, or their interaction. Use more
-than one preregistered alpha permutation or a local recurrent-sensitivity
-analysis before interpreting alpha's functional amplification as systematic.
+Do not describe the network as performing sequential approximate Bayesian
+updates. Trial updates align most strongly with exact innovation on first
+exposure, then diverge while the terminal state remains posterior-like. The
+working algorithm is a meta-learned state-dependent iterative relaxation:
+`E_t = E_theta(e_t, P_(t-1))`, `d_t = g_theta(e_t, P_(t-1))`, and accumulated
+interacting writes converge toward a distributional expected-rank potential.
+
+At exposure 4, no-prior-relation history increases generated write norm through
+a positive eligibility main effect. DA is suppressive or unresolved and the
+factor interaction is unresolved or suppressive. When all generated factors
+are replayed at one natural baseline, however, total policy restoration is
+unresolved even though each history condition at its own baseline previously
+showed robust restoration. Therefore accumulated `P` changes both factor
+generation and the local recurrent expression of a write. Do not attribute
+assimilation solely to eligibility or a scalar learning rate.
+
+Before formal seeds or architecture changes, run only the remaining registered
+closure test: cross natural versus no-prior recipient baselines with natural
+versus no-prior generated total factors at exposure 4. This 2-by-2 replay must
+separate baseline sensitivity, factor generation, and their interaction. If it
+is stable in both pilots, freeze an independent `mechanism_confirmation_v1`
+before accessing formal seeds 2001--2010; do not edit `confirmation_v1` after
+seeing formal results.
 
 The target is to explain how bidirectional global redistribution accumulates
 into a correctly aligned potential and how human behavior retains additional
 local or conjunctive structure. Do not tune the slope or add a memory module
-before the remaining gain-direction-history interaction is localized.
+before the remaining history baseline-by-factor interaction is localized.
 
 ## Repository workflow
 
