@@ -1,126 +1,170 @@
 # Constructive-ranking mechanism development
 
-This document records the implementation contract on the `dev` branch. It is a
-development protocol, not a positive scientific result.
+This document records the implementation contract and current evidence on the
+`dev` branch. The tracked candidate is a single-seed development result, not a
+replication distribution.
 
-## Claim boundary
+## Current claim boundary
 
-The implemented pipeline tests the following candidate mechanism:
+The current development result is consistent with this narrow candidate
+mechanism:
 
 > A population-shared meta-learned update rule uses episode-local recurrent
-> plasticity to assemble sparse, stably distorted relation evidence into a
-> query-order-invariant global ranking state.
+> plasticity to select an episode-specific, query-order-invariant ranking policy
+> from sparse relation evidence with stable subject-level omissions.
 
-The current code establishes executable estimands and qualification gates. It
-does **not** yet establish that a trained checkpoint passes those gates, matches
-the Liu et al. human distribution, or reproduces subjective neural geometry.
+For coherent-error virtual subjects, the **antisymmetric relational component**
+of frozen query hidden states is closer to that subject's inferred ranking than
+to the true ranking or other subjects' rankings. The context-averaged hidden
+geometry is negative, so the result does not establish that the whole hidden
+state is organized by subjective rank. Ablated networks can retain a generic
+transitive response scaffold, so the result also does not show that plastic
+state creates transitivity from nothing.
 
-## Registered components
+## Versioned components
 
-- `benchmarks/liu_v1.json` freezes the eight-item, 32-observation passive
-  learning phase and 280 no-feedback queries, together with the human targets.
-- `fsrl.constructive.ExactRankingPosterior` enumerates all `8! = 40320` global
-  orders. Relation reliability changes the likelihood; one committed order is
-  read without query-by-query state changes.
+- `benchmarks/liu_v1.json` freezes the eight-item, 32-observation passive phase,
+  280 no-feedback queries, and reported human targets.
+- `fsrl.constructive.ExactRankingPosterior` enumerates all `8! = 40320` orders.
 - `fsrl.meta_tasks.GenericRankingTaskGenerator` samples connected 7--10-edge
-  ranking graphs and rejects the Liu graph. Item codes and true rank
-  permutations vary by episode.
-- `fsrl.subject_encoding.SubjectEncodingState` is sampled once per virtual
-  subject. Its baseline, item salience, and distance slope only attenuate
-  observed relation evidence; it contains neither the true nor subjective
-  order, and remains fixed across all four support blocks.
-- `fsrl.meta_train` uses supervised outer-loop cross entropy. Query labels enter
-  only the outer loss, never the episode inputs or plastic update. There is no
-  query feedback, and query fast weights are frozen.
-- `fsrl.liu_eval` resets ordinary hidden state and eligibility on every query
-  while reusing a fixed post-learning `P_T`. It evaluates intact, plastic-write
-  off, `alpha=0`, post-learning reset, and cross-subject `P_T` shuffle. Accuracy
-  is balanced across both orientations of every pair, so a fixed left/right
-  response bias cannot pass the gate.
-- `benchmarks/qualification_v1.json` registers the GO/NO-GO thresholds. The
-  checkpoint's sibling `config.json` must match its SHA-256 and record that the
-  Liu graph was held out.
+  ranking graphs and rejects the Liu graph. Item codes and ranks vary by
+  episode.
+- `stable_omission` samples which support relations a virtual subject retains
+  once per episode and holds that mask fixed across all four blocks. The older
+  continuous `stable_attenuation` mode remains available as a negative-result
+  control.
+- `fsrl.meta_train` uses query labels only in the supervised outer loss. Query
+  inputs contain no label or feedback, ordinary hidden state and eligibility
+  reset on every query, and the post-support fast weight `P_T` is frozen.
+- `benchmarks/qualification_v2.json` requires held-out provenance, intact
+  competence, exact query-order invariance, chance-level nonlearned accuracy,
+  and low decision agreement after write-off, `alpha=0`, reset, or cross-subject
+  shuffle. It is a developmental gate revised after inspecting v1 ablations.
+- `fsrl.behavioral` samples the registered 280-query protocol from frozen logits
+  and measures rank class, circular triads, stable errors, beta pair classes,
+  symbolic distance, and inter-subject Kendall structure.
+- `benchmarks/human_fit_v1.json` freezes a four-value global-temperature grid
+  and uses only overall accuracy for selection. The grid was frozen after
+  inspecting `T=1.0` and `T=0.5`, but before `T=0.75` and `T=0.25`; it is not a
+  confirmation-stage preregistration. All metrics other than overall accuracy
+  were excluded from the selection rule. Because the accuracy target is an
+  approximate figure read and no tolerance is registered, this step reports no
+  formal PASS.
+- `fsrl.geometry` reconstructs item vectors from half the orientation contrast
+  `h(i,j)-h(j,i)` using a vector Hodge solve. The older context-average estimator
+  is retained as a negative control.
 
-The `permuted_shared` cue mode gives each batch member a different item-to-code
-mapping from the same codebook. It is required for cross-subject `P_T` shuffle
-to be a meaningful mismatch intervention; it is not itself a model of human
-individuality. The stable encoding state is the explicit individuality
-bottleneck in this version.
+## Tracked candidate and current result
 
-## Run the pipeline
+The candidate checkpoint is
+`checkpoints/dev-v2-seed1801-step1000/net.dat` (SHA-256
+`0fb9f063ba8e35b0d94c5a7ed5b6bf8c80d1ed963baebe3d823176aa7653d690`).
+Its machine-readable summary is `results/dev_v2_seed1801_step1000.json`.
 
-Use the repository environment for every command:
+- Causal qualification: **developmental-gate PASS**. Intact
+  overall/nonlearned accuracy is
+  `0.860/0.840`; all four interventions reduce nonlearned accuracy to
+  `0.488--0.497` and pair-decision agreement with intact to `0.485--0.512`.
+  Query-order maximum absolute logit change is exactly `0`.
+- Human comparison: **descriptive only**. The registered rule selects
+  temperature `0.25`: overall/learned/nonlearned accuracy is
+  `0.854/0.895/0.837`, rank classes are `9/59/9`, symbolic-distance slope is
+  `0.0426`, stable-error prevalence is `0.853` at at least 80% and `0.735` at
+  100%, and beta classes are `11` high-accuracy, `17` bimodal, `0` ordinary.
+- Geometry: **exploratory-gate PASS for the antisymmetric estimator**. Across 59
+  self-consistent incorrect subjects, mean subjective-minus-true Spearman is
+  `0.224`, subjective-minus-other is `0.444`, and the one-sided sign-test
+  `p=8.77e-11`.
+- Context-average control: **negative**. Subjective-minus-true is `0.048` and
+  the sign-test `p=0.217`.
+
+## Negative evidence that changed the design
+
+The first continuous-attenuation checkpoint achieved high intact accuracy but
+mostly produced low-confidence stochastic errors. It did not reproduce stable
+wrong ranks or beta bimodality. This motivated fixed relation omission, which
+creates repeatable informational differences without injecting a rank label.
+
+The first causal gate required ablations to lose transitivity. That was too
+strong: the frozen base network can retain a generic scalar, transitive response
+scaffold even when it no longer selects the intact subject-specific ordering.
+Version 2 therefore tests both chance-level correctness and decision mismatch
+to intact. The claim is necessity for the episode-specific policy, not creation
+of every transitive tendency. Because this revision used v1 diagnostics, it
+must be validated on new seeds before being treated as confirmatory.
+
+The first geometry estimator averaged an item's hidden state across both
+left/right roles and partners. It was non-significant and can cancel an
+antisymmetric relational signal. The version-2 Hodge estimator is primary; the
+failed context-average result remains reported rather than being overwritten.
+Because v2 was proposed after this negative result on the same checkpoint, its
+current pass is exploratory and requires a fresh-seed confirmation.
+
+## Reproduce the registered checks
+
+Use the repository environment. The code selects CUDA only when
+`torch.cuda.is_available()` is true; restricted execution environments can hide
+the GPU and silently cause CPU execution, so verify device visibility in the
+same execution context as training:
 
 ```bash
-env CUDA_VISIBLE_DEVICES=-1 direnv exec . \
-  python -m unittest discover -s tests -v
+direnv exec . python -c 'import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu")'
+direnv exec . python -m pytest -q
 ```
 
-For a short infrastructure check:
-
-```bash
-env CUDA_VISIBLE_DEVICES=-1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  direnv exec . python -m fsrl.meta_train \
-  --output-dir output/dev-smoke \
-  --outer-steps 1 --batch-size 2 --hidden-size 8 --cue-size 8 \
-  --seed 51 --save-every 1
-```
-
-For an actual training run, remove the smoke-test size overrides and register
-the chosen seed and output directory:
-
-```bash
-direnv exec . python -m fsrl.meta_train \
-  --output-dir output/meta-seed-1 \
-  --outer-steps 30000 --batch-size 32 --hidden-size 200 \
-  --cue-size 15 --seed 1 --save-every 500
-```
-
-Run all causal conditions using the zero-feedback checkpoint:
+Evaluate the tracked checkpoint:
 
 ```bash
 direnv exec . python -m fsrl.liu_eval \
-  --checkpoint output/meta-seed-1/net.dat \
-  --output output/meta-seed-1/liu-causal.json \
+  --checkpoint checkpoints/dev-v2-seed1801-step1000/net.dat \
+  --output output/dev-v2/liu-causal.json \
   --batch-size 77 --cue-mode permuted_shared \
-  --subject-encoding stable_bottleneck \
-  --cue-seed 1 --support-seed 100 --subject-encoding-seed 300 \
-  --order-seed 200 --order-schedules 8
+  --subject-encoding stable_omission \
+  --cue-seed 1802 --support-seed 1803 --subject-encoding-seed 1804 \
+  --order-seed 1805 --order-schedules 8
+
+direnv exec . python -m fsrl.qualification \
+  --result output/dev-v2/liu-causal.json \
+  --output output/dev-v2/qualification.json
 ```
 
-Apply the registered gate:
+Generate four behavioral files using temperatures `1.0`, `0.75`, `0.5`, and
+`0.25`, with otherwise identical arguments:
 
 ```bash
-direnv exec . python -m fsrl.qualification \
-  --result output/meta-seed-1/liu-causal.json \
-  --output output/meta-seed-1/qualification.json
+direnv exec . python -m fsrl.behavioral \
+  --checkpoint checkpoints/dev-v2-seed1801-step1000/net.dat \
+  --output output/dev-v2/behavior-temp025.json \
+  --batch-size 77 --cue-seed 1802 --support-seed 1803 \
+  --subject-encoding-seed 1804 --choice-seed 1806 \
+  --temperature 0.25 --subject-encoding stable_omission
 ```
 
-The qualification command exits with status 1 when any gate fails. An
-infrastructure smoke run is expected to fail the scientific gate.
+Pass all four outputs to the registered selector, then use only the selected
+behavior for geometry:
 
-## GO/NO-GO sequence
+```bash
+direnv exec . python -m fsrl.human_fit \
+  --behavior output/dev-v2/behavior-temp100.json \
+  --behavior output/dev-v2/behavior-temp075.json \
+  --behavior output/dev-v2/behavior-temp050.json \
+  --behavior output/dev-v2/behavior-temp025.json \
+  --output output/dev-v2/human-fit.json
 
-1. **Plastic-state necessity:** intact nonlearned performance and transitive
-   structure must pass their lower bounds; all four interventions must fall
-   below their registered upper bounds.
-2. **Strict query-order invariance:** maximum paired logit change across query
-   orders must be at most `1e-6`.
-3. **Held-out graph generalization:** the checkpoint hash must match registered
-   training metadata and `liu_graph_held_out` must be true.
-4. **Human fitting:** only after 1--3 pass, compare correct-ranker counts,
-   stable self-consistent errors, pair-level modes, symbolic-distance effects,
-   and inter-subject Kendall structure against the registered human targets.
-5. **Neural geometry:** only after the behavioural fit passes, test whether
-   erroneous virtual subjects' item geometry aligns more closely with their
-   committed subjective order than with ground truth. This analysis is not yet
-   implemented because it is downstream of the competence and causal gates.
+direnv exec . python -m fsrl.geometry \
+  --checkpoint checkpoints/dev-v2-seed1801-step1000/net.dat \
+  --behavior output/dev-v2/behavior-temp025.json \
+  --output output/dev-v2/geometry.json
+```
 
-## Outstanding external artifact
+## Remaining work before a paper-level claim
 
-No checkpoint identified as `G7-F` is registered in the fetched repository
-branches. If that checkpoint is supplied, run `fsrl.liu_eval` with
-`--subject-encoding none` first to audit the original G7 mechanism semantics.
-That legacy audit can establish plastic-state necessity and query-order
-invariance, but it cannot satisfy the new model's held-out-graph provenance
-gate unless matching training metadata is also supplied.
+1. Freeze numeric human targets from source data rather than figure reads and
+   register tolerances before any further fit.
+2. Run a predeclared multi-seed replication and report the seed distribution,
+   including failures; the tracked checkpoint is only seed 1801.
+3. Add matched controls separating fixed relation omission from alternative
+   stable subject bottlenecks.
+4. If the external `G7-F` checkpoint becomes available, audit it separately.
+   No matching checkpoint was found in any fetched remote branch, and legacy
+   G7 artifacts cannot satisfy held-out-training provenance without metadata.

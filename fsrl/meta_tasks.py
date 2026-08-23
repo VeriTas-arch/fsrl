@@ -67,6 +67,7 @@ class GenericRankingTaskGenerator:
         support_blocks: int = 4,
         exclude_liu_graph: bool = True,
         subject_encoding_config: SubjectEncodingConfig | None = None,
+        subject_encoding_mode: str = "stable_omission",
     ) -> None:
         if n_items < 3:
             raise ValueError("n_items must be at least three")
@@ -85,6 +86,9 @@ class GenericRankingTaskGenerator:
         self.subject_encoding_config = (
             subject_encoding_config or SubjectEncodingConfig()
         )
+        if subject_encoding_mode not in {"stable_attenuation", "stable_omission"}:
+            raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
+        self.subject_encoding_mode = subject_encoding_mode
         self.excluded_signatures = (
             frozenset({liu_graph_signature()}) if exclude_liu_graph else frozenset()
         )
@@ -148,6 +152,18 @@ class GenericRankingTaskGenerator:
         subject_encoding: SubjectEncodingState,
     ) -> tuple[SupportTrial, ...]:
         trials = []
+        relation_gains = {}
+        for high_rank, low_rank in graph:
+            higher = true_order[high_rank]
+            lower = true_order[low_rank]
+            probability = subject_encoding.relation_reliability(
+                higher, lower, low_rank - high_rank
+            )
+            relation_gains[(high_rank, low_rank)] = (
+                probability
+                if self.subject_encoding_mode == "stable_attenuation"
+                else float(rng.random() < probability)
+            )
         for block_index in range(self.support_blocks):
             for edge_index in rng.permutation(len(graph)):
                 high_rank, low_rank = graph[int(edge_index)]
@@ -155,9 +171,7 @@ class GenericRankingTaskGenerator:
                 lower = true_order[low_rank]
                 symbolic_distance = low_rank - high_rank
                 magnitude = symbolic_distance / float(self.n_items - 1)
-                reliability = subject_encoding.relation_reliability(
-                    higher, lower, symbolic_distance
-                )
+                reliability = relation_gains[(high_rank, low_rank)]
                 if rng.random() < 0.5:
                     left, right, signed = higher, lower, magnitude
                 else:

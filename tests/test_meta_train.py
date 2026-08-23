@@ -70,6 +70,7 @@ class MetaTrainingTests(unittest.TestCase):
             self.assertEqual(
                 subject_encoding["state_scope"], "fixed_for_entire_episode"
             )
+            self.assertEqual(subject_encoding["mode"], "stable_omission")
             self.assertFalse(subject_encoding["contains_rank_label"])
             self.assertEqual(len(metadata["checkpoint"]["sha256"]), 64)
 

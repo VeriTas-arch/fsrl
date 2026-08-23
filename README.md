@@ -36,10 +36,13 @@ python eval_figures.py --figures fig2a fig4b --batch-size 64 --seed 1
 
 The `dev` branch adds a registered Liu-style passive-learning benchmark, an
 exact 40320-permutation computational model, generic sparse-graph supervised
-meta-training with the Liu graph held out, stable subject-level evidence
-encoding, and fast-weight causal qualification controls. See
-[`docs/development_plan.md`](docs/development_plan.md) for the claim boundary,
-GO/NO-GO gates, and reproducible commands.
+meta-training with the Liu graph held out, stable subject-level relation
+omission, causal fast-weight controls, registered human-behavior analysis, and
+subjective-rank geometry tests. A tracked single-seed candidate passes the
+causal and antisymmetric-geometry gates; its human comparison remains
+descriptive because the source accuracies were read approximately from a
+figure. See [`docs/development_plan.md`](docs/development_plan.md) for the
+results, negative controls, claim boundary, and reproducible commands.
 
 ## Original README
 

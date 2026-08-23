@@ -36,9 +36,9 @@ class SubjectEncodingTests(unittest.TestCase):
             by_relation.setdefault(relation, set()).add(trial.encoding_reliability)
         self.assertEqual(len(by_relation), 8)
         self.assertTrue(all(len(values) == 1 for values in by_relation.values()))
-        self.assertGreater(
-            len({next(iter(values)) for values in by_relation.values()}), 1
-        )
+        realized = {next(iter(values)) for values in by_relation.values()}
+        self.assertTrue(realized <= {0.0, 1.0})
+        self.assertEqual(realized, {0.0, 1.0})
 
 
 if __name__ == "__main__":

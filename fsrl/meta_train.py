@@ -33,6 +33,7 @@ class MetaTrainConfig:
     fast_weight_penalty: float = 1e-4
     support_query_time: float = 2.0 / 3.0
     save_every: int = 500
+    subject_encoding_mode: str = "stable_omission"
 
 
 @dataclass(frozen=True)
@@ -196,6 +197,7 @@ def make_model_and_tasks(training_config: MetaTrainConfig):
         max_edges=training_config.max_edges,
         support_blocks=training_config.support_blocks,
         exclude_liu_graph=True,
+        subject_encoding_mode=training_config.subject_encoding_mode,
     )
     return model_config, net, task_generator
 
@@ -226,7 +228,8 @@ def save_meta_checkpoint(
             "query_time_channel": "constant_at_support_query_boundary",
             "subject_encoding": {
                 "state_scope": "fixed_for_entire_episode",
-                "acts_on": "support_relation_reliability",
+                "mode": training_config.subject_encoding_mode,
+                "acts_on": "support_relation_retention",
                 "contains_rank_label": False,
                 "configuration": SubjectEncodingConfig().to_dict(),
             },
@@ -281,6 +284,11 @@ def parse_args(args=None):
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--learning-rate", type=float, default=1e-4)
     parser.add_argument("--save-every", type=int, default=500)
+    parser.add_argument(
+        "--subject-encoding",
+        choices=["stable_attenuation", "stable_omission"],
+        default="stable_omission",
+    )
     return parser.parse_args(args)
 
 
@@ -294,6 +302,7 @@ def main(args=None):
         cue_size=parsed.cue_size,
         learning_rate=parsed.learning_rate,
         save_every=parsed.save_every,
+        subject_encoding_mode=parsed.subject_encoding,
     )
     train_meta_model(training_config, parsed.output_dir)
 

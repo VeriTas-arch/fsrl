@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "result_id": "dev-v2-seed1801-step1000",
+  "status": "single-seed-candidate",
+  "checkpoint": {
+    "path": "checkpoints/dev-v2-seed1801-step1000/net.dat",
+    "sha256": "0fb9f063ba8e35b0d94c5a7ed5b6bf8c80d1ed963baebe3d823176aa7653d690"
+  },
+  "causal_qualification": {
+    "specification": "benchmarks/qualification_v2.json",
+    "status": "developmental_gate_pass",
+    "passed": true,
+    "intact": {
+      "overall_accuracy": 0.8599257884972171,
+      "nonlearned_accuracy": 0.8396103896103895,
+      "mean_transitive_triplet_fraction": 0.9995361781076066
+    },
+    "interventions": {
+      "write_off": {
+        "nonlearned_accuracy": 0.49707792207792195,
+        "mean_pair_decision_agreement_to_intact": 0.511595547309833
+      },
+      "alpha_zero": {
+        "nonlearned_accuracy": 0.49707792207792195,
+        "mean_pair_decision_agreement_to_intact": 0.511595547309833
+      },
+      "reset": {
+        "nonlearned_accuracy": 0.49707792207792195,
+        "mean_pair_decision_agreement_to_intact": 0.511595547309833
+      },
+      "shuffle": {
+        "nonlearned_accuracy": 0.4883116883116883,
+        "mean_pair_decision_agreement_to_intact": 0.48515769944341375
+      }
+    },
+    "query_order_max_abs_logit_delta": 0.0,
+    "liu_graph_held_out": true
+  },
+  "human_fit": {
+    "specification": "benchmarks/human_fit_v1.json",
+    "status": "descriptive_fit_only",
+    "temperature_grid_status": "partially_data_informed_before_freeze",
+    "selected_temperature": 0.25,
+    "selection_target_overall_accuracy_approximate": 0.87,
+    "selected_overall_accuracy": 0.8538961038961037,
+    "learned_accuracy": 0.8954545454545453,
+    "nonlearned_accuracy": 0.8372727272727273,
+    "symbolic_distance_slope": 0.042568248078452206,
+    "ranking_class_counts": {
+      "correct": 9,
+      "self_consistent_incorrect": 59,
+      "self_inconsistent": 9
+    },
+    "stable_error_prevalence_analysis": {
+      "at_least_80_percent": 0.8529411764705882,
+      "at_100_percent": 0.7352941176470589
+    },
+    "beta_pair_class_counts_analysis": {
+      "high_accuracy": 11,
+      "bimodal": 17,
+      "ordinary_unimodal": 0
+    },
+    "formal_acceptance_thresholds": null
+  },
+  "geometry": {
+    "specification": "benchmarks/geometry_gate_v2.json",
+    "status": "exploratory_gate_pass",
+    "passed": true,
+    "behavior_temperature": 0.25,
+    "primary_antisymmetric_hodge": {
+      "subjects": 59,
+      "mean_subjective_minus_true_spearman": 0.2241588402288517,
+      "mean_subjective_minus_other_spearman": 0.4441757396708683,
+      "proportion_subjective_greater_than_true": 0.8983050847457628,
+      "one_sided_sign_test_p": 8.769593731750014e-11
+    },
+    "context_average_control": {
+      "mean_subjective_minus_true_spearman": 0.04795210064324894,
+      "mean_subjective_minus_other_spearman": 0.07893835929481834,
+      "one_sided_sign_test_p": 0.21749640256107672
+    }
+  },
+  "claim_boundary": [
+    "P_T is necessary for selecting the episode-specific query policy in this checkpoint.",
+    "The antisymmetric relational component of frozen query hidden states follows each coherent-error subject's subjective rank more than the true or other-subject ranks.",
+    "The v2 gates are developmental, this single seed is not a replication distribution, the human fit has no formal tolerance, and context-averaged hidden geometry is negative."
+  ]
+}

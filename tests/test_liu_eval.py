@@ -1,7 +1,9 @@
 import tempfile
 import unittest
+from itertools import combinations
 from pathlib import Path
 
+import numpy as np
 import torch
 
 from fsrl.config import TrainConfig
@@ -49,6 +51,22 @@ class LiuEvaluatorTests(unittest.TestCase):
         self.assertEqual(metrics.pairs, 56)
         self.assertLessEqual(metrics.max_abs_logit_delta, 1e-7)
 
+    def test_hidden_readout_is_query_order_invariant(self):
+        fast_weights = self.evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
+        forward = tuple(combinations(range(8), 2))
+        reverse = tuple(reversed(forward))
+        first = self.evaluator.readout_hidden_states(
+            fast_weights, tuple(forward for _ in range(self.config.bs))
+        )
+        second = self.evaluator.readout_hidden_states(
+            fast_weights, tuple(reverse for _ in range(self.config.bs))
+        )
+        for subject in range(self.config.bs):
+            for pair in forward:
+                np.testing.assert_allclose(
+                    first[subject][pair], second[subject][pair], atol=1e-7
+                )
+
     def test_alpha_is_restored_after_alpha_zero_control(self):
         before = self.net.alpha.detach().clone()
         self.evaluator.learn_fast_weights(FastWeightIntervention.ALPHA_ZERO)
@@ -90,6 +108,32 @@ class LiuEvaluatorTests(unittest.TestCase):
         self.assertFalse(
             torch.equal(torch.from_numpy(codes[0]), torch.from_numpy(codes[1]))
         )
+
+    def test_stable_omission_is_binary_and_fixed_across_blocks(self):
+        evaluator = FrozenFastWeightEvaluator(
+            self.net,
+            self.config,
+            load_ranking_protocol(),
+            cue_seed=5,
+            support_seed=7,
+            subject_encoding_mode="stable_omission",
+            subject_encoding_seed=19,
+        )
+        realized = {
+            gain
+            for subject_gains in evaluator.subject_relation_gains or ()
+            for gain in subject_gains.values()
+        }
+        self.assertTrue(realized <= {0.0, 1.0})
+        self.assertEqual(realized, {0.0, 1.0})
+        schedule = evaluator.support_schedules[0]
+        by_relation = {}
+        for trial in schedule:
+            relation = (trial.higher_item, trial.lower_item)
+            by_relation.setdefault(relation, set()).add(
+                evaluator._encoding_reliability(0, trial)
+            )
+        self.assertTrue(all(len(values) == 1 for values in by_relation.values()))
 
 
 if __name__ == "__main__":

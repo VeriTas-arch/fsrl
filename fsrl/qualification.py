@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 DEFAULT_QUALIFICATION_PATH = (
-    Path(__file__).resolve().parents[1] / "benchmarks" / "qualification_v1.json"
+    Path(__file__).resolve().parents[1] / "benchmarks" / "qualification_v2.json"
 )
 
 
@@ -104,6 +104,7 @@ def evaluate_qualification(result: dict, specification: dict) -> dict:
     )
     return {
         "qualification_id": specification["qualification_id"],
+        "registration_status": specification.get("registration_status"),
         "passed": all(check["passed"] for check in checks),
         "checks": checks,
     }

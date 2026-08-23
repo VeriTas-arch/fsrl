@@ -18,10 +18,11 @@ def passing_result():
         "overall_accuracy": 0.51,
         "nonlearned_accuracy": 0.5,
         "mean_transitive_triplet_fraction": 0.78,
+        "mean_pair_decision_agreement_to_intact": 0.5,
     }
     return {
         "cue_mode": "permuted_shared",
-        "subject_encoding": {"mode": "stable_bottleneck"},
+        "subject_encoding": {"mode": "stable_omission"},
         "training_provenance": {
             "present": True,
             "checkpoint_sha_matches": True,
@@ -45,6 +46,10 @@ class QualificationTests(unittest.TestCase):
     def test_all_registered_checks_can_pass(self):
         report = evaluate_qualification(passing_result(), self.specification)
         self.assertTrue(report["passed"])
+        self.assertEqual(
+            report["registration_status"],
+            "developmental_after_v1_ablation_diagnostics",
+        )
         self.assertTrue(all(check["passed"] for check in report["checks"]))
 
     def test_missing_plasticity_effect_is_a_no_go(self):
@@ -68,6 +73,14 @@ class QualificationTests(unittest.TestCase):
         self.assertFalse(report["passed"])
         failed = {check["name"] for check in report["checks"] if not check["passed"]}
         self.assertIn("training_provenance.liu_graph_held_out", failed)
+
+    def test_ablated_policy_that_preserves_intact_ranking_is_a_no_go(self):
+        result = passing_result()
+        result["conditions"]["reset"]["mean_pair_decision_agreement_to_intact"] = 0.9
+        report = evaluate_qualification(result, self.specification)
+        self.assertFalse(report["passed"])
+        failed = {check["name"] for check in report["checks"] if not check["passed"]}
+        self.assertIn("reset.mean_pair_decision_agreement_to_intact", failed)
 
 
 if __name__ == "__main__":

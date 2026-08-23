@@ -191,14 +191,32 @@ class FrozenFastWeightEvaluator:
             config.bs, protocol.n_items, config.cs, cue_seed, mode=cue_mode
         )
         self.cue_mode = cue_mode
+        self.subject_relation_gains: tuple[dict[tuple[int, int], float], ...] | None
         if subject_encoding_mode == "none":
             self.subject_encoding_states: tuple[SubjectEncodingState, ...] | None = None
-        elif subject_encoding_mode == "stable_bottleneck":
+            self.subject_relation_gains = None
+        elif subject_encoding_mode in {"stable_bottleneck", "stable_omission"}:
+            encoding_rng = np.random.default_rng(subject_encoding_seed)
             self.subject_encoding_states = sample_subject_encoding_states(
-                np.random.default_rng(subject_encoding_seed),
+                encoding_rng,
                 config.bs,
                 protocol.n_items,
             )
+            gains = []
+            for state in self.subject_encoding_states:
+                subject_gains = {}
+                for higher, lower in protocol.support_pairs_higher_lower:
+                    symbolic_distance = self.item_rank[lower] - self.item_rank[higher]
+                    probability = state.relation_reliability(
+                        higher, lower, symbolic_distance
+                    )
+                    subject_gains[(higher, lower)] = (
+                        probability
+                        if subject_encoding_mode == "stable_bottleneck"
+                        else float(encoding_rng.random() < probability)
+                    )
+                gains.append(subject_gains)
+            self.subject_relation_gains = tuple(gains)
         else:
             raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
         self.subject_encoding_mode = subject_encoding_mode
@@ -257,8 +275,9 @@ class FrozenFastWeightEvaluator:
         fast_weights = self.net.initialZeroPlasticWeights(self.config.bs)
         blank = torch.zeros(self.config.bs, self.config.inputsize, device=DEVICE)
 
-        with torch.no_grad(), self._alpha_zeroed(
-            intervention == FastWeightIntervention.ALPHA_ZERO
+        with (
+            torch.no_grad(),
+            self._alpha_zeroed(intervention == FastWeightIntervention.ALPHA_ZERO),
         ):
             for _ in range(2):
                 _, _, _, hidden, eligibility, proposed = self.net(
@@ -317,12 +336,10 @@ class FrozenFastWeightEvaluator:
     def _encoding_reliability(self, subject: int, trial: SupportTrial) -> float:
         if self.subject_encoding_states is None:
             return 1.0
-        symbolic_distance = (
-            self.item_rank[trial.lower_item] - self.item_rank[trial.higher_item]
-        )
-        return self.subject_encoding_states[subject].relation_reliability(
-            trial.higher_item, trial.lower_item, symbolic_distance
-        )
+        assert self.subject_relation_gains is not None
+        return self.subject_relation_gains[subject][
+            (trial.higher_item, trial.lower_item)
+        ]
 
     def readout_logits(
         self,
@@ -374,9 +391,57 @@ class FrozenFastWeightEvaluator:
                     )
         return tuple(outputs)
 
-    def condition_metrics(
+    def readout_hidden_states(
+        self,
+        fast_weights: torch.Tensor,
+        pair_schedules: tuple[tuple[tuple[int, int], ...], ...],
+    ) -> tuple[dict[tuple[int, int], np.ndarray], ...]:
+        """Return response-step hidden states under the strict frozen query protocol."""
+
+        if len(pair_schedules) != self.config.bs:
+            raise ValueError("one pair schedule is required per batch subject")
+        schedule_lengths = {len(schedule) for schedule in pair_schedules}
+        if len(schedule_lengths) != 1:
+            raise ValueError("all pair schedules must have equal length")
+        outputs = [{} for _ in range(self.config.bs)]
+        with torch.no_grad():
+            for pair_index in range(next(iter(schedule_lengths))):
+                hidden = self.net.initialZeroState(self.config.bs)
+                eligibility = self.net.initialZeroET(self.config.bs)
+                left = np.asarray(
+                    [schedule[pair_index][0] for schedule in pair_schedules],
+                    dtype=np.int64,
+                )
+                right = np.asarray(
+                    [schedule[pair_index][1] for schedule in pair_schedules],
+                    dtype=np.int64,
+                )
+                signed = np.zeros(self.config.bs, dtype=np.float32)
+                response_hidden = None
+                for numstep in range(self.config.triallen):
+                    inputs = self._step_inputs(
+                        left,
+                        right,
+                        signed,
+                        numstep=numstep,
+                        time_value=self.test_time_value,
+                        support_trial=False,
+                    )
+                    _, _, _, hidden, eligibility, _proposed = self.net(
+                        inputs, hidden, eligibility, fast_weights
+                    )
+                    if numstep == NUMRESPONSESTEP:
+                        response_hidden = hidden.detach().cpu().numpy()
+                assert response_hidden is not None
+                for subject, state in enumerate(response_hidden):
+                    outputs[subject][(int(left[subject]), int(right[subject]))] = (
+                        state.copy()
+                    )
+        return tuple(outputs)
+
+    def condition_evaluation(
         self, intervention: FastWeightIntervention
-    ) -> ConditionMetrics:
+    ) -> tuple[ConditionMetrics, tuple[dict[tuple[int, int], int], ...]]:
         fast_weights = self.learn_fast_weights(intervention)
         canonical = tuple(combinations(range(self.protocol.n_items), 2))
         ordered_pairs = tuple(
@@ -396,6 +461,7 @@ class FrozenFastWeightEvaluator:
         subject_nonlearned = []
         subject_probability = []
         subject_cycles = []
+        subject_winners = []
         for subject_logits in logits:
             correct = []
             correct_learned = []
@@ -422,19 +488,29 @@ class FrozenFastWeightEvaluator:
             subject_nonlearned.append(np.mean(correct_nonlearned))
             subject_probability.append(np.mean(probabilities))
             subject_cycles.append(cycles)
+            subject_winners.append(winners)
         n_triads = len(tuple(combinations(range(self.protocol.n_items), 3)))
-        return ConditionMetrics(
-            intervention=intervention.value,
-            overall_accuracy=float(np.mean(subject_overall)),
-            learned_accuracy=float(np.mean(subject_learned)),
-            nonlearned_accuracy=float(np.mean(subject_nonlearned)),
-            mean_probability_correct=float(np.mean(subject_probability)),
-            mean_abs_fast_weight=float(torch.mean(torch.abs(fast_weights)).cpu()),
-            mean_circular_triads=float(np.mean(subject_cycles)),
-            mean_transitive_triplet_fraction=float(
-                1.0 - np.mean(subject_cycles) / n_triads
+        return (
+            ConditionMetrics(
+                intervention=intervention.value,
+                overall_accuracy=float(np.mean(subject_overall)),
+                learned_accuracy=float(np.mean(subject_learned)),
+                nonlearned_accuracy=float(np.mean(subject_nonlearned)),
+                mean_probability_correct=float(np.mean(subject_probability)),
+                mean_abs_fast_weight=float(torch.mean(torch.abs(fast_weights)).cpu()),
+                mean_circular_triads=float(np.mean(subject_cycles)),
+                mean_transitive_triplet_fraction=float(
+                    1.0 - np.mean(subject_cycles) / n_triads
+                ),
             ),
+            tuple(subject_winners),
         )
+
+    def condition_metrics(
+        self, intervention: FastWeightIntervention
+    ) -> ConditionMetrics:
+        metrics, _winners = self.condition_evaluation(intervention)
+        return metrics
 
     def order_invariance(
         self, fast_weights: torch.Tensor, schedules: int, seed: int
@@ -504,10 +580,23 @@ def run_causal_suite(
         subject_encoding_mode=subject_encoding_mode,
         subject_encoding_seed=subject_encoding_seed,
     )
-    conditions = {
-        intervention.value: asdict(evaluator.condition_metrics(intervention))
-        for intervention in FastWeightIntervention
-    }
+    conditions = {}
+    condition_winners = {}
+    for intervention in FastWeightIntervention:
+        metrics, winners = evaluator.condition_evaluation(intervention)
+        conditions[intervention.value] = asdict(metrics)
+        condition_winners[intervention.value] = winners
+    intact_winners = condition_winners[FastWeightIntervention.INTACT.value]
+    for intervention, winners_by_subject in condition_winners.items():
+        agreements = []
+        for subject, winners in enumerate(winners_by_subject):
+            agreements.extend(
+                int(winner == intact_winners[subject][pair])
+                for pair, winner in winners.items()
+            )
+        conditions[intervention]["mean_pair_decision_agreement_to_intact"] = float(
+            np.mean(agreements)
+        )
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     invariance = evaluator.order_invariance(
         intact_fast_weights, schedules=order_schedules, seed=order_seed
@@ -544,8 +633,8 @@ def parse_args(args=None):
     )
     parser.add_argument(
         "--subject-encoding",
-        choices=["none", "stable_bottleneck"],
-        default="stable_bottleneck",
+        choices=["none", "stable_bottleneck", "stable_omission"],
+        default="stable_omission",
     )
     parser.add_argument("--subject-encoding-seed", type=int, default=300)
     parser.add_argument("--support-seed", type=int, default=100)
