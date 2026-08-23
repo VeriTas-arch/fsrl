@@ -39,10 +39,15 @@ exact 40320-permutation computational model, generic sparse-graph supervised
 meta-training with the Liu graph held out, stable subject-level relation
 omission, causal fast-weight controls, registered human-behavior analysis, and
 subjective-rank geometry tests. A tracked single-seed candidate passes the
-causal and antisymmetric-geometry gates; its human comparison remains
-descriptive because the source accuracies were read approximately from a
-figure. See [`docs/development_plan.md`](docs/development_plan.md) for the
-results, negative controls, claim boundary, and reproducible commands.
+causal and antisymmetric-geometry gates and is frozen as development evidence at
+`07591af`. See [`docs/development_plan.md`](docs/development_plan.md) for those
+results and their claim boundary.
+
+The source-corrected, all-seed protocol now includes an exact OSF human
+benchmark, matched bottleneck controls, and a 40,320-order posterior comparison.
+See [`docs/confirmation_protocol.md`](docs/confirmation_protocol.md) for the
+two-seed pilot, frozen formal contract, and commands. Pilot outputs are reported
+without seed filtering in [`results/pilot_v1.json`](results/pilot_v1.json).
 
 ## Original README
 

@@ -16,7 +16,11 @@ from .liu_eval import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .ranking_protocol import (
+    DEFAULT_PROTOCOL_PATH,
+    RankingProtocol,
+    load_ranking_protocol,
+)
 
 Pair = tuple[int, int]
 
@@ -391,8 +395,10 @@ def run_behavioral_analysis(
     choice_seed: int,
     temperature: float,
     subject_encoding_mode: str = "stable_omission",
+    protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
 ) -> dict:
-    protocol = load_ranking_protocol()
+    protocol_path = Path(protocol_path)
+    protocol = load_ranking_protocol(protocol_path)
     net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
     evaluator = FrozenFastWeightEvaluator(
         net,
@@ -421,6 +427,7 @@ def run_behavioral_analysis(
     result["support_seed"] = support_seed
     result["subject_encoding_seed"] = subject_encoding_seed
     result["subject_encoding_mode"] = subject_encoding_mode
+    result["protocol_path"] = str(protocol_path.resolve())
     return result
 
 
@@ -438,9 +445,16 @@ def parse_args(args=None):
     parser.add_argument("--temperature", type=float, default=1.0)
     parser.add_argument(
         "--subject-encoding",
-        choices=["stable_bottleneck", "stable_omission"],
+        choices=[
+            "stable_bottleneck",
+            "stable_omission",
+            "presentationwise_omission",
+            "blockwise_omission",
+            "uniform_no_bottleneck",
+        ],
         default="stable_omission",
     )
+    parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
     return parser.parse_args(args)
 
 
@@ -455,6 +469,7 @@ def main(args=None):
         choice_seed=parsed.choice_seed,
         temperature=parsed.temperature,
         subject_encoding_mode=parsed.subject_encoding,
+        protocol_path=parsed.protocol,
     )
     parsed.output.parent.mkdir(parents=True, exist_ok=True)
     with parsed.output.open("w", encoding="utf-8") as handle:

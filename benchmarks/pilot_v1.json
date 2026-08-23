@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "confirmation_id": "liu-neural-constructive-ranking-pilot-v1",
+  "registration_status": "workflow_validation_pilot_not_formal_confirmation",
+  "development_freeze_commit": "07591af56ccd693307ab90cc72b03335cb4cd6c9",
+  "protocol": {
+    "path": "benchmarks/liu_v2.json",
+    "protocol_id": "liu-constructive-ranking-v2-source-corrected",
+    "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec",
+    "training_exclusion": "source-correct graph and rank-axis reflection"
+  },
+  "human_benchmark": {
+    "path": "benchmarks/liu_human_exact_v1.json",
+    "benchmark_id": "liu-human-exact-combined-v1",
+    "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1",
+    "required_status": "source_recomputed_and_paper_checks_reproduced",
+    "bootstrap_samples": 10000
+  },
+  "training": {
+    "seeds": [1901, 1902],
+    "outer_steps": 1000,
+    "checkpoint_selection": "step_1000_only",
+    "batch_size": 32,
+    "hidden_size": 200,
+    "cue_size": 15,
+    "min_edges": 7,
+    "max_edges": 10,
+    "support_blocks": 4,
+    "learning_rate": 0.0001,
+    "gradient_clip": 2.0,
+    "fast_weight_penalty": 0.0001,
+    "support_query_time": 0.6666666666666666,
+    "save_every": 1000,
+    "subject_encoding_mode": "stable_omission"
+  },
+  "evaluation": {
+    "batch_size": 77,
+    "cue_seed": 29001,
+    "support_seed": 29101,
+    "subject_encoding_seed": 29201,
+    "choice_seed": 29301,
+    "order_seed": 29401,
+    "order_schedules": 8,
+    "cue_mode": "permuted_shared",
+    "temperature": 0.25,
+    "temperature_selection": "fixed_from_development; never refit per seed",
+    "posterior_temperature": 0.05
+  },
+  "qualification": {
+    "path": "benchmarks/qualification_v2.json",
+    "sha256": "1b1fd30f5514ec11f9b43e878e4215f0480f56cabf41d0d28b9da71fff9ae369"
+  },
+  "geometry": {
+    "path": "benchmarks/geometry_gate_v2.json",
+    "sha256": "e282ba014272d9def76ae0ae81627f365ebf501e81f13a0d1ccaa4dad1634590"
+  },
+  "behavioral_confirmation": {
+    "rule": "all registered scalar model estimates inside human participant-bootstrap 95% intervals",
+    "metrics": [
+      "overall_accuracy",
+      "learned_accuracy",
+      "nonlearned_accuracy",
+      "symbolic_distance_slope",
+      "correct_ranker_proportion",
+      "self_consistent_incorrect_proportion",
+      "self_inconsistent_proportion",
+      "stable_error_80_analysis_proportion",
+      "stable_error_100_analysis_proportion"
+    ],
+    "beta_pair_classes": "report exact counts descriptively; no registered sampling interval"
+  },
+  "matched_controls": {
+    "modes": [
+      "stable_omission",
+      "presentationwise_omission",
+      "blockwise_omission",
+      "uniform_no_bottleneck"
+    ],
+    "mean_information_matching": "same registered reliability distribution; uniform control uses its cohort mean as a common deterministic gain",
+    "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases."
+  },
+  "algorithmic_comparison": {
+    "hypotheses": 40320,
+    "primary_outputs": [
+      "neural_map_proportion",
+      "closest_map_kendall_tau",
+      "pair_probability_spearman"
+    ],
+    "qualification_gate": false
+  },
+  "reporting": {
+    "all_declared_seeds_required": true,
+    "seed_filtering": "forbidden",
+    "primary_rates": [
+      "causal_qualification_pass_proportion",
+      "behavioral_confirmation_pass_proportion",
+      "geometry_pass_proportion",
+      "joint_pass_proportion"
+    ],
+    "pilot_boundary": "These two seeds validate the workflow and cannot be counted as formal confirmation after they exposed a v2 scoring bug."
+  }
+}

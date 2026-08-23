@@ -265,7 +265,12 @@ def run_geometry_analysis(
     net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
     if behavior.get("checkpoint", {}).get("sha256") != checkpoint_info.sha256:
         raise ValueError("behavior result and checkpoint SHA-256 do not match")
-    protocol = load_ranking_protocol()
+    protocol_path_value = behavior.get("protocol_path")
+    protocol = (
+        load_ranking_protocol()
+        if protocol_path_value is None
+        else load_ranking_protocol(protocol_path_value)
+    )
     evaluator = FrozenFastWeightEvaluator(
         net,
         config,
@@ -312,6 +317,11 @@ def run_geometry_analysis(
         "group": context_control["group"],
     }
     result["protocol_id"] = protocol.protocol_id
+    result["protocol_path"] = (
+        None
+        if protocol_path_value is None
+        else str(Path(protocol_path_value).resolve())
+    )
     result["checkpoint"] = asdict(checkpoint_info)
     result["behavior_path"] = str(behavior_path.resolve())
     result["gate"] = evaluate_geometry_gate(result, load_json(gate_path))

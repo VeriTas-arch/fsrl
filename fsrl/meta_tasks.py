@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from itertools import combinations
+from pathlib import Path
 
 import numpy as np
 
@@ -27,8 +28,8 @@ class RankingEpisode:
     subject_encoding: SubjectEncodingState
 
 
-def liu_graph_signature() -> GraphSignature:
-    protocol = load_ranking_protocol()
+def graph_signature_from_protocol(path: Path | str | None = None) -> GraphSignature:
+    protocol = load_ranking_protocol() if path is None else load_ranking_protocol(path)
     rank = {
         item: position for position, item in enumerate(protocol.true_order_high_to_low)
     }
@@ -37,6 +38,22 @@ def liu_graph_signature() -> GraphSignature:
             tuple(sorted((rank[higher], rank[lower])))
             for higher, lower in protocol.support_pairs_higher_lower
         )
+    )
+
+
+def liu_graph_signature() -> GraphSignature:
+    """Return the legacy v1 signature used by developmental training."""
+
+    return graph_signature_from_protocol()
+
+
+def held_out_liu_graph_signatures() -> frozenset[GraphSignature]:
+    """Exclude both source-correct Liu geometry and its rank-axis reflection."""
+
+    benchmark_dir = Path(__file__).resolve().parents[1] / "benchmarks"
+    return frozenset(
+        graph_signature_from_protocol(benchmark_dir / filename)
+        for filename in ("liu_v1.json", "liu_v2.json")
     )
 
 
@@ -90,7 +107,7 @@ class GenericRankingTaskGenerator:
             raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
         self.subject_encoding_mode = subject_encoding_mode
         self.excluded_signatures = (
-            frozenset({liu_graph_signature()}) if exclude_liu_graph else frozenset()
+            held_out_liu_graph_signatures() if exclude_liu_graph else frozenset()
         )
 
     def sample(

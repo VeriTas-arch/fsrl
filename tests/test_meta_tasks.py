@@ -5,6 +5,7 @@ import numpy as np
 from fsrl.meta_tasks import (
     GenericRankingTaskGenerator,
     graph_is_connected,
+    held_out_liu_graph_signatures,
     liu_graph_signature,
 )
 
@@ -15,13 +16,15 @@ class GenericRankingTaskTests(unittest.TestCase):
 
     def test_samples_connected_sparse_graphs_and_holds_out_liu(self):
         rng = np.random.default_rng(31)
-        held_out = liu_graph_signature()
+        held_out = held_out_liu_graph_signatures()
+        self.assertEqual(len(held_out), 2)
+        self.assertIn(liu_graph_signature(), held_out)
         observed_sizes = set()
         for _ in range(100):
             episode = self.generator.sample(rng)
             observed_sizes.add(len(episode.graph_rank_pairs))
             self.assertTrue(graph_is_connected(8, episode.graph_rank_pairs))
-            self.assertNotEqual(episode.graph_rank_pairs, held_out)
+            self.assertNotIn(episode.graph_rank_pairs, held_out)
             self.assertGreaterEqual(
                 len({abs(a - b) for a, b in episode.graph_rank_pairs}), 2
             )

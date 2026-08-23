@@ -128,12 +128,83 @@ class LiuEvaluatorTests(unittest.TestCase):
         self.assertEqual(realized, {0.0, 1.0})
         schedule = evaluator.support_schedules[0]
         by_relation = {}
-        for trial in schedule:
+        for trial_index, trial in enumerate(schedule):
             relation = (trial.higher_item, trial.lower_item)
             by_relation.setdefault(relation, set()).add(
-                evaluator._encoding_reliability(0, trial)
+                evaluator._encoding_reliability(0, trial_index)
             )
         self.assertTrue(all(len(values) == 1 for values in by_relation.values()))
+
+    def test_temporal_omission_controls_are_binary_and_resampled(self):
+        for mode in ("presentationwise_omission", "blockwise_omission"):
+            evaluator = FrozenFastWeightEvaluator(
+                self.net,
+                self.config,
+                load_ranking_protocol(),
+                cue_seed=5,
+                support_seed=7,
+                subject_encoding_mode=mode,
+                subject_encoding_seed=19,
+            )
+            realized = {
+                gain
+                for subject_gains in evaluator.subject_trial_gains or ()
+                for gain in subject_gains
+            }
+            self.assertTrue(realized <= {0.0, 1.0})
+            self.assertEqual(realized, {0.0, 1.0})
+
+    def test_uniform_control_has_no_subject_or_relation_bottleneck(self):
+        evaluator = FrozenFastWeightEvaluator(
+            self.net,
+            self.config,
+            load_ranking_protocol(),
+            cue_seed=5,
+            support_seed=7,
+            subject_encoding_mode="uniform_no_bottleneck",
+            subject_encoding_seed=19,
+        )
+        realized = {
+            gain
+            for subject_gains in evaluator.subject_trial_gains or ()
+            for gain in subject_gains
+        }
+        self.assertEqual(len(realized), 1)
+        self.assertTrue(0.0 < next(iter(realized)) < 1.0)
+
+    def test_source_corrected_protocol_uses_registered_true_order(self):
+        protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        evaluator = FrozenFastWeightEvaluator(
+            self.net,
+            self.config,
+            protocol,
+            cue_seed=5,
+            support_seed=7,
+        )
+        original_readout = evaluator.readout_logits
+
+        def correct_source_order(_fast_weights, pair_schedules, **_kwargs):
+            return tuple(
+                {
+                    pair: (
+                        1.0
+                        if evaluator.item_rank[pair[0]]
+                        < evaluator.item_rank[pair[1]]
+                        else -1.0
+                    )
+                    for pair in schedule
+                }
+                for schedule in pair_schedules
+            )
+
+        evaluator.readout_logits = correct_source_order
+        try:
+            metrics = evaluator.condition_metrics(FastWeightIntervention.INTACT)
+        finally:
+            evaluator.readout_logits = original_readout
+        self.assertEqual(metrics.overall_accuracy, 1.0)
+        self.assertEqual(metrics.learned_accuracy, 1.0)
+        self.assertEqual(metrics.nonlearned_accuracy, 1.0)
 
 
 if __name__ == "__main__":

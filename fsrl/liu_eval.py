@@ -16,7 +16,11 @@ import torch
 
 from .config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
 from .model import RetroModulRNN
-from .ranking_protocol import RankingProtocol, SupportTrial, load_ranking_protocol
+from .ranking_protocol import (
+    DEFAULT_PROTOCOL_PATH,
+    RankingProtocol,
+    load_ranking_protocol,
+)
 from .subject_encoding import (
     SubjectEncodingConfig,
     SubjectEncodingState,
@@ -191,40 +195,110 @@ class FrozenFastWeightEvaluator:
             config.bs, protocol.n_items, config.cs, cue_seed, mode=cue_mode
         )
         self.cue_mode = cue_mode
+        supported_encoding_modes = {
+            "none",
+            "stable_bottleneck",
+            "stable_omission",
+            "presentationwise_omission",
+            "blockwise_omission",
+            "uniform_no_bottleneck",
+        }
+        if subject_encoding_mode not in supported_encoding_modes:
+            raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
+        self.support_schedules = tuple(
+            protocol.support_schedule(np.random.default_rng(support_seed + subject))
+            for subject in range(config.bs)
+        )
         self.subject_relation_gains: tuple[dict[tuple[int, int], float], ...] | None
+        self.subject_trial_gains: tuple[tuple[float, ...], ...] | None
         if subject_encoding_mode == "none":
             self.subject_encoding_states: tuple[SubjectEncodingState, ...] | None = None
             self.subject_relation_gains = None
-        elif subject_encoding_mode in {"stable_bottleneck", "stable_omission"}:
+            self.subject_trial_gains = None
+        else:
             encoding_rng = np.random.default_rng(subject_encoding_seed)
             self.subject_encoding_states = sample_subject_encoding_states(
                 encoding_rng,
                 config.bs,
                 protocol.n_items,
             )
-            gains = []
+            probabilities = []
             for state in self.subject_encoding_states:
-                subject_gains = {}
+                subject_probabilities = {}
                 for higher, lower in protocol.support_pairs_higher_lower:
                     symbolic_distance = self.item_rank[lower] - self.item_rank[higher]
-                    probability = state.relation_reliability(
+                    subject_probabilities[(higher, lower)] = state.relation_reliability(
                         higher, lower, symbolic_distance
                     )
-                    subject_gains[(higher, lower)] = (
-                        probability
-                        if subject_encoding_mode == "stable_bottleneck"
-                        else float(encoding_rng.random() < probability)
+                probabilities.append(subject_probabilities)
+            if subject_encoding_mode == "stable_bottleneck":
+                relation_gains = probabilities
+            elif subject_encoding_mode == "stable_omission":
+                relation_gains = [
+                    {
+                        pair: float(encoding_rng.random() < probability)
+                        for pair, probability in subject_probabilities.items()
+                    }
+                    for subject_probabilities in probabilities
+                ]
+            elif subject_encoding_mode == "uniform_no_bottleneck":
+                uniform_gain = float(
+                    np.mean(
+                        [
+                            probability
+                            for subject_probabilities in probabilities
+                            for probability in subject_probabilities.values()
+                        ]
                     )
-                gains.append(subject_gains)
-            self.subject_relation_gains = tuple(gains)
-        else:
-            raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
+                )
+                relation_gains = [
+                    {pair: uniform_gain for pair in subject_probabilities}
+                    for subject_probabilities in probabilities
+                ]
+            else:
+                relation_gains = probabilities
+            self.subject_relation_gains = tuple(relation_gains)
+
+            trial_gains = []
+            for subject, schedule in enumerate(self.support_schedules):
+                if subject_encoding_mode == "presentationwise_omission":
+                    values = tuple(
+                        float(
+                            encoding_rng.random()
+                            < probabilities[subject][
+                                (trial.higher_item, trial.lower_item)
+                            ]
+                        )
+                        for trial in schedule
+                    )
+                elif subject_encoding_mode == "blockwise_omission":
+                    block_relation_gains = {
+                        (block, pair): float(
+                            encoding_rng.random() < probabilities[subject][pair]
+                        )
+                        for block in range(protocol.support_blocks)
+                        for pair in protocol.support_pairs_higher_lower
+                    }
+                    values = tuple(
+                        block_relation_gains[
+                            (
+                                trial.block_index,
+                                (trial.higher_item, trial.lower_item),
+                            )
+                        ]
+                        for trial in schedule
+                    )
+                else:
+                    values = tuple(
+                        relation_gains[subject][
+                            (trial.higher_item, trial.lower_item)
+                        ]
+                        for trial in schedule
+                    )
+                trial_gains.append(values)
+            self.subject_trial_gains = tuple(trial_gains)
         self.subject_encoding_mode = subject_encoding_mode
         self.subject_encoding_seed = subject_encoding_seed
-        self.support_schedules = tuple(
-            protocol.support_schedule(np.random.default_rng(support_seed + subject))
-            for subject in range(config.bs)
-        )
 
     def _step_inputs(
         self,
@@ -301,7 +375,7 @@ class FrozenFastWeightEvaluator:
                 signed = np.asarray(
                     [
                         trial.signed_magnitude
-                        * self._encoding_reliability(subject, trial)
+                        * self._encoding_reliability(subject, trial_index)
                         for subject, trial in enumerate(trials)
                     ],
                     dtype=np.float32,
@@ -333,13 +407,31 @@ class FrozenFastWeightEvaluator:
             fast_weights = torch.roll(fast_weights, shifts=1, dims=0)
         return fast_weights.detach().clone()
 
-    def _encoding_reliability(self, subject: int, trial: SupportTrial) -> float:
-        if self.subject_encoding_states is None:
+    def _encoding_reliability(self, subject: int, trial_index: int) -> float:
+        if self.subject_trial_gains is None:
             return 1.0
-        assert self.subject_relation_gains is not None
-        return self.subject_relation_gains[subject][
-            (trial.higher_item, trial.lower_item)
-        ]
+        return self.subject_trial_gains[subject][trial_index]
+
+    def realized_support_evidence(self) -> tuple[tuple[dict, ...], ...]:
+        """Return the exact support evidence presented to each virtual subject."""
+
+        rows = []
+        for subject, schedule in enumerate(self.support_schedules):
+            rows.append(
+                tuple(
+                    {
+                        "higher_item": trial.higher_item,
+                        "lower_item": trial.lower_item,
+                        "magnitude": abs(trial.signed_magnitude),
+                        "reliability": self._encoding_reliability(
+                            subject, trial_index
+                        ),
+                        "block_index": trial.block_index,
+                    }
+                    for trial_index, trial in enumerate(schedule)
+                )
+            )
+        return tuple(rows)
 
     def readout_logits(
         self,
@@ -471,11 +563,25 @@ class FrozenFastWeightEvaluator:
             for pair in canonical:
                 forward_logit = subject_logits[pair]
                 reverse_logit = subject_logits[(pair[1], pair[0])]
-                pair_correct = (float(forward_logit > 0.0), float(reverse_logit < 0.0))
-                pair_probability = (
-                    float(1.0 / (1.0 + np.exp(-forward_logit))),
-                    float(1.0 / (1.0 + np.exp(reverse_logit))),
-                )
+                first_is_higher = self.item_rank[pair[0]] < self.item_rank[pair[1]]
+                if first_is_higher:
+                    pair_correct = (
+                        float(forward_logit > 0.0),
+                        float(reverse_logit < 0.0),
+                    )
+                    pair_probability = (
+                        float(1.0 / (1.0 + np.exp(-forward_logit))),
+                        float(1.0 / (1.0 + np.exp(reverse_logit))),
+                    )
+                else:
+                    pair_correct = (
+                        float(forward_logit < 0.0),
+                        float(reverse_logit > 0.0),
+                    )
+                    pair_probability = (
+                        float(1.0 / (1.0 + np.exp(forward_logit))),
+                        float(1.0 / (1.0 + np.exp(-reverse_logit))),
+                    )
                 correct.extend(pair_correct)
                 probabilities.extend(pair_probability)
                 target = correct_learned if pair in learned else correct_nonlearned
@@ -567,8 +673,10 @@ def run_causal_suite(
     cue_mode: str,
     subject_encoding_mode: str,
     subject_encoding_seed: int,
+    protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
 ) -> dict:
-    protocol = load_ranking_protocol()
+    protocol_path = Path(protocol_path)
+    protocol = load_ranking_protocol(protocol_path)
     net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
     evaluator = FrozenFastWeightEvaluator(
         net,
@@ -604,6 +712,7 @@ def run_causal_suite(
     provenance = load_training_provenance(Path(checkpoint), checkpoint_info.sha256)
     return {
         "protocol_id": protocol.protocol_id,
+        "protocol_path": str(protocol_path.resolve()),
         "checkpoint": asdict(checkpoint_info),
         "batch_size": batch_size,
         "cue_seed": cue_seed,
@@ -633,13 +742,21 @@ def parse_args(args=None):
     )
     parser.add_argument(
         "--subject-encoding",
-        choices=["none", "stable_bottleneck", "stable_omission"],
+        choices=[
+            "none",
+            "stable_bottleneck",
+            "stable_omission",
+            "presentationwise_omission",
+            "blockwise_omission",
+            "uniform_no_bottleneck",
+        ],
         default="stable_omission",
     )
     parser.add_argument("--subject-encoding-seed", type=int, default=300)
     parser.add_argument("--support-seed", type=int, default=100)
     parser.add_argument("--order-seed", type=int, default=200)
     parser.add_argument("--order-schedules", type=int, default=8)
+    parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
     return parser.parse_args(args)
 
 
@@ -655,6 +772,7 @@ def main(args=None):
         cue_mode=parsed.cue_mode,
         subject_encoding_mode=parsed.subject_encoding,
         subject_encoding_seed=parsed.subject_encoding_seed,
+        protocol_path=parsed.protocol,
     )
     parsed.output.parent.mkdir(parents=True, exist_ok=True)
     with parsed.output.open("w", encoding="utf-8") as handle:

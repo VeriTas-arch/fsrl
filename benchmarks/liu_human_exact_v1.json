@@ -1,0 +1,2066 @@
+{
+  "analysis_contract": {
+    "below_chance_exclusion": "overall_accuracy < 0.5",
+    "correct_pair": "pair_accuracy > 0.5",
+    "correct_ranker": "all 28 pair accuracies > 0.5",
+    "pair_distribution_cohort": "eligible subjects excluding correct rankers",
+    "paper_figure_beta_endpoint_reconstruction": "0.01 for 27 pairs; B-H released parameters match 0.001",
+    "ranking_classification": "published Figure 3b classes; trial-majority reconstruction retained as a diagnostic because tie handling is under-specified",
+    "ranking_reconstruction": "Hodge least squares from mean pair preference",
+    "registered_model_beta_endpoint_clip": 0.001,
+    "self_consistency_denominator": 20,
+    "stable_error_thresholds": [
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ]
+  },
+  "benchmark_id": "liu-human-exact-combined-v1",
+  "bootstrap": {
+    "interval": 0.95,
+    "method": "participant-level nonparametric percentile bootstrap",
+    "metrics": {
+      "correct_ranker_proportion": {
+        "lower": 0.03896103896103896,
+        "mean": 0.10375454545454547,
+        "standard_deviation": 0.03462955342653373,
+        "upper": 0.16883116883116883
+      },
+      "learned_accuracy": {
+        "lower": 0.8931818181818183,
+        "mean": 0.9140895292207791,
+        "standard_deviation": 0.010401624262834298,
+        "upper": 0.933766233766234
+      },
+      "nonlearned_accuracy": {
+        "lower": 0.8033100649350651,
+        "mean": 0.827653090909091,
+        "standard_deviation": 0.011948013851691463,
+        "upper": 0.8501964285714286
+      },
+      "overall_accuracy": {
+        "lower": 0.8319573283858998,
+        "mean": 0.8523492161410019,
+        "standard_deviation": 0.010174008104108274,
+        "upper": 0.871799628942486
+      },
+      "self_consistent_incorrect_proportion": {
+        "lower": 0.7402597402597403,
+        "mean": 0.8312207792207792,
+        "standard_deviation": 0.04290960124292984,
+        "upper": 0.9090909090909091
+      },
+      "self_inconsistent_proportion": {
+        "lower": 0.012987012987012988,
+        "mean": 0.06502467532467533,
+        "standard_deviation": 0.028202230809527714,
+        "upper": 0.12987012987012986
+      },
+      "stable_error_100_analysis_proportion": {
+        "lower": 0.6811594202898551,
+        "mean": 0.7829274989204686,
+        "standard_deviation": 0.04951690690240949,
+        "upper": 0.8732394366197183
+      },
+      "stable_error_80_analysis_proportion": {
+        "lower": 0.8405797101449275,
+        "mean": 0.9130705676470461,
+        "standard_deviation": 0.03391294786521028,
+        "upper": 0.9714285714285714
+      },
+      "symbolic_distance_slope": {
+        "lower": 0.03475439526459938,
+        "mean": 0.03982665610919696,
+        "standard_deviation": 0.0025662238500596722,
+        "upper": 0.04489879848043117
+      }
+    },
+    "samples": 10000,
+    "seed": 20260823
+  },
+  "cohorts": {
+    "preregistered": {
+      "analysis_subjects_excluding_correct_rankers": 37,
+      "beta_pair_class_counts_analysis": {
+        "bimodal": 20,
+        "boundary": 0,
+        "high_accuracy": 7,
+        "low_accuracy": 0,
+        "not_fit": 1,
+        "ordinary_unimodal": 0
+      },
+      "beta_pair_class_counts_uniform_source_reconstruction": {
+        "bimodal": 13,
+        "boundary": 0,
+        "high_accuracy": 13,
+        "low_accuracy": 0,
+        "ordinary_unimodal": 2
+      },
+      "eligible_subjects": 40,
+      "excluded_below_chance": 0,
+      "generated_subjects": 40,
+      "learned_accuracy": 0.9134374999999999,
+      "mean_inter_subject_kendall_tau": 0.5497640497640497,
+      "mean_self_consistency_coefficient": 0.9949999999999999,
+      "nonlearned_accuracy": 0.8181249999999999,
+      "overall_accuracy": 0.8453571428571429,
+      "pairs": [
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.28421121272812405,
+            "beta": 0.16682667653953842,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.44877390852082744,
+            "beta": 0.26079621747139825,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.73,
+          "pair": [
+            "A",
+            "B"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.34903013696286284,
+            "beta": 0.17709111936153474,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.5440418226206174,
+            "beta": 0.2724180509247354,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7775000000000001,
+          "pair": [
+            "A",
+            "C"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.4799312023979067,
+            "beta": 0.17274828285582775,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.7819267592968165,
+            "beta": 0.27707739437602724,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.845,
+          "pair": [
+            "A",
+            "D"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.9776314538266917,
+            "beta": 0.17884022103837743,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.7604936308494459,
+            "beta": 0.31287734653705085,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9200000000000002,
+          "pair": [
+            "A",
+            "E"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 3.5887047208905596,
+            "beta": 0.2241509955193497,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 6.063421690863894,
+            "beta": 0.44551158991104234,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9550000000000001,
+          "pair": [
+            "A",
+            "F"
+          ],
+          "symbolic_distance": 5
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.4447038922560327,
+            "beta": 0.1506727014345535,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.7189434049617234,
+            "beta": 0.24413043298270035,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8575000000000002,
+          "pair": [
+            "A",
+            "G"
+          ],
+          "symbolic_distance": 6
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 7.952569704283648,
+            "beta": 0.23791243599609088,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 14.225054073541811,
+            "beta": 0.5560176726457574,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9800000000000001,
+          "pair": [
+            "A",
+            "H"
+          ],
+          "symbolic_distance": 7
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.8812129310501782,
+            "beta": 0.21836526533839104,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.4143441773621903,
+            "beta": 0.35632167003880594,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8674999999999999,
+          "pair": [
+            "B",
+            "C"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.3220890599086482,
+            "beta": 0.16812358751469383,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.5161527105865635,
+            "beta": 0.2613450361948414,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7825,
+          "pair": [
+            "B",
+            "D"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 1.0724575647626269,
+            "beta": 0.18969282461901665,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 2.0059859022802877,
+            "beta": 0.3343940595505003,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9275,
+          "pair": [
+            "B",
+            "E"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.8673548145600084,
+            "beta": 0.1845198580642979,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.446681408228774,
+            "beta": 0.3119373439581064,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8925000000000001,
+          "pair": [
+            "B",
+            "F"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 1.1606068730018457,
+            "beta": 0.15930868121697825,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 2.4474943265182802,
+            "beta": 0.29696492219913345,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.97,
+          "pair": [
+            "B",
+            "G"
+          ],
+          "symbolic_distance": 5
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": null,
+            "beta": null,
+            "class": "not_fit"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.9878839612883214e+29,
+            "beta": 2.0079635972609292e+27,
+            "class": "ordinary_unimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 1.0,
+          "pair": [
+            "B",
+            "H"
+          ],
+          "symbolic_distance": 6
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.39189909611363494,
+            "beta": 0.23537513795825865,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.6078156195705234,
+            "beta": 0.35257779277897205,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7150000000000001,
+          "pair": [
+            "C",
+            "D"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.6155338658432896,
+            "beta": 0.18124244752861426,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.0276629493219804,
+            "beta": 0.2999314675944625,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8525,
+          "pair": [
+            "C",
+            "E"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.5971028347740497,
+            "beta": 0.1665181710381934,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.0009293635455079,
+            "beta": 0.2773850238525353,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8699999999999999,
+          "pair": [
+            "C",
+            "F"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.6806582678659754,
+            "beta": 0.17205034300271327,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.2273636429621382,
+            "beta": 0.2909367930682752,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9075,
+          "pair": [
+            "C",
+            "G"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 38.1924757637887,
+            "beta": 0.35836443699953163,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 81.93264430197377,
+            "beta": 1.4606886403065436,
+            "class": "ordinary_unimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9925,
+          "pair": [
+            "C",
+            "H"
+          ],
+          "symbolic_distance": 5
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.286106055618371,
+            "beta": 0.20953673280352492,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.44672189864313144,
+            "beta": 0.31653086613262144,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.675,
+          "pair": [
+            "D",
+            "E"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 1.3601298807527609,
+            "beta": 0.21681994892782708,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.9501801225635036,
+            "beta": 0.3592713763512756,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8875,
+          "pair": [
+            "D",
+            "F"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.3822825341661897,
+            "beta": 0.15397918128272972,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.6158962059339324,
+            "beta": 0.248272576457124,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8175000000000001,
+          "pair": [
+            "D",
+            "G"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.886503275667142,
+            "beta": 0.15964363504918336,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.5460819274928603,
+            "beta": 0.27678783430939763,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9324999999999999,
+          "pair": [
+            "D",
+            "H"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.3577641964222744,
+            "beta": 0.19758296011120655,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.5303853381966733,
+            "beta": 0.30869910674305007,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.6849999999999999,
+          "pair": [
+            "E",
+            "F"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.22969386718007226,
+            "beta": 0.18091873818565088,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.3549244021017545,
+            "beta": 0.2783627389996122,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.6325000000000001,
+          "pair": [
+            "E",
+            "G"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 6.717447910290307,
+            "beta": 0.27475118384265784,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 13.088169150584132,
+            "beta": 0.6457634332670272,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9650000000000001,
+          "pair": [
+            "E",
+            "H"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.24343496882295046,
+            "beta": 0.20302125553560246,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.3681457078048034,
+            "beta": 0.31153617010357837,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.5875,
+          "pair": [
+            "F",
+            "G"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.562852747069328,
+            "beta": 0.1869442706197488,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.8807051202621706,
+            "beta": 0.2989844207053542,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8275,
+          "pair": [
+            "F",
+            "H"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.3672973000507554,
+            "beta": 0.1648474157415904,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.6063723580897437,
+            "beta": 0.2614759044774495,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8175000000000001,
+          "pair": [
+            "G",
+            "H"
+          ],
+          "symbolic_distance": 1
+        }
+      ],
+      "ranking_class_counts": {
+        "correct": 3,
+        "self_consistent_incorrect": 32,
+        "self_inconsistent": 5
+      },
+      "stable_error_subject_prevalence": {
+        "100": {
+          "analysis_count": 30,
+          "analysis_proportion": 0.8108108108108109,
+          "eligible_count": 30,
+          "eligible_proportion": 0.75
+        },
+        "60": {
+          "analysis_count": 36,
+          "analysis_proportion": 0.972972972972973,
+          "eligible_count": 36,
+          "eligible_proportion": 0.9
+        },
+        "70": {
+          "analysis_count": 36,
+          "analysis_proportion": 0.972972972972973,
+          "eligible_count": 36,
+          "eligible_proportion": 0.9
+        },
+        "80": {
+          "analysis_count": 33,
+          "analysis_proportion": 0.8918918918918919,
+          "eligible_count": 33,
+          "eligible_proportion": 0.825
+        },
+        "90": {
+          "analysis_count": 33,
+          "analysis_proportion": 0.8918918918918919,
+          "eligible_count": 33,
+          "eligible_proportion": 0.825
+        }
+      },
+      "symbolic_distance_slope": {
+        "mean": 0.0400807823129252,
+        "t_vs_zero": 10.701113483610538
+      }
+    },
+    "replication": {
+      "analysis_subjects_excluding_correct_rankers": 32,
+      "beta_pair_class_counts_analysis": {
+        "bimodal": 20,
+        "boundary": 0,
+        "high_accuracy": 8,
+        "low_accuracy": 0,
+        "not_fit": 0,
+        "ordinary_unimodal": 0
+      },
+      "beta_pair_class_counts_uniform_source_reconstruction": {
+        "bimodal": 14,
+        "boundary": 0,
+        "high_accuracy": 13,
+        "low_accuracy": 0,
+        "ordinary_unimodal": 1
+      },
+      "eligible_subjects": 37,
+      "excluded_below_chance": 0,
+      "generated_subjects": 37,
+      "learned_accuracy": 0.914527027027027,
+      "mean_inter_subject_kendall_tau": 0.5584677419354839,
+      "mean_self_consistency_coefficient": 1.0,
+      "nonlearned_accuracy": 0.8381081081081081,
+      "overall_accuracy": 0.8599420849420849,
+      "pairs": [
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.4568612961018622,
+            "beta": 0.1671893628956341,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.75969540719936,
+            "beta": 0.26699966670919906,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8648648648648647,
+          "pair": [
+            "A",
+            "B"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.5648194696585016,
+            "beta": 0.1616338597831112,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.9524451995594152,
+            "beta": 0.2644448193053584,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9027027027027027,
+          "pair": [
+            "A",
+            "C"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 1.9858551068321384,
+            "beta": 0.2159710746920822,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 3.03173255090431,
+            "beta": 0.3796919031780653,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.935135135135135,
+          "pair": [
+            "A",
+            "D"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.7959501391913184,
+            "beta": 0.1772343637126082,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.3216545400669406,
+            "beta": 0.2968216698108247,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9054054054054054,
+          "pair": [
+            "A",
+            "E"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 7.485429902930937,
+            "beta": 0.25412782547341994,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 13.997001892253504,
+            "beta": 0.597678024365624,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9756756756756757,
+          "pair": [
+            "A",
+            "F"
+          ],
+          "symbolic_distance": 5
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 4.096099839117596,
+            "beta": 0.20276361672636303,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 6.781666902573583,
+            "beta": 0.4093726230639278,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9756756756756757,
+          "pair": [
+            "A",
+            "G"
+          ],
+          "symbolic_distance": 6
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 25.001804938394255,
+            "beta": 0.2986940453726006,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 44.97860700522318,
+            "beta": 0.9386229903625344,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9891891891891892,
+          "pair": [
+            "A",
+            "H"
+          ],
+          "symbolic_distance": 7
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.7648818358095397,
+            "beta": 0.22374253910164538,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.178987445625816,
+            "beta": 0.35643323482760086,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8324324324324325,
+          "pair": [
+            "B",
+            "C"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.3224538638779401,
+            "beta": 0.16680692039441677,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.5140955066584909,
+            "beta": 0.2614827333742175,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7891891891891891,
+          "pair": [
+            "B",
+            "D"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.892129513902081,
+            "beta": 0.17742599455653818,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.5961680619285386,
+            "beta": 0.3086115643009406,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9162162162162162,
+          "pair": [
+            "B",
+            "E"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.4105362249467344,
+            "beta": 0.16078155806780728,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.647449491713418,
+            "beta": 0.2545043447793033,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.835135135135135,
+          "pair": [
+            "B",
+            "F"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.7891076703508508,
+            "beta": 0.16265177967265276,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.3319762938964366,
+            "beta": 0.27580273848742437,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9216216216216216,
+          "pair": [
+            "B",
+            "G"
+          ],
+          "symbolic_distance": 5
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 18.894792232080082,
+            "beta": 0.3212032674801366,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 42.405682504243096,
+            "beta": 1.0584287075676797,
+            "class": "ordinary_unimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9864864864864865,
+          "pair": [
+            "B",
+            "H"
+          ],
+          "symbolic_distance": 6
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.2719893774482689,
+            "beta": 0.20248519671561896,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.4185238073586871,
+            "beta": 0.3071211276672125,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.6702702702702702,
+          "pair": [
+            "C",
+            "D"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.5578943606721942,
+            "beta": 0.16807509827101239,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.9282167369045115,
+            "beta": 0.27502370700930123,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8783783783783784,
+          "pair": [
+            "C",
+            "E"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.37093621458165094,
+            "beta": 0.17908544479937202,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.5871680790091381,
+            "beta": 0.28015989014649684,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7918918918918919,
+          "pair": [
+            "C",
+            "F"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.45161853705435534,
+            "beta": 0.15365393154028692,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.7675144328278454,
+            "beta": 0.24979826382824408,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8864864864864864,
+          "pair": [
+            "C",
+            "G"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 12.421810476923175,
+            "beta": 0.2692246727478992,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 23.90929457592459,
+            "beta": 0.7255736388083547,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9810810810810812,
+          "pair": [
+            "C",
+            "H"
+          ],
+          "symbolic_distance": 5
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.28689342475952384,
+            "beta": 0.17833071869068556,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.44943457412612436,
+            "beta": 0.2795985711491281,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7108108108108109,
+          "pair": [
+            "D",
+            "E"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.7078536112906965,
+            "beta": 0.19648294996773835,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.081767347124115,
+            "beta": 0.3142835090841147,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8567567567567567,
+          "pair": [
+            "D",
+            "F"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.8275247045854497,
+            "beta": 0.1895394790546786,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 1.3792809037250426,
+            "beta": 0.31624253956407017,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.8945945945945947,
+          "pair": [
+            "D",
+            "G"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 1.8310196997544064,
+            "beta": 0.19435430416978047,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 2.765402648698279,
+            "beta": 0.34213643934023064,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.9405405405405405,
+          "pair": [
+            "D",
+            "H"
+          ],
+          "symbolic_distance": 4
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.2539200243363695,
+            "beta": 0.2072121970137993,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.3784826767494014,
+            "beta": 0.31656210143366775,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.6027027027027028,
+          "pair": [
+            "E",
+            "F"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.2911559665919471,
+            "beta": 0.17380346577099443,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.45858499971245853,
+            "beta": 0.2689131073257928,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7486486486486488,
+          "pair": [
+            "E",
+            "G"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 4.856444460851585,
+            "beta": 0.23937112378838227,
+            "class": "high_accuracy"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 8.651102030753467,
+            "beta": 0.510056353724315,
+            "class": "high_accuracy",
+            "endpoint_clip": 0.01
+          },
+          "learned": true,
+          "mean_accuracy": 0.9648648648648648,
+          "pair": [
+            "E",
+            "H"
+          ],
+          "symbolic_distance": 3
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.26465754311342055,
+            "beta": 0.17651245156190454,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.41372857956465553,
+            "beta": 0.2716824611656242,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7027027027027027,
+          "pair": [
+            "F",
+            "G"
+          ],
+          "symbolic_distance": 1
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.5106794973964272,
+            "beta": 0.15991707614614345,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.814124853170485,
+            "beta": 0.2577151462760726,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.8756756756756758,
+          "pair": [
+            "F",
+            "H"
+          ],
+          "symbolic_distance": 2
+        },
+        {
+          "beta_fit_analysis": {
+            "alpha": 0.33340730456626766,
+            "beta": 0.17587767957922798,
+            "class": "bimodal"
+          },
+          "beta_fit_uniform_source_reconstruction": {
+            "alpha": 0.49939811227718583,
+            "beta": 0.2703738223697626,
+            "class": "bimodal",
+            "endpoint_clip": 0.01
+          },
+          "learned": false,
+          "mean_accuracy": 0.7432432432432432,
+          "pair": [
+            "G",
+            "H"
+          ],
+          "symbolic_distance": 1
+        }
+      ],
+      "ranking_class_counts": {
+        "correct": 5,
+        "self_consistent_incorrect": 32,
+        "self_inconsistent": 0
+      },
+      "stable_error_subject_prevalence": {
+        "100": {
+          "analysis_count": 24,
+          "analysis_proportion": 0.75,
+          "eligible_count": 24,
+          "eligible_proportion": 0.6486486486486487
+        },
+        "60": {
+          "analysis_count": 31,
+          "analysis_proportion": 0.96875,
+          "eligible_count": 31,
+          "eligible_proportion": 0.8378378378378378
+        },
+        "70": {
+          "analysis_count": 30,
+          "analysis_proportion": 0.9375,
+          "eligible_count": 30,
+          "eligible_proportion": 0.8108108108108109
+        },
+        "80": {
+          "analysis_count": 30,
+          "analysis_proportion": 0.9375,
+          "eligible_count": 30,
+          "eligible_proportion": 0.8108108108108109
+        },
+        "90": {
+          "analysis_count": 28,
+          "analysis_proportion": 0.875,
+          "eligible_count": 28,
+          "eligible_proportion": 0.7567567567567568
+        }
+      },
+      "symbolic_distance_slope": {
+        "mean": 0.03955598455598459,
+        "t_vs_zero": 10.866266283446302
+      }
+    }
+  },
+  "combined": {
+    "analysis_subjects_excluding_correct_rankers": 69,
+    "beta_pair_class_counts_analysis": {
+      "bimodal": 22,
+      "boundary": 0,
+      "high_accuracy": 6,
+      "low_accuracy": 0,
+      "not_fit": 0,
+      "ordinary_unimodal": 0
+    },
+    "beta_pair_class_counts_uniform_source_reconstruction": {
+      "bimodal": 15,
+      "boundary": 0,
+      "high_accuracy": 12,
+      "low_accuracy": 0,
+      "ordinary_unimodal": 1
+    },
+    "eligible_subjects": 77,
+    "excluded_below_chance": 0,
+    "generated_subjects": 77,
+    "learned_accuracy": 0.9139610389610392,
+    "mean_inter_subject_kendall_tau": 0.5536475459749116,
+    "mean_self_consistency_coefficient": 0.9974025974025974,
+    "nonlearned_accuracy": 0.8277272727272728,
+    "overall_accuracy": 0.8523654916512059,
+    "pairs": [
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.3383169147401705,
+          "beta": 0.1649222019602719,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.5424054161663704,
+          "beta": 0.2589414864849091,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.7948051948051947,
+        "pair": [
+          "A",
+          "B"
+        ],
+        "symbolic_distance": 1
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.4121173040431396,
+          "beta": 0.16683584604717555,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.6588999798234252,
+          "beta": 0.2626359001011437,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.8376623376623377,
+        "pair": [
+          "A",
+          "C"
+        ],
+        "symbolic_distance": 2
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.6830084133973118,
+          "beta": 0.17898379100756642,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.130228909340827,
+          "beta": 0.2942148264708602,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.8883116883116884,
+        "pair": [
+          "A",
+          "D"
+        ],
+        "symbolic_distance": 3
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.8810334569502536,
+          "beta": 0.1777720840199972,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.5200946445576484,
+          "beta": 0.30400482694844294,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.9129870129870131,
+        "pair": [
+          "A",
+          "E"
+        ],
+        "symbolic_distance": 4
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 4.704453851482531,
+          "beta": 0.23351963713551768,
+          "class": "high_accuracy"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 8.25446093397846,
+          "beta": 0.490812504218177,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.9649350649350651,
+        "pair": [
+          "A",
+          "F"
+        ],
+        "symbolic_distance": 5
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.6579471636167373,
+          "beta": 0.15283125828261665,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.1143948986404302,
+          "beta": 0.2570609948624469,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.9142857142857144,
+        "pair": [
+          "A",
+          "G"
+        ],
+        "symbolic_distance": 6
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 11.675373805893699,
+          "beta": 0.2538368017069365,
+          "class": "high_accuracy"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 21.157453391349627,
+          "beta": 0.6499047953298636,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.9844155844155844,
+        "pair": [
+          "A",
+          "H"
+        ],
+        "symbolic_distance": 7
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.8208847539764458,
+          "beta": 0.2205010414649913,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.2904707920985594,
+          "beta": 0.3554343727321899,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.8506493506493507,
+        "pair": [
+          "B",
+          "C"
+        ],
+        "symbolic_distance": 1
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.3222554428218838,
+          "beta": 0.16750967988637164,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.5151956337802301,
+          "beta": 0.2614084995787835,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.7857142857142856,
+        "pair": [
+          "B",
+          "D"
+        ],
+        "symbolic_distance": 2
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.9797636596947168,
+          "beta": 0.18364400462598196,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.7913801903298021,
+          "beta": 0.3213079571008284,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.922077922077922,
+        "pair": [
+          "B",
+          "E"
+        ],
+        "symbolic_distance": 3
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.5547810971536411,
+          "beta": 0.16924686896934507,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.896941666354959,
+          "beta": 0.2745014076794283,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.8649350649350649,
+        "pair": [
+          "B",
+          "F"
+        ],
+        "symbolic_distance": 4
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.9382609910222882,
+          "beta": 0.15979980387923842,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.7300112660195635,
+          "beta": 0.2816855661950142,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.9467532467532467,
+        "pair": [
+          "B",
+          "G"
+        ],
+        "symbolic_distance": 5
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 43.35115498008165,
+          "beta": 0.3685188470096921,
+          "class": "high_accuracy"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 91.9044314906055,
+          "beta": 1.5631641792963777,
+          "class": "ordinary_unimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.9935064935064936,
+        "pair": [
+          "B",
+          "H"
+        ],
+        "symbolic_distance": 6
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.32410064211615375,
+          "beta": 0.21789024157622908,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.5001120664916806,
+          "beta": 0.3277435640195708,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.6935064935064935,
+        "pair": [
+          "C",
+          "D"
+        ],
+        "symbolic_distance": 1
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.5873291078820382,
+          "beta": 0.1748628532877687,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.9789100908330718,
+          "beta": 0.28778123455649524,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.864935064935065,
+        "pair": [
+          "C",
+          "E"
+        ],
+        "symbolic_distance": 2
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.45263332901055914,
+          "beta": 0.16950036813399583,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.7343812176943576,
+          "beta": 0.2730044539515867,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.8324675324675324,
+        "pair": [
+          "C",
+          "F"
+        ],
+        "symbolic_distance": 3
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.5469055265091695,
+          "beta": 0.16216434103926025,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.9541155342052839,
+          "beta": 0.26803755611744867,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.8974025974025975,
+        "pair": [
+          "C",
+          "G"
+        ],
+        "symbolic_distance": 4
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 19.771149352284176,
+          "beta": 0.29961922792752804,
+          "class": "high_accuracy"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 39.390497623406475,
+          "beta": 0.932263422360545,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.987012987012987,
+        "pair": [
+          "C",
+          "H"
+        ],
+        "symbolic_distance": 5
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.28571448603967603,
+          "beta": 0.1934973491027745,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.4470896657729704,
+          "beta": 0.2979205245063361,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.6922077922077923,
+        "pair": [
+          "D",
+          "E"
+        ],
+        "symbolic_distance": 1
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.9308122856772034,
+          "beta": 0.20346050549022632,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.40245427659012,
+          "beta": 0.3311461302466726,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.8727272727272728,
+        "pair": [
+          "D",
+          "F"
+        ],
+        "symbolic_distance": 2
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.49746338870270224,
+          "beta": 0.16570095502346965,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.811941836109196,
+          "beta": 0.26895646165012627,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.8545454545454545,
+        "pair": [
+          "D",
+          "G"
+        ],
+        "symbolic_distance": 3
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 1.149781356182332,
+          "beta": 0.17186031851929356,
+          "class": "high_accuracy"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 1.9394811562442815,
+          "beta": 0.3004720158284834,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.9363636363636363,
+        "pair": [
+          "D",
+          "H"
+        ],
+        "symbolic_distance": 4
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.29702482098527616,
+          "beta": 0.19986333305278467,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.4421816402023763,
+          "beta": 0.3088249947497344,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.6454545454545455,
+        "pair": [
+          "E",
+          "F"
+        ],
+        "symbolic_distance": 1
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.2530947602359881,
+          "beta": 0.17667185729303178,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.393717774959477,
+          "beta": 0.27212348336867476,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.6883116883116884,
+        "pair": [
+          "E",
+          "G"
+        ],
+        "symbolic_distance": 2
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 5.720275697311033,
+          "beta": 0.2565956072491206,
+          "class": "high_accuracy"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 10.62168809300592,
+          "beta": 0.5719681876590724,
+          "class": "high_accuracy",
+          "endpoint_clip": 0.01
+        },
+        "learned": true,
+        "mean_accuracy": 0.9649350649350649,
+        "pair": [
+          "E",
+          "H"
+        ],
+        "symbolic_distance": 3
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.25178532255530256,
+          "beta": 0.1892117556469393,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.38568983026058157,
+          "beta": 0.2903494327979563,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.6428571428571429,
+        "pair": [
+          "F",
+          "G"
+        ],
+        "symbolic_distance": 1
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.5368523680023913,
+          "beta": 0.17329871241066805,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.8472532766970096,
+          "beta": 0.2781859264493698,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.8506493506493507,
+        "pair": [
+          "F",
+          "H"
+        ],
+        "symbolic_distance": 2
+      },
+      {
+        "beta_fit_analysis": {
+          "alpha": 0.34990148356923245,
+          "beta": 0.16955118075757303,
+          "class": "bimodal"
+        },
+        "beta_fit_uniform_source_reconstruction": {
+          "alpha": 0.5488935980409726,
+          "beta": 0.2645723417893612,
+          "class": "bimodal",
+          "endpoint_clip": 0.01
+        },
+        "learned": false,
+        "mean_accuracy": 0.7818181818181819,
+        "pair": [
+          "G",
+          "H"
+        ],
+        "symbolic_distance": 1
+      }
+    ],
+    "published_figure_checks": {
+      "beta_pair_class_counts": {
+        "bimodal": 15,
+        "high_accuracy": 13,
+        "low_accuracy": 0,
+        "ordinary_unimodal": 0
+      },
+      "ranking_class_counts": {
+        "correct": 8,
+        "self_consistent_incorrect": 64,
+        "self_inconsistent": 5
+      }
+    },
+    "ranking_class_counts": {
+      "correct": 8,
+      "self_consistent_incorrect": 64,
+      "self_inconsistent": 5
+    },
+    "stable_error_subject_prevalence": {
+      "100": {
+        "analysis_count": 54,
+        "analysis_proportion": 0.782608695652174,
+        "eligible_count": 54,
+        "eligible_proportion": 0.7012987012987013
+      },
+      "60": {
+        "analysis_count": 67,
+        "analysis_proportion": 0.9710144927536232,
+        "eligible_count": 67,
+        "eligible_proportion": 0.8701298701298701
+      },
+      "70": {
+        "analysis_count": 66,
+        "analysis_proportion": 0.9565217391304348,
+        "eligible_count": 66,
+        "eligible_proportion": 0.8571428571428571
+      },
+      "80": {
+        "analysis_count": 63,
+        "analysis_proportion": 0.9130434782608695,
+        "eligible_count": 63,
+        "eligible_proportion": 0.8181818181818182
+      },
+      "90": {
+        "analysis_count": 61,
+        "analysis_proportion": 0.8840579710144928,
+        "eligible_count": 61,
+        "eligible_proportion": 0.7922077922077922
+      }
+    },
+    "symbolic_distance_slope": {
+      "mean": 0.03982860676738232,
+      "t_vs_zero": 15.322309253908891
+    }
+  },
+  "paper": {
+    "doi": "10.1371/journal.pbio.3003756",
+    "osf_project": "https://osf.io/gya95/",
+    "title": "Human brains construct individualized global rankings from identical few-shot learning input"
+  },
+  "protocol_id": "liu-constructive-ranking-v2-source-corrected",
+  "schema_version": 1,
+  "source_files": {
+    "figure2d": {
+      "download_url": "https://osf.io/download/69c8941cdda521b5dd9ac12f/",
+      "local_path": "data/external/liu2026/Figure2d_Data.csv",
+      "pairs": 28,
+      "sha256": "c20d660279a06acbdb03d343157ac70158d4346097ccc9aa76bc6c17f6567734"
+    },
+    "figure3b": {
+      "download_url": "https://osf.io/download/69c89449dda521b5dd9ac14e/",
+      "local_path": "data/external/liu2026/Figure3b_left_panel_Data.csv",
+      "participants": 77,
+      "sha256": "395e1eac5b3379e480def18d073e90234109f4d8c3d73d158f772e05ef1efed0"
+    },
+    "preregistered": {
+      "download_url": "https://osf.io/download/mjqpe/",
+      "local_path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "participants": 40,
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227"
+    },
+    "replication": {
+      "download_url": "https://osf.io/download/698e858121336f1da3c72b17/",
+      "local_path": "data/external/liu2026/replication_experiment_data.csv",
+      "participants": 37,
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249"
+    }
+  },
+  "source_reproduction": {
+    "figure2d_uniform_endpoint_reconstruction": {
+      "exception_pairs": [
+        {
+          "pair": [
+            "B",
+            "H"
+          ],
+          "published": {
+            "alpha": 43.35115498011588,
+            "beta": 0.3685188470096727,
+            "class": "high_accuracy",
+            "pair": [
+              "B",
+              "H"
+            ]
+          },
+          "uniform_clip_0.01": {
+            "alpha": 91.9044314906055,
+            "beta": 1.5631641792963777,
+            "class": "ordinary_unimodal",
+            "endpoint_clip": 0.01
+          }
+        }
+      ],
+      "interpretation": "The released B-H parameters equal a 0.001/0.999 endpoint clip; the other 27 equal 0.01/0.99. Published classes remain the paper-reproduction target.",
+      "matching_pairs": 27
+    },
+    "figure3b_trial_reconstruction": {
+      "exception_participants": [
+        {
+          "combined_id": 30,
+          "majority_ties": 1,
+          "published": "self_inconsistent",
+          "trial_majority_reconstruction": "self_consistent_incorrect"
+        },
+        {
+          "combined_id": 38,
+          "majority_ties": 2,
+          "published": "self_inconsistent",
+          "trial_majority_reconstruction": "self_consistent_incorrect"
+        }
+      ],
+      "interpretation": "The paper does not specify majority-tie handling. Published Figure 3b classes are primary; the transparent majority-rule reconstruction differs only for IDs 30 and 38.",
+      "matching_participants": 75
+    }
+  },
+  "status": "source_recomputed_and_paper_checks_reproduced"
+}

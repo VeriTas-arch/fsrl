@@ -13,7 +13,11 @@ import torch.nn.functional as F
 
 from .config import DEVICE, NUMRESPONSESTEP, TrainConfig
 from .liu_eval import DISTANCE_INPUT_OFFSET, checkpoint_sha256
-from .meta_tasks import GenericRankingTaskGenerator, RankingEpisode
+from .meta_tasks import (
+    GenericRankingTaskGenerator,
+    RankingEpisode,
+    held_out_liu_graph_signatures,
+)
 from .model import RetroModulRNN
 from .subject_encoding import SubjectEncodingConfig
 
@@ -223,6 +227,13 @@ def save_meta_checkpoint(
             "n_items": 8,
             "connected_sparse_graph": True,
             "liu_graph_held_out": True,
+            "held_out_rank_graph_signatures": [
+                [list(pair) for pair in signature]
+                for signature in sorted(held_out_liu_graph_signatures())
+            ],
+            "held_out_graph_scope": (
+                "source-correct Liu graph and its rank-axis reflection"
+            ),
             "query_labels_enter_episode_inputs": False,
             "query_fast_weights": "frozen",
             "query_time_channel": "constant_at_support_query_boundary",
