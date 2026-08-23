@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-assembly-slope-hodge-v1",
+  "registration_status": "frozen_after_pilot_review_before_read_only_diagnostic_execution",
+  "registration_parent_commit": "1d8155821ac8f2c4b343d9f28aaf7d0220ace187",
+  "scientific_question": "Does the excessive neural symbolic-distance slope arise from the stable-omission evidence model, neural over-sharpening, or a missing human local/conjunctive component?",
+  "claim_boundary": "This is a two-seed mechanism diagnostic on frozen pilot checkpoints, not a formal confirmation gate and not evidence for a new architecture.",
+  "positive_evidence_backbone": [
+    "held-out sparse-graph transfer",
+    "episode-local fast-weight necessity",
+    "human-scale individuality under stable subject-specific omission",
+    "antisymmetric subjective-rank geometry"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1",
+      "cohort": "all 77 source-eligible participants"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "field_contract": {
+    "edge_order": "all unordered item pairs in lexicographic integer order",
+    "sign": "positive means the first item is preferred as higher",
+    "human_choice_preference": "2 * observed pair choice probability - 1, reconstructed from ten trials per pair",
+    "neural_choice_preference": "2 * sigmoid(orientation-antisymmetric logit margin / 0.25) - 1",
+    "neural_logit_margin": "0.5 * (logit(i,j) - logit(j,i))",
+    "exact_posterior_preference": "2 * P(i ranks higher than j | realized support evidence) - 1",
+    "hodge_decomposition": "orthogonal complete-graph projection F_ij = (s_i - s_j) + c_ij",
+    "group_estimand": "decompose the cohort-mean field; bootstrap subjects before taking each cohort mean",
+    "human_sampling_boundary": "primary cross-source inference uses the 77-subject cohort mean so finite ten-trial pair noise is averaged rather than mistaken for individual conjunctive code"
+  },
+  "primary_metrics": [
+    "total_accuracy_slope",
+    "gradient_accuracy_slope",
+    "residual_accuracy_slope",
+    "gradient_energy_fraction",
+    "mean_absolute_residual",
+    "learned_absolute_residual_effect_adjusted_for_symbolic_distance",
+    "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance"
+  ],
+  "secondary_metrics": [
+    "registered_sampled_neural_slope",
+    "neural_logit_gradient_energy_fraction",
+    "neural_logit_learned_residual_effects"
+  ],
+  "bootstrap": {
+    "unit": "subject",
+    "samples": 10000,
+    "interval": 0.95,
+    "seed": 20260823,
+    "neural_vs_posterior": "paired by virtual-subject realized evidence",
+    "human_vs_model": "independent participant and virtual-subject resampling"
+  },
+  "directional_diagnosis": {
+    "confidence_rule": "the registered 95% bootstrap difference interval must exclude zero in the stated direction",
+    "evidence_model_contribution": "lower bound of exact_posterior minus human total_accuracy_slope is greater than zero",
+    "neural_over_sharpening": "lower bound of neural minus exact_posterior total_accuracy_slope is greater than zero",
+    "human_mixed_code_signal": [
+      "lower bound of neural minus human gradient_energy_fraction is greater than zero",
+      "lower bound of human minus neural learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance is greater than zero"
+    ],
+    "non_equivalence_rule": "failure to exclude zero is unresolved and must not be described as equivalence"
+  },
+  "reporting": {
+    "all_pilot_seeds_required": true,
+    "seed_filtering": "forbidden",
+    "temperature_refit": "forbidden",
+    "checkpoint_selection": "forbidden",
+    "negative_results": "retain and use to select the next mechanism test"
+  },
+  "next_test_logic": {
+    "evidence_model_only": "test magnitude compression and evidence uncertainty without changing the frozen pilot baseline",
+    "neural_over_sharpening_only": "test learned-prior or neural readout/dynamics explanations",
+    "human_mixed_code_signal": "test whether an emergent or explicit local relational trace complements global assembly",
+    "unresolved": "proceed to intermediate-fast-weight trajectory and leave-one-relation-out analyses before architecture changes"
+  }
+}
