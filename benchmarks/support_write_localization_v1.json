@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-support-write-localization-v1",
+  "registration_status": "frozen_after_trajectory_review_before_implementation_and_execution",
+  "registration_parent_commit": "7bc498d47c8e4dc99559f55799933c8aa1e2df3f",
+  "scientific_question": "How does neuromodulated plasticity convert one local support observation into a state-dependent global update of an episode-specific expected-rank potential?",
+  "claim_boundary": "This is a read-only two-seed mechanism diagnostic on frozen pilot checkpoints. It does not train, alter the architecture or checkpoint, tune the slope, access formal seeds, or establish a biological identity for the modeled DA signal.",
+  "working_theory": {
+    "meta_parameters": "theta, especially alpha, specify an additive relational hypothesis class and a structural plasticity map",
+    "episode_state": "P_t selects and progressively assembles episode-specific content within that class",
+    "algorithmic_target": "the centered vector q_i(D) = -E[rank_i | D], which is equivalent after normalization to the complete-graph posterior Hodge potential",
+    "state_dependence": "a relation update is f_theta(e_t, P_(t-1)), not an independently correct transitive message"
+  },
+  "primary_questions": [
+    "Does relation information enter the fast-weight write mainly through the scalar DA change or the evidence-dependent eligibility pattern?",
+    "Does the trained alpha arrangement convert the matched eligibility write into a more posterior-update-aligned global potential change than scale-matched unstructured controls?",
+    "Does the matched neural potential update track the exact posterior expected-rank innovation rather than a fixed true-order message?",
+    "Is late attenuation caused by literal clipping, write-generation or functional saturation, or relation-specific evidence assimilation?"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "trajectory_specification": {
+      "path": "benchmarks/assembly_trajectory_v1.json",
+      "sha256": "9fb6eed990e20403180f224be0a0ee81ff1e39e9fcf02ac03f674be4b37f67f6"
+    },
+    "trajectory_result": {
+      "path": "results/assembly_trajectory_v1.json",
+      "sha256": "0d47b8b5e61c3b05e0e8cbfe20b3c3f92d89f2d8a6f26388fbff13437a676b3c"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "support_trials": 32,
+    "support_steps": [0, 1, 2, 3],
+    "relation_exposures": [1, 2, 3, 4],
+    "training": "forbidden",
+    "architecture_or_checkpoint_change": "forbidden",
+    "formal_seed_access": "forbidden",
+    "seed_or_subject_filtering": "forbidden",
+    "temperature_or_threshold_refit": "forbidden",
+    "floating_zero_tolerance": 1e-07,
+    "potential_zero_tolerance": 1e-12,
+    "alpha_shuffle_seed": 20260823
+  },
+  "step_trace_contract": {
+    "state_reset": "hidden state and eligibility are zeroed at the start of every support trial while accumulated P is retained",
+    "update_order": [
+      "compute h_(k+1) from x_k, h_k, and W + alpha elementwise-multiplied by P_k",
+      "compute scalar d_k from h_(k+1)",
+      "form intended write U_k = d_k E_k using eligibility before its update",
+      "clip P_k + U_k elementwise to [-50, 50]",
+      "update eligibility from h_(k+1) and h_k"
+    ],
+    "registered_timing_prediction": "steps 0 and 1 have E_k = 0 and no actual write; relation-induced writes first occur at steps 2 and 3",
+    "recorded_per_step": [
+      "d_k",
+      "E_k before update",
+      "intended U_k = d_k E_k",
+      "actual clipped P increment",
+      "effective increment alpha elementwise-multiplied by the actual P increment",
+      "clip fraction and pre-clip excess mass"
+    ]
+  },
+  "matched_evidence_contract": {
+    "plus_branch": "P_t+ starts at the natural P_(t-1) and uses the registered cues, orientation, time, and signed magnitude times stable reliability",
+    "zero_branch": "P_t0 starts at the identical natural P_(t-1), preserves cues, orientation, time, and recurrent steps, and sets only signed magnitude to zero",
+    "primary_relation_write": "delta U_(t,k) = d+_(t,k) E+_(t,k) - d0_(t,k) E0_(t,k)",
+    "primary_effective_write": "delta M_(t,k) = alpha elementwise-multiplied by delta U_(t,k)",
+    "primary_policy_update": "delta s_t = s(P_t+) - s(P_t0), with s the centered Hodge potential of all 28 frozen query margins",
+    "negative_control": "stable-omitted trials must have zero delta U, delta M, delta s, and exact innovation within floating tolerance"
+  },
+  "da_eligibility_decomposition": {
+    "da_component": "delta U_DA = 0.5 * (d+ - d0) * (E+ + E0)",
+    "eligibility_component": "delta U_E = 0.5 * (d+ + d0) * (E+ - E0)",
+    "identity": "delta U = delta U_DA + delta U_E exactly before clipping",
+    "primary_metrics": [
+      "Frobenius norms before and after alpha",
+      "component cosine and signed cross-energy",
+      "each component cosine to the total effective write",
+      "decomposition max-absolute residual"
+    ],
+    "functional_replay": "add each summed pre-clip component separately to the final zero-branch P state and measure its frozen-query potential effect under the original alpha",
+    "interpretation": "norm dominance identifies write direction, while functional replay measures downstream consequence; non-additivity of policy effects is retained rather than forced into an additive attribution"
+  },
+  "alpha_structure_controls": {
+    "baseline_effective_connectivity": "M0 = alpha elementwise-multiplied by P_t0 is held fixed",
+    "actual_increment": "delta M = alpha elementwise-multiplied by delta U",
+    "scalar_control": "replace delta M by c_s delta U for each subject, choosing c_s to match the actual delta M Frobenius norm",
+    "shuffled_control": "elementwise-multiply delta U by one preregistered permutation of alpha entries, then norm-match each subject to actual delta M",
+    "query_implementation": "query the same frozen network with explicit effective recurrent modulation M0 plus each increment; validate that M = alpha elementwise-multiplied by P reproduces the standard evaluator",
+    "primary_metrics": [
+      "cosine of the induced potential update to exact delta q",
+      "induced update norm",
+      "Hodge gradient fraction of the induced pair-margin update"
+    ],
+    "boundary": "these controls isolate alpha's expression map around the observed zero-branch state; they do not remove alpha from the support dynamics that generated eligibility"
+  },
+  "exact_innovation_contract": {
+    "potential": "q_t is centered negative posterior expected rank under the frozen exact likelihood and temperature",
+    "direction": "delta q_t = q_t - q_(t-1)",
+    "information_gain": "KL[p(pi | D_1:t) || p(pi | D_1:t-1)]",
+    "entropy_reduction": "H_(t-1) - H_t",
+    "primary_alignment": "cosine(delta s_t, delta q_t)",
+    "fixed_message_comparator": "cosine(delta s_t, the registered true-order potential)",
+    "da_gain_estimands": [
+      "within-subject Spearman correlation of exact information gain with sum over effective steps of abs(d+)",
+      "within-subject Spearman correlation of exact information gain with sum over effective steps of abs(d+ - d0)",
+      "the analogous correlations with norm(delta q_t)"
+    ],
+    "directional_rule": "inference-aligned updating requires the subject-bootstrap lower bound of retained-trial cosine(delta s, delta q) to exceed zero in both pilot seeds"
+  },
+  "attenuation_and_assimilation": {
+    "literal_clip_saturation": "record the fraction of pre-clip P entries outside [-50, 50] and their mean excess magnitude",
+    "write_generation": "summed effective-write Frobenius norm by relation exposure 1 through 4",
+    "functional_gain": "norm(delta s_t) divided by norm(sum_k delta M_(t,k))",
+    "history_control_state": "for each subject and current relation e, replay every earlier support slot while zeroing only earlier presentations of e; keep every other relation, cue, orientation, and time",
+    "history_control_estimand": "for exposures 2 through 4, compare the current matched update norm from the no-prior-e state against the same update from natural P_(t-1)",
+    "assimilation_direction": "relation-specific assimilation is supported when the subject-bootstrap lower bound of no-prior-e minus natural policy-update norm is above zero in both seeds",
+    "interpretation": "restoration under the history control supports evidence redundancy or assimilation; declining write norm without clipping supports write-generation attenuation; declining functional gain supports state-dependent policy saturation"
+  },
+  "bootstrap": {
+    "unit": "virtual subject; repeated trials, steps, and relations are averaged within subject before resampling",
+    "samples": 10000,
+    "interval": 0.95,
+    "seed": 20260823,
+    "paired_comparisons": "all matched branches, component replays, alpha controls, exposure contrasts, and history controls resample the same subjects",
+    "non_equivalence_rule": "failure to exclude zero is unresolved and must not be called equivalence"
+  },
+  "decision_logic": {
+    "write_timing": "steps 0 and 1 must remain within zero tolerance and retained steps 2 or 3 must have a positive effective-write norm",
+    "eligibility_direction_dominance": "the retained-trial eligibility-component effective norm exceeds the DA-component norm with a positive paired bootstrap interval in both seeds",
+    "alpha_structural_mapping": "actual-alpha delta-s to delta-q cosine exceeds both norm-matched scalar and shuffled-alpha controls with positive paired intervals in both seeds",
+    "posterior_innovation_tracking": "retained-trial delta-s to delta-q cosine has a positive lower interval in both seeds",
+    "da_innovation_signal": "the across-subject mean within-subject Spearman association between DA gain and exact information gain has a positive lower interval in both seeds",
+    "literal_saturation": "any nonzero clip fraction is reported; practical literal saturation requires more than 1e-6 of traced entries to exceed the clip bound",
+    "relation_specific_assimilation": "no-prior-relation history restores current policy-update norm at exposures 2 through 4 with a positive lower interval in both seeds",
+    "negative_results": "failed directions revise the three-factor assignment or attenuation mechanism; they do not erase validated fast-weight necessity, global causal reach, or distributional-potential alignment"
+  },
+  "reporting": {
+    "all_pilot_seeds_required": true,
+    "positive_and_negative_results_required": true,
+    "raw_subject_level_metrics_required": true,
+    "formal_confirmation_status": "deferred",
+    "next_step_rule": "do not change architecture or run formal seeds until DA, eligibility, alpha, and state-dependence roles are localized from the joint registered pattern"
+  }
+}
