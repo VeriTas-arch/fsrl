@@ -99,6 +99,8 @@ mechanism pilots. See
 [`results/history_state_factorial_v1.json`](results/history_state_factorial_v1.json),
 and the frozen formal mechanism contract
 [`benchmarks/mechanism_confirmation_v1.json`](benchmarks/mechanism_confirmation_v1.json).
+The source-locked formal runner and serial execution commands are documented in
+[`docs/mechanism_confirmation_protocol.md`](docs/mechanism_confirmation_protocol.md).
 
 ## Original README
 

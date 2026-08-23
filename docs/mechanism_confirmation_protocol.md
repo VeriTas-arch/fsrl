@@ -73,3 +73,37 @@ No formal seed should be trained, loaded, evaluated, or listed until this
 contract is committed and pushed. Once formal access begins, this file is
 immutable; a scientifically motivated revision requires
 `mechanism_confirmation_v2`.
+
+## Source-locked execution
+
+Validate the frozen sources and reproduce all three development components
+through the formal adapter before accessing formal artifacts:
+
+```bash
+direnv exec . python -m fsrl.mechanism_confirmation validate
+direnv exec . python -m fsrl.mechanism_confirmation validate-development
+```
+
+Then process seeds 2001 through 2010 serially. For each seed, the old workflow
+trains and evaluates the frozen `confirmation_v1`; the mechanism workflow then
+registers the checkpoint, behavior, qualification, adapters, and three raw
+component artifacts by SHA-256:
+
+```bash
+direnv exec . python -m fsrl.confirmation run-seed --seed 2001
+direnv exec . python -m fsrl.mechanism_confirmation run-seed --seed 2001
+```
+
+Do not inspect or aggregate scientific outcomes between seeds. After all ten
+seed-level artifacts exist, aggregate both contracts without optional
+omissions:
+
+```bash
+direnv exec . python -m fsrl.confirmation aggregate \
+  --output results/confirmation_v1.json
+direnv exec . python -m fsrl.mechanism_confirmation aggregate
+```
+
+The mechanism aggregate first reduces within each network, then applies the
+registered 10,000-sample bootstrap across the ten network-seed means. It reports
+all linkwise outcomes even when the complete-chain conjunction fails.
