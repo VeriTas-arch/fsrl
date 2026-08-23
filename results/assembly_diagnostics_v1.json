@@ -1,0 +1,1438 @@
+{
+  "artifact_validation": {
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "pilot_artifacts": [
+      {
+        "behavior": {
+          "path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+          "sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+        },
+        "checkpoint": {
+          "path": "output/pilot-v1/seed-1901/net.dat",
+          "sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14"
+        },
+        "config": {
+          "path": "output/pilot-v1/seed-1901/config.json",
+          "sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b"
+        },
+        "seed": 1901
+      },
+      {
+        "behavior": {
+          "path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+          "sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+        },
+        "checkpoint": {
+          "path": "output/pilot-v1/seed-1902/net.dat",
+          "sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da"
+        },
+        "config": {
+          "path": "output/pilot-v1/seed-1902/config.json",
+          "sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90"
+        },
+        "seed": 1902
+      }
+    ],
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    }
+  },
+  "bootstrap": {
+    "human_vs_model": "independent participant and virtual-subject resampling",
+    "interval": 0.95,
+    "neural_vs_posterior": "paired by virtual-subject realized evidence",
+    "samples": 10000,
+    "seed": 20260823,
+    "unit": "subject"
+  },
+  "claim_boundary": "This is a two-seed mechanism diagnostic on frozen pilot checkpoints, not a formal confirmation gate and not evidence for a new architecture.",
+  "device": {
+    "neural_readout": "cuda",
+    "posterior_hodge_bootstrap": "cpu_numpy"
+  },
+  "diagnostic_id": "liu-assembly-slope-hodge-v1",
+  "estimand": {
+    "edge_order": "all unordered item pairs in lexicographic integer order",
+    "exact_posterior_preference": "2 * P(i ranks higher than j | realized support evidence) - 1",
+    "group_estimand": "decompose the cohort-mean field; bootstrap subjects before taking each cohort mean",
+    "hodge_decomposition": "orthogonal complete-graph projection F_ij = (s_i - s_j) + c_ij",
+    "human_choice_preference": "2 * observed pair choice probability - 1, reconstructed from ten trials per pair",
+    "human_sampling_boundary": "primary cross-source inference uses the 77-subject cohort mean so finite ten-trial pair noise is averaged rather than mistaken for individual conjunctive code",
+    "neural_choice_preference": "2 * sigmoid(orientation-antisymmetric logit margin / 0.25) - 1",
+    "neural_logit_margin": "0.5 * (logit(i,j) - logit(j,i))",
+    "sign": "positive means the first item is preferred as higher"
+  },
+  "exact_posterior_choice_field": {
+    "bootstrap": {
+      "gradient_accuracy_slope": {
+        "bootstrap_mean": 0.11053283202045994,
+        "lower": 0.1039666331758071,
+        "upper": 0.11636553356165644
+      },
+      "gradient_energy_fraction": {
+        "bootstrap_mean": 0.7816927019164798,
+        "lower": 0.7685468512230442,
+        "upper": 0.7954188116040392
+      },
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+        "bootstrap_mean": 0.025346681897130047,
+        "lower": 0.014619182250051337,
+        "upper": 0.0365886375128185
+      },
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+        "bootstrap_mean": 0.011305514385427668,
+        "lower": 0.005710285845784522,
+        "upper": 0.017541612550249712
+      },
+      "mean_absolute_residual": {
+        "bootstrap_mean": 0.3582627653481437,
+        "lower": 0.3354430555408519,
+        "upper": 0.3793162145537423
+      },
+      "mean_absolute_residual_learned": {
+        "bootstrap_mean": 0.3364322397037625,
+        "lower": 0.32134267330017235,
+        "upper": 0.35026892035365204
+      },
+      "mean_absolute_residual_nonlearned": {
+        "bootstrap_mean": 0.36699497560589617,
+        "lower": 0.3408120685601412,
+        "upper": 0.391163784746775
+      },
+      "mean_correctness_aligned_residual_accuracy_learned": {
+        "bootstrap_mean": 0.06007636070316099,
+        "lower": 0.05606441810237213,
+        "upper": 0.06350973948999969
+      },
+      "mean_correctness_aligned_residual_accuracy_nonlearned": {
+        "bootstrap_mean": 0.11964351032459108,
+        "lower": 0.11038340187442974,
+        "upper": 0.12807978182539434
+      },
+      "residual_accuracy_slope": {
+        "bootstrap_mean": -0.10447622984110617,
+        "lower": -0.11066165146709073,
+        "upper": -0.09766307296290386
+      },
+      "total_accuracy_slope": {
+        "bootstrap_mean": 0.006056602179353774,
+        "lower": 0.0018313540541535457,
+        "upper": 0.010108766649045052
+      }
+    },
+    "distance_profiles": {
+      "gradient_linear_accuracy_component": {
+        "1": 0.6097864218124837,
+        "2": 0.722920772751359,
+        "3": 0.8398325761665631,
+        "4": 0.9550100755215458,
+        "5": 1.066387626944272,
+        "6": 1.1687623182540772,
+        "7": 1.268504952687386
+      },
+      "residual_linear_accuracy_contribution": {
+        "1": 0.29799946537658484,
+        "2": 0.20957862960635698,
+        "3": 0.11653049629428558,
+        "4": 0.0012405336374295972,
+        "5": -0.10529514725322531,
+        "6": -0.21144855531599338,
+        "7": -0.32170513184789085
+      },
+      "total_accuracy": {
+        "1": 0.9077858871890685,
+        "2": 0.932499402357716,
+        "3": 0.9563630724608487,
+        "4": 0.9562506091589754,
+        "5": 0.9610924796910467,
+        "6": 0.9573137629380838,
+        "7": 0.9467998208394951
+      }
+    },
+    "point": {
+      "gradient_accuracy_slope": 0.11051406194313758,
+      "gradient_energy_fraction": 0.7819032149764993,
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.02486668640572023,
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.011315689799275197,
+      "mean_absolute_residual": 0.35766369214295,
+      "mean_absolute_residual_learned": 0.3357232301468852,
+      "mean_absolute_residual_nonlearned": 0.366439876941376,
+      "mean_correctness_aligned_residual_accuracy_learned": 0.060018516361838255,
+      "mean_correctness_aligned_residual_accuracy_nonlearned": 0.11952234180805613,
+      "residual_accuracy_slope": -0.10439263589520142,
+      "total_accuracy_slope": 0.006121426047936153
+    },
+    "subject_level_descriptive": {
+      "gradient_accuracy_slope": {
+        "lower_quartile": 0.11579879092487431,
+        "mean": 0.11051406194313755,
+        "median": 0.12368127831895703,
+        "upper_quartile": 0.12475649345610397
+      },
+      "gradient_energy_fraction": {
+        "lower_quartile": 0.7532534171022174,
+        "mean": 0.7790917498734979,
+        "median": 0.7623862854467127,
+        "upper_quartile": 0.81428945488057
+      },
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+        "lower_quartile": 0.0004498921449202914,
+        "mean": 0.018893615934830514,
+        "median": 0.008630922661332613,
+        "upper_quartile": 0.028708559404085558
+      },
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+        "lower_quartile": 0.00027885231640911723,
+        "mean": 0.011315689799275193,
+        "median": 0.004391807249830307,
+        "upper_quartile": 0.013228719407651857
+      },
+      "mean_absolute_residual": {
+        "lower_quartile": 0.34080096598294357,
+        "mean": 0.3670700830726118,
+        "median": 0.4101780425925773,
+        "upper_quartile": 0.42434774375408707
+      },
+      "mean_absolute_residual_learned": {
+        "lower_quartile": 0.3312960922916036,
+        "mean": 0.341238937773666,
+        "median": 0.3701044199767287,
+        "upper_quartile": 0.37469369403195685
+      },
+      "mean_absolute_residual_nonlearned": {
+        "lower_quartile": 0.34364403635168345,
+        "mean": 0.37740254119219013,
+        "median": 0.43155512588236444,
+        "upper_quartile": 0.4456047913722202
+      },
+      "mean_correctness_aligned_residual_accuracy_learned": {
+        "lower_quartile": 0.05879720344168858,
+        "mean": 0.060018516361838234,
+        "median": 0.06295880340224114,
+        "upper_quartile": 0.06551115726055709
+      },
+      "mean_correctness_aligned_residual_accuracy_nonlearned": {
+        "lower_quartile": 0.10646088320410693,
+        "mean": 0.11952234180805613,
+        "median": 0.1379853252393178,
+        "upper_quartile": 0.14801187120862933
+      },
+      "residual_accuracy_slope": {
+        "lower_quartile": -0.1236979652568081,
+        "mean": -0.10439263589520136,
+        "median": -0.11787626383629489,
+        "upper_quartile": -0.09846388629056443
+      },
+      "total_accuracy_slope": {
+        "lower_quartile": 0.0004662330777436413,
+        "mean": 0.00612142604793619,
+        "median": 0.0023791235689491486,
+        "upper_quartile": 0.01231863758006635
+      }
+    },
+    "subjects": 77
+  },
+  "exact_posterior_minus_human": {
+    "bootstrap": {
+      "gradient_accuracy_slope": {
+        "bootstrap_mean": 0.008618970990333614,
+        "lower": 0.0004029230733762643,
+        "upper": 0.016270393501767594
+      },
+      "gradient_energy_fraction": {
+        "bootstrap_mean": -0.11362033172564492,
+        "lower": -0.13416913053274634,
+        "upper": -0.09268666698930181
+      },
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+        "bootstrap_mean": -0.07853516636516593,
+        "lower": -0.11233109191308967,
+        "upper": -0.044286706133549694
+      },
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+        "bootstrap_mean": -0.04472418769938622,
+        "lower": -0.06544493526487248,
+        "upper": -0.02341726280029532
+      },
+      "mean_absolute_residual": {
+        "bootstrap_mean": 0.1579338135856205,
+        "lower": 0.1238154839266172,
+        "upper": 0.1916217254227821
+      },
+      "mean_absolute_residual_learned": {
+        "bootstrap_mean": 0.0718145935998664,
+        "lower": 0.04347998102617848,
+        "upper": 0.10090420422759759
+      },
+      "mean_absolute_residual_nonlearned": {
+        "bootstrap_mean": 0.19238150157992212,
+        "lower": 0.15296996494189374,
+        "upper": 0.23172878722368304
+      },
+      "mean_correctness_aligned_residual_accuracy_learned": {
+        "bootstrap_mean": -0.003904430692942934,
+        "lower": -0.016488430892406414,
+        "upper": 0.00925126212520616
+      },
+      "mean_correctness_aligned_residual_accuracy_nonlearned": {
+        "bootstrap_mean": 0.07153380902588978,
+        "lower": 0.05672043791874358,
+        "upper": 0.08688875575222242
+      },
+      "residual_accuracy_slope": {
+        "bootstrap_mean": -0.042409097983168186,
+        "lower": -0.05276018129456855,
+        "upper": -0.032299109429834764
+      },
+      "total_accuracy_slope": {
+        "bootstrap_mean": -0.033790126992834575,
+        "lower": -0.04036824139658032,
+        "upper": -0.02746666352408727
+      }
+    },
+    "estimand": "first minus second",
+    "point": {
+      "gradient_accuracy_slope": 0.008597594057281943,
+      "gradient_energy_fraction": -0.11529950020640134,
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": -0.08163328128827722,
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": -0.04453492724537156,
+      "mean_absolute_residual": 0.1591015400093693,
+      "mean_absolute_residual_learned": 0.0713563470300021,
+      "mean_absolute_residual_nonlearned": 0.19419961720111623,
+      "mean_correctness_aligned_residual_accuracy_learned": -0.003861353768031893,
+      "mean_correctness_aligned_residual_accuracy_nonlearned": 0.07134052362623794,
+      "residual_accuracy_slope": -0.04230477477672805,
+      "total_accuracy_slope": -0.03370718071944611
+    }
+  },
+  "human_choice_field": {
+    "bootstrap": {
+      "gradient_accuracy_slope": {
+        "bootstrap_mean": 0.10191386103012631,
+        "lower": 0.09670819253025885,
+        "upper": 0.10657971110522127
+      },
+      "gradient_energy_fraction": {
+        "bootstrap_mean": 0.8953130336421247,
+        "lower": 0.8794306331443007,
+        "upper": 0.9109289085099892
+      },
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+        "bootstrap_mean": 0.10388184826229599,
+        "lower": 0.07122767296274755,
+        "upper": 0.1356251211475091
+      },
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+        "bootstrap_mean": 0.05602970208481388,
+        "lower": 0.03544862268742852,
+        "upper": 0.07635519642049476
+      },
+      "mean_absolute_residual": {
+        "bootstrap_mean": 0.20032895176252322,
+        "lower": 0.1745582096474953,
+        "upper": 0.22648480983302413
+      },
+      "mean_absolute_residual_learned": {
+        "bootstrap_mean": 0.26461764610389615,
+        "lower": 0.2394480519480519,
+        "upper": 0.28904423701298715
+      },
+      "mean_absolute_residual_nonlearned": {
+        "bootstrap_mean": 0.17461347402597402,
+        "lower": 0.14474025974025972,
+        "upper": 0.20571590909090914
+      },
+      "mean_correctness_aligned_residual_accuracy_learned": {
+        "bootstrap_mean": 0.06398079139610392,
+        "lower": 0.051542207792207834,
+        "upper": 0.0762581168831169
+      },
+      "mean_correctness_aligned_residual_accuracy_nonlearned": {
+        "bootstrap_mean": 0.0481097012987013,
+        "lower": 0.03569764610389613,
+        "upper": 0.06014650974025976
+      },
+      "residual_accuracy_slope": {
+        "bootstrap_mean": -0.062067131857937975,
+        "lower": -0.06976889522042584,
+        "upper": -0.05405991861030128
+      },
+      "total_accuracy_slope": {
+        "bootstrap_mean": 0.03984672917218835,
+        "lower": 0.03479120284477428,
+        "upper": 0.04485408384132874
+      }
+    },
+    "distance_profiles": {
+      "gradient_linear_accuracy_component": {
+        "1": 0.6035018552875695,
+        "2": 0.6984848484848486,
+        "3": 0.7950324675324675,
+        "4": 0.9025974025974025,
+        "5": 0.9917207792207791,
+        "6": 1.0954545454545455,
+        "7": 1.224512987012987
+      },
+      "residual_linear_accuracy_contribution": {
+        "1": 0.12525510204081647,
+        "2": 0.11818181818181817,
+        "3": 0.09743506493506493,
+        "4": 0.00032467532467539417,
+        "5": -0.025487012987012836,
+        "6": -0.14155844155844166,
+        "7": -0.24009740259740253
+      },
+      "total_accuracy": {
+        "1": 0.728756957328386,
+        "2": 0.8166666666666668,
+        "3": 0.8924675324675324,
+        "4": 0.9029220779220779,
+        "5": 0.9662337662337662,
+        "6": 0.9538961038961038,
+        "7": 0.9844155844155844
+      }
+    },
+    "point": {
+      "gradient_accuracy_slope": 0.10191646788585564,
+      "gradient_energy_fraction": 0.8972027151829006,
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.10649996769399746,
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.05585061704464676,
+      "mean_absolute_residual": 0.19856215213358072,
+      "mean_absolute_residual_learned": 0.2643668831168831,
+      "mean_absolute_residual_nonlearned": 0.17224025974025975,
+      "mean_correctness_aligned_residual_accuracy_learned": 0.06387987012987015,
+      "mean_correctness_aligned_residual_accuracy_nonlearned": 0.04818181818181818,
+      "residual_accuracy_slope": -0.06208786111847337,
+      "total_accuracy_slope": 0.039828606767382264
+    },
+    "subject_level_descriptive": {
+      "gradient_accuracy_slope": {
+        "lower_quartile": 0.09472789115646259,
+        "mean": 0.10191646788585564,
+        "median": 0.10892857142857143,
+        "upper_quartile": 0.11774659863945577
+      },
+      "gradient_energy_fraction": {
+        "lower_quartile": 0.7676229508196722,
+        "mean": 0.7956749031155543,
+        "median": 0.7927682737169517,
+        "upper_quartile": 0.8179117147707979
+      },
+      "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+        "lower_quartile": -0.011470425649530207,
+        "mean": 0.038595622177711696,
+        "median": 0.03485351022664504,
+        "upper_quartile": 0.1002763957987841
+      },
+      "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+        "lower_quartile": 0.000967385295743195,
+        "mean": 0.05585061704464675,
+        "median": 0.05035931453841881,
+        "upper_quartile": 0.09762299613045863
+      },
+      "mean_absolute_residual": {
+        "lower_quartile": 0.3267857142857143,
+        "mean": 0.3599953617810761,
+        "median": 0.37321428571428567,
+        "upper_quartile": 0.4053571428571429
+      },
+      "mean_absolute_residual_learned": {
+        "lower_quartile": 0.31250000000000006,
+        "mean": 0.3687500000000001,
+        "median": 0.36874999999999997,
+        "upper_quartile": 0.4124999999999999
+      },
+      "mean_absolute_residual_nonlearned": {
+        "lower_quartile": 0.325,
+        "mean": 0.35649350649350653,
+        "median": 0.3700000000000001,
+        "upper_quartile": 0.39749999999999996
+      },
+      "mean_correctness_aligned_residual_accuracy_learned": {
+        "lower_quartile": 0.043750000000000046,
+        "mean": 0.06387987012987016,
+        "median": 0.06250000000000006,
+        "upper_quartile": 0.08750000000000006
+      },
+      "mean_correctness_aligned_residual_accuracy_nonlearned": {
+        "lower_quartile": 0.004999999999999999,
+        "mean": 0.04818181818181819,
+        "median": 0.05124999999999998,
+        "upper_quartile": 0.085
+      },
+      "residual_accuracy_slope": {
+        "lower_quartile": -0.0913350340136054,
+        "mean": -0.062087861118473385,
+        "median": -0.06177721088435374,
+        "upper_quartile": -0.0363690476190476
+      },
+      "total_accuracy_slope": {
+        "lower_quartile": 0.026122448979591838,
+        "mean": 0.03982860676738228,
+        "median": 0.04074829931972789,
+        "upper_quartile": 0.05513605442176869
+      }
+    },
+    "subjects": 77
+  },
+  "overall_diagnosis": {
+    "evidence_model_contribution": false,
+    "formal_confirmation_status": "deferred; frozen contract remains unchanged",
+    "human_mixed_code_signal_replicated_across_pilot_seeds": true,
+    "neural_over_sharpening_replicated_across_pilot_seeds": true,
+    "next_mechanism_test": "test local/conjunctive traces alongside the preserved global assembly baseline"
+  },
+  "pilot_seeds": {
+    "1901": {
+      "comparisons": {
+        "human_minus_neural": {
+          "bootstrap": {
+            "gradient_accuracy_slope": {
+              "bootstrap_mean": 0.006493869932414426,
+              "lower": -0.001564065833848562,
+              "upper": 0.01490383961821057
+            },
+            "gradient_energy_fraction": {
+              "bootstrap_mean": -0.0389793574391859,
+              "lower": -0.06105949668375779,
+              "upper": -0.016232442742151677
+            },
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.07314899528786,
+              "lower": 0.03022893089700966,
+              "upper": 0.11735688830113501
+            },
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.04300913544294009,
+              "lower": 0.01607298347021744,
+              "upper": 0.06987550950163468
+            },
+            "mean_absolute_residual": {
+              "bootstrap_mean": 0.03929708076479809,
+              "lower": 0.0013417180273238185,
+              "upper": 0.07644243498895775
+            },
+            "mean_absolute_residual_learned": {
+              "bootstrap_mean": 0.08412890305068363,
+              "lower": 0.04295711711231564,
+              "upper": 0.12388165695243747
+            },
+            "mean_absolute_residual_nonlearned": {
+              "bootstrap_mean": 0.021364351850443882,
+              "lower": -0.020599375065868952,
+              "upper": 0.06347372522049229
+            },
+            "mean_correctness_aligned_residual_accuracy_learned": {
+              "bootstrap_mean": 0.03136526427591656,
+              "lower": 0.014470575890809259,
+              "upper": 0.04820439417232362
+            },
+            "mean_correctness_aligned_residual_accuracy_nonlearned": {
+              "bootstrap_mean": 0.003443993246269006,
+              "lower": -0.0134403172604327,
+              "upper": 0.020060382327576683
+            },
+            "residual_accuracy_slope": {
+              "bootstrap_mean": -0.013665641988881629,
+              "lower": -0.026022704330600246,
+              "upper": -0.0011998890296639505
+            },
+            "total_accuracy_slope": {
+              "bootstrap_mean": -0.007171772056467199,
+              "lower": -0.014395208895986252,
+              "upper": 5.737458329164523e-05
+            }
+          },
+          "estimand": "first minus second",
+          "point": {
+            "gradient_accuracy_slope": 0.006470070849145401,
+            "gradient_energy_fraction": -0.03959259294851247,
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.07377556699282717,
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.042740536338926924,
+            "mean_absolute_residual": 0.039586713236433924,
+            "mean_absolute_residual_learned": 0.08478405202796777,
+            "mean_absolute_residual_nonlearned": 0.021507777719820376,
+            "mean_correctness_aligned_residual_accuracy_learned": 0.031242775766084224,
+            "mean_correctness_aligned_residual_accuracy_nonlearned": 0.0035566304720602154,
+            "residual_accuracy_slope": -0.01367502951429337,
+            "total_accuracy_slope": -0.007204958665147969
+          }
+        },
+        "neural_minus_exact_posterior": {
+          "bootstrap": {
+            "gradient_accuracy_slope": {
+              "bootstrap_mean": -0.01511284092274804,
+              "lower": -0.019201311557227735,
+              "upper": -0.011247444331110861
+            },
+            "gradient_energy_fraction": {
+              "bootstrap_mean": 0.1525996891648308,
+              "lower": 0.13410259357328624,
+              "upper": 0.17151681455029125
+            },
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.005386171077305929,
+              "lower": -0.023470967571965703,
+              "upper": 0.033545333010913045
+            },
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.001715052256446127,
+              "lower": -0.015375477607723497,
+              "upper": 0.018790173179234603
+            },
+            "mean_absolute_residual": {
+              "bootstrap_mean": -0.1972308943504186,
+              "lower": -0.22157485514428285,
+              "upper": -0.17352393524827667
+            },
+            "mean_absolute_residual_learned": {
+              "bootstrap_mean": -0.15594349665055002,
+              "lower": -0.1847183067858082,
+              "upper": -0.12732989554225013
+            },
+            "mean_absolute_residual_nonlearned": {
+              "bootstrap_mean": -0.21374585343036606,
+              "lower": -0.23998061197809858,
+              "upper": -0.18809845644460693
+            },
+            "mean_correctness_aligned_residual_accuracy_learned": {
+              "bootstrap_mean": -0.027460833582973625,
+              "lower": -0.03864327705684507,
+              "upper": -0.016889306124387878
+            },
+            "mean_correctness_aligned_residual_accuracy_nonlearned": {
+              "bootstrap_mean": -0.07497780227215878,
+              "lower": -0.08597125150599526,
+              "upper": -0.06435645037490835
+            },
+            "residual_accuracy_slope": {
+              "bootstrap_mean": 0.056074739972049814,
+              "lower": 0.04799256125983373,
+              "upper": 0.06450734188031212
+            },
+            "total_accuracy_slope": {
+              "bootstrap_mean": 0.040961899049301774,
+              "lower": 0.035433784152538776,
+              "upper": 0.046784612651752475
+            }
+          },
+          "estimand": "first minus second",
+          "point": {
+            "gradient_accuracy_slope": -0.015067664906427344,
+            "gradient_energy_fraction": 0.1548920931549138,
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.007857714295450059,
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.001794390906444638,
+            "mean_absolute_residual": -0.19868825324580322,
+            "mean_absolute_residual_learned": -0.15614039905796986,
+            "mean_absolute_residual_nonlearned": -0.2157073949209366,
+            "mean_correctness_aligned_residual_accuracy_learned": -0.02738142199805233,
+            "mean_correctness_aligned_residual_accuracy_nonlearned": -0.07489715409829817,
+            "residual_accuracy_slope": 0.05597980429102142,
+            "total_accuracy_slope": 0.04091213938459408
+          }
+        },
+        "neural_minus_human": {
+          "bootstrap": {
+            "gradient_accuracy_slope": {
+              "bootstrap_mean": -0.006493869932414426,
+              "lower": -0.014903839618210572,
+              "upper": 0.00156406583384856
+            },
+            "gradient_energy_fraction": {
+              "bootstrap_mean": 0.0389793574391859,
+              "lower": 0.016232442742151673,
+              "upper": 0.06105949668375779
+            },
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": -0.07314899528786,
+              "lower": -0.11735688830113501,
+              "upper": -0.03022893089700966
+            },
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": -0.04300913544294009,
+              "lower": -0.06987550950163468,
+              "upper": -0.016072983470217447
+            },
+            "mean_absolute_residual": {
+              "bootstrap_mean": -0.03929708076479809,
+              "lower": -0.07644243498895775,
+              "upper": -0.0013417180273238203
+            },
+            "mean_absolute_residual_learned": {
+              "bootstrap_mean": -0.08412890305068363,
+              "lower": -0.12388165695243747,
+              "upper": -0.04295711711231564
+            },
+            "mean_absolute_residual_nonlearned": {
+              "bootstrap_mean": -0.021364351850443882,
+              "lower": -0.0634737252204923,
+              "upper": 0.020599375065868945
+            },
+            "mean_correctness_aligned_residual_accuracy_learned": {
+              "bootstrap_mean": -0.03136526427591656,
+              "lower": -0.04820439417232362,
+              "upper": -0.014470575890809259
+            },
+            "mean_correctness_aligned_residual_accuracy_nonlearned": {
+              "bootstrap_mean": -0.003443993246269006,
+              "lower": -0.020060382327576693,
+              "upper": 0.0134403172604327
+            },
+            "residual_accuracy_slope": {
+              "bootstrap_mean": 0.013665641988881629,
+              "lower": 0.0011998890296639497,
+              "upper": 0.026022704330600246
+            },
+            "total_accuracy_slope": {
+              "bootstrap_mean": 0.007171772056467199,
+              "lower": -5.737458329164561e-05,
+              "upper": 0.01439520889598625
+            }
+          },
+          "estimand": "first minus second",
+          "point": {
+            "gradient_accuracy_slope": -0.006470070849145401,
+            "gradient_energy_fraction": 0.03959259294851247,
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": -0.07377556699282717,
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": -0.042740536338926924,
+            "mean_absolute_residual": -0.039586713236433924,
+            "mean_absolute_residual_learned": -0.08478405202796777,
+            "mean_absolute_residual_nonlearned": -0.021507777719820376,
+            "mean_correctness_aligned_residual_accuracy_learned": -0.031242775766084224,
+            "mean_correctness_aligned_residual_accuracy_nonlearned": -0.0035566304720602154,
+            "residual_accuracy_slope": 0.01367502951429337,
+            "total_accuracy_slope": 0.007204958665147969
+          }
+        }
+      },
+      "directional_diagnosis": {
+        "evidence_model_contribution": false,
+        "human_mixed_code_signal": true,
+        "neural_over_sharpening": true,
+        "non_significant_means": "unresolved, not equivalent"
+      },
+      "neural_choice_field": {
+        "bootstrap": {
+          "gradient_accuracy_slope": {
+            "bootstrap_mean": 0.09541999109771189,
+            "lower": 0.08850666086931927,
+            "upper": 0.10175286630974886
+          },
+          "gradient_energy_fraction": {
+            "bootstrap_mean": 0.9342923910813106,
+            "lower": 0.9178248565507173,
+            "upper": 0.94997107574952
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "bootstrap_mean": 0.03073285297443598,
+            "lower": 0.0023276225992758617,
+            "upper": 0.058835871959565966
+          },
+          "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+            "bootstrap_mean": 0.013020566641873796,
+            "lower": -0.005112769758157558,
+            "upper": 0.03096981258822476
+          },
+          "mean_absolute_residual": {
+            "bootstrap_mean": 0.16103187099772512,
+            "lower": 0.1339496464097636,
+            "upper": 0.18836082560106227
+          },
+          "mean_absolute_residual_learned": {
+            "bootstrap_mean": 0.1804887430532125,
+            "lower": 0.14889605959576127,
+            "upper": 0.21195363269794493
+          },
+          "mean_absolute_residual_nonlearned": {
+            "bootstrap_mean": 0.15324912217553013,
+            "lower": 0.12391875019270554,
+            "upper": 0.18318461804496997
+          },
+          "mean_correctness_aligned_residual_accuracy_learned": {
+            "bootstrap_mean": 0.03261552712018737,
+            "lower": 0.0207273577529521,
+            "upper": 0.04400905800267059
+          },
+          "mean_correctness_aligned_residual_accuracy_nonlearned": {
+            "bootstrap_mean": 0.04466570805243229,
+            "lower": 0.03310422585380609,
+            "upper": 0.05626143638976311
+          },
+          "residual_accuracy_slope": {
+            "bootstrap_mean": -0.04840148986905635,
+            "lower": -0.05780389707693733,
+            "upper": -0.03878652469942373
+          },
+          "total_accuracy_slope": {
+            "bootstrap_mean": 0.04701850122865555,
+            "lower": 0.04191035023297275,
+            "upper": 0.052110793507241966
+          }
+        },
+        "distance_profiles": {
+          "gradient_linear_accuracy_component": {
+            "1": 0.5927740708989642,
+            "2": 0.7000303387428025,
+            "3": 0.8036667288129816,
+            "4": 0.91970515238381,
+            "5": 1.0061112146883027,
+            "6": 1.100091016228407,
+            "7": 1.149418496292749
+          },
+          "residual_linear_accuracy_contribution": {
+            "1": 0.0861263054305037,
+            "2": 0.113443122443318,
+            "3": 0.07123811309476091,
+            "4": 0.003902216872562758,
+            "5": -0.03194955626627294,
+            "6": -0.11264323220545491,
+            "7": -0.18060666332231556
+          },
+          "total_accuracy": {
+            "1": 0.6789003763294679,
+            "2": 0.8134734611861205,
+            "3": 0.8749048419077425,
+            "4": 0.9236073692563728,
+            "5": 0.9741616584220297,
+            "6": 0.9874477840229521,
+            "7": 0.9688118329704334
+          }
+        },
+        "point": {
+          "gradient_accuracy_slope": 0.09544639703671023,
+          "gradient_energy_fraction": 0.9367953081314131,
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.03272440070117029,
+          "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.013110080705719835,
+          "mean_absolute_residual": 0.1589754388971468,
+          "mean_absolute_residual_learned": 0.17958283108891535,
+          "mean_absolute_residual_nonlearned": 0.15073248202043937,
+          "mean_correctness_aligned_residual_accuracy_learned": 0.03263709436378592,
+          "mean_correctness_aligned_residual_accuracy_nonlearned": 0.044625187709757964,
+          "residual_accuracy_slope": -0.04841283160418,
+          "total_accuracy_slope": 0.04703356543253023
+        },
+        "subject_level_descriptive": {
+          "gradient_accuracy_slope": {
+            "lower_quartile": 0.08066535544753856,
+            "mean": 0.09544639703671015,
+            "median": 0.10842129589495533,
+            "upper_quartile": 0.11799565253955746
+          },
+          "gradient_energy_fraction": {
+            "lower_quartile": 0.7932243807475711,
+            "mean": 0.8085722652624533,
+            "median": 0.8063371013686147,
+            "upper_quartile": 0.8187770414823258
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "lower_quartile": -0.09025864745587632,
+            "mean": -0.02366274739339232,
+            "median": -0.029245165869378906,
+            "upper_quartile": 0.03353383374757116
+          },
+          "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+            "lower_quartile": -0.049445345224067384,
+            "mean": 0.013110080705719927,
+            "median": 0.009688398912135215,
+            "upper_quartile": 0.06896181779855554
+          },
+          "mean_absolute_residual": {
+            "lower_quartile": 0.3385650291388842,
+            "mean": 0.35536811600191415,
+            "median": 0.3566078815315125,
+            "upper_quartile": 0.37699368320501614
+          },
+          "mean_absolute_residual_learned": {
+            "lower_quartile": 0.2939863103004975,
+            "mean": 0.3402208140569782,
+            "median": 0.34285898128225334,
+            "upper_quartile": 0.39002060840037583
+          },
+          "mean_absolute_residual_nonlearned": {
+            "lower_quartile": 0.3414728673963137,
+            "mean": 0.3614270367798885,
+            "median": 0.3639340269515955,
+            "upper_quartile": 0.3930856531240142
+          },
+          "mean_correctness_aligned_residual_accuracy_learned": {
+            "lower_quartile": 0.0065910834094882395,
+            "mean": 0.032637094363785965,
+            "median": 0.03843867382610993,
+            "upper_quartile": 0.06801542216533557
+          },
+          "mean_correctness_aligned_residual_accuracy_nonlearned": {
+            "lower_quartile": 0.0039536477754223585,
+            "mean": 0.04462518770975796,
+            "median": 0.04295107699964292,
+            "upper_quartile": 0.07980477602261733
+          },
+          "residual_accuracy_slope": {
+            "lower_quartile": -0.08208737372470587,
+            "mean": -0.04841283160417992,
+            "median": -0.05176975395594634,
+            "upper_quartile": -0.0159890260611329
+          },
+          "total_accuracy_slope": {
+            "lower_quartile": 0.028238366289195856,
+            "mean": 0.04703356543253024,
+            "median": 0.05206687951378777,
+            "upper_quartile": 0.06268232306542056
+          }
+        },
+        "subjects": 77
+      },
+      "neural_logit_field": {
+        "bootstrap": {
+          "gradient_energy_fraction": {
+            "bootstrap_mean": 0.9986362432422695,
+            "lower": 0.9983311179717803,
+            "upper": 0.9989198217670096
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "bootstrap_mean": 0.0328441987586629,
+            "lower": 0.021573220058033964,
+            "upper": 0.04361855913388782
+          },
+          "mean_absolute_residual": {
+            "bootstrap_mean": 0.0641302434930378,
+            "lower": 0.05420529612100896,
+            "upper": 0.07443188964959191
+          },
+          "mean_absolute_residual_learned": {
+            "bootstrap_mean": 0.0961253850063546,
+            "lower": 0.08201321745932022,
+            "upper": 0.1103262475173914
+          },
+          "mean_absolute_residual_nonlearned": {
+            "bootstrap_mean": 0.05133218688771105,
+            "lower": 0.0416621350895124,
+            "upper": 0.06137456428261502
+          }
+        },
+        "point": {
+          "gradient_energy_fraction": 0.9986843594695618,
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.035366658000725734,
+          "mean_absolute_residual": 0.06292796624087475,
+          "mean_absolute_residual_learned": 0.09611852452697163,
+          "mean_absolute_residual_nonlearned": 0.049651742926435996
+        },
+        "subject_level_descriptive": {
+          "gradient_energy_fraction": {
+            "lower_quartile": 0.99503069376461,
+            "mean": 0.9957999324739809,
+            "median": 0.9961696171753749,
+            "upper_quartile": 0.9969116376603455
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "lower_quartile": -0.01917074339525015,
+            "mean": 0.0050900268761792525,
+            "median": 8.879817565108847e-05,
+            "upper_quartile": 0.02566616460804604
+          },
+          "mean_absolute_residual": {
+            "lower_quartile": 0.1055137487128376,
+            "mean": 0.12934652149212048,
+            "median": 0.1252801140238132,
+            "upper_quartile": 0.14978467167488171
+          },
+          "mean_absolute_residual_learned": {
+            "lower_quartile": 0.10998396098148096,
+            "mean": 0.14141122479325882,
+            "median": 0.13503591704648024,
+            "upper_quartile": 0.17402287013828704
+          },
+          "mean_absolute_residual_nonlearned": {
+            "lower_quartile": 0.10120415738783758,
+            "mean": 0.12452064017166514,
+            "median": 0.11993157658725975,
+            "upper_quartile": 0.1472305519040673
+          }
+        },
+        "subjects": 77
+      },
+      "registered_sampled_neural_slope": 0.04657699443413733,
+      "seed": 1901
+    },
+    "1902": {
+      "comparisons": {
+        "human_minus_neural": {
+          "bootstrap": {
+            "gradient_accuracy_slope": {
+              "bootstrap_mean": 0.00567023191920541,
+              "lower": -0.0018848695166385752,
+              "upper": 0.013548218222831004
+            },
+            "gradient_energy_fraction": {
+              "bootstrap_mean": -0.04001748861547902,
+              "lower": -0.06161943650356093,
+              "upper": -0.0182485127096723
+            },
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.06689310491680528,
+              "lower": 0.022837575327203232,
+              "upper": 0.1116889075954895
+            },
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.03787284596192761,
+              "lower": 0.01070858634394656,
+              "upper": 0.06504620236932283
+            },
+            "mean_absolute_residual": {
+              "bootstrap_mean": 0.03799613006779621,
+              "lower": 0.0008242777955193778,
+              "upper": 0.07489772618166708
+            },
+            "mean_absolute_residual_learned": {
+              "bootstrap_mean": 0.07650989362873108,
+              "lower": 0.03811638087845736,
+              "upper": 0.1144017141024699
+            },
+            "mean_absolute_residual_nonlearned": {
+              "bootstrap_mean": 0.022590624643422264,
+              "lower": -0.019940536394840908,
+              "upper": 0.06472017785881108
+            },
+            "mean_correctness_aligned_residual_accuracy_learned": {
+              "bootstrap_mean": 0.02833207168222285,
+              "lower": 0.01153312007116641,
+              "upper": 0.04518681796090496
+            },
+            "mean_correctness_aligned_residual_accuracy_nonlearned": {
+              "bootstrap_mean": 0.005222073648116398,
+              "lower": -0.011695860654858585,
+              "upper": 0.021983589591778204
+            },
+            "residual_accuracy_slope": {
+              "bootstrap_mean": -0.013502491988813215,
+              "lower": -0.02544904235620653,
+              "upper": -0.0013563679355994929
+            },
+            "total_accuracy_slope": {
+              "bootstrap_mean": -0.007832260069607805,
+              "lower": -0.014978749827854984,
+              "upper": -0.000697561770942702
+            }
+          },
+          "estimand": "first minus second",
+          "point": {
+            "gradient_accuracy_slope": 0.005657029177263934,
+            "gradient_energy_fraction": -0.04059291515837593,
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.06959464966463141,
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.03760304559204178,
+            "mean_absolute_residual": 0.03880494328108311,
+            "mean_absolute_residual_learned": 0.0786839647889438,
+            "mean_absolute_residual_nonlearned": 0.02285333467793882,
+            "mean_correctness_aligned_residual_accuracy_learned": 0.02823423643445158,
+            "mean_correctness_aligned_residual_accuracy_nonlearned": 0.00533430352570935,
+            "residual_accuracy_slope": -0.013531722937372842,
+            "total_accuracy_slope": -0.007874693760108908
+          }
+        },
+        "neural_minus_exact_posterior": {
+          "bootstrap": {
+            "gradient_accuracy_slope": {
+              "bootstrap_mean": -0.014289202909539023,
+              "lower": -0.018503705838734168,
+              "upper": -0.010182661014956157
+            },
+            "gradient_energy_fraction": {
+              "bootstrap_mean": 0.15363782034112394,
+              "lower": 0.13642307171100765,
+              "upper": 0.17127896769448603
+            },
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.011642061448360632,
+              "lower": -0.01775532955776704,
+              "upper": 0.0408946281337918
+            },
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": 0.006851341737458606,
+              "lower": -0.010466139426575196,
+              "upper": 0.02447718892370715
+            },
+            "mean_absolute_residual": {
+              "bootstrap_mean": -0.1959299436534167,
+              "lower": -0.21860728689172618,
+              "upper": -0.17316518562691974
+            },
+            "mean_absolute_residual_learned": {
+              "bootstrap_mean": -0.14832448722859748,
+              "lower": -0.1760047558670562,
+              "upper": -0.12182981717828385
+            },
+            "mean_absolute_residual_nonlearned": {
+              "bootstrap_mean": -0.2149721262233444,
+              "lower": -0.24013029855076484,
+              "upper": -0.1895777412483304
+            },
+            "mean_correctness_aligned_residual_accuracy_learned": {
+              "bootstrap_mean": -0.024427640989279915,
+              "lower": -0.035426652644398406,
+              "upper": -0.013643989713761198
+            },
+            "mean_correctness_aligned_residual_accuracy_nonlearned": {
+              "bootstrap_mean": -0.07675588267400617,
+              "lower": -0.08737186585406474,
+              "upper": -0.06659473923754823
+            },
+            "residual_accuracy_slope": {
+              "bootstrap_mean": 0.0559115899719814,
+              "lower": 0.04823998316323283,
+              "upper": 0.06374886208174502
+            },
+            "total_accuracy_slope": {
+              "bootstrap_mean": 0.04162238706244238,
+              "lower": 0.03643305117772308,
+              "upper": 0.047018757561609476
+            }
+          },
+          "estimand": "first minus second",
+          "point": {
+            "gradient_accuracy_slope": -0.014254623234545877,
+            "gradient_energy_fraction": 0.15589241536477727,
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.012038631623645806,
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.006931881653329778,
+            "mean_absolute_residual": -0.1979064832904524,
+            "mean_absolute_residual_learned": -0.1500403118189459,
+            "mean_absolute_residual_nonlearned": -0.21705295187905504,
+            "mean_correctness_aligned_residual_accuracy_learned": -0.02437288266641969,
+            "mean_correctness_aligned_residual_accuracy_nonlearned": -0.07667482715194729,
+            "residual_accuracy_slope": 0.055836497714100895,
+            "total_accuracy_slope": 0.04158187447955502
+          }
+        },
+        "neural_minus_human": {
+          "bootstrap": {
+            "gradient_accuracy_slope": {
+              "bootstrap_mean": -0.00567023191920541,
+              "lower": -0.013548218222831006,
+              "upper": 0.001884869516638575
+            },
+            "gradient_energy_fraction": {
+              "bootstrap_mean": 0.04001748861547902,
+              "lower": 0.0182485127096723,
+              "upper": 0.06161943650356093
+            },
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": -0.06689310491680528,
+              "lower": -0.1116889075954895,
+              "upper": -0.022837575327203243
+            },
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+              "bootstrap_mean": -0.03787284596192761,
+              "lower": -0.06504620236932285,
+              "upper": -0.01070858634394656
+            },
+            "mean_absolute_residual": {
+              "bootstrap_mean": -0.03799613006779621,
+              "lower": -0.07489772618166708,
+              "upper": -0.0008242777955193805
+            },
+            "mean_absolute_residual_learned": {
+              "bootstrap_mean": -0.07650989362873108,
+              "lower": -0.1144017141024699,
+              "upper": -0.038116380878457375
+            },
+            "mean_absolute_residual_nonlearned": {
+              "bootstrap_mean": -0.022590624643422264,
+              "lower": -0.06472017785881108,
+              "upper": 0.019940536394840908
+            },
+            "mean_correctness_aligned_residual_accuracy_learned": {
+              "bootstrap_mean": -0.02833207168222285,
+              "lower": -0.045186817960904964,
+              "upper": -0.011533120071166412
+            },
+            "mean_correctness_aligned_residual_accuracy_nonlearned": {
+              "bootstrap_mean": -0.005222073648116398,
+              "lower": -0.02198358959177821,
+              "upper": 0.011695860654858583
+            },
+            "residual_accuracy_slope": {
+              "bootstrap_mean": 0.013502491988813215,
+              "lower": 0.0013563679355994911,
+              "upper": 0.02544904235620653
+            },
+            "total_accuracy_slope": {
+              "bootstrap_mean": 0.007832260069607805,
+              "lower": 0.0006975617709427014,
+              "upper": 0.01497874982785498
+            }
+          },
+          "estimand": "first minus second",
+          "point": {
+            "gradient_accuracy_slope": -0.005657029177263934,
+            "gradient_energy_fraction": 0.04059291515837593,
+            "learned_absolute_residual_effect_adjusted_for_symbolic_distance": -0.06959464966463141,
+            "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": -0.03760304559204178,
+            "mean_absolute_residual": -0.03880494328108311,
+            "mean_absolute_residual_learned": -0.0786839647889438,
+            "mean_absolute_residual_nonlearned": -0.02285333467793882,
+            "mean_correctness_aligned_residual_accuracy_learned": -0.02823423643445158,
+            "mean_correctness_aligned_residual_accuracy_nonlearned": -0.00533430352570935,
+            "residual_accuracy_slope": 0.013531722937372842,
+            "total_accuracy_slope": 0.007874693760108908
+          }
+        }
+      },
+      "directional_diagnosis": {
+        "evidence_model_contribution": false,
+        "human_mixed_code_signal": true,
+        "neural_over_sharpening": true,
+        "non_significant_means": "unresolved, not equivalent"
+      },
+      "neural_choice_field": {
+        "bootstrap": {
+          "gradient_accuracy_slope": {
+            "bootstrap_mean": 0.09624362911092091,
+            "lower": 0.09000034365781186,
+            "upper": 0.10203539027620641
+          },
+          "gradient_energy_fraction": {
+            "bootstrap_mean": 0.9353305222576037,
+            "lower": 0.9196955808219599,
+            "upper": 0.9498255590585947
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "bootstrap_mean": 0.03698874334549068,
+            "lower": 0.0070433446532030715,
+            "upper": 0.06720642839725913
+          },
+          "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+            "bootstrap_mean": 0.018156856122886273,
+            "lower": -0.00024452306233255423,
+            "upper": 0.036747124072867905
+          },
+          "mean_absolute_residual": {
+            "bootstrap_mean": 0.162332821694727,
+            "lower": 0.13611485575989088,
+            "upper": 0.18977567658796063
+          },
+          "mean_absolute_residual_learned": {
+            "bootstrap_mean": 0.1881077524751651,
+            "lower": 0.15905329749417033,
+            "upper": 0.21704884963183788
+          },
+          "mean_absolute_residual_nonlearned": {
+            "bootstrap_mean": 0.15202284938255178,
+            "lower": 0.12298398393321816,
+            "upper": 0.18291285813253996
+          },
+          "mean_correctness_aligned_residual_accuracy_learned": {
+            "bootstrap_mean": 0.035648719713881075,
+            "lower": 0.02414092133336852,
+            "upper": 0.04713776169179478
+          },
+          "mean_correctness_aligned_residual_accuracy_nonlearned": {
+            "bootstrap_mean": 0.042887627650584896,
+            "lower": 0.031213885059037345,
+            "upper": 0.054559516074105745
+          },
+          "residual_accuracy_slope": {
+            "bootstrap_mean": -0.04856463986912476,
+            "lower": -0.05759688263048051,
+            "upper": -0.039439956307075315
+          },
+          "total_accuracy_slope": {
+            "bootstrap_mean": 0.04767898924179615,
+            "lower": 0.04262157760378516,
+            "upper": 0.05261326799491062
+          }
+        },
+        "distance_profiles": {
+          "gradient_linear_accuracy_component": {
+            "1": 0.5932005389393938,
+            "2": 0.7027775009419184,
+            "3": 0.809816868745709,
+            "4": 0.9272448520814677,
+            "5": 1.0163614479095149,
+            "6": 1.1083325028257554,
+            "7": 1.1524037725757568
+          },
+          "residual_linear_accuracy_contribution": {
+            "1": 0.08087174616140813,
+            "2": 0.1149457968737474,
+            "3": 0.07468512909233271,
+            "4": 0.01040504543391818,
+            "5": -0.04093579189685459,
+            "6": -0.11156404093271355,
+            "7": -0.18277201132816112
+          },
+          "total_accuracy": {
+            "1": 0.674072285100802,
+            "2": 0.8177232978156658,
+            "3": 0.8845019978380417,
+            "4": 0.9376498975153859,
+            "5": 0.9754256560126603,
+            "6": 0.9967684618930418,
+            "7": 0.9696317612475956
+          }
+        },
+        "point": {
+          "gradient_accuracy_slope": 0.0962594387085917,
+          "gradient_energy_fraction": 0.9377956303412766,
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.03690531802936604,
+          "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": 0.018247571452604975,
+          "mean_absolute_residual": 0.1597572088524976,
+          "mean_absolute_residual_learned": 0.18568291832793932,
+          "mean_absolute_residual_nonlearned": 0.14938692506232093,
+          "mean_correctness_aligned_residual_accuracy_learned": 0.035645633695418566,
+          "mean_correctness_aligned_residual_accuracy_nonlearned": 0.04284751465610883,
+          "residual_accuracy_slope": -0.04855613818110053,
+          "total_accuracy_slope": 0.04770330052749117
+        },
+        "subject_level_descriptive": {
+          "gradient_accuracy_slope": {
+            "lower_quartile": 0.084474257311783,
+            "mean": 0.09625943870859174,
+            "median": 0.1091866404333393,
+            "upper_quartile": 0.11827327976455056
+          },
+          "gradient_energy_fraction": {
+            "lower_quartile": 0.7942082796380497,
+            "mean": 0.8114268604903071,
+            "median": 0.8099037253279376,
+            "upper_quartile": 0.8217368193640998
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "lower_quartile": -0.08235154193818561,
+            "mean": -0.013364024887374534,
+            "median": -0.010566131351010588,
+            "upper_quartile": 0.04308598807159035
+          },
+          "learned_correctness_aligned_residual_accuracy_effect_adjusted_for_symbolic_distance": {
+            "lower_quartile": -0.032706793595690065,
+            "mean": 0.018247571452605027,
+            "median": 0.0173374734686964,
+            "upper_quartile": 0.06927398729562229
+          },
+          "mean_absolute_residual": {
+            "lower_quartile": 0.33372081661471575,
+            "mean": 0.35160160118465933,
+            "median": 0.35653115804041,
+            "upper_quartile": 0.3796201522680715
+          },
+          "mean_absolute_residual_learned": {
+            "lower_quartile": 0.28627134541646915,
+            "mean": 0.3379509827977299,
+            "median": 0.3434327907072147,
+            "upper_quartile": 0.3829719049403223
+          },
+          "mean_absolute_residual_nonlearned": {
+            "lower_quartile": 0.33720401195059885,
+            "mean": 0.3570618485394312,
+            "median": 0.3579440778728681,
+            "upper_quartile": 0.39231097689593114
+          },
+          "mean_correctness_aligned_residual_accuracy_learned": {
+            "lower_quartile": 0.006058045206382971,
+            "mean": 0.035645633695418594,
+            "median": 0.04641903920559136,
+            "upper_quartile": 0.06642137069691259
+          },
+          "mean_correctness_aligned_residual_accuracy_nonlearned": {
+            "lower_quartile": 0.006557808833993364,
+            "mean": 0.0428475146561088,
+            "median": 0.04346807411921097,
+            "upper_quartile": 0.08089751599895853
+          },
+          "residual_accuracy_slope": {
+            "lower_quartile": -0.07956709055796697,
+            "mean": -0.04855613818110056,
+            "median": -0.05411262334663573,
+            "upper_quartile": -0.017245091087695896
+          },
+          "total_accuracy_slope": {
+            "lower_quartile": 0.0353286922764459,
+            "mean": 0.04770330052749118,
+            "median": 0.04908657651817271,
+            "upper_quartile": 0.06389993740747467
+          }
+        },
+        "subjects": 77
+      },
+      "neural_logit_field": {
+        "bootstrap": {
+          "gradient_energy_fraction": {
+            "bootstrap_mean": 0.9993552350878426,
+            "lower": 0.9991808797103304,
+            "upper": 0.9995141264930479
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "bootstrap_mean": 0.024916993141721622,
+            "lower": 0.014177371666469762,
+            "upper": 0.035668191280454696
+          },
+          "mean_absolute_residual": {
+            "bootstrap_mean": 0.04535532863907781,
+            "lower": 0.037657305852820115,
+            "upper": 0.05341627632483431
+          },
+          "mean_absolute_residual_learned": {
+            "bootstrap_mean": 0.06927451510605714,
+            "lower": 0.05663756348072502,
+            "upper": 0.08219689780883264
+          },
+          "mean_absolute_residual_nonlearned": {
+            "bootstrap_mean": 0.03578765405228607,
+            "lower": 0.02884411545680892,
+            "upper": 0.04353366019452207
+          }
+        },
+        "point": {
+          "gradient_energy_fraction": 0.9993996398729007,
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": 0.026474989465128062,
+          "mean_absolute_residual": 0.04403224956913348,
+          "mean_absolute_residual_learned": 0.06885549109036025,
+          "mean_absolute_residual_nonlearned": 0.03410295296064275
+        },
+        "subject_level_descriptive": {
+          "gradient_energy_fraction": {
+            "lower_quartile": 0.9964192354722996,
+            "mean": 0.9968640575452324,
+            "median": 0.9968772531591833,
+            "upper_quartile": 0.9975103308369481
+          },
+          "learned_absolute_residual_effect_adjusted_for_symbolic_distance": {
+            "lower_quartile": -0.01963818495431109,
+            "mean": 6.368181048972327e-05,
+            "median": -0.0011205568826243642,
+            "upper_quartile": 0.02313397435966659
+          },
+          "mean_absolute_residual": {
+            "lower_quartile": 0.095885113047968,
+            "mean": 0.11714205046882857,
+            "median": 0.11278331406148416,
+            "upper_quartile": 0.13413319344233193
+          },
+          "mean_absolute_residual_learned": {
+            "lower_quartile": 0.0931340205715968,
+            "mean": 0.12400491089921432,
+            "median": 0.11805063276551672,
+            "upper_quartile": 0.15407733456231643
+          },
+          "mean_absolute_residual_nonlearned": {
+            "lower_quartile": 0.09632220612838868,
+            "mean": 0.11439690629667425,
+            "median": 0.11097675524652018,
+            "upper_quartile": 0.12800448620691893
+          }
+        },
+        "subjects": 77
+      },
+      "registered_sampled_neural_slope": 0.04756427246223168,
+      "seed": 1902
+    }
+  },
+  "projection_boundary": "Hodge gradient fields are not clipped to [-1, 1]. Their linear accuracy components may fall outside [0, 1]; only the recombined total is a choice probability, while component slopes are additive decomposition estimands.",
+  "registration_status": "frozen_after_pilot_review_before_read_only_diagnostic_execution",
+  "schema_version": 1
+}

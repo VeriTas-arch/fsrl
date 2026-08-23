@@ -75,19 +75,23 @@ evidence bottleneck, and antisymmetric subjective-rank geometry form the current
 positive evidence backbone. The immediate unresolved question is how
 `D_s -> P_T^(s) -> pi_s` performs global assembly.
 
-Treat the excessive symbolic-distance slope, systematic deviation from the
-uniform-prior exact posterior, and null context-average geometry as diagnostic
-constraints on that assembly mechanism. Before scaling formal seeds or changing
-the architecture, prioritize read-only analyses of the pilot checkpoints:
+The completed registered slope/Hodge diagnostic rules out the stable-omission
+evidence model as the source of the excessive distance slope. It instead shows
+that both pilot networks transform evidence into an almost purely additive
+logit potential, while the human choice field retains a stronger learned-pair
+residual. Treat this as a policy-level mixed-code signal, not yet proof of a
+local memory store.
 
-1. Human, exact-posterior, and neural slope-source and Hodge decomposition.
-2. Support-trial trajectories from intermediate `P_t` states.
-3. Leave-one-relation-out causal influence on unobserved pairs.
-4. Identification of a reproducible meta-learned implicit prior.
+Before scaling formal seeds or changing the architecture, prioritize:
 
-The target is not a tuned slope. It is a testable account of how global
-relational potential, local or conjunctive traces, evidence uncertainty, and a
-learned prior jointly construct individualized rankings.
+1. Support-trial trajectories from intermediate `P_t` states.
+2. Leave-one-relation-out causal influence on unobserved pairs.
+3. Identification of a reproducible meta-learned implicit prior.
+
+The target is to explain how the network commits ambiguous evidence to a global
+potential and how human behavior retains additional local or conjunctive
+structure. Do not tune the slope or add a memory module before the read-only
+diagnostics localize those operations.
 
 ## Repository workflow
 

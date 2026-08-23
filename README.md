@@ -49,6 +49,13 @@ See [`docs/confirmation_protocol.md`](docs/confirmation_protocol.md) for the
 two-seed pilot, frozen formal contract, and commands. Pilot outputs are reported
 without seed filtering in [`results/pilot_v1.json`](results/pilot_v1.json).
 
+A preregistered read-only diagnostic on both pilot checkpoints localizes the
+excessive distance slope to the neural transformation rather than the evidence
+model. Frozen neural logit fields are nearly pure additive potentials, whereas
+human choices retain a stronger learned-pair residual after controlling for
+distance. See [`docs/assembly_diagnostics_v1.md`](docs/assembly_diagnostics_v1.md)
+and [`results/assembly_diagnostics_v1.json`](results/assembly_diagnostics_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
