@@ -32,6 +32,15 @@ Outputs are written to `figures/` by default. Use a smaller batch for quick demo
 python eval_figures.py --figures fig2a fig4b --batch-size 64 --seed 1
 ```
 
+## Constructive-ranking mechanism development
+
+The `dev` branch adds a registered Liu-style passive-learning benchmark, an
+exact 40320-permutation computational model, generic sparse-graph supervised
+meta-training with the Liu graph held out, stable subject-level evidence
+encoding, and fast-weight causal qualification controls. See
+[`docs/development_plan.md`](docs/development_plan.md) for the claim boundary,
+GO/NO-GO gates, and reproducible commands.
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "protocol_id": "liu-constructive-ranking-v1",
+  "n_items": 8,
+  "item_labels": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "true_order_high_to_low": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "support": {
+    "pairs_higher_lower": [
+      ["A", "F"],
+      ["B", "C"],
+      ["B", "E"],
+      ["C", "G"],
+      ["D", "F"],
+      ["D", "G"],
+      ["E", "H"],
+      ["A", "H"]
+    ],
+    "blocks": 4,
+    "trials": 32,
+    "randomize_order_within_block": true,
+    "randomize_left_right_orientation": true,
+    "visible_magnitude": "rank_gap/(n_items-1)",
+    "choice_required": false,
+    "feedback": false
+  },
+  "query": {
+    "all_unordered_pairs": true,
+    "pairs_per_block": 28,
+    "blocks": 10,
+    "trials": 280,
+    "randomize_order_within_block": true,
+    "randomize_left_right_orientation": true,
+    "feedback": false,
+    "distance_input": false,
+    "reset_hidden_each_trial": true,
+    "reset_eligibility_each_trial": true,
+    "fast_weights": "freeze_after_support",
+    "time_channel": "constant_at_support_query_boundary",
+    "time_value": 0.6666666666666666
+  },
+  "analysis": {
+    "below_chance_exclusion": true,
+    "exclude_correct_rankers_from_pair_distribution_analyses": true,
+    "primary_metrics": [
+      "overall_accuracy",
+      "learned_accuracy",
+      "nonlearned_accuracy",
+      "symbolic_distance_slope",
+      "ranking_class_counts",
+      "self_consistency",
+      "stable_error_prevalence",
+      "pair_beta_classes",
+      "inter_subject_kendall_tau"
+    ]
+  },
+  "human_targets": {
+    "sample_after_below_chance_exclusion": 77,
+    "correct_rankers": 8,
+    "self_consistent_incorrect": 64,
+    "self_inconsistent": 5,
+    "symbolic_distance_slope": 0.04,
+    "stable_error_at_least_80pct": 0.913,
+    "stable_error_100pct": 0.783,
+    "pair_beta_classes": {
+      "high_accuracy": 13,
+      "bimodal": 15,
+      "ordinary_unimodal": 0
+    },
+    "figure_read_accuracy_approximation": {
+      "overall": 0.87,
+      "learned": 0.94,
+      "nonlearned": 0.84
+    }
+  }
+}

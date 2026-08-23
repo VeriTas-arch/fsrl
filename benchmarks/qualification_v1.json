@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "qualification_id": "liu-fast-weight-necessity-v1",
+  "requires_cue_mode": "permuted_shared",
+  "requires_subject_encoding_mode": "stable_bottleneck",
+  "requires_held_out_liu_graph": true,
+  "intact_minimum": {
+    "overall_accuracy": 0.75,
+    "nonlearned_accuracy": 0.70,
+    "mean_transitive_triplet_fraction": 0.95
+  },
+  "intervention_maximum": {
+    "nonlearned_accuracy": 0.55,
+    "mean_transitive_triplet_fraction": 0.85
+  },
+  "required_interventions": [
+    "write_off",
+    "alpha_zero",
+    "reset",
+    "shuffle"
+  ],
+  "order_invariance_max_abs_logit_delta": 1e-06
+}
