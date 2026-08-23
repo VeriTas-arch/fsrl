@@ -12,15 +12,23 @@ import numpy as np
 from .algorithmic import run_algorithmic_comparison
 from .behavioral import run_behavioral_analysis
 from .config import DEVICE
+from .formal_runtime import require_formal_runtime
 from .geometry import run_geometry_analysis
 from .liu_eval import run_causal_suite
 from .meta_tasks import held_out_liu_graph_signatures
-from .meta_train import MetaTrainConfig, train_meta_model
+from .meta_train import (
+    COMPILED_TRAINING_EXECUTION,
+    MetaTrainConfig,
+    train_meta_model,
+)
 from .qualification import evaluate_qualification
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "confirmation_v1.json"
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "confirmation-v1"
+FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
+FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "formal_runtime.py"
+FORMAL_TRAINING_SOURCE = ROOT / "fsrl" / "meta_train.py"
 
 
 def file_sha256(path: Path) -> str:
@@ -119,6 +127,55 @@ def _training_config(specification: dict, seed: int) -> MetaTrainConfig:
     return MetaTrainConfig(seed=seed, **registered)
 
 
+def _require_registered_runtime(specification: dict) -> dict | None:
+    if specification["confirmation_id"] == FORMAL_CONFIRMATION_ID:
+        return require_formal_runtime()
+    return None
+
+
+def _formal_runtime_source_registration() -> dict:
+    return {
+        "path": str(FORMAL_RUNTIME_SOURCE.relative_to(ROOT)),
+        "sha256": file_sha256(FORMAL_RUNTIME_SOURCE),
+    }
+
+
+def _formal_training_source_registration() -> dict:
+    return {
+        "path": str(FORMAL_TRAINING_SOURCE.relative_to(ROOT)),
+        "sha256": file_sha256(FORMAL_TRAINING_SOURCE),
+    }
+
+
+def _validate_formal_runtime_record(result: dict) -> None:
+    runtime = result.get("execution_runtime", {})
+    if not (
+        runtime.get("active")
+        and runtime.get("cpu_thread_limit") == 1
+        and runtime.get("torch_intraop_threads") == 1
+        and runtime.get("torch_interop_threads") == 1
+        and runtime.get("cuda_available")
+        and runtime.get("device") == "cuda"
+        and runtime.get("torch_version")
+        and runtime.get("cuda_version")
+        and runtime.get("device_name")
+    ):
+        raise RuntimeError("formal seed result lacks the bounded GPU runtime record")
+    registration = result.get("execution_runtime_source", {})
+    expected_registration = _formal_runtime_source_registration()
+    if registration != expected_registration:
+        raise RuntimeError("formal seed runtime source hash does not match")
+
+
+def _validate_formal_training_execution(result: dict) -> None:
+    if result.get("training_execution") != COMPILED_TRAINING_EXECUTION:
+        raise RuntimeError("formal seed result lacks the registered compiled training")
+    if result.get(
+        "training_execution_source"
+    ) != _formal_training_source_registration():
+        raise RuntimeError("formal seed compiled-training source hash does not match")
+
+
 def _validate_seed(specification: dict, seed: int) -> None:
     if seed not in specification["training"]["seeds"]:
         raise ValueError(f"seed {seed} is not registered for confirmation")
@@ -136,6 +193,13 @@ def _validate_checkpoint(
     if observed_training != expected_training:
         raise RuntimeError(
             f"seed {seed} checkpoint training configuration is not registered"
+        )
+    if (
+        specification["confirmation_id"] == FORMAL_CONFIRMATION_ID
+        and metadata.get("execution") != COMPILED_TRAINING_EXECUTION
+    ):
+        raise RuntimeError(
+            f"seed {seed} checkpoint was not trained with the registered compiler"
         )
     if metadata["completed_outer_steps"] != specification["training"]["outer_steps"]:
         raise RuntimeError(f"seed {seed} checkpoint is not the fixed final step")
@@ -165,13 +229,18 @@ def train_confirmation_seed(
     if not contract["passed"]:
         raise RuntimeError("confirmation contract validation failed before training")
     specification = load_json(specification_path)
+    _require_registered_runtime(specification)
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
     checkpoint = seed_dir / "net.dat"
     if checkpoint.exists():
         _validate_checkpoint(checkpoint, specification, seed)
         return checkpoint
-    train_meta_model(_training_config(specification, seed), seed_dir)
+    train_meta_model(
+        _training_config(specification, seed),
+        seed_dir,
+        compile_model=specification["confirmation_id"] == FORMAL_CONFIRMATION_ID,
+    )
     _validate_checkpoint(checkpoint, specification, seed)
     return checkpoint
 
@@ -270,6 +339,7 @@ def evaluate_confirmation_seed(
     if not contract["passed"]:
         raise RuntimeError("confirmation contract validation failed before evaluation")
     specification, paths = _specification_and_paths(specification_path)
+    runtime = _require_registered_runtime(specification)
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
     checkpoint = seed_dir / "net.dat"
@@ -356,6 +426,15 @@ def evaluate_confirmation_seed(
         },
         "algorithmic": algorithmic["group"],
     }
+    if runtime is not None:
+        summary.update(
+            {
+                "execution_runtime": runtime,
+                "execution_runtime_source": _formal_runtime_source_registration(),
+                "training_execution": checkpoint_metadata.get("execution"),
+                "training_execution_source": _formal_training_source_registration(),
+            }
+        )
     write_json(seed_dir / "confirmation.json", summary)
     return summary
 
@@ -366,6 +445,7 @@ def aggregate_confirmation(
     output_root: Path = DEFAULT_OUTPUT_ROOT,
 ) -> dict:
     specification = load_json(specification_path)
+    formal = specification["confirmation_id"] == FORMAL_CONFIRMATION_ID
     seeds = specification["training"]["seeds"]
     summaries = []
     missing = []
@@ -377,11 +457,21 @@ def aggregate_confirmation(
             summary = load_json(path)
             if summary.get("seed") != seed:
                 raise RuntimeError(f"confirmation result has wrong seed: {path}")
+            if formal:
+                _validate_formal_runtime_record(summary)
+                _validate_formal_training_execution(summary)
             summaries.append(summary)
     if missing:
         raise RuntimeError(
             f"all registered seeds are mandatory; missing results for {missing}"
         )
+    if formal and len(
+        {
+            json.dumps(summary["execution_runtime"], sort_keys=True)
+            for summary in summaries
+        }
+    ) != 1:
+        raise RuntimeError("formal seeds used different runtime environments")
 
     pass_names = (
         "causal_qualification",

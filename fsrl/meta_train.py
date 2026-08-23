@@ -49,6 +49,17 @@ class MetaBatchStats:
     n_edges: int
 
 
+COMPILED_TRAINING_EXECUTION = {
+    "torch_compile": {
+        "enabled": True,
+        "backend": "inductor",
+        "fullgraph": True,
+        "mode": "default",
+    },
+    "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial",
+}
+
+
 def build_meta_inputs(
     model_config: TrainConfig,
     episodes: tuple[RankingEpisode, ...],
@@ -62,6 +73,30 @@ def build_meta_inputs(
 ) -> torch.Tensor:
     """Build passive inputs; query targets are deliberately absent from this API."""
 
+    inputs = _build_meta_input_array(
+        model_config,
+        episodes,
+        left_items,
+        right_items,
+        signed_magnitudes,
+        numstep=numstep,
+        time_value=time_value,
+        support_trial=support_trial,
+    )
+    return torch.from_numpy(inputs).to(DEVICE)
+
+
+def _build_meta_input_array(
+    model_config: TrainConfig,
+    episodes: tuple[RankingEpisode, ...],
+    left_items: np.ndarray,
+    right_items: np.ndarray,
+    signed_magnitudes: np.ndarray,
+    *,
+    numstep: int,
+    time_value: float,
+    support_trial: bool,
+) -> np.ndarray:
     inputs = np.zeros((model_config.bs, model_config.inputsize), dtype=np.float32)
     for subject, episode in enumerate(episodes):
         if numstep == 0:
@@ -79,6 +114,35 @@ def build_meta_inputs(
             inputs[subject, model_config.nbstimbits + DISTANCE_INPUT_OFFSET] = (
                 signed_magnitudes[subject]
             )
+    return inputs
+
+
+def build_meta_input_sequence(
+    model_config: TrainConfig,
+    episodes: tuple[RankingEpisode, ...],
+    left_items: np.ndarray,
+    right_items: np.ndarray,
+    signed_magnitudes: np.ndarray,
+    *,
+    num_steps: int,
+    time_value: float,
+    support_trial: bool,
+) -> torch.Tensor:
+    inputs = np.stack(
+        [
+            _build_meta_input_array(
+                model_config,
+                episodes,
+                left_items,
+                right_items,
+                signed_magnitudes,
+                numstep=numstep,
+                time_value=time_value,
+                support_trial=support_trial,
+            )
+            for numstep in range(num_steps)
+        ]
+    )
     return torch.from_numpy(inputs).to(DEVICE)
 
 
@@ -106,9 +170,11 @@ def run_meta_batch(
         )
 
     n_support = len(episodes[0].support_trials)
+    zero_hidden = net.initialZeroState(model_config.bs)
+    zero_eligibility = net.initialZeroET(model_config.bs)
     for trial_index in range(n_support):
-        hidden = net.initialZeroState(model_config.bs)
-        eligibility = net.initialZeroET(model_config.bs)
+        hidden = zero_hidden
+        eligibility = zero_eligibility
         trials = [episode.support_trials[trial_index] for episode in episodes]
         left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
         right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
@@ -119,17 +185,17 @@ def run_meta_batch(
         time_value = (
             trial_index / max(1, n_support - 1) * training_config.support_query_time
         )
-        for numstep in range(model_config.triallen):
-            inputs = build_meta_inputs(
-                model_config,
-                episodes,
-                left,
-                right,
-                signed,
-                numstep=numstep,
-                time_value=time_value,
-                support_trial=True,
-            )
+        input_sequence = build_meta_input_sequence(
+            model_config,
+            episodes,
+            left,
+            right,
+            signed,
+            num_steps=model_config.triallen,
+            time_value=time_value,
+            support_trial=True,
+        )
+        for inputs in input_sequence.unbind():
             _, _, _, hidden, eligibility, fast_weights = net(
                 inputs, hidden, eligibility, fast_weights
             )
@@ -139,8 +205,8 @@ def run_meta_batch(
     total = 0
     n_queries = len(episodes[0].query_trials)
     for query_index in range(n_queries):
-        hidden = net.initialZeroState(model_config.bs)
-        eligibility = net.initialZeroET(model_config.bs)
+        hidden = zero_hidden
+        eligibility = zero_eligibility
         trials = [episode.query_trials[query_index] for episode in episodes]
         left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
         right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
@@ -149,17 +215,17 @@ def run_meta_batch(
         )
         signed = np.zeros(model_config.bs, dtype=np.float32)
         response_logits = None
-        for numstep in range(NUMRESPONSESTEP + 1):
-            inputs = build_meta_inputs(
-                model_config,
-                episodes,
-                left,
-                right,
-                signed,
-                numstep=numstep,
-                time_value=training_config.support_query_time,
-                support_trial=False,
-            )
+        input_sequence = build_meta_input_sequence(
+            model_config,
+            episodes,
+            left,
+            right,
+            signed,
+            num_steps=NUMRESPONSESTEP + 1,
+            time_value=training_config.support_query_time,
+            support_trial=False,
+        )
+        for numstep, inputs in enumerate(input_sequence.unbind()):
             logits, _, _, hidden, eligibility, _proposed = net(
                 inputs, hidden, eligibility, fast_weights
             )
@@ -206,11 +272,17 @@ def make_model_and_tasks(training_config: MetaTrainConfig):
     return model_config, net, task_generator
 
 
+def compile_meta_model(net: RetroModulRNN):
+    return torch.compile(net, fullgraph=True)
+
+
 def save_meta_checkpoint(
     output_dir: Path,
     net: RetroModulRNN,
     training_config: MetaTrainConfig,
     step: int,
+    *,
+    execution: dict | None = None,
 ) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_path = output_dir / "net.dat"
@@ -246,25 +318,39 @@ def save_meta_checkpoint(
             },
         },
     }
+    if execution is not None:
+        metadata["execution"] = execution
     with (output_dir / "config.json").open("w", encoding="utf-8") as handle:
         json.dump(metadata, handle, indent=2, sort_keys=True)
         handle.write("\n")
 
 
-def train_meta_model(training_config: MetaTrainConfig, output_dir: Path) -> None:
+def train_meta_model(
+    training_config: MetaTrainConfig,
+    output_dir: Path,
+    *,
+    compile_model: bool = False,
+) -> None:
     np.random.seed(training_config.seed)
     torch.manual_seed(training_config.seed)
     rng = np.random.default_rng(training_config.seed)
     model_config, net, task_generator = make_model_and_tasks(training_config)
-    optimizer = torch.optim.Adam(net.parameters(), lr=training_config.learning_rate)
+    training_net = compile_meta_model(net) if compile_model else net
+    optimizer = torch.optim.Adam(
+        training_net.parameters(), lr=training_config.learning_rate
+    )
     log_path = output_dir / "train_log.jsonl"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for step in range(training_config.outer_steps):
         optimizer.zero_grad()
-        stats = run_meta_batch(training_config, model_config, net, task_generator, rng)
+        stats = run_meta_batch(
+            training_config, model_config, training_net, task_generator, rng
+        )
         stats.loss.backward()
-        torch.nn.utils.clip_grad_norm_(net.parameters(), training_config.gradient_clip)
+        torch.nn.utils.clip_grad_norm_(
+            training_net.parameters(), training_config.gradient_clip
+        )
         optimizer.step()
         record = {
             "outer_step": step,
@@ -280,7 +366,13 @@ def train_meta_model(training_config: MetaTrainConfig, output_dir: Path) -> None
             (step + 1) % training_config.save_every == 0
             or step + 1 == training_config.outer_steps
         ):
-            save_meta_checkpoint(output_dir, net, training_config, step)
+            save_meta_checkpoint(
+                output_dir,
+                net,
+                training_config,
+                step,
+                execution=COMPILED_TRAINING_EXECUTION if compile_model else None,
+            )
 
 
 def parse_args(args=None):

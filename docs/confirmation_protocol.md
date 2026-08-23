@@ -57,13 +57,13 @@ was frozen only after the two-seed workflow pilot described below. It fixes:
 Run one registered seed on a CUDA-visible host with:
 
 ```bash
-direnv exec . python -m fsrl.confirmation run-seed --seed 2001
+direnv exec . python -m fsrl.formal_runtime confirmation run-seed --seed 2001
 ```
 
 After all ten registered seeds finish, aggregate without optional omissions:
 
 ```bash
-direnv exec . python -m fsrl.confirmation aggregate \
+direnv exec . python -m fsrl.formal_runtime confirmation aggregate \
   --output results/confirmation_v1.json
 ```
 
@@ -90,11 +90,41 @@ human intervals. The full, unfiltered pilot aggregate is
 `results/pilot_v1.json`.
 
 The observed workload consists of many small sequential recurrent CUDA kernels.
-A single process used about 5 GB on an RTX 5090 but remained dispatch-bound;
-four concurrent seeds consumed about 18.6 GB without improving aggregate
-throughput. Future work should therefore validate changes with one to three
-pilot seeds and run the formal set sequentially unless a numerically equivalent
-batched implementation is separately validated.
+A single process uses about 5 GB on an RTX 5090 and remains dispatch-bound.
+Formal execution therefore uses `fsrl.formal_runtime`, which requires a visible
+GPU and fixes PyTorch intra-op and inter-op CPU work to one thread. The
+unbounded default created 74 operating-system threads and consumed about 17.6
+CPU cores while GPU utilization was only about 23%. The bounded training runtime
+averaged about one CPU core while retaining GPU execution. NumPy and BLAS thread
+settings deliberately remain unchanged: forcing every CPU library to one thread
+changed byte-level assembly and factor-swap development results, whereas the
+PyTorch-only bound reproduced all three frozen mechanism results exactly.
+
+Formal training also batches all time-step inputs for one trial into one
+contiguous CPU-to-GPU transfer and compiles `RetroModulRNN` with
+`torch.compile(net, fullgraph=True)`. The mode argument is deliberately omitted,
+so PyTorch uses its default mode and Inductor backend. A source-locked execution
+record in every checkpoint and seed summary identifies this configuration, the
+PyTorch/CUDA/device environment, and the training implementation hash.
+
+The resource defect was found after seeds 2001--2003 completed and seed 2004
+started, before any scientific outcome was inspected. That execution was
+aborted and its ignored artifacts were archived under
+`output/aborted-confirmation-v1-unbounded-threads-20260824/`; none are eligible
+for aggregation. A seed-2004 replay with the bounded runtime reproduced the
+first 184 training-log records byte for byte (identical SHA-256) and completed
+those steps in 28.26 seconds at 105% CPU. Trial-level input batching preserved
+all 184 records byte for byte and reduced the run to 23.98 seconds. Adding
+full-graph default compilation reduced it further to 17.47 seconds. Complete
+compiled development seeds 1901 and 1902 took 88.52 and 87.49 seconds for 1,000
+steps. Across both seeds, task and accuracy branches never changed, the maximum
+training-statistic difference was `9.5367431640625e-7`, and the maximum
+checkpoint parameter difference was `2.682209014892578e-7`. Joint reruns of all
+three frozen mechanism analyses differed by at most `1.430511474609375e-6`,
+below the registered `3.814697265625e-6` tolerance, with unchanged confirmation
+decisions. All ten formal seeds must therefore be rerun from scratch through the
+bounded compiled entry point. Future implementation changes still require one
+to three development seeds and numerical-equivalence checks before formal use.
 
 ## Matched controls and algorithmic interpretation
 

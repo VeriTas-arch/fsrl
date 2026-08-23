@@ -144,6 +144,16 @@ memory module during mechanism confirmation.
 - Use GPU for neural training and evaluation when it materially helps. CPU is
   appropriate for lightweight tests, data checks, bootstrap summaries, and
   exact enumeration when it is the more efficient implementation.
+- Run formal confirmation and mechanism commands only through
+  `python -m fsrl.formal_runtime`. This entry point requires a visible GPU and
+  bounds PyTorch intra-op and inter-op work to one CPU thread; do not also
+  change NumPy/BLAS thread settings, bypass the entry point, or mix bounded and
+  unbounded seed artifacts in one formal aggregate.
+- Formal meta-training uses one contiguous CPU-to-GPU input transfer per trial
+  and `torch.compile(net, fullgraph=True)` with the default mode. Treat the
+  compiler configuration and implementation source hashes as part of the
+  execution lock; validate any further optimization on one to three development
+  seeds before changing it.
 - At the end of an experiment, preserve positive and negative outputs, run the
   scoped validation, commit the intended files, verify that the worktree is
   clean, and push to `origin/dev`.

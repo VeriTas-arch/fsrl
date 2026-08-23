@@ -21,6 +21,13 @@ but it may not change their equations, donor assignments, factor/cell
 definitions, null permutations, targets, or tolerances. Such a change requires
 a new contract version before formal access.
 
+The source-locked execution layer limits PyTorch intra-op and inter-op work to
+one CPU thread, performs one contiguous input transfer per trial, and trains
+with `torch.compile(net, fullgraph=True)` in the default mode. NumPy/BLAS thread
+settings remain unchanged to preserve the frozen analysis reductions. Each
+formal artifact records the compiler configuration, runtime environment, and
+execution-source hashes; aggregation rejects mixed execution versions.
+
 The formal inferential unit is the independently trained network. Each
 registered subject-level contrast is first averaged within a seed over the
 fixed 77-subject cohort, then the ten seed means are bootstrapped 10,000 times
@@ -80,8 +87,8 @@ Validate the frozen sources and reproduce all three development components
 through the formal adapter before accessing formal artifacts:
 
 ```bash
-direnv exec . python -m fsrl.mechanism_confirmation validate
-direnv exec . python -m fsrl.mechanism_confirmation validate-development
+direnv exec . python -m fsrl.formal_runtime mechanism validate
+direnv exec . python -m fsrl.formal_runtime mechanism validate-development
 ```
 
 Then process seeds 2001 through 2010 serially. For each seed, the old workflow
@@ -90,8 +97,8 @@ registers the checkpoint, behavior, qualification, adapters, and three raw
 component artifacts by SHA-256:
 
 ```bash
-direnv exec . python -m fsrl.confirmation run-seed --seed 2001
-direnv exec . python -m fsrl.mechanism_confirmation run-seed --seed 2001
+direnv exec . python -m fsrl.formal_runtime confirmation run-seed --seed 2001
+direnv exec . python -m fsrl.formal_runtime mechanism run-seed --seed 2001
 ```
 
 Do not inspect or aggregate scientific outcomes between seeds. After all ten
@@ -99,9 +106,9 @@ seed-level artifacts exist, aggregate both contracts without optional
 omissions:
 
 ```bash
-direnv exec . python -m fsrl.confirmation aggregate \
+direnv exec . python -m fsrl.formal_runtime confirmation aggregate \
   --output results/confirmation_v1.json
-direnv exec . python -m fsrl.mechanism_confirmation aggregate
+direnv exec . python -m fsrl.formal_runtime mechanism aggregate
 ```
 
 The mechanism aggregate first reduces within each network, then applies the

@@ -18,9 +18,13 @@ from .assembly_trajectory import (
 )
 from .confirmation import (
     DEFAULT_OUTPUT_ROOT,
+    FORMAL_CONFIRMATION_ID,
     _validate_checkpoint,
+    _validate_formal_runtime_record,
+    _validate_formal_training_execution,
     write_json,
 )
+from .formal_runtime import require_formal_runtime
 from .history_state_factorial import run_history_state_factorial
 from .support_factor_swap import run_support_factor_swap
 
@@ -123,6 +127,9 @@ def _seed_input_registration(
     metadata = _validate_checkpoint(checkpoint, training_specification, seed)
     behavior_result = load_json(behavior)
     confirmation_result = load_json(confirmation)
+    if training_specification["confirmation_id"] == FORMAL_CONFIRMATION_ID:
+        _validate_formal_runtime_record(confirmation_result)
+        _validate_formal_training_execution(confirmation_result)
     qualification_result = load_json(qualification)
     if behavior_result["checkpoint"]["sha256"] != metadata["checkpoint"]["sha256"]:
         raise RuntimeError("behavior artifact does not match the registered checkpoint")
@@ -345,6 +352,7 @@ def run_mechanism_seed(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     output_root: Path = DEFAULT_OUTPUT_ROOT,
 ) -> dict:
+    runtime = require_formal_runtime()
     contract_validation = validate_mechanism_contract(specification_path)
     if not contract_validation["passed"]:
         raise RuntimeError("mechanism confirmation contract validation failed")
@@ -392,6 +400,14 @@ def run_mechanism_seed(
         },
         "primary_seed_means": primary,
         "registered_nonprimary_seed_means": diagnostics,
+        "execution_runtime": runtime,
+        "execution_runtime_source": _registered_file(
+            ROOT / "fsrl" / "formal_runtime.py"
+        ),
+        "training_execution": inputs["confirmation"]["training_execution"],
+        "training_execution_source": inputs["confirmation"][
+            "training_execution_source"
+        ],
         "orchestration_source": _registered_file(Path(__file__)),
         "input_artifacts": inputs["files"],
         "adapter_artifacts": {
@@ -409,7 +425,10 @@ def _validate_seed_result(seed: int, path: Path, confirmation_id: str) -> dict:
     result = load_json(path)
     if result.get("seed") != seed or result.get("confirmation_id") != confirmation_id:
         raise RuntimeError(f"mechanism seed result identity mismatch: {path}")
+    _validate_formal_runtime_record(result)
+    _validate_formal_training_execution(result)
     registrations = {
+        "execution_runtime_source": result["execution_runtime_source"],
         "orchestration_source": result["orchestration_source"],
         **result["input_artifacts"],
         **{f"adapter_{name}": row for name, row in result["adapter_artifacts"].items()},
@@ -460,6 +479,13 @@ def aggregate_mechanism_confirmation(
         raise RuntimeError(
             f"all registered formal seeds are mandatory; missing results for {missing}"
         )
+    if len(
+        {
+            json.dumps(result["execution_runtime"], sort_keys=True)
+            for result in seed_results
+        }
+    ) != 1:
+        raise RuntimeError("formal mechanism seeds used different runtime environments")
     inference = specification["formal_inference"]
     rng = np.random.default_rng(int(inference["network_bootstrap_seed"]))
     counts = bootstrap_counts(
