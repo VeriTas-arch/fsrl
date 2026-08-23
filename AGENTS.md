@@ -148,15 +148,28 @@ negative fingerprint is an excessive symbolic-distance slope together with
 lower learned and overall accuracy, while nonlearned accuracy, stable coherent
 errors, causal necessity, geometry, and global reassembly transport. Build the
 next candidate from those positives: preserve the confirmed fast-weight global
-expected-rank channel and test a separate episode-local learned-pair residual
-channel. Require selective causal ablations of the two channels; do not tune a
-temperature, choose checkpoints, or add an unconstrained memory module merely
-to move the failed scalars.
+expected-rank channel and search for the mechanism that preserves direct local
+experience. Require selective causal ablations; do not tune a temperature,
+choose checkpoints, or add an unconstrained memory module merely to move the
+failed scalars.
+
+The post-formal two-seed hidden-residual audit has rejected the simplest
+readout-only route. Retained relations cause a small direct-enriched Hodge
+residual in response hidden states, but it does not contain one cross-subject,
+cross-relation correctness direction that is suppressed by `W_out`; the current
+output direction reads the direct residual at least as well. Do not describe
+this as an existing dual channel or fit a second response-state readout and call
+it a mechanism. Next localize relation-conditioned traces in the generated
+write and terminal fast-weight/support state, then test whether query dynamics
+route or discard them. Only consider a new persistent local mechanism if these
+earlier-state audits also fail.
 
 Start v2 only with one to three development seeds. Freeze estimands, competence
 gates, and outcome-contingent interpretations before any new formal population.
-The current evidence and next decisive test are recorded in
-`docs/formal_confirmation_v1.md`.
+Keep the seed-2009 complete-write/operator localization separate from the human
+local-fidelity question. The current formal evidence is recorded in
+`docs/formal_confirmation_v1.md`; the response-state negative and its next
+decisive test are in `docs/hidden_residual_audit_v1.md`.
 
 ## Repository workflow
 

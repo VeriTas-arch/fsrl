@@ -115,6 +115,18 @@ distance slope. See [`docs/formal_confirmation_v1.md`](docs/formal_confirmation_
 [`results/confirmation_v1.json`](results/confirmation_v1.json), and
 [`results/mechanism_confirmation_v1.json`](results/mechanism_confirmation_v1.json).
 
+The first post-formal read-only representation audit asks whether the missing
+human learned-pair component already exists as a response-hidden residual that
+the fixed output suppresses. Retained relations do create a small causal local
+Hodge residual in both frozen development networks, but a direction jointly
+held out by subject and relation is not selectively local and does not
+outperform the current output direction. Thus v2 should not begin by merely
+fitting another readout to the same response state. The next audit must localize
+relation-conditioned content in earlier support/fast-weight state before a new
+persistent mechanism is considered. See
+[`docs/hidden_residual_audit_v1.md`](docs/hidden_residual_audit_v1.md) and
+[`results/hidden_residual_audit_v1.json`](results/hidden_residual_audit_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

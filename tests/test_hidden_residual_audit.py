@@ -1,7 +1,9 @@
 import unittest
+from pathlib import Path
 
 import numpy as np
 
+from fsrl.assembly_diagnostics import file_sha256, load_json
 from fsrl.assembly_trajectory import build_complete_graph_geometry
 from fsrl.hidden_residual_audit import (
     cross_validated_local_direction,
@@ -74,6 +76,24 @@ class HiddenResidualAuditTests(unittest.TestCase):
         )
         np.testing.assert_allclose(metrics["local_remote_absolute"], 0.0)
         np.testing.assert_allclose(metrics["output_direct_correctness"], 0.0)
+
+    def test_registered_result_is_complete_and_source_locked(self):
+        result = load_json("results/hidden_residual_audit_v1.json")
+        self.assertFalse(result["formal_seed_access"])
+        self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
+        self.assertEqual(
+            result["implementation"]["sha256"],
+            file_sha256(Path(result["implementation"]["path"])),
+        )
+        for row in result["seed_results"].values():
+            self.assertEqual(
+                row["validation"]["stable_omitted_hidden_influence_max_abs"],
+                0.0,
+            )
+            self.assertLessEqual(
+                row["validation"]["hidden_to_logit_projection_max_abs_error"],
+                row["validation"]["floating_reproduction_tolerance"],
+            )
 
 
 if __name__ == "__main__":
