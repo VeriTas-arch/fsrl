@@ -56,6 +56,15 @@ human choices retain a stronger learned-pair residual after controlling for
 distance. See [`docs/assembly_diagnostics_v1.md`](docs/assembly_diagnostics_v1.md)
 and [`results/assembly_diagnostics_v1.json`](results/assembly_diagnostics_v1.json).
 
+The follow-up registered prefix and relation-LOO diagnostic shows that retained
+support evidence causally reorganizes disjoint pairs, progressively forms a
+distributional expected-rank potential rather than a hard MAP order, and is
+already available to hidden dynamics at query onset. The output direction
+selects an even more additive component, but query recurrence is not the source
+of commitment. See
+[`docs/assembly_trajectory_v1.md`](docs/assembly_trajectory_v1.md) and
+[`results/assembly_trajectory_v1.json`](results/assembly_trajectory_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

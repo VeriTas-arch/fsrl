@@ -82,16 +82,30 @@ logit potential, while the human choice field retains a stronger learned-pair
 residual. Treat this as a policy-level mixed-code signal, not yet proof of a
 local memory store.
 
+The completed registered prefix/LOO diagnostic further shows that retained
+support trials have immediate causal effects on disjoint pairs, and that
+leaving out one retained relation differentially changes third-party item
+potentials. The final neural potential aligns more closely with the exact
+posterior expected-rank/Hodge potential than with a MAP order. Episode-specific
+content requires the fast-weight pathway and is already present in hidden
+dynamics at query onset; the output direction selects a modestly more additive
+component. Do not describe this as independent correctness-propagating updates:
+remote absolute effects are robust, but their correctness-aligned contribution
+is unresolved or negative.
+
 Before scaling formal seeds or changing the architecture, prioritize:
 
-1. Support-trial trajectories from intermediate `P_t` states.
-2. Leave-one-relation-out causal influence on unobserved pairs.
-3. Identification of a reproducible meta-learned implicit prior.
+1. Support-time localization of DA, eligibility, `alpha * Delta P_t`, and the
+   induced neural-potential update.
+2. Tests of whether late update attenuation reflects fast-weight saturation or
+   interaction with accumulated evidence.
+3. Comparison of each neural potential update with the exact posterior
+   expected-rank update, preserving the MAP result as a rejected alternative.
 
-The target is to explain how the network commits ambiguous evidence to a global
-potential and how human behavior retains additional local or conjunctive
-structure. Do not tune the slope or add a memory module before the read-only
-diagnostics localize those operations.
+The target is to explain how bidirectional global redistribution accumulates
+into a correctly aligned potential and how human behavior retains additional
+local or conjunctive structure. Do not tune the slope or add a memory module
+before the support-write mechanism is localized.
 
 ## Repository workflow
 

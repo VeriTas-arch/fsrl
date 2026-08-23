@@ -40,6 +40,31 @@ class LiuEvaluatorTests(unittest.TestCase):
         self.assertEqual(float(torch.max(torch.abs(write_off))), 0.0)
         self.assertEqual(float(torch.max(torch.abs(reset))), 0.0)
 
+    def test_incremental_support_endpoint_matches_intact_evaluation(self):
+        fast_weights = self.evaluator.initialize_fast_weights()
+        for trial_index in range(self.evaluator.protocol.support_trials):
+            fast_weights = self.evaluator.advance_support_trial(
+                fast_weights, trial_index
+            )
+        expected = self.evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
+        torch.testing.assert_close(fast_weights, expected)
+
+    def test_zero_evidence_preserves_trial_but_removes_magnitude(self):
+        fast_weights = self.evaluator.initialize_fast_weights()
+        explicit_zero = self.evaluator.advance_support_trial(
+            fast_weights, 0, zero_evidence=True
+        )
+        relation_zero = self.evaluator.advance_support_trial(
+            fast_weights,
+            0,
+            zero_relations=frozenset(
+                self.evaluator.protocol.support_pairs_higher_lower
+            ),
+        )
+        natural = self.evaluator.advance_support_trial(fast_weights, 0)
+        torch.testing.assert_close(explicit_zero, relation_zero)
+        self.assertGreater(float(torch.max(torch.abs(natural - explicit_zero))), 0.0)
+
     def test_shuffle_rotates_subject_fast_states(self):
         intact = self.evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
         shuffled = self.evaluator.learn_fast_weights(FastWeightIntervention.SHUFFLE)
@@ -65,6 +90,32 @@ class LiuEvaluatorTests(unittest.TestCase):
             for pair in forward:
                 np.testing.assert_allclose(
                     first[subject][pair], second[subject][pair], atol=1e-7
+                )
+
+    def test_hidden_trajectory_contains_registered_response_state(self):
+        fast_weights = self.evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
+        pairs = tuple(combinations(range(8), 2))
+        schedules = tuple(pairs for _ in range(self.config.bs))
+        response = self.evaluator.readout_hidden_states(fast_weights, schedules)
+        trajectories, logit_trajectories = (
+            self.evaluator.readout_hidden_and_logit_trajectories(
+                fast_weights, schedules
+            )
+        )
+        response_logits = self.evaluator.readout_logits(fast_weights, schedules)
+        for subject in range(self.config.bs):
+            for pair in pairs:
+                self.assertEqual(
+                    trajectories[subject][pair].shape,
+                    (self.config.triallen, self.config.hs),
+                )
+                np.testing.assert_allclose(
+                    trajectories[subject][pair][1], response[subject][pair]
+                )
+                self.assertAlmostEqual(
+                    logit_trajectories[subject][pair][1],
+                    response_logits[subject][pair],
+                    places=6,
                 )
 
     def test_alpha_is_restored_after_alpha_zero_control(self):

@@ -344,6 +344,27 @@ class FrozenFastWeightEvaluator:
                 self.net.alpha.copy_(saved)
 
     def learn_fast_weights(self, intervention: FastWeightIntervention) -> torch.Tensor:
+        fast_weights = self.initialize_fast_weights(intervention)
+        for trial_index in range(self.protocol.support_trials):
+            fast_weights = self.advance_support_trial(
+                fast_weights,
+                trial_index,
+                intervention=intervention,
+            )
+
+        if intervention == FastWeightIntervention.RESET:
+            fast_weights = torch.zeros_like(fast_weights)
+        elif intervention == FastWeightIntervention.SHUFFLE:
+            if self.config.bs < 2:
+                raise ValueError("shuffle intervention requires batch_size >= 2")
+            fast_weights = torch.roll(fast_weights, shifts=1, dims=0)
+        return fast_weights.detach().clone()
+
+    def initialize_fast_weights(
+        self, intervention: FastWeightIntervention = FastWeightIntervention.INTACT
+    ) -> torch.Tensor:
+        """Return P_0 after the registered two blank initialization steps."""
+
         hidden = self.net.initialZeroState(self.config.bs)
         eligibility = self.net.initialZeroET(self.config.bs)
         fast_weights = self.net.initialZeroPlasticWeights(self.config.bs)
@@ -362,49 +383,70 @@ class FrozenFastWeightEvaluator:
                     if intervention == FastWeightIntervention.WRITE_OFF
                     else proposed
                 )
+        return fast_weights.detach().clone()
 
-            n_trials = self.protocol.support_trials
-            for trial_index in range(n_trials):
-                hidden = self.net.initialZeroState(self.config.bs)
-                eligibility = self.net.initialZeroET(self.config.bs)
-                trials = [schedule[trial_index] for schedule in self.support_schedules]
-                left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
-                right = np.asarray(
-                    [trial.right_item for trial in trials], dtype=np.int64
-                )
-                signed = np.asarray(
-                    [
-                        trial.signed_magnitude
-                        * self._encoding_reliability(subject, trial_index)
-                        for subject, trial in enumerate(trials)
-                    ],
-                    dtype=np.float32,
-                )
-                trial_time = trial_index / max(1, n_trials - 1) * self.test_time_value
-                for numstep in range(self.config.triallen):
-                    inputs = self._step_inputs(
-                        left,
-                        right,
-                        signed,
-                        numstep=numstep,
-                        time_value=trial_time,
-                        support_trial=True,
-                    )
-                    _, _, _, hidden, eligibility, proposed = self.net(
-                        inputs, hidden, eligibility, fast_weights
-                    )
-                    fast_weights = (
-                        fast_weights
-                        if intervention == FastWeightIntervention.WRITE_OFF
-                        else proposed
-                    )
+    def advance_support_trial(
+        self,
+        fast_weights: torch.Tensor,
+        trial_index: int,
+        *,
+        intervention: FastWeightIntervention = FastWeightIntervention.INTACT,
+        zero_evidence: bool = False,
+        zero_relations: frozenset[tuple[int, int]] = frozenset(),
+    ) -> torch.Tensor:
+        """Advance one registered support slot while optionally zeroing evidence."""
 
-        if intervention == FastWeightIntervention.RESET:
-            fast_weights = torch.zeros_like(fast_weights)
-        elif intervention == FastWeightIntervention.SHUFFLE:
-            if self.config.bs < 2:
-                raise ValueError("shuffle intervention requires batch_size >= 2")
-            fast_weights = torch.roll(fast_weights, shifts=1, dims=0)
+        if not 0 <= trial_index < self.protocol.support_trials:
+            raise IndexError("support trial index is outside the registered schedule")
+        if fast_weights.shape != (
+            self.config.bs,
+            self.config.hs,
+            self.config.hs,
+        ):
+            raise ValueError("fast_weights has the wrong shape")
+
+        hidden = self.net.initialZeroState(self.config.bs)
+        eligibility = self.net.initialZeroET(self.config.bs)
+        trials = [schedule[trial_index] for schedule in self.support_schedules]
+        left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
+        right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
+        signed = np.asarray(
+            [
+                0.0
+                if zero_evidence
+                or (trial.higher_item, trial.lower_item) in zero_relations
+                else trial.signed_magnitude
+                * self._encoding_reliability(subject, trial_index)
+                for subject, trial in enumerate(trials)
+            ],
+            dtype=np.float32,
+        )
+        trial_time = (
+            trial_index
+            / max(1, self.protocol.support_trials - 1)
+            * self.test_time_value
+        )
+        with (
+            torch.no_grad(),
+            self._alpha_zeroed(intervention == FastWeightIntervention.ALPHA_ZERO),
+        ):
+            for numstep in range(self.config.triallen):
+                inputs = self._step_inputs(
+                    left,
+                    right,
+                    signed,
+                    numstep=numstep,
+                    time_value=trial_time,
+                    support_trial=True,
+                )
+                _, _, _, hidden, eligibility, proposed = self.net(
+                    inputs, hidden, eligibility, fast_weights
+                )
+                fast_weights = (
+                    fast_weights
+                    if intervention == FastWeightIntervention.WRITE_OFF
+                    else proposed
+                )
         return fast_weights.detach().clone()
 
     def _encoding_reliability(self, subject: int, trial_index: int) -> float:
@@ -490,13 +532,46 @@ class FrozenFastWeightEvaluator:
     ) -> tuple[dict[tuple[int, int], np.ndarray], ...]:
         """Return response-step hidden states under the strict frozen query protocol."""
 
+        trajectories = self.readout_hidden_trajectories(fast_weights, pair_schedules)
+        return tuple(
+            {pair: states[NUMRESPONSESTEP].copy() for pair, states in subject.items()}
+            for subject in trajectories
+        )
+
+    def readout_hidden_trajectories(
+        self,
+        fast_weights: torch.Tensor,
+        pair_schedules: tuple[tuple[tuple[int, int], ...], ...],
+        *,
+        alpha_zero: bool = False,
+    ) -> tuple[dict[tuple[int, int], np.ndarray], ...]:
+        """Return every hidden step under the strict frozen query protocol."""
+
+        hidden, _logits = self.readout_hidden_and_logit_trajectories(
+            fast_weights, pair_schedules, alpha_zero=alpha_zero
+        )
+        return hidden
+
+    def readout_hidden_and_logit_trajectories(
+        self,
+        fast_weights: torch.Tensor,
+        pair_schedules: tuple[tuple[tuple[int, int], ...], ...],
+        *,
+        alpha_zero: bool = False,
+    ) -> tuple[
+        tuple[dict[tuple[int, int], np.ndarray], ...],
+        tuple[dict[tuple[int, int], np.ndarray], ...],
+    ]:
+        """Return hidden states and output margins from each frozen query step."""
+
         if len(pair_schedules) != self.config.bs:
             raise ValueError("one pair schedule is required per batch subject")
         schedule_lengths = {len(schedule) for schedule in pair_schedules}
         if len(schedule_lengths) != 1:
             raise ValueError("all pair schedules must have equal length")
-        outputs = [{} for _ in range(self.config.bs)]
-        with torch.no_grad():
+        hidden_outputs = [{} for _ in range(self.config.bs)]
+        logit_outputs = [{} for _ in range(self.config.bs)]
+        with torch.no_grad(), self._alpha_zeroed(alpha_zero):
             for pair_index in range(next(iter(schedule_lengths))):
                 hidden = self.net.initialZeroState(self.config.bs)
                 eligibility = self.net.initialZeroET(self.config.bs)
@@ -509,7 +584,8 @@ class FrozenFastWeightEvaluator:
                     dtype=np.int64,
                 )
                 signed = np.zeros(self.config.bs, dtype=np.float32)
-                response_hidden = None
+                hidden_steps = []
+                logit_steps = []
                 for numstep in range(self.config.triallen):
                     inputs = self._step_inputs(
                         left,
@@ -519,17 +595,20 @@ class FrozenFastWeightEvaluator:
                         time_value=self.test_time_value,
                         support_trial=False,
                     )
-                    _, _, _, hidden, eligibility, _proposed = self.net(
+                    logits, _, _, hidden, eligibility, _proposed = self.net(
                         inputs, hidden, eligibility, fast_weights
                     )
-                    if numstep == NUMRESPONSESTEP:
-                        response_hidden = hidden.detach().cpu().numpy()
-                assert response_hidden is not None
-                for subject, state in enumerate(response_hidden):
-                    outputs[subject][(int(left[subject]), int(right[subject]))] = (
-                        state.copy()
+                    hidden_steps.append(hidden.detach().cpu().numpy())
+                    logit_steps.append(
+                        (logits[:, 1] - logits[:, 0]).detach().cpu().numpy()
                     )
-        return tuple(outputs)
+                stacked_hidden = np.stack(hidden_steps, axis=1)
+                stacked_logits = np.stack(logit_steps, axis=1)
+                for subject, states in enumerate(stacked_hidden):
+                    pair = (int(left[subject]), int(right[subject]))
+                    hidden_outputs[subject][pair] = states.copy()
+                    logit_outputs[subject][pair] = stacked_logits[subject].copy()
+        return tuple(hidden_outputs), tuple(logit_outputs)
 
     def condition_evaluation(
         self, intervention: FastWeightIntervention
