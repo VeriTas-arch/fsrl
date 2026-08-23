@@ -93,19 +93,36 @@ component. Do not describe this as independent correctness-propagating updates:
 remote absolute effects are robust, but their correctness-aligned contribution
 is unresolved or negative.
 
-Before scaling formal seeds or changing the architecture, prioritize:
+The completed registered support-write localization assigns most
+relation-specific write direction and downstream policy change to eligibility,
+not to the matched DA difference. The modeled DA magnitude retains a weaker
+state- and innovation-sensitive gain signal after an explicitly exploratory
+exposure adjustment, but it is not an exact Bayesian surprise variable. Alpha
+causally amplifies norm-matched writes in the frozen query policy, yet it does
+not reproducibly beat scalar and shuffled controls in posterior-update
+direction. Keep amplification and directional mapping as distinct claims.
 
-1. Support-time localization of DA, eligibility, `alpha * Delta P_t`, and the
-   induced neural-potential update.
-2. Tests of whether late update attenuation reflects fast-weight saturation or
-   interaction with accumulated evidence.
-3. Comparison of each neural potential update with the exact posterior
-   expected-rank update, preserving the MAP result as a rejected alternative.
+Trial updates positively align with exact posterior expected-rank innovations,
+especially at the first relation exposure, but do not outperform a fixed
+true-order direction across the whole episode. Late attenuation occurs in
+write generation without literal clipping or replicated functional saturation.
+The no-prior-relation history control supports relation-specific assimilation
+by the fourth exposure, not a monotonic redundancy effect from the second
+exposure onward.
+
+Before scaling formal seeds or changing the architecture, prioritize a
+registered within-exposure factor-swap diagnostic. Exchange DA scalars and
+eligibility matrices among matched trials while holding the pre-query state and
+alpha expression map fixed; test whether eligibility transfers update direction
+and DA transfers magnitude. Contrast natural and no-prior-relation histories to
+localize late assimilation to DA, eligibility, or their interaction. Use more
+than one preregistered alpha permutation or a local recurrent-sensitivity
+analysis before interpreting alpha's functional amplification as systematic.
 
 The target is to explain how bidirectional global redistribution accumulates
 into a correctly aligned potential and how human behavior retains additional
 local or conjunctive structure. Do not tune the slope or add a memory module
-before the support-write mechanism is localized.
+before the remaining gain-direction-history interaction is localized.
 
 ## Repository workflow
 

@@ -65,6 +65,17 @@ of commitment. See
 [`docs/assembly_trajectory_v1.md`](docs/assembly_trajectory_v1.md) and
 [`results/assembly_trajectory_v1.json`](results/assembly_trajectory_v1.json).
 
+The registered support-write localization shows that evidence-dependent
+eligibility supplies nearly all effective write direction, while the modeled
+DA signal has a much smaller, coarse gain role. Alpha makes norm-matched writes
+far more effective for the query policy but does not uniquely align them with
+the exact posterior innovation. First exposures are strongly innovation
+aligned; later updates attenuate without clipping and show relation-specific
+assimilation by the fourth exposure. See
+[`docs/support_write_localization_v1.md`](docs/support_write_localization_v1.md)
+and
+[`results/support_write_localization_v1.json`](results/support_write_localization_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
