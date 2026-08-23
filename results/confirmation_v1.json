@@ -1,0 +1,2261 @@
+{
+  "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+  "declared_seeds": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010
+  ],
+  "pass_rates": {
+    "behavioral_confirmation_pass_proportion": 0.0,
+    "causal_qualification_pass_proportion": 1.0,
+    "geometry_pass_proportion": 1.0,
+    "joint_pass_proportion": 0.0
+  },
+  "reported_seeds": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010
+  ],
+  "seed_distributions": {
+    "closest_map_kendall_tau": {
+      "maximum": 0.7504638218923934,
+      "mean": 0.7409090909090909,
+      "minimum": 0.7319109461966604,
+      "values_by_seed": {
+        "2001": 0.7319109461966604,
+        "2002": 0.7384044526901671,
+        "2003": 0.735621521335807,
+        "2004": 0.7467532467532466,
+        "2005": 0.7504638218923934,
+        "2006": 0.7448979591836734,
+        "2007": 0.7421150278293136,
+        "2008": 0.735621521335807,
+        "2009": 0.74860853432282,
+        "2010": 0.7346938775510204
+      }
+    },
+    "geometry_pass": {
+      "maximum": 1.0,
+      "mean": 1.0,
+      "minimum": 1.0,
+      "values_by_seed": {
+        "2001": true,
+        "2002": true,
+        "2003": true,
+        "2004": true,
+        "2005": true,
+        "2006": true,
+        "2007": true,
+        "2008": true,
+        "2009": true,
+        "2010": true
+      }
+    },
+    "neural_map_proportion": {
+      "maximum": 0.12987012987012986,
+      "mean": 0.09740259740259741,
+      "minimum": 0.05194805194805195,
+      "values_by_seed": {
+        "2001": 0.07792207792207792,
+        "2002": 0.09090909090909091,
+        "2003": 0.1038961038961039,
+        "2004": 0.12987012987012986,
+        "2005": 0.1038961038961039,
+        "2006": 0.11688311688311688,
+        "2007": 0.1038961038961039,
+        "2008": 0.1038961038961039,
+        "2009": 0.09090909090909091,
+        "2010": 0.05194805194805195
+      }
+    },
+    "nonlearned_accuracy": {
+      "maximum": 0.8117532467532467,
+      "mean": 0.8071623376623377,
+      "minimum": 0.8040259740259741,
+      "values_by_seed": {
+        "2001": 0.8043506493506493,
+        "2002": 0.8040259740259741,
+        "2003": 0.8086363636363636,
+        "2004": 0.805974025974026,
+        "2005": 0.8077922077922078,
+        "2006": 0.8083116883116883,
+        "2007": 0.8092207792207793,
+        "2008": 0.8042857142857144,
+        "2009": 0.8117532467532467,
+        "2010": 0.8072727272727273
+      }
+    },
+    "overall_accuracy": {
+      "maximum": 0.8352968460111319,
+      "mean": 0.8316697588126161,
+      "minimum": 0.8284322820037106,
+      "values_by_seed": {
+        "2001": 0.82847866419295,
+        "2002": 0.8284322820037106,
+        "2003": 0.8329313543599258,
+        "2004": 0.831400742115028,
+        "2005": 0.8337662337662338,
+        "2006": 0.8325602968460112,
+        "2007": 0.8326994434137291,
+        "2008": 0.8287105751391466,
+        "2009": 0.8352968460111319,
+        "2010": 0.8324211502782932
+      }
+    },
+    "self_consistent_incorrect_proportion": {
+      "maximum": 0.8831168831168831,
+      "mean": 0.8493506493506494,
+      "minimum": 0.7922077922077922,
+      "values_by_seed": {
+        "2001": 0.8181818181818182,
+        "2002": 0.8831168831168831,
+        "2003": 0.8181818181818182,
+        "2004": 0.8831168831168831,
+        "2005": 0.8571428571428571,
+        "2006": 0.8441558441558441,
+        "2007": 0.8831168831168831,
+        "2008": 0.8701298701298701,
+        "2009": 0.8441558441558441,
+        "2010": 0.7922077922077922
+      }
+    }
+  },
+  "seed_filtering": false,
+  "seed_summaries": [
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7319109461966604,
+        "mean_neural_posterior_probability": 0.07686501685875458,
+        "mean_pair_probability_spearman": 0.7395099705807874,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8510868983019457,
+        "neural_map_proportion": 0.07792207792207792,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "13f930ed4348d983c2f793a30e4e0a55541ad6b40ef86057ff2016c5e3a6a805"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "overall_accuracy",
+            "model": 0.82847866419295,
+            "standardized_discrepancy": -2.3462289103556864
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "learned_accuracy",
+            "model": 0.8887987012987011,
+            "standardized_discrepancy": -2.4314306384286413
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8043506493506493,
+            "standardized_discrepancy": -1.9503192620707293
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.05012545277851404,
+            "standardized_discrepancy": 4.013210565819347
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.06493506493506493,
+            "standardized_discrepancy": -1.12099281331582
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8181818181818182,
+            "standardized_discrepancy": -0.3038704779646344
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.11688311688311688,
+            "standardized_discrepancy": 1.838806366371625
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9166666666666666,
+            "standardized_discrepancy": 0.1060391162075774
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.7777777777777778,
+            "standardized_discrepancy": -0.1039992492430958
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 17,
+          "boundary": 0,
+          "high_accuracy": 11,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6757271557271557,
+            "nonlearned_accuracy": 0.8548051948051947,
+            "overall_accuracy": 0.8780148423005566,
+            "self_consistent_incorrect_proportion": 0.8311688311688312,
+            "self_inconsistent_proportion": 0.14285714285714285
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6599022707674619,
+            "nonlearned_accuracy": 0.8551298701298703,
+            "overall_accuracy": 0.8732374768089052,
+            "self_consistent_incorrect_proportion": 0.8181818181818182,
+            "self_inconsistent_proportion": 0.1038961038961039
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.49002347417840375,
+            "nonlearned_accuracy": 0.8043506493506493,
+            "overall_accuracy": 0.82847866419295,
+            "self_consistent_incorrect_proportion": 0.8181818181818182,
+            "self_inconsistent_proportion": 0.11688311688311688
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8106250825954804,
+            "nonlearned_accuracy": 0.9231818181818181,
+            "overall_accuracy": 0.9380797773654918,
+            "self_consistent_incorrect_proportion": 0.5714285714285714,
+            "self_inconsistent_proportion": 0.03896103896103896
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2001,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.49002347417840375,
+        "nonlearned_accuracy": 0.8043506493506493,
+        "overall_accuracy": 0.82847866419295,
+        "self_consistent_incorrect_proportion": 0.8181818181818182,
+        "self_inconsistent_proportion": 0.11688311688311688
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7384044526901671,
+        "mean_neural_posterior_probability": 0.07840548191914305,
+        "mean_pair_probability_spearman": 0.7325110733367269,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8472935016446885,
+        "neural_map_proportion": 0.09090909090909091,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "043afdf122d4cd5c18663a36b146786978b949e380e4b16e5e19c25b8943d03c"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "overall_accuracy",
+            "model": 0.8284322820037106,
+            "standardized_discrepancy": -2.350787800889766
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "learned_accuracy",
+            "model": 0.8894480519480521,
+            "standardized_discrepancy": -2.3690028259117843
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8040259740259741,
+            "standardized_discrepancy": -1.9774932617584855
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.04893409311776662,
+            "standardized_discrepancy": 3.5489643697130657
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.06493506493506493,
+            "standardized_discrepancy": -1.12099281331582
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8831168831168831,
+            "standardized_discrepancy": 1.2094287150863408
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.05194805194805195,
+            "standardized_discrepancy": -0.4636733691366583
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9305555555555556,
+            "standardized_discrepancy": 0.5155844304070817
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.8333333333333334,
+            "standardized_discrepancy": 1.0179519999544233
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 18,
+          "boundary": 0,
+          "high_accuracy": 10,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6666107757657053,
+            "nonlearned_accuracy": 0.8553896103896104,
+            "overall_accuracy": 0.8767625231910948,
+            "self_consistent_incorrect_proportion": 0.7922077922077922,
+            "self_inconsistent_proportion": 0.14285714285714285
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6467974513749162,
+            "nonlearned_accuracy": 0.8481168831168832,
+            "overall_accuracy": 0.8680890538033397,
+            "self_consistent_incorrect_proportion": 0.7662337662337663,
+            "self_inconsistent_proportion": 0.16883116883116883
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5084674714956404,
+            "nonlearned_accuracy": 0.8040259740259741,
+            "overall_accuracy": 0.8284322820037106,
+            "self_consistent_incorrect_proportion": 0.8831168831168831,
+            "self_inconsistent_proportion": 0.05194805194805195
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8203400373211693,
+            "nonlearned_accuracy": 0.9218831168831169,
+            "overall_accuracy": 0.9379870129870129,
+            "self_consistent_incorrect_proportion": 0.6753246753246753,
+            "self_inconsistent_proportion": 0.012987012987012988
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2002,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5084674714956404,
+        "nonlearned_accuracy": 0.8040259740259741,
+        "overall_accuracy": 0.8284322820037106,
+        "self_consistent_incorrect_proportion": 0.8831168831168831,
+        "self_inconsistent_proportion": 0.05194805194805195
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.735621521335807,
+        "mean_neural_posterior_probability": 0.09158841561272868,
+        "mean_pair_probability_spearman": 0.7460930869153245,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8531639408476059,
+        "neural_map_proportion": 0.1038961038961039,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "112f56b6e2082c742777295125bcb11d858d5ba80dac3f2c1478141501ce6673"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "overall_accuracy",
+            "model": 0.8329313543599258,
+            "standardized_discrepancy": -1.908575419085338
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "learned_accuracy",
+            "model": 0.8936688311688313,
+            "standardized_discrepancy": -1.963222044552438
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8086363636363636,
+            "standardized_discrepancy": -1.5916224661921727
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.0489539711988692,
+            "standardized_discrepancy": 3.5567104130296356
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.07792207792207792,
+            "standardized_discrepancy": -0.7459659445875007
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8181818181818182,
+            "standardized_discrepancy": -0.3038704779646344
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.1038961038961039,
+            "standardized_discrepancy": 1.3783104192699687
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.971830985915493,
+            "standardized_discrepancy": 1.7326838852816597
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.7887323943661971,
+            "standardized_discrepancy": 0.11723057454232912
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 17,
+          "boundary": 0,
+          "high_accuracy": 11,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6840588141958006,
+            "nonlearned_accuracy": 0.8543506493506493,
+            "overall_accuracy": 0.8776437847866421,
+            "self_consistent_incorrect_proportion": 0.8571428571428571,
+            "self_inconsistent_proportion": 0.1038961038961039
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6574302960620868,
+            "nonlearned_accuracy": 0.853896103896104,
+            "overall_accuracy": 0.8725417439703154,
+            "self_consistent_incorrect_proportion": 0.7142857142857143,
+            "self_inconsistent_proportion": 0.2077922077922078
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5088243748203507,
+            "nonlearned_accuracy": 0.8086363636363636,
+            "overall_accuracy": 0.8329313543599258,
+            "self_consistent_incorrect_proportion": 0.8181818181818182,
+            "self_inconsistent_proportion": 0.1038961038961039
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8014430014430014,
+            "nonlearned_accuracy": 0.9211688311688311,
+            "overall_accuracy": 0.9358534322820037,
+            "self_consistent_incorrect_proportion": 0.6753246753246753,
+            "self_inconsistent_proportion": 0.03896103896103896
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2003,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5088243748203507,
+        "nonlearned_accuracy": 0.8086363636363636,
+        "overall_accuracy": 0.8329313543599258,
+        "self_consistent_incorrect_proportion": 0.8181818181818182,
+        "self_inconsistent_proportion": 0.1038961038961039
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7467532467532466,
+        "mean_neural_posterior_probability": 0.11555286073693091,
+        "mean_pair_probability_spearman": 0.7416171015581315,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8565700555374208,
+        "neural_map_proportion": 0.12987012987012986,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "6bf0626402d5ee87096366b7409f399a3224337df6dd63f6fb3942a8d5d065f2"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "overall_accuracy",
+            "model": 0.831400742115028,
+            "standardized_discrepancy": -2.059018806709508
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "learned_accuracy",
+            "model": 0.8949675324675326,
+            "standardized_discrepancy": -1.8383664195187985
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.805974025974026,
+            "standardized_discrepancy": -1.8144492636318732
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.048802456047354045,
+            "standardized_discrepancy": 3.4976683495277983
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.05194805194805195,
+            "standardized_discrepancy": -1.4960196820441392
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8831168831168831,
+            "standardized_discrepancy": 1.2094287150863408
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.06493506493506493,
+            "standardized_discrepancy": -0.0031774220350019185
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.8904109589041096,
+            "standardized_discrepancy": -0.6681698339229876
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.7808219178082192,
+            "standardized_discrepancy": -0.04252246846514958
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 17,
+          "boundary": 0,
+          "high_accuracy": 11,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6632993071349236,
+            "nonlearned_accuracy": 0.8527272727272729,
+            "overall_accuracy": 0.8763450834879405,
+            "self_consistent_incorrect_proportion": 0.8181818181818182,
+            "self_inconsistent_proportion": 0.14285714285714285
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6613952504363463,
+            "nonlearned_accuracy": 0.8568831168831169,
+            "overall_accuracy": 0.8744897959183674,
+            "self_consistent_incorrect_proportion": 0.8181818181818182,
+            "self_inconsistent_proportion": 0.14285714285714285
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5194607523374647,
+            "nonlearned_accuracy": 0.805974025974026,
+            "overall_accuracy": 0.831400742115028,
+            "self_consistent_incorrect_proportion": 0.8831168831168831,
+            "self_inconsistent_proportion": 0.06493506493506493
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8140056022408962,
+            "nonlearned_accuracy": 0.9224025974025974,
+            "overall_accuracy": 0.9380797773654915,
+            "self_consistent_incorrect_proportion": 0.6233766233766234,
+            "self_inconsistent_proportion": 0.03896103896103896
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2004,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5194607523374647,
+        "nonlearned_accuracy": 0.805974025974026,
+        "overall_accuracy": 0.831400742115028,
+        "self_consistent_incorrect_proportion": 0.8831168831168831,
+        "self_inconsistent_proportion": 0.06493506493506493
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7504638218923934,
+        "mean_neural_posterior_probability": 0.09171864106803712,
+        "mean_pair_probability_spearman": 0.7503288059646266,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8555074507275553,
+        "neural_map_proportion": 0.1038961038961039,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "6d6465235f8f471e407f912af1ff24098e65568c684f4894603b5a0c03e781ff"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "overall_accuracy",
+            "model": 0.8337662337662338,
+            "standardized_discrepancy": -1.8265153894721442
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "learned_accuracy",
+            "model": 0.8987012987012988,
+            "standardized_discrepancy": -1.4794064975470738
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8077922077922078,
+            "standardized_discrepancy": -1.6622748653803654
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.047571781959537096,
+            "standardized_discrepancy": 3.0181022010843055
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.06493506493506493,
+            "standardized_discrepancy": -1.12099281331582
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8571428571428571,
+            "standardized_discrepancy": 0.6041090378659496
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.07792207792207792,
+            "standardized_discrepancy": 0.45731852506665494
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9861111111111112,
+            "standardized_discrepancy": 2.1537656872050923
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.8472222222222222,
+            "standardized_discrepancy": 1.298439812253802
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 19,
+          "boundary": 0,
+          "high_accuracy": 9,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6816155686018699,
+            "nonlearned_accuracy": 0.8586363636363635,
+            "overall_accuracy": 0.880333951762523,
+            "self_consistent_incorrect_proportion": 0.8441558441558441,
+            "self_inconsistent_proportion": 0.1038961038961039
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6486542443064183,
+            "nonlearned_accuracy": 0.8568831168831169,
+            "overall_accuracy": 0.8745361781076066,
+            "self_consistent_incorrect_proportion": 0.7662337662337663,
+            "self_inconsistent_proportion": 0.14285714285714285
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5107031075340934,
+            "nonlearned_accuracy": 0.8077922077922078,
+            "overall_accuracy": 0.8337662337662338,
+            "self_consistent_incorrect_proportion": 0.8571428571428571,
+            "self_inconsistent_proportion": 0.07792207792207792
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8077835785476983,
+            "nonlearned_accuracy": 0.9299350649350648,
+            "overall_accuracy": 0.9448051948051948,
+            "self_consistent_incorrect_proportion": 0.5324675324675324,
+            "self_inconsistent_proportion": 0.025974025974025976
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2005,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5107031075340934,
+        "nonlearned_accuracy": 0.8077922077922078,
+        "overall_accuracy": 0.8337662337662338,
+        "self_consistent_incorrect_proportion": 0.8571428571428571,
+        "self_inconsistent_proportion": 0.07792207792207792
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7448979591836734,
+        "mean_neural_posterior_probability": 0.10486107546635373,
+        "mean_pair_probability_spearman": 0.746945670518649,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8541463140486153,
+        "neural_map_proportion": 0.11688311688311688,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "fb0743950ea84c8933ab81c317de7f9cef0e4bca90334529f9e28386af91c6b7"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "overall_accuracy",
+            "model": 0.8325602968460112,
+            "standardized_discrepancy": -1.945046543357866
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "learned_accuracy",
+            "model": 0.8931818181818183,
+            "standardized_discrepancy": -2.010042903940059
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8083116883116883,
+            "standardized_discrepancy": -1.6187964658799385
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.04865094089583889,
+            "standardized_discrepancy": 3.4386262860259613
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.07792207792207792,
+            "standardized_discrepancy": -0.7459659445875007
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8441558441558441,
+            "standardized_discrepancy": 0.3014491992557541
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.07792207792207792,
+            "standardized_discrepancy": 0.45731852506665494
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9436619718309859,
+            "standardized_discrepancy": 0.902056769158723
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.8028169014084507,
+            "standardized_discrepancy": 0.40166891940930755
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 17,
+          "boundary": 0,
+          "high_accuracy": 11,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6795056050589249,
+            "nonlearned_accuracy": 0.8601298701298702,
+            "overall_accuracy": 0.8827922077922077,
+            "self_consistent_incorrect_proportion": 0.7662337662337663,
+            "self_inconsistent_proportion": 0.15584415584415584
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6514828455126962,
+            "nonlearned_accuracy": 0.857857142857143,
+            "overall_accuracy": 0.8769016697588125,
+            "self_consistent_incorrect_proportion": 0.7012987012987013,
+            "self_inconsistent_proportion": 0.16883116883116883
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5108364472549584,
+            "nonlearned_accuracy": 0.8083116883116883,
+            "overall_accuracy": 0.8325602968460112,
+            "self_consistent_incorrect_proportion": 0.8441558441558441,
+            "self_inconsistent_proportion": 0.07792207792207792
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8131868131868131,
+            "nonlearned_accuracy": 0.9257792207792209,
+            "overall_accuracy": 0.9390538033395174,
+            "self_consistent_incorrect_proportion": 0.6623376623376623,
+            "self_inconsistent_proportion": 0.025974025974025976
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2006,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5108364472549584,
+        "nonlearned_accuracy": 0.8083116883116883,
+        "overall_accuracy": 0.8325602968460112,
+        "self_consistent_incorrect_proportion": 0.8441558441558441,
+        "self_inconsistent_proportion": 0.07792207792207792
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7421150278293136,
+        "mean_neural_posterior_probability": 0.09264136079693386,
+        "mean_pair_probability_spearman": 0.7427533718278654,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.851231525840447,
+        "neural_map_proportion": 0.1038961038961039,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "d71bf3b30a819388bb572762807297e118c5f12e81ecf56db985f12e4e492010"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "overall_accuracy",
+            "model": 0.8326994434137291,
+            "standardized_discrepancy": -1.9313698717556707
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "learned_accuracy",
+            "model": 0.8913961038961039,
+            "standardized_discrepancy": -2.181719388361331
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8092207792207793,
+            "standardized_discrepancy": -1.5427092667541797
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.049198692463998626,
+            "standardized_discrepancy": 3.652072812971378
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.03896103896103896,
+            "standardized_discrepancy": -1.8710465507724585
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8831168831168831,
+            "standardized_discrepancy": 1.2094287150863408
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.07792207792207792,
+            "standardized_discrepancy": 0.45731852506665494
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.8918918918918919,
+            "standardized_discrepancy": -0.6245011739861287
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.7567567567567568,
+            "standardized_discrepancy": -0.5285213435340482
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 18,
+          "boundary": 0,
+          "high_accuracy": 10,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6697901695889624,
+            "nonlearned_accuracy": 0.8603246753246756,
+            "overall_accuracy": 0.8813079777365491,
+            "self_consistent_incorrect_proportion": 0.7792207792207793,
+            "self_inconsistent_proportion": 0.14285714285714285
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6466297786720322,
+            "nonlearned_accuracy": 0.8572727272727273,
+            "overall_accuracy": 0.8728664192949905,
+            "self_consistent_incorrect_proportion": 0.7142857142857143,
+            "self_inconsistent_proportion": 0.22077922077922077
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5336912254720474,
+            "nonlearned_accuracy": 0.8092207792207793,
+            "overall_accuracy": 0.8326994434137291,
+            "self_consistent_incorrect_proportion": 0.8831168831168831,
+            "self_inconsistent_proportion": 0.07792207792207792
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8204906204906204,
+            "nonlearned_accuracy": 0.9211688311688314,
+            "overall_accuracy": 0.9371057513914657,
+            "self_consistent_incorrect_proportion": 0.6623376623376623,
+            "self_inconsistent_proportion": 0.05194805194805195
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2007,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5336912254720474,
+        "nonlearned_accuracy": 0.8092207792207793,
+        "overall_accuracy": 0.8326994434137291,
+        "self_consistent_incorrect_proportion": 0.8831168831168831,
+        "self_inconsistent_proportion": 0.07792207792207792
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.735621521335807,
+        "mean_neural_posterior_probability": 0.09176456497377602,
+        "mean_pair_probability_spearman": 0.7379582806138799,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8499253784124832,
+        "neural_map_proportion": 0.1038961038961039,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "3979b7e9081fdba85645515effa088a29452effd17cc140b2a1766fab0cfc56c"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "overall_accuracy",
+            "model": 0.8287105751391466,
+            "standardized_discrepancy": -2.3234344576853645
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "learned_accuracy",
+            "model": 0.8897727272727275,
+            "standardized_discrepancy": -2.3377889196533665
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8042857142857144,
+            "standardized_discrepancy": -1.9557540620082674
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.04931442706952914,
+            "standardized_discrepancy": 3.6971719985033897
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.07792207792207792,
+            "standardized_discrepancy": -0.7459659445875007
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8701298701298701,
+            "standardized_discrepancy": 0.9067688764761451
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.05194805194805195,
+            "standardized_discrepancy": -0.4636733691366583
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9577464788732394,
+            "standardized_discrepancy": 1.3173703272201898
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.8450704225352113,
+            "standardized_discrepancy": 1.254983954010236
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 18,
+          "boundary": 0,
+          "high_accuracy": 9,
+          "low_accuracy": 0,
+          "not_fit": 1,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6664492280930637,
+            "nonlearned_accuracy": 0.8552597402597402,
+            "overall_accuracy": 0.8777365491651204,
+            "self_consistent_incorrect_proportion": 0.7792207792207793,
+            "self_inconsistent_proportion": 0.16883116883116883
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6524424323720099,
+            "nonlearned_accuracy": 0.8494805194805194,
+            "overall_accuracy": 0.8673005565862709,
+            "self_consistent_incorrect_proportion": 0.7272727272727273,
+            "self_inconsistent_proportion": 0.2077922077922078
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.49152055188272487,
+            "nonlearned_accuracy": 0.8042857142857144,
+            "overall_accuracy": 0.8287105751391466,
+            "self_consistent_incorrect_proportion": 0.8701298701298701,
+            "self_inconsistent_proportion": 0.05194805194805195
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8001924001924001,
+            "nonlearned_accuracy": 0.9193506493506495,
+            "overall_accuracy": 0.9352040816326531,
+            "self_consistent_incorrect_proportion": 0.6623376623376623,
+            "self_inconsistent_proportion": 0.05194805194805195
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2008,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.49152055188272487,
+        "nonlearned_accuracy": 0.8042857142857144,
+        "overall_accuracy": 0.8287105751391466,
+        "self_consistent_incorrect_proportion": 0.8701298701298701,
+        "self_inconsistent_proportion": 0.05194805194805195
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.74860853432282,
+        "mean_neural_posterior_probability": 0.07898270318955852,
+        "mean_pair_probability_spearman": 0.7401971968277868,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.851992645030069,
+        "neural_map_proportion": 0.09090909090909091,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "0bc1c36cd68d9414145b0a21c1faabb67e88587d589bbcaae885a2325f007380"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "overall_accuracy",
+            "model": 0.8352968460111319,
+            "standardized_discrepancy": -1.676072001847952
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "learned_accuracy",
+            "model": 0.894155844155844,
+            "standardized_discrepancy": -1.9164011851648486
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8117532467532467,
+            "standardized_discrepancy": -1.330752069189593
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.047364166445799126,
+            "standardized_discrepancy": 2.9371990820001526
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.06493506493506493,
+            "standardized_discrepancy": -1.12099281331582
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.8441558441558441,
+            "standardized_discrepancy": 0.3014491992557541
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.09090909090909091,
+            "standardized_discrepancy": 0.9178144721683118
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9305555555555556,
+            "standardized_discrepancy": 0.5155844304070817
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.7777777777777778,
+            "standardized_discrepancy": -0.1039992492430958
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 19,
+          "boundary": 0,
+          "high_accuracy": 9,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.713726805276101,
+            "nonlearned_accuracy": 0.8741558441558441,
+            "overall_accuracy": 0.8945732838589983,
+            "self_consistent_incorrect_proportion": 0.8961038961038961,
+            "self_inconsistent_proportion": 0.03896103896103896
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6735843633227938,
+            "nonlearned_accuracy": 0.8722077922077922,
+            "overall_accuracy": 0.8897495361781076,
+            "self_consistent_incorrect_proportion": 0.8441558441558441,
+            "self_inconsistent_proportion": 0.07792207792207792
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5069025262687235,
+            "nonlearned_accuracy": 0.8117532467532467,
+            "overall_accuracy": 0.8352968460111319,
+            "self_consistent_incorrect_proportion": 0.8441558441558441,
+            "self_inconsistent_proportion": 0.09090909090909091
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8323350304482381,
+            "nonlearned_accuracy": 0.9255194805194805,
+            "overall_accuracy": 0.9401205936920219,
+            "self_consistent_incorrect_proportion": 0.7012987012987013,
+            "self_inconsistent_proportion": 0.0
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2009,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5069025262687235,
+        "nonlearned_accuracy": 0.8117532467532467,
+        "overall_accuracy": 0.8352968460111319,
+        "self_consistent_incorrect_proportion": 0.8441558441558441,
+        "self_inconsistent_proportion": 0.09090909090909091
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    },
+    {
+      "algorithmic": {
+        "mean_closest_map_kendall_tau": 0.7346938775510204,
+        "mean_neural_posterior_probability": 0.04229948762286483,
+        "mean_pair_probability_spearman": 0.7414123995355801,
+        "mean_posterior_expected_agreement_with_neural_choices": 0.8510485528418401,
+        "neural_map_proportion": 0.05194805194805195,
+        "subjects": 77
+      },
+      "checkpoint": {
+        "path": "net.dat",
+        "sha256": "8413bff33e01f019615ef158745c5bd2688c92b8d9b74979735cc1785ab0bb24"
+      },
+      "confirmation_id": "liu-neural-constructive-ranking-confirmation-v1",
+      "device": "cuda",
+      "execution_runtime": {
+        "active": true,
+        "cpu_thread_limit": 1,
+        "cuda_available": true,
+        "cuda_version": "13.0",
+        "device": "cuda",
+        "device_name": "NVIDIA GeForce RTX 5090",
+        "torch_interop_threads": 1,
+        "torch_intraop_threads": 1,
+        "torch_version": "2.13.0+cu130"
+      },
+      "execution_runtime_source": {
+        "path": "fsrl/formal_runtime.py",
+        "sha256": "60eb092ab1799adcaa6ca0a0feb88deb44fd4761964e7864eced0f666836410a"
+      },
+      "fixed_outer_steps": 1000,
+      "fixed_temperature": 0.25,
+      "human_comparison": {
+        "checks": [
+          {
+            "human_bootstrap_95_interval": [
+              0.8319573283858998,
+              0.871799628942486
+            ],
+            "human_bootstrap_mean": 0.8523492161410019,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "overall_accuracy",
+            "model": 0.8324211502782932,
+            "standardized_discrepancy": -1.9587232149600613
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8931818181818183,
+              0.933766233766234
+            ],
+            "human_bootstrap_mean": 0.9140895292207791,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "learned_accuracy",
+            "model": 0.8952922077922076,
+            "standardized_discrepancy": -1.8071525132604127
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8033100649350651,
+              0.8501964285714286
+            ],
+            "human_bootstrap_mean": 0.827653090909091,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "nonlearned_accuracy",
+            "model": 0.8072727272727273,
+            "standardized_discrepancy": -1.7057532648808014
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03475439526459938,
+              0.04489879848043117
+            ],
+            "human_bootstrap_mean": 0.03982665610919696,
+            "inside_human_bootstrap_95_interval": false,
+            "metric": "symbolic_distance_slope",
+            "model": 0.049172630090997475,
+            "standardized_discrepancy": 3.6419168895118776
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.03896103896103896,
+              0.16883116883116883
+            ],
+            "human_bootstrap_mean": 0.10375454545454547,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "correct_ranker_proportion",
+            "model": 0.1038961038961039,
+            "standardized_discrepancy": 0.004087792869138309
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.7402597402597403,
+              0.9090909090909091
+            ],
+            "human_bootstrap_mean": 0.8312207792207792,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_consistent_incorrect_proportion",
+            "model": 0.7922077922077922,
+            "standardized_discrepancy": -0.9091901551850254
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.012987012987012988,
+              0.12987012987012986
+            ],
+            "human_bootstrap_mean": 0.06502467532467533,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "self_inconsistent_proportion",
+            "model": 0.1038961038961039,
+            "standardized_discrepancy": 1.3783104192699687
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.8405797101449275,
+              0.9714285714285714
+            ],
+            "human_bootstrap_mean": 0.9130705676470461,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_80_analysis_proportion",
+            "model": 0.9710144927536232,
+            "standardized_discrepancy": 1.7086077369882398
+          },
+          {
+            "human_bootstrap_95_interval": [
+              0.6811594202898551,
+              0.8732394366197183
+            ],
+            "human_bootstrap_mean": 0.7829274989204686,
+            "inside_human_bootstrap_95_interval": true,
+            "metric": "stable_error_100_analysis_proportion",
+            "model": 0.8115942028985508,
+            "standardized_discrepancy": 0.578927598094525
+          }
+        ],
+        "human_published_beta_pair_class_counts": {
+          "bimodal": 15,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "ordinary_unimodal": 0
+        },
+        "model_beta_pair_class_counts": {
+          "bimodal": 17,
+          "boundary": 0,
+          "high_accuracy": 11,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "passed": false,
+        "rule": "all registered scalar metrics inside human bootstrap 95% intervals"
+      },
+      "matched_controls": {
+        "identifiability_note": "Each relation appears once per block, so blockwise and presentationwise omission have the same sampling granularity and are not independent mechanistic contrasts. Both are reported as protocol-requested aliases.",
+        "results": {
+          "blockwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6865079365079366,
+            "nonlearned_accuracy": 0.8561688311688311,
+            "overall_accuracy": 0.8791280148423006,
+            "self_consistent_incorrect_proportion": 0.8311688311688312,
+            "self_inconsistent_proportion": 0.11688311688311688
+          },
+          "presentationwise_omission": {
+            "mean_inter_subject_kendall_tau": 0.6611836885809489,
+            "nonlearned_accuracy": 0.8537662337662338,
+            "overall_accuracy": 0.8721706864564006,
+            "self_consistent_incorrect_proportion": 0.8441558441558441,
+            "self_inconsistent_proportion": 0.11688311688311688
+          },
+          "stable_omission": {
+            "mean_inter_subject_kendall_tau": 0.5144927536231884,
+            "nonlearned_accuracy": 0.8072727272727273,
+            "overall_accuracy": 0.8324211502782932,
+            "self_consistent_incorrect_proportion": 0.7922077922077922,
+            "self_inconsistent_proportion": 0.1038961038961039
+          },
+          "uniform_no_bottleneck": {
+            "mean_inter_subject_kendall_tau": 0.8224953617810762,
+            "nonlearned_accuracy": 0.9196753246753244,
+            "overall_accuracy": 0.9360853432282005,
+            "self_consistent_incorrect_proportion": 0.6753246753246753,
+            "self_inconsistent_proportion": 0.05194805194805195
+          }
+        }
+      },
+      "passes": {
+        "behavioral_confirmation": false,
+        "causal_qualification": true,
+        "geometry": true,
+        "joint": false
+      },
+      "seed": 2010,
+      "stable_behavior": {
+        "mean_inter_subject_kendall_tau": 0.5144927536231884,
+        "nonlearned_accuracy": 0.8072727272727273,
+        "overall_accuracy": 0.8324211502782932,
+        "self_consistent_incorrect_proportion": 0.7922077922077922,
+        "self_inconsistent_proportion": 0.1038961038961039
+      },
+      "training_execution": {
+        "torch_compile": {
+          "backend": "inductor",
+          "enabled": true,
+          "fullgraph": true,
+          "mode": "default"
+        },
+        "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial"
+      },
+      "training_execution_source": {
+        "path": "fsrl/meta_train.py",
+        "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+      }
+    }
+  ],
+  "status": "complete_all_declared_seeds_reported"
+}

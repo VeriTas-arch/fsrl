@@ -102,6 +102,19 @@ and the frozen formal mechanism contract
 The source-locked formal runner and serial execution commands are documented in
 [`docs/mechanism_confirmation_protocol.md`](docs/mechanism_confirmation_protocol.md).
 
+Formal seeds 2001--2010 have now been completed without filtering. All ten pass
+the frozen causal, antisymmetric-geometry, fast-weight-necessity, and source-
+reproduction gates. Six of seven registered mechanism links confirm across
+network seeds: global remote reassembly, eligibility direction transfer, alpha
+high-gain placement, history-dependent expression and interaction, and terminal
+expected-rank-over-MAP projection. Within the unresolved DA link, both magnitude
+contrasts confirm, but direction preservation does not because one competent
+network uses a different factorization. All ten fail the strict all-scalar human
+behavior conjunction, at minimum because every seed has an excessive symbolic-
+distance slope. See [`docs/formal_confirmation_v1.md`](docs/formal_confirmation_v1.md),
+[`results/confirmation_v1.json`](results/confirmation_v1.json), and
+[`results/mechanism_confirmation_v1.json`](results/mechanism_confirmation_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

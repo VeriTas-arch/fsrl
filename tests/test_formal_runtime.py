@@ -33,7 +33,9 @@ class FormalRuntimeTests(unittest.TestCase):
 
         recorded_runtime = dict(result)
         recorded_runtime["cuda_available"] = True
+        recorded_runtime["cuda_version"] = recorded_runtime.get("cuda_version") or "test-cuda"
         recorded_runtime["device"] = "cuda"
+        recorded_runtime["device_name"] = recorded_runtime.get("device_name") or "test-gpu"
         record = {
             "execution_runtime": recorded_runtime,
             "execution_runtime_source": _formal_runtime_source_registration(),

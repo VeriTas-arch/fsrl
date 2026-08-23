@@ -123,20 +123,40 @@ eligibility, DA, or a scalar learning rate: history primarily changes the
 recurrent sensitivity landscape in which a nearly direction-preserving write
 is expressed, with an additional matched nonlinear advantage.
 
-The mechanism-discovery pilot stop rule has now been met. Do not launch more
-open-ended pilot diagnostics or change the architecture to amplify these
-effects. Formal seeds 2001--2010 may be accessed only under the separately
-frozen `mechanism_confirmation_v1`, with all seeds retained and development
-negatives reported as diagnostics. Never edit either `confirmation_v1` or
-`mechanism_confirmation_v1` after formal results are observed; register a new
-version if the formal evidence requires a revised mechanism.
+Formal seeds 2001--2010 are complete under both frozen v1 contracts, with no
+filtering. All competence and integrity gates pass. Six of seven primary
+mechanism links confirm across network seeds: global remote reassembly,
+eligibility direction transfer, alpha sensitivity placement, history-dependent
+expression and interaction, and terminal expected-rank-over-MAP projection.
+Within the unresolved DA link, both magnitude contrasts confirm, but direction
+preservation fails its prospectively fixed threshold. The complete chain is
+therefore not confirmed.
+Never edit `confirmation_v1`, `mechanism_confirmation_v1`, or their result
+artifacts after observing these outcomes; revisions require a separately frozen
+v2 contract and new seeds.
 
-The next target is formal transport of the complete supported chain: fast-weight
-content necessity, immediate third-party causal reach, eligibility direction,
-DA gain, alpha sensitivity placement, history-dependent expression, and
-terminal expected-rank rather than MAP alignment. Keep the remaining human
-local or conjunctive structure gap explicit; do not tune the slope or add a
-memory module during mechanism confirmation.
+Treat the DA-direction failure as implementation heterogeneity, not permission
+to filter seed 2009 or erase the six positive links. Nine networks use the
+development-like eligibility-direction/DA-gain factorization; one competent
+network preserves the invariant global mechanism while isolated eligibility
+transfer and DA direction preservation fail. The next implementation-level
+test should distinguish a co-adapted complete-write code from content that is
+distributed into baseline-dependent recurrent expression.
+
+The formal behavioral conjunction fails in all ten networks. The common
+negative fingerprint is an excessive symbolic-distance slope together with
+lower learned and overall accuracy, while nonlearned accuracy, stable coherent
+errors, causal necessity, geometry, and global reassembly transport. Build the
+next candidate from those positives: preserve the confirmed fast-weight global
+expected-rank channel and test a separate episode-local learned-pair residual
+channel. Require selective causal ablations of the two channels; do not tune a
+temperature, choose checkpoints, or add an unconstrained memory module merely
+to move the failed scalars.
+
+Start v2 only with one to three development seeds. Freeze estimands, competence
+gates, and outcome-contingent interpretations before any new formal population.
+The current evidence and next decisive test are recorded in
+`docs/formal_confirmation_v1.md`.
 
 ## Repository workflow
 
