@@ -248,7 +248,7 @@ def _summarize_seed(
     )
     remote_norm = np.stack(
         [
-            np.mean(residual_norm[r, :, remote_masks[r]], axis=1)
+            np.mean(residual_norm[r][:, remote_masks[r]], axis=1)
             for r in range(relation_count)
         ]
     )
