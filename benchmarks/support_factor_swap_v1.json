@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-support-factor-swap-v1",
+  "registration_status": "frozen_after_support_write_review_before_implementation_and_execution",
+  "registration_parent_commit": "8bbaf30424563ec0230cbde5c4f232e1096812b4",
+  "scientific_question": "Does the frozen network implement a meta-learned state-dependent relaxation rule in which eligibility transfers relation-specific update direction, DA transfers downstream gain, accumulated relation history changes those factors, and alpha places writes in recurrently high-gain directions?",
+  "claim_boundary": "This is a read-only two-seed mechanism-discovery diagnostic on frozen pilot checkpoints. It does not train, alter checkpoints or architecture, access formal seeds, use exact posterior innovation as a trial-level target, or establish a biological identity for modeled DA.",
+  "working_theory": {
+    "algorithm": "meta-learned state-dependent iterative relaxation, not sequential exact Bayesian updating",
+    "update_operator": "s_(t+1) = s_t + Psi_theta(e_t, P_t), with only the accumulated terminal solution expected to be posterior-like",
+    "eligibility_role": "high-dimensional evidence-specific update direction",
+    "da_role": "coarse state-dependent plasticity gain",
+    "alpha_role": "meta-learned placement of writes into recurrently high-gain directions",
+    "history_role": "P_t changes how repeated evidence is converted into eligibility, DA, or their interaction"
+  },
+  "primary_questions": [
+    "Does swapping matched evidence-specific eligibility between relations transfer the downstream neural-potential direction from recipient identity toward donor identity?",
+    "Does swapping naturally high versus low DA factors while holding recipient eligibility fixed transfer downstream policy-update magnitude?",
+    "At the fourth exposure, is no-prior-relation restoration carried by eligibility, DA, or their factorial interaction when all combinations are replayed at one common state?",
+    "Does actual alpha produce systematically higher local policy sensitivity than a preregistered multi-permutation null distribution?"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "support_write_specification": {
+      "path": "benchmarks/support_write_localization_v1.json",
+      "sha256": "8439d1aa33f24a3d6e8f79b7969b051d9d395804088f229f09e258d143a5a067"
+    },
+    "support_write_result": {
+      "path": "results/support_write_localization_v1.json",
+      "sha256": "61c9d877876e6ecead4f5d9f17df65ba36fc3e92e1a38cfc0bd7703e06c789dc"
+    },
+    "support_write_implementation": {
+      "path": "fsrl/support_write_localization.py",
+      "sha256": "bc83bacbee7f381db332da3bf324f524eb76be5aaac902d4c9a21979316de5f2"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "support_trials": 32,
+    "relation_exposures": [1, 2, 3, 4],
+    "effective_support_steps": [2, 3],
+    "training": "forbidden",
+    "architecture_or_checkpoint_change": "forbidden",
+    "formal_seed_access": "forbidden",
+    "seed_subject_or_relation_filtering": "forbidden except the prospectively defined stable-omission and retained-evidence masks",
+    "posterior_temperature_threshold_or_nuisance_refit": "forbidden",
+    "floating_zero_tolerance": 1e-07,
+    "potential_zero_tolerance": 1e-12,
+    "alpha_permutation_count": 32,
+    "alpha_permutation_seed": 20260824,
+    "device": "GPU for neural replay; CPU for summaries"
+  },
+  "factor_contract": {
+    "matched_branches": "plus and zero-magnitude branches share subject, recipient P, cues, orientation, time, and recurrent steps",
+    "da_mean": "dbar_k = 0.5 * (d+_k + d0_k)",
+    "da_difference": "delta d_k = d+_k - d0_k",
+    "eligibility_mean": "Ebar_k = 0.5 * (E+_k + E0_k)",
+    "eligibility_difference": "delta E_k = E+_k - E0_k",
+    "composition": "C(D_a, E_b) = sum over steps 2 and 3 of [delta d_(a,k) Ebar_(b,k) + dbar_(a,k) delta E_(b,k)]",
+    "identity": "C(D_a, E_a) exactly equals the summed matched pre-clip write difference for source a",
+    "interpretation": "the DA factor is the pair (dbar, delta d); the eligibility factor is the pair (Ebar, delta E)"
+  },
+  "eligibility_identity_transfer": {
+    "population": "all retained recipient relations at all four exposures",
+    "donor_pairing": "within each subject and exposure, order retained relations by their canonical protocol relation index and assign the cyclic next retained relation as donor; donor must differ from recipient",
+    "swapped_factor": "donor delta E at steps 2 and 3",
+    "held_fixed": "recipient dbar, recipient natural zero-branch effective-connectivity baseline, trained alpha, query protocol, and recipient effective-write norm",
+    "first_norm_match": "jointly norm-match the donor two-step delta E tensor to recipient delta E before DA multiplication",
+    "second_norm_match": "norm-match the resulting alpha-weighted synthetic eligibility increment to the recipient natural eligibility-component effective increment so the primary test is directional",
+    "synthetic_update": "replay sum_k recipient dbar_k times norm-matched donor delta E_k at the recipient baseline",
+    "primary_targets": "donor and recipient natural total neural-potential updates from their own matched branches",
+    "primary_estimand": "cosine(synthetic update, donor natural update) minus cosine(synthetic update, recipient natural update)",
+    "competence_estimands": [
+      "one minus donor-recipient natural-update cosine",
+      "synthetic effective increment norm minus recipient target norm",
+      "recipient self-replay error"
+    ],
+    "directional_rule": "eligibility identity transfer is supported only if donor and recipient targets are distinguishable and the subject-bootstrap lower bound of the donor-minus-recipient cosine is above zero in both pilot seeds",
+    "boundary": "transfer identifies functional relation identity in delta E; it does not require the donor update to equal an exact posterior innovation"
+  },
+  "da_magnitude_transfer": {
+    "population": "all retained recipient relations at all four exposures",
+    "donor_selection": "within each subject and exposure, choose the retained relation with the largest versus smallest L2 norm of dbar across steps 2 and 3; ties use canonical relation index",
+    "swapped_factor": "the complete high or low donor DA factor (dbar, delta d)",
+    "held_fixed": "recipient eligibility factor (Ebar, delta E), recipient natural zero-branch effective-connectivity baseline, alpha, and query protocol",
+    "norm_matching": "forbidden because transferred magnitude is the estimand",
+    "primary_estimand": "policy-potential update norm under the high-DA factor minus the norm under the low-DA factor",
+    "write_competence": "effective-write norm under high DA minus low DA",
+    "direction_diagnostic": "cosine between high-DA and low-DA synthetic policy-potential updates; no equivalence claim is permitted from a non-significant difference",
+    "directional_rule": "DA magnitude transfer is supported only if both effective-write and downstream policy-norm paired bootstrap lower bounds exceed zero in both seeds",
+    "boundary": "the downstream replay, not the algebraic multiplication alone, carries the scientific claim"
+  },
+  "exposure_four_history_factorial": {
+    "population": "all retained fourth-exposure relations",
+    "natural_history": "the registered accumulated fast-weight state before the current relation",
+    "no_prior_relation_history": "replay all earlier support slots while zeroing only earlier presentations of the current relation for each subject",
+    "factor_sources": "extract natural factors D_N,E_N and no-prior factors D_H,E_H from matched plus and zero branches",
+    "common_recipient_baseline": "natural-history current-trial zero-magnitude final effective connectivity",
+    "four_replays": [
+      "C(D_N,E_N)",
+      "C(D_H,E_N)",
+      "C(D_N,E_H)",
+      "C(D_H,E_H)"
+    ],
+    "primary_outcomes": [
+      "effective-write norm",
+      "policy-potential update norm"
+    ],
+    "da_main_effect": "0.5 * [(Y_HN - Y_NN) + (Y_HH - Y_NH)]",
+    "eligibility_main_effect": "0.5 * [(Y_NH - Y_NN) + (Y_HH - Y_HN)]",
+    "interaction": "Y_HH - Y_HN - Y_NH + Y_NN",
+    "total_common_state_restoration": "Y_HH - Y_NN",
+    "attribution_rule": "for each outcome and seed, positive support requires a bootstrap lower bound above zero, suppression requires an upper bound below zero, and an interval containing zero is unresolved; report DA, eligibility, and interaction jointly rather than forcing one winner",
+    "competence_rule": "the common-state total policy restoration must have a positive lower bound in both seeds before interpreting its factorial attribution"
+  },
+  "alpha_systematic_gain": {
+    "population": "all retained natural matched writes across all four exposures",
+    "actual_direction": "u_actual = alpha elementwise-multiplied by the summed matched write difference",
+    "null_directions": "32 independent fixed permutations of all alpha entries generated sequentially from NumPy default_rng seed 20260824",
+    "norm_matching": "each permuted-alpha effective increment is norm-matched per subject and trial to u_actual",
+    "common_baseline": "the natural current-trial zero-magnitude effective-connectivity state",
+    "local_gain": "g(u) = norm of the induced centered neural-potential update divided by Frobenius norm of u",
+    "primary_estimand": "g(u_actual) minus the within-trial mean g over all 32 null directions",
+    "supporting_estimands": [
+      "empirical percentile of actual gain among actual plus 32 null directions",
+      "fraction of null directions beaten by actual",
+      "null gain quantiles"
+    ],
+    "directional_rule": "systematic alpha high-gain placement is supported when the subject-bootstrap lower bound of actual-minus-null-mean gain exceeds zero in both seeds",
+    "boundary": "this is a local frozen-policy sensitivity claim, not a posterior-direction claim and not a retraining intervention"
+  },
+  "bootstrap": {
+    "unit": "virtual subject; repeated relations, exposures, donor pairs, and null permutations are averaged within subject before resampling",
+    "samples": 10000,
+    "interval": 0.95,
+    "seed": 20260824,
+    "paired_comparisons": "all factor swaps, factorial contrasts, and alpha-null comparisons resample the same subjects",
+    "non_equivalence_rule": "failure to exclude zero is unresolved and must not be called equivalence"
+  },
+  "decision_logic": {
+    "eligibility_direction": "evaluate donor identity transfer after both competence checks; positive supports E as a transferable content direction, negative favors recipient-state dominance, unresolved leaves the assignment incomplete",
+    "da_gain": "positive high-minus-low write and policy effects support transferable DA gain; write-only support means downstream gain is not established",
+    "history_attribution": "classify positive, suppressive, or unresolved DA, eligibility, and interaction contrasts separately after common-state restoration competence",
+    "alpha_gain": "positive actual-minus-multi-null local gain supports systematic high-gain placement; failure rejects the one-shuffle interpretation without altering fast-weight necessity",
+    "joint_interpretation": "the four results revise the relaxation operator Psi_theta; no single failed factor erases established eligibility dominance, global causal reach, or terminal distributional-potential alignment",
+    "pilot_stop_rule": "if direction, gain, history attribution, and alpha placement are localized without implementation failure, stop mechanism discovery pilots and freeze an independent mechanism_confirmation_v1 before any access to formal seeds 2001 through 2010"
+  },
+  "reporting": {
+    "all_pilot_seeds_required": true,
+    "positive_negative_and_mixed_results_required": true,
+    "raw_subject_level_metrics_required": true,
+    "registered_and_post_result_analyses_must_be_separated": true,
+    "formal_confirmation_status": "deferred",
+    "next_step_rule": "do not access formal seeds until this final support-mechanism pilot is interpreted and a separate prospective mechanism confirmation contract is frozen"
+  }
+}
