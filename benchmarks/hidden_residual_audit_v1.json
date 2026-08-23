@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-hidden-learned-relation-residual-v1",
+  "registration_status": "frozen_post_formal_before_new_hidden_residual_estimands_are_executed",
+  "registration_parent_commit": "fa920037859441799c9be01310e771fc7478886e",
+  "scientific_question": "Does the frozen v1 response-hidden state already contain a fast-weight-dependent learned-relation residual that is linearly accessible across subjects and relation identities but attenuated by the fixed output direction?",
+  "claim_boundary": "This is a post-formal exploratory read-only diagnostic on the two frozen development seeds 1901 and 1902. It may localize a v2 hypothesis, but it is not a v2 confirmation, does not alter the v1 claim, and may not use or select formal seeds.",
+  "positive_evidence_backbone": [
+    "ten-seed confirmation of fast-weight state-dependent global relational reassembly",
+    "ten-seed terminal expected-rank-over-MAP projection",
+    "ten-seed excessive symbolic-distance slope with preserved nonlearned inference and coherent errors",
+    "two-seed evidence that response hidden vector fields are less additive than their output projection"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "assembly_specification": {
+      "path": "benchmarks/assembly_trajectory_v1.json",
+      "sha256": "9fb6eed990e20403180f224be0a0ee81ff1e39e9fcf02ac03f674be4b37f67f6"
+    },
+    "assembly_result": {
+      "path": "results/assembly_trajectory_v1.json",
+      "sha256": "0d47b8b5e61c3b05e0e8cbfe20b3c3f92d89f2d8a6f26388fbff13437a676b3c"
+    },
+    "formal_behavior_result": {
+      "path": "results/confirmation_v1.json",
+      "sha256": "70dea7864e6eeadd1597f5412369f88c18f41d632d1b8abbe6e054b889afa5bd"
+    },
+    "formal_mechanism_result": {
+      "path": "results/mechanism_confirmation_v1.json",
+      "sha256": "88ef7616dc94cfb04694737def0c0d189fd0ed5f16e38974d6e9b5df884d1d05"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "assembly_implementation": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "training": "forbidden",
+    "architecture_or_parameter_change": "forbidden",
+    "checkpoint_or_seed_selection": "forbidden",
+    "formal_seed_access": "forbidden",
+    "neural_replay_device": "GPU with PyTorch intra-op and inter-op threads bounded to one",
+    "subject_encoding": "the original 77-subject stable-omission cohort for each frozen pilot",
+    "query_protocol": "all 28 unordered pairs in both orientations; hidden state and eligibility reset before every query; use the registered response step and frozen fast weights",
+    "leave_one_relation_out": "for each of the eight support relations, replay all 32 support slots and set only that relation's signed magnitude to zero while preserving cues, orientation, block, time, and every other relation",
+    "floating_reproduction_tolerance": 0.000003814697265625,
+    "scientific_zero_tolerance": 1e-07
+  },
+  "representation_contract": {
+    "canonical_hidden_field": "H_s(e) = 0.5 * [h_s(i,j) - h_s(j,i)] at the registered response step for canonical edge e=(i,j)",
+    "hodge_gradient": "H_gradient = Q H, where Q is the complete-graph edge-space gradient projector applied independently to every hidden unit",
+    "hodge_residual": "H_residual = (I-Q) H",
+    "loo_hidden_influence": "Delta H_(r->e) = H_intact(e) - H_without_relation_r(e)",
+    "loo_residual_influence": "Delta C_(r->e) = (I-Q) Delta H_(r->e)",
+    "direct_edge": "the canonical edge corresponding to removed support relation r",
+    "remote_edges": "query edges disjoint from both endpoints of r",
+    "fixed_output_direction": "unit-normalized W_out[action1] - W_out[action0]; output bias cancels in orientation contrasts",
+    "stable_omission_control": "LOO of a relation already omitted for that subject must yield zero hidden influence within the fixed tolerance"
+  },
+  "cross_validated_local_direction": {
+    "purpose": "test for one common correctness-aligned hidden-residual direction without fitting or changing the network readout",
+    "subject_folds": 7,
+    "fold_assignment": "subject_index modulo 7",
+    "relation_holdout": "when evaluating relation r, exclude all examples of r from direction construction",
+    "subject_holdout": "exclude every subject in the evaluation fold from direction construction",
+    "training_examples": "correctness-align the direct Delta C vector for every retained relation of every remaining subject",
+    "direction": "unit-normalized arithmetic mean of the correctness-aligned training vectors; no intercept, regression, hyperparameter, or target refit",
+    "evaluation": "each subject-relation direct effect is evaluated exactly once with both its subject fold and relation identity held out",
+    "boundary": "positive cross-validated projection is linear availability in a frozen state difference, not evidence that the current network causally uses that direction"
+  },
+  "primary_estimands": [
+    "subject-mean retained direct minus remote per-edge L2 norm of Delta C",
+    "cross-validated local-direction correctness-aligned direct projection",
+    "cross-validated local-direction direct projection minus mean absolute remote projection",
+    "cross-validated local-direction minus unit-normalized fixed-output correctness-aligned direct projection",
+    "maximum absolute stable-omitted Delta H"
+  ],
+  "secondary_estimands": [
+    "intact hidden-vector and output-projected Hodge gradient-energy fractions",
+    "retained direct and remote Delta C norms",
+    "fraction of retained LOO hidden-influence energy in the Hodge residual",
+    "unit-normalized fixed-output direct and remote residual projections",
+    "cross-validated local-direction cosine with the fixed output direction",
+    "per-relation and raw subject-level scalar estimands"
+  ],
+  "bootstrap": {
+    "unit": "virtual subject after averaging retained relation effects within subject",
+    "samples": 10000,
+    "interval": 0.95,
+    "seed": 20260827,
+    "paired_rule": "all direct, remote, local-direction, and output-direction contrasts resample the same subject indices within a network seed",
+    "non_equivalence_rule": "an interval containing zero is unresolved, not evidence of absence or equivalence"
+  },
+  "directional_diagnosis": {
+    "causal_local_residual": "for both seeds, retained direct-minus-remote Delta C norm has a bootstrap lower bound above zero and stable-omitted Delta H stays within tolerance",
+    "linearly_accessible_local_direction": "for both seeds, the cross-validated correctness-aligned direct projection and direct-minus-remote projection have bootstrap lower bounds above zero",
+    "fixed_readout_suppression": "for both seeds, cross-validated local minus fixed-output correctness-aligned direct projection has a bootstrap lower bound above zero",
+    "hidden_local_trace_supported": "all three preceding diagnoses pass in both seeds",
+    "negative_interpretation": "if causal residual exists without a cross-relation direction, local content is high-dimensional or relation-specific at this layer; if no causal residual exists, inspect earlier support state before proposing a new persistent mechanism"
+  },
+  "reporting": {
+    "both_declared_development_seeds_required": true,
+    "positive_negative_and_mixed_results_required": true,
+    "raw_subject_level_scalar_estimands_required": true,
+    "formal_results_immutable": true,
+    "architecture_decision_rule": "change readout or training objective only if a causal accessible hidden local trace is supported; consider a new local persistent mechanism only after hidden and earlier support-state audits fail"
+  }
+}
