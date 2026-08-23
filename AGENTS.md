@@ -113,27 +113,30 @@ working algorithm is a meta-learned state-dependent iterative relaxation:
 `E_t = E_theta(e_t, P_(t-1))`, `d_t = g_theta(e_t, P_(t-1))`, and accumulated
 interacting writes converge toward a distributional expected-rank potential.
 
-At exposure 4, no-prior-relation history increases generated write norm through
-a positive eligibility main effect. DA is suppressive or unresolved and the
-factor interaction is unresolved or suppressive. When all generated factors
-are replayed at one natural baseline, however, total policy restoration is
-unresolved even though each history condition at its own baseline previously
-showed robust restoration. Therefore accumulated `P` changes both factor
-generation and the local recurrent expression of a write. Do not attribute
-assimilation solely to eligibility or a scalar learning rate.
+At exposure 4, no-prior-relation history increases eligibility-generated write
+norm, while DA is suppressive or unresolved. The completed registered 2-by-2
+history state-by-factor closure shows that accumulated `P` has a reproducible
+positive effect on local recurrent expression and a smaller positive
+history-matched interaction in both pilots. The total factor-generation main
+effect remains unresolved. Therefore do not attribute assimilation solely to
+eligibility, DA, or a scalar learning rate: history primarily changes the
+recurrent sensitivity landscape in which a nearly direction-preserving write
+is expressed, with an additional matched nonlinear advantage.
 
-Before formal seeds or architecture changes, run only the remaining registered
-closure test: cross natural versus no-prior recipient baselines with natural
-versus no-prior generated total factors at exposure 4. This 2-by-2 replay must
-separate baseline sensitivity, factor generation, and their interaction. If it
-is stable in both pilots, freeze an independent `mechanism_confirmation_v1`
-before accessing formal seeds 2001--2010; do not edit `confirmation_v1` after
-seeing formal results.
+The mechanism-discovery pilot stop rule has now been met. Do not launch more
+open-ended pilot diagnostics or change the architecture to amplify these
+effects. Formal seeds 2001--2010 may be accessed only under the separately
+frozen `mechanism_confirmation_v1`, with all seeds retained and development
+negatives reported as diagnostics. Never edit either `confirmation_v1` or
+`mechanism_confirmation_v1` after formal results are observed; register a new
+version if the formal evidence requires a revised mechanism.
 
-The target is to explain how bidirectional global redistribution accumulates
-into a correctly aligned potential and how human behavior retains additional
-local or conjunctive structure. Do not tune the slope or add a memory module
-before the remaining history baseline-by-factor interaction is localized.
+The next target is formal transport of the complete supported chain: fast-weight
+content necessity, immediate third-party causal reach, eligibility direction,
+DA gain, alpha sensitivity placement, history-dependent expression, and
+terminal expected-rank rather than MAP alignment. Keep the remaining human
+local or conjunctive structure gap explicit; do not tune the slope or add a
+memory module during mechanism confirmation.
 
 ## Repository workflow
 

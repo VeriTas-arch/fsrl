@@ -88,6 +88,18 @@ terminal potential, not sequential exact Bayesian updating. See
 [`docs/support_factor_swap_v1.md`](docs/support_factor_swap_v1.md) and
 [`results/support_factor_swap_v1.json`](results/support_factor_swap_v1.json).
 
+The final registered pilot closure crosses natural versus no-prior-relation
+fast-weight baselines with factors generated under those two histories. In both
+pilots, history has a positive effect on recurrent expression and a smaller
+positive matched interaction; the standalone total factor-generation effect is
+unresolved. This localizes assimilation to a state-dependent sensitivity
+landscape rather than a scalar write-strength mechanism and closes exploratory
+mechanism pilots. See
+[`docs/history_state_factorial_v1.md`](docs/history_state_factorial_v1.md),
+[`results/history_state_factorial_v1.json`](results/history_state_factorial_v1.json),
+and the frozen formal mechanism contract
+[`benchmarks/mechanism_confirmation_v1.json`](benchmarks/mechanism_confirmation_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
