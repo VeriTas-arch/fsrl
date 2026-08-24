@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-policy-relative-curvature-opposition-gate-pilot-v2.1",
+  "freeze_status": "implementation_frozen_before_gate_adaptation_or_liu_evaluation",
+  "pilot_specification_path": "benchmarks/policy_opposition_gate_pilot_v2_1.json",
+  "pilot_specification_sha256": "1b591b3d5dc99450fd9ae630f84ea92b64fc818d57b3a9f3e7791f158ee1d903",
+  "implementation_sources": {
+    "policy_opposition_gate": {
+      "path": "fsrl/policy_opposition_gate.py",
+      "sha256": "19dfea97434e3ae361e3f375597138f66f4ed114de3d2f3ae599145b0f35cb00"
+    },
+    "policy_opposition_gate_pilot": {
+      "path": "fsrl/policy_opposition_gate_pilot.py",
+      "sha256": "39ebb8314b343071fc2d4a44284079d032c8720348b3de7e4371d0ff63fe350b"
+    },
+    "policy_opposition_gate_tests": {
+      "path": "tests/test_policy_opposition_gate.py",
+      "sha256": "abde4b113f156c6549bbc004675ec447cad5c8d7c3d996c721165b6127b6c94b"
+    },
+    "policy_opposition_gate_pilot_tests": {
+      "path": "tests/test_policy_opposition_gate_pilot.py",
+      "sha256": "91ccd2fd144bf99e6b674215d50d359dfeb287a5e1adea96be765d414ca4599e"
+    },
+    "reused_curvature_gate_primitives": {
+      "path": "fsrl/curvature_gate.py",
+      "sha256": "dcf8e9c2f3b456252eae8ed8e6650d39d2da82f4e5b4a69658ce329150265a49"
+    },
+    "reused_curvature_pilot_estimands": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    }
+  },
+  "compiler_contract": {
+    "gate_adaptation": "torch.compile(gate, fullgraph=True, mode='default')",
+    "generic_backbone_replay": "torch.compile(backbone, fullgraph=True, mode='default')"
+  },
+  "frozen_backbone": {
+    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"
+  },
+  "immutability": "Any implementation repair after execution begins requires a superseding lock that names the defect; scientific equations, thresholds, seeds, and stop rules remain unchanged."
+}
