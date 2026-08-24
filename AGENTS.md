@@ -271,13 +271,35 @@ quadratic-opposition statistic as insufficient.
 
 Close the scalar amplitude-gating family. Do not run seeds 2102/2103, retune
 beta or `tau`, add caps or more elaborate risk statistics, change `tanh`, or
-begin end-to-end co-adaptation to rescue it. The next separately registered
-candidate should reuse the frozen seed-2101 backbone and explicitly preserve a
-`J_b u` first-order branch through residualized or near-linear policy
-expression, with the same global-mechanism preservation gates and matched
-controls. Freeze whether this residual acts in hidden or policy space and the
-exact mixing equation before implementation. The v2.1 result and family
+begin end-to-end co-adaptation to rescue it. The subsequent separately frozen
+candidate reused the seed-2101 backbone and explicitly preserved the `J_b u`
+first-order branch through a policy residual, with global-mechanism gates and
+matched-magnitude and shuffled controls. The v2.1 result and amplitude-family
 closure are in `docs/policy_opposition_gate_pilot_v2_1.md`.
+
+The completed first-order policy-residual v2.2 test is a valid mixed negative.
+Generic-only adaptation selects eta 0.09398. The natural residual causes a
+robust, state-query-specific movement toward correctness for H>A (+0.03596)
+and F>A (+0.00779); matched-magnitude and shuffled controls do not reproduce
+the H>A movement. Preserve this as positive evidence that the existing
+first-order residual contains causal information for the two hardest
+relations. It is not sufficient: H>A remains robustly negative, aggregate
+direct-correctness improvement is unresolved, both aggregate control-
+specificity contrasts fail, and the six already-correct relations decline.
+All competence, fast-weight necessity, nonlearned inference, remote/third-
+party reassembly, query-binding, and expected-rank-over-MAP gates remain
+supported.
+
+Close the family in which the existing first-order signal is rescued by a
+low-capacity response-expression correction. Do not run 2102/2103, select eta
+on Liu, add relation-specific residual scalars, change `tanh`, or begin end-to-
+end co-adaptation to rescue it. The next justified family is a separately
+persistent local component that selectively preserves direct experience
+alongside the confirmed global expected-rank channel. Retain the H>A/F>A
+first-order residual fingerprint as a constraint and possible routing
+diagnostic, not as proof that the residual is a sufficient local channel. The
+v2.2 result and stop/go decision are in
+`docs/policy_residual_pilot_v2_2.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -293,7 +315,9 @@ the final amplitude/curvature architecture-selection gate is in
 `docs/operator_amplitude_path_v1.md`; and the first v2 intervention and its
 negative result are in `docs/curvature_gate_pilot_v2.md`. The signed
 policy-opposition follow-up and amplitude-gating family closure are in
-`docs/policy_opposition_gate_pilot_v2_1.md`.
+`docs/policy_opposition_gate_pilot_v2_1.md`; the first-order residual test and
+low-capacity expression-family closure are in
+`docs/policy_residual_pilot_v2_2.md`.
 
 ## Repository workflow
 

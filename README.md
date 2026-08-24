@@ -221,6 +221,23 @@ See
 and
 [`results/policy_opposition_gate_pilot_v2_1.json`](results/policy_opposition_gate_pilot_v2_1.json).
 
+The frozen v2.2 policy-residual test then asks whether the already-supported
+first-order response can be explicitly restored at the policy margin without
+changing hidden dynamics, storage, or readout parameters. It reveals a
+structured positive effect: the natural residual robustly moves H>A and F>A
+toward correctness, while matched-magnitude and shuffled controls do not
+reproduce the H>A movement. But H>A remains wrong-sign, the aggregate rescue
+and both aggregate control-specificity rules fail, and the six already-correct
+relations decline. Global assembly, causal necessity, query binding,
+nonlearned inference, and expected-rank-over-MAP projection remain intact.
+This closes low-capacity response-expression correction and redirects the next
+registered mechanism toward a separately persistent local component while
+retaining the H>A/F>A residual fingerprint as a constraint. See
+[`docs/policy_residual_pilot_v2_2.md`](docs/policy_residual_pilot_v2_2.md),
+[`benchmarks/policy_residual_pilot_v2_2.json`](benchmarks/policy_residual_pilot_v2_2.json),
+and
+[`results/policy_residual_pilot_v2_2.json`](results/policy_residual_pilot_v2_2.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
