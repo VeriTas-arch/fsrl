@@ -226,17 +226,43 @@ Read-only local-fidelity localization on seeds 1901 and 1902 is now complete.
 Do not add adaptive amplitude points or more post hoc diagnostics on those
 seeds. Global clipping is not the selected mechanism because the other seven
 relation means remain correct at natural amplitude and subject thresholds vary.
-The next step is to register an online relation-/state-conditioned expression
-v2 on one to three new development seeds. Its gate may use normal query state,
-total fast-weight recurrent drive, and recurrent operating state, but not
-relation LOO, labels, correctness, or a relation-identity oracle. Compare it
-with the original v1 network, a matched global-scalar gate, and selective
-gate-off or shuffled-gate controls. Require improved learned-pair fidelity,
-preserved global assembly/query binding/nonlearned inference, and the predicted
-selective causal loss of rescue before any formal run.
 
-Start v2 only with one to three development seeds. Freeze estimands, competence
-gates, and outcome-contingent interpretations before any new formal population.
+The first registered v2 gate-only sufficiency test is complete on the new
+development seed 2101. It froze a competent v1 backbone and trained only
+`gamma=1/(1+beta*r)` with unsigned hidden-space
+`r=||K2||/(||J_bu||+epsilon)` on the generic held-out-graph distribution.
+`beta` remains nonzero and all frozen tensors and integrity controls pass. The
+conditioned gate preserves fast-weight necessity, nonlearned inference,
+remote/third-party reassembly, query binding, and terminal expected-rank over
+MAP. Preserve these positive results.
+
+The candidate nevertheless fails local rescue and state-conditioning
+specificity. H>A direct correctness moves toward zero but remains robustly
+negative. Aggregate retained direct correctness decreases relative to v1, the
+other seven relations decline substantially, and matched-global and shuffled
+controls exceed the conditioned aggregate. Online gamma is negatively, not
+positively, associated with offline crossing midpoint; H>A and F>A receive
+among the largest gamma values despite the most crossings. The symbolic-
+distance slope does not improve. Reject unsigned curvature magnitude as the
+sufficient online control variable; do not describe this as evidence against
+the preserved operator/global backbone or against all state-conditioned
+control.
+
+Do not run seeds 2102/2103 for the failed unsigned-risk candidate, change its
+thresholds, or begin end-to-end co-adaptation. The next sufficiency test should
+reuse the frozen seed-2101 backbone and prospectively register a low-capacity,
+online sign/opposition-aware statistic. A leading hypothesis is output-relative
+curvature opposition, for example `j=W_margin^T J_bu`, `k=W_margin^T K2`, and
+`r_opp=relu(-j*k)/(j^2+epsilon)`, followed by the same bounded monotone gamma.
+The exact equation, safeguards, generic-only adaptation, matched-global and
+shuffled controls, and outcome rules must be frozen before implementation.
+Neither true labels, relation identity, H>A, LOO state, nor offline crossings
+may enter the gate. Only after a new one-backbone sufficiency pass should a
+separate seed-2102/2103 replication contract be frozen.
+
+Start any later v2 replication with only one to three development seeds. Freeze
+estimands, competence gates, and outcome-contingent interpretations before any
+new formal population.
 Keep the seed-2009 complete-write/operator localization separate from the human
 local-fidelity question. The current formal evidence is recorded in
 `docs/formal_confirmation_v1.md`; the response-state negative and its next
@@ -245,7 +271,8 @@ operator-code result is in `docs/relation_trace_localization_v1.md`; its
 functional resolution is in `docs/state_query_operator_binding_v1.md`; the
 value-to-expression localization is in `docs/operator_output_semantics_v1.md`;
 the final amplitude/curvature architecture-selection gate is in
-`docs/operator_amplitude_path_v1.md`.
+`docs/operator_amplitude_path_v1.md`; and the first v2 intervention and its
+negative result are in `docs/curvature_gate_pilot_v2.md`.
 
 ## Repository workflow
 

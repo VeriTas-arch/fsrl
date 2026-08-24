@@ -188,6 +188,24 @@ readout, or a global scalar local gain. See
 and
 [`results/operator_output_semantics_v1.json`](results/operator_output_semantics_v1.json).
 
+The final old-seed amplitude path localizes that failure to state-conditioned
+finite-amplitude curvature, then closes read-only discovery on seeds 1901 and
+1902. The first registered v2 intervention trains a new seed-2101 v1 backbone,
+freezes it, and adapts only one curvature-norm gate parameter on the generic
+training distribution. This gate preserves fast-weight necessity, remote and
+third-party reassembly, query binding, nonlearned inference, and terminal
+expected-rank-over-MAP projection. It nevertheless fails the registered local
+rescue: H>A becomes less negative but remains robustly wrong-sign, the other
+relations lose direct correctness, matched-global and shuffled controls exceed
+the conditioned aggregate, and online gamma is negatively rather than
+positively associated with offline crossing susceptibility. This rejects
+unsigned curvature magnitude as the sufficient control variable and motivates
+a separately registered sign/opposition-aware online gate before any new seed
+or end-to-end v2 training. See
+[`docs/operator_amplitude_path_v1.md`](docs/operator_amplitude_path_v1.md),
+[`docs/curvature_gate_pilot_v2.md`](docs/curvature_gate_pilot_v2.md), and
+[`results/curvature_gate_pilot_v2.json`](results/curvature_gate_pilot_v2.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).
