@@ -2,14 +2,28 @@ import unittest
 
 import numpy as np
 
+from fsrl.assembly_diagnostics import load_json
 from fsrl.relation_trace_localization import (
     _decision,
     prototype_identity_metrics,
     prototype_rdm_similarity,
+    validate_registered_sources,
 )
 
 
 class RelationTraceLocalizationTests(unittest.TestCase):
+    def test_corrected_execution_lock_preserves_registered_sources(self):
+        specification = load_json("benchmarks/relation_trace_localization_v1_1.json")
+        self.assertEqual(
+            specification["execution_contract"]["floating_reproduction_tolerance"],
+            64.0 * np.finfo(np.float32).eps,
+        )
+        self.assertEqual(
+            specification["supersedes"]["scientific_contract_changes"], "none"
+        )
+        validation = validate_registered_sources(specification)
+        self.assertEqual(len(validation["pilot_artifacts"]), 2)
+
     def test_same_relation_prototypes_identify_held_out_subjects(self):
         relations = 8
         subjects = 14
@@ -26,9 +40,7 @@ class RelationTraceLocalizationTests(unittest.TestCase):
         )
         np.testing.assert_allclose(metrics["own_prototype_cosine"], 1.0)
         np.testing.assert_allclose(metrics["other_prototype_mean_cosine"], 0.0)
-        np.testing.assert_allclose(
-            metrics["eight_way_identification_accuracy"], 1.0
-        )
+        np.testing.assert_allclose(metrics["eight_way_identification_accuracy"], 1.0)
 
     def test_prototype_rdm_compares_geometry_across_feature_spaces(self):
         rng = np.random.default_rng(4)

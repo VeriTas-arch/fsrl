@@ -31,9 +31,9 @@ from .support_write_localization import trace_support_trial
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "relation_trace_localization_v1.json"
+    ROOT / "benchmarks" / "relation_trace_localization_v1_1.json"
 )
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "relation_trace_localization_v1.json"
+DEFAULT_OUTPUT_PATH = ROOT / "results" / "relation_trace_localization_v1_1.json"
 
 
 def _unit_rows(values: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray]:
@@ -141,9 +141,7 @@ def summarize_identity_level(
         traces.shape,
     )
     omitted_max = (
-        float(np.max(np.abs(traces[omitted_selector])))
-        if np.any(~retained)
-        else 0.0
+        float(np.max(np.abs(traces[omitted_selector]))) if np.any(~retained) else 0.0
     )
     present = (
         summaries["own_minus_other_selectivity"]["bootstrap"]["lower"] > 0.0
@@ -279,12 +277,18 @@ def trace_generated_writes(
             float(torch.max(torch.abs(reference - plus.final_fast_weights)).item()),
         )
         realized = plus.final_fast_weights - zero.final_fast_weights
-        intended = torch.sum(
-            plus.intended_increment - zero.intended_increment, dim=1
-        )
+        delta_intended = plus.intended_increment - zero.intended_increment
+        intended = torch.sum(delta_intended, dim=1)
         validation["realized_minus_intended_max_abs_error"] = max(
             validation["realized_minus_intended_max_abs_error"],
-            float(torch.max(torch.abs(realized - intended)).item()),
+            float(
+                torch.max(
+                    torch.abs(
+                        realized.to(torch.float64)
+                        - torch.sum(delta_intended.to(torch.float64), dim=1)
+                    )
+                ).item()
+            ),
         )
         relation_indices = _relation_indices(evaluator, protocol, trial_index)
         for relation in range(relations):
@@ -301,14 +305,22 @@ def trace_generated_writes(
     if not np.all(exposure_counts == protocol.support_blocks):
         raise RuntimeError("every subject-relation must have four support slots")
     if max(validation.values()) > tolerance:
-        raise RuntimeError("generated-write replay exceeded frozen tolerance")
+        raise RuntimeError(
+            "generated-write replay exceeded frozen tolerance: "
+            f"tolerance={tolerance}, validation={validation}"
+        )
     alpha = evaluator.net.alpha.detach()
     retained = _retained_mask(evaluator, protocol)
-    return {
-        "generated_effective_write": (alpha * cumulative_raw).cpu().numpy(),
-        "generated_raw_write": cumulative_raw.cpu().numpy(),
-        "generated_intended_raw_write": cumulative_intended.cpu().numpy(),
-    }, natural, retained, validation
+    return (
+        {
+            "generated_effective_write": (alpha * cumulative_raw).cpu().numpy(),
+            "generated_raw_write": cumulative_raw.cpu().numpy(),
+            "generated_intended_raw_write": cumulative_intended.cpu().numpy(),
+        },
+        natural,
+        retained,
+        validation,
+    )
 
 
 def _hidden_trajectory_fields(
@@ -357,7 +369,8 @@ def trace_terminal_and_query(
 ) -> tuple[dict[str, np.ndarray], dict]:
     relations = tuple(protocol.support_pairs_higher_lower)
     direct_edges = {
-        relation: geometry.pairs.index(tuple(sorted(relation))) for relation in relations
+        relation: geometry.pairs.index(tuple(sorted(relation)))
+        for relation in relations
     }
     terminal_raw = []
     query_direct = []
@@ -441,7 +454,9 @@ def _run_seed(
         protocol,
         geometry,
         intact_weights,
-        response_step=int(specification["query_state_contract"]["primary_response_step"]),
+        response_step=int(
+            specification["query_state_contract"]["primary_response_step"]
+        ),
     )
     levels = {**write_levels, **state_levels}
     primary_names = (
@@ -507,9 +522,7 @@ def _run_seed(
         "validation": {
             **write_validation,
             **state_validation,
-            "scientific_zero_tolerance": float(
-                execution["scientific_zero_tolerance"]
-            ),
+            "scientific_zero_tolerance": float(execution["scientific_zero_tolerance"]),
             "floating_reproduction_tolerance": tolerance,
         },
         "checkpoint": {
@@ -538,9 +551,7 @@ def _overall_diagnosis(seed_results: dict[str, dict]) -> dict:
             if len(seed_outcomes) == 1
             else "mixed_across_development_seeds"
         ),
-        "seed_outcomes": {
-            seed: row["outcome"] for seed, row in seed_results.items()
-        },
+        "seed_outcomes": {seed: row["outcome"] for seed, row in seed_results.items()},
         "formal_interpretation": "hypothesis_generating_only",
     }
 
