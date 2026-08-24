@@ -301,6 +301,44 @@ diagnostic, not as proof that the residual is a sufficient local channel. The
 v2.2 result and stop/go decision are in
 `docs/policy_residual_pilot_v2_2.md`.
 
+The first separately persistent local-component pilot is now complete on the
+same frozen seed-2101 backbone. Its fixed shared address is a normalized
+antisymmetric tensor product of the two normal item cues; the normal encoded
+signed support value is accumulated in an episode-local trace, and only one
+positive local gain is adapted on generic held-out graphs. No item/relation ID,
+H>A/F>A flag, label, residual target, posterior, or Liu value enters the
+module or adaptation.
+
+Preserve the strong positive causal decomposition. Dual-intact increases
+retained direct correctness by 0.30039 and makes H>A robustly positive; a
+query-address derangement does not reproduce it. Local influence is strongly
+direct-enriched. With `P_T` removed, learned-pair accuracy remains above chance
+while nonlearned accuracy is near chance and remote reassembly collapses. With
+the local trace removed, the system is exactly v1 and all confirmed global
+mechanism gates remain intact. This supports functionally separable global
+inferential and local conjunctive persistent states on this backbone; it does
+not prove unique tensor-product coding or biologically separate stores.
+
+The v2.3 candidate is nevertheless a registered mixed negative because the
+sampled learned-accuracy rescue is only +0.00146 with a bootstrap interval
+crossing zero, and the symbolic-distance slope does not improve. Nine of ten
+primary flags pass, but the all-primary conjunction fails. Do not run
+2102/2103, retune the gain on Liu, relax the behavioral rule, alter the fixed
+address after seeing the result, or begin end-to-end co-adaptation. Preserve
+the double dissociation rather than calling the local trace ineffective, but
+do not call it a full behavioral rescue.
+
+Before another trainable local candidate, freeze a read-only attribution of
+the behavioral non-rescue. Partition learned errors and signed margins by
+retained versus stable-omitted evidence and measure whether the frozen local
+correction crosses decision/probability thresholds on retained relations. If
+omitted relations dominate, revise how weak evidence can persist locally while
+remaining unavailable to global assembly; if retained low-margin relations
+dominate, test a shared value/expression transform while preserving the now-
+supported storage and query-address mechanism. Do not tune either route before
+this attribution. The v2.3 result is in
+`docs/conjunctive_local_trace_pilot_v2_3.md`.
+
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
 new formal population.
@@ -317,7 +355,9 @@ negative result are in `docs/curvature_gate_pilot_v2.md`. The signed
 policy-opposition follow-up and amplitude-gating family closure are in
 `docs/policy_opposition_gate_pilot_v2_1.md`; the first-order residual test and
 low-capacity expression-family closure are in
-`docs/policy_residual_pilot_v2_2.md`.
+`docs/policy_residual_pilot_v2_2.md`; and the persistent conjunctive trace and
+causal local/global double dissociation are in
+`docs/conjunctive_local_trace_pilot_v2_3.md`.
 
 ## Repository workflow
 
