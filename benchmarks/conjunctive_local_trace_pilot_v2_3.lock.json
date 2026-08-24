@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-conjunctive-local-trace-pilot-v2.3",
+  "freeze_status": "implementation_frozen_before_local_gain_adaptation_or_liu_evaluation",
+  "pilot_specification_path": "benchmarks/conjunctive_local_trace_pilot_v2_3.json",
+  "pilot_specification_sha256": "8ee6dcb4309eb543ec574f756a2de1ea9447dfa2b96c50fbf88b078b62136cbc",
+  "implementation_sources": {
+    "conjunctive_local_trace": {
+      "path": "fsrl/conjunctive_local_trace.py",
+      "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"
+    },
+    "conjunctive_local_trace_pilot": {
+      "path": "fsrl/conjunctive_local_trace_pilot.py",
+      "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"
+    },
+    "conjunctive_local_trace_tests": {
+      "path": "tests/test_conjunctive_local_trace.py",
+      "sha256": "1658b1936b6d1fef12faf7a095da880d916c957f3b96c0de8e572312b2522804"
+    },
+    "conjunctive_local_trace_pilot_tests": {
+      "path": "tests/test_conjunctive_local_trace_pilot.py",
+      "sha256": "62491912145a2331bad2acbf61389bf11a1c8eefcb3275cc6b56fe35d319f654"
+    },
+    "reused_generic_task_primitives": {
+      "path": "fsrl/curvature_gate.py",
+      "sha256": "dcf8e9c2f3b456252eae8ed8e6650d39d2da82f4e5b4a69658ce329150265a49"
+    },
+    "reused_frozen_estimands": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "reused_behavioral_analysis": {
+      "path": "fsrl/behavioral.py",
+      "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"
+    },
+    "reused_residual_diagnostic": {
+      "path": "fsrl/policy_residual.py",
+      "sha256": "af6a40165b6837678cd4801baf95be87cff3f1d505a9c690087a1a2c4606894f"
+    }
+  },
+  "compiler_contract": {
+    "local_read_and_policy": "torch.compile(local, fullgraph=True, mode='default')",
+    "local_write": "torch.compile(local.write, fullgraph=True, mode='default')",
+    "generic_backbone_replay": "torch.compile(backbone, fullgraph=True, mode='default')"
+  },
+  "frozen_backbone": {
+    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"
+  },
+  "validation_before_freeze": {
+    "pytest": "165 passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "next_lock": "After local-gain adaptation, commit benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json with exact hashes before Liu evaluation.",
+  "immutability": "Any implementation repair after local-gain adaptation begins requires a superseding implementation lock naming the defect; equations, controls, seeds, thresholds, and stop rules remain unchanged."
+}
