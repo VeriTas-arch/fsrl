@@ -257,13 +257,21 @@ def structured_contrasts(
     matched = np.stack([rows[index, :, index] for index in range(relations)])
     shared = np.stack(
         [
-            np.nanmean(rows[index][:, overlap[index] == 1], axis=1)
+            _masked_mean(
+                rows[index][:, overlap[index] == 1],
+                np.isfinite(rows[index][:, overlap[index] == 1]),
+                axis=1,
+            )
             for index in range(relations)
         ]
     )
     disjoint = np.stack(
         [
-            np.nanmean(rows[index][:, overlap[index] == 0], axis=1)
+            _masked_mean(
+                rows[index][:, overlap[index] == 0],
+                np.isfinite(rows[index][:, overlap[index] == 0]),
+                axis=1,
+            )
             for index in range(relations)
         ]
     )
