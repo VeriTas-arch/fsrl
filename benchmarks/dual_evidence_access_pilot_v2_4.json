@@ -112,6 +112,7 @@
     "dual_access_matched": "Use the registered dual-access evidence on the natural support address and the natural query address.",
     "dual_access_evidence_shuffle": "Within each subject and support block, apply a fixed derangement of the eight signed candidate local evidence scalars across the eight presented cue addresses. Preserve the exact blockwise scalar multiset, global P_T, trial times, write count, local gain, and cue-address multiset while breaking evidence-to-support binding.",
     "dual_access_query_shuffle": "Use the natural dual-access trace but the frozen v2.3 within-subject canonical query-address derangement, preserving the query-address multiset while breaking trace-to-query matching.",
+    "global_P_off_shared_access": "Replace P_T by zero only during query replay while retaining the shared-access v2.3 L_T; this is the frozen local-only baseline for omitted rescue.",
     "global_P_off_dual_access": "Replace P_T by zero only during query replay while retaining the natural dual-access L_T.",
     "evidence_shuffle_seed": 32301,
     "query_shuffle_seed": 31801,
@@ -134,7 +135,7 @@
     "subject_encoding_mode": "stable_omission",
     "temperature": 0.25,
     "posterior_temperature": 0.05,
-    "all_six_conditions_required": true
+    "all_seven_conditions_required": true
   },
   "estimand_contract": {
     "cell_unit": "Subject by learned relation by query orientation; compute correct-signed margins and exact sigmoid probabilities at T=0.25 separately by orientation before averaging.",
