@@ -530,21 +530,70 @@ Revise the global-policy problem from scalar overgain to a confidence-
 allocation/comparator-shape question: a smaller neural additive-potential norm
 can still have a steeper probability-distance slope when confidence is
 distributed differently across pairs and distances. The probability-space
-allocation remains unresolved. Do not fit a temperature, normalize
-`P_T`, normalize `W_out`, or perform any scalar scale correction. If this route
-continues, first register a separate same-unit neural/posterior policy-field
-factorial that swaps additive Hodge fields and residual fields through the
-same fixed sigmoid, with a norm-matched additive control. Treat it only as a
-field-level reassembly/sufficiency test, not `P_T`/`W_out` causal localization.
-It must freeze the additive-by-residual interaction, norm-match target and
-direction, natural anchors, 20-pair mask, exact reconstruction, bootstrap and
-no-pooling rules, and closure/equivalence margins. A failure remains unresolved
-under the frozen comparator; it does not by itself prove comparator
-inadequacy. It may not be appended post hoc to the present audit. Do not modify
-v2.4 or mix local cross-talk into that primary global analysis. The fresh
-confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`, the slope
-localization is in `docs/global_policy_slope_localization_v1.md`, and the
-amplitude audit is in `docs/global_policy_amplitude_provenance_v1.md`.
+allocation remains unresolved. Do not fit a temperature, normalize `P_T`,
+normalize `W_out`, or perform any scalar scale correction.
+
+The subsequently frozen same-unit neural/posterior additive-by-residual field
+reassembly is now complete on those same 2104/2105 backbones. This is a
+sequential field-level sufficiency diagnostic, not an independent confirmation
+or a realizable recurrent intervention. Its direct-margin amplitude bridge was
+prospectively repaired after static implementation review but before either
+checkpoint replay: exact reconstruction is anchored to `a_N_from_margin`,
+while the already registered hidden/readout bridge retains its GPU tolerance.
+Both formal executions are byte-identical, and every source, artifact,
+endpoint, Hodge, norm-match, factorial-identity, and bootstrap-finiteness gate
+passes.
+
+The registered field-source fingerprint is `mixed_or_unresolved` separately in
+both networks. Posterior-additive replacement materially reduces the neural-
+posterior probability-slope difference (`Delta_A` 0.04080 and 0.04192), but its
+remaining closure contrast is also materially positive (`C_A` 0.01694 and
+0.01684), so additive replacement is not sufficient. Posterior-residual
+replacement is unresolved and leaves a large positive closure contrast.
+Neither natural single-component replacement nor the both-components rule
+passes. Preserve the reductions without converting the largest one into a
+sufficiency claim.
+
+The symmetric additive-source main effect is materially positive (`A` 0.05417
+and 0.05594), whereas the residual-source main effect is unresolved. The
+registered probability-link interaction is materially negative (`I` -0.02674
+and -0.02804): the neural-versus-posterior additive-source effect is smaller
+under the neural residual than under the posterior residual. The corresponding
+pre-sigmoid margin interaction is exactly zero. Treat `I` only as fixed-sigmoid
+field-reassembly moderation, not recurrent, circuit, or biological coupling.
+`A` and `R` partition `D`; `I` is a separately registered contrast of the same
+four cells. None constitutes an independent evidence source or confirmation
+link.
+
+The sole posterior-to-neural norm match further separates shape from the
+natural source replacement. At the neural full-28-edge additive norm with the
+neural residual fixed, posterior additive shape materially reduces the slope
+(`Q_shape` 0.03368 and 0.03474), and moving that posterior-shape field from the
+participant-wise neural target to its natural norm reduces the cohort mean
+(`Q_amp` 0.00712 and 0.00718); the scale direction is not uniform across
+participants. But the norm-matched cell remains materially above the posterior
+anchor (`C_shape` 0.02406 and 0.02403); shape is informative but not sufficient.
+The norm match fixes complete pre-sigmoid field energy, not the 20-pair subset
+norm or probability amplitude. It cannot trigger a scalar or model
+intervention.
+
+The revised constraint is therefore a comparator-relative additive allocation
+difference with fixed-sigmoid residual context dependence and an unresolved
+closure gap. Preserve the exact-posterior comparator boundary: it is not the
+human posterior or ground-truth neural geometry. Do not add additional hybrid,
+norm, mask, temperature, or comparator variants on 2104/2105. Do not modify
+v2.4 or mix local cross-talk into this global analysis. Before any
+implementable or causal follow-up, freeze the unchanged three-part field
+fingerprint on one to three new development backbones: positive additive-source
+effect, positive matched-norm shape reduction without assumed closure, and
+negative probability-link interaction. A comparator-adequacy test requires a
+separate prospective criterion.
+
+The fresh confirmation is in
+`docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
+`docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
+`docs/global_policy_amplitude_provenance_v1.md`, and the field reassembly is in
+`docs/global_policy_field_reassembly_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -575,7 +624,9 @@ confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`.
 The registered global-policy slope localization is in
 `docs/global_policy_slope_localization_v1.md`; and the registered common-unit
 amplitude-provenance result is in
-`docs/global_policy_amplitude_provenance_v1.md`.
+`docs/global_policy_amplitude_provenance_v1.md`; and the registered
+additive-by-residual field-reassembly result is in
+`docs/global_policy_field_reassembly_v1.md`.
 
 ## Repository workflow
 
