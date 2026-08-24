@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "study_id": "liu-magnitude-placement-behavior-v1",
+  "registration_status": "prospectively_registered_after_human_metric_constructive_comparator_failure_and_before_validator_or_collection_implementation",
+  "registration_parent_commit": "a125421feac64b43f43ec9990c1fac08668d13ca",
+  "scientific_question": "When the signed support graph and the multiset of displayed magnitudes are held fixed, does relocating those magnitudes across graph edges change the constructed global order, confidence within an unchanged order, or only memory for directly observed relations?",
+  "current_theory": "The frozen human-only stable-access metric comparator reproduces the human symbolic-distance slope but not the reliable pair-specific field or exact individual structure. The existing Liu data confound pair identity, graph position, latent rank distance, and displayed magnitude. A new within-participant behavior experiment is therefore required to identify where displayed metric magnitude enters behavior; another comparator on the same holdout cannot resolve this confound.",
+  "candidate_hypotheses": {
+    "metric_global_construction": "Displayed support magnitude affects the globally constructed item order, so preferences on pairs whose latent order reverses between assignments follow the assignment-specific order.",
+    "ordinal_global_metric_confidence": "Global order is approximately sign/ordinal based, while displayed support magnitude modulates choice confidence on nonlearned pairs whose order direction is unchanged.",
+    "local_metric_only": "Displayed magnitude is retained for learned relations but does not materially affect global order or nonlearned confidence.",
+    "stronger_ordinalization_or_metric_loss": "None of the registered global-order, nonlearned-confidence, or learned-relation magnitude estimands is materially different from zero. This is evidence for stronger internal ordinalization or loss under this task, not proof that no metric information is ever encoded."
+  },
+  "claim_boundary": "This experiment identifies behavioral sensitivity to prospectively relocated displayed magnitudes under two task-consistent scalar embeddings. It does not identify a unique cognitive algorithm, neural code, P_T or L_T computation, biological store, or general-purpose metric representation. Equivalence is task- and SESOI-relative. Assignment B is a coherent intervention, not an arbitrary edge shuffle or a frustrated graph.",
+  "canonical_paths": {
+    "specification": "benchmarks/magnitude_placement_behavior_v1.json",
+    "validator": "fsrl/magnitude_placement_behavior.py",
+    "validator_tests": "tests/test_magnitude_placement_behavior.py",
+    "validation_result": "results/magnitude_placement_behavior_v1_validation.json",
+    "eventual_collection_implementation": "not_authorized_by_this_registration",
+    "eventual_behavior_result": "not_authorized_by_this_registration"
+  },
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "variance_planning_derivation_trials": {
+      "path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227"
+    },
+    "variance_planning_confirmation_trials": {
+      "path": "data/external/liu2026/replication_experiment_data.csv",
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249"
+    },
+    "failed_comparator_result": {
+      "path": "results/human_metric_constructive_comparator_v1.json",
+      "sha256": "8c77ee6c4020705895a39f824b1dba4e3af2a426f086217e8e0e032ac2988b4b"
+    },
+    "failed_comparator_report": {
+      "path": "docs/human_metric_constructive_comparator_v1.md",
+      "sha256": "32d34311533b11c53da4ebc13a3e0f206ce517904b89090e87cefa2a8df4b471"
+    }
+  },
+  "experimental_design": {
+    "design": "Within-participant two-list crossover with disjoint image sets. Every participant completes assignment A on one item list and assignment B on the other.",
+    "sessions": "Two sessions, one complete list per session, separated by 24 to 72 hours. Session order is counterbalanced. Each session repeats the complete Liu structure: 8 passive support relations by 4 blocks, then all 28 unordered query pairs by 10 blocks.",
+    "counterbalance": {
+      "factors": [
+        "condition_order: A_first versus B_first",
+        "image_set_mapping: set_1_to_A versus set_1_to_B"
+      ],
+      "cells": [
+        "A_first/set_1_to_A",
+        "A_first/set_1_to_B",
+        "B_first/set_1_to_A",
+        "B_first/set_1_to_B"
+      ],
+      "allocation": "Exactly 25 analyzable participants per cell. Random allocation occurs before session 1; cell quotas and enrollment order are retained.",
+      "item_mapping": "Within each image set, images are assigned one-to-one to abstract roles A through H using a participant-specific seed fixed before support exposure. The two conditions never share an image. Analysis relabels images by their assigned abstract roles."
+    },
+    "support_phase": {
+      "relations_per_block": 8,
+      "blocks": 4,
+      "trials": 32,
+      "choice_required": false,
+      "feedback": false,
+      "randomization": "Randomize relation order within block and left-right orientation exactly as in the Liu protocol. Preserve the condition-specific signed relative gap on every presentation. Randomized absolute bar level remains nuisance and must be sampled without clipping or changing the registered relative gap."
+    },
+    "query_phase": {
+      "pairs_per_block": 28,
+      "blocks": 10,
+      "trials": 280,
+      "feedback": false,
+      "randomization": "Randomize pair order within block and left-right orientation. Do not show support magnitude, symbolic distance, correctness, or feedback at query."
+    },
+    "cross_session_firewall": "No item image, support response, query response, correctness signal, or feedback is transferred between lists. The task instructions and timing are held fixed across sessions; only assignment, image set, and their counterbalanced order differ.",
+    "forbidden_design_changes": "Do not arbitrarily permute edge magnitudes, add inconsistent support constraints, change the sign graph, reuse images across lists, add learning choices or feedback, shorten one assignment, select query pairs after data, or add a third condition."
+  },
+  "frozen_assignments": {
+    "item_roles": ["A", "B", "C", "D", "E", "F", "G", "H"],
+    "support_relation_order": ["F>A", "C>B", "E>B", "G>C", "F>D", "G>D", "H>E", "H>A"],
+    "common_signed_graph": "Every support relation has the displayed higher-to-lower direction shown in support_relation_order in both assignments.",
+    "magnitude_multiset": [1, 2, 3, 3, 3, 4, 5, 7],
+    "assignment_A": {
+      "low_to_high_order": ["A", "B", "C", "D", "E", "F", "G", "H"],
+      "rank_levels": {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7},
+      "support_gaps": {"F>A": 5, "C>B": 1, "E>B": 3, "G>C": 4, "F>D": 2, "G>D": 3, "H>E": 3, "H>A": 7}
+    },
+    "assignment_B": {
+      "low_to_high_order": ["D", "B", "E", "A", "C", "F", "H", "G"],
+      "rank_levels": {"D": 0, "B": 1, "E": 2, "A": 3, "C": 4, "F": 5, "H": 6, "G": 7},
+      "support_gaps": {"F>A": 2, "C>B": 3, "E>B": 1, "G>C": 3, "F>D": 5, "G>D": 7, "H>E": 4, "H>A": 3}
+    },
+    "pair_partition": {
+      "learned": ["A-F", "A-H", "B-C", "B-E", "C-G", "D-F", "D-G", "E-H"],
+      "nonlearned_order_flip": ["A-B", "A-D", "A-E", "B-D", "C-D", "C-E", "G-H"],
+      "nonlearned_same_direction": ["A-C", "A-G", "B-F", "B-G", "B-H", "C-F", "C-H", "D-E", "D-H", "E-F", "E-G", "F-G", "F-H"]
+    },
+    "same_direction_distance_change_B_minus_A": {"A-C": -1, "A-G": -2, "B-F": 0, "B-G": 1, "B-H": -1, "C-F": -2, "C-H": -3, "D-E": 1, "D-H": 2, "E-F": 2, "E-G": 3, "F-G": 1, "F-H": -1},
+    "learned_magnitude_change_B_minus_A": {"A-F": -3, "A-H": -4, "B-C": 2, "B-E": -2, "C-G": -1, "D-F": 3, "D-G": 4, "E-H": 1}
+  },
+  "registered_estimands": {
+    "choice_probability": "For participant s, condition k, pair e, and named item h, p_s,k(h|e) is the fraction of ten query repetitions on which h is chosen.",
+    "delta_flip_subject": "For the seven nonlearned order-flip pairs, Delta_flip_s is the unweighted mean of p_s,A(h_A|e)-p_s,B(h_A|e), where h_A is the item higher under assignment A. Positive values mean choices move toward the assignment-specific global order.",
+    "beta_conf_subject": "For the 13 nonlearned same-direction pairs, fit an intercept and the frozen x_e=d_B(e)-d_A(e) to y_s,e=p_s,B(h_e|e)-p_s,A(h_e|e), where h_e is higher in both assignments. beta_conf_s is the OLS slope. The registered x vector has exact mean zero.",
+    "beta_learned_subject": "For the eight learned relations, fit an intercept and x_r=m_B(r)-m_A(r) to y_s,r=p_s,B(h_r|r)-p_s,A(h_r|r), where h_r is the displayed higher item in both assignments. beta_learned_s is the OLS slope. The registered x vector has exact mean zero.",
+    "counterbalance_adjustment": "For each subject-level estimand separately, fit y_s=mu+theta_order*o_s+theta_map*i_s+theta_interaction*o_s*i_s+error_s using effect coding -1/+1. The intercept mu is the registered cohort point. Its two-sided 90 percent ordinary least-squares t interval uses residual df=N-4. Counterbalance coefficients are mandatory descriptive outputs and cannot replace mu.",
+    "axis_flags": {
+      "directional_positive": "The 90 percent interval lower endpoint is greater than zero, equivalent to a one-sided alpha 0.05 superiority test.",
+      "directional_negative": "The 90 percent interval upper endpoint is less than zero.",
+      "equivalent_to_zero": "The complete 90 percent interval lies within the axis-specific symmetric SESOI band. An interval merely containing zero is unresolved.",
+      "precedence": "Equivalence has practical-interpretation priority when a small estimate is both statistically directional and contained within the SESOI band; report both raw flags, but route it as practically equivalent."
+    },
+    "sesoi": {
+      "delta_flip_probability": 0.1,
+      "beta_conf_probability_per_rank_gap_unit": 0.02,
+      "beta_learned_probability_per_displayed_gap_unit": 0.02,
+      "rationale": "A ten-point mean preference relocation across the seven flip pairs is a behaviorally material global-order change. A slope of 0.02 changes predicted choice probability by 0.12 across the observed six-unit same-direction distance-change range and by 0.16 across the eight-unit learned magnitude-change range. These scales were selected for mechanistic materiality before new data, not fitted to achieve the planned sample size."
+    }
+  },
+  "sample_size_plan": {
+    "planning_use_boundary": "The two existing Liu cohorts are combined only to estimate participant-profile variance and pair covariance. Their observed mean effects are irrelevant because both historical lists used assignment A. No new-condition effect, candidate model, or expected direction is estimated from them.",
+    "historical_participants": 77,
+    "historical_profile": "For each participant, average the ten binary responses for every one of the 28 pairs.",
+    "conservative_independent_list_null": "Form all 77 by 77 ordered pairs of historical participant profiles and treat the first as assignment A and the second as assignment B. Compute each registered within-subject contrast from those independent profiles. This retains empirical pair covariance and ten-trial response noise but deliberately does not borrow an unknown positive within-participant cross-list correlation.",
+    "ordered_profile_pairs": 5929,
+    "null_standard_deviation": {"delta_flip": 0.20534325943631407, "beta_conf": 0.0598490073222847, "beta_learned": 0.03232696998566431},
+    "power_method": "For balanced four-cell effect-coded OLS, use residual df=N-4. Directional power is the exact noncentral-t probability at a true positive effect equal to the SESOI. Equivalence power at true zero integrates the symmetric TOST acceptance probability over the chi-square residual-variance distribution. Use one-sided alpha 0.05 and a two-sided 90 percent interval. Search N in multiples of four; require at least 0.90 for both directional and equivalence power on every axis.",
+    "minimum_analyzable_n": 100,
+    "analyzable_per_counterbalance_cell": 25,
+    "power_at_n_100": {
+      "delta_flip": {"directional_at_positive_sesoi": 0.9992895398286519, "equivalence_at_zero": 0.9985790796563165},
+      "beta_conf": {"directional_at_positive_sesoi": 0.9528558979081063, "equivalence_at_zero": 0.9057117958156491},
+      "beta_learned": {"directional_at_positive_sesoi": 0.9999965656665416, "equivalence_at_zero": 0.9999931313320743}
+    },
+    "n_96_boundary": "N=96 is insufficient because beta_conf equivalence power is 0.8915391021513193; thresholds and power targets may not be relaxed.",
+    "recruitment": "Recruit until exactly 25 analyzable participants are obtained in each of the four cells, with a hard maximum of 30 enrolled per cell and 120 total. Replacement uses only the frozen eligibility/completeness rules and chronological enrollment order, never an estimand or condition contrast. If any cell has fewer than 25 analyzable participants at its cap, the registered primary study is noninterpretable rather than underpowered-but-analyzable."
+  },
+  "eligibility_and_exclusions": {
+    "prerecruitment": "Use the same adult source population, consent, language, vision, and no-prior-participation requirements for both counterbalanced conditions. Duplicate participation is resolved by the first eligible enrollment before responses are analyzed.",
+    "complete_case": "An analyzable participant must complete both sessions, all 64 passive support presentations, and all 560 query trials with a valid binary choice. No imputation is permitted.",
+    "below_chance": "As in the Liu analysis boundary, exclude a participant only if combined correctness relative to the condition-specific scalar orders across all 560 query trials is strictly below 0.50. Do not exclude based on either condition alone.",
+    "technical_failure": "Exclude only a logged acquisition failure that prevents the registered stimulus, timing, or response from being presented or recorded. Retain the pre-outcome log and reason.",
+    "forbidden_exclusions": "Do not exclude by Delta_flip, beta_conf, beta_learned, condition-specific accuracy, flip-pair accuracy, learned/nonlearned accuracy, reconstructed rank, response time, model fit, perceived strategy, or whether the participant follows assignment A or B.",
+    "blinding": "Apply identity, completeness, and technical checks before computing primary contrasts. The combined below-chance rule and final analysis are run only after recruitment is closed in all four cells."
+  },
+  "secondary_and_descriptive": {
+    "hodge_ranking": "For each condition and participant, form the 28-pair majority field, apply the source Liu Hodge ranking reconstruction, and report the reconstructed abstract-role order. This is secondary and cannot change a primary branch.",
+    "assignment_following_score": "G_s=[tau(rank_s,A,order_A)-tau(rank_s,A,order_B)]+[tau(rank_s,B,order_B)-tau(rank_s,B,order_A)], using Kendall tau on the eight abstract roles. Report its counterbalance-adjusted mean and 90/95 percent intervals without an additional pass threshold.",
+    "mandatory_reports": "Report condition-wise overall, learned, nonlearned, flip-pair, and same-direction accuracy; every pair probability and condition difference; reconstructed-ranking distributions; all counterbalance coefficients; session order; exclusions; attrition by cell; and both 90 and 95 percent intervals for all three registered subject estimands.",
+    "no_multiplicity_expansion": "No additional pair subset, interaction, nonlinear magnitude transform, item covariate, distance definition, response-time model, strategy subgroup, or alternative rank score may become confirmatory after collection."
+  },
+  "hierarchical_outcome_tree": {
+    "noninterpretable": "Any assignment-coherence, magnitude-multiset, pair-partition, schedule, feedback, counterbalance, quota, completeness, acquisition, preregistration, finiteness, or no-filtering gate fails.",
+    "step_1_global_order": "Evaluate Delta_flip first. If equivalent_to_zero is false and directional_positive is true, classify metric_enters_global_order_construction. If equivalent_to_zero is true, continue to step 2 even if a very small directional flag also passes. Every other result is mixed_or_unresolved.",
+    "step_2_nonlearned_confidence": "Only after Delta_flip equivalence, evaluate beta_conf. If equivalent_to_zero is false and directional_positive is true, classify ordinal_global_order_with_metric_confidence_modulation. If equivalent_to_zero is true, continue to step 3. Every other result is mixed_or_unresolved.",
+    "step_3_learned_relations": "Only after Delta_flip and beta_conf equivalence, evaluate beta_learned. If equivalent_to_zero is false and directional_positive is true, classify metric_retained_locally_not_globally. If equivalent_to_zero is true, classify stronger_ordinalization_or_metric_loss. Every other result is mixed_or_unresolved.",
+    "negative_effects": "A registered directional-negative axis is reported exactly but routed to mixed_or_unresolved because it contradicts all four positive mechanistic predictions; it is not reflected or relabeled.",
+    "gatekeeping": "The fixed hierarchy authorizes one confirmatory mechanistic branch and prevents selecting whichever of three correlated estimands is favorable. All later-axis estimates remain mandatory reports even when their branch is not entered."
+  },
+  "synthetic_validation_contract": {
+    "authorized_next_step": "Implement only a pure specification validator and unit tests after this registration is committed and pushed. It may load this JSON and standard numeric libraries, but no participant response, model checkpoint, neural artifact, candidate comparator, or collection platform.",
+    "required_assignment_checks": [
+      "Both rank-level maps are exact permutations of integers 0 through 7 and match their low-to-high orders.",
+      "Every registered support relation has the same higher-to-lower sign in both assignments.",
+      "Every support gap equals the exact rank-level difference in its assignment.",
+      "Both support-gap lists equal the registered multiset [1,2,3,3,3,4,5,7].",
+      "All eight support edges change magnitude between assignments.",
+      "The 28 unordered pairs partition exactly into 8 learned, 7 nonlearned order-flip, and 13 nonlearned same-direction pairs.",
+      "The frozen distance- and magnitude-change vectors are exact and have mean zero."
+    ],
+    "required_task_checks": [
+      "Each list contains exactly 32 passive no-feedback support trials and 280 no-feedback query trials over all 28 unordered pairs.",
+      "The two-list design uses disjoint item images and exactly four counterbalance cells.",
+      "No learning response, feedback, query label, symbolic-distance input, or cross-list item identity is present in the registered interface."
+    ],
+    "required_analysis_checks": [
+      "SESOI values are positive and correspond to the three registered axes.",
+      "N is 100, divisible equally across four cells, and N=96 fails the frozen all-axis power rule.",
+      "Every reported N=100 directional and equivalence power is at least 0.90 under the frozen analytic equations.",
+      "The outcome tree gives equivalence priority and contains no posthoc candidate-selection route."
+    ],
+    "result_rule": "Write one deterministic validation artifact containing source hashes, all derived orders/gaps/pair sets/x vectors/power values, and a complete Boolean gate ledger. Any failure blocks collection implementation and data collection; it never authorizes editing an assignment or threshold after data."
+  },
+  "execution_firewall": {
+    "registration_freeze": "Commit and push this specification alone before implementing the validator or its tests.",
+    "validation_freeze": "After the pure validator and tests pass, commit and push their source before writing the validation artifact; run the validator once from that clean pushed source and retain the result.",
+    "collection_not_authorized": "Passing synthetic validation does not authorize participant recruitment, acquisition code, pilot inspection, or analysis of new responses. Those require a separately reviewed collection implementation, platform timing validation, consent/ethics confirmation, randomization manifest, source lock, and explicit user authorization.",
+    "future_data_firewall": "Before the first new participant, freeze and hash the collection code, image manifests, assignment generator, analysis implementation, environment, counterbalance schedule, and write-once result paths. No threshold, exclusion, pair set, assignment, session rule, or outcome branch may change after data collection begins.",
+    "no_comparator_extension": "Do not evaluate another comparator, ordinal limit, compression transform, neural comparison, or P_T/L_T intervention as part of this behavior protocol."
+  }
+}
