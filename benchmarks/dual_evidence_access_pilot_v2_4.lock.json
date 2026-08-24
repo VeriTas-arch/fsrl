@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-dual-evidence-access-pilot-v2.4",
+  "freeze_status": "implementation_frozen_before_seed_2102_or_2103_v2_4_evaluation",
+  "pilot_specification_path": "benchmarks/dual_evidence_access_pilot_v2_4.json",
+  "pilot_specification_sha256": "ef3a87d22b30e259d54d57578757ae0179019da676fcd36258f3f0b4ea3eecf9",
+  "implementation_sources": {
+    "pilot_runner": {
+      "path": "fsrl/dual_evidence_access_pilot.py",
+      "sha256": "f4cdf9d66a6e4634b9f21075357b556bbe3208bc4cfa8ddf0d9e28cd5be1567d"
+    },
+    "pilot_tests": {
+      "path": "tests/test_dual_evidence_access_pilot.py",
+      "sha256": "852dea171735388472df06abdfde2ffc0ad9fcd08da9daea42febd4dc128ade3"
+    }
+  },
+  "reused_frozen_sources": {
+    "bootstrap_and_geometry": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "runtime_and_frozen_estimands": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "ranking_protocol_loader": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "hash_validation": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    }
+  },
+  "execution_contract": {
+    "neural_execution": "Frozen seed-2102 and seed-2103 checkpoint replay on a visible CUDA GPU; no training, adaptation, compilation, or parameter update occurs in v2.4.",
+    "cpu_threads": "PyTorch intra-op and inter-op threads fixed to one by configure_runtime; NumPy and BLAS settings unchanged.",
+    "seed_order": [2102, 2103],
+    "joint_result_write": "Both seeds are evaluated in one process and the result is written only after both complete.",
+    "adaptive_stopping": "forbidden"
+  },
+  "validation_before_freeze": {
+    "pytest": "177 passed",
+    "focused_pytest": "19 passed",
+    "scoped_ruff_check": "passed",
+    "scoped_ruff_format_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "result_contract": "The first v2.4 evaluation may run only after this implementation lock, the runner, and tests are committed and pushed to origin/dev.",
+  "immutability": "Any execution repair after evaluation begins requires a superseding implementation lock naming the defect; the admission equation, reused backbones and gains, conditions, maps, LOO semantics, estimands, thresholds, and both-seed rule remain unchanged."
+}
