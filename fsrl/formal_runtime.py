@@ -60,6 +60,7 @@ def main(args=None) -> int:
         "confirmation",
         "mechanism",
         "global-policy-amplitude-provenance",
+        "global-policy-field-reassembly",
         "global-policy-slope-localization",
     }
     if not arguments or arguments[0] not in workflows:
@@ -72,8 +73,10 @@ def main(args=None) -> int:
         from .mechanism_confirmation import main as workflow_main
     elif workflow == "global-policy-slope-localization":
         from .global_policy_slope_localization import main as workflow_main
-    else:
+    elif workflow == "global-policy-amplitude-provenance":
         from .global_policy_amplitude_provenance import main as workflow_main
+    else:
+        from .global_policy_field_reassembly import main as workflow_main
     return workflow_main(arguments)
 
 

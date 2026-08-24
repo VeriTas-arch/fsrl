@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-global-policy-field-reassembly-v1",
+  "freeze_status": "implementation_and_sources_frozen_before_any_field_reassembly_checkpoint_replay",
+  "original_registration_commit": "be265ebd2e37a76caa3e2d7da7aba7f45e41f20d",
+  "protocol_repair_commit": "4b1c2a55cbeea6a530bd2ff9777ae956b9593abb",
+  "diagnostic_specification_sha256": "8b2f6785b6c982b5d0c84f39e9069be3b622cd10c681b241ea5266f2ee5ab56a",
+  "implementation_sources": {
+    "diagnostic_runner": {
+      "path": "fsrl/global_policy_field_reassembly.py",
+      "sha256": "26a5ffa8edaee19a8b392579263125ff0b17aab82a4772a4ad106fe2281dbb7f"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "983282e6de60147cc37da7afa002a022549e41b29447ba883907372c34ff5cee"
+    },
+    "diagnostic_tests": {
+      "path": "tests/test_global_policy_field_reassembly.py",
+      "sha256": "14d0aaf224123abbc40b5552ad337eef9a859ce1e98b5915d00bb4b9028eec6b"
+    },
+    "formal_runtime_tests": {
+      "path": "tests/test_formal_runtime.py",
+      "sha256": "9bb41dec4775f510b503bb6549ee775d8c3af4623d43200a7dd23e622de9db92"
+    }
+  },
+  "validated_before_freeze": {
+    "focused_tests": 17,
+    "full_tests": 213,
+    "scoped_ruff": "passed",
+    "scoped_format": "passed",
+    "formal_runtime_help": "passed_without_checkpoint_replay",
+    "diff_check": "passed"
+  },
+  "execution_boundary": "Neither seed-2104 nor seed-2105 checkpoint was loaded or replayed for this diagnostic before this lock was written. Execute both mandatory networks in one formal-runtime command only after committing and pushing this implementation lock."
+}

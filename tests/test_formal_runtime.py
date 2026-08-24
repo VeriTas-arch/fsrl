@@ -16,6 +16,20 @@ from fsrl.meta_train import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_field_reassembly_dispatch_uses_registered_entry_point(self):
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch(
+                "fsrl.global_policy_field_reassembly.main", return_value=19
+            ) as workflow,
+        ):
+            result = formal_runtime.main(
+                ["global-policy-field-reassembly", "--sentinel"]
+            )
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 19)
+
     def test_amplitude_provenance_dispatch_uses_registered_entry_point(self):
         with (
             patch.object(formal_runtime, "configure_formal_runtime") as configure,
