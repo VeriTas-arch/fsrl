@@ -1,0 +1,102 @@
+{
+  "claim_boundary": "Synthetic implementation readiness only. No human responses were collected, and no ethics, consent, recruitment, privacy, platform, or explicit collection-GO requirement is satisfied by this artifact.",
+  "collection_status": "NO_GO",
+  "dry_run": {
+    "human_data_used": false,
+    "profile_import_gates": {
+      "MPB-001": true,
+      "MPB-002": true,
+      "MPB-003": true,
+      "MPB-004": true
+    },
+    "selected_slots": [
+      "MPB-001",
+      "MPB-002",
+      "MPB-003",
+      "MPB-004"
+    ],
+    "session_gates": {
+      "MPB-001/session-1": true,
+      "MPB-001/session-2": true,
+      "MPB-002/session-1": true,
+      "MPB-002/session-2": true,
+      "MPB-003/session-1": true,
+      "MPB-003/session-2": true,
+      "MPB-004/session-1": true,
+      "MPB-004/session-2": true
+    },
+    "temporary_files_retained": false
+  },
+  "external_go_requirements": {
+    "Participant information and consent text are approved.": "pending",
+    "Production acquisition platform reproduces locked SVG geometry and passes browser/display timing and focus/reload tests.": "pending",
+    "Recruitment channel, compensation, privacy, pseudonym linkage, withdrawal, and retention plan are fixed.": "pending",
+    "Responsible institution confirms applicable ethics/IRB status for this new two-session abstract-token study.": "pending",
+    "User gives explicit collection GO after reviewing the locked readiness artifact.": "pending"
+  },
+  "gates": {
+    "all_five_analysis_branches": true,
+    "collection_remains_no_go": true,
+    "dry_run_contains_only_synthetic_ids": true,
+    "eight_session_bundles_validate_and_reopen": true,
+    "four_counterbalance_cells_dry_run": true,
+    "four_participant_profiles_import": true,
+    "full_manifest": true,
+    "paper_source_hash": true,
+    "raw_schema_has_repaired_pseudonym_interface": true,
+    "raw_schema_is_valid_draft_2020_12": true,
+    "readiness_repair_parent_hash": true,
+    "scientific_protocol_hash": true
+  },
+  "implementation_status": "pass",
+  "manifest_validation": {
+    "cell_counts": {
+      "A_first/C1_to_A": 30,
+      "A_first/C1_to_B": 30,
+      "B_first/C1_to_A": 30,
+      "B_first/C1_to_B": 30
+    },
+    "gates": {
+      "120_unique_chronological_slots": true,
+      "30_slots_per_cell": true,
+      "67200_query_trials": true,
+      "7680_support_trials": true,
+      "bar_gaps_and_pixels_exact": true,
+      "codebooks": true,
+      "condition_session_codebook_maps": true,
+      "every_four_slots_balanced": true,
+      "no_runtime_entropy": true,
+      "query_blocks_complete": true,
+      "renderer_hashes_exact": true,
+      "role_code_assignment_exact": true,
+      "role_maps_are_permutations": true,
+      "support_blocks_complete": true
+    },
+    "passed": true,
+    "query_trials": 67200,
+    "support_trials": 7680
+  },
+  "provenance": {
+    "randomization_manifest_sha256": "284bbdc81a06da70c790b41e148f85ab5604d3c2783612946d2727eaa21466d1",
+    "raw_schema_sha256": "a3ec1b4fc67f04ebe4d744096f22d8d4a7ee35fdc0c8a0028cb334b7cdb7eea7",
+    "readiness_contract_sha256": "bd29afb557c2711374f8587cfa3c6e4fffbedd07d6292dd9f3a4f153835f2d2a",
+    "readiness_repair_sha256": "c0e59589e32ad454815db31756aac0221bedb0d93b7f8de762a6eb5d5a84c07f",
+    "scientific_protocol_sha256": "6158529e4fba7981a64cb8f3612a8f02be227a76578d0d7fadccaa0d21c58331",
+    "source_sha256": {
+      "fsrl/magnitude_placement_analysis.py": "e9c11cb899aab29a07a1c21d9c1ce1c34c7913c37c6d53d27aefa04f92284df8",
+      "fsrl/magnitude_placement_collection.py": "612b852e3523e0536c20a9aba3ff9db1f910209298855c2c4d2703c283740944",
+      "requirements.txt": "c30329e9a1989f816d06776db21cf6bc74550ef45b6119789ca7352eab3ca651",
+      "tests/test_magnitude_placement_analysis.py": "c24f7e89ca19a46a7b38f3d1a326924535a067360f6b4702522b11f7bbdd993e",
+      "tests/test_magnitude_placement_collection.py": "4c9436762a44f83b18ef707b61f3cac05469d02c331a529dd66478106f6067b5"
+    }
+  },
+  "readiness_id": "liu-magnitude-placement-behavior-v1.1-collection-readiness",
+  "schema_version": 1,
+  "synthetic_analysis_branches": {
+    "metric_enters_global_order_construction": true,
+    "metric_retained_locally_not_globally": true,
+    "mixed_or_unresolved": true,
+    "ordinal_global_order_with_metric_confidence_modulation": true,
+    "stronger_ordinalization_or_metric_loss": true
+  }
+}
