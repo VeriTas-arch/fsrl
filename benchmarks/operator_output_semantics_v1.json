@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-operator-output-semantics-v1",
+  "registration_status": "frozen_post_operator_binding_before_new_semantic_estimands_are_executed",
+  "registration_parent_commit": "251c86d1a457145a4a68154cccc8b54bcf0dd2a8",
+  "scientific_question": "Does the frozen query-addressed relation operator already generate a correctness-aligned learned-pair value, or is fidelity lost at the recurrent operating point or finite-amplitude nonlinearity?",
+  "claim_boundary": "This is a read-only post-formal localization on the two frozen development seeds 1901 and 1902. It may identify the minimal v2 mechanism target, but it is not v2 confirmation, may not fit a probe or readout, and may not access formal seeds.",
+  "positive_evidence_backbone": [
+    "the frozen v1 fast-weight state supports global expected-rank assembly and is causally necessary",
+    "retained relations leave direct-enriched response Hodge residuals",
+    "terminal relation-LOO fast weights act as basis-dependent query-addressable operators with exact-match preferential binding",
+    "operator relation identity is already present in the linear preactivation action and is preserved by the recurrent nonlinearity"
+  ],
+  "negative_constraints": [
+    "the formal behavioral conjunction fails through excessive symbolic-distance slope and reduced learned-pair accuracy",
+    "the response residual does not contain one cross-subject cross-relation correctness direction suppressed by the current output readout",
+    "H>A has strong local relation identity but was previously correctness-opposed",
+    "storage and query access are supported and must not be replaced by an unconstrained second memory store"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "operator_binding_specification": {
+      "path": "benchmarks/state_query_operator_binding_v1.json",
+      "sha256": "145d85a579b37d8e883f702d053d04dc1b8bf10458717b5c475b9276d95efd2a"
+    },
+    "operator_binding_result": {
+      "path": "results/state_query_operator_binding_v1.json",
+      "sha256": "7d334170296b7f5e55509089f4dc0a2757531cdc314f6b9c8ae4dd6c9997487c"
+    },
+    "hidden_residual_specification": {
+      "path": "benchmarks/hidden_residual_audit_v1.json",
+      "sha256": "cf7f10b3c15251f5bd4dbfec9933a64284fc124de0d6c32690a7c21bf9cb35cc"
+    },
+    "hidden_residual_result": {
+      "path": "results/hidden_residual_audit_v1.json",
+      "sha256": "627577ed0ea2db1fb494cde37bebadc75b824b6873f163a353888ac502a593ff"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "hodge_implementation": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "operator_binding_implementation": {
+      "path": "fsrl/state_query_operator_binding.py",
+      "sha256": "090a20a9447c31808162d050e339ca5011d1d41ab6dd6afe9cab15ae46770944"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "training_or_parameter_change": "forbidden",
+    "checkpoint_seed_subject_or_relation_selection": "forbidden",
+    "formal_seed_access": "forbidden",
+    "probe_readout_or_relation_specific_refit": "forbidden",
+    "neural_replay_device": "GPU with PyTorch intra-op and inter-op threads bounded to one",
+    "subject_encoding": "the original 77-subject stable-omission cohort",
+    "query_protocol": "all 28 canonical unordered pairs in both orientations; hidden and eligibility reset before every query; terminal fast weights remain frozen",
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed": 20260824,
+    "floating_reproduction_tolerance": 0.00000762939453125,
+    "scientific_zero_tolerance": 1e-07
+  },
+  "nested_map_contract": {
+    "effective_relation_operator": "M_(q,s) = alpha elementwise-multiplied by [P_T,intact(s) - P_T,without-q(s)]",
+    "query_key": "h0_(e,o) is the step-0 hidden state of oriented query edge e with hidden reset to zero",
+    "loo_baseline": "b_(q,e,o) = i2h(x1) + [W + alpha elementwise-multiplied by P_T,without-q] h0_(e,o)",
+    "operator_value": "A_(q,e,o) = M_q h0_(e,o)",
+    "local_jacobian": "J_b = diag[1 - tanh(b)^2] evaluated at the relation-LOO baseline",
+    "linearized_expression": "J_(q,e,o) = J_b A_(q,e,o)",
+    "finite_amplitude_expression": "H_(q,e,o) = tanh[b_(q,e,o)+A_(q,e,o)] - tanh[b_(q,e,o)]",
+    "fixed_output_covector": "w_out = W_out[action1] - W_out[action0], used at its trained scale with no normalization or refit",
+    "bilinear_identity": "w_out^T A_(q,e,o) = [M_q^T w_out]^T h0_(e,o)",
+    "oriented_scalar_field": "F_q^X(e) = 0.5 * [w_out^T X_(q,e,forward) - w_out^T X_(q,e,reverse)] for X in {A,J,H}"
+  },
+  "hodge_semantics_contract": {
+    "edge_order": "all 28 canonical item-index pairs from itertools.combinations(range(8),2)",
+    "gradient_projector": "Q is the registered complete-graph edge-space gradient projector",
+    "residual_field": "C_q^X = (I-Q) F_q^X independently for every relation, subject, and stage X",
+    "direct_edge": "the canonical edge corresponding to support relation q",
+    "correctness_sign": "y_e is the registered true-order sign for canonical edge e",
+    "direct_correctness": "d_X(q,s) = y_q C_q^X(q) for retained relation q",
+    "remote_edges": "the 15 query edges disjoint from both endpoints of q",
+    "remote_correctness": "r_X(q,s) is the mean y_e C_q^X(e) over the 15 remote edges",
+    "locality_control": "d_X(q,s) - r_X(q,s), accompanied by direct-minus-remote absolute residual magnitude",
+    "stable_omission_control": "all A, J, H scalar fields and Hodge residuals must be zero within tolerance when q was already omitted for subject s"
+  },
+  "normalized_semantics_contract": {
+    "subject_level_rho": "for each subject and stage, cosine between the vector of retained direct residual values C_q^X(q) and their correctness signs y_q",
+    "purpose": "rho distinguishes semantic direction from raw amplitude; a common positive rescaling changes direct correctness but not rho",
+    "undefined_rule": "rho is undefined only if the retained direct residual vector has norm at or below scientific_zero_tolerance",
+    "bootstrap_unit": "virtual subject after averaging raw retained relation effects within subject; rho is first computed within subject",
+    "non_equivalence_rule": "an interval containing zero is unresolved, not evidence of preservation, absence, or equivalence"
+  },
+  "primary_estimands": [
+    "participant-bootstrap mean retained direct correctness D_A, D_J, and D_H",
+    "participant-bootstrap mean subject-level normalized correctness rho_A, rho_J, and rho_H",
+    "paired raw direct-correctness transitions D_J-D_A and D_H-D_J",
+    "paired normalized-semantic transitions rho_J-rho_A and rho_H-rho_J",
+    "direct-minus-remote correctness and direct-minus-remote absolute residual magnitude at A, J, and H",
+    "maximum absolute stable-omitted field and residual at A, J, and H"
+  ],
+  "secondary_estimands": [
+    "gradient and residual energy fractions at A, J, and H",
+    "direct and remote residual magnitudes at A, J, and H",
+    "per-relation direct correctness, locality contrasts, and A-to-J-to-H trajectories",
+    "raw subject-level scalar estimands required to reproduce every bootstrap interval"
+  ],
+  "prospective_H_greater_A_contract": {
+    "relation_higher_lower": [7, 0],
+    "relation_label": "H>A",
+    "estimands": [
+      "retained direct correctness at A, J, and H",
+      "paired J-minus-A and H-minus-J direct-correctness transitions",
+      "direct-minus-remote correctness and absolute-magnitude specificity at all three stages"
+    ],
+    "interpretation": "negative A localizes the wrong sign to bound operator value generation; positive A followed by negative J localizes corruption to the operating point; positive A and J followed by negative H localizes corruption to finite-amplitude expression"
+  },
+  "directional_rules_within_seed": {
+    "stage_correctness_aligned": "both direct-correctness and rho bootstrap lower bounds exceed zero",
+    "stage_correctness_opposed": "both direct-correctness and rho bootstrap upper bounds are below zero",
+    "stage_correctness_unresolved": "neither aligned nor opposed",
+    "semantic_degradation": "the paired downstream-minus-upstream rho bootstrap upper bound is below zero",
+    "semantic_improvement": "the paired downstream-minus-upstream rho bootstrap lower bound is above zero",
+    "raw_attenuation_only": "raw direct correctness decreases while the rho contrast is unresolved and the downstream stage remains correctness-aligned",
+    "local_specificity": "direct-minus-remote correctness and direct-minus-remote absolute residual magnitude bootstrap lower bounds both exceed zero"
+  },
+  "outcome_contingent_decision_tree": {
+    "aggregate_A_aligned_then_J_lost_or_reversed": "operator value is correctness-aligned but the recurrent operating point corrupts its semantics; v2 should preserve fidelity through local recurrent expression",
+    "aggregate_A_and_J_aligned_then_H_lost_or_reversed": "linearized local expression is correctness-aligned but finite-amplitude nonlinearity corrupts it; v2 should modify nonlinear routing or expression",
+    "aggregate_A_J_H_all_aligned": "correct semantic direction reaches actual policy; quantify amplitude and local-global combination without adding a memory store, and do not call it sufficient without a frozen human-scale comparison",
+    "aggregate_A_J_H_all_opposed_or_unresolved": "storage and access are present but correctness-aligned value semantics are not; v2 should add a relation-specific value-generation transformation while preserving the operator substrate",
+    "aggregate_aligned_but_H_greater_A_opposed": "a single scalar local correction is insufficient; v2 requires relation-conditioned semantic transformation",
+    "raw_decrease_without_rho_degradation": "the transition is attenuation rather than semantic corruption",
+    "mixed_across_seeds_or_stages": "preserve the heterogeneous result and register a narrower discriminator; do not select relations, subjects, or checkpoints"
+  },
+  "reporting": {
+    "both_declared_development_seeds_required": true,
+    "all_8_state_relations_28_query_edges_2_orientations_and_77_subjects_required": true,
+    "positive_negative_and_mixed_results_required": true,
+    "raw_subject_level_scalar_estimands_required": true,
+    "formal_v1_and_prior_diagnostic_artifacts_immutable": true,
+    "storage_access_claim": "functional relation-specific storage and query access remain supported under their prior frozen estimands",
+    "episodic_retrieval_rank_one_or_human_fidelity_claim": "forbidden",
+    "v2_training_stop": "do not train v2 until this audit localizes value generation versus recurrent expression"
+  }
+}
