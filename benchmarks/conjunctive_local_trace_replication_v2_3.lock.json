@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "replication_id": "liu-conjunctive-local-trace-replication-v2.3",
+  "freeze_status": "implementation_frozen_before_seed_2102_or_2103_backbone_training_gain_adaptation_or_liu_evaluation",
+  "replication_specification_path": "benchmarks/conjunctive_local_trace_replication_v2_3.json",
+  "replication_specification_sha256": "95ee985cccb0c464e5e1fad351f6bf176803840e9b3b5151ea19acfd7e6e82c1",
+  "implementation_sources": {
+    "replication_runner": {
+      "path": "fsrl/conjunctive_local_trace_replication.py",
+      "sha256": "0cf5e3dd59c0c450d61eee2685c95de3494e16ea7f974a802be529f6b58056ca"
+    },
+    "replication_tests": {
+      "path": "tests/test_conjunctive_local_trace_replication.py",
+      "sha256": "751d37da8cb771c1f46c5447412c4b1d4f6c0aea17def9248cb4ce114d121094"
+    },
+    "bootstrap_and_geometry": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "generic_task_primitives": {
+      "path": "fsrl/curvature_gate.py",
+      "sha256": "dcf8e9c2f3b456252eae8ed8e6650d39d2da82f4e5b4a69658ce329150265a49"
+    },
+    "runtime_and_frozen_estimands": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "behavioral_analysis": {
+      "path": "fsrl/behavioral.py",
+      "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"
+    },
+    "ranking_protocol_loader": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    }
+  },
+  "reused_frozen_sources": {
+    "v1_training": {
+      "path": "fsrl/meta_train.py",
+      "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+    },
+    "v1_model": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "liu_evaluator": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "local_trace": {
+      "path": "fsrl/conjunctive_local_trace.py",
+      "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"
+    },
+    "v2_3_runner": {
+      "path": "fsrl/conjunctive_local_trace_pilot.py",
+      "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"
+    },
+    "attribution": {
+      "path": "fsrl/local_behavior_attribution.py",
+      "sha256": "79a16b6be0cea2ae481f2aa01b343b1ecbc44b1cb404b85bac34b0d5197715c4"
+    }
+  },
+  "compiler_contract": {
+    "backbone_training": "torch.compile(net, fullgraph=True) with PyTorch default mode, as locked in fsrl/meta_train.py",
+    "local_read_and_policy": "torch.compile(local, fullgraph=True, mode='default')",
+    "local_write": "torch.compile(local.write, fullgraph=True, mode='default')",
+    "generic_backbone_replay": "torch.compile(backbone, fullgraph=True, mode='default')"
+  },
+  "execution_firewall": {
+    "mandatory_seed_order": [2102, 2103],
+    "both_artifacts_before_either_liu_evaluation": true,
+    "joint_artifact_lock_required": true,
+    "adaptive_seed_stopping": "forbidden"
+  },
+  "validation_before_freeze": {
+    "pytest": "172 passed",
+    "scoped_ruff_check": "passed",
+    "scoped_ruff_format_check": "passed",
+    "git_diff_check": "passed",
+    "repository_wide_ruff": "not a freeze gate because pre-existing legacy and archive files are outside this change and are not repository-wide clean"
+  },
+  "next_lock": "After both mandatory backbone and gain artifact sets exist, commit benchmarks/conjunctive_local_trace_replication_v2_3.artifact_lock.json before evaluating either seed.",
+  "immutability": "Any repair after training begins requires a superseding implementation lock naming the defect; candidate equations, training distributions, seeds, controls, estimands, thresholds, and both-seed execution remain unchanged."
+}
