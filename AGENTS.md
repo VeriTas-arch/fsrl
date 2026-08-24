@@ -476,14 +476,32 @@ cross-talk from newly admitted omitted writes, not erased as noise. The
 symbolic-distance slope also remains excessive and slightly increases.
 
 Close local-model development unless new contradictory evidence appears. The
-next active route is the separately frozen, read-only `P_T` slope localization
-on the pure global `L`-off branch. Decompose nonlearned correct-signed margin
-into additive Hodge potential and residual, separate normalized potential
-geometry from raw amplitude, compare neural and exact-posterior expected-rank
-potentials, and then quantify the fixed sigmoid choice-link sensitivity. Do
-not modify v2.4, fit a temperature, or mix local cross-talk into the primary
-global analysis. The fresh confirmation is in
-`docs/dual_evidence_access_confirmation_v2_4.md`.
+separately frozen, read-only `P_T` slope localization is now complete on the
+pure global `L`-off branches of seeds 2104 and 2105. Every source, artifact,
+runtime, and exact-identity gate passes, and an independent replay is byte-
+identical. Participants were bootstrapped within network and never pooled.
+
+The excessive nonlearned slope is already in the additive policy potential.
+The additive component supplies more than 100 percent of the positive margin
+slope in both networks; the Hodge residual is small and significantly
+negative. The normalized neural potential is strongly posterior-aligned but
+has significantly *less* distance geometry than the exact-posterior expected-
+rank comparator. The fixed sigmoid link is also significantly compressive,
+not amplifying. Meanwhile neural exact-probability slope exceeds the posterior
+comparator in both networks. Under the frozen outcome tree, the leading source
+is therefore over-sharp `P_T`-to-policy-potential scale, not excessive
+normalized geometry, residual corruption, or sigmoid amplification.
+
+Do not describe normalized neural and posterior geometry as equivalent, and
+do not yet identify whether the scale originates in recurrent `P_T` magnitude
+or frozen `W_out` projection gain. Do not fit a temperature: the sigmoid is
+already attenuating the upstream discrepancy. The next justified stage is a
+separately frozen read-only amplitude-provenance audit separating `P_T` state
+magnitude, `W_out` projection gain, evidence coverage, and exact-posterior
+uncertainty before any scale intervention. Do not modify v2.4 or mix local
+cross-talk into that primary global analysis. The fresh confirmation is in
+`docs/dual_evidence_access_confirmation_v2_4.md`, and the slope localization
+is in `docs/global_policy_slope_localization_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -511,6 +529,8 @@ replication of the local/global decomposition is in
 differential evidence-access sufficiency result is in
 `docs/dual_evidence_access_pilot_v2_4.md`; and its blind fresh-backbone
 confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`.
+The registered global-policy slope localization is in
+`docs/global_policy_slope_localization_v1.md`.
 
 ## Repository workflow
 
