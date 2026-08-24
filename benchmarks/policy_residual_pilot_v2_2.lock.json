@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-policy-first-order-residual-pilot-v2.2",
+  "freeze_status": "implementation_frozen_before_eta_adaptation_or_liu_evaluation",
+  "pilot_specification_path": "benchmarks/policy_residual_pilot_v2_2.json",
+  "pilot_specification_sha256": "d53b98b2159d5ea1653e07e1e077b43a8c38dc4f67b6a306ac8ef6d85ff7d4de",
+  "implementation_sources": {
+    "policy_residual": {
+      "path": "fsrl/policy_residual.py",
+      "sha256": "af6a40165b6837678cd4801baf95be87cff3f1d505a9c690087a1a2c4606894f"
+    },
+    "policy_residual_pilot": {
+      "path": "fsrl/policy_residual_pilot.py",
+      "sha256": "8e6e2c60097ed15e1236d4736e6077775609c458c5377fc7e80018248215d33a"
+    },
+    "policy_residual_tests": {
+      "path": "tests/test_policy_residual.py",
+      "sha256": "616699117d7fd7b63d7a50123f4f4a66befac506b7f9fc8e5805c4e6b2b169d4"
+    },
+    "policy_residual_pilot_tests": {
+      "path": "tests/test_policy_residual_pilot.py",
+      "sha256": "bc75578c54b45f6755eecb4aa31b417a73fb879ef83ca1e64dabe594bac21923"
+    },
+    "reused_generic_adaptation_primitives": {
+      "path": "fsrl/curvature_gate.py",
+      "sha256": "dcf8e9c2f3b456252eae8ed8e6650d39d2da82f4e5b4a69658ce329150265a49"
+    },
+    "reused_frozen_estimands": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    }
+  },
+  "compiler_contract": {
+    "eta_adaptation": "torch.compile(residual, fullgraph=True, mode='default')",
+    "generic_backbone_replay": "torch.compile(backbone, fullgraph=True, mode='default')"
+  },
+  "frozen_backbone": {
+    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"
+  },
+  "next_lock": "After eta adaptation, commit benchmarks/policy_residual_pilot_v2_2.artifact_lock.json with exact hashes before Liu evaluation.",
+  "immutability": "Any implementation repair after eta adaptation begins requires a superseding implementation lock naming the defect; equations, controls, seeds, thresholds, and stop rules remain unchanged."
+}
