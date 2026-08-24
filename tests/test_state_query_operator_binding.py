@@ -1,8 +1,9 @@
 import unittest
+from pathlib import Path
 
 import numpy as np
 
-from fsrl.assembly_diagnostics import load_json
+from fsrl.assembly_diagnostics import file_sha256, load_json
 from fsrl.assembly_trajectory import bootstrap_counts
 from fsrl.hidden_residual_audit import validate_registered_sources
 from fsrl.state_query_operator_binding import (
@@ -116,6 +117,40 @@ class StateQueryOperatorBindingTests(unittest.TestCase):
         specification = load_json("benchmarks/state_query_operator_binding_v1.json")
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
+
+    def test_registered_result_is_complete_and_source_locked(self):
+        result = load_json("results/state_query_operator_binding_v1.json")
+        self.assertFalse(result["formal_seed_access"])
+        self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
+        self.assertEqual(
+            result["implementation"]["sha256"],
+            file_sha256(Path(result["implementation"]["path"])),
+        )
+        expected = {
+            "operator_state_identity": True,
+            "cross_query_operator_state_identity": False,
+            "operator_binding": True,
+            "hidden_state_identity": True,
+            "cross_query_hidden_state_identity": False,
+            "hidden_query_identity_control": True,
+        }
+        self.assertEqual(
+            result["overall_diagnosis"]["replicated_primary_presence"], expected
+        )
+        for row in result["seed_results"].values():
+            self.assertEqual(row["primary_presence"], expected)
+            self.assertEqual(
+                row["validation"]["stable_omitted_operator_action_max_abs"], 0.0
+            )
+            self.assertEqual(
+                row["validation"]["stable_omitted_hidden_effect_max_abs"], 0.0
+            )
+            self.assertLessEqual(
+                row["validation"][
+                    "operator_preactivation_reconstruction_max_abs_error"
+                ],
+                row["validation"]["floating_reproduction_tolerance"],
+            )
 
 
 if __name__ == "__main__":

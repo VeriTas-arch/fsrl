@@ -141,6 +141,21 @@ machinery. See
 and
 [`results/relation_trace_localization_v1_1.json`](results/relation_trace_localization_v1_1.json).
 
+The frozen state-by-query factorial resolves that mixed path. A terminal
+relation-LOO matrix does not have a shared static relation prototype, but its
+preactivation action has strong held-out-subject state identity within a fixed
+query basis. Exact relation matching yields much more normalized gain than
+either shared-endpoint or disjoint mismatches in both development seeds, and
+the nonlinear hidden response preserves this identity. Cross-query identity
+fails, so the code is a basis-dependent, query-addressable synaptic operator,
+not a query-invariant relation vector. Storage and access are present; the next
+read-only audit must localize where operator output fails to become a
+correctness-aligned fidelity residual. See
+[`docs/state_query_operator_binding_v1.md`](docs/state_query_operator_binding_v1.md),
+[`benchmarks/state_query_operator_binding_v1.json`](benchmarks/state_query_operator_binding_v1.json),
+and
+[`results/state_query_operator_binding_v1.json`](results/state_query_operator_binding_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

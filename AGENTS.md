@@ -186,13 +186,35 @@ if only query identity is present, a new local storage mechanism becomes more
 plausible; if operator identity is lost through recurrent expression, localize
 the routing failure. Do not train v2 or fit a new readout before this test.
 
+That frozen state-by-query factorial is now complete. In both pilots,
+preactivation action `A_(q,e)` has strong state-relation identity when query
+basis is fixed, every relation preferentially binds its exactly matching query
+over both shared-endpoint and disjoint nulls, and the nonlinear hidden effect
+preserves the identity. Cross-query state identity fails below chance, and the
+step-0 query key alone does not pass the held-out-subject identity rule. The
+local state is therefore a basis-dependent, query-addressable synaptic
+operator, not a shared static embedding or a query-invariant relation vector.
+The operating point adds a smaller matched gain advantage but does not generate
+identity de novo. Do not claim rank-one key-value memory, episodic retrieval,
+or correctness from this result.
+
+Storage and access are now supported under the frozen functional estimands.
+The next local-fidelity test should hold `W_out` fixed and prospectively compare
+direct Hodge-residual correctness across `W_out^T A`, `W_out^T J_b A`, and the
+exact `W_out^T [tanh(b+A)-tanh(b)]` over all 28 query edges, with remote and
+stable-omission controls. Use this to distinguish an incorrect operator value
+direction from operating-point or finite-amplitude corruption. Do not fit a
+new readout or add a memory module; preserve the confirmed global channel and
+operator binding while identifying the missing fidelity transformation.
+
 Start v2 only with one to three development seeds. Freeze estimands, competence
 gates, and outcome-contingent interpretations before any new formal population.
 Keep the seed-2009 complete-write/operator localization separate from the human
 local-fidelity question. The current formal evidence is recorded in
 `docs/formal_confirmation_v1.md`; the response-state negative and its next
 decisive test are in `docs/hidden_residual_audit_v1.md`; the subsequent mixed
-operator-code result is in `docs/relation_trace_localization_v1.md`.
+operator-code result is in `docs/relation_trace_localization_v1.md`; its
+functional resolution is in `docs/state_query_operator_binding_v1.md`.
 
 ## Repository workflow
 
