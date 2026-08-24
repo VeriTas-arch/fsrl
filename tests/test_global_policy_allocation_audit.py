@@ -11,14 +11,18 @@ from fsrl.curvature_gate_pilot import load_json
 from fsrl.global_policy_allocation_audit import (
     DEFAULT_IMPLEMENTATION_LOCK_PATH,
     DEFAULT_SPECIFICATION_PATH,
+    INITIAL_IMPLEMENTATION_LOCK_PATH,
+    NONINTERPRETABLE_ATTEMPT_PATH,
     UPSTREAM_OUTPUT_ROOT,
     _canonical_paths,
+    _q_shape_rows_complete,
     allocation_tensor_view,
     correlation_summary,
     cross_network_analysis,
     edge_metadata,
     joint_model_statistics,
     pair_fingerprint_vectors,
+    required_freeze_paths,
     seed_statistics,
     validate_sources,
     write_json_exclusive,
@@ -336,12 +340,37 @@ class GlobalPolicyAllocationAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "canonical output_root"):
                 _canonical_paths(parsed)
 
+    def test_repair_git_gate_requires_the_full_provenance_chain(self):
+        self.assertEqual(
+            required_freeze_paths(
+                DEFAULT_SPECIFICATION_PATH, DEFAULT_IMPLEMENTATION_LOCK_PATH
+            ),
+            (
+                DEFAULT_SPECIFICATION_PATH,
+                DEFAULT_IMPLEMENTATION_LOCK_PATH,
+                INITIAL_IMPLEMENTATION_LOCK_PATH,
+                NONINTERPRETABLE_ATTEMPT_PATH,
+            ),
+        )
+
     def test_result_writer_refuses_overwrite(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "result.json"
             write_json_exclusive(path, {"value": 1})
             with self.assertRaises(FileExistsError):
                 write_json_exclusive(path, {"value": 2})
+
+    def test_result_writer_serializes_before_exclusive_create(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "result.json"
+            with self.assertRaises(TypeError):
+                write_json_exclusive(path, {"value": np.bool_(True)})
+            self.assertFalse(path.exists())
+
+    def test_prerequisite_row_check_returns_builtin_bool(self):
+        complete = _q_shape_rows_complete(np.ones(77), 77)
+        self.assertIs(type(complete), bool)
+        self.assertTrue(complete)
 
     def test_source_lock_is_complete_and_fails_closed(self):
         self.assertTrue(validate_sources()["passed"])

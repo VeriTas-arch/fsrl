@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit_id": "liu-global-policy-allocation-audit-v1",
+  "attempt": 1,
+  "status": "noninterpretable_execution_failure",
+  "execution_commit": "9d9bd2ae4ccbfa21424b39c300eb4346f4ae8252",
+  "command": "direnv exec . python -m fsrl.formal_runtime global-policy-allocation-audit evaluate --result /tmp/global_policy_allocation_audit_v1_9d9bd2a_replay.json",
+  "failure_stage": "exclusive final JSON serialization after both mandatory seed replays completed",
+  "error_type": "TypeError",
+  "error_message": "Object of type bool is not JSON serializable",
+  "diagnosis": "The frozen prerequisite check seed_2106_q_shape_rows retained a numpy.bool_ produced by numpy.all. Python's strict JSON encoder rejected that scalar. No field, bridge, bootstrap, axis, threshold, or outcome definition failed or changed.",
+  "partial_output": {
+    "preserved_temporary_path": "/tmp/global_policy_allocation_audit_v1_9d9bd2a_attempt1_failed_partial.json",
+    "bytes": 14889,
+    "sha256": "6d42baa1b5a987e01e75abcddd26358c0c3f7e16dc65507a7a60234688653d73",
+    "valid_json": false,
+    "scientific_outcome_inspected": false
+  },
+  "interpretation": "Attempt 1 is noninterpretable and supplies no scientific result. It may be used only to justify a serialization-only repair.",
+  "required_repair": "Cast the prerequisite row check to a built-in bool, serialize fully in memory before exclusive file creation, add regressions, and commit and push a superseding repair lock before a complete two-seed reexecution."
+}

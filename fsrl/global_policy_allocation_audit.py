@@ -37,10 +37,18 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "global_policy_allocation_audit_v1.json"
 )
-DEFAULT_IMPLEMENTATION_LOCK_PATH = (
+INITIAL_IMPLEMENTATION_LOCK_PATH = (
     ROOT / "benchmarks" / "global_policy_allocation_audit_v1.lock.json"
 )
+DEFAULT_IMPLEMENTATION_LOCK_PATH = (
+    ROOT / "benchmarks" / "global_policy_allocation_audit_v1.repair1.lock.json"
+)
 DEFAULT_RESULT_PATH = ROOT / "results" / "global_policy_allocation_audit_v1.json"
+NONINTERPRETABLE_ATTEMPT_PATH = (
+    ROOT
+    / "results"
+    / "global_policy_allocation_audit_v1_attempt1_noninterpretable.json"
+)
 UPSTREAM_SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "global_policy_field_fingerprint_replication_v1.json"
 )
@@ -125,13 +133,24 @@ def _canonical_paths(parsed: argparse.Namespace) -> None:
         raise RuntimeError("allocation result parent may not be a symlink")
 
 
+def required_freeze_paths(
+    specification_path: Path, implementation_lock_path: Path
+) -> tuple[Path, ...]:
+    return (
+        specification_path,
+        implementation_lock_path,
+        INITIAL_IMPLEMENTATION_LOCK_PATH,
+        NONINTERPRETABLE_ATTEMPT_PATH,
+    )
+
+
 def write_json_exclusive(path: Path, value: dict) -> None:
     """Create a result exactly once, including under a concurrent writer."""
 
+    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x", encoding="utf-8") as handle:
-        json.dump(value, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
+        handle.write(payload)
 
 
 def validate_sources(
@@ -146,10 +165,29 @@ def validate_sources(
         lock.get("schema_version") != 1
         or lock.get("audit_id") != specification.get("audit_id")
         or lock.get("freeze_status")
-        != "implementation_and_sources_frozen_before_allocation_evaluation"
+        != "repair1_frozen_after_noninterpretable_attempt1_and_before_reexecution"
         or lock.get("audit_specification_sha256") != file_sha256(specification_path)
     ):
         raise RuntimeError("allocation implementation lock identity mismatch")
+    expected_supersedes = {
+        "path": str(INITIAL_IMPLEMENTATION_LOCK_PATH.relative_to(ROOT)),
+        "sha256": file_sha256(INITIAL_IMPLEMENTATION_LOCK_PATH),
+    }
+    expected_attempt = {
+        "path": str(NONINTERPRETABLE_ATTEMPT_PATH.relative_to(ROOT)),
+        "sha256": file_sha256(NONINTERPRETABLE_ATTEMPT_PATH),
+    }
+    if lock.get("supersedes") != expected_supersedes:
+        raise RuntimeError("allocation repair lock does not supersede the initial lock")
+    if lock.get("noninterpretable_attempt") != expected_attempt:
+        raise RuntimeError("allocation repair lock does not bind attempt 1")
+    attempt = load_json(NONINTERPRETABLE_ATTEMPT_PATH)
+    if (
+        attempt.get("audit_id") != specification.get("audit_id")
+        or attempt.get("status") != "noninterpretable_execution_failure"
+        or not lock.get("repair_scope")
+    ):
+        raise RuntimeError("allocation repair provenance mismatch")
     groups = (
         (lock.get("implementation_sources", {}), REQUIRED_IMPLEMENTATION_SOURCE_PATHS),
         (lock.get("reused_frozen_sources", {}), REQUIRED_REUSED_SOURCE_PATHS),
@@ -195,6 +233,8 @@ def validate_sources(
             "path": str(specification_path.relative_to(ROOT)),
             "sha256": lock["audit_specification_sha256"],
         },
+        "superseded_implementation_lock": expected_supersedes,
+        "noninterpretable_attempt": expected_attempt,
         **lock["implementation_sources"],
         **lock["reused_frozen_sources"],
     }
@@ -214,6 +254,10 @@ def validate_sources(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"allocation source lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
+
+
+def _q_shape_rows_complete(values: np.ndarray, subjects: int) -> bool:
+    return bool(values.shape == (subjects,) and np.all(np.isfinite(values)))
 
 
 def validate_upstream(specification: dict) -> tuple[dict, dict, dict[str, np.ndarray]]:
@@ -258,9 +302,9 @@ def validate_upstream(specification: dict) -> tuple[dict, dict, dict[str, np.nda
             dtype=np.float64,
         )
         prior_q_shape[seed] = values
-        checks[f"seed_{seed}_q_shape_rows"] = values.shape == (
-            int(specification["evaluation"]["subjects"]),
-        ) and np.all(np.isfinite(values))
+        checks[f"seed_{seed}_q_shape_rows"] = _q_shape_rows_complete(
+            values, int(specification["evaluation"]["subjects"])
+        )
     passed = bool(all(checks.values()))
     if not passed:
         raise RuntimeError(f"frozen fingerprint prerequisite failed: {checks}")
@@ -1267,7 +1311,7 @@ def main(args=None) -> int:
         parsed.specification, parsed.implementation_lock
     )
     git_freeze = require_pushed_freeze(
-        (parsed.specification, parsed.implementation_lock)
+        required_freeze_paths(parsed.specification, parsed.implementation_lock)
     )
     artifact_validation, prerequisite, prior_q_shape = validate_upstream(specification)
     result = evaluate_audit(
