@@ -488,20 +488,63 @@ negative. The normalized neural potential is strongly posterior-aligned but
 has significantly *less* distance geometry than the exact-posterior expected-
 rank comparator. The fixed sigmoid link is also significantly compressive,
 not amplifying. Meanwhile neural exact-probability slope exceeds the posterior
-comparator in both networks. Under the frozen outcome tree, the leading source
-is therefore over-sharp `P_T`-to-policy-potential scale, not excessive
-normalized geometry, residual corruption, or sigmoid amplification.
+comparator in both networks. Track B's frozen within-neural decomposition
+therefore identified multiplication by the natural additive-potential
+amplitude, rather than normalized geometry, residual corruption, or sigmoid
+amplification, as the leading algebraic contributor inside the neural field.
+The subsequent audit below rejects the stronger cross-comparator hypothesis
+that this natural neural norm is globally over-sharp.
 
-Do not describe normalized neural and posterior geometry as equivalent, and
-do not yet identify whether the scale originates in recurrent `P_T` magnitude
-or frozen `W_out` projection gain. Do not fit a temperature: the sigmoid is
-already attenuating the upstream discrepancy. The next justified stage is a
-separately frozen read-only amplitude-provenance audit separating `P_T` state
-magnitude, `W_out` projection gain, evidence coverage, and exact-posterior
-uncertainty before any scale intervention. Do not modify v2.4 or mix local
-cross-talk into that primary global analysis. The fresh confirmation is in
-`docs/dual_evidence_access_confirmation_v2_4.md`, and the slope localization
-is in `docs/global_policy_slope_localization_v1.md`.
+Do not describe normalized neural and posterior geometry as equivalent. The
+subsequent separately frozen amplitude-provenance audit is now complete on the
+same pure-global 2104/2105 branches. Its original protocol, prospectively
+repaired decision axes, implementation lock, and two byte-identical GPU
+executions all precede interpretation. Every source, artifact, reconstruction,
+Hodge, posterior, denominator, and bootstrap-finiteness gate passes.
+
+The registered outcome is `comparator_sensitive_unresolved`. The frozen
+Track-B probability-slope excess remains positive in both networks, but the
+stronger global-over-amplitude premise is rejected in common policy-margin
+units. Mean `Y=log(a_N/a_post)` is -0.87606 and -0.84235 with wholly negative
+participant-bootstrap intervals; neural additive policy-potential amplitude
+is smaller, not larger, than the exact-posterior log-odds additive potential.
+The mandatory additive probability-potential contrast is positive only as a
+point estimate and unresolved in both networks. A through-origin scalar map of
+the two additive potentials explains only 82.38 and 82.29 percent of neural
+potential energy, below the frozen 90 percent rule, and its scale is 0.34296
+and 0.35450 rather than greater than one. Do not call this a constant units
+mismatch.
+
+Preserve the positive `P_T` result. Query-time `P=0` subtraction assigns nearly
+all signed allocation along the intact additive-potential direction to the
+`P_T`-induced contrast (`phi_P` 1.00086 and 0.99827), while the baseline
+allocation is unresolved around zero and was not tested for equivalence.
+Track B therefore still identifies where the excessive slope resides inside
+the neural policy; the signed allocation is consistent with and preserves its
+episode-state provenance. What fails is the extra inference that the neural
+additive-potential norm is oversized relative to the posterior comparator. Do
+not use the stopped layer elasticities to claim a drive, recurrent, readout,
+or co-adapted source.
+
+Revise the global-policy problem from scalar overgain to a confidence-
+allocation/comparator-shape question: a smaller neural additive-potential norm
+can still have a steeper probability-distance slope when confidence is
+distributed differently across pairs and distances. The probability-space
+allocation remains unresolved. Do not fit a temperature, normalize
+`P_T`, normalize `W_out`, or perform any scalar scale correction. If this route
+continues, first register a separate same-unit neural/posterior policy-field
+factorial that swaps additive Hodge fields and residual fields through the
+same fixed sigmoid, with a norm-matched additive control. Treat it only as a
+field-level reassembly/sufficiency test, not `P_T`/`W_out` causal localization.
+It must freeze the additive-by-residual interaction, norm-match target and
+direction, natural anchors, 20-pair mask, exact reconstruction, bootstrap and
+no-pooling rules, and closure/equivalence margins. A failure remains unresolved
+under the frozen comparator; it does not by itself prove comparator
+inadequacy. It may not be appended post hoc to the present audit. Do not modify
+v2.4 or mix local cross-talk into that primary global analysis. The fresh
+confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`, the slope
+localization is in `docs/global_policy_slope_localization_v1.md`, and the
+amplitude audit is in `docs/global_policy_amplitude_provenance_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -530,7 +573,9 @@ differential evidence-access sufficiency result is in
 `docs/dual_evidence_access_pilot_v2_4.md`; and its blind fresh-backbone
 confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`.
 The registered global-policy slope localization is in
-`docs/global_policy_slope_localization_v1.md`.
+`docs/global_policy_slope_localization_v1.md`; and the registered common-unit
+amplitude-provenance result is in
+`docs/global_policy_amplitude_provenance_v1.md`.
 
 ## Repository workflow
 
