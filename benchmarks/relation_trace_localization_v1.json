@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-relation-trace-localization-v1",
+  "registration_status": "frozen_after_hidden_residual_review_before_new_trace_estimands_are_executed",
+  "registration_parent_commit": "3cd9b9433a007ca491ffc2769a10d8307c81e5d7",
+  "scientific_question": "At which implemented layer does retained local evidence preserve relation identity: the generated matched effective write, the terminal effective fast-weight state, or the first fast-weight-sensitive query response state?",
+  "claim_boundary": "This is a post-formal exploratory read-only diagnostic on frozen development seeds 1901 and 1902. It tests relation-conditioned identity, not correctness, human fidelity, a new architecture, or a v2 confirmation. It may not access or select formal seeds.",
+  "positive_evidence_backbone": [
+    "ten-seed confirmation of fast-weight state-dependent global relational reassembly",
+    "two-seed causal direct-enriched response-hidden Hodge residual",
+    "rejection of one shared correctness-aligned response-hidden direction suppressed by W_out"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "assembly_specification": {
+      "path": "benchmarks/assembly_trajectory_v1.json",
+      "sha256": "9fb6eed990e20403180f224be0a0ee81ff1e39e9fcf02ac03f674be4b37f67f6"
+    },
+    "assembly_result": {
+      "path": "results/assembly_trajectory_v1.json",
+      "sha256": "0d47b8b5e61c3b05e0e8cbfe20b3c3f92d89f2d8a6f26388fbff13437a676b3c"
+    },
+    "support_write_specification": {
+      "path": "benchmarks/support_write_localization_v1.json",
+      "sha256": "8439d1aa33f24a3d6e8f79b7969b051d9d395804088f229f09e258d143a5a067"
+    },
+    "support_write_result": {
+      "path": "results/support_write_localization_v1.json",
+      "sha256": "61c9d877876e6ecead4f5d9f17df65ba36fc3e92e1a38cfc0bd7703e06c789dc"
+    },
+    "hidden_residual_specification": {
+      "path": "benchmarks/hidden_residual_audit_v1.json",
+      "sha256": "cf7f10b3c15251f5bd4dbfec9933a64284fc124de0d6c32690a7c21bf9cb35cc"
+    },
+    "hidden_residual_result": {
+      "path": "results/hidden_residual_audit_v1.json",
+      "sha256": "627577ed0ea2db1fb494cde37bebadc75b824b6873f163a353888ac502a593ff"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "assembly_implementation": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "support_write_implementation": {
+      "path": "fsrl/support_write_localization.py",
+      "sha256": "bc83bacbee7f381db332da3bf324f524eb76be5aaac902d4c9a21979316de5f2"
+    },
+    "hidden_residual_implementation": {
+      "path": "fsrl/hidden_residual_audit.py",
+      "sha256": "710fe557389362bcc544b171fea434fbc2429e4c296b1e13808ff762a928e09f"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "training_or_parameter_change": "forbidden",
+    "checkpoint_seed_subject_or_relation_selection": "forbidden",
+    "formal_seed_access": "forbidden",
+    "neural_replay_device": "GPU with PyTorch intra-op and inter-op threads bounded to one",
+    "subject_encoding": "the original 77-subject stable-omission cohort",
+    "subject_folds": 7,
+    "fold_assignment": "subject_index modulo 7",
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed": 20260828,
+    "floating_reproduction_tolerance": 0.000003814697265625,
+    "scientific_zero_tolerance": 1e-07
+  },
+  "generated_write_contract": {
+    "matched_branch": "for every natural support slot, replay plus-evidence and zero-evidence branches from the identical natural P_(t-1), with the same cues, orientation, time, recurrent steps, and recipient history",
+    "realized_matched_write": "delta P_t = P_t_plus - P_t_zero after the full support trial, retaining any realized clipping",
+    "relation_cumulative_raw_write": "C_raw_(r,s) is the sum of realized matched delta P_t over the four slots whose presented relation is r for subject s",
+    "relation_cumulative_effective_write": "C_eff_(r,s) = alpha elementwise-multiplied by C_raw_(r,s)",
+    "primary": "C_eff because W + alpha elementwise-multiplied by P is the implemented recurrent connectivity",
+    "secondary": "C_raw and intended pre-clip write totals",
+    "validation": "natural incremental endpoint must reproduce the intact evaluator endpoint and realized plus-minus endpoint differences must reproduce intended differences within the frozen tolerance"
+  },
+  "terminal_state_contract": {
+    "relation_loo": "replay all 32 support slots while setting only one relation's signed magnitude to zero and preserving every other input and relation",
+    "raw_trace": "delta P_T(r,s) = P_T_intact(s) - P_T_without_r(s)",
+    "effective_trace": "delta W_eff_T(r,s) = alpha elementwise-multiplied by delta P_T(r,s)",
+    "primary": "effective trace",
+    "secondary": "raw trace",
+    "stable_omission_control": "removing a relation already omitted for subject s must produce exact zero terminal trace within tolerance"
+  },
+  "query_state_contract": {
+    "query_schedule": "all 28 unordered pairs in both orientations with hidden state and eligibility reset before every query and fast weights frozen",
+    "direct_hidden_influence": "for query relation r at step k, delta h_(r,s,k) is the orientation-antisymmetric intact-minus-relation-LOO hidden vector",
+    "step_0_boundary": "because h is reset to zero and P enters only through (W + alpha*P)h, step 0 must have exactly zero fast-weight influence and is an implementation control",
+    "primary_response_step": 1,
+    "response_boundary": "step 1 is both the first fast-weight-sensitive state and the registered behavioral response; the architecture has no distinct pre-response routing state",
+    "post_response_steps": [2, 3],
+    "post_response_interpretation": "descriptive persistence or transformation after the registered choice, not a cause of that choice",
+    "response_hodge_residual": "apply the complete-graph vector Hodge residual to the step-1 LOO hidden-influence field, then take its direct relation edge"
+  },
+  "relation_identity_contract": {
+    "unit": "relation trace matrix or vector for one subject",
+    "prototype": "for each relation and held-out subject fold, unit-normalize the arithmetic mean trace over retained training subjects of that same relation",
+    "evaluation": "cosine similarity of each retained held-out-subject trace to all eight same-fold relation prototypes",
+    "own_relation_selectivity": "cosine to the matching relation prototype minus the mean cosine to the other seven prototypes",
+    "eight_way_identification": "argmax prototype cosine; fixed chance level 0.125",
+    "no_probe_boundary": "no cross-relation common direction, regression, classifier fitting, hyperparameter selection, correctness target, or nuisance refit",
+    "presence_rule_within_seed": "the subject-bootstrap lower bound of mean own-relation selectivity exceeds zero, the lower bound of mean eight-way accuracy exceeds 0.125, and stable-omitted traces remain within tolerance",
+    "replication_rule": "a layer contains a replicated relation-conditioned trace only if its presence rule passes independently in both declared seeds"
+  },
+  "primary_levels": [
+    "relation-cumulative generated effective write",
+    "terminal relation-LOO effective fast-weight trace",
+    "step-1 direct full hidden influence",
+    "step-1 direct hidden Hodge-residual influence"
+  ],
+  "secondary_levels_and_metrics": [
+    "raw generated write and raw terminal fast-weight trace",
+    "step-0 exact-zero influence and post-response steps 2 and 3",
+    "trace L2 norms and stable-omitted maximum absolute values",
+    "per-relation selectivity and identification",
+    "seven-fold prototype-RDM Spearman similarity between terminal effective state and every other level"
+  ],
+  "outcome_contingent_decision_tree": {
+    "write_terminal_response_residual_all_present": "storage and implemented response access preserve relation identity; because the prior response audit rejected a shared correctness channel, the missing human mechanism is a fidelity transformation rather than storage",
+    "write_terminal_and_full_response_present_residual_absent": "relation identity reaches response hidden state but is organized outside the direct Hodge residual; localize the response geometry before changing storage",
+    "write_and_terminal_present_response_absent": "persistent local state exists but the first implemented fast-weight-sensitive query transition does not access it; a routing mechanism is missing",
+    "write_present_terminal_absent": "relation identity is generated during support but compressed during fast-weight integration",
+    "write_and_terminal_absent": "v1 lacks a persistent relation-identity code under these estimands; only then consider a new local storage mechanism",
+    "terminal_present_write_absent_or_other_mixed_pattern": "the registered hierarchy is insufficient; report the mixed result without selecting relations or changing thresholds"
+  },
+  "reporting": {
+    "both_declared_seeds_required": true,
+    "all_relations_and_subjects_required": true,
+    "positive_negative_and_mixed_results_required": true,
+    "raw_subject_level_scalar_estimands_required": true,
+    "formal_v1_artifacts_immutable": true,
+    "v2_training_stop": "do not train a dual-channel v2 until this localization identifies storage, access, or fidelity transformation as the missing operation"
+  }
+}
