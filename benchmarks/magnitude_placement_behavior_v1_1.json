@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "study_id": "liu-magnitude-placement-behavior-v1.1-binary-codebook",
+  "registration_status": "prospectively_registered_before_binary_renderer_randomization_collection_or_analysis_implementation_and_before_any_new_participant_data",
+  "registration_parent_commit": "c5e1e02cef29fac52b645573dcbd1c8f65b02475",
+  "revision_of": {
+    "path": "benchmarks/magnitude_placement_behavior_v1.json",
+    "sha256": "fbd567f4ca78bf7281dc42d9a2555b60a996e091cc18af3fda7f7aec7a03be2c",
+    "historical_status": "preserved_unchanged",
+    "replacement_scope": "This v1.1 contract prospectively replaces v1 for future participant collection because the item-identity interface changes from natural-image sets to two frozen abstract binary codebooks. The A/B magnitude assignments, pair partition, estimands, SESOI, sample size, exclusions, counterbalance logic, task counts, and hierarchical outcome tree remain inherited without revision."
+  },
+  "scientific_question": "With the signed support graph and displayed-magnitude multiset fixed, does changing only which support edge receives each magnitude alter global relational construction, global confidence, direct learned-relation memory, or none of these at the registered resolution?",
+  "current_theory": "The held-out human-only metric comparator showed that metric evidence plus stable access can reproduce distance dependence but not the reliable pair-specific human field. Existing Liu data confound edge identity, graph position, latent distance, and displayed magnitude. The registered A/B placement intervention separates these factors. Replacing natural images with counterbalanced equidistant binary tokens further removes uncontrolled semantic and category structure from item identity while preserving every task variable required by the scientific question.",
+  "claim_boundary": "This is an abstract-token variant of the Liu behavioral interface, not a direct visual replication. It preserves item discriminability, signed pair evidence, relative displayed magnitude, passive support exposure, complete no-feedback query, and subject-level role randomization. It intentionally removes natural-image semantics. Results identify magnitude-placement sensitivity in this abstract-token task and cannot by themselves establish generalization to meaningful objects, the original image sets, a unique cognitive algorithm, or a neural mechanism.",
+  "inherited_frozen_contract": {
+    "support_relation_order": ["F>A", "C>B", "E>B", "G>C", "F>D", "G>D", "H>E", "H>A"],
+    "magnitude_multiset": [1, 2, 3, 3, 3, 4, 5, 7],
+    "assignment_A_gaps": [5, 1, 3, 4, 2, 3, 3, 7],
+    "assignment_B_gaps": [2, 3, 1, 3, 5, 7, 4, 3],
+    "assignment_A_low_to_high": ["A", "B", "C", "D", "E", "F", "G", "H"],
+    "assignment_B_low_to_high": ["D", "B", "E", "A", "C", "F", "H", "G"],
+    "pair_partition": {
+      "learned": ["A-F", "A-H", "B-C", "B-E", "C-G", "D-F", "D-G", "E-H"],
+      "nonlearned_order_flip": ["A-B", "A-D", "A-E", "B-D", "C-D", "C-E", "G-H"],
+      "nonlearned_same_direction": ["A-C", "A-G", "B-F", "B-G", "B-H", "C-F", "C-H", "D-E", "D-H", "E-F", "E-G", "F-G", "F-H"]
+    },
+    "estimand_order": ["delta_flip", "beta_conf", "beta_learned"],
+    "sesoi": {"delta_flip": 0.1, "beta_conf": 0.02, "beta_learned": 0.02},
+    "analyzable_participants": 100,
+    "counterbalance_cells": 4,
+    "analyzable_per_cell": 25,
+    "maximum_enrolled_per_cell": 30,
+    "maximum_enrolled_total": 120,
+    "support_blocks": 4,
+    "support_trials_per_block": 8,
+    "query_blocks": 10,
+    "query_trials_per_block": 28,
+    "feedback": false,
+    "hierarchy": "delta_flip first; enter beta_conf only after delta_flip equivalence; enter beta_learned only after delta_flip and beta_conf equivalence; reverse-direction or unresolved gates yield mixed_or_unresolved; equivalence has practical priority over a tiny directional flag",
+    "exclusion_boundary": "Complete both sessions and all registered trials; combined condition-specific accuracy strictly below 0.50 is excluded; no condition-specific or estimand-based exclusion."
+  },
+  "binary_stimulus_contract": {
+    "sets": 2,
+    "items_per_set": 8,
+    "matrix_shape": [4, 4],
+    "alphabet": [0, 1],
+    "black_cells_per_item": 8,
+    "within_set_hamming_distance": 8,
+    "geometry_rule": "Each within-codebook distance matrix has zero diagonal and exactly 8 on every off-diagonal entry; D1 equals D2 exactly.",
+    "identity_rule": "All 16 matrices are distinct. No cross-codebook pair is identical or complementary; cross-codebook Hamming distances lie from 4 through 12. No two matrices within either codebook, and no matrix across codebooks, are related by an exact square-grid rotation or reflection.",
+    "visual_qc_rule": "Every row and every column of every 4-by-4 matrix contains between one and three black cells. This stimulus-only rule prevents blank or solid rows and columns; it was applied without human behavioral screening.",
+    "construction_provenance": {
+      "base": "Rows 1 through 8 of the order-16 Sylvester Hadamard matrix, binarized as 1 where the entry is negative and 0 otherwise.",
+      "codebook_1_column_permutation": [9, 2, 3, 5, 0, 13, 14, 7, 12, 8, 1, 6, 15, 4, 10, 11],
+      "codebook_2_column_permutation": [0, 2, 11, 6, 10, 15, 5, 3, 9, 4, 14, 8, 7, 13, 12, 1],
+      "selection_inputs": "Only constant weight, within-set Hamming geometry, row/column occupancy, exact/complement uniqueness, dihedral uniqueness, and cross-codebook Hamming bounds. No participant response, model output, A/B assignment, pair identity, rank, or outcome was used.",
+      "authority": "The explicit matrices below are authoritative. The construction description is provenance and cannot regenerate a different accepted set."
+    },
+    "codebook_1": {
+      "C1-01": [[1, 0, 1, 1], [0, 1, 0, 1], [0, 0, 1, 0], [1, 0, 0, 1]],
+      "C1-02": [[0, 1, 1, 0], [0, 0, 1, 1], [0, 0, 0, 1], [1, 0, 1, 1]],
+      "C1-03": [[1, 1, 0, 1], [0, 1, 1, 0], [0, 0, 1, 1], [0, 0, 1, 0]],
+      "C1-04": [[0, 0, 0, 1], [0, 1, 1, 1], [1, 0, 0, 1], [1, 1, 0, 0]],
+      "C1-05": [[1, 0, 1, 0], [0, 0, 1, 0], [1, 0, 1, 1], [0, 1, 0, 1]],
+      "C1-06": [[0, 1, 1, 1], [0, 1, 0, 0], [1, 0, 0, 0], [0, 1, 1, 1]],
+      "C1-07": [[1, 1, 0, 0], [0, 0, 0, 1], [1, 0, 1, 0], [1, 1, 1, 0]],
+      "C1-08": [[1, 0, 0, 0], [0, 1, 1, 0], [1, 1, 0, 0], [1, 0, 1, 1]]
+    },
+    "codebook_2": {
+      "C2-01": [[0, 0, 1, 0], [0, 1, 1, 1], [1, 0, 0, 0], [1, 1, 0, 1]],
+      "C2-02": [[0, 1, 1, 1], [1, 1, 0, 1], [0, 0, 1, 0], [1, 0, 0, 0]],
+      "C2-03": [[0, 1, 0, 1], [1, 0, 1, 0], [1, 0, 1, 0], [0, 1, 0, 1]],
+      "C2-04": [[0, 0, 0, 1], [0, 1, 1, 0], [0, 1, 1, 0], [1, 1, 1, 0]],
+      "C2-05": [[0, 0, 1, 1], [0, 0, 0, 1], [1, 1, 1, 0], [0, 0, 1, 1]],
+      "C2-06": [[0, 1, 1, 0], [1, 0, 1, 1], [0, 1, 0, 0], [0, 1, 1, 0]],
+      "C2-07": [[0, 1, 0, 0], [1, 1, 0, 0], [1, 1, 0, 0], [1, 0, 1, 1]],
+      "C2-08": [[0, 0, 1, 0], [1, 1, 0, 0], [1, 0, 1, 1], [0, 1, 1, 0]]
+    }
+  },
+  "renderer_interface": {
+    "item_identity": "Render the authoritative 4-by-4 binary matrix directly as equal square cells. Do not rasterize, interpolate, smooth, morph, color-code, label, or add semantic imagery.",
+    "pixel_semantics": "Binary 1 is black and binary 0 is white on a fixed neutral surround; use integer cell and border coordinates with crisp edges so every item has identical area and dimensions.",
+    "support_information": "Show two code items and two ticked bars encoding the registered signed relative gap. Absolute bar baseline is nuisance sampled only from values that keep both bars in range. Realized high minus low level and pixel height must equal the registered gap and gap times pixels-per-unit exactly; clipping and post-hoc rounding are forbidden.",
+    "query_information": "Show only the two code items and collect which item is judged higher. Do not display magnitude, abstract role, pair identity, symbolic distance, correctness, rank, or feedback.",
+    "role_visibility": "A-through-H roles exist only in the hidden manifest and analysis. Participants see code patterns, never role letters or codebook correspondences.",
+    "implementation_freeze": "Canvas, item size and position, cell size, colors, tick geometry, bar range, pixels per unit, trial screens, timing, response keys/click regions, and acquisition diagnostics must be fixed in the separately locked collection-readiness contract before recruitment. Parameters unavailable from the Liu paper/public files must be labeled implementation choices."
+  },
+  "two_session_and_counterbalance_contract": {
+    "sessions": "Two complete sessions separated by 24 to 72 hours, one codebook per session. Each session contains 32 passive support trials followed by 280 no-feedback query trials.",
+    "factors": ["condition_order: A_first versus B_first", "codebook_condition_mapping: codebook_1_to_A versus codebook_1_to_B"],
+    "cells": ["A_first/C1_to_A", "A_first/C1_to_B", "B_first/C1_to_A", "B_first/C1_to_B"],
+    "role_mapping": "Within each codebook, assign its eight fixed matrices one-to-one to abstract roles A through H using a participant-slot-specific deterministic permutation frozen before recruitment.",
+    "carryover_boundary": "Disjoint code matrices prevent explicit item reuse, not cognitive reset. Condition-order counterbalancing addresses average task-familiarity and strategy carryover; no claim of independent cognitive states across sessions is permitted."
+  },
+  "randomization_contract": {
+    "freeze_before_recruitment": ["120 chronological enrollment slots: 30 per counterbalance cell", "codebook-to-role permutations", "condition and session order", "support within-block order", "support left-right orientation", "admissible absolute bar baseline", "query within-block order", "query left-right orientation"],
+    "rng_rule": "Use one registered master seed and domain-separated deterministic child seeds. Never use system entropy or an unlogged runtime random draw.",
+    "replacement_rule": "Enrollment consumes the next chronological slot. Frozen eligibility, completeness, or technical-failure exclusions may trigger replacement within the affected cell until 25 analyzable participants or 30 enrolled slots; no estimand or condition result may affect assignment or replacement.",
+    "manifest_boundary": "The manifest records codebook ID, code matrix hash, participant slot, abstract role, trial schedule, orientations, and bar levels. Participant identifiers are assigned later and are not embedded in the public frozen randomization artifact."
+  },
+  "collection_readiness_firewall": {
+    "authorized_next_stage": "After this v1.1 revision alone is committed and pushed, implement and source-lock the binary renderer, complete 120-slot randomization manifest, immutable raw-event schema/writer, registered analysis runner, synthetic outcome-branch fixtures, and a no-human end-to-end dry run.",
+    "collection_no_go": "This revision does not authorize recruitment, pilot behavior, or real participant data. Collection remains NO_GO until the readiness artifact passes, acquisition/platform timing is validated, consent and ethics applicability are confirmed by the responsible institution, privacy/retention and compensation are fixed, and the user gives explicit GO.",
+    "no_behavioral_stimulus_selection": "Do not screen, replace, reorder, or tune binary patterns using pilot accuracy, memorability, confusion, preference, response time, rank recovery, or any other human response. Any future stimulus defect must be handled as a separately registered protocol revision, not an invisible substitution.",
+    "no_scientific_reopening": "Do not change the A/B assignments, 7/13/8 pair partition, three estimands, SESOI, N, exclusions, equivalence precedence, or hierarchical outcome tree during readiness implementation."
+  },
+  "canonical_paths": {
+    "revision_specification": "benchmarks/magnitude_placement_behavior_v1_1.json",
+    "parent_specification": "benchmarks/magnitude_placement_behavior_v1.json",
+    "future_readiness_specification": "benchmarks/magnitude_placement_behavior_v1_1_collection_readiness.json",
+    "future_collection_module": "fsrl/magnitude_placement_collection.py",
+    "future_analysis_module": "fsrl/magnitude_placement_analysis.py",
+    "future_raw_schema": "benchmarks/magnitude_placement_behavior_v1_1_raw.schema.json",
+    "future_randomization_manifest": "benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz",
+    "future_readiness_result": "results/magnitude_placement_behavior_v1_1_collection_readiness.json"
+  }
+}
