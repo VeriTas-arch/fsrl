@@ -49,7 +49,7 @@ DEFAULT_SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "policy_opposition_gate_pilot_v2_1.json"
 )
 DEFAULT_LOCK_PATH = (
-    ROOT / "benchmarks" / "policy_opposition_gate_pilot_v2_1.lock_v2.json"
+    ROOT / "benchmarks" / "policy_opposition_gate_pilot_v2_1.lock_v3.json"
 )
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "policy-opposition-gate-pilot-v2-1"
 DEFAULT_RESULT_PATH = ROOT / "results" / "policy_opposition_gate_pilot_v2_1.json"
@@ -111,6 +111,19 @@ def validate_sources(
         checks.append(
             {
                 "name": name,
+                "path": str(path.relative_to(ROOT)),
+                "observed": observed,
+                "expected": registration["sha256"],
+                "passed": observed == registration["sha256"],
+            }
+        )
+    if "frozen_gate_artifact" in lock:
+        registration = lock["frozen_gate_artifact"]
+        path = _resolve_registered(registration["path"])
+        observed = file_sha256(path)
+        checks.append(
+            {
+                "name": "frozen_gate_artifact",
                 "path": str(path.relative_to(ROOT)),
                 "observed": observed,
                 "expected": registration["sha256"],
