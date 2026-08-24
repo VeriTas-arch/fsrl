@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "readiness_id": "liu-magnitude-placement-behavior-v1.1-collection-readiness",
+  "registration_status": "frozen_after_v1_1_protocol_commit_and_before_collection_analysis_or_manifest_implementation",
+  "registration_parent_commit": "cec5f28c3ebb4a3b6ba986fa11be54700352499d",
+  "scientific_protocol": {
+    "path": "benchmarks/magnitude_placement_behavior_v1_1.json",
+    "sha256": "6158529e4fba7981a64cb8f3612a8f02be227a76578d0d7fadccaa0d21c58331"
+  },
+  "source_audit": {
+    "paper": {
+      "path": "docs/Human brains construct individualized global rankings from identical few-shot learning input.pdf",
+      "sha256": "e9fc90dbb255f224f2a8d9f57924aa6725c9376d8d4d1bd667e7e6a4f43e1a0b"
+    },
+    "source_faithful_behavioral_elements": [
+      "Eight fixed nonadjacent support pairs, each shown once per block for four blocks in randomized order.",
+      "Two ticked bars carry relative difference while absolute values vary by trial; support requires no response.",
+      "All 28 query pairs occur once per block for ten blocks in randomized order without feedback.",
+      "Query response selects one of two parallel items; the next query begins after a 2000 ms intertrial interval.",
+      "The original behavioral implementation used PsychoPy online on participant computers."
+    ],
+    "unavailable_in_paper_or_public_project_files": [
+      "Behavioral support display duration and support intertrial timing.",
+      "Exact behavioral canvas, item dimensions, fonts, colors, tick count, bar width, pixels per unit, and click bounds.",
+      "Exact distribution and admissible range used for randomized absolute bar values.",
+      "Behavioral browser timing tolerances and focus/reload handling.",
+      "Original image files and acquisition source code."
+    ],
+    "implementation_choice_boundary": "Every value below that is unavailable from the source is an explicit v1.1 implementation choice. It is fixed for internal validity and reproducibility, not claimed as a recovered Liu parameter."
+  },
+  "renderer": {
+    "format": "deterministic SVG with integer coordinates and shape-rendering crispEdges",
+    "canvas": {"width_px": 1280, "height_px": 720, "background": "#808080"},
+    "code_item": {
+      "grid_rows": 4,
+      "grid_columns": 4,
+      "cell_px": 48,
+      "content_px": 192,
+      "border_px": 4,
+      "outer_px": 200,
+      "one_color": "#000000",
+      "zero_color": "#FFFFFF",
+      "border_color": "#000000",
+      "interpolation": "forbidden",
+      "labels": "forbidden"
+    },
+    "support_layout": {
+      "left_item_xy": [160, 260],
+      "right_item_xy": [920, 260],
+      "left_bar_x": 460,
+      "right_bar_x": 756,
+      "bar_baseline_y": 600,
+      "bar_width_px": 64,
+      "bar_min_level": 1,
+      "bar_max_level": 12,
+      "pixels_per_unit": 28,
+      "tick_every_units": 1,
+      "bar_fill": "#D9D9D9",
+      "bar_outline": "#000000",
+      "baseline_sampling": "uniform integer low level from 1 through 12-gap inclusive; high=low+gap; sample the legal low level directly and never clip or round a derived high value"
+    },
+    "query_layout": {
+      "left_item_xy": [260, 260],
+      "right_item_xy": [820, 260],
+      "left_click_bounds": [260, 260, 460, 460],
+      "right_click_bounds": [820, 260, 1020, 460],
+      "off_item_click": "ignored and logged as an acquisition event; it is not a response"
+    },
+    "screen_structure_and_timing": {
+      "fixation_screen": "none",
+      "support_display_ms": 4000,
+      "support_iti_ms": 1000,
+      "query_display": "self-paced until one valid item click; no response deadline",
+      "query_iti_ms": 2000,
+      "feedback_screen": "none",
+      "timing_status": "support duration and support ITI are v1.1 implementation choices; query ITI is source-faithful; production platform must validate scheduled versus actual onset before GO"
+    }
+  },
+  "randomization": {
+    "master_seed": 5318702401,
+    "slots": 120,
+    "slot_id_format": "MPB-001 through MPB-120",
+    "cell_ids": ["A_first/C1_to_A", "A_first/C1_to_B", "B_first/C1_to_A", "B_first/C1_to_B"],
+    "cell_schedule": "Partition chronological slots into 30 consecutive groups of four. Within every group, deterministically permute all four cell IDs using a group-specific child seed; every cell therefore has exactly 30 enrolled slots and every adjacent group of four is balanced.",
+    "child_seed": "unsigned first 64 bits of SHA256(readiness_id | master_seed | slot_or_group | domain), big-endian",
+    "domains": ["cell_order", "C1_role_mapping", "C2_role_mapping", "A_support", "B_support", "A_query", "B_query"],
+    "support_randomization": "Independently within each of four blocks, permute eight relations, randomize left/right orientation with probability one half, and uniformly sample the legal integer low bar level.",
+    "query_randomization": "Independently within each of ten blocks, permute all 28 unordered role pairs and randomize left/right orientation with probability one half.",
+    "manifest_format": "deterministic UTF-8 JSON serialized with sorted keys and compact separators, then gzip-compressed with filename empty and mtime zero",
+    "manifest_path": "benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz",
+    "runtime_entropy": "forbidden"
+  },
+  "raw_data": {
+    "schema_path": "benchmarks/magnitude_placement_behavior_v1_1_raw.schema.json",
+    "format": "one immutable JSON object per completed participant session containing a header, exactly 312 finalized trial records, and an append-only acquisition-event ledger",
+    "writer": "create the session bundle with exclusive creation; fsync; then create a SHA256 sidecar exclusively. Existing raw bundle or sidecar is never overwritten.",
+    "pseudonymization": "Trial logs contain only a study-local pseudonymous participant ID and frozen enrollment slot. Names, contact details, consent records, payment identifiers, IP address, and recruitment-platform identifiers are stored outside the analysis log under the institution-approved retention plan.",
+    "no_derived_only_storage": "Raw query records retain displayed code IDs, roles, raw chosen side, click coordinates, and RT. Correctness and pair probability are reconstructed by the locked analysis and are not accepted as substitutes for raw choices.",
+    "event_kinds": ["session_start", "focus_lost", "focus_restored", "page_reload", "network_interruption", "off_item_click", "session_end"]
+  },
+  "analysis": {
+    "input": "Validate two complete session bundles per participant against the frozen slot manifest and raw schema, then reconstruct role choices from raw side responses.",
+    "complete_case": "Exactly 32 support and 280 query trials per session; every support block contains all eight relations once and every query block contains all 28 pairs once; ten query choices per condition and pair.",
+    "eligibility": "Exclude only combined condition-specific accuracy strictly below 0.50 after completeness and technical checks. Never exclude by a condition alone or by any registered estimand.",
+    "participant_estimands": ["delta_flip", "beta_conf", "beta_learned"],
+    "cohort_model": "For each estimand, ordinary least squares with effect-coded condition order, codebook-condition mapping, and their interaction; the intercept is the cohort effect; residual df=N-4.",
+    "intervals": "Report two-sided ordinary t intervals at 90 and 95 percent. Primary directional flags and symmetric TOST equivalence use the 90 percent interval and inherited SESOI.",
+    "precedence": "Equivalent-to-zero has practical priority over a simultaneous tiny directional flag.",
+    "hierarchy": ["delta_flip", "beta_conf", "beta_learned"],
+    "secondary": "Reconstruct Hodge ranks from each complete 28-pair mean preference field and compute the inherited assignment-following Kendall score; it cannot change the primary outcome.",
+    "mandatory_descriptives": ["overall learned nonlearned flip and same-direction accuracy by condition", "all 28 pair choice probabilities and A/B differences", "counterbalance coefficients", "Hodge order and assignment-following score", "attrition exclusions and technical events by cell"]
+  },
+  "synthetic_branch_contract": {
+    "participants": 100,
+    "per_cell": 25,
+    "fixtures": {
+      "metric_enters_global_order_construction": "positive non-equivalent delta_flip",
+      "ordinal_global_order_with_metric_confidence_modulation": "equivalent delta_flip and positive non-equivalent beta_conf",
+      "metric_retained_locally_not_globally": "equivalent delta_flip and beta_conf, positive non-equivalent beta_learned",
+      "stronger_ordinalization_or_metric_loss": "all three axes equivalent",
+      "mixed_or_unresolved": "registered reverse-direction or unresolved upstream axis"
+    },
+    "prohibition": "Fixtures are algebraic fake participant profiles, never fitted to or mixed with human responses. They validate code paths, not power or scientific truth."
+  },
+  "dry_run": {
+    "human_data": "forbidden",
+    "scope": "Use the first frozen slot from each of four counterbalance cells. For both sessions, render/hash all 32 support and 280 query frames, create deterministic fake clicks, write and re-open immutable raw bundles, import them, and verify manifest/schema/trial-count/role/condition identities.",
+    "full_manifest_checks": "Across all 120 slots, validate 30 slots per cell, 240 role permutations, 7680 support trials, 67200 query trials, exact A/B gaps, legal bar levels, exact pixel differences, all block permutations, all orientations, and no runtime entropy.",
+    "analysis_branch_checks": "Run all five registered synthetic 100-participant outcome fixtures through the same estimand, OLS, interval, equivalence, and hierarchy implementation used for future data."
+  },
+  "readiness_decision": {
+    "implementation_pass": "All protocol/source hashes, codebook, renderer, manifest, schema, raw writer, importer, analysis, branch, dry-run, determinism, finiteness, and no-human gates pass.",
+    "external_go_requirements": ["Responsible institution confirms applicable ethics/IRB status for this new two-session abstract-token study.", "Participant information and consent text are approved.", "Recruitment channel, compensation, privacy, pseudonym linkage, withdrawal, and retention plan are fixed.", "Production acquisition platform reproduces locked SVG geometry and passes browser/display timing and focus/reload tests.", "User gives explicit collection GO after reviewing the locked readiness artifact."],
+    "status_before_external_go": "implementation_ready_external_go_blocked",
+    "collection_status": "NO_GO",
+    "failure_rule": "Any implementation gate failure is noninterpretable and blocks collection. It does not authorize changing a scientific estimand, A/B assignment, codebook, SESOI, N, exclusion, or outcome branch.",
+    "no_real_participant_boundary": "No pilot, recruitment, consent, participant ID, or human response may be created by the readiness runner."
+  },
+  "canonical_paths": {
+    "collection_module": "fsrl/magnitude_placement_collection.py",
+    "analysis_module": "fsrl/magnitude_placement_analysis.py",
+    "collection_tests": "tests/test_magnitude_placement_collection.py",
+    "analysis_tests": "tests/test_magnitude_placement_analysis.py",
+    "randomization_manifest": "benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz",
+    "raw_schema": "benchmarks/magnitude_placement_behavior_v1_1_raw.schema.json",
+    "readiness_result": "results/magnitude_placement_behavior_v1_1_collection_readiness.json",
+    "dry_run_root": "temporary_directory_only"
+  },
+  "execution_firewall": {
+    "contract_freeze": "Commit and push this readiness contract and raw schema before implementing collection or analysis code.",
+    "source_freeze": "After scoped tests pass, commit and push implementation and tests before generating the canonical manifest or readiness result.",
+    "artifact_freeze": "Generate the canonical manifest and readiness result once from clean pushed source; commit and push them without modifying locked source.",
+    "collection_firewall": "Canonical implementation readiness is necessary but not sufficient for collection. External GO requirements and explicit user authorization remain mandatory."
+  }
+}

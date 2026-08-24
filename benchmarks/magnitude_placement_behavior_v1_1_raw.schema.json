@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritas.invalid/fsrl/magnitude_placement_behavior_v1_1_raw.schema.json",
+  "title": "Magnitude-placement v1.1 immutable participant-session bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "study_id", "participant_id", "enrollment_slot", "counterbalance_cell", "session_index", "condition", "codebook", "manifest_sha256", "trials", "acquisition_events"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "study_id": {"const": "liu-magnitude-placement-behavior-v1.1-binary-codebook"},
+    "participant_id": {"type": "string", "pattern": "^SYNTH-[A-Z0-9-]+$"},
+    "enrollment_slot": {"type": "string", "pattern": "^MPB-[0-9]{3}$"},
+    "counterbalance_cell": {"enum": ["A_first/C1_to_A", "A_first/C1_to_B", "B_first/C1_to_A", "B_first/C1_to_B"]},
+    "session_index": {"enum": [1, 2]},
+    "condition": {"enum": ["A", "B"]},
+    "codebook": {"enum": ["C1", "C2"]},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "trials": {"type": "array", "minItems": 312, "maxItems": 312, "items": {"$ref": "#/$defs/trial"}},
+    "acquisition_events": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/acquisition_event"}}
+  },
+  "$defs": {
+    "common_trial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trial_id", "phase", "block_index", "trial_index", "trial_index_within_block", "role_left", "role_right", "code_left", "code_right", "scheduled_onset_ms", "actual_onset_ms", "focus_ok", "reload_count", "network_interruption", "renderer_sha256", "support_relation", "registered_higher_role", "registered_lower_role", "registered_gap_units", "bar_left_level", "bar_right_level", "bar_left_pixels", "bar_right_pixels", "choice_side", "choice_x_px", "choice_y_px", "response_time_ms"],
+      "properties": {
+        "trial_id": {"type": "string", "pattern": "^MPB-[0-9]{3}-S[12]-(SUP|QUE)-[0-9]{3}$"},
+        "phase": {"enum": ["support", "query"]},
+        "block_index": {"type": "integer", "minimum": 1, "maximum": 10},
+        "trial_index": {"type": "integer", "minimum": 1, "maximum": 312},
+        "trial_index_within_block": {"type": "integer", "minimum": 1, "maximum": 28},
+        "role_left": {"enum": ["A", "B", "C", "D", "E", "F", "G", "H"]},
+        "role_right": {"enum": ["A", "B", "C", "D", "E", "F", "G", "H"]},
+        "code_left": {"type": "string", "pattern": "^C[12]-0[1-8]$"},
+        "code_right": {"type": "string", "pattern": "^C[12]-0[1-8]$"},
+        "scheduled_onset_ms": {"type": "number", "minimum": 0},
+        "actual_onset_ms": {"type": "number", "minimum": 0},
+        "focus_ok": {"type": "boolean"},
+        "reload_count": {"type": "integer", "minimum": 0},
+        "network_interruption": {"type": "boolean"},
+        "renderer_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "support_relation": {"type": ["string", "null"]},
+        "registered_higher_role": {"type": ["string", "null"]},
+        "registered_lower_role": {"type": ["string", "null"]},
+        "registered_gap_units": {"type": ["integer", "null"]},
+        "bar_left_level": {"type": ["integer", "null"]},
+        "bar_right_level": {"type": ["integer", "null"]},
+        "bar_left_pixels": {"type": ["integer", "null"]},
+        "bar_right_pixels": {"type": ["integer", "null"]},
+        "choice_side": {"enum": ["left", "right", null]},
+        "choice_x_px": {"type": ["number", "null"]},
+        "choice_y_px": {"type": ["number", "null"]},
+        "response_time_ms": {"type": ["number", "null"], "exclusiveMinimum": 0}
+      }
+    },
+    "trial": {
+      "allOf": [
+        {"$ref": "#/$defs/common_trial"},
+        {
+          "if": {"properties": {"phase": {"const": "support"}}},
+          "then": {
+            "properties": {
+              "block_index": {"maximum": 4},
+              "trial_index_within_block": {"maximum": 8},
+              "support_relation": {"type": "string", "pattern": "^[A-H]>[A-H]$"},
+              "registered_higher_role": {"enum": ["A", "B", "C", "D", "E", "F", "G", "H"]},
+              "registered_lower_role": {"enum": ["A", "B", "C", "D", "E", "F", "G", "H"]},
+              "registered_gap_units": {"type": "integer", "minimum": 1, "maximum": 7},
+              "bar_left_level": {"type": "integer", "minimum": 1, "maximum": 12},
+              "bar_right_level": {"type": "integer", "minimum": 1, "maximum": 12},
+              "bar_left_pixels": {"type": "integer", "minimum": 28, "maximum": 336},
+              "bar_right_pixels": {"type": "integer", "minimum": 28, "maximum": 336},
+              "choice_side": {"const": null},
+              "choice_x_px": {"const": null},
+              "choice_y_px": {"const": null},
+              "response_time_ms": {"const": null}
+            }
+          },
+          "else": {
+            "properties": {
+              "block_index": {"maximum": 10},
+              "trial_index_within_block": {"maximum": 28},
+              "support_relation": {"const": null},
+              "registered_higher_role": {"const": null},
+              "registered_lower_role": {"const": null},
+              "registered_gap_units": {"const": null},
+              "bar_left_level": {"const": null},
+              "bar_right_level": {"const": null},
+              "bar_left_pixels": {"const": null},
+              "bar_right_pixels": {"const": null},
+              "choice_side": {"enum": ["left", "right"]},
+              "choice_x_px": {"type": "number"},
+              "choice_y_px": {"type": "number"},
+              "response_time_ms": {"type": "number", "exclusiveMinimum": 0}
+            }
+          }
+        }
+      ]
+    },
+    "acquisition_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_index", "event_kind", "monotonic_ms", "detail"],
+      "properties": {
+        "event_index": {"type": "integer", "minimum": 1},
+        "event_kind": {"enum": ["session_start", "focus_lost", "focus_restored", "page_reload", "network_interruption", "off_item_click", "session_end"]},
+        "monotonic_ms": {"type": "number", "minimum": 0},
+        "detail": {"type": "string"}
+      }
+    }
+  }
+}
