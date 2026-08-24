@@ -656,6 +656,40 @@ comparator, not the human posterior or ground-truth neural geometry; do not
 search comparator families or select the alternative that best removes the
 current fingerprint.
 
+That prospectively defined external comparator-adequacy audit is now complete.
+It uses the public Liu trial-level human choice field as the only external
+standard, retains all 77 eligible participants including correct rankers, and
+does not match human to virtual subjects. Human participants alone are
+bootstrapped; the current 77-subject exact-posterior field remains fixed. No
+neural field, second comparator, temperature fit, checkpoint load, or neural
+replay enters the audit.
+
+The registered outcome is `comparator_externally_inadequate`; both necessary
+criteria fail. On the fixed 20 nonlearned pairs, human distance slope is
+`0.05398` with participant-bootstrap 95 percent interval
+`[0.04731, 0.06069]`, whereas the current posterior slope is `0.01066` and is
+`inadequate_below`. The secondary six-level ledger shows that the posterior is
+already much more confident than humans at distances 1 through 4, especially
+distances 1 and 2, while distance-5 and distance-6 differences are unresolved.
+This explains the location of the previous `q` fingerprint without turning
+near distances into a retrospective primary.
+
+Human distance-residualized pair structure is highly reliable: odd/even-block
+`r_HH=0.96976` and Spearman-Brown-corrected `rho_H=0.98465`. The current
+posterior nevertheless has `r_PH=-0.04214`; its corrected ceiling ratio is
+`-0.04247` with a 90 percent interval `[-0.32253, 0.36888]`, far below the
+frozen 0.80 adequacy floor. Treat this as failure to capture a reliable human
+pair fingerprint, not as a robust negative correlation.
+
+Preserve all earlier positive network-internal and comparator-relative results,
+but close intervention under this comparator. Do not inspect or modify `P_T`,
+`W_out`, temperature, evidence admission, norm matching, or the v2.4 local
+mechanism to remove the current neural-posterior difference. The only justified
+route is prospective comparator-theory reassessment. Any future comparator
+must have independent theoretical motivation and pass a separately frozen
+human-only external adequacy contract before it can define a neural target; do
+not search alternatives against the neural field.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
@@ -664,7 +698,9 @@ The fresh confirmation is in
 replication is in
 `docs/global_policy_field_fingerprint_replication_v1.md`, and the equal-energy
 allocation localization is in
-`docs/global_policy_allocation_audit_v1.md`.
+`docs/global_policy_allocation_audit_v1.md`, and the human-external comparator
+adequacy result is in
+`docs/global_policy_comparator_adequacy_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -701,7 +737,9 @@ additive-by-residual field-reassembly result is in
 fresh-backbone fingerprint replication is in
 `docs/global_policy_field_fingerprint_replication_v1.md`; and the registered
 equal-energy allocation localization is in
-`docs/global_policy_allocation_audit_v1.md`.
+`docs/global_policy_allocation_audit_v1.md`; and the human-external comparator
+adequacy result is in
+`docs/global_policy_comparator_adequacy_v1.md`.
 
 ## Repository workflow
 
