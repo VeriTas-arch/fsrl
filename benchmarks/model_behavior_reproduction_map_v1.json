@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "map_id": "liu-v2.4-model-behavior-reproduction-map-v1",
+  "registration_status": "frozen_before_map_implementation_or_serial_position_computation",
+  "registration_parent_commit": "d5be48a0619ffb367c405fb9936ba1318973da61",
+  "scientific_question": "Which Liu behavioral phenomena are reproduced by the frozen v2.4 computational model, which are only qualitatively reproduced with quantitative mismatch, and which are not reproduced?",
+  "scope": {
+    "human_role": "The 77-person combined Liu behavioral benchmark defines the phenomenon reference, not a claim that the model is the human brain mechanism.",
+    "model_condition": "Use dual_access_matched only from the frozen v2.4 fresh-backbone confirmation seeds 2104 and 2105.",
+    "network_independence": "Compute and classify every row independently in both networks. Never pool virtual participants or bootstrap across networks.",
+    "read_only": "Load only registered result and human source artifacts. Do not load a checkpoint, train, adapt, resample model choices, change temperature, or recompute Liu policy outputs.",
+    "no_tuning": "A mismatch is reported and cannot authorize parameter, comparator, evidence-admission, activation, or policy calibration."
+  },
+  "registered_sources": {
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "human_preregistered_trials": {
+      "path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227"
+    },
+    "human_replication_trials": {
+      "path": "data/external/liu2026/replication_experiment_data.csv",
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249"
+    },
+    "model_result": {
+      "path": "results/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991"
+    },
+    "model_specification": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09"
+    },
+    "model_implementation_lock": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.lock.json",
+      "sha256": "5c67201b17b1dd089ca4a274bad0a2106ce8628b21d8c23851a1646f31e2fba1"
+    },
+    "model_artifact_lock": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json",
+      "sha256": "d2448bd682f5dbd96be9cc80a2a43731926aee4f86e756a824afc732867483f2"
+    },
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "behavioral_estimator": {
+      "path": "fsrl/behavioral.py",
+      "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"
+    },
+    "human_loader": {
+      "path": "fsrl/human_benchmark.py",
+      "sha256": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade"
+    },
+    "model_confirmation_runner": {
+      "path": "fsrl/dual_evidence_access_confirmation.py",
+      "sha256": "5324b8c08870131c754325226eb715d017c8b9733947b9a07e65f39361a6ba32"
+    }
+  },
+  "bootstrap": {
+    "samples": 10000,
+    "interval": 0.95,
+    "human_new_estimands_seed": 20260825,
+    "model_seed_rule": "20260825 + network seed",
+    "unit": "participant within the human cohort or virtual participant within one network",
+    "network_pooling": "forbidden"
+  },
+  "status_rules": {
+    "reproduced": "The row's qualitative rule and quantitative calibration rule both pass independently in seeds 2104 and 2105.",
+    "qualitatively_reproduced_quantitatively_mismatched": "The qualitative rule passes independently in both networks, but the calibration rule fails in at least one network.",
+    "not_reproduced": "The qualitative rule fails in at least one network.",
+    "human_interval_membership": "Inclusive membership of the model point estimate in the registered human participant-bootstrap 95 percent interval.",
+    "no_cross_network_rescue": "A strong result in one network cannot compensate for failure in the other."
+  },
+  "rows": [
+    {
+      "row_id": "learned_accuracy",
+      "human_estimand": "Combined mean accuracy over the eight directly learned pairs and its existing participant-bootstrap 95 percent interval.",
+      "model_estimand": "dual_access_matched summary learned_accuracy and existing participant bootstrap within each network.",
+      "qualitative_rule": "Model point estimate is greater than 0.5.",
+      "calibration_rule": "Model point estimate is inside the existing human 95 percent interval."
+    },
+    {
+      "row_id": "nonlearned_accuracy",
+      "human_estimand": "Combined mean accuracy over the twenty nonlearned pairs and its existing participant-bootstrap 95 percent interval.",
+      "model_estimand": "dual_access_matched summary nonlearned_accuracy and existing participant bootstrap within each network.",
+      "qualitative_rule": "Model point estimate is greater than 0.5.",
+      "calibration_rule": "Model point estimate is inside the existing human 95 percent interval."
+    },
+    {
+      "row_id": "symbolic_distance_effect",
+      "human_estimand": "Existing participant mean OLS slope of seven distance-level accuracies and its participant-bootstrap 95 percent interval.",
+      "model_estimand": "Existing dual_access_matched symbolic_distance_slope within each network.",
+      "qualitative_rule": "Slope is positive with existing two-sided p_vs_zero below 0.05.",
+      "calibration_rule": "Model slope is inside the existing human 95 percent interval."
+    },
+    {
+      "row_id": "serial_position_effect",
+      "human_estimand": "For each eligible participant, average pair accuracy over the seven pairs incident on each true rank position. The registered endpoint contrast is mean(position 1, position 8) minus mean(positions 2 through 7), with a participant-bootstrap 95 percent interval.",
+      "model_estimand": "Reassemble the same eight-position profile from the 28 frozen dual_access_matched pair mean accuracies. No participant-level model serial-position uncertainty is reconstructible from the frozen artifact and none may be manufactured by replay.",
+      "qualitative_rule": "Both endpoint accuracies separately exceed the mean accuracy of positions 2 through 7.",
+      "calibration_rule": "The model mean-endpoint contrast is inside the human participant-bootstrap 95 percent interval.",
+      "secondary": "Report overall, learned-only, and nonlearned-only position profiles without adding gates."
+    },
+    {
+      "row_id": "difficult_pair_bimodality",
+      "human_estimand": "Published Figure 2d class counts: 15 bimodal and 13 high-accuracy pairs, with no ordinary-unimodal or low-accuracy pair.",
+      "model_estimand": "Existing dual_access_matched beta_pair_class_counts_analysis within each network.",
+      "qualitative_rule": "At least 15 of 28 pairs are bimodal and neither ordinary_unimodal nor low_accuracy occurs.",
+      "calibration_rule": "The qualitative rule is the frozen phenomenon boundary; exact equality to 15 is descriptive, not an additional gate."
+    },
+    {
+      "row_id": "stable_within_subject_errors",
+      "human_estimand": "Existing analysis-cohort prevalence of at least one pair with error on at least 80 percent of trials and its participant-bootstrap 95 percent interval.",
+      "model_estimand": "dual_access_matched stable_error_subject_prevalence[80].analysis within each network, with participant bootstrap recomputed only from stored subject records.",
+      "qualitative_rule": "Analysis-cohort prevalence is at least 0.80.",
+      "calibration_rule": "Model point estimate is inside the existing human 95 percent interval."
+    },
+    {
+      "row_id": "self_consistent_vs_inconsistent_errors",
+      "human_estimand": "Existing eligible-cohort proportions self_consistent_incorrect and self_inconsistent, each with a participant-bootstrap 95 percent interval.",
+      "model_estimand": "Stored dual_access_matched ranking classes divided by 77 eligible virtual participants within each network, with participant bootstrap.",
+      "qualitative_rule": "self_consistent_incorrect proportion exceeds self_inconsistent proportion.",
+      "calibration_rule": "Both model category proportions are inside their corresponding human 95 percent intervals."
+    },
+    {
+      "row_id": "hodge_reconstructed_subjective_ranking",
+      "human_estimand": "Existing correct-ranker proportion and its participant-bootstrap 95 percent interval; all stored subjective orders must be complete HodgeRank permutations.",
+      "model_estimand": "Stored dual_access_matched correct ranking class divided by 77 and every stored subjective_order_high_to_low within each network.",
+      "qualitative_rule": "Every stored Hodge order is a permutation of items 0 through 7 and fewer than half of eligible subjects are correct rankers.",
+      "calibration_rule": "Model correct-ranker proportion is inside the existing human 95 percent interval."
+    },
+    {
+      "row_id": "inter_subject_ranking_diversity",
+      "human_estimand": "Mean pairwise Kendall tau among eligible non-correct Hodge rankings, with participant bootstrap recomputed from registered human trials.",
+      "model_estimand": "Existing dual_access_matched mean_inter_subject_kendall_tau and participant bootstrap recomputed from stored eligible non-correct subjective orders within each network.",
+      "qualitative_rule": "Mean pairwise Kendall tau is below 0.80, rejecting near-convergence to one common ranking as the reproduced pattern.",
+      "calibration_rule": "Model point estimate is inside the registered human participant-bootstrap 95 percent interval."
+    }
+  ],
+  "integrity_gates": {
+    "source_hashes": "Every registered source hash must match before any value is read.",
+    "model_identity": "The v2.4 result must pass its own source and artifact validation, contain exactly seeds 2104 and 2105, and report fresh_backbone_confirmation_pass.",
+    "condition_identity": "dual_access_matched must exist in both seeds and contain 77 eligible subjects with no below-chance exclusion.",
+    "human_identity": "Human benchmark status must be source_recomputed_and_paper_checks_reproduced with 77 eligible combined subjects and zero below-chance exclusions.",
+    "finite": "Every computed point, interval, and profile value must be finite.",
+    "immutable_output": "Serialize with allow_nan false and exclusive creation."
+  },
+  "outcome_contract": {
+    "output": "results/model_behavior_reproduction_map_v1.json",
+    "report": "docs/model_behavior_reproduction_map_v1.md",
+    "interpretation": "This map evaluates model reproduction of human-inspired phenomena. It is neither a model-selection objective nor evidence that the model mechanism is implemented in the human brain.",
+    "next_step": "After the read-only map is frozen, build the main P_T/L_T causal mechanism figure and reduced algorithm from already confirmed links; do not tune v2.4 to repair mismatched rows."
+  }
+}
