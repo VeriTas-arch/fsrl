@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repair_id": "liu-magnitude-placement-behavior-v1.1-collection-readiness-repair1",
+  "registration_status": "frozen_before_collection_analysis_or_manifest_implementation_and_before_any_new_participant_data",
+  "registration_parent_commit": "e8c364f9adc179fb6c1c76db89669f9fe7ff2ba2",
+  "original_readiness_contract": {
+    "path": "benchmarks/magnitude_placement_behavior_v1_1_collection_readiness.json",
+    "sha256": "bd29afb557c2711374f8587cfa3c6e4fffbedd07d6292dd9f3a4f153835f2d2a"
+  },
+  "original_raw_schema": {
+    "path": "benchmarks/magnitude_placement_behavior_v1_1_raw.schema.json",
+    "sha256": "fee3c2a15c39c023aced42747c83cfce5a77e66e52940551f0800d982281eb63"
+  },
+  "defect": "The original raw schema required participant_id to begin with SYNTH-. That correctly constrained the readiness dry run but contradicted the registered future pseudonymization interface, which must be able to represent institution-issued study-local participant IDs after an explicit collection GO.",
+  "repair": "Permit either SYNTH- or MPBP- followed by uppercase letters, digits, or hyphens in the raw schema. The readiness and dry-run implementation must still reject every non-SYNTH participant ID. MPBP remains unusable until ethics, privacy, platform, and explicit user GO requirements pass.",
+  "scientific_invariance": "No codebook, stimulus, renderer, randomization, A/B assignment, pair set, task count, timing, estimand, SESOI, sample size, exclusion, statistical equation, outcome branch, or collection-GO rule changes.",
+  "collection_status": "NO_GO"
+}

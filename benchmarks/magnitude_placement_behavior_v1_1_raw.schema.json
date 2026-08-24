@@ -8,7 +8,7 @@
   "properties": {
     "schema_version": {"const": 1},
     "study_id": {"const": "liu-magnitude-placement-behavior-v1.1-binary-codebook"},
-    "participant_id": {"type": "string", "pattern": "^SYNTH-[A-Z0-9-]+$"},
+    "participant_id": {"type": "string", "pattern": "^(SYNTH|MPBP)-[A-Z0-9-]+$"},
     "enrollment_slot": {"type": "string", "pattern": "^MPB-[0-9]{3}$"},
     "counterbalance_cell": {"enum": ["A_first/C1_to_A", "A_first/C1_to_B", "B_first/C1_to_A", "B_first/C1_to_B"]},
     "session_index": {"enum": [1, 2]},
