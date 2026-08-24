@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "study_id": "liu-human-metric-constructive-comparator-v1",
+  "registration_status": "prospectively_registered_after_exact_comparator_external_inadequacy_and_before_candidate_implementation_derivation_or_replication_loading",
+  "registration_parent_commit": "aa4881c804e24482c86d5a6a6bdcda5c56195325",
+  "scientific_question": "Can the task-faithful metric observations in the Liu paradigm, combined with episode-stable imperfect evidence access and constructive commitment to one coherent global order, predict the held-out human nonlearned choice field and its defining individual structure?",
+  "current_theory": "The existing synthetic-stable-omission plus exact-posterior comparator fails both external human axes, while the P_T/L_T neural mechanism and all comparator-relative fingerprints retain their qualified support. That failure does not distinguish the synthetic evidence distribution from the posterior inference rule. The next test therefore removes all neural and virtual-subject inputs and asks whether a low-capacity human-only evidence-access theory is sufficient while preserving the metric information actually displayed in the experiment.",
+  "candidate_hypothesis": "Each participant has one episode-stable Bernoulli access state for each of the eight support relations. Access retains the complete displayed metric relation; non-access removes that relation from effective global evidence. Conditional on this effective evidence, the participant constructs and commits to one coherent order, then makes ten repeated pair choices with a shared response-lapse probability.",
+  "claim_boundary": "This is a human-only predictive adequacy test of one prospectively selected comparator. A pass would support metric evidence plus stable imperfect access plus constructive global order as a provisional behavioral reference, not identify literal omission, a unique cognitive algorithm, a biological store, or the neural computation. A failure would reject this low-capacity conjunction on the frozen holdout, not prove ordinal encoding or invalidate the confirmed P_T/L_T mechanism.",
+  "canonical_paths": {
+    "specification": "benchmarks/human_metric_constructive_comparator_v1.json",
+    "implementation_lock": "benchmarks/human_metric_constructive_comparator_v1.lock.json",
+    "parameter_artifact": "benchmarks/human_metric_constructive_comparator_v1.parameters.json",
+    "parameter_lock": "benchmarks/human_metric_constructive_comparator_v1.parameters.lock.json",
+    "runner": "fsrl/human_metric_constructive_comparator.py",
+    "runner_tests": "tests/test_human_metric_constructive_comparator.py",
+    "formal_runtime": "fsrl/formal_runtime.py",
+    "formal_runtime_tests": "tests/test_formal_runtime.py",
+    "result": "results/human_metric_constructive_comparator_v1.json",
+    "report": "docs/human_metric_constructive_comparator_v1.md"
+  },
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "derivation_trials": {
+      "path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227"
+    },
+    "confirmation_trials": {
+      "path": "data/external/liu2026/replication_experiment_data.csv",
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249"
+    },
+    "failed_comparator_specification": {
+      "path": "benchmarks/global_policy_comparator_adequacy_v1.json",
+      "sha256": "a1769d9c0753f012216edd753f22a411b113f5c0c87610609914dc95429378b2"
+    },
+    "failed_comparator_result": {
+      "path": "results/global_policy_comparator_adequacy_v1.json",
+      "sha256": "72e7e0beb0715fa4dcff6f5f74e7594cc8b8d51999db4f453ec8696e9ed3585f"
+    },
+    "failed_comparator_report": {
+      "path": "docs/global_policy_comparator_adequacy_v1.md",
+      "sha256": "cacf84f29119e3fd5619b375948766b24cd855a880a5efa05b6beb81a8ac1dc6"
+    },
+    "human_benchmark_source": {
+      "path": "fsrl/human_benchmark.py",
+      "sha256": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade"
+    },
+    "ranking_protocol_source": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "exact_order_source": {
+      "path": "fsrl/constructive.py",
+      "sha256": "8c33fa737f2d2b988c94054aa720c51913abccbec666c864c4d9eadb8fed443d"
+    },
+    "adequacy_estimand_source": {
+      "path": "fsrl/global_policy_comparator_adequacy.py",
+      "sha256": "3d76ea629cae15fe8600c61f6273b6da75ac6b8aa1aab90afe9b4e5cd8d8e1b6"
+    }
+  },
+  "task_information_contract": {
+    "observation_interface": "Eight item identities; the fixed eight nonadjacent support pairs; four passive presentations of every relation; the signed relative ticked-bar difference on every presentation; randomized absolute bar levels as nuisance; then all 28 unordered test pairs repeated in ten blocks without feedback.",
+    "information_preserving_abstraction": "Represent a support observation by item identity and signed relative magnitude. Removing randomized absolute bar height is allowed; removing displayed relative magnitude is not an interface-preserving operation.",
+    "latent_abstraction": "A coherent global-order variable is allowed because stable self-consistent individualized rankings are an independently supported behavioral result, although participants were not instructed to construct a full rank.",
+    "forbidden_information": "True query labels, query feedback, neural states or outputs, P_T, L_T, Delta-g, q ledgers, synthetic virtual-subject evidence, model checkpoints, and post-learning alternative-comparator outcomes.",
+    "cognitive_bottleneck_boundary": "Stable relation access is the single tested cognitive bottleneck. Pure sign-only encoding, magnitude compression, trialwise encoding noise, and alternative inference families are neither controls nor fallback candidates in this study."
+  },
+  "candidate_model": {
+    "items": 8,
+    "support_relations": 8,
+    "support_blocks": 4,
+    "query_pairs": 28,
+    "query_blocks": 10,
+    "support_relation_order": ["F>A", "C>B", "E>B", "G>C", "F>D", "G>D", "H>E", "H>A"],
+    "displayed_magnitude": "For relation r=(higher,lower), m_r is the task-displayed relative difference, equal under the frozen protocol to (source_position(lower)-source_position(higher))/7. It is input evidence, not a query target.",
+    "stable_access": "For participant s and support relation r, z_sr is Bernoulli(rho), independent across the eight relations and fixed across all four presentations. z_sr=1 retains the complete signed metric relation; z_sr=0 supplies no effective global evidence.",
+    "relation_summary": "The four identical-magnitude presentations are summarized once at the episode relation level after stable access. The energy contains one term per retained relation, not four independent access draws; any common repetition multiplier is absorbed by the single fitted tau.",
+    "order_space": "Enumerate all 8! high-to-low orders pi with a uniform prior.",
+    "metric_energy": "E_z(pi)=sum_r z_r * (delta_pi(r)-m_r)^2, where delta_pi(r)=(position_pi(lower_r)-position_pi(higher_r))/7 and may be negative when pi reverses the observed relation.",
+    "constructive_distribution": "q(pi|z,tau)=softmax_pi[-E_z(pi)/tau].",
+    "population_order_distribution": "q(pi|rho,tau)=sum_z rho^sum(z)*(1-rho)^(8-sum(z))*q(pi|z,tau), exactly marginalizing all 256 stable access masks.",
+    "commitment": "Each participant draws one pi_s from q(pi|rho,tau) after learning and retains it for the complete test phase.",
+    "response_model": "For each query repetition, the source-correct choice has probability 1-epsilon when pi_s gives the source-correct orientation and epsilon otherwise. Responses are conditionally independent only given the one committed pi_s; there is no learning-stage choice or feedback.",
+    "cohort_pair_field": "C[e]=epsilon+(1-2*epsilon)*sum_pi q(pi|rho,tau)*I(pi is source-correct on e).",
+    "free_parameters": ["rho", "tau", "epsilon"],
+    "parameter_count": 3,
+    "no_additional_freedom": "No relation, item, distance, cohort, subject, learned/nonlearned, or query-specific parameter; no prior fit; no choice temperature in addition to epsilon; no ordinal or compression branch."
+  },
+  "derivation_contract": {
+    "cohort": "Use exactly the 40 preregistered participants and all 280 released test trials per participant. Do not load, summarize, hash-derived inspect, or optimize against the 37-person replication responses during derivation.",
+    "likelihood": "For each participant, aggregate the ten binary correctness responses for all 28 pairs, then exactly marginalize the single committed order: L_s=sum_pi q(pi|rho,tau)*product_e Binomial(k_se;10,p_correct(pi,e,epsilon)). Sum log L_s over all 40 participants. This preserves repeated-response dependence through pi_s; a product of marginal pair or trial probabilities is forbidden.",
+    "estimator": "Joint maximum likelihood over the three cohort-level parameters using float64 order and mask enumeration on the visible GPU.",
+    "bounds": {
+      "rho": [0.0001, 0.9999],
+      "tau": [0.0001, 4.0],
+      "epsilon": [0.0001, 0.49]
+    },
+    "optimizer": {
+      "algorithm": "scipy.optimize.minimize L-BFGS-B with exact PyTorch autograd objective gradients from CUDA float64 tensors",
+      "starts": {
+        "rho": [0.1, 0.5, 0.9],
+        "tau": [0.01, 0.1, 1.0],
+        "epsilon": [0.01, 0.1, 0.25],
+        "cartesian_total": 27
+      },
+      "max_iterations": 1000,
+      "max_line_search_steps": 50,
+      "ftol": 1e-12,
+      "gtol": 1e-8,
+      "selection": "Select the finite converged solution with the largest log likelihood; ties within 1e-10 are broken lexicographically by rho,tau,epsilon.",
+      "stability_gate": "At least three starts must converge. Every converged solution within 1e-6 log-likelihood units of the selected solution must produce a 28-pair field within 1e-5 max absolute difference. Failure is noninterpretable, not permission to change bounds or starts."
+    },
+    "artifact_firewall": "The derivation command writes the complete parameter artifact once. The artifact and a separate SHA-256 lock must be committed and pushed at a clean dev HEAD before the confirmation command may load any replication response.",
+    "required_artifact": "Retain source hashes, runtime, all 27 start states and optimizer statuses, selected parameters, selected objective, mask and order identities, complete 28-pair field, parameter-bound diagnostics, and every derivation integrity gate."
+  },
+  "confirmation_contract": {
+    "cohort": "Use exactly the 37 retained replication participants and all 280 trials per participant once. Never refit, recalibrate, select, average, or repair candidate parameters on this cohort.",
+    "primary_pairs": "Use the same fixed 20 nonlearned pairs and lexicographic pair order as global_policy_comparator_adequacy_v1.",
+    "human_field": "For each replication participant and pair, average the ten correctness responses; then form the unweighted 37-participant cohort mean.",
+    "split_half": "Odd query blocks 1,3,5,7,9 and even blocks 2,4,6,8,10; each participant-pair half has five observations.",
+    "distance_estimand": "Use the inherited fixed nonlearned weights w[e]=(d[e]-2.8)/57.2. S_H=sum_e w[e]h[e], and S_C=sum_e w[e]C[e].",
+    "distance_adequacy": "S_C must lie inclusively inside the central 95 percent participant-bootstrap interval for replication-cohort S_H.",
+    "pair_estimand": "Remove only intercept and linear distance from the 20-vectors. Compute r_CH=corr(r(C),r(h)), odd-even r_HH, rho_H=2*r_HH/(1+r_HH), and eta_pair=r_CH/sqrt(rho_H), without clipping.",
+    "pair_adequacy": "The central 90 percent participant-bootstrap lower bound of eta_pair must be at least the inherited 0.80 threshold.",
+    "bootstrap": "Use one 10000-by-37 participant-resampling count matrix for every primary and human qualification interval; seed 36501; central 90 and 95 percent percentile intervals. Candidate parameters and field remain fixed.",
+    "no_second_chance": "No other comparator, ordinal limit, compression transform, alternate tau/epsilon interpretation, threshold, pair mask, cohort mixture, or posthoc refit may be evaluated on the replication responses."
+  },
+  "individual_qualification": {
+    "purpose": "A field match alone is insufficient because the Liu result requires stable coherent and individualized behavior rather than trialwise independent noise.",
+    "human_analysis": "Apply the existing source-locked human benchmark definitions within the 37-person replication cohort: overall-accuracy eligibility, correct-ranker exclusion for error and diversity analyses, majority/Hodge ranking reconstruction, circular-triad self-consistency, and stable-error thresholds.",
+    "candidate_prediction": "Draw 200000 independent synthetic participants from the frozen q(pi|rho,tau), generate exactly ten Bernoulli responses for all 28 pairs using epsilon, and apply the identical trial-majority/Hodge analysis. Use seed 36601. Ties at five correct responses are broken by the participant's committed pi orientation, which is fixed before simulation.",
+    "mandatory_axes": {
+      "mean_self_consistency_coefficient": "Candidate point must lie inside the central 95 percent replication-participant bootstrap interval.",
+      "stable_error_80_analysis_proportion": "Candidate point among eligible non-correct rankers must lie inside the central 95 percent replication-participant bootstrap interval.",
+      "stable_error_100_analysis_proportion": "Candidate point among eligible non-correct rankers must lie inside the central 95 percent replication-participant bootstrap interval.",
+      "mean_inter_subject_kendall_tau": "Candidate expectation among eligible non-correct reconstructed ranks must lie inside the central 95 percent replication-participant bootstrap interval. Compute the 200000-participant point without enumerating all subject pairs by the exact distinct-pair sign-product identity over the 28 item pairs."
+    },
+    "qualification_pass": "All four mandatory axes must pass after simulation-size, finiteness, eligible-cohort, and analysis-cohort gates. Ranking-class proportions and learned/nonlearned/overall accuracy are mandatory descriptive reports but do not add posthoc gates.",
+    "simulation_boundary": "The fixed large simulation estimates the candidate predictive expectation; it is not a synthetic population-prevalence claim and is never resampled to widen the human interval."
+  },
+  "competence_and_integrity_gates": {
+    "source_hashes": "Every registered task, human source, upstream result, and reused implementation source must match SHA-256.",
+    "formal_runtime": "Both phases require python -m fsrl.formal_runtime, a visible CUDA GPU, and one PyTorch intra-op and inter-op CPU thread. Do not set NumPy or BLAS thread variables.",
+    "git_freeze": "The specification and implementation lock must be tracked at a clean pushed dev HEAD before derivation; the parameter artifact and parameter lock must be tracked at a later clean pushed dev HEAD before confirmation.",
+    "human_completeness": "Derivation is exactly 40 by 10 by 28 binary trials and confirmation is exactly 37 by 10 by 28, with every pair once per block and no exclusions beyond the source study's already released replication cohort.",
+    "model_completeness": "Exactly 256 masks, 40320 orders, eight support relations, 28 query pairs, three parameters, 27 optimizer starts, 10000 human bootstrap draws, and 200000 predictive participants.",
+    "probability_identity": "Every mask-conditional order distribution and the marginalized order distribution sum to one within 1e-10; all pair probabilities lie in [0,1]; direct and matrix likelihood reconstructions agree within 1e-10 on registered synthetic identities.",
+    "cohort_isolation": "Derivation artifact provenance lists only the preregistered trial source. Confirmation verifies the parameter lock before opening the replication file. No combined-cohort estimand is admissible.",
+    "no_neural_or_alternative_input": "No checkpoint, virtual subject, neural field, Track-B array, current exact-posterior field, or alternative comparator may be loaded by the runner.",
+    "complete_execution": "All parameters, predictions, primary estimates, qualification estimates, bootstrap arrays, predictive counts, source identities, and decisions are finite and retained.",
+    "no_filtering_or_posthoc_repair": "Do not remove or change a participant, response, pair, distance, mask, order, start, parameter, bootstrap draw, predictive subject, threshold, or outcome after either phase."
+  },
+  "runtime_contract": {
+    "device": "visible CUDA GPU required by fsrl.formal_runtime",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "numeric_precision": "float64 for masks, energies, order probabilities, likelihoods, optimization, and primary statistics",
+    "training_or_neural_replay": "not performed",
+    "derivation_command": "direnv exec . python -m fsrl.formal_runtime human-metric-constructive-comparator derive",
+    "confirmation_command": "direnv exec . python -m fsrl.formal_runtime human-metric-constructive-comparator confirm"
+  },
+  "execution_firewall": {
+    "protocol_freeze": "Commit and push this complete contract before writing the runner, tests, formal dispatch, implementation lock, or calculating candidate parameters or outcomes.",
+    "implementation_freeze": "After synthetic/static validation, commit and push the runner, tests, dispatch, and exact source lock before derivation.",
+    "parameter_freeze": "Run derivation once, write the parameter artifact and its lock, then commit and push both before confirmation. Parameter artifacts cannot be overwritten.",
+    "confirmation_freeze": "Confirmation reads one locked candidate and one replication cohort exactly once. The canonical result is write-once and a second complete /tmp replay must be byte-identical before reporting.",
+    "single_candidate": "No comparator tournament. The metric-preserving stable-access candidate is the only model evaluated; all other encoding and inference theories remain unexecuted.",
+    "repair_boundary": "Only an integrity or execution repair that leaves every scientific model equation, parameter domain, estimator, source split, estimand, threshold, simulation, and outcome rule unchanged may occur, and it must be separately frozen before the affected phase."
+  },
+  "outcome_tree": {
+    "noninterpretable": "Any source, runtime, git, cohort-isolation, completeness, optimizer, parameter-lock, probability, reliability, simulation, finiteness, or no-filtering gate fails.",
+    "metric_constructive_comparator_externally_adequate": "Distance adequacy, pair adequacy, and all four individual-qualification axes pass. The candidate becomes a provisional external comparator; a new separately registered read-only neural comparison is permitted but no intervention is authorized by this result.",
+    "field_adequate_individual_qualification_failed": "Both field primaries pass but at least one individual qualification fails. The candidate cannot serve as the project comparator because cohort-average predictive adequacy does not recover the defining individual structure.",
+    "distance_adequate_pair_inadequate": "Distance adequacy passes and pair adequacy fails, regardless of qualification. Stable access plus metric constructive inference captures the distance trend but not the reliable pair fingerprint.",
+    "pair_adequate_distance_inadequate": "Pair adequacy passes and distance adequacy fails, regardless of qualification. The candidate captures enough residual pair structure but not human distance calibration.",
+    "metric_constructive_comparator_externally_inadequate": "Both field primaries fail, regardless of qualification. Reject this low-capacity conjunction on the held-out cohort.",
+    "decision_priority": "Apply noninterpretable gates first; classify the two field primaries; consult individual qualification only if both field primaries pass. Descriptive results never override this ordering."
+  },
+  "outcome_contingent_route": {
+    "pass": "Keep the comparator frozen and first repeat Track B as a read-only neural-versus-new-comparator question. Reopen P_T-to-g_N mechanism work only if a separately registered discrepancy survives the externally validated comparator.",
+    "any_substantive_failure": "Preserve the exact failure and stop comparator search on the 37-person holdout. Do not run ordinal, compressed-metric, Bradley-Terry, temperature variants, or another stable-access law on these responses.",
+    "next_experiment_after_failure": "Prospectively design a new behavior experiment with two independent item lists, the same signed eight-edge graph and magnitude multiset, and counterbalanced permutation of displayed magnitude across support edges. Use equivalence and directional tests to distinguish ordinal structure, metric confidence modulation, and metric-dependent global construction.",
+    "identification_boundary": "The existing Liu data confound pair identity, graph position, true rank distance, and displayed magnitude. Predictive adequacy on those data alone cannot establish that humans preserved, compressed, or discarded metric magnitude."
+  },
+  "reporting": {
+    "result_path": "results/human_metric_constructive_comparator_v1.json",
+    "report_path": "docs/human_metric_constructive_comparator_v1.md",
+    "required_raw_derivation": "All source hashes, correctness-count arrays, mask definitions, order definitions, energy identities, optimizer starts and endpoints, selected parameters, log likelihood, convergence diagnostics, and candidate 28-pair field.",
+    "required_raw_confirmation": "Replication participant-by-block-by-pair correctness, full/odd/even fields, 20-pair metadata, one bootstrap count matrix and all primary bootstrap arrays, predictive simulation aggregate counts and qualification metrics, primary and qualification decisions, and full gate ledger.",
+    "required_claim_boundaries": "State that metric information is preserved at the interface, stable access is a tested latent bottleneck rather than observed omission, parameters are derivation-only, confirmation is one-shot, the existing data cannot identify metric versus ordinal encoding, and no neural target or intervention follows unless a future separate protocol permits it."
+  }
+}

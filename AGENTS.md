@@ -68,6 +68,28 @@ mechanism, preserve the frozen candidate as a baseline and register a new
 candidate rather than editing the old confirmation contract after seeing its
 results.
 
+## Task-faithful information boundary
+
+- Be strict at the experimental observation and behavioral-response interfaces,
+  while allowing explicitly hypothesized abstraction inside the cognitive or
+  neural computation. For the Liu task, the information-preserving support
+  representation is item identity plus signed relative bar difference; random
+  absolute bar height is a nuisance, but displayed magnitude is not.
+- If a model receives information unavailable to participants, such as true
+  rank, query labels, test feedback, or a neural-derived target, the comparison
+  is invalid. If a model discards available information, such as replacing
+  signed metric evidence by its sign, treat that operation as a cognitive
+  bottleneck hypothesis requiring independent evidence rather than as a
+  description of the task.
+- Keep observation, cognitive encoding, relational inference, and test readout
+  as separate contracts. A global-order latent state is an admissible
+  result-supported abstraction; ordinalization, compression, omission, or
+  noisy retention of the displayed metric evidence are competing encoding
+  theories and must be prospectively distinguished.
+- Do not use learning-stage choice or reward noise in the Liu paradigm:
+  participants passively observed four presentations of each support relation,
+  made no learning response, and received no test feedback.
+
 ## Current FSRL direction
 
 The held-out graph transfer, fast-weight necessity, stable subject-specific
@@ -689,6 +711,29 @@ route is prospective comparator-theory reassessment. Any future comparator
 must have independent theoretical motivation and pass a separately frozen
 human-only external adequacy contract before it can define a neural target; do
 not search alternatives against the neural field.
+
+The next comparator-theory test is now prospectively registered as one
+human-only, metric-preserving candidate. It keeps the displayed signed relative
+magnitudes and coherent eight-item order space, but gives each participant one
+episode-stable Bernoulli access variable per support relation. A retained
+relation contributes its full metric magnitude to constructive inference; an
+omitted relation contributes no effective global evidence. One global access
+probability, one constructive temperature, and one response-lapse probability
+are fit using only the 40-person preregistered cohort. The complete parameter
+artifact must then be committed and hash-locked before the 37-person replication
+cohort is loaded once for confirmation.
+
+The inherited nonlearned distance and distance-residualized pair adequacy rules
+remain necessary. Individual coherence, stable-error prevalence, and
+subjective-ranking diversity are also mandatory qualification axes, so matching
+only a cohort-average field cannot establish a usable comparator. No neural
+field, virtual subject encoding, `P_T`, `L_T`, prior allocation result, ordinal
+control, compression law, Bradley--Terry model, or alternative comparator may
+enter derivation or confirmation. If this single candidate fails, stop searching
+the existing 37-person holdout and move to a new behavior experiment that
+counterbalances displayed magnitude placement over an unchanged signed support
+graph. The original Liu data do not independently identify pair identity,
+graph position, true rank distance, and displayed magnitude.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
