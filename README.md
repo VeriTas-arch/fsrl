@@ -127,6 +127,20 @@ persistent mechanism is considered. See
 [`docs/hidden_residual_audit_v1.md`](docs/hidden_residual_audit_v1.md) and
 [`results/hidden_residual_audit_v1.json`](results/hidden_residual_audit_v1.json).
 
+The next frozen two-seed localization finds a non-monotonic information path.
+Generated and terminal effective fast-weight matrices do not carry a shared
+same-relation prototype under held-out-subject matching, but the first
+fast-weight-sensitive query transition produces replicated relation identity
+in both full hidden influence and its direct Hodge residual. This mixed result
+rejects a static matrix-label code without proving that persistent relation
+information is absent. The next read-only test must factor terminal operator
+identity from query-basis identity before v2 adds storage, routing, or fidelity
+machinery. See
+[`docs/relation_trace_localization_v1.md`](docs/relation_trace_localization_v1.md),
+[`benchmarks/relation_trace_localization_v1_1.json`](benchmarks/relation_trace_localization_v1_1.json),
+and
+[`results/relation_trace_localization_v1_1.json`](results/relation_trace_localization_v1_1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

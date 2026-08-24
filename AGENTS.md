@@ -164,12 +164,35 @@ write and terminal fast-weight/support state, then test whether query dynamics
 route or discard them. Only consider a new persistent local mechanism if these
 earlier-state audits also fail.
 
+The completed relation-trace localization returns a replicated non-monotonic
+pattern. Generated cumulative effective writes and terminal relation-LOO
+effective fast-weight matrices do not contain the registered shared
+same-relation, held-out-subject prototype geometry. Nevertheless, the first
+fast-weight-sensitive query transition contains replicated relation identity in
+both its full direct hidden influence and its direct Hodge residual. Raw-state
+controls also fail, step 0 and stable-omitted traces are exactly zero, and the
+post-response trace persists. Treat this as a mixed operator-code result, not
+as proof that persistent local information is absent and not as an existing
+correctness channel. `H>A` again has the strongest response identity while the
+prior audit shows that its residual is correctness-opposed.
+
+The next local-fidelity test should freeze the full state-by-query operator
+factorial `A_(q,e) = (alpha elementwise-multiplied by delta P_q) h_e^0` on
+development seeds 1901 and 1902. Separate state-relation identity, query-basis
+identity, and their matched interaction, and require exact step-1
+preactivation/hidden reconstruction plus stable-omitted controls. If state
+identity or congruent binding is present, search for a fidelity transformation;
+if only query identity is present, a new local storage mechanism becomes more
+plausible; if operator identity is lost through recurrent expression, localize
+the routing failure. Do not train v2 or fit a new readout before this test.
+
 Start v2 only with one to three development seeds. Freeze estimands, competence
 gates, and outcome-contingent interpretations before any new formal population.
 Keep the seed-2009 complete-write/operator localization separate from the human
 local-fidelity question. The current formal evidence is recorded in
 `docs/formal_confirmation_v1.md`; the response-state negative and its next
-decisive test are in `docs/hidden_residual_audit_v1.md`.
+decisive test are in `docs/hidden_residual_audit_v1.md`; the subsequent mixed
+operator-code result is in `docs/relation_trace_localization_v1.md`.
 
 ## Repository workflow
 

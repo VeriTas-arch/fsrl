@@ -1,8 +1,9 @@
 import unittest
+from pathlib import Path
 
 import numpy as np
 
-from fsrl.assembly_diagnostics import load_json
+from fsrl.assembly_diagnostics import file_sha256, load_json
 from fsrl.relation_trace_localization import (
     _decision,
     prototype_identity_metrics,
@@ -79,6 +80,32 @@ class RelationTraceLocalizationTests(unittest.TestCase):
             _decision(query_emergent),
             "mixed_pattern_requires_new_registered_hierarchy",
         )
+
+    def test_registered_result_is_complete_and_source_locked(self):
+        result = load_json("results/relation_trace_localization_v1_1.json")
+        self.assertFalse(result["formal_seed_access"])
+        self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
+        self.assertEqual(
+            result["implementation"]["sha256"],
+            file_sha256(Path(result["implementation"]["path"])),
+        )
+        expected = {
+            "generated_effective_write": False,
+            "terminal_effective_fast_weight": False,
+            "response_full_hidden": True,
+            "response_hodge_residual": True,
+        }
+        self.assertEqual(
+            result["overall_diagnosis"]["replicated_primary_presence"],
+            expected,
+        )
+        for row in result["seed_results"].values():
+            self.assertEqual(row["primary_presence"], expected)
+            self.assertEqual(row["validation"]["query_step_0_max_abs_influence"], 0.0)
+            self.assertLessEqual(
+                row["validation"]["realized_minus_intended_max_abs_error"],
+                row["validation"]["floating_reproduction_tolerance"],
+            )
 
 
 if __name__ == "__main__":
