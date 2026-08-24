@@ -17,6 +17,24 @@ from fsrl.meta_train import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_human_metric_constructive_comparator_dispatch_uses_registered_entry_point(
+        self,
+    ):
+        module_name = "fsrl.human_metric_constructive_comparator"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=37)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(
+                ["human-metric-constructive-comparator", "--sentinel"]
+            )
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 37)
+
     def test_global_policy_comparator_adequacy_dispatch_uses_registered_entry_point(
         self,
     ):
