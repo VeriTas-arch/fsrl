@@ -589,11 +589,51 @@ effect, positive matched-norm shape reduction without assumed closure, and
 negative probability-link interaction. A comparator-adequacy test requires a
 separate prospective criterion.
 
+That prospectively frozen replication is now complete on the two mandatory
+fresh backbones 2106 and 2107. Both 1000-step backbones were generated before
+one joint artifact lock, and neither Liu evaluation ran until that lock was
+committed and pushed. Every competence, source, artifact, endpoint, Hodge,
+norm-match, factorial-identity, and finiteness gate passes. A second complete
+GPU evaluation is byte-identical. Participants were bootstrapped separately
+within each network and never pooled; this is not network-population inference.
+
+The registered outcome is `replicated_field_fingerprint`. The prerequisite
+neural-versus-posterior slope anchor is positive in both networks. All three
+primary links replicate independently: the additive-source main effect is
+materially positive (`A` 0.05548 and 0.05375), the neural-norm posterior-shape
+reduction is materially positive (`Q_shape` 0.03454 and 0.03325), and the
+fixed-sigmoid interaction is materially negative (`I` -0.02779 and -0.02648).
+Promote their conjunction, rather than any one component, into the stable
+comparator-relative global-policy field fingerprint.
+
+Preserve the replicated secondary boundaries. Natural posterior-additive
+replacement and neural-norm posterior-shape replacement remain materially
+above the posterior anchor in both networks (`C_A` 0.01667 and 0.01687;
+`C_shape` 0.02372 and 0.02414). Shape/allocation contributes but is not
+sufficient. The residual-source main effect remains unresolved in both
+networks and was not a primary gate; do not call it zero, small, absent, or
+equivalent. The pre-sigmoid interaction remains zero to floating-point error,
+so negative `I` is fixed-link probability-field context dependence, not a
+recurrent, circuit, or biological interaction.
+
+The next justified stage is a separately registered read-only allocation
+audit of `Delta g = g_N - g_P_tilde`, with pair identity, symbolic distance,
+posterior uncertainty, and observed/effective evidence coverage fixed as the
+candidate axes before analysis. On 2106/2107 this is sequential localization,
+not another independent confirmation. Do not modify `P_T`, recurrent dynamics,
+`W_out`, temperature, the comparator, or the model before this audit. If no
+cross-network state-dependent allocation fingerprint is found, redirect to a
+prospectively defined comparator-adequacy test rather than tuning the network.
+The exact posterior remains a frozen comparator, not the human posterior or
+ground-truth neural geometry.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
 `docs/global_policy_amplitude_provenance_v1.md`, and the field reassembly is in
-`docs/global_policy_field_reassembly_v1.md`.
+`docs/global_policy_field_reassembly_v1.md`; the fresh-backbone fingerprint
+replication is in
+`docs/global_policy_field_fingerprint_replication_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -626,7 +666,9 @@ The registered global-policy slope localization is in
 amplitude-provenance result is in
 `docs/global_policy_amplitude_provenance_v1.md`; and the registered
 additive-by-residual field-reassembly result is in
-`docs/global_policy_field_reassembly_v1.md`.
+`docs/global_policy_field_reassembly_v1.md`; and its prospectively frozen
+fresh-backbone fingerprint replication is in
+`docs/global_policy_field_fingerprint_replication_v1.md`.
 
 ## Repository workflow
 
