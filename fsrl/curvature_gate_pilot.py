@@ -814,10 +814,10 @@ def query_binding_summary(
         )
         matched = normalized[state_index, :, state_index]
         shared_rows[state_index] = matched - np.nanmean(
-            normalized[state_index, :, overlaps == 1], axis=1
+            normalized[state_index][:, overlaps == 1], axis=1
         )
         disjoint_rows[state_index] = matched - np.nanmean(
-            normalized[state_index, :, overlaps == 0], axis=1
+            normalized[state_index][:, overlaps == 0], axis=1
         )
     shared = _masked_subject_mean(shared_rows, retained)
     disjoint = _masked_subject_mean(disjoint_rows, retained)

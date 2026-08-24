@@ -8,6 +8,7 @@ from fsrl.curvature_gate import CurvatureGateTransition
 from fsrl.curvature_gate_pilot import (
     _ordered_pairs,
     margin_fields,
+    query_binding_summary,
     query_bundle,
 )
 from fsrl.liu_eval import FrozenFastWeightEvaluator
@@ -90,6 +91,31 @@ class CurvatureGatePilotTests(unittest.TestCase):
         observed = margin_fields({"logits": logits}, self.protocol.n_items)
         expected = 0.5 * (logits[:, 0::2] - logits[:, 1::2])
         self.assertTrue(np.array_equal(observed, expected))
+
+    def test_query_binding_reduces_mismatch_queries_within_subject(self):
+        intact = torch.randn(
+            self.config.bs,
+            self.config.hs,
+            self.config.hs,
+            device=self.net.w.device,
+        )
+        loo = intact[None].repeat(8, 1, 1, 1) - 0.01 * torch.randn(
+            8,
+            self.config.bs,
+            self.config.hs,
+            self.config.hs,
+            device=self.net.w.device,
+        )
+        retained = np.ones((8, self.config.bs), dtype=bool)
+        counts = np.eye(self.config.bs, dtype=np.float64)
+        result = query_binding_summary(
+            self.evaluator, intact, loo, retained, counts, 0.95
+        )
+        self.assertEqual(
+            len(result["raw_subject_level"]["matched_minus_shared_endpoint"]),
+            self.config.bs,
+        )
+        self.assertEqual(result["conditioned_minus_original_max_abs"], 0.0)
 
 
 if __name__ == "__main__":
