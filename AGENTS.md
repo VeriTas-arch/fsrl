@@ -616,16 +616,45 @@ equivalent. The pre-sigmoid interaction remains zero to floating-point error,
 so negative `I` is fixed-link probability-field context dependence, not a
 recurrent, circuit, or biological interaction.
 
-The next justified stage is a separately registered read-only allocation
-audit of `Delta g = g_N - g_P_tilde`, with pair identity, symbolic distance,
-posterior uncertainty, and observed/effective evidence coverage fixed as the
-candidate axes before analysis. On 2106/2107 this is sequential localization,
-not another independent confirmation. Do not modify `P_T`, recurrent dynamics,
-`W_out`, temperature, the comparator, or the model before this audit. If no
-cross-network state-dependent allocation fingerprint is found, redirect to a
-prospectively defined comparator-adequacy test rather than tuning the network.
-The exact posterior remains a frozen comparator, not the human posterior or
-ground-truth neural geometry.
+That prospectively frozen read-only allocation audit is now complete on the
+same locked 2106/2107 backbones. The exact bridge from the equal-energy field
+difference through the fixed sigmoid to the slope ledger is verified for every
+participant and bootstrap draw: `sum_e q_(s,e) = Q_shape,s`. Both complete GPU
+executions are byte-identical, all source, artifact, fingerprint, identity, and
+finiteness gates pass, and participants remain separate within network. This is
+sequential localization, not another independent confirmation or network-
+population inference.
+
+The registered outcome is `policy_effective_allocation_localized`, with scope
+`structural_only`. After removing an intercept and linear distance, the pair
+vectors replicate across networks in both the correct-signed field mismatch
+(`corr(r_delta)=0.99477`, bootstrap lower bound 0.40845) and the exact slope
+bridge (`corr(r_q)=0.95800`, lower bound 0.33947). The six-level exact slope
+ledger also replicates (`corr=0.99986`, lower bound 0.99267): positive
+`Q_shape` is concentrated at distances 1 and 2 and partially offset at
+distances 3 through 6. Treat this as stable comparator-relative structural
+allocation at the policy-effective locations, not pairwise significance,
+component sufficiency, a causal result, or a population-prevalence claim.
+
+Posterior uncertainty and effective evidence coverage are reproducibly
+associated with the allocation but fail the frozen policy-effectiveness rule.
+For both variables in both networks, the simultaneous pair-fixed-effect field
+coefficient is positive while the exact-bridge coefficient is negative. Do not
+call either axis null, absent, or irrelevant; the registered result is a stable
+field-to-policy sign reversal. The two predictors are highly correlated,
+posterior uncertainty is comparator-derived, and coverage is observational, so
+the coefficients are conditional associations rather than causal or total
+effects.
+
+Preserve the structural positive while revising the route: the audit does not
+authorize a state-conditioned `P_T -> g_N` generation analysis, parameter
+inspection, neural intervention, fifth allocation axis, new interaction, norm
+change, or temperature fit. The only registered next stage is a prospectively
+defined comparator-adequacy test with an external criterion fixed before any
+alternative comparator is introduced. The exact posterior remains a frozen
+comparator, not the human posterior or ground-truth neural geometry; do not
+search comparator families or select the alternative that best removes the
+current fingerprint.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
@@ -633,7 +662,9 @@ The fresh confirmation is in
 `docs/global_policy_amplitude_provenance_v1.md`, and the field reassembly is in
 `docs/global_policy_field_reassembly_v1.md`; the fresh-backbone fingerprint
 replication is in
-`docs/global_policy_field_fingerprint_replication_v1.md`.
+`docs/global_policy_field_fingerprint_replication_v1.md`, and the equal-energy
+allocation localization is in
+`docs/global_policy_allocation_audit_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -668,7 +699,9 @@ amplitude-provenance result is in
 additive-by-residual field-reassembly result is in
 `docs/global_policy_field_reassembly_v1.md`; and its prospectively frozen
 fresh-backbone fingerprint replication is in
-`docs/global_policy_field_fingerprint_replication_v1.md`.
+`docs/global_policy_field_fingerprint_replication_v1.md`; and the registered
+equal-energy allocation localization is in
+`docs/global_policy_allocation_audit_v1.md`.
 
 ## Repository workflow
 
