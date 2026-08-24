@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "audit_id": "liu-global-policy-comparator-adequacy-v1",
+  "repair_status": "prospectively_frozen_after_static_edge_contract_failure_and_before_any_human_or_posterior_adequacy_evaluation",
+  "original_specification": {
+    "path": "benchmarks/global_policy_comparator_adequacy_v1.json",
+    "sha256": "a1769d9c0753f012216edd753f22a411b113f5c0c87610609914dc95429378b2"
+  },
+  "failure_stage": "The first focused synthetic/static test invocation failed while constructing edge metadata in setUpClass. No raw human trial file, exact-posterior field, split-half reliability, 20-pair human slope, posterior-human correlation, distance profile, adequacy status, or outcome was loaded or calculated.",
+  "failure": "The specification transcribed distance_level_pair_counts as [4,5,4,3,2,2], but its own frozen 20 nonlearned pair labels and inherited Track-B mask deterministically contain [6,5,2,3,2,2] pairs at distances 1 through 6.",
+  "upstream_identity": {
+    "allocation_specification": {
+      "path": "benchmarks/global_policy_allocation_audit_v1.json",
+      "sha256": "b14836fbd523c9b6ad620394979905b15a96f5a3109b7929669da199cb70c0fe",
+      "distance_level_pair_counts": [6, 5, 2, 3, 2, 2]
+    },
+    "allocation_result": {
+      "path": "results/global_policy_allocation_audit_v1.json",
+      "sha256": "82147bad41b0cbdbb812217f383555f166e5f96492a7b00de752bec14ef867f6",
+      "distance_level_pair_counts": [6, 5, 2, 3, 2, 2]
+    }
+  },
+  "repair": {
+    "json_pointer": "/field_contract/distance_level_pair_counts",
+    "registered_value": [4, 5, 4, 3, 2, 2],
+    "corrected_value": [6, 5, 2, 3, 2, 2]
+  },
+  "unchanged_contract": "The 20 pair labels, learned/nonlearned mask, pair order, six distance levels, d_bar=2.8, V_d=57.2, slope weights, residualization, human split, comparator, bootstrap, adequacy thresholds, four outcome branches, sources, and all claim boundaries are unchanged. The correction changes only a descriptive completeness vector so it agrees with the already frozen pair set.",
+  "execution_rule": "The runner must validate the original specification hash, both upstream count anchors, and this exact one-field correction; it may then use corrected_value for completeness validation and reporting. No other original protocol field may be overridden.",
+  "repair_boundary": "This is an execution-integrity repair, not an observed-outcome amendment. It provides no permission to change any scientific estimand, threshold, split, comparator, source, or interpretation after evaluation."
+}
