@@ -49,7 +49,7 @@ def require_formal_runtime() -> dict:
     ):
         raise RuntimeError(
             "formal execution requires the GPU and the bounded runtime entry point: "
-            "python -m fsrl.formal_runtime <confirmation|mechanism> ..."
+            "python -m fsrl.formal_runtime <registered-workflow> ..."
         )
     return snapshot
 
@@ -59,6 +59,7 @@ def main(args=None) -> int:
     workflows = {
         "confirmation",
         "mechanism",
+        "global-policy-amplitude-provenance",
         "global-policy-slope-localization",
     }
     if not arguments or arguments[0] not in workflows:
@@ -69,8 +70,10 @@ def main(args=None) -> int:
         from .confirmation import main as workflow_main
     elif workflow == "mechanism":
         from .mechanism_confirmation import main as workflow_main
-    else:
+    elif workflow == "global-policy-slope-localization":
         from .global_policy_slope_localization import main as workflow_main
+    else:
+        from .global_policy_amplitude_provenance import main as workflow_main
     return workflow_main(arguments)
 
 

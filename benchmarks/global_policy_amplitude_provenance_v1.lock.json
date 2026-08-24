@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-global-policy-amplitude-provenance-v1",
+  "freeze_status": "implementation_and_sources_frozen_before_any_neural_replay",
+  "original_registration_commit": "b7daef8d3a0c07d1937b1ae5d40658c2b14824c7",
+  "protocol_repair_commit": "4229fd3bee8b35871021d930099a651e80d9e0db",
+  "registration_provenance_commit": "0ed9dcfa47058c44b70c4c1dcceb3d0db93d6c3b",
+  "diagnostic_specification_sha256": "08b0a0448c1c6ccc1d783c964e44c0f2e7758b38a1695b802e7416657e985234",
+  "implementation_sources": {
+    "diagnostic_runner": {
+      "path": "fsrl/global_policy_amplitude_provenance.py",
+      "sha256": "da757bcb2fb1748ce9a9e24413b104aa16598ef4e3c5112733137054713dfc2a"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "3298dd2eb890eaa1dcb804e452ef7bfa9678cbc8b0c1bbe7da40ffee3afd1754"
+    },
+    "diagnostic_tests": {
+      "path": "tests/test_global_policy_amplitude_provenance.py",
+      "sha256": "fb1f08d2a0dda225d79220b3271597e5a9a8b45a39fa287194cb108f57357f64"
+    },
+    "formal_runtime_tests": {
+      "path": "tests/test_formal_runtime.py",
+      "sha256": "73cf762900c28ff823dbd836a5a3213383a3e47069c039552d4ce9f3570c45ee"
+    },
+    "choice_probability_source": {
+      "path": "fsrl/local_behavior_attribution.py",
+      "sha256": "79a16b6be0cea2ae481f2aa01b343b1ecbc44b1cb404b85bac34b0d5197715c4"
+    },
+    "json_and_tensor_hash_source": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "file_hash_source": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    }
+  },
+  "validated_before_freeze": {
+    "focused_tests": 18,
+    "full_tests": 199,
+    "scoped_ruff": "passed",
+    "scoped_format": "passed",
+    "repository_wide_ruff": "contains pre-existing findings outside the changed files",
+    "diff_check": "passed"
+  },
+  "execution_boundary": "No seed-2104 or seed-2105 checkpoint was loaded or replayed for this diagnostic before this lock was written. Execute both mandatory networks in one formal-runtime command only after committing and pushing this implementation lock."
+}

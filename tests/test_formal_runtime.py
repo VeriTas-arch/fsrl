@@ -3,7 +3,9 @@ import json
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
 
+from fsrl import formal_runtime
 from fsrl.confirmation import (
     _formal_runtime_source_registration,
     _formal_training_source_registration,
@@ -14,6 +16,20 @@ from fsrl.meta_train import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_amplitude_provenance_dispatch_uses_registered_entry_point(self):
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch(
+                "fsrl.global_policy_amplitude_provenance.main", return_value=17
+            ) as workflow,
+        ):
+            result = formal_runtime.main(
+                ["global-policy-amplitude-provenance", "--sentinel"]
+            )
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 17)
+
     def test_fresh_process_applies_single_thread_policy(self):
         command = (
             "from fsrl.formal_runtime import configure_formal_runtime; "
@@ -33,9 +49,13 @@ class FormalRuntimeTests(unittest.TestCase):
 
         recorded_runtime = dict(result)
         recorded_runtime["cuda_available"] = True
-        recorded_runtime["cuda_version"] = recorded_runtime.get("cuda_version") or "test-cuda"
+        recorded_runtime["cuda_version"] = (
+            recorded_runtime.get("cuda_version") or "test-cuda"
+        )
         recorded_runtime["device"] = "cuda"
-        recorded_runtime["device_name"] = recorded_runtime.get("device_name") or "test-gpu"
+        recorded_runtime["device_name"] = (
+            recorded_runtime.get("device_name") or "test-gpu"
+        )
         record = {
             "execution_runtime": recorded_runtime,
             "execution_runtime_source": _formal_runtime_source_registration(),
