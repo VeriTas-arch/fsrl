@@ -1,9 +1,10 @@
 import unittest
+from pathlib import Path
 
 import numpy as np
 import torch
 
-from fsrl.assembly_diagnostics import load_json
+from fsrl.assembly_diagnostics import file_sha256, load_json
 from fsrl.assembly_trajectory import bootstrap_counts
 from fsrl.hidden_residual_audit import validate_registered_sources
 from fsrl.operator_amplitude_path import (
@@ -93,6 +94,45 @@ class OperatorAmplitudePathTests(unittest.TestCase):
         specification = load_json("benchmarks/operator_amplitude_path_v1.json")
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
+
+    def test_registered_result_is_complete_and_source_locked(self):
+        result = load_json("results/operator_amplitude_path_v1.json")
+        self.assertFalse(result["formal_seed_access"])
+        self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
+        self.assertEqual(
+            result["implementation"]["sha256"],
+            file_sha256(Path(result["implementation"]["path"])),
+        )
+        self.assertEqual(
+            result["specification"]["sha256"],
+            file_sha256(Path(result["specification"]["path"])),
+        )
+        overall = result["overall_diagnosis"]
+        self.assertEqual(overall["replicated_mean_crossing_relations"], ["H>A"])
+        self.assertEqual(overall["union_mean_crossing_relations"], ["H>A"])
+        self.assertEqual(
+            overall["v2_selection"],
+            "heterogeneous_or_nonreplicated_crossings_register_online_relation_conditioned_v2",
+        )
+        expected_brackets = {"1901": (0.55, 0.60), "1902": (0.60, 0.65)}
+        for seed, row in result["seed_results"].items():
+            self.assertEqual(len(row["lambda_grid"]), 21)
+            bracket = row["prospective_H_greater_A"]["mean_sign_change_bracket"]
+            self.assertEqual(
+                (bracket["lambda_minus"], bracket["lambda_plus"]),
+                expected_brackets[seed],
+            )
+            self.assertTrue(row["validation"]["zero_controls_pass"])
+            self.assertEqual(
+                row["validation"]["prior_J_and_H_summary_consistency_max_abs_error"],
+                0.0,
+            )
+            curvature = next(
+                relation
+                for relation in row["curvature"]["per_relation"]
+                if relation["relation_label"] == "H>A"
+            )
+            self.assertLess(curvature["direct_correctness"]["bootstrap"]["upper"], 0.0)
 
 
 if __name__ == "__main__":

@@ -212,15 +212,28 @@ generation or the first-order operating point. A global scalar local gain is
 insufficient because it would amplify the wrong-sign `H>A` response. Do not
 fit a new readout or add a memory module.
 
-Before choosing a v2 architecture, freeze a final two-seed amplitude-path
-discriminator `H_q(lambda)=tanh(b_q+lambda A_q)-tanh(b_q)` on a prospective
-grid, with all relations reported, `H>A` primary, and the same Hodge, remote,
-and stable-omission controls. Use it to distinguish a large-amplitude sign
-crossing addressable by magnitude-bounded or residualized expression from a
-baseline-dependent routing failure. Any v2 mechanism must be online-computable
-without a relation-LOO oracle, preserve the confirmed global channel and
-operator binding, and begin with one to three new development seeds under
-selective causal ablations.
+The final frozen amplitude-path gate is complete on the two pilots. `H>A` is
+the only relation whose mean direct correctness crosses zero in either seed,
+at `lambda=0.55--0.60` and `0.60--0.65`; the robust transition intervals
+overlap. Most retained subjects cross (`49/55` and `45/55`), but their brackets
+are broad. `F>A` also crosses in a sizeable minority without a mean crossing,
+while the other relations are much less affected. The analytic quadratic
+curvature coefficient is correctness-opposed overall and much more negative
+for `H>A` than for the other relations. Treat this as finite-amplitude
+relation- and subject-conditioned curvature, not generic saturation.
+
+Read-only local-fidelity localization on seeds 1901 and 1902 is now complete.
+Do not add adaptive amplitude points or more post hoc diagnostics on those
+seeds. Global clipping is not the selected mechanism because the other seven
+relation means remain correct at natural amplitude and subject thresholds vary.
+The next step is to register an online relation-/state-conditioned expression
+v2 on one to three new development seeds. Its gate may use normal query state,
+total fast-weight recurrent drive, and recurrent operating state, but not
+relation LOO, labels, correctness, or a relation-identity oracle. Compare it
+with the original v1 network, a matched global-scalar gate, and selective
+gate-off or shuffled-gate controls. Require improved learned-pair fidelity,
+preserved global assembly/query binding/nonlearned inference, and the predicted
+selective causal loss of rescue before any formal run.
 
 Start v2 only with one to three development seeds. Freeze estimands, competence
 gates, and outcome-contingent interpretations before any new formal population.
@@ -230,7 +243,9 @@ local-fidelity question. The current formal evidence is recorded in
 decisive test are in `docs/hidden_residual_audit_v1.md`; the subsequent mixed
 operator-code result is in `docs/relation_trace_localization_v1.md`; its
 functional resolution is in `docs/state_query_operator_binding_v1.md`; the
-value-to-expression localization is in `docs/operator_output_semantics_v1.md`.
+value-to-expression localization is in `docs/operator_output_semantics_v1.md`;
+the final amplitude/curvature architecture-selection gate is in
+`docs/operator_amplitude_path_v1.md`.
 
 ## Repository workflow
 
