@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "confirmation_id": "liu-dual-evidence-access-confirmation-v2.4",
+  "freeze_status": "implementation_frozen_before_seed_2104_or_2105_artifact_generation_or_liu_evaluation",
+  "confirmation_specification_path": "benchmarks/dual_evidence_access_confirmation_v2_4.json",
+  "confirmation_specification_sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09",
+  "implementation_sources": {
+    "confirmation_runner": {
+      "path": "fsrl/dual_evidence_access_confirmation.py",
+      "sha256": "5324b8c08870131c754325226eb715d017c8b9733947b9a07e65f39361a6ba32"
+    },
+    "confirmation_tests": {
+      "path": "tests/test_dual_evidence_access_confirmation.py",
+      "sha256": "2c9a93d8512f244763fa482f515682f1729afaccdcb4153153dc0ac973d7eb8d"
+    }
+  },
+  "reused_frozen_sources": {
+    "bootstrap_and_geometry": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "runtime_and_frozen_estimands": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "ranking_protocol_loader": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "hash_validation": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    }
+  },
+  "reuse_contract": {
+    "training_and_gain": "The confirmation runner calls the frozen v2.3 train_backbone, adapt_gain, seed_specification, and artifact validation primitives without changing their equations or compiler settings.",
+    "liu_evaluation": "The confirmation runner calls the repair1-locked v2.4 evaluate_seed and cross_seed_decision functions for all seven conditions and four primary links.",
+    "path_binding": "A scoped context binds only the fresh specification and output root required by the reused v2.4 function and restores both module constants afterward.",
+    "scientific_reimplementation": "none"
+  },
+  "compiler_contract": {
+    "backbone_training": "torch.compile(net, fullgraph=True) with PyTorch default mode through train_meta_model",
+    "generic_backbone_replay": "torch.compile(backbone, fullgraph=True, mode='default')",
+    "local_read_and_policy": "torch.compile(local, fullgraph=True, mode='default')",
+    "local_write": "torch.compile(local.write, fullgraph=True, mode='default')",
+    "liu_replay": "frozen eager evaluation with no parameter update"
+  },
+  "execution_firewall": {
+    "mandatory_seed_order": [2104, 2105],
+    "both_artifact_sets_before_either_liu_evaluation": true,
+    "joint_artifact_lock_required": true,
+    "single_two_seed_evaluation_command_required": true,
+    "adaptive_stopping_replacement_checkpoint_selection_or_liu_gain_tuning": "forbidden"
+  },
+  "validation_before_freeze": {
+    "pytest": "183 passed",
+    "focused_pytest": "14 passed",
+    "scoped_ruff_check": "passed",
+    "scoped_ruff_format_check": "passed",
+    "registered_source_hashes": "passed",
+    "git_diff_check": "passed"
+  },
+  "next_lock": "After both final-step backbones and both final-step generic gains exist, create and push benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json before any Liu evaluation.",
+  "immutability": "Any execution repair after artifact generation begins requires a superseding implementation lock naming the defect; seeds, training, gain adaptation, admission equation, controls, maps, estimands, thresholds, and outcome rules remain unchanged."
+}
