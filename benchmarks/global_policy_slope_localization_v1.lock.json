@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-global-policy-slope-localization-v1",
+  "freeze_status": "implementation_and_sources_frozen_before_neural_replay",
+  "registration_commit": "6fda137eb31afe2846cb0c6eebe0cc698335317c",
+  "diagnostic_specification_sha256": "a32878f671327eb650f3f94336a4951b24edd8f76af99a5ce343872010ca6107",
+  "implementation_sources": {
+    "diagnostic_runner": {
+      "path": "fsrl/global_policy_slope_localization.py",
+      "sha256": "1b6d1d3d326d2ab00182eb9b15f64208154065e8808f49b8eec47af386312442"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "f0e688006f406f01ef9765112d8e556e413774269c974bb4dfbb09d01cbf6861"
+    },
+    "diagnostic_tests": {
+      "path": "tests/test_global_policy_slope_localization.py",
+      "sha256": "301ccd3e7fe3971684cb9050628c9955a03cc07b45d3a8b7f2198b24f78d59c1"
+    }
+  },
+  "validated_before_freeze": {
+    "focused_tests": 11,
+    "full_tests": 187,
+    "scoped_ruff": "passed",
+    "full_ruff": "contains eight pre-existing findings outside the changed files",
+    "diff_check": "passed"
+  },
+  "execution_boundary": "No seed-2104 or seed-2105 neural replay for this diagnostic occurred before this lock was written. Execute both mandatory networks in one command only after committing and pushing this lock."
+}

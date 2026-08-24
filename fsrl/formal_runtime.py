@@ -56,16 +56,21 @@ def require_formal_runtime() -> dict:
 
 def main(args=None) -> int:
     arguments = list(sys.argv[1:] if args is None else args)
-    if not arguments or arguments[0] not in {"confirmation", "mechanism"}:
-        raise ValueError(
-            "first argument must select the confirmation or mechanism workflow"
-        )
+    workflows = {
+        "confirmation",
+        "mechanism",
+        "global-policy-slope-localization",
+    }
+    if not arguments or arguments[0] not in workflows:
+        raise ValueError("first argument must select a registered formal workflow")
     workflow = arguments.pop(0)
     configure_formal_runtime()
     if workflow == "confirmation":
         from .confirmation import main as workflow_main
-    else:
+    elif workflow == "mechanism":
         from .mechanism_confirmation import main as workflow_main
+    else:
+        from .global_policy_slope_localization import main as workflow_main
     return workflow_main(arguments)
 
 
