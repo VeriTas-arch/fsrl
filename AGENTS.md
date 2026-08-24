@@ -750,6 +750,50 @@ unchanged signed support graph. The original Liu data do not independently
 identify pair identity, graph position, true rank distance, and displayed
 magnitude.
 
+That behavior experiment is now prospectively registered, but no participant
+collection is authorized. It is a within-participant two-list crossover with
+disjoint image sets and four counterbalance cells. Both conditions preserve the
+same eight signed support relations and magnitude multiset
+`{1,2,3,3,3,4,5,7}`. Assignment A uses low-to-high order
+`A-B-C-D-E-F-G-H`; assignment B uses `D-B-E-A-C-F-H-G`. Both are exact scalar
+embeddings, all eight support-edge magnitudes change, and the complete query
+graph splits prospectively into seven nonlearned order-flip pairs, thirteen
+nonlearned same-direction pairs, and eight learned pairs. Do not replace
+assignment B with an arbitrary edge shuffle or introduce metric frustration.
+
+The registered hierarchy first tests assignment-following preference on the
+seven flip pairs, then magnitude-linked confidence over the thirteen
+same-direction nonlearned pairs only if the flip effect is equivalent to zero,
+and finally the learned-pair magnitude slope only if both earlier effects are
+equivalent. The symmetric SESOI values are `0.10` probability for the flip
+contrast and `0.02` probability per gap unit for each slope. Equivalence has
+practical-interpretation priority over a tiny directional effect; intervals
+that merely include zero remain unresolved. Preserve the fixed outcome tree and
+do not select a favorable pair subset, interaction, transform, or rank score
+after collection.
+
+Sample-size planning uses the existing 77 participants only for empirical
+participant-profile variance and pair covariance. A conservative independent-
+list construction gives null standard deviations `0.20534`, `0.05985`, and
+`0.03233` for the flip, nonlearned-confidence, and learned-relation estimands.
+Under the frozen balanced four-cell OLS and symmetric TOST equations, the
+minimum analyzable size is 100, exactly 25 per cell; 96 fails the 0.90
+all-axis power rule. Recruitment may replace only prospectively ineligible or
+incomplete cases up to 30 enrolled per cell. Never use an observed condition
+contrast to replace, exclude, or extend recruitment.
+
+The pure synthetic contract validator passes every registered assignment,
+pair-partition, task-interface, sample-size, power, and outcome-tree gate while
+opening no participant response file. This is implementation validation, not
+new behavioral evidence. Before the first new participant, separately review
+and freeze acquisition code, image and randomization manifests, analysis code,
+platform timing, consent/ethics status, source hashes, and write-once result
+paths. Until that explicit authorization, do not implement collection, inspect
+a pilot, continue comparator modeling, or reopen neural intervention. The
+registration is in `benchmarks/magnitude_placement_behavior_v1.json`; the
+synthetic validation is in
+`results/magnitude_placement_behavior_v1_validation.json`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
