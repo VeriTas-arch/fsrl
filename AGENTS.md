@@ -888,6 +888,26 @@ mismatches as behavioral shape constraints. The contract and result are in
 `results/model_behavior_reproduction_map_v1.json`; the interpretation is in
 `docs/model_behavior_reproduction_map_v1.md`.
 
+The second near-term deliverable is now frozen as a synthesis of existing
+evidence, not a new experiment. The main model has two differentially admitted
+episode-local states. `P_T` implements state-dependent iterative relational
+reassembly: eligibility commonly carries relation direction, modeled DA
+modulates magnitude, `alpha` places writes in high-sensitivity directions,
+accumulated state changes their expression, and interacting writes produce an
+expected-rank-like additive global field. `L_T` accumulates a broader weak
+signed signal on a conjunctive address and supplies query-matched direct
+fidelity. `P`-off and `L`-off establish the functional double dissociation.
+
+Keep parameter-level and biological boundaries explicit. The
+eligibility-direction/DA-gain split is not universal because of competent seed
+2009; isolated remote updates are not independently correctness-propagating;
+the address and `p_sr` are sufficient implementations rather than unique
+codes; and `P_T/L_T` are not identified biological stores. The main mechanism
+figure, equations, causal-link provenance, and negative constraints are in
+`docs/model_mechanism_synthesis_v1.md`. The next active deliverable is a
+read-only reduced-algorithm compression test, not further internal probing or
+model tuning.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
