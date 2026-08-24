@@ -1,0 +1,721 @@
+{
+  "claim_boundary": "This map evaluates model reproduction of human-inspired phenomena. It is neither a model-selection objective nor evidence that the model mechanism is implemented in the human brain.",
+  "execution_mode": "read_only_existing_artifacts_no_checkpoint_load",
+  "human_reference": {
+    "analysis_subjects_excluding_correct_rankers": 69,
+    "difficult_pair_bimodality": {
+      "bimodal": 15,
+      "high_accuracy": 13,
+      "low_accuracy": 0,
+      "ordinary_unimodal": 0
+    },
+    "hodge_reconstructed_subjective_ranking": {
+      "correct_ranker_proportion": 0.1038961038961039,
+      "interval": {
+        "lower": 0.03896103896103896,
+        "upper": 0.16883116883116883
+      }
+    },
+    "inter_subject_ranking_diversity": {
+      "interval": {
+        "lower": 0.5071839605407381,
+        "upper": 0.6124101814638899
+      },
+      "point": 0.5536475459749116
+    },
+    "learned_accuracy": 0.9139610389610392,
+    "nonlearned_accuracy": 0.8277272727272728,
+    "self_consistent_vs_inconsistent_errors": {
+      "counts": {
+        "correct": 8,
+        "self_consistent_incorrect": 64,
+        "self_inconsistent": 5
+      },
+      "self_consistent_incorrect_interval": {
+        "lower": 0.7402597402597403,
+        "upper": 0.9090909090909091
+      },
+      "self_inconsistent_interval": {
+        "lower": 0.012987012987012988,
+        "upper": 0.12987012987012986
+      }
+    },
+    "serial_position_effect": {
+      "interval": {
+        "lower": 0.05373840445269019,
+        "upper": 0.11070037105751393
+      },
+      "point": 0.0821892393320965,
+      "profiles": {
+        "all": {
+          "both_endpoints_above_interior": true,
+          "interior_mean": 0.8318181818181817,
+          "mean_endpoint_contrast": 0.08218923933209676,
+          "minimum_endpoint_advantage": 0.06781076066790348,
+          "profile_low_to_high": [
+            0.8996289424860852,
+            0.8797773654916514,
+            0.8519480519480517,
+            0.8176252319109463,
+            0.812987012987013,
+            0.8105751391465674,
+            0.8179962894248608,
+            0.9283858998144717
+          ]
+        },
+        "learned": {
+          "both_endpoints_above_interior": true,
+          "interior_mean": 0.8937229437229437,
+          "mean_endpoint_contrast": 0.08095238095238111,
+          "minimum_endpoint_advantage": 0.08095238095238089,
+          "profile_low_to_high": [
+            0.9746753246753246,
+            0.8863636363636361,
+            0.8740259740259742,
+            0.8636363636363639,
+            0.9435064935064937,
+            0.918831168831169,
+            0.875974025974026,
+            0.9746753246753251
+          ]
+        },
+        "nonlearned": {
+          "both_endpoints_above_interior": true,
+          "interior_mean": 0.8070562770562768,
+          "mean_endpoint_contrast": 0.08268398268398269,
+          "minimum_endpoint_advantage": 0.06255411255411258,
+          "profile_low_to_high": [
+            0.8696103896103894,
+            0.8771428571428567,
+            0.8431168831168826,
+            0.7992207792207792,
+            0.7607792207792208,
+            0.7672727272727271,
+            0.7948051948051947,
+            0.9098701298701295
+          ]
+        }
+      }
+    },
+    "stable_within_subject_errors": {
+      "interval": {
+        "lower": 0.8405797101449275,
+        "upper": 0.9714285714285714
+      },
+      "point": 0.9130434782608695
+    },
+    "subjects": 77,
+    "symbolic_distance_effect": {
+      "mean": 0.03982860676738232,
+      "t_vs_zero": 15.322309253908891
+    }
+  },
+  "identity_gates": {
+    "dual_access_matched_complete": true,
+    "exact_mandatory_networks": true,
+    "human_benchmark_identity": true,
+    "human_raw_identity": true,
+    "model_confirmation_identity": true
+  },
+  "map_id": "liu-v2.4-model-behavior-reproduction-map-v1",
+  "networks": {
+    "2104": {
+      "analysis_subjects_excluding_correct_rankers": 71,
+      "eligible_subjects": 77,
+      "flags": {
+        "difficult_pair_bimodality": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "hodge_reconstructed_subjective_ranking": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "inter_subject_ranking_diversity": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "learned_accuracy": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "nonlearned_accuracy": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "self_consistent_vs_inconsistent_errors": {
+          "calibration": false,
+          "qualitative": true
+        },
+        "serial_position_effect": {
+          "calibration": false,
+          "qualitative": true
+        },
+        "stable_within_subject_errors": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "symbolic_distance_effect": {
+          "calibration": false,
+          "qualitative": true
+        }
+      },
+      "metrics": {
+        "difficult_pair_bimodality": {
+          "bimodal": 18,
+          "boundary": 0,
+          "high_accuracy": 10,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "hodge_reconstructed_subjective_ranking": {
+          "all_orders_are_permutations": true,
+          "correct_ranker": {
+            "interval": {
+              "lower": 0.025974025974025976,
+              "upper": 0.14285714285714285
+            },
+            "point": 0.07792207792207792
+          }
+        },
+        "inter_subject_ranking_diversity": {
+          "interval": {
+            "lower": 0.4958306984765737,
+            "upper": 0.5898821500431157
+          },
+          "point": 0.5351537798217879
+        },
+        "learned_accuracy": {
+          "interval": {
+            "lower": 0.9090909090909091,
+            "mean": 0.9252415584415583,
+            "upper": 0.940422077922078
+          },
+          "point": 0.9251623376623375
+        },
+        "nonlearned_accuracy": {
+          "interval": {
+            "lower": 0.7803879870129868,
+            "mean": 0.8036932142857142,
+            "upper": 0.825974025974026
+          },
+          "point": 0.8035714285714287
+        },
+        "self_consistent_vs_inconsistent_errors": {
+          "self_consistent_incorrect": {
+            "interval": {
+              "lower": 0.6753246753246753,
+              "upper": 0.8571428571428571
+            },
+            "point": 0.7662337662337663
+          },
+          "self_inconsistent": {
+            "interval": {
+              "lower": 0.07792207792207792,
+              "upper": 0.24675324675324675
+            },
+            "point": 0.15584415584415584
+          }
+        },
+        "serial_position_effect": {
+          "participant_interval": "unavailable_from_frozen_model_artifact",
+          "profiles": {
+            "all": {
+              "both_endpoints_above_interior": true,
+              "interior_mean": 0.825139146567718,
+              "mean_endpoint_contrast": 0.05269016697588125,
+              "minimum_endpoint_advantage": 0.050742115027829326,
+              "profile_low_to_high": [
+                0.8797773654916513,
+                0.8719851576994433,
+                0.8179962894248608,
+                0.7992578849721708,
+                0.7981447124304267,
+                0.8035250463821891,
+                0.8599257884972171,
+                0.8758812615955474
+              ]
+            },
+            "learned": {
+              "both_endpoints_above_interior": true,
+              "interior_mean": 0.912878787878788,
+              "mean_endpoint_contrast": 0.04913419913419903,
+              "minimum_endpoint_advantage": 0.044913419913419794,
+              "profile_low_to_high": [
+                0.9662337662337662,
+                0.8636363636363635,
+                0.8896103896103896,
+                0.9246753246753245,
+                0.92012987012987,
+                0.9214285714285714,
+                0.9577922077922079,
+                0.9577922077922078
+              ]
+            },
+            "nonlearned": {
+              "both_endpoints_above_interior": true,
+              "interior_mean": 0.7900432900432901,
+              "mean_endpoint_contrast": 0.05411255411255411,
+              "minimum_endpoint_advantage": 0.05307359307359305,
+              "profile_low_to_high": [
+                0.8451948051948053,
+                0.8753246753246753,
+                0.7893506493506494,
+                0.7490909090909091,
+                0.7493506493506494,
+                0.7563636363636362,
+                0.8207792207792208,
+                0.8431168831168832
+              ]
+            }
+          }
+        },
+        "stable_within_subject_errors": {
+          "interval": {
+            "lower": 0.8873239436619719,
+            "upper": 0.9859154929577465
+          },
+          "point": 0.9436619718309859
+        },
+        "symbolic_distance_effect": {
+          "mean": 0.04949112112377422,
+          "p_vs_zero": 5.9214367540949384e-36,
+          "t_vs_zero": 22.984287877167258
+        }
+      },
+      "seed": 2104
+    },
+    "2105": {
+      "analysis_subjects_excluding_correct_rankers": 73,
+      "eligible_subjects": 77,
+      "flags": {
+        "difficult_pair_bimodality": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "hodge_reconstructed_subjective_ranking": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "inter_subject_ranking_diversity": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "learned_accuracy": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "nonlearned_accuracy": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "self_consistent_vs_inconsistent_errors": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "serial_position_effect": {
+          "calibration": false,
+          "qualitative": true
+        },
+        "stable_within_subject_errors": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "symbolic_distance_effect": {
+          "calibration": false,
+          "qualitative": true
+        }
+      },
+      "metrics": {
+        "difficult_pair_bimodality": {
+          "bimodal": 15,
+          "boundary": 0,
+          "high_accuracy": 13,
+          "low_accuracy": 0,
+          "not_fit": 0,
+          "ordinary_unimodal": 0
+        },
+        "hodge_reconstructed_subjective_ranking": {
+          "all_orders_are_permutations": true,
+          "correct_ranker": {
+            "interval": {
+              "lower": 0.012987012987012988,
+              "upper": 0.1038961038961039
+            },
+            "point": 0.05194805194805195
+          }
+        },
+        "inter_subject_ranking_diversity": {
+          "interval": {
+            "lower": 0.4992389649923896,
+            "upper": 0.5850184822787563
+          },
+          "point": 0.5354968471406827
+        },
+        "learned_accuracy": {
+          "interval": {
+            "lower": 0.9175324675324676,
+            "mean": 0.9314914935064935,
+            "upper": 0.9449675324675323
+          },
+          "point": 0.9314935064935064
+        },
+        "nonlearned_accuracy": {
+          "interval": {
+            "lower": 0.7826607142857143,
+            "mean": 0.8053703246753247,
+            "upper": 0.8277938311688313
+          },
+          "point": 0.8052597402597403
+        },
+        "self_consistent_vs_inconsistent_errors": {
+          "self_consistent_incorrect": {
+            "interval": {
+              "lower": 0.7532467532467533,
+              "upper": 0.922077922077922
+            },
+            "point": 0.8441558441558441
+          },
+          "self_inconsistent": {
+            "interval": {
+              "lower": 0.03896103896103896,
+              "upper": 0.18181818181818182
+            },
+            "point": 0.1038961038961039
+          }
+        },
+        "serial_position_effect": {
+          "participant_interval": "unavailable_from_frozen_model_artifact",
+          "profiles": {
+            "all": {
+              "both_endpoints_above_interior": true,
+              "interior_mean": 0.8284786641929499,
+              "mean_endpoint_contrast": 0.05139146567717989,
+              "minimum_endpoint_advantage": 0.04944341372912797,
+              "profile_low_to_high": [
+                0.8779220779220779,
+                0.8666048237476808,
+                0.8217068645640074,
+                0.8029684601113173,
+                0.806307977736549,
+                0.8040816326530612,
+                0.8692022263450835,
+                0.8818181818181817
+              ]
+            },
+            "learned": {
+              "both_endpoints_above_interior": true,
+              "interior_mean": 0.9198051948051948,
+              "mean_endpoint_contrast": 0.04675324675324666,
+              "minimum_endpoint_advantage": 0.0405844155844155,
+              "profile_low_to_high": [
+                0.9727272727272727,
+                0.872077922077922,
+                0.8935064935064935,
+                0.933766233766234,
+                0.9259740259740259,
+                0.9285714285714286,
+                0.964935064935065,
+                0.9603896103896103
+              ]
+            },
+            "nonlearned": {
+              "both_endpoints_above_interior": true,
+              "interior_mean": 0.7919480519480521,
+              "mean_endpoint_contrast": 0.05324675324675321,
+              "minimum_endpoint_advantage": 0.04805194805194801,
+              "profile_low_to_high": [
+                0.8400000000000001,
+                0.8644155844155843,
+                0.792987012987013,
+                0.7506493506493508,
+                0.7584415584415585,
+                0.7542857142857142,
+                0.8309090909090908,
+                0.8503896103896105
+              ]
+            }
+          }
+        },
+        "stable_within_subject_errors": {
+          "interval": {
+            "lower": 0.8904109589041096,
+            "upper": 0.9863013698630136
+          },
+          "point": 0.9452054794520548
+        },
+        "symbolic_distance_effect": {
+          "mean": 0.049541478929234065,
+          "p_vs_zero": 5.5835254056856694e-36,
+          "t_vs_zero": 23.00458390295364
+        }
+      },
+      "seed": 2105
+    }
+  },
+  "next_step": "After the read-only map is frozen, build the main P_T/L_T causal mechanism figure and reduced algorithm from already confirmed links; do not tune v2.4 to repair mismatched rows.",
+  "rows": [
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "learned_accuracy",
+      "status": "reproduced"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "nonlearned_accuracy",
+      "status": "reproduced"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": false,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": false,
+          "qualitative": true
+        }
+      },
+      "row_id": "symbolic_distance_effect",
+      "status": "qualitatively_reproduced_quantitatively_mismatched"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": false,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": false,
+          "qualitative": true
+        }
+      },
+      "row_id": "serial_position_effect",
+      "status": "qualitatively_reproduced_quantitatively_mismatched"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "difficult_pair_bimodality",
+      "status": "reproduced"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "stable_within_subject_errors",
+      "status": "reproduced"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": false,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "self_consistent_vs_inconsistent_errors",
+      "status": "qualitatively_reproduced_quantitatively_mismatched"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "hodge_reconstructed_subjective_ranking",
+      "status": "reproduced"
+    },
+    {
+      "network_flags": {
+        "2104": {
+          "calibration": true,
+          "qualitative": true
+        },
+        "2105": {
+          "calibration": true,
+          "qualitative": true
+        }
+      },
+      "row_id": "inter_subject_ranking_diversity",
+      "status": "reproduced"
+    }
+  ],
+  "schema_version": 1,
+  "source_validation": {
+    "checks": [
+      {
+        "expected": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432",
+        "name": "map_specification",
+        "observed": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432",
+        "passed": true,
+        "path": "benchmarks/model_behavior_reproduction_map_v1.json"
+      },
+      {
+        "expected": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1",
+        "name": "human_benchmark",
+        "observed": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1",
+        "passed": true,
+        "path": "benchmarks/liu_human_exact_v1.json"
+      },
+      {
+        "expected": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227",
+        "name": "human_preregistered_trials",
+        "observed": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227",
+        "passed": true,
+        "path": "data/external/liu2026/preregistered_experiment_data.csv"
+      },
+      {
+        "expected": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249",
+        "name": "human_replication_trials",
+        "observed": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249",
+        "passed": true,
+        "path": "data/external/liu2026/replication_experiment_data.csv"
+      },
+      {
+        "expected": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+        "name": "model_result",
+        "observed": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+        "passed": true,
+        "path": "results/dual_evidence_access_confirmation_v2_4.json"
+      },
+      {
+        "expected": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09",
+        "name": "model_specification",
+        "observed": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09",
+        "passed": true,
+        "path": "benchmarks/dual_evidence_access_confirmation_v2_4.json"
+      },
+      {
+        "expected": "5c67201b17b1dd089ca4a274bad0a2106ce8628b21d8c23851a1646f31e2fba1",
+        "name": "model_implementation_lock",
+        "observed": "5c67201b17b1dd089ca4a274bad0a2106ce8628b21d8c23851a1646f31e2fba1",
+        "passed": true,
+        "path": "benchmarks/dual_evidence_access_confirmation_v2_4.lock.json"
+      },
+      {
+        "expected": "d2448bd682f5dbd96be9cc80a2a43731926aee4f86e756a824afc732867483f2",
+        "name": "model_artifact_lock",
+        "observed": "d2448bd682f5dbd96be9cc80a2a43731926aee4f86e756a824afc732867483f2",
+        "passed": true,
+        "path": "benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json"
+      },
+      {
+        "expected": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec",
+        "name": "liu_protocol",
+        "observed": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec",
+        "passed": true,
+        "path": "benchmarks/liu_v2.json"
+      },
+      {
+        "expected": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336",
+        "name": "behavioral_estimator",
+        "observed": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336",
+        "passed": true,
+        "path": "fsrl/behavioral.py"
+      },
+      {
+        "expected": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade",
+        "name": "human_loader",
+        "observed": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade",
+        "passed": true,
+        "path": "fsrl/human_benchmark.py"
+      },
+      {
+        "expected": "5324b8c08870131c754325226eb715d017c8b9733947b9a07e65f39361a6ba32",
+        "name": "model_confirmation_runner",
+        "observed": "5324b8c08870131c754325226eb715d017c8b9733947b9a07e65f39361a6ba32",
+        "passed": true,
+        "path": "fsrl/dual_evidence_access_confirmation.py"
+      },
+      {
+        "expected": "c0fa2908d1dae762161051ad2e620f306b583b0b1b8d8a3e96b4270c39311d91",
+        "name": "map_runner",
+        "observed": "c0fa2908d1dae762161051ad2e620f306b583b0b1b8d8a3e96b4270c39311d91",
+        "passed": true,
+        "path": "fsrl/model_behavior_reproduction_map.py"
+      },
+      {
+        "expected": "eea837b1525eeb8a2aa9eb57bba3329d9e1a7c3ed03c7bfc64e0768ae0978b71",
+        "name": "map_tests",
+        "observed": "eea837b1525eeb8a2aa9eb57bba3329d9e1a7c3ed03c7bfc64e0768ae0978b71",
+        "passed": true,
+        "path": "tests/test_model_behavior_reproduction_map.py"
+      }
+    ],
+    "lock": {
+      "execution_firewall": {
+        "artifact_generation": "Commit and push this lock and its exact implementation sources before creating the write-once result.",
+        "checkpoint_load": "forbidden",
+        "model_choice_resampling": "forbidden",
+        "network_pooling": "forbidden",
+        "training_or_adaptation": "forbidden"
+      },
+      "freeze_status": "implementation_frozen_after_protocol_commit_and_before_map_execution",
+      "implementation_sources": {
+        "map_runner": {
+          "path": "fsrl/model_behavior_reproduction_map.py",
+          "sha256": "c0fa2908d1dae762161051ad2e620f306b583b0b1b8d8a3e96b4270c39311d91"
+        },
+        "map_tests": {
+          "path": "tests/test_model_behavior_reproduction_map.py",
+          "sha256": "eea837b1525eeb8a2aa9eb57bba3329d9e1a7c3ed03c7bfc64e0768ae0978b71"
+        }
+      },
+      "map_id": "liu-v2.4-model-behavior-reproduction-map-v1",
+      "schema_version": 1,
+      "specification_sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432"
+    },
+    "passed": true
+  },
+  "summary": {
+    "rows": 9,
+    "status_counts": {
+      "not_reproduced": 0,
+      "qualitatively_reproduced_quantitatively_mismatched": 3,
+      "reproduced": 6
+    }
+  }
+}

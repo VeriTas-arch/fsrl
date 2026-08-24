@@ -867,6 +867,27 @@ evidence-to-`L_T` local fidelity; a minimal `(P_t,L_t)` algorithm; and
 generalization plus mechanism-ancestry tests. Prospective human falsification
 is a later validation layer, not a present model acceptance gate.
 
+The first deliverable is now complete under a prospectively frozen, read-only
+contract on v2.4 fresh backbones 2104 and 2105. Six of nine Liu phenomena are
+reproduced independently in both networks: learned accuracy, nonlearned
+accuracy, difficult-pair bimodality, 80-percent-stable errors,
+Hodge-reconstructed individualized ranking, and inter-subject ranking
+diversity. Three are directionally reproduced but quantitatively mismatched:
+the symbolic-distance slope is too steep in both networks; the independently
+registered serial-position endpoint contrast is too weak in both; and seed
+2104 overproduces self-inconsistent subjects while seed 2105 is calibrated.
+Nothing is classified `not_reproduced`.
+
+Retain these three mismatches together. The opposite directions of the
+distance and serial-position amplitude discrepancies reject a single global
+temperature, output-gain, or `P_T`-amplitude repair as the next route. Do not
+tune v2.4 against the map. Proceed to the main `P_T/L_T` causal mechanism
+figure and reduced algorithm using confirmed links, while carrying all three
+mismatches as behavioral shape constraints. The contract and result are in
+`benchmarks/model_behavior_reproduction_map_v1.json` and
+`results/model_behavior_reproduction_map_v1.json`; the interpretation is in
+`docs/model_behavior_reproduction_map_v1.md`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
