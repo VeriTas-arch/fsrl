@@ -712,28 +712,43 @@ must have independent theoretical motivation and pass a separately frozen
 human-only external adequacy contract before it can define a neural target; do
 not search alternatives against the neural field.
 
-The next comparator-theory test is now prospectively registered as one
-human-only, metric-preserving candidate. It keeps the displayed signed relative
-magnitudes and coherent eight-item order space, but gives each participant one
-episode-stable Bernoulli access variable per support relation. A retained
-relation contributes its full metric magnitude to constructive inference; an
-omitted relation contributes no effective global evidence. One global access
-probability, one constructive temperature, and one response-lapse probability
-are fit using only the 40-person preregistered cohort. The complete parameter
-artifact must then be committed and hash-locked before the 37-person replication
-cohort is loaded once for confirmation.
+The completed human-only comparator-theory test preserves the displayed signed
+relative magnitudes and coherent eight-item order space, while giving each
+participant one episode-stable Bernoulli access variable per support relation.
+Only one global access probability, one constructive temperature, and one
+response-lapse probability were fit on the 40-person preregistered cohort. The
+parameters were then committed and hash-locked before the 37-person replication
+cohort was opened. Derivation selected `rho=0.78988`, `tau=0.11349`, and
+`epsilon=0.05073`; all 27 registered optimizer starts converged, no parameter
+hit a bound, and all source-isolation and integrity gates pass.
 
-The inherited nonlearned distance and distance-residualized pair adequacy rules
-remain necessary. Individual coherence, stable-error prevalence, and
-subjective-ranking diversity are also mandatory qualification axes, so matching
-only a cohort-average field cannot establish a usable comparator. No neural
-field, virtual subject encoding, `P_T`, `L_T`, prior allocation result, ordinal
-control, compression law, Bradley--Terry model, or alternative comparator may
-enter derivation or confirmation. If this single candidate fails, stop searching
-the existing 37-person holdout and move to a new behavior experiment that
-counterbalances displayed magnitude placement over an unchanged signed support
-graph. The original Liu data do not independently identify pair identity,
-graph position, true rank distance, and displayed magnitude.
+The registered outcome is `distance_adequate_pair_inadequate`. The candidate
+nonlearned slope is `0.06004`, inside the held-out human 95 percent interval
+`[0.04221, 0.06079]` around `S_H=0.05143`. Preserve this positive evidence:
+metric observations plus stable imperfect access and constructive global-order
+commitment are sufficient for the human distance gradient under this split.
+They are not sufficient for the reliable distance-residualized pair field.
+`r_CH=0.23168`, corrected `eta_pair=0.23337`, and its 90 percent lower bound is
+`-0.00896`, far below the frozen `0.80` floor.
+
+Individual qualification is mixed and cannot rescue the failed pair primary.
+The candidate passes the 80-percent stable-error and inter-subject ranking-
+diversity axes. Its self-consistency miss is numerically tiny
+(`0.999989` versus the human ceiling `1.0`) but fails the exact registered
+interval. More materially, it overproduces perfectly stable errors
+(`0.91867` versus human `0.75000`, human 95 percent upper bound `0.89655`).
+Treat stable imperfect access as a sufficient source of distance dependence and
+some individualized global structure, not as a human-adequate comparator or a
+literal omission mechanism.
+
+Close comparator search on the existing 37-person holdout. Do not add
+relation-specific access, refit `rho/tau/epsilon`, run an ordinal limit,
+compression law, Bradley--Terry model, or neural-informed comparator on these
+responses. Neural intervention remains closed. The next decisive test is a new
+behavior experiment that counterbalances displayed magnitude placement over an
+unchanged signed support graph. The original Liu data do not independently
+identify pair identity, graph position, true rank distance, and displayed
+magnitude.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
@@ -745,7 +760,9 @@ replication is in
 allocation localization is in
 `docs/global_policy_allocation_audit_v1.md`, and the human-external comparator
 adequacy result is in
-`docs/global_policy_comparator_adequacy_v1.md`.
+`docs/global_policy_comparator_adequacy_v1.md`, and the held-out human-only
+metric constructive-comparator result is in
+`docs/human_metric_constructive_comparator_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -784,7 +801,9 @@ fresh-backbone fingerprint replication is in
 equal-energy allocation localization is in
 `docs/global_policy_allocation_audit_v1.md`; and the human-external comparator
 adequacy result is in
-`docs/global_policy_comparator_adequacy_v1.md`.
+`docs/global_policy_comparator_adequacy_v1.md`; and the registered human-only
+metric constructive-comparator derivation and confirmation are in
+`docs/human_metric_constructive_comparator_v1.md`.
 
 ## Repository workflow
 
