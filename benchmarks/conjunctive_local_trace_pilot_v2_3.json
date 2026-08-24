@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-conjunctive-local-trace-pilot-v2.3",
+  "registration_status": "frozen_before_v2_3_implementation_local_adaptation_or_evaluation",
+  "registration_parent_commit": "2923ad89c4e3f0d8300ca66130e5d6d15480a956",
+  "scientific_question": "Can a separately persistent, content-addressable conjunctive trace preserve directly experienced relations on a frozen globally competent backbone while leaving nonlearned inference and remote fast-weight reassembly to the existing P_T channel?",
+  "core_hypothesis": "The frozen seed-2101 fast-weight system already supplies global expected-rank-like assembly, while direct fidelity requires a distinct episode-local state that binds the normal pair cue conjunction to the encoded signed support evidence. A fixed shared tensor-product address and one generic-trained positive gain are sufficient if the missing computation is persistent local storage rather than another response correction or global learner.",
+  "mechanism_family": "separately persistent content-addressable local conjunctive trace, distinct from tanh changes, scalar amplitude gating, response-residual mixing, relation lookup tables, and a second transitive learner",
+  "claim_boundary": "This is a one-backbone, one-trainable-scalar development sufficiency test. It can establish a causal functional decomposition on seed 2101 but cannot establish population replication, a biological memory system, unique tensor-product coding, or end-to-end co-adaptation. A valid failure closes this minimal fixed-address local-trace candidate, not every possible persistent local mechanism and not the confirmed P_T global mechanism.",
+  "registration_timing": "The contract is frozen after the valid v2.2 mixed negative closed low-capacity response-expression correction and before writing v2.3 code, adapting the local gain, constructing Liu controls, or evaluating any v2.3 condition.",
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "qualification": {
+      "path": "benchmarks/qualification_v2.json",
+      "sha256": "1b1fd30f5514ec11f9b43e878e4215f0480f56cabf41d0d28b9da71fff9ae369"
+    },
+    "operator_semantics_specification": {
+      "path": "benchmarks/operator_output_semantics_v1.json",
+      "sha256": "1ed8a134268f942af9e8c10af3f128c4850735a65c588db2ab007317b224359b"
+    },
+    "operator_semantics_result": {
+      "path": "results/operator_output_semantics_v1.json",
+      "sha256": "b38f577ad83ffe64866724252e2ff03279185beb748972a7298099855c85837a"
+    },
+    "policy_residual_specification": {
+      "path": "benchmarks/policy_residual_pilot_v2_2.json",
+      "sha256": "d53b98b2159d5ea1653e07e1e077b43a8c38dc4f67b6a306ac8ef6d85ff7d4de"
+    },
+    "policy_residual_artifact_lock": {
+      "path": "benchmarks/policy_residual_pilot_v2_2.artifact_lock.json",
+      "sha256": "f3c34e12b8e147e07c47e5fe07772904df5b2a0d01e43b49e5e513bb4995f662"
+    },
+    "policy_residual_result": {
+      "path": "results/policy_residual_pilot_v2_2.json",
+      "sha256": "74d8150e2e539907d72a54a01930618b81b90303840a6e45b4c1f9e8f495b628"
+    },
+    "policy_residual_report": {
+      "path": "docs/policy_residual_pilot_v2_2.md",
+      "sha256": "e777de86204537f597d39d68a82c33143799d1f99c2911dd87667b05aa7e3b9c"
+    },
+    "v1_training_source": {
+      "path": "fsrl/meta_train.py",
+      "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+    },
+    "v1_model_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    }
+  },
+  "frozen_backbone_contract": {
+    "seed": 2101,
+    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d",
+    "origin": "final step-1000 v1 backbone produced under curvature_gate_pilot_v2",
+    "reuse_only": "Do not retrain or edit the backbone. Freeze every backbone tensor before local-gain adaptation and verify byte identity afterward.",
+    "forbidden_seeds": [1901, 1902, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2102, 2103]
+  },
+  "execution_contract": {
+    "device": "visible CUDA GPU required for local-gain adaptation and neural replay",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "local_adaptation_compile": {
+      "enabled": true,
+      "fullgraph": true,
+      "mode": "default"
+    },
+    "trial_input_transfer": "one contiguous CPU-to-GPU transfer per trial",
+    "implementation_freeze": "The v2.3 implementation, tests, and implementation lock must be committed after this protocol and before local-gain adaptation.",
+    "artifact_freeze": "After local-gain adaptation, write and commit a separate artifact lock containing the exact gain-artifact hash before any Liu evaluation. Evaluation must refuse artifact, backbone, protocol, or source mismatches.",
+    "seed_subject_relation_or_trial_filtering": "forbidden except the prospectively defined stable-omission retained-evidence mask",
+    "liu_use_during_adaptation": "forbidden"
+  },
+  "local_trace_equation": {
+    "normal_event_input": "At support and query step 0, split the existing passive input into its left and right cue vectors c_l and c_r. No item index or relation ID enters the local module.",
+    "raw_conjunction": "z(c_l,c_r) = vec(c_l c_r^T - c_r c_l^T)",
+    "normalized_key": "k(c_l,c_r) = z / max(||z||_2, epsilon_key), with epsilon_key=1e-8",
+    "orientation_identity": "k(c_r,c_l) = -k(c_l,c_r)",
+    "state": "L_0 is a zero vector of cue_size squared entries; this is the scalar-value special case of L_0=0 and L_(t+1)=rho L_t + omega_t v_t k_t^T",
+    "write": "L_(t+1) = L_t + s_t k(c_l,c_r), exactly once at support step 0",
+    "encoded_value": "s_t is the existing signed_magnitude multiplied by the existing subject encoding reliability, read from the normal support input; thus presentation reversal changes both s_t and k_t signs and leaves the stored relation trace invariant",
+    "decay": "rho=1.0 fixed; there is no learned forgetting parameter in v2.3",
+    "write_gate": "omega_t=1.0 fixed after the existing stable-omission or attenuation bottleneck has formed s_t; no correctness, label, Liu statistic, hidden residual, or relation-specific gate is permitted",
+    "query": "q_e=k(c_l,c_r) from the normal query step-0 cue input and raw local margin ell_e = L_T dot q_e",
+    "local_gain": "lambda_L=softplus(raw_lambda_L) is the only trainable v2.3 parameter and m_e=m_v1,e + lambda_L ell_e",
+    "symmetric_logits": "output_dual[class_0]=output_v1[class_0]-lambda_L ell_e/2 and output_dual[class_1]=output_v1[class_1]+lambda_L ell_e/2, preserving the v1 common-mode logit",
+    "global_off": "For the P-off/L-intact condition only, run the frozen query dynamics with P_T replaced by zero and add the unchanged local margin; backbone parameters remain frozen.",
+    "forbidden_inputs": "item index, Liu relation identity, H>A or F>A indicator, true query label, correctness, LOO state, posterior, subject identifier, c_res, human target, or any offline crossing statistic"
+  },
+  "local_only_adaptation": {
+    "backbone": "load the frozen seed-2101 checkpoint and freeze every v1 parameter",
+    "task_distribution": "the same generic sparse ranking distribution with the Liu graph and its rank-axis reflection excluded",
+    "adaptation_rng_seed": 12201,
+    "outer_steps": 500,
+    "batch_size": 32,
+    "learning_rate": 0.01,
+    "optimizer": "Adam over raw_lambda_L only",
+    "gradient_clip": 2.0,
+    "initial_lambda_L": 0.1,
+    "loss": "mean generic query cross-entropy of the intact dual branch over all 28 query pairs; no Liu term, local-only auxiliary loss, human scalar, relation label, H>A/F>A indicator, c_res target, or transitive/direct query weighting",
+    "checkpoint_selection": "step 500 only",
+    "control_training": "none; all controls reuse the exact adapted lambda_L and add no parameter"
+  },
+  "liu_evaluation": {
+    "subjects": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "order_seed": 31401,
+    "local_shuffle_seed": 31801,
+    "bootstrap_seed": 31901,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "posterior_temperature": 0.05,
+    "conditions": {
+      "original_v1_local_off": "frozen P_T and v1 output with lambda_L ell_e set to zero",
+      "dual_intact": "frozen P_T plus the naturally written and queried local trace",
+      "local_query_key_shuffle": "frozen P_T and natural L_T, but a fixed seeded within-subject derangement of the 28 canonical query-pair addresses is used; orientation is preserved and the same map is reused for intact and every relation-LOO replay",
+      "global_P_off_local_intact": "replace P_T by zero only during every query replay while retaining the naturally written local trace"
+    },
+    "all_four_conditions_required": true
+  },
+  "estimand_contract": {
+    "local_field": "For each retained support relation r, subtract relation-LOO logits from intact logits on all 28 pairs in both orientations, antisymmetrize, and apply the complete-graph Hodge residual projector.",
+    "direct_correctness": "Multiply the Hodge residual on r's direct edge by the registered correct orientation sign.",
+    "local_branch_influence": "Apply the same intact-minus-LOO field construction to lambda_L ell_e alone. Report absolute direct influence on r and mean absolute influence over disjoint remote query pairs.",
+    "remote_reassembly": "For each retained r, average absolute intact-minus-LOO total-margin influence over disjoint query pairs and average within subject before bootstrap.",
+    "third_party_reassembly": "Use the gauge-invariant third-party relational potential-energy fraction from the registered assembly definition.",
+    "double_dissociation_behavior": "Report learned and nonlearned accuracy separately for all conditions; global-P-off/local-intact is the registered local-only behavioral condition.",
+    "global_branch_identity": "Report exact original-v1/local-off logit identity, qualification, fast-weight necessity, remote reassembly, query binding, and terminal expected-rank-over-MAP projection.",
+    "behavioral_consequences": "Report learned accuracy, nonlearned accuracy, overall accuracy, symbolic-distance slope, and coherent-error summaries for all four conditions; no human interval is a primary gate.",
+    "residual_fingerprint": "Without training or selecting on it, report relationwise local causal rescue including H>A and F>A, corr(|lambda_L ell_e|,|c_res,e|), and whether cells with the largest v1 residual need receive the largest local causal contribution. This is descriptive only."
+  },
+  "competence_and_integrity_gates": {
+    "backbone": "The original-v1/local-off condition must pass qualification_v2 before the local result is interpreted.",
+    "source_and_artifact_hashes": "Every registered source, implementation source, backbone checkpoint, gain artifact, and artifact lock must match its recorded SHA-256.",
+    "frozen_backbone": "Only raw_lambda_L may change during adaptation; every v1 state-dict tensor must be byte-identical before and after.",
+    "local_off_equivalence": "original_v1_local_off must reproduce ungated backbone logits and recurrent outputs exactly, with logit tolerance at most 1e-6.",
+    "orientation_invariance": "Reversing a support presentation must leave s_t k_t unchanged within 1e-7, and reversing a query must negate ell_e within 1e-7.",
+    "trace_replay_identity": "Reconstructing L_T by the registered writes must be query-order invariant and repeated evaluation must agree within 1e-7.",
+    "stable_omission": "A relation whose encoded support value is already zero must have zero natural local intact-minus-LOO influence within 1e-7.",
+    "shuffle_integrity": "Every subject's local-query control map must be a derangement and preserve the full 28-key canonical address multiset; intact and every LOO replay reuse the same map.",
+    "common_mode_identity": "Adding the natural or shuffled local margin must preserve the v1 two-logit mean within 1e-6.",
+    "control_parameter_integrity": "All conditions use the same frozen lambda_L and introduce no additional trainable parameter."
+  },
+  "primary_decision_rules": {
+    "aggregate_local_rescue": "The paired participant-bootstrap lower bound for dual-intact minus original-v1 retained-relation mean direct correctness exceeds zero.",
+    "H_greater_A_rescue": "The paired retained-subject bootstrap lower bound for dual-intact minus original-v1 H>A direct correctness exceeds zero, and the dual-intact H>A direct-correctness bootstrap upper bound is at least zero.",
+    "learned_accuracy_rescue": "The paired participant-bootstrap lower bound for dual-intact minus original-v1 learned accuracy exceeds zero.",
+    "query_address_specificity": "The paired participant-bootstrap lower bound for dual-intact minus local-query-key-shuffle retained-relation mean direct correctness exceeds zero.",
+    "local_direct_specificity": "For the natural local branch, the participant-bootstrap lower bound of mean absolute direct influence minus three times mean absolute disjoint remote influence exceeds zero.",
+    "local_only_direct_memory": "Under global-P-off/local-intact, the participant-bootstrap lower bound for learned accuracy exceeds 0.55, the upper bound for nonlearned accuracy is at most 0.60, and the paired lower bound for learned minus nonlearned accuracy exceeds 0.10.",
+    "global_off_remote_collapse": "The participant-bootstrap upper bound for global-P-off/local-intact remote absolute influence minus 0.25 times original-v1 remote absolute influence is below zero.",
+    "nonlearned_preservation": "Dual-intact nonlearned accuracy is at least 0.70 and its paired participant-bootstrap lower bound relative to original-v1 is no smaller than -0.02.",
+    "global_reassembly_preservation": "Dual-intact remote absolute and third-party relational estimands each have bootstrap lower bounds above zero and point estimates at least 80 percent of original-v1.",
+    "global_branch_preservation": "Original-v1/local-off exactly reproduces v1, passes every qualification_v2 intervention and query-order rule, retains positive query-binding contrasts, and retains an expected-rank-minus-MAP bootstrap lower bound above zero."
+  },
+  "outcome_contingent_interpretation": {
+    "all_primary_rules_pass": "The frozen globally competent system admits a causally separable direct-memory component: P_T is necessary for nonlearned/global remote assembly, while the content-addressable L_T selectively preserves experienced conjunctions. Freeze a separate replication contract before any 2102/2103 or new independent development seed; do not call the tensor-product implementation unique.",
+    "local_rescue_without_double_dissociation": "Reject the mechanistic candidate even if learned behavior improves: the local branch is acting as a second global learner or its causal specificity is insufficient. Do not count accuracy alone as support and do not begin end-to-end co-adaptation.",
+    "double_dissociation_without_local_rescue": "Preserve the selective-storage evidence but reject sufficiency for the Liu local-fidelity problem. Do not tune lambda_L on Liu or alter the frozen address after seeing the result.",
+    "valid_local_or_specificity_failure": "Close the minimal fixed antisymmetric tensor-product trace candidate. Preserve the global P_T mechanism and any qualified local-storage positives, then diagnose whether a shared learned support/query representation or a distinct persistent value transform is missing before registering another family.",
+    "competence_or_integrity_failure": "The mechanistic outcome is non-interpretable; repair execution on the same frozen backbone without changing equations, controls, thresholds, seeds, or scientific rules."
+  },
+  "reporting": {
+    "all_subjects_relations_conditions_and_controls_required": true,
+    "positive_negative_mixed_and_uncertain_results_required": true,
+    "H_A_F_A_and_residual_fingerprint_are_evaluation_only": true,
+    "human_scalar_conjunction_as_primary_gate": false,
+    "threshold_refit_checkpoint_selection_seed_filtering_and_posthoc_gain_selection": "forbidden",
+    "old_v1_v2_v2_1_and_v2_2_contracts_implementations_and_artifacts_immutable": true,
+    "new_backbone_training_new_seed_activation_change_scalar_gate_residual_mixing_or_end_to_end_coadaptation": "forbidden"
+  }
+}
