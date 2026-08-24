@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-state-query-operator-binding-v1",
+  "registration_status": "frozen_after_relation_trace_review_before_operator_factorial_estimands_are_executed",
+  "registration_parent_commit": "c59ff4bd9b7c47406656fd0563fca73e033ba6a9",
+  "scientific_question": "Does the terminal relation-LOO fast-weight trace preserve state-relation identity as a query-keyed operator, and does the recurrent operating point preserve, amplify, generate, or destroy that identity at the first fast-weight-sensitive hidden state?",
+  "claim_boundary": "This is a post-formal exploratory read-only diagnostic on frozen development seeds 1901 and 1902. It tests state-query operator binding, not episodic retrieval, correctness, human fidelity, a rank-one key-value mechanism, a new architecture, or a v2 confirmation. It may not access or select formal seeds.",
+  "positive_evidence_backbone": [
+    "confirmed fast-weight-dependent global expected-rank reassembly",
+    "replicated relation identity in the first fast-weight-sensitive full hidden influence and direct Hodge residual",
+    "exactly zero step-0 and stable-omitted relation-LOO influences"
+  ],
+  "negative_constraints": [
+    "generated and terminal effective fast-weight matrices do not pass the registered shared flattened-matrix relation-prototype test",
+    "the response relation identity is not a shared correctness-aligned fidelity channel and H>A is strongest but correctness-opposed",
+    "query identity alone is a control and may not be interpreted as persistent state identity"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "relation_trace_specification": {
+      "path": "benchmarks/relation_trace_localization_v1_1.json",
+      "sha256": "8701af7535e0634f30b8a18c25fd0797581ca35c9f5e96c4724bf5849febf8e3"
+    },
+    "relation_trace_result": {
+      "path": "results/relation_trace_localization_v1_1.json",
+      "sha256": "8248e72452e77f6d488a27935a04c39505fe2d32cd2c6c45a81ca1428d7a9ae0"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "relation_trace_implementation": {
+      "path": "fsrl/relation_trace_localization.py",
+      "sha256": "343f6ba9f45ff41132d66664eb17d33821251a8dc49a9f98fa072c6dba778e70"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "training_or_parameter_change": "forbidden",
+    "checkpoint_seed_subject_or_relation_selection": "forbidden",
+    "formal_seed_access": "forbidden",
+    "neural_replay_device": "GPU with PyTorch intra-op and inter-op threads bounded to one",
+    "subject_encoding": "the original 77-subject stable-omission cohort",
+    "subject_folds": 7,
+    "fold_assignment": "subject_index modulo 7",
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed": 20260830,
+    "floating_reproduction_tolerance": 0.00000762939453125,
+    "scientific_zero_tolerance": 1e-07
+  },
+  "terminal_state_contract": {
+    "intact_state": "replay all 32 natural support slots from the registered P0",
+    "relation_loo_state": "for each state relation q, replay all support slots while setting only q's signed evidence magnitude to zero",
+    "effective_operator": "M_(q,s) = alpha elementwise-multiplied by [P_T,intact(s) - P_T,without-q(s)]",
+    "stable_omission_control": "M_(q,s) and every downstream factorial effect must be exact zero when q was already omitted for subject s",
+    "static_prototype_boundary": "the prior failed flattened-matrix prototype is not rerun as a new primary outcome"
+  },
+  "factorial_contract": {
+    "state_relations_q": "all eight support relations in registered higher-lower order",
+    "query_relations_e": "the same eight relations, each queried in higher-lower and lower-higher orientations",
+    "query_reset": "hidden and eligibility are reset before every oriented query and fast weights remain frozen",
+    "query_key": "h0_(e,o) is the step-0 hidden state for query relation e and orientation o; it is identical under intact and relation-LOO fast weights because recurrent hidden input starts at zero",
+    "loo_baseline_preactivation": "b_(q,e,o) = i2h(x1) + [W + alpha elementwise-multiplied by P_T,without-q] h0_(e,o)",
+    "operator_action": "A_(q,e,o) = M_q h0_(e,o)",
+    "nonlinear_hidden_effect": "H_(q,e,o) = tanh[b_(q,e,o) + A_(q,e,o)] - tanh[b_(q,e,o)]",
+    "identity_vector": "orientation-antisymmetric 0.5 times [forward minus reverse] A or H",
+    "exact_reconstruction": "b+A must reproduce intact step-1 preactivation and H must reproduce intact-minus-LOO step-1 hidden state for every q, e, subject, and orientation"
+  },
+  "state_identity_contract": {
+    "fixed_query": "for each query relation e and held-out subject fold, form eight unit same-q prototypes from retained training subjects at that same e, then classify q for retained held-out subjects",
+    "cross_query": "for each held-out query relation e and subject fold, form each q prototype from retained training subjects pooled over the other seven query relations, then test q at e",
+    "metrics": [
+      "own-q prototype cosine minus mean cosine to the other seven q prototypes",
+      "eight-way q identification accuracy with fixed chance 0.125"
+    ],
+    "presence_rule_within_seed": "participant-bootstrap lower bounds of mean selectivity and eight-way accuracy exceed zero and 0.125 respectively, with stable-omitted traces within tolerance",
+    "cross_query_interpretation": "fixed-query presence with cross-query presence is query-invariant state identity; fixed-query presence without cross-query presence is basis-dependent state identity"
+  },
+  "query_identity_control": {
+    "fixed_state": "for each retained state relation q and held-out subject fold, form eight same-e prototypes at fixed q and classify query relation e",
+    "cross_state": "for each held-out q and subject fold, form each e prototype from retained training subjects pooled over the other seven state relations, then test e at q",
+    "step0_control": "apply held-out-subject eight-way query matching directly to orientation-antisymmetric h0",
+    "interpretation": "query identity verifies basis structure and is never sufficient evidence for persistent state identity"
+  },
+  "binding_contract": {
+    "overlap_classes": {
+      "matched": "q=e with two shared endpoints",
+      "shared_endpoint_mismatch": "q differs from e and shares exactly one endpoint; exactly two e per q",
+      "disjoint_mismatch": "q and e share no endpoint; exactly five e per q"
+    },
+    "normalized_operator_gain": "for each orientation, norm(M_q h0_e) divided by [Frobenius norm(M_q) times norm(h0_e)], averaged across orientations",
+    "primary_contrasts": [
+      "matched normalized operator gain minus the mean shared-endpoint mismatch gain",
+      "matched normalized operator gain minus the mean disjoint mismatch gain"
+    ],
+    "binding_presence_within_seed": "both participant-bootstrap lower bounds exceed zero and stable-omitted operator actions remain within tolerance",
+    "secondary": [
+      "the same structured contrasts for raw operator-action norm",
+      "structured nonlinear-hidden-effect norm contrasts",
+      "structured nonlinear gain H-norm divided by A-norm",
+      "matched minus mismatch fixed-query state-prototype selectivity"
+    ]
+  },
+  "nonlinear_attribution_contract": {
+    "primary_comparison": "apply the identical fixed-query and cross-query state-identity tests separately to A and H",
+    "paired_secondary": "participant-level H-minus-A changes in selectivity and eight-way accuracy",
+    "boundary": "A identifies functional operator content before the nonlinearity; H identifies content expressed after the LOO operating point and tanh; neither is a correctness or retrieval measure"
+  },
+  "replication_contract": {
+    "operator_state_identity": "fixed-query A state-identity presence independently in both seeds",
+    "cross_query_operator_state_identity": "cross-query A state-identity presence independently in both seeds",
+    "operator_binding": "A binding presence independently in both seeds",
+    "hidden_state_identity": "fixed-query H state-identity presence independently in both seeds",
+    "cross_query_hidden_state_identity": "cross-query H state-identity presence independently in both seeds",
+    "hidden_query_identity_control": "fixed-state H query-identity presence independently in both seeds"
+  },
+  "outcome_contingent_decision_tree": {
+    "A_state_yes_binding_yes_H_state_yes": "persistent fast weight forms a query-keyed operator; the missing human link is a correctness-aligned fidelity transformation",
+    "A_state_yes_binding_no_H_state_yes": "state operator carries identity without matching-key access; identify the more general routing rule before changing storage",
+    "A_state_no_binding_no_H_state_yes": "relation identity is generated jointly by the LOO operating point, nonlinear recurrence, and operator action rather than being present in A alone",
+    "A_state_no_binding_no_H_state_no_H_query_yes": "current evidence does not support persistent local state identity under static or functional tests; a new local storage mechanism becomes more plausible",
+    "A_state_yes_H_state_no": "operator identity reaches preactivation but is lost in recurrent nonlinear expression; the missing operation is expression or routing",
+    "other_pattern": "the registered hierarchy is insufficient; preserve the mixed result without changing thresholds or selecting relations"
+  },
+  "reporting": {
+    "both_declared_seeds_required": true,
+    "all_state_relations_query_relations_and_subjects_required": true,
+    "positive_negative_and_mixed_results_required": true,
+    "raw_subject_level_scalar_estimands_required": true,
+    "formal_v1_artifacts_immutable": true,
+    "rank_one_key_value_claim": "forbidden under this protocol",
+    "retrieval_or_correctness_claim": "forbidden under this protocol",
+    "v2_training_stop": "do not train a dual-channel v2 or fit another response readout until this factorial distinguishes storage, binding, nonlinear expression, and fidelity transformation"
+  }
+}
