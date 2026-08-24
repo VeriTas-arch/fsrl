@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "map_id": "liu-v2.4-model-behavior-reproduction-map-v1",
+  "freeze_status": "implementation_frozen_after_protocol_commit_and_before_map_execution",
+  "specification_sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432",
+  "implementation_sources": {
+    "map_runner": {
+      "path": "fsrl/model_behavior_reproduction_map.py",
+      "sha256": "c0fa2908d1dae762161051ad2e620f306b583b0b1b8d8a3e96b4270c39311d91"
+    },
+    "map_tests": {
+      "path": "tests/test_model_behavior_reproduction_map.py",
+      "sha256": "eea837b1525eeb8a2aa9eb57bba3329d9e1a7c3ed03c7bfc64e0768ae0978b71"
+    }
+  },
+  "execution_firewall": {
+    "checkpoint_load": "forbidden",
+    "training_or_adaptation": "forbidden",
+    "model_choice_resampling": "forbidden",
+    "network_pooling": "forbidden",
+    "artifact_generation": "Commit and push this lock and its exact implementation sources before creating the write-once result."
+  }
+}
