@@ -410,15 +410,47 @@ queries remain the largest exact-slope source. Stable-omitted cells still hold
 and their own local write is exactly zero. Thus the local mechanism is
 replicated while full human behavior remains unsolved.
 
-The next admissible local candidate family is a prospectively registered
-`dual_evidence_access_v2.4` test: preserve the frozen v2.3 address, persistent
-state, and `P_T` global path, while defining how weak/raw evidence unavailable
-to the global stable-omission channel can enter the local path. Freeze the
-evidence source, subject-specific semantics, controls, competence gates, and
-stop rules before implementation. Do not refit the local gain on Liu or ask
-this local-access candidate to repair the separate nonlearned/global distance-
-slope discrepancy. The replication result is in
-`docs/conjunctive_local_trace_replication_v2_3.md`.
+The registered zero-parameter `dual_evidence_access_v2.4` pilot is now complete
+on the same frozen seed-2102 and seed-2103 backbones. Global assembly retains
+`s_G=m_t z_sr`, while the unchanged local trace receives
+`s_L=m_t[z_sr+(1-z_sr)p_sr]`, where `p_sr` is the existing reliability that
+generated the stable global admission. No gain, address, state update, query
+read, recurrent computation, activation, or output readout changes. Every
+competence and integrity gate passes after a source-locked estimator-replay
+repair, and all four primary links pass separately within both networks; no
+participants are pooled across networks.
+
+Preserve the positive differential-access result. Omitted exact probability
+improves by 0.07432 and 0.06024, and omitted relation-LOO direct correctness by
+0.23711 and 0.20515. Natural evidence routing beats a blockwise scalar-
+multiset derangement, and natural query addressing beats the canonical query
+derangement. Under `P`-off, omitted exact probability remains above chance and
+improves over shared access, while nonlearned accuracy stays near chance and
+remote influence collapses. Together with the v2.3 double dissociation, this
+supports different evidence-admission rules feeding two causally distinct
+computations: selective effective evidence enters `P_T` for global assembly,
+whereas broader weak observed evidence enters `L_T` for direct fidelity.
+
+Retain the qualified negatives. Newly admitted omitted writes cause a small
+but reproducible retained-probability cost (-0.00182 and -0.00135), although
+both seeds pass the frozen -0.005 noninferiority rule, retained own writes are
+exactly unchanged, and retained direct causal effects are numerically
+unchanged. The symbolic-distance slope becomes slightly larger, and
+nonlearned/global policy remains its dominant exact source. Do not claim that
+retained decisions are literally unaffected, that `p_sr` is the uniquely
+correct human evidence model, that the two states are biological stores, or
+that network-population prevalence is established.
+
+Before a population claim, freeze the unchanged v2.4 equation and four-link
+contract on new independent backbones; train and generic-adapt all mandatory
+artifacts before inspecting any Liu result. Do not refit `p_sr`, `lambda_L`,
+the retained noninferiority margin, or either routing control. Treat the
+excessive nonlearned/global distance slope as a separate `P_T` policy question;
+begin that family with read-only localization rather than modifying v2.4. The
+v2.3 replication is in
+`docs/conjunctive_local_trace_replication_v2_3.md`, and the differential-access
+result and execution-repair audit are in
+`docs/dual_evidence_access_pilot_v2_4.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -442,7 +474,9 @@ causal local/global double dissociation are in
 its direct-causal versus sampled-behavior mismatch is in
 `docs/local_behavior_attribution_v2_3.md`; and the independent two-backbone
 replication of the local/global decomposition is in
-`docs/conjunctive_local_trace_replication_v2_3.md`.
+`docs/conjunctive_local_trace_replication_v2_3.md`; and the registered
+differential evidence-access sufficiency result is in
+`docs/dual_evidence_access_pilot_v2_4.md`.
 
 ## Repository workflow
 
