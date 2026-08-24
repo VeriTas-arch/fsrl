@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-operator-amplitude-path-v1",
+  "registration_status": "frozen_after_operator_semantics_before_any_amplitude_path_estimand_is_executed",
+  "registration_parent_commit": "476026cc0298cdedac971f39fcfa45e60016a5b8",
+  "scientific_question": "Where and how consistently does finite-amplitude relation-conditioned curvature reverse the otherwise correct query-bound operator value, and does that failure support global magnitude control or relation-conditioned expression in v2?",
+  "claim_boundary": "This is the final read-only local-fidelity architecture-selection gate on frozen development seeds 1901 and 1902. It does not train v2, fit a probe, use a relation or correctness oracle, or access formal seeds. After this gate, choose and register a v2 candidate on new development seeds rather than adding post hoc localization on 1901 and 1902.",
+  "established_chain": [
+    "terminal fast weights support global expected-rank assembly",
+    "relation-LOO fast weights form query-addressable operators with exact-match binding",
+    "W_out-transduced operator value A is correctness-aligned",
+    "the local Jacobian J_b A strengthens raw and normalized correctness",
+    "the exact finite-amplitude response degrades semantic direction and robustly reverses H>A in both pilots"
+  ],
+  "registered_sources": {
+    "pilot_specification": {
+      "path": "benchmarks/pilot_v1.json",
+      "sha256": "903647eceba94cad5194fd9cfff723d6a7ac250b342b5689c6906e28e6464163"
+    },
+    "protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "operator_semantics_specification": {
+      "path": "benchmarks/operator_output_semantics_v1.json",
+      "sha256": "1ed8a134268f942af9e8c10af3f128c4850735a65c588db2ab007317b224359b"
+    },
+    "operator_semantics_result": {
+      "path": "results/operator_output_semantics_v1.json",
+      "sha256": "b38f577ad83ffe64866724252e2ff03279185beb748972a7298099855c85837a"
+    },
+    "model_equation_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "hodge_implementation": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "operator_semantics_implementation": {
+      "path": "fsrl/operator_output_semantics.py",
+      "sha256": "d4c4f4b818ea9b3e20de9b9f055ef52a8baa81b59905dc77c84bbb58fc59d423"
+    },
+    "pilot_artifacts": [
+      {
+        "seed": 1901,
+        "checkpoint_path": "output/pilot-v1/seed-1901/net.dat",
+        "checkpoint_sha256": "b13b7ee663a0d285c97906504d61914485bc43607c1dedc39266b6472914fb14",
+        "config_path": "output/pilot-v1/seed-1901/config.json",
+        "config_sha256": "db304bc887fe90ecec2be6dc30126c8109a556931d6e0ca2196f635dddf3d72b",
+        "behavior_path": "output/pilot-v1/seed-1901/behavior-stable_omission.json",
+        "behavior_sha256": "f92a82ff77398e0df35b69e63fb6addb9329b983e1252b3972e5a00edfe76fcd"
+      },
+      {
+        "seed": 1902,
+        "checkpoint_path": "output/pilot-v1/seed-1902/net.dat",
+        "checkpoint_sha256": "4dfbcb6228ab8dd9fccdf952d51802683eaac5b76586ca19ffaea0d292da31da",
+        "config_path": "output/pilot-v1/seed-1902/config.json",
+        "config_sha256": "d349546671e8b3acddd80d049b5f86d9418546cca489f801483a336626b3ef90",
+        "behavior_path": "output/pilot-v1/seed-1902/behavior-stable_omission.json",
+        "behavior_sha256": "136528320643b6d8a6ae426581b9bf0f1ee774f187491017ce9a9901337ed70e"
+      }
+    ]
+  },
+  "execution_contract": {
+    "seeds": [1901, 1902],
+    "training_or_parameter_change": "forbidden",
+    "checkpoint_seed_subject_or_relation_selection": "forbidden",
+    "formal_seed_access": "forbidden",
+    "adaptive_lambda_search_or_post_hoc_grid_points": "forbidden",
+    "probe_readout_label_or_relation_identity_refit": "forbidden",
+    "neural_replay_device": "GPU with PyTorch intra-op and inter-op threads bounded to one",
+    "subjects": 77,
+    "state_relations": 8,
+    "query_edges": 28,
+    "orientations": 2,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed": 20260824,
+    "floating_reproduction_tolerance": 0.00000762939453125,
+    "scientific_zero_tolerance": 1e-07
+  },
+  "amplitude_path_contract": {
+    "fixed_lambda_grid": [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0],
+    "path": "H_q(lambda) = tanh[b_q + lambda A_q] - tanh(b_q)",
+    "operator_action": "A_q = [alpha elementwise-multiplied by (P_T,intact - P_T,without-q)] h0",
+    "baseline": "b_q is the full relation-LOO response preactivation",
+    "fixed_output": "the trained action-margin covector W_out[action1]-W_out[action0] at its trained scale",
+    "scalar_field": "orientation-antisymmetric W_out projection on all 28 canonical query edges",
+    "hodge_residual": "apply the registered complete-graph residual projector independently at every lambda, relation, and subject",
+    "direct_correctness": "c_q,s(lambda) = y_q C_q,s(lambda)[direct edge q]",
+    "lambda_zero": "the complete field and every residual must be exactly zero",
+    "lambda_one": "must reproduce the prior exact-H estimands and actual intact-minus-LOO logit influence"
+  },
+  "aggregate_crossing_contract": {
+    "per_relation_curve": "participant-bootstrap mean direct correctness at every fixed lambda for every one of the eight relations",
+    "mean_sign_change_bracket": "the first adjacent nonzero grid points [lambda_minus,lambda_plus] with mean c(lambda_minus)>0 and mean c(lambda_plus)<=0; do not interpolate a root",
+    "robust_transition_bracket": "the last grid point before the first robust-negative point whose bootstrap lower bound is above zero, paired with that first later point whose bootstrap upper bound is below zero",
+    "grid_status": "robust_positive if the bootstrap lower bound is above zero, robust_negative if the upper bound is below zero, otherwise unresolved; lambda zero is structural_zero",
+    "crossing_regime": {
+      "early": "mean sign-change lambda_plus <= 0.20",
+      "intermediate": "not early and mean sign-change lambda_minus < 0.60",
+      "late": "mean sign-change lambda_minus >= 0.60",
+      "no_crossing": "no positive-to-nonpositive mean transition by lambda 1"
+    },
+    "primary_relation": "H>A, index pair [7,0], prospectively selected by the prior frozen result",
+    "all_relations_required": true
+  },
+  "subject_crossing_contract": {
+    "first_crossing_bracket": "for each retained subject and relation, the first adjacent nonzero grid pair with c_s(lambda_minus)>0 and c_s(lambda_plus)<=0",
+    "denominator": "all retained subjects for that relation, without filtering on competence, initial sign, or crossing",
+    "reported": [
+      "proportion with a fixed-grid positive-to-nonpositive crossing",
+      "proportion nonpositive at the first nonzero lambda",
+      "proportion negative at lambda 1",
+      "median, quartiles, and counts of first crossing brackets among crossing subjects",
+      "positive-without-crossing and never-positive counts"
+    ],
+    "boundary": "subject brackets describe heterogeneity; no adaptive or subject-specific root solving is permitted"
+  },
+  "curvature_contract": {
+    "local_jacobian": "J_b A = [1-tanh(b)^2] elementwise-multiplied by A",
+    "quadratic_coefficient": "K2 = -tanh(b) elementwise-multiplied by [1-tanh(b)^2] elementwise-multiplied by A^2",
+    "taylor_identity": "H(lambda) = lambda J_b A + lambda^2 K2 + O(lambda^3)",
+    "scalar_and_hodge_processing": "project K2 through the same fixed W_out, orientation contrast, and Hodge residual as the exact path",
+    "secondary_estimands": [
+      "aggregate retained direct correctness of K2",
+      "per-relation retained direct correctness of K2",
+      "H>A K2 direct correctness minus the within-subject mean of other retained relation K2 correctness",
+      "second-order approximation error at each nonzero fixed lambda"
+    ],
+    "interpretation": "negative H>A K2 with weaker or positive other-relation K2 supports a relation-conditioned output-opposed curvature component; call this curvature, not generic saturation"
+  },
+  "primary_estimands": [
+    "H>A aggregate mean sign-change and robust-transition brackets in both seeds",
+    "H>A subject crossing proportion and fixed-grid bracket distribution in both seeds",
+    "all eight per-relation direct-correctness trajectories and crossing regimes",
+    "aggregate across-relation direct correctness and normalized rho trajectories",
+    "direct-minus-remote correctness trajectory",
+    "stable-omitted and lambda-zero exact-zero controls"
+  ],
+  "outcome_contingent_v2_selection": {
+    "isolated_late_H_greater_A_crossing": "choose a relation-conditioned amplitude-control v2; global clipping is not justified because the other relations remain correct",
+    "widespread_late_crossing": "choose a globally magnitude-bounded or residualized-expression v2, while preserving global assembly and testing relation controls",
+    "isolated_early_or_intermediate_H_greater_A_crossing": "choose an online relation-conditioned expression or routing v2 rather than a global scalar correction",
+    "widespread_early_or_intermediate_crossing": "choose a fidelity-preserving near-linear residual expression v2 rather than relying on the current finite nonlinear path",
+    "heterogeneous_or_nonreplicated_crossings": "register the simplest online relation-conditioned v2 that predicts the observed heterogeneity; do not continue post hoc localization on seeds 1901 and 1902",
+    "no_H_greater_A_crossing": "treat this as an integrity contradiction with the locked A/J/H result and stop before v2"
+  },
+  "v2_entry_contract": {
+    "after_this_gate": "do not add further local-fidelity localization on seeds 1901 and 1902",
+    "new_development_seeds": "one to three seeds not used by the read-only localization series",
+    "required_gates": [
+      "learned-pair local fidelity improves under a frozen estimand",
+      "global expected-rank assembly, nonlearned inference, and query binding are preserved",
+      "a selective causal intervention supports the proposed expression mechanism"
+    ],
+    "online_computability": "the v2 mechanism may use normal query and fast-weight state but not relation LOO, true labels, correctness, or a relation-identity oracle",
+    "formal_confirmation": "forbidden until a v2 candidate and estimands are frozen after the one-to-three-seed pilot"
+  },
+  "reporting": {
+    "both_declared_seeds_required": true,
+    "all_relations_subjects_lambdas_edges_and_orientations_required": true,
+    "raw_subject_level_direct_correctness_required": true,
+    "positive_negative_and_heterogeneous_results_required": true,
+    "prior_formal_and_diagnostic_artifacts_immutable": true,
+    "generic_saturation_claim": "forbidden; report finite-amplitude relation-conditioned curvature",
+    "new_memory_dual_channel_or_fitted_readout_claim": "forbidden"
+  }
+}
