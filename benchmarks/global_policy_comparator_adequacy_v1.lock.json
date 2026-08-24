@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "audit_id": "liu-global-policy-comparator-adequacy-v1",
+  "freeze_status": "implementation_frozen_after_protocol_commit_and_before_formal_evaluation",
+  "audit_specification_sha256": "a1769d9c0753f012216edd753f22a411b113f5c0c87610609914dc95429378b2",
+  "protocol_repair": {
+    "path": "benchmarks/global_policy_comparator_adequacy_v1.repair1.json",
+    "sha256": "d9c5f79897f059183b18e62bbda695a905dc7bec10e02f58c3f1503dd8af07ed"
+  },
+  "implementation_sources": {
+    "audit_runner": {
+      "path": "fsrl/global_policy_comparator_adequacy.py",
+      "sha256": "3d76ea629cae15fe8600c61f6273b6da75ac6b8aa1aab90afe9b4e5cd8d8e1b6"
+    },
+    "audit_tests": {
+      "path": "tests/test_global_policy_comparator_adequacy.py",
+      "sha256": "dc523a58ac9190cb400265b13ed593f46e53f0127e2c4e6c584cf73838b42cb8"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "ce16de6a6ce4e7e2d8ec9a39e9e85fa93ed94199d4e0f1ac5c818a62a0ce10fe"
+    },
+    "formal_runtime_tests": {
+      "path": "tests/test_formal_runtime.py",
+      "sha256": "e0ab814fe0ef77291645ab6b23839e117f2b59417333777733ad0e0c3cec67f5"
+    }
+  },
+  "reused_frozen_sources": {
+    "human_benchmark_source": {
+      "path": "fsrl/human_benchmark.py",
+      "sha256": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade"
+    },
+    "posterior_descriptor_source": {
+      "path": "fsrl/global_policy_amplitude_provenance.py",
+      "sha256": "da757bcb2fb1748ce9a9e24413b104aa16598ef4e3c5112733137054713dfc2a"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "subject_encoding_source": {
+      "path": "fsrl/subject_encoding.py",
+      "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"
+    },
+    "ranking_protocol_source": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "exact_posterior_source": {
+      "path": "fsrl/constructive.py",
+      "sha256": "8c33fa737f2d2b988c94054aa720c51913abccbec666c864c4d9eadb8fed443d"
+    },
+    "configuration_source": {
+      "path": "fsrl/config.py",
+      "sha256": "d19b03fd5ce0bd4e8129b83c4d7399bb4afd02bfff199a568e999151ad8625d8"
+    },
+    "assembly_source": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "hash_validation_source": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    }
+  },
+  "static_validation": {
+    "focused_tests": "20 passed after lock generation",
+    "full_suite": "258 passed and 10 subtests passed; one historical allocation current-source-lock test was intentionally deselected because the new append-only formal-runtime dispatch changes the live shared entry-point hash without changing the historical allocation artifact",
+    "ruff": "passed",
+    "formatter": "black"
+  },
+  "shared_runtime_boundary": "The formal runtime and its test file receive only the append-only comparator-adequacy dispatch. Historical result artifacts retain the source hashes and commits under which they executed; this new lock governs only the new audit.",
+  "immutability": "Formal evaluation may begin only after this lock, runner, tests, and dispatch are committed and pushed. Any later execution repair requires a superseding lock that preserves the human sources, fixed comparator, split, estimands, thresholds, bootstrap, outcome tree, and claim boundaries."
+}

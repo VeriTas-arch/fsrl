@@ -61,6 +61,7 @@ def main(args=None) -> int:
         "mechanism",
         "global-policy-allocation-audit",
         "global-policy-amplitude-provenance",
+        "global-policy-comparator-adequacy",
         "global-policy-field-fingerprint-replication",
         "global-policy-field-reassembly",
         "global-policy-slope-localization",
@@ -79,6 +80,8 @@ def main(args=None) -> int:
         from .global_policy_amplitude_provenance import main as workflow_main
     elif workflow == "global-policy-allocation-audit":
         from .global_policy_allocation_audit import main as workflow_main
+    elif workflow == "global-policy-comparator-adequacy":
+        from .global_policy_comparator_adequacy import main as workflow_main
     elif workflow == "global-policy-field-reassembly":
         from .global_policy_field_reassembly import main as workflow_main
     elif workflow == "global-policy-field-fingerprint-replication":
