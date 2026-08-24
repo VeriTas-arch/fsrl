@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "diagnostic_id": "liu-global-policy-amplitude-provenance-v1",
-  "registration_status": "frozen_before_read_only_implementation_or_neural_replay",
+  "registration_status": "prospectively_repaired_after_independent_static_review_before_any_neural_replay",
   "registration_parent_commit": "6a4326ce4ff3808e2a3fce6593ece83924bd86b5",
+  "superseded_registration_commit": "b7daef8",
+  "protocol_repair": "The original frozen registration is preserved in git history. Before any seed-2104 or seed-2105 checkpoint was loaded for this audit, independent static review found that cumulative beta_H or beta_delta equivalence could hide cancellation among earlier atomic elasticities, and that final constant calibration could coexist with internal co-adaptation. This repair makes the four atomic terms symmetric and reports final-comparator and layer-ledger decisions on separate axes. No estimand values, checkpoints, Liu outputs, or audit results were inspected before this repair.",
   "scientific_question": "Which frozen functional layer best matches the excessive scale of the global policy potential: additive fast-weight drive, recurrent nonlinear expression, frozen state-readout alignment, or mixing with the P-independent query baseline?",
   "current_theory": "Differential evidence access into P_T and L_T is the frozen working learning mechanism. The remaining nonlearned distance-slope discrepancy is already localized to an over-sharp additive global policy potential, while normalized geometry, Hodge residual, and the fixed sigmoid are not amplifying sources.",
   "diagnostic_hypothesis": "A same-coordinate, P-off-subtracted amplitude ledger can localize the subjectwise posterior-relative calibration fingerprint to the earliest cumulative layer whose log-elasticity departs from the posterior-equivalent policy amplitude.",
@@ -158,7 +160,7 @@
         "2104": 33704,
         "2105": 33705
       },
-      "rule": "Recompute all means, scalar fits, correlations, OLS slopes, elasticities, increments, and contrasts from each resampled set of participant rows."
+      "rule": "Recompute all means, scalar fits, correlations, OLS slopes, elasticities, increments, and contrasts from each resampled set of participant rows. All 10000 estimates must be finite; never discard an undefined resample. Any undefined estimate makes that network non-interpretable."
     },
     "directional_rule": "A positive or negative claim requires the registered 95% participant-bootstrap interval to exclude zero in that direction.",
     "elasticity_materiality": "For beta-1 or any delta, material positive requires lower95>0.10 and material negative requires upper95<-0.10.",
@@ -170,14 +172,16 @@
     "noninterpretable_integrity_failure": "Any source, artifact, runtime, parameter-immutability, subject-count, reconstruction, denominator, or exact-identity gate fails.",
     "premise_not_reproduced": "The Track-B probability-slope mismatch mean lower95 is not positive in either network.",
     "comparator_sensitive_unresolved": "Y and d_prob do not both have positive lower95 bounds in both networks. Preserve Track B but stop amplitude provenance and do not intervene.",
-    "constant_calibration_fingerprint": "In both networks: c lower95>1; scalar shape-energy explained lower95>=0.90; beta_N-1 is equivalent to zero; Y-on-C and Y-on-Q are equivalent to zero; and the probability-space direction check passes.",
-    "functional_drive_fingerprint": "In both networks: beta_P-1 is material in the same direction; delta_rec, delta_out, and delta_mix are each equivalent to zero.",
-    "recurrent_expression_fingerprint": "In both networks: beta_P-1 is equivalent to zero; delta_rec is material in the same direction; delta_out and delta_mix are each equivalent to zero.",
-    "projection_alignment_fingerprint": "In both networks: beta_H-1 is equivalent to zero; delta_out is material in the same direction; delta_mix is equivalent to zero. This is alignment/projection efficiency, not W_out-norm identification.",
-    "P_independent_mixing_fingerprint": "In both networks: beta_delta-1 is equivalent to zero and delta_mix is material in the same direction; phi and cross-term summaries must be reported.",
-    "coadapted_scale_fingerprint": "Two or more increments are replicated material, or material positive and negative increments cancel, without satisfying one unique earlier branch.",
+    "atomic_layer_terms": "Use e_P=beta_P-1, e_rec=delta_rec, e_out=delta_out, and e_mix=delta_mix. A unique layer requires its own term to be replicated material in the same direction and all other three atomic terms to be equivalent to zero in both networks.",
+    "constant_calibration_fingerprint": "Final-comparator axis only. In both networks: c lower95>1; scalar shape-energy explained lower95>=0.90; beta_N-1 is equivalent to zero; Y-on-C and Y-on-Q are equivalent to zero; and the probability-space direction check passes. This flag does not suppress or replace the layer-elasticity decision.",
+    "functional_drive_fingerprint": "Layer axis. In both networks: e_P is material in the same direction; e_rec, e_out, and e_mix are each equivalent to zero.",
+    "recurrent_expression_fingerprint": "Layer axis. In both networks: e_rec is material in the same direction; e_P, e_out, and e_mix are each equivalent to zero.",
+    "projection_alignment_fingerprint": "Layer axis. In both networks: e_out is material in the same direction; e_P, e_rec, and e_mix are each equivalent to zero. This is alignment/projection efficiency, not W_out-norm identification.",
+    "P_independent_mixing_fingerprint": "Layer axis. In both networks: e_mix is material in the same direction; e_P, e_rec, and e_out are each equivalent to zero; phi and cross-term summaries must be reported.",
+    "coadapted_scale_fingerprint": "Layer axis. Two or more of e_P, e_rec, e_out, and e_mix are independently replicated material, including material terms of opposite signs that cancel in beta_N-1.",
     "heterogeneous_or_unresolved": "The two networks select different branches, no directional/equivalence rule closes, or the scalar shape model leaves more than 10 percent energy unexplained.",
-    "decision_priority": "Apply integrity and premise gates first, then constant calibration, then unique layer branches, then coadapted, else heterogeneous_or_unresolved. Do not choose the numerically largest effect post hoc."
+    "decision_axes": "After integrity, Track-B premise, comparator-direction, and scalar-shape gates, report final_comparator_fingerprint and layer_elasticity_fingerprint separately. The former may be constant_calibration_fingerprint while the latter is unique, coadapted, or unresolved.",
+    "decision_priority": "Apply integrity, Track-B premise, comparator-direction, and scalar-shape gates first. Then compute the final-comparator flag and the symmetric four-term layer flag independently. Do not choose the numerically largest effect post hoc."
   },
   "integrity_gates": {
     "all_registered_source_and_artifact_hashes": "must match",
