@@ -48,7 +48,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "policy_opposition_gate_pilot_v2_1.json"
 )
-DEFAULT_LOCK_PATH = ROOT / "benchmarks" / "policy_opposition_gate_pilot_v2_1.lock.json"
+DEFAULT_LOCK_PATH = (
+    ROOT / "benchmarks" / "policy_opposition_gate_pilot_v2_1.lock_v2.json"
+)
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "policy-opposition-gate-pilot-v2-1"
 DEFAULT_RESULT_PATH = ROOT / "results" / "policy_opposition_gate_pilot_v2_1.json"
 UNSIGNED_SPECIFICATION_PATH = ROOT / "benchmarks" / "curvature_gate_pilot_v2.json"
@@ -531,12 +533,11 @@ def _allocation_summary(evaluator, bundle: dict, retained: np.ndarray) -> dict:
         ):
             values = np.mean(bundle[name][:, indices], axis=1)
             row[f"mean_{name}"] = float(np.mean(values[mask]))
-        product = np.mean(
+        product = (
             bundle["first_order_values"][:, indices]
-            * bundle["quadratic_values"][:, indices],
-            axis=1,
+            * bundle["quadratic_values"][:, indices]
         )
-        row["opposed_fraction"] = float(np.mean(product[mask] < 0.0))
+        row["opposed_fraction"] = float(np.mean(product[mask, :] < 0.0))
         relation_rows.append(row)
     product = bundle["first_order_values"] * bundle["quadratic_values"]
     return {
