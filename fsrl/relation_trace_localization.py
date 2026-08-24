@@ -422,13 +422,13 @@ def _decision(flags: dict[str, bool]) -> str:
     residual = flags["response_hodge_residual"]
     if write and terminal and response and residual:
         return "storage_access_present_missing_fidelity_transformation"
-    if write and terminal and response:
+    if write and terminal and response and not residual:
         return "response_identity_outside_direct_hodge_residual"
-    if write and terminal and not response:
+    if write and terminal and not response and not residual:
         return "persistent_storage_present_query_access_missing"
-    if write and not terminal:
+    if write and not terminal and not response and not residual:
         return "identity_generated_then_compressed_during_integration"
-    if not write and not terminal:
+    if not write and not terminal and not response and not residual:
         return "persistent_relation_identity_not_detected"
     return "mixed_pattern_requires_new_registered_hierarchy"
 

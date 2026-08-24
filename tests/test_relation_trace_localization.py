@@ -69,6 +69,16 @@ class RelationTraceLocalizationTests(unittest.TestCase):
             _decision(no_access),
             "persistent_storage_present_query_access_missing",
         )
+        query_emergent = {
+            "generated_effective_write": False,
+            "terminal_effective_fast_weight": False,
+            "response_full_hidden": True,
+            "response_hodge_residual": True,
+        }
+        self.assertEqual(
+            _decision(query_emergent),
+            "mixed_pattern_requires_new_registered_hierarchy",
+        )
 
 
 if __name__ == "__main__":
