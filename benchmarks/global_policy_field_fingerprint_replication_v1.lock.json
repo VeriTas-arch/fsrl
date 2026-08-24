@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "replication_id": "liu-global-policy-field-fingerprint-replication-v1",
+  "freeze_status": "implementation_and_sources_frozen_before_seed_2106_or_2107_artifact_generation_or_liu_evaluation",
+  "registration_commit": "ff2212bc5903d9f90a3ad1a1d88446331f8eae35",
+  "replication_specification_path": "benchmarks/global_policy_field_fingerprint_replication_v1.json",
+  "replication_specification_sha256": "de83db0f30a9a8a2c398363ed0aca2369c203f5e41c6baa8a5677bc1b57ac461",
+  "implementation_sources": {
+    "replication_runner": {
+      "path": "fsrl/global_policy_field_fingerprint_replication.py",
+      "sha256": "3e709384a6ad5f109e9f7361208ee5315d371a414ddeaab7949b9e23bd27f810"
+    },
+    "replication_tests": {
+      "path": "tests/test_global_policy_field_fingerprint_replication.py",
+      "sha256": "65c38aabcb78d4a1d9d8e328bd845ba3c1dbb45afb5e1e77113642e87819a8d9"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "db1380c69df23fbd39b9b3903c31687bcac69be73649b6ffdf979f7d0addd22d"
+    },
+    "formal_runtime_tests": {
+      "path": "tests/test_formal_runtime.py",
+      "sha256": "0f97e73d3cbd7e5adc04ff17128932ec4f0319f5a42b102075f26954018aa71d"
+    }
+  },
+  "reused_frozen_sources": {
+    "hash_validation": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    },
+    "serialization_and_tensor_hashes": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "posterior_descriptor": {
+      "path": "fsrl/global_policy_amplitude_provenance.py",
+      "sha256": "da757bcb2fb1748ce9a9e24413b104aa16598ef4e3c5112733137054713dfc2a"
+    },
+    "slope_estimator": {
+      "path": "fsrl/global_policy_slope_localization.py",
+      "sha256": "1b6d1d3d326d2ab00182eb9b15f64208154065e8808f49b8eec47af386312442"
+    },
+    "exact_probability": {
+      "path": "fsrl/local_behavior_attribution.py",
+      "sha256": "79a16b6be0cea2ae481f2aa01b343b1ecbc44b1cb404b85bac34b0d5197715c4"
+    },
+    "transitive_artifact_validation_import": {
+      "path": "fsrl/dual_evidence_access_confirmation.py",
+      "sha256": "5324b8c08870131c754325226eb715d017c8b9733947b9a07e65f39361a6ba32"
+    }
+  },
+  "compiler_contract": {
+    "backbone_training": "torch.compile(net, fullgraph=True, mode=default, backend=inductor) through source-locked train_meta_model",
+    "trial_input_transfer": "one contiguous CPU-to-GPU transfer per trial",
+    "liu_replay": "frozen eager evaluation with no parameter update"
+  },
+  "execution_firewall": {
+    "mandatory_seed_order": [2106, 2107],
+    "backbone_only": true,
+    "local_gain_constructed_or_used": false,
+    "both_artifact_sets_before_joint_lock": true,
+    "joint_artifact_lock_committed_and_pushed_before_evaluation": true,
+    "canonical_specification_implementation_artifact_and_output_paths": true,
+    "temporary_result_override": "evaluate-only file below /tmp for byte replay",
+    "git_gate": "Every stage requires clean dev with HEAD equal to origin/dev and all stage-required freeze files tracked and unchanged at HEAD.",
+    "manifest_binding": "Every backbone manifest records the exact specification and implementation-lock SHA-256 values.",
+    "output_membership": "Only seed-2106 and seed-2107 directories, each containing only one non-symlink backbone directory with checkpoint, config, 1000-row log, and manifest.",
+    "adaptive_stopping_replacement_checkpoint_selection_seed_filtering_or_liu_training_use": "forbidden"
+  },
+  "validated_before_freeze": {
+    "focused_tests": "19 passed, 10 subtests passed",
+    "full_tests": "228 passed, 10 subtests passed",
+    "scoped_ruff_check": "passed",
+    "scoped_ruff_format_check": "passed",
+    "formal_runtime_help": "passed without checkpoint load",
+    "registered_source_hashes": "passed",
+    "independent_protocol_review": "passed",
+    "independent_estimand_review": "passed",
+    "independent_api_and_firewall_review": "passed",
+    "git_diff_check": "passed"
+  },
+  "next_lock": "After both complete final-step backbones exist, create and push benchmarks/global_policy_field_fingerprint_replication_v1.artifact_lock.json before either Liu evaluation.",
+  "immutability": "Any integrity-only execution repair after artifact generation begins requires a superseding source lock that preserves both seeds, training contract, field estimands, posterior comparator, masks, thresholds, primary links, secondary boundaries, and outcome tree."
+}

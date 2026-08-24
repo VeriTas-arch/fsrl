@@ -3,7 +3,8 @@ import json
 import subprocess
 import sys
 import unittest
-from unittest.mock import patch
+from types import ModuleType
+from unittest.mock import Mock, patch
 
 from fsrl import formal_runtime
 from fsrl.confirmation import (
@@ -16,6 +17,22 @@ from fsrl.meta_train import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_field_fingerprint_replication_dispatch_uses_registered_entry_point(self):
+        module_name = "fsrl.global_policy_field_fingerprint_replication"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=23)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(
+                ["global-policy-field-fingerprint-replication", "--sentinel"]
+            )
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 23)
+
     def test_field_reassembly_dispatch_uses_registered_entry_point(self):
         with (
             patch.object(formal_runtime, "configure_formal_runtime") as configure,

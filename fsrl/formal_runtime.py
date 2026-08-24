@@ -60,6 +60,7 @@ def main(args=None) -> int:
         "confirmation",
         "mechanism",
         "global-policy-amplitude-provenance",
+        "global-policy-field-fingerprint-replication",
         "global-policy-field-reassembly",
         "global-policy-slope-localization",
     }
@@ -75,8 +76,12 @@ def main(args=None) -> int:
         from .global_policy_slope_localization import main as workflow_main
     elif workflow == "global-policy-amplitude-provenance":
         from .global_policy_amplitude_provenance import main as workflow_main
-    else:
+    elif workflow == "global-policy-field-reassembly":
         from .global_policy_field_reassembly import main as workflow_main
+    elif workflow == "global-policy-field-fingerprint-replication":
+        from .global_policy_field_fingerprint_replication import main as workflow_main
+    else:
+        raise AssertionError(f"unhandled registered formal workflow: {workflow}")
     return workflow_main(arguments)
 
 
