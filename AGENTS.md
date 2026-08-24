@@ -788,11 +788,84 @@ opening no participant response file. This is implementation validation, not
 new behavioral evidence. Before the first new participant, separately review
 and freeze acquisition code, image and randomization manifests, analysis code,
 platform timing, consent/ethics status, source hashes, and write-once result
-paths. Until that explicit authorization, do not implement collection, inspect
-a pilot, continue comparator modeling, or reopen neural intervention. The
+paths. Until that explicit authorization, do not begin collection, inspect a
+pilot, continue comparator modeling, or reopen neural intervention. The
 registration is in `benchmarks/magnitude_placement_behavior_v1.json`; the
 synthetic validation is in
 `results/magnitude_placement_behavior_v1_validation.json`.
+
+The binary-codebook v1.1 collection-readiness stage is now complete. The
+deterministic renderer, 120-slot counterbalanced manifest, immutable raw schema
+and writer, importer, frozen analysis, all five synthetic outcome branches,
+and four-cell/two-session dry run pass from source frozen before artifact
+generation. This is an implementation result only. No human response was
+created or opened, every external ethics/consent/recruitment/privacy/platform
+requirement remains pending, and collection status remains `NO_GO`. Preserve
+the v1 and v1.1 registrations and artifacts; do not recruit, pilot, inspect new
+human data, or reopen the study without a later explicit user `GO`.
+The revised protocol, readiness contract, repair, frozen randomization, and
+readiness result are in
+`benchmarks/magnitude_placement_behavior_v1_1.json`,
+`benchmarks/magnitude_placement_behavior_v1_1_collection_readiness.json`,
+`benchmarks/magnitude_placement_behavior_v1_1_collection_readiness_repair1.json`,
+`benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz`, and
+`results/magnitude_placement_behavior_v1_1_collection_readiness.json`.
+
+## Near-term model-only scope: 2026-08-25 through 2026-09-25
+
+For this period, do not require the current model to establish that its
+internal computation is the mechanism used by human brains. Keep three levels
+separate: behavioral phenomenon reproduction, model-internal computational
+mechanism, and prospective human-mechanism validation. Work only on the first
+two levels. Park new human-experiment implementation and data collection,
+human comparator search, MEG/neural alignment, symbolic-distance tuning,
+temperature or `W_out`/`P_T` calibration, and activation-function changes.
+
+The model question is now:
+
+> How does a meta-learned plastic network transform sparse relational evidence
+> into a stable global structure while preserving direct experience?
+
+Advance it in this order:
+
+1. Build a frozen behavioral reproduction map for v2.4 covering learned and
+   nonlearned accuracy, symbolic-distance and serial-position effects,
+   difficult-pair bimodality, stable within-subject errors, self-consistent
+   versus inconsistent errors, Hodge-reconstructed subjective ranking, and
+   inter-subject ranking diversity or similarity. Classify every row as
+   `reproduced`, `qualitatively_reproduced_quantitatively_mismatched`, or
+   `not_reproduced`; report uncertainty and provenance. Do not tune the model
+   in response to a mismatch. Treat symbolic-distance dependence as
+   qualitatively reproduced with exact human calibration unresolved unless a
+   frozen audit establishes otherwise.
+2. Compress the confirmed global chain to
+   `e_t -> (E_t,d_t) -> delta P_t -> P_T -> g_ij ~= s_i-s_j -> choice`,
+   retaining support-write direction, DA magnitude but not identity, alpha
+   sensitivity placement, remote reassembly, support-stage potential
+   formation, query readout, and `P`-off necessity. The target description is
+   `P_T implements state-dependent iterative relational reassembly`.
+3. Compress the confirmed local chain to
+   `direct observed relation -> L_T -> query-addressed contribution -> direct
+   fidelity`. Preserve the `P`-off/`L`-on versus `L`-off double dissociation
+   and v2.4 differential admission equations. Describe `P_T` as supporting
+   relational abstraction/generalization and `L_T` as preserving
+   experience-specific fidelity, without claiming unique code, biological
+   stores, or human implementation.
+4. Derive a reduced algorithm with coupled states `(P_t,L_t)` and a global
+   plus local policy, then test computational generalization across item count,
+   support topology/sparsity/order/magnitude placement, adjacent transitive
+   inference, and list linking. Validate any new executable design on one to
+   three development seeds before freezing a larger run.
+5. Only after the reproduction map and reduced mechanism are stable, perform
+   read-only ancestry comparisons with the Miconi active/passive reinstatement
+   mechanism. Do not treat analogy as identity or modify the frozen v2.4 model
+   merely to increase similarity.
+
+The four near-term deliverables are: a Liu-phenomenon/model reproduction map; a
+main causal mechanism figure centered on evidence-to-`P_T` global assembly and
+evidence-to-`L_T` local fidelity; a minimal `(P_t,L_t)` algorithm; and
+generalization plus mechanism-ancestry tests. Prospective human falsification
+is a later validation layer, not a present model acceptance gate.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
