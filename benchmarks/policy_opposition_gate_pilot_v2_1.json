@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-policy-relative-curvature-opposition-gate-pilot-v2.1",
+  "registration_status": "frozen_before_v2_1_implementation_gate_adaptation_or_evaluation",
+  "registration_parent_commit": "eb9c2d7240ee17596aac5c3e2faafc7a1ffe845e",
+  "scientific_question": "Is selective attenuation of finite-amplitude curvature that opposes the network's own first-order policy value sufficient to recover local fidelity while preserving the frozen global relational mechanism?",
+  "core_hypothesis": "The frozen seed-2101 fast-weight backbone already carries query-bound useful first-order value, but finite-amplitude tanh curvature sometimes opposes that value in output-margin geometry. A policy-relative sign-aware controller should attenuate only those opposed corrections rather than all large curvature.",
+  "theoretical_identity": "This is a policy-relative curvature-opposition controller. Its online state is g(P_T, h0, b, W_margin), not a hidden-space-only saturation detector.",
+  "claim_boundary": "This is a one-backbone development sufficiency test. It does not confirm population-level v2, identify a biological controller, prove that the gate estimates an offline crossing, change tanh, introduce a new memory channel, or permit end-to-end co-adaptation. A valid failure closes the scalar amplitude-gating family rather than shrinking the supported fast-weight global-assembly claim.",
+  "registration_timing": "The contract is frozen after the unsigned curvature-risk v2 pilot failed and before writing the v2.1 implementation, adapting its parameter, or evaluating any v2.1 condition.",
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "qualification": {
+      "path": "benchmarks/qualification_v2.json",
+      "sha256": "1b1fd30f5514ec11f9b43e878e4215f0480f56cabf41d0d28b9da71fff9ae369"
+    },
+    "amplitude_path_specification": {
+      "path": "benchmarks/operator_amplitude_path_v1.json",
+      "sha256": "2a93d1c5fab389b1097d05f28cff656520c69d0f6bd147dbb21992c8d7d93f06"
+    },
+    "amplitude_path_result": {
+      "path": "results/operator_amplitude_path_v1.json",
+      "sha256": "b88d39b062a2bb9d0ada2b0a4299caa5d591a8fab28233d6ecef37bd13e78302"
+    },
+    "unsigned_gate_specification": {
+      "path": "benchmarks/curvature_gate_pilot_v2.json",
+      "sha256": "8aa515072d95e2d52eaebf378b54f18d344944f8103ec9358ae9e0353b7b5754"
+    },
+    "unsigned_gate_execution_lock": {
+      "path": "benchmarks/curvature_gate_pilot_v2.lock_v2.json",
+      "sha256": "22c7ffd3bcb87fde8088a9cef2d99b72cd0ee17412995d98b04e608a59ee62ac"
+    },
+    "unsigned_gate_result": {
+      "path": "results/curvature_gate_pilot_v2.json",
+      "sha256": "35d251ba919bdea7ab87963c75e1e2d6d55fdc1b4057ed22fa03343c0d401fd6"
+    },
+    "unsigned_gate_report": {
+      "path": "docs/curvature_gate_pilot_v2.md",
+      "sha256": "8039578fa974f62067b0475104f59ccc7917a02e133405e58828d422a5328a34"
+    },
+    "v1_training_source": {
+      "path": "fsrl/meta_train.py",
+      "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+    },
+    "v1_model_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    }
+  },
+  "frozen_backbone_contract": {
+    "seed": 2101,
+    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d",
+    "origin": "final step-1000 v1 backbone produced under curvature_gate_pilot_v2",
+    "reuse_only": "Do not retrain or edit the backbone. Freeze every backbone tensor before v2.1 gate adaptation and verify byte identity afterward.",
+    "forbidden_seeds": [1901, 1902, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2102, 2103]
+  },
+  "execution_contract": {
+    "device": "visible CUDA GPU required for gate adaptation and neural replay",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "gate_adaptation_compile": {
+      "enabled": true,
+      "fullgraph": true,
+      "mode": "default"
+    },
+    "trial_input_transfer": "one contiguous CPU-to-GPU transfer per trial",
+    "implementation_freeze": "The v2.1 implementation and tests must be committed after this protocol and before gate adaptation. An execution lock must record exact source hashes and refuse mismatches.",
+    "seed_subject_relation_or_trial_filtering": "forbidden except the prospectively defined stable-omission retained-evidence mask",
+    "liu_use_during_adaptation_or_calibration": "forbidden"
+  },
+  "gate_equation": {
+    "scope": "only the first fast-weight-sensitive response transition of a query; support dynamics, fast-weight writes, and all later unused query steps remain frozen v1",
+    "baseline": "b = i2h(x_response) + W h0",
+    "fast_weight_drive": "u = (alpha elementwise-multiplied by P_T) h0",
+    "local_jacobian_drive": "J_bu = (1 - tanh(b)^2) elementwise-multiplied by u",
+    "quadratic_curvature": "K2(b,u) = -tanh(b) elementwise-multiplied by (1 - tanh(b)^2) elementwise-multiplied by u^2",
+    "policy_margin": "W_margin = W_out[class_1] - W_out[class_0]",
+    "first_order_policy_value": "j = W_margin^T J_bu",
+    "quadratic_policy_value": "k = W_margin^T K2(b,u)",
+    "relative_scale": "s_squared = ||W_margin||_2^2 ||J_bu||_2^2",
+    "denominator": "d = j^2 + tau s_squared + epsilon",
+    "tau": 0.01,
+    "epsilon": 1e-08,
+    "opposition_risk": "r_opp = relu(-j k) / d",
+    "sign_reversed_risk": "r_support = relu(+j k) / d",
+    "mapping": "gamma(r) = 1 / (1 + beta r)",
+    "beta_constraint": "beta = softplus(raw_beta) and raw_beta is the only trainable v2.1 parameter",
+    "initial_beta": 1.0,
+    "response": "h1 = tanh(b + gamma(r) u)",
+    "small_j_safeguard_rationale": "The fixed relative-scale term prevents rare near-zero projected first-order values from controlling adaptation without introducing any Liu-derived scale or fitted cap.",
+    "online_inputs_only": "P_T, current query-derived h0, x_response, and frozen backbone parameters including W_margin",
+    "forbidden_inputs": "relation identity, H>A indicator, true label, correctness, LOO state, posterior, offline crossing bracket, subject identifier, or Liu-derived statistic"
+  },
+  "gate_only_adaptation": {
+    "backbone": "load the frozen seed-2101 checkpoint and freeze every v1 parameter",
+    "task_distribution": "the same generic sparse ranking distribution with the Liu graph and rank-axis reflection excluded",
+    "adaptation_rng_seed": 12101,
+    "outer_steps": 500,
+    "batch_size": 32,
+    "learning_rate": 0.01,
+    "optimizer": "Adam over raw_beta only",
+    "gradient_clip": 2.0,
+    "loss": "mean generic query cross-entropy under r_opp; no Liu term, crossing target, human scalar, relation label, or auxiliary gate target",
+    "checkpoint_selection": "step 500 only",
+    "sign_reversed_training": "none; r_support reuses the exact beta learned for r_opp and adds no free parameter"
+  },
+  "matched_global_calibration": {
+    "definition": "gamma_global is the arithmetic mean of opposition gamma over every subject and query in an independent generic calibration stream after beta is frozen",
+    "calibration_rng_seed": 22101,
+    "batches": 64,
+    "batch_size": 32,
+    "graph_distribution": "identical to gate adaptation and excluding Liu plus its reflection",
+    "freeze_timing": "gamma_global is written to the v2.1 gate artifact before any Liu evaluation and is never refit"
+  },
+  "liu_evaluation": {
+    "subjects": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "order_seed": 31401,
+    "shuffle_seed": 31501,
+    "bootstrap_seed": 31601,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "posterior_temperature": 0.05,
+    "randomness_reuse_rationale": "Reuse the frozen v2 Liu evaluation draws to isolate the online statistic; none are used for parameter adaptation or calibration.",
+    "conditions": {
+      "original_v1": "gamma=1 with the frozen seed-2101 backbone",
+      "opposition_gate": "gamma is computed online from matched-query r_opp",
+      "matched_global_scalar": "every query uses the pre-Liu frozen gamma_global",
+      "shuffled_opposition_gate": "within subject, permute opposition gamma across the 56 fixed oriented queries; reuse the same query permutation for intact and every relation-LOO replay",
+      "sign_reversed_support_gate": "use r_support with the exact opposition-trained beta and otherwise identical equation and state"
+    },
+    "all_five_conditions_required": true
+  },
+  "estimand_contract": {
+    "local_field": "For each retained support relation q, subtract relation-LOO logits from intact logits on all 28 pairs in both orientations, antisymmetrize, and apply the complete-graph Hodge residual projector.",
+    "direct_correctness": "Multiply the Hodge residual on q's direct edge by the registered correct orientation sign.",
+    "primary_local_estimands": [
+      "within-subject retained-relation mean direct correctness",
+      "H>A retained-subject direct correctness",
+      "within-subject mean direct correctness over the other seven retained relations"
+    ],
+    "remote_reassembly": "For each retained q, average absolute intact-minus-LOO influence over disjoint query pairs and average within subject before bootstrap.",
+    "third_party_reassembly": "Use the gauge-invariant third-party relational potential-energy fraction from the registered assembly definition and average retained relations within subject.",
+    "query_binding": "Matched normalized operator-action gain minus shared-endpoint mismatch and disjoint mismatch, using the registered state-query operator definition before gated tanh.",
+    "terminal_projection": "Opposition-gated final neural-potential cosine to exact posterior expected-rank/Hodge potential minus cosine to exact MAP potential.",
+    "crossing_susceptibility": "Reuse the frozen 0.00 to 1.00 amplitude grid in increments of 0.05. Spearman correlation between opposition gamma and LOO crossing midpoint is descriptive only and never enters PASS/FAIL.",
+    "gate_allocation": "Report j, k, opposition/support risk and gamma by relation, including H>A and F>A, plus the fraction of states with j*k below, above, or equal to zero.",
+    "behavioral_consequences": "Report learned accuracy, nonlearned accuracy, overall accuracy, and symbolic-distance slope for all five conditions; no human interval is a primary gate."
+  },
+  "competence_and_integrity_gates": {
+    "backbone": "The original-v1 condition must pass qualification_v2 before the gate result is interpreted.",
+    "source_and_artifact_hashes": "Every registered source, implementation source, backbone checkpoint, gate artifact, and matched scalar must match its recorded SHA-256.",
+    "frozen_backbone": "Only raw_beta may change during adaptation; every v1 state-dict tensor must be byte-identical before and after.",
+    "gate_equivalence": "original_v1 must reproduce ungated backbone logits within 1e-6.",
+    "risk_identity": "For every finite evaluated state, r_opp and r_support are nonnegative; when j*k is positive r_opp is exactly zero, and when j*k is negative r_support is exactly zero, within 1e-7.",
+    "stable_omission": "Relation-LOO influence and direct correctness must be zero within 1e-7 when the relation was already omitted.",
+    "shuffle_integrity": "Shuffled opposition gamma must preserve each subject's 56-value multiset within 1e-7 and change at least one assignment for every subject with nonconstant gamma.",
+    "matched_scalar_integrity": "Stored gamma_global must equal the independently replayed generic calibration mean within 1e-7.",
+    "sign_reversed_integrity": "The sign-reversed condition must use the same beta, denominator, state, and response mapping as opposition, differing only by relu(+j*k) versus relu(-j*k)."
+  },
+  "primary_decision_rules": {
+    "local_rescue": "The paired participant-bootstrap lower bound for opposition minus original retained-relation mean direct correctness exceeds zero.",
+    "control_specificity": "Each paired participant-bootstrap lower bound for opposition minus matched-global, opposition minus shuffled-opposition, and opposition minus sign-reversed-support retained-relation mean direct correctness exceeds zero.",
+    "H_greater_A_rescue": "The paired retained-subject bootstrap lower bound for opposition minus original H>A direct correctness exceeds zero, and H>A under opposition is not robustly wrong-sign: its bootstrap upper bound is at least zero.",
+    "preserve_other_relations": "The opposition-minus-original mean over the other seven retained relations has a paired-bootstrap lower bound no smaller than -0.01.",
+    "nonlearned_preservation": "Opposition nonlearned accuracy is at least 0.70 and no more than 0.02 below original v1.",
+    "fast_weight_necessity": "The opposition condition passes every qualification_v2 intervention and order-invariance rule.",
+    "global_reassembly_preservation": "Opposition remote absolute and third-party relational estimands each have bootstrap lower bounds above zero and point estimates at least 80 percent of original v1.",
+    "query_binding_preservation": "Both opposition matched-minus-mismatch normalized operator-gain contrasts remain positive and equal original within 1e-7 because the estimand is pre-gate.",
+    "terminal_projection_preservation": "The opposition expected-rank-minus-MAP participant-bootstrap lower bound exceeds zero.",
+    "crossing_correlation_not_a_gate": "Spearman(gamma, offline crossing midpoint) is reported as a mechanistic diagnostic but cannot pass or fail the candidate."
+  },
+  "outcome_contingent_interpretation": {
+    "all_primary_rules_pass": "Selective attenuation of policy-opposed curvature is sufficient on the frozen seed-2101 backbone. Freeze a separate 2102/2103 replication contract before any new seed; do not begin end-to-end co-adaptation.",
+    "valid_local_or_specificity_failure": "Close the scalar amplitude-gating family. Do not invent a more complex risk metric, run 2102/2103, change tanh, or co-adapt end-to-end. Register a residualized or near-linear expression candidate that explicitly preserves a local J_bu branch on this same frozen backbone.",
+    "local_rescue_with_global_failure": "Reject the candidate because it trades supported global assembly for local fidelity; close scalar amplitude gating and move to the registered near-linear/residualized route.",
+    "competence_or_integrity_failure": "The mechanistic outcome is non-interpretable; repair execution on the same frozen backbone without changing equations, thresholds, seeds, or scientific rules."
+  },
+  "reporting": {
+    "all_subjects_relations_conditions_and_controls_required": true,
+    "positive_negative_mixed_and_uncertain_results_required": true,
+    "human_scalar_conjunction_as_primary_gate": false,
+    "threshold_refit_checkpoint_selection_seed_filtering_and_posthoc_caps": "forbidden",
+    "old_v1_and_v2_contracts_implementations_and_artifacts_immutable": true,
+    "new_backbone_training_new_seed_or_end_to_end_coadaptation": "forbidden"
+  }
+}
