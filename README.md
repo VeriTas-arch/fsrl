@@ -14,6 +14,23 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+## Tests
+
+Run tests through the timeout-bounded entry point. It gives the test process an
+independent process group and cleans up that whole group on timeout or
+interruption. The default command is `pytest -q` with a five-minute timeout.
+
+```bash
+direnv exec . python -m fsrl.test_runtime
+```
+
+To run one `unittest` module with a different timeout:
+
+```bash
+direnv exec . python -m fsrl.test_runtime --timeout 60 \
+  --framework unittest -- tests.test_liu_eval -v
+```
+
 The default `requirements.txt` installs the standard PyPI build of PyTorch. If you need a CUDA-specific PyTorch build, install PyTorch first using the command from <https://pytorch.org/get-started/locally/>, then run:
 
 ```bash

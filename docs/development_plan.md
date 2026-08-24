@@ -109,7 +109,7 @@ same execution context as training:
 
 ```bash
 direnv exec . python -c 'import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu")'
-direnv exec . python -m pytest -q
+direnv exec . python -m fsrl.test_runtime
 ```
 
 Evaluate the tracked checkpoint:

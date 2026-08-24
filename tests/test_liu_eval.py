@@ -160,6 +160,16 @@ class LiuEvaluatorTests(unittest.TestCase):
             torch.equal(torch.from_numpy(codes[0]), torch.from_numpy(codes[1]))
         )
 
+    def test_pathological_six_bit_seed_completes_with_valid_codebook(self):
+        codes = deterministic_cue_codes(3, 8, 6, 5)
+        self.assertEqual(codes.shape, (3, 8, 6))
+        for first, second in combinations(codes[0], 2):
+            self.assertLessEqual(float(np.mean(first == second)), 0.66)
+
+    def test_impossible_codebook_fails_after_bounded_search(self):
+        with self.assertRaisesRegex(ValueError, "Could not construct 3"):
+            deterministic_cue_codes(1, 3, 1, 5)
+
     def test_stable_omission_is_binary_and_fixed_across_blocks(self):
         evaluator = FrozenFastWeightEvaluator(
             self.net,
