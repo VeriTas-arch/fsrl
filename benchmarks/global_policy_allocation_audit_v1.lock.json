@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "audit_id": "liu-global-policy-allocation-audit-v1",
+  "freeze_status": "implementation_and_sources_frozen_before_allocation_evaluation",
+  "registration_commit": "46bfa6ae0a12145d45a2d6b2f32159e85a69b5f9",
+  "audit_specification_path": "benchmarks/global_policy_allocation_audit_v1.json",
+  "audit_specification_sha256": "b14836fbd523c9b6ad620394979905b15a96f5a3109b7929669da199cb70c0fe",
+  "implementation_sources": {
+    "audit_runner": {
+      "path": "fsrl/global_policy_allocation_audit.py",
+      "sha256": "64c86fac0a3b90a9665ef1d57806b04bdf3136ef47391cd11ac8f2fe78455f08"
+    },
+    "audit_tests": {
+      "path": "tests/test_global_policy_allocation_audit.py",
+      "sha256": "0f37fa6bb7d6740b669b411f19f88ac5c046ac638ed5fe8aefa3682d342ba6df"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "3040620c8e559809aeba090663222110f2feedb9794afd56f5000650341aa042"
+    },
+    "formal_runtime_tests": {
+      "path": "tests/test_formal_runtime.py",
+      "sha256": "8d6616001f75ea675405fb57c8674c817d012cf3e16b3db30050305a111dcd8e"
+    }
+  },
+  "reused_frozen_sources": {
+    "fingerprint_runner": {
+      "path": "fsrl/global_policy_field_fingerprint_replication.py",
+      "sha256": "3e709384a6ad5f109e9f7361208ee5315d371a414ddeaab7949b9e23bd27f810"
+    },
+    "field_reassembly_estimator": {
+      "path": "fsrl/global_policy_field_reassembly.py",
+      "sha256": "26a5ffa8edaee19a8b392579263125ff0b17aab82a4772a4ad106fe2281dbb7f"
+    },
+    "posterior_descriptor": {
+      "path": "fsrl/global_policy_amplitude_provenance.py",
+      "sha256": "da757bcb2fb1748ce9a9e24413b104aa16598ef4e3c5112733137054713dfc2a"
+    },
+    "slope_estimator": {
+      "path": "fsrl/global_policy_slope_localization.py",
+      "sha256": "1b6d1d3d326d2ab00182eb9b15f64208154065e8808f49b8eec47af386312442"
+    },
+    "assembly_source": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "frozen_evaluator": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "exact_probability": {
+      "path": "fsrl/local_behavior_attribution.py",
+      "sha256": "79a16b6be0cea2ae481f2aa01b343b1ecbc44b1cb404b85bac34b0d5197715c4"
+    },
+    "exact_posterior": {
+      "path": "fsrl/constructive.py",
+      "sha256": "8c33fa737f2d2b988c94054aa720c51913abccbec666c864c4d9eadb8fed443d"
+    },
+    "ranking_protocol": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "configuration": {
+      "path": "fsrl/config.py",
+      "sha256": "d19b03fd5ce0bd4e8129b83c4d7399bb4afd02bfff199a568e999151ad8625d8"
+    },
+    "hash_validation": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    },
+    "tensor_hashes": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "1677a963b8e93fed06d3aa4fd25b2b846c1cb85602178e5b58faac30d0373391"
+    },
+    "v1_training_source": {
+      "path": "fsrl/meta_train.py",
+      "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+    },
+    "v1_model_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "generic_task_source": {
+      "path": "fsrl/meta_tasks.py",
+      "sha256": "d7602a30e101d58fb849ff17f973f83113ce95e522ad41818cb70f3a5fc7bd12"
+    },
+    "subject_encoding_source": {
+      "path": "fsrl/subject_encoding.py",
+      "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"
+    },
+    "qualification_source": {
+      "path": "fsrl/qualification.py",
+      "sha256": "cd3069b75edfbfd5707b2a093e9531edefc24381af5321767055dc1197a66a09"
+    }
+  },
+  "upstream_fingerprint": {
+    "specification": {
+      "path": "benchmarks/global_policy_field_fingerprint_replication_v1.json",
+      "sha256": "de83db0f30a9a8a2c398363ed0aca2369c203f5e41c6baa8a5677bc1b57ac461"
+    },
+    "implementation_lock": {
+      "path": "benchmarks/global_policy_field_fingerprint_replication_v1.lock.json",
+      "sha256": "8554497e3b99f713b25a78bb129e698b689e40654d5d20aaa5727ee65d1363e9"
+    },
+    "artifact_lock": {
+      "path": "benchmarks/global_policy_field_fingerprint_replication_v1.artifact_lock.json",
+      "sha256": "14bc424da38e847f13f47eeaba6a6ddd10b13000ff6f848fdee5c4bf7a58486e"
+    },
+    "result": {
+      "path": "results/global_policy_field_fingerprint_replication_v1.json",
+      "sha256": "21592db1f9dc1a35bdca05a0eddc62c5b8a7bcec2a6abf90d103fac33b138600"
+    },
+    "report": {
+      "path": "docs/global_policy_field_fingerprint_replication_v1.md",
+      "sha256": "553a8b6637f6acb2a7e625d0230cccdefc9700fab87677c893d12e979c4547f1"
+    },
+    "output_root": "output/global-policy-field-fingerprint-replication-v1",
+    "checkpoint_sha256": {
+      "2106": "4c1e0261080f37782472082479f95b04290edc395ad9696e85d0abbf4db8aa9c",
+      "2107": "fdd8017e01f5f3b74e1a8126016166e63509a45e07218eb4369c8e04e05b3363"
+    }
+  },
+  "execution_firewall": {
+    "mandatory_seed_order": [2106, 2107],
+    "training_adaptation_or_artifact_generation": "forbidden",
+    "canonical_upstream_output_root": true,
+    "one_command_both_networks": true,
+    "temporary_result_override": "evaluate-only file below /tmp for complete byte replay",
+    "git_gate": "Evaluation requires clean dev with HEAD equal to origin/dev and tracked unchanged specification and implementation lock.",
+    "participant_pooling_network_resampling_or_posthoc_axis_changes": "forbidden"
+  },
+  "validated_before_freeze": {
+    "focused_tests": "19 passed",
+    "full_tests": "242 passed, 10 subtests passed",
+    "scoped_ruff_check": "passed",
+    "scoped_ruff_format_check": "passed",
+    "runner_help": "passed without checkpoint load",
+    "registered_source_hashes": "passed",
+    "independent_protocol_review": "passed",
+    "independent_api_and_firewall_review": "passed",
+    "git_diff_check": "passed"
+  },
+  "immutability": "Any integrity-only execution repair requires a superseding source lock that preserves both seeds, all four frozen axes, the exact probability bridge, U/C definitions and joint model, bootstrap rules, thresholds, outcome tree, and claim boundaries."
+}

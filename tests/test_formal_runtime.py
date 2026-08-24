@@ -17,6 +17,22 @@ from fsrl.meta_train import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_global_policy_allocation_audit_dispatch_uses_registered_entry_point(self):
+        module_name = "fsrl.global_policy_allocation_audit"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=29)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(
+                ["global-policy-allocation-audit", "--sentinel"]
+            )
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 29)
+
     def test_field_fingerprint_replication_dispatch_uses_registered_entry_point(self):
         module_name = "fsrl.global_policy_field_fingerprint_replication"
         module = ModuleType(module_name)
