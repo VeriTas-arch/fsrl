@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "study_id": "liu-human-metric-constructive-comparator-v1",
+  "repair_status": "prospectively_frozen_after_noninterpretable_attempt1_and_before_derivation_replay",
+  "original_specification": {
+    "path": "benchmarks/human_metric_constructive_comparator_v1.json",
+    "sha256": "3ad0587dd1daf8261a3404d2be8be521874b20b0943199ea5ab0548a97b30398"
+  },
+  "superseded_implementation_lock": {
+    "path": "benchmarks/human_metric_constructive_comparator_v1.lock.json",
+    "sha256": "dd5661b026ec60a550c269c288dbc8be9eafbc9eea4b5d5744b5ca39a84ab22c"
+  },
+  "noninterpretable_attempt": {
+    "path": "results/human_metric_constructive_comparator_v1_attempt1_noninterpretable.json",
+    "sha256": "81cf13087ca70b236905b65aa51f6517b14a83a3ed28dad0cbcd5df14d6da1bd"
+  },
+  "direct_cause": "numpy.bool_ in the derivation gate ledger reached the strict JSON serializer after computation and before the exclusive artifact file was opened.",
+  "repair": "Wrap the derivation and confirmation human-completeness and model-completeness conjunctions in native Python bool. Route future executions through a separately hash-locked Repair 1 implementation and bind the failed attempt and original lock.",
+  "scientific_contract_changed": false,
+  "unchanged": [
+    "candidate equations",
+    "three parameters and bounds",
+    "27 optimizer starts and every optimizer option",
+    "40-person derivation and 37-person confirmation split",
+    "likelihood and exact latent marginalization",
+    "primary estimands and thresholds",
+    "individual qualification simulation and gates",
+    "outcome tree and stop/go interpretation"
+  ],
+  "result_exposure": "No parameter or scientific result was serialized, printed, inspected, or used in this repair.",
+  "replay_authorization": "One complete derivation replay is authorized only after the Repair 1 sources and lock are committed and pushed on dev."
+}

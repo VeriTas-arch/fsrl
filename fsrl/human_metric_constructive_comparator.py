@@ -21,8 +21,21 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.json"
 )
-DEFAULT_IMPLEMENTATION_LOCK_PATH = (
+INITIAL_IMPLEMENTATION_LOCK_PATH = (
     ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.lock.json"
+)
+DEFAULT_IMPLEMENTATION_LOCK_PATH = (
+    ROOT
+    / "benchmarks"
+    / "human_metric_constructive_comparator_v1.repair1.lock.json"
+)
+DEFAULT_REPAIR_PATH = (
+    ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.repair1.json"
+)
+NONINTERPRETABLE_ATTEMPT_PATH = (
+    ROOT
+    / "results"
+    / "human_metric_constructive_comparator_v1_attempt1_noninterpretable.json"
 )
 DEFAULT_PARAMETER_PATH = (
     ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.parameters.json"
@@ -162,15 +175,32 @@ def validate_sources(
 ) -> dict:
     specification = load_json(specification_path)
     lock = load_json(implementation_lock_path)
+    repair = load_json(DEFAULT_REPAIR_PATH)
+    expected_supersedes = {
+        "path": str(INITIAL_IMPLEMENTATION_LOCK_PATH.relative_to(ROOT)),
+        "sha256": file_sha256(INITIAL_IMPLEMENTATION_LOCK_PATH),
+    }
+    expected_attempt = {
+        "path": str(NONINTERPRETABLE_ATTEMPT_PATH.relative_to(ROOT)),
+        "sha256": file_sha256(NONINTERPRETABLE_ATTEMPT_PATH),
+    }
+    expected_repair = {
+        "path": str(DEFAULT_REPAIR_PATH.relative_to(ROOT)),
+        "sha256": file_sha256(DEFAULT_REPAIR_PATH),
+    }
     if not (
         lock.get("schema_version") == 1
         and lock.get("study_id") == specification.get("study_id")
         and lock.get("freeze_status")
-        == "implementation_frozen_after_registration_and_before_derivation"
+        == "repair1_frozen_after_noninterpretable_attempt1_and_before_derivation_replay"
         and lock.get("specification_sha256") == file_sha256(specification_path)
+        and lock.get("supersedes") == expected_supersedes
+        and lock.get("noninterpretable_attempt") == expected_attempt
+        and lock.get("repair") == expected_repair
         and set(lock.get("implementation_sources", {}))
         == set(IMPLEMENTATION_SOURCE_PATHS)
         and lock.get("registered_sources") == specification["registered_sources"]
+        and repair.get("scientific_contract_changed") is False
     ):
         raise RuntimeError("metric-constructive implementation lock mismatch")
 
@@ -182,6 +212,15 @@ def validate_sources(
             record.get("path") == relative
             and record.get("sha256") == file_sha256(path)
         )
+    checks["repair:initial_implementation_lock"] = bool(
+        expected_supersedes["sha256"] == file_sha256(INITIAL_IMPLEMENTATION_LOCK_PATH)
+    )
+    checks["repair:noninterpretable_attempt"] = bool(
+        expected_attempt["sha256"] == file_sha256(NONINTERPRETABLE_ATTEMPT_PATH)
+    )
+    checks["repair:registration"] = bool(
+        expected_repair["sha256"] == file_sha256(DEFAULT_REPAIR_PATH)
+    )
     opened_trial_sources = []
     for name, record in specification["registered_sources"].items():
         if phase == "derive" and name == "confirmation_trials":
@@ -1165,12 +1204,16 @@ def derive(
         "cohort_isolation": source_validation["opened_trial_sources"]
         == ["derivation_trials"]
         and not source_validation["confirmation_trial_contents_opened"],
-        "human_completeness": trials.shape == (40, 10, 28)
-        and np.all((trials == 0.0) | (trials == 1.0)),
-        "model_completeness": arrays["masks"].shape == (256, 8)
-        and arrays["orders"].shape == (40320, 8)
-        and arrays["order_correct"].shape == (40320, 28)
-        and len(optimizer["starts"]) == 27,
+        "human_completeness": bool(
+            trials.shape == (40, 10, 28)
+            and np.all((trials == 0.0) | (trials == 1.0))
+        ),
+        "model_completeness": bool(
+            arrays["masks"].shape == (256, 8)
+            and arrays["orders"].shape == (40320, 8)
+            and arrays["order_correct"].shape == (40320, 28)
+            and len(optimizer["starts"]) == 27
+        ),
         "optimizer_stability": optimizer["stability_pass"],
         "probability_identity": bool(
             identities
@@ -1325,8 +1368,10 @@ def confirm(
         "derivation_passed": parameters_artifact["derivation_decision"]["passed"],
         "cohort_isolation": source_validation["opened_trial_sources"]
         == ["derivation_trials", "confirmation_trials"],
-        "human_completeness": trials.shape == (37, 10, 28)
-        and np.all((trials == 0.0) | (trials == 1.0)),
+        "human_completeness": bool(
+            trials.shape == (37, 10, 28)
+            and np.all((trials == 0.0) | (trials == 1.0))
+        ),
         "human_benchmark_identity": bool(
             benchmark_means.shape == (28,)
             and np.max(np.abs(human_field_28 - benchmark_means)) <= tolerance
@@ -1450,7 +1495,13 @@ def main(args=None) -> int:
     )
     if parsed.phase == "derive":
         git_freeze = require_pushed_freeze(
-            (parsed.specification, parsed.implementation_lock)
+            (
+                parsed.specification,
+                INITIAL_IMPLEMENTATION_LOCK_PATH,
+                DEFAULT_REPAIR_PATH,
+                NONINTERPRETABLE_ATTEMPT_PATH,
+                parsed.implementation_lock,
+            )
         )
         artifact, parameter_lock = derive(
             specification, runtime, source_validation, git_freeze
@@ -1470,6 +1521,9 @@ def main(args=None) -> int:
         git_freeze = require_pushed_freeze(
             (
                 parsed.specification,
+                INITIAL_IMPLEMENTATION_LOCK_PATH,
+                DEFAULT_REPAIR_PATH,
+                NONINTERPRETABLE_ATTEMPT_PATH,
                 parsed.implementation_lock,
                 parsed.parameters,
                 parsed.parameter_lock,

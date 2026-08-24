@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study_id": "liu-human-metric-constructive-comparator-v1",
+  "status": "noninterpretable_execution_failure",
+  "phase": "derive",
+  "source_head": "49ca86c28503bc82e84914016f1f11c14b432eba",
+  "command": "direnv exec . python -m fsrl.formal_runtime human-metric-constructive-comparator derive",
+  "failure_stage": "strict JSON serialization before exclusive artifact open",
+  "error_type": "TypeError",
+  "error_message": "Object of type bool is not JSON serializable",
+  "direct_cause": "At least one derivation gate was a numpy.bool_ scalar. The write-once serializer intentionally rejected non-native JSON scalar types under allow_nan=False.",
+  "artifact_state": {
+    "parameter_artifact_created": false,
+    "parameter_lock_created": false,
+    "confirmation_source_opened": false,
+    "confirmation_executed": false,
+    "parameter_or_scientific_result_printed": false
+  },
+  "scientific_interpretation": "None. The numerical derivation completed in process, but no value was serialized, displayed, inspected, selected, or used to modify the scientific contract.",
+  "permitted_repair": "Convert derivation and confirmation gate values to native Python bool before constructing the JSON artifact. Preserve every model equation, source split, parameter bound, optimizer start and option, estimand, threshold, simulation, and outcome rule.",
+  "retry_boundary": "Freeze the repair registration, patched implementation sources, and superseding Repair 1 lock at a clean pushed dev HEAD before replaying derivation."
+}

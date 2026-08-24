@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "study_id": "liu-human-metric-constructive-comparator-v1",
+  "freeze_status": "repair1_frozen_after_noninterpretable_attempt1_and_before_derivation_replay",
+  "specification_sha256": "3ad0587dd1daf8261a3404d2be8be521874b20b0943199ea5ab0548a97b30398",
+  "supersedes": {
+    "path": "benchmarks/human_metric_constructive_comparator_v1.lock.json",
+    "sha256": "dd5661b026ec60a550c269c288dbc8be9eafbc9eea4b5d5744b5ca39a84ab22c"
+  },
+  "noninterpretable_attempt": {
+    "path": "results/human_metric_constructive_comparator_v1_attempt1_noninterpretable.json",
+    "sha256": "81cf13087ca70b236905b65aa51f6517b14a83a3ed28dad0cbcd5df14d6da1bd"
+  },
+  "repair": {
+    "path": "benchmarks/human_metric_constructive_comparator_v1.repair1.json",
+    "sha256": "bb5747e48e80df08a423dc281325a8e36d2c1ba1b3999209ff3d4f6f6c295deb"
+  },
+  "repair_scope": "native JSON boolean conversion and repair provenance only; no scientific contract changed",
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/human_metric_constructive_comparator.py",
+      "sha256": "daec6412301ce3a5e5f527ba4ebb0e9f607aa9bfc52de55017a287f8eaa493ab"
+    },
+    "runner_tests": {
+      "path": "tests/test_human_metric_constructive_comparator.py",
+      "sha256": "82e740f7a3cb8003b38549ad14d17c09d9bf7f1b5f5efa111cca514b87585cb2"
+    },
+    "formal_runtime": {
+      "path": "fsrl/formal_runtime.py",
+      "sha256": "da4b105df502557bf2b58b1e3b01072ceb269b354581e132e76ca9e9b9fef6b5"
+    },
+    "formal_runtime_tests": {
+      "path": "tests/test_formal_runtime.py",
+      "sha256": "2fcce3a81442deec1e5bc630ba1853d5b68be3b160cd2424d006fca15427f2f6"
+    }
+  },
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "derivation_trials": {
+      "path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227"
+    },
+    "confirmation_trials": {
+      "path": "data/external/liu2026/replication_experiment_data.csv",
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249"
+    },
+    "failed_comparator_specification": {
+      "path": "benchmarks/global_policy_comparator_adequacy_v1.json",
+      "sha256": "a1769d9c0753f012216edd753f22a411b113f5c0c87610609914dc95429378b2"
+    },
+    "failed_comparator_result": {
+      "path": "results/global_policy_comparator_adequacy_v1.json",
+      "sha256": "72e7e0beb0715fa4dcff6f5f74e7594cc8b8d51999db4f453ec8696e9ed3585f"
+    },
+    "failed_comparator_report": {
+      "path": "docs/global_policy_comparator_adequacy_v1.md",
+      "sha256": "cacf84f29119e3fd5619b375948766b24cd855a880a5efa05b6beb81a8ac1dc6"
+    },
+    "human_benchmark_source": {
+      "path": "fsrl/human_benchmark.py",
+      "sha256": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade"
+    },
+    "ranking_protocol_source": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "exact_order_source": {
+      "path": "fsrl/constructive.py",
+      "sha256": "8c33fa737f2d2b988c94054aa720c51913abccbec666c864c4d9eadb8fed443d"
+    },
+    "adequacy_estimand_source": {
+      "path": "fsrl/global_policy_comparator_adequacy.py",
+      "sha256": "3d76ea629cae15fe8600c61f6273b6da75ac6b8aa1aab90afe9b4e5cd8d8e1b6"
+    }
+  }
+}
