@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-curvature-conditioned-expression-gate-pilot-v2",
+  "lock_status": "frozen_after_implementation_and_tests_before_seed_2101_training",
+  "implementation_parent_commit": "4d7927063883335e154b5924cdbf0c4594b4761c",
+  "pilot_specification_path": "benchmarks/curvature_gate_pilot_v2.json",
+  "pilot_specification_sha256": "8aa515072d95e2d52eaebf378b54f18d344944f8103ec9358ae9e0353b7b5754",
+  "implementation_sources": {
+    "curvature_gate": {
+      "path": "fsrl/curvature_gate.py",
+      "sha256": "dcf8e9c2f3b456252eae8ed8e6650d39d2da82f4e5b4a69658ce329150265a49"
+    },
+    "curvature_gate_pilot": {
+      "path": "fsrl/curvature_gate_pilot.py",
+      "sha256": "643da0eaba97f480b81f326ae4326b726e52df0918872e64bd2ee89a5929a74d"
+    },
+    "curvature_gate_tests": {
+      "path": "tests/test_curvature_gate.py",
+      "sha256": "ef168ce1b5299621ecafd81dc2032cfebb90bf7dfa3a8b0a27c490e0bb9bca51"
+    },
+    "curvature_gate_pilot_tests": {
+      "path": "tests/test_curvature_gate_pilot.py",
+      "sha256": "5e0580831a9f8b37d3841a68c6e5a89423ceaf3b22323d7292b67dfe6fbadef4"
+    }
+  },
+  "validation": {
+    "ruff": "passed",
+    "targeted_tests": "7 passed",
+    "full_tests": "136 passed",
+    "compiled_fullgraph_smoke": "passed on CUDA with beta gradient",
+    "gate_off_transition_parity": "exact tensor equality test passed",
+    "shuffle_multiset_integrity": "passed"
+  },
+  "execution_rule": "The pilot runner must refuse any registered or implementation source mismatch. Any source edit requires a new lock version before training; the scientific protocol remains immutable."
+}
