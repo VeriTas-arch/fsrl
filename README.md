@@ -206,6 +206,21 @@ or end-to-end v2 training. See
 [`docs/curvature_gate_pilot_v2.md`](docs/curvature_gate_pilot_v2.md), and
 [`results/curvature_gate_pilot_v2.json`](results/curvature_gate_pilot_v2.json).
 
+The separately frozen policy-relative v2.1 follow-up reuses the same seed-2101
+backbone and replaces unsigned magnitude with the sign-aware statistic
+`relu(-(W_margin^T J_b u)(W_margin^T K2))`. It preserves every registered
+global mechanism and competence gate, but its local, H>A, and matched-control
+rescue rules fail: the statistic assigns almost no attenuation to H>A or F>A.
+A same-beta sign-reversed control harms the other relations, showing that sign
+matters without establishing a sufficient gate. This closes scalar amplitude
+gating and redirects the next registered test toward an explicit first-order
+residual or near-linear policy-expression path on the same frozen backbone.
+See
+[`docs/policy_opposition_gate_pilot_v2_1.md`](docs/policy_opposition_gate_pilot_v2_1.md),
+[`benchmarks/policy_opposition_gate_pilot_v2_1.json`](benchmarks/policy_opposition_gate_pilot_v2_1.json),
+and
+[`results/policy_opposition_gate_pilot_v2_1.json`](results/policy_opposition_gate_pilot_v2_1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

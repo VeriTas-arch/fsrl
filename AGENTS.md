@@ -248,17 +248,36 @@ sufficient online control variable; do not describe this as evidence against
 the preserved operator/global backbone or against all state-conditioned
 control.
 
-Do not run seeds 2102/2103 for the failed unsigned-risk candidate, change its
-thresholds, or begin end-to-end co-adaptation. The next sufficiency test should
-reuse the frozen seed-2101 backbone and prospectively register a low-capacity,
-online sign/opposition-aware statistic. A leading hypothesis is output-relative
-curvature opposition, for example `j=W_margin^T J_bu`, `k=W_margin^T K2`, and
-`r_opp=relu(-j*k)/(j^2+epsilon)`, followed by the same bounded monotone gamma.
-The exact equation, safeguards, generic-only adaptation, matched-global and
-shuffled controls, and outcome rules must be frozen before implementation.
-Neither true labels, relation identity, H>A, LOO state, nor offline crossings
-may enter the gate. Only after a new one-backbone sufficiency pass should a
-separate seed-2102/2103 replication contract be frozen.
+After the unsigned-risk failure, the policy-relative signed-curvature test was
+prospectively registered on the same frozen seed-2101 backbone. It used
+`j=W_margin^T J_bu`, `k=W_margin^T K2`, and a relative-scale safeguarded
+`r_opp=relu(-j*k)/d`, followed by the same bounded monotone gamma. The exact
+equation, safeguards, generic-only adaptation, matched-global, shuffled, and
+sign-reversed controls, and outcome rules were frozen before implementation;
+no true labels, relation identity, H>A, LOO state, or offline crossings entered
+the gate.
+
+The completed policy-relative signed-curvature v2.1 test is also a valid
+negative. Its source, artifact, competence, and global-mechanism gates pass,
+but opposition-minus-v1 local rescue, H>A rescue, and superiority to both
+matched-global and shuffled controls fail. The gate assigns almost no
+attenuation to the critical relations: only 2.50 percent of retained H>A and
+2.68 percent of retained F>A oriented direct-query states have `j*k<0`, with
+mean gamma 0.99944 and 0.99949. The diagnostic crossing correlation is weak
+and non-significant. The sign-reversed same-beta control is substantially worse
+in aggregate and on the other seven relations while moving H>A only
+nonspecifically toward zero. Treat sign as informative but the scalar local
+quadratic-opposition statistic as insufficient.
+
+Close the scalar amplitude-gating family. Do not run seeds 2102/2103, retune
+beta or `tau`, add caps or more elaborate risk statistics, change `tanh`, or
+begin end-to-end co-adaptation to rescue it. The next separately registered
+candidate should reuse the frozen seed-2101 backbone and explicitly preserve a
+`J_b u` first-order branch through residualized or near-linear policy
+expression, with the same global-mechanism preservation gates and matched
+controls. Freeze whether this residual acts in hidden or policy space and the
+exact mixing equation before implementation. The v2.1 result and family
+closure are in `docs/policy_opposition_gate_pilot_v2_1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -272,7 +291,9 @@ functional resolution is in `docs/state_query_operator_binding_v1.md`; the
 value-to-expression localization is in `docs/operator_output_semantics_v1.md`;
 the final amplitude/curvature architecture-selection gate is in
 `docs/operator_amplitude_path_v1.md`; and the first v2 intervention and its
-negative result are in `docs/curvature_gate_pilot_v2.md`.
+negative result are in `docs/curvature_gate_pilot_v2.md`. The signed
+policy-opposition follow-up and amplitude-gating family closure are in
+`docs/policy_opposition_gate_pilot_v2_1.md`.
 
 ## Repository workflow
 
