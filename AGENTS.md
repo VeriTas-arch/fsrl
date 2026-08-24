@@ -199,13 +199,28 @@ identity de novo. Do not claim rank-one key-value memory, episodic retrieval,
 or correctness from this result.
 
 Storage and access are now supported under the frozen functional estimands.
-The next local-fidelity test should hold `W_out` fixed and prospectively compare
+The completed operator-output semantics audit holds `W_out` fixed and compares
 direct Hodge-residual correctness across `W_out^T A`, `W_out^T J_b A`, and the
 exact `W_out^T [tanh(b+A)-tanh(b)]` over all 28 query edges, with remote and
-stable-omission controls. Use this to distinguish an incorrect operator value
-direction from operating-point or finite-amplitude corruption. Do not fit a
-new readout or add a memory module; preserve the confirmed global channel and
-operator binding while identifying the missing fidelity transformation.
+stable-omission controls. Aggregate correctness is positive at all three
+stages in both pilots. The local Jacobian strongly improves raw and normalized
+correctness over `A`, but exact finite-amplitude tanh strongly degrades both.
+The prospectively registered `H>A` relation is strongly correct at `A` and
+`J_b A` and strongly incorrect at exact `H` in both seeds. The missing link is
+therefore relation-conditioned nonlinear expression, not operator value
+generation or the first-order operating point. A global scalar local gain is
+insufficient because it would amplify the wrong-sign `H>A` response. Do not
+fit a new readout or add a memory module.
+
+Before choosing a v2 architecture, freeze a final two-seed amplitude-path
+discriminator `H_q(lambda)=tanh(b_q+lambda A_q)-tanh(b_q)` on a prospective
+grid, with all relations reported, `H>A` primary, and the same Hodge, remote,
+and stable-omission controls. Use it to distinguish a large-amplitude sign
+crossing addressable by magnitude-bounded or residualized expression from a
+baseline-dependent routing failure. Any v2 mechanism must be online-computable
+without a relation-LOO oracle, preserve the confirmed global channel and
+operator binding, and begin with one to three new development seeds under
+selective causal ablations.
 
 Start v2 only with one to three development seeds. Freeze estimands, competence
 gates, and outcome-contingent interpretations before any new formal population.
@@ -214,7 +229,8 @@ local-fidelity question. The current formal evidence is recorded in
 `docs/formal_confirmation_v1.md`; the response-state negative and its next
 decisive test are in `docs/hidden_residual_audit_v1.md`; the subsequent mixed
 operator-code result is in `docs/relation_trace_localization_v1.md`; its
-functional resolution is in `docs/state_query_operator_binding_v1.md`.
+functional resolution is in `docs/state_query_operator_binding_v1.md`; the
+value-to-expression localization is in `docs/operator_output_semantics_v1.md`.
 
 ## Repository workflow
 

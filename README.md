@@ -156,6 +156,21 @@ correctness-aligned fidelity residual. See
 and
 [`results/state_query_operator_binding_v1.json`](results/state_query_operator_binding_v1.json).
 
+The subsequent frozen operator-output semantics audit localizes the missing
+fidelity link. The bound operator value `W_out^T A` is correctness-aligned in
+both development seeds, and the local Jacobian `W_out^T J_b A` strengthens both
+raw and normalized correctness. The exact finite-amplitude tanh response then
+strongly degrades semantic direction. Aggregate exact-response correctness
+remains positive, but the prospectively registered `H>A` relation reverses
+from strongly correct at `A` and `J_b A` to strongly incorrect at the actual
+response in both seeds. The v2 target is therefore relation-conditioned,
+fidelity-preserving nonlinear expression—not a new memory store, another
+readout, or a global scalar local gain. See
+[`docs/operator_output_semantics_v1.md`](docs/operator_output_semantics_v1.md),
+[`benchmarks/operator_output_semantics_v1.json`](benchmarks/operator_output_semantics_v1.json),
+and
+[`results/operator_output_semantics_v1.json`](results/operator_output_semantics_v1.json).
+
 ## Original README
 
 This is the code for the paper [Neural mechanisms of relational learning and fast knowledge reassembly in plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas Miconi and Kenneth Kay, Nature Neuroscience 2024 (previous preprint [here](https://www.biorxiv.org/content/10.1101/2023.07.27.550739)).

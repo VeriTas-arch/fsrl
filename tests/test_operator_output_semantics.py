@@ -1,8 +1,9 @@
 import unittest
+from pathlib import Path
 
 import numpy as np
 
-from fsrl.assembly_diagnostics import load_json
+from fsrl.assembly_diagnostics import file_sha256, load_json
 from fsrl.assembly_trajectory import build_complete_graph_geometry
 from fsrl.hidden_residual_audit import validate_registered_sources
 from fsrl.operator_output_semantics import (
@@ -98,6 +99,48 @@ class OperatorOutputSemanticsTests(unittest.TestCase):
         specification = load_json("benchmarks/operator_output_semantics_v1.json")
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
+
+    def test_registered_result_is_complete_and_source_locked(self):
+        result = load_json("results/operator_output_semantics_v1.json")
+        self.assertFalse(result["formal_seed_access"])
+        self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
+        self.assertEqual(
+            result["implementation"]["sha256"],
+            file_sha256(Path(result["implementation"]["path"])),
+        )
+        self.assertEqual(
+            result["specification"]["sha256"],
+            file_sha256(Path(result["specification"]["path"])),
+        )
+        self.assertEqual(
+            result["overall_diagnosis"]["outcome"],
+            "aggregate_aligned_but_H_greater_A_opposed",
+        )
+        expected_stage = {stage: "correctness_aligned" for stage in STAGES}
+        expected_h_greater_a = {
+            STAGES[0]: "correctness_aligned",
+            STAGES[1]: "correctness_aligned",
+            STAGES[2]: "correctness_opposed",
+        }
+        for row in result["seed_results"].values():
+            self.assertEqual(row["diagnosis"]["stage_status"], expected_stage)
+            self.assertEqual(
+                row["diagnosis"]["H_greater_A_stage_status"], expected_h_greater_a
+            )
+            self.assertTrue(row["diagnosis"]["stable_omission_pass"])
+            tolerance = row["validation"]["floating_reproduction_tolerance"]
+            self.assertLessEqual(
+                row["validation"][
+                    "exact_hidden_to_actual_logit_influence_max_abs_error"
+                ],
+                tolerance,
+            )
+            for name in (
+                "stable_omitted_oriented_scalar_max_abs",
+                "stable_omitted_field_max_abs",
+                "stable_omitted_residual_max_abs",
+            ):
+                self.assertEqual(set(row["validation"][name].values()), {0.0})
 
 
 if __name__ == "__main__":
