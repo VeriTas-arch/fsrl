@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "diagnostic_id": "liu-global-policy-slope-localization-v1",
+  "registration_status": "frozen_before_read_only_diagnostic_implementation_or_execution",
+  "registration_parent_commit": "b1e530301878895758af604d6cd0a1f67b599708",
+  "scientific_question": "Why does the frozen P_T global branch form an expected-rank-like coherent potential yet express excessive nonlearned symbolic-distance dependence?",
+  "current_theory": "Differential evidence admission into P_T and L_T is the working local/global learning mechanism. The remaining excessive symbolic-distance slope is a separate global-policy problem dominated by nonlearned queries.",
+  "diagnostic_hypothesis": "The pure L-off global margin can be localized into additive-potential geometry, potential amplitude, Hodge residual, and the fixed sigmoid choice link without changing or fitting the model.",
+  "claim_boundary": "This is a two-frozen-backbone, within-network, read-only source localization. It can distinguish registered policy-chain contributions and constrain the next intervention family. It cannot prove a unique cause from an unresolved contrast, establish network-population prevalence, fit a temperature, change v2.4, or evaluate a new model.",
+  "registration_timing": "Frozen after fresh-backbone v2.4 confirmation and before writing or executing this diagnostic.",
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "v2_4_confirmation_specification": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09"
+    },
+    "v2_4_confirmation_implementation_lock": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.lock.json",
+      "sha256": "5c67201b17b1dd089ca4a274bad0a2106ce8628b21d8c23851a1646f31e2fba1"
+    },
+    "v2_4_confirmation_artifact_lock": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json",
+      "sha256": "d2448bd682f5dbd96be9cc80a2a43731926aee4f86e756a824afc732867483f2"
+    },
+    "v2_4_confirmation_result": {
+      "path": "results/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991"
+    },
+    "v2_4_confirmation_report": {
+      "path": "docs/dual_evidence_access_confirmation_v2_4.md",
+      "sha256": "34141e56364588f547c19e9edf60c94a0f1ff024b4cbdf4fb93e6dda23f163d9"
+    },
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "prior_assembly_specification": {
+      "path": "benchmarks/assembly_diagnostics_v1.json",
+      "sha256": "e96cd83e0d025de9d595538ec00126681faea6c34c3f6d6c20b009a6853695a4"
+    },
+    "prior_assembly_result": {
+      "path": "results/assembly_diagnostics_v1.json",
+      "sha256": "a768495fe84b2d74a4b258d0d14cbfb8d7057c2fd4c3675fc006b1f010a19500"
+    },
+    "assembly_trajectory_source": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "ranking_protocol_source": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "exact_probability_source": {
+      "path": "fsrl/local_behavior_attribution.py",
+      "sha256": "79a16b6be0cea2ae481f2aa01b343b1ecbc44b1cb404b85bac34b0d5197715c4"
+    },
+    "artifact_validation_source": {
+      "path": "fsrl/dual_evidence_access_confirmation.py",
+      "sha256": "5324b8c08870131c754325226eb715d017c8b9733947b9a07e65f39361a6ba32"
+    }
+  },
+  "network_contract": {
+    "mandatory_frozen_seeds": [2104, 2105],
+    "checkpoint_selection": "Use exactly the jointly hash-locked final checkpoints from the fresh v2.4 confirmation.",
+    "primary_condition": "Pure L-off v1/global branch with intact P_T and frozen W_out; no local trace is constructed or read.",
+    "within_network_inference": "Bootstrap participants separately within each network. Never pool participant rows across networks.",
+    "network_population_inference": "not_performed",
+    "training_gain_adaptation_or_parameter_change": "forbidden"
+  },
+  "runtime_contract": {
+    "command": "direnv exec . python -m fsrl.formal_runtime global-policy-slope-localization",
+    "visible_cuda_gpu": "required for frozen neural replay",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "torch_compile": "not_applicable_read_only_replay",
+    "all_seed_execution": "Both mandatory networks must be analyzed in one command before the result is written."
+  },
+  "field_contract": {
+    "edge_order": "All 28 unordered item pairs in lexicographic integer order.",
+    "sign": "Every margin is orientation-antisymmetrized so positive means the first item is preferred as higher.",
+    "global_margin": "m_ij=0.5[logit(i,j)-logit(j,i)] from the intact frozen P_T branch with L off.",
+    "hodge_decomposition": "m=g+c with s=pinv(B)m, g=Bs, and c=m-g on the complete graph.",
+    "potential_scale_shape": "Center s, define a=||s||_2 and hat_s=s/a, so g=a B hat_s and beta_g=a beta_hat_s exactly.",
+    "correctness": "Multiply pair fields by y_ij in {+1,-1} from the source-correct true ranking.",
+    "primary_pair_subset": "The 20 nonlearned pairs only; learned support pairs are excluded before every slope.",
+    "symbolic_distance": "Absolute source-correct rank-position difference d_ij.",
+    "subject_slope": "OLS slope cov(value,d)/var(d) over the fixed 20 nonlearned pairs, computed separately for every participant.",
+    "posterior_geometry": "Use the terminal exact-posterior pair field from the same realized support evidence and posterior temperature 0.05; its normalized Hodge potential is algebraically the normalized expected-rank potential.",
+    "choice_link": "p_ij=sigmoid(y_ij m_ij/T) at the frozen T=0.25; there is no temperature search or refit."
+  },
+  "exact_decompositions": {
+    "margin_slope": "beta_m=beta_g+beta_c.",
+    "potential_slope": "beta_g=a beta_hat_s.",
+    "choice_link": "Within subject fit p=intercept+kappa*q+e over nonlearned pairs, where q=y m. Then beta_p=kappa beta_m+beta_e exactly.",
+    "choice_sensitivity": "Report mean p(1-p)/T as a descriptive local derivative, not a fitted parameter.",
+    "required_numeric_tolerance": 1e-10
+  },
+  "evaluation": {
+    "subjects": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "choice_temperature": 0.25,
+    "posterior_temperature": 0.05,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seeds": {
+      "2104": 32704,
+      "2105": 32705
+    }
+  },
+  "primary_estimands": {
+    "global_margin_slope": "beta_m",
+    "additive_potential_slope": "beta_g",
+    "hodge_residual_slope": "beta_c",
+    "potential_amplitude": "a",
+    "normalized_potential_geometry_slope": "beta_hat_s",
+    "posterior_normalized_geometry_slope": "beta_hat_s_posterior",
+    "neural_minus_posterior_geometry_slope": "beta_hat_s-beta_hat_s_posterior",
+    "potential_fraction_contrast": "beta_g-0.9 beta_m",
+    "neural_exact_probability_slope": "beta_p",
+    "posterior_exact_probability_slope": "beta_p_posterior",
+    "neural_minus_posterior_probability_slope": "beta_p-beta_p_posterior",
+    "choice_linearized_slope": "kappa beta_m",
+    "choice_nonlinear_remainder_slope": "beta_e",
+    "neural_posterior_normalized_potential_cosine": "cos(hat_s,hat_s_posterior)"
+  },
+  "registered_diagnoses": {
+    "global_potential_dominance": "Within each network, beta_m lower bound >0 and (beta_g-0.9 beta_m) lower bound >0.",
+    "normalized_geometry_excess": "Within each network, lower bound of beta_hat_s-beta_hat_s_posterior >0.",
+    "positive_residual_contribution": "Within each network, beta_c lower bound >0.",
+    "neural_probability_slope_excess": "Within each network, lower bound of beta_p-beta_p_posterior >0.",
+    "choice_link_amplification": "Within each network, beta_e lower bound >0.",
+    "choice_link_compression": "Within each network, beta_e upper bound <0.",
+    "unresolved_rule": "An interval containing zero is unresolved, never equivalence or evidence of absence.",
+    "replication_rule": "A diagnosis is replicated only when its stated rule passes separately in both mandatory networks."
+  },
+  "outcome_contingent_interpretation": {
+    "potential_geometry": "If potential dominance and normalized geometry excess replicate, localize the discrepancy to P_T-to-potential assembly geometry before policy scaling.",
+    "potential_scale": "If probability-slope excess and potential dominance replicate, normalized geometry excess does not replicate, and the choice link is compressive rather than amplifying, treat over-sharp potential scaling as the leading next hypothesis but do not claim normalized geometry equivalence.",
+    "hodge_residual": "If a positive residual contribution replicates and potential dominance fails, localize material distance structure outside the additive potential.",
+    "choice_link": "If choice-link amplification replicates, treat the fixed nonlinear policy link as an independent contributor; if compression replicates, it attenuates rather than creates the upstream slope.",
+    "mixed_or_unresolved": "Preserve every supported component and freeze a later discriminating intervention; do not fit a temperature or edit v2.4 inside this diagnostic."
+  },
+  "secondary_preservation_check": {
+    "source": "Use only the already frozen v2.4 confirmation result; do not rerun or mix L_T into the primary decomposition.",
+    "question": "Do the dual-intact exact slope and dominant nonlearned contribution retain the same qualitative fingerprint in both networks?",
+    "decision_role": "reported_only_not_a_primary_gate"
+  },
+  "integrity_gates": {
+    "all_registered_source_hashes": "must match",
+    "all_artifact_hashes": "must match the joint v2.4 confirmation artifact lock",
+    "formal_runtime_gpu_and_single_torch_cpu_thread": "must pass",
+    "all_77_subjects_and_both_networks": "required",
+    "margin_decomposition_max_error": "<=1e-10",
+    "potential_scale_decomposition_max_error": "<=1e-10",
+    "choice_link_decomposition_max_error": "<=1e-10",
+    "expected_rank_equivalence_max_error": "<=1e-10",
+    "seed_filtering_checkpoint_selection_temperature_refit_or_model_mutation": "forbidden"
+  },
+  "reporting": {
+    "result_path": "results/global_policy_slope_localization_v1.json",
+    "report_path": "docs/global_policy_slope_localization_v1.md",
+    "implementation_lock_path": "benchmarks/global_policy_slope_localization_v1.lock.json",
+    "retain_positive_negative_and_unresolved_results": true,
+    "next_action": "No intervention is authorized by this contract. Use the replicated localization pattern to preregister a separate next candidate."
+  }
+}
