@@ -339,6 +339,48 @@ supported storage and query-address mechanism. Do not tune either route before
 this attribution. The v2.3 result is in
 `docs/conjunctive_local_trace_pilot_v2_3.md`.
 
+That registered read-only attribution is now complete. Stable-omitted learned
+cells account for 71.36 percent of v1 exact learned error mass, with a bootstrap
+lower bound of 62.81 percent, despite being only 296 of 1232 learned
+orientation cells. Their local self trace is exactly zero. Among retained
+cells, 827 of 936 already have v1 exact correct probability at least 0.99. The
+local trace nevertheless increases retained exact probability by 0.00682 with
+a positive bootstrap lower bound and removes 20.15 percent of retained exact
+error mass; the existing sampled learned-accuracy contrast remains unresolved.
+Treat the large direct-causal rescue and tiny sampled change as an endpoint-
+sensitivity result, not a contradiction.
+
+The self/cross decomposition further supports the local representation. Every
+retained self contribution is correctly signed, with mean 0.33691. Cross-talk
+is directionally negative but its absolute magnitude is 28.41 percent of self,
+below the registered one-third materiality threshold. Stable-omitted cells
+receive no self signal, and cross-talk alone slightly worsens them. Do not
+increase the local gain as a repair.
+
+The full `P`-off/local-intact retained exact-probability point estimate is
+0.66768, but its lower bound is 0.64435 and narrowly misses the frozen 0.65
+retained-sufficiency rule. Therefore do not relabel the result as a formal
+dual-evidence-access PASS. Pure-local diagnostics are strong, but they cannot
+replace that registered condition. The frozen attribution outcome is
+`confirmation_estimand_sensitivity`; retained value-conversion limitation and
+material address interference are not supported.
+
+The exact distance-slope decomposition separates the behavioral fingerprint.
+Nonlearned queries contribute 81.05 percent of the v1 slope. Both learned
+contributions become slightly smaller with the local trace, but the nonlearned
+contribution increases enough to cancel them. Treat direct learned fidelity
+and excessive global symbolic-distance dependence as two mechanistically
+distinct problems; do not require one local memory component to repair both.
+
+Do not change v2.3, train a value transform, alter stable omission, move the
+0.65 threshold, or immediately run 2102/2103. The next admissible action is to
+prospectively freeze a new replication contract that keeps the mechanism
+unchanged and uses exact retained probability, direct causal rescue,
+self/query specificity, and the `P`/`L` double dissociation as confirmation
+estimands. Preserve sampled learned accuracy and distance slope as the failed
+v2.3 endpoints in all future reporting. The attribution is in
+`docs/local_behavior_attribution_v2_3.md`.
+
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
 new formal population.
@@ -357,7 +399,9 @@ policy-opposition follow-up and amplitude-gating family closure are in
 low-capacity expression-family closure are in
 `docs/policy_residual_pilot_v2_2.md`; and the persistent conjunctive trace and
 causal local/global double dissociation are in
-`docs/conjunctive_local_trace_pilot_v2_3.md`.
+`docs/conjunctive_local_trace_pilot_v2_3.md`; and the registered explanation of
+its direct-causal versus sampled-behavior mismatch is in
+`docs/local_behavior_attribution_v2_3.md`.
 
 ## Repository workflow
 
