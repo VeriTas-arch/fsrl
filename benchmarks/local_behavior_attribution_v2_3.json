@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "analysis_id": "liu-local-behavior-attribution-v2.3",
+  "registration_status": "frozen_before_attribution_implementation_or_execution",
+  "registration_parent_commit": "8d890a0bb8f1d1518df18eebac562a5242ed7ff7",
+  "scientific_question": "Why does the causally effective v2.3 local trace increase retained direct correctness by 0.30039 while changing sampled learned accuracy by only 0.00146?",
+  "core_hypothesis": "The direct-causal and sampled-behavior estimands can diverge because stable-omitted relations have no self write, retained relations may already lie on a saturated correct policy margin, and nonorthogonal tensor addresses add cross-talk. A read-only cellwise decomposition can distinguish evidence availability, retained value conversion, and endpoint sensitivity without modifying v2.3.",
+  "claim_boundary": "This analysis attributes the frozen seed-2101 v2.3 outcome. It does not change or rescue the registered v2.3 decision, select a new gain, establish population replication, redefine stable omission, or authorize a new trainable mechanism.",
+  "registration_timing": "Frozen after the complete v2.3 result and before writing attribution code, replaying the frozen model for this analysis, or inspecting retained-versus-omitted cellwise margins.",
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "v2_3_specification": {
+      "path": "benchmarks/conjunctive_local_trace_pilot_v2_3.json",
+      "sha256": "8ee6dcb4309eb543ec574f756a2de1ea9447dfa2b96c50fbf88b078b62136cbc"
+    },
+    "v2_3_implementation_lock": {
+      "path": "benchmarks/conjunctive_local_trace_pilot_v2_3.lock.json",
+      "sha256": "49d376f743cb79a6de876f0f1798abee36dd796e6daafc243a8334922c1580a1"
+    },
+    "v2_3_artifact_lock": {
+      "path": "benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json",
+      "sha256": "a4a1e5c284e52f1e2f6d72ae97a1e3e1eb38ee08bfa679a758fb200be9b3fb4f"
+    },
+    "v2_3_result": {
+      "path": "results/conjunctive_local_trace_pilot_v2_3.json",
+      "sha256": "5176802b437795a7b609472fb2969c3ba33d7bf74f8d05b9450dbef812d3cc4d"
+    },
+    "v2_3_report": {
+      "path": "docs/conjunctive_local_trace_pilot_v2_3.md",
+      "sha256": "578a90b6ca96fc8079f9cc015719c2016bb13d1f1b5f4efed834d02e906e1be4"
+    },
+    "local_trace_source": {
+      "path": "fsrl/conjunctive_local_trace.py",
+      "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"
+    },
+    "v2_3_runner_source": {
+      "path": "fsrl/conjunctive_local_trace_pilot.py",
+      "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "behavioral_source": {
+      "path": "fsrl/behavioral.py",
+      "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"
+    }
+  },
+  "frozen_artifacts": {
+    "backbone": {
+      "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+      "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"
+    },
+    "gain": {
+      "path": "output/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json",
+      "sha256": "32a0750f3e4ce08703da0f3edca506d649e0e7d123aa67cc0bc3fc91fd059cc8",
+      "lambda_L": 0.16946345567703247
+    }
+  },
+  "execution_contract": {
+    "read_only": true,
+    "device": "visible CUDA GPU required for frozen neural replay",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "subjects": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "bootstrap_seed": 32001,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "choice_temperature": 0.25,
+    "parameter_checkpoint_seed_or_threshold_changes": "forbidden",
+    "sampled_endpoint": "Reproduce the existing frozen v2.3 sampled behavior with the same choice seed; primary attribution uses exact probabilities and contains no new choice sampling."
+  },
+  "cell_contract": {
+    "unit": "subject by learned relation by query orientation; retain both orientations rather than averaging logits before the sigmoid",
+    "retention": "R_sr=1 exactly when the frozen stable-omission subject relation gain is positive; the same R_sr labels both orientations",
+    "correct_signed_global_margin": "g_sro = y_ro times the frozen v1 policy margin, where y_ro is +1 for higher-lower query order and -1 for lower-higher order",
+    "correct_signed_local_margin": "ell_sro = y_ro times the frozen applied lambda_L local margin",
+    "correct_signed_dual_margin": "d_sro = g_sro + ell_sro",
+    "exact_probabilities": "pG=sigmoid(g/T), pD=sigmoid(d/T), and delta_p=pD-pG with T=0.25",
+    "relation_level_reporting": "Average the two orientation-specific correct probabilities or signed margins only after computing each orientation-specific value"
+  },
+  "self_cross_decomposition": {
+    "full_trace": "L_T is the unchanged natural v2.3 trace",
+    "self_trace": "L_r is replayed from only the support slots belonging to learned relation r, using the same normal encoded signed values and frozen lambda_L",
+    "cross_trace": "L_-r=L_T-L_r",
+    "identity": "ell_full=ell_self+ell_cross for every subject, learned relation, and orientation within 1e-6",
+    "stable_omission": "ell_self is exactly zero within 1e-7 whenever R_sr=0",
+    "registered_summaries": [
+      "signed and absolute self, cross, and full contribution by retained status",
+      "retained self-positive fraction",
+      "absolute self-to-cross ratio",
+      "self-only and full-local boundary rescue"
+    ]
+  },
+  "primary_estimands": {
+    "error_mass": "E_R=sum R(1-pG), E_O=sum (1-R)(1-pG), and omitted fraction E_O/(E_R+E_O), with subject-bootstrap ratios computed from resampled subject totals",
+    "boundary_crossing": "Within retained cells report g<=0 and d>0 rescue, g>0 and d<=0 harm, plus denominators and subject-bootstrap rates",
+    "exact_probability_change": "Report delta_p by retained status, baseline pG saturation bins [0,0.5), [0.5,0.9), [0.9,0.99), [0.99,1.0], and the fraction of error mass removed",
+    "local_only_partition": "For P-off/L-intact report exact probability and hard correctness separately for retained and omitted cells; also report pure-local sigmoid(ell/T) and sign correctness",
+    "sampled_endpoint_reproduction": "Reproduce original-v1/local-off and dual-intact sampled learned, nonlearned, overall accuracy, and distance slope from the frozen v2.3 result",
+    "slope_decomposition": "For each subject and condition compute pair-level exact correct probability averaged over orientations. Decompose the OLS numerator sum (d-dbar)(p-pbar) and slope by learned-retained, learned-omitted, and nonlearned groups; group contributions must sum to the total within 1e-12."
+  },
+  "decision_rules": {
+    "omission_dominant": "The participant-bootstrap lower bound for omitted error-mass fraction exceeds 0.50.",
+    "retained_local_sufficient": "For P-off/L-intact, retained exact-probability lower bound exceeds 0.65, omitted upper bound is at most 0.55, and retained-minus-omitted paired lower bound exceeds 0.10.",
+    "retained_value_conversion_limited": "Retained local sufficiency fails while retained self contribution has a positive bootstrap lower bound and retained cells account for at least half of v1 exact error mass.",
+    "exact_rescue_with_sampled_insensitivity": "The paired lower bound for retained dual-minus-v1 exact probability exceeds zero while the frozen sampled learned-accuracy contrast interval contains zero.",
+    "address_interference_material": "The retained mean absolute cross contribution is at least one third of the retained mean absolute self contribution.",
+    "slope_source": "Name the group with the largest positive v1 exact-probability slope contribution and report every signed contribution; this is descriptive and does not redefine the v2.3 behavioral endpoint."
+  },
+  "outcome_tree": {
+    "dual_evidence_access": "If omission_dominant and retained_local_sufficient pass, preserve storage/query/value sufficiency for retained evidence and next test whether a local branch can access weak/raw evidence that the global stable-omission bottleneck excludes. Do not increase gain or change the address.",
+    "shared_value_transform": "If retained_value_conversion_limited passes, preserve L_T storage/address and prospectively test a shared value or expression transform. Do not replace the address or use relation-specific parameters.",
+    "confirmation_estimand_sensitivity": "If exact_rescue_with_sampled_insensitivity passes without either mechanistic limitation above, do not change the model; revise only a future replication estimand prospectively while preserving the failed v2.3 endpoint.",
+    "mixed_or_unresolved": "If the registered diagnoses do not isolate one route, preserve all qualified decompositions and register a narrower read-only analysis before another trainable candidate."
+  },
+  "reporting": {
+    "all_subjects_relations_orientations_and_groups_required": true,
+    "raw_cell_values_required": true,
+    "positive_negative_mixed_and_uncertain_results_required": true,
+    "primary_attribution_is_exact_probability": true,
+    "v2_3_decision_remains_immutable": true,
+    "gain_refit_seed_filtering_relation_filtering_and_endpoint_relabeling": "forbidden"
+  }
+}
