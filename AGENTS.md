@@ -319,14 +319,15 @@ mechanism gates remain intact. This supports functionally separable global
 inferential and local conjunctive persistent states on this backbone; it does
 not prove unique tensor-product coding or biologically separate stores.
 
-The v2.3 candidate is nevertheless a registered mixed negative because the
+The original v2.3 pilot is nevertheless a registered mixed negative because the
 sampled learned-accuracy rescue is only +0.00146 with a bootstrap interval
 crossing zero, and the symbolic-distance slope does not improve. Nine of ten
 primary flags pass, but the all-primary conjunction fails. Do not run
-2102/2103, retune the gain on Liu, relax the behavioral rule, alter the fixed
-address after seeing the result, or begin end-to-end co-adaptation. Preserve
-the double dissociation rather than calling the local trace ineffective, but
-do not call it a full behavioral rescue.
+2102/2103 without a separately frozen replication contract, retune the gain on
+Liu, relax the original behavioral rule, alter the fixed address after seeing
+the result, or begin end-to-end co-adaptation. Preserve the double dissociation
+rather than calling the local trace ineffective, but do not retroactively call
+the discovery pilot a full behavioral rescue.
 
 Before another trainable local candidate, freeze a read-only attribution of
 the behavioral non-rescue. Partition learned errors and signed margins by
@@ -372,14 +373,52 @@ contribution increases enough to cancel them. Treat direct learned fidelity
 and excessive global symbolic-distance dependence as two mechanistically
 distinct problems; do not require one local memory component to repair both.
 
-Do not change v2.3, train a value transform, alter stable omission, move the
-0.65 threshold, or immediately run 2102/2103. The next admissible action is to
-prospectively freeze a new replication contract that keeps the mechanism
-unchanged and uses exact retained probability, direct causal rescue,
-self/query specificity, and the `P`/`L` double dissociation as confirmation
-estimands. Preserve sampled learned accuracy and distance slope as the failed
-v2.3 endpoints in all future reporting. The attribution is in
+Do not retroactively change v2.3, train a value transform inside its frozen
+contract, alter its stable-omission rule, or move the 0.65 threshold. The
+required replication contract was prospectively frozen
+with the mechanism unchanged and exact retained probability, direct causal
+rescue, self/query specificity, and the `P`/`L` double dissociation as four
+independent confirmation links. The attribution is in
 `docs/local_behavior_attribution_v2_3.md`.
+
+That two-backbone replication is now complete on mandatory seeds 2102 and
+2103. Both artifact sets were trained and generic-gain-adapted before either
+Liu evaluation, then jointly hash-locked. All competence and integrity gates
+pass. Each of the four primary links passes separately within both networks;
+participants were bootstrapped within network and never pooled across
+networks. The registered outcome is `replicated_mechanism`, not a network-
+population prevalence estimate.
+
+Retained exact probability improves by 0.01194 and 0.00889 with positive
+participant-bootstrap lower bounds. Direct causal correctness improves by
+0.32957 and 0.28515. Natural query addresses beat deranged addresses by
+0.34062 and 0.29472, and own-write contributions are robustly correctly
+signed. Under `P`-off/local-intact, retained-minus-omitted exact probability
+and sampled learned-minus-nonlearned accuracy are positive while remote
+reassembly collapses. Under `L`-off, both networks exactly restore v1 and all
+global mechanism gates. Treat the retained-evidence `L_T` versus global-
+inference `P_T` causal decomposition as the working project mechanism. Do not
+claim unique tensor-product coding, biological stores, or population
+prevalence.
+
+Preserve the original seed-2101 sampled learned-accuracy failure and 0.65
+historical-threshold miss. The replication seeds show small positive sampled
+learned-accuracy changes, but nonlearned accuracy declines slightly and the
+symbolic-distance slope remains unchanged or slightly worse. Nonlearned
+queries remain the largest exact-slope source. Stable-omitted cells still hold
+66.65 and 71.33 percent of v1 exact learned error mass in the two networks,
+and their own local write is exactly zero. Thus the local mechanism is
+replicated while full human behavior remains unsolved.
+
+The next admissible local candidate family is a prospectively registered
+`dual_evidence_access_v2.4` test: preserve the frozen v2.3 address, persistent
+state, and `P_T` global path, while defining how weak/raw evidence unavailable
+to the global stable-omission channel can enter the local path. Freeze the
+evidence source, subject-specific semantics, controls, competence gates, and
+stop rules before implementation. Do not refit the local gain on Liu or ask
+this local-access candidate to repair the separate nonlearned/global distance-
+slope discrepancy. The replication result is in
+`docs/conjunctive_local_trace_replication_v2_3.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
@@ -401,7 +440,9 @@ low-capacity expression-family closure are in
 causal local/global double dissociation are in
 `docs/conjunctive_local_trace_pilot_v2_3.md`; and the registered explanation of
 its direct-causal versus sampled-behavior mismatch is in
-`docs/local_behavior_attribution_v2_3.md`.
+`docs/local_behavior_attribution_v2_3.md`; and the independent two-backbone
+replication of the local/global decomposition is in
+`docs/conjunctive_local_trace_replication_v2_3.md`.
 
 ## Repository workflow
 
