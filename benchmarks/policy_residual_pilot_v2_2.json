@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "pilot_id": "liu-policy-first-order-residual-pilot-v2.2",
+  "registration_status": "frozen_before_v2_2_implementation_eta_adaptation_or_evaluation",
+  "registration_parent_commit": "5f9b0536c3bbe4a94f4aae685710d880eb983abc",
+  "scientific_question": "Is the already-present correctness-aligned first-order fast-weight response sufficient for local fidelity when its component lost by exact finite-amplitude expression is explicitly restored at the policy margin?",
+  "core_hypothesis": "The frozen seed-2101 fast-weight substrate already supplies both global assembly and a correctness-aligned J_b u response. Human-like local fidelity may require preserving the difference between this first-order response and the exact finite-amplitude tanh response at policy expression, without changing recurrent computation, storage, or readout parameters.",
+  "mechanism_family": "low-capacity first-order response-expression correction, distinct from scalar input-amplitude gating",
+  "claim_boundary": "This is a one-backbone, one-parameter development sufficiency test. It does not confirm population-level v2, introduce a second memory store, identify a biological residual pathway, change tanh, fit a new readout, or permit Liu-informed adaptation. A valid failure closes the family in which the existing first-order signal can be recovered by a low-capacity response-expression correction; it does not erase the supported fast-weight global mechanism.",
+  "registration_timing": "The contract is frozen after the policy-opposition v2.1 pilot validly closed scalar amplitude gating and before writing the v2.2 implementation, adapting eta, constructing Liu controls, or evaluating any v2.2 condition.",
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "qualification": {
+      "path": "benchmarks/qualification_v2.json",
+      "sha256": "1b1fd30f5514ec11f9b43e878e4215f0480f56cabf41d0d28b9da71fff9ae369"
+    },
+    "operator_semantics_specification": {
+      "path": "benchmarks/operator_output_semantics_v1.json",
+      "sha256": "1ed8a134268f942af9e8c10af3f128c4850735a65c588db2ab007317b224359b"
+    },
+    "operator_semantics_result": {
+      "path": "results/operator_output_semantics_v1.json",
+      "sha256": "b38f577ad83ffe64866724252e2ff03279185beb748972a7298099855c85837a"
+    },
+    "opposition_gate_specification": {
+      "path": "benchmarks/policy_opposition_gate_pilot_v2_1.json",
+      "sha256": "1b591b3d5dc99450fd9ae630f84ea92b64fc818d57b3a9f3e7791f158ee1d903"
+    },
+    "opposition_gate_final_lock": {
+      "path": "benchmarks/policy_opposition_gate_pilot_v2_1.lock_v3.json",
+      "sha256": "eb5670c41da6f868ecb03ea8dbdbaf817d8a9244628dbfe47c98c4113fd6fbab"
+    },
+    "opposition_gate_result": {
+      "path": "results/policy_opposition_gate_pilot_v2_1.json",
+      "sha256": "8b0cc636f344b11c440b7a38b34f8775689b16f3bd32c6db6708cb8477764011"
+    },
+    "opposition_gate_report": {
+      "path": "docs/policy_opposition_gate_pilot_v2_1.md",
+      "sha256": "50a8e823782a0bd6d507d72f3c71a7c7bcf9c648d1d41965862c747d82d82825"
+    },
+    "v1_training_source": {
+      "path": "fsrl/meta_train.py",
+      "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"
+    },
+    "v1_model_source": {
+      "path": "fsrl/model.py",
+      "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    }
+  },
+  "frozen_backbone_contract": {
+    "seed": 2101,
+    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d",
+    "origin": "final step-1000 v1 backbone produced under curvature_gate_pilot_v2",
+    "reuse_only": "Do not retrain or edit the backbone. Freeze every backbone tensor before v2.2 eta adaptation and verify byte identity afterward.",
+    "forbidden_seeds": [1901, 1902, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2102, 2103]
+  },
+  "execution_contract": {
+    "device": "visible CUDA GPU required for eta adaptation and neural replay",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "eta_adaptation_compile": {
+      "enabled": true,
+      "fullgraph": true,
+      "mode": "default"
+    },
+    "trial_input_transfer": "one contiguous CPU-to-GPU transfer per trial",
+    "implementation_freeze": "The v2.2 implementation, tests, and implementation lock must be committed after this protocol and before eta adaptation.",
+    "artifact_freeze": "After eta adaptation, write and commit a separate artifact lock containing the exact eta-artifact hash before any Liu evaluation. Evaluation must refuse artifact, backbone, protocol, or source mismatches.",
+    "seed_subject_relation_or_trial_filtering": "forbidden except the prospectively defined stable-omission retained-evidence mask",
+    "liu_use_during_adaptation": "forbidden"
+  },
+  "policy_residual_equation": {
+    "scope": "only the two choice logits at the first fast-weight-sensitive response transition; hidden activation, value, DA, eligibility, fast weights, support dynamics, and all backbone parameters remain exact frozen v1",
+    "baseline": "b = i2h(x_response) + W h0",
+    "fast_weight_drive": "u = (alpha elementwise-multiplied by P_T) h0",
+    "exact_response_increment": "delta_h_exact = tanh(b + u) - tanh(b)",
+    "first_order_response_increment": "delta_h_lin = J_b u = (1 - tanh(b)^2) elementwise-multiplied by u",
+    "hidden_residual": "r_h = delta_h_lin - delta_h_exact",
+    "policy_margin": "W_margin = W_out[class_1] - W_out[class_0]",
+    "policy_residual": "c_res = W_margin^T r_h",
+    "v1_margin": "m_v1 = output_v1[class_1] - output_v1[class_0]",
+    "candidate_margin": "m_eta = m_v1 + eta c_res",
+    "symmetric_logit_implementation": "output_eta[class_0] = output_v1[class_0] - eta c_res / 2 and output_eta[class_1] = output_v1[class_1] + eta c_res / 2, preserving common-mode logit and changing the margin by exactly eta c_res",
+    "hidden_policy_equivalence": "Because W_out is linear at this choice step, applying the same scalar eta to delta_h_exact + eta(delta_h_lin-delta_h_exact) in hidden space gives the same policy margin. Only the policy form is tested; hidden and policy forms are not separate candidates.",
+    "eta_constraint": "eta = sigmoid(raw_eta), raw_eta is the only trainable v2.2 parameter, and 0 <= eta <= 1",
+    "initial_eta": 0.5,
+    "eta_zero_identity": "eta=0 exactly reproduces all v1 outputs and recurrent state",
+    "eta_one_identity": "eta=1 replaces only the fast-weight-induced policy increment by its current-operating-point first-order expression",
+    "online_inputs_only": "P_T, current query-derived h0, x_response, and frozen backbone parameters including W_margin",
+    "forbidden_inputs": "relation identity, H>A indicator, true label, correctness, LOO state, posterior, subject identifier, offline crossing, Liu-derived statistic, or a newly fitted readout"
+  },
+  "eta_only_adaptation": {
+    "backbone": "load the frozen seed-2101 checkpoint and freeze every v1 parameter",
+    "task_distribution": "the same generic sparse ranking distribution with the Liu graph and its rank-axis reflection excluded",
+    "adaptation_rng_seed": 12101,
+    "outer_steps": 500,
+    "batch_size": 32,
+    "learning_rate": 0.01,
+    "optimizer": "Adam over raw_eta only",
+    "gradient_clip": 2.0,
+    "loss": "mean generic query cross-entropy under the natural policy residual; no Liu term, human scalar, relation label, crossing target, or auxiliary residual target",
+    "checkpoint_selection": "step 500 only",
+    "control_training": "none; both controls reuse the exact candidate-trained eta and add no parameter"
+  },
+  "liu_evaluation": {
+    "subjects": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "order_seed": 31401,
+    "shuffle_seed": 31501,
+    "bootstrap_seed": 31601,
+    "magnitude_null_seed": 31701,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "posterior_temperature": 0.05,
+    "randomness_reuse_rationale": "Reuse the frozen v2 Liu evaluation draws to isolate the expression mechanism; none enter eta adaptation.",
+    "conditions": {
+      "original_v1": "eta=0 with the frozen seed-2101 backbone",
+      "policy_residual": "apply the natural online c_res with generic-only adapted eta",
+      "matched_magnitude_null": "apply c_null = sigma_subject_query |c_res| with the same eta; for each subject, a fixed seeded permutation assigns exactly 28 positive and 28 negative signs across the 56 canonical oriented queries, and intact plus every LOO replay reuse the same sign table",
+      "shuffled_residual": "within each subject, permute signed c_res across the 56 canonical oriented queries; intact and every relation-LOO replay use the same query permutation, preserving each replay's correction distribution while breaking state-query matching"
+    },
+    "all_four_conditions_required": true
+  },
+  "estimand_contract": {
+    "local_field": "For each retained support relation q, subtract relation-LOO logits from intact logits on all 28 pairs in both orientations, antisymmetrize, and apply the complete-graph Hodge residual projector.",
+    "direct_correctness": "Multiply the Hodge residual on q's direct edge by the registered correct orientation sign.",
+    "primary_local_estimands": [
+      "within-subject retained-relation mean direct correctness",
+      "H>A retained-subject direct correctness",
+      "within-subject mean direct correctness over the other seven retained relations"
+    ],
+    "remote_reassembly": "For each retained q, average absolute intact-minus-LOO influence over disjoint query pairs and average within subject before bootstrap.",
+    "third_party_reassembly": "Use the gauge-invariant third-party relational potential-energy fraction from the registered assembly definition and average retained relations within subject.",
+    "query_binding": "Matched normalized operator-action gain minus shared-endpoint mismatch and disjoint mismatch, using the registered state-query operator definition before policy residual expression.",
+    "terminal_projection": "Policy-residual final neural-potential cosine to exact posterior expected-rank/Hodge potential minus cosine to exact MAP potential.",
+    "residual_allocation": "Report c_res, eta c_res, and control corrections by relation including H>A and F>A, plus their subject-query distributions. These are mechanistic diagnostics and do not replace causal outcome rules.",
+    "behavioral_consequences": "Report learned accuracy, nonlearned accuracy, overall accuracy, and symbolic-distance slope for all four conditions; no human interval is a primary gate."
+  },
+  "competence_and_integrity_gates": {
+    "backbone": "The original-v1 condition must pass qualification_v2 before the residual result is interpreted.",
+    "source_and_artifact_hashes": "Every registered source, implementation source, backbone checkpoint, eta artifact, and artifact lock must match its recorded SHA-256.",
+    "frozen_backbone": "Only raw_eta may change during adaptation; every v1 state-dict tensor must be byte-identical before and after.",
+    "eta_zero_equivalence": "original_v1 must reproduce ungated backbone logits and all recurrent outputs exactly, with logit tolerance at most 1e-6.",
+    "policy_residual_identity": "For every evaluated natural candidate state, corrected margin minus v1 margin must equal eta c_res within 1e-6.",
+    "matched_magnitude_integrity": "For every subject, query, intact state, and LOO replay, |c_null| must equal |c_res| within 1e-7; each subject sign table has exactly 28 positive and 28 negative entries and is reused across intact and LOO.",
+    "shuffle_integrity": "Shuffled c_res must preserve each subject and replay's 56-value multiset within 1e-7 and change at least one assignment for every nonconstant row.",
+    "stable_omission": "Relation-LOO influence and direct correctness must be zero within 1e-7 when the relation was already omitted.",
+    "control_parameter_integrity": "Both controls use the same frozen eta as the natural candidate and introduce no trainable parameter."
+  },
+  "primary_decision_rules": {
+    "local_rescue": "The paired participant-bootstrap lower bound for policy-residual minus original retained-relation mean direct correctness exceeds zero.",
+    "H_greater_A_rescue": "The paired retained-subject bootstrap lower bound for policy-residual minus original H>A direct correctness exceeds zero, and H>A under policy residual is not robustly wrong-sign: its bootstrap upper bound is at least zero.",
+    "preserve_other_relations": "The policy-residual-minus-original mean over the other seven retained relations has a paired-bootstrap lower bound no smaller than -0.01.",
+    "control_specificity": "Each paired participant-bootstrap lower bound for policy residual minus matched-magnitude null and policy residual minus shuffled residual retained-relation mean direct correctness exceeds zero.",
+    "nonlearned_preservation": "Policy-residual nonlearned accuracy is at least 0.70 and no more than 0.02 below original v1.",
+    "fast_weight_necessity": "The policy-residual condition passes every qualification_v2 intervention and order-invariance rule.",
+    "global_reassembly_preservation": "Policy-residual remote absolute and third-party relational estimands each have bootstrap lower bounds above zero and point estimates at least 80 percent of original v1.",
+    "query_binding_preservation": "Both policy-residual matched-minus-mismatch normalized operator-gain contrasts remain positive and equal original within 1e-7 because this estimand precedes policy correction.",
+    "terminal_projection_preservation": "The policy-residual expected-rank-minus-MAP participant-bootstrap lower bound exceeds zero."
+  },
+  "outcome_contingent_interpretation": {
+    "all_primary_rules_pass": "Explicitly restoring the existing first-order residual is sufficient on the frozen seed-2101 backbone. The same synaptic operator can support an exact nonlinear global branch and a preserved first-order local-fidelity expression regime. Freeze a separate 2102/2103 replication contract before any new seed or end-to-end training.",
+    "valid_local_or_specificity_failure": "Close the entire family in which the existing first-order signal is recoverable by a low-capacity response-expression correction. Do not invent additional residual scalars, train on Liu, change tanh, or run 2102/2103. The next justified family is a separately persistent local component, prospectively registered on the same backbone before any implementation.",
+    "local_rescue_with_global_failure": "Reject the candidate because it trades the supported global mechanism for local fidelity; close low-capacity response-expression correction and move to a separately persistent local component.",
+    "competence_or_integrity_failure": "The mechanistic outcome is non-interpretable; repair execution on the same frozen backbone without changing equations, controls, thresholds, seeds, or scientific rules."
+  },
+  "reporting": {
+    "all_subjects_relations_conditions_and_controls_required": true,
+    "positive_negative_mixed_and_uncertain_results_required": true,
+    "human_scalar_conjunction_as_primary_gate": false,
+    "threshold_refit_checkpoint_selection_seed_filtering_and_posthoc_eta_selection": "forbidden",
+    "old_v1_v2_and_v2_1_contracts_implementations_and_artifacts_immutable": true,
+    "new_backbone_training_new_seed_activation_change_or_end_to_end_coadaptation": "forbidden"
+  }
+}
