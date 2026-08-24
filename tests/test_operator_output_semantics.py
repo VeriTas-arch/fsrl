@@ -13,6 +13,7 @@ from fsrl.operator_output_semantics import (
     decide_outcome,
     hodge_components,
     normalized_direct_correctness,
+    stage_relation_metrics,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
 
@@ -59,6 +60,13 @@ class OperatorOutputSemanticsTests(unittest.TestCase):
         self.assertEqual(len(direct), 8)
         self.assertEqual(set(signs), {-1.0})
         self.assertTrue(all(int(np.sum(mask)) == 15 for mask in remote))
+
+        fields = np.zeros((8, 77, 28), dtype=np.float64)
+        metrics = stage_relation_metrics(
+            fields, fields, self.geometry, direct, signs, remote
+        )
+        self.assertEqual(metrics["remote_correctness"].shape, (8, 77))
+        self.assertEqual(metrics["remote_absolute_residual"].shape, (8, 77))
 
     def test_directional_rules_and_outcome_tree(self):
         aligned = {

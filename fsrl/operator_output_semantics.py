@@ -341,13 +341,13 @@ def stage_relation_metrics(
     )
     remote_correctness = np.stack(
         [
-            np.mean(residual[index, :, mask] * geometry.true_sign[mask], axis=1)
+            np.mean(residual[index][:, mask] * geometry.true_sign[mask], axis=1)
             for index, mask in enumerate(remote_masks)
         ]
     )
     remote_absolute = np.stack(
         [
-            np.mean(np.abs(residual[index, :, mask]), axis=1)
+            np.mean(np.abs(residual[index][:, mask]), axis=1)
             for index, mask in enumerate(remote_masks)
         ]
     )
