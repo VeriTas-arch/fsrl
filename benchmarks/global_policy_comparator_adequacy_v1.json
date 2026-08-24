@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "audit_id": "liu-global-policy-comparator-adequacy-v1",
+  "registration_status": "prospectively_registered_after_allocation_localization_and_before_comparator_adequacy_implementation_or_new_estimand_evaluation",
+  "registration_parent_commit": "1ee80bfcf1833b34a996f7ba8e6eff181517314a",
+  "scientific_question": "Is the single frozen exact-posterior comparator externally adequate for the human nonlearned choice field on the same symbolic-distance and distance-residualized pair axes that localize the replicated neural-versus-posterior allocation fingerprint?",
+  "current_theory": "P_T-dependent g_N carries the neural global distance slope. Relative to one frozen exact posterior, four networks share A>0, Q_shape>0, and I<0, and the equal-energy mismatch has policy-effective pair and distance structure. Posterior uncertainty and evidence coverage do not provide a concordant field-to-policy state explanation. Before any further P_T decomposition or intervention, the comparator itself must be judged against human choices without using the neural field to select or tune it.",
+  "audit_hypothesis": "The current exact posterior may or may not be an externally adequate reference for the cohort-level human choice field. Adequacy requires both its fixed 20-pair symbolic-distance slope to lie inside the prospectively recomputed human participant-bootstrap interval and its distance-residualized pair structure to retain at least 80 percent of the Spearman-Brown-corrected human split-half noise ceiling under the frozen one-sided equivalence rule.",
+  "claim_boundary": "This is a read-only external-reference audit of one already frozen comparator. It does not search, fit, rank, or introduce another comparator; match virtual subjects to human participants; use a neural field in comparator selection; establish that the exact posterior is the human posterior; test a P_T-internal mechanism; authorize a temperature, W_out, P_T, evidence, or model intervention; or provide network-population inference.",
+  "registration_timing": "Frozen after the complete committed allocation result at 1ee80bf and after acknowledging the historical human and posterior slope summaries, but before writing a comparator-adequacy runner or calculating the new 20-pair human cohort slope interval, odd-even reliability, posterior-human residual correlation, corrected ceiling ratio, or six-level human-versus-posterior profile.",
+  "canonical_paths": {
+    "specification": "benchmarks/global_policy_comparator_adequacy_v1.json",
+    "implementation_lock": "benchmarks/global_policy_comparator_adequacy_v1.lock.json",
+    "runner": "fsrl/global_policy_comparator_adequacy.py",
+    "runner_tests": "tests/test_global_policy_comparator_adequacy.py",
+    "formal_runtime": "fsrl/formal_runtime.py",
+    "formal_runtime_tests": "tests/test_formal_runtime.py",
+    "result": "results/global_policy_comparator_adequacy_v1.json",
+    "report": "docs/global_policy_comparator_adequacy_v1.md"
+  },
+  "registered_sources": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+    },
+    "human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "human_preregistered_trials": {
+      "path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227"
+    },
+    "human_replication_trials": {
+      "path": "data/external/liu2026/replication_experiment_data.csv",
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249"
+    },
+    "allocation_specification": {
+      "path": "benchmarks/global_policy_allocation_audit_v1.json",
+      "sha256": "b14836fbd523c9b6ad620394979905b15a96f5a3109b7929669da199cb70c0fe"
+    },
+    "allocation_result": {
+      "path": "results/global_policy_allocation_audit_v1.json",
+      "sha256": "82147bad41b0cbdbb812217f383555f166e5f96492a7b00de752bec14ef867f6"
+    },
+    "allocation_report": {
+      "path": "docs/global_policy_allocation_audit_v1.md",
+      "sha256": "229378dc536aae69a39fd19557698179ea94b35a017e95c27a77d390bc6ad39e"
+    },
+    "fingerprint_result": {
+      "path": "results/global_policy_field_fingerprint_replication_v1.json",
+      "sha256": "21592db1f9dc1a35bdca05a0eddc62c5b8a7bcec2a6abf90d103fac33b138600"
+    },
+    "human_benchmark_source": {
+      "path": "fsrl/human_benchmark.py",
+      "sha256": "ccea96102f01dc4027d2ca2f1202e33c1626da8f19cf7de8e5a3c24370cd6ade"
+    },
+    "posterior_descriptor_source": {
+      "path": "fsrl/global_policy_amplitude_provenance.py",
+      "sha256": "da757bcb2fb1748ce9a9e24413b104aa16598ef4e3c5112733137054713dfc2a"
+    },
+    "frozen_evaluator_source": {
+      "path": "fsrl/liu_eval.py",
+      "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"
+    },
+    "subject_encoding_source": {
+      "path": "fsrl/subject_encoding.py",
+      "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"
+    },
+    "ranking_protocol_source": {
+      "path": "fsrl/ranking_protocol.py",
+      "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"
+    },
+    "exact_posterior_source": {
+      "path": "fsrl/constructive.py",
+      "sha256": "8c33fa737f2d2b988c94054aa720c51913abccbec666c864c4d9eadb8fed443d"
+    },
+    "configuration_source": {
+      "path": "fsrl/config.py",
+      "sha256": "d19b03fd5ce0bd4e8129b83c4d7399bb4afd02bfff199a568e999151ad8625d8"
+    },
+    "assembly_source": {
+      "path": "fsrl/assembly_trajectory.py",
+      "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"
+    },
+    "hash_validation_source": {
+      "path": "fsrl/confirmation.py",
+      "sha256": "df71f4d67a458507e2f3b9e3c7345351e0317dc1fe09be2fcbbefb92d39ab0d1"
+    }
+  },
+  "external_standard": {
+    "primary_standard": "The public Liu trial-level human choice field only. No second model comparator is admissible.",
+    "human_cohort": "Combine the 40 preregistered and 37 retained replication participants in source order. Apply only the already frozen below-chance exclusion overall_accuracy<0.5; require exactly 77 eligible participants. Do not exclude the eight correct rankers for this choice-field audit.",
+    "human_model_mapping": "There is no participant-wise mapping between human and virtual subjects. All primary comparisons are between separately formed cohort-level pair fields.",
+    "human_choice": "Use the released r_or_w correctness value, independently verify it equals choosing the higher source item under A<B<...<H, and retain every registered query trial.",
+    "human_full_field": "For each human participant and unordered pair, average correctness over all ten query blocks. Then define h[e] as the unweighted mean of those participant pair accuracies over all 77 eligible participants.",
+    "posterior_field": "Reconstruct the unchanged exact posterior from the frozen stable-omission virtual evidence cohort and define p_P[e] as the unweighted mean correct-choice probability over its fixed 77 virtual subjects. The virtual cohort is fixed, is not resampled for the primary human adequacy interval, and is not matched to humans.",
+    "neural_field": "Forbidden from all primary and secondary comparator-adequacy calculations. Existing neural-versus-posterior results are provenance and outcome context only."
+  },
+  "posterior_comparator": {
+    "posterior_temperature": 0.05,
+    "choice_temperature": 0.25,
+    "subjects": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "definition": "Use exactly the current comparator: P_post(pi|D_s) proportional to exp[-E(pi)/0.05] under each frozen virtual subject's realized evidence. For canonical pair e, p_P[s,e] is the posterior probability of the source-correct orientation; no clipping, temperature fit, calibration, or alternative evidence model is allowed.",
+    "fixed_cohort_boundary": "Inference is about the current frozen comparator field, not a population of simulated subject cohorts."
+  },
+  "field_contract": {
+    "edge_order": "All 28 unordered pairs in lexicographic integer order.",
+    "nonlearned_pair_labels": [
+      "A-B", "A-C", "A-D", "A-E", "A-G",
+      "B-D", "B-F", "B-G", "B-H",
+      "C-D", "C-E", "C-F", "C-H",
+      "D-E", "D-H",
+      "E-F", "E-G",
+      "F-G", "F-H",
+      "G-H"
+    ],
+    "primary_pairs": "Use exactly the same 20 nonlearned pairs as Track B and the allocation audit. Learned support pairs are excluded before every primary and distance-level calculation.",
+    "symbolic_distance": "Absolute source-correct rank-position difference d[e].",
+    "distance_levels": [1, 2, 3, 4, 5, 6],
+    "distance_level_pair_counts": [4, 5, 4, 3, 2, 2],
+    "fixed_design": "For the 20 primary pairs, d_bar=2.8, V_d=sum_e(d[e]-d_bar)^2=57.2, and w[e]=(d[e]-2.8)/57.2.",
+    "distance_residualization": "For each 20-vector x, define r(x)=(I-X pinv(X))x with X=[1,d]. Do not remove categorical distance, nonlinear distance, pair families, endpoints, or any additional covariate."
+  },
+  "human_split_half": {
+    "split": "Odd query blocks 1,3,5,7,9 form half A and even blocks 2,4,6,8,10 form half B. Each half must contain exactly one response for every participant-pair-block cell and five responses per participant-pair.",
+    "half_fields": "Form h_A[e] and h_B[e] by first averaging each participant's five responses within that half and then taking the unweighted cohort mean.",
+    "reliability": "r_HH=corr(r(h_A),r(h_B)) over the fixed 20 pairs.",
+    "spearman_brown": "rho_H=2*r_HH/(1+r_HH), without clipping.",
+    "purpose": "The corrected reliability supplies an external human measurement ceiling; it is not selected or adjusted using posterior or neural results."
+  },
+  "primary_distance_adequacy": {
+    "human_estimand": "S_H=sum_e w[e] h[e]. Because the design is fixed and slope is linear, this equals the mean of participant-level 20-pair slopes.",
+    "posterior_estimand": "S_P=sum_e w[e] p_P[e] for the fixed current comparator cohort.",
+    "bootstrap": "Resample the 77 eligible human participants with replacement, recompute h and S_H, and retain the fixed S_P. Pairs, trials, blocks, and virtual subjects are never resampled.",
+    "adequate": "S_P lies inclusively inside the central 95 percent participant-bootstrap interval for S_H.",
+    "inadequate_below": "S_P is below the 2.5th percentile of the human S_H bootstrap distribution.",
+    "inadequate_above": "S_P is above the 97.5th percentile of the human S_H bootstrap distribution.",
+    "boundary": "This is the only distance adequacy rule. Do not change temperature, mask, slope definition, or interval after execution."
+  },
+  "primary_pair_adequacy": {
+    "posterior_human_correlation": "r_PH=corr(r(p_P),r(h)) over the fixed 20 pairs.",
+    "corrected_ceiling_ratio": "eta_pair=r_PH/sqrt(rho_H), where rho_H is the Spearman-Brown-corrected odd-even human reliability. Do not clip eta_pair or either correlation.",
+    "bootstrap": "Use the same human participant-resampling counts as the distance audit. Recompute h, h_A, h_B, r_PH, r_HH, rho_H, and eta_pair in every draw while p_P remains fixed.",
+    "reliability_gate": "The point estimate and every registered bootstrap r_HH and rho_H must be finite and strictly positive; all residual-vector norms must exceed 1e-12. Failure is noninterpretable rather than permission to change the split or metric.",
+    "adequate": "The central 90 percent participant-bootstrap lower bound of eta_pair is at least 0.80, prospectively defining retention of at least 80 percent of the corrected human noise ceiling.",
+    "inadequate": "The pair adequacy rule is not met after all reliability and integrity gates pass.",
+    "boundary": "Report r_PH, r_HH, rho_H, eta_pair, and central 90 and 95 percent intervals. The 0.80 threshold is fixed before evaluation and is not a claim that 0.80 is a universal cognitive standard."
+  },
+  "statistical_contract": {
+    "human_inference_unit": "eligible human participant",
+    "virtual_subject_role": "fixed comparator-cohort averaging unit, not a resampled or human-matched inference unit",
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 35801,
+    "intervals": [0.90, 0.95],
+    "bootstrap_counts": "Generate one 10000-by-77 participant-resampling count matrix and reuse it for every human field, slope, reliability, correlation, ceiling, and secondary profile estimand.",
+    "pair_correlation": "Pearson product-moment correlation after the single frozen linear-distance residualization.",
+    "minimum_vector_norm": 1e-12,
+    "floating_tolerance": 1e-10,
+    "multiple_testing": "No family-wise error or population-prevalence claim. Distance and pair adequacy are two distinct necessary criteria in the frozen four-branch decision tree."
+  },
+  "secondary_reporting": {
+    "distance_profile": "For each registered distance d=1,...,6, report H_d=mean[h[e]|d[e]=d], P_d=mean[p_P[e]|d[e]=d], H_d-P_d, and the human participant-bootstrap intervals. This is explanatory only and cannot create a near/far primary.",
+    "pair_vectors": "Report the 20 pair labels, h, p_P, r(h), and r(p_P) in frozen order without 20 individual significance tests.",
+    "source_cohorts": "Report preregistered and replication human cohort fields and slopes separately as descriptive provenance only; neither can replace or override the combined-cohort primary.",
+    "historical_context": "Report the previously known all-pair human slope and frozen Track-B posterior slope only as historical context; neither is substituted for the newly registered 20-pair estimands."
+  },
+  "competence_and_integrity_gates": {
+    "source_hashes": "Every registered protocol, data, benchmark, upstream result, report, and reused source must match SHA-256.",
+    "formal_runtime": "A visible CUDA GPU and one PyTorch intra-op plus one inter-op CPU thread are required even though the audit performs no neural replay.",
+    "git_freeze": "The specification and implementation lock must be tracked at a clean pushed dev HEAD before formal evaluation.",
+    "human_completeness": "Exactly 40 preregistered plus 37 replication participants, 77 eligible combined participants, 280 trials per participant, blocks 1 through 10, all 28 pairs once per block, ten observations per participant-pair, and five observations in each registered half.",
+    "human_accuracy_identity": "Every r_or_w value equals whether the chosen source item is the source-correct higher item.",
+    "human_benchmark_reproduction": "The 28 full-cohort pair means reconstructed from raw trials equal the frozen human benchmark pair means within 1e-10, and its source-reproduction status and 77-participant competence checks pass.",
+    "posterior_identity": "The reconstructed participant-level S_P vector equals the frozen seed-2106 and seed-2107 S_PP vectors from the fingerprint result within 1e-10; the two frozen S_PP anchors must themselves be identical.",
+    "allocation_prerequisite": "The frozen allocation result must pass all source, artifact, prerequisite, seed, and cross-network gates and must retain outcome policy_effective_allocation_localized, scope structural_only, pair and distance policy-effective, U/C not policy-effective, and conditional next step prospective_comparator_adequacy.",
+    "complete_execution": "All 77 human participants, all 77 fixed virtual subjects, 28 canonical pairs, the fixed 20 nonlearned pairs, six distance levels, and all 10000 bootstrap draws are retained and finite.",
+    "no_filtering_or_posthoc_repair": "No participant, trial, block, pair, distance, comparator, temperature, evidence state, threshold, split, bootstrap draw, or result may be removed, replaced, added, or redefined after execution."
+  },
+  "runtime_contract": {
+    "device": "visible CUDA GPU required by fsrl.formal_runtime",
+    "torch_cpu_threads": 1,
+    "numpy_or_blas_thread_overrides": "forbidden",
+    "training": "not performed",
+    "neural_checkpoint_loading_or_replay": "forbidden; reconstruct only the existing exact posterior from the source-locked virtual evidence schedule",
+    "command": "direnv exec . python -m fsrl.formal_runtime global-policy-comparator-adequacy evaluate"
+  },
+  "execution_firewall": {
+    "protocol_freeze": "Commit and push this complete scientific contract before writing the new runner, test, or formal-runtime dispatch and before calculating any newly registered adequacy outcome.",
+    "implementation_freeze": "After implementation and static tests, write an exact implementation/source lock, commit and push runner, tests, dispatch, and lock before formal evaluation.",
+    "single_comparator": "Evaluate only the current exact posterior. No alternative posterior, heuristic comparator, neural field, calibration, temperature, or best-fit selection enters this audit.",
+    "repair_boundary": "Only an integrity or execution repair that leaves every scientific estimand, threshold, split, source, and outcome rule unchanged may occur; it must be documented and frozen before any affected replay.",
+    "canonical_result": "Write the canonical result once. A second complete /tmp replay must be byte-identical before reporting."
+  },
+  "outcome_tree": {
+    "noninterpretable": "Any source, runtime, git, completeness, identity, finiteness, reliability, prerequisite, or no-filtering gate fails.",
+    "comparator_externally_adequate": "Distance adequacy and pair adequacy both pass. A separately registered neural-mechanism question about P_T-to-g_N pair/distance allocation may then be considered; this result itself is not that mechanism test.",
+    "comparator_externally_inadequate": "Distance adequacy and pair adequacy both fail. Preserve every neural-versus-this-comparator fingerprint, but attribute its mechanistic ambiguity to comparator limitation and stop P_T intervention.",
+    "distance_adequate_pair_inadequate": "Distance adequacy passes and pair adequacy fails. The comparator captures the human distance trend but not enough distance-residualized pair structure; any future comparator work must be independently motivated and pair-focused.",
+    "pair_adequate_distance_inadequate": "Pair adequacy passes and distance adequacy fails. The comparator captures enough residual pair structure but not human distance calibration; the neural-versus-posterior distance fingerprint cannot be treated as a neural defect.",
+    "decision_priority": "Apply all noninterpretable gates first, then classify distance and pair adequacy independently, then map their two booleans to exactly one of the four substantive outcomes. Secondary profiles and source-cohort descriptions never override the primary outcome."
+  },
+  "outcome_contingent_interpretation": {
+    "comparator_externally_adequate": "The current exact posterior is externally adequate on both prospectively fixed human axes. This permits, but does not itself establish, a new separately frozen investigation of how P_T generates the stable comparator-relative pair/distance allocation.",
+    "comparator_externally_inadequate": "The stable A/Q_shape/I and pair/distance fingerprints remain valid facts relative to this comparator, but they cannot guide network modification. Stop neural intervention and reassess comparator theory prospectively without searching alternatives against the neural field.",
+    "distance_adequate_pair_inadequate": "Retain comparator adequacy for the human distance trend only. Do not use its pair-specific departures as a P_T target.",
+    "pair_adequate_distance_inadequate": "Retain comparator adequacy for residual pair structure only. Do not use the neural-posterior distance departure as a P_T target or repair it with scalar calibration.",
+    "secondary_distance_profile": "Distance-level differences may explain where an inadequacy occurs but cannot create a new primary or retrospectively redefine distance 1-2 as the tested family."
+  },
+  "reporting": {
+    "result_path": "results/global_policy_comparator_adequacy_v1.json",
+    "report_path": "docs/global_policy_comparator_adequacy_v1.md",
+    "required_raw_arrays": "Retain human participant-by-pair full, odd-half, and even-half arrays; fixed posterior subject-by-pair and cohort fields; pair labels, mask, distances, weights; the single bootstrap count matrix; all bootstrap S_H, r_PH, r_HH, rho_H, eta_pair, and distance-profile arrays; and every point estimate, interval, status, identity, and decision.",
+    "required_claim_boundaries": "State that the comparator is fixed rather than true, human and virtual subjects are not matched, only humans are bootstrapped, no neural field or alternative comparator entered the audit, historical slope evidence made the distance direction non-blind, pair adequacy uses a policy threshold rather than a universal standard, and no network intervention is authorized unless the registered outcome permits a future separate protocol."
+  }
+}
