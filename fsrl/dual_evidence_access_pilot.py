@@ -66,7 +66,7 @@ DEFAULT_SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "dual_evidence_access_pilot_v2_4.json"
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_evidence_access_pilot_v2_4.lock.json"
+    ROOT / "benchmarks" / "dual_evidence_access_pilot_v2_4.repair1.lock.json"
 )
 DEFAULT_RESULT_PATH = ROOT / "results" / "dual_evidence_access_pilot_v2_4.json"
 V2_3_RESULT_PATH = ROOT / "results" / "conjunctive_local_trace_replication_v2_3.json"
@@ -371,7 +371,10 @@ def _learned_probabilities(evaluator, bundle: dict, temperature: float) -> np.nd
     for relation_index, relation in enumerate(relations):
         for orientation, pair in enumerate((relation, relation[::-1])):
             sign = 1.0 if orientation == 0 else -1.0
-            margin = sign * bundle["logits"][:, pair_index[pair]]
+            margin = sign * (
+                bundle["global_logits"][:, pair_index[pair]]
+                + bundle["applied_local_margins"][:, pair_index[pair]]
+            )
             values[:, relation_index, orientation] = exact_probability(
                 margin, temperature
             )

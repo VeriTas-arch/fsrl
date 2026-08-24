@@ -1,9 +1,11 @@
 import unittest
+from types import SimpleNamespace
 
 import numpy as np
 
 from fsrl.curvature_gate_pilot import load_json
 from fsrl.dual_evidence_access_pilot import (
+    _learned_probabilities,
     access_factor,
     apply_blockwise_route,
     blockwise_derangements,
@@ -25,6 +27,20 @@ class DualEvidenceAccessPilotTests(unittest.TestCase):
     def test_access_factor_rejects_nonbinary_global_admission(self):
         with self.assertRaisesRegex(ValueError, "binary"):
             access_factor(np.asarray([0.5]), np.asarray([0.5]))
+
+    def test_learned_probability_reuses_frozen_component_sum_estimand(self):
+        evaluator = SimpleNamespace(
+            protocol=SimpleNamespace(support_pairs_higher_lower=((0, 1),), n_items=2),
+            config=SimpleNamespace(bs=1),
+        )
+        bundle = {
+            "logits": np.asarray([[-10.0, -10.0]]),
+            "global_logits": np.asarray([[0.1, 0.2]]),
+            "applied_local_margins": np.asarray([[0.2, 0.3]]),
+        }
+        observed = _learned_probabilities(evaluator, bundle, 1.0)
+        expected = 1.0 / (1.0 + np.exp(-np.asarray([[[0.3, -0.5]]])))
+        np.testing.assert_allclose(observed, expected, atol=0.0, rtol=1e-15)
 
     def test_blockwise_routes_are_derangements_and_preserve_multisets(self):
         maps = blockwise_derangements(3, 2, 4, 17)
