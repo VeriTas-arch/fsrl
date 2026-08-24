@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "analysis_id": "liu-local-behavior-attribution-v2.3",
+  "freeze_status": "implementation_frozen_before_read_only_attribution_execution",
+  "analysis_specification_path": "benchmarks/local_behavior_attribution_v2_3.json",
+  "analysis_specification_sha256": "ea892ce00c852e029c05d13c4cefc1011ba75ed70ffd714990a3da6ad916ea3c",
+  "implementation_sources": {
+    "local_behavior_attribution": {
+      "path": "fsrl/local_behavior_attribution.py",
+      "sha256": "79a16b6be0cea2ae481f2aa01b343b1ecbc44b1cb404b85bac34b0d5197715c4"
+    },
+    "local_behavior_attribution_tests": {
+      "path": "tests/test_local_behavior_attribution.py",
+      "sha256": "2283919912add0d17ff21dec729e3c428fd6640e7b5bf8a647a7c67e03d834a7"
+    }
+  },
+  "validation_before_freeze": {
+    "pytest": "169 passed",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "immutability": "The attribution may now execute only on the frozen seed-2101 backbone, v2.3 gain, Liu schedule, exact-probability temperature, bootstrap seed, and registered estimands. Any source repair requires a superseding lock without changing scientific rules."
+}
