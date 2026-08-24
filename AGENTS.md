@@ -452,6 +452,39 @@ v2.3 replication is in
 result and execution-repair audit are in
 `docs/dual_evidence_access_pilot_v2_4.md`.
 
+That fresh-backbone confirmation is now complete on seeds 2104 and 2105. Both
+1000-step backbones and both 500-step generic-only gains were generated before
+one joint artifact lock, and neither Liu evaluation ran until that lock was
+committed and pushed. Every competence and integrity gate passes. All four
+v2.4 links confirm independently in both fresh networks; participants were
+never pooled across networks. The registered outcome is
+`fresh_backbone_confirmation_pass`, not a network-population prevalence
+estimate.
+
+Promote `P_T/L_T` plus differential evidence admission into the working main
+computational model. Omitted exact probability improves by 0.06118 and 0.05241
+and omitted direct causal correctness by 0.19402 and 0.20817. Matched evidence
+and query routing beat both derangements. Under `P`-off, omitted direct
+fidelity persists while nonlearned inference stays near chance and remote
+influence collapses; `L`-off exactly restores v1 and all global gates.
+
+Preserve the now four-network retained trade-off. Fresh-seed retained exact
+costs are -0.00114 and -0.00143, both within the frozen -0.005 noninferiority
+margin, while retained own writes and direct causal effects remain numerically
+unchanged. This repeats the 2102/2103 pattern and should be attributed to
+cross-talk from newly admitted omitted writes, not erased as noise. The
+symbolic-distance slope also remains excessive and slightly increases.
+
+Close local-model development unless new contradictory evidence appears. The
+next active route is the separately frozen, read-only `P_T` slope localization
+on the pure global `L`-off branch. Decompose nonlearned correct-signed margin
+into additive Hodge potential and residual, separate normalized potential
+geometry from raw amplitude, compare neural and exact-posterior expected-rank
+potentials, and then quantify the fixed sigmoid choice-link sensitivity. Do
+not modify v2.4, fit a temperature, or mix local cross-talk into the primary
+global analysis. The fresh confirmation is in
+`docs/dual_evidence_access_confirmation_v2_4.md`.
+
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
 new formal population.
@@ -476,7 +509,8 @@ its direct-causal versus sampled-behavior mismatch is in
 replication of the local/global decomposition is in
 `docs/conjunctive_local_trace_replication_v2_3.md`; and the registered
 differential evidence-access sufficiency result is in
-`docs/dual_evidence_access_pilot_v2_4.md`.
+`docs/dual_evidence_access_pilot_v2_4.md`; and its blind fresh-backbone
+confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`.
 
 ## Repository workflow
 
