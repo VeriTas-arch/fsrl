@@ -1,4 +1,4 @@
-schema_version = 1
+schema_version = 2
 id = "relational_model"
 status = "working"
 title = "Relational model mainline"
@@ -7,7 +7,7 @@ working_claim = "Sparse signed evidence feeds a meta-learned fast-weight state f
 boundary = "This workflow organizes the current model and its evidence; it does not turn the model into a claim about human neural implementation, erase valid negative studies, or supersede frozen study contracts."
 study_registry = "studies/README.md"
 synthesis = "synthesis/README.md"
-figure_root = "synthesis/figures/README.md"
+figure_root = "synthesis/figures"
 
 [execution]
 default_profile = "GPU, torch.compile backend=inductor, fullgraph=true, mode=default"
@@ -23,8 +23,19 @@ finding = "The maintained task adapter preserves the experimental information bo
 boundary = "Any omission, attenuation, or broader local admission is a model hypothesis rather than a restatement of the task."
 depends_on = []
 implementation = ["fsrl/tasks/protocol.py", "fsrl/tasks/sparse_ranking.py", "fsrl/tasks/evidence.py", "fsrl/core/inputs.py"]
+tests = ["tests/tasks/test_protocol.py", "tests/tasks/test_meta_tasks.py"]
 studies = ["task_fidelity"]
-verify = ["direnv exec . python -m unittest tests.tasks.test_protocol tests.tasks.test_meta_tasks"]
+
+[[stages.evidence]]
+study = "task_fidelity"
+record = "records/benchmarks/liu_v2.json"
+use = "defines"
+description = "Frozen task interface and information boundary used by the maintained model evaluation."
+
+[[stages.verification]]
+id = "task_contract_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.tasks.test_protocol", "tests.tasks.test_meta_tasks"]
 
 [[stages]]
 id = "global_backbone"
@@ -34,9 +45,35 @@ method = "Meta-train the plastic recurrent backbone on generic connected ranking
 finding = "Held-out transfer and fast-weight necessity establish a competent global relational assembly substrate."
 boundary = "Competence does not by itself identify the algorithm or reproduce every human behavioral statistic."
 depends_on = ["task_contract"]
-implementation = ["fsrl/core/plastic_rnn.py", "fsrl/training/backbone.py", "fsrl/training/checkpoints.py", "fsrl/infra/runtime.py"]
+implementation = ["fsrl/core/plastic_rnn.py", "fsrl/training/backbone.py", "fsrl/training/checkpoints.py", "fsrl/evaluation/frozen_fast_weight.py", "fsrl/infra/runtime.py"]
+tests = ["tests/training/test_backbone.py", "tests/evaluation/test_frozen_fast_weight.py"]
 studies = ["development_qualification", "formal_behavioral_confirmation"]
-verify = ["direnv exec . python -m unittest tests.training.test_backbone tests.evaluation.test_frozen_fast_weight"]
+
+[[stages.evidence]]
+study = "development_qualification"
+record = "records/results/dev_v2_seed1801_step1000.json"
+json_pointer = "/causal_qualification/status"
+use = "supports"
+description = "The development checkpoint passes the held-out causal qualification gate."
+
+[[stages.evidence]]
+study = "formal_behavioral_confirmation"
+record = "records/results/confirmation_v1.json"
+json_pointer = "/pass_rates/causal_qualification_pass_proportion"
+use = "supports"
+description = "All ten declared formal networks pass causal qualification without seed filtering."
+
+[[stages.evidence]]
+study = "formal_behavioral_confirmation"
+record = "records/results/confirmation_v1.json"
+json_pointer = "/pass_rates/behavioral_confirmation_pass_proportion"
+use = "constrains"
+description = "The full behavioral conjunction fails in every formal network and remains a model boundary."
+
+[[stages.verification]]
+id = "global_backbone_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.training.test_backbone", "tests.evaluation.test_frozen_fast_weight"]
 
 [[stages]]
 id = "global_mechanism"
@@ -46,9 +83,42 @@ method = "Use registered causal ablations, write-factor swaps, trajectory analys
 finding = "Evidence-specific writes accumulate through a meta-learned recurrent sensitivity landscape toward an expected-rank-like global potential."
 boundary = "The complete DA direction-preservation chain is heterogeneous, and the model is not a sequential Bayesian updater."
 depends_on = ["global_backbone"]
-implementation = ["fsrl/evaluation/frozen_fast_weight.py", "fsrl/analysis/hodge.py", "fsrl/analysis/statistics.py"]
+implementation = ["fsrl/evaluation/frozen_fast_weight.py", "fsrl/analysis/hodge.py", "fsrl/analysis/statistics.py", "fsrl/experiments/assembly/trajectory.py", "fsrl/experiments/assembly/factor_swap.py", "fsrl/experiments/confirmation/mechanism.py"]
+tests = ["tests/experiments/assembly/test_trajectory.py", "tests/experiments/assembly/test_factor_swap.py", "tests/experiments/confirmation/test_mechanism.py"]
 studies = ["assembly_trajectory", "support_factor_swap", "mechanism_confirmation"]
-verify = ["direnv exec . python -m unittest tests.experiments.assembly.test_trajectory tests.experiments.assembly.test_factor_swap tests.experiments.confirmation.test_mechanism"]
+
+[[stages.evidence]]
+study = "assembly_trajectory"
+record = "records/results/assembly_trajectory_v1.json"
+json_pointer = "/overall_diagnosis/episode_specific_global_reassembly_replicated_across_pilot_seeds"
+use = "supports"
+description = "Episode-specific global reassembly replicates across both diagnostic pilots."
+
+[[stages.evidence]]
+study = "support_factor_swap"
+record = "records/results/support_factor_swap_v1.json"
+json_pointer = "/overall_diagnosis/eligibility_identity_transfer_replicated_across_pilot_seeds"
+use = "supports"
+description = "Matched eligibility transfers evidence-specific direction across both pilots."
+
+[[stages.evidence]]
+study = "mechanism_confirmation"
+record = "records/results/mechanism_confirmation_v1.json"
+json_pointer = "/linkwise_confirmation/immediate_and_episode_global_reassembly/status"
+use = "supports"
+description = "Immediate and episode-level global reassembly confirms across all formal seeds."
+
+[[stages.evidence]]
+study = "mechanism_confirmation"
+record = "records/results/mechanism_confirmation_v1.json"
+json_pointer = "/linkwise_confirmation/da_gain_with_direction_preservation/status"
+use = "constrains"
+description = "DA magnitude confirms but direction preservation remains unresolved because of seed heterogeneity."
+
+[[stages.verification]]
+id = "global_mechanism_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.assembly.test_trajectory", "tests.experiments.assembly.test_factor_swap", "tests.experiments.confirmation.test_mechanism"]
 
 [[stages]]
 id = "local_mechanism"
@@ -58,9 +128,33 @@ method = "Accumulate a fixed antisymmetric conjunctive trace and read it only th
 finding = "Independent backbones replicate a direct-enriched local rescue and a causal P/L double dissociation."
 boundary = "The evidence supports the computation, not a unique tensor-product code or biologically separate memory store."
 depends_on = ["task_contract", "global_backbone"]
-implementation = ["fsrl/core/local_trace.py", "fsrl/core/relational_system.py", "fsrl/core/state.py"]
+implementation = ["fsrl/core/local_trace.py", "fsrl/core/relational_system.py", "fsrl/core/state.py", "fsrl/experiments/local_fidelity/trace_replication.py", "fsrl/experiments/local_fidelity/behavior_attribution.py"]
+tests = ["tests/core/test_local_trace.py", "tests/core/test_relational_system.py", "tests/experiments/local_fidelity/test_trace_replication.py", "tests/experiments/local_fidelity/test_behavior_attribution.py"]
 studies = ["conjunctive_local_trace_replication", "local_behavior_attribution"]
-verify = ["direnv exec . python -m unittest tests.core.test_local_trace tests.core.test_relational_system"]
+
+[[stages.evidence]]
+study = "conjunctive_local_trace_replication"
+record = "records/results/conjunctive_local_trace_replication_v2_3.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "All four local/global causal links replicate independently on seeds 2102 and 2103."
+
+[[stages.evidence]]
+study = "local_behavior_attribution"
+record = "records/results/local_behavior_attribution_v2_3.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "Exact-probability attribution resolves the sampled-endpoint sensitivity without changing the mechanism."
+
+[[stages.verification]]
+id = "local_core_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.core.test_local_trace", "tests.core.test_relational_system"]
+
+[[stages.verification]]
+id = "local_evidence_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.local_fidelity.test_trace_replication", "tests.experiments.local_fidelity.test_behavior_attribution"]
 
 [[stages]]
 id = "differential_admission"
@@ -70,9 +164,35 @@ method = "Keep the P and L update/readout mechanisms fixed, use selective effect
 finding = "Four independent backbones confirm omitted direct-fidelity rescue with evidence and query specificity while global inference remains P-dependent."
 boundary = "The broader local writes have a small replicated retained cross-talk cost and do not repair the excessive global distance slope."
 depends_on = ["global_mechanism", "local_mechanism"]
-implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py"]
+implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py", "fsrl/experiments/local_fidelity/evidence_access_pilot.py", "fsrl/experiments/local_fidelity/evidence_access_confirmation.py"]
+tests = ["tests/core/test_relational_system.py", "tests/experiments/local_fidelity/test_evidence_access_pilot.py", "tests/experiments/local_fidelity/test_evidence_access_confirmation.py"]
 studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation"]
-verify = ["direnv exec . python -m unittest tests.experiments.local_fidelity.test_evidence_access_pilot tests.experiments.local_fidelity.test_evidence_access_confirmation tests.core.test_relational_system"]
+
+[[stages.evidence]]
+study = "dual_evidence_access_pilot"
+record = "records/results/dual_evidence_access_pilot_v2_4.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "The zero-parameter differential-admission rule passes all four development links."
+
+[[stages.evidence]]
+study = "dual_evidence_access_confirmation"
+record = "records/results/dual_evidence_access_confirmation_v2_4.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "The unchanged rule confirms on two fresh backbones after joint artifact locking."
+
+[[stages.evidence]]
+study = "dual_evidence_access_confirmation"
+record = "records/results/dual_evidence_access_confirmation_v2_4.json"
+json_pointer = "/claim_boundary"
+use = "constrains"
+description = "The result preserves the retained cross-talk cost, slope mismatch, and non-population claim boundary."
+
+[[stages.verification]]
+id = "differential_admission_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.local_fidelity.test_evidence_access_pilot", "tests.experiments.local_fidelity.test_evidence_access_confirmation", "tests.core.test_relational_system"]
 
 [[stages]]
 id = "algorithm_and_transport"
@@ -82,18 +202,140 @@ method = "Reduce the local state to an exact edge ledger plus Gram geometry and 
 finding = "The local computation has an exact reduction and the structural mechanism transports broadly; tested low-dimensional global reductions remain insufficient."
 boundary = "Evidence-density prevalence has an unresolved boundary, and no tested compact global state is yet sufficient."
 depends_on = ["differential_admission"]
-implementation = ["fsrl/core/relational_system.py", "fsrl/analysis/hodge.py"]
-studies = ["asymmetric_algorithmic_organization", "support_topology_transport", "presentation_order_transport", "evidence_sparsity_transport", "item_count_transport"]
-verify = ["direnv exec . python -m fsrl.infra.study_registry check"]
+implementation = ["fsrl/core/relational_system.py", "fsrl/analysis/hodge.py", "fsrl/experiments/reduction/dual_state_v1.py", "fsrl/experiments/reduction/dual_state_v2.py", "fsrl/experiments/reduction/dual_state_v3.py", "fsrl/experiments/reduction/functional_latent.py", "fsrl/experiments/transport/topology.py", "fsrl/experiments/transport/presentation_order.py", "fsrl/experiments/transport/evidence_sparsity.py", "fsrl/experiments/transport/sparsity_individualization.py", "fsrl/experiments/transport/item_count.py"]
+tests = ["tests/analysis/test_algorithmic.py", "tests/experiments/reduction/test_dual_state_v1.py", "tests/experiments/reduction/test_dual_state_v2.py", "tests/experiments/reduction/test_dual_state_v3.py", "tests/experiments/reduction/test_functional_latent.py", "tests/experiments/transport/test_topology.py", "tests/experiments/transport/test_presentation_order.py", "tests/experiments/transport/test_evidence_sparsity.py", "tests/experiments/transport/test_sparsity_individualization.py", "tests/experiments/transport/test_item_count.py"]
+studies = ["dual_state_reduction_v1", "dual_state_reduction_v2", "dual_state_reduction_v3", "functional_fast_weight_latent_sufficiency", "asymmetric_algorithmic_organization", "support_topology_transport", "presentation_order_transport", "evidence_sparsity_transport", "sparsity_individualization_localization", "item_count_transport"]
+
+[[stages.evidence]]
+study = "dual_state_reduction_v1"
+record = "records/results/dual_state_reduced_algorithm_v1.json"
+json_pointer = "/decision/outcome"
+use = "closes"
+description = "The potential-transition reduction is insufficient."
+
+[[stages.evidence]]
+study = "dual_state_reduction_v2"
+record = "records/results/dual_state_reduced_algorithm_v2.json"
+json_pointer = "/decision/outcome"
+use = "closes"
+description = "The scalar-history reduction is insufficient."
+
+[[stages.evidence]]
+study = "dual_state_reduction_v3"
+record = "records/results/dual_state_reduced_algorithm_v3.json"
+json_pointer = "/decision/outcome"
+use = "closes"
+description = "The item-history reduction is insufficient."
+
+[[stages.evidence]]
+study = "functional_fast_weight_latent_sufficiency"
+record = "records/results/functional_fast_weight_latent_sufficiency_v1.json"
+json_pointer = "/decision/outcome"
+use = "closes"
+description = "The registered fixed linear functional-P latent fails held-out sufficiency."
+
+[[stages.evidence]]
+study = "asymmetric_algorithmic_organization"
+record = "records/benchmarks/asymmetric_algorithmic_organization_v1.json"
+json_pointer = "/three_level_theory/algorithmic_asymmetry"
+use = "supports"
+description = "The locked cross-study synthesis states the exact local reduction and unresolved global closure boundary."
+
+[[stages.evidence]]
+study = "support_topology_transport"
+record = "records/results/liu_support_topology_transport_v1.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "The causal mechanism transports across all registered support topologies."
+
+[[stages.evidence]]
+study = "presentation_order_transport"
+record = "records/results/liu_presentation_order_transport_v1.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "The mechanism transports across all registered presentation schedules."
+
+[[stages.evidence]]
+study = "evidence_sparsity_transport"
+record = "records/results/liu_evidence_sparsity_transport_v1.json"
+json_pointer = "/decision/outcome"
+use = "constrains"
+description = "The E=10 stable-error prevalence gate and density-allocation prediction remain unresolved or negative."
+
+[[stages.evidence]]
+study = "sparsity_individualization_localization"
+record = "records/results/liu_sparsity_individualization_localization_v1.json"
+json_pointer = "/decision/outcome"
+use = "constrains"
+description = "Order convergence transports, but the registered stable-error loss does not replicate."
+
+[[stages.evidence]]
+study = "item_count_transport"
+record = "records/results/liu_item_count_transport_v1.json"
+json_pointer = "/decision/outcome"
+use = "supports"
+description = "All registered links pass at N=6, N=8, and N=10 on all three development backbones."
+
+[[stages.verification]]
+id = "algorithmic_reduction_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.analysis.test_algorithmic", "tests.experiments.reduction.test_dual_state_v1", "tests.experiments.reduction.test_dual_state_v2", "tests.experiments.reduction.test_dual_state_v3", "tests.experiments.reduction.test_functional_latent"]
+
+[[stages.verification]]
+id = "transport_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.transport.test_topology", "tests.experiments.transport.test_presentation_order", "tests.experiments.transport.test_evidence_sparsity", "tests.experiments.transport.test_sparsity_individualization", "tests.experiments.transport.test_item_count"]
 
 [[stages]]
 id = "reporting"
 title = "Evidence synthesis and figures"
 question = "How are frozen estimands converted into a report without rewriting diagnostic history?"
-method = "Keep study records byte-preserved, organize the cross-study claim in synthesis, and require source data plus panel provenance for promoted figures."
-finding = "The repository exposes a short human route, a machine-verifiable registry, and paper-aligned behavioral figures from the same evidence ownership model."
+method = "Keep study records byte-preserved, organize the cross-study claim in the mainline workflow, and require source data plus panel provenance for promoted figures."
+finding = "The repository exposes one current claim graph, a complete evidence ledger, historical snapshots, and paper-aligned behavioral figures."
 boundary = "The current synthesis remains indexed rather than final; a later scientific curation pass may reorder the argument without changing frozen records."
 depends_on = ["algorithm_and_transport"]
-implementation = ["fsrl/infra/study_registry.py", "fsrl/workflows/paper_figures.py", "synthesis/manifest.toml"]
+implementation = ["fsrl/infra/study_registry.py", "fsrl/workflows/schema.py", "fsrl/workflows/frozen_evidence.py", "fsrl/workflows/paper_figures.py"]
+tests = ["tests/infra/test_study_registry.py", "tests/workflows/test_schema.py", "tests/workflows/test_frozen_evidence.py", "tests/workflows/test_paper_figures.py"]
 studies = ["behavior_reproduction_map"]
-verify = ["direnv exec . python -m fsrl.infra.study_registry check", "direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml"]
+
+[[stages.evidence]]
+study = "behavior_reproduction_map"
+record = "records/results/model_behavior_reproduction_map_v1.json"
+json_pointer = "/summary/status_counts"
+use = "constrains"
+description = "Six phenomena reproduce and three remain quantitative mismatches; none is absent."
+
+[[stages.figures]]
+specification = "synthesis/figures/paper_alignment/figure_spec.json"
+figure = "figure_01_group_behavior"
+description = "Matched group-level human and model behavioral estimands."
+
+[[stages.figures]]
+specification = "synthesis/figures/paper_alignment/figure_spec.json"
+figure = "figure_02_pair_structure"
+description = "Pair-level accuracy and stable-error structure."
+
+[[stages.figures]]
+specification = "synthesis/figures/paper_alignment/figure_spec.json"
+figure = "figure_02h_error_fingerprints"
+description = "Subject-by-pair stable-error fingerprints."
+
+[[stages.figures]]
+specification = "synthesis/figures/paper_alignment/figure_spec.json"
+figure = "figure_03_global_rankings"
+description = "Reconstructed individualized global rankings."
+
+[[stages.verification]]
+id = "registry_check"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "fsrl.infra.study_registry", "check"]
+
+[[stages.verification]]
+id = "workflow_check"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "fsrl.workflows", "check", "workflows/relational_model/workflow.toml"]
+
+[[stages.verification]]
+id = "figure_check"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "fsrl.workflows.paper_figures", "check"]

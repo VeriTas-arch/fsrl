@@ -13,6 +13,8 @@ import re
 import sys
 from pathlib import Path
 
+from fsrl.infra.study_registry import resolve_record
+
 ROOT = Path(__file__).resolve().parents[2]
 MIGRATION_PATH = ROOT / "studies" / "migrations" / "flat-records-v1.json"
 ROOT_EXPRESSION = re.compile(
@@ -31,7 +33,7 @@ RESOLVED_LITERAL = re.compile(
 def _import_resolver(content: str, path: Path) -> str:
     if "resolve_record(" not in content:
         return content
-    if path.parent.name == "fsrl":
+    if path.is_relative_to(ROOT / "fsrl"):
         statement = "from fsrl.infra.study_registry import resolve_record"
         if statement in content:
             return content
@@ -88,7 +90,7 @@ def rewrite(*, apply: bool) -> dict[str, object]:
     changed: list[str] = []
     unknown: list[str] = []
     for root in (ROOT / "fsrl", ROOT / "tests"):
-        for path in sorted(root.glob("*.py")):
+        for path in sorted(root.rglob("*.py")):
             if path.name == "liu_catalog.py":
                 continue
             original = path.read_text(encoding="utf-8")
@@ -119,9 +121,10 @@ def rewrite(*, apply: bool) -> dict[str, object]:
             key=lambda value: len(value["legacy_path"]),
             reverse=True,
         ):
+            current = resolve_record(record["path"]).relative_to(ROOT).as_posix()
             rewritten = re.sub(
                 rf"(?<!records/){re.escape(record['legacy_path'])}",
-                record["path"],
+                current,
                 rewritten,
             )
         if rewritten != original:

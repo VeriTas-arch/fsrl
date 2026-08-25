@@ -17,6 +17,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from fsrl.infra.study_registry import resolve_record
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
@@ -354,7 +356,7 @@ def audit_migration() -> dict[str, Any]:
     errors: list[str] = []
     for record in migration.get("records", []):
         legacy_path = record["legacy_path"]
-        current = ROOT / record["path"]
+        current = resolve_record(record["path"])
         try:
             source_payload = _git_blob(record["source_ref"], legacy_path)
         except subprocess.CalledProcessError:

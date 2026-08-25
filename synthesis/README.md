@@ -7,25 +7,26 @@
 
 A provisional human-readable organization of the frozen model evidence, diagnostic lineage, closed candidate families, and remaining claim boundaries.
 
-**Current working claim.** Sparse relational evidence feeds a meta-learned global assembly state and a causally distinct direct-fidelity state with broader evidence admission; the current record also preserves unresolved global-policy and transport boundaries.
+**Current working claim.** Sparse signed evidence feeds a meta-learned fast-weight state for global assembly and a query-addressed local trace with broader evidence admission for direct fidelity.
 
-**Boundary.** This first refactor changes organization and provenance paths only. It does not promote a new scientific estimand, erase negative results, or assert that the current reading order is the final paper argument.
+**Boundary.** This workflow organizes the current model and its evidence; it does not turn the model into a claim about human neural implementation, erase valid negative studies, or supersede frozen study contracts.
 
 ## Start here
 
+- [Current model mainline](../workflows/relational_model/README.md)
 - [Complete study registry](../studies/README.md)
-- [Frozen evidence overlay](frozen/README.md)
+- [Historical reporting snapshots](snapshots/README.md)
 - [Release and migration history](history.toml)
 - [Figure workflow](figures/README.md)
-- [Maintained model workflow](../workflows/relational_model/README.md)
 
-The frozen overlay is a machine-verifiable historical reporting object. This
-page is the editable human synthesis; neither replaces the study records.
+The workflow is the current claim graph, historical snapshots are immutable
+reporting objects, and this page is their editable human synthesis. None
+replaces the study-owned evidence records.
 
 ## Provenance layers
 
 Byte-preserved reports, contracts, locks, results, and presentation assets
-live in study-owned `records/` or `synthesis/records/`. Frozen execution
+live in study-owned `records/` or versioned reporting snapshots. Frozen execution
 locks that name historical Python files are indexed by `(path, sha256)` in
 `synthesis/source-provenance.toml` and verified against immutable Git blobs
 and witness commits. Maintained model source and tests live in `fsrl/` and
@@ -35,19 +36,11 @@ worktree rather than mixing old files into the current import tree.
 
 ## Reading routes
 
-### Reporting mainline
+### Current reporting mainline
 
-The shortest route for a talk or manuscript: task, competence, final causal mechanism, algorithmic asymmetry, and transport boundary.
-
-1. [Liu task and human benchmark contract](../studies/task_fidelity/README.md) — `frozen_contract` — The task contract preserves item identity, signed displayed magnitude, passive four-presentation learning, all-pair testing, and no test feedback.
-2. [Frozen v2.4 behavioral reproduction map](../studies/behavior_reproduction_map/README.md) — `supporting` — Six of nine registered phenomena are reproduced and three are qualitatively reproduced but quantitatively mismatched; none is absent.
-3. [Formal mechanism confirmation](../studies/mechanism_confirmation/README.md) — `mixed` — Six of seven primary mechanism links confirm, including global reassembly, direction transfer, sensitivity placement, history effects, and expected-rank-over-MAP projection; the DA direction-preservation threshold fails through seed-2009 heterogeneity.
-4. [Fresh-backbone differential-access confirmation](../studies/dual_evidence_access_confirmation/README.md) — `confirmed` — All four links confirm independently on seeds 2104 and 2105, promoting P_T/a_T with differential evidence admission to the working model mechanism.
-5. [Asymmetric algorithmic organization synthesis](../studies/asymmetric_algorithmic_organization/README.md) — `confirmed` — The local L_T state has an exact edge-ledger-plus-Gram reduction a_T, while the global output is geometrically near-additive but its tested learning states do not close.
-6. [Support-topology transport](../studies/support_topology_transport/README.md) — `transported` — The registered structural mechanism transports under the repaired, source-locked topology contract.
-7. [Presentation-order transport](../studies/presentation_order_transport/README.md) — `transported` — All registered links transport across random, clustered, and reversed schedules; the local ledger is exactly commutative while P_T remains quantitatively order-sensitive.
-8. [Evidence-sparsity transport](../studies/evidence_sparsity_transport/README.md) — `unresolved` — All causal components transport through E=9 and nearly all at E=10, but one stable-error prevalence gate fails; the prediction that denser evidence reduces P_T reliance is rejected.
-9. [Item-count transport](../studies/item_count_transport/README.md) — `transported` — All primary links pass at N=6, 8, and 10 across all three development backbones, including exact local ledger reconstruction and P/a double dissociation.
+The canonical stage order, exact evidence locators, maintained code, tests,
+verification commands, and promoted figures are owned by
+[the relational model workflow](../workflows/relational_model/README.md).
 
 ### Diagnostic lineage
 

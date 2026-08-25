@@ -9,9 +9,11 @@ This directory is the experiment-level source of truth. Each capsule joins
 one scientific question to its registered protocol, execution locks, exact
 results, report, outcome boundary, and provenance hashes.
 
-Start with [the current synthesis](../synthesis/README.md)
-for a short reading route; return here for complete evidence and negative
-results.
+Start with [the current model mainline](../workflows/relational_model/README.md)
+for the shortest claim-to-code-to-evidence route, or use
+[the current synthesis](../synthesis/README.md) for
+diagnostic history, closed routes, and unresolved boundaries. Return here
+for the complete evidence ledger.
 
 ## Start here: task and frozen reporting object
 
@@ -118,3 +120,6 @@ Keep source papers visible while keeping them outside the factual model-evidence
 Run `direnv exec . python -m fsrl.infra.study_registry check` before commit.
 Use `build` only to refresh generated navigation after editing TOML metadata.
 A path move requires a new versioned migration; it is not a prose edit.
+Records above 5 MB require an explicit storage review. New payloads above
+20 MB belong in a registered content-addressed external backend; historical
+tagged records remain grandfathered by their existing manifests.

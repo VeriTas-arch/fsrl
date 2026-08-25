@@ -9,17 +9,17 @@ reproduction now live in one isolated capsule under
 
 ## Start here
 
-- [Current synthesis](synthesis/README.md) gives the shortest human reading
-  route through the model evidence.
+- [Relational model mainline](workflows/relational_model/README.md) is the
+  shortest claim-to-code-to-evidence route and the current machine-readable
+  scientific workflow.
+- [Current synthesis](synthesis/README.md) organizes diagnostic history,
+  closed candidate families, unresolved boundaries, and reporting context.
 - [Study registry](studies/README.md) lists every registered positive, negative,
   mixed, unresolved, transported, and deferred study.
-- [Frozen evidence overlay](synthesis/frozen/README.md) is the historical
-  machine-verifiable reporting object.
+- [Historical reporting snapshots](synthesis/snapshots/README.md) provides the
+  maintained replay guide for immutable reporting objects.
 - [Figure workflow](synthesis/figures/README.md) defines how study outputs
   become report- or paper-facing figures.
-- [Maintained model workflow](workflows/relational_model/README.md) connects
-  code, registered evidence, verification commands, and report outputs in one
-  machine-checked and human-readable route.
 - [Code architecture](fsrl/README.md) defines stable package ownership,
   compatibility adapters, and the boundary around historical study runners.
 
@@ -33,7 +33,7 @@ studies/                 experiment-level questions and exact records
     README.md             generated human capsule
     study.toml            authoritative metadata and record hashes
     records/              byte-preserved reports, contracts, locks, results
-synthesis/                current cross-study account and frozen overlay
+synthesis/                current cross-study account, figures, and snapshots
 artifacts/runs/           ignored training, evaluation, and checkpoint runs
 artifacts/reproductions/  ignored regenerated external-paper outputs
 data/external/            tracked immutable external source datasets
@@ -43,11 +43,10 @@ workflows/                schema-driven maintained research routes
 reproductions/            isolated external-paper reproduction capsules
 ~~~
 
-The pre-refactor docs/, benchmarks/, results/, research/liu/, and
-mainlines/liu_v1/ paths are recorded in
-studies/migrations/flat-records-v1.json. Active code resolves those frozen
-identifiers through fsrl.infra.study_registry.resolve_record; the files themselves
-have one authoritative current location.
+The pre-refactor flat paths and the later synthesis-snapshot relocation are
+recorded in versioned maps under `studies/migrations/`. Active code resolves
+every historical identifier through `fsrl.infra.study_registry.resolve_record`;
+the files themselves have one authoritative current location.
 
 Frozen execution locks that identify historical Python files are indexed by
 `(path, sha256)` in synthesis/source-provenance.toml and verified against Git

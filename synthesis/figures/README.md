@@ -11,9 +11,8 @@ Every promoted figure should have a source-data file, a generation command, and
 study/estimand provenance. Prefer a stable figure ID whose directory contains
 the rendered panel, source table, generation script or command, and a manifest
 mapping every panel to study IDs and frozen estimands. Historical presentation
-assets remain under `synthesis/records/` until the second curation pass decides
-whether to regenerate or retire them. Do not copy an image here merely to make
-it easier to find.
+assets remain in their versioned reporting snapshot. Do not copy an image here
+merely to make it easier to find.
 
 ## Current suites
 

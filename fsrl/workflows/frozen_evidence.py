@@ -28,7 +28,7 @@ from fsrl.infra.study_registry import (
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT
-MAINLINE_ROOT = SYNTHESIS_ROOT / "frozen"
+MAINLINE_ROOT = SYNTHESIS_ROOT / "snapshots" / "reporting_v1"
 MANIFEST_PATH = MAINLINE_ROOT / "manifest.json"
 ARTIFACTS_PATH = MAINLINE_ROOT / "artifacts.json"
 ENVIRONMENT_PATH = MAINLINE_ROOT / "environment.json"

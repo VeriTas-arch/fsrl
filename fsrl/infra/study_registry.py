@@ -32,6 +32,9 @@ from fsrl.paths import REPO_ROOT, STUDIES_ROOT, SYNTHESIS_ROOT
 ROOT = REPO_ROOT
 REGISTRY_PATH = STUDIES_ROOT / "registry.toml"
 MIGRATION_PATH = STUDIES_ROOT / "migrations" / "flat-records-v1.json"
+SYNTHESIS_SNAPSHOT_MIGRATION_PATH = (
+    STUDIES_ROOT / "migrations" / "synthesis-snapshot-v1.json"
+)
 RUNTIME_LOCATOR_MIGRATION_PATH = (
     STUDIES_ROOT / "migrations" / "runtime-locators-v1.json"
 )
@@ -93,6 +96,14 @@ def load_migration(path: Path = MIGRATION_PATH) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_migrations(
+    registry: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    registry = load_registry() if registry is None else registry
+    values = registry.get("migrations", [registry["migration"]])
+    return [load_migration(STUDIES_ROOT / value) for value in values]
+
+
 def load_runtime_locator_migration(
     path: Path = RUNTIME_LOCATOR_MIGRATION_PATH,
 ) -> dict[str, Any]:
@@ -142,18 +153,34 @@ def _safe_relative(value: str) -> Path:
 
 @lru_cache(maxsize=1)
 def migration_lookup() -> dict[str, str]:
-    if not MIGRATION_PATH.is_file():
-        return {}
-    migration = load_migration()
-    return {
-        entry["legacy_path"]: entry["path"] for entry in migration.get("records", [])
+    direct = {
+        record["legacy_path"]: record["path"]
+        for migration in load_migrations()
+        for record in migration.get("records", [])
     }
+
+    def final_path(value: str) -> str:
+        seen = set()
+        while value in direct:
+            if value in seen:
+                raise RuntimeError(f"migration cycle detected at {value}")
+            seen.add(value)
+            value = direct[value]
+        return value
+
+    return {legacy: final_path(legacy) for legacy in direct}
 
 
 @lru_cache(maxsize=1)
 def runtime_locator_lookup() -> dict[str, dict[str, Any]]:
     migration = load_runtime_locator_migration()
-    return {record["path"]: record for record in migration.get("records", [])}
+    lookup: dict[str, dict[str, Any]] = {}
+    for record in migration.get("records", []):
+        lookup[record["path"]] = record
+        final = migration_lookup().get(record["path"])
+        if final is not None:
+            lookup[final] = record
+    return lookup
 
 
 @lru_cache(maxsize=1)
@@ -305,7 +332,11 @@ def legacy_identifier(path: str | Path) -> str:
         candidate.resolve().relative_to(ROOT) if candidate.is_absolute() else candidate
     )
     current = _safe_relative(relative.as_posix()).as_posix()
-    inverse = {value: key for key, value in migration_lookup().items()}
+    resolved = migration_lookup()
+    inverse = {
+        resolved.get(record["legacy_path"], record["path"]): record["legacy_path"]
+        for record in load_migration().get("records", [])
+    }
     return inverse.get(current, current)
 
 
@@ -419,6 +450,124 @@ def _validate_retired_asset(
     return path
 
 
+def _migration_chain_lookup(
+    migrations: list[dict[str, Any]], errors: list[str]
+) -> dict[str, str]:
+    direct: dict[str, str] = {}
+    for migration in migrations:
+        records = migration.get("records", [])
+        if migration.get("schema_version") != 1:
+            errors.append(f"{migration.get('id')}: migration schema_version must be 1")
+        if migration.get("record_count") != len(records):
+            errors.append(f"{migration.get('id')}: migration record_count is stale")
+        for record in records:
+            legacy = record.get("legacy_path")
+            current = record.get("path")
+            if not isinstance(legacy, str) or not isinstance(current, str):
+                errors.append("migration record paths must be strings")
+                continue
+            if legacy in direct:
+                errors.append(f"duplicate migration legacy path {legacy}")
+                continue
+            direct[legacy] = current
+
+    def final_path(value: str) -> str:
+        seen = set()
+        while value in direct:
+            if value in seen:
+                errors.append(f"migration cycle detected at {value}")
+                break
+            seen.add(value)
+            value = direct[value]
+        return value
+
+    return {legacy: final_path(legacy) for legacy in direct}
+
+
+def _validate_migration_chain(
+    *,
+    migrations: list[dict[str, Any]],
+    record_pairs: dict[str, str],
+    record_provenance: dict[str, dict[str, Any]],
+    errors: list[str],
+) -> dict[str, str]:
+    lookup = _migration_chain_lookup(migrations, errors)
+    primary = migrations[0]
+    primary_records = primary.get("records", [])
+    primary_legacy = {record.get("legacy_path") for record in primary_records}
+    if primary_legacy != set(record_pairs):
+        missing = sorted(set(record_pairs) - primary_legacy)
+        extra = sorted(primary_legacy - set(record_pairs))
+        if missing:
+            errors.append(f"migration is missing records {missing}")
+        if extra:
+            errors.append(f"migration has unowned records {extra}")
+
+    for record in primary_records:
+        legacy = record.get("legacy_path")
+        if not isinstance(legacy, str):
+            continue
+        final = lookup.get(legacy, record.get("path"))
+        if record_pairs.get(legacy) != final:
+            errors.append(f"migration record disagrees for {legacy}")
+        expected = record_provenance.get(legacy)
+        if expected is None:
+            continue
+        mismatched = [
+            field
+            for field in (
+                "owner_id",
+                "owner_kind",
+                "role",
+                "sha256",
+                "bytes",
+                "source_ref",
+            )
+            if record.get(field) != expected[field]
+        ]
+        if mismatched:
+            errors.append(f"migration provenance disagrees for {legacy}: {mismatched}")
+
+    prior_targets: set[str] = set()
+    for index, migration in enumerate(migrations):
+        for record in migration.get("records", []):
+            legacy = record.get("legacy_path")
+            current = record.get("path")
+            if not isinstance(legacy, str) or not isinstance(current, str):
+                continue
+            if index > 0 and legacy not in prior_targets:
+                errors.append(
+                    f"{migration.get('id')}: relocation source is not a prior target: "
+                    f"{legacy}"
+                )
+            if index > 0:
+                source_ref = record.get("source_ref", migration.get("source_commit"))
+                try:
+                    payload = subprocess.run(
+                        ["git", "show", f"{source_ref}:{legacy}"],
+                        cwd=ROOT,
+                        check=True,
+                        capture_output=True,
+                    ).stdout
+                    if len(payload) != record.get("bytes") or hashlib.sha256(
+                        payload
+                    ).hexdigest() != record.get("sha256"):
+                        errors.append(
+                            f"{migration.get('id')}: source provenance differs: {legacy}"
+                        )
+                except (OSError, subprocess.CalledProcessError) as error:
+                    errors.append(
+                        f"{migration.get('id')}: source provenance unavailable for "
+                        f"{legacy}: {error}"
+                    )
+            prior_targets.add(current)
+
+    for legacy, final in lookup.items():
+        if legacy != final and (ROOT / legacy).exists():
+            errors.append(f"migrated path still exists: {legacy}")
+    return lookup
+
+
 def validate_registry(
     registry: dict[str, Any] | None = None,
     synthesis: dict[str, Any] | None = None,
@@ -427,7 +576,9 @@ def validate_registry(
 ) -> dict[str, Any]:
     registry = load_registry() if registry is None else registry
     synthesis = load_synthesis() if synthesis is None else synthesis
-    migration = load_migration() if migration is None else migration
+    migrations = load_migrations(registry)
+    if migration is not None:
+        migrations[0] = migration
     source_provenance = (
         load_source_provenance() if source_provenance is None else source_provenance
     )
@@ -435,12 +586,49 @@ def validate_registry(
 
     if registry.get("schema_version") != 1:
         errors.append("registry schema_version must be 1")
-    if synthesis.get("schema_version") != 1:
-        errors.append("synthesis schema_version must be 1")
-    if migration.get("schema_version") != 1:
-        errors.append("migration schema_version must be 1")
+    if synthesis.get("schema_version") != 2:
+        errors.append("synthesis schema_version must be 2")
     if source_provenance.get("schema_version") != 1:
         errors.append("source provenance schema_version must be 1")
+
+    synthesis_paths = {
+        "registry": (SYNTHESIS_ROOT / synthesis.get("registry", "")).resolve(),
+        "workflow": ROOT / synthesis.get("workflow", ""),
+        "history": SYNTHESIS_ROOT / synthesis.get("history", ""),
+        "snapshot_index": SYNTHESIS_ROOT / synthesis.get("snapshot_index", ""),
+        "snapshot_reference": SYNTHESIS_ROOT / synthesis.get("snapshot_reference", ""),
+        "figure_root": SYNTHESIS_ROOT / synthesis.get("figure_root", ""),
+    }
+    for name, path in synthesis_paths.items():
+        if not path.exists():
+            errors.append(f"synthesis {name} path does not exist: {path}")
+    workflow = (
+        _load_toml(synthesis_paths["workflow"])
+        if synthesis_paths["workflow"].is_file()
+        else {}
+    )
+    if workflow.get("schema_version") != 2:
+        errors.append("synthesis workflow must use schema_version 2")
+    for field in ("working_claim", "boundary"):
+        if not isinstance(workflow.get(field), str) or not workflow[field].strip():
+            errors.append(f"synthesis workflow {field} must be non-empty")
+
+    storage_policy = registry.get("storage_policy", {})
+    review_threshold = storage_policy.get("inline_review_threshold_bytes")
+    hard_limit = storage_policy.get("inline_hard_limit_bytes")
+    historical_inline = set(storage_policy.get("historical_inline_source_refs", []))
+    external_backends = set(storage_policy.get("future_large_payload_backends", []))
+    if (
+        not isinstance(review_threshold, int)
+        or not isinstance(hard_limit, int)
+        or review_threshold <= 0
+        or hard_limit <= review_threshold
+    ):
+        errors.append("registry storage thresholds are invalid")
+        review_threshold = 0
+        hard_limit = 0
+    if not historical_inline or not external_backends:
+        errors.append("registry storage policy requires historical refs and backends")
 
     sources = source_provenance.get("sources", [])
     if source_provenance.get("source_version_count") != len(sources):
@@ -579,6 +767,19 @@ def validate_registry(
             }
             current_paths.add(current_path)
             role_counts[record["role"]] += 1
+            if hard_limit and record["bytes"] > hard_limit:
+                errors.append(
+                    f"{study_id}: inline record exceeds hard limit: {current_path}"
+                )
+            if (
+                review_threshold
+                and record["bytes"] > review_threshold
+                and record["source_ref"] not in historical_inline
+                and record.get("storage_backend") not in external_backends
+            ):
+                errors.append(
+                    f"{study_id}: large record requires an external backend: {current_path}"
+                )
         for asset in study.get("retired_assets", []):
             path = _validate_retired_asset(
                 owner_id=study_id, asset=asset, errors=errors
@@ -612,39 +813,17 @@ def validate_registry(
         }
         current_paths.add(current_path)
         role_counts[record["role"]] += 1
+        if hard_limit and record["bytes"] > hard_limit:
+            errors.append(
+                f"{synthesis['id']}: inline record exceeds hard limit: {current_path}"
+            )
 
-    migration_records = migration.get("records", [])
-    if migration.get("record_count") != len(migration_records):
-        errors.append("migration record_count does not match records")
-    migration_pairs: dict[str, str] = {}
-    for record in migration_records:
-        legacy = record.get("legacy_path")
-        current = record.get("path")
-        if not isinstance(legacy, str) or not isinstance(current, str):
-            errors.append("migration record paths must be strings")
-            continue
-        if legacy in migration_pairs:
-            errors.append(f"duplicate migration legacy path {legacy}")
-        migration_pairs[legacy] = current
-        if record_pairs.get(legacy) != current:
-            errors.append(f"migration record disagrees for {legacy}")
-        expected = record_provenance.get(legacy)
-        if expected is not None:
-            mismatched = [
-                field for field, value in expected.items() if record.get(field) != value
-            ]
-            if mismatched:
-                errors.append(
-                    f"migration provenance disagrees for {legacy}: {mismatched}"
-                )
-
-    if record_pairs != migration_pairs:
-        missing = sorted(set(record_pairs) - set(migration_pairs))
-        extra = sorted(set(migration_pairs) - set(record_pairs))
-        if missing:
-            errors.append(f"migration is missing records {missing}")
-        if extra:
-            errors.append(f"migration has unowned records {extra}")
+    migration_pairs = _validate_migration_chain(
+        migrations=migrations,
+        record_pairs=record_pairs,
+        record_provenance=record_provenance,
+        errors=errors,
+    )
 
     locator_migration = load_runtime_locator_migration()
     locator_records = locator_migration.get("records", [])
@@ -659,21 +838,22 @@ def validate_registry(
         errors.append("runtime-locator migration replacement_count is stale")
     if len(locator_paths) != len(set(locator_paths)):
         errors.append("runtime-locator migration paths must be unique")
-    unknown_locator_paths = sorted(set(locator_paths) - current_paths)
+    resolved_locator_paths = {
+        migration_pairs.get(path, path)
+        for path in locator_paths
+        if isinstance(path, str)
+    }
+    unknown_locator_paths = sorted(resolved_locator_paths - current_paths)
     if unknown_locator_paths:
         errors.append(
             f"runtime-locator migration has unowned records {unknown_locator_paths}"
         )
 
-    for legacy_path in migration_pairs:
-        if (ROOT / legacy_path).exists():
-            errors.append(f"legacy flat path still exists: {legacy_path}")
-
     if source_provenance.get("registered_record_files") != len(record_pairs):
         errors.append("source provenance registered-record count is stale")
     for redundant_root in (
-        SYNTHESIS_ROOT / "frozen" / "source",
-        SYNTHESIS_ROOT / "frozen" / "source-blobs",
+        SYNTHESIS_ROOT / "snapshots" / "reporting_v1" / "source",
+        SYNTHESIS_ROOT / "snapshots" / "reporting_v1" / "source-blobs",
     ):
         if redundant_root.exists():
             errors.append(f"redundant source tree still exists: {redundant_root}")
@@ -683,13 +863,12 @@ def validate_registry(
         path.relative_to(ROOT).as_posix()
         for root in (
             STUDIES_ROOT,
-            SYNTHESIS_ROOT / "records",
-            SYNTHESIS_ROOT / "frozen",
+            SYNTHESIS_ROOT / "snapshots" / "reporting_v1",
         )
         if root.exists()
         for path in root.rglob("*")
         if path.is_file()
-        and path.name not in {"README.md", "study.toml", "registry.toml"}
+        and path.name not in {"AGENTS.md", "README.md", "study.toml", "registry.toml"}
         and "migrations" not in path.parts
     }
     unexpected = sorted(observed_files - expected_files)
@@ -702,6 +881,9 @@ def validate_registry(
         "studies": len(studies),
         "chapters": len(chapters),
         "records": len(record_pairs),
+        "migration_steps": sum(
+            len(migration.get("records", [])) for migration in migrations
+        ),
         "study_records": sum(
             len(study.get("records", [])) for study in studies.values()
         ),
@@ -813,6 +995,9 @@ def _study_readme(study: dict[str, Any]) -> tuple[Path, str]:
             "hashes, sizes, and source ref are recorded in `study.toml` and the global",
             "migration map. New interpretation belongs in this capsule or `synthesis/`;",
             "the frozen records themselves are not rewritten.",
+            "Commands and relative links inside a frozen report describe its historical",
+            "checkout. Use the maintained workflow for current commands, or the snapshot",
+            "replay guide for an exact detached-worktree replay.",
             "",
             "Add a `figures/` directory only when this study has a promoted, reproducible",
             "study-level figure. Cross-study paper figures belong in `synthesis/figures/`.",
@@ -833,9 +1018,11 @@ def _studies_readme(
             "one scientific question to its registered protocol, execution locks, exact",
             "results, report, outcome boundary, and provenance hashes.",
             "",
-            f"Start with {_link(Path('synthesis/README.md'), output, 'the current synthesis')}",
-            "for a short reading route; return here for complete evidence and negative",
-            "results.",
+            f"Start with {_link(Path('workflows/relational_model/README.md'), output, 'the current model mainline')}",
+            "for the shortest claim-to-code-to-evidence route, or use",
+            f"{_link(Path('synthesis/README.md'), output, 'the current synthesis')} for",
+            "diagnostic history, closed routes, and unresolved boundaries. Return here",
+            "for the complete evidence ledger.",
             "",
         ]
     )
@@ -858,6 +1045,9 @@ def _studies_readme(
             "Run `direnv exec . python -m fsrl.infra.study_registry check` before commit.",
             "Use `build` only to refresh generated navigation after editing TOML metadata.",
             "A path move requires a new versioned migration; it is not a prose edit.",
+            "Records above 5 MB require an explicit storage review. New payloads above",
+            "20 MB belong in a registered content-addressed external backend; historical",
+            "tagged records remain grandfathered by their existing manifests.",
             "",
         ]
     )
@@ -870,30 +1060,33 @@ def _synthesis_readme(
     synthesis: dict[str, Any],
 ) -> str:
     output = Path("synthesis/README.md")
+    workflow_path = ROOT / synthesis["workflow"]
+    workflow = _load_toml(workflow_path)
     lines = [f"# {synthesis['title']}", ""] + _notice("synthesis/manifest.toml")
     lines.extend(
         [
             synthesis["scope"],
             "",
-            f"**Current working claim.** {synthesis['working_claim']}",
+            f"**Current working claim.** {workflow['working_claim']}",
             "",
-            f"**Boundary.** {synthesis['boundary']}",
+            f"**Boundary.** {workflow['boundary']}",
             "",
             "## Start here",
             "",
+            f"- {_link(Path('workflows/relational_model/README.md'), output, 'Current model mainline')}",
             f"- {_link(Path('studies/README.md'), output, 'Complete study registry')}",
-            f"- {_link(Path('synthesis/frozen/README.md'), output, 'Frozen evidence overlay')}",
+            f"- {_link(Path('synthesis/snapshots/README.md'), output, 'Historical reporting snapshots')}",
             f"- {_link(Path('synthesis/history.toml'), output, 'Release and migration history')}",
             f"- {_link(Path('synthesis/figures/README.md'), output, 'Figure workflow')}",
-            f"- {_link(Path('workflows/relational_model/README.md'), output, 'Maintained model workflow')}",
             "",
-            "The frozen overlay is a machine-verifiable historical reporting object. This",
-            "page is the editable human synthesis; neither replaces the study records.",
+            "The workflow is the current claim graph, historical snapshots are immutable",
+            "reporting objects, and this page is their editable human synthesis. None",
+            "replaces the study-owned evidence records.",
             "",
             "## Provenance layers",
             "",
             "Byte-preserved reports, contracts, locks, results, and presentation assets",
-            "live in study-owned `records/` or `synthesis/records/`. Frozen execution",
+            "live in study-owned `records/` or versioned reporting snapshots. Frozen execution",
             "locks that name historical Python files are indexed by `(path, sha256)` in",
             "`synthesis/source-provenance.toml` and verified against immutable Git blobs",
             "and witness commits. Maintained model source and tests live in `fsrl/` and",
@@ -902,6 +1095,12 @@ def _synthesis_readme(
             "worktree rather than mixing old files into the current import tree.",
             "",
             "## Reading routes",
+            "",
+            "### Current reporting mainline",
+            "",
+            "The canonical stage order, exact evidence locators, maintained code, tests,",
+            "verification commands, and promoted figures are owned by",
+            f"{_link(Path('workflows/relational_model/README.md'), output, 'the relational model workflow')}.",
             "",
         ]
     )
@@ -943,9 +1142,8 @@ Every promoted figure should have a source-data file, a generation command, and
 study/estimand provenance. Prefer a stable figure ID whose directory contains
 the rendered panel, source table, generation script or command, and a manifest
 mapping every panel to study IDs and frozen estimands. Historical presentation
-assets remain under `synthesis/records/` until the second curation pass decides
-whether to regenerate or retire them. Do not copy an image here merely to make
-it easier to find.
+assets remain in their versioned reporting snapshot. Do not copy an image here
+merely to make it easier to find.
 
 ## Current suites
 

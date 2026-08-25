@@ -1,4 +1,5 @@
 import copy
+import importlib.util
 import re
 import unittest
 from pathlib import Path
@@ -7,9 +8,11 @@ from fsrl.infra.study_registry import (
     GENERATED_PATHS,
     MIGRATION_PATH,
     ROOT,
+    SYNTHESIS_SNAPSHOT_MIGRATION_PATH,
     check_navigation,
     file_sha256,
     load_migration,
+    load_migrations,
     load_registry,
     load_runtime_locator_migration,
     load_source_provenance,
@@ -35,6 +38,7 @@ class StudyRegistryTests(unittest.TestCase):
         cls.registry = load_registry()
         cls.synthesis = load_synthesis()
         cls.migration = load_migration()
+        cls.migrations = load_migrations(cls.registry)
         cls.studies = load_studies(cls.registry)
         cls.validation = validate_registry(cls.registry, cls.synthesis, cls.migration)
 
@@ -43,6 +47,7 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertEqual(self.validation["studies"], 42)
         self.assertEqual(self.validation["chapters"], 9)
         self.assertEqual(self.validation["records"], 211)
+        self.assertEqual(self.validation["migration_steps"], 231)
         self.assertEqual(self.validation["study_records"], 191)
         self.assertEqual(self.validation["synthesis_records"], 20)
         self.assertEqual(self.validation["retired_assets"], 2)
@@ -63,12 +68,14 @@ class StudyRegistryTests(unittest.TestCase):
             self.assertFalse((ROOT / directory).exists(), directory)
         for record in self.migration["records"]:
             self.assertFalse((ROOT / record["legacy_path"]).exists())
-            self.assertTrue((ROOT / record["path"]).is_file())
+            self.assertTrue(resolve_record(record["legacy_path"]).is_file())
+        self.assertFalse((ROOT / "synthesis" / "records").exists())
+        self.assertFalse((ROOT / "synthesis" / "frozen").exists())
 
     def test_active_python_defaults_do_not_recreate_legacy_output_root(self):
         legacy_root = re.compile(r"\bROOT\s*/\s*['\"]output['\"]")
         offenders = []
-        for path in sorted((ROOT / "fsrl").glob("*.py")):
+        for path in sorted((ROOT / "fsrl").rglob("*.py")):
             if legacy_root.search(path.read_text(encoding="utf-8")):
                 offenders.append(path.relative_to(ROOT).as_posix())
         self.assertEqual(offenders, [])
@@ -88,23 +95,26 @@ class StudyRegistryTests(unittest.TestCase):
         )
 
     def test_migration_is_bijective_and_legacy_paths_resolve(self):
-        legacy = [record["legacy_path"] for record in self.migration["records"]]
-        current = [record["path"] for record in self.migration["records"]]
+        records = [
+            record for migration in self.migrations for record in migration["records"]
+        ]
+        legacy = [record["legacy_path"] for record in records]
+        current = [record["path"] for record in records]
         self.assertEqual(len(legacy), len(set(legacy)))
         self.assertEqual(len(current), len(set(current)))
         self.assertTrue(MIGRATION_PATH.is_file())
-        for record in self.migration["records"]:
-            self.assertEqual(
-                resolve_record(record["legacy_path"]), ROOT / record["path"]
-            )
+        self.assertTrue(SYNTHESIS_SNAPSHOT_MIGRATION_PATH.is_file())
+        for record in records:
+            self.assertTrue(resolve_record(record["legacy_path"]).is_file())
 
     def test_historical_source_locks_resolve_through_git_provenance(self):
         provenance = load_source_provenance()
         sources = provenance["sources"]
         self.assertEqual(len(sources), 127)
         self.assertEqual(provenance["source_reference_occurrences"], 631)
-        self.assertFalse((ROOT / "synthesis" / "frozen" / "source").exists())
-        self.assertFalse((ROOT / "synthesis" / "frozen" / "source-blobs").exists())
+        snapshot = ROOT / "synthesis" / "snapshots" / "reporting_v1"
+        self.assertFalse((snapshot / "source").exists())
+        self.assertFalse((snapshot / "source-blobs").exists())
         pairs = {(source["path"], source["sha256"]) for source in sources}
         self.assertEqual(len(pairs), len(sources))
 
@@ -206,6 +216,38 @@ class StudyRegistryTests(unittest.TestCase):
                     continue
                 resolved = (source.parent / target).resolve()
                 self.assertTrue(resolved.exists(), f"{relative}: {raw_target}")
+
+    def test_active_human_docs_have_live_local_links_and_python_modules(self):
+        historical_roots = (
+            ROOT / "studies",
+            ROOT / "synthesis" / "snapshots" / "reporting_v1",
+        )
+        failures = []
+        for path in sorted(ROOT.rglob("*.md")):
+            if ".git" in path.parts or ".cache" in path.parts:
+                continue
+            if historical_roots[0] in path.parents and "records" in path.parts:
+                continue
+            if historical_roots[1] in path.parents:
+                continue
+            content = path.read_text(encoding="utf-8")
+            for raw_target in re.findall(r"(?<!!)\[[^]]*\]\(([^)]+)\)", content):
+                target = raw_target.strip("<>").split("#", 1)[0]
+                if not target or "://" in target or target.startswith("mailto:"):
+                    continue
+                resolved = (path.parent / target).resolve()
+                if not resolved.exists():
+                    failures.append(
+                        f"missing link: {path.relative_to(ROOT)} -> {raw_target}"
+                    )
+            for module in re.findall(
+                r"python\s+-m\s+(fsrl(?:\.[A-Za-z0-9_]+)+)", content
+            ):
+                if importlib.util.find_spec(module) is None:
+                    failures.append(
+                        f"missing module: {path.relative_to(ROOT)} -> {module}"
+                    )
+        self.assertEqual(failures, [])
 
     def test_frozen_mainline_evidence_hashes_survive_the_path_migration(self):
         manifest = load_json(MANIFEST_PATH)

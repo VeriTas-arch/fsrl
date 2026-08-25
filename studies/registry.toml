@@ -4,6 +4,13 @@ review_state = "indexed"
 source_import_commit = "fb32095df70b1265b5d14b8eda3be6cb65036c6a"
 evidence_source_ref = "refs/tags/liu-mainline-v1"
 migration = "migrations/flat-records-v1.json"
+migrations = ["migrations/flat-records-v1.json", "migrations/synthesis-snapshot-v1.json"]
+
+[storage_policy]
+inline_review_threshold_bytes = 5000000
+inline_hard_limit_bytes = 20000000
+historical_inline_source_refs = ["refs/tags/liu-mainline-v1"]
+future_large_payload_backends = ["content_addressed_bundle", "release_asset", "git_lfs"]
 
 [status_legend]
 frozen_contract = "Task or evaluation boundary used by later studies; not itself a mechanism result."
@@ -70,12 +77,6 @@ id = "context"
 order = 80
 title = "Source and theoretical context"
 purpose = "Keep source papers visible while keeping them outside the factual model-evidence DAG."
-
-[[views]]
-id = "reporting_mainline"
-title = "Reporting mainline"
-purpose = "The shortest route for a talk or manuscript: task, competence, final causal mechanism, algorithmic asymmetry, and transport boundary."
-studies = ["task_fidelity", "behavior_reproduction_map", "mechanism_confirmation", "dual_evidence_access_confirmation", "asymmetric_algorithmic_organization", "support_topology_transport", "presentation_order_transport", "evidence_sparsity_transport", "item_count_transport"]
 
 [[views]]
 id = "diagnostic_lineage"

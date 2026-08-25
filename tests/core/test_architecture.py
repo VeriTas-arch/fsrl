@@ -113,9 +113,27 @@ class CoreArchitectureTests(unittest.TestCase):
                 "tasks",
                 "training",
             },
+            "experiments": {
+                "analysis",
+                "core",
+                "evaluation",
+                "experiments",
+                "infra",
+                "paths",
+                "tasks",
+                "training",
+            },
             "infra": {"infra", "paths"},
             "tasks": {"infra", "tasks"},
             "training": {"core", "infra", "tasks", "training"},
+            "workflows": {
+                "analysis",
+                "evaluation",
+                "experiments",
+                "infra",
+                "paths",
+                "tasks",
+            },
         }
         violations = []
         for owner, dependencies in allowed.items():
@@ -145,6 +163,25 @@ class CoreArchitectureTests(unittest.TestCase):
         root_tests = list((ROOT / "tests").glob("test_*.py"))
         self.assertEqual(source_files, {"__init__.py", "paths.py"})
         self.assertEqual(root_tests, [])
+
+    def test_scoped_agent_guides_cover_distinct_repository_boundaries(self):
+        expected = {
+            "fsrl/AGENTS.md",
+            "fsrl/experiments/AGENTS.md",
+            "fsrl/infra/AGENTS.md",
+            "fsrl/tasks/AGENTS.md",
+            "fsrl/workflows/AGENTS.md",
+            "reproductions/AGENTS.md",
+            "studies/AGENTS.md",
+            "synthesis/AGENTS.md",
+            "synthesis/figures/AGENTS.md",
+            "synthesis/snapshots/AGENTS.md",
+            "tests/AGENTS.md",
+            "tools/AGENTS.md",
+            "workflows/AGENTS.md",
+        }
+        missing = sorted(path for path in expected if not (ROOT / path).is_file())
+        self.assertEqual(missing, [])
 
 
 if __name__ == "__main__":

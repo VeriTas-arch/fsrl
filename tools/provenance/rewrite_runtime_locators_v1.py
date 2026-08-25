@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from fsrl.infra.study_registry import resolve_record
+
 ROOT = Path(__file__).resolve().parents[2]
 FLAT_MIGRATION_PATH = ROOT / "studies" / "migrations" / "flat-records-v1.json"
 MIGRATION_PATH = ROOT / "studies" / "migrations" / "runtime-locators-v1.json"
@@ -50,17 +52,18 @@ def _git_blob(source_ref: str, source_path: str) -> bytes:
 
 
 def _registered_candidates() -> list[Path]:
-    paths = [
-        path
-        for path in (ROOT / "studies").glob("*/records/**/*")
-        if path.is_file() and OLD_PREFIX in path.read_bytes()
-    ]
-    paths.extend(
-        path
-        for path in (ROOT / "synthesis" / "records").rglob("*")
-        if path.is_file() and OLD_PREFIX in path.read_bytes()
-    )
-    return sorted(paths)
+    paths = []
+    for repository_path in _flat_records():
+        is_study_record = (
+            repository_path.startswith("studies/") and "/records/" in repository_path
+        )
+        is_synthesis_record = repository_path.startswith("synthesis/records/")
+        if not (is_study_record or is_synthesis_record):
+            continue
+        path = resolve_record(repository_path)
+        if path.is_file() and OLD_PREFIX in path.read_bytes():
+            paths.append(path)
+    return sorted(set(paths))
 
 
 def _flat_records() -> dict[str, dict[str, Any]]:
@@ -225,7 +228,7 @@ def audit() -> dict[str, Any]:
         except (KeyError, subprocess.CalledProcessError):
             errors.append(f"unavailable runtime-locator source: {path_value}")
             continue
-        current_path = ROOT / path_value
+        current_path = resolve_record(path_value)
         if not current_path.is_file():
             errors.append(f"missing rewritten runtime-locator record: {path_value}")
             continue
@@ -302,7 +305,7 @@ def apply() -> dict[str, Any]:
         return audit()
     migration = _plan()
     for record in migration["records"]:
-        path = ROOT / record["path"]
+        path = resolve_record(record["path"])
         path.write_bytes(path.read_bytes().replace(OLD_PREFIX, NEW_PREFIX))
     _, dependent_payloads = _dependent_plan(migration["records"])
     for path, payload in dependent_payloads.items():

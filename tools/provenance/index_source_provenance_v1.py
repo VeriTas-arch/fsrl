@@ -223,8 +223,8 @@ def run(*, apply: bool) -> dict[str, Any]:
     elif MANIFEST_PATH.read_text(encoding="utf-8") != expected:
         errors.append("source provenance manifest is stale")
     for redundant_root in (
-        SYNTHESIS_ROOT / "frozen" / "source",
-        SYNTHESIS_ROOT / "frozen" / "source-blobs",
+        SYNTHESIS_ROOT / "snapshots" / "reporting_v1" / "source",
+        SYNTHESIS_ROOT / "snapshots" / "reporting_v1" / "source-blobs",
     ):
         if redundant_root.exists():
             errors.append(f"redundant source tree still exists: {redundant_root}")

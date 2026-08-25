@@ -23,9 +23,9 @@ environment. `figure_spec.json` records panel mappings, fixed selection rules,
 frozen inputs, and explicit exclusions.
 
 ```bash
-direnv exec . python -m fsrl.paper_figure_alignment replay
-direnv exec . python -m fsrl.paper_figure_alignment render
-direnv exec . python -m fsrl.paper_figure_alignment check
+direnv exec . python -m fsrl.workflows.paper_figures replay
+direnv exec . python -m fsrl.workflows.paper_figures render
+direnv exec . python -m fsrl.workflows.paper_figures check
 ```
 
 The figures intentionally retain the model's excessive symbolic-distance

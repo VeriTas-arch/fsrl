@@ -32,6 +32,9 @@ Files under `records/` are byte-preserving relocations. Their former paths,
 hashes, sizes, and source ref are recorded in `study.toml` and the global
 migration map. New interpretation belongs in this capsule or `synthesis/`;
 the frozen records themselves are not rewritten.
+Commands and relative links inside a frozen report describe its historical
+checkout. Use the maintained workflow for current commands, or the snapshot
+replay guide for an exact detached-worktree replay.
 
 Add a `figures/` directory only when this study has a promoted, reproducible
 study-level figure. Cross-study paper figures belong in `synthesis/figures/`.
