@@ -9,15 +9,18 @@ from fsrl.study_registry import (
     MIGRATION_PATH,
     ROOT,
     check_navigation,
+    file_sha256,
     load_migration,
     load_registry,
-    load_source_snapshots,
+    load_source_provenance,
     load_studies,
     load_synthesis,
     render_navigation,
     resolve_record,
     validate_registry,
+    verify_source_lock,
 )
+from tools.provenance.index_source_provenance_v1 import run as check_source_provenance
 
 
 class StudyRegistryTests(unittest.TestCase):
@@ -36,6 +39,7 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertEqual(self.validation["records"], 211)
         self.assertEqual(self.validation["study_records"], 191)
         self.assertEqual(self.validation["synthesis_records"], 20)
+        self.assertEqual(self.validation["source_provenance"], 127)
 
     def test_old_flat_roots_are_not_the_active_layout(self):
         for directory in ("docs", "benchmarks", "results", "research", "mainlines"):
@@ -55,18 +59,45 @@ class StudyRegistryTests(unittest.TestCase):
                 resolve_record(record["legacy_path"]), ROOT / record["path"]
             )
 
-    def test_source_snapshots_are_flat_non_importable_blobs(self):
-        snapshots = load_source_snapshots()["snapshots"]
-        self.assertEqual(len(snapshots), 74)
+    def test_historical_source_locks_resolve_through_git_provenance(self):
+        provenance = load_source_provenance()
+        sources = provenance["sources"]
+        self.assertEqual(len(sources), 127)
+        self.assertEqual(provenance["source_reference_occurrences"], 631)
         self.assertFalse((ROOT / "synthesis" / "frozen" / "source").exists())
-        for snapshot in snapshots:
-            relative = Path(snapshot["path"])
-            self.assertEqual(relative.parts[:2], ("frozen", "source-blobs"))
-            self.assertEqual(relative.name, snapshot["sha256"])
-            self.assertEqual(relative.suffix, "")
-            self.assertEqual(
-                resolve_record(snapshot["source_path"]), ROOT / "synthesis" / relative
+        self.assertFalse((ROOT / "synthesis" / "frozen" / "source-blobs").exists())
+        pairs = {(source["path"], source["sha256"]) for source in sources}
+        self.assertEqual(len(pairs), len(sources))
+
+        historical = next(
+            source
+            for source in sources
+            if file_sha256(ROOT / source["path"]) != source["sha256"]
+        )
+        self.assertEqual(resolve_record(historical["path"]), ROOT / historical["path"])
+        verification = verify_source_lock(historical["path"], historical["sha256"])
+        self.assertTrue(verification["passed"])
+        self.assertEqual(verification["observed_sha256"], historical["sha256"])
+
+    def test_source_provenance_rejects_a_tampered_git_registration(self):
+        altered = copy.deepcopy(load_source_provenance())
+        altered["sources"][0]["sha256"] = "0" * 64
+        validation = validate_registry(
+            self.registry, self.synthesis, self.migration, altered
+        )
+        self.assertFalse(validation["passed"])
+        self.assertTrue(
+            any(
+                "source provenance verification failed" in error
+                for error in validation["errors"]
             )
+        )
+
+    def test_source_provenance_index_matches_all_structured_evidence(self):
+        result = check_source_provenance(apply=False)
+        self.assertTrue(result["passed"], result["errors"])
+        self.assertEqual(result["source_versions"], 127)
+        self.assertEqual(result["source_reference_occurrences"], 631)
 
     def test_migration_provenance_must_match_the_local_authority(self):
         altered = copy.deepcopy(self.migration)

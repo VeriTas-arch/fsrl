@@ -1,7 +1,7 @@
 import unittest
 
-from fsrl.assembly_diagnostics import file_sha256, load_json, resolve_path
-from fsrl.study_registry import resolve_record
+from fsrl.assembly_diagnostics import load_json, resolve_path
+from fsrl.study_registry import registered_file_sha256, resolve_record
 
 
 class MechanismConfirmationContractTests(unittest.TestCase):
@@ -11,7 +11,11 @@ class MechanismConfirmationContractTests(unittest.TestCase):
     def test_every_registered_source_is_immutable(self):
         for registration in self.contract["registered_sources"].values():
             self.assertEqual(
-                file_sha256(resolve_path(registration["path"])),
+                registered_file_sha256(
+                    registration["path"],
+                    registration["sha256"],
+                    resolved_path=resolve_path(registration["path"]),
+                ),
                 registration["sha256"],
             )
 

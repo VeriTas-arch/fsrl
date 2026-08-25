@@ -17,10 +17,12 @@ import argparse
 import hashlib
 import json
 import os
+import re
+import subprocess
 import sys
 import tomllib
 from collections import Counter
-from functools import lru_cache
+from functools import cache, lru_cache
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -30,7 +32,9 @@ REGISTRY_PATH = STUDIES_ROOT / "registry.toml"
 MIGRATION_PATH = STUDIES_ROOT / "migrations" / "flat-records-v1.json"
 SYNTHESIS_ROOT = ROOT / "synthesis"
 SYNTHESIS_MANIFEST_PATH = SYNTHESIS_ROOT / "manifest.toml"
-SOURCE_SNAPSHOTS_PATH = SYNTHESIS_ROOT / "source-snapshots.toml"
+SOURCE_PROVENANCE_PATH = SYNTHESIS_ROOT / "source-provenance.toml"
+SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
+GIT_SHA1_PATTERN = re.compile(r"[0-9a-f]{40}")
 GENERATED_PATHS = (
     Path("studies/README.md"),
     Path("synthesis/README.md"),
@@ -75,9 +79,9 @@ def load_migration(path: Path = MIGRATION_PATH) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_source_snapshots(path: Path = SOURCE_SNAPSHOTS_PATH) -> dict[str, Any]:
+def load_source_provenance(path: Path = SOURCE_PROVENANCE_PATH) -> dict[str, Any]:
     if not path.is_file():
-        return {"schema_version": 1, "snapshots": []}
+        return {"schema_version": 1, "sources": []}
     return _load_toml(path)
 
 
@@ -107,26 +111,96 @@ def migration_lookup() -> dict[str, str]:
 
 
 @lru_cache(maxsize=1)
-def source_snapshot_lookup() -> dict[str, str]:
-    snapshots = load_source_snapshots()
+def source_provenance_lookup() -> dict[tuple[str, str], dict[str, Any]]:
+    provenance = load_source_provenance()
     return {
-        record["source_path"]: record["path"]
-        for record in snapshots.get("snapshots", [])
+        (record["path"], record["sha256"]): record
+        for record in provenance.get("sources", [])
     }
 
 
+@cache
+def _git_blob(git_blob: str) -> bytes:
+    completed = subprocess.run(
+        ["git", "cat-file", "blob", git_blob],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    )
+    return completed.stdout
+
+
+def _verify_source_record(record: dict[str, Any]) -> dict[str, Any]:
+    path = _safe_relative(record["path"]).as_posix()
+    expected_sha256 = record["sha256"]
+    git_blob = record["git_blob"]
+    witness_commit = record["witness_commit"]
+    payload = _git_blob(git_blob)
+    observed_sha256 = hashlib.sha256(payload).hexdigest()
+    if observed_sha256 != expected_sha256:
+        raise ValueError(f"Git blob hash mismatch for {path}@{expected_sha256}")
+    if len(payload) != record["bytes"]:
+        raise ValueError(f"Git blob byte count mismatch for {path}@{expected_sha256}")
+    completed = subprocess.run(
+        ["git", "rev-parse", f"{witness_commit}:{path}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    witness_blob = completed.stdout.strip()
+    if witness_blob != git_blob:
+        raise ValueError(f"Git witness mismatch for {path}@{expected_sha256}")
+    return {
+        "path": path,
+        "expected_sha256": expected_sha256,
+        "observed_sha256": observed_sha256,
+        "bytes": len(payload),
+        "git_blob": git_blob,
+        "witness_commit": witness_commit,
+        "passed": True,
+    }
+
+
+def verify_source_lock(value: str | Path, expected_sha256: str) -> dict[str, Any]:
+    """Verify a frozen Python source registration against Git object storage."""
+
+    path = _safe_relative(Path(value).as_posix()).as_posix()
+    record = source_provenance_lookup().get((path, expected_sha256))
+    if record is None:
+        raise FileNotFoundError(
+            f"unindexed frozen source registration: {path}@{expected_sha256}"
+        )
+    return _verify_source_record(record)
+
+
+def registered_file_sha256(
+    value: str | Path,
+    expected_sha256: str,
+    *,
+    resolved_path: Path | None = None,
+) -> str:
+    """Hash a registered artifact, using Git for historical Python sources."""
+
+    candidate = Path(value)
+    if candidate.is_absolute():
+        return file_sha256(candidate if resolved_path is None else resolved_path)
+    path = _safe_relative(candidate.as_posix()).as_posix()
+    if path.endswith(".py") and path.startswith(("fsrl/", "tests/")):
+        return verify_source_lock(path, expected_sha256)["observed_sha256"]
+    return file_sha256(resolve_record(path) if resolved_path is None else resolved_path)
+
+
 def resolve_record(value: str | Path) -> Path:
-    """Resolve a current path or a frozen pre-refactor repository path.
+    """Resolve an active path or a frozen pre-refactor record path.
 
     Returning a path does not imply that the file exists.  This preserves the
     normal ``Path`` behavior for prospective outputs while making historical
-    contracts readable after the physical migration.
+    record contracts readable after the physical migration. Historical source
+    locks are verified separately with :func:`verify_source_lock`.
     """
 
     relative = _safe_relative(Path(value).as_posix())
-    snapshot = source_snapshot_lookup().get(relative.as_posix())
-    if snapshot is not None:
-        return SYNTHESIS_ROOT / _safe_relative(snapshot)
     direct = ROOT / relative
     if direct.exists():
         return direct
@@ -207,11 +281,14 @@ def validate_registry(
     registry: dict[str, Any] | None = None,
     synthesis: dict[str, Any] | None = None,
     migration: dict[str, Any] | None = None,
+    source_provenance: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     registry = load_registry() if registry is None else registry
     synthesis = load_synthesis() if synthesis is None else synthesis
     migration = load_migration() if migration is None else migration
-    source_snapshots = load_source_snapshots()
+    source_provenance = (
+        load_source_provenance() if source_provenance is None else source_provenance
+    )
     errors: list[str] = []
 
     if registry.get("schema_version") != 1:
@@ -220,8 +297,67 @@ def validate_registry(
         errors.append("synthesis schema_version must be 1")
     if migration.get("schema_version") != 1:
         errors.append("migration schema_version must be 1")
-    if source_snapshots.get("schema_version") != 1:
-        errors.append("source snapshot schema_version must be 1")
+    if source_provenance.get("schema_version") != 1:
+        errors.append("source provenance schema_version must be 1")
+
+    sources = source_provenance.get("sources", [])
+    if source_provenance.get("source_version_count") != len(sources):
+        errors.append("source provenance count does not match sources")
+    source_pairs: set[tuple[str, str]] = set()
+    required_source_fields = {
+        "path",
+        "sha256",
+        "bytes",
+        "git_blob",
+        "witness_commit",
+        "record_count",
+        "occurrence_count",
+    }
+    for source in sources:
+        missing = sorted(required_source_fields - set(source))
+        if missing:
+            errors.append(f"source provenance entry missing fields {missing}")
+            continue
+        path = source["path"]
+        sha256 = source["sha256"]
+        git_blob = source["git_blob"]
+        witness_commit = source["witness_commit"]
+        if not isinstance(path, str):
+            errors.append("source provenance path must be a string")
+            continue
+        try:
+            normalized_path = _safe_relative(path).as_posix()
+        except ValueError as error:
+            errors.append(f"invalid source provenance path: {error}")
+            continue
+        if not normalized_path.endswith(".py") or not normalized_path.startswith(
+            ("fsrl/", "tests/")
+        ):
+            errors.append(f"source provenance path is not active Python: {path}")
+        if not isinstance(sha256, str) or SHA256_PATTERN.fullmatch(sha256) is None:
+            errors.append(f"invalid source provenance SHA-256: {path}")
+            continue
+        if (
+            not isinstance(git_blob, str)
+            or GIT_SHA1_PATTERN.fullmatch(git_blob) is None
+        ):
+            errors.append(f"invalid source provenance Git blob: {path}@{sha256}")
+            continue
+        if (
+            not isinstance(witness_commit, str)
+            or GIT_SHA1_PATTERN.fullmatch(witness_commit) is None
+        ):
+            errors.append(f"invalid source provenance witness: {path}@{sha256}")
+            continue
+        pair = (normalized_path, sha256)
+        if pair in source_pairs:
+            errors.append(f"duplicate source provenance pair: {path}@{sha256}")
+            continue
+        source_pairs.add(pair)
+        try:
+            _verify_source_record(source)
+        except (KeyError, OSError, subprocess.CalledProcessError, ValueError) as error:
+            errors.append(f"source provenance verification failed: {error}")
 
     chapters = registry.get("chapters", [])
     chapter_ids = [chapter.get("id") for chapter in chapters]
@@ -362,33 +498,16 @@ def validate_registry(
         if (ROOT / legacy_path).exists():
             errors.append(f"legacy flat path still exists: {legacy_path}")
 
+    if source_provenance.get("registered_record_files") != len(record_pairs):
+        errors.append("source provenance registered-record count is stale")
+    for redundant_root in (
+        SYNTHESIS_ROOT / "frozen" / "source",
+        SYNTHESIS_ROOT / "frozen" / "source-blobs",
+    ):
+        if redundant_root.exists():
+            errors.append(f"redundant source tree still exists: {redundant_root}")
+
     expected_files = current_paths
-    snapshot_paths: set[str] = set()
-    snapshot_sources: set[str] = set()
-    for snapshot in source_snapshots.get("snapshots", []):
-        source_path = snapshot.get("source_path")
-        local_path = snapshot.get("path")
-        if not isinstance(source_path, str) or not isinstance(local_path, str):
-            errors.append("source snapshot paths must be strings")
-            continue
-        repository_path = (SYNTHESIS_ROOT / _safe_relative(local_path)).relative_to(
-            ROOT
-        )
-        path = ROOT / repository_path
-        snapshot_paths.add(repository_path.as_posix())
-        snapshot_sources.add(source_path)
-        if not path.is_file():
-            errors.append(f"missing source snapshot {repository_path.as_posix()}")
-            continue
-        if path.stat().st_size != snapshot.get("bytes"):
-            errors.append(f"source snapshot byte count changed: {source_path}")
-        if file_sha256(path) != snapshot.get("sha256"):
-            errors.append(f"source snapshot hash changed: {source_path}")
-    if len(snapshot_paths) != len(source_snapshots.get("snapshots", [])):
-        errors.append("source snapshot paths must be unique")
-    if len(snapshot_sources) != len(source_snapshots.get("snapshots", [])):
-        errors.append("source snapshot source paths must be unique")
-    expected_files = expected_files | snapshot_paths
     observed_files = {
         path.relative_to(ROOT).as_posix()
         for root in (
@@ -416,7 +535,7 @@ def validate_registry(
             len(study.get("records", [])) for study in studies.values()
         ),
         "synthesis_records": len(synthesis.get("records", [])),
-        "source_snapshots": len(source_snapshots.get("snapshots", [])),
+        "source_provenance": len(sources),
         "role_counts": dict(sorted(role_counts.items())),
     }
 
@@ -583,11 +702,11 @@ def _synthesis_readme(
             "",
             "Byte-preserved reports, contracts, locks, results, and presentation assets",
             "live in study-owned `records/` or `synthesis/records/`. Frozen execution",
-            "locks that name pre-refactor Python files resolve to exact source snapshots",
-            "stored as extensionless, content-addressed objects under",
-            "`synthesis/frozen/source-blobs/` and indexed by `source-snapshots.toml`.",
-            "The active `fsrl/` and `tests/` trees remain the current implementation and",
-            "test surface; the blobs are provenance evidence, not a second Python tree.",
+            "locks that name historical Python files are indexed by `(path, sha256)` in",
+            "`synthesis/source-provenance.toml` and verified against immutable Git blobs",
+            "and witness commits. The active `fsrl/` and `tests/` trees are the only",
+            "physical source and test surfaces; historical replay uses a detached Git",
+            "worktree rather than mixing old files into the current import tree.",
             "",
             "## Reading routes",
             "",

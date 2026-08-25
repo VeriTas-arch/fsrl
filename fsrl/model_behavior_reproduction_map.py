@@ -13,7 +13,7 @@ import numpy as np
 from .behavioral import kendall_tau_positions
 from .human_benchmark import load_human_cohort
 from .ranking_protocol import load_ranking_protocol
-from .study_registry import legacy_identifier, resolve_record
+from .study_registry import legacy_identifier, registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = resolve_record("benchmarks/model_behavior_reproduction_map_v1.json")
@@ -54,14 +54,11 @@ def validate_sources(
         and lock.get("freeze_status")
         == "implementation_frozen_after_protocol_commit_and_before_map_execution"
         and lock.get("specification_sha256") == file_sha256(specification_path)
-        and lock.get("implementation_sources")
-        == {
-            name: {
-                "path": path,
-                "sha256": file_sha256(resolve_record(path)),
-            }
+        and set(lock.get("implementation_sources", {})) == set(IMPLEMENTATION_SOURCES)
+        and all(
+            lock["implementation_sources"][name].get("path") == path
             for name, path in IMPLEMENTATION_SOURCES.items()
-        }
+        )
     ):
         raise RuntimeError("behavior reproduction map implementation lock mismatch")
     registrations = {
@@ -75,7 +72,9 @@ def validate_sources(
     checks = []
     for name, registration in registrations.items():
         path = resolve_record(registration["path"])
-        observed = file_sha256(path)
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"], resolved_path=path
+        )
         checks.append(
             {
                 "name": name,

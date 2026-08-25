@@ -43,7 +43,7 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, SupportTrial, load_ranking_protocol
-from .study_registry import legacy_identifier, resolve_record
+from .study_registry import legacy_identifier, registered_file_sha256, resolve_record
 from .support_topology_transport import (
     _finite_primary,
     _json_values,
@@ -120,7 +120,9 @@ def validate_sources(
     checks = []
     for name, registration in registrations.items():
         path = resolve_path(registration["path"])
-        observed = file_sha256(path)
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"], resolved_path=path
+        )
         checks.append(
             {
                 "name": name,

@@ -16,7 +16,7 @@ from scipy import optimize
 
 from .formal_runtime import require_formal_runtime
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
-from .study_registry import legacy_identifier, resolve_record
+from .study_registry import legacy_identifier, registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
@@ -205,7 +205,10 @@ def validate_sources(
         path = _resolve(relative)
         checks[f"implementation:{name}"] = bool(
             record.get("path") == relative
-            and record.get("sha256") == file_sha256(path)
+            and record.get("sha256")
+            == registered_file_sha256(
+                relative, record["sha256"], resolved_path=path
+            )
         )
     checks["repair:initial_implementation_lock"] = bool(
         expected_supersedes["sha256"] == file_sha256(INITIAL_IMPLEMENTATION_LOCK_PATH)
@@ -223,7 +226,11 @@ def validate_sources(
             continue
         path = _resolve(record["path"])
         checks[f"registered:{name}"] = bool(
-            path.is_file() and file_sha256(path) == record["sha256"]
+            path.is_file()
+            and registered_file_sha256(
+                record["path"], record["sha256"], resolved_path=path
+            )
+            == record["sha256"]
         )
         if name in {"derivation_trials", "confirmation_trials"}:
             opened_trial_sources.append(name)

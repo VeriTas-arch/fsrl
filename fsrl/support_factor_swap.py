@@ -25,7 +25,7 @@ from .assembly_trajectory import (
 from .config import DEVICE, NUMRESPONSESTEP
 from .liu_eval import FastWeightIntervention, FrozenFastWeightEvaluator
 from .ranking_protocol import load_ranking_protocol
-from .study_registry import resolve_record
+from .study_registry import registered_file_sha256, resolve_record
 from .support_write_localization import (
     _replay_without_relation_history,
     matrix_norm,
@@ -57,7 +57,9 @@ class EpisodeFactors:
 
 def _registered_file(registration: dict) -> dict:
     path = resolve_path(registration["path"])
-    observed = file_sha256(path)
+    observed = registered_file_sha256(
+        registration["path"], registration["sha256"], resolved_path=path
+    )
     if observed != registration["sha256"]:
         raise RuntimeError(f"registered SHA-256 mismatch: {path}")
     return {"path": registration["path"], "sha256": observed}

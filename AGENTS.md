@@ -1339,13 +1339,13 @@ metric constructive-comparator derivation and confirmation are in
   versioned migration and full validation, not ordinary cleanup.
 - Validate this migration with
   `python tools/provenance/migrate_flat_records_v1.py audit`; keep the active
-  path rewrite and source snapshot checks idempotent with their respective
+  path rewrite and source provenance checks idempotent with their respective
   `check` commands under `tools/provenance/`.
-- Pre-refactor Python files named by frozen execution locks are preserved as
-  extensionless content-addressed objects under
-  `synthesis/frozen/source-blobs/` and indexed by
-  `synthesis/source-snapshots.toml`. They are provenance evidence, not
-  importable code; default Pytest discovery must remain restricted to `tests/`.
+- Historical Python files named by frozen execution locks are indexed by the
+  exact `(path, sha256)` pair in `synthesis/source-provenance.toml` and verified
+  against immutable Git blobs and witness commits. Do not restore physical
+  source snapshots under `synthesis/`; `fsrl/` and `tests/` are the only active
+  source trees. Use a detached Git worktree for complete historical replay.
 - Put runtime outputs in the ignored `artifacts/` workspace. Promote only a
   registered evidence object into a study. Study-level figures may be added to
   `studies/<study-id>/figures/` when needed; cross-study paper figures and their

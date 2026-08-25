@@ -15,7 +15,7 @@ import torch
 from . import dual_state_reduced_algorithm as v1
 from .liu_eval import load_retro_checkpoint
 from .meta_tasks import GenericRankingTaskGenerator
-from .study_registry import legacy_identifier, resolve_record
+from .study_registry import legacy_identifier, registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = (
@@ -98,7 +98,9 @@ def validate_sources(
     checks = []
     for name, registration in registrations.items():
         path = resolve_record(registration["path"])
-        observed = file_sha256(path)
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"], resolved_path=path
+        )
         checks.append(
             {
                 "name": name,

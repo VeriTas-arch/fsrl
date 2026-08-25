@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import torch
 
-from fsrl.assembly_diagnostics import file_sha256, load_json
+from fsrl.assembly_diagnostics import load_json
 from fsrl.assembly_trajectory import bootstrap_counts
 from fsrl.hidden_residual_audit import validate_registered_sources
 from fsrl.operator_amplitude_path import (
@@ -14,7 +14,7 @@ from fsrl.operator_amplitude_path import (
     select_v2_outcome,
     subject_crossing_summary,
 )
-from fsrl.study_registry import resolve_record
+from fsrl.study_registry import registered_file_sha256, resolve_record
 
 
 class OperatorAmplitudePathTests(unittest.TestCase):
@@ -101,11 +101,17 @@ class OperatorAmplitudePathTests(unittest.TestCase):
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(resolve_record(result["implementation"]["path"])),
+            registered_file_sha256(
+                result["implementation"]["path"],
+                result["implementation"]["sha256"],
+            ),
         )
         self.assertEqual(
             result["specification"]["sha256"],
-            file_sha256(resolve_record(result["specification"]["path"])),
+            registered_file_sha256(
+                result["specification"]["path"],
+                result["specification"]["sha256"],
+            ),
         )
         overall = result["overall_diagnosis"]
         self.assertEqual(overall["replicated_mean_crossing_relations"], ["H>A"])

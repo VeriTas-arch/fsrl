@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from fsrl.assembly_diagnostics import file_sha256, load_json
+from fsrl.assembly_diagnostics import load_json
 from fsrl.assembly_trajectory import bootstrap_counts
 from fsrl.hidden_residual_audit import validate_registered_sources
 from fsrl.state_query_operator_binding import (
@@ -11,7 +11,7 @@ from fsrl.state_query_operator_binding import (
     overlap_classes,
     structured_contrasts,
 )
-from fsrl.study_registry import resolve_record
+from fsrl.study_registry import registered_file_sha256, resolve_record
 
 
 class StateQueryOperatorBindingTests(unittest.TestCase):
@@ -124,7 +124,10 @@ class StateQueryOperatorBindingTests(unittest.TestCase):
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(resolve_record(result["implementation"]["path"])),
+            registered_file_sha256(
+                result["implementation"]["path"],
+                result["implementation"]["sha256"],
+            ),
         )
         expected = {
             "operator_state_identity": True,

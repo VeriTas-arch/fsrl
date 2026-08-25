@@ -19,7 +19,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .git_provenance import git_blob_sha256, verify_git_registrations
-from .study_registry import SYNTHESIS_ROOT, resolve_record
+from .study_registry import SYNTHESIS_ROOT, registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 MAINLINE_ROOT = SYNTHESIS_ROOT / "frozen"
@@ -162,7 +162,9 @@ def verify_evidence_files(manifest: dict) -> dict:
         path = _safe_repo_path(registration.get("path", ""))
         if not path.is_file() or path.is_symlink():
             raise RuntimeError(f"mainline evidence file is unavailable: {name}")
-        observed = file_sha256(path)
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"], resolved_path=path
+        )
         check = {
             "name": name,
             "path": str(path.relative_to(ROOT)),

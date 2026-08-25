@@ -13,7 +13,6 @@ from .assembly_trajectory import (
     hodge_potentials,
     readout_margin_fields,
 )
-from .confirmation import file_sha256
 from .curvature_gate_pilot import _tensor_hashes, load_json, write_json
 from .dual_evidence_access_confirmation import validate_artifacts
 from .formal_runtime import require_formal_runtime
@@ -30,7 +29,7 @@ from .liu_eval import (
 )
 from .local_behavior_attribution import exact_probability
 from .ranking_protocol import load_ranking_protocol
-from .study_registry import resolve_record
+from .study_registry import registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
@@ -524,7 +523,9 @@ def _source_validation(
     checks = []
     for name, registration in registrations.items():
         path = _resolve(registration["path"])
-        observed = file_sha256(path)
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"], resolved_path=path
+        )
         checks.append(
             {
                 "name": name,

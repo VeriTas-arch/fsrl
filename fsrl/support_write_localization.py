@@ -30,7 +30,7 @@ from .config import DEVICE, NUMRESPONSESTEP
 from .constructive import ExactRankingPosterior
 from .liu_eval import FastWeightIntervention, FrozenFastWeightEvaluator
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
-from .study_registry import resolve_record
+from .study_registry import registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/support_write_localization_v1.json")
@@ -59,7 +59,9 @@ class ExactInnovations:
 
 def _registered_file(registration: dict) -> dict:
     path = resolve_path(registration["path"])
-    observed = file_sha256(path)
+    observed = registered_file_sha256(
+        registration["path"], registration["sha256"], resolved_path=path
+    )
     if observed != registration["sha256"]:
         raise RuntimeError(f"registered SHA-256 mismatch: {path}")
     return {"path": registration["path"], "sha256": observed}

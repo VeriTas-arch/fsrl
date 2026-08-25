@@ -26,7 +26,7 @@ from .confirmation import (
 )
 from .formal_runtime import require_formal_runtime
 from .history_state_factorial import run_history_state_factorial
-from .study_registry import resolve_record
+from .study_registry import registered_file_sha256, resolve_record
 from .support_factor_swap import run_support_factor_swap
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,7 +61,9 @@ def _registered_file(path: Path) -> dict:
 
 def _validate_file(registration: dict) -> dict:
     path = resolve_path(registration["path"])
-    observed = file_sha256(path)
+    observed = registered_file_sha256(
+        registration["path"], registration["sha256"], resolved_path=path
+    )
     return {
         "path": registration["path"],
         "expected_sha256": registration["sha256"],

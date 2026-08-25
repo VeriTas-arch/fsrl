@@ -422,9 +422,17 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
             except KeyError as error:
                 raise AssertionError(f"unexpected source hash: {resolved}") from error
 
+        def fake_registered_sha256(value, expected, *, resolved_path=None):
+            del value, expected
+            return fake_sha256(resolved_path)
+
         with (
             patch.object(fingerprint, "load_json", side_effect=fake_load) as loader,
-            patch.object(fingerprint, "file_sha256", side_effect=fake_sha256),
+            patch.object(
+                fingerprint,
+                "registered_file_sha256",
+                side_effect=fake_registered_sha256,
+            ),
         ):
             result = validate_sources(specification_path, implementation_lock_path)
 

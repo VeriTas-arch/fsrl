@@ -41,11 +41,10 @@ studies/migrations/flat-records-v1.json. Active code resolves those frozen
 identifiers through fsrl.study_registry.resolve_record; the files themselves
 have one authoritative current location.
 
-Frozen execution locks that identify pre-refactor Python files are backed by
-extensionless, content-addressed objects under synthesis/frozen/source-blobs/.
-The original paths remain in synthesis/source-snapshots.toml; the blobs are
-provenance evidence rather than a second Python package. The active
-implementation and test surface remains fsrl/ plus tests/.
+Frozen execution locks that identify historical Python files are indexed by
+`(path, sha256)` in synthesis/source-provenance.toml and verified against Git
+blobs plus witness commits. The only physical implementation and test surface
+is fsrl/ plus tests/; full historical replay uses a detached Git worktree.
 
 ## Current scientific snapshot
 
@@ -86,12 +85,12 @@ direnv exec . python -m fsrl.study_registry check
 ~~~
 
 Audit the one-time physical migration against its frozen Git sources and check
-that compatibility rewrites and source snapshots remain reproducible:
+that compatibility rewrites and the Git-backed source index remain reproducible:
 
 ~~~bash
 direnv exec . python tools/provenance/migrate_flat_records_v1.py audit
 direnv exec . python tools/provenance/rewrite_active_record_paths_v1.py check
-direnv exec . python tools/provenance/snapshot_refactor_sources_v1.py check
+direnv exec . python tools/provenance/index_source_provenance_v1.py check
 ~~~
 
 Run tests through the timeout-bounded entry point. It creates an independent

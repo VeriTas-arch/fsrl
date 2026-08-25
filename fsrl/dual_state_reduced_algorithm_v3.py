@@ -13,7 +13,7 @@ import numpy as np
 
 from . import dual_state_reduced_algorithm as v1
 from . import dual_state_reduced_algorithm_v2 as v2
-from .study_registry import legacy_identifier, resolve_record
+from .study_registry import legacy_identifier, registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = resolve_record("benchmarks/dual_state_reduced_algorithm_v3.json")
@@ -72,7 +72,9 @@ def validate_sources(
             registrations[f"preservation_{seed}_{name}"] = registration
     checks = []
     for name, registration in registrations.items():
-        observed = file_sha256(resolve_record(registration["path"]))
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"]
+        )
         checks.append(
             {
                 "name": name,

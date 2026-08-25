@@ -2,14 +2,14 @@ import unittest
 
 import numpy as np
 
-from fsrl.assembly_diagnostics import file_sha256, load_json
+from fsrl.assembly_diagnostics import load_json
 from fsrl.relation_trace_localization import (
     _decision,
     prototype_identity_metrics,
     prototype_rdm_similarity,
     validate_registered_sources,
 )
-from fsrl.study_registry import resolve_record
+from fsrl.study_registry import registered_file_sha256, resolve_record
 
 
 class RelationTraceLocalizationTests(unittest.TestCase):
@@ -87,7 +87,10 @@ class RelationTraceLocalizationTests(unittest.TestCase):
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(resolve_record(result["implementation"]["path"])),
+            registered_file_sha256(
+                result["implementation"]["path"],
+                result["implementation"]["sha256"],
+            ),
         )
         expected = {
             "generated_effective_write": False,

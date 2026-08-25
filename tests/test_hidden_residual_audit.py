@@ -2,14 +2,14 @@ import unittest
 
 import numpy as np
 
-from fsrl.assembly_diagnostics import file_sha256, load_json
+from fsrl.assembly_diagnostics import load_json
 from fsrl.assembly_trajectory import build_complete_graph_geometry
 from fsrl.hidden_residual_audit import (
     cross_validated_local_direction,
     vector_hodge_components,
 )
 from fsrl.ranking_protocol import RankingProtocol
-from fsrl.study_registry import resolve_record
+from fsrl.study_registry import registered_file_sha256, resolve_record
 
 
 class HiddenResidualAuditTests(unittest.TestCase):
@@ -83,7 +83,10 @@ class HiddenResidualAuditTests(unittest.TestCase):
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(resolve_record(result["implementation"]["path"])),
+            registered_file_sha256(
+                result["implementation"]["path"],
+                result["implementation"]["sha256"],
+            ),
         )
         for row in result["seed_results"].values():
             self.assertEqual(

@@ -36,7 +36,7 @@ from .local_behavior_attribution import exact_probability
 from .meta_train import COMPILED_TRAINING_EXECUTION, MetaTrainConfig, train_meta_model
 from .qualification import evaluate_qualification
 from .ranking_protocol import load_ranking_protocol
-from .study_registry import resolve_record
+from .study_registry import registered_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
@@ -354,7 +354,9 @@ def validate_sources(
     checks = []
     for name, registration in registrations.items():
         path = _resolve(registration["path"])
-        observed = file_sha256(path)
+        observed = registered_file_sha256(
+            registration["path"], registration["sha256"], resolved_path=path
+        )
         checks.append(
             {
                 "name": name,
