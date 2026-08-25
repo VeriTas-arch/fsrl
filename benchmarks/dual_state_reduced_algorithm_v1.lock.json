@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v1",
+  "freeze_status": "implementation_frozen_after_protocol_commit_and_before_trajectory_extraction_fit_or_evaluation",
+  "registration_commit": "3622dd6",
+  "specification_sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80",
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/dual_state_reduced_algorithm.py",
+      "sha256": "6b212800400c2bac0f7ab51ba75a7cca48cbab177d3777d4eb2ef5ca5bbc0787"
+    },
+    "tests": {
+      "path": "tests/test_dual_state_reduced_algorithm.py",
+      "sha256": "fb2f071ae09412b504a19a85ca402dc430931f3ba94c572f9776efb49a88f37b"
+    }
+  },
+  "preexecution_validation": {
+    "targeted_tests": "6 passed",
+    "python_compile": "passed",
+    "ruff": "passed",
+    "trajectory_extraction": "not_run",
+    "reduced_fit": "not_run",
+    "liu_preservation": "not_run"
+  },
+  "next_step": "Commit and push this lock before the single registered GPU execution."
+}
