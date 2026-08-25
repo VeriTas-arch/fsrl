@@ -1319,6 +1319,17 @@ metric constructive-comparator derivation and confirmation are in
 ## Repository workflow
 
 - Work on `dev`; reserve `main` for stable releases.
+- Use `research/liu/README.md` as the human entry point and
+  `mainlines/liu_v1/` as the frozen machine-verifiable evidence object. The
+  generated `docs/INDEX.md`, `benchmarks/INDEX.md`, `results/INDEX.md`, and
+  `research/liu/studies/<study-id>/README.md` pages are navigation, not new
+  evidence; update `research/liu/catalog.json` and rebuild them with
+  `python -m fsrl.liu_catalog build`.
+- Historical Liu files remain canonical at their registered paths because
+  contracts, locks, runners, hashes, and reports depend on those identities.
+  New studies may be capsule-native from inception. Moving a frozen historical
+  file is a separately versioned provenance migration requiring compatibility
+  mapping and full validation, not ordinary cleanup.
 - Use GPU for neural training and evaluation when it materially helps. CPU is
   appropriate for lightweight tests, data checks, bootstrap summaries, and
   exact enumeration when it is the more efficient implementation.

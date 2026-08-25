@@ -52,14 +52,14 @@ python eval_figures.py --figures fig2a fig4b --batch-size 64 --seed 1
 ## Constructive-ranking mechanism development
 
 > [!IMPORTANT]
-> Liu Mainline v1 is frozen for reporting at dev commit `7bfb896`. Start with
-> [`docs/liu_presentation_package_v1.md`](docs/liu_presentation_package_v1.md)
-> for the talk structure,
-> [`docs/liu_mainline_synthesis_v1.md`](docs/liu_mainline_synthesis_v1.md) for
-> the integrated claim boundary, and
-> [`benchmarks/liu_mainline_freeze_v1.json`](benchmarks/liu_mainline_freeze_v1.json)
-> for the freeze policy. The chronological development record below is retained
-> as provenance; its intermediate “next step” statements are historical.
+> Liu Mainline v1 is frozen at tag `liu-mainline-v1` (dev commit `2e0bdd8`).
+> Start with the human-facing
+> [`research/liu/README.md`](research/liu/README.md), then use
+> [`docs/liu_presentation_package_v2.md`](docs/liu_presentation_package_v2.md)
+> for the talk and [`mainlines/liu_v1/README.md`](mainlines/liu_v1/README.md)
+> for the machine-verifiable evidence and replay contract. Historical reports,
+> contracts, locks, and results remain canonical at their original paths; the
+> chronological development record below is retained as provenance.
 
 The `dev` branch adds a registered Liu-style passive-learning benchmark, an
 exact 40320-permutation computational model, generic sparse-graph supervised
