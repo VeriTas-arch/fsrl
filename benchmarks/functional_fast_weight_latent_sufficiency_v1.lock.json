@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "functional-fast-weight-latent-sufficiency-v1",
+  "freeze_status": "implementation_frozen_after_protocol_commit_and_before_P_reextraction_fit_or_evaluation",
+  "registration_commit": "4dbc214",
+  "specification_sha256": "8c6edfc57a15842bd8da1f2f12e84fa3b2a8c7a60d1f6aad1d60f72d3b910c54",
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/functional_fast_weight_latent_sufficiency.py",
+      "sha256": "9d4ee6382cb1e6ca2640cd38be04f4a9953b3606c45886af53d9f1dea091b257"
+    },
+    "tests": {
+      "path": "tests/test_functional_fast_weight_latent_sufficiency.py",
+      "sha256": "fde9acca4e1f7c25ca7d2730756f8939fb4ccac9084538c82097457dca396594"
+    }
+  },
+  "implementation_choices": {
+    "centered_target_basis": "Use one fixed QR-orthonormal basis for the seven-dimensional subspace orthogonal to the all-ones vector. This is an algebraically exact coordinate system for the registered raw centered target, not a learned projection.",
+    "large_regression": "Use the registered full functional-state matrix in float32 on GPU. Compute the full-state ridge solution in the dual over training transitions by Cholesky factorization.",
+    "supervised_projection": "SVD is applied only to the full oracle's fitted training contribution in the exact seven-dimensional centered output basis. Rank seven must reconstruct the full-P prediction to maximum absolute error at most 1e-5.",
+    "remote_evaluation": "Natural and LOO branches both use their own frozen neural s_t and functional P_t as teacher-forced inputs. Predicted updates are cumulatively summed from the observed branch s_0; no predicted state is fed back.",
+    "memory": "Process one backbone at a time, keep raw functional-state trajectories only in memory, release them before the next backbone, and save only coefficients and aggregate results."
+  },
+  "preexecution_validation": {
+    "targeted_tests": "14 passed across the new audit and inherited v1 reduced-algorithm tests",
+    "python_compile": "passed",
+    "ruff_check": "passed",
+    "ruff_format": "passed",
+    "P_reextraction": "not_run",
+    "held_out_metrics": "not_computed",
+    "remote_LOO_metrics": "not_computed"
+  },
+  "next_step": "Commit and push this implementation lock before the single registered three-backbone execution."
+}
