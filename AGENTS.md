@@ -1216,6 +1216,31 @@ binary prevalence. All other competence, construction, remote/global,
 local-direct, P-off-scope, and exact-ledger links retain their frozen
 definitions. The contract is in `benchmarks/liu_item_count_transport_v1.json`.
 
+That registered item-count transport is now complete on N=6,8,10 and all three
+development backbones. Both full GPU executions are byte-identical, all source,
+graph-enumeration, variable-item-interface, N=8 replay, bounded-runtime,
+finite-value, tensor-freeze, orientation, and exact-ledger gates pass, and all
+eight primary links pass independently in all nine cells. The registered
+outcome is `LIU_ITEM_COUNT_MECHANISM_TRANSPORTED`.
+
+Promote the frozen `P_T/a_T` functional asymmetry from one eight-item instance
+to the registered six-to-ten-item Liu-style sparse-cycle family. `P_T` retains
+coherent nonlearned and remote relational assembly; `a_T` retains exact
+edge-addressed direct fidelity without becoming transitive. N=6 and N=10 remain
+strict OOD because every backbone was meta-trained only at N=8, and item count
+co-varies with edge count, support duration, query count, and direct-query
+fraction. Do not claim arbitrary-size scaling or population prevalence.
+
+Preserve the quantitative size boundary. Nonlearned accuracy, Hodge-order
+alignment, and global remote-effect magnitude decline toward N=10, while the
+normalized distance slope and size-normalized stable-error density increase.
+This does not reject the transported division of labor; it shows that the
+global policy remains cardinality-sensitive. Do not tune, retrain on N=6/10,
+or add post-hoc sizes. The four-step Liu structural-generalization sequence is
+complete. Next consolidate its frozen provenance and claim boundaries before
+opening list linking, human-mechanism, MEG, Miconi, or a new intervention. The
+item-count result is in `docs/liu_item_count_transport_v1.md`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
