@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v2-scalar-history",
+  "registration_status": "prospectively_frozen_after_v1_negative_and_before_v2_implementation_fit_or_evaluation",
+  "registration_parent_commit": "479ee70",
+  "scientific_question": "Does one task-faithful cumulative effective-evidence scalar close the item-potential dynamics and recover the missing history-dependent remote magnitude?",
+  "v1_diagnosis": "The rank-2 and unconstrained (s_t,x_t) bilinear transitions do not beat the accumulator, while remote influence direction remains correlated 0.81--0.82 with the full network but reaches only 25--35 percent of its magnitude. Local edge-plus-Gram compression is exact.",
+  "primary_hypothesis": "The item potential is the main global relational state but needs one scalar cumulative confidence/history state. Evidence omitted from the global path changes that state and therefore changes the gain of later writes, producing remote reassembly without adding pair, query, Liu, posterior, or neural-state information.",
+  "claim_boundary": "A pass supports the coupled reduced state (s_t,c_t,a_t) for the frozen eight-item generic distribution and Liu preservation backbones. It does not identify c_t as human confidence, a biological variable, a unique state, or a population-general algorithm. A failure rejects this one scalar energy-history augmentation and closes post hoc scalar history feature engineering.",
+  "registered_sources": {
+    "v1_contract": {"path": "benchmarks/dual_state_reduced_algorithm_v1.json", "sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80"},
+    "v1_final_lock": {"path": "benchmarks/dual_state_reduced_algorithm_v1.repair3.lock.json", "sha256": "79ee811e463ff32ac2837ecae90e90f5b2e81a5b660d2e2569147c401819de9b"},
+    "v1_runner": {"path": "fsrl/dual_state_reduced_algorithm.py", "sha256": "5e1504e3fc1308b8faed2c9d6f955c1d75a90c9f83394118c81ab80269dedd77"},
+    "v1_result": {"path": "results/dual_state_reduced_algorithm_v1.json", "sha256": "573b56ea212849f83d61e6f73d24ed9a5a8e078d6793a18e6a5da73198e871c9"},
+    "v1_trajectory_artifact": {"path": "results/dual_state_reduced_algorithm_v1.trajectories.npz", "sha256": "3bc5f874b459a490a3e66acbe1b057cee863898eeaef9fc2c8492e76d101ce34"},
+    "v1_report": {"path": "docs/dual_state_reduced_algorithm_v1.md", "sha256": "ae952b8716959f94b38e6b3288f780253b19b661ae6e9cc54735014d1c76c26a"},
+    "behavior_source": {"path": "fsrl/behavioral.py", "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"},
+    "behavior_map_source": {"path": "fsrl/model_behavior_reproduction_map.py", "sha256": "c0fa2908d1dae762161051ad2e620f306b583b0b1b8d8a3e96b4270c39311d91"},
+    "behavior_map_result": {"path": "results/model_behavior_reproduction_map_v1.json", "sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6"},
+    "v2_4_confirmation_contract": {"path": "benchmarks/dual_evidence_access_confirmation_v2_4.json", "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09"}
+  },
+  "frozen_state_equations": {
+    "initial_state": "s_0=0 and c_0=0",
+    "history_update": "c_(t+1)=c_t+0.5*||x_t||_2^2; because x_t=m_t(e_i-e_j), the increment is exactly m_t^2",
+    "potential_update": "s_(t+1)=Pi[s_t+A x_t+B(c_t x_t)]",
+    "local_state": "Reuse the exact v1 a_(t+1)=a_t+s_t^L e_(r_t) and ell=K a_T without refitting or modification.",
+    "information_boundary": "c_t contains only prior effective global evidence magnitudes. It contains no item identity beyond x_t, block or absolute time label, query, true order, Liu behavior, posterior, full neural potential, P_t tensor, L_t tensor, or network seed.",
+    "parameter_count_before_gauge": 128
+  },
+  "data_and_split_contract": {
+    "development_data": "Read the 128 registered generic trajectories for each of seeds 2101, 2102, and 2103 from the frozen v1 NPZ. Use only valid prefixes identified by each stored length; NaN padding is forbidden from fitting.",
+    "folds": "Repeat the exact three leave-one-backbone-out folds from v1. Fit on two backbones and evaluate all 128 episodes from the third; networks and participants are never pooled for inference.",
+    "preservation": "After the three folds, fit once on all 384 development episodes and evaluate unchanged Liu backbones 2104 and 2105 under the same v1 local state, temperature, sampling, LOO, double-dissociation, and behavior-category contracts.",
+    "neural_reextraction": "Forbidden for development trajectories. The untouched Liu checkpoint replay may be used only to reconstruct the already registered preservation interface and full-field diagnostic; no checkpoint value enters the v2 fit."
+  },
+  "fit_contract": {
+    "features": "Concatenate x_t and c_t*x_t in that order.",
+    "target": "s_(t+1)-s_t in raw centered Hodge-potential units.",
+    "method": "One closed-form float64 ridge regression with lambda=1e-6; no optimizer, restart, early stopping, feature scaling, model selection, or hyperparameter selection.",
+    "accumulator_null": "The frozen v1 A*x accumulator fit on the same fold.",
+    "v1_candidate_comparison": "Reuse the already written held-out v1 rank-2 metrics; do not rerun or refit v1.",
+    "runtime": "GPU and one PyTorch intraop/interop thread are required only for the untouched Liu preservation replay; the closed-form v2 fit may run on CPU."
+  },
+  "primary_estimands": {
+    "one_step": "Exactly the v1 MSE, NRMSE, candidate-to-accumulator ratio, and paired episode bootstrap, plus v2-minus-v1-rank2 MSE.",
+    "trajectory": "Exactly the v1 zero-initialized prefix cosine, terminal cosine, pair-order agreement, and centered RMSE ratio.",
+    "remote": "Exactly the v1 natural-minus-LOO all-pair correlation, disjoint magnitude ratio, and candidate-versus-accumulator remote MSE.",
+    "scalar_state": "Report c_T distribution and fitted B norm. Neither nonzero c nor nonzero B is sufficient evidence without all causal preservation gates.",
+    "local_and_Liu": "Reuse v1 local exactness and independently require the unchanged double-dissociation and nine-row category-preservation rules in 2104 and 2105."
+  },
+  "bootstrap": {
+    "samples": 5000,
+    "interval": 0.95,
+    "seeds": {"2101": 47101, "2102": 47102, "2103": 47103}
+  },
+  "primary_pass_rules": {
+    "integrity": "All source, v1 artifact, valid-slice finiteness, NaN-padding exclusion, gauge, fold, parameter, GPU preservation, and local exactness gates pass.",
+    "one_step": "In each held-out seed v2 NRMSE is at most 0.50, v2 MSE is at most 0.80 times accumulator MSE, the paired episode interval for v2-minus-accumulator lies below zero, and v2 MSE is lower than frozen v1 rank-2 MSE.",
+    "trajectory": "In each held-out seed median prefix cosine and mean terminal cosine are at least 0.95, terminal pair-order agreement is at least 0.90, and terminal centered RMSE ratio is at most 0.50.",
+    "remote": "In each held-out seed v2/full influence correlation is at least 0.70, disjoint magnitude ratio is in [0.50,1.50], and v2 remote MSE is below both accumulator and frozen v1 remote MSE.",
+    "preservation": "Separately in 2104 and 2105, the exact v1 double-dissociation rule and all nine frozen behavior flag pairs pass without treating newly improved human calibration as preservation."
+  },
+  "outcome_tree": {
+    "potential_plus_scalar_history_algorithm": "All integrity and primary links pass in every mandatory backbone. Promote (s_t,c_t,a_t) within scope and proceed to separately frozen cross-task generalization.",
+    "scalar_history_insufficient": "Integrity passes but any primary link fails. Preserve exact local compression and any positive scalar link, close alternative scalar coverage/time/block/history feature engineering, and next ask whether a separately registered higher-dimensional latent state is required.",
+    "noninterpretable": "Any integrity or execution gate fails. Repair provenance or implementation without changing the scientific contract before interpretation."
+  },
+  "stop_rules": [
+    "Do not try cumulative count, absolute magnitude, block index, elapsed time, alternative normalization, interaction mixtures, ridge values, or nonlinear scalar transforms after seeing v2.",
+    "Do not change v1 artifacts, thresholds, behavior categories, local kernel, evidence access, temperature, checkpoint, or seed.",
+    "Do not begin cross-task generalization unless this or a later separately frozen reduced state passes."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/dual_state_reduced_algorithm_v2.lock.json",
+    "result": "results/dual_state_reduced_algorithm_v2.json",
+    "report": "docs/dual_state_reduced_algorithm_v2.md"
+  }
+}
