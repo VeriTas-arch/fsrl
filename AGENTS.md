@@ -1083,17 +1083,27 @@ Liu internal validity in the fixed order: presentation order, sparsity, then
 item count. The next protocol must vary presentation order only while holding
 the transported graph/model contract fixed.
 
-That presentation-order protocol is now prospectively frozen as
-`liu_presentation_order_transport_v1`. On the unchanged source-correct Liu
-graph and seeds 2101--2103, compare the original blockwise-random schedule with
-a relation-clustered stable sort and exact reversal of each subject's same 32
-physical support trials. Rebuild only the position-aligned stable relation
-gains; do not resample admission. Reuse the topology-v1 functional gates and
-add an exact cross-schedule `a_T` ledger/Gram identity gate. Do not require
-`P_T` or its field to be numerically order invariant: report its field changes
-descriptively while requiring competence, construction, remote reassembly, and
-the P/a double dissociation in every schedule and backbone. The contract is in
-`benchmarks/liu_presentation_order_transport_v1.json`.
+That presentation-order transport is now complete on development seeds
+2101--2103. Blockwise-random, relation-clustered, and exact-reverse schedules
+were made from every subject's same 32 physical support trials, with only
+position-aligned relation gains rebuilt and no admission resampling. All eight
+registered links pass independently in all nine schedule-by-backbone cells;
+the outcome is `LIU_PRESENTATION_ORDER_MECHANISM_TRANSPORTED`.
+
+Preserve the exact algorithmic contrast. In common float64 arithmetic, both
+nonbaseline terminal `a_T` ledgers and every one of their 28 Gram reads are
+exactly equal to blockwise random for every participant and backbone. The
+global `P_T` output is quantitatively order-sensitive: relation clustering has
+only `.829--.837` field correlation and `.872--.878` exact decision agreement
+with baseline, whereas reversal has `.959--.965` correlation and
+`.943--.953` agreement. Relation clustering also lowers learned exact accuracy,
+but every competence, construction, individualization, remote reassembly, and
+P/a double-dissociation gate still passes. Treat this as an exactly commutative
+local edge ledger beside a state-dependent iterative global computation, not
+as behavioral or `P_T` invariance. The contract, result, and report are in
+`benchmarks/liu_presentation_order_transport_v1.json`,
+`results/liu_presentation_order_transport_v1.json`, and
+`docs/liu_presentation_order_transport_v1.md`.
 
 The model-side theory is now formally consolidated as **asymmetric
 algorithmic organization of relational memory**. Keep three evidence levels
@@ -1113,17 +1123,18 @@ evidence for history-dependent update amount, v3 as evidence for relational
 allocation structure, and the functional-`P` failure as evidence against a
 stable fixed cross-episode linear coordinate.
 
-The next model question is whether this functional asymmetry generalizes across
-relational-learning regimes. Begin with a separately frozen one-to-three-seed
-list-linking pilot: two learned sequences plus one bridge relation should
-maximize the distinction between `P_T`-dependent remote restructuring and
-`a_T`-dependent bridge/direct fidelity. Freeze task generation, competence,
-`P`-off/local-off interventions, direct-versus-remote estimands, and stop rules
-before execution. Only then consider item count, topology, sparsity, or classic
-adjacent-pair transitive inference. A later Miconi ancestry analysis should
-compare operator-level causal motifs, not align latent coordinates. Human
-experiment design remains deferred. The synthesis and its source-hash registry
-are in `docs/asymmetric_algorithmic_organization_v1.md` and
+The immediate model question is now Liu-style evidence sparsity. Freeze
+connected eight-item graphs with `|E| = 7, 8, 9, 10` and a prospective matched
+design before execution, then test the same competence, construction,
+individualization, remote reassembly, exact-local, and P/a double-dissociation
+links on only one to three development backbones. Distinguish transport of the
+functional asymmetry from the quantitative prediction that sparse evidence
+increases reliance on `P_T` while dense evidence directly covers more queries
+through `a_T`. Item-count transport follows only after sparsity. List linking,
+classic transitive inference, Miconi ancestry, MEG, human-mechanism validation,
+and new global-compression work remain deferred. The consolidated synthesis
+and its source-hash registry remain in
+`docs/asymmetric_algorithmic_organization_v1.md` and
 `benchmarks/asymmetric_algorithmic_organization_v1.json`.
 
 The fresh confirmation is in
