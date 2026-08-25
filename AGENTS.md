@@ -976,6 +976,33 @@ result, and report are in `benchmarks/dual_state_reduced_algorithm_v2.json`,
 `results/dual_state_reduced_algorithm_v2.json`, and
 `docs/dual_state_reduced_algorithm_v2.md`.
 
+That capacity-matched item-history v3 test is now complete and is also a valid
+mixed negative. Item allocation is informative: it reduces one-step MSE by
+about ten percent versus the accumulator in every held-out backbone and avoids
+the scalar v2 remote-MSE inflation. It is still worse than v2 on one-step
+prediction, recovers only 20--25 percent of full remote magnitude, fails all
+rollout gates, weakens Liu potential alignment and nonlearned accuracy, and
+fails both strict preservation conjunctions.
+
+Together v2 and v3 establish a constrained trade-off. A global scalar restores
+remote amount but misallocates the field; an item ledger improves remote error
+but loses the amount. Do not combine them after seeing complementary failures.
+Close all hand-built count, coverage, energy, time, block, pair-ledger, and
+scalar-plus-item history variants.
+
+The next active step is a read-only `P_t` latent sufficiency audit. Re-extract
+the exact registered generic episodes and require the reconstructed `s_t`
+trajectory to match the frozen v1 NPZ before using `P_t`. Because independent
+backbones have unaligned fast-weight coordinates, first test prospectively
+fixed latent dimensions within each backbone on held-out episodes; do not pool
+or call PCA coordinates a shared algorithm. Ask whether a low-dimensional
+`P_t` projection predicts residual updates and remote LOO effects beyond
+`(s_t,x_t)`. Only replicated dimensional sufficiency should motivate a later
+cross-network invariant-state construction. The v3 contract, result, and
+report are in `benchmarks/dual_state_reduced_algorithm_v3.json`,
+`results/dual_state_reduced_algorithm_v3.json`, and
+`docs/dual_state_reduced_algorithm_v3.md`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
