@@ -1003,6 +1003,38 @@ report are in `benchmarks/dual_state_reduced_algorithm_v3.json`,
 `results/dual_state_reduced_algorithm_v3.json`, and
 `docs/dual_state_reduced_algorithm_v3.md`.
 
+That functional fast-weight latent-sufficiency audit is now complete and is a
+valid replicated negative under its registered linear readout. Exact v1
+natural and LOO trajectories reassemble in all three backbones, all integrity
+gates pass, and rank 7 numerically reconstructs the full functional-`P`
+prediction. Nevertheless, the full residual `alpha elementwise-multiplied by
+P_t` readout generalizes catastrophically: held-out one-step MSE is 57--141
+times the `(s_t,x_t)` baseline, and remote correlations are negative while
+remote magnitude is inflated 28--118 fold. Rank 1 is already robustly harmful
+in every network and error increases through rank 7. Therefore no information
+fraction or `k_min` is defined under the frozen rules.
+
+Do not interpret this as absence of information or causality in `P_t`. Reject
+the narrower claim that one fixed cross-episode linear supervised projection
+of residual functional `P_t` exposes a transferable low-dimensional state,
+even within a backbone. Do not tune the ridge, change `P_t` normalization, add
+PCA or nonlinear kernels, or proceed to autonomous latent closure after this
+failure. Preserve the stronger synthesis from v1--v3: near-additive relational
+geometry is a low-dimensional output code, while its generating global
+learning state remains high-dimensional and interacting.
+
+The current reduced theory is deliberately asymmetric. The local branch has
+an exact edge-state algorithm `a_(t+1)=a_t+s_t^L e_(r_t)` with read
+`ell=K a_T`; the global branch remains the frozen meta-learned plastic system
+whose high-dimensional state produces a near-additive potential observable.
+Consolidate and test claims at this boundary rather than forcing a symmetric
+low-dimensional global algorithm. This model-only audit does not reopen human
+experiment design. Its contract, repair, result, and report are in
+`benchmarks/functional_fast_weight_latent_sufficiency_v1.json`,
+`benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.json`,
+`results/functional_fast_weight_latent_sufficiency_v1.json`, and
+`docs/functional_fast_weight_latent_sufficiency_v1.md`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
