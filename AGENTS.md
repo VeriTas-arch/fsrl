@@ -1137,23 +1137,40 @@ and its source-hash registry remain in
 `docs/asymmetric_algorithmic_organization_v1.md` and
 `benchmarks/asymmetric_algorithmic_organization_v1.json`.
 
-That sparsity protocol is now prospectively frozen as
-`liu_evidence_sparsity_transport_v1`. It uses two independent nested graph
-families centered on the original Liu cycle and the already transported
-balanced-branched graph. In each family, `E=7,8,9,10` differs only by removing
-or adding registered rank-distance-three relations, so the two families have
-the same distance multiset at every density. Preserve every common physical
-trial, its relative within-block order, and its stable admission across nested
-conditions; the two `E=8` cells must exactly replay their frozen source cells.
+That sparsity test is now complete. Its two nested graph families have matched
+rank-distance multisets at `E=7,8,9,10`, preserve every common physical trial
+and stable admission, and exactly replay both frozen `E=8` source cells. All
+integrity gates pass and an independent GPU execution is byte-identical.
 
-Reuse all eight topology-v1 functional links independently in all 24
-family-by-density-by-backbone cells. The separately registered density
-allocation prediction is secondary: over all 28 queries, causal dependence on
-`P_T` should decrease and causal dependence on `a_T` should increase with each
-added relation. These paired participant slopes cannot rescue or veto
-functional transport. The contract is in
-`benchmarks/liu_evidence_sparsity_transport_v1.json`. Do not implement or run
-item-count transport before this contract is resolved and reported.
+The registered outcome is `SPARSITY_DEPENDENT_OR_UNRESOLVED`: 23 of 24 cells
+and 191 of 192 links pass. Both families transport at `E=7,8,9`. At `E=10`,
+five of six cells pass; balanced-branched seed 2103 fails only the stable-error
+prevalence part of `individualized_stable_structure` (point `.8630`, lower
+bound `.7808` versus the frozen `.80` boundary). Every competence,
+constructive-global, remote-reassembly, local-direct, P-off-scope, and exact
+local link passes in all 24 cells. Preserve transport over the registered
+seven-to-nine range and the E=10 causal positives, but do not claim complete
+seven-to-ten sparsity transport or move/pool the failed threshold.
+
+The secondary density-allocation prediction is rejected. All-query causal
+dependence on `P_T` has a positive rather than negative density slope in every
+family/backbone (`+.00293` to `+.00748` probability per added relation; five
+intervals exclude zero). The `a_T` all-query dependence slope is unresolved in
+all six analyses, even though its observed-relation direct benefit remains
+positive in every cell. Therefore `P_T` is not merely recruited to compensate
+for sparse direct coverage; more compatible evidence can strengthen global
+construction. `a_T` remains a direct-fidelity path whose cross-talk prevents a
+monotonic total-policy gain. The contract, result, and report are in
+`benchmarks/liu_evidence_sparsity_transport_v1.json`,
+`results/liu_evidence_sparsity_transport_v1.json`, and
+`docs/liu_evidence_sparsity_transport_v1.md`.
+
+Do not begin item-count transport yet. First freeze a read-only localization on
+the existing sparsity artifact only, separating general density-linked
+convergence of subject Hodge orders/stable error sets, an E=10
+balanced-family-specific effect, and a lone bootstrap-boundary miss. Do not
+rerun networks, add densities, alter the 80-percent stable-error definition, or
+pool participants/backbones for that localization.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
