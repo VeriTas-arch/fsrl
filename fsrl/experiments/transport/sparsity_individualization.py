@@ -9,21 +9,17 @@ from pathlib import Path
 import numpy as np
 
 from fsrl.analysis.behavioral import kendall_tau_positions
-from fsrl.experiments.confirmation.behavioral import file_sha256
-from fsrl.experiments.transport.topology import (
-    ROOT,
-    _json_values,
-    bootstrap_counts,
-    load_json,
-    resolve_path,
-    summarize_subjects,
-    write_json_exclusive,
-)
+from fsrl.analysis.statistics import json_values, summarize_subjects
+from fsrl.experiments.transport.topology import ROOT, bootstrap_counts
+from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
+    canonical_file_registration,
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
 )
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/liu_sparsity_individualization_localization_v1.json"
@@ -41,10 +37,6 @@ IMPLEMENTATION_SOURCES = {
 REGISTRATION_COMMIT = "619500eaef3aa5a9bedb3ab74397d14cc7e81969"
 
 
-def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(resolve_record(path))}
-
-
 def write_implementation_lock(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -56,7 +48,8 @@ def write_implementation_lock(
         "registration_commit": REGISTRATION_COMMIT,
         "specification_sha256": file_sha256(specification_path),
         "implementation_sources": {
-            name: _registration(path) for name, path in IMPLEMENTATION_SOURCES.items()
+            name: canonical_file_registration(path)
+            for name, path in IMPLEMENTATION_SOURCES.items()
         },
     }
     write_json_exclusive(lock_path, lock)
@@ -320,7 +313,7 @@ def analyze_family_seed(
     }
     return {
         "raw_subject_slopes": {
-            name: _json_values(values) for name, values in slopes.items()
+            name: json_values(values) for name, values in slopes.items()
         },
         "participant_slope_summaries": summaries,
         "all_participant_pairwise_tau_by_density": {

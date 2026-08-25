@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 DEFAULT_QUALIFICATION_PATH = resolve_record("benchmarks/qualification_v2.json")
@@ -108,11 +109,6 @@ def evaluate_qualification(result: dict, specification: dict) -> dict:
         "passed": all(check["passed"] for check in checks),
         "checks": checks,
     }
-
-
-def load_json(path: Path | str) -> dict:
-    with Path(path).open(encoding="utf-8") as handle:
-        return json.load(handle)
 
 
 def parse_args(args=None):

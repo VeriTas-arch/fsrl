@@ -3,8 +3,7 @@ import unittest
 import numpy as np
 import torch
 
-from fsrl.experiments.assembly.diagnostics import load_json
-from fsrl.experiments.assembly.trajectory import bootstrap_counts
+from fsrl.analysis.statistics import bootstrap_counts
 from fsrl.experiments.local_fidelity.amplitude_path import (
     crossing_regime,
     mean_sign_change_bracket,
@@ -14,6 +13,7 @@ from fsrl.experiments.local_fidelity.amplitude_path import (
     subject_crossing_summary,
 )
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 

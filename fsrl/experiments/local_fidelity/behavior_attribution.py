@@ -10,35 +10,37 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.statistics import (
+    json_values,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
-from fsrl.experiments.local_fidelity.trace_pilot import (
-    _new_local_trace,
-    _ordered_pairs,
-    _resolve_registered,
-    _retained_mask,
-    build_local_trace,
+from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     bundle_logits,
     configure_runtime,
-    load_json,
-    query_bundle,
-    write_json,
 )
+from fsrl.experiments.local_fidelity.trace_pilot import (
+    build_local_trace,
+    create_local_trace,
+    query_bundle,
+)
+from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 ROOT = REPO_ROOT
@@ -70,7 +72,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -113,7 +115,7 @@ def _masked_subject_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
     )
 
 
-def _ratio_summary(
+def ratio_summary(
     numerator: np.ndarray,
     denominator: np.ndarray,
     counts: np.ndarray,
@@ -156,27 +158,13 @@ def _group_summary(
     subject_values = _masked_subject_mean(values, mask)
     return {
         "summary": summarize_subjects(subject_values, counts, interval=interval),
-        "raw_subject_level": _json_values(subject_values),
+        "raw_subject_level": json_values(subject_values),
         "cells": int(np.sum(mask)),
         "cell_mean": float(np.mean(values[mask])) if np.any(mask) else None,
     }
 
 
-def _json_values(values: np.ndarray) -> list:
-    array = np.asarray(values)
-
-    def convert(value):
-        value = float(value)
-        return None if not np.isfinite(value) else value
-
-    if array.ndim == 0:
-        return convert(array)
-    if array.ndim == 1:
-        return [convert(value) for value in array]
-    return [_json_values(row) for row in array]
-
-
-def _self_traces(evaluator, local_module, relations) -> torch.Tensor:
+def compute_self_traces(evaluator, local_module, relations) -> torch.Tensor:
     relation_set = frozenset(relations)
     return torch.stack(
         [
@@ -190,7 +178,7 @@ def _self_traces(evaluator, local_module, relations) -> torch.Tensor:
     )
 
 
-def _self_local_margins(evaluator, local_module, self_traces, relations) -> np.ndarray:
+def self_local_margins(evaluator, local_module, self_traces, relations) -> np.ndarray:
     subjects = evaluator.config.bs
     values = np.empty((subjects, len(relations), 2), dtype=np.float64)
     with torch.no_grad():
@@ -227,7 +215,7 @@ def learned_cells(
     temperature: float,
 ) -> dict[str, np.ndarray]:
     relations = tuple(evaluator.protocol.support_pairs_higher_lower)
-    pairs = _ordered_pairs(evaluator.protocol.n_items)
+    pairs = ordered_pairs(evaluator.protocol.n_items)
     pair_index = {pair: index for index, pair in enumerate(pairs)}
     subjects = evaluator.config.bs
     shape = (subjects, len(relations), 2)
@@ -272,7 +260,7 @@ def error_mass_attribution(
     error = 1.0 - cells["p_global"]
     retained_error = np.sum(np.where(retained, error, 0.0), axis=(1, 2))
     omitted_error = np.sum(np.where(~retained, error, 0.0), axis=(1, 2))
-    omitted_fraction = _ratio_summary(
+    omitted_fraction = ratio_summary(
         omitted_error, retained_error + omitted_error, counts, interval
     )
     return {
@@ -283,8 +271,8 @@ def error_mass_attribution(
         "omitted_cells": int(np.sum(~retained)),
         "mean_error_per_retained_cell": float(np.mean(error[retained])),
         "mean_error_per_omitted_cell": float(np.mean(error[~retained])),
-        "raw_subject_retained_error_mass": _json_values(retained_error),
-        "raw_subject_omitted_error_mass": _json_values(omitted_error),
+        "raw_subject_retained_error_mass": json_values(retained_error),
+        "raw_subject_omitted_error_mass": json_values(omitted_error),
     }
 
 
@@ -336,7 +324,7 @@ def boundary_and_probability_attribution(
         )
         removed = np.sum(np.where(group, delta_p, 0.0), axis=(1, 2))
         output["delta_probability"][name]["fraction_error_mass_removed"] = (
-            _ratio_summary(removed, baseline_error, counts, interval)
+            ratio_summary(removed, baseline_error, counts, interval)
         )
     bins = (
         ("below_0_5", 0.0, 0.5),
@@ -395,10 +383,10 @@ def self_cross_attribution(
             np.max(np.abs(full_margin - self_margin - cross_margin))
         ),
         "stable_omitted_self_max_abs": float(np.max(np.abs(self_margin[~retained]))),
-        "raw_subject_retained_signed_self": _json_values(retained_signed_self),
-        "raw_subject_retained_signed_cross": _json_values(retained_signed_cross),
-        "raw_subject_retained_absolute_self": _json_values(retained_abs_self),
-        "raw_subject_retained_absolute_cross": _json_values(retained_abs_cross),
+        "raw_subject_retained_signed_self": json_values(retained_signed_self),
+        "raw_subject_retained_signed_cross": json_values(retained_signed_cross),
+        "raw_subject_retained_absolute_self": json_values(retained_abs_self),
+        "raw_subject_retained_absolute_cross": json_values(retained_abs_cross),
     }
 
 
@@ -435,19 +423,17 @@ def local_only_attribution(
             "omitted_hard_accuracy": summarize_subjects(
                 omitted_hard, counts, interval=interval
             ),
-            "raw_subject_retained_exact_probability": _json_values(
-                retained_probability
-            ),
-            "raw_subject_omitted_exact_probability": _json_values(omitted_probability),
+            "raw_subject_retained_exact_probability": json_values(retained_probability),
+            "raw_subject_omitted_exact_probability": json_values(omitted_probability),
         }
     return output
 
 
-def _pair_correct_probabilities(
+def pair_correct_probabilities(
     evaluator, bundle: dict, temperature: float
 ) -> np.ndarray:
     canonical = tuple(combinations(range(evaluator.protocol.n_items), 2))
-    ordered = _ordered_pairs(evaluator.protocol.n_items)
+    ordered = ordered_pairs(evaluator.protocol.n_items)
     pair_index = {pair: index for index, pair in enumerate(ordered)}
     rank = {
         item: position
@@ -523,9 +509,9 @@ def slope_decomposition(
                 for name, values in contributions.items()
             },
             "additive_identity_max_abs_error": identity_error,
-            "raw_subject_total": _json_values(total),
+            "raw_subject_total": json_values(total),
             "raw_subject_group_contributions": {
-                name: _json_values(values) for name, values in contributions.items()
+                name: json_values(values) for name, values in contributions.items()
             },
         }
     output["dual_minus_original_group_contributions"] = {
@@ -555,7 +541,9 @@ def sampled_endpoint_reproduction(
 ) -> dict:
     execution = specification["execution_contract"]
     frozen = load_json(
-        _resolve_registered(specification["registered_sources"]["v2_3_result"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["v2_3_result"]["path"]
+        )
     )
     output = {}
     errors = []
@@ -665,10 +653,12 @@ def run_attribution(
     specification: dict, source_validation: dict, runtime: dict
 ) -> dict:
     execution = specification["execution_contract"]
-    backbone_path = _resolve_registered(
+    backbone_path = resolve_registered_path(
         specification["frozen_artifacts"]["backbone"]["path"]
     )
-    gain_path = _resolve_registered(specification["frozen_artifacts"]["gain"]["path"])
+    gain_path = resolve_registered_path(
+        specification["frozen_artifacts"]["gain"]["path"]
+    )
     gain_artifact = load_json(gain_path)
     backbone, model_config, checkpoint_info = load_retro_checkpoint(
         backbone_path, int(execution["subjects"])
@@ -676,15 +666,17 @@ def run_attribution(
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
     v2_specification = load_json(
-        _resolve_registered(
+        resolve_registered_path(
             specification["registered_sources"]["v2_3_specification"]["path"]
         )
     )
-    local_module = _new_local_trace(v2_specification, model_config.cs)
+    local_module = create_local_trace(v2_specification, model_config.cs)
     with torch.no_grad():
         local_module.raw_gain.fill_(float(gain_artifact["raw_lambda_L"]))
     protocol = load_ranking_protocol(
-        _resolve_registered(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -696,7 +688,7 @@ def run_attribution(
         subject_encoding_mode=str(execution["subject_encoding_mode"]),
         subject_encoding_seed=int(execution["subject_encoding_seed"]),
     )
-    pairs = _ordered_pairs(protocol.n_items)
+    pairs = ordered_pairs(protocol.n_items)
     schedules = tuple(pairs for _ in range(model_config.bs))
     fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     full_trace = build_local_trace(evaluator, local_module)
@@ -717,9 +709,9 @@ def run_attribution(
         )
     }
     relations = tuple(protocol.support_pairs_higher_lower)
-    retained = _retained_mask(evaluator, relations)
-    self_traces = _self_traces(evaluator, local_module, relations)
-    self_local = _self_local_margins(evaluator, local_module, self_traces, relations)
+    retained = retained_relation_mask(evaluator, relations)
+    self_traces = compute_self_traces(evaluator, local_module, relations)
+    self_local = self_local_margins(evaluator, local_module, self_traces, relations)
     cells = learned_cells(
         evaluator,
         bundles["original_v1_local_off"],
@@ -744,7 +736,7 @@ def run_attribution(
     self_cross = self_cross_attribution(cells, counts, interval)
     local_only = local_only_attribution(cells, counts, interval)
     pair_probabilities = {
-        condition: _pair_correct_probabilities(
+        condition: pair_correct_probabilities(
             evaluator, bundle, float(execution["choice_temperature"])
         )
         for condition, bundle in bundles.items()
@@ -821,10 +813,10 @@ def run_attribution(
         "sampled_endpoint_reproduction": sampled,
         "decision": decision,
         "raw_learned_cells": {
-            name: _json_values(value) for name, value in cells.items()
+            name: json_values(value) for name, value in cells.items()
         },
         "raw_pair_exact_probabilities": {
-            name: _json_values(value) for name, value in pair_probabilities.items()
+            name: json_values(value) for name, value in pair_probabilities.items()
         },
     }
 

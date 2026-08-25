@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 
 import numpy as np
 
@@ -9,9 +8,9 @@ from fsrl.experiments.transport.evidence_sparsity import (
     cross_cell_decision,
     density_trend_metrics,
     family_protocols,
-    load_json,
     validate_sparsity_contract,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -172,22 +171,6 @@ class EvidenceSparsityTransportTests(unittest.TestCase):
             cross_cell_decision(seeds, families, edge_counts, seed_ids)["outcome"],
             "NONINTERPRETABLE_EXECUTION",
         )
-
-    def test_dedicated_runtime_configures_before_dispatch(self):
-        with (
-            patch(
-                "fsrl.experiments.transport.evidence_sparsity_runtime.configure_formal_runtime"
-            ) as configure,
-            patch(
-                "fsrl.experiments.transport.evidence_sparsity.main", return_value=47
-            ) as workflow,
-        ):
-            from fsrl.experiments.transport.evidence_sparsity_runtime import main
-
-            result = main(["--sentinel"])
-        configure.assert_called_once_with()
-        workflow.assert_called_once_with(["--sentinel"])
-        self.assertEqual(result, 47)
 
 
 if __name__ == "__main__":

@@ -8,11 +8,11 @@ from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
 from fsrl.experiments.local_fidelity.curvature_gate import CurvatureGateTransition
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _ordered_pairs,
     margin_fields,
     query_binding_summary,
     query_bundle,
 )
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 
@@ -33,7 +33,7 @@ class CurvatureGatePilotTests(unittest.TestCase):
         self.fast_weights = torch.randn(
             self.config.bs, self.config.hs, self.config.hs, device=self.net.w.device
         )
-        pairs = _ordered_pairs(self.protocol.n_items)
+        pairs = ordered_pairs(self.protocol.n_items)
         self.schedules = tuple(pairs for _ in range(self.config.bs))
 
     def test_original_gate_bundle_matches_frozen_evaluator(self):

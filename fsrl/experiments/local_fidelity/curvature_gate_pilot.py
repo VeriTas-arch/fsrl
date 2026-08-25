@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from dataclasses import asdict
 from itertools import combinations
@@ -14,25 +13,29 @@ import torch
 from scipy import stats
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.hodge import (
+    build_complete_graph_geometry,
+    hodge_potentials,
+    normalize_potentials,
+    potential_alignment,
+)
+from fsrl.analysis.statistics import (
+    json_values,
+    masked_column_mean,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
     load_retro_checkpoint,
     load_training_provenance,
+    retained_relation_mask,
     run_causal_suite,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    exact_prefix_trajectory,
-    hodge_potentials,
-    normalize_potentials,
-    potential_alignment,
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
+from fsrl.experiments.assembly.trajectory import exact_prefix_trajectory
 from fsrl.experiments.local_fidelity.amplitude_path import collect_amplitude_fields
 from fsrl.experiments.local_fidelity.curvature_gate import (
     CurvatureGateTransition,
@@ -40,12 +43,16 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
     run_gate_batch,
 )
 from fsrl.infra.formal_runtime import formal_runtime_snapshot
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model
 
@@ -62,18 +69,6 @@ CONDITIONS = (
 )
 
 
-def load_json(path: Path | str) -> dict:
-    with Path(path).open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def write_json(path: Path, value: dict) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        json.dump(value, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
-
-
 def configure_runtime() -> dict:
     torch.set_num_threads(1)
     if torch.get_num_interop_threads() != 1:
@@ -86,11 +81,6 @@ def configure_runtime() -> dict:
     return snapshot
 
 
-def _resolve_registered(path: str) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
 def validate_sources(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_LOCK_PATH,
@@ -99,7 +89,7 @@ def validate_sources(
     specification = load_json(specification_path)
     checks = []
     for name, registration in specification["registered_sources"].items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -124,7 +114,7 @@ def validate_sources(
         }
     )
     for name, registration in lock["implementation_sources"].items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -174,15 +164,7 @@ def train_backbone(specification: dict, output_root: Path, runtime: dict) -> Pat
     return checkpoint
 
 
-def _tensor_hashes(net) -> dict[str, str]:
-    rows = {}
-    for name, value in net.state_dict().items():
-        digest = hashlib.sha256(value.detach().cpu().contiguous().numpy().tobytes())
-        rows[name] = digest.hexdigest()
-    return rows
-
-
-def _adaptation_config(specification: dict) -> MetaTrainConfig:
+def adaptation_config(specification: dict) -> MetaTrainConfig:
     backbone = specification["v1_backbone_training"]
     adaptation = specification["gate_only_adaptation"]
     return MetaTrainConfig(
@@ -211,7 +193,7 @@ def calibrate_global_gamma(
     *,
     compile_models: bool,
 ) -> dict:
-    adaptation = _adaptation_config(specification)
+    adaptation = adaptation_config(specification)
     calibration = specification["matched_global_calibration"]
     calibration_config = MetaTrainConfig(
         **{
@@ -259,11 +241,11 @@ def adapt_gate(
     source_validation: dict,
     runtime: dict,
 ) -> Path:
-    adaptation = _adaptation_config(specification)
+    adaptation = adaptation_config(specification)
     backbone, model_config, checkpoint_info = load_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
-    before = _tensor_hashes(backbone)
+    before = tensor_hashes(backbone)
     gate_specification = specification["gate_equation"]
     gate = CurvatureGateTransition(
         backbone,
@@ -312,7 +294,7 @@ def adapt_gate(
         }
         with log_path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(record, sort_keys=True) + "\n")
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     if before != after:
         raise RuntimeError("frozen backbone tensors changed during gate adaptation")
     calibration = calibrate_global_gamma(
@@ -341,15 +323,7 @@ def adapt_gate(
     return artifact_path
 
 
-def _ordered_pairs(n_items: int) -> tuple[tuple[int, int], ...]:
-    return tuple(
-        oriented
-        for first, second in combinations(range(n_items), 2)
-        for oriented in ((first, second), (second, first))
-    )
-
-
-def _query_pass(
+def query_pass(
     evaluator,
     gate,
     fast_weights,
@@ -432,7 +406,7 @@ def query_bundle(
     subjects = evaluator.config.bs
     pair_count = len(pair_schedules[0])
     if condition == "conditioned_gate":
-        return _query_pass(
+        return query_pass(
             evaluator,
             gate,
             fast_weights,
@@ -445,7 +419,7 @@ def query_bundle(
     elif condition == "matched_global_scalar":
         overrides = np.full((subjects, pair_count), gamma_global, dtype=np.float64)
     else:
-        natural = _query_pass(
+        natural = query_pass(
             evaluator,
             gate,
             fast_weights,
@@ -462,7 +436,7 @@ def query_bundle(
         overrides = np.take_along_axis(
             natural["conditioned_gammas"], permutations, axis=1
         )
-    return _query_pass(
+    return query_pass(
         evaluator,
         gate,
         fast_weights,
@@ -486,43 +460,7 @@ def margin_fields(bundle: dict, n_items: int) -> np.ndarray:
     return 0.5 * (bundle["logits"][:, 0::2] - bundle["logits"][:, 1::2])
 
 
-def _retained_mask(evaluator, relations) -> np.ndarray:
-    if evaluator.subject_relation_gains is None:
-        return np.ones((len(relations), evaluator.config.bs), dtype=bool)
-    return np.asarray(
-        [
-            [
-                evaluator.subject_relation_gains[subject][relation] > 0.0
-                for subject in range(evaluator.config.bs)
-            ]
-            for relation in relations
-        ],
-        dtype=bool,
-    )
-
-
-def _masked_subject_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
-    rows = np.where(mask, np.asarray(values, dtype=np.float64), np.nan)
-    finite = np.sum(np.isfinite(rows), axis=0)
-    return np.divide(
-        np.nansum(rows, axis=0),
-        finite,
-        out=np.full(rows.shape[1], np.nan, dtype=np.float64),
-        where=finite > 0,
-    )
-
-
-def _json_values(values: np.ndarray) -> list:
-    def convert(value):
-        return None if not np.isfinite(value) else float(value)
-
-    array = np.asarray(values, dtype=np.float64)
-    if array.ndim == 1:
-        return [convert(value) for value in array]
-    return [_json_values(row) for row in array]
-
-
-def _field_metrics(
+def field_metrics(
     fields: dict[str, np.ndarray],
     relations,
     retained: np.ndarray,
@@ -572,16 +510,16 @@ def _field_metrics(
             where=denominator > 1e-14,
         )
 
-    aggregate = _masked_subject_mean(direct_correctness, retained)
-    remote = _masked_subject_mean(remote_absolute, retained)
-    third = _masked_subject_mean(third_party, retained)
+    aggregate = masked_column_mean(direct_correctness, retained)
+    remote = masked_column_mean(remote_absolute, retained)
+    third = masked_column_mean(third_party, retained)
     primary_index = relations.index((7, 0))
     primary = np.where(
         retained[primary_index], direct_correctness[primary_index], np.nan
     )
     other_mask = retained.copy()
     other_mask[primary_index] = False
-    other = _masked_subject_mean(direct_correctness, other_mask)
+    other = masked_column_mean(direct_correctness, other_mask)
     omitted_selector = np.broadcast_to((~retained)[..., None], influence.shape)
     omitted_max = (
         float(np.max(np.abs(influence[omitted_selector]))) if np.any(~retained) else 0.0
@@ -612,9 +550,9 @@ def _field_metrics(
         },
         "raw_relation_subject": {
             "retained": retained.astype(int).tolist(),
-            "direct_correctness": _json_values(direct_correctness),
-            "remote_absolute": _json_values(remote_absolute),
-            "gauge_invariant_R_third_rel": _json_values(third_party),
+            "direct_correctness": json_values(direct_correctness),
+            "remote_absolute": json_values(remote_absolute),
+            "gauge_invariant_R_third_rel": json_values(third_party),
         },
     }
 
@@ -623,7 +561,7 @@ def _condition_metrics(protocol, bundle: dict, fast_weights, intervention: str):
     logits = bundle_logits(
         bundle,
         tuple(
-            _ordered_pairs(protocol.n_items) for _ in range(bundle["logits"].shape[0])
+            ordered_pairs(protocol.n_items) for _ in range(bundle["logits"].shape[0])
         ),
     )
     canonical = tuple(combinations(range(protocol.n_items), 2))
@@ -699,7 +637,7 @@ def conditioned_causal_suite(
 ) -> dict:
     evaluation = specification["liu_evaluation"]
     protocol = evaluator.protocol
-    pairs = _ordered_pairs(protocol.n_items)
+    pairs = ordered_pairs(protocol.n_items)
     schedules = tuple(pairs for _ in range(evaluator.config.bs))
     conditions = {}
     winners = {}
@@ -829,8 +767,8 @@ def query_binding_summary(
         disjoint_rows[state_index] = matched - np.nanmean(
             normalized[state_index][:, overlaps == 0], axis=1
         )
-    shared = _masked_subject_mean(shared_rows, retained)
-    disjoint = _masked_subject_mean(disjoint_rows, retained)
+    shared = masked_column_mean(shared_rows, retained)
+    disjoint = masked_column_mean(disjoint_rows, retained)
     summaries = {
         "matched_minus_shared_endpoint": summarize_subjects(
             shared, counts, interval=interval
@@ -844,8 +782,8 @@ def query_binding_summary(
         "conditioned_gate": summaries,
         "conditioned_minus_original_max_abs": 0.0,
         "raw_subject_level": {
-            "matched_minus_shared_endpoint": _json_values(shared),
-            "matched_minus_disjoint": _json_values(disjoint),
+            "matched_minus_shared_endpoint": json_values(shared),
+            "matched_minus_disjoint": json_values(disjoint),
         },
     }
 
@@ -877,7 +815,7 @@ def crossing_alignment(
         (len(amplitudes), len(relations), evaluator.config.bs), dtype=np.float64
     )
     gammas = np.empty((len(relations), evaluator.config.bs), dtype=np.float64)
-    ordered = _ordered_pairs(evaluator.protocol.n_items)
+    ordered = ordered_pairs(evaluator.protocol.n_items)
     pair_index = {pair: index for index, pair in enumerate(ordered)}
     for relation_index, relation in enumerate(relations):
         edge = geometry.pairs.index(tuple(sorted(relation)))
@@ -918,8 +856,8 @@ def crossing_alignment(
         "orientation_reduction": "mean conditioned gamma over the two direct orientations",
         "validation": validation,
         "raw": {
-            "crossing_midpoint": _json_values(midpoints),
-            "online_gamma": _json_values(gammas),
+            "crossing_midpoint": json_values(midpoints),
+            "online_gamma": json_values(gammas),
         },
     }
 
@@ -952,14 +890,8 @@ def terminal_projection_summary(
         ]
         difference = expected - map_alignment
         output[condition] = summarize_subjects(difference, counts, interval=interval)
-        raw[condition] = _json_values(difference)
+        raw[condition] = json_values(difference)
     return {"summary": output, "raw_subject_level": raw}
-
-
-def _paired_summary(
-    first: np.ndarray, second: np.ndarray, counts: np.ndarray, interval: float
-) -> dict:
-    return summarize_difference(first, second, counts, interval=interval)
 
 
 def decision_summary(
@@ -978,29 +910,29 @@ def decision_summary(
     shuffled = local["shuffled_gate"]
     key = "retained_relation_mean_direct_correctness"
     other_key = "other_relation_mean_direct_correctness"
-    local_difference = _paired_summary(
+    local_difference = summarize_difference(
         conditioned["subject_level"][key],
         original["subject_level"][key],
         local["counts"],
-        local["interval"],
+        interval=local["interval"],
     )
-    other_difference = _paired_summary(
+    other_difference = summarize_difference(
         conditioned["subject_level"][other_key],
         original["subject_level"][other_key],
         local["counts"],
-        local["interval"],
+        interval=local["interval"],
     )
-    global_difference = _paired_summary(
+    global_difference = summarize_difference(
         conditioned["subject_level"][key],
         global_control["subject_level"][key],
         local["counts"],
-        local["interval"],
+        interval=local["interval"],
     )
-    shuffled_difference = _paired_summary(
+    shuffled_difference = summarize_difference(
         conditioned["subject_level"][key],
         shuffled["subject_level"][key],
         local["counts"],
-        local["interval"],
+        interval=local["interval"],
     )
     h_summary = conditioned["summary"]["H_greater_A_direct_correctness"]
     local_rescue = (
@@ -1125,7 +1057,9 @@ def evaluate_pilot(
         raise RuntimeError("matched global scalar did not reproduce")
 
     protocol = load_ranking_protocol(
-        _resolve_registered(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -1138,7 +1072,7 @@ def evaluate_pilot(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
     geometry = build_complete_graph_geometry(protocol)
-    pairs = _ordered_pairs(protocol.n_items)
+    pairs = ordered_pairs(protocol.n_items)
     schedules = tuple(pairs for _ in range(model_config.bs))
     intact = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     relations = tuple(protocol.support_pairs_higher_lower)
@@ -1153,7 +1087,7 @@ def evaluate_pilot(
             )
         loo_rows.append(state)
     loo = torch.stack(loo_rows)
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     counts = (
         np.random.default_rng(int(evaluation["bootstrap_seed"]))
         .multinomial(
@@ -1200,7 +1134,7 @@ def evaluate_pilot(
             ),
         }
         condition_fields[condition] = fields["intact"]
-        local[condition] = _field_metrics(
+        local[condition] = field_metrics(
             fields, relations, retained, geometry, counts, interval
         )
         behavior[condition] = analyze_sampled_query_policy(
@@ -1244,12 +1178,12 @@ def evaluate_pilot(
         cue_mode=str(evaluation["cue_mode"]),
         subject_encoding_mode=str(evaluation["subject_encoding_mode"]),
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
-        protocol_path=_resolve_registered(
+        protocol_path=resolve_registered_path(
             specification["registered_sources"]["liu_protocol"]["path"]
         ),
     )
     qualification_specification = load_json(
-        _resolve_registered(
+        resolve_registered_path(
             specification["registered_sources"]["qualification"]["path"]
         )
     )
@@ -1294,7 +1228,7 @@ def evaluate_pilot(
         name: {
             "summary": row["summary"],
             "raw_subject_level": {
-                key: _json_values(value) for key, value in row["subject_level"].items()
+                key: json_values(value) for key, value in row["subject_level"].items()
             },
             "raw_relation_subject": row["raw_relation_subject"],
         }

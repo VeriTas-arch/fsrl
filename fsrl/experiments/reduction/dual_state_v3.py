@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -11,6 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
@@ -38,26 +38,6 @@ ORIGINAL_SCALAR_ROLLOUT_BATCH = v2.scalar_history_rollout_batch
 class ItemHistoryParameters:
     A: np.ndarray
     B: np.ndarray
-
-
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
 
 
 def validate_sources(

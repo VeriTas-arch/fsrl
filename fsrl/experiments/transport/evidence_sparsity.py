@@ -13,58 +13,58 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.statistics import (
+    finite_column_mean,
+    json_values,
+    stable_sigmoid,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _ordered_pairs,
-    _retained_mask,
-    _tensor_hashes,
     bundle_logits,
     margin_fields,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    _build_fast_weight_loo,
-    _presentation_invariance,
     build_access_trace,
+    build_fast_weight_loo,
+    measure_presentation_invariance,
 )
-from fsrl.experiments.local_fidelity.trace_pilot import _query_pass
+from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
     ROOT,
-    _finite_primary,
-    _json_values,
-    _schedule_hash,
-    _sigmoid,
     bootstrap_counts,
     condition_metrics,
     constructive_metrics,
+    finite_primary,
     graph_descriptor,
     individualized_metrics,
-    load_json,
     protocol_for_graph,
     reconstruct_local_ledger,
     relation_loo_metrics,
-    resolve_path,
     serial_position_endpoint,
-    write_json_exclusive,
+    support_schedule_hash,
 )
 from fsrl.experiments.transport.topology import (
     within_cell_decision as topology_within_cell_decision,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.study_registry import (
+    canonical_file_registration,
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
 )
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import (
     RankingProtocol,
     SupportTrial,
@@ -99,10 +99,6 @@ CORE_METRIC_KEYS = (
 )
 
 
-def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(resolve_record(path))}
-
-
 def write_implementation_lock(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -114,7 +110,8 @@ def write_implementation_lock(
         "registration_commit": REGISTRATION_COMMIT,
         "specification_sha256": file_sha256(specification_path),
         "implementation_sources": {
-            name: _registration(path) for name, path in IMPLEMENTATION_SOURCES.items()
+            name: canonical_file_registration(path)
+            for name, path in IMPLEMENTATION_SOURCES.items()
         },
     }
     write_json_exclusive(lock_path, lock)
@@ -532,7 +529,7 @@ def prepare_family_evaluators(
             "cue_codes_identical_across_densities": bool(cue_identity),
             "subject_encoding_states_identical_across_densities": bool(state_identity),
             "schedule_hashes": {
-                str(edge_count): _schedule_hash(evaluator)
+                str(edge_count): support_schedule_hash(evaluator)
                 for edge_count, evaluator in evaluators.items()
             },
             "admission_hashes": {
@@ -549,16 +546,6 @@ def _bootstrap_seed(seed: int, family_index: int, edge_count: int) -> int:
     if edge_count == 8:
         return 760000 + 100 * seed + 1 if family_index == 1 else 530000 + 100 * seed + 1
     return 880000 + 1000 * family_index + 100 * seed + edge_count
-
-
-def _masked_subject_mean(values: np.ndarray) -> np.ndarray:
-    finite = np.sum(np.isfinite(values), axis=0)
-    return np.divide(
-        np.nansum(values, axis=0),
-        finite,
-        out=np.full(values.shape[1], np.nan),
-        where=finite > 0,
-    )
 
 
 def _metric_projection(metrics: dict) -> dict:
@@ -590,7 +577,7 @@ def evaluate_prepared_cell(
         int(evaluation["subjects_per_cell"]),
     )
     interval = float(evaluation["bootstrap_interval"])
-    from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
+    from fsrl.analysis.hodge import build_complete_graph_geometry
 
     geometry = build_complete_graph_geometry(protocol)
     relations = tuple(protocol.support_pairs_higher_lower)
@@ -598,11 +585,11 @@ def evaluate_prepared_cell(
         [pair in protocol.learned_pairs for pair in geometry.pairs]
     )
     query_schedules = tuple(
-        _ordered_pairs(protocol.n_items) for _ in range(evaluator.config.bs)
+        ordered_pairs(protocol.n_items) for _ in range(evaluator.config.bs)
     )
-    before = _tensor_hashes(evaluator.net)
+    before = tensor_hashes(evaluator.net)
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = _build_fast_weight_loo(evaluator, relations)
+    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
     intact_trace = build_access_trace(evaluator, local, dual_access=True)
     loo_traces = [
         build_access_trace(
@@ -610,7 +597,7 @@ def evaluate_prepared_cell(
         )
         for relation in relations
     ]
-    intact_bundle = _query_pass(
+    intact_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -620,7 +607,7 @@ def evaluate_prepared_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    a_off_bundle = _query_pass(
+    a_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -630,7 +617,7 @@ def evaluate_prepared_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    p_off_bundle = _query_pass(
+    p_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -641,7 +628,7 @@ def evaluate_prepared_cell(
         shuffled_indices=None,
     )
     loo_global_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             loo_fast_weights[index],
@@ -654,7 +641,7 @@ def evaluate_prepared_cell(
         for index in range(len(relations))
     ]
     loo_local_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             intact_fast_weights,
@@ -740,9 +727,9 @@ def evaluate_prepared_cell(
         intact_trace.state.detach().cpu().numpy().astype(np.float64),
         intact_bundle["raw_local_margins"][:, 0::2],
     )
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     exact_probability = {
-        name: _sigmoid(
+        name: stable_sigmoid(
             field * geometry.true_sign[None] / float(evaluation["temperature"])
         )
         for name, field in fields.items()
@@ -772,15 +759,15 @@ def evaluate_prepared_cell(
         "contrasts": contrasts,
         "local_exactness": exact,
         "retained_omitted": {
-            "retained_counts_per_subject": _json_values(np.sum(retained, axis=0)),
-            "omitted_counts_per_subject": _json_values(np.sum(~retained, axis=0)),
+            "retained_counts_per_subject": json_values(np.sum(retained, axis=0)),
+            "omitted_counts_per_subject": json_values(np.sum(~retained, axis=0)),
             "retained_correct_probability": summarize_subjects(
-                _masked_subject_mean(np.where(retained, learned_probability, np.nan)),
+                finite_column_mean(np.where(retained, learned_probability, np.nan)),
                 counts,
                 interval=interval,
             ),
             "omitted_correct_probability": summarize_subjects(
-                _masked_subject_mean(np.where(~retained, learned_probability, np.nan)),
+                finite_column_mean(np.where(~retained, learned_probability, np.nan)),
                 counts,
                 interval=interval,
             ),
@@ -790,22 +777,22 @@ def evaluate_prepared_cell(
         "serial_position_endpoint": serial_position_endpoint(behavior, protocol),
         "density_dependencies": {
             name: {
-                "raw_subject": _json_values(values),
+                "raw_subject": json_values(values),
                 "summary": summarize_subjects(values, counts, interval=interval),
             }
             for name, values in dependencies.items()
         },
     }
-    presentation = _presentation_invariance(
+    presentation = measure_presentation_invariance(
         evaluator, local, intact_trace.natural_scalars
     )
-    schedule_hash = _schedule_hash(evaluator)
+    schedule_hash = support_schedule_hash(evaluator)
     e8_metrics_exact = bool(
         edge_count != 8
         or _metric_projection(metrics) == _metric_projection(source_metrics or {})
     )
     e8_schedule_exact = bool(edge_count != 8 or schedule_hash == source_schedule_hash)
-    after = _tensor_hashes(evaluator.net)
+    after = tensor_hashes(evaluator.net)
     integrity = {
         "source_validation_passed": bool(source_validation["passed"]),
         "graph_validation_passed": bool(graph_validation["passed"]),
@@ -823,7 +810,7 @@ def evaluate_prepared_cell(
             np.max(np.abs(a_off_bundle["logits"] - a_off_bundle["global_logits"]))
         ),
         **presentation,
-        "primary_values_finite": _finite_primary(metrics),
+        "primary_values_finite": finite_primary(metrics),
     }
     integrity["all_passed"] = bool(
         integrity["source_validation_passed"]
@@ -899,7 +886,7 @@ def density_trend_metrics(
             dtype=np.float64,
         )
         slopes = centered @ values / denominator
-        raw_slopes[name] = _json_values(slopes)
+        raw_slopes[name] = json_values(slopes)
         summaries[name] = summarize_subjects(slopes, counts, interval=interval)
     flags = {
         "global_dependence_decreases": bool(

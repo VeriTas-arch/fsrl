@@ -2,12 +2,12 @@ import unittest
 from pathlib import Path
 
 import fsrl.experiments.local_fidelity.evidence_access_pilot as dual_access
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     bind_fresh_artifacts,
     confirmation_decision,
     fresh_seeds,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 

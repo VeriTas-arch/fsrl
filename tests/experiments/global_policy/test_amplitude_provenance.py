@@ -3,10 +3,7 @@ from importlib import import_module
 
 import numpy as np
 
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    hodge_potentials,
-)
+from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
 from fsrl.tasks.registered_protocol import RankingProtocol
 
 _PROVENANCE = import_module("fsrl.experiments.global_policy.amplitude_provenance")
@@ -20,7 +17,7 @@ layer_elasticity_decision = _PROVENANCE.layer_elasticity_decision
 NonInterpretableEstimate = _PROVENANCE.NonInterpretableEstimate
 ols_slope = _PROVENANCE.ols_slope
 vector_item_potentials = _PROVENANCE.vector_item_potentials
-_interval_summary = _PROVENANCE._interval_summary
+interval_summary = _PROVENANCE.interval_summary
 
 
 class GlobalPolicyAmplitudeProvenanceTests(unittest.TestCase):
@@ -172,7 +169,7 @@ class GlobalPolicyAmplitudeProvenanceTests(unittest.TestCase):
 
     def test_nonfinite_bootstrap_draw_is_not_filtered(self):
         with self.assertRaises(NonInterpretableEstimate):
-            _interval_summary(1.0, np.asarray([0.9, np.nan, 1.1]))
+            interval_summary(1.0, np.asarray([0.9, np.nan, 1.1]))
 
     def test_atomic_layer_gate_detects_upstream_cancellation(self):
         equivalent = "equivalent"

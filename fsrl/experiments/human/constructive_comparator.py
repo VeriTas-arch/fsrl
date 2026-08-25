@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
-import json
 import math
 import subprocess
 from itertools import combinations, permutations, product
@@ -15,10 +14,12 @@ import numpy as np
 from scipy import optimize
 
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
@@ -66,14 +67,6 @@ IMPLEMENTATION_SOURCE_PATHS = {
 }
 
 
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def array_sha256(value: np.ndarray) -> str:
     contiguous = np.ascontiguousarray(value)
     digest = hashlib.sha256()
@@ -81,23 +74,6 @@ def array_sha256(value: np.ndarray) -> str:
     digest.update(str(contiguous.shape).encode())
     digest.update(contiguous.tobytes())
     return digest.hexdigest()
-
-
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
-
-
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def _git(*arguments: str) -> str:
@@ -207,7 +183,7 @@ def validate_sources(
     checks = {}
     for name, relative in IMPLEMENTATION_SOURCE_PATHS.items():
         record = lock["implementation_sources"][name]
-        path = _resolve(relative)
+        path = resolve_registered_path(relative)
         checks[f"implementation:{name}"] = bool(
             record.get("path") == relative
             and record.get("sha256")
@@ -227,7 +203,7 @@ def validate_sources(
         if phase == "derive" and name == "confirmation_trials":
             checks[f"registered:{name}"] = "deferred_without_opening"
             continue
-        path = _resolve(record["path"])
+        path = resolve_registered_path(record["path"])
         checks[f"registered:{name}"] = bool(
             path.is_file()
             and registered_file_sha256(
@@ -731,7 +707,7 @@ def fit_parameters(
     return summary, order, field
 
 
-def _interval_summary(point: float, bootstrap: np.ndarray) -> dict:
+def interval_summary(point: float, bootstrap: np.ndarray) -> dict:
     values = np.asarray(bootstrap, dtype=np.float64)
     return {
         "point": float(point),
@@ -810,7 +786,7 @@ def confirmation_statistics(
     human_slope = float(human @ weights)
     candidate_slope = float(candidate @ weights)
     human_slope_boot = full_boot @ weights
-    slope_summary = _interval_summary(human_slope, human_slope_boot)
+    slope_summary = interval_summary(human_slope, human_slope_boot)
     distance_adequate = bool(
         slope_summary["bootstrap"]["lower95"]
         <= candidate_slope
@@ -841,7 +817,7 @@ def confirmation_statistics(
         raise RuntimeError("replication split-half bootstrap is nonpositive")
     rho_h_boot = 2.0 * r_hh_boot / (1.0 + r_hh_boot)
     eta_boot = r_ch_boot / np.sqrt(rho_h_boot)
-    eta_summary = _interval_summary(eta, eta_boot)
+    eta_summary = interval_summary(eta, eta_boot)
     pair_adequate = bool(eta_summary["bootstrap"]["lower90"] >= 0.80)
     statistics = {
         "distance": {
@@ -857,9 +833,9 @@ def confirmation_statistics(
             ),
         },
         "pair": {
-            "r_CH": _interval_summary(r_ch, r_ch_boot),
-            "r_HH": _interval_summary(r_hh, r_hh_boot),
-            "rho_H_spearman_brown": _interval_summary(rho_h, rho_h_boot),
+            "r_CH": interval_summary(r_ch, r_ch_boot),
+            "r_HH": interval_summary(r_hh, r_hh_boot),
+            "rho_H_spearman_brown": interval_summary(rho_h, rho_h_boot),
             "eta_pair": eta_summary,
             "threshold": 0.80,
             "adequate": pair_adequate,
@@ -1086,7 +1062,7 @@ def predictive_qualification(
     all_pass = True
     for name in contract["mandatory_axes"]:
         human_point = human_components["metrics"][name]
-        human_summary = _interval_summary(human_point, human_bootstrap[name])
+        human_summary = interval_summary(human_point, human_bootstrap[name])
         candidate_point = candidate_components["metrics"][name]
         passed = bool(
             human_summary["bootstrap"]["lower95"]
@@ -1177,11 +1153,15 @@ def derive(
     git_freeze: dict,
 ) -> tuple[dict, dict]:
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     arrays = model_arrays(protocol, specification)
     trials, labels = load_trial_cohort(
-        _resolve(specification["registered_sources"]["derivation_trials"]["path"]),
+        resolve_registered_path(
+            specification["registered_sources"]["derivation_trials"]["path"]
+        ),
         "preregistered",
         arrays,
         expected_subjects=40,
@@ -1297,11 +1277,15 @@ def confirm(
     git_freeze: dict,
 ) -> dict:
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     arrays = model_arrays(protocol, specification)
     trials, labels = load_trial_cohort(
-        _resolve(specification["registered_sources"]["confirmation_trials"]["path"]),
+        resolve_registered_path(
+            specification["registered_sources"]["confirmation_trials"]["path"]
+        ),
         "replication",
         arrays,
         expected_subjects=37,
@@ -1351,7 +1335,9 @@ def confirm(
         primary_counts,
     )
     benchmark = load_json(
-        _resolve(specification["registered_sources"]["human_benchmark"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["human_benchmark"]["path"]
+        )
     )
     benchmark_means = np.asarray(
         [row["mean_accuracy"] for row in benchmark["cohorts"]["replication"]["pairs"]],

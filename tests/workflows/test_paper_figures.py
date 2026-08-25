@@ -7,12 +7,12 @@ from fsrl.workflows.paper_figures import (
     REPLAY_CSV_PATH,
     REPLAY_MANIFEST_PATH,
     SUITE_ROOT,
-    _ranking_positions,
-    _select_exemplar,
     check_suite,
     file_sha256,
     load_datasets,
     load_json,
+    ranking_positions,
+    select_exemplar,
     validate_specification,
 )
 
@@ -60,10 +60,10 @@ class PaperFigureAlignmentTests(unittest.TestCase):
             self.assertEqual(dataset.pair_accuracy.shape, (77, 28))
             self.assertTrue(np.all(np.isfinite(dataset.pair_accuracy)))
 
-        true_positions = _ranking_positions(list(protocol.true_order_high_to_low))
+        true_positions = ranking_positions(list(protocol.true_order_high_to_low))
         displayed_ids = []
         for dataset in datasets.values():
-            index = _select_exemplar(dataset, true_positions)
+            index = select_exemplar(dataset, true_positions)
             subject = dataset.subjects[index]
             displayed_ids.append(
                 int(subject.get("combined_id", subject.get("subject", index) + 1))

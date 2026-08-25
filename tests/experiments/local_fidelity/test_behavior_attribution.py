@@ -3,9 +3,9 @@ import unittest
 import numpy as np
 
 from fsrl.experiments.local_fidelity.behavior_attribution import (
-    _ratio_summary,
     decision_summary,
     exact_probability,
+    ratio_summary,
     slope_decomposition,
 )
 
@@ -22,7 +22,7 @@ class LocalBehaviorAttributionTests(unittest.TestCase):
         numerator = np.asarray([1.0, 3.0])
         denominator = np.asarray([2.0, 6.0])
         counts = np.asarray([[1.0, 1.0], [2.0, 0.0], [0.0, 2.0]])
-        result = _ratio_summary(numerator, denominator, counts, 0.95)
+        result = ratio_summary(numerator, denominator, counts, 0.95)
         self.assertAlmostEqual(result["point"], 0.5)
         self.assertAlmostEqual(result["bootstrap"]["mean"], 0.5)
 

@@ -18,41 +18,47 @@ from fsrl.analysis.behavioral import (
     count_circular_triads,
     kendall_tau_positions,
 )
+from fsrl.analysis.hodge import (
+    build_complete_graph_geometry,
+    gradient_energy_fraction,
+    hodge_potentials,
+    kendall_tau_scores,
+)
+from fsrl.analysis.statistics import (
+    json_values,
+    stable_sigmoid,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    gradient_energy_fraction,
-    hodge_potentials,
-    kendall_tau_scores,
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _ordered_pairs,
-    _retained_mask,
-    _tensor_hashes,
     bundle_logits,
     margin_fields,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    _build_fast_weight_loo,
-    _presentation_invariance,
     build_access_trace,
+    build_fast_weight_loo,
+    measure_presentation_invariance,
 )
-from fsrl.experiments.local_fidelity.trace_pilot import _query_pass
+from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.study_registry import (
+    canonical_file_registration,
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
 )
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
@@ -80,27 +86,6 @@ IMPLEMENTATION_SOURCES = {
 }
 
 
-def load_json(path: Path | str) -> dict:
-    with Path(path).open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
-
-
-def resolve_path(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
-def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(resolve_record(path))}
-
-
 def write_implementation_lock(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -121,7 +106,8 @@ def write_implementation_lock(
         ),
         "specification_sha256": file_sha256(specification_path),
         "implementation_sources": {
-            name: _registration(path) for name, path in IMPLEMENTATION_SOURCES.items()
+            name: canonical_file_registration(path)
+            for name, path in IMPLEMENTATION_SOURCES.items()
         },
     }
     if repairing:
@@ -348,18 +334,6 @@ def bootstrap_counts(
     ).astype(np.float64)
 
 
-def _sigmoid(values: np.ndarray) -> np.ndarray:
-    clipped = np.clip(np.asarray(values, dtype=np.float64), -60.0, 60.0)
-    return 1.0 / (1.0 + np.exp(-clipped))
-
-
-def _json_values(values: np.ndarray) -> list:
-    array = np.asarray(values, dtype=np.float64)
-    if array.ndim == 0:
-        return None if not np.isfinite(array) else float(array)
-    return [_json_values(row) for row in array]
-
-
 def _subject_group_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
     return np.mean(np.asarray(values, dtype=np.float64)[:, mask], axis=1)
 
@@ -374,7 +348,7 @@ def condition_metrics(
 ) -> dict:
     correct = np.asarray(field, dtype=np.float64) * geometry.true_sign[None]
     decision = (correct > 0.0).astype(np.float64)
-    probability = _sigmoid(correct / temperature)
+    probability = stable_sigmoid(correct / temperature)
     groups = {
         "overall": np.ones(len(geometry.pairs), dtype=bool),
         "learned": learned_mask,
@@ -398,10 +372,10 @@ def condition_metrics(
             for metric, rows in raw.items()
         },
         "raw_subject": {
-            metric: {name: _json_values(values) for name, values in rows.items()}
+            metric: {name: json_values(values) for name, values in rows.items()}
             for metric, rows in raw.items()
         },
-        "correct_signed_field": _json_values(correct),
+        "correct_signed_field": json_values(correct),
     }
 
 
@@ -436,7 +410,7 @@ def constructive_metrics(
             name: summarize_subjects(values, counts, interval=interval)
             for name, values in raw.items()
         },
-        "raw_subject": {name: _json_values(values) for name, values in raw.items()},
+        "raw_subject": {name: json_values(values) for name, values in raw.items()},
     }
 
 
@@ -493,17 +467,17 @@ def relation_loo_metrics(
             ),
         },
         "raw_subject": {
-            "remote_absolute": _json_values(subject_remote),
-            "third_party_relational": _json_values(subject_third),
+            "remote_absolute": json_values(subject_remote),
+            "third_party_relational": json_values(subject_third),
         },
         "raw_relation_subject": {
-            "remote_absolute": _json_values(remote),
-            "third_party_relational": _json_values(third_party),
+            "remote_absolute": json_values(remote),
+            "third_party_relational": json_values(third_party),
         },
     }
 
 
-def _key(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+def edge_key(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     flat = (
         (np.outer(left, right) - np.outer(right, left)).reshape(-1).astype(np.float64)
     )
@@ -525,12 +499,14 @@ def reconstruct_local_ledger(
     gpu_read_errors = []
     for subject, schedule in enumerate(schedules):
         codes = np.asarray(item_codes[subject], dtype=np.float64)
-        keys = np.stack([_key(codes[first], codes[second]) for first, second in pairs])
+        keys = np.stack(
+            [edge_key(codes[first], codes[second]) for first, second in pairs]
+        )
         reconstructed = np.zeros(keys.shape[1], dtype=np.float64)
         ledger = np.zeros(len(pairs), dtype=np.float64)
         for trial_index, trial in enumerate(schedule):
             scalar = float(natural_scalars[subject, trial_index])
-            reconstructed += scalar * _key(
+            reconstructed += scalar * edge_key(
                 codes[trial.left_item], codes[trial.right_item]
             )
             canonical = tuple(sorted((trial.left_item, trial.right_item)))
@@ -635,14 +611,14 @@ def serial_position_endpoint(behavior: dict, protocol: RankingProtocol) -> dict:
     profile = totals / counts
     interior = float(np.mean(profile[1:7]))
     return {
-        "profile_high_to_low": _json_values(profile),
+        "profile_high_to_low": json_values(profile),
         "interior_mean": interior,
         "mean_endpoint_contrast": float(np.mean(profile[[0, 7]]) - interior),
         "minimum_endpoint_advantage": float(min(profile[0], profile[7]) - interior),
     }
 
 
-def _schedule_hash(evaluator: FrozenFastWeightEvaluator) -> str:
+def support_schedule_hash(evaluator: FrozenFastWeightEvaluator) -> str:
     payload = json.dumps(
         [
             [asdict(trial) for trial in schedule]
@@ -784,7 +760,7 @@ def cross_cell_decision(
     }
 
 
-def _finite_primary(metrics: dict) -> bool:
+def finite_primary(metrics: dict) -> bool:
     values = []
     for condition in metrics["conditions"].values():
         for metric in condition["summary"].values():
@@ -855,10 +831,10 @@ def evaluate_cell(
     learned_mask = np.asarray(
         [pair in protocol.learned_pairs for pair in geometry.pairs]
     )
-    schedules = tuple(_ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
-    before = _tensor_hashes(backbone)
+    schedules = tuple(ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
+    before = tensor_hashes(backbone)
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = _build_fast_weight_loo(evaluator, relations)
+    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
     intact_trace = build_access_trace(evaluator, local, dual_access=True)
     loo_traces = [
         build_access_trace(
@@ -866,7 +842,7 @@ def evaluate_cell(
         )
         for relation in relations
     ]
-    intact_bundle = _query_pass(
+    intact_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -876,7 +852,7 @@ def evaluate_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    a_off_bundle = _query_pass(
+    a_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -886,7 +862,7 @@ def evaluate_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    p_off_bundle = _query_pass(
+    p_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -897,7 +873,7 @@ def evaluate_cell(
         shuffled_indices=None,
     )
     loo_global_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             loo_fast_weights[index],
@@ -910,7 +886,7 @@ def evaluate_cell(
         for index in range(len(relations))
     ]
     loo_p_off_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             intact_fast_weights,
@@ -999,8 +975,8 @@ def evaluate_cell(
         intact_trace.state.detach().cpu().numpy().astype(np.float64),
         intact_bundle["raw_local_margins"][:, 0::2],
     )
-    retained = _retained_mask(evaluator, relations)
-    correct_probability = _sigmoid(
+    retained = retained_relation_mask(evaluator, relations)
+    correct_probability = stable_sigmoid(
         fields["intact"] * geometry.true_sign[None] / float(evaluation["temperature"])
     )
     relation_indices = [
@@ -1033,8 +1009,8 @@ def evaluate_cell(
         "contrasts": contrasts,
         "local_exactness": exact,
         "retained_omitted": {
-            "retained_counts_per_subject": _json_values(np.sum(retained, axis=0)),
-            "omitted_counts_per_subject": _json_values(np.sum(~retained, axis=0)),
+            "retained_counts_per_subject": json_values(np.sum(retained, axis=0)),
+            "omitted_counts_per_subject": json_values(np.sum(~retained, axis=0)),
             "retained_correct_probability": summarize_subjects(
                 masked_subject_mean(retained_values), counts, interval=interval
             ),
@@ -1042,18 +1018,18 @@ def evaluate_cell(
                 masked_subject_mean(omitted_values), counts, interval=interval
             ),
         },
-        "raw_relation_subject_local_direct_correctness": _json_values(local_direct),
+        "raw_relation_subject_local_direct_correctness": json_values(local_direct),
         "sampled_behavior": behavior,
         "sampled_accuracy_bootstrap": sampled_accuracy,
         "serial_position_endpoint": serial_position_endpoint(behavior, protocol),
     }
-    presentation = _presentation_invariance(
+    presentation = measure_presentation_invariance(
         evaluator, local, intact_trace.natural_scalars
     )
     local_off_error = float(
         np.max(np.abs(a_off_bundle["logits"] - a_off_bundle["global_logits"]))
     )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     integrity = {
         "source_validation_passed": bool(source_validation["passed"]),
         "graph_validation_passed": bool(graph_validation["passed"]),
@@ -1066,7 +1042,7 @@ def evaluate_cell(
         "backbone_tensor_hashes_unchanged": before == after,
         "local_off_global_logit_max_abs_error": local_off_error,
         **presentation,
-        "primary_values_finite": _finite_primary(metrics),
+        "primary_values_finite": finite_primary(metrics),
     }
     integrity["all_passed"] = bool(
         integrity["source_validation_passed"]
@@ -1084,7 +1060,7 @@ def evaluate_cell(
         "protocol_id": protocol.protocol_id,
         "rank_edges": graph["rank_edges"],
         "item_edges_higher_lower": [list(relation) for relation in relations],
-        "support_schedule_sha256": _schedule_hash(evaluator),
+        "support_schedule_sha256": support_schedule_hash(evaluator),
         "bootstrap_seed": bootstrap_seed,
         "metrics": metrics,
         "integrity": integrity,

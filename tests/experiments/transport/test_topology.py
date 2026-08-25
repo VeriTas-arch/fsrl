@@ -8,11 +8,11 @@ from fsrl.experiments.transport.topology import (
     cross_cell_decision,
     enumerate_registered_graphs,
     graph_descriptor,
-    load_json,
     protocol_for_graph,
     reconstruct_local_ledger,
     validate_graph_contract,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import SupportTrial, load_ranking_protocol
 

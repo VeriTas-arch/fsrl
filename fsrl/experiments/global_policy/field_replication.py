@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
@@ -19,14 +20,10 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_training_provenance,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    readout_margin_fields,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
+from fsrl.experiments.assembly.trajectory import readout_margin_fields
 from fsrl.experiments.global_policy.amplitude_provenance import (
     NonInterpretableEstimate,
-    _posterior_descriptors,
+    posterior_descriptors,
 )
 from fsrl.experiments.global_policy.field_reassembly import (
     classify_status,
@@ -35,14 +32,16 @@ from fsrl.experiments.global_policy.field_reassembly import (
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _tensor_hashes,
-    load_json,
-    write_json,
-)
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import (
+    registered_file_sha256,
+    resolve_record,
+    resolve_registered_path,
+)
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import symbolic_distances
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
@@ -171,11 +170,6 @@ REQUIRED_REUSED_SOURCE_PATHS = {
 }
 
 
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
 def _canonical_paths(parsed: argparse.Namespace) -> None:
     expected = {
         "specification": DEFAULT_SPECIFICATION_PATH,
@@ -291,7 +285,7 @@ def backbone_training_config(specification: dict, seed: int) -> MetaTrainConfig:
     return training
 
 
-def _seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
+def seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
     backbone = output_root / f"seed-{seed}" / "backbone"
     return {
         "backbone_dir": backbone,
@@ -367,7 +361,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -411,7 +405,7 @@ def _read_training_log(path: Path, outer_steps: int) -> list[dict]:
     return records
 
 
-def _validate_complete_backbone(
+def validate_complete_backbone(
     specification: dict,
     output_root: Path,
     seed: int,
@@ -420,7 +414,7 @@ def _validate_complete_backbone(
 ) -> Path:
     """Fail closed unless one seed has the complete registered final artifact set."""
 
-    paths = _seed_paths(output_root, seed)
+    paths = seed_paths(output_root, seed)
     seed_dir = paths["backbone_dir"].parent
     if (
         seed_dir.is_symlink()
@@ -501,7 +495,7 @@ def train_backbone(
 ) -> Path:
     """Train one registered final backbone, or validate an already complete one."""
 
-    paths = _seed_paths(output_root, seed)
+    paths = seed_paths(output_root, seed)
     seed_dir = paths["backbone_dir"].parent
     if seed_dir.exists() and (
         seed_dir.is_symlink()
@@ -511,7 +505,7 @@ def train_backbone(
     ):
         raise RuntimeError(f"seed {seed} has invalid pre-existing members")
     if paths["backbone_dir"].exists():
-        return _validate_complete_backbone(
+        return validate_complete_backbone(
             specification,
             output_root,
             seed,
@@ -535,7 +529,7 @@ def train_backbone(
         },
     }
     write_json(paths["backbone_manifest"], manifest)
-    return _validate_complete_backbone(
+    return validate_complete_backbone(
         specification,
         output_root,
         seed,
@@ -579,14 +573,14 @@ def artifact_lock_document(
     seeds = mandatory_seeds(specification)
     _validate_output_members(output_root, seeds, allow_partial=False)
     for seed in seeds:
-        _validate_complete_backbone(
+        validate_complete_backbone(
             specification,
             output_root,
             seed,
             specification_path,
             implementation_lock_path,
         )
-        paths = _seed_paths(output_root, seed)
+        paths = seed_paths(output_root, seed)
         artifacts[str(seed)] = {
             name: {
                 "path": str(paths[name].resolve().relative_to(ROOT)),
@@ -676,7 +670,7 @@ def validate_artifacts(
     seeds = mandatory_seeds(specification)
     _validate_output_members(output_root, seeds, allow_partial=False)
     for seed in seeds:
-        _validate_complete_backbone(
+        validate_complete_backbone(
             specification,
             output_root,
             seed,
@@ -686,9 +680,9 @@ def validate_artifacts(
         registrations = lock["artifacts"][str(seed)]
         if set(registrations) != exact_artifact_names:
             raise RuntimeError(f"seed {seed} artifact lock has the wrong keys")
-        expected_paths = _seed_paths(output_root, seed)
+        expected_paths = seed_paths(output_root, seed)
         for name, registration in registrations.items():
-            path = _resolve(registration["path"])
+            path = resolve_registered_path(registration["path"])
             if path.resolve() != expected_paths[name].resolve():
                 raise RuntimeError(f"seed {seed} {name} escaped the registered root")
             observed = file_sha256(path)
@@ -708,19 +702,6 @@ def validate_artifacts(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"field-fingerprint artifact lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
-
-
-def _distances(protocol, pairs: tuple[tuple[int, int], ...]) -> np.ndarray:
-    positions = np.empty(protocol.n_items, dtype=np.int64)
-    for position, item in enumerate(protocol.true_order_high_to_low):
-        positions[item] = position
-    return np.asarray(
-        [
-            abs(int(positions[first]) - int(positions[second]))
-            for first, second in pairs
-        ],
-        dtype=np.float64,
-    )
 
 
 def _factorial_identity_errors(values: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
@@ -875,7 +856,9 @@ def _qualification(
     causal = {
         "protocol_id": evaluator.protocol.protocol_id,
         "protocol_path": str(
-            _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+            resolve_registered_path(
+                specification["registered_sources"]["liu_protocol"]["path"]
+            )
         ),
         "checkpoint": {
             "path": str(checkpoint_path.resolve()),
@@ -898,7 +881,9 @@ def _qualification(
     report = evaluate_qualification(
         causal,
         load_json(
-            _resolve(specification["registered_sources"]["qualification"]["path"])
+            resolve_registered_path(
+                specification["registered_sources"]["qualification"]["path"]
+            )
         ),
     )
     report["causal_result"] = causal
@@ -914,15 +899,17 @@ def analyze_seed(
 
     evaluation = specification["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
-    checkpoint_path = _resolve(artifact["path"])
+    checkpoint_path = resolve_registered_path(artifact["path"])
     backbone, model_config, checkpoint = load_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    before = _tensor_hashes(backbone)
+    before = tensor_hashes(backbone)
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -935,13 +922,13 @@ def analyze_seed(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
     geometry = build_complete_graph_geometry(protocol)
-    distances = _distances(protocol, geometry.pairs)
+    distances = symbolic_distances(protocol, geometry.pairs)
     nonlearned = np.asarray(
         [pair not in protocol.learned_pairs for pair in geometry.pairs], dtype=bool
     )
     fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     neural_margin = readout_margin_fields(evaluator, fast_weights, geometry)
-    posterior, posterior_integrity = _posterior_descriptors(
+    posterior, posterior_integrity = posterior_descriptors(
         evaluator, geometry, specification
     )
     posterior_margin = posterior["fields"]["same_unit_margin"]
@@ -979,7 +966,7 @@ def analyze_seed(
         checkpoint.sha256,
         fast_weights,
     )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
 
     tolerance = float(
         specification["competence_and_integrity_gates"][

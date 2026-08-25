@@ -8,30 +8,27 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
 from fsrl.analysis.posterior import ExactRankingPosterior, RelationEvidence
+from fsrl.analysis.statistics import bootstrap_counts
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.trajectory import (
-    bootstrap_counts,
-    build_complete_graph_geometry,
-    hodge_potentials,
-    ordered_query_schedule,
-)
+from fsrl.experiments.assembly.trajectory import ordered_query_schedule
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _tensor_hashes,
-    load_json,
-    write_json,
-)
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import (
+    registered_file_sha256,
+    resolve_record,
+    resolve_registered_path,
+)
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -52,11 +49,6 @@ CONFIRMATION_OUTPUT_ROOT = (
 
 class NonInterpretableEstimate(RuntimeError):
     """Raised when a frozen estimand is undefined without filtering rows or draws."""
-
-
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def _max_abs_or_none(values: np.ndarray) -> float | None:
@@ -235,7 +227,7 @@ def bootstrap_correlation(
     )
 
 
-def _interval_summary(point: float, samples: np.ndarray) -> dict:
+def interval_summary(point: float, samples: np.ndarray) -> dict:
     finite = np.asarray(samples, dtype=np.float64)
     if finite.ndim != 1 or len(finite) == 0:
         raise NonInterpretableEstimate("bootstrap estimates must be a nonempty vector")
@@ -260,8 +252,8 @@ def summarize_ols(y: np.ndarray, x: np.ndarray, counts: np.ndarray) -> dict:
     slopes = bootstrap_ols(y, x, counts)
     correlations = bootstrap_correlation(x, y, counts)
     return {
-        "slope": _interval_summary(ols_slope(x, y), slopes),
-        "correlation": _interval_summary(
+        "slope": interval_summary(ols_slope(x, y), slopes),
+        "correlation": interval_summary(
             float(np.corrcoef(np.asarray(x), np.asarray(y))[0, 1]), correlations
         ),
     }
@@ -310,12 +302,12 @@ def through_origin_shape_fit(
     )
     mean_cosine_samples = counts @ cosine / total_counts
     return {
-        "scale": _interval_summary(scale, scale_samples),
-        "energy_explained": _interval_summary(explained, explained_samples),
-        "residual_energy": _interval_summary(
+        "scale": interval_summary(scale, scale_samples),
+        "energy_explained": interval_summary(explained, explained_samples),
+        "residual_energy": interval_summary(
             float(np.sum(residual * residual)), residual_energy
         ),
-        "normalized_cosine": _interval_summary(
+        "normalized_cosine": interval_summary(
             float(np.mean(cosine)), mean_cosine_samples
         ),
     }
@@ -334,7 +326,7 @@ def _source_validation(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -354,13 +346,17 @@ def _source_validation(
 
 def _artifact_validation(specification: dict) -> dict:
     sources = specification["registered_sources"]
-    confirmation_path = _resolve(sources["v2_4_confirmation_specification"]["path"])
+    confirmation_path = resolve_registered_path(
+        sources["v2_4_confirmation_specification"]["path"]
+    )
     confirmation = load_json(confirmation_path)
     return validate_artifacts(
         confirmation,
         confirmation_path,
-        _resolve(sources["v2_4_confirmation_implementation_lock"]["path"]),
-        _resolve(sources["v2_4_confirmation_artifact_lock"]["path"]),
+        resolve_registered_path(
+            sources["v2_4_confirmation_implementation_lock"]["path"]
+        ),
+        resolve_registered_path(sources["v2_4_confirmation_artifact_lock"]["path"]),
         CONFIRMATION_OUTPUT_ROOT,
     )
 
@@ -606,7 +602,7 @@ def _stable_sigmoid(value: float) -> float:
     return float(exponential / (1.0 + exponential))
 
 
-def _posterior_descriptors(
+def posterior_descriptors(
     evaluator, geometry, specification: dict
 ) -> tuple[dict, dict]:
     contract = specification["posterior_comparator"]
@@ -772,7 +768,7 @@ def _mean_summary(values: np.ndarray, counts: np.ndarray) -> dict:
     if not np.all(np.isfinite(rows)):
         raise NonInterpretableEstimate("participant metrics must all be finite")
     samples = counts @ rows / np.sum(counts, axis=1)
-    interval = _interval_summary(float(np.mean(rows)), samples)
+    interval = interval_summary(float(np.mean(rows)), samples)
     return {
         "subjects": len(rows),
         "mean": float(np.mean(rows)),
@@ -835,7 +831,7 @@ def _seed_statistics(
         values = logs[f"log_a_{name}"]
         samples = bootstrap_ols(values, Z, counts)
         slope_samples[f"beta_{name}"] = samples
-        slopes[f"beta_{name}"] = _interval_summary(ols_slope(Z, values), samples)
+        slopes[f"beta_{name}"] = interval_summary(ols_slope(Z, values), samples)
     increment_definitions = {
         "delta_rec": ("beta_H", "beta_P"),
         "delta_out": ("beta_delta", "beta_H"),
@@ -844,13 +840,11 @@ def _seed_statistics(
     for name, (first, second) in increment_definitions.items():
         samples = slope_samples[first] - slope_samples[second]
         point = slopes[first]["point"] - slopes[second]["point"]
-        slopes[name] = _interval_summary(point, samples)
+        slopes[name] = interval_summary(point, samples)
         slope_samples[name] = samples
     direct_mismatch_samples = bootstrap_ols(Y, Z, counts)
-    slopes["beta_Y_direct"] = _interval_summary(
-        ols_slope(Z, Y), direct_mismatch_samples
-    )
-    slopes["beta_N_minus_1"] = _interval_summary(
+    slopes["beta_Y_direct"] = interval_summary(ols_slope(Z, Y), direct_mismatch_samples)
+    slopes["beta_N_minus_1"] = interval_summary(
         slopes["beta_N"]["point"] - 1.0,
         slope_samples["beta_N"] - 1.0,
     )
@@ -1083,22 +1077,24 @@ def _noninterpretable_statistics(
 
 def analyze_seed(specification: dict, seed: int, artifact_validation: dict) -> dict:
     evaluation = load_json(
-        _resolve(
+        resolve_registered_path(
             specification["registered_sources"]["slope_localization_specification"][
                 "path"
             ]
         )
     )["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
-    checkpoint_path = _resolve(artifact["path"])
+    checkpoint_path = resolve_registered_path(artifact["path"])
     backbone, model_config, checkpoint = load_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    before = _tensor_hashes(backbone)
+    before = tensor_hashes(backbone)
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -1113,11 +1109,11 @@ def analyze_seed(specification: dict, seed: int, artifact_validation: dict) -> d
     geometry = build_complete_graph_geometry(protocol)
     fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     neural, neural_integrity = _neural_layers(evaluator, fast_weights, geometry)
-    posterior, posterior_integrity = _posterior_descriptors(
+    posterior, posterior_integrity = posterior_descriptors(
         evaluator, geometry, specification
     )
     track_b = load_json(
-        _resolve(
+        resolve_registered_path(
             specification["registered_sources"]["slope_localization_result"]["path"]
         )
     )["seeds"][str(seed)]
@@ -1184,7 +1180,7 @@ def analyze_seed(specification: dict, seed: int, artifact_validation: dict) -> d
                 reason=statistics_error,
                 zero_denominators={},
             )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     float_tolerance = float(
         specification["integrity_gates"]["float64_Hodge_and_algebra_tolerance"]
     )

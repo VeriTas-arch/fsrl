@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import json
 from collections import defaultdict
 from itertools import combinations
@@ -20,6 +19,7 @@ from fsrl.analysis.behavioral import (
     kendall_tau_positions,
     maximum_circular_triads,
 )
+from fsrl.infra.provenance import file_sha256
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
@@ -70,14 +70,6 @@ REQUIRED_COLUMNS = {
     "film_index_2",
     "r_or_w",
 }
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def portable_path(path: Path) -> str:

@@ -3,13 +3,13 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from fsrl.experiments.assembly.diagnostics import load_json
 from fsrl.experiments.assembly.history_factorial import (
     first_exposure_target_indices,
     scalar_factorial,
     validate_registered_sources,
     vector_factorial,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 

@@ -9,20 +9,19 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
+from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
 from fsrl.experiments.assembly.trajectory import (
-    CompleteGraphGeometry,
-    bootstrap_counts,
-    build_complete_graph_geometry,
     load_frozen_evaluator,
     ordered_query_schedule,
-    summarize_subjects,
 )
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
-from fsrl.experiments.local_fidelity.operator_binding import _replay_terminal_states
+from fsrl.experiments.local_fidelity.operator_binding import replay_terminal_states
 from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -34,11 +33,7 @@ DEFAULT_OUTPUT_PATH = resolve_record("results/operator_output_semantics_v1.json"
 STAGES = ("A_operator_value", "J_linearized_expression", "H_exact_expression")
 
 
-def _json_values(values: np.ndarray) -> list:
-    return [None if not np.isfinite(value) else float(value) for value in values]
-
-
-def _masked_relation_mean(values: np.ndarray, retained: np.ndarray) -> np.ndarray:
+def masked_relation_mean(values: np.ndarray, retained: np.ndarray) -> np.ndarray:
     rows = np.asarray(values, dtype=np.float64)
     if rows.shape != retained.shape:
         raise ValueError("relation values and retained mask do not match")
@@ -85,7 +80,7 @@ def hodge_components(
     return gradient, values - gradient
 
 
-def _relation_geometry(
+def relation_geometry(
     protocol: RankingProtocol, geometry: CompleteGraphGeometry
 ) -> tuple[np.ndarray, np.ndarray, tuple[np.ndarray, ...]]:
     edge_lookup = {pair: index for index, pair in enumerate(geometry.pairs)}
@@ -106,7 +101,7 @@ def _relation_geometry(
     return direct, geometry.true_sign[direct], tuple(remote_masks)
 
 
-def _stack_step(rows, pair: tuple[int, int], step: int) -> np.ndarray:
+def stack_step(rows, pair: tuple[int, int], step: int) -> np.ndarray:
     return np.stack([subject[pair][step] for subject in rows])
 
 
@@ -218,7 +213,7 @@ def collect_nested_fields(
                         ).item()
                     ),
                 )
-                actual_h0 = torch.from_numpy(_stack_step(intact_hidden, pair, 0)).to(
+                actual_h0 = torch.from_numpy(stack_step(intact_hidden, pair, 0)).to(
                     DEVICE
                 )
                 validation["manual_h0_max_abs_error"] = max(
@@ -234,22 +229,22 @@ def collect_nested_fields(
                 )
 
                 actual_intact_h1 = torch.from_numpy(
-                    _stack_step(intact_hidden, pair, NUMRESPONSESTEP)
+                    stack_step(intact_hidden, pair, NUMRESPONSESTEP)
                 ).to(DEVICE)
                 actual_intact_logit = torch.from_numpy(
-                    _stack_step(intact_logits, pair, NUMRESPONSESTEP)
+                    stack_step(intact_logits, pair, NUMRESPONSESTEP)
                 ).to(DEVICE)
                 for relation_index, (loo_hidden, loo_logits) in enumerate(
                     loo_trajectories
                 ):
                     actual_loo_h0 = torch.from_numpy(
-                        _stack_step(loo_hidden, pair, 0)
+                        stack_step(loo_hidden, pair, 0)
                     ).to(DEVICE)
                     actual_loo_h1 = torch.from_numpy(
-                        _stack_step(loo_hidden, pair, NUMRESPONSESTEP)
+                        stack_step(loo_hidden, pair, NUMRESPONSESTEP)
                     ).to(DEVICE)
                     actual_loo_logit = torch.from_numpy(
-                        _stack_step(loo_logits, pair, NUMRESPONSESTEP)
+                        stack_step(loo_logits, pair, NUMRESPONSESTEP)
                     ).to(DEVICE)
                     validation["loo_h0_invariance_max_abs_error"] = max(
                         validation["loo_h0_invariance_max_abs_error"],
@@ -396,7 +391,7 @@ def _stage_summary(
     tolerance: float,
 ) -> tuple[dict, dict[str, np.ndarray]]:
     subject = {
-        name: _masked_relation_mean(values, retained)
+        name: masked_relation_mean(values, retained)
         for name, values in metrics.items()
         if name != "direct_residual"
     }
@@ -412,7 +407,7 @@ def _stage_summary(
             for name, values in subject.items()
         },
         "raw_subject_level": {
-            name: _json_values(values) for name, values in subject.items()
+            name: json_values(values) for name, values in subject.items()
         },
     }, subject
 
@@ -551,7 +546,7 @@ def _run_seed(
     evaluator, _behavior = load_frozen_evaluator(
         registration, pilot_specification, protocol
     )
-    intact, loo, effective, retained = _replay_terminal_states(evaluator, protocol)
+    intact, loo, effective, retained = replay_terminal_states(evaluator, protocol)
     execution = specification["execution_contract"]
     interval = float(execution["bootstrap_interval"])
     tolerance = float(execution["scientific_zero_tolerance"])
@@ -565,7 +560,7 @@ def _run_seed(
         retained,
         tolerance=float(execution["floating_reproduction_tolerance"]),
     )
-    direct_edges, correctness_signs, remote_masks = _relation_geometry(
+    direct_edges, correctness_signs, remote_masks = relation_geometry(
         protocol, geometry
     )
     metrics_by_stage = {
@@ -615,7 +610,7 @@ def _run_seed(
             for name, values in transitions_subject.items()
         },
         "raw_subject_level": {
-            name: _json_values(values) for name, values in transitions_subject.items()
+            name: json_values(values) for name, values in transitions_subject.items()
         },
     }
     per_relation = _relation_summary(

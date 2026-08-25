@@ -11,20 +11,20 @@ import numpy as np
 from fsrl.experiments.global_policy.amplitude_provenance import NonInterpretableEstimate
 from fsrl.experiments.global_policy.comparator_adequacy import (
     DEFAULT_SPECIFICATION_PATH,
-    _load_trial_cohort,
     adequacy_statistics,
     apply_protocol_repair,
     bootstrap_counts,
     decide,
     distance_profiles,
     edge_metadata,
+    load_trial_cohort,
     residualize,
     row_correlations,
     validate_prerequisite,
     vector_correlation,
-    write_json_exclusive,
 )
 from fsrl.infra.git_provenance import verify_git_registrations
+from fsrl.infra.provenance import write_json_exclusive
 from fsrl.infra.study_registry import ROOT, legacy_identifier, resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -216,7 +216,7 @@ class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):
                                     "r_or_w": 1,
                                 }
                             )
-            values, labels = _load_trial_cohort(path, "preregistered", pair_to_index, 8)
+            values, labels = load_trial_cohort(path, "preregistered", pair_to_index, 8)
         self.assertEqual(values.shape, (40, 10, 28))
         self.assertEqual(len(labels), 40)
         self.assertTrue(np.all(values == 1.0))

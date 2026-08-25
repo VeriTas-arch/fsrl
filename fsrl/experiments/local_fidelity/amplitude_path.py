@@ -10,30 +10,28 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
+from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
 from fsrl.experiments.assembly.trajectory import (
-    CompleteGraphGeometry,
-    bootstrap_counts,
-    build_complete_graph_geometry,
     load_frozen_evaluator,
     ordered_query_schedule,
-    summarize_subjects,
 )
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
-from fsrl.experiments.local_fidelity.operator_binding import _replay_terminal_states
+from fsrl.experiments.local_fidelity.operator_binding import replay_terminal_states
 from fsrl.experiments.local_fidelity.output_semantics import (
     STAGES,
-    _json_values,
-    _masked_relation_mean,
-    _relation_geometry,
-    _stack_step,
     hodge_components,
+    masked_relation_mean,
     normalized_direct_correctness,
+    relation_geometry,
+    stack_step,
     stage_relation_metrics,
 )
 from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -167,8 +165,8 @@ def subject_crossing_summary(
         "crossing_lambda_plus": summarize_subjects(upper, counts, interval=interval),
         "crossing_bracket_counts": dict(sorted(Counter(bracket_labels).items())),
         "raw_subject_level": {
-            "lambda_minus": _json_values(lower),
-            "lambda_plus": _json_values(upper),
+            "lambda_minus": json_values(lower),
+            "lambda_plus": json_values(upper),
             "crossed": [
                 bool(value) if mask[index] else None
                 for index, value in enumerate(crossed)
@@ -317,7 +315,7 @@ def collect_amplitude_fields(
                         ),
                     )
                 )
-                actual_h0 = torch.from_numpy(_stack_step(intact_hidden, pair, 0)).to(
+                actual_h0 = torch.from_numpy(stack_step(intact_hidden, pair, 0)).to(
                     DEVICE
                 )
                 validation["manual_h0_max_abs_error"] = max(
@@ -326,22 +324,22 @@ def collect_amplitude_fields(
                 )
                 exact_one = torch.tanh(baseline + action) - baseline_hidden
                 actual_intact_h1 = torch.from_numpy(
-                    _stack_step(intact_hidden, pair, NUMRESPONSESTEP)
+                    stack_step(intact_hidden, pair, NUMRESPONSESTEP)
                 ).to(DEVICE)
                 actual_intact_logit = torch.from_numpy(
-                    _stack_step(intact_logits, pair, NUMRESPONSESTEP)
+                    stack_step(intact_logits, pair, NUMRESPONSESTEP)
                 ).to(DEVICE)
                 for relation_index, (loo_hidden, loo_logits) in enumerate(
                     loo_trajectories
                 ):
                     actual_loo_h0 = torch.from_numpy(
-                        _stack_step(loo_hidden, pair, 0)
+                        stack_step(loo_hidden, pair, 0)
                     ).to(DEVICE)
                     actual_loo_h1 = torch.from_numpy(
-                        _stack_step(loo_hidden, pair, NUMRESPONSESTEP)
+                        stack_step(loo_hidden, pair, NUMRESPONSESTEP)
                     ).to(DEVICE)
                     actual_loo_logit = torch.from_numpy(
-                        _stack_step(loo_logits, pair, NUMRESPONSESTEP)
+                        stack_step(loo_logits, pair, NUMRESPONSESTEP)
                     ).to(DEVICE)
                     validation["loo_h0_invariance_max_abs_error"] = max(
                         validation["loo_h0_invariance_max_abs_error"],
@@ -453,7 +451,7 @@ def _aggregate_curve(
     rows = []
     for amplitude, metrics in zip(amplitudes, metrics_by_amplitude):
         current = {
-            "direct_correctness": _masked_relation_mean(
+            "direct_correctness": masked_relation_mean(
                 metrics["direct_correctness"], retained
             ),
             "normalized_direct_correctness_rho": normalized_direct_correctness(
@@ -462,7 +460,7 @@ def _aggregate_curve(
                 retained,
                 tolerance=tolerance,
             ),
-            "direct_minus_remote_correctness": _masked_relation_mean(
+            "direct_minus_remote_correctness": masked_relation_mean(
                 metrics["direct_minus_remote_correctness"], retained
             ),
         }
@@ -476,7 +474,7 @@ def _aggregate_curve(
                     for name, values in current.items()
                 },
                 "raw_subject_level": {
-                    name: _json_values(values) for name, values in current.items()
+                    name: json_values(values) for name, values in current.items()
                 },
             }
         )
@@ -513,7 +511,7 @@ def _relation_curves(
                     "lambda": float(amplitude),
                     "direct_correctness": summary,
                     "status": curve_status(summary, float(amplitude)),
-                    "raw_subject_level": _json_values(
+                    "raw_subject_level": json_values(
                         np.where(mask, subject_values, np.nan)
                     ),
                 }
@@ -560,7 +558,7 @@ def _curvature_summary(
     interval: float,
 ) -> dict:
     direct = curvature_metrics["direct_correctness"]
-    aggregate = _masked_relation_mean(direct, retained)
+    aggregate = masked_relation_mean(direct, retained)
     per_relation = []
     for relation_index, relation in enumerate(protocol.support_pairs_higher_lower):
         mask = retained[relation_index]
@@ -602,8 +600,8 @@ def _curvature_summary(
             primary_minus_other, counts, interval=interval
         ),
         "raw_subject_level": {
-            "aggregate_direct_correctness": _json_values(aggregate),
-            "H_greater_A_minus_other_relations": _json_values(primary_minus_other),
+            "aggregate_direct_correctness": json_values(aggregate),
+            "H_greater_A_minus_other_relations": json_values(primary_minus_other),
         },
     }
 
@@ -634,14 +632,14 @@ def _approximation_summary(
                 for index in range(relation_count)
             ]
         )
-        subject_absolute = _masked_relation_mean(np.abs(direct_error), retained)
+        subject_absolute = masked_relation_mean(np.abs(direct_error), retained)
         rows.append(
             {
                 "lambda": float(amplitude),
                 "aggregate_absolute_direct_error": summarize_subjects(
                     subject_absolute, counts, interval=interval
                 ),
-                "raw_subject_level": _json_values(subject_absolute),
+                "raw_subject_level": json_values(subject_absolute),
             }
         )
     return rows
@@ -659,7 +657,7 @@ def _prior_consistency_error(
     tolerance: float,
 ) -> float:
     jacobian_subject = {
-        "direct_correctness": _masked_relation_mean(
+        "direct_correctness": masked_relation_mean(
             jacobian_metrics["direct_correctness"], retained
         ),
         "normalized_direct_correctness_rho": normalized_direct_correctness(
@@ -668,7 +666,7 @@ def _prior_consistency_error(
             retained,
             tolerance=tolerance,
         ),
-        "direct_minus_remote_correctness": _masked_relation_mean(
+        "direct_minus_remote_correctness": masked_relation_mean(
             jacobian_metrics["direct_minus_remote_correctness"], retained
         ),
     }
@@ -709,7 +707,7 @@ def _run_seed(
     evaluator, _behavior = load_frozen_evaluator(
         registration, pilot_specification, protocol
     )
-    intact, loo, effective, retained = _replay_terminal_states(evaluator, protocol)
+    intact, loo, effective, retained = replay_terminal_states(evaluator, protocol)
     execution = specification["execution_contract"]
     interval = float(execution["bootstrap_interval"])
     scientific_zero = float(execution["scientific_zero_tolerance"])
@@ -728,7 +726,7 @@ def _run_seed(
         amplitudes,
         tolerance=float(execution["floating_reproduction_tolerance"]),
     )
-    direct_edges, correctness_signs, remote_masks = _relation_geometry(
+    direct_edges, correctness_signs, remote_masks = relation_geometry(
         protocol, geometry
     )
     metrics_by_amplitude = [

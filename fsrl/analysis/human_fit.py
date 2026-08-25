@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/human_fit_v1.json")
@@ -84,11 +85,6 @@ def select_global_temperature(results: list[dict], specification: dict) -> dict:
         "cohort": signature,
         "grid_results": rows,
     }
-
-
-def load_json(path: Path | str) -> dict:
-    with Path(path).open(encoding="utf-8") as handle:
-        return json.load(handle)
 
 
 def parse_args(args=None):

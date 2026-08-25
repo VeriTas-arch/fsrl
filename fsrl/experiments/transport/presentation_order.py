@@ -14,58 +14,60 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.hodge import (
+    build_complete_graph_geometry,
+    hodge_potentials,
+    kendall_tau_scores,
+)
+from fsrl.analysis.statistics import (
+    finite_column_mean,
+    json_values,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    hodge_potentials,
-    kendall_tau_scores,
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _ordered_pairs,
-    _retained_mask,
-    _tensor_hashes,
     bundle_logits,
     margin_fields,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    _build_fast_weight_loo,
-    _presentation_invariance,
     build_access_trace,
+    build_fast_weight_loo,
+    measure_presentation_invariance,
 )
-from fsrl.experiments.local_fidelity.trace_pilot import _query_pass
+from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
-    _finite_primary,
-    _json_values,
-    _key,
     bootstrap_counts,
     condition_metrics,
     constructive_metrics,
+    edge_key,
+    finite_primary,
     individualized_metrics,
-    load_json,
     reconstruct_local_ledger,
     relation_loo_metrics,
-    resolve_path,
     serial_position_endpoint,
-    write_json_exclusive,
 )
 from fsrl.experiments.transport.topology import (
     within_cell_decision as topology_within_cell_decision,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.study_registry import (
+    canonical_file_registration,
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
 )
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import (
     RankingProtocol,
     SupportTrial,
@@ -87,10 +89,6 @@ IMPLEMENTATION_SOURCES = {
 }
 
 
-def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(resolve_record(path))}
-
-
 def write_implementation_lock(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -102,7 +100,8 @@ def write_implementation_lock(
         "registration_commit": "ff48f0d1aed863a79986b39be53116f6cd727d83",
         "specification_sha256": file_sha256(specification_path),
         "implementation_sources": {
-            name: _registration(path) for name, path in IMPLEMENTATION_SOURCES.items()
+            name: canonical_file_registration(path)
+            for name, path in IMPLEMENTATION_SOURCES.items()
         },
     }
     write_json_exclusive(lock_path, lock)
@@ -212,7 +211,7 @@ def schedule_integrity(
     }
 
 
-def _schedule_hash(schedules) -> str:
+def schedule_hash(schedules) -> str:
     payload = json.dumps(
         [[asdict(trial) for trial in schedule] for schedule in schedules],
         sort_keys=True,
@@ -262,7 +261,9 @@ def local_ledger_arrays(evaluator, natural_scalars: np.ndarray) -> dict:
     states = []
     for subject, schedule in enumerate(evaluator.support_schedules):
         codes = np.asarray(evaluator.cue_codes[subject], dtype=np.float64)
-        keys = np.stack([_key(codes[first], codes[second]) for first, second in pairs])
+        keys = np.stack(
+            [edge_key(codes[first], codes[second]) for first, second in pairs]
+        )
         ledger = np.zeros(len(pairs), dtype=np.float64)
         for trial_index, trial in enumerate(schedule):
             canonical = tuple(sorted((trial.left_item, trial.right_item)))
@@ -278,16 +279,6 @@ def local_ledger_arrays(evaluator, natural_scalars: np.ndarray) -> dict:
         "state": np.asarray(states),
         "reads": np.asarray(reads),
     }
-
-
-def _masked_subject_mean(values: np.ndarray) -> np.ndarray:
-    finite = np.sum(np.isfinite(values), axis=0)
-    return np.divide(
-        np.nansum(values, axis=0),
-        finite,
-        out=np.full(values.shape[1], np.nan),
-        where=finite > 0,
-    )
 
 
 def evaluate_schedule(
@@ -332,10 +323,10 @@ def evaluate_schedule(
     learned_mask = np.asarray(
         [pair in protocol.learned_pairs for pair in geometry.pairs]
     )
-    schedules = tuple(_ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
-    before = _tensor_hashes(backbone)
+    schedules = tuple(ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
+    before = tensor_hashes(backbone)
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = _build_fast_weight_loo(evaluator, relations)
+    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
     intact_trace = build_access_trace(evaluator, local, dual_access=True)
     loo_traces = [
         build_access_trace(
@@ -343,7 +334,7 @@ def evaluate_schedule(
         )
         for relation in relations
     ]
-    intact_bundle = _query_pass(
+    intact_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -353,7 +344,7 @@ def evaluate_schedule(
         global_off=False,
         shuffled_indices=None,
     )
-    a_off_bundle = _query_pass(
+    a_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -363,7 +354,7 @@ def evaluate_schedule(
         global_off=False,
         shuffled_indices=None,
     )
-    p_off_bundle = _query_pass(
+    p_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -374,7 +365,7 @@ def evaluate_schedule(
         shuffled_indices=None,
     )
     loo_global_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             loo_fast_weights[index],
@@ -387,7 +378,7 @@ def evaluate_schedule(
         for index in range(len(relations))
     ]
     loo_local_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             intact_fast_weights,
@@ -473,7 +464,7 @@ def evaluate_schedule(
         intact_trace.state.detach().cpu().numpy().astype(np.float64),
         intact_bundle["raw_local_margins"][:, 0::2],
     )
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     correct_probability = 1.0 / (
         1.0
         + np.exp(
@@ -503,15 +494,15 @@ def evaluate_schedule(
         "contrasts": contrasts,
         "local_exactness": exact,
         "retained_omitted": {
-            "retained_counts_per_subject": _json_values(np.sum(retained, axis=0)),
-            "omitted_counts_per_subject": _json_values(np.sum(~retained, axis=0)),
+            "retained_counts_per_subject": json_values(np.sum(retained, axis=0)),
+            "omitted_counts_per_subject": json_values(np.sum(~retained, axis=0)),
             "retained_correct_probability": summarize_subjects(
-                _masked_subject_mean(np.where(retained, learned_probability, np.nan)),
+                finite_column_mean(np.where(retained, learned_probability, np.nan)),
                 counts,
                 interval=interval,
             ),
             "omitted_correct_probability": summarize_subjects(
-                _masked_subject_mean(np.where(~retained, learned_probability, np.nan)),
+                finite_column_mean(np.where(~retained, learned_probability, np.nan)),
                 counts,
                 interval=interval,
             ),
@@ -520,10 +511,10 @@ def evaluate_schedule(
         "sampled_accuracy_bootstrap": sampled_accuracy,
         "serial_position_endpoint": serial_position_endpoint(behavior, protocol),
     }
-    presentation = _presentation_invariance(
+    presentation = measure_presentation_invariance(
         evaluator, local, intact_trace.natural_scalars
     )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     integrity = {
         "source_validation_passed": bool(source_validation["passed"]),
         "schedule_integrity": schedule_check,
@@ -538,7 +529,7 @@ def evaluate_schedule(
             np.max(np.abs(a_off_bundle["logits"] - a_off_bundle["global_logits"]))
         ),
         **presentation,
-        "primary_values_finite": _finite_primary(metrics),
+        "primary_values_finite": finite_primary(metrics),
     }
     integrity["all_passed"] = bool(
         integrity["source_validation_passed"]
@@ -552,7 +543,7 @@ def evaluate_schedule(
     )
     public = {
         "condition": condition,
-        "support_schedule_sha256": _schedule_hash(evaluator.support_schedules),
+        "support_schedule_sha256": schedule_hash(evaluator.support_schedules),
         "bootstrap_seed": bootstrap_seed,
         "metrics": metrics,
         "integrity": integrity,

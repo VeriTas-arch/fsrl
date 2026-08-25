@@ -3,18 +3,20 @@ from itertools import combinations
 
 import numpy as np
 
-from fsrl.analysis.posterior import ExactRankingPosterior
-from fsrl.experiments.assembly.trajectory import (
+from fsrl.analysis.hodge import (
     build_complete_graph_geometry,
-    classified_effects,
     gradient_energy_fraction,
     hodge_potentials,
-    load_json,
     normalize_potentials,
     potential_alignment,
-    validate_registered_sources,
     vector_gradient_energy_fraction,
 )
+from fsrl.analysis.posterior import ExactRankingPosterior
+from fsrl.experiments.assembly.trajectory import (
+    classified_effects,
+    validate_registered_sources,
+)
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 

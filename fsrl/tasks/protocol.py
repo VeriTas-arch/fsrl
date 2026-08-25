@@ -111,6 +111,33 @@ class RankingProtocol:
         return tuple(trials)
 
 
+def ordered_pairs(n_items: int) -> tuple[tuple[int, int], ...]:
+    """Return both orientations of every unordered item pair."""
+
+    return tuple(
+        oriented
+        for first, second in combinations(range(n_items), 2)
+        for oriented in ((first, second), (second, first))
+    )
+
+
+def symbolic_distances(
+    protocol: RankingProtocol, pairs: tuple[tuple[int, int], ...]
+) -> np.ndarray:
+    """Return true-order distance for each item pair in an analysis field."""
+
+    positions = np.empty(protocol.n_items, dtype=np.int64)
+    for position, item in enumerate(protocol.true_order_high_to_low):
+        positions[item] = position
+    return np.asarray(
+        [
+            abs(int(positions[first]) - int(positions[second]))
+            for first, second in pairs
+        ],
+        dtype=np.float64,
+    )
+
+
 def load_ranking_protocol(path: Path | str) -> RankingProtocol:
     path = Path(path)
     with path.open(encoding="utf-8") as handle:

@@ -19,8 +19,8 @@ from fsrl.experiments.human.magnitude_collection import (
     READINESS_PATH,
     build_manifest,
     build_synthetic_session_bundle,
-    load_json,
 )
+from fsrl.infra.provenance import load_json
 
 
 class MagnitudePlacementAnalysisTests(unittest.TestCase):

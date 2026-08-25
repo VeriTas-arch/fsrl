@@ -2,14 +2,14 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.experiments.global_policy.slope_localization import (
     choice_link_components,
     cross_seed_decision,
     seed_decision,
     subject_slopes,
 )
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 

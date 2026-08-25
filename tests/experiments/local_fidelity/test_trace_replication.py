@@ -1,6 +1,5 @@
 import unittest
 
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
 from fsrl.experiments.local_fidelity.trace_replication import (
     backbone_training_config,
     cross_seed_decision,
@@ -8,6 +7,7 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     seed_specification,
     within_seed_decision,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 

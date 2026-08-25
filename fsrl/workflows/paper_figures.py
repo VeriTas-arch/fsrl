@@ -14,6 +14,8 @@ from pathlib import Path
 
 import matplotlib
 
+from fsrl.infra.provenance import file_sha256, load_json
+
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
@@ -103,19 +105,6 @@ class Dataset:
         return self.eligible & np.asarray(
             [subject["ranking_class"] != "correct" for subject in self.subjects]
         )
-
-
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _repo_path(value: str) -> Path:
@@ -240,14 +229,14 @@ def replay_model_subject_pairs(
         validate_sources,
     )
     from fsrl.experiments.local_fidelity.trace_pilot import (
-        _new_local_trace,
-        _ordered_pairs,
-        _query_pass,
+        create_local_trace,
+        query_pass,
     )
     from fsrl.experiments.local_fidelity.trace_replication import (
-        _seed_paths,
+        seed_paths,
         seed_specification,
     )
+    from fsrl.tasks.protocol import ordered_pairs
 
     runtime = configure_runtime()
     source_validation = validate_sources()
@@ -270,14 +259,14 @@ def replay_model_subject_pairs(
     rows = []
     seed_checks = {}
     for seed in specification["model"]["network_seeds"]:
-        paths = _seed_paths(DEFAULT_OUTPUT_ROOT, int(seed))
+        paths = seed_paths(DEFAULT_OUTPUT_ROOT, int(seed))
         gain = load_json(paths["gain"])
         backbone, model_config, checkpoint = load_retro_checkpoint(
             paths["checkpoint"], int(evaluation["subjects"])
         )
         for parameter in backbone.parameters():
             parameter.requires_grad_(False)
-        local = _new_local_trace(
+        local = create_local_trace(
             seed_specification(frozen_specification, int(seed)), model_config.cs
         )
         with torch.no_grad():
@@ -293,11 +282,11 @@ def replay_model_subject_pairs(
             subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
         )
         schedules = tuple(
-            _ordered_pairs(protocol.n_items) for _ in range(model_config.bs)
+            ordered_pairs(protocol.n_items) for _ in range(model_config.bs)
         )
         fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
         trace = dual_access.build_access_trace(evaluator, local, dual_access=True)
-        bundle = _query_pass(
+        bundle = query_pass(
             evaluator,
             local,
             fast_weights,
@@ -602,7 +591,7 @@ def _matrix(values: np.ndarray, n_items: int) -> np.ma.MaskedArray:
     return np.ma.masked_invalid(output)
 
 
-def _ranking_positions(order: list[int]) -> np.ndarray:
+def ranking_positions(order: list[int]) -> np.ndarray:
     positions = np.empty(len(order), dtype=np.int64)
     for position, item in enumerate(order):
         positions[item] = position
@@ -611,7 +600,7 @@ def _ranking_positions(order: list[int]) -> np.ndarray:
 
 def _pairwise_tau(dataset: Dataset) -> np.ndarray:
     positions = [
-        _ranking_positions(subject["subjective_order_high_to_low"])
+        ranking_positions(subject["subjective_order_high_to_low"])
         for subject, include in zip(dataset.subjects, dataset.analysis, strict=True)
         if include
     ]
@@ -631,11 +620,11 @@ def _subject_id(dataset: Dataset, index: int) -> int:
 
 def _subject_tau_to_true(subject: dict, true_positions: np.ndarray) -> float:
     return kendall_tau_positions(
-        _ranking_positions(subject["subjective_order_high_to_low"]), true_positions
+        ranking_positions(subject["subjective_order_high_to_low"]), true_positions
     )
 
 
-def _select_exemplar(dataset: Dataset, true_positions: np.ndarray) -> int:
+def select_exemplar(dataset: Dataset, true_positions: np.ndarray) -> int:
     candidates = [
         index
         for index, subject in enumerate(dataset.subjects)
@@ -1131,7 +1120,7 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
     order_rows = []
     tau_values = {}
     exemplars = {}
-    true_positions = _ranking_positions(list(protocol.true_order_high_to_low))
+    true_positions = ranking_positions(list(protocol.true_order_high_to_low))
     for dataset_id in DATASET_ORDER:
         dataset = datasets[dataset_id]
         counts = {
@@ -1162,7 +1151,7 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
                     "kendall_tau": value,
                 }
             )
-        exemplars[dataset_id] = _select_exemplar(dataset, true_positions)
+        exemplars[dataset_id] = select_exemplar(dataset, true_positions)
         exemplar_index = exemplars[dataset_id]
         for pair_index, pair in enumerate(pairs):
             exemplar_rows.append(

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from dataclasses import dataclass
 from itertools import combinations
@@ -19,9 +18,10 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.confirmation.reproduction_map import _model_record
+from fsrl.experiments.confirmation.reproduction_map import model_record
 from fsrl.experiments.local_fidelity.evidence_access_pilot import access_factor
-from fsrl.experiments.local_fidelity.trace_pilot import _behavior_summaries
+from fsrl.experiments.local_fidelity.trace_pilot import behavior_summaries
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
@@ -75,26 +75,6 @@ class EpisodeTrajectory:
     local_exact_error: float
     local_identity_raw: np.ndarray
     local_kernel_raw: np.ndarray
-
-
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
 
 
 def validate_sources(
@@ -853,7 +833,7 @@ def _liu_local(
     return np.asarray(compressed), np.asarray(identity), max_error
 
 
-def _margin_logits(fields: np.ndarray, geometry: Geometry) -> tuple[dict, ...]:
+def margin_logits(fields: np.ndarray, geometry: Geometry) -> tuple[dict, ...]:
     outputs = []
     for row in fields:
         bundle = {}
@@ -902,11 +882,11 @@ def _behavior_flags(seed: int, behavior: dict) -> dict:
         )
         .astype(np.float64)
     )
-    behavior["participant_bootstrap"] = _behavior_summaries(
+    behavior["participant_bootstrap"] = behavior_summaries(
         behavior, counts, float(evaluation["bootstrap_interval"])
     )
     pseudo = {"seeds": {str(seed): {"behavior": {"dual_access_matched": behavior}}}}
-    record = _model_record(
+    record = model_record(
         pseudo,
         str(seed),
         intervals,
@@ -1061,13 +1041,13 @@ def evaluate_preservation_seed(
     }
     behavior = analyze_sampled_query_policy(
         protocol,
-        _margin_logits(intact, geometry),
+        margin_logits(intact, geometry),
         seed=int(evaluation["choice_seed"]),
         temperature=temperature,
     )
     identity_behavior = analyze_sampled_query_policy(
         protocol,
-        _margin_logits(identity_intact, geometry),
+        margin_logits(identity_intact, geometry),
         seed=int(evaluation["choice_seed"]),
         temperature=temperature,
     )

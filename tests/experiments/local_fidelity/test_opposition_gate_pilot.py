@@ -10,10 +10,10 @@ from fsrl.experiments.local_fidelity.opposition_gate import (
     PolicyOppositionGateTransition,
 )
 from fsrl.experiments.local_fidelity.opposition_gate_pilot import (
-    _ordered_pairs,
     decision_summary,
     query_bundle,
 )
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 
@@ -34,7 +34,7 @@ class PolicyOppositionGatePilotTests(unittest.TestCase):
         self.fast_weights = torch.randn(
             self.config.bs, self.config.hs, self.config.hs, device=self.net.w.device
         )
-        pairs = _ordered_pairs(self.protocol.n_items)
+        pairs = ordered_pairs(self.protocol.n_items)
         self.schedules = tuple(pairs for _ in range(self.config.bs))
 
     def _bundle(self, condition, shuffle_seed=59):

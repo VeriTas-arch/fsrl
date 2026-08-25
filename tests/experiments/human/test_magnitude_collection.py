@@ -14,9 +14,7 @@ from fsrl.experiments.human.magnitude_collection import (
     build_synthetic_session_bundle,
     bytes_sha256,
     canonical_json_bytes,
-    file_sha256,
     load_gzip_json,
-    load_json,
     read_locked_session_bundle,
     render_trial_svg,
     run_readiness,
@@ -26,6 +24,7 @@ from fsrl.experiments.human.magnitude_collection import (
     write_gzip_json_exclusive,
     write_session_bundle_exclusive,
 )
+from fsrl.infra.provenance import file_sha256, load_json
 
 
 class MagnitudePlacementCollectionTests(unittest.TestCase):

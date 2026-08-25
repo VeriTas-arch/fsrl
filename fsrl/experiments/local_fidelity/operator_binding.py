@@ -9,18 +9,18 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE
-from fsrl.evaluation.frozen_fast_weight import FastWeightIntervention
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
-from fsrl.experiments.assembly.trajectory import (
-    bootstrap_counts,
-    load_frozen_evaluator,
-    summarize_subjects,
+from fsrl.evaluation.frozen_fast_weight import (
+    FastWeightIntervention,
+    retained_relation_mask,
 )
+from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
-from fsrl.experiments.local_fidelity.relation_trace import _retained_mask
 from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -58,10 +58,6 @@ def _masked_mean(
         out=np.full_like(numerator, np.nan, dtype=np.float64),
         where=denominator > 0,
     )
-
-
-def _json_values(values: np.ndarray) -> list:
-    return [None if not np.isfinite(value) else float(value) for value in values]
 
 
 def contextual_identity_metrics(
@@ -214,7 +210,7 @@ def summarize_contextual_identity(
         "omitted_max_abs": omitted_max,
         "presence_rule_passed": bool(present),
         "raw_subject_level": {
-            name: _json_values(values) for name, values in subject_metrics.items()
+            name: json_values(values) for name, values in subject_metrics.items()
         },
     }, metrics
 
@@ -309,12 +305,12 @@ def structured_contrasts(
             for relation in range(relations)
         ],
         "raw_subject_level": {
-            name: _json_values(value) for name, value in subject_values.items()
+            name: json_values(value) for name, value in subject_values.items()
         },
     }
 
 
-def _replay_terminal_states(
+def replay_terminal_states(
     evaluator, protocol: RankingProtocol
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, np.ndarray]:
     intact = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
@@ -330,7 +326,12 @@ def _replay_terminal_states(
         loo_states.append(state)
     loo = torch.stack(loo_states)
     effective = evaluator.net.alpha.detach() * (intact[None] - loo)
-    return intact, loo, effective, _retained_mask(evaluator, protocol)
+    return (
+        intact,
+        loo,
+        effective,
+        retained_relation_mask(evaluator, protocol.support_pairs_higher_lower),
+    )
 
 
 def _oriented_query_pairs(
@@ -578,12 +579,12 @@ def _identity_change(
             for name, values in subject.items()
         },
         "raw_subject_level": {
-            name: _json_values(values) for name, values in subject.items()
+            name: json_values(values) for name, values in subject.items()
         },
     }
 
 
-def _decision(flags: dict[str, bool]) -> str:
+def operator_binding_decision(flags: dict[str, bool]) -> str:
     operator_state = flags["operator_state_identity"]
     binding = flags["operator_binding"]
     hidden_state = flags["hidden_state_identity"]
@@ -616,7 +617,7 @@ def _run_seed(
     interval = float(execution["bootstrap_interval"])
     folds = int(execution["subject_folds"])
     chance = 1.0 / len(protocol.support_pairs_higher_lower)
-    intact, loo, effective, retained = _replay_terminal_states(evaluator, protocol)
+    intact, loo, effective, retained = replay_terminal_states(evaluator, protocol)
     levels, validation = collect_factorial(
         evaluator,
         protocol,
@@ -757,7 +758,7 @@ def _run_seed(
             for mode in ("fixed_query", "cross_query")
         },
         "primary_presence": flags,
-        "outcome": _decision(flags),
+        "outcome": operator_binding_decision(flags),
         "validation": {
             **validation,
             "scientific_zero_tolerance": tolerance,
@@ -784,7 +785,7 @@ def _overall_diagnosis(seed_results: dict[str, dict]) -> dict:
     return {
         "replicated_primary_presence": replicated,
         "outcome": (
-            _decision(replicated)
+            operator_binding_decision(replicated)
             if len(seed_outcomes) == 1
             else "mixed_across_development_seeds"
         ),

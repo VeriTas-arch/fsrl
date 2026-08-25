@@ -6,30 +6,29 @@ from pathlib import Path
 
 import numpy as np
 
-from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.experiments.global_policy.allocation_audit import (
     DEFAULT_IMPLEMENTATION_LOCK_PATH,
     DEFAULT_SPECIFICATION_PATH,
     INITIAL_IMPLEMENTATION_LOCK_PATH,
     NONINTERPRETABLE_ATTEMPT_PATH,
     UPSTREAM_OUTPUT_ROOT,
-    _canonical_paths,
-    _q_shape_rows_complete,
     allocation_tensor_view,
+    canonical_paths,
     correlation_summary,
     cross_network_analysis,
     edge_metadata,
     joint_model_statistics,
     pair_fingerprint_vectors,
+    q_shape_rows_complete,
     required_freeze_paths,
     seed_statistics,
     validate_sources,
-    write_json_exclusive,
 )
 from fsrl.experiments.global_policy.amplitude_provenance import NonInterpretableEstimate
 from fsrl.experiments.global_policy.field_reassembly import field_reassembly_estimands
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
 from fsrl.infra.git_provenance import verify_git_registrations
+from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
@@ -336,10 +335,10 @@ class GlobalPolicyAllocationAuditTests(unittest.TestCase):
                 output_root=UPSTREAM_OUTPUT_ROOT,
                 result=Path(directory) / "result.json",
             )
-            _canonical_paths(parsed)
+            canonical_paths(parsed)
             parsed.output_root = Path("/tmp/not-the-frozen-output")
             with self.assertRaisesRegex(RuntimeError, "canonical output_root"):
-                _canonical_paths(parsed)
+                canonical_paths(parsed)
 
     def test_repair_git_gate_requires_the_full_provenance_chain(self):
         self.assertEqual(
@@ -369,7 +368,7 @@ class GlobalPolicyAllocationAuditTests(unittest.TestCase):
             self.assertFalse(path.exists())
 
     def test_prerequisite_row_check_returns_builtin_bool(self):
-        complete = _q_shape_rows_complete(np.ones(77), 77)
+        complete = q_shape_rows_complete(np.ones(77), 77)
         self.assertIs(type(complete), bool)
         self.assertTrue(complete)
 

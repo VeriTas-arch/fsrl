@@ -3,46 +3,41 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 import numpy as np
 
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    readout_margin_fields,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
+from fsrl.experiments.assembly.trajectory import readout_margin_fields
 from fsrl.experiments.global_policy.amplitude_provenance import (
     NonInterpretableEstimate,
-    _interval_summary,
-    _posterior_descriptors,
+    interval_summary,
+    posterior_descriptors,
 )
 from fsrl.experiments.global_policy.field_reassembly import field_reassembly_estimands
 from fsrl.experiments.global_policy.field_replication import (
     ALGEBRA_ERROR_ARRAYS,
-    _distances,
     mandatory_seeds,
     require_pushed_freeze,
     validate_artifacts,
 )
 from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _tensor_hashes,
-    load_json,
-)
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import symbolic_distances
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 ROOT = REPO_ROOT
@@ -111,12 +106,7 @@ UPSTREAM_ONLY_REUSED_SOURCES = {
 }
 
 
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
-def _canonical_paths(parsed: argparse.Namespace) -> None:
+def canonical_paths(parsed: argparse.Namespace) -> None:
     expected = {
         "specification": DEFAULT_SPECIFICATION_PATH,
         "implementation_lock": DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -150,15 +140,6 @@ def required_freeze_paths(
         INITIAL_IMPLEMENTATION_LOCK_PATH,
         NONINTERPRETABLE_ATTEMPT_PATH,
     )
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    """Create a result exactly once, including under a concurrent writer."""
-
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
 
 
 def validate_sources(
@@ -248,7 +229,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -266,7 +247,7 @@ def validate_sources(
     return {"passed": True, "checks": checks, "lock": lock}
 
 
-def _q_shape_rows_complete(values: np.ndarray, subjects: int) -> bool:
+def q_shape_rows_complete(values: np.ndarray, subjects: int) -> bool:
     return bool(values.shape == (subjects,) and np.all(np.isfinite(values)))
 
 
@@ -312,7 +293,7 @@ def validate_upstream(specification: dict) -> tuple[dict, dict, dict[str, np.nda
             dtype=np.float64,
         )
         prior_q_shape[seed] = values
-        checks[f"seed_{seed}_q_shape_rows"] = _q_shape_rows_complete(
+        checks[f"seed_{seed}_q_shape_rows"] = q_shape_rows_complete(
             values, int(specification["evaluation"]["subjects"])
         )
     passed = bool(all(checks.values()))
@@ -340,7 +321,7 @@ def edge_metadata(specification: dict, protocol, geometry) -> dict:
     pair_labels = tuple(
         f"{labels[first]}-{labels[second]}" for first, second in geometry.pairs
     )
-    distances = _distances(protocol, geometry.pairs)
+    distances = symbolic_distances(protocol, geometry.pairs)
     nonlearned = np.asarray(
         [pair not in protocol.learned_pairs for pair in geometry.pairs], dtype=bool
     )
@@ -495,7 +476,7 @@ def _scalar_summary(values: np.ndarray, counts: np.ndarray) -> dict:
     rows = np.asarray(values, dtype=np.float64)
     denominator = np.sum(counts, axis=1)
     samples = counts @ rows / denominator
-    return _interval_summary(float(np.mean(rows)), samples)
+    return interval_summary(float(np.mean(rows)), samples)
 
 
 def _distance_residual_maker(distances: np.ndarray) -> np.ndarray:
@@ -677,7 +658,7 @@ def joint_model_statistics(
     for prefix, fit in (("beta_delta", delta_fit), ("beta_q", q_fit)):
         for offset, name in enumerate(coefficient_names, start=1):
             key = f"{prefix}_{name}"
-            summary = _interval_summary(
+            summary = interval_summary(
                 float(fit["point"][offset]), fit["bootstrap"][:, offset]
             )
             summaries[key] = summary
@@ -781,7 +762,7 @@ def correlation_summary(
             },
             "status": "unresolved_degenerate",
         }
-    summary = _interval_summary(float(point_values[0]), bootstrap_values)
+    summary = interval_summary(float(point_values[0]), bootstrap_values)
     summary["bootstrap"]["degenerate_draws"] = 0
     summary["bootstrap"]["nonfinite_draws"] = 0
     summary["bootstrap"]["zero_norm_draws"] = 0
@@ -823,7 +804,7 @@ def seed_statistics(
     q_sum_bootstrap = counts @ np.sum(arrays["q"], axis=1) / denominator
     q_distance_sum_bootstrap = np.sum(q_distance_bootstrap, axis=1)
     q_distance_summaries = {
-        str(int(level)): _interval_summary(
+        str(int(level)): interval_summary(
             float(q_distance_point[index]), q_distance_bootstrap[:, index]
         )
         for index, level in enumerate(metadata["distance_levels"])
@@ -891,16 +872,18 @@ def analyze_seed(
 
     evaluation = specification["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
-    checkpoint_path = _resolve(artifact["path"])
+    checkpoint_path = resolve_registered_path(artifact["path"])
     backbone, model_config, checkpoint = load_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     backbone.eval()
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    before = _tensor_hashes(backbone)
+    before = tensor_hashes(backbone)
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -916,7 +899,7 @@ def analyze_seed(
     metadata = edge_metadata(specification, protocol, geometry)
     fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     neural_margin = readout_margin_fields(evaluator, fast_weights, geometry)
-    posterior, posterior_integrity = _posterior_descriptors(
+    posterior, posterior_integrity = posterior_descriptors(
         evaluator,
         geometry,
         {
@@ -941,7 +924,7 @@ def analyze_seed(
         float(evaluation["choice_temperature"]),
     )
     statistics, internal = seed_statistics(specification, seed, arrays, metadata)
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
 
     field_errors = {
         f"{name}_max_abs_error": float(np.max(np.abs(estimands[name])))
@@ -1312,7 +1295,7 @@ def parse_args(args=None):
 
 def main(args=None) -> int:
     parsed = parse_args(args)
-    _canonical_paths(parsed)
+    canonical_paths(parsed)
     runtime = require_formal_runtime()
     specification = load_json(parsed.specification)
     if tuple(specification["artifact_contract"]["mandatory_seeds"]) != (2106, 2107):

@@ -7,29 +7,38 @@ from pathlib import Path
 
 import numpy as np
 
+from fsrl.analysis.hodge import (
+    build_complete_graph_geometry,
+    hodge_potentials,
+    normalize_potentials,
+)
+from fsrl.analysis.statistics import (
+    bootstrap_counts,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
 from fsrl.experiments.assembly.trajectory import (
-    bootstrap_counts,
-    build_complete_graph_geometry,
     exact_prefix_trajectory,
-    hodge_potentials,
-    normalize_potentials,
     readout_margin_fields,
-    summarize_difference,
-    summarize_subjects,
 )
 from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json, write_json
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.study_registry import (
+    registered_file_sha256,
+    resolve_record,
+    resolve_registered_path,
+)
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import symbolic_distances
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 ROOT = REPO_ROOT
@@ -43,11 +52,6 @@ DEFAULT_RESULT_PATH = resolve_record("results/global_policy_slope_localization_v
 CONFIRMATION_OUTPUT_ROOT = (
     ROOT / "artifacts" / "runs" / "dual-evidence-access-confirmation-v2-4"
 )
-
-
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def subject_slopes(
@@ -116,7 +120,7 @@ def _source_validation(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -136,29 +140,18 @@ def _source_validation(
 
 def _artifact_validation(specification: dict) -> dict:
     sources = specification["registered_sources"]
-    confirmation_specification_path = _resolve(
+    confirmation_specification_path = resolve_registered_path(
         sources["v2_4_confirmation_specification"]["path"]
     )
     confirmation_specification = load_json(confirmation_specification_path)
     return validate_artifacts(
         confirmation_specification,
         confirmation_specification_path,
-        _resolve(sources["v2_4_confirmation_implementation_lock"]["path"]),
-        _resolve(sources["v2_4_confirmation_artifact_lock"]["path"]),
+        resolve_registered_path(
+            sources["v2_4_confirmation_implementation_lock"]["path"]
+        ),
+        resolve_registered_path(sources["v2_4_confirmation_artifact_lock"]["path"]),
         CONFIRMATION_OUTPUT_ROOT,
-    )
-
-
-def _distances(protocol, pairs: tuple[tuple[int, int], ...]) -> np.ndarray:
-    positions = np.empty(protocol.n_items, dtype=np.int64)
-    for position, item in enumerate(protocol.true_order_high_to_low):
-        positions[item] = position
-    return np.asarray(
-        [
-            abs(int(positions[first]) - int(positions[second]))
-            for first, second in pairs
-        ],
-        dtype=np.float64,
     )
 
 
@@ -214,14 +207,16 @@ def analyze_seed(
 ) -> dict:
     evaluation = specification["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
-    checkpoint_path = _resolve(artifact["path"])
+    checkpoint_path = resolve_registered_path(artifact["path"])
     backbone, model_config, checkpoint = load_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -234,7 +229,7 @@ def analyze_seed(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
     geometry = build_complete_graph_geometry(protocol)
-    distances = _distances(protocol, geometry.pairs)
+    distances = symbolic_distances(protocol, geometry.pairs)
     learned = np.asarray(
         [pair in protocol.learned_pairs for pair in geometry.pairs], dtype=bool
     )
@@ -374,7 +369,7 @@ def analyze_seed(
 
 def _secondary_preservation(specification: dict) -> dict:
     result = load_json(
-        _resolve(
+        resolve_registered_path(
             specification["registered_sources"]["v2_4_confirmation_result"]["path"]
         )
     )

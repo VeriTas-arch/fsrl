@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 
 import numpy as np
@@ -11,15 +10,10 @@ import torch.nn.functional as F
 from torch import nn
 
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP, TrainConfig
+from fsrl.core.local_trace import inverse_softplus
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator, RankingEpisode
 from fsrl.training.backbone import MetaTrainConfig, build_meta_input_sequence
-
-
-def inverse_softplus(value: float) -> float:
-    if value <= 0.0:
-        raise ValueError("softplus target must be positive")
-    return math.log(math.expm1(value))
 
 
 def curvature_risk(

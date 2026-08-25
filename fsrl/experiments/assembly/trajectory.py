@@ -15,7 +15,6 @@ from fsrl.analysis.hodge import (
     build_complete_graph_geometry,
     gradient_energy_fraction,
     hodge_potentials,
-    kendall_tau_scores,  # noqa: F401 - historical public re-export
     normalize_potentials,
     potential_alignment,
     vector_gradient_energy_fraction,
@@ -23,7 +22,8 @@ from fsrl.analysis.hodge import (
 from fsrl.analysis.posterior import ExactRankingPosterior
 from fsrl.analysis.statistics import (
     bootstrap_counts,
-    bootstrap_samples,  # noqa: F401 - historical public re-export
+    json_values,
+    masked_column_mean,
     summarize_difference,
     summarize_subjects,
 )
@@ -33,9 +33,13 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
-from fsrl.experiments.confirmation.behavioral import _validate_checkpoint
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.experiments.confirmation.behavioral import validate_checkpoint
+from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.study_registry import (
+    resolve_record,
+    validate_registered_file,
+)
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -125,20 +129,10 @@ def exact_prefix_trajectory(
     )
 
 
-def _validate_file(registration: dict) -> dict:
-    path = resolve_path(registration["path"])
-    observed = registered_file_sha256(
-        registration["path"], registration["sha256"], resolved_path=path
-    )
-    if observed != registration["sha256"]:
-        raise RuntimeError(f"registered SHA-256 mismatch: {path}")
-    return {"path": registration["path"], "sha256": observed}
-
-
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
     validated = {
-        name: _validate_file(sources[name])
+        name: validate_registered_file(sources[name])
         for name in (
             "pilot_specification",
             "protocol",
@@ -170,7 +164,7 @@ def load_frozen_evaluator(
 ) -> tuple[FrozenFastWeightEvaluator, dict]:
     seed = int(registration["seed"])
     checkpoint = resolve_path(registration["checkpoint_path"])
-    _validate_checkpoint(checkpoint, pilot_specification, seed)
+    validate_checkpoint(checkpoint, pilot_specification, seed)
     behavior = load_json(resolve_path(registration["behavior_path"]))
     net, config, checkpoint_info = load_retro_checkpoint(
         checkpoint, len(behavior["subjects"])
@@ -254,28 +248,6 @@ def classified_effects(
             name: np.asarray(rows) for name, rows in aligned.items()
         },
     }
-
-
-def json_values(values: np.ndarray) -> list:
-    def convert(value):
-        return None if not np.isfinite(value) else float(value)
-
-    array = np.asarray(values, dtype=np.float64)
-    if array.ndim == 1:
-        return [convert(value) for value in array]
-    return [json_values(row) for row in array]
-
-
-def _masked_subject_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
-    rows = np.where(mask, np.asarray(values, dtype=np.float64), np.nan)
-    counts = np.sum(np.isfinite(rows), axis=0)
-    totals = np.nansum(rows, axis=0)
-    return np.divide(
-        totals,
-        counts,
-        out=np.full(rows.shape[1], np.nan, dtype=np.float64),
-        where=counts > 0,
-    )
 
 
 def run_prefix_branches(
@@ -455,7 +427,7 @@ def summarize_matched_branches(
         ):
             aggregate[status][measure] = {
                 name: summarize_subjects(
-                    _masked_subject_mean(values, mask), counts, interval=interval
+                    masked_column_mean(values, mask), counts, interval=interval
                 )
                 for name, values in classes.items()
             }
@@ -585,18 +557,18 @@ def run_leave_one_relation_out(
         ("stable_omitted", ~retained),
     ):
         aggregate[status]["influence_gradient_energy_fraction"] = summarize_subjects(
-            _masked_subject_mean(gradient, mask), counts, interval=interval
+            masked_column_mean(gradient, mask), counts, interval=interval
         )
         aggregate[status]["requested_R_third"] = summarize_subjects(
-            _masked_subject_mean(requested_third, mask), counts, interval=interval
+            masked_column_mean(requested_third, mask), counts, interval=interval
         )
         aggregate[status]["gauge_invariant_R_third_rel"] = summarize_subjects(
-            _masked_subject_mean(relational_third, mask), counts, interval=interval
+            masked_column_mean(relational_third, mask), counts, interval=interval
         )
         for measure, classes in effects_array.items():
             aggregate[status][measure] = {
                 name: summarize_subjects(
-                    _masked_subject_mean(values, mask), counts, interval=interval
+                    masked_column_mean(values, mask), counts, interval=interval
                 )
                 for name, values in classes.items()
             }

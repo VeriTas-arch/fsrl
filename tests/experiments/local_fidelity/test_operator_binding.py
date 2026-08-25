@@ -2,15 +2,15 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.assembly.diagnostics import load_json
-from fsrl.experiments.assembly.trajectory import bootstrap_counts
+from fsrl.analysis.statistics import bootstrap_counts
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
 from fsrl.experiments.local_fidelity.operator_binding import (
-    _decision,
     contextual_identity_metrics,
+    operator_binding_decision,
     overlap_classes,
     structured_contrasts,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 
@@ -89,7 +89,9 @@ class StateQueryOperatorBindingTests(unittest.TestCase):
         )
         self.assertAlmostEqual(result["summary"]["matched_minus_disjoint"]["mean"], 2.0)
 
-    def test_decision_tree_separates_binding_nonlinearity_and_loss(self):
+    def test_decision_tree_separates_binding_nonlinearity_and_loss(
+        self,
+    ):
         flags = {
             "operator_state_identity": True,
             "operator_binding": True,
@@ -97,20 +99,21 @@ class StateQueryOperatorBindingTests(unittest.TestCase):
             "hidden_query_identity_control": True,
         }
         self.assertEqual(
-            _decision(flags),
+            operator_binding_decision(flags),
             "query_keyed_operator_missing_fidelity_transformation",
         )
         nonlinear = dict(flags)
         nonlinear["operator_state_identity"] = False
         nonlinear["operator_binding"] = False
         self.assertEqual(
-            _decision(nonlinear),
+            operator_binding_decision(nonlinear),
             "identity_generated_by_operating_point_nonlinearity",
         )
         lost = dict(flags)
         lost["hidden_state_identity"] = False
         self.assertEqual(
-            _decision(lost), "operator_identity_lost_in_recurrent_expression"
+            operator_binding_decision(lost),
+            "operator_identity_lost_in_recurrent_expression",
         )
 
     def test_registered_sources_are_immutable(self):

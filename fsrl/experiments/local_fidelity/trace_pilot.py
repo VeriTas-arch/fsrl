@@ -13,6 +13,12 @@ import torch
 import torch.nn.functional as F
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.analysis.statistics import (
+    json_values,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
     DISTANCE_INPUT_OFFSET,
@@ -20,40 +26,32 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
     load_retro_checkpoint,
+    retained_relation_mask,
     run_causal_suite,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.curvature_gate import make_gate_tasks
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _adaptation_config,
-    _field_metrics,
-    _json_values,
-    _ordered_pairs,
-    _resolve_registered,
-    _retained_mask,
-    _tensor_hashes,
+    adaptation_config,
     bundle_logits,
     configure_runtime,
-    load_json,
+    field_metrics,
     margin_fields,
     query_binding_summary,
     terminal_projection_summary,
-    write_json,
 )
 from fsrl.experiments.local_fidelity.policy_residual import policy_residual_statistics
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator, RankingEpisode
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 from fsrl.training.backbone import MetaTrainConfig, build_meta_input_sequence
 
@@ -88,7 +86,7 @@ def validate_sources(
     specification = load_json(specification_path)
     checks = []
     for name, registration in specification["registered_sources"].items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -102,7 +100,7 @@ def validate_sources(
             }
         )
     backbone = specification["frozen_backbone_contract"]
-    backbone_path = _resolve_registered(backbone["path"])
+    backbone_path = resolve_registered_path(backbone["path"])
     observed_backbone = checkpoint_sha256(backbone_path)
     checks.append(
         {
@@ -125,7 +123,7 @@ def validate_sources(
         }
     )
     for name, registration in lock["implementation_sources"].items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -160,7 +158,7 @@ def validate_artifact(
             artifact_lock["implementation_lock_sha256"],
         ),
         "frozen_backbone": (
-            _resolve_registered(artifact_lock["frozen_backbone"]["path"]),
+            resolve_registered_path(artifact_lock["frozen_backbone"]["path"]),
             artifact_lock["frozen_backbone"]["sha256"],
         ),
         "gain_artifact": (
@@ -180,7 +178,7 @@ def validate_artifact(
                 "passed": observed == expected,
             }
         )
-    declared = _resolve_registered(artifact_lock["gain_artifact"]["path"])
+    declared = resolve_registered_path(artifact_lock["gain_artifact"]["path"])
     if declared.resolve() != artifact_path.resolve():
         raise RuntimeError("artifact lock points to a different gain artifact")
     if not all(check["passed"] for check in checks):
@@ -203,7 +201,7 @@ def _runtime_specification(specification: dict) -> dict:
     }
 
 
-def _new_local_trace(specification: dict, cue_size: int) -> ConjunctiveLocalTrace:
+def create_local_trace(specification: dict, cue_size: int) -> ConjunctiveLocalTrace:
     adaptation = specification["local_only_adaptation"]
     return ConjunctiveLocalTrace(
         cue_size,
@@ -347,14 +345,14 @@ def adapt_gain(
     runtime: dict,
 ) -> Path:
     runtime_specification = _runtime_specification(specification)
-    adaptation = _adaptation_config(runtime_specification)
+    adaptation = adaptation_config(runtime_specification)
     backbone, model_config, checkpoint_info = load_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    before = _tensor_hashes(backbone)
-    local = _new_local_trace(specification, model_config.cs)
+    before = tensor_hashes(backbone)
+    local = create_local_trace(specification, model_config.cs)
     task_generator = make_gate_tasks(adaptation)
     rng = np.random.default_rng(adaptation.seed)
     np.random.seed(adaptation.seed)
@@ -402,7 +400,7 @@ def adapt_gain(
                 )
                 + "\n"
             )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     if before != after:
         raise RuntimeError("frozen backbone changed during v2.3 gain adaptation")
     artifact = {
@@ -441,7 +439,7 @@ def canonical_derangements(subjects: int, n_items: int, seed: int) -> np.ndarray
 
 def shuffled_pair_indices(subjects: int, n_items: int, seed: int) -> np.ndarray:
     canonical = tuple(combinations(range(n_items), 2))
-    ordered = _ordered_pairs(n_items)
+    ordered = ordered_pairs(n_items)
     ordered_index = {pair: index for index, pair in enumerate(ordered)}
     derangements = canonical_derangements(subjects, n_items, seed)
     rows = np.empty((subjects, len(ordered)), dtype=np.int64)
@@ -498,7 +496,7 @@ def build_local_trace(
     return state.detach().clone()
 
 
-def _query_pass(
+def query_pass(
     evaluator: FrozenFastWeightEvaluator,
     local: ConjunctiveLocalTrace,
     fast_weights: torch.Tensor,
@@ -523,7 +521,7 @@ def _query_pass(
         )
     }
     query_weights = torch.zeros_like(fast_weights) if global_off else fast_weights
-    all_pairs = _ordered_pairs(evaluator.protocol.n_items)
+    all_pairs = ordered_pairs(evaluator.protocol.n_items)
     with torch.no_grad():
         for pair_index in range(pair_count):
             hidden = evaluator.net.initialZeroState(subjects)
@@ -624,7 +622,7 @@ def query_bundle(
         shuffled = shuffled_pair_indices(
             evaluator.config.bs, evaluator.protocol.n_items, shuffle_seed
         )
-    return _query_pass(
+    return query_pass(
         evaluator,
         local,
         fast_weights,
@@ -676,25 +674,25 @@ def _local_specificity(
             ),
         },
         "raw_subject_level": {
-            "direct_absolute": _json_values(subject_direct),
-            "remote_absolute": _json_values(subject_remote),
-            "direct_minus_three_remote": _json_values(difference),
+            "direct_absolute": json_values(subject_direct),
+            "remote_absolute": json_values(subject_remote),
+            "direct_minus_three_remote": json_values(difference),
         },
         "raw_relation_subject": {
-            "direct_absolute": _json_values(direct),
-            "remote_absolute": _json_values(remote),
+            "direct_absolute": json_values(direct),
+            "remote_absolute": json_values(remote),
         },
     }
 
 
-def _behavior_subject_values(result: dict, name: str) -> np.ndarray:
+def behavior_subject_values(result: dict, name: str) -> np.ndarray:
     return np.asarray([row[name] for row in result["subjects"]], dtype=np.float64)
 
 
-def _behavior_summaries(result: dict, counts: np.ndarray, interval: float) -> dict:
+def behavior_summaries(result: dict, counts: np.ndarray, interval: float) -> dict:
     return {
         name: summarize_subjects(
-            _behavior_subject_values(result, name), counts, interval=interval
+            behavior_subject_values(result, name), counts, interval=interval
         )
         for name in ("overall_accuracy", "learned_accuracy", "nonlearned_accuracy")
     }
@@ -739,26 +737,26 @@ def decision_summary(
     }
     behavior_contrasts = {
         "dual_minus_original_learned_accuracy": summarize_difference(
-            _behavior_subject_values(behavior["dual_intact"], "learned_accuracy"),
-            _behavior_subject_values(
+            behavior_subject_values(behavior["dual_intact"], "learned_accuracy"),
+            behavior_subject_values(
                 behavior["original_v1_local_off"], "learned_accuracy"
             ),
             counts,
             interval=interval,
         ),
         "dual_minus_original_nonlearned_accuracy": summarize_difference(
-            _behavior_subject_values(behavior["dual_intact"], "nonlearned_accuracy"),
-            _behavior_subject_values(
+            behavior_subject_values(behavior["dual_intact"], "nonlearned_accuracy"),
+            behavior_subject_values(
                 behavior["original_v1_local_off"], "nonlearned_accuracy"
             ),
             counts,
             interval=interval,
         ),
         "P_off_learned_minus_nonlearned": summarize_difference(
-            _behavior_subject_values(
+            behavior_subject_values(
                 behavior["global_P_off_local_intact"], "learned_accuracy"
             ),
-            _behavior_subject_values(
+            behavior_subject_values(
                 behavior["global_P_off_local_intact"], "nonlearned_accuracy"
             ),
             counts,
@@ -784,7 +782,7 @@ def decision_summary(
         > 0.0
     )
     p_behavior = {
-        name: _behavior_summaries(
+        name: behavior_summaries(
             behavior["global_P_off_local_intact"], counts, interval
         )[name]
         for name in ("learned_accuracy", "nonlearned_accuracy")
@@ -802,7 +800,7 @@ def decision_summary(
         interval=interval,
     )
     remote_collapse = remote_collapse_contrast["bootstrap"]["upper"] < 0.0
-    dual_nonlearned = _behavior_summaries(behavior["dual_intact"], counts, interval)[
+    dual_nonlearned = behavior_summaries(behavior["dual_intact"], counts, interval)[
         "nonlearned_accuracy"
     ]
     nonlearned = (
@@ -902,8 +900,8 @@ def _residual_fingerprint(
         ),
         "mean_absolute_local_margin_other_cells": float(np.mean(applied[~high])),
         "by_relation": relation_rows,
-        "raw_intact_absolute_local_margin": _json_values(applied),
-        "raw_intact_absolute_policy_residual": _json_values(residual),
+        "raw_intact_absolute_local_margin": json_values(applied),
+        "raw_intact_absolute_policy_residual": json_values(residual),
     }
 
 
@@ -926,11 +924,13 @@ def evaluate_pilot(
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    local_module = _new_local_trace(specification, model_config.cs)
+    local_module = create_local_trace(specification, model_config.cs)
     with torch.no_grad():
         local_module.raw_gain.fill_(float(artifact["raw_lambda_L"]))
     protocol = load_ranking_protocol(
-        _resolve_registered(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -943,7 +943,7 @@ def evaluate_pilot(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
     geometry = build_complete_graph_geometry(protocol)
-    pairs = _ordered_pairs(protocol.n_items)
+    pairs = ordered_pairs(protocol.n_items)
     schedules = tuple(pairs for _ in range(model_config.bs))
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     intact_local = build_local_trace(evaluator, local_module)
@@ -963,7 +963,7 @@ def evaluate_pilot(
             )
         )
     loo_fast_weights_tensor = torch.stack(loo_fast_weights)
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     counts = (
         np.random.default_rng(int(evaluation["bootstrap_seed"]))
         .multinomial(
@@ -1011,7 +1011,7 @@ def evaluate_pilot(
             ),
         }
         condition_fields[condition] = fields["intact"]
-        local[condition] = _field_metrics(
+        local[condition] = field_metrics(
             fields, relations, retained, geometry, counts, interval
         )
         behavior[condition] = analyze_sampled_query_policy(
@@ -1020,7 +1020,7 @@ def evaluate_pilot(
             seed=int(evaluation["choice_seed"]),
             temperature=float(evaluation["temperature"]),
         )
-        behavior[condition]["participant_bootstrap"] = _behavior_summaries(
+        behavior[condition]["participant_bootstrap"] = behavior_summaries(
             behavior[condition], counts, interval
         )
         common_mode_errors.append(
@@ -1093,12 +1093,12 @@ def evaluate_pilot(
         cue_mode=str(evaluation["cue_mode"]),
         subject_encoding_mode=str(evaluation["subject_encoding_mode"]),
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
-        protocol_path=_resolve_registered(
+        protocol_path=resolve_registered_path(
             specification["registered_sources"]["liu_protocol"]["path"]
         ),
     )
     qualification_specification = load_json(
-        _resolve_registered(
+        resolve_registered_path(
             specification["registered_sources"]["qualification"]["path"]
         )
     )
@@ -1142,7 +1142,7 @@ def evaluate_pilot(
         condition: {
             "summary": local[condition]["summary"],
             "raw_subject_level": {
-                key: _json_values(value)
+                key: json_values(value)
                 for key, value in local[condition]["subject_level"].items()
             },
             "raw_relation_subject": local[condition]["raw_relation_subject"],
@@ -1214,7 +1214,9 @@ def main(args=None) -> int:
         parsed.specification, parsed.implementation_lock
     )
     specification = load_json(parsed.specification)
-    checkpoint = _resolve_registered(specification["frozen_backbone_contract"]["path"])
+    checkpoint = resolve_registered_path(
+        specification["frozen_backbone_contract"]["path"]
+    )
     artifact = parsed.output_root / "seed-2101" / "local" / "gain.json"
     if parsed.stage == "adapt-gain":
         adapt_gain(

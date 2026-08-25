@@ -6,6 +6,13 @@ import os
 import sys
 from importlib import import_module
 
+from fsrl.infra.runtime import (
+    ExecutionProfile,
+    configure_runtime,
+    default_device,
+    runtime_snapshot,
+)
+
 CPU_THREAD_LIMIT = 1
 ACTIVE_ENVIRONMENT_VARIABLE = "FSRL_FORMAL_RUNTIME_ACTIVE"
 WORKFLOW_MODULES = {
@@ -22,37 +29,43 @@ WORKFLOW_MODULES = {
     "human-metric-constructive-comparator": (
         "fsrl.experiments.human.constructive_comparator"
     ),
+    "liu-evidence-sparsity-transport": "fsrl.experiments.transport.evidence_sparsity",
+    "liu-item-count-transport": "fsrl.experiments.transport.item_count",
+    "liu-presentation-order-transport": "fsrl.experiments.transport.presentation_order",
     "liu-support-topology-transport": "fsrl.experiments.transport.topology",
 }
+
+
+def _formal_profile() -> ExecutionProfile:
+    return ExecutionProfile(
+        device=default_device(),
+        cpu_threads=CPU_THREAD_LIMIT,
+        compile=False,
+        require_cuda=False,
+    )
 
 
 def configure_formal_runtime() -> dict:
     """Bound PyTorch CPU work without changing NumPy/BLAS reductions."""
 
-    import torch
-
-    torch.set_num_threads(CPU_THREAD_LIMIT)
-    if torch.get_num_interop_threads() != CPU_THREAD_LIMIT:
-        torch.set_num_interop_threads(CPU_THREAD_LIMIT)
+    configure_runtime(_formal_profile())
     os.environ[ACTIVE_ENVIRONMENT_VARIABLE] = "1"
     return formal_runtime_snapshot()
 
 
 def formal_runtime_snapshot() -> dict:
-    import torch
-
+    profile = _formal_profile()
+    snapshot = runtime_snapshot(profile)
     return {
         "active": os.environ.get(ACTIVE_ENVIRONMENT_VARIABLE) == "1",
         "cpu_thread_limit": CPU_THREAD_LIMIT,
-        "torch_intraop_threads": torch.get_num_threads(),
-        "torch_interop_threads": torch.get_num_interop_threads(),
-        "torch_version": str(torch.__version__),
-        "cuda_version": torch.version.cuda,
-        "cuda_available": torch.cuda.is_available(),
-        "device": "cuda" if torch.cuda.is_available() else "cpu",
-        "device_name": (
-            torch.cuda.get_device_name(0) if torch.cuda.is_available() else None
-        ),
+        "torch_intraop_threads": snapshot["torch_intraop_threads"],
+        "torch_interop_threads": snapshot["torch_interop_threads"],
+        "torch_version": snapshot["torch_version"],
+        "cuda_version": snapshot["cuda_version"],
+        "cuda_available": snapshot["cuda_available"],
+        "device": profile.device,
+        "device_name": snapshot["device_name"],
     }
 
 

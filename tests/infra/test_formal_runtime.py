@@ -7,16 +7,42 @@ from types import ModuleType
 from unittest.mock import Mock, patch
 
 from fsrl.experiments.confirmation.behavioral import (
-    _formal_runtime_source_registration,
-    _formal_training_source_registration,
-    _validate_formal_runtime_record,
-    _validate_formal_training_execution,
+    formal_runtime_source_registration,
+    formal_training_source_registration,
+    validate_formal_runtime_record,
+    validate_formal_training_execution,
 )
 from fsrl.infra import formal_runtime
 from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_transport_dispatches_use_registered_entry_points(self):
+        workflows = {
+            "liu-evidence-sparsity-transport": (
+                "fsrl.experiments.transport.evidence_sparsity"
+            ),
+            "liu-item-count-transport": "fsrl.experiments.transport.item_count",
+            "liu-presentation-order-transport": (
+                "fsrl.experiments.transport.presentation_order"
+            ),
+        }
+        for command, module_name in workflows.items():
+            with self.subTest(command=command):
+                module = ModuleType(module_name)
+                workflow = Mock(return_value=43)
+                module.main = workflow
+                with (
+                    patch.object(
+                        formal_runtime, "configure_formal_runtime"
+                    ) as configure,
+                    patch.dict(sys.modules, {module_name: module}),
+                ):
+                    result = formal_runtime.main([command, "--sentinel"])
+                configure.assert_called_once_with()
+                workflow.assert_called_once_with(["--sentinel"])
+                self.assertEqual(result, 43)
+
     def test_support_topology_transport_dispatch_uses_registered_entry_point(self):
         module_name = "fsrl.experiments.transport.topology"
         module = ModuleType(module_name)
@@ -158,24 +184,24 @@ class FormalRuntimeTests(unittest.TestCase):
         )
         record = {
             "execution_runtime": recorded_runtime,
-            "execution_runtime_source": _formal_runtime_source_registration(),
+            "execution_runtime_source": formal_runtime_source_registration(),
         }
-        _validate_formal_runtime_record(record)
+        validate_formal_runtime_record(record)
 
         record["execution_runtime"]["torch_interop_threads"] = 2
         with self.assertRaisesRegex(RuntimeError, "bounded GPU runtime"):
-            _validate_formal_runtime_record(record)
+            validate_formal_runtime_record(record)
 
     def test_compiled_training_record_is_source_locked(self):
         record = {
             "training_execution": copy.deepcopy(COMPILED_TRAINING_EXECUTION),
-            "training_execution_source": _formal_training_source_registration(),
+            "training_execution_source": formal_training_source_registration(),
         }
-        _validate_formal_training_execution(record)
+        validate_formal_training_execution(record)
 
         record["training_execution"]["torch_compile"]["fullgraph"] = False
         with self.assertRaisesRegex(RuntimeError, "registered compiled training"):
-            _validate_formal_training_execution(record)
+            validate_formal_training_execution(record)
 
 
 if __name__ == "__main__":

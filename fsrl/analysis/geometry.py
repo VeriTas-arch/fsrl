@@ -16,6 +16,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -247,11 +248,6 @@ def evaluate_geometry_gate(result: dict, specification: dict) -> dict:
         "passed": all(check["passed"] for check in checks),
         "checks": checks,
     }
-
-
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
 
 
 def run_geometry_analysis(

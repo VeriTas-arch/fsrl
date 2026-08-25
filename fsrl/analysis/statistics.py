@@ -5,6 +5,42 @@ from __future__ import annotations
 import numpy as np
 
 
+def json_values(values: np.ndarray) -> float | None | list:
+    """Convert an array into JSON-safe finite floats and nested lists."""
+
+    array = np.asarray(values, dtype=np.float64)
+    if array.ndim == 0:
+        return None if not np.isfinite(array) else float(array)
+    return [json_values(row) for row in array]
+
+
+def stable_sigmoid(values: np.ndarray) -> np.ndarray:
+    """Evaluate the logistic function without overflow."""
+
+    clipped = np.clip(np.asarray(values, dtype=np.float64), -60.0, 60.0)
+    return 1.0 / (1.0 + np.exp(-clipped))
+
+
+def finite_column_mean(values: np.ndarray) -> np.ndarray:
+    """Average finite rows independently for each subject column."""
+
+    rows = np.asarray(values, dtype=np.float64)
+    finite = np.sum(np.isfinite(rows), axis=0)
+    return np.divide(
+        np.nansum(rows, axis=0),
+        finite,
+        out=np.full(rows.shape[1], np.nan, dtype=np.float64),
+        where=finite > 0,
+    )
+
+
+def masked_column_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    """Average selected finite rows independently for each subject column."""
+
+    rows = np.where(mask, np.asarray(values, dtype=np.float64), np.nan)
+    return finite_column_mean(rows)
+
+
 def bootstrap_counts(
     rng: np.random.Generator, samples: int, subjects: int
 ) -> np.ndarray:

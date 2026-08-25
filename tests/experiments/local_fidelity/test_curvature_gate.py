@@ -4,11 +4,11 @@ import numpy as np
 import torch
 
 from fsrl.core.config import TrainConfig
+from fsrl.core.local_trace import inverse_softplus
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.experiments.local_fidelity.curvature_gate import (
     CurvatureGateTransition,
     curvature_risk,
-    inverse_softplus,
 )
 
 

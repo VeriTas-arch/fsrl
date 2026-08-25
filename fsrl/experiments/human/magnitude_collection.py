@@ -15,6 +15,7 @@ from pathlib import Path
 import jsonschema
 import numpy as np
 
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
 
@@ -37,11 +38,6 @@ RESULT_PATH = resolve_record(
 )
 
 
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
 def canonical_json_bytes(value: object) -> bytes:
     return json.dumps(
         value, sort_keys=True, separators=(",", ":"), allow_nan=False
@@ -50,14 +46,6 @@ def canonical_json_bytes(value: object) -> bytes:
 
 def bytes_sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def child_seed(readiness: dict, identity: str, domain: str) -> int:
@@ -946,13 +934,6 @@ def run_readiness(
             "or explicit collection-GO requirement is satisfied by this artifact."
         ),
     }
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -49,6 +49,7 @@ __all__ = [
     "load_training_provenance",
     "main",
     "parse_args",
+    "retained_relation_mask",
     "run_causal_suite",
 ]
 
@@ -79,6 +80,25 @@ class OrderInvarianceMetrics:
     pairs: int
     max_abs_logit_delta: float
     mean_abs_logit_delta: float
+
+
+def retained_relation_mask(
+    evaluator: FrozenFastWeightEvaluator, relations
+) -> np.ndarray:
+    """Return relation-by-subject retention under the evaluator's encoding."""
+
+    if evaluator.subject_relation_gains is None:
+        return np.ones((len(relations), evaluator.config.bs), dtype=bool)
+    return np.asarray(
+        [
+            [
+                evaluator.subject_relation_gains[subject][relation] > 0.0
+                for subject in range(evaluator.config.bs)
+            ]
+            for relation in relations
+        ],
+        dtype=bool,
+    )
 
 
 def deterministic_cue_codes(

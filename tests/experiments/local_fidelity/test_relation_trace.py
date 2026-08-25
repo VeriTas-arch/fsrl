@@ -2,13 +2,13 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.assembly.diagnostics import load_json
+from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
 from fsrl.experiments.local_fidelity.relation_trace import (
-    _decision,
     prototype_identity_metrics,
     prototype_rdm_similarity,
-    validate_registered_sources,
+    relation_trace_decision,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 
@@ -54,7 +54,9 @@ class RelationTraceLocalizationTests(unittest.TestCase):
         result = prototype_rdm_similarity(first, second)
         self.assertAlmostEqual(result["mean"], 1.0)
 
-    def test_decision_tree_distinguishes_storage_access_and_fidelity(self):
+    def test_decision_tree_distinguishes_storage_access_and_fidelity(
+        self,
+    ):
         all_present = {
             "generated_effective_write": True,
             "terminal_effective_fast_weight": True,
@@ -62,14 +64,14 @@ class RelationTraceLocalizationTests(unittest.TestCase):
             "response_hodge_residual": True,
         }
         self.assertEqual(
-            _decision(all_present),
+            relation_trace_decision(all_present),
             "storage_access_present_missing_fidelity_transformation",
         )
         no_access = dict(all_present)
         no_access["response_full_hidden"] = False
         no_access["response_hodge_residual"] = False
         self.assertEqual(
-            _decision(no_access),
+            relation_trace_decision(no_access),
             "persistent_storage_present_query_access_missing",
         )
         query_emergent = {
@@ -79,7 +81,7 @@ class RelationTraceLocalizationTests(unittest.TestCase):
             "response_hodge_residual": True,
         }
         self.assertEqual(
-            _decision(query_emergent),
+            relation_trace_decision(query_emergent),
             "mixed_pattern_requires_new_registered_hierarchy",
         )
 

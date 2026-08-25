@@ -5,12 +5,12 @@ import numpy as np
 
 from fsrl.experiments.reduction.dual_state_v1 import (
     ReducedParameters,
-    _margin_logits,
     accumulator_fit,
     antisymmetric_field_from_margin_bundle,
     complete_geometry,
     hodge_potential,
     local_edge_compression,
+    margin_logits,
     reduced_step,
     rollout,
     unconstrained_bilinear_fit,
@@ -46,7 +46,7 @@ class DualStateReducedAlgorithmTests(unittest.TestCase):
 
     def test_behavior_adapter_returns_oriented_scalar_contrasts(self):
         fields = np.arange(56, dtype=np.float64).reshape(2, 28) / 10.0
-        bundles = _margin_logits(fields, self.geometry)
+        bundles = margin_logits(fields, self.geometry)
         for subject, bundle in enumerate(bundles):
             for index, (first, second) in enumerate(self.geometry.pairs):
                 self.assertIsInstance(bundle[(first, second)], float)

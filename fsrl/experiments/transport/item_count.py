@@ -22,6 +22,19 @@ from fsrl.analysis.behavioral import (
     kendall_tau_positions,
     maximum_circular_triads,
 )
+from fsrl.analysis.hodge import (
+    build_complete_graph_geometry,
+    gradient_energy_fraction,
+    hodge_potentials,
+    kendall_tau_scores,
+)
+from fsrl.analysis.statistics import (
+    finite_column_mean,
+    json_values,
+    stable_sigmoid,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.core.config import TrainConfig
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
@@ -29,49 +42,38 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     deterministic_cue_codes,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    gradient_energy_fraction,
-    hodge_potentials,
-    kendall_tau_scores,
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _ordered_pairs,
-    _retained_mask,
-    _tensor_hashes,
     bundle_logits,
     margin_fields,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    _build_fast_weight_loo,
-    _presentation_invariance,
     build_access_trace,
+    build_fast_weight_loo,
+    measure_presentation_invariance,
 )
-from fsrl.experiments.local_fidelity.trace_pilot import _query_pass
+from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
     ROOT,
-    _finite_primary,
-    _json_values,
-    _schedule_hash,
-    _sigmoid,
     bootstrap_counts,
     condition_metrics,
+    finite_primary,
     graph_descriptor,
-    load_json,
     reconstruct_local_ledger,
-    resolve_path,
-    write_json_exclusive,
+    support_schedule_hash,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.study_registry import (
+    canonical_file_registration,
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
 )
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 from fsrl.tasks.subject_encoding import (
     SubjectEncodingState,
@@ -93,10 +95,6 @@ IMPLEMENTATION_SOURCES = {
 REGISTRATION_COMMIT = "9577d381c205516a9eac2a82a935d4ddcaafca19"
 
 
-def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(resolve_record(path))}
-
-
 def write_implementation_lock(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -108,7 +106,8 @@ def write_implementation_lock(
         "registration_commit": REGISTRATION_COMMIT,
         "specification_sha256": file_sha256(specification_path),
         "implementation_sources": {
-            name: _registration(path) for name, path in IMPLEMENTATION_SOURCES.items()
+            name: canonical_file_registration(path)
+            for name, path in IMPLEMENTATION_SOURCES.items()
         },
     }
     write_json_exclusive(lock_path, lock)
@@ -761,7 +760,7 @@ def validate_size_interface(evaluator: VariableItemFrozenFastWeightEvaluator) ->
         "admission_relations_complete": bool(admission),
         "cue_shape_valid": bool(cue_shape),
         "subject_state_shape_valid": bool(state_shape),
-        "support_schedule_sha256": _schedule_hash(evaluator),
+        "support_schedule_sha256": support_schedule_hash(evaluator),
         "cue_codes_sha256": _cue_hash(evaluator),
         "admission_sha256": _admission_hash(evaluator),
     }
@@ -823,7 +822,7 @@ def constructive_metrics_generic(
             name: summarize_subjects(values, counts, interval=interval)
             for name, values in raw.items()
         },
-        "raw_subject": {name: _json_values(values) for name, values in raw.items()},
+        "raw_subject": {name: json_values(values) for name, values in raw.items()},
     }
 
 
@@ -881,12 +880,12 @@ def relation_loo_metrics_generic(
             ),
         },
         "raw_subject": {
-            "remote_absolute": _json_values(subject_remote),
-            "third_party_relational": _json_values(subject_third),
+            "remote_absolute": json_values(subject_remote),
+            "third_party_relational": json_values(subject_third),
         },
         "raw_relation_subject": {
-            "remote_absolute": _json_values(remote),
-            "third_party_relational": _json_values(third_party),
+            "remote_absolute": json_values(remote),
+            "third_party_relational": json_values(third_party),
         },
     }
 
@@ -976,21 +975,11 @@ def serial_position_endpoint_generic(behavior: dict, protocol: RankingProtocol) 
     profile = totals / counts
     interior = float(np.mean(profile[1:-1]))
     return {
-        "profile_high_to_low": _json_values(profile),
+        "profile_high_to_low": json_values(profile),
         "interior_mean": interior,
         "mean_endpoint_contrast": float(np.mean(profile[[0, -1]]) - interior),
         "minimum_endpoint_advantage": float(min(profile[0], profile[-1]) - interior),
     }
-
-
-def _masked_subject_mean(values: np.ndarray) -> np.ndarray:
-    finite = np.sum(np.isfinite(values), axis=0)
-    return np.divide(
-        np.nansum(values, axis=0),
-        finite,
-        out=np.full(values.shape[1], np.nan),
-        where=finite > 0,
-    )
 
 
 def _distance_summaries(
@@ -1016,8 +1005,8 @@ def _distance_summaries(
         "normalized_distance_slope": summarize_subjects(
             normalized, counts, interval=interval
         ),
-        "raw_subject_symbolic_distance_slope": _json_values(symbolic),
-        "raw_subject_normalized_distance_slope": _json_values(normalized),
+        "raw_subject_symbolic_distance_slope": json_values(symbolic),
+        "raw_subject_normalized_distance_slope": json_values(normalized),
     }
 
 
@@ -1141,10 +1130,10 @@ def evaluate_cell(
     learned_mask = np.asarray(
         [pair in protocol.learned_pairs for pair in geometry.pairs]
     )
-    query_schedules = tuple(_ordered_pairs(n_items) for _ in range(evaluator.config.bs))
-    before = _tensor_hashes(evaluator.net)
+    query_schedules = tuple(ordered_pairs(n_items) for _ in range(evaluator.config.bs))
+    before = tensor_hashes(evaluator.net)
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = _build_fast_weight_loo(evaluator, relations)
+    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
     intact_trace = build_access_trace(evaluator, local, dual_access=True)
     loo_traces = [
         build_access_trace(
@@ -1152,7 +1141,7 @@ def evaluate_cell(
         )
         for relation in relations
     ]
-    intact_bundle = _query_pass(
+    intact_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -1162,7 +1151,7 @@ def evaluate_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    a_off_bundle = _query_pass(
+    a_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -1172,7 +1161,7 @@ def evaluate_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    p_off_bundle = _query_pass(
+    p_off_bundle = query_pass(
         evaluator,
         local,
         intact_fast_weights,
@@ -1183,7 +1172,7 @@ def evaluate_cell(
         shuffled_indices=None,
     )
     loo_global_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             loo_fast_weights[index],
@@ -1196,7 +1185,7 @@ def evaluate_cell(
         for index in range(len(relations))
     ]
     loo_local_bundles = [
-        _query_pass(
+        query_pass(
             evaluator,
             local,
             intact_fast_weights,
@@ -1287,9 +1276,9 @@ def evaluate_cell(
         intact_trace.state.detach().cpu().numpy().astype(np.float64),
         intact_bundle["raw_local_margins"][:, 0::2],
     )
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     exact_probability = {
-        name: _sigmoid(
+        name: stable_sigmoid(
             field * geometry.true_sign[None] / float(evaluation["temperature"])
         )
         for name, field in fields.items()
@@ -1322,15 +1311,15 @@ def evaluate_cell(
         "contrasts": contrasts,
         "local_exactness": exact,
         "retained_omitted": {
-            "retained_counts_per_subject": _json_values(np.sum(retained, axis=0)),
-            "omitted_counts_per_subject": _json_values(np.sum(~retained, axis=0)),
+            "retained_counts_per_subject": json_values(np.sum(retained, axis=0)),
+            "omitted_counts_per_subject": json_values(np.sum(~retained, axis=0)),
             "retained_correct_probability": summarize_subjects(
-                _masked_subject_mean(np.where(retained, learned_probability, np.nan)),
+                finite_column_mean(np.where(retained, learned_probability, np.nan)),
                 counts,
                 interval=interval,
             ),
             "omitted_correct_probability": summarize_subjects(
-                _masked_subject_mean(np.where(~retained, learned_probability, np.nan)),
+                finite_column_mean(np.where(~retained, learned_probability, np.nan)),
                 counts,
                 interval=interval,
             ),
@@ -1342,7 +1331,7 @@ def evaluate_cell(
         ),
         "density_dependencies": {
             name: {
-                "raw_subject": _json_values(values),
+                "raw_subject": json_values(values),
                 "summary": summarize_subjects(values, counts, interval=interval),
             }
             for name, values in dependencies.items()
@@ -1357,10 +1346,10 @@ def evaluate_cell(
         "query_trials": protocol.query_trials,
         "direct_query_fraction": len(relations) / float(len(geometry.pairs)),
     }
-    presentation = _presentation_invariance(
+    presentation = measure_presentation_invariance(
         evaluator, local, intact_trace.natural_scalars
     )
-    schedule_hash = _schedule_hash(evaluator)
+    schedule_hash = support_schedule_hash(evaluator)
     n8_metrics_exact = bool(
         n_items != 8
         or _legacy_metric_projection(metrics) == (source_cell or {})["metrics"]
@@ -1368,7 +1357,7 @@ def evaluate_cell(
     n8_schedule_exact = bool(
         n_items != 8 or schedule_hash == (source_cell or {})["support_schedule_sha256"]
     )
-    after = _tensor_hashes(evaluator.net)
+    after = tensor_hashes(evaluator.net)
     individualized = metrics["individualized"]
     individualized_finite = bool(
         individualized["eligible_noncorrect_subjects"] < 2
@@ -1400,7 +1389,7 @@ def evaluate_cell(
         ),
         **presentation,
         "primary_values_finite": bool(
-            _finite_primary(metrics) and individualized_finite
+            finite_primary(metrics) and individualized_finite
         ),
     }
     integrity["all_passed"] = bool(

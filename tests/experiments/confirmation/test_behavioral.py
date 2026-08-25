@@ -5,9 +5,9 @@ from pathlib import Path
 from fsrl.experiments.confirmation.behavioral import (
     aggregate_confirmation,
     compare_behavior_to_human,
-    load_json,
     validate_confirmation_contract,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 

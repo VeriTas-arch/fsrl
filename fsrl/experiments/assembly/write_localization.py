@@ -12,27 +12,35 @@ import numpy as np
 import torch
 from scipy import stats
 
+from fsrl.analysis.hodge import (
+    CompleteGraphGeometry,
+    build_complete_graph_geometry,
+    gradient_energy_fraction,
+    hodge_potentials,
+)
 from fsrl.analysis.posterior import ExactRankingPosterior
+from fsrl.analysis.statistics import (
+    bootstrap_counts,
+    json_values,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
 )
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
 from fsrl.experiments.assembly.trajectory import (
-    CompleteGraphGeometry,
-    bootstrap_counts,
-    build_complete_graph_geometry,
-    gradient_energy_fraction,
-    hodge_potentials,
-    json_values,
     load_frozen_evaluator,
     ordered_query_schedule,
     readout_margin_fields,
-    summarize_difference,
-    summarize_subjects,
 )
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.study_registry import (
+    resolve_record,
+    validate_registered_file,
+)
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -63,16 +71,6 @@ class ExactInnovations:
     entropy_reduction: np.ndarray
 
 
-def _registered_file(registration: dict) -> dict:
-    path = resolve_path(registration["path"])
-    observed = registered_file_sha256(
-        registration["path"], registration["sha256"], resolved_path=path
-    )
-    if observed != registration["sha256"]:
-        raise RuntimeError(f"registered SHA-256 mismatch: {path}")
-    return {"path": registration["path"], "sha256": observed}
-
-
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
     names = (
@@ -83,7 +81,7 @@ def validate_registered_sources(specification: dict) -> dict:
         "model_equation_source",
         "frozen_evaluator_source",
     )
-    validated = {name: _registered_file(sources[name]) for name in names}
+    validated = {name: validate_registered_file(sources[name]) for name in names}
     artifacts = []
     for registration in sources["pilot_artifacts"]:
         row = {"seed": int(registration["seed"])}
@@ -489,7 +487,7 @@ def _policy_metrics(
     }
 
 
-def _replay_without_relation_history(
+def replay_without_relation_history(
     evaluator: FrozenFastWeightEvaluator,
     trial_index: int,
     focal_relations: tuple[tuple[int, int], ...],
@@ -780,9 +778,7 @@ def collect_seed_metrics(
             no_history_policy_norm = actual_policy["potential_norm"].copy()
             no_history_write_norm = _cpu(matrix_norm(total_delta_m))
         else:
-            history = _replay_without_relation_history(
-                evaluator, trial_index, relations
-            )
+            history = replay_without_relation_history(evaluator, trial_index, relations)
             history_plus = trace_support_trial(evaluator, history, trial_index)
             history_zero = trace_support_trial(
                 evaluator,

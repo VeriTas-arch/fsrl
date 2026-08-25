@@ -11,51 +11,46 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.analysis.statistics import json_values, summarize_difference
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
     load_retro_checkpoint,
+    retained_relation_mask,
     run_causal_suite,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    summarize_difference,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.curvature_gate import (
     make_gate_tasks,
     run_gate_batch,
 )
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _adaptation_config,
-    _field_metrics,
-    _json_values,
-    _ordered_pairs,
-    _resolve_registered,
-    _retained_mask,
-    _tensor_hashes,
+    adaptation_config,
     bundle_logits,
     calibrate_global_gamma,
     conditioned_causal_suite,
     configure_runtime,
     crossing_alignment,
-    load_json,
+    field_metrics,
     margin_fields,
     query_binding_summary,
     terminal_projection_summary,
-    write_json,
 )
 from fsrl.experiments.local_fidelity.opposition_gate import (
     PolicyOppositionGateTransition,
 )
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 ROOT = REPO_ROOT
@@ -85,7 +80,7 @@ def validate_sources(
     specification = load_json(specification_path)
     checks = []
     for name, registration in specification["registered_sources"].items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -99,7 +94,7 @@ def validate_sources(
             }
         )
     backbone = specification["frozen_backbone_contract"]
-    backbone_path = _resolve_registered(backbone["path"])
+    backbone_path = resolve_registered_path(backbone["path"])
     observed_backbone = checkpoint_sha256(backbone_path)
     checks.append(
         {
@@ -122,7 +117,7 @@ def validate_sources(
         }
     )
     for name, registration in lock["implementation_sources"].items():
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -137,7 +132,7 @@ def validate_sources(
         )
     if "frozen_gate_artifact" in lock:
         registration = lock["frozen_gate_artifact"]
-        path = _resolve_registered(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -192,11 +187,11 @@ def adapt_gate(
     runtime: dict,
 ) -> Path:
     runtime_specification = _runtime_specification(specification)
-    adaptation = _adaptation_config(runtime_specification)
+    adaptation = adaptation_config(runtime_specification)
     backbone, model_config, checkpoint_info = load_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
-    before = _tensor_hashes(backbone)
+    before = tensor_hashes(backbone)
     gate = _new_gate(backbone, specification)
     task_generator = make_gate_tasks(adaptation)
     rng = np.random.default_rng(adaptation.seed)
@@ -236,7 +231,7 @@ def adapt_gate(
                 "mean_opposition_risk": stats_row.risk_sum / stats_row.gamma_count,
             }
             handle.write(json.dumps(record, sort_keys=True) + "\n")
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     if before != after:
         raise RuntimeError("frozen backbone changed during v2.1 gate adaptation")
     calibration = calibrate_global_gamma(
@@ -265,7 +260,7 @@ def adapt_gate(
     return artifact_path
 
 
-def _query_pass(
+def query_pass(
     evaluator,
     gate,
     fast_weights,
@@ -375,7 +370,7 @@ def query_bundle(
     subjects = evaluator.config.bs
     pair_count = len(pair_schedules[0])
     if condition in ("opposition_gate", "sign_reversed_support_gate"):
-        return _query_pass(
+        return query_pass(
             evaluator,
             gate,
             fast_weights,
@@ -389,7 +384,7 @@ def query_bundle(
     elif condition == "matched_global_scalar":
         overrides = np.full((subjects, pair_count), gamma_global, dtype=np.float64)
     else:
-        natural = _query_pass(
+        natural = query_pass(
             evaluator,
             gate,
             fast_weights,
@@ -407,7 +402,7 @@ def query_bundle(
         overrides = np.take_along_axis(
             natural["conditioned_gammas"], permutations, axis=1
         )
-    return _query_pass(
+    return query_pass(
         evaluator,
         gate,
         fast_weights,
@@ -416,15 +411,6 @@ def query_bundle(
         alpha_zero=alpha_zero,
         use_support_risk=False,
     )
-
-
-def _paired(
-    first: np.ndarray,
-    second: np.ndarray,
-    counts: np.ndarray,
-    interval: float,
-) -> dict:
-    return summarize_difference(first, second, counts, interval=interval)
 
 
 def decision_summary(
@@ -442,23 +428,23 @@ def decision_summary(
     other_key = "other_relation_mean_direct_correctness"
     h_key = "H_greater_A_direct_correctness"
     contrasts = {
-        "opposition_minus_original_local": _paired(
+        "opposition_minus_original_local": summarize_difference(
             opposition["subject_level"][key],
             original["subject_level"][key],
             local["counts"],
-            local["interval"],
+            interval=local["interval"],
         ),
-        "opposition_minus_original_H_greater_A": _paired(
+        "opposition_minus_original_H_greater_A": summarize_difference(
             opposition["subject_level"][h_key],
             original["subject_level"][h_key],
             local["counts"],
-            local["interval"],
+            interval=local["interval"],
         ),
-        "opposition_minus_original_other_relations": _paired(
+        "opposition_minus_original_other_relations": summarize_difference(
             opposition["subject_level"][other_key],
             original["subject_level"][other_key],
             local["counts"],
-            local["interval"],
+            interval=local["interval"],
         ),
     }
     for control in (
@@ -466,11 +452,11 @@ def decision_summary(
         "shuffled_opposition_gate",
         "sign_reversed_support_gate",
     ):
-        contrasts[f"opposition_minus_{control}_local"] = _paired(
+        contrasts[f"opposition_minus_{control}_local"] = summarize_difference(
             opposition["subject_level"][key],
             local[control]["subject_level"][key],
             local["counts"],
-            local["interval"],
+            interval=local["interval"],
         )
     local_rescue = (
         contrasts["opposition_minus_original_local"]["bootstrap"]["lower"] > 0.0
@@ -544,7 +530,7 @@ def decision_summary(
 
 
 def _allocation_summary(evaluator, bundle: dict, retained: np.ndarray) -> dict:
-    pairs = _ordered_pairs(evaluator.protocol.n_items)
+    pairs = ordered_pairs(evaluator.protocol.n_items)
     pair_index = {pair: index for index, pair in enumerate(pairs)}
     labels = evaluator.protocol.item_labels
     relation_rows = []
@@ -581,7 +567,7 @@ def _allocation_summary(evaluator, bundle: dict, retained: np.ndarray) -> dict:
         },
         "by_retained_relation": relation_rows,
         "raw_intact_query": {
-            name: _json_values(bundle[name])
+            name: json_values(bundle[name])
             for name in (
                 "first_order_values",
                 "quadratic_values",
@@ -634,7 +620,9 @@ def evaluate_pilot(
         raise RuntimeError("matched global scalar did not reproduce")
 
     protocol = load_ranking_protocol(
-        _resolve_registered(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -647,7 +635,7 @@ def evaluate_pilot(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
     geometry = build_complete_graph_geometry(protocol)
-    pairs = _ordered_pairs(protocol.n_items)
+    pairs = ordered_pairs(protocol.n_items)
     schedules = tuple(pairs for _ in range(model_config.bs))
     intact = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     relations = tuple(protocol.support_pairs_higher_lower)
@@ -662,7 +650,7 @@ def evaluate_pilot(
             )
         loo_rows.append(state)
     loo = torch.stack(loo_rows)
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     counts = (
         np.random.default_rng(int(evaluation["bootstrap_seed"]))
         .multinomial(
@@ -711,7 +699,7 @@ def evaluate_pilot(
             ),
         }
         condition_fields[condition] = fields["intact"]
-        local[condition] = _field_metrics(
+        local[condition] = field_metrics(
             fields, relations, retained, geometry, counts, interval
         )
         behavior[condition] = analyze_sampled_query_policy(
@@ -779,12 +767,12 @@ def evaluate_pilot(
         cue_mode=str(evaluation["cue_mode"]),
         subject_encoding_mode=str(evaluation["subject_encoding_mode"]),
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
-        protocol_path=_resolve_registered(
+        protocol_path=resolve_registered_path(
             specification["registered_sources"]["liu_protocol"]["path"]
         ),
     )
     qualification_specification = load_json(
-        _resolve_registered(
+        resolve_registered_path(
             specification["registered_sources"]["qualification"]["path"]
         )
     )
@@ -839,7 +827,7 @@ def evaluate_pilot(
         name: {
             "summary": row["summary"],
             "raw_subject_level": {
-                key: _json_values(value) for key, value in row["subject_level"].items()
+                key: json_values(value) for key, value in row["subject_level"].items()
             },
             "raw_relation_subject": row["raw_relation_subject"],
         }
@@ -908,7 +896,9 @@ def main(args=None) -> int:
     runtime = configure_runtime()
     source_validation = validate_sources(parsed.specification, parsed.lock)
     specification = load_json(parsed.specification)
-    checkpoint = _resolve_registered(specification["frozen_backbone_contract"]["path"])
+    checkpoint = resolve_registered_path(
+        specification["frozen_backbone_contract"]["path"]
+    )
     artifact = parsed.output_root / "seed-2101" / "gate" / "gate.json"
     if parsed.stage in ("adapt-gate", "all"):
         artifact = adapt_gate(

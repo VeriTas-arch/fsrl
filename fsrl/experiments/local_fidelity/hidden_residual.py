@@ -8,21 +8,23 @@ from pathlib import Path
 
 import numpy as np
 
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
-from fsrl.evaluation.frozen_fast_weight import FastWeightIntervention
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
-from fsrl.experiments.assembly.trajectory import (
+from fsrl.analysis.hodge import (
     CompleteGraphGeometry,
-    bootstrap_counts,
     build_complete_graph_geometry,
     gradient_energy_fraction,
-    load_frozen_evaluator,
-    ordered_query_schedule,
-    summarize_subjects,
     vector_gradient_energy_fraction,
 )
+from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
+from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.evaluation.frozen_fast_weight import FastWeightIntervention
+from fsrl.experiments.assembly.trajectory import (
+    load_frozen_evaluator,
+    ordered_query_schedule,
+)
 from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -106,7 +108,7 @@ def _hidden_and_margin_fields(
     return hidden, margins, float(np.max(np.abs(analytic - margins)))
 
 
-def _relation_geometry(
+def relation_geometry(
     protocol: RankingProtocol, geometry: CompleteGraphGeometry
 ) -> tuple[np.ndarray, np.ndarray, tuple[np.ndarray, ...]]:
     edge_lookup = {pair: index for index, pair in enumerate(geometry.pairs)}
@@ -217,10 +219,6 @@ def _retained_subject_mean(values: np.ndarray, retained: np.ndarray) -> np.ndarr
     if np.any(np.sum(retained, axis=0) == 0):
         raise RuntimeError("every subject must retain at least one support relation")
     return np.nanmean(rows, axis=0)
-
-
-def _json_values(values: np.ndarray) -> list:
-    return [None if not np.isfinite(value) else float(value) for value in values]
 
 
 def _summarize_seed(
@@ -373,7 +371,7 @@ def _summarize_seed(
         },
         "directional_diagnosis": diagnosis,
         "raw_subject_level": {
-            name: _json_values(values) for name, values in subject_metrics.items()
+            name: json_values(values) for name, values in subject_metrics.items()
         },
     }
 
@@ -425,7 +423,7 @@ def _run_seed(
     full_influence = np.asarray(hidden_rows)
     _gradient, residual_influence = vector_hodge_components(full_influence, geometry)
     retained = np.asarray(retained_rows)
-    direct_edges, correctness_signs, remote_masks = _relation_geometry(
+    direct_edges, correctness_signs, remote_masks = relation_geometry(
         protocol, geometry
     )
     output_direction = (

@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 
 import numpy as np
 
@@ -12,11 +11,11 @@ from fsrl.experiments.transport.item_count import (
     analyze_size_generic_sampled_query_policy,
     cross_cell_decision,
     individualized_metrics_generic,
-    load_json,
     protocol_for_size,
     validate_graph_contract,
     validate_n8_evaluator_interface,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -171,22 +170,6 @@ class ItemCountTransportTests(unittest.TestCase):
             cross_cell_decision(seeds, sizes, seed_ids)["outcome"],
             "NONINTERPRETABLE_EXECUTION",
         )
-
-    def test_dedicated_runtime_configures_before_dispatch(self):
-        with (
-            patch(
-                "fsrl.experiments.transport.item_count_runtime.configure_formal_runtime"
-            ) as configure,
-            patch(
-                "fsrl.experiments.transport.item_count.main", return_value=53
-            ) as workflow,
-        ):
-            from fsrl.experiments.transport.item_count_runtime import main
-
-            result = main(["--sentinel"])
-        configure.assert_called_once_with()
-        workflow.assert_called_once_with(["--sentinel"])
-        self.assertEqual(result, 53)
 
 
 if __name__ == "__main__":

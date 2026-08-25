@@ -2,19 +2,19 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.assembly.diagnostics import load_json
-from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
 from fsrl.experiments.local_fidelity.output_semantics import (
     STAGES,
-    _relation_geometry,
     classify_stage,
     classify_transition,
     decide_outcome,
     hodge_components,
     normalized_direct_correctness,
+    relation_geometry,
     stage_relation_metrics,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -57,7 +57,7 @@ class OperatorOutputSemanticsTests(unittest.TestCase):
         np.testing.assert_allclose(opposed, -1.0)
 
     def test_relation_geometry_freezes_direct_and_remote_edges(self):
-        direct, signs, remote = _relation_geometry(self.protocol, self.geometry)
+        direct, signs, remote = relation_geometry(self.protocol, self.geometry)
         self.assertEqual(len(direct), 8)
         self.assertEqual(set(signs), {-1.0})
         self.assertTrue(all(int(np.sum(mask)) == 15 for mask in remote))

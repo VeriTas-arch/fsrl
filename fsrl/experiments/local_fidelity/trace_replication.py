@@ -10,49 +10,49 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.statistics import (
+    json_values,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.behavior_attribution import (
-    _json_values,
-    _pair_correct_probabilities,
-    _self_local_margins,
-    _self_traces,
     boundary_and_probability_attribution,
+    compute_self_traces,
     error_mass_attribution,
     learned_cells,
     local_only_attribution,
+    pair_correct_probabilities,
     self_cross_attribution,
+    self_local_margins,
     slope_decomposition,
 )
 from fsrl.experiments.local_fidelity.curvature_gate import make_gate_tasks
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    configure_runtime,
-    load_json,
-    write_json,
-)
+from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
 from fsrl.experiments.local_fidelity.trace_pilot import (
     CONDITIONS,
-    _behavior_subject_values,
-    _new_local_trace,
-    _ordered_pairs,
-    _retained_mask,
-    _tensor_hashes,
+    behavior_subject_values,
     build_local_trace,
+    create_local_trace,
     evaluate_pilot,
     query_bundle,
     run_local_batch,
 )
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import (
+    registered_file_sha256,
+    resolve_record,
+    resolve_registered_path,
+)
 from fsrl.paths import REPO_ROOT
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model
 
@@ -74,11 +74,6 @@ DEFAULT_RESULT_PATH = resolve_record(
 )
 
 
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
 def validate_sources(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -98,7 +93,7 @@ def validate_sources(
         **lock["reused_frozen_sources"],
     }
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -127,7 +122,7 @@ def _network_seeds(specification: dict) -> tuple[int, ...]:
     return seeds
 
 
-def _seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
+def seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
     seed_dir = output_root / f"seed-{seed}"
     return {
         "backbone_dir": seed_dir / "backbone",
@@ -175,7 +170,7 @@ def local_adaptation_config(specification: dict, seed: int) -> MetaTrainConfig:
 
 def seed_specification(specification: dict, seed: int) -> dict:
     pilot_registration = specification["registered_sources"]["v2_3_specification"]
-    seed_specification = load_json(_resolve(pilot_registration["path"]))
+    seed_specification = load_json(resolve_registered_path(pilot_registration["path"]))
     seed_specification["pilot_id"] = specification["replication_id"]
     seed_specification["registration_status"] = specification["registration_status"]
     seed_specification["claim_boundary"] = specification["claim_boundary"]
@@ -194,10 +189,10 @@ def seed_specification(specification: dict, seed: int) -> dict:
     return seed_specification
 
 
-def _validate_complete_backbone(
+def validate_complete_backbone(
     specification: dict, output_root: Path, seed: int
 ) -> Path:
-    paths = _seed_paths(output_root, seed)
+    paths = seed_paths(output_root, seed)
     required = tuple(
         paths[name]
         for name in (
@@ -229,9 +224,9 @@ def _validate_complete_backbone(
 def train_backbone(
     specification: dict, output_root: Path, seed: int, runtime: dict
 ) -> Path:
-    paths = _seed_paths(output_root, seed)
+    paths = seed_paths(output_root, seed)
     if paths["backbone_dir"].exists():
-        return _validate_complete_backbone(specification, output_root, seed)
+        return validate_complete_backbone(specification, output_root, seed)
     training = backbone_training_config(specification, seed)
     train_meta_model(training, paths["backbone_dir"], compile_model=True)
     manifest = {
@@ -246,11 +241,11 @@ def train_backbone(
         },
     }
     write_json(paths["backbone_manifest"], manifest)
-    return _validate_complete_backbone(specification, output_root, seed)
+    return validate_complete_backbone(specification, output_root, seed)
 
 
-def _validate_complete_gain(specification: dict, output_root: Path, seed: int) -> Path:
-    paths = _seed_paths(output_root, seed)
+def validate_complete_gain(specification: dict, output_root: Path, seed: int) -> Path:
+    paths = seed_paths(output_root, seed)
     if not paths["gain"].is_file() or not paths["local_log"].is_file():
         raise RuntimeError(f"seed {seed} local-gain artifact set is incomplete")
     artifact = load_json(paths["gain"])
@@ -282,17 +277,17 @@ def adapt_gain(
     source_validation: dict,
     runtime: dict,
 ) -> Path:
-    paths = _seed_paths(output_root, seed)
+    paths = seed_paths(output_root, seed)
     if paths["local_dir"].exists():
-        return _validate_complete_gain(specification, output_root, seed)
+        return validate_complete_gain(specification, output_root, seed)
     adaptation = local_adaptation_config(specification, seed)
     backbone, model_config, checkpoint_info = load_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    before = _tensor_hashes(backbone)
-    local = _new_local_trace(seed_specification(specification, seed), model_config.cs)
+    before = tensor_hashes(backbone)
+    local = create_local_trace(seed_specification(specification, seed), model_config.cs)
     tasks = make_gate_tasks(adaptation)
     rng = np.random.default_rng(adaptation.seed)
     np.random.seed(adaptation.seed)
@@ -334,7 +329,7 @@ def adapt_gain(
                 )
                 + "\n"
             )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     if before != after:
         raise RuntimeError(f"seed {seed} backbone changed during gain adaptation")
     artifact = {
@@ -352,7 +347,7 @@ def adapt_gain(
         "runtime": runtime,
     }
     write_json(paths["gain"], artifact)
-    return _validate_complete_gain(specification, output_root, seed)
+    return validate_complete_gain(specification, output_root, seed)
 
 
 def train_artifacts(
@@ -381,9 +376,9 @@ def artifact_lock_document(
 ) -> dict:
     artifacts = {}
     for seed in _network_seeds(specification):
-        _validate_complete_backbone(specification, output_root, seed)
-        gain_path = _validate_complete_gain(specification, output_root, seed)
-        paths = _seed_paths(output_root, seed)
+        validate_complete_backbone(specification, output_root, seed)
+        gain_path = validate_complete_gain(specification, output_root, seed)
+        paths = seed_paths(output_root, seed)
         gain = load_json(gain_path)
         artifacts[str(seed)] = {
             name: {
@@ -449,10 +444,10 @@ def validate_artifacts(
             }
         )
     for seed in _network_seeds(specification):
-        _validate_complete_backbone(specification, output_root, seed)
-        _validate_complete_gain(specification, output_root, seed)
+        validate_complete_backbone(specification, output_root, seed)
+        validate_complete_gain(specification, output_root, seed)
         for name, registration in lock["artifacts"][str(seed)].items():
-            path = _resolve(registration["path"])
+            path = resolve_registered_path(registration["path"])
             observed = file_sha256(path)
             checks.append(
                 {
@@ -483,7 +478,7 @@ def _bootstrap_counts(evaluation: dict, seed: int) -> np.ndarray:
     )
 
 
-def _attribution_for_seed(
+def attribution_for_seed(
     specification: dict,
     seed: int,
     checkpoint: Path,
@@ -496,11 +491,13 @@ def _attribution_for_seed(
     )
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    local = _new_local_trace(seed_specification(specification, seed), model_config.cs)
+    local = create_local_trace(seed_specification(specification, seed), model_config.cs)
     with torch.no_grad():
         local.raw_gain.fill_(float(gain["raw_lambda_L"]))
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -512,7 +509,7 @@ def _attribution_for_seed(
         subject_encoding_mode=str(evaluation["subject_encoding_mode"]),
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
-    pairs = _ordered_pairs(protocol.n_items)
+    pairs = ordered_pairs(protocol.n_items)
     schedules = tuple(pairs for _ in range(model_config.bs))
     fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     full_trace = build_local_trace(evaluator, local)
@@ -529,9 +526,9 @@ def _attribution_for_seed(
         for condition in CONDITIONS
     }
     relations = tuple(protocol.support_pairs_higher_lower)
-    retained = _retained_mask(evaluator, relations)
-    self_local = _self_local_margins(
-        evaluator, local, _self_traces(evaluator, local, relations), relations
+    retained = retained_relation_mask(evaluator, relations)
+    self_local = self_local_margins(
+        evaluator, local, compute_self_traces(evaluator, local, relations), relations
     )
     cells = learned_cells(
         evaluator,
@@ -548,7 +545,7 @@ def _attribution_for_seed(
     self_cross = self_cross_attribution(cells, counts, interval)
     local_only = local_only_attribution(cells, counts, interval)
     pair_probabilities = {
-        condition: _pair_correct_probabilities(
+        condition: pair_correct_probabilities(
             evaluator, bundle, float(evaluation["temperature"])
         )
         for condition, bundle in bundles.items()
@@ -563,7 +560,7 @@ def _attribution_for_seed(
         "local_only": local_only,
         "exact_probability_slope_decomposition": slope,
         "raw_learned_cells": {
-            name: _json_values(value) for name, value in cells.items()
+            name: json_values(value) for name, value in cells.items()
         },
         "integrity": {
             "dual_margin_identity_max_abs_error": float(
@@ -612,8 +609,8 @@ def within_seed_decision(
     )
     p_off_behavior = pilot["behavior"]["global_P_off_local_intact"]
     learned_minus_nonlearned = summarize_difference(
-        _behavior_subject_values(p_off_behavior, "learned_accuracy"),
-        _behavior_subject_values(p_off_behavior, "nonlearned_accuracy"),
+        behavior_subject_values(p_off_behavior, "learned_accuracy"),
+        behavior_subject_values(p_off_behavior, "nonlearned_accuracy"),
         counts,
         interval=interval,
     )
@@ -761,7 +758,7 @@ def evaluate_replication(
 ) -> dict:
     seed_results = {}
     for seed in _network_seeds(specification):
-        paths = _seed_paths(output_root, seed)
+        paths = seed_paths(output_root, seed)
         pilot = evaluate_pilot(
             seed_specification(specification, seed),
             paths["checkpoint"],
@@ -771,7 +768,7 @@ def evaluate_replication(
             runtime,
         )
         pilot["seed"] = seed
-        attribution = _attribution_for_seed(
+        attribution = attribution_for_seed(
             specification, seed, paths["checkpoint"], paths["gain"]
         )
         decision = within_seed_decision(specification, pilot, attribution, seed)

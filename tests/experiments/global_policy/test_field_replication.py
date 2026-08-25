@@ -15,7 +15,7 @@ from fsrl.experiments.global_policy.field_replication import (
     validate_artifacts,
     validate_sources,
 )
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 
@@ -303,7 +303,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
         self._write_dummy_backbones(output_root)
         with (
             patch.object(fingerprint, "ROOT", root),
-            patch.object(fingerprint, "_validate_complete_backbone"),
+            patch.object(fingerprint, "validate_complete_backbone"),
         ):
             document = artifact_lock_document(
                 self.specification,
@@ -369,7 +369,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
                 )
                 with (
                     patch.object(fingerprint, "ROOT", root),
-                    patch.object(fingerprint, "_validate_complete_backbone"),
+                    patch.object(fingerprint, "validate_complete_backbone"),
                     self.assertRaisesRegex(RuntimeError, "artifact.*(seed|keys)"),
                 ):
                     validate_artifacts(

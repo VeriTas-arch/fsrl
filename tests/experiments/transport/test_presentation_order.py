@@ -1,13 +1,12 @@
 import unittest
-from unittest.mock import patch
 
 from fsrl.experiments.transport.presentation_order import (
     DEFAULT_SPECIFICATION_PATH,
     cross_cell_decision,
-    load_json,
     schedule_integrity,
     transform_schedule,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -92,22 +91,6 @@ class PresentationOrderTransportTests(unittest.TestCase):
             cross_cell_decision(seeds, conditions, seed_ids)["outcome"],
             "NONINTERPRETABLE_EXECUTION",
         )
-
-    def test_dedicated_runtime_configures_before_dispatch(self):
-        with (
-            patch(
-                "fsrl.experiments.transport.presentation_order_runtime.configure_formal_runtime"
-            ) as configure,
-            patch(
-                "fsrl.experiments.transport.presentation_order.main", return_value=43
-            ) as workflow,
-        ):
-            from fsrl.experiments.transport.presentation_order_runtime import main
-
-            result = main(["--sentinel"])
-        configure.assert_called_once_with()
-        workflow.assert_called_once_with(["--sentinel"])
-        self.assertEqual(result, 43)
 
 
 if __name__ == "__main__":

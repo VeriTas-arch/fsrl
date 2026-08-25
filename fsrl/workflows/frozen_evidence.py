@@ -19,6 +19,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from fsrl.infra.git_provenance import git_blob_sha256, verify_git_registrations
+from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import (
     SYNTHESIS_ROOT,
     registered_file_sha256,
@@ -70,18 +71,6 @@ def canonical_manifest_payload_sha256(manifest: dict) -> str:
         allow_nan=False,
     ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
-
-
-def load_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _safe_repo_path(value: str) -> Path:

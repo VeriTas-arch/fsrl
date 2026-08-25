@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from itertools import combinations
 from pathlib import Path
@@ -12,6 +11,7 @@ import numpy as np
 
 from fsrl.analysis.behavioral import kendall_tau_positions
 from fsrl.experiments.human.benchmark import load_human_cohort
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
@@ -34,19 +34,6 @@ IMPLEMENTATION_SOURCES = {
     "map_runner": "fsrl/model_behavior_reproduction_map.py",
     "map_tests": "tests/test_model_behavior_reproduction_map.py",
 }
-
-
-def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def validate_sources(
@@ -215,7 +202,7 @@ def _human_subject_serial(subject: dict, learned_mask: np.ndarray) -> dict:
     }
 
 
-def _model_record(
+def model_record(
     result: dict,
     seed: str,
     human_intervals: dict,
@@ -533,7 +520,7 @@ def build_map(
         "inter_subject_ranking_diversity": human_tau,
     }
     networks = {
-        seed: _model_record(
+        seed: model_record(
             model_result,
             seed,
             human_intervals,
@@ -577,13 +564,6 @@ def build_map(
     }
     json.dumps(result, allow_nan=False)
     return result
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
 
 
 def main(argv: list[str] | None = None) -> int:

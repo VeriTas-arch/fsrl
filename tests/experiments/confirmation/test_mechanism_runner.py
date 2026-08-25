@@ -2,18 +2,18 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fsrl.experiments.assembly.diagnostics import load_json
 from fsrl.experiments.confirmation.mechanism import (
     COMPONENT_RESULTS,
     COMPONENT_SOURCES,
     DEVELOPMENT_TRAINING_PATH,
-    _reproduction_gate,
-    _seed_estimands,
-    _threshold_status,
-    _write_adapters,
     aggregate_mechanism_confirmation,
+    reproduction_gate,
+    seed_estimands,
+    threshold_status,
     validate_mechanism_contract,
+    write_adapters,
 )
+from fsrl.infra.provenance import load_json
 
 
 class MechanismConfirmationRunnerTests(unittest.TestCase):
@@ -24,7 +24,7 @@ class MechanismConfirmationRunnerTests(unittest.TestCase):
         assembly = load_json(COMPONENT_SOURCES["assembly"])
         artifacts = assembly["registered_sources"]["pilot_artifacts"]
         with tempfile.TemporaryDirectory() as temp_dir:
-            paths = _write_adapters(
+            paths = write_adapters(
                 Path(temp_dir),
                 training_specification_path=DEVELOPMENT_TRAINING_PATH,
                 artifact_registrations=artifacts,
@@ -45,19 +45,19 @@ class MechanismConfirmationRunnerTests(unittest.TestCase):
             name: load_json(path)["pilot_seeds"]["1901"]
             for name, path in COMPONENT_RESULTS.items()
         }
-        primary, diagnostics = _seed_estimands(components)
+        primary, diagnostics = seed_estimands(components)
         self.assertEqual(len(primary), 11)
         self.assertGreater(primary["eligibility_donor_identity_advantage"], 0.0)
         self.assertIn("history_factor_generation", diagnostics)
-        self.assertTrue(_reproduction_gate(components, 3.814697265625e-6)["passed"])
+        self.assertTrue(reproduction_gate(components, 3.814697265625e-6)["passed"])
 
     def test_threshold_status_keeps_unresolved_distinct_from_contrary(self):
         self.assertEqual(
-            _threshold_status({"bootstrap": {"lower": -0.1, "upper": 0.2}}),
+            threshold_status({"bootstrap": {"lower": -0.1, "upper": 0.2}}),
             "unresolved",
         )
         self.assertEqual(
-            _threshold_status({"bootstrap": {"lower": -0.2, "upper": -0.1}}),
+            threshold_status({"bootstrap": {"lower": -0.2, "upper": -0.1}}),
             "directionally_contrary",
         )
 

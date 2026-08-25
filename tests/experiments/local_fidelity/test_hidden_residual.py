@@ -2,12 +2,12 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.assembly.diagnostics import load_json
-from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.experiments.local_fidelity.hidden_residual import (
     cross_validated_local_direction,
     vector_hodge_components,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.tasks.registered_protocol import RankingProtocol
 

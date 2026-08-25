@@ -1326,8 +1326,8 @@ metric constructive-comparator derivation and confirmation are in
   `studies/registry.toml` supplies only cross-study discovery and reading order.
 - The generated `studies/<study-id>/README.md`, `studies/README.md`, and
   `synthesis/README.md` pages are navigation, not new evidence. Update the TOML
-  authorities and rebuild them with `python -m fsrl.study_registry build`;
-  require `python -m fsrl.study_registry check` before commit.
+  authorities and rebuild them with `python -m fsrl.infra.study_registry build`;
+  require `python -m fsrl.infra.study_registry check` before commit.
 - The first organization pass is explicitly `review_state = "indexed"`.
   Preserve room for a second synthesis pass rather than treating the current
   reading order, prose, or figure selection as the final paper argument.
@@ -1335,7 +1335,7 @@ metric constructive-comparator derivation and confirmation are in
   byte changes under study-owned `records/`. Their old identifiers, current
   paths, hashes, sizes, and source ref are locked in
   `studies/migrations/flat-records-v1.json`; active historical code must use
-  `fsrl.study_registry.resolve_record`. Another move requires a separately
+  `fsrl.infra.study_registry.resolve_record`. Another move requires a separately
   versioned migration and full validation, not ordinary cleanup.
 - Validate this migration with
   `python tools/provenance/migrate_flat_records_v1.py audit`; keep the active
@@ -1357,7 +1357,7 @@ metric constructive-comparator derivation and confirmation are in
   appropriate for lightweight tests, data checks, bootstrap summaries, and
   exact enumeration when it is the more efficient implementation.
 - Run formal confirmation and mechanism commands only through
-  `python -m fsrl.formal_runtime`. This entry point requires a visible GPU and
+  `python -m fsrl.infra.formal_runtime`. This entry point requires a visible GPU and
   bounds PyTorch intra-op and inter-op work to one CPU thread; do not also
   change NumPy/BLAS thread settings, bypass the entry point, or mix bounded and
   unbounded seed artifacts in one formal aggregate.

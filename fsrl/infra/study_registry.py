@@ -26,6 +26,7 @@ from functools import cache, lru_cache
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from fsrl.infra.provenance import file_sha256
 from fsrl.paths import REPO_ROOT, STUDIES_ROOT, SYNTHESIS_ROOT
 
 ROOT = REPO_ROOT
@@ -104,14 +105,6 @@ def load_source_provenance(path: Path = SOURCE_PROVENANCE_PATH) -> dict[str, Any
     if not path.is_file():
         return {"schema_version": 1, "sources": []}
     return _load_toml(path)
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def canonical_file_sha256(path: Path | str) -> str:
@@ -277,6 +270,31 @@ def resolve_record(value: str | Path) -> Path:
         return direct
     migrated = migration_lookup().get(relative.as_posix())
     return ROOT / migrated if migrated is not None else direct
+
+
+def resolve_registered_path(value: str | Path) -> Path:
+    """Resolve a registered repository path while accepting absolute overrides."""
+
+    candidate = Path(value)
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
+
+
+def canonical_file_registration(path: str) -> dict[str, str]:
+    """Build the path/hash entry used by prospective source locks."""
+
+    return {"path": path, "sha256": canonical_file_sha256(resolve_record(path))}
+
+
+def validate_registered_file(registration: dict[str, str]) -> dict[str, str]:
+    """Validate one registered path/hash pair without changing its locator."""
+
+    path = resolve_registered_path(registration["path"])
+    observed = registered_file_sha256(
+        registration["path"], registration["sha256"], resolved_path=path
+    )
+    if observed != registration["sha256"]:
+        raise RuntimeError(f"registered SHA-256 mismatch: {path}")
+    return {"path": registration["path"], "sha256": observed}
 
 
 def legacy_identifier(path: str | Path) -> str:

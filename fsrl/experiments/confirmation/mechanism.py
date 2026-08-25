@@ -10,24 +10,21 @@ from pathlib import Path
 
 import numpy as np
 
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
+from fsrl.analysis.statistics import bootstrap_counts, summarize_subjects
 from fsrl.experiments.assembly.factor_swap import run_support_factor_swap
 from fsrl.experiments.assembly.history_factorial import run_history_state_factorial
-from fsrl.experiments.assembly.trajectory import (
-    bootstrap_counts,
-    run_assembly_trajectory,
-    summarize_subjects,
-)
+from fsrl.experiments.assembly.trajectory import run_assembly_trajectory
 from fsrl.experiments.confirmation.behavioral import (
     DEFAULT_OUTPUT_ROOT,
     FORMAL_CONFIRMATION_ID,
-    _validate_checkpoint,
-    _validate_formal_runtime_record,
-    _validate_formal_training_execution,
-    write_json,
+    validate_checkpoint,
+    validate_formal_runtime_record,
+    validate_formal_training_execution,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json, write_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT
@@ -128,12 +125,12 @@ def _seed_input_registration(
     for path in (checkpoint, config, behavior, confirmation, qualification):
         if not path.is_file():
             raise RuntimeError(f"registered seed artifact is missing: {path}")
-    metadata = _validate_checkpoint(checkpoint, training_specification, seed)
+    metadata = validate_checkpoint(checkpoint, training_specification, seed)
     behavior_result = load_json(behavior)
     confirmation_result = load_json(confirmation)
     if training_specification["confirmation_id"] == FORMAL_CONFIRMATION_ID:
-        _validate_formal_runtime_record(confirmation_result)
-        _validate_formal_training_execution(confirmation_result)
+        validate_formal_runtime_record(confirmation_result)
+        validate_formal_training_execution(confirmation_result)
     qualification_result = load_json(qualification)
     if behavior_result["checkpoint"]["sha256"] != metadata["checkpoint"]["sha256"]:
         raise RuntimeError("behavior artifact does not match the registered checkpoint")
@@ -193,7 +190,7 @@ def _adapter_specification(
     return specification
 
 
-def _write_adapters(
+def write_adapters(
     directory: Path,
     *,
     training_specification_path: Path,
@@ -227,7 +224,7 @@ def reproduce_development_components() -> dict:
         "registered_sources"
     ]["pilot_artifacts"]
     with tempfile.TemporaryDirectory(prefix="fsrl-mechanism-dryrun-") as temp_dir:
-        adapter_paths = _write_adapters(
+        adapter_paths = write_adapters(
             Path(temp_dir),
             training_specification_path=DEVELOPMENT_TRAINING_PATH,
             artifact_registrations=artifact_registrations,
@@ -251,7 +248,7 @@ def _mean(summary: dict) -> float:
     return float(value)
 
 
-def _seed_estimands(components: dict[str, dict]) -> tuple[dict, dict]:
+def seed_estimands(components: dict[str, dict]) -> tuple[dict, dict]:
     assembly = components["assembly"]
     factor = components["factor_swap"]
     history = components["history_state"]
@@ -326,7 +323,7 @@ def _validation_error_max(validation: dict) -> float:
     return max(values, default=0.0)
 
 
-def _reproduction_gate(components: dict[str, dict], tolerance: float) -> dict:
+def reproduction_gate(components: dict[str, dict], tolerance: float) -> dict:
     assembly = components["assembly"]
     factor = components["factor_swap"]
     history = components["history_state"]
@@ -372,7 +369,7 @@ def run_mechanism_seed(
         training_specification_path=training_path,
         output_root=output_root,
     )
-    adapter_paths = _write_adapters(
+    adapter_paths = write_adapters(
         seed_dir / "mechanism-adapters",
         training_specification_path=training_path,
         artifact_registrations=[artifact_registration],
@@ -387,11 +384,11 @@ def run_mechanism_seed(
         path = seed_dir / f"mechanism-{name}.json"
         write_json(path, wrapper)
         component_paths[name] = path
-    primary, diagnostics = _seed_estimands(components)
+    primary, diagnostics = seed_estimands(components)
     tolerance = float(
         specification["execution_contract"]["floating_reproduction_tolerance"]
     )
-    reproduction = _reproduction_gate(components, tolerance)
+    reproduction = reproduction_gate(components, tolerance)
     result = {
         "schema_version": 1,
         "confirmation_id": specification["confirmation_id"],
@@ -429,8 +426,8 @@ def _validate_seed_result(seed: int, path: Path, confirmation_id: str) -> dict:
     result = load_json(path)
     if result.get("seed") != seed or result.get("confirmation_id") != confirmation_id:
         raise RuntimeError(f"mechanism seed result identity mismatch: {path}")
-    _validate_formal_runtime_record(result)
-    _validate_formal_training_execution(result)
+    validate_formal_runtime_record(result)
+    validate_formal_training_execution(result)
     registrations = {
         "execution_runtime_source": result["execution_runtime_source"],
         "orchestration_source": result["orchestration_source"],
@@ -449,7 +446,7 @@ def _validate_seed_result(seed: int, path: Path, confirmation_id: str) -> dict:
     return result
 
 
-def _threshold_status(summary: dict, threshold: float = 0.0) -> str:
+def threshold_status(summary: dict, threshold: float = 0.0) -> str:
     lower = summary["bootstrap"]["lower"]
     upper = summary["bootstrap"]["upper"]
     if lower > threshold:
@@ -548,7 +545,7 @@ def aggregate_mechanism_confirmation(
     links = {}
     for link, criteria in link_estimands.items():
         criteria_status = {
-            name: _threshold_status(summaries[name], threshold)
+            name: threshold_status(summaries[name], threshold)
             for name, threshold in criteria
         }
         if not competence or not reproduction:

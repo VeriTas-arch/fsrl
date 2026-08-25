@@ -2,9 +2,9 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
+from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.experiments.global_policy.amplitude_provenance import NonInterpretableEstimate
 from fsrl.experiments.global_policy.field_reassembly import (
-    NonInterpretableEstimate,
     classify_status,
     cross_seed_decision,
     decompose_field,

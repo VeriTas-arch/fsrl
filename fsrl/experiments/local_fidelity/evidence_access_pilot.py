@@ -11,38 +11,33 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
+from fsrl.analysis.statistics import (
+    json_values,
+    masked_column_mean,
+    summarize_difference,
+    summarize_subjects,
+)
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
+    retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    hodge_potentials,
-    summarize_difference,
-    summarize_subjects,
-)
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.local_fidelity.behavior_attribution import (
-    _pair_correct_probabilities,
     exact_probability,
+    pair_correct_probabilities,
 )
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    _json_values,
     bundle_logits,
     configure_runtime,
-    load_json,
     margin_fields,
-    write_json,
 )
 from fsrl.experiments.local_fidelity.trace_pilot import (
-    _behavior_summaries,
-    _new_local_trace,
-    _ordered_pairs,
-    _query_pass,
-    _retained_mask,
-    _tensor_hashes,
+    behavior_summaries,
     build_local_trace,
+    create_local_trace,
+    query_pass,
     shuffled_pair_indices,
 )
 from fsrl.experiments.local_fidelity.trace_replication import (
@@ -58,13 +53,20 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     DEFAULT_SPECIFICATION_PATH as V2_3_SPECIFICATION_PATH,
 )
 from fsrl.experiments.local_fidelity.trace_replication import (
-    _seed_paths,
+    seed_paths,
     seed_specification,
     validate_artifacts,
 )
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import (
+    registered_file_sha256,
+    resolve_record,
+    resolve_registered_path,
+)
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.evidence import broader_local_admission
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 ROOT = REPO_ROOT
@@ -89,11 +91,6 @@ CONDITIONS = (
 )
 
 
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
 def validate_sources(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     implementation_lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -111,7 +108,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -269,7 +266,7 @@ def build_access_trace(
     return AccessTrace(state.detach().clone(), natural, applied, route_maps)
 
 
-def _build_fast_weight_loo(evaluator, relations) -> torch.Tensor:
+def build_fast_weight_loo(evaluator, relations) -> torch.Tensor:
     rows = []
     for relation in relations:
         state = evaluator.initialize_fast_weights()
@@ -281,18 +278,7 @@ def _build_fast_weight_loo(evaluator, relations) -> torch.Tensor:
     return torch.stack(rows)
 
 
-def _masked_subject_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
-    rows = np.where(mask, np.asarray(values, dtype=np.float64), np.nan)
-    finite = np.sum(np.isfinite(rows), axis=0)
-    return np.divide(
-        np.nansum(rows, axis=0),
-        finite,
-        out=np.full(rows.shape[1], np.nan, dtype=np.float64),
-        where=finite > 0,
-    )
-
-
-def _field_metrics(
+def field_metrics(
     intact: np.ndarray,
     loo: np.ndarray,
     relations,
@@ -348,9 +334,9 @@ def _field_metrics(
     summary = {}
     for group, mask in groups.items():
         subject_level[group] = {
-            "direct_correctness": _masked_subject_mean(direct, mask),
-            "remote_absolute": _masked_subject_mean(remote, mask),
-            "third_party_relational": _masked_subject_mean(third_party, mask),
+            "direct_correctness": masked_column_mean(direct, mask),
+            "remote_absolute": masked_column_mean(remote, mask),
+            "third_party_relational": masked_column_mean(third_party, mask),
         }
         summary[group] = {
             name: summarize_subjects(values, counts, interval=interval)
@@ -359,23 +345,23 @@ def _field_metrics(
     return {
         "summary": summary,
         "raw_subject_level": {
-            group: {name: _json_values(values) for name, values in row.items()}
+            group: {name: json_values(values) for name, values in row.items()}
             for group, row in subject_level.items()
         },
         "raw_relation_subject": {
             "retained": retained.astype(int).tolist(),
-            "direct_correctness": _json_values(direct),
-            "remote_absolute": _json_values(remote),
-            "third_party_relational": _json_values(third_party),
+            "direct_correctness": json_values(direct),
+            "remote_absolute": json_values(remote),
+            "third_party_relational": json_values(third_party),
         },
     }
 
 
-def _learned_probabilities(evaluator, bundle: dict, temperature: float) -> np.ndarray:
+def learned_probabilities(evaluator, bundle: dict, temperature: float) -> np.ndarray:
     relations = tuple(evaluator.protocol.support_pairs_higher_lower)
     pair_index = {
         pair: index
-        for index, pair in enumerate(_ordered_pairs(evaluator.protocol.n_items))
+        for index, pair in enumerate(ordered_pairs(evaluator.protocol.n_items))
     }
     values = np.empty((evaluator.config.bs, len(relations), 2), dtype=np.float64)
     for relation_index, relation in enumerate(relations):
@@ -422,9 +408,9 @@ def _probability_metrics(
             for group, values in raw.items()
         },
         "raw_subject_level": {
-            group: _json_values(values) for group, values in raw.items()
+            group: json_values(values) for group, values in raw.items()
         },
-        "raw_relation_orientation": _json_values(probabilities),
+        "raw_relation_orientation": json_values(probabilities),
     }
 
 
@@ -491,9 +477,9 @@ def _exact_slope_decomposition(
                 for name, values in contributions.items()
             },
             "additive_identity_max_abs_error": identity,
-            "raw_subject_total": _json_values(total),
+            "raw_subject_total": json_values(total),
             "raw_subject_group_contributions": {
-                name: _json_values(values) for name, values in contributions.items()
+                name: json_values(values) for name, values in contributions.items()
             },
         }
     return output
@@ -512,7 +498,9 @@ def _condition_configuration(condition: str) -> tuple[str, bool, bool, bool]:
     return configurations[condition]
 
 
-def _presentation_invariance(evaluator, local, natural_scalars: np.ndarray) -> dict:
+def measure_presentation_invariance(
+    evaluator, local, natural_scalars: np.ndarray
+) -> dict:
     support_error = 0.0
     with torch.no_grad():
         for trial_index in range(evaluator.protocol.support_trials):
@@ -793,21 +781,23 @@ def evaluate_seed(
     runtime: dict,
 ) -> dict:
     evaluation = specification["liu_evaluation"]
-    paths = _seed_paths(V2_3_OUTPUT_ROOT, seed)
+    paths = seed_paths(V2_3_OUTPUT_ROOT, seed)
     gain_artifact = load_json(paths["gain"])
     backbone, model_config, checkpoint = load_retro_checkpoint(
         paths["checkpoint"], int(evaluation["subjects"])
     )
-    before = _tensor_hashes(backbone)
+    before = tensor_hashes(backbone)
     for parameter in backbone.parameters():
         parameter.requires_grad_(False)
-    local = _new_local_trace(
+    local = create_local_trace(
         seed_specification(load_json(V2_3_SPECIFICATION_PATH), seed), model_config.cs
     )
     with torch.no_grad():
         local.raw_gain.fill_(float(gain_artifact["raw_lambda_L"]))
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     evaluator = FrozenFastWeightEvaluator(
         backbone,
@@ -820,13 +810,13 @@ def evaluate_seed(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
     )
     relations = tuple(protocol.support_pairs_higher_lower)
-    retained = _retained_mask(evaluator, relations)
+    retained = retained_relation_mask(evaluator, relations)
     counts = _bootstrap_counts(specification, seed)
     interval = float(evaluation["bootstrap_interval"])
     geometry = build_complete_graph_geometry(protocol)
-    schedules = tuple(_ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
+    schedules = tuple(ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
     intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = _build_fast_weight_loo(evaluator, relations)
+    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
     route_maps = blockwise_derangements(
         model_config.bs,
         protocol.support_blocks,
@@ -869,7 +859,7 @@ def evaluate_seed(
             condition
         )
         shuffled = query_shuffle if query_shuffled else None
-        condition_bundles[condition] = _query_pass(
+        condition_bundles[condition] = query_pass(
             evaluator,
             local,
             intact_fast_weights,
@@ -880,7 +870,7 @@ def evaluate_seed(
             shuffled_indices=shuffled,
         )
         condition_loo_bundles[condition] = [
-            _query_pass(
+            query_pass(
                 evaluator,
                 local,
                 loo_fast_weights[index],
@@ -899,7 +889,7 @@ def evaluate_seed(
                 for bundle in condition_loo_bundles[condition]
             ]
         )
-        fields[condition] = _field_metrics(
+        fields[condition] = field_metrics(
             intact_field,
             loo_field,
             relations,
@@ -908,7 +898,7 @@ def evaluate_seed(
             counts,
             interval,
         )
-        learned = _learned_probabilities(
+        learned = learned_probabilities(
             evaluator, condition_bundles[condition], float(evaluation["temperature"])
         )
         probability[condition] = _probability_metrics(
@@ -920,10 +910,10 @@ def evaluate_seed(
             seed=int(evaluation["choice_seed"]),
             temperature=float(evaluation["temperature"]),
         )
-        behavior[condition]["participant_bootstrap"] = _behavior_summaries(
+        behavior[condition]["participant_bootstrap"] = behavior_summaries(
             behavior[condition], counts, interval
         )
-        pair_probabilities[condition] = _pair_correct_probabilities(
+        pair_probabilities[condition] = pair_correct_probabilities(
             evaluator,
             condition_bundles[condition],
             float(evaluation["temperature"]),
@@ -1070,7 +1060,7 @@ def evaluate_seed(
     local_off_error = max(
         abs(local_off_readout[subject][pair] - local_off_bundle[subject][pair])
         for subject in range(model_config.bs)
-        for pair in _ordered_pairs(protocol.n_items)
+        for pair in ordered_pairs(protocol.n_items)
     )
     common_mode_error = max(
         float(
@@ -1084,7 +1074,7 @@ def evaluate_seed(
         )
         for condition in CONDITIONS
     )
-    presentation_invariance = _presentation_invariance(evaluator, local, natural)
+    presentation_invariance = measure_presentation_invariance(evaluator, local, natural)
     slope_decomposition = _exact_slope_decomposition(
         evaluator, pair_probabilities, retained, counts, interval
     )
@@ -1092,7 +1082,7 @@ def evaluate_seed(
         condition["additive_identity_max_abs_error"]
         for condition in slope_decomposition["conditions"].values()
     )
-    after = _tensor_hashes(backbone)
+    after = tensor_hashes(backbone)
     frozen_seed = frozen_replication["seeds"][str(seed)]
     global_branch = bool(
         frozen_seed["original_v1_qualification"]["passed"]

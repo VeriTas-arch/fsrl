@@ -11,13 +11,13 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
 )
 from fsrl.experiments.local_fidelity.trace_pilot import (
-    _ordered_pairs,
     build_local_trace,
     canonical_derangements,
     decision_summary,
     query_bundle,
     shuffled_pair_indices,
 )
+from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 
@@ -41,7 +41,7 @@ class ConjunctiveLocalTracePilotTests(unittest.TestCase):
             FastWeightIntervention.INTACT
         )
         self.local_state = build_local_trace(self.evaluator, self.local)
-        pairs = _ordered_pairs(self.protocol.n_items)
+        pairs = ordered_pairs(self.protocol.n_items)
         self.schedules = tuple(pairs for _ in range(self.config.bs))
 
     def _bundle(self, condition):

@@ -10,16 +10,16 @@ import numpy as np
 import torch
 from scipy import stats
 
+from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
+from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE
-from fsrl.evaluation.frozen_fast_weight import FastWeightIntervention
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
+from fsrl.evaluation.frozen_fast_weight import (
+    FastWeightIntervention,
+    retained_relation_mask,
+)
 from fsrl.experiments.assembly.trajectory import (
-    CompleteGraphGeometry,
-    bootstrap_counts,
-    build_complete_graph_geometry,
     load_frozen_evaluator,
     ordered_query_schedule,
-    summarize_subjects,
 )
 from fsrl.experiments.assembly.write_localization import trace_support_trial
 from fsrl.experiments.local_fidelity.hidden_residual import (
@@ -27,7 +27,9 @@ from fsrl.experiments.local_fidelity.hidden_residual import (
     vector_hodge_components,
 )
 from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -110,10 +112,6 @@ def _retained_subject_mean(values: np.ndarray, retained: np.ndarray) -> np.ndarr
     return np.nanmean(rows, axis=0)
 
 
-def _json_values(values: np.ndarray) -> list:
-    return [None if not np.isfinite(value) else float(value) for value in values]
-
-
 def summarize_identity_level(
     traces: np.ndarray,
     retained: np.ndarray,
@@ -176,7 +174,7 @@ def summarize_identity_level(
         "stable_omitted_max_abs": omitted_max,
         "presence_rule_passed": bool(present),
         "raw_subject_level": {
-            name: _json_values(values) for name, values in subject_metrics.items()
+            name: json_values(values) for name, values in subject_metrics.items()
         },
     }, prototypes
 
@@ -205,7 +203,7 @@ def prototype_rdm_similarity(
         "mean": float(np.mean(values)),
         "minimum": float(np.min(values)),
         "maximum": float(np.max(values)),
-        "values": _json_values(values),
+        "values": json_values(values),
     }
 
 
@@ -224,24 +222,6 @@ def _relation_indices(
             )
         ],
         dtype=np.int64,
-    )
-
-
-def _retained_mask(evaluator, protocol: RankingProtocol) -> np.ndarray:
-    if evaluator.subject_relation_gains is None:
-        return np.ones(
-            (len(protocol.support_pairs_higher_lower), evaluator.config.bs),
-            dtype=bool,
-        )
-    return np.asarray(
-        [
-            [
-                evaluator.subject_relation_gains[subject][relation] > 0.0
-                for subject in range(evaluator.config.bs)
-            ]
-            for relation in protocol.support_pairs_higher_lower
-        ],
-        dtype=bool,
     )
 
 
@@ -312,7 +292,7 @@ def trace_generated_writes(
             f"tolerance={tolerance}, validation={validation}"
         )
     alpha = evaluator.net.alpha.detach()
-    retained = _retained_mask(evaluator, protocol)
+    retained = retained_relation_mask(evaluator, protocol.support_pairs_higher_lower)
     return (
         {
             "generated_effective_write": (alpha * cumulative_raw).cpu().numpy(),
@@ -417,7 +397,7 @@ def trace_terminal_and_query(
     }
 
 
-def _decision(flags: dict[str, bool]) -> str:
+def relation_trace_decision(flags: dict[str, bool]) -> str:
     write = flags["generated_effective_write"]
     terminal = flags["terminal_effective_fast_weight"]
     response = flags["response_full_hidden"]
@@ -520,7 +500,7 @@ def _run_seed(
         },
         "prototype_rdm_similarity_to_terminal_effective": rdm,
         "primary_presence": primary_flags,
-        "outcome": _decision(primary_flags),
+        "outcome": relation_trace_decision(primary_flags),
         "validation": {
             **write_validation,
             **state_validation,
@@ -549,7 +529,7 @@ def _overall_diagnosis(seed_results: dict[str, dict]) -> dict:
     return {
         "replicated_primary_presence": replicated,
         "outcome": (
-            _decision(replicated)
+            relation_trace_decision(replicated)
             if len(seed_outcomes) == 1
             else "mixed_across_development_seeds"
         ),

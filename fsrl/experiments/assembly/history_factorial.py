@@ -10,28 +10,32 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
+from fsrl.analysis.statistics import (
+    bootstrap_counts,
+    json_values,
+    masked_column_mean,
+    summarize_subjects,
+)
 from fsrl.core.config import DEVICE
-from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
 from fsrl.experiments.assembly.factor_swap import (
     EpisodeFactors,
     compose_factors,
     readout_effective_margin_fields_batched,
     trace_natural_episode,
 )
-from fsrl.experiments.assembly.trajectory import (
-    bootstrap_counts,
-    build_complete_graph_geometry,
-    hodge_potentials,
-    json_values,
-    load_frozen_evaluator,
-    summarize_subjects,
-)
+from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.assembly.write_localization import (
-    _replay_without_relation_history,
+    replay_without_relation_history,
     row_cosine,
     trace_support_trial,
 )
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.study_registry import (
+    resolve_record,
+    validate_registered_file,
+)
+from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -41,16 +45,6 @@ DEFAULT_SPECIFICATION_PATH = resolve_record(
 )
 DEFAULT_OUTPUT_PATH = resolve_record("results/history_state_factorial_v1.json")
 CELL_NAMES = ("NN", "NH", "HN", "HH")
-
-
-def _registered_file(registration: dict) -> dict:
-    path = resolve_path(registration["path"])
-    observed = registered_file_sha256(
-        registration["path"], registration["sha256"], resolved_path=path
-    )
-    if observed != registration["sha256"]:
-        raise RuntimeError(f"registered SHA-256 mismatch: {path}")
-    return {"path": registration["path"], "sha256": observed}
 
 
 def validate_registered_sources(specification: dict) -> dict:
@@ -64,7 +58,7 @@ def validate_registered_sources(specification: dict) -> dict:
         "model_equation_source",
         "frozen_evaluator_source",
     )
-    validated = {name: _registered_file(sources[name]) for name in names}
+    validated = {name: validate_registered_file(sources[name]) for name in names}
     artifacts = []
     for registration in sources["pilot_artifacts"]:
         row = {"seed": int(registration["seed"])}
@@ -141,7 +135,7 @@ def _history_factors(
     relations = tuple(
         tuple(values) for values in factors.relations[trial_index].tolist()
     )
-    history = _replay_without_relation_history(evaluator, trial_index, relations)
+    history = replay_without_relation_history(evaluator, trial_index, relations)
     history_plus = trace_support_trial(evaluator, history, trial_index)
     history_zero = trace_support_trial(
         evaluator,
@@ -336,17 +330,6 @@ def cell_metrics(
     }
 
 
-def _masked_subject_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
-    selected = np.where(mask, np.asarray(values, dtype=np.float64), np.nan)
-    count = np.sum(np.isfinite(selected), axis=0)
-    return np.divide(
-        np.nansum(selected, axis=0),
-        count,
-        out=np.full(selected.shape[1], np.nan, dtype=np.float64),
-        where=count > 0,
-    )
-
-
 def summarize_metric_group(
     metrics: dict[str, np.ndarray],
     mask: np.ndarray,
@@ -354,7 +337,7 @@ def summarize_metric_group(
     interval: float,
 ) -> tuple[dict, dict]:
     subjects = {
-        name: _masked_subject_mean(values, mask) for name, values in metrics.items()
+        name: masked_column_mean(values, mask) for name, values in metrics.items()
     }
     return (
         {

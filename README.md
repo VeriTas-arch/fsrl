@@ -46,7 +46,7 @@ reproductions/            isolated external-paper reproduction capsules
 The pre-refactor docs/, benchmarks/, results/, research/liu/, and
 mainlines/liu_v1/ paths are recorded in
 studies/migrations/flat-records-v1.json. Active code resolves those frozen
-identifiers through fsrl.study_registry.resolve_record; the files themselves
+identifiers through fsrl.infra.study_registry.resolve_record; the files themselves
 have one authoritative current location.
 
 Frozen execution locks that identify historical Python files are indexed by

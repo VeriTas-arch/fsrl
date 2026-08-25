@@ -3,14 +3,14 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    _learned_probabilities,
     access_factor,
     apply_blockwise_route,
     blockwise_derangements,
     cross_seed_decision,
+    learned_probabilities,
 )
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 
 
@@ -41,7 +41,7 @@ class DualEvidenceAccessPilotTests(unittest.TestCase):
             "global_logits": np.asarray([[0.1, 0.2]]),
             "applied_local_margins": np.asarray([[0.2, 0.3]]),
         }
-        observed = _learned_probabilities(evaluator, bundle, 1.0)
+        observed = learned_probabilities(evaluator, bundle, 1.0)
         expected = 1.0 / (1.0 + np.exp(-np.asarray([[[0.3, -0.5]]])))
         np.testing.assert_allclose(observed, expected, atol=0.0, rtol=1e-15)
 

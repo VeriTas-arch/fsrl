@@ -13,11 +13,10 @@ from fsrl.experiments.confirmation.reproduction_map import (
     build_map,
     classify_network_flags,
     endpoint_statistics,
-    load_json,
     position_profile,
     validate_sources,
-    write_json_exclusive,
 )
+from fsrl.infra.provenance import load_json, write_json_exclusive
 
 
 class ModelBehaviorReproductionMapTests(unittest.TestCase):

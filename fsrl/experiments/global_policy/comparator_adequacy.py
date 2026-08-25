@@ -10,23 +10,24 @@ from pathlib import Path
 
 import numpy as np
 
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.core.config import TrainConfig
 from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
-from fsrl.experiments.assembly.trajectory import build_complete_graph_geometry
-from fsrl.experiments.confirmation.behavioral import file_sha256
 from fsrl.experiments.global_policy.amplitude_provenance import (
     NonInterpretableEstimate,
-    _interval_summary,
-    _posterior_descriptors,
+    interval_summary,
+    posterior_descriptors,
 )
 from fsrl.experiments.global_policy.field_replication import require_pushed_freeze
 from fsrl.experiments.human.benchmark import REQUIRED_COLUMNS
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
 from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.provenance import load_json, write_json_exclusive
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,
+    resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
@@ -64,11 +65,6 @@ REQUIRED_REUSED_SOURCE_NAMES = {
 }
 
 
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
-
-
 def _canonical_paths(parsed: argparse.Namespace) -> None:
     expected = {
         "specification": DEFAULT_SPECIFICATION_PATH,
@@ -92,13 +88,6 @@ def _canonical_paths(parsed: argparse.Namespace) -> None:
         raise RuntimeError("comparator-adequacy result already exists or is a symlink")
     if parsed.result.parent.is_symlink():
         raise RuntimeError("comparator-adequacy result parent may not be a symlink")
-
-
-def write_json_exclusive(path: Path, value: dict) -> None:
-    payload = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("x", encoding="utf-8") as handle:
-        handle.write(payload)
 
 
 def apply_protocol_repair(
@@ -128,7 +117,7 @@ def apply_protocol_repair(
         registration = upstream.get(name, {})
         if not (
             registration.get("distance_level_pair_counts") == [6, 5, 2, 3, 2, 2]
-            and file_sha256(_resolve(registration["path"]))
+            and file_sha256(resolve_registered_path(registration["path"]))
             == registration.get("sha256")
         ):
             raise RuntimeError(f"comparator-adequacy repair anchor mismatch: {name}")
@@ -191,7 +180,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -211,7 +200,9 @@ def validate_sources(
 
 def validate_prerequisite(specification: dict) -> dict:
     allocation = load_json(
-        _resolve(specification["registered_sources"]["allocation_result"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["allocation_result"]["path"]
+        )
     )
     decision = allocation.get("decision", {})
     axes = decision.get("axes", {})
@@ -323,7 +314,7 @@ def edge_metadata(specification: dict, protocol) -> dict:
     }
 
 
-def _load_trial_cohort(
+def load_trial_cohort(
     path: Path,
     cohort: str,
     pair_to_index: dict[tuple[int, int], int],
@@ -386,14 +377,14 @@ def load_human_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
     pair_to_index = {
         pair: index for index, pair in enumerate(metadata["geometry"].pairs)
     }
-    preregistered, preregistered_labels = _load_trial_cohort(
-        _resolve(sources["human_preregistered_trials"]["path"]),
+    preregistered, preregistered_labels = load_trial_cohort(
+        resolve_registered_path(sources["human_preregistered_trials"]["path"]),
         "preregistered",
         pair_to_index,
         metadata["n_items"],
     )
-    replication, replication_labels = _load_trial_cohort(
-        _resolve(sources["human_replication_trials"]["path"]),
+    replication, replication_labels = load_trial_cohort(
+        resolve_registered_path(sources["human_replication_trials"]["path"]),
         "replication",
         pair_to_index,
         metadata["n_items"],
@@ -409,7 +400,7 @@ def load_human_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
     odd = odd_28[:, selected]
     even = even_28[:, selected]
 
-    benchmark = load_json(_resolve(sources["human_benchmark"]["path"]))
+    benchmark = load_json(resolve_registered_path(sources["human_benchmark"]["path"]))
     benchmark_rows = benchmark.get("combined", {}).get("pairs", [])
     benchmark_labels = tuple("-".join(row["pair"]) for row in benchmark_rows)
     benchmark_means = np.asarray(
@@ -464,7 +455,7 @@ def load_human_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
 def posterior_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
     contract = specification["posterior_comparator"]
     allocation_specification = load_json(
-        _resolve(
+        resolve_registered_path(
             specification["registered_sources"]["allocation_specification"]["path"]
         )
     )
@@ -488,7 +479,9 @@ def posterior_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
         None,
         config,
         load_ranking_protocol(
-            _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+            resolve_registered_path(
+                specification["registered_sources"]["liu_protocol"]["path"]
+            )
         ),
         cue_seed=int(contract["cue_seed"]),
         support_seed=int(contract["support_seed"]),
@@ -496,7 +489,7 @@ def posterior_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
         subject_encoding_mode=str(contract["subject_encoding_mode"]),
         subject_encoding_seed=int(contract["subject_encoding_seed"]),
     )
-    posterior, posterior_integrity = _posterior_descriptors(
+    posterior, posterior_integrity = posterior_descriptors(
         evaluator,
         metadata["geometry"],
         {"posterior_comparator": contract},
@@ -510,7 +503,9 @@ def posterior_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
     subject_slopes = selected @ metadata["distance_weights"]
 
     fingerprint = load_json(
-        _resolve(specification["registered_sources"]["fingerprint_result"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["fingerprint_result"]["path"]
+        )
     )
     anchors = {
         seed: np.asarray(
@@ -681,7 +676,7 @@ def adequacy_statistics(
     posterior_profile = np.mean(posterior_profiles_by_subject, axis=0)
     human_profile_boot = counts @ human_profiles_by_subject / subjects
 
-    distance_interval = _interval_summary(human_slope, human_slope_boot)
+    distance_interval = interval_summary(human_slope, human_slope_boot)
     lower = distance_interval["bootstrap"]["lower95"]
     upper = distance_interval["bootstrap"]["upper95"]
     if posterior_slope < lower:
@@ -690,7 +685,7 @@ def adequacy_statistics(
         distance_status = "inadequate_above"
     else:
         distance_status = "adequate"
-    eta_summary = _interval_summary(float(eta_pair), eta_boot)
+    eta_summary = interval_summary(float(eta_pair), eta_boot)
     pair_status = (
         "adequate" if eta_summary["bootstrap"]["lower90"] >= 0.80 else "inadequate"
     )
@@ -705,7 +700,7 @@ def adequacy_statistics(
         }
     distance_rows = []
     for index, level in enumerate(metadata["distance_levels"]):
-        human_summary = _interval_summary(
+        human_summary = interval_summary(
             float(human_profile[index]), human_profile_boot[:, index]
         )
         difference = human_profile_boot[:, index] - posterior_profile[index]
@@ -715,7 +710,7 @@ def adequacy_statistics(
                 "pairs": int(metadata["distance_counts"][index]),
                 "human": human_summary,
                 "posterior_point": float(posterior_profile[index]),
-                "human_minus_posterior": _interval_summary(
+                "human_minus_posterior": interval_summary(
                     float(human_profile[index] - posterior_profile[index]), difference
                 ),
             }
@@ -730,9 +725,9 @@ def adequacy_statistics(
                 "adequate": distance_status == "adequate",
             },
             "pair": {
-                "r_PH": _interval_summary(r_ph, r_ph_boot),
-                "r_HH": _interval_summary(r_hh, r_hh_boot),
-                "rho_H_spearman_brown": _interval_summary(rho_h, rho_h_boot),
+                "r_PH": interval_summary(r_ph, r_ph_boot),
+                "r_HH": interval_summary(r_hh, r_hh_boot),
+                "rho_H_spearman_brown": interval_summary(rho_h, rho_h_boot),
                 "eta_pair": eta_summary,
                 "threshold": 0.80,
                 "interval_rule": "lower90_at_least_threshold",
@@ -864,7 +859,9 @@ def evaluate(
     prerequisite: dict,
 ) -> dict:
     protocol = load_ranking_protocol(
-        _resolve(specification["registered_sources"]["liu_protocol"]["path"])
+        resolve_registered_path(
+            specification["registered_sources"]["liu_protocol"]["path"]
+        )
     )
     metadata = edge_metadata(specification, protocol)
     human, human_integrity = load_human_fields(specification, metadata)

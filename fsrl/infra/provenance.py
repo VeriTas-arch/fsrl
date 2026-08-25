@@ -17,6 +17,17 @@ def file_sha256(path: Path | str) -> str:
     return digest.hexdigest()
 
 
+def tensor_hashes(module: Any) -> dict[str, str]:
+    """Hash each tensor in a module state dictionary by name."""
+
+    return {
+        name: hashlib.sha256(
+            value.detach().cpu().contiguous().numpy().tobytes()
+        ).hexdigest()
+        for name, value in module.state_dict().items()
+    }
+
+
 def load_json(path: Path | str) -> dict[str, Any]:
     with Path(path).open(encoding="utf-8") as handle:
         return json.load(handle)

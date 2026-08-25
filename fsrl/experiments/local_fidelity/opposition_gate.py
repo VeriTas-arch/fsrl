@@ -7,8 +7,8 @@ import torch.nn.functional as F
 from torch import nn
 
 from fsrl.core.config import DEVICE
+from fsrl.core.local_trace import inverse_softplus
 from fsrl.core.plastic_rnn import RetroModulRNN
-from fsrl.experiments.local_fidelity.curvature_gate import inverse_softplus
 
 
 def policy_opposition_statistics(

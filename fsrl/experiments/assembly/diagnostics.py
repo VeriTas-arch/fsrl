@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from dataclasses import dataclass
 from itertools import combinations
@@ -18,14 +17,21 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.confirmation.behavioral import _validate_checkpoint
+from fsrl.experiments.confirmation.behavioral import validate_checkpoint
 from fsrl.experiments.human.benchmark import (
     DEFAULT_PREREGISTERED_PATH,
     DEFAULT_REPLICATION_PATH,
     SOURCE_FILES,
     load_human_cohort,
 )
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.study_registry import (
+    resolve_record,
+    validate_registered_file,
+)
+from fsrl.infra.study_registry import (
+    resolve_registered_path as resolve_path,
+)
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
@@ -43,24 +49,6 @@ class FieldDesign:
     learned_mask: np.ndarray
     slope_weights: np.ndarray
     learned_effect_weights: np.ndarray
-
-
-def load_json(path: Path | str) -> dict:
-    with Path(path).open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
-def resolve_path(path: str) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def build_field_design(protocol: RankingProtocol) -> FieldDesign:
@@ -309,20 +297,10 @@ def directional_diagnosis(
     }
 
 
-def _validate_registered_file(registration: dict) -> dict:
-    path = resolve_path(registration["path"])
-    observed = registered_file_sha256(
-        registration["path"], registration["sha256"], resolved_path=path
-    )
-    if observed != registration["sha256"]:
-        raise RuntimeError(f"registered SHA-256 mismatch: {path}")
-    return {"path": registration["path"], "sha256": observed}
-
-
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
     validated = {
-        name: _validate_registered_file(sources[name])
+        name: validate_registered_file(sources[name])
         for name in ("pilot_specification", "protocol", "human_benchmark")
     }
     artifacts = []
@@ -375,7 +353,7 @@ def _read_frozen_pilot(
     seed = int(registration["seed"])
     checkpoint = resolve_path(registration["checkpoint_path"])
     behavior_path = resolve_path(registration["behavior_path"])
-    _validate_checkpoint(checkpoint, pilot_specification, seed)
+    validate_checkpoint(checkpoint, pilot_specification, seed)
     behavior = load_json(behavior_path)
     net, config, checkpoint_info = load_retro_checkpoint(
         checkpoint, len(behavior["subjects"])

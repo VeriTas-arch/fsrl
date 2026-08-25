@@ -15,7 +15,11 @@ from fsrl.core.config import DEVICE
 from fsrl.evaluation.frozen_fast_weight import run_causal_suite
 from fsrl.evaluation.qualification import evaluate_qualification
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.study_registry import canonical_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.study_registry import (
+    canonical_file_sha256 as file_sha256,
+)
+from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.meta_tasks import held_out_liu_graph_signatures
 from fsrl.training.backbone import (
@@ -30,22 +34,6 @@ DEFAULT_OUTPUT_ROOT = ROOT / "artifacts" / "runs" / "confirmation-v1"
 FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
 FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "infra" / "formal_runtime.py"
 FORMAL_TRAINING_SOURCE = ROOT / "fsrl" / "training" / "backbone.py"
-
-
-def file_sha256(path: Path) -> str:
-    return canonical_file_sha256(path)
-
-
-def load_json(path: Path | str) -> dict:
-    with Path(path).open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def write_json(path: Path, value: dict) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        json.dump(value, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
 
 
 def resolve_registered_path(specification_path: Path, registered: str) -> Path:
@@ -129,21 +117,21 @@ def _require_registered_runtime(specification: dict) -> dict | None:
     return None
 
 
-def _formal_runtime_source_registration() -> dict:
+def formal_runtime_source_registration() -> dict:
     return {
         "path": str(FORMAL_RUNTIME_SOURCE.relative_to(ROOT)),
         "sha256": file_sha256(FORMAL_RUNTIME_SOURCE),
     }
 
 
-def _formal_training_source_registration() -> dict:
+def formal_training_source_registration() -> dict:
     return {
         "path": str(FORMAL_TRAINING_SOURCE.relative_to(ROOT)),
         "sha256": file_sha256(FORMAL_TRAINING_SOURCE),
     }
 
 
-def _validate_formal_runtime_record(result: dict) -> None:
+def validate_formal_runtime_record(result: dict) -> None:
     runtime = result.get("execution_runtime", {})
     if not (
         runtime.get("active")
@@ -158,18 +146,15 @@ def _validate_formal_runtime_record(result: dict) -> None:
     ):
         raise RuntimeError("formal seed result lacks the bounded GPU runtime record")
     registration = result.get("execution_runtime_source", {})
-    expected_registration = _formal_runtime_source_registration()
+    expected_registration = formal_runtime_source_registration()
     if registration != expected_registration:
         raise RuntimeError("formal seed runtime source hash does not match")
 
 
-def _validate_formal_training_execution(result: dict) -> None:
+def validate_formal_training_execution(result: dict) -> None:
     if result.get("training_execution") != COMPILED_TRAINING_EXECUTION:
         raise RuntimeError("formal seed result lacks the registered compiled training")
-    if (
-        result.get("training_execution_source")
-        != _formal_training_source_registration()
-    ):
+    if result.get("training_execution_source") != formal_training_source_registration():
         raise RuntimeError("formal seed compiled-training source hash does not match")
 
 
@@ -178,7 +163,7 @@ def _validate_seed(specification: dict, seed: int) -> None:
         raise ValueError(f"seed {seed} is not registered for confirmation")
 
 
-def _validate_checkpoint(checkpoint: Path, specification: dict, seed: int) -> dict:
+def validate_checkpoint(checkpoint: Path, specification: dict, seed: int) -> dict:
     metadata = load_json(checkpoint.parent / "config.json")
     expected_training = dict(specification["training"])
     expected_training.pop("seeds")
@@ -229,14 +214,14 @@ def train_confirmation_seed(
     seed_dir = output_root / f"seed-{seed}"
     checkpoint = seed_dir / "net.dat"
     if checkpoint.exists():
-        _validate_checkpoint(checkpoint, specification, seed)
+        validate_checkpoint(checkpoint, specification, seed)
         return checkpoint
     train_meta_model(
         _training_config(specification, seed),
         seed_dir,
         compile_model=specification["confirmation_id"] == FORMAL_CONFIRMATION_ID,
     )
-    _validate_checkpoint(checkpoint, specification, seed)
+    validate_checkpoint(checkpoint, specification, seed)
     return checkpoint
 
 
@@ -332,7 +317,7 @@ def evaluate_confirmation_seed(
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
     checkpoint = seed_dir / "net.dat"
-    checkpoint_metadata = _validate_checkpoint(checkpoint, specification, seed)
+    checkpoint_metadata = validate_checkpoint(checkpoint, specification, seed)
     evaluation = specification["evaluation"]
 
     causal = run_causal_suite(
@@ -419,9 +404,9 @@ def evaluate_confirmation_seed(
         summary.update(
             {
                 "execution_runtime": runtime,
-                "execution_runtime_source": _formal_runtime_source_registration(),
+                "execution_runtime_source": formal_runtime_source_registration(),
                 "training_execution": checkpoint_metadata.get("execution"),
-                "training_execution_source": _formal_training_source_registration(),
+                "training_execution_source": formal_training_source_registration(),
             }
         )
     write_json(seed_dir / "confirmation.json", summary)
@@ -447,8 +432,8 @@ def aggregate_confirmation(
             if summary.get("seed") != seed:
                 raise RuntimeError(f"confirmation result has wrong seed: {path}")
             if formal:
-                _validate_formal_runtime_record(summary)
-                _validate_formal_training_execution(summary)
+                validate_formal_runtime_record(summary)
+                validate_formal_training_execution(summary)
             summaries.append(summary)
     if missing:
         raise RuntimeError(

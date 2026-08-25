@@ -3,13 +3,13 @@ import unittest
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.core.config import TrainConfig
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
 )
-from fsrl.experiments.assembly.diagnostics import load_json
 from fsrl.experiments.assembly.factor_swap import (
     compose_factors,
     donor_indices,
@@ -17,11 +17,9 @@ from fsrl.experiments.assembly.factor_swap import (
     readout_effective_margin_fields_batched,
     validate_registered_sources,
 )
-from fsrl.experiments.assembly.trajectory import (
-    build_complete_graph_geometry,
-    readout_margin_fields,
-)
+from fsrl.experiments.assembly.trajectory import readout_margin_fields
 from fsrl.experiments.assembly.write_localization import trace_support_trial
+from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 

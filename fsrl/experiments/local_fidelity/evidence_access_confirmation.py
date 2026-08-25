@@ -7,25 +7,26 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import fsrl.experiments.local_fidelity.evidence_access_pilot as dual_access
-from fsrl.experiments.confirmation.behavioral import file_sha256
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    configure_runtime,
-    load_json,
-    write_json,
-)
+from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
 from fsrl.experiments.local_fidelity.trace_pilot import (
     evaluate_pilot as evaluate_v2_3_pilot,
 )
 from fsrl.experiments.local_fidelity.trace_replication import (
-    _attribution_for_seed,
-    _seed_paths,
-    _validate_complete_backbone,
-    _validate_complete_gain,
     adapt_gain,
+    attribution_for_seed,
+    seed_paths,
     seed_specification,
     train_backbone,
+    validate_complete_backbone,
+    validate_complete_gain,
 )
-from fsrl.infra.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
+from fsrl.infra.study_registry import (
+    registered_file_sha256,
+    resolve_record,
+    resolve_registered_path,
+)
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT
@@ -44,11 +45,6 @@ DEFAULT_OUTPUT_ROOT = (
 DEFAULT_RESULT_PATH = resolve_record(
     "results/dual_evidence_access_confirmation_v2_4.json"
 )
-
-
-def _resolve(path: str | Path) -> Path:
-    candidate = Path(path)
-    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def fresh_seeds(specification: dict) -> tuple[int, ...]:
@@ -82,7 +78,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = _resolve(registration["path"])
+        path = resolve_registered_path(registration["path"])
         observed = registered_file_sha256(
             registration["path"], registration["sha256"], resolved_path=path
         )
@@ -126,9 +122,9 @@ def artifact_lock_document(
 ) -> dict:
     artifacts = {}
     for seed in fresh_seeds(specification):
-        _validate_complete_backbone(specification, output_root, seed)
-        gain_path = _validate_complete_gain(specification, output_root, seed)
-        paths = _seed_paths(output_root, seed)
+        validate_complete_backbone(specification, output_root, seed)
+        gain_path = validate_complete_gain(specification, output_root, seed)
+        paths = seed_paths(output_root, seed)
         gain = load_json(gain_path)
         artifacts[str(seed)] = {
             name: {
@@ -194,10 +190,10 @@ def validate_artifacts(
             }
         )
     for seed in fresh_seeds(specification):
-        _validate_complete_backbone(specification, output_root, seed)
-        _validate_complete_gain(specification, output_root, seed)
+        validate_complete_backbone(specification, output_root, seed)
+        validate_complete_gain(specification, output_root, seed)
         for name, registration in lock["artifacts"][str(seed)].items():
-            path = _resolve(registration["path"])
+            path = resolve_registered_path(registration["path"])
             observed = file_sha256(path)
             checks.append(
                 {
@@ -221,7 +217,7 @@ def _v2_3_reference_seed(
     artifact_validation: dict,
     runtime: dict,
 ) -> dict:
-    paths = _seed_paths(output_root, seed)
+    paths = seed_paths(output_root, seed)
     pilot = evaluate_v2_3_pilot(
         seed_specification(specification, seed),
         paths["checkpoint"],
@@ -230,7 +226,7 @@ def _v2_3_reference_seed(
         artifact_validation,
         runtime,
     )
-    attribution = _attribution_for_seed(
+    attribution = attribution_for_seed(
         specification, seed, paths["checkpoint"], paths["gain"]
     )
     return {
