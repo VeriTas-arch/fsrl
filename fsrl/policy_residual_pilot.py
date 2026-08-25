@@ -51,7 +51,7 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = (
 DEFAULT_ARTIFACT_LOCK_PATH = (
     resolve_record("benchmarks/policy_residual_pilot_v2_2.artifact_lock.json")
 )
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "policy-residual-pilot-v2-2"
+DEFAULT_OUTPUT_ROOT = ROOT / "artifacts" / "runs" / "policy-residual-pilot-v2-2"
 DEFAULT_RESULT_PATH = resolve_record("results/policy_residual_pilot_v2_2.json")
 UNSIGNED_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
 CONDITIONS = (

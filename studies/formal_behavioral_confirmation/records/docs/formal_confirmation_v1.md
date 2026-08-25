@@ -10,7 +10,7 @@ The machine-readable records are
 [`results/confirmation_v1.json`](../results/confirmation_v1.json) and
 [`results/mechanism_confirmation_v1.json`](../results/mechanism_confirmation_v1.json).
 Raw checkpoints and per-seed artifacts remain under the ignored
-`output/confirmation-v1/` tree.
+`artifacts/runs/confirmation-v1/` tree.
 
 ## Integrity and competence
 

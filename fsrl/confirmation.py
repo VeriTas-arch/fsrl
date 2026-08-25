@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 
@@ -22,22 +21,18 @@ from .meta_train import (
     train_meta_model,
 )
 from .qualification import evaluate_qualification
-from .study_registry import resolve_record
+from .study_registry import canonical_file_sha256, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/confirmation_v1.json")
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "confirmation-v1"
+DEFAULT_OUTPUT_ROOT = ROOT / "artifacts" / "runs" / "confirmation-v1"
 FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
 FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "formal_runtime.py"
 FORMAL_TRAINING_SOURCE = ROOT / "fsrl" / "meta_train.py"
 
 
 def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+    return canonical_file_sha256(path)
 
 
 def load_json(path: Path | str) -> dict:

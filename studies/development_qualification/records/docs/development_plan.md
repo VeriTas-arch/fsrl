@@ -117,15 +117,15 @@ Evaluate the tracked checkpoint:
 ```bash
 direnv exec . python -m fsrl.liu_eval \
   --checkpoint checkpoints/dev-v2-seed1801-step1000/net.dat \
-  --output output/dev-v2/liu-causal.json \
+  --output artifacts/runs/dev-v2/liu-causal.json \
   --batch-size 77 --cue-mode permuted_shared \
   --subject-encoding stable_omission \
   --cue-seed 1802 --support-seed 1803 --subject-encoding-seed 1804 \
   --order-seed 1805 --order-schedules 8
 
 direnv exec . python -m fsrl.qualification \
-  --result output/dev-v2/liu-causal.json \
-  --output output/dev-v2/qualification.json
+  --result artifacts/runs/dev-v2/liu-causal.json \
+  --output artifacts/runs/dev-v2/qualification.json
 ```
 
 Generate four behavioral files using temperatures `1.0`, `0.75`, `0.5`, and
@@ -134,7 +134,7 @@ Generate four behavioral files using temperatures `1.0`, `0.75`, `0.5`, and
 ```bash
 direnv exec . python -m fsrl.behavioral \
   --checkpoint checkpoints/dev-v2-seed1801-step1000/net.dat \
-  --output output/dev-v2/behavior-temp025.json \
+  --output artifacts/runs/dev-v2/behavior-temp025.json \
   --batch-size 77 --cue-seed 1802 --support-seed 1803 \
   --subject-encoding-seed 1804 --choice-seed 1806 \
   --temperature 0.25 --subject-encoding stable_omission
@@ -145,16 +145,16 @@ behavior for geometry:
 
 ```bash
 direnv exec . python -m fsrl.human_fit \
-  --behavior output/dev-v2/behavior-temp100.json \
-  --behavior output/dev-v2/behavior-temp075.json \
-  --behavior output/dev-v2/behavior-temp050.json \
-  --behavior output/dev-v2/behavior-temp025.json \
-  --output output/dev-v2/human-fit.json
+  --behavior artifacts/runs/dev-v2/behavior-temp100.json \
+  --behavior artifacts/runs/dev-v2/behavior-temp075.json \
+  --behavior artifacts/runs/dev-v2/behavior-temp050.json \
+  --behavior artifacts/runs/dev-v2/behavior-temp025.json \
+  --output artifacts/runs/dev-v2/human-fit.json
 
 direnv exec . python -m fsrl.geometry \
   --checkpoint checkpoints/dev-v2-seed1801-step1000/net.dat \
-  --behavior output/dev-v2/behavior-temp025.json \
-  --output output/dev-v2/geometry.json
+  --behavior artifacts/runs/dev-v2/behavior-temp025.json \
+  --output artifacts/runs/dev-v2/geometry.json
 ```
 
 ## Remaining work before a paper-level claim

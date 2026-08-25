@@ -48,7 +48,12 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = (
 DEFAULT_ARTIFACT_LOCK_PATH = (
     resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.artifact_lock.json")
 )
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "global-policy-field-fingerprint-replication-v1"
+DEFAULT_OUTPUT_ROOT = (
+    ROOT
+    / "artifacts"
+    / "runs"
+    / "global-policy-field-fingerprint-replication-v1"
+)
 DEFAULT_RESULT_PATH = (
     resolve_record("results/global_policy_field_fingerprint_replication_v1.json")
 )

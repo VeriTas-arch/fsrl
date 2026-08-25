@@ -58,7 +58,10 @@ UPSTREAM_ARTIFACT_LOCK_PATH = (
     resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.artifact_lock.json")
 )
 UPSTREAM_OUTPUT_ROOT = (
-    ROOT / "output" / "global-policy-field-fingerprint-replication-v1"
+    ROOT
+    / "artifacts"
+    / "runs"
+    / "global-policy-field-fingerprint-replication-v1"
 )
 UPSTREAM_RESULT_PATH = (
     resolve_record("results/global_policy_field_fingerprint_replication_v1.json")

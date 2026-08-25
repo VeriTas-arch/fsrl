@@ -128,7 +128,7 @@ a later mainline version must preserve every member identity.
 
 `restore-test-artifacts` applies the same fail-closed extraction rule to the six
 seed-1901/1902 files referenced by legacy source-integrity tests. It does not
-train or evaluate a model. These files live under ignored `output/` paths, so a
+train or evaluate a model. These files live under ignored `artifacts/runs/` paths, so a
 clean clone remains Git-clean after restoration and the full CPU suite.
 
 ## Environment reconstruction

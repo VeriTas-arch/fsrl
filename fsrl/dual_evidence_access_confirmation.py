@@ -32,7 +32,9 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = (
 DEFAULT_ARTIFACT_LOCK_PATH = (
     resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json")
 )
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "dual-evidence-access-confirmation-v2-4"
+DEFAULT_OUTPUT_ROOT = (
+    ROOT / "artifacts" / "runs" / "dual-evidence-access-confirmation-v2-4"
+)
 DEFAULT_RESULT_PATH = resolve_record("results/dual_evidence_access_confirmation_v2_4.json")
 
 

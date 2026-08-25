@@ -23,4 +23,6 @@ replication participants after the source study's below-chance exclusion. Each
 retained participant has 280 query trials: all 28 pairs repeated in 10 blocks.
 
 No inferred or processed values should be written into this directory. Derived
-benchmarks belong under `benchmarks/` and must retain these hashes.
+runtime outputs belong under `artifacts/runs/`; registered contracts and compact
+evidence belong to their owning `studies/<study-id>/records/` directory and must
+retain these source hashes.

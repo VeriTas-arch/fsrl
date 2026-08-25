@@ -52,7 +52,9 @@ DEFAULT_SPECIFICATION_PATH = (
 DEFAULT_LOCK_PATH = (
     resolve_record("benchmarks/policy_opposition_gate_pilot_v2_1.lock_v3.json")
 )
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "policy-opposition-gate-pilot-v2-1"
+DEFAULT_OUTPUT_ROOT = (
+    ROOT / "artifacts" / "runs" / "policy-opposition-gate-pilot-v2-1"
+)
 DEFAULT_RESULT_PATH = resolve_record("results/policy_opposition_gate_pilot_v2_1.json")
 UNSIGNED_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
 CONDITIONS = (

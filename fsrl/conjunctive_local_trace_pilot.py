@@ -62,7 +62,9 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = (
 DEFAULT_ARTIFACT_LOCK_PATH = (
     resolve_record("benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json")
 )
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "conjunctive-local-trace-pilot-v2-3"
+DEFAULT_OUTPUT_ROOT = (
+    ROOT / "artifacts" / "runs" / "conjunctive-local-trace-pilot-v2-3"
+)
 DEFAULT_RESULT_PATH = resolve_record("results/conjunctive_local_trace_pilot_v2_3.json")
 UNSIGNED_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
 CONDITIONS = (

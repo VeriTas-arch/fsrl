@@ -47,7 +47,7 @@ from .study_registry import legacy_identifier, registered_file_sha256, resolve_r
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
 DEFAULT_LOCK_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.lock.json")
-DEFAULT_OUTPUT_ROOT = ROOT / "output" / "curvature-gate-pilot-v2"
+DEFAULT_OUTPUT_ROOT = ROOT / "artifacts" / "runs" / "curvature-gate-pilot-v2"
 DEFAULT_RESULT_PATH = resolve_record("results/curvature_gate_pilot_v2.json")
 CONDITIONS = (
     "original_v1",

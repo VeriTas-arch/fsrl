@@ -39,7 +39,9 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = (
     resolve_record("benchmarks/global_policy_field_reassembly_v1.lock.json")
 )
 DEFAULT_RESULT_PATH = resolve_record("results/global_policy_field_reassembly_v1.json")
-CONFIRMATION_OUTPUT_ROOT = ROOT / "output" / "dual-evidence-access-confirmation-v2-4"
+CONFIRMATION_OUTPUT_ROOT = (
+    ROOT / "artifacts" / "runs" / "dual-evidence-access-confirmation-v2-4"
+)
 
 PRIMARY_ESTIMANDS = (
     "S_NN",

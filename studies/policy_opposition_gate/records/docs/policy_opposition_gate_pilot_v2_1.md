@@ -37,10 +37,10 @@ near-linear policy expression. This result does not motivate changing `tanh`.
   actively reject a mismatch to the already frozen gate-artifact hash and
   changes no computation.
 - Frozen backbone:
-  `output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat`, SHA-256
+  `artifacts/runs/curvature-gate-pilot-v2/seed-2101/backbone/net.dat`, SHA-256
   `3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d`.
 - Frozen v2.1 gate artifact:
-  `output/policy-opposition-gate-pilot-v2-1/seed-2101/gate/gate.json`, SHA-256
+  `artifacts/runs/policy-opposition-gate-pilot-v2-1/seed-2101/gate/gate.json`, SHA-256
   `a1b51eb565d37e64d086c4bde348b90adfa07c151a677978ecf36aa0d481ddc0`.
 - Final result: `results/policy_opposition_gate_pilot_v2_1.json`, SHA-256
   `8b0cc636f344b11c440b7a38b34f8775689b16f3bd32c6db6708cb8477764011`.

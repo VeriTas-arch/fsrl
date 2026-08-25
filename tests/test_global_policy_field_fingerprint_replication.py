@@ -246,7 +246,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
                 "artifacts": {
                     str(seed): {
                         "checkpoint": {
-                            "path": f"output/seed-{seed}/net.dat",
+                            "path": f"artifacts/runs/seed-{seed}/net.dat",
                             "sha256": f"sha-{seed}",
                         }
                     }

@@ -110,7 +110,7 @@ PyTorch/CUDA/device environment, and the training implementation hash.
 The resource defect was found after seeds 2001--2003 completed and seed 2004
 started, before any scientific outcome was inspected. That execution was
 aborted and its ignored artifacts were archived under
-`output/aborted-confirmation-v1-unbounded-threads-20260824/`; none are eligible
+`artifacts/runs/aborted-confirmation-v1-unbounded-threads-20260824/`; none are eligible
 for aggregation. A seed-2004 replay with the bounded runtime reproduced the
 first 184 training-log records byte for byte (identical SHA-256) and completed
 those steps in 28.26 seconds at 105% CPU. Trial-level input batching preserved

@@ -34,8 +34,9 @@ studies/                 experiment-level questions and exact records
     study.toml            authoritative metadata and record hashes
     records/              byte-preserved reports, contracts, locks, results
 synthesis/                current cross-study account and frozen overlay
-artifacts/                ignored runtime outputs and regenerated data
-data/external/            tracked source datasets
+artifacts/runs/           ignored training, evaluation, and checkpoint runs
+artifacts/reproductions/  ignored regenerated external-paper outputs
+data/external/            tracked immutable external source datasets
 fsrl/                     executable model and analysis code
 tests/                    regression and scientific-contract tests
 workflows/                schema-driven maintained research routes
@@ -98,6 +99,7 @@ that compatibility rewrites and the Git-backed source index remain reproducible:
 
 ~~~bash
 direnv exec . python tools/provenance/migrate_flat_records_v1.py audit
+direnv exec . python tools/provenance/rewrite_runtime_locators_v1.py audit
 direnv exec . python tools/provenance/rewrite_active_record_paths_v1.py check
 direnv exec . python tools/provenance/index_source_provenance_v1.py check
 ~~~
@@ -116,10 +118,12 @@ direnv exec . python -m fsrl.test_runtime --timeout 60 \
   --framework unittest -- tests.test_study_registry -v
 ~~~
 
-Runtime outputs belong in artifacts/. Promoting an output into a study requires
-a registered protocol, exact provenance, a result status, and a claim boundary.
-The pre-existing ignored output/ and figures/ trees remain legacy runner caches
-for compatibility; they are not part of the study registry or frozen evidence.
+Runtime outputs belong under `artifacts/runs/<workflow>/`, including checkpoints,
+logs, evaluations, and previews owned by that run. External-paper teaching
+outputs belong under `artifacts/reproductions/<capsule>/`. The former top-level
+`output/`, `figures/`, and `checkpoints/` layouts are retired. Promoting an
+output into a study requires a registered protocol, exact provenance, a result
+status, and a claim boundary.
 
 ## Original-paper teaching reproduction
 

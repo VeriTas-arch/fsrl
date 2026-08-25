@@ -38,11 +38,11 @@
     "generic_backbone_replay": "torch.compile(backbone, fullgraph=True, mode='default')"
   },
   "frozen_backbone": {
-    "path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
+    "path": "artifacts/runs/curvature-gate-pilot-v2/seed-2101/backbone/net.dat",
     "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"
   },
   "frozen_gate_artifact": {
-    "path": "output/policy-opposition-gate-pilot-v2-1/seed-2101/gate/gate.json",
+    "path": "artifacts/runs/policy-opposition-gate-pilot-v2-1/seed-2101/gate/gate.json",
     "sha256": "a1b51eb565d37e64d086c4bde348b90adfa07c151a677978ecf36aa0d481ddc0"
   },
   "immutability": "The evaluator now checks every declared source, the backbone, and the frozen gate artifact before evaluation."

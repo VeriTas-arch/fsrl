@@ -667,7 +667,9 @@ def _worktree(commit: str) -> Path:
     return worktree
 
 
-def _extract_required_artifacts(worktree: Path, tags: list[str]) -> list[str]:
+def _extract_required_artifacts(
+    worktree: Path, tags: list[str], *, active_runtime_layout: bool = False
+) -> list[str]:
     if not tags:
         return []
     artifacts = load_json(ARTIFACTS_PATH)
@@ -680,7 +682,17 @@ def _extract_required_artifacts(worktree: Path, tags: list[str]) -> list[str]:
     if not selected:
         raise RuntimeError(f"no bundled artifact satisfies replay tags: {tags}")
     for member in selected:
-        target = worktree.joinpath(*PurePosixPath(member["bundle_member"]).parts)
+        bundle_member = PurePosixPath(member["bundle_member"])
+        if active_runtime_layout:
+            if bundle_member.parts[0] != "output":
+                raise RuntimeError(
+                    "active runtime artifact must use the frozen output/ prefix"
+                )
+            target = worktree / "artifacts" / "runs" / Path(*bundle_member.parts[1:])
+            extraction_root = worktree / "artifacts" / "runs"
+        else:
+            target = worktree.joinpath(*bundle_member.parts)
+            extraction_root = worktree
         if target.exists():
             if (
                 target.is_symlink()
@@ -690,16 +702,19 @@ def _extract_required_artifacts(worktree: Path, tags: list[str]) -> list[str]:
                 raise RuntimeError(f"existing replay artifact has wrong hash: {target}")
             continue
         target.parent.mkdir(parents=True, exist_ok=True)
+        command = [
+            "tar",
+            "--zstd",
+            "-xf",
+            str(bundle),
+            "-C",
+            str(extraction_root),
+        ]
+        if active_runtime_layout:
+            command.append("--strip-components=1")
+        command.append(member["bundle_member"])
         completed = subprocess.run(
-            [
-                "tar",
-                "--zstd",
-                "-xf",
-                str(bundle),
-                "-C",
-                str(worktree),
-                member["bundle_member"],
-            ],
+            command,
             check=False,
             capture_output=True,
             text=True,
@@ -719,7 +734,9 @@ def restore_test_artifacts() -> dict:
     """Restore only the six registered artifacts needed by the CPU test suite."""
 
     verify_artifact_bundle()
-    restored = _extract_required_artifacts(ROOT, ["cpu_test_suite"])
+    restored = _extract_required_artifacts(
+        ROOT, ["cpu_test_suite"], active_runtime_layout=True
+    )
     if len(restored) != 6:
         raise RuntimeError("CPU test artifact profile must contain exactly six files")
     return {

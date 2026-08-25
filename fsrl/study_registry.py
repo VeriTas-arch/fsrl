@@ -6,9 +6,9 @@ The registry separates three concerns:
 * ``synthesis/`` organizes the current cross-study account;
 * the migration map resolves frozen pre-refactor paths without duplicating files.
 
-Historical records are intentionally treated as immutable bytes.  Updating a
-scientific result requires a new record, not rebuilding this index around a
-different interpretation.
+Historical scientific values are immutable. Repository-wide locator-only
+rewrites require their own provenance-locked migration ledger; changing a
+result or interpretation still requires a new record.
 """
 
 from __future__ import annotations
@@ -30,6 +30,9 @@ ROOT = Path(__file__).resolve().parents[1]
 STUDIES_ROOT = ROOT / "studies"
 REGISTRY_PATH = STUDIES_ROOT / "registry.toml"
 MIGRATION_PATH = STUDIES_ROOT / "migrations" / "flat-records-v1.json"
+RUNTIME_LOCATOR_MIGRATION_PATH = (
+    STUDIES_ROOT / "migrations" / "runtime-locators-v1.json"
+)
 SYNTHESIS_ROOT = ROOT / "synthesis"
 SYNTHESIS_MANIFEST_PATH = SYNTHESIS_ROOT / "manifest.toml"
 SOURCE_PROVENANCE_PATH = SYNTHESIS_ROOT / "source-provenance.toml"
@@ -89,6 +92,14 @@ def load_migration(path: Path = MIGRATION_PATH) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_runtime_locator_migration(
+    path: Path = RUNTIME_LOCATOR_MIGRATION_PATH,
+) -> dict[str, Any]:
+    if not path.is_file():
+        return {"schema_version": 1, "records": []}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def load_source_provenance(path: Path = SOURCE_PROVENANCE_PATH) -> dict[str, Any]:
     if not path.is_file():
         return {"schema_version": 1, "sources": []}
@@ -101,6 +112,32 @@ def file_sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def canonical_file_sha256(path: Path | str) -> str:
+    """Return the registered identity across a locator-only content rewrite."""
+
+    target = Path(path)
+    try:
+        repository_path = target.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        repository_path = None
+    rewrite = (
+        runtime_locator_lookup().get(repository_path)
+        if repository_path is not None
+        else None
+    )
+    observed = file_sha256(target)
+    if rewrite is None:
+        return observed
+    if (
+        target.stat().st_size != rewrite["after_bytes"]
+        or observed != rewrite["after_sha256"]
+    ):
+        raise RuntimeError(
+            f"runtime-locator rewritten content mismatch: {repository_path}"
+        )
+    return rewrite["before_sha256"]
 
 
 def _safe_relative(value: str) -> Path:
@@ -118,6 +155,12 @@ def migration_lookup() -> dict[str, str]:
     return {
         entry["legacy_path"]: entry["path"] for entry in migration.get("records", [])
     }
+
+
+@lru_cache(maxsize=1)
+def runtime_locator_lookup() -> dict[str, dict[str, Any]]:
+    migration = load_runtime_locator_migration()
+    return {record["path"]: record for record in migration.get("records", [])}
 
 
 @lru_cache(maxsize=1)
@@ -193,8 +236,26 @@ def registered_file_sha256(
     """Hash a registered artifact, using Git for historical Python sources."""
 
     candidate = Path(value)
+    target = candidate if candidate.is_absolute() else resolve_record(candidate)
+    if resolved_path is not None:
+        target = resolved_path
+    try:
+        repository_path = target.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        repository_path = None
+    rewrite = (
+        runtime_locator_lookup().get(repository_path)
+        if repository_path is not None
+        else None
+    )
+    if rewrite is not None:
+        if rewrite["before_sha256"] != expected_sha256:
+            raise RuntimeError(
+                f"runtime-locator source hash mismatch: {repository_path}"
+            )
+        return canonical_file_sha256(target)
     if candidate.is_absolute():
-        return file_sha256(candidate if resolved_path is None else resolved_path)
+        return file_sha256(target)
     path = _safe_relative(candidate.as_posix()).as_posix()
     if path.endswith(".py") and path.startswith(("fsrl/", "tests/")):
         return verify_source_lock(path, expected_sha256)["observed_sha256"]
@@ -278,12 +339,33 @@ def _validate_record(
     else:
         actual_bytes = path.stat().st_size
         actual_hash = file_sha256(path)
-        if actual_bytes != record["bytes"]:
-            errors.append(
-                f"{owner_id}: byte count changed for {repository_path.as_posix()}"
-            )
-        if actual_hash != record["sha256"]:
-            errors.append(f"{owner_id}: hash changed for {repository_path.as_posix()}")
+        rewrite = runtime_locator_lookup().get(repository_path.as_posix())
+        if rewrite is None:
+            if actual_bytes != record["bytes"]:
+                errors.append(
+                    f"{owner_id}: byte count changed for {repository_path.as_posix()}"
+                )
+            if actual_hash != record["sha256"]:
+                errors.append(
+                    f"{owner_id}: hash changed for {repository_path.as_posix()}"
+                )
+        else:
+            if (
+                record["bytes"] != rewrite["before_bytes"]
+                or record["sha256"] != rewrite["before_sha256"]
+            ):
+                errors.append(
+                    f"{owner_id}: runtime-locator source identity changed for "
+                    f"{repository_path.as_posix()}"
+                )
+            if (
+                actual_bytes != rewrite["after_bytes"]
+                or actual_hash != rewrite["after_sha256"]
+            ):
+                errors.append(
+                    f"{owner_id}: runtime-locator rewrite changed for "
+                    f"{repository_path.as_posix()}"
+                )
     return legacy_path, repository_path.as_posix()
 
 
@@ -546,6 +628,25 @@ def validate_registry(
         if extra:
             errors.append(f"migration has unowned records {extra}")
 
+    locator_migration = load_runtime_locator_migration()
+    locator_records = locator_migration.get("records", [])
+    locator_paths = [record.get("path") for record in locator_records]
+    if locator_migration.get("schema_version") != 1:
+        errors.append("runtime-locator migration schema_version must be 1")
+    if locator_migration.get("record_count") != len(locator_records):
+        errors.append("runtime-locator migration record_count is stale")
+    if locator_migration.get("replacement_count") != sum(
+        record.get("replacements", 0) for record in locator_records
+    ):
+        errors.append("runtime-locator migration replacement_count is stale")
+    if len(locator_paths) != len(set(locator_paths)):
+        errors.append("runtime-locator migration paths must be unique")
+    unknown_locator_paths = sorted(set(locator_paths) - current_paths)
+    if unknown_locator_paths:
+        errors.append(
+            f"runtime-locator migration has unowned records {unknown_locator_paths}"
+        )
+
     for legacy_path in migration_pairs:
         if (ROOT / legacy_path).exists():
             errors.append(f"legacy flat path still exists: {legacy_path}")
@@ -588,6 +689,7 @@ def validate_registry(
         ),
         "synthesis_records": len(synthesis.get("records", [])),
         "retired_assets": len(retired_asset_paths),
+        "runtime_locator_rewrites": len(locator_records),
         "source_provenance": len(sources),
         "role_counts": dict(sorted(role_counts.items())),
     }

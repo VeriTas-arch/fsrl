@@ -124,6 +124,12 @@ class LiuMainlineTests(unittest.TestCase):
         self.assertTrue(restored["passed"])
         self.assertEqual(restored["profile"], "cpu_test_suite")
         self.assertEqual(len(restored["restored_artifacts"]), 6)
+        self.assertFalse((ROOT / "output").exists())
+        self.assertTrue(
+            (
+                ROOT / "artifacts" / "runs" / "pilot-v1" / "seed-1901" / "net.dat"
+            ).is_file()
+        )
 
     def test_exact_and_semantic_replay_contracts_are_distinct(self):
         validation = verify_replay_contracts(self.manifest)

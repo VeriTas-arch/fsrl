@@ -12,6 +12,7 @@ from fsrl.study_registry import (
     file_sha256,
     load_migration,
     load_registry,
+    load_runtime_locator_migration,
     load_source_provenance,
     load_studies,
     load_synthesis,
@@ -21,6 +22,7 @@ from fsrl.study_registry import (
     verify_source_lock,
 )
 from tools.provenance.index_source_provenance_v1 import run as check_source_provenance
+from tools.provenance.rewrite_runtime_locators_v1 import audit as audit_runtime_locators
 
 
 class StudyRegistryTests(unittest.TestCase):
@@ -40,6 +42,7 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertEqual(self.validation["study_records"], 191)
         self.assertEqual(self.validation["synthesis_records"], 20)
         self.assertEqual(self.validation["retired_assets"], 2)
+        self.assertEqual(self.validation["runtime_locator_rewrites"], 76)
         self.assertEqual(self.validation["source_provenance"], 127)
 
     def test_old_flat_roots_are_not_the_active_layout(self):
@@ -50,11 +53,35 @@ class StudyRegistryTests(unittest.TestCase):
             "research",
             "mainlines",
             "checkpoints",
+            "output",
+            "figures",
         ):
             self.assertFalse((ROOT / directory).exists(), directory)
         for record in self.migration["records"]:
             self.assertFalse((ROOT / record["legacy_path"]).exists())
             self.assertTrue((ROOT / record["path"]).is_file())
+
+    def test_active_python_defaults_do_not_recreate_legacy_output_root(self):
+        legacy_root = re.compile(r"\bROOT\s*/\s*['\"]output['\"]")
+        offenders = []
+        for path in sorted((ROOT / "fsrl").glob("*.py")):
+            if legacy_root.search(path.read_text(encoding="utf-8")):
+                offenders.append(path.relative_to(ROOT).as_posix())
+        self.assertEqual(offenders, [])
+
+    def test_runtime_locator_rewrite_is_provenance_locked(self):
+        migration = load_runtime_locator_migration()
+        self.assertEqual(migration["record_count"], 76)
+        self.assertEqual(migration["replacement_count"], 784)
+        validation = audit_runtime_locators()
+        self.assertTrue(validation["passed"], validation["errors"])
+        self.assertEqual(validation["dependent_updates"], 3)
+
+    def test_data_root_contains_only_external_inputs_and_its_contract(self):
+        self.assertEqual(
+            sorted(path.name for path in (ROOT / "data").iterdir()),
+            ["README.md", "external"],
+        )
 
     def test_migration_is_bijective_and_legacy_paths_resolve(self):
         legacy = [record["legacy_path"] for record in self.migration["records"]]

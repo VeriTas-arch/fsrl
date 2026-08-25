@@ -39,10 +39,10 @@ confirmed global fast-weight assembly channel.
   `benchmarks/policy_residual_pilot_v2_2.artifact_lock.json`, committed as
   `24bdd9f` before any Liu evaluation.
 - Frozen backbone:
-  `output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat`, SHA-256
+  `artifacts/runs/curvature-gate-pilot-v2/seed-2101/backbone/net.dat`, SHA-256
   `3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d`.
 - Frozen eta artifact:
-  `output/policy-residual-pilot-v2-2/seed-2101/residual/eta.json`, SHA-256
+  `artifacts/runs/policy-residual-pilot-v2-2/seed-2101/residual/eta.json`, SHA-256
   `20a64e540780083213d850d69f5e9f52daba0dd1a761f1fc2afa961037ce0b3e`.
 - Final result: `results/policy_residual_pilot_v2_2.json`, SHA-256
   `74d8150e2e539907d72a54a01930618b81b90303840a6e45b4c1f9e8f495b628`.

@@ -1339,8 +1339,11 @@ metric constructive-comparator derivation and confirmation are in
   versioned migration and full validation, not ordinary cleanup.
 - Validate this migration with
   `python tools/provenance/migrate_flat_records_v1.py audit`; keep the active
-  path rewrite and source provenance checks idempotent with their respective
-  `check` commands under `tools/provenance/`.
+  record-path rewrite, runtime-locator rewrite, and source provenance checks
+  idempotent with their respective `check` or `audit` commands under
+  `tools/provenance/`. Current registered records use `artifacts/runs/`; the
+  old `output/` prefix survives only inside the content-addressed historical
+  artifact bundle and its frozen archive documentation.
 - Historical Python files named by frozen execution locks are indexed by the
   exact `(path, sha256)` pair in `synthesis/source-provenance.toml` and verified
   against immutable Git blobs and witness commits. Do not restore physical

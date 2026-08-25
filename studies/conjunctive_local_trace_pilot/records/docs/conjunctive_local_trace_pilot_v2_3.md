@@ -49,10 +49,10 @@ a different shared value/expression transform.
   `benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json`, committed
   as `404b8a3` before any Liu evaluation.
 - Frozen backbone:
-  `output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat`, SHA-256
+  `artifacts/runs/curvature-gate-pilot-v2/seed-2101/backbone/net.dat`, SHA-256
   `3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d`.
 - Frozen gain artifact:
-  `output/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json`,
+  `artifacts/runs/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json`,
   SHA-256
   `32a0750f3e4ce08703da0f3edca506d649e0e7d123aa67cc0bc3fc91fd059cc8`.
 - Final result: `results/conjunctive_local_trace_pilot_v2_3.json`, SHA-256

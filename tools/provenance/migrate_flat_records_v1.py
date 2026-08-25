@@ -342,6 +342,15 @@ def _registry_toml(catalog: dict[str, Any]) -> str:
 
 def audit_migration() -> dict[str, Any]:
     migration = json.loads(MIGRATION_PATH.read_text(encoding="utf-8"))
+    locator_path = ROOT / "studies" / "migrations" / "runtime-locators-v1.json"
+    locator_migration = (
+        json.loads(locator_path.read_text(encoding="utf-8"))
+        if locator_path.is_file()
+        else {"records": []}
+    )
+    locator_records = {
+        record["path"]: record for record in locator_migration.get("records", [])
+    }
     errors: list[str] = []
     for record in migration.get("records", []):
         legacy_path = record["legacy_path"]
@@ -355,9 +364,19 @@ def audit_migration() -> dict[str, Any]:
         expected_bytes = record["bytes"]
         if len(source_payload) != expected_bytes or _sha256_bytes(source_payload) != expected_hash:
             errors.append(f"source ref provenance differs for {legacy_path}")
+        rewrite = locator_records.get(record["path"])
+        if rewrite is not None and (
+            rewrite.get("before_sha256") != expected_hash
+            or rewrite.get("before_bytes") != expected_bytes
+        ):
+            errors.append(f"runtime-locator source differs for {record['path']}")
+        current_hash = (
+            rewrite["after_sha256"] if rewrite is not None else expected_hash
+        )
+        current_bytes = rewrite["after_bytes"] if rewrite is not None else expected_bytes
         if not current.is_file():
             errors.append(f"current record is missing: {record['path']}")
-        elif current.stat().st_size != expected_bytes or _sha256(current) != expected_hash:
+        elif current.stat().st_size != current_bytes or _sha256(current) != current_hash:
             errors.append(f"current record differs: {record['path']}")
     if migration.get("record_count") != len(migration.get("records", [])):
         errors.append("migration record_count does not match records")
