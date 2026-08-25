@@ -22,9 +22,7 @@ ROOT_EXPRESSION = re.compile(
 PATH_EXPRESSION = re.compile(
     r'\bPath\(\s*"(?P<path>(?:docs|benchmarks|results)/[^"\n]+)"\s*\)'
 )
-TEST_LITERAL = re.compile(
-    r'"(?P<path>(?:docs|benchmarks|results)/[^"\n]+)"'
-)
+TEST_LITERAL = re.compile(r'"(?P<path>(?:docs|benchmarks|results)/[^"\n]+)"')
 RESOLVED_LITERAL = re.compile(
     r'resolve_record\(\s*"(?P<path>(?:docs|benchmarks|results)/[^"\n]+)"\s*\)'
 )
@@ -34,7 +32,7 @@ def _import_resolver(content: str, path: Path) -> str:
     if "resolve_record(" not in content:
         return content
     if path.parent.name == "fsrl":
-        statement = "from .study_registry import resolve_record"
+        statement = "from fsrl.infrastructure.study_registry import resolve_record"
         if statement in content:
             return content
         marker = "from __future__ import annotations\n"
@@ -42,12 +40,17 @@ def _import_resolver(content: str, path: Path) -> str:
             raise RuntimeError(f"cannot place resolver import in {path}")
         return content.replace(marker, marker + "\n" + statement + "\n", 1)
 
-    statement = "from fsrl.study_registry import resolve_record"
+    statement = "from fsrl.infrastructure.study_registry import resolve_record"
     if statement in content:
         return content
     first_fsrl = re.search(r"^from fsrl\.", content, flags=re.MULTILINE)
     if first_fsrl is not None:
-        return content[: first_fsrl.start()] + statement + "\n" + content[first_fsrl.start() :]
+        return (
+            content[: first_fsrl.start()]
+            + statement
+            + "\n"
+            + content[first_fsrl.start() :]
+        )
     marker = "import unittest\n"
     if marker not in content:
         raise RuntimeError(f"cannot place resolver import in {path}")
@@ -56,9 +59,7 @@ def _import_resolver(content: str, path: Path) -> str:
 
 def _rewrite(content: str, *, test_literals: bool) -> str:
     content = ROOT_EXPRESSION.sub(
-        lambda match: (
-            f'resolve_record("{match.group("root")}/{match.group("name")}")'
-        ),
+        lambda match: f'resolve_record("{match.group("root")}/{match.group("name")}")',
         content,
     )
     content = PATH_EXPRESSION.sub(
@@ -94,7 +95,8 @@ def rewrite(*, apply: bool) -> dict[str, object]:
             rewritten = _rewrite(
                 original,
                 test_literals=(
-                    path.parent.name == "tests" and path.name != "test_study_registry.py"
+                    path.parent.name == "tests"
+                    and path.name != "test_study_registry.py"
                 ),
             )
             if rewritten == original:

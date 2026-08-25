@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 
-from fsrl.config import TrainConfig
+from fsrl.core.config import TrainConfig
 
 from .training import set_seed, train
 

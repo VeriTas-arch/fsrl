@@ -7,7 +7,9 @@ import tomllib
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[2]
+from fsrl.paths import REPO_ROOT
+
+ROOT = REPO_ROOT
 WORKFLOW_ID = re.compile(r"[a-z][a-z0-9_]*")
 REQUIRED_STAGE_FIELDS = (
     "id",

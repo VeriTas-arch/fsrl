@@ -11,12 +11,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from sklearn.decomposition import PCA
-
 from tqdm.auto import tqdm
 
-from fsrl.config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
 from fsrl.core import RetroModulRNN
-from fsrl.logging import log
+from fsrl.core.config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
+from fsrl.infrastructure.logging import log
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 CAPSULE_ROOT = Path(__file__).resolve().parent
@@ -101,7 +100,9 @@ def load_network(params, model_path):
     net = RetroModulRNN(params)
     net.load_state_dict(load_model_state(model_path))
     net.eval()
-    log(f"[model] Ready on {DEVICE}; batch_size={params['bs']}, hidden_size={params['hs']}")
+    log(
+        f"[model] Ready on {DEVICE}; batch_size={params['bs']}, hidden_size={params['hs']}"
+    )
     return net
 
 
@@ -132,7 +133,15 @@ def generate_cue_data(params, batch_size):
     return cue_data
 
 
-def sample_cue_pair(params, nbtrials, batch_index, linked_lists, linking_is_sham, episode_index, trial_index):
+def sample_cue_pair(
+    params,
+    nbtrials,
+    batch_index,
+    linked_lists,
+    linking_is_sham,
+    episode_index,
+    trial_index,
+):
     cue_range = range(params["nbcues"])
     if linked_lists:
         show_first_half_first = 1
@@ -172,7 +181,9 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
     nbstimbits = 2 * params["cs"] + 1
     nb_episodes = 3 if linked_lists else 1
     eval_name = "linked-list" if linked_lists else "single-list"
-    log(f"[eval:{eval_name}] Starting eval: episodes={nb_episodes}, batch_size={batch_size}, keep_rates={keep_rates}")
+    log(
+        f"[eval:{eval_name}] Starting eval: episodes={nb_episodes}, batch_size={batch_size}, keep_rates={keep_rates}"
+    )
     if linked_lists:
         params["nbepsbwresets"] = 3
         params["nbiter"] = 3
@@ -210,15 +221,23 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
             pw = pw.detach()
 
         if not linked_lists or episode_index == 0:
-            log(f"[eval:{eval_name}] Episode {episode_index + 1}/{nb_episodes}: generating cue vectors")
+            log(
+                f"[eval:{eval_name}] Episode {episode_index + 1}/{nb_episodes}: generating cue vectors"
+            )
             cue_data = generate_cue_data(params, batch_size)
 
         iscorrect = np.zeros((batch_size, params["nbtrials"]))
         isadjacent = np.zeros((batch_size, params["nbtrials"]))
         responses = np.zeros((batch_size, params["nbtrials"]))
         cue_pairs = []
-        actions = np.zeros((batch_size, params["nbtrials"], params["triallen"])).astype(int)
-        rates = np.zeros((batch_size, params["hs"], params["eplen"]), dtype="float32") if keep_rates else None
+        actions = np.zeros((batch_size, params["nbtrials"], params["triallen"])).astype(
+            int
+        )
+        rates = (
+            np.zeros((batch_size, params["hs"], params["eplen"]), dtype="float32")
+            if keep_rates
+            else None
+        )
         pw_trial20_step1 = None
 
         reward = np.zeros(batch_size, dtype="float32")
@@ -250,7 +269,15 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
             correct_answer = np.zeros(batch_size)
 
             for nb in range(batch_size):
-                cue_pair = sample_cue_pair(params, nbtrials, nb, linked_lists, linking_is_sham, episode_index, trial_index)
+                cue_pair = sample_cue_pair(
+                    params,
+                    nbtrials,
+                    nb,
+                    linked_lists,
+                    linking_is_sham,
+                    episode_index,
+                    trial_index,
+                )
                 correct_order[nb] = 1 if cue_pair[0] < cue_pair[1] else 0
                 adjacent[nb] = 1 if abs(cue_pair[0] - cue_pair[1]) == 1 else 0
                 isadjacent[nb, trial_index] = adjacent[nb]
@@ -298,9 +325,12 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
                     if numstep == NUMRESPONSESTEP:
                         responses[nb, trial_index] = numactionschosen[nb] * 2 - 1
                         correct_answer[nb] = 1
-                        if correct_order[nb] and numactionschosen[nb] == 1:
-                            reward[nb] += params["rew"]
-                        elif (not correct_order[nb]) and numactionschosen[nb] == 0:
+                        if (
+                            correct_order[nb]
+                            and numactionschosen[nb] == 1
+                            or (not correct_order[nb])
+                            and numactionschosen[nb] == 0
+                        ):
                             reward[nb] += params["rew"]
                         else:
                             reward[nb] -= params["rew"]
@@ -407,7 +437,9 @@ def plot_pair_performance(result, params, output_path, linked_lists=False):
 
         tick_positions.extend(xs)
         for numx, pair in enumerate(pairs[start : start + group_len]):
-            tick_labels.append(("\n" if numx % 2 == 1 else "") + ALPHABET[pair[0]] + ALPHABET[pair[1]])
+            tick_labels.append(
+                ("\n" if numx % 2 == 1 else "") + ALPHABET[pair[0]] + ALPHABET[pair[1]]
+            )
 
         start += group_len
         group_len -= 1
@@ -464,19 +496,38 @@ def plot_fig4a(result, params, net, output_path):
     resp_neg = mx_pca[result.responses[:, trial_index] == -1]
     axes[0].plot(resp_pos[:, 0], resp_pos[:, 1], "+c", alpha=0.3, label="Choose Stim1")
     axes[0].plot(resp_neg[:, 0], resp_neg[:, 1], ".r", alpha=0.2, label="Choose Stim2")
-    axes[0].arrow(0, 0, 1.3 * wo_pca[0], 1.3 * wo_pca[1], color="k", zorder=10, width=0.1, head_width=0.5)
+    axes[0].arrow(
+        0,
+        0,
+        1.3 * wo_pca[0],
+        1.3 * wo_pca[1],
+        color="k",
+        zorder=10,
+        width=0.1,
+        head_width=0.5,
+    )
     axes[0].text(0, -0.75, r"$\mathbf{W_{out}}$", fontsize=15)
     axes[0].legend()
 
     ordered_points = mx_pca[ordered[:, trial_index] == 1]
     unordered_points = mx_pca[ordered[:, trial_index] == 0]
-    axes[1].plot(ordered_points[:, 0], ordered_points[:, 1], "+c", alpha=0.3, label="Stim1>Stim2")
-    axes[1].plot(unordered_points[:, 0], unordered_points[:, 1], ".r", alpha=0.2, label="Stim2>Stim1")
+    axes[1].plot(
+        ordered_points[:, 0], ordered_points[:, 1], "+c", alpha=0.3, label="Stim1>Stim2"
+    )
+    axes[1].plot(
+        unordered_points[:, 0],
+        unordered_points[:, 1],
+        ".r",
+        alpha=0.2,
+        label="Stim2>Stim1",
+    )
     axes[1].legend()
 
     correct_points = mx_pca[result.correct[:, trial_index] == 1]
     wrong_points = mx_pca[result.correct[:, trial_index] == 0]
-    axes[2].plot(correct_points[:, 0], correct_points[:, 1], "+c", alpha=0.3, label="Correct")
+    axes[2].plot(
+        correct_points[:, 0], correct_points[:, 1], "+c", alpha=0.3, label="Correct"
+    )
     axes[2].plot(wrong_points[:, 0], wrong_points[:, 1], ".r", alpha=0.2, label="Error")
     axes[2].legend()
 
@@ -485,7 +536,9 @@ def plot_fig4a(result, params, net, output_path):
     cue_labels = ["Cue1:A", "Cue1:B", "Cue1:C", "Cue1:D"]
     for cue_index, color, label in zip(cue_indices, colors, cue_labels):
         points = mx_pca[first_iscuenum[cue_index, :, trial_index] == 1]
-        axes[3].plot(points[:, 0], points[:, 1], ".", color=color, alpha=0.3, label=label)
+        axes[3].plot(
+            points[:, 0], points[:, 1], ".", color=color, alpha=0.3, label=label
+        )
     axes[3].legend(ncol=2)
 
     for ax in axes:
@@ -498,7 +551,9 @@ def plot_fig4a(result, params, net, output_path):
 
 def single_item_alignment(result, params, net):
     if result.pw_trial20_step1 is None:
-        raise ValueError("Trial 20 plastic weights were not captured; run standard eval with at least 20 trials.")
+        raise ValueError(
+            "Trial 20 plastic weights were not captured; run standard eval with at least 20 trials."
+        )
 
     batch_size = params["bs"]
     nbstimbits = 2 * params["cs"] + 1
@@ -562,7 +617,9 @@ def plot_fig4b(result, params, net, output_path):
         linestyle="none",
     )
     ax.set_xlabel("Single item (X)")
-    ax.set_ylabel(r"Representation alignment" + "\n" + r"Corr($\psi_{t2}(X), \mathbf{w}_{out}$)")
+    ax.set_ylabel(
+        r"Representation alignment" + "\n" + r"Corr($\psi_{t2}(X), \mathbf{w}_{out}$)"
+    )
     fig.tight_layout()
     save_figure(fig, output_path)
 
@@ -572,12 +629,21 @@ def save_figure(fig, output_path):
     fig.savefig(output_path.with_suffix(".png"), dpi=300)
     fig.savefig(output_path.with_suffix(".pdf"))
     plt.close(fig)
-    log(f"[plot] Saved {output_path.with_suffix('.png')} and {output_path.with_suffix('.pdf')}")
+    log(
+        f"[plot] Saved {output_path.with_suffix('.png')} and {output_path.with_suffix('.pdf')}"
+    )
 
 
 def parse_args(args=None):
-    parser = argparse.ArgumentParser(description="Teaching eval code for NN.pdf Fig. 2a, 3a, 4a, and 4b.")
-    parser.add_argument("--figures", nargs="+", default=["all"], choices=["all", "fig2a", "fig3a", "fig4a", "fig4b"])
+    parser = argparse.ArgumentParser(
+        description="Teaching eval code for NN.pdf Fig. 2a, 3a, 4a, and 4b."
+    )
+    parser.add_argument(
+        "--figures",
+        nargs="+",
+        default=["all"],
+        choices=["all", "fig2a", "fig3a", "fig4a", "fig4b"],
+    )
     parser.add_argument("--model-path", default=None)
     parser.add_argument("--batch-size", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=None)
@@ -610,7 +676,9 @@ def main(args=None):
         result = run_eval(params, net, keep_rates=bool(figures & {"fig4a"}))
         if "fig2a" in figures:
             log("[stage] Plotting Fig. 2a")
-            plot_pair_performance(result, params, output_dir / "fig2a_sde", linked_lists=False)
+            plot_pair_performance(
+                result, params, output_dir / "fig2a_sde", linked_lists=False
+            )
         if "fig4a" in figures:
             log("[stage] Plotting Fig. 4a")
             plot_fig4a(result, params, net, output_dir / "fig4a_pca")
@@ -622,9 +690,13 @@ def main(args=None):
         log("[stage] Running linked-list eval for Fig. 3a")
         params = default_params(parsed_args.batch_size)
         net = load_network(params, model_path)
-        result = run_eval(params, net, linked_lists=True, linking_is_sham=False, keep_rates=False)
+        result = run_eval(
+            params, net, linked_lists=True, linking_is_sham=False, keep_rates=False
+        )
         log("[stage] Plotting Fig. 3a")
-        plot_pair_performance(result, params, output_dir / "fig3a_linked_sde", linked_lists=True)
+        plot_pair_performance(
+            result, params, output_dir / "fig3a_linked_sde", linked_lists=True
+        )
 
     log(f"[done] Saved requested figures to {output_dir}")
 

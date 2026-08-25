@@ -6,7 +6,7 @@ import json
 import tomllib
 from pathlib import Path
 
-from fsrl.provenance import file_sha256
+from fsrl.infrastructure.provenance import file_sha256
 
 CAPSULE_ROOT = Path(__file__).resolve().parent
 MANIFEST_PATH = CAPSULE_ROOT / "source_manifest.toml"

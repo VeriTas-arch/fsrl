@@ -24,7 +24,7 @@ boundary = "Any omission, attenuation, or broader local admission is a model hyp
 depends_on = []
 implementation = ["fsrl/tasks/protocol.py", "fsrl/tasks/sparse_ranking.py", "fsrl/tasks/evidence.py", "fsrl/core/inputs.py"]
 studies = ["task_fidelity"]
-verify = ["direnv exec . python -m unittest tests.test_ranking_protocol tests.test_meta_tasks"]
+verify = ["direnv exec . python -m unittest tests.tasks.test_protocol tests.tasks.test_meta_tasks"]
 
 [[stages]]
 id = "global_backbone"
@@ -34,9 +34,9 @@ method = "Meta-train the plastic recurrent backbone on generic connected ranking
 finding = "Held-out transfer and fast-weight necessity establish a competent global relational assembly substrate."
 boundary = "Competence does not by itself identify the algorithm or reproduce every human behavioral statistic."
 depends_on = ["task_contract"]
-implementation = ["fsrl/core/plastic_rnn.py", "fsrl/training/backbone.py", "fsrl/training/checkpoints.py", "fsrl/runtime.py"]
+implementation = ["fsrl/core/plastic_rnn.py", "fsrl/training/backbone.py", "fsrl/training/checkpoints.py", "fsrl/infrastructure/runtime.py"]
 studies = ["development_qualification", "formal_behavioral_confirmation"]
-verify = ["direnv exec . python -m unittest tests.test_meta_train tests.test_liu_eval"]
+verify = ["direnv exec . python -m unittest tests.training.test_backbone tests.evaluation.test_frozen_fast_weight"]
 
 [[stages]]
 id = "global_mechanism"
@@ -48,7 +48,7 @@ boundary = "The complete DA direction-preservation chain is heterogeneous, and t
 depends_on = ["global_backbone"]
 implementation = ["fsrl/evaluation/frozen_fast_weight.py", "fsrl/analysis/hodge.py", "fsrl/analysis/statistics.py"]
 studies = ["assembly_trajectory", "support_factor_swap", "mechanism_confirmation"]
-verify = ["direnv exec . python -m unittest tests.test_assembly_trajectory tests.test_support_factor_swap tests.test_mechanism_confirmation"]
+verify = ["direnv exec . python -m unittest tests.experiments.assembly.test_trajectory tests.experiments.assembly.test_factor_swap tests.experiments.confirmation.test_mechanism"]
 
 [[stages]]
 id = "local_mechanism"
@@ -60,7 +60,7 @@ boundary = "The evidence supports the computation, not a unique tensor-product c
 depends_on = ["task_contract", "global_backbone"]
 implementation = ["fsrl/core/local_trace.py", "fsrl/core/relational_system.py", "fsrl/core/state.py"]
 studies = ["conjunctive_local_trace_replication", "local_behavior_attribution"]
-verify = ["direnv exec . python -m unittest tests.test_conjunctive_local_trace tests.test_relational_system"]
+verify = ["direnv exec . python -m unittest tests.core.test_local_trace tests.core.test_relational_system"]
 
 [[stages]]
 id = "differential_admission"
@@ -72,7 +72,7 @@ boundary = "The broader local writes have a small replicated retained cross-talk
 depends_on = ["global_mechanism", "local_mechanism"]
 implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py"]
 studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation"]
-verify = ["direnv exec . python -m unittest tests.test_dual_evidence_access_pilot tests.test_dual_evidence_access_confirmation tests.test_relational_system"]
+verify = ["direnv exec . python -m unittest tests.experiments.local_fidelity.test_evidence_access_pilot tests.experiments.local_fidelity.test_evidence_access_confirmation tests.core.test_relational_system"]
 
 [[stages]]
 id = "algorithm_and_transport"
@@ -84,7 +84,7 @@ boundary = "Evidence-density prevalence has an unresolved boundary, and no teste
 depends_on = ["differential_admission"]
 implementation = ["fsrl/core/relational_system.py", "fsrl/analysis/hodge.py"]
 studies = ["asymmetric_algorithmic_organization", "support_topology_transport", "presentation_order_transport", "evidence_sparsity_transport", "item_count_transport"]
-verify = ["direnv exec . python -m fsrl.study_registry check"]
+verify = ["direnv exec . python -m fsrl.infrastructure.study_registry check"]
 
 [[stages]]
 id = "reporting"
@@ -94,6 +94,6 @@ method = "Keep study records byte-preserved, organize the cross-study claim in s
 finding = "The repository exposes a short human route, a machine-verifiable registry, and paper-aligned behavioral figures from the same evidence ownership model."
 boundary = "The current synthesis remains indexed rather than final; a later scientific curation pass may reorder the argument without changing frozen records."
 depends_on = ["algorithm_and_transport"]
-implementation = ["fsrl/study_registry.py", "fsrl/paper_figure_alignment.py", "synthesis/manifest.toml"]
+implementation = ["fsrl/infrastructure/study_registry.py", "fsrl/workflows/paper_figures.py", "synthesis/manifest.toml"]
 studies = ["behavior_reproduction_map"]
-verify = ["direnv exec . python -m fsrl.study_registry check", "direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml"]
+verify = ["direnv exec . python -m fsrl.infrastructure.study_registry check", "direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml"]

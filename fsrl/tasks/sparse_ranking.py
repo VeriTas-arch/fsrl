@@ -8,11 +8,12 @@ from itertools import combinations
 
 import numpy as np
 
-from ..subject_encoding import (
+from fsrl.tasks.subject_encoding import (
     SubjectEncodingConfig,
     SubjectEncodingState,
     sample_subject_encoding_states,
 )
+
 from .protocol import QueryTrial, RankingProtocol, SupportTrial
 
 GraphSignature = tuple[tuple[int, int], ...]

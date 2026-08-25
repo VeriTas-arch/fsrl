@@ -1,3 +1,34 @@
+[build-system]
+requires = ["setuptools==81.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fsrl-relational-model"
+version = "0.1.0"
+description = "Plastic recurrent models for relational learning"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "jsonschema>=4.26,<5",
+    "matplotlib>=3.11,<3.12",
+    "numpy>=2.4,<2.5",
+    "scipy>=1.18,<1.19",
+    "torch>=2.13,<2.14",
+]
+
+[project.optional-dependencies]
+reproduction = [
+    "scikit-learn>=1.9,<2",
+    "tqdm>=4.67,<5",
+]
+test = [
+    "pytest>=9.1,<9.2",
+    "ruff>=0.16,<0.17",
+]
+
+[tool.setuptools.packages.find]
+include = ["fsrl*"]
+
 [tool.ruff]
 cache-dir = ".cache/ruff"
 target-version = "py312"
@@ -6,89 +37,6 @@ extend-exclude = [
     "reproductions/relational_learning_2024/upstream/base/simple.ipynb",
     "reproductions/relational_learning_2024/upstream/addons/TI_FrozenWin.ipynb",
     "synthesis/frozen",
-]
-
-# Historical study runners and the readable reproduction retain explicit
-# pre-existing lint debt. Original notebooks remain byte-locked source
-# artifacts; their executable Python exports are linted and formatted.
-[tool.ruff.lint.per-file-ignores]
-"fsrl/config.py" = ["I001"]
-"reproductions/relational_learning_2024/episode.py" = ["RUF059", "UP032"]
-"reproductions/relational_learning_2024/figures.py" = ["I001", "SIM114"]
-"reproductions/relational_learning_2024/training.py" = ["FURB122"]
-
-# Formatting is enforced for new code. These pre-existing runners form the
-# source/provenance formatting baseline and must not be rewritten incidentally.
-[tool.ruff.format]
-exclude = [
-    "fsrl/algorithmic.py",
-    "fsrl/confirmation.py",
-    "fsrl/conjunctive_local_trace_pilot.py",
-    "fsrl/conjunctive_local_trace_replication.py",
-    "fsrl/dual_evidence_access_confirmation.py",
-    "fsrl/dual_evidence_access_pilot.py",
-    "fsrl/dual_state_reduced_algorithm.py",
-    "fsrl/dual_state_reduced_algorithm_v2.py",
-    "fsrl/dual_state_reduced_algorithm_v3.py",
-    "reproductions/relational_learning_2024/episode.py",
-    "reproductions/relational_learning_2024/figures.py",
-    "reproductions/relational_learning_2024/training.py",
-    "fsrl/evidence_sparsity_transport.py",
-    "fsrl/functional_fast_weight_latent_sufficiency.py",
-    "fsrl/global_policy_allocation_audit.py",
-    "fsrl/global_policy_amplitude_provenance.py",
-    "fsrl/global_policy_comparator_adequacy.py",
-    "fsrl/global_policy_field_fingerprint_replication.py",
-    "fsrl/global_policy_field_reassembly.py",
-    "fsrl/global_policy_slope_localization.py",
-    "fsrl/hidden_residual_audit.py",
-    "fsrl/history_state_factorial.py",
-    "fsrl/human_benchmark.py",
-    "fsrl/human_metric_constructive_comparator.py",
-    "fsrl/item_count_transport.py",
-    "fsrl/liu_eval.py",
-    "fsrl/liu_mainline.py",
-    "fsrl/local_behavior_attribution.py",
-    "fsrl/magnitude_placement_analysis.py",
-    "fsrl/magnitude_placement_behavior.py",
-    "fsrl/magnitude_placement_collection.py",
-    "fsrl/mechanism_confirmation.py",
-    "fsrl/model_behavior_reproduction_map.py",
-    "fsrl/operator_amplitude_path.py",
-    "fsrl/operator_output_semantics.py",
-    "fsrl/policy_opposition_gate_pilot.py",
-    "fsrl/policy_residual_pilot.py",
-    "fsrl/presentation_order_transport.py",
-    "fsrl/relation_trace_localization.py",
-    "fsrl/sparsity_individualization_localization.py",
-    "fsrl/state_query_operator_binding.py",
-    "fsrl/support_topology_transport.py",
-    "fsrl/support_write_localization.py",
-    "tests/test_assembly_trajectory.py",
-    "tests/test_confirmation.py",
-    "tests/test_dual_evidence_access_pilot.py",
-    "tests/test_dual_state_reduced_algorithm.py",
-    "tests/test_dual_state_reduced_algorithm_v3.py",
-    "tests/test_global_policy_field_fingerprint_replication.py",
-    "tests/test_global_policy_slope_localization.py",
-    "tests/test_hidden_residual_audit.py",
-    "tests/test_history_state_factorial.py",
-    "tests/test_human_benchmark.py",
-    "tests/test_human_metric_constructive_comparator.py",
-    "tests/test_liu_eval.py",
-    "tests/test_magnitude_placement_analysis.py",
-    "tests/test_magnitude_placement_behavior.py",
-    "tests/test_magnitude_placement_collection.py",
-    "tests/test_mechanism_confirmation.py",
-    "tests/test_meta_train.py",
-    "tests/test_operator_amplitude_path.py",
-    "tests/test_operator_output_semantics.py",
-    "tests/test_relation_trace_localization.py",
-    "tests/test_state_query_operator_binding.py",
-    "tests/test_support_factor_swap.py",
-    "tests/test_support_write_localization.py",
-    "tools/provenance/migrate_flat_records_v1.py",
-    "tools/provenance/rewrite_active_record_paths_v1.py",
 ]
 
 [tool.pytest.ini_options]

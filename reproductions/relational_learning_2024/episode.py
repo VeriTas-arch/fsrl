@@ -3,8 +3,8 @@ from dataclasses import dataclass
 import numpy as np
 import torch
 
-from fsrl.config import DEVICE, NUMRESPONSESTEP
-from fsrl.logging import log
+from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.infrastructure.logging import log
 
 from .task import build_step_inputs, generate_cue_data, prepare_trial
 
@@ -61,7 +61,7 @@ def run_episode(config, net, nbcues, print_trace=False):
     for numtrial in range(config.nbtrials):
         hidden = net.initialZeroState(config.bs)
         et = net.initialZeroET(config.bs)
-        cues, cue_pairs, correct_order, adjacent = prepare_trial(
+        cues, _cue_pairs, correct_order, adjacent = prepare_trial(
             config, nbcues, nbtrials
         )
         istest_thisep[:, numtrial] = 1 if numtrial >= config.nbtraintrials else 0
@@ -186,21 +186,7 @@ def log_trace(
     config, numtrial, numstep, inputs, y, actions, correct_order, reward, daout, cues
 ):
     log(
-        "Tr {} Step {} Cue1(0): {} Cue2(0): {} Other inputs: {}\n"
-        " - Outputs(0): {} - action chosen(0): {} TrialLen: {} numstep {} "
-        "TTHCC(0): {} Reward(prev): {} DAout: {} cues(0): {}".format(
-            numtrial,
-            numstep,
-            inputs[0, : config.cs].detach().cpu().numpy(),
-            inputs[0, config.cs : 2 * config.cs].detach().cpu().numpy(),
-            inputs[0, 2 * config.cs :].detach().cpu().numpy(),
-            y.detach().cpu().numpy()[0, :],
-            actions[0],
-            config.triallen,
-            numstep,
-            correct_order[0],
-            reward[0],
-            float(daout[0].detach()),
-            cues[0],
-        )
+        f"Tr {numtrial} Step {numstep} Cue1(0): {inputs[0, : config.cs].detach().cpu().numpy()} Cue2(0): {inputs[0, config.cs : 2 * config.cs].detach().cpu().numpy()} Other inputs: {inputs[0, 2 * config.cs :].detach().cpu().numpy()}\n"
+        f" - Outputs(0): {y.detach().cpu().numpy()[0, :]} - action chosen(0): {actions[0]} TrialLen: {config.triallen} numstep {numstep} "
+        f"TTHCC(0): {correct_order[0]} Reward(prev): {reward[0]} DAout: {float(daout[0].detach())} cues(0): {cues[0]}"
     )

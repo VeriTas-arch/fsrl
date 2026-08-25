@@ -46,7 +46,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m unittest tests.test_ranking_protocol tests.test_meta_tasks`
+- `direnv exec . python -m unittest tests.tasks.test_protocol tests.tasks.test_meta_tasks`
 
 ## 2. Global fast-weight backbone
 
@@ -65,7 +65,7 @@ Implementation:
 - [`fsrl/core/plastic_rnn.py`](../../fsrl/core/plastic_rnn.py)
 - [`fsrl/training/backbone.py`](../../fsrl/training/backbone.py)
 - [`fsrl/training/checkpoints.py`](../../fsrl/training/checkpoints.py)
-- [`fsrl/runtime.py`](../../fsrl/runtime.py)
+- [`fsrl/infrastructure/runtime.py`](../../fsrl/infrastructure/runtime.py)
 
 Evidence:
 
@@ -74,7 +74,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m unittest tests.test_meta_train tests.test_liu_eval`
+- `direnv exec . python -m unittest tests.training.test_backbone tests.evaluation.test_frozen_fast_weight`
 
 ## 3. Global assembly mechanism
 
@@ -102,7 +102,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m unittest tests.test_assembly_trajectory tests.test_support_factor_swap tests.test_mechanism_confirmation`
+- `direnv exec . python -m unittest tests.experiments.assembly.test_trajectory tests.experiments.assembly.test_factor_swap tests.experiments.confirmation.test_mechanism`
 
 ## 4. Query-addressed local fidelity
 
@@ -129,7 +129,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m unittest tests.test_conjunctive_local_trace tests.test_relational_system`
+- `direnv exec . python -m unittest tests.core.test_local_trace tests.core.test_relational_system`
 
 ## 5. Differential evidence admission
 
@@ -155,7 +155,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m unittest tests.test_dual_evidence_access_pilot tests.test_dual_evidence_access_confirmation tests.test_relational_system`
+- `direnv exec . python -m unittest tests.experiments.local_fidelity.test_evidence_access_pilot tests.experiments.local_fidelity.test_evidence_access_confirmation tests.core.test_relational_system`
 
 ## 6. Algorithmic form and transport
 
@@ -184,7 +184,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m fsrl.study_registry check`
+- `direnv exec . python -m fsrl.infrastructure.study_registry check`
 
 ## 7. Evidence synthesis and figures
 
@@ -200,8 +200,8 @@ Verification:
 
 Implementation:
 
-- [`fsrl/study_registry.py`](../../fsrl/study_registry.py)
-- [`fsrl/paper_figure_alignment.py`](../../fsrl/paper_figure_alignment.py)
+- [`fsrl/infrastructure/study_registry.py`](../../fsrl/infrastructure/study_registry.py)
+- [`fsrl/workflows/paper_figures.py`](../../fsrl/workflows/paper_figures.py)
 - [`synthesis/manifest.toml`](../../synthesis/manifest.toml)
 
 Evidence:
@@ -210,7 +210,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m fsrl.study_registry check`
+- `direnv exec . python -m fsrl.infrastructure.study_registry check`
 - `direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml`
 
 ## Evidence and figures

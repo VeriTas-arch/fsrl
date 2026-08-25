@@ -5,9 +5,9 @@ import numpy as np
 import torch
 from tqdm.auto import tqdm
 
-from fsrl.config import DEVICE
 from fsrl.core import RetroModulRNN
-from fsrl.logging import log
+from fsrl.core.config import DEVICE
+from fsrl.infrastructure.logging import log
 
 from .episode import run_episode
 
@@ -50,8 +50,7 @@ def save_checkpoint(config, net, output_dir, test_rewards):
     torch.save(net.state_dict(), output_dir / ("netAE" + str(config.rngseed) + ".dat"))
     torch.save(net.state_dict(), output_dir / "net.dat")
     with open(output_dir / ("tAE" + str(config.rngseed) + ".txt"), "w") as thefile:
-        for item in test_rewards[::10]:
-            thefile.write(f"{item}\n")
+        thefile.writelines(f"{item}\n" for item in test_rewards[::10])
     log(f"[save] Wrote checkpoint and test-reward log to {output_dir}")
 
 

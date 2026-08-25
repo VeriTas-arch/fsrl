@@ -13,19 +13,20 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from ..config import NUMRESPONSESTEP, TrainConfig
-from ..core.inputs import EVIDENCE_AUXILIARY_OFFSET
-from ..core.plastic_rnn import RetroModulRNN
-from ..ranking_protocol import (
+from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
+from fsrl.tasks.registered_protocol import (
     DEFAULT_PROTOCOL_PATH,
     RankingProtocol,
     load_ranking_protocol,
 )
-from ..subject_encoding import (
+from fsrl.tasks.subject_encoding import (
     SubjectEncodingConfig,
     SubjectEncodingState,
     sample_subject_encoding_states,
 )
+
+from ..core.inputs import EVIDENCE_AUXILIARY_OFFSET
+from ..core.plastic_rnn import RetroModulRNN
 from ..training.checkpoints import (
     CheckpointInfo,
     checkpoint_sha256,

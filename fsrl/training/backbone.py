@@ -11,18 +11,19 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from ..config import NUMRESPONSESTEP, TrainConfig
-from ..core.inputs import RelationalInputLayout
-from ..core.plastic_rnn import RetroModulRNN
-from ..provenance import file_sha256
-from ..runtime import (
+from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
+from fsrl.infrastructure.provenance import file_sha256
+from fsrl.infrastructure.runtime import (
     DEFAULT_COMPILED_PROFILE,
     ExecutionProfile,
     compile_module,
     configure_runtime,
     default_device,
 )
-from ..subject_encoding import SubjectEncodingConfig
+from fsrl.tasks.subject_encoding import SubjectEncodingConfig
+
+from ..core.inputs import RelationalInputLayout
+from ..core.plastic_rnn import RetroModulRNN
 from ..tasks.sparse_ranking import (
     GenericRankingTaskGenerator,
     GraphSignature,
@@ -71,7 +72,7 @@ COMPILED_TRAINING_EXECUTION = {
 def registered_excluded_signatures() -> frozenset[GraphSignature]:
     """Resolve the historical two-graph holdout only at the workflow boundary."""
 
-    from ..meta_tasks import held_out_liu_graph_signatures
+    from fsrl.tasks.meta_tasks import held_out_liu_graph_signatures
 
     return held_out_liu_graph_signatures()
 

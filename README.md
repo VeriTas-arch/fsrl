@@ -72,26 +72,46 @@ estimands, controls, seeds, outcomes, and claim boundaries.
 
 ## Environment setup
 
-Use Python 3.12.
+The repository uses Python 3.12 and an editable local installation. Its
+`.envrc` selects the shared Conda environment named `ipex`:
 
 ~~~bash
-conda create -n fsrl python=3.12
-conda activate fsrl
-pip install --upgrade pip
-pip install -r requirements.txt
+conda create -n ipex python=3.12 pip
+direnv allow
+direnv exec . python -m pip install --upgrade pip
 ~~~
 
-The default requirements install the standard PyPI build of PyTorch. For a
-CUDA-specific build, install PyTorch first using the command from
-<https://pytorch.org/get-started/locally/>, then install the remaining
-requirements.
+For a CUDA-specific build, install PyTorch first using the command from
+<https://pytorch.org/get-started/locally/>. Then install the maintained `fsrl`
+namespace, reproduction dependencies, and test tools in editable mode and
+verify the environment:
+
+~~~bash
+direnv exec . python -m pip install -r requirements.txt
+direnv exec . python -m pip check
+direnv exec . python -c "import fsrl; print(fsrl.__file__)"
+~~~
+
+When dependencies are already installed, refresh only the local package
+metadata without dependency resolution:
+
+~~~bash
+direnv exec . python -m pip install --no-deps -e .
+~~~
+
+Ordinary Python source edits are visible immediately through the editable
+installation; rerun the refresh only after packaging metadata changes. The
+distribution is named `fsrl-relational-model`, while its import namespace
+remains `fsrl`. This first packaging stage is repository-bound: registered
+studies, synthesis records, and external data remain outside a standalone
+wheel and are resolved from this checkout.
 
 ## Validation
 
 Check the study registry and generated human views:
 
 ~~~bash
-direnv exec . python -m fsrl.study_registry check
+direnv exec . python -m fsrl.infrastructure.study_registry check
 ~~~
 
 Audit the one-time physical migration against its frozen Git sources and check
@@ -108,14 +128,14 @@ Run tests through the timeout-bounded entry point. It creates an independent
 process group and cleans up that group on timeout or interruption:
 
 ~~~bash
-direnv exec . python -m fsrl.test_runtime
+direnv exec . python -m fsrl.infrastructure.test_runtime
 ~~~
 
 To run one unittest module with a shorter timeout:
 
 ~~~bash
-direnv exec . python -m fsrl.test_runtime --timeout 60 \
-  --framework unittest -- tests.test_study_registry -v
+direnv exec . python -m fsrl.infrastructure.test_runtime --timeout 60 \
+  --framework unittest -- tests.infrastructure.test_study_registry -v
 ~~~
 
 Runtime outputs belong under `artifacts/runs/<workflow>/`, including checkpoints,

@@ -2,7 +2,8 @@ import numpy as np
 import torch
 from torch import nn
 
-from ..runtime import default_device
+from fsrl.infrastructure.runtime import default_device
+
 from .state import PlasticRNNState
 
 

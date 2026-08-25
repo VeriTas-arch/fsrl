@@ -3,7 +3,7 @@
 This importer is retained as migration provenance.  It is intentionally tied to
 the pre-migration human catalog at commit ``fb32095`` and refuses partial or
 ambiguous ownership.  After application, ongoing validation belongs to
-``python -m fsrl.study_registry check``.
+``python -m fsrl.infrastructure.study_registry check``.
 """
 
 from __future__ import annotations
@@ -191,9 +191,7 @@ def _record(
     payload = _git_blob(SOURCE_REF, legacy_path.as_posix())
     source_hash = _sha256(source)
     if source.stat().st_size != len(payload) or source_hash != _sha256_bytes(payload):
-        raise RuntimeError(
-            f"migration source differs from {SOURCE_REF}: {legacy_path}"
-        )
+        raise RuntimeError(f"migration source differs from {SOURCE_REF}: {legacy_path}")
     return {
         "owner_kind": owner_kind,
         "owner_id": owner_id,
@@ -212,7 +210,9 @@ def build_plan() -> tuple[dict[str, Any], dict[str, Any]]:
     catalog = load_catalog()
     validation = validate_catalog(catalog)
     if not validation["passed"]:
-        raise RuntimeError("source catalog is invalid: " + "; ".join(validation["errors"]))
+        raise RuntimeError(
+            "source catalog is invalid: " + "; ".join(validation["errors"])
+        )
 
     owner_by_path = {
         path: study_id
@@ -274,16 +274,12 @@ def build_plan() -> tuple[dict[str, Any], dict[str, Any]]:
 
 
 def _registry_toml(catalog: dict[str, Any]) -> str:
-    studies = [
-        study for study in catalog["studies"] if study["id"] != SYNTHESIS_OWNER
-    ]
+    studies = [study for study in catalog["studies"] if study["id"] != SYNTHESIS_OWNER]
     views = []
     for view in catalog["views"]:
         converted = dict(view)
         converted["studies"] = [
-            study_id
-            for study_id in view["studies"]
-            if study_id != SYNTHESIS_OWNER
+            study_id for study_id in view["studies"] if study_id != SYNTHESIS_OWNER
         ]
         views.append(converted)
     lines = [
@@ -326,7 +322,11 @@ def _registry_toml(catalog: dict[str, Any]) -> str:
     chapter_order = {chapter["id"]: chapter["order"] for chapter in catalog["chapters"]}
     for study in sorted(
         studies,
-        key=lambda value: (chapter_order[value["chapter"]], value["order"], value["id"]),
+        key=lambda value: (
+            chapter_order[value["chapter"]],
+            value["order"],
+            value["id"],
+        ),
     ):
         manifest_path = f"studies/{study['id']}/study.toml"
         lines.extend(
@@ -362,7 +362,10 @@ def audit_migration() -> dict[str, Any]:
             continue
         expected_hash = record["sha256"]
         expected_bytes = record["bytes"]
-        if len(source_payload) != expected_bytes or _sha256_bytes(source_payload) != expected_hash:
+        if (
+            len(source_payload) != expected_bytes
+            or _sha256_bytes(source_payload) != expected_hash
+        ):
             errors.append(f"source ref provenance differs for {legacy_path}")
         rewrite = locator_records.get(record["path"])
         if rewrite is not None and (
@@ -370,13 +373,15 @@ def audit_migration() -> dict[str, Any]:
             or rewrite.get("before_bytes") != expected_bytes
         ):
             errors.append(f"runtime-locator source differs for {record['path']}")
-        current_hash = (
-            rewrite["after_sha256"] if rewrite is not None else expected_hash
+        current_hash = rewrite["after_sha256"] if rewrite is not None else expected_hash
+        current_bytes = (
+            rewrite["after_bytes"] if rewrite is not None else expected_bytes
         )
-        current_bytes = rewrite["after_bytes"] if rewrite is not None else expected_bytes
         if not current.is_file():
             errors.append(f"current record is missing: {record['path']}")
-        elif current.stat().st_size != current_bytes or _sha256(current) != current_hash:
+        elif (
+            current.stat().st_size != current_bytes or _sha256(current) != current_hash
+        ):
             errors.append(f"current record differs: {record['path']}")
     if migration.get("record_count") != len(migration.get("records", [])):
         errors.append("migration record_count does not match records")
@@ -454,7 +459,9 @@ def apply_migration() -> dict[str, Any]:
         source = ROOT / record["legacy_path"]
         destination = ROOT / record["path"]
         if destination.exists():
-            raise RuntimeError(f"migration destination already exists: {record['path']}")
+            raise RuntimeError(
+                f"migration destination already exists: {record['path']}"
+            )
         destination.parent.mkdir(parents=True, exist_ok=True)
         source.rename(destination)
         if _sha256(destination) != record["sha256"]:
@@ -487,9 +494,7 @@ def apply_migration() -> dict[str, Any]:
     (ROOT / "synthesis" / "manifest.toml").write_text(
         _synthesis_toml(synthesis_records), encoding="utf-8"
     )
-    (ROOT / "synthesis" / "history.toml").write_text(
-        _history_toml(), encoding="utf-8"
-    )
+    (ROOT / "synthesis" / "history.toml").write_text(_history_toml(), encoding="utf-8")
 
     generated_old = [
         ROOT / "docs" / "INDEX.md",
@@ -543,8 +548,7 @@ def main(argv: list[str] | None = None) -> int:
                 }
             ),
             "synthesis_records": sum(
-                record["owner_kind"] == "synthesis"
-                for record in migration["records"]
+                record["owner_kind"] == "synthesis" for record in migration["records"]
             ),
         }
     else:

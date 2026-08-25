@@ -4,9 +4,10 @@
 
 ```text
 workflows
-  -> training / evaluation
-       -> tasks / core
-            -> runtime / provenance
+  -> experiments
+       -> analysis / training / evaluation
+            -> tasks / core
+                 -> infrastructure / paths
 analysis
   -> typed outputs from tasks or evaluation
 ```
@@ -22,29 +23,33 @@ The packages have deliberately narrow ownership:
 - `evaluation/` owns frozen rollout and causal intervention interfaces.
 - `analysis/` owns reusable pure estimators such as Hodge decomposition and
   participant bootstrap utilities.
+- `infrastructure/` owns runtime policy, provenance, the study registry, and
+  bounded execution helpers.
+- `experiments/` owns maintained evidence-producing runners, grouped by
+  assembly, confirmation, local fidelity, global policy, reduction, transport,
+  and human-program scope.
 - `workflows/` validates and renders the schema-driven mainline under the
   repository-level `workflows/` directory.
-- `runtime.py` and `provenance.py` make device, thread, compilation, hashing,
-  and exclusive-output choices explicit.
+- `paths.py` is the only repository-root path contract; package modules do not
+  infer the checkout root from their own directory depth.
 
 The maintained command-line boundaries are `python -m fsrl.training` and
-`python -m fsrl.evaluation`. Formal studies continue to use their registered
-runner and frozen execution contract.
+`python -m fsrl.evaluation`. Maintained formal workflows run through
+`python -m fsrl.infrastructure.formal_runtime`; historical commands continue
+to replay from their exact Git commit.
 
-## Compatibility and diagnostic code
+## Experiments and historical replay
 
-`model.py`, `meta_train.py`, `meta_tasks.py`, `liu_eval.py`,
-`ranking_protocol.py`, and `conjunctive_local_trace.py` are small compatibility
-adapters. Historical study runners may continue importing those names, but new
-code should import the canonical packages above.
+The package root contains only `__init__.py` and the explicit `paths.py`
+contract. Reusable code lives in the stable packages above; evidence-producing
+code lives below `experiments/`. Tests mirror the same ownership structure.
 
-The remaining large flat modules are study-owned diagnostic runners. They are
-kept runnable because their exact historical versions are referenced by frozen
-contracts and Git provenance. They are not a library layer: stable packages
-must never import a pilot, audit, confirmation, replication, or transport
-runner. `tests/test_core_architecture.py` enforces that boundary. A later
-curation pass can retire or relocate individual runners after their study
-records have a replacement replay route.
+Frozen contracts may still name former flat modules. Those identities are
+verified against Git blobs and witness commits rather than recreated as a large
+set of compatibility files. Full historical execution uses a detached
+worktree. Stable packages never import `experiments/`; the explicit dependency
+layer graph and non-flat roots are enforced by
+`tests/core/test_architecture.py`.
 
 Eponymous protocol names remain only where they identify frozen historical
 records or compatibility APIs. New workflow and package names describe the

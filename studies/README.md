@@ -115,6 +115,6 @@ Keep source papers visible while keeping them outside the factual model-evidence
 
 ## Maintenance
 
-Run `direnv exec . python -m fsrl.study_registry check` before commit.
+Run `direnv exec . python -m fsrl.infrastructure.study_registry check` before commit.
 Use `build` only to refresh generated navigation after editing TOML metadata.
 A path move requires a new versioned migration; it is not a prose edit.
