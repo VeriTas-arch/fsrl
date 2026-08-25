@@ -8,6 +8,7 @@ import numpy as np
 
 from fsrl.assembly_trajectory import build_complete_graph_geometry
 from fsrl.curvature_gate_pilot import load_json
+from fsrl.git_provenance import verify_git_registrations
 from fsrl.global_policy_allocation_audit import (
     DEFAULT_IMPLEMENTATION_LOCK_PATH,
     DEFAULT_SPECIFICATION_PATH,
@@ -373,8 +374,27 @@ class GlobalPolicyAllocationAuditTests(unittest.TestCase):
         self.assertTrue(complete)
 
     def test_source_lock_is_complete_and_fails_closed(self):
-        self.assertTrue(validate_sources()["passed"])
         lock = load_json(DEFAULT_IMPLEMENTATION_LOCK_PATH)
+        historical = verify_git_registrations(
+            Path(__file__).resolve().parents[1],
+            "d216bdb8f06f81dd3d2aef74a01d48c7f2bd279a",
+            {
+                **load_json(DEFAULT_SPECIFICATION_PATH)["registered_sources"],
+                "audit_specification": {
+                    "path": str(
+                        DEFAULT_SPECIFICATION_PATH.relative_to(
+                            Path(__file__).resolve().parents[1]
+                        )
+                    ),
+                    "sha256": lock["audit_specification_sha256"],
+                },
+                "superseded_implementation_lock": lock["supersedes"],
+                "noninterpretable_attempt": lock["noninterpretable_attempt"],
+                **lock["implementation_sources"],
+                **lock["reused_frozen_sources"],
+            },
+        )
+        self.assertTrue(historical["passed"])
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
             changed_source = copy.deepcopy(lock)

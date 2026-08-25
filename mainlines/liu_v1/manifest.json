@@ -1,0 +1,886 @@
+{
+  "schema_version": 1,
+  "mainline_id": "liu_v1",
+  "status": "draft",
+  "scope": "Model-level Liu task fidelity, behavioral competence, causal computation, algorithmic asymmetry, and prospectively registered one-factor transport. No human-neural implementation or new scientific estimand is introduced.",
+  "design_principles": [
+    "historical_experiment_is_not_mainline_orchestration_or_presentation",
+    "motivated_by_is_not_depends_on",
+    "historical_replay_is_not_live_head_validation"
+  ],
+  "claim_nodes": {
+    "task_fidelity": {
+      "depends_on": [],
+      "motivated_by": [],
+      "claim": "The model-facing contract preserves the Liu paradigm's available information: item identity plus signed displayed magnitude, four passive presentations per support relation, all-pair testing, and no learning response or test feedback.",
+      "evidence": [
+        "liu_protocol",
+        "liu_human_benchmark",
+        "liu_preregistered_trials",
+        "liu_replication_trials"
+      ],
+      "boundary": "This node binds only the Liu paradigm. Classic rewarded adjacent-pair TI and list-linking tasks are research context, not factual prerequisites."
+    },
+    "behavioral_competence": {
+      "depends_on": [
+        "task_fidelity"
+      ],
+      "motivated_by": [],
+      "claim": "The frozen model reproduces six of nine registered Liu phenomena quantitatively and the remaining three qualitatively with explicit quantitative mismatch.",
+      "evidence": [
+        "behavior_map_result",
+        "behavior_map_report"
+      ],
+      "boundary": "Behavioral reproduction is a competence gate, not a human-mechanism claim or a perfect fit."
+    },
+    "global_reassembly": {
+      "depends_on": [
+        "task_fidelity"
+      ],
+      "motivated_by": [
+        "global_only_direct_fidelity_deficit"
+      ],
+      "claim": "Selectively admitted evidence enters P_T, whose causal contribution supports coherent remote and nonlearned relational assembly.",
+      "evidence": [
+        "formal_mechanism_result",
+        "local_replication_result",
+        "dual_access_confirmation_result"
+      ],
+      "boundary": "P_T is a network computation, not a Bayesian update identity or a biological memory store."
+    },
+    "local_direct_fidelity": {
+      "depends_on": [
+        "task_fidelity"
+      ],
+      "motivated_by": [
+        "scalar_gate_family_closed",
+        "first_order_residual_family_closed"
+      ],
+      "claim": "Broader weak observed evidence enters L_T, equivalently represented by the exact edge-ledger coordinate a_T, and provides query-addressed direct fidelity without restoring global transitive inference when P_T is removed.",
+      "evidence": [
+        "local_replication_result",
+        "dual_access_confirmation_result"
+      ],
+      "boundary": "The evidence supports functional separation, not unique tensor-product coding, biological stores, or network-population prevalence."
+    },
+    "algorithmic_asymmetry": {
+      "depends_on": [
+        "global_reassembly",
+        "local_direct_fidelity"
+      ],
+      "motivated_by": [
+        "mechanism_stack_compression"
+      ],
+      "claim": "The local path has an exact reduced edge-ledger algorithm, whereas three prospectively tested low-capacity reductions do not close the global learning dynamics even though the terminal global output geometry is nearly additive.",
+      "evidence": [
+        "reduced_algorithm_v1_result",
+        "reduced_algorithm_v2_result",
+        "reduced_algorithm_v3_result",
+        "item_count_result"
+      ],
+      "boundary": "Simple output geometry does not imply simple learning dynamics; failed reductions reject their registered closure families, not all possible P_T-derived reductions."
+    },
+    "structural_transport": {
+      "depends_on": [
+        "global_reassembly",
+        "local_direct_fidelity"
+      ],
+      "motivated_by": [
+        "fixed_graph_lookup_table_alternative"
+      ],
+      "claim": "The P_T/a_T functional division transports across the registered one-factor support-topology, presentation-order, density, and N=6/8/10 item-count studies.",
+      "evidence": [
+        "topology_result",
+        "presentation_order_result",
+        "evidence_sparsity_result",
+        "sparsity_localization_result",
+        "item_count_result"
+      ],
+      "boundary": "These are sequential one-factor tests, not a full factorial, arbitrary graph, arbitrary schedule, or arbitrary-size guarantee. The sparsity parent outcome remains unresolved."
+    },
+    "claim_freeze": {
+      "depends_on": [
+        "behavioral_competence",
+        "global_reassembly",
+        "local_direct_fidelity",
+        "algorithmic_asymmetry",
+        "structural_transport"
+      ],
+      "motivated_by": [],
+      "claim": "Liu v1 is a frozen model-level scientific object whose positive results, qualified negatives, provenance, artifacts, environment, and presentation view are preserved together.",
+      "evidence": [
+        "legacy_evidence_manifest",
+        "legacy_claim_freeze",
+        "legacy_mainline_synthesis"
+      ],
+      "boundary": "Any scientific claim change requires liu_v2; factual corrections require append-only errata."
+    }
+  },
+  "research_lineage": [
+    {
+      "id": "global_only_direct_fidelity_deficit",
+      "motivates": "local_direct_fidelity",
+      "role": "The confirmed global channel transported remote inference but failed the full behavioral conjunction, motivating localization of direct-experience loss."
+    },
+    {
+      "id": "scalar_gate_family_closed",
+      "motivates": "local_direct_fidelity",
+      "role": "Unsigned and policy-relative scalar amplitude gates were valid negatives and closed that intervention family."
+    },
+    {
+      "id": "first_order_residual_family_closed",
+      "motivates": "local_direct_fidelity",
+      "role": "The first-order residual carried H>A/F>A information but was insufficient, motivating a separately persistent local state."
+    },
+    {
+      "id": "mechanism_stack_compression",
+      "motivates": "algorithmic_asymmetry",
+      "role": "The replicated P_T/L_T mechanism motivated testing whether the evidence stack could be compressed into an executable reduced algorithm."
+    },
+    {
+      "id": "fixed_graph_lookup_table_alternative",
+      "motivates": "structural_transport",
+      "role": "Transport tests distinguish a task algorithm from one fixed support graph or schedule."
+    }
+  ],
+  "reference_context": {
+    "Miconi_and_Kay": "Research lineage and model ancestry only; their rewarded adjacent-pair episode is outside the Liu fact DAG.",
+    "Lippl_et_al": "Theoretical context for classic TI representation and norm-minimization arguments only.",
+    "Nelli_et_al": "Knowledge-reassembly context and a future list-linking program only."
+  },
+  "evidence_files": {
+    "liu_protocol": {
+      "path": "benchmarks/liu_v2.json",
+      "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec",
+      "role": "task_contract"
+    },
+    "liu_human_benchmark": {
+      "path": "benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1",
+      "role": "human_benchmark"
+    },
+    "liu_preregistered_trials": {
+      "path": "data/external/liu2026/preregistered_experiment_data.csv",
+      "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227",
+      "role": "human_source_data"
+    },
+    "liu_replication_trials": {
+      "path": "data/external/liu2026/replication_experiment_data.csv",
+      "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249",
+      "role": "human_source_data"
+    },
+    "behavior_map_specification": {
+      "path": "benchmarks/model_behavior_reproduction_map_v1.json",
+      "sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432",
+      "role": "registered_contract"
+    },
+    "behavior_map_lock": {
+      "path": "benchmarks/model_behavior_reproduction_map_v1.lock.json",
+      "sha256": "466604fb507fc63fba8ba48869839ff425456780953d3f5bd21cc7760d9a25bf",
+      "role": "execution_lock"
+    },
+    "behavior_map_result": {
+      "path": "results/model_behavior_reproduction_map_v1.json",
+      "sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+      "role": "frozen_result"
+    },
+    "behavior_map_report": {
+      "path": "docs/model_behavior_reproduction_map_v1.md",
+      "sha256": "11d7ef2f5c07dbac930a2a741c196d1698a4527acd2f7d8382350ca2fc2fb3e7",
+      "role": "frozen_report"
+    },
+    "formal_mechanism_specification": {
+      "path": "benchmarks/mechanism_confirmation_v1.json",
+      "sha256": "fe9f3bbac5ed9372d015a3271f3ec1d0b4463e821ce37d2c745f2c4b0c8d97a7",
+      "role": "registered_contract"
+    },
+    "formal_mechanism_result": {
+      "path": "results/mechanism_confirmation_v1.json",
+      "sha256": "88ef7616dc94cfb04694737def0c0d189fd0ed5f16e38974d6e9b5df884d1d05",
+      "role": "frozen_result"
+    },
+    "formal_mechanism_synthesis": {
+      "path": "docs/model_mechanism_synthesis_v1.md",
+      "sha256": "81a032cd35f8d21c9f4d72dc0f73726461c8071dc5e355d62d8ec3e026d41ec8",
+      "role": "frozen_report"
+    },
+    "local_replication_specification": {
+      "path": "benchmarks/conjunctive_local_trace_replication_v2_3.json",
+      "sha256": "95ee985cccb0c464e5e1fad351f6bf176803840e9b3b5151ea19acfd7e6e82c1",
+      "role": "registered_contract"
+    },
+    "local_replication_lock": {
+      "path": "benchmarks/conjunctive_local_trace_replication_v2_3.lock.json",
+      "sha256": "d1f82a63bd867e43f05750e282470793f2cc5cee5e591f1f44ea0630a12b2ba5",
+      "role": "execution_lock"
+    },
+    "local_replication_artifact_lock": {
+      "path": "benchmarks/conjunctive_local_trace_replication_v2_3.artifact_lock.json",
+      "sha256": "30ddef8b10eccdb406bd7768e317606fe7cbfb8ecefb5dc1fa594ef02b17e4c0",
+      "role": "artifact_lock"
+    },
+    "local_replication_result": {
+      "path": "results/conjunctive_local_trace_replication_v2_3.json",
+      "sha256": "646bb69eff8e515a5f891dce7bab3957299312d341c04794d75afdd03404bc4f",
+      "role": "frozen_result"
+    },
+    "local_replication_report": {
+      "path": "docs/conjunctive_local_trace_replication_v2_3.md",
+      "sha256": "e2777cde7a30874b038db5a8a1edf74ef82297e50bc8b16a11a3bf71974f78a2",
+      "role": "frozen_report"
+    },
+    "dual_access_confirmation_specification": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09",
+      "role": "registered_contract"
+    },
+    "dual_access_confirmation_lock": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.lock.json",
+      "sha256": "5c67201b17b1dd089ca4a274bad0a2106ce8628b21d8c23851a1646f31e2fba1",
+      "role": "execution_lock"
+    },
+    "dual_access_confirmation_artifact_lock": {
+      "path": "benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json",
+      "sha256": "d2448bd682f5dbd96be9cc80a2a43731926aee4f86e756a824afc732867483f2",
+      "role": "artifact_lock"
+    },
+    "dual_access_confirmation_result": {
+      "path": "results/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+      "role": "frozen_result"
+    },
+    "dual_access_confirmation_report": {
+      "path": "docs/dual_evidence_access_confirmation_v2_4.md",
+      "sha256": "34141e56364588f547c19e9edf60c94a0f1ff024b4cbdf4fb93e6dda23f163d9",
+      "role": "frozen_report"
+    },
+    "reduced_algorithm_v1_result": {
+      "path": "results/dual_state_reduced_algorithm_v1.json",
+      "sha256": "573b56ea212849f83d61e6f73d24ed9a5a8e078d6793a18e6a5da73198e871c9",
+      "role": "frozen_result"
+    },
+    "reduced_algorithm_v2_result": {
+      "path": "results/dual_state_reduced_algorithm_v2.json",
+      "sha256": "4326ec76995114848d46ad59e815d365af1b179fad31e563d5fed586a241fe5a",
+      "role": "frozen_result"
+    },
+    "reduced_algorithm_v3_specification": {
+      "path": "benchmarks/dual_state_reduced_algorithm_v3.json",
+      "sha256": "32c7b3df64ee0c5d0d77ba34bfb1612ba4a035f5936775eafad5d924e401c2b0",
+      "role": "registered_contract"
+    },
+    "reduced_algorithm_v3_lock": {
+      "path": "benchmarks/dual_state_reduced_algorithm_v3.lock.json",
+      "sha256": "d901c8565cc2ad1c20090c19f42ececa8320006f324d7e2bc720553ca219eba6",
+      "role": "execution_lock"
+    },
+    "reduced_algorithm_v3_result": {
+      "path": "results/dual_state_reduced_algorithm_v3.json",
+      "sha256": "44f125cf4d6357c0b385d7c9dcd116c9e686666d4597dbf17c17a2e34698d365",
+      "role": "frozen_result"
+    },
+    "topology_specification": {
+      "path": "benchmarks/liu_support_topology_transport_v1.json",
+      "sha256": "7bbb454a29a41d8cd2757b4d5fdd83e391bc4ca6b5fe961cea0efc37606cb43e",
+      "role": "registered_contract"
+    },
+    "topology_initial_lock": {
+      "path": "benchmarks/liu_support_topology_transport_v1.lock.json",
+      "sha256": "d45653c32efb92e3033f3a3167cfe071756520ad70a4926f11106f0518be1574",
+      "role": "superseded_lock"
+    },
+    "topology_repair_lock": {
+      "path": "benchmarks/liu_support_topology_transport_v1.repair1.lock.json",
+      "sha256": "593c15806ac56b46270e2c470138aea6c1d1bd3462e948b56cfbd95e1713d22c",
+      "role": "execution_lock"
+    },
+    "topology_result": {
+      "path": "results/liu_support_topology_transport_v1.json",
+      "sha256": "2838a1a7d4a53ff905938368bd91ffb23c3120b5336dd4fe65767a3a1d51ad62",
+      "role": "frozen_result"
+    },
+    "topology_report": {
+      "path": "docs/liu_support_topology_transport_v1.md",
+      "sha256": "8f30aae9e3fd49c848ff3e3b001bbeaaa2e7372da745d2f4998e96d6aff8133c",
+      "role": "frozen_report"
+    },
+    "presentation_order_specification": {
+      "path": "benchmarks/liu_presentation_order_transport_v1.json",
+      "sha256": "b294a8cf23d3cf56c0395d4cd7382ccb5c6474bdcdd638681b9bdf9aef5d6e36",
+      "role": "registered_contract"
+    },
+    "presentation_order_lock": {
+      "path": "benchmarks/liu_presentation_order_transport_v1.lock.json",
+      "sha256": "2d9d2ed6f55c679b2d49ddc59d56852934e10fc71e73d6dc5f9b1dc9532ed9ee",
+      "role": "execution_lock"
+    },
+    "presentation_order_result": {
+      "path": "results/liu_presentation_order_transport_v1.json",
+      "sha256": "d13f0e1ff448cc370a0f0d00c633a8e8a9914968c4f7ea3e73e706d834ca5aba",
+      "role": "frozen_result"
+    },
+    "presentation_order_report": {
+      "path": "docs/liu_presentation_order_transport_v1.md",
+      "sha256": "7b7a88f32a04d5184f5c55d1834b39984db3af06d1448fe85e64e6aacfa1e115",
+      "role": "frozen_report"
+    },
+    "evidence_sparsity_specification": {
+      "path": "benchmarks/liu_evidence_sparsity_transport_v1.json",
+      "sha256": "682e6fc1bbdbcf83e960b97d4768b1fca9cf6107765fb17d64ce62710f58ebd9",
+      "role": "registered_contract"
+    },
+    "evidence_sparsity_lock": {
+      "path": "benchmarks/liu_evidence_sparsity_transport_v1.lock.json",
+      "sha256": "1bf9457db8e26be04180e8686ad9e02afc43dac1fd2ae80d4a310f3455a83b9e",
+      "role": "execution_lock"
+    },
+    "evidence_sparsity_result": {
+      "path": "results/liu_evidence_sparsity_transport_v1.json",
+      "sha256": "baad32a2b737cc26a6e9c6a02ccb82da0a51c953d3d80bbfad115c74499d1b41",
+      "role": "frozen_result"
+    },
+    "evidence_sparsity_report": {
+      "path": "docs/liu_evidence_sparsity_transport_v1.md",
+      "sha256": "4d251f1871a32ea73e04413f5acb940e257f29715dec8da1b356361dab7f4e6f",
+      "role": "frozen_report"
+    },
+    "sparsity_localization_specification": {
+      "path": "benchmarks/liu_sparsity_individualization_localization_v1.json",
+      "sha256": "1858d533b1ef4f5aebc276a91a656831d17ee60e5ef5e87e63116c46550850f9",
+      "role": "registered_contract"
+    },
+    "sparsity_localization_lock": {
+      "path": "benchmarks/liu_sparsity_individualization_localization_v1.lock.json",
+      "sha256": "a9255eb3f636f32c2f06aaa7d6670614e016da18d60dcead174726591bed0a14",
+      "role": "execution_lock"
+    },
+    "sparsity_localization_result": {
+      "path": "results/liu_sparsity_individualization_localization_v1.json",
+      "sha256": "70d00237f3aeef0897f31c558008179bccc1ff2d5ec07993084b73aea513e06a",
+      "role": "frozen_result"
+    },
+    "sparsity_localization_report": {
+      "path": "docs/liu_sparsity_individualization_localization_v1.md",
+      "sha256": "4cf4f35202803fc50e580f8f485f941348221b5600ea0296153cccac9a7246e4",
+      "role": "frozen_report"
+    },
+    "item_count_specification": {
+      "path": "benchmarks/liu_item_count_transport_v1.json",
+      "sha256": "236c4076a42198d9cf92c5157a1cda74321e0f1f592315cf614e777d8ddcf17a",
+      "role": "registered_contract"
+    },
+    "item_count_lock": {
+      "path": "benchmarks/liu_item_count_transport_v1.lock.json",
+      "sha256": "a29b72cf573d3d27b3f044621b4803910eae9e3c4e9887769b7c6fa776a9d4a1",
+      "role": "execution_lock"
+    },
+    "item_count_result": {
+      "path": "results/liu_item_count_transport_v1.json",
+      "sha256": "2429ef71c849d1a39b2b8f4d60748f054c90342d93e2130fc8cae6dd87b3eee5",
+      "role": "frozen_result"
+    },
+    "item_count_report": {
+      "path": "docs/liu_item_count_transport_v1.md",
+      "sha256": "3e134573bed7bfa2ce79833d81aa52fd129893eb843ffc8a0a24c07dcb8e07aa",
+      "role": "frozen_report"
+    },
+    "legacy_evidence_manifest": {
+      "path": "benchmarks/liu_mainline_evidence_manifest_v1.json",
+      "sha256": "c2e11fca1935fd8658ee6a9c9d006246c3646d7ba1971244da09f3d7e96b4b94",
+      "role": "legacy_freeze"
+    },
+    "legacy_claim_freeze": {
+      "path": "benchmarks/liu_mainline_freeze_v1.json",
+      "sha256": "257d5eb31d55fbda54eb3bd8224a03116649824b77d48ff392046c6dfbc0785c",
+      "role": "legacy_freeze"
+    },
+    "legacy_mainline_synthesis": {
+      "path": "docs/liu_mainline_synthesis_v1.md",
+      "sha256": "401d174a68a9779e314f84c6f3be299d0305c1b5127b32033ce30fe6c1b459e8",
+      "role": "legacy_freeze"
+    },
+    "artifact_registry": {
+      "path": "mainlines/liu_v1/artifacts.json",
+      "sha256": "18ba851afca948f379e92b478aba403fcecddc10b001491c24d31b9ebcb638c1",
+      "role": "overlay_provenance"
+    },
+    "environment_registry": {
+      "path": "mainlines/liu_v1/environment.json",
+      "sha256": "1fa91f1ff6023986a7f588c6a344b23ad79539ca71c73db228b9eb43cdac63a7",
+      "role": "overlay_provenance"
+    },
+    "dependency_lock": {
+      "path": "mainlines/liu_v1/requirements-lock.txt",
+      "sha256": "8adffb141880bcac87cac479baf9cd3ea99027fdbc5a4a419ff77985dae7be13",
+      "role": "overlay_provenance"
+    },
+    "report_view": {
+      "path": "mainlines/liu_v1/report_view.json",
+      "sha256": "1a54af15d5be8dae5bf892638deddfd673253ea46f07199c50cc39b7ac66167a",
+      "role": "presentation_view"
+    },
+    "mainline_readme": {
+      "path": "mainlines/liu_v1/README.md",
+      "sha256": "bdc5317315f3492ea02de097eda9b312a809ef457e839eb8eabf68471b69eb38",
+      "role": "overlay_documentation"
+    },
+    "reproduction_contract": {
+      "path": "docs/liu_mainline_reproduction_v1.md",
+      "sha256": "909dea9d03975beca2a51425cadd106b04daffbba4f1afe615e4e041bb14fd72",
+      "role": "overlay_documentation"
+    },
+    "presentation_package": {
+      "path": "docs/liu_presentation_package_v2.md",
+      "sha256": "9725759f585f1e855831a6dbb0eb99a29e3f1ac143c8ab3a3e6cc669b122418a",
+      "role": "presentation_documentation"
+    },
+    "git_provenance_implementation": {
+      "path": "fsrl/git_provenance.py",
+      "sha256": "98fb5e23a3122fa3c10542b0e12cce96d9b2a2e45b4617657c142b18b7c3de4f",
+      "role": "overlay_implementation"
+    },
+    "mainline_implementation": {
+      "path": "fsrl/liu_mainline.py",
+      "sha256": "14dad0666c945e2d59f021879266aca65796d2f50ba7073cee241a65c8755c0b",
+      "role": "overlay_implementation"
+    },
+    "git_provenance_tests": {
+      "path": "tests/test_git_provenance.py",
+      "sha256": "08d80fc08df0456daeeb1e50bfcc1ab4ec906c30135a585b0d768eac2377427e",
+      "role": "overlay_test"
+    },
+    "mainline_tests": {
+      "path": "tests/test_liu_mainline.py",
+      "sha256": "f563a38a1f57e0a297d7384cdba36863ab175bdaf532e4978e4468498a3d1c16",
+      "role": "overlay_test"
+    },
+    "allocation_historical_provenance_test": {
+      "path": "tests/test_global_policy_allocation_audit.py",
+      "sha256": "749f8c7a0d7cea298edf24db564c3f0d2a9d2422e8120e5ee65e7fe5e93e2d3b",
+      "role": "overlay_test"
+    },
+    "comparator_historical_provenance_test": {
+      "path": "tests/test_global_policy_comparator_adequacy.py",
+      "sha256": "af0e77680751220f13061aa9c0525c6aa53ae3837331a961fedddc7d169d2f04",
+      "role": "overlay_test"
+    },
+    "report_summary": {
+      "path": "docs/assets/liu_mainline_v1/liu_mainline_summary.json",
+      "sha256": "89c5c8fe5b5f5998f868e772d202f42a5e608a5e5c3ce0407011c92dc5eab5c7",
+      "role": "generated_report_data"
+    },
+    "report_table": {
+      "path": "docs/assets/liu_mainline_v1/liu_mainline_tables.csv",
+      "sha256": "4a2b449ac7968e2f847c0566a8bc7b020f0655e575c71d039c95e5c861b292ba",
+      "role": "generated_report_data"
+    },
+    "report_figure_1": {
+      "path": "docs/assets/liu_mainline_v1/figure_1_behavioral_target.svg",
+      "sha256": "ca6ff864d0b11bec9fde2274bca9b1f5ee8ac75453549d40b2ed158ed800aa7a",
+      "role": "generated_figure"
+    },
+    "report_figure_2": {
+      "path": "docs/assets/liu_mainline_v1/figure_2_causal_mechanism.svg",
+      "sha256": "5ee37647cb12eb4ce9d1b37fd1e0a90a0ac07fc99f5bc3fad42013c64b93ed82",
+      "role": "generated_figure"
+    },
+    "report_figure_3": {
+      "path": "docs/assets/liu_mainline_v1/figure_3_algorithmic_asymmetry.svg",
+      "sha256": "818d44d63c32c4a6c390668b8e94ce3bb39b673815be3cda4fd3c0aac71d7741",
+      "role": "generated_figure"
+    },
+    "report_figure_4": {
+      "path": "docs/assets/liu_mainline_v1/figure_4_transport_boundaries.svg",
+      "sha256": "d12498d0f6c2d0da0cb788411ea46ff4c5419ae159c51aa82804cbdfe662d3b1",
+      "role": "generated_figure"
+    }
+  },
+  "execution_records": {
+    "behavior_map": {
+      "execution_commit": "088f74b230566145baeb45112bb532bf6f58e528",
+      "specification": "behavior_map_specification",
+      "execution_lock": "behavior_map_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "behavior_map_specification",
+        "behavior_map_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources"
+      ],
+      "result": "behavior_map_result",
+      "report": "behavior_map_report",
+      "runtime": "cpu",
+      "artifact_requirement_tags": [],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.model_behavior_reproduction_map",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/summary/status_counts/reproduced",
+              "operator": "equals",
+              "expected": 6
+            },
+            {
+              "json_pointer": "/summary/status_counts/qualitatively_reproduced_quantitatively_mismatched",
+              "operator": "equals",
+              "expected": 3
+            }
+          ]
+        }
+      }
+    },
+    "dual_access_confirmation": {
+      "execution_commit": "741dc3559008ea8453f033622abf9f94e4e77f32",
+      "specification": "dual_access_confirmation_specification",
+      "execution_lock": "dual_access_confirmation_lock",
+      "artifact_lock": "dual_access_confirmation_artifact_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "dual_access_confirmation_specification",
+        "dual_access_confirmation_lock",
+        "dual_access_confirmation_artifact_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources",
+        "reused_frozen_sources"
+      ],
+      "result": "dual_access_confirmation_result",
+      "report": "dual_access_confirmation_report",
+      "runtime": "gpu_fixed_artifact",
+      "artifact_requirement_tags": [
+        "global_reassembly"
+      ],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.dual_evidence_access_confirmation",
+        "evaluate",
+        "--result",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "fresh_backbone_confirmation_pass"
+            },
+            {
+              "json_pointer": "/decision/all_four_links_pass",
+              "operator": "is_true"
+            }
+          ]
+        }
+      }
+    },
+    "reduced_algorithm_v3": {
+      "execution_commit": "64ee33fab0906d5a89cbec7bf13448a698e37511",
+      "specification": "reduced_algorithm_v3_specification",
+      "execution_lock": "reduced_algorithm_v3_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "reduced_algorithm_v3_specification",
+        "reduced_algorithm_v3_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources"
+      ],
+      "result": "reduced_algorithm_v3_result",
+      "runtime": "cpu",
+      "artifact_requirement_tags": [],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.dual_state_reduced_algorithm_v3",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "44f125cf4d6357c0b385d7c9dcd116c9e686666d4597dbf17c17a2e34698d365"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "item_history_insufficient"
+            }
+          ]
+        }
+      }
+    },
+    "support_topology_transport": {
+      "execution_commit": "80d9632973e9700dd78cbb191476b21ee448a0dd",
+      "specification": "topology_specification",
+      "execution_lock": "topology_repair_lock",
+      "historical_locks": [
+        "topology_initial_lock"
+      ],
+      "supersedes": "topology_initial_lock",
+      "historical_files": [
+        "topology_specification",
+        "topology_initial_lock",
+        "topology_repair_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources",
+        "repair_sources"
+      ],
+      "result": "topology_result",
+      "report": "topology_report",
+      "runtime": "gpu_fixed_artifact",
+      "artifact_requirement_tags": [
+        "support_topology_transport"
+      ],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.formal_runtime",
+        "liu-support-topology-transport",
+        "--implementation-lock",
+        "benchmarks/liu_support_topology_transport_v1.repair1.lock.json",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "2838a1a7d4a53ff905938368bd91ffb23c3120b5336dd4fe65767a3a1d51ad62"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "LIU_STRUCTURAL_MECHANISM_TRANSPORTED"
+            }
+          ]
+        }
+      }
+    },
+    "presentation_order_transport": {
+      "execution_commit": "2b062b5c1a2a409f39b98f7221488dbbb8cd3e96",
+      "specification": "presentation_order_specification",
+      "execution_lock": "presentation_order_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "presentation_order_specification",
+        "presentation_order_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources"
+      ],
+      "result": "presentation_order_result",
+      "report": "presentation_order_report",
+      "runtime": "gpu_fixed_artifact",
+      "artifact_requirement_tags": [
+        "presentation_order_transport"
+      ],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.presentation_order_runtime",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "d13f0e1ff448cc370a0f0d00c633a8e8a9914968c4f7ea3e73e706d834ca5aba"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "LIU_PRESENTATION_ORDER_MECHANISM_TRANSPORTED"
+            }
+          ]
+        }
+      }
+    },
+    "evidence_sparsity_transport": {
+      "execution_commit": "3859d9e55bfc3bbe9d8a37a6ce633be7e383a081",
+      "specification": "evidence_sparsity_specification",
+      "execution_lock": "evidence_sparsity_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "evidence_sparsity_specification",
+        "evidence_sparsity_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources"
+      ],
+      "result": "evidence_sparsity_result",
+      "report": "evidence_sparsity_report",
+      "runtime": "gpu_fixed_artifact",
+      "artifact_requirement_tags": [
+        "evidence_sparsity_transport"
+      ],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.evidence_sparsity_runtime",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "baad32a2b737cc26a6e9c6a02ccb82da0a51c953d3d80bbfad115c74499d1b41"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "SPARSITY_DEPENDENT_OR_UNRESOLVED"
+            },
+            {
+              "json_pointer": "/decision/density_passes/10",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    "sparsity_localization": {
+      "execution_commit": "4d2631c50a3e028d7235245321840f04abc21c9d",
+      "specification": "sparsity_localization_specification",
+      "execution_lock": "sparsity_localization_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "sparsity_localization_specification",
+        "sparsity_localization_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources"
+      ],
+      "result": "sparsity_localization_result",
+      "report": "sparsity_localization_report",
+      "runtime": "cpu",
+      "artifact_requirement_tags": [],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.sparsity_individualization_localization",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "70d00237f3aeef0897f31c558008179bccc1ff2d5ec07993084b73aea513e06a"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "ORDER_CONVERGENCE_WITHOUT_REPLICATED_STABLE_ERROR_LOSS"
+            }
+          ]
+        }
+      }
+    },
+    "item_count_transport": {
+      "execution_commit": "33ea99a094f835ca56a59b3e60b61f28b41a9c5b",
+      "specification": "item_count_specification",
+      "execution_lock": "item_count_lock",
+      "historical_locks": [],
+      "historical_files": [
+        "item_count_specification",
+        "item_count_lock"
+      ],
+      "historical_source_groups": [
+        "implementation_sources"
+      ],
+      "result": "item_count_result",
+      "report": "item_count_report",
+      "runtime": "gpu_fixed_artifact",
+      "artifact_requirement_tags": [
+        "item_count_transport"
+      ],
+      "argv": [
+        "{python}",
+        "-m",
+        "fsrl.item_count_runtime",
+        "--output",
+        "{result}"
+      ],
+      "replay_policy": {
+        "exact": {
+          "allowed_environment": "liu-mainline-v1-linux-cuda130",
+          "expected_sha256": "2429ef71c849d1a39b2b8f4d60748f054c90342d93e2130fc8cae6dd87b3eee5"
+        },
+        "semantic": {
+          "assertions": [
+            {
+              "json_pointer": "/decision/outcome",
+              "operator": "equals",
+              "expected": "LIU_ITEM_COUNT_MECHANISM_TRANSPORTED"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "replay_stages": {
+    "behavioral_competence": "behavior_map",
+    "global_reassembly": "dual_access_confirmation",
+    "local_direct_fidelity": "dual_access_confirmation",
+    "algorithmic_asymmetry": "reduced_algorithm_v3",
+    "support_topology_transport": "support_topology_transport",
+    "presentation_order_transport": "presentation_order_transport",
+    "evidence_sparsity_transport": "evidence_sparsity_transport",
+    "sparsity_individualization_localization": "sparsity_localization",
+    "item_count_transport": "item_count_transport"
+  },
+  "implementation_lineage": {
+    "rule": "contract -> implementation -> execution_lock -> artifact_lock_if_any -> execution -> result -> report; repairs supersede locks without changing historical objects",
+    "records": [
+      "behavior_map",
+      "dual_access_confirmation",
+      "reduced_algorithm_v3",
+      "support_topology_transport",
+      "presentation_order_transport",
+      "evidence_sparsity_transport",
+      "sparsity_localization",
+      "item_count_transport"
+    ]
+  },
+  "report_view": "mainlines/liu_v1/report_view.json",
+  "artifact_registry": "mainlines/liu_v1/artifacts.json",
+  "environment_registry": "mainlines/liu_v1/environment.json",
+  "freeze": {
+    "freeze_ref": "refs/tags/liu-mainline-v1",
+    "validated_candidate_commit": null,
+    "canonical_payload_sha256": null,
+    "canonical_payload_hash_scope": "The canonical JSON serialization of this manifest with status=draft and both validated_candidate_commit and canonical_payload_sha256 set to null. This avoids a self-referential commit or file hash."
+  },
+  "append_only_policy": {
+    "draft_to_frozen": "After clean-clone, CPU, GPU fixed-artifact, and worktree-clean validation, record the validated candidate commit and canonical payload hash, change status to frozen once, commit, push, and create the annotated tag.",
+    "frozen": "Do not modify manifest.json, artifacts.json, report_view.json, the bundle, or generated figure data after the annotated freeze tag.",
+    "errata": "Factual corrections use liu_v1_errata_NNN.json with affected paths and old/new hashes.",
+    "new_science": "Any changed claim, estimand, threshold, model output, or evidence selection requires mainlines/liu_v2."
+  }
+}

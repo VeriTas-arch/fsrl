@@ -1,0 +1,311 @@
+{
+  "figures": [
+    {
+      "asset": "figure_1_behavioral_target.svg",
+      "claim_nodes": [
+        "task_fidelity",
+        "behavioral_competence"
+      ],
+      "id": "figure_1_behavioral_target",
+      "metrics": [
+        {
+          "display": "0.914",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/human_reference/learned_accuracy",
+          "label": "Human learned accuracy",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 0.9139610389610392
+        },
+        {
+          "display": "0.925",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/networks/2104/metrics/learned_accuracy/point",
+          "label": "Model learned accuracy, seed 2104",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 0.9251623376623375
+        },
+        {
+          "display": "0.931",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/networks/2105/metrics/learned_accuracy/point",
+          "label": "Model learned accuracy, seed 2105",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 0.9314935064935064
+        },
+        {
+          "display": "0.828",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/human_reference/nonlearned_accuracy",
+          "label": "Human nonlearned accuracy",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 0.8277272727272728
+        },
+        {
+          "display": "0.804",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/networks/2104/metrics/nonlearned_accuracy/point",
+          "label": "Model nonlearned accuracy, seed 2104",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 0.8035714285714287
+        },
+        {
+          "display": "0.805",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/networks/2105/metrics/nonlearned_accuracy/point",
+          "label": "Model nonlearned accuracy, seed 2105",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 0.8052597402597403
+        },
+        {
+          "display": "6",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/summary/status_counts/reproduced",
+          "label": "Phenomena reproduced",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 6
+        },
+        {
+          "display": "3",
+          "figure_id": "figure_1_behavioral_target",
+          "json_pointer": "/summary/status_counts/qualitatively_reproduced_quantitatively_mismatched",
+          "label": "Qualitative but quantitatively mismatched",
+          "source_id": "behavior_map_result",
+          "source_path": "results/model_behavior_reproduction_map_v1.json",
+          "source_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+          "value": 3
+        }
+      ],
+      "title": "Human target and behavioral reproduction"
+    },
+    {
+      "asset": "figure_2_causal_mechanism.svg",
+      "claim_nodes": [
+        "global_reassembly",
+        "local_direct_fidelity"
+      ],
+      "id": "figure_2_causal_mechanism",
+      "metrics": [
+        {
+          "display": "+0.194",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2104/contrasts/dual_minus_shared_omitted_direct_correctness/mean",
+          "label": "Omitted direct rescue, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": 0.19402111011575843
+        },
+        {
+          "display": "+0.208",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2105/contrasts/dual_minus_shared_omitted_direct_correctness/mean",
+          "label": "Omitted direct rescue, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": 0.20816939932660872
+        },
+        {
+          "display": "+0.061",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2104/contrasts/dual_minus_shared_omitted_exact_probability/mean",
+          "label": "Omitted exact-probability rescue, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": 0.06117566044887997
+        },
+        {
+          "display": "+0.052",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2105/contrasts/dual_minus_shared_omitted_exact_probability/mean",
+          "label": "Omitted exact-probability rescue, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": 0.052408402818350894
+        },
+        {
+          "display": "-0.068",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2104/contrasts/P_off_all_remote_minus_quarter_shared_all_remote/mean",
+          "label": "P-off remote-collapse contrast, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": -0.06766703486224852
+        },
+        {
+          "display": "-0.069",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2105/contrasts/P_off_all_remote_minus_quarter_shared_all_remote/mean",
+          "label": "P-off remote-collapse contrast, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": -0.06859752527718813
+        },
+        {
+          "display": "-0.0011",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2104/contrasts/dual_minus_shared_retained_exact_probability/mean",
+          "label": "Retained exact trade-off, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": -0.001138561065708016
+        },
+        {
+          "display": "-0.0014",
+          "figure_id": "figure_2_causal_mechanism",
+          "json_pointer": "/seeds/2105/contrasts/dual_minus_shared_retained_exact_probability/mean",
+          "label": "Retained exact trade-off, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "source_path": "results/dual_evidence_access_confirmation_v2_4.json",
+          "source_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+          "value": -0.0014262758179830672
+        }
+      ],
+      "title": "Differential admission and causal double dissociation"
+    },
+    {
+      "asset": "figure_3_algorithmic_asymmetry.svg",
+      "claim_nodes": [
+        "algorithmic_asymmetry"
+      ],
+      "id": "figure_3_algorithmic_asymmetry",
+      "metrics": [
+        {
+          "display": "5.55e-16",
+          "figure_id": "figure_3_algorithmic_asymmetry",
+          "json_pointer": "/seeds/2101/sizes/8/metrics/local_exactness/ledger_tensor_state_max_abs_error",
+          "label": "Local tensor reconstruction max error",
+          "source_id": "item_count_result",
+          "source_path": "results/liu_item_count_transport_v1.json",
+          "source_sha256": "2429ef71c849d1a39b2b8f4d60748f054c90342d93e2130fc8cae6dd87b3eee5",
+          "value": 5.551115123125783e-16
+        },
+        {
+          "display": "7.99e-15",
+          "figure_id": "figure_3_algorithmic_asymmetry",
+          "json_pointer": "/seeds/2101/sizes/8/metrics/local_exactness/all_query_raw_read_max_abs_error",
+          "label": "All-query local read max error",
+          "source_id": "item_count_result",
+          "source_path": "results/liu_item_count_transport_v1.json",
+          "source_sha256": "2429ef71c849d1a39b2b8f4d60748f054c90342d93e2130fc8cae6dd87b3eee5",
+          "value": 7.993605777301127e-15
+        },
+        {
+          "display": "rank_2_potential_transition_insufficient",
+          "figure_id": "figure_3_algorithmic_asymmetry",
+          "json_pointer": "/decision/outcome",
+          "label": "Potential-only reduction",
+          "source_id": "reduced_algorithm_v1_result",
+          "source_path": "results/dual_state_reduced_algorithm_v1.json",
+          "source_sha256": "573b56ea212849f83d61e6f73d24ed9a5a8e078d6793a18e6a5da73198e871c9",
+          "value": "rank_2_potential_transition_insufficient"
+        },
+        {
+          "display": "scalar_history_insufficient",
+          "figure_id": "figure_3_algorithmic_asymmetry",
+          "json_pointer": "/decision/outcome",
+          "label": "Scalar-history reduction",
+          "source_id": "reduced_algorithm_v2_result",
+          "source_path": "results/dual_state_reduced_algorithm_v2.json",
+          "source_sha256": "4326ec76995114848d46ad59e815d365af1b179fad31e563d5fed586a241fe5a",
+          "value": "scalar_history_insufficient"
+        },
+        {
+          "display": "item_history_insufficient",
+          "figure_id": "figure_3_algorithmic_asymmetry",
+          "json_pointer": "/decision/outcome",
+          "label": "Item-history reduction",
+          "source_id": "reduced_algorithm_v3_result",
+          "source_path": "results/dual_state_reduced_algorithm_v3.json",
+          "source_sha256": "44f125cf4d6357c0b385d7c9dcd116c9e686666d4597dbf17c17a2e34698d365",
+          "value": "item_history_insufficient"
+        }
+      ],
+      "title": "Exact local ledger and unresolved global learning dynamics"
+    },
+    {
+      "asset": "figure_4_transport_boundaries.svg",
+      "claim_nodes": [
+        "structural_transport",
+        "claim_freeze"
+      ],
+      "id": "figure_4_transport_boundaries",
+      "metrics": [
+        {
+          "display": "LIU_STRUCTURAL_MECHANISM_TRANSPORTED",
+          "figure_id": "figure_4_transport_boundaries",
+          "json_pointer": "/decision/outcome",
+          "label": "Support topology",
+          "source_id": "topology_result",
+          "source_path": "results/liu_support_topology_transport_v1.json",
+          "source_sha256": "2838a1a7d4a53ff905938368bd91ffb23c3120b5336dd4fe65767a3a1d51ad62",
+          "value": "LIU_STRUCTURAL_MECHANISM_TRANSPORTED"
+        },
+        {
+          "display": "LIU_PRESENTATION_ORDER_MECHANISM_TRANSPORTED",
+          "figure_id": "figure_4_transport_boundaries",
+          "json_pointer": "/decision/outcome",
+          "label": "Presentation order",
+          "source_id": "presentation_order_result",
+          "source_path": "results/liu_presentation_order_transport_v1.json",
+          "source_sha256": "d13f0e1ff448cc370a0f0d00c633a8e8a9914968c4f7ea3e73e706d834ca5aba",
+          "value": "LIU_PRESENTATION_ORDER_MECHANISM_TRANSPORTED"
+        },
+        {
+          "display": "SPARSITY_DEPENDENT_OR_UNRESOLVED",
+          "figure_id": "figure_4_transport_boundaries",
+          "json_pointer": "/decision/outcome",
+          "label": "Evidence sparsity",
+          "source_id": "evidence_sparsity_result",
+          "source_path": "results/liu_evidence_sparsity_transport_v1.json",
+          "source_sha256": "baad32a2b737cc26a6e9c6a02ccb82da0a51c953d3d80bbfad115c74499d1b41",
+          "value": "SPARSITY_DEPENDENT_OR_UNRESOLVED"
+        },
+        {
+          "display": "ORDER_CONVERGENCE_WITHOUT_REPLICATED_STABLE_ERROR_LOSS",
+          "figure_id": "figure_4_transport_boundaries",
+          "json_pointer": "/decision/outcome",
+          "label": "Sparsity localization",
+          "source_id": "sparsity_localization_result",
+          "source_path": "results/liu_sparsity_individualization_localization_v1.json",
+          "source_sha256": "70d00237f3aeef0897f31c558008179bccc1ff2d5ec07993084b73aea513e06a",
+          "value": "ORDER_CONVERGENCE_WITHOUT_REPLICATED_STABLE_ERROR_LOSS"
+        },
+        {
+          "display": "LIU_ITEM_COUNT_MECHANISM_TRANSPORTED",
+          "figure_id": "figure_4_transport_boundaries",
+          "json_pointer": "/decision/outcome",
+          "label": "Item count",
+          "source_id": "item_count_result",
+          "source_path": "results/liu_item_count_transport_v1.json",
+          "source_sha256": "2429ef71c849d1a39b2b8f4d60748f054c90342d93e2130fc8cae6dd87b3eee5",
+          "value": "LIU_ITEM_COUNT_MECHANISM_TRANSPORTED"
+        }
+      ],
+      "title": "One-factor transport and validity boundary"
+    }
+  ],
+  "generation_contract": "frozen_json_field_extraction_only",
+  "mainline_id": "liu_v1",
+  "manifest_status": "draft",
+  "schema_version": 1
+}

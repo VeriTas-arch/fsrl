@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "view_id": "liu-mainline-report-view-v1",
+  "purpose": "Presentation order and deterministic field extraction; this file does not define scientific dependencies.",
+  "claim_order": [
+    "task_fidelity",
+    "behavioral_competence",
+    "global_reassembly",
+    "local_direct_fidelity",
+    "algorithmic_asymmetry",
+    "structural_transport",
+    "claim_freeze"
+  ],
+  "figures": [
+    {
+      "id": "figure_1_behavioral_target",
+      "title": "Human target and behavioral reproduction",
+      "claim_nodes": [
+        "task_fidelity",
+        "behavioral_competence"
+      ],
+      "metrics": [
+        {
+          "label": "Human learned accuracy",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/human_reference/learned_accuracy",
+          "format": ".3f"
+        },
+        {
+          "label": "Model learned accuracy, seed 2104",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/networks/2104/metrics/learned_accuracy/point",
+          "format": ".3f"
+        },
+        {
+          "label": "Model learned accuracy, seed 2105",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/networks/2105/metrics/learned_accuracy/point",
+          "format": ".3f"
+        },
+        {
+          "label": "Human nonlearned accuracy",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/human_reference/nonlearned_accuracy",
+          "format": ".3f"
+        },
+        {
+          "label": "Model nonlearned accuracy, seed 2104",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/networks/2104/metrics/nonlearned_accuracy/point",
+          "format": ".3f"
+        },
+        {
+          "label": "Model nonlearned accuracy, seed 2105",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/networks/2105/metrics/nonlearned_accuracy/point",
+          "format": ".3f"
+        },
+        {
+          "label": "Phenomena reproduced",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/summary/status_counts/reproduced",
+          "format": "d"
+        },
+        {
+          "label": "Qualitative but quantitatively mismatched",
+          "source_id": "behavior_map_result",
+          "json_pointer": "/summary/status_counts/qualitatively_reproduced_quantitatively_mismatched",
+          "format": "d"
+        }
+      ]
+    },
+    {
+      "id": "figure_2_causal_mechanism",
+      "title": "Differential admission and causal double dissociation",
+      "claim_nodes": [
+        "global_reassembly",
+        "local_direct_fidelity"
+      ],
+      "metrics": [
+        {
+          "label": "Omitted direct rescue, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2104/contrasts/dual_minus_shared_omitted_direct_correctness/mean",
+          "format": "+.3f"
+        },
+        {
+          "label": "Omitted direct rescue, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2105/contrasts/dual_minus_shared_omitted_direct_correctness/mean",
+          "format": "+.3f"
+        },
+        {
+          "label": "Omitted exact-probability rescue, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2104/contrasts/dual_minus_shared_omitted_exact_probability/mean",
+          "format": "+.3f"
+        },
+        {
+          "label": "Omitted exact-probability rescue, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2105/contrasts/dual_minus_shared_omitted_exact_probability/mean",
+          "format": "+.3f"
+        },
+        {
+          "label": "P-off remote-collapse contrast, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2104/contrasts/P_off_all_remote_minus_quarter_shared_all_remote/mean",
+          "format": "+.3f"
+        },
+        {
+          "label": "P-off remote-collapse contrast, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2105/contrasts/P_off_all_remote_minus_quarter_shared_all_remote/mean",
+          "format": "+.3f"
+        },
+        {
+          "label": "Retained exact trade-off, seed 2104",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2104/contrasts/dual_minus_shared_retained_exact_probability/mean",
+          "format": "+.4f"
+        },
+        {
+          "label": "Retained exact trade-off, seed 2105",
+          "source_id": "dual_access_confirmation_result",
+          "json_pointer": "/seeds/2105/contrasts/dual_minus_shared_retained_exact_probability/mean",
+          "format": "+.4f"
+        }
+      ]
+    },
+    {
+      "id": "figure_3_algorithmic_asymmetry",
+      "title": "Exact local ledger and unresolved global learning dynamics",
+      "claim_nodes": [
+        "algorithmic_asymmetry"
+      ],
+      "metrics": [
+        {
+          "label": "Local tensor reconstruction max error",
+          "source_id": "item_count_result",
+          "json_pointer": "/seeds/2101/sizes/8/metrics/local_exactness/ledger_tensor_state_max_abs_error",
+          "format": ".2e"
+        },
+        {
+          "label": "All-query local read max error",
+          "source_id": "item_count_result",
+          "json_pointer": "/seeds/2101/sizes/8/metrics/local_exactness/all_query_raw_read_max_abs_error",
+          "format": ".2e"
+        },
+        {
+          "label": "Potential-only reduction",
+          "source_id": "reduced_algorithm_v1_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        },
+        {
+          "label": "Scalar-history reduction",
+          "source_id": "reduced_algorithm_v2_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        },
+        {
+          "label": "Item-history reduction",
+          "source_id": "reduced_algorithm_v3_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        }
+      ]
+    },
+    {
+      "id": "figure_4_transport_boundaries",
+      "title": "One-factor transport and validity boundary",
+      "claim_nodes": [
+        "structural_transport",
+        "claim_freeze"
+      ],
+      "metrics": [
+        {
+          "label": "Support topology",
+          "source_id": "topology_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        },
+        {
+          "label": "Presentation order",
+          "source_id": "presentation_order_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        },
+        {
+          "label": "Evidence sparsity",
+          "source_id": "evidence_sparsity_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        },
+        {
+          "label": "Sparsity localization",
+          "source_id": "sparsity_localization_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        },
+        {
+          "label": "Item count",
+          "source_id": "item_count_result",
+          "json_pointer": "/decision/outcome",
+          "format": "s"
+        }
+      ]
+    }
+  ],
+  "table_order": [
+    "figure_1_behavioral_target",
+    "figure_2_causal_mechanism",
+    "figure_3_algorithmic_asymmetry",
+    "figure_4_transport_boundaries"
+  ]
+}

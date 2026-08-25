@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "environment_id": "liu-mainline-v1-linux-cuda130",
+  "snapshot_date": "2026-08-25",
+  "provenance": {
+    "frozen_runtime_sources": [
+      {
+        "path": "results/dual_evidence_access_confirmation_v2_4.json",
+        "json_pointer": "/seeds/2104/runtime"
+      },
+      {
+        "path": "results/liu_item_count_transport_v1.json",
+        "json_pointer": "/execution_runtime"
+      }
+    ],
+    "host_snapshot_role": "Descriptive verification of the machine used to build and validate the overlay; frozen scientific outcomes remain bound to their own runtime records."
+  },
+  "host_snapshot": {
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernel": "7.0.0-30-generic",
+    "architecture": "x86_64",
+    "python": "3.12.8",
+    "compiler": "GCC 13.3.0",
+    "git": "2.43.0",
+    "torch": "2.13.0+cu130",
+    "cuda_runtime": "13.0",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "gpu_compute_capability": "12.0",
+    "nvidia_driver": "580.178.04",
+    "numpy": "2.4.6",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "matplotlib": "3.11.0",
+    "jsonschema": "4.26.0"
+  },
+  "runtime_contract": {
+    "torch_intraop_threads": 1,
+    "torch_interop_threads": 1,
+    "omp_num_threads": 1,
+    "openblas_num_threads": 1,
+    "mkl_num_threads": 1,
+    "gpu_required_for": [
+      "global_reassembly",
+      "local_direct_fidelity",
+      "support_topology_transport",
+      "presentation_order_transport",
+      "evidence_sparsity_transport",
+      "item_count_transport"
+    ],
+    "cpu_only": [
+      "behavioral_competence",
+      "algorithmic_asymmetry",
+      "sparsity_individualization_localization",
+      "verify",
+      "summarize"
+    ]
+  },
+  "dependency_lock": {
+    "path": "mainlines/liu_v1/requirements-lock.txt",
+    "sha256": "8adffb141880bcac87cac479baf9cd3ea99027fdbc5a4a419ff77985dae7be13",
+    "torch_wheel_index": "https://download.pytorch.org/whl/cu130",
+    "python_abi": "cp312",
+    "platform": "manylinux_2_28_x86_64"
+  },
+  "replay_contracts": {
+    "exact": "Byte identity is required only when the frozen execution commit, artifact bundle, dependency lock, runtime family, and deterministic runner all match.",
+    "semantic": "On a different driver, GPU, operating system, or framework build, every prospectively recorded semantic assertion must pass; tolerances may not be selected after replay."
+  }
+}

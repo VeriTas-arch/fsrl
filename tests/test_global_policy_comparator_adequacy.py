@@ -8,6 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
+from fsrl.git_provenance import verify_git_registrations
 from fsrl.global_policy_amplitude_provenance import NonInterpretableEstimate
 from fsrl.global_policy_comparator_adequacy import (
     DEFAULT_SPECIFICATION_PATH,
@@ -21,7 +22,6 @@ from fsrl.global_policy_comparator_adequacy import (
     residualize,
     row_correlations,
     validate_prerequisite,
-    validate_sources,
     vector_correlation,
     write_json_exclusive,
 )
@@ -54,7 +54,32 @@ class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):
         )
 
     def test_implementation_source_lock_is_complete(self):
-        validation = validate_sources()
+        specification = json.loads(DEFAULT_SPECIFICATION_PATH.read_text())
+        lock = json.loads(
+            (
+                DEFAULT_SPECIFICATION_PATH.parents[1]
+                / "benchmarks"
+                / "global_policy_comparator_adequacy_v1.lock.json"
+            ).read_text()
+        )
+        validation = verify_git_registrations(
+            DEFAULT_SPECIFICATION_PATH.parents[1],
+            "44004aa39441e075b915f499aa9d02578c78e471",
+            {
+                **specification["registered_sources"],
+                "audit_specification": {
+                    "path": str(
+                        DEFAULT_SPECIFICATION_PATH.relative_to(
+                            DEFAULT_SPECIFICATION_PATH.parents[1]
+                        )
+                    ),
+                    "sha256": lock["audit_specification_sha256"],
+                },
+                "protocol_repair": lock["protocol_repair"],
+                **lock["implementation_sources"],
+                **lock["reused_frozen_sources"],
+            },
+        )
         self.assertTrue(validation["passed"])
         self.assertGreaterEqual(len(validation["checks"]), 20)
 
