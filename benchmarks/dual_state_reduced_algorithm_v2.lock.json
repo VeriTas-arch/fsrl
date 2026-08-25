@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v2-scalar-history",
+  "freeze_status": "implementation_frozen_after_protocol_commit_and_before_v2_fit_or_evaluation",
+  "registration_commit": "65e797a",
+  "specification_sha256": "e8e5497a607be1ca0bd6ee0dd7de6361dd9b5fd768943e55b7800d50a10fdb40",
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/dual_state_reduced_algorithm_v2.py",
+      "sha256": "575ce2a223df9d909b4a9c3cd45b08311783570080808089ad9c81af5e748273"
+    },
+    "tests": {
+      "path": "tests/test_dual_state_reduced_algorithm_v2.py",
+      "sha256": "1bdf5ae775e754d988c995f25b2b3abab5921c114ac3891d05f56c841b628460"
+    }
+  },
+  "preexecution_validation": {
+    "targeted_tests": "4 passed",
+    "python_compile": "passed",
+    "ruff": "passed",
+    "v1_trajectory_reextraction": "not_run",
+    "v2_fit": "not_run",
+    "liu_preservation": "not_run"
+  },
+  "next_step": "Commit and push this implementation lock before the single registered v2 execution."
+}
