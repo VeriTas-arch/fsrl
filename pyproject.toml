@@ -1,5 +1,90 @@
 [tool.ruff]
 cache-dir = ".cache/ruff"
+target-version = "py312"
+extend-exclude = ["addons", "archive", "synthesis/frozen"]
+
+# These original runtime files are source-locked by historical studies. Keep
+# their exact bytes and make the pre-existing lint debt explicit instead of
+# allowing an editor action to rewrite scientific provenance.
+[tool.ruff.lint.per-file-ignores]
+"fsrl/cli.py" = ["I001"]
+"fsrl/config.py" = ["I001"]
+"fsrl/episode.py" = ["RUF059", "UP032"]
+"fsrl/eval_figures.py" = ["I001", "SIM114"]
+"fsrl/model.py" = ["PLR0402"]
+"fsrl/train.py" = ["FURB122"]
+
+# Formatting is enforced for new code. These pre-existing files form the
+# source/provenance formatting baseline and must not be rewritten incidentally.
+[tool.ruff.format]
+exclude = [
+    "fsrl/algorithmic.py",
+    "fsrl/confirmation.py",
+    "fsrl/conjunctive_local_trace_pilot.py",
+    "fsrl/conjunctive_local_trace_replication.py",
+    "fsrl/dual_evidence_access_confirmation.py",
+    "fsrl/dual_evidence_access_pilot.py",
+    "fsrl/dual_state_reduced_algorithm.py",
+    "fsrl/dual_state_reduced_algorithm_v2.py",
+    "fsrl/dual_state_reduced_algorithm_v3.py",
+    "fsrl/eval_figures.py",
+    "fsrl/evidence_sparsity_transport.py",
+    "fsrl/functional_fast_weight_latent_sufficiency.py",
+    "fsrl/global_policy_allocation_audit.py",
+    "fsrl/global_policy_amplitude_provenance.py",
+    "fsrl/global_policy_comparator_adequacy.py",
+    "fsrl/global_policy_field_fingerprint_replication.py",
+    "fsrl/global_policy_field_reassembly.py",
+    "fsrl/global_policy_slope_localization.py",
+    "fsrl/hidden_residual_audit.py",
+    "fsrl/history_state_factorial.py",
+    "fsrl/human_benchmark.py",
+    "fsrl/human_metric_constructive_comparator.py",
+    "fsrl/item_count_transport.py",
+    "fsrl/liu_eval.py",
+    "fsrl/liu_mainline.py",
+    "fsrl/local_behavior_attribution.py",
+    "fsrl/magnitude_placement_analysis.py",
+    "fsrl/magnitude_placement_behavior.py",
+    "fsrl/magnitude_placement_collection.py",
+    "fsrl/mechanism_confirmation.py",
+    "fsrl/model_behavior_reproduction_map.py",
+    "fsrl/operator_amplitude_path.py",
+    "fsrl/operator_output_semantics.py",
+    "fsrl/policy_opposition_gate_pilot.py",
+    "fsrl/policy_residual_pilot.py",
+    "fsrl/presentation_order_transport.py",
+    "fsrl/relation_trace_localization.py",
+    "fsrl/sparsity_individualization_localization.py",
+    "fsrl/state_query_operator_binding.py",
+    "fsrl/support_topology_transport.py",
+    "fsrl/support_write_localization.py",
+    "tests/test_assembly_trajectory.py",
+    "tests/test_confirmation.py",
+    "tests/test_dual_evidence_access_pilot.py",
+    "tests/test_dual_state_reduced_algorithm.py",
+    "tests/test_dual_state_reduced_algorithm_v3.py",
+    "tests/test_global_policy_field_fingerprint_replication.py",
+    "tests/test_global_policy_slope_localization.py",
+    "tests/test_hidden_residual_audit.py",
+    "tests/test_history_state_factorial.py",
+    "tests/test_human_benchmark.py",
+    "tests/test_human_metric_constructive_comparator.py",
+    "tests/test_liu_eval.py",
+    "tests/test_magnitude_placement_analysis.py",
+    "tests/test_magnitude_placement_behavior.py",
+    "tests/test_magnitude_placement_collection.py",
+    "tests/test_mechanism_confirmation.py",
+    "tests/test_meta_train.py",
+    "tests/test_operator_amplitude_path.py",
+    "tests/test_operator_output_semantics.py",
+    "tests/test_relation_trace_localization.py",
+    "tests/test_state_query_operator_binding.py",
+    "tests/test_support_factor_swap.py",
+    "tests/test_support_write_localization.py",
+    "tools/provenance/migrate_flat_records_v1.py",
+    "tools/provenance/rewrite_active_record_paths_v1.py",
+]
 
 [tool.pytest.ini_options]
 cache_dir = ".cache/pytest"

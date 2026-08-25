@@ -35,9 +35,7 @@ class PaperFigureAlignmentTests(unittest.TestCase):
                 "figure_03_global_rankings",
             ],
         )
-        self.assertEqual(
-            self.specification["model"]["network_pooling"], "forbidden"
-        )
+        self.assertEqual(self.specification["model"]["network_pooling"], "forbidden")
         self.assertIn(
             "paper_q_learning_controls", self.specification["excluded_panels"]
         )

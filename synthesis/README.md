@@ -26,9 +26,10 @@ page is the editable human synthesis; neither replaces the study records.
 Byte-preserved reports, contracts, locks, results, and presentation assets
 live in study-owned `records/` or `synthesis/records/`. Frozen execution
 locks that name pre-refactor Python files resolve to exact source snapshots
-under `synthesis/frozen/source/`, indexed by `source-snapshots.toml`. The
-active `fsrl/` and `tests/` trees remain the current implementation and test
-surface; the snapshots are evidence and are excluded from test discovery.
+stored as extensionless, content-addressed objects under
+`synthesis/frozen/source-blobs/` and indexed by `source-snapshots.toml`.
+The active `fsrl/` and `tests/` trees remain the current implementation and
+test surface; the blobs are provenance evidence, not a second Python tree.
 
 ## Reading routes
 

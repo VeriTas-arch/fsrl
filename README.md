@@ -42,8 +42,10 @@ identifiers through fsrl.study_registry.resolve_record; the files themselves
 have one authoritative current location.
 
 Frozen execution locks that identify pre-refactor Python files are backed by
-exact snapshots under synthesis/frozen/source/. They are provenance evidence;
-the active implementation and test surface remains fsrl/ plus tests/.
+extensionless, content-addressed objects under synthesis/frozen/source-blobs/.
+The original paths remain in synthesis/source-snapshots.toml; the blobs are
+provenance evidence rather than a second Python package. The active
+implementation and test surface remains fsrl/ plus tests/.
 
 ## Current scientific snapshot
 

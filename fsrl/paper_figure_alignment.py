@@ -37,8 +37,12 @@ from .study_registry import ROOT, resolve_record
 SUITE_ROOT = ROOT / "synthesis" / "figures" / "paper_alignment"
 SPECIFICATION_PATH = SUITE_ROOT / "figure_spec.json"
 REPLAY_CSV_PATH = SUITE_ROOT / "source" / "model_subject_pair_accuracy.csv"
-REPLAY_MANIFEST_PATH = SUITE_ROOT / "source" / "model_subject_pair_accuracy.manifest.json"
-MODEL_RESULT_PATH = resolve_record("results/dual_evidence_access_confirmation_v2_4.json")
+REPLAY_MANIFEST_PATH = (
+    SUITE_ROOT / "source" / "model_subject_pair_accuracy.manifest.json"
+)
+MODEL_RESULT_PATH = resolve_record(
+    "results/dual_evidence_access_confirmation_v2_4.json"
+)
 HUMAN_BENCHMARK_PATH = resolve_record("benchmarks/liu_human_exact_v1.json")
 PROTOCOL_PATH = resolve_record("benchmarks/liu_v2.json")
 
@@ -139,7 +143,9 @@ def _write_csv(path: Path, fieldnames: list[str], rows: list[dict]) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for row in rows:
-            writer.writerow({name: _format_cell(row.get(name, "")) for name in fieldnames})
+            writer.writerow(
+                {name: _format_cell(row.get(name, "")) for name in fieldnames}
+            )
 
 
 def validate_specification(path: Path = SPECIFICATION_PATH) -> dict:
@@ -421,7 +427,9 @@ def _load_human_subjects(protocol) -> tuple[list[dict], dict, dict]:
     return subjects, published, load_json(HUMAN_BENCHMARK_PATH)
 
 
-def _load_replay_matrix(seed: int, pairs: tuple[tuple[int, int], ...], labels) -> np.ndarray:
+def _load_replay_matrix(
+    seed: int, pairs: tuple[tuple[int, int], ...], labels
+) -> np.ndarray:
     manifest = load_json(REPLAY_MANIFEST_PATH)
     if file_sha256(REPLAY_CSV_PATH) != manifest["output"]["sha256"]:
         raise RuntimeError("pair replay CSV hash mismatch")
@@ -449,16 +457,26 @@ def load_datasets() -> tuple[object, dict[str, Dataset], dict]:
     )
     human_rows = human_benchmark["combined"]["pairs"]
     result = load_json(MODEL_RESULT_PATH)
-    datasets = {
-        "human": Dataset("human", human_subjects, human_matrix, human_rows)
-    }
+    datasets = {"human": Dataset("human", human_subjects, human_matrix, human_rows)}
     for seed in (2104, 2105):
         behavior = result["seeds"][str(seed)]["behavior"]["dual_access_matched"]
         matrix = _load_replay_matrix(seed, pairs, protocol.item_labels)
-        if float(np.max(np.abs(np.mean(matrix, axis=0) - np.asarray(
-            [row["mean_accuracy_all"] for row in behavior["pairs"]]
-        )))) > 1e-12:
-            raise RuntimeError(f"seed {seed} replay no longer matches frozen pair means")
+        if (
+            float(
+                np.max(
+                    np.abs(
+                        np.mean(matrix, axis=0)
+                        - np.asarray(
+                            [row["mean_accuracy_all"] for row in behavior["pairs"]]
+                        )
+                    )
+                )
+            )
+            > 1e-12
+        ):
+            raise RuntimeError(
+                f"seed {seed} replay no longer matches frozen pair means"
+            )
         datasets[str(seed)] = Dataset(
             str(seed), behavior["subjects"], matrix, behavior["pairs"]
         )
@@ -467,7 +485,9 @@ def load_datasets() -> tuple[object, dict[str, Dataset], dict]:
     return protocol, datasets, published
 
 
-def _bootstrap_rows(values: np.ndarray, *, samples: int, seed: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def _bootstrap_rows(
+    values: np.ndarray, *, samples: int, seed: int
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     values = np.asarray(values, dtype=np.float64)
     if values.ndim == 1:
         values = values[:, None]
@@ -491,12 +511,17 @@ def _profiles(dataset: Dataset, protocol) -> dict[str, np.ndarray]:
     learned = np.asarray([pair in protocol.learned_pairs for pair in pairs])
     eligible_matrix = dataset.pair_accuracy[dataset.eligible]
     group = np.column_stack(
-        (np.mean(eligible_matrix[:, learned], axis=1), np.mean(eligible_matrix[:, ~learned], axis=1))
+        (
+            np.mean(eligible_matrix[:, learned], axis=1),
+            np.mean(eligible_matrix[:, ~learned], axis=1),
+        )
     )
     serial = np.column_stack(
         [
             np.mean(
-                eligible_matrix[:, [index for index, pair in enumerate(pairs) if item in pair]],
+                eligible_matrix[
+                    :, [index for index, pair in enumerate(pairs) if item in pair]
+                ],
                 axis=1,
             )
             for item in reversed(protocol.true_order_high_to_low)
@@ -505,11 +530,14 @@ def _profiles(dataset: Dataset, protocol) -> dict[str, np.ndarray]:
     distance = np.column_stack(
         [
             np.mean(
-                eligible_matrix[:, [
-                    index
-                    for index, pair in enumerate(pairs)
-                    if abs(rank[pair[0]] - rank[pair[1]]) == value
-                ]],
+                eligible_matrix[
+                    :,
+                    [
+                        index
+                        for index, pair in enumerate(pairs)
+                        if abs(rank[pair[0]] - rank[pair[1]]) == value
+                    ],
+                ],
                 axis=1,
             )
             for value in range(1, protocol.n_items)
@@ -562,7 +590,9 @@ def _save_figure(fig, directory: Path, figure_id: str) -> list[Path]:
 
 def _matrix(values: np.ndarray, n_items: int) -> np.ma.MaskedArray:
     output = np.full((n_items, n_items), np.nan, dtype=np.float64)
-    for value, (first, second) in zip(values, combinations(range(n_items), 2), strict=True):
+    for value, (first, second) in zip(
+        values, combinations(range(n_items), 2), strict=True
+    ):
         output[second, first] = value
     return np.ma.masked_invalid(output)
 
@@ -614,18 +644,26 @@ def _select_exemplar(dataset: Dataset, true_positions: np.ndarray) -> int:
         ]
     )
     median = float(np.median(taus))
-    return min(candidates, key=lambda index: (
-        abs(_subject_tau_to_true(dataset.subjects[index], true_positions) - median),
-        _subject_id(dataset, index),
-    ))
+    return min(
+        candidates,
+        key=lambda index: (
+            abs(_subject_tau_to_true(dataset.subjects[index], true_positions) - median),
+            _subject_id(dataset, index),
+        ),
+    )
 
 
-def render_figure_01(output_root: Path, protocol, datasets: dict[str, Dataset], specification: dict) -> dict:
+def render_figure_01(
+    output_root: Path, protocol, datasets: dict[str, Dataset], specification: dict
+) -> dict:
     figure_id = "figure_01_group_behavior"
     directory = output_root / figure_id
     samples = int(specification["visual_uncertainty"]["samples"])
     base_seed = int(specification["visual_uncertainty"]["seed"])
-    profiles = {dataset_id: _profiles(dataset, protocol) for dataset_id, dataset in datasets.items()}
+    profiles = {
+        dataset_id: _profiles(dataset, protocol)
+        for dataset_id, dataset in datasets.items()
+    }
     summaries = {}
     rows = []
     for dataset_offset, dataset_id in enumerate(DATASET_ORDER):
@@ -645,7 +683,9 @@ def render_figure_01(output_root: Path, protocol, datasets: dict[str, Dataset], 
             for index, label in enumerate(labels):
                 rows.append(
                     {
-                        "panel": {"group": "1E", "serial": "1F", "distance": "1G"}[name],
+                        "panel": {"group": "1E", "serial": "1F", "distance": "1G"}[
+                            name
+                        ],
                         "dataset": dataset_id,
                         "network_seed": "" if dataset_id == "human" else dataset_id,
                         "x_index": index,
@@ -681,8 +721,20 @@ def render_figure_01(output_root: Path, protocol, datasets: dict[str, Dataset], 
     axes[0].legend(fontsize=8, loc="lower left")
 
     for axis, name, title, x_values, x_labels in (
-        (axes[1], "serial", "1F  Serial-position effect", np.arange(8), protocol.item_labels),
-        (axes[2], "distance", "1G  Symbolic-distance effect", np.arange(1, 8), tuple(str(v) for v in range(1, 8))),
+        (
+            axes[1],
+            "serial",
+            "1F  Serial-position effect",
+            np.arange(8),
+            protocol.item_labels,
+        ),
+        (
+            axes[2],
+            "distance",
+            "1G  Symbolic-distance effect",
+            np.arange(1, 8),
+            tuple(str(v) for v in range(1, 8)),
+        ),
     ):
         for dataset_id in DATASET_ORDER:
             point, lower, upper = summaries[dataset_id][name]
@@ -695,27 +747,56 @@ def render_figure_01(output_root: Path, protocol, datasets: dict[str, Dataset], 
                 color=DATASET_COLORS[dataset_id],
                 label=DATASET_LABELS[dataset_id],
             )
-            axis.fill_between(x_values, lower, upper, color=DATASET_COLORS[dataset_id], alpha=0.12)
+            axis.fill_between(
+                x_values, lower, upper, color=DATASET_COLORS[dataset_id], alpha=0.12
+            )
         axis.set_ylim(0.5, 1.0)
         axis.set_ylabel("Choice accuracy")
         axis.set_title(title)
         axis.set_xticks(x_values, x_labels)
     axes[1].set_xlabel("True rank position (low to high)")
     axes[2].set_xlabel("Symbolic distance")
-    fig.suptitle("Released human behavior and frozen v2.4 model counterparts", fontsize=12, fontweight="bold")
-    fig.text(0.5, 0.005, "Shading/error bars: 95% participant bootstrap within each dataset; networks are not pooled.", ha="center", fontsize=8)
+    fig.suptitle(
+        "Released human behavior and frozen v2.4 model counterparts",
+        fontsize=12,
+        fontweight="bold",
+    )
+    fig.text(
+        0.5,
+        0.005,
+        "Shading/error bars: 95% participant bootstrap within each dataset; networks are not pooled.",
+        ha="center",
+        fontsize=8,
+    )
     fig.tight_layout(rect=(0, 0.04, 1, 0.94))
     outputs = _save_figure(fig, directory, figure_id)
     source_path = directory / "source_data.csv"
     _write_csv(
         source_path,
-        ["panel", "dataset", "network_seed", "x_index", "x_label", "value", "lower", "upper", "participants", "pooling"],
+        [
+            "panel",
+            "dataset",
+            "network_seed",
+            "x_index",
+            "x_label",
+            "value",
+            "lower",
+            "upper",
+            "participants",
+            "pooling",
+        ],
         rows,
     )
     return {"id": figure_id, "outputs": outputs + [source_path], "rows": len(rows)}
 
 
-def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], published: dict, specification: dict) -> dict:
+def render_figure_02(
+    output_root: Path,
+    protocol,
+    datasets: dict[str, Dataset],
+    published: dict,
+    specification: dict,
+) -> dict:
     figure_id = "figure_02_pair_structure"
     directory = output_root / figure_id
     pairs = tuple(combinations(range(protocol.n_items), 2))
@@ -738,7 +819,9 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
         else:
             class_rows = dataset.pair_rows
             means = np.asarray([row["mean_accuracy_all"] for row in class_rows])
-        for pair_index, (pair, row, mean) in enumerate(zip(pairs, class_rows, means, strict=True)):
+        for pair_index, (pair, row, mean) in enumerate(
+            zip(pairs, class_rows, means, strict=True)
+        ):
             fit = row if dataset_id == "human" else row["beta_fit_analysis"]
             pair_rows.append(
                 {
@@ -767,14 +850,22 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
             )
         stable_values = np.column_stack(
             [
-                np.asarray([
-                    dataset.subjects[index]["stable_error_pair_counts"][str(threshold)] > 0
-                    for index in analysis_indices
-                ], dtype=np.float64)
+                np.asarray(
+                    [
+                        dataset.subjects[index]["stable_error_pair_counts"][
+                            str(threshold)
+                        ]
+                        > 0
+                        for index in analysis_indices
+                    ],
+                    dtype=np.float64,
+                )
                 for threshold in (60, 70, 80, 90, 100)
             ]
         )
-        point, lower, upper = _bootstrap_rows(stable_values, samples=samples, seed=base_seed + offset)
+        point, lower, upper = _bootstrap_rows(
+            stable_values, samples=samples, seed=base_seed + offset
+        )
         stable_summaries[dataset_id] = (point, lower, upper)
         for index, threshold in enumerate((60, 70, 80, 90, 100)):
             stable_rows.append(
@@ -791,7 +882,9 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
 
     _style()
     fig = plt.figure(figsize=(12.2, 12.0))
-    grid = fig.add_gridspec(4, 3, height_ratios=(1.0, 0.9, 1.0, 0.8), hspace=0.48, wspace=0.28)
+    grid = fig.add_gridspec(
+        4, 3, height_ratios=(1.0, 0.9, 1.0, 0.8), hspace=0.48, wspace=0.28
+    )
     accuracy_axes = [fig.add_subplot(grid[0, index]) for index in range(3)]
     distribution_axes = [fig.add_subplot(grid[1, index]) for index in range(3)]
     class_axes = [fig.add_subplot(grid[2, index]) for index in range(3)]
@@ -799,11 +892,23 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
     accuracy_image = None
     for column, dataset_id in enumerate(DATASET_ORDER):
         dataset_pair_rows = [row for row in pair_rows if row["dataset"] == dataset_id]
-        accuracy = _matrix(np.asarray([row["mean_accuracy"] for row in dataset_pair_rows]), 8)
-        accuracy_image = accuracy_axes[column].imshow(accuracy, vmin=0.5, vmax=1.0, cmap="Blues")
+        accuracy = _matrix(
+            np.asarray([row["mean_accuracy"] for row in dataset_pair_rows]), 8
+        )
+        accuracy_image = accuracy_axes[column].imshow(
+            accuracy, vmin=0.5, vmax=1.0, cmap="Blues"
+        )
         for pair in protocol.learned_pairs:
             first, second = sorted(pair)
-            accuracy_axes[column].scatter(first, second, marker="^", s=24, facecolors="none", edgecolors="black", linewidths=0.7)
+            accuracy_axes[column].scatter(
+                first,
+                second,
+                marker="^",
+                s=24,
+                facecolors="none",
+                edgecolors="black",
+                linewidths=0.7,
+            )
         accuracy_axes[column].set_title(DATASET_LABELS[dataset_id])
         accuracy_axes[column].set_xticks(range(8), labels)
         accuracy_axes[column].set_yticks(range(8), labels)
@@ -811,7 +916,11 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
         if column == 0:
             accuracy_axes[column].set_ylabel("2A  Pair accuracy\nItem 2")
 
-        values = [row["pair_accuracy"] for row in distribution_rows if row["dataset"] == dataset_id]
+        values = [
+            row["pair_accuracy"]
+            for row in distribution_rows
+            if row["dataset"] == dataset_id
+        ]
         distribution_axes[column].hist(
             values,
             bins=np.arange(-0.05, 1.051, 0.1),
@@ -827,10 +936,14 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
         if column == 0:
             distribution_axes[column].set_ylabel("2B  Subject proportion")
 
-        classes = np.asarray([class_index[row["beta_class"]] for row in dataset_pair_rows])
+        classes = np.asarray(
+            [class_index[row["beta_class"]] for row in dataset_pair_rows]
+        )
         class_matrix = _matrix(classes, 8)
         cmap = ListedColormap([PAIR_CLASS_COLORS[name] for name in PAIR_CLASS_ORDER])
-        norm = BoundaryNorm(np.arange(-0.5, len(PAIR_CLASS_ORDER) + 0.5), len(PAIR_CLASS_ORDER))
+        norm = BoundaryNorm(
+            np.arange(-0.5, len(PAIR_CLASS_ORDER) + 0.5), len(PAIR_CLASS_ORDER)
+        )
         class_axes[column].imshow(class_matrix, cmap=cmap, norm=norm)
         class_axes[column].set_title(DATASET_LABELS[dataset_id])
         class_axes[column].set_xticks(range(8), labels)
@@ -839,10 +952,20 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
         if column == 0:
             class_axes[column].set_ylabel("2D  Beta class\nItem 2")
 
-    fig.colorbar(accuracy_image, ax=accuracy_axes, location="right", fraction=0.018, pad=0.02, label="Mean accuracy")
+    fig.colorbar(
+        accuracy_image,
+        ax=accuracy_axes,
+        location="right",
+        fraction=0.018,
+        pad=0.02,
+        label="Mean accuracy",
+    )
     legend_classes = ("high_accuracy", "bimodal", "ordinary_unimodal", "low_accuracy")
     class_axes[2].legend(
-        handles=[Patch(facecolor=PAIR_CLASS_COLORS[name], label=name.replace("_", " ")) for name in legend_classes],
+        handles=[
+            Patch(facecolor=PAIR_CLASS_COLORS[name], label=name.replace("_", " "))
+            for name in legend_classes
+        ],
         loc="center left",
         bbox_to_anchor=(1.03, 0.5),
         fontsize=8,
@@ -850,20 +973,49 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
     thresholds = np.asarray((60, 70, 80, 90, 100))
     for dataset_id in DATASET_ORDER:
         point, lower, upper = stable_summaries[dataset_id]
-        stable_axis.plot(thresholds, point, marker="o", color=DATASET_COLORS[dataset_id], label=DATASET_LABELS[dataset_id])
-        stable_axis.fill_between(thresholds, lower, upper, color=DATASET_COLORS[dataset_id], alpha=0.12)
+        stable_axis.plot(
+            thresholds,
+            point,
+            marker="o",
+            color=DATASET_COLORS[dataset_id],
+            label=DATASET_LABELS[dataset_id],
+        )
+        stable_axis.fill_between(
+            thresholds, lower, upper, color=DATASET_COLORS[dataset_id], alpha=0.12
+        )
     stable_axis.set_ylim(0, 1.02)
     stable_axis.set_xlabel("Error-consistency threshold (%)")
     stable_axis.set_ylabel("Subjects with at least one stable error")
     stable_axis.set_title("2E  Individual-level error consistency")
     stable_axis.legend(ncol=3, loc="upper right")
-    fig.suptitle("Pair-level structure: released human data and frozen model counterparts", fontsize=12, fontweight="bold", y=0.995)
+    fig.suptitle(
+        "Pair-level structure: released human data and frozen model counterparts",
+        fontsize=12,
+        fontweight="bold",
+        y=0.995,
+    )
     outputs = _save_figure(fig, directory, figure_id)
     source_path = directory / "source_data.csv"
     fields = [
-        "row_type", "dataset", "network_seed", "pair_index", "item_1", "item_2", "learned",
-        "mean_accuracy", "beta_alpha", "beta_beta", "beta_class", "subject_id", "pair", "pair_accuracy",
-        "threshold_percent", "proportion", "lower", "upper", "analysis_subjects",
+        "row_type",
+        "dataset",
+        "network_seed",
+        "pair_index",
+        "item_1",
+        "item_2",
+        "learned",
+        "mean_accuracy",
+        "beta_alpha",
+        "beta_beta",
+        "beta_class",
+        "subject_id",
+        "pair",
+        "pair_accuracy",
+        "threshold_percent",
+        "proportion",
+        "lower",
+        "upper",
+        "analysis_subjects",
     ]
     rows = (
         [{"row_type": "pair", **row} for row in pair_rows]
@@ -874,11 +1026,16 @@ def render_figure_02(output_root: Path, protocol, datasets: dict[str, Dataset], 
     return {"id": figure_id, "outputs": outputs + [source_path], "rows": len(rows)}
 
 
-def render_figure_02h(output_root: Path, protocol, datasets: dict[str, Dataset]) -> dict:
+def render_figure_02h(
+    output_root: Path, protocol, datasets: dict[str, Dataset]
+) -> dict:
     figure_id = "figure_02h_error_fingerprints"
     directory = output_root / figure_id
     pairs = tuple(combinations(range(protocol.n_items), 2))
-    pair_labels = [f"{protocol.item_labels[first]}{protocol.item_labels[second]}" for first, second in pairs]
+    pair_labels = [
+        f"{protocol.item_labels[first]}{protocol.item_labels[second]}"
+        for first, second in pairs
+    ]
     rows = []
     _style()
     fig = plt.figure(figsize=(13.2, 6.2))
@@ -924,14 +1081,34 @@ def render_figure_02h(output_root: Path, protocol, datasets: dict[str, Dataset])
         cax=colorbar_axis,
         label="Error proportion (correct pairs blank)",
     )
-    fig.suptitle("2H  Stable subject-specific local error fingerprints", fontsize=12, fontweight="bold")
-    fig.text(0.5, 0.01, "Layout-adapted subject-by-pair view of the paper's per-subject lower-triangle matrices.", ha="center", fontsize=8)
+    fig.suptitle(
+        "2H  Stable subject-specific local error fingerprints",
+        fontsize=12,
+        fontweight="bold",
+    )
+    fig.text(
+        0.5,
+        0.01,
+        "Layout-adapted subject-by-pair view of the paper's per-subject lower-triangle matrices.",
+        ha="center",
+        fontsize=8,
+    )
     fig.subplots_adjust(left=0.06, right=0.96, bottom=0.13, top=0.90)
     outputs = _save_figure(fig, directory, figure_id)
     source_path = directory / "source_data.csv"
     _write_csv(
         source_path,
-        ["dataset", "network_seed", "row_position", "subject_id", "item_1", "item_2", "pair_accuracy", "error_proportion", "displayed_as_error"],
+        [
+            "dataset",
+            "network_seed",
+            "row_position",
+            "subject_id",
+            "item_1",
+            "item_2",
+            "pair_accuracy",
+            "error_proportion",
+            "displayed_as_error",
+        ],
         rows,
     )
     return {"id": figure_id, "outputs": outputs + [source_path], "rows": len(rows)}
@@ -953,7 +1130,12 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
     for dataset_id in DATASET_ORDER:
         dataset = datasets[dataset_id]
         counts = {
-            name: sum(include and subject["ranking_class"] == name for subject, include in zip(dataset.subjects, dataset.eligible, strict=True))
+            name: sum(
+                include and subject["ranking_class"] == name
+                for subject, include in zip(
+                    dataset.subjects, dataset.eligible, strict=True
+                )
+            )
             for name in class_names
         }
         for name in class_names:
@@ -1008,7 +1190,9 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
 
     _style()
     fig = plt.figure(figsize=(12.4, 12.2))
-    grid = fig.add_gridspec(3, 3, height_ratios=(0.8, 1.0, 1.55), hspace=0.46, wspace=0.32)
+    grid = fig.add_gridspec(
+        3, 3, height_ratios=(0.8, 1.0, 1.55), hspace=0.46, wspace=0.32
+    )
     class_axis = fig.add_subplot(grid[0, 0])
     tau_axis = fig.add_subplot(grid[0, 1:])
     exemplar_axes = [fig.add_subplot(grid[1, index]) for index in range(3)]
@@ -1017,14 +1201,32 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
     x = np.arange(len(class_names))
     width = 0.24
     for offset, dataset_id in enumerate(DATASET_ORDER):
-        values = [next(row["count"] for row in class_rows if row["dataset"] == dataset_id and row["ranking_class"] == name) for name in class_names]
-        class_axis.bar(x + (offset - 1) * width, values, width, color=DATASET_COLORS[dataset_id], label=DATASET_LABELS[dataset_id])
+        values = [
+            next(
+                row["count"]
+                for row in class_rows
+                if row["dataset"] == dataset_id and row["ranking_class"] == name
+            )
+            for name in class_names
+        ]
+        class_axis.bar(
+            x + (offset - 1) * width,
+            values,
+            width,
+            color=DATASET_COLORS[dataset_id],
+            label=DATASET_LABELS[dataset_id],
+        )
     class_axis.set_xticks(x, class_labels, fontsize=7)
     class_axis.set_ylabel("Subjects")
     class_axis.set_title("3B  Reconstructed ranking classes")
     class_axis.legend(fontsize=7)
 
-    violins = tau_axis.violinplot([tau_values[name] for name in DATASET_ORDER], positions=(1, 2, 3), showmeans=True, showextrema=False)
+    violins = tau_axis.violinplot(
+        [tau_values[name] for name in DATASET_ORDER],
+        positions=(1, 2, 3),
+        showmeans=True,
+        showextrema=False,
+    )
     for body, dataset_id in zip(violins["bodies"], DATASET_ORDER, strict=True):
         body.set_facecolor(DATASET_COLORS[dataset_id])
         body.set_edgecolor(DATASET_COLORS[dataset_id])
@@ -1039,10 +1241,18 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
     for axis, dataset_id in zip(exemplar_axes, DATASET_ORDER, strict=True):
         dataset = datasets[dataset_id]
         subject_index = exemplars[dataset_id]
-        exemplar_image = axis.imshow(_matrix(dataset.pair_accuracy[subject_index], 8), vmin=0, vmax=1, cmap="Blues")
+        exemplar_image = axis.imshow(
+            _matrix(dataset.pair_accuracy[subject_index], 8),
+            vmin=0,
+            vmax=1,
+            cmap="Blues",
+        )
         order = dataset.subjects[subject_index]["subjective_order_high_to_low"]
         order_label = ">".join(protocol.item_labels[item] for item in order)
-        axis.set_title(f"{DATASET_LABELS[dataset_id]} subject {_subject_id(dataset, subject_index)}\n{order_label}", fontsize=8)
+        axis.set_title(
+            f"{DATASET_LABELS[dataset_id]} subject {_subject_id(dataset, subject_index)}\n{order_label}",
+            fontsize=8,
+        )
         axis.set_xticks(range(8), protocol.item_labels)
         axis.set_yticks(range(8), protocol.item_labels)
         axis.set_xlabel("Item 1")
@@ -1056,7 +1266,14 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
                 fontsize=11,
                 fontweight="bold",
             )
-    fig.colorbar(exemplar_image, ax=exemplar_axes, location="right", fraction=0.018, pad=0.02, label="Pair accuracy")
+    fig.colorbar(
+        exemplar_image,
+        ax=exemplar_axes,
+        location="right",
+        fraction=0.018,
+        pad=0.02,
+        label="Pair accuracy",
+    )
 
     item_cmap = ListedColormap(ITEM_COLORS)
     item_norm = BoundaryNorm(np.arange(-0.5, 8.5), 8)
@@ -1064,8 +1281,20 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
     for axis, dataset_id in zip(order_axes, DATASET_ORDER, strict=True):
         dataset = datasets[dataset_id]
         indices = np.flatnonzero(dataset.analysis)
-        matrix = np.asarray([dataset.subjects[index]["subjective_order_high_to_low"] for index in indices], dtype=np.int64)
-        order_image = axis.imshow(matrix, aspect="auto", interpolation="nearest", cmap=item_cmap, norm=item_norm)
+        matrix = np.asarray(
+            [
+                dataset.subjects[index]["subjective_order_high_to_low"]
+                for index in indices
+            ],
+            dtype=np.int64,
+        )
+        order_image = axis.imshow(
+            matrix,
+            aspect="auto",
+            interpolation="nearest",
+            cmap=item_cmap,
+            norm=item_norm,
+        )
         axis.set_title(f"{DATASET_LABELS[dataset_id]} (n={len(indices)})")
         axis.set_xticks(range(8), range(1, 9))
         axis.set_xlabel("Subjective rank (high to low)")
@@ -1080,16 +1309,41 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
                 ha="left",
                 fontweight="bold",
             )
-    colorbar = fig.colorbar(order_image, ax=order_axes, location="right", fraction=0.018, pad=0.02, ticks=range(8))
+    colorbar = fig.colorbar(
+        order_image,
+        ax=order_axes,
+        location="right",
+        fraction=0.018,
+        pad=0.02,
+        ticks=range(8),
+    )
     colorbar.ax.set_yticklabels(protocol.item_labels)
     colorbar.set_label("Item identity")
-    fig.suptitle("Coherent and individualized global rankings", fontsize=12, fontweight="bold", y=0.995)
+    fig.suptitle(
+        "Coherent and individualized global rankings",
+        fontsize=12,
+        fontweight="bold",
+        y=0.995,
+    )
     outputs = _save_figure(fig, directory, figure_id)
     source_path = directory / "source_data.csv"
     fields = [
-        "row_type", "dataset", "network_seed", "ranking_class", "count", "eligible_subjects", "kendall_tau",
-        "subject_id", "pair_index", "item_1", "item_2", "pair_accuracy", "kendall_tau_to_true",
-        "row_position", "subjective_rank_high_to_low", "item",
+        "row_type",
+        "dataset",
+        "network_seed",
+        "ranking_class",
+        "count",
+        "eligible_subjects",
+        "kendall_tau",
+        "subject_id",
+        "pair_index",
+        "item_1",
+        "item_2",
+        "pair_accuracy",
+        "kendall_tau_to_true",
+        "row_position",
+        "subjective_rank_high_to_low",
+        "item",
     ]
     rows = (
         [{"row_type": "ranking_class", **row} for row in class_rows]

@@ -11,6 +11,7 @@ from fsrl.study_registry import (
     check_navigation,
     load_migration,
     load_registry,
+    load_source_snapshots,
     load_studies,
     load_synthesis,
     render_navigation,
@@ -26,9 +27,7 @@ class StudyRegistryTests(unittest.TestCase):
         cls.synthesis = load_synthesis()
         cls.migration = load_migration()
         cls.studies = load_studies(cls.registry)
-        cls.validation = validate_registry(
-            cls.registry, cls.synthesis, cls.migration
-        )
+        cls.validation = validate_registry(cls.registry, cls.synthesis, cls.migration)
 
     def test_registry_owns_the_complete_migrated_record(self):
         self.assertTrue(self.validation["passed"], self.validation["errors"])
@@ -54,6 +53,19 @@ class StudyRegistryTests(unittest.TestCase):
         for record in self.migration["records"]:
             self.assertEqual(
                 resolve_record(record["legacy_path"]), ROOT / record["path"]
+            )
+
+    def test_source_snapshots_are_flat_non_importable_blobs(self):
+        snapshots = load_source_snapshots()["snapshots"]
+        self.assertEqual(len(snapshots), 74)
+        self.assertFalse((ROOT / "synthesis" / "frozen" / "source").exists())
+        for snapshot in snapshots:
+            relative = Path(snapshot["path"])
+            self.assertEqual(relative.parts[:2], ("frozen", "source-blobs"))
+            self.assertEqual(relative.name, snapshot["sha256"])
+            self.assertEqual(relative.suffix, "")
+            self.assertEqual(
+                resolve_record(snapshot["source_path"]), ROOT / "synthesis" / relative
             )
 
     def test_migration_provenance_must_match_the_local_authority(self):

@@ -18,12 +18,11 @@ import hashlib
 import json
 import os
 import sys
+import tomllib
 from collections import Counter
 from functools import lru_cache
 from pathlib import Path, PurePosixPath
 from typing import Any
-
-import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 STUDIES_ROOT = ROOT / "studies"
@@ -103,8 +102,7 @@ def migration_lookup() -> dict[str, str]:
         return {}
     migration = load_migration()
     return {
-        entry["legacy_path"]: entry["path"]
-        for entry in migration.get("records", [])
+        entry["legacy_path"]: entry["path"] for entry in migration.get("records", [])
     }
 
 
@@ -140,7 +138,9 @@ def legacy_identifier(path: str | Path) -> str:
     """Return the frozen pre-migration identifier for a current record path."""
 
     candidate = Path(path)
-    relative = candidate.resolve().relative_to(ROOT) if candidate.is_absolute() else candidate
+    relative = (
+        candidate.resolve().relative_to(ROOT) if candidate.is_absolute() else candidate
+    )
     current = _safe_relative(relative.as_posix()).as_posix()
     inverse = {value: key for key, value in migration_lookup().items()}
     return inverse.get(current, current)
@@ -293,7 +293,10 @@ def validate_registry(
                 "path": current_path,
                 "owner_id": study_id,
                 "owner_kind": "study",
-                **{field: record[field] for field in ("role", "sha256", "bytes", "source_ref")},
+                **{
+                    field: record[field]
+                    for field in ("role", "sha256", "bytes", "source_ref")
+                },
             }
             current_paths.add(current_path)
             role_counts[record["role"]] += 1
@@ -314,7 +317,10 @@ def validate_registry(
             "path": current_path,
             "owner_id": synthesis["id"],
             "owner_kind": "synthesis",
-            **{field: record[field] for field in ("role", "sha256", "bytes", "source_ref")},
+            **{
+                field: record[field]
+                for field in ("role", "sha256", "bytes", "source_ref")
+            },
         }
         current_paths.add(current_path)
         role_counts[record["role"]] += 1
@@ -337,9 +343,7 @@ def validate_registry(
         expected = record_provenance.get(legacy)
         if expected is not None:
             mismatched = [
-                field
-                for field, value in expected.items()
-                if record.get(field) != value
+                field for field, value in expected.items() if record.get(field) != value
             ]
             if mismatched:
                 errors.append(
@@ -367,7 +371,9 @@ def validate_registry(
         if not isinstance(source_path, str) or not isinstance(local_path, str):
             errors.append("source snapshot paths must be strings")
             continue
-        repository_path = (SYNTHESIS_ROOT / _safe_relative(local_path)).relative_to(ROOT)
+        repository_path = (SYNTHESIS_ROOT / _safe_relative(local_path)).relative_to(
+            ROOT
+        )
         path = ROOT / repository_path
         snapshot_paths.add(repository_path.as_posix())
         snapshot_sources.add(source_path)
@@ -385,7 +391,11 @@ def validate_registry(
     expected_files = expected_files | snapshot_paths
     observed_files = {
         path.relative_to(ROOT).as_posix()
-        for root in (STUDIES_ROOT, SYNTHESIS_ROOT / "records", SYNTHESIS_ROOT / "frozen")
+        for root in (
+            STUDIES_ROOT,
+            SYNTHESIS_ROOT / "records",
+            SYNTHESIS_ROOT / "frozen",
+        )
         if root.exists()
         for path in root.rglob("*")
         if path.is_file()
@@ -402,7 +412,9 @@ def validate_registry(
         "studies": len(studies),
         "chapters": len(chapters),
         "records": len(record_pairs),
-        "study_records": sum(len(study.get("records", [])) for study in studies.values()),
+        "study_records": sum(
+            len(study.get("records", [])) for study in studies.values()
+        ),
         "synthesis_records": len(synthesis.get("records", [])),
         "source_snapshots": len(source_snapshots.get("snapshots", [])),
         "role_counts": dict(sorted(role_counts.items())),
@@ -446,7 +458,7 @@ def _notice(source: str) -> list[str]:
     return [
         "> [!NOTE]",
         f"> This navigation page is generated from `{source}`. The current",
-        "> `review_state = \"indexed\"` means the records are organized and checked,",
+        '> `review_state = "indexed"` means the records are organized and checked,',
         "> but the prose is intentionally provisional pending the second synthesis pass.",
         "",
     ]
@@ -454,9 +466,7 @@ def _notice(source: str) -> list[str]:
 
 def _study_readme(study: dict[str, Any]) -> tuple[Path, str]:
     output = Path("studies") / study["id"] / "README.md"
-    lines = [f"# {study['title']}", ""] + _notice(
-        f"studies/{study['id']}/study.toml"
-    )
+    lines = [f"# {study['title']}", ""] + _notice(f"studies/{study['id']}/study.toml")
     lines.extend(
         [
             _link(Path("studies/README.md"), output, "Back to the study registry"),
@@ -574,9 +584,10 @@ def _synthesis_readme(
             "Byte-preserved reports, contracts, locks, results, and presentation assets",
             "live in study-owned `records/` or `synthesis/records/`. Frozen execution",
             "locks that name pre-refactor Python files resolve to exact source snapshots",
-            "under `synthesis/frozen/source/`, indexed by `source-snapshots.toml`. The",
-            "active `fsrl/` and `tests/` trees remain the current implementation and test",
-            "surface; the snapshots are evidence and are excluded from test discovery.",
+            "stored as extensionless, content-addressed objects under",
+            "`synthesis/frozen/source-blobs/` and indexed by `source-snapshots.toml`.",
+            "The active `fsrl/` and `tests/` trees remain the current implementation and",
+            "test surface; the blobs are provenance evidence, not a second Python tree.",
             "",
             "## Reading routes",
             "",
@@ -597,7 +608,7 @@ def _synthesis_readme(
             "## What this first refactor does not claim",
             "",
             "The order above is a checked navigation layer, not yet the final manuscript",
-            "argument. `review_state = \"indexed\"` deliberately leaves room for a second",
+            'argument. `review_state = "indexed"` deliberately leaves room for a second',
             "pass that compresses methods, chooses paper-level estimands, and promotes only",
             "the figures needed for the final claim structure.",
             "",
@@ -683,8 +694,7 @@ def check_navigation() -> dict[str, Any]:
         if path.parts[:1] == ("studies",) and len(path.parts) == 3
     }
     existing_study_readmes = {
-        path.relative_to(ROOT).as_posix()
-        for path in STUDIES_ROOT.glob("*/README.md")
+        path.relative_to(ROOT).as_posix() for path in STUDIES_ROOT.glob("*/README.md")
     }
     unexpected = sorted(existing_study_readmes - expected_study_readmes)
     return {

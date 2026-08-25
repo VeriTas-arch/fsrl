@@ -1,4 +1,4 @@
-"""Freeze pre-refactor Python sources required by historical execution locks."""
+"""Freeze historical Python bytes as non-importable content-addressed blobs."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE_COMMIT = "fb32095df70b1265b5d14b8eda3be6cb65036c6a"
-OUTPUT_ROOT = ROOT / "synthesis" / "frozen" / "source"
+OUTPUT_ROOT = ROOT / "synthesis" / "frozen" / "source-blobs"
 MANIFEST_PATH = ROOT / "synthesis" / "source-snapshots.toml"
 
 
@@ -59,12 +59,13 @@ def source_records() -> list[dict[str, object]]:
         assert isinstance(payload, bytes)
         if payload == (ROOT / source_path).read_bytes():
             continue
-        local_path = Path("frozen") / "source" / source_path
+        digest = _sha256(payload)
+        local_path = Path("frozen") / "source-blobs" / digest
         records.append(
             {
                 "source_path": source_path.as_posix(),
                 "path": local_path.as_posix(),
-                "sha256": _sha256(payload),
+                "sha256": digest,
                 "bytes": len(payload),
                 "source_commit": SOURCE_COMMIT,
                 "payload": payload,
@@ -110,11 +111,10 @@ def run(*, apply: bool) -> dict[str, object]:
     elif MANIFEST_PATH.read_text(encoding="utf-8") != expected_manifest:
         errors.append("source snapshot manifest is stale")
     expected_paths = {
-        (ROOT / "synthesis" / str(record["path"])).resolve()
-        for record in records
+        (ROOT / "synthesis" / str(record["path"])).resolve() for record in records
     }
     observed_paths = {
-        path.resolve() for path in OUTPUT_ROOT.rglob("*.py") if path.is_file()
+        path.resolve() for path in OUTPUT_ROOT.rglob("*") if path.is_file()
     }
     if observed_paths != expected_paths:
         errors.append("source snapshot file set is stale")
