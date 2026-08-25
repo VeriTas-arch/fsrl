@@ -948,6 +948,34 @@ contract, result, and interpretation are in
 `results/dual_state_reduced_algorithm_v1.json`, and
 `docs/dual_state_reduced_algorithm_v1.md`.
 
+That scalar-history v2 test is now complete and is a valid mixed negative.
+Preserve its positive links. The frozen cumulative effective-evidence energy
+reduces held-out one-step MSE by about 14 percent in every development
+backbone, with all paired episode intervals below zero, and restores the
+relation-LOO remote magnitude ratio from 25--35 percent in v1 to 78--90
+percent. The strict reduced P/L double dissociation also passes independently
+in 2104 and 2105. This supports history-dependent global gain as a real part
+of the reduced computation.
+
+The scalar is not a sufficient state. NRMSE, rollout, and behavior-category
+gates fail in all required networks, and remote field MSE is worse than both
+the accumulator and v1 even though total remote magnitude is restored. The
+failure is therefore allocation, not simply missing total gain. Close scalar
+history feature engineering: do not try count, absolute magnitude, time,
+block, normalization, nonlinear scalar transforms, or mixtures.
+
+The next and only task-derived confidence candidate should retain where
+evidence accumulated while holding fitted capacity at 128 parameters:
+`q_(t+1)=q_t+x_t elementwise-multiplied by x_t` and
+`s_(t+1)=Pi[s_t+A x_t+B(q_t elementwise-multiplied by x_t)]`. Freeze it
+separately, reuse the v1 trajectory artifact, and compare it with the
+accumulator and v2 under the same remote, rollout, double-dissociation, and
+behavior gates. If it fails, close task-derived confidence ledgers and move to
+a separately registered `P_t`-derived latent-state audit. The v2 contract,
+result, and report are in `benchmarks/dual_state_reduced_algorithm_v2.json`,
+`results/dual_state_reduced_algorithm_v2.json`, and
+`docs/dual_state_reduced_algorithm_v2.md`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
