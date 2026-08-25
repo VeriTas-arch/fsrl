@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v3-item-history",
+  "registration_status": "prospectively_frozen_after_v2_negative_and_before_v3_implementation_fit_or_evaluation",
+  "registration_parent_commit": "0f3fc36",
+  "scientific_question": "Does allocating cumulative effective-evidence energy by item, rather than storing one global scalar, close the potential dynamics and reproduce remote field shape?",
+  "v2_diagnosis": "The scalar history state robustly improves one-step prediction and restores total remote magnitude, but worsens remote field MSE and does not preserve rollout or behavior categories. History-dependent gain is informative, but its relational allocation is insufficient.",
+  "primary_hypothesis": "An item-wise evidence-energy ledger q_t preserves where confidence accumulated. Its interaction with current evidence can allocate history-dependent updates across the global potential while keeping fitted capacity identical to v2.",
+  "claim_boundary": "A pass supports the coupled reduced state (s_t,q_t,a_t) within the frozen eight-item scope. It does not identify q_t as human confidence, Bayesian precision, a biological state, or a unique algorithm. Failure closes task-derived count, coverage, energy, time, and block ledgers and redirects to a P_t-derived latent-state audit.",
+  "registered_sources": {
+    "v1_contract": {"path": "benchmarks/dual_state_reduced_algorithm_v1.json", "sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80"},
+    "v1_result": {"path": "results/dual_state_reduced_algorithm_v1.json", "sha256": "573b56ea212849f83d61e6f73d24ed9a5a8e078d6793a18e6a5da73198e871c9"},
+    "v1_trajectory_artifact": {"path": "results/dual_state_reduced_algorithm_v1.trajectories.npz", "sha256": "3bc5f874b459a490a3e66acbe1b057cee863898eeaef9fc2c8492e76d101ce34"},
+    "v1_runner": {"path": "fsrl/dual_state_reduced_algorithm.py", "sha256": "5e1504e3fc1308b8faed2c9d6f955c1d75a90c9f83394118c81ab80269dedd77"},
+    "v2_contract": {"path": "benchmarks/dual_state_reduced_algorithm_v2.json", "sha256": "e8e5497a607be1ca0bd6ee0dd7de6361dd9b5fd768943e55b7800d50a10fdb40"},
+    "v2_lock": {"path": "benchmarks/dual_state_reduced_algorithm_v2.lock.json", "sha256": "0e12b87e99ba11d00be5b64571a1b74449e55ec1e9689c45dee6ed73f95d8b11"},
+    "v2_runner": {"path": "fsrl/dual_state_reduced_algorithm_v2.py", "sha256": "575ce2a223df9d909b4a9c3cd45b08311783570080808089ad9c81af5e748273"},
+    "v2_result": {"path": "results/dual_state_reduced_algorithm_v2.json", "sha256": "4326ec76995114848d46ad59e815d365af1b179fad31e563d5fed586a241fe5a"},
+    "v2_report": {"path": "docs/dual_state_reduced_algorithm_v2.md", "sha256": "6c51d516bdf8950781ce457fd2186f205e4cbf9091ce13a993a301cf4306e2f7"},
+    "behavior_map_result": {"path": "results/model_behavior_reproduction_map_v1.json", "sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6"}
+  },
+  "frozen_state_equations": {
+    "initial_state": "s_0=0 and q_0=0 in R^8",
+    "history_update": "q_(t+1)=q_t+x_t elementwise-multiplied by x_t",
+    "potential_update": "s_(t+1)=Pi[s_t+A x_t+B(q_t elementwise-multiplied by x_t)]",
+    "local_state": "Reuse the exact v1 edge-plus-Gram local algorithm without modification.",
+    "parameter_count_before_gauge": 128,
+    "capacity_match": "A and B are each 8 by 8, exactly matching v2 parameter count; any difference is state allocation, not fitted capacity.",
+    "information_boundary": "q_t uses only prior effective support evidence by item. It contains no pair ID ledger, query, label, true order, Liu behavior, posterior, P_t, L_t, hidden state, time, block, or network seed."
+  },
+  "data_fit_and_execution": {
+    "development": "Reuse only valid slices of the frozen v1 NPZ for the exact 2101/2102/2103 leave-one-backbone-out folds; no neural development re-extraction.",
+    "features": "Concatenate x_t and q_t elementwise-multiplied by x_t.",
+    "target": "s_(t+1)-s_t in raw centered potential units.",
+    "fit": "One float64 closed-form ridge regression with lambda=1e-6, no scaling, optimizer, restart, selection, or tuning.",
+    "preservation": "Fit once on all 384 development episodes, then reuse the exact v2 Liu preservation interface on untouched 2104 and 2105 with only the registered rollout function changed.",
+    "runtime": "GPU plus one PyTorch intraop and interop thread for Liu replay; CPU is allowed for the closed-form fit."
+  },
+  "comparators": {
+    "accumulator": "Refit the frozen v1 accumulator on the same training fold.",
+    "v2_scalar": "Read held-out v2 metrics from the frozen result without refitting.",
+    "local": "Exact K a_T and the identity-kernel diagnostic remain unchanged."
+  },
+  "bootstrap": {"samples": 5000, "interval": 0.95, "seeds": {"2101": 48101, "2102": 48102, "2103": 48103}},
+  "primary_pass_rules": {
+    "integrity": "All v1/v2 sources, artifacts, preservation checkpoints/gains, valid slices, padding, gauge, parameters, runtime, and local exactness pass.",
+    "one_step": "In every held-out seed NRMSE is at most 0.50, MSE is at most 0.80 times accumulator, the paired interval lies below zero, and MSE is lower than frozen v2.",
+    "trajectory": "In every held-out seed median prefix and terminal cosine are at least 0.95, order agreement at least 0.90, and centered RMSE ratio at most 0.50.",
+    "remote": "In every held-out seed influence correlation is at least 0.70, magnitude ratio is in [0.50,1.50], and remote MSE is below both accumulator and frozen v2.",
+    "preservation": "The exact v1 double-dissociation and all nine behavior flag pairs pass independently in both 2104 and 2105."
+  },
+  "outcome_tree": {
+    "potential_plus_item_history_algorithm": "All links pass. Promote (s_t,q_t,a_t) within scope and freeze cross-task generalization.",
+    "item_history_insufficient": "Integrity passes but any link fails. Preserve any improved link, close all task-derived confidence/history ledger variants, and next freeze a read-only P_t-derived latent sufficiency audit.",
+    "noninterpretable": "Any integrity gate fails; repair provenance or implementation without changing the contract."
+  },
+  "stop_rules": [
+    "Do not change q update, add pair ledgers, mix scalar and item history, add time/block/count/absolute-magnitude features, or tune ridge after execution.",
+    "Do not begin cross-task generalization unless v3 passes.",
+    "If v3 fails, the next experiment must derive its extra state from frozen P_t trajectories rather than another hand-built support-history feature."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/dual_state_reduced_algorithm_v3.lock.json",
+    "result": "results/dual_state_reduced_algorithm_v3.json",
+    "report": "docs/dual_state_reduced_algorithm_v3.md"
+  }
+}
