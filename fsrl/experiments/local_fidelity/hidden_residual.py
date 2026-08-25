@@ -16,11 +16,9 @@ from fsrl.analysis.hodge import (
 )
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import FastWeightIntervention
-from fsrl.experiments.assembly.trajectory import (
-    load_frozen_evaluator,
-    ordered_query_schedule,
-)
+from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.infra.formal_runtime import configure_formal_runtime
 from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record

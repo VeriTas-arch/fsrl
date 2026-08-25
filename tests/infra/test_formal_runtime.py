@@ -170,6 +170,11 @@ class FormalRuntimeTests(unittest.TestCase):
         result = json.loads(completed.stdout)
         self.assertTrue(result["active"])
         self.assertEqual(result["cpu_thread_limit"], 1)
+        self.assertEqual(result["blas_thread_limit"], 1)
+        self.assertTrue(result["blas_threadpools"])
+        self.assertTrue(
+            all(pool["num_threads"] == 1 for pool in result["blas_threadpools"])
+        )
         self.assertEqual(result["torch_intraop_threads"], 1)
         self.assertEqual(result["torch_interop_threads"], 1)
 

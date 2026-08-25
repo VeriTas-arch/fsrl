@@ -8,12 +8,13 @@ from pathlib import Path
 import numpy as np
 
 from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.analysis.policy import exact_probability
+from fsrl.evaluation.fields import readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.trajectory import readout_margin_fields
 from fsrl.experiments.global_policy.amplitude_provenance import (
     NonInterpretableEstimate,
     interval_summary,
@@ -26,7 +27,6 @@ from fsrl.experiments.global_policy.field_replication import (
     require_pushed_freeze,
     validate_artifacts,
 )
-from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256

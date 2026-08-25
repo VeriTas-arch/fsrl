@@ -8,12 +8,14 @@ from .relational_system import (
     RelationalIntervention,
     RelationalQueryReadout,
 )
+from .sequence import RecurrentSequence
 from .state import PlasticRNNState, RelationalEpisodeState
 
 __all__ = [
     "ConjunctiveLocalTrace",
     "GlobalLocalRelationalSystem",
     "PlasticRNNState",
+    "RecurrentSequence",
     "RelationalEpisodeState",
     "RelationalInputLayout",
     "RelationalIntervention",

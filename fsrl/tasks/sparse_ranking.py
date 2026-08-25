@@ -35,7 +35,10 @@ def graph_signature_from_protocol(protocol: RankingProtocol) -> GraphSignature:
     }
     return tuple(
         sorted(
-            tuple(sorted((rank[higher], rank[lower])))
+            (
+                min(rank[higher], rank[lower]),
+                max(rank[higher], rank[lower]),
+            )
             for higher, lower in protocol.support_pairs_higher_lower
         )
     )

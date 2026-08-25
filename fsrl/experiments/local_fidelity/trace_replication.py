@@ -709,7 +709,8 @@ def cross_seed_decision(specification: dict, seed_results: dict[str, dict]) -> d
         links[name] = {
             "status": status,
             "seed_passes": {
-                str(seed): bool(value) for seed, value in zip(seeds, values)
+                str(seed): bool(value)
+                for seed, value in zip(seeds, values, strict=True)
             },
         }
     effect_keys = tuple(seed_results[str(seeds[0])]["decision"]["primary_effects"])

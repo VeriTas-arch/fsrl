@@ -45,7 +45,7 @@ class PolicyOppositionGateTests(unittest.TestCase):
             scale,
             denominator,
         )
-        for actual, target in zip(observed, expected):
+        for actual, target in zip(observed, expected, strict=True):
             self.assertTrue(torch.allclose(actual, target))
 
     def test_opposition_and_sign_reversed_risks_select_opposite_signs(self):
@@ -81,7 +81,7 @@ class PolicyOppositionGateTests(unittest.TestCase):
             fast_weights,
             torch.ones(self.config.bs, 1, device=device),
         )
-        for expected_value, observed_value in zip(expected, observed[:6]):
+        for expected_value, observed_value in zip(expected, observed[:6], strict=True):
             self.assertTrue(torch.equal(expected_value, observed_value))
 
     def test_only_beta_is_trainable_and_both_gammas_are_bounded(self):

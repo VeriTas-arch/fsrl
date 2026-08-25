@@ -55,7 +55,8 @@ class RankingProtocol:
     @property
     def learned_pairs(self) -> frozenset[tuple[int, int]]:
         return frozenset(
-            tuple(sorted(pair)) for pair in self.support_pairs_higher_lower
+            (min(first, second), max(first, second))
+            for first, second in self.support_pairs_higher_lower
         )
 
     def support_schedule(self, rng: np.random.Generator) -> tuple[SupportTrial, ...]:

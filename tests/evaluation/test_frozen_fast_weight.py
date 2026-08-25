@@ -10,10 +10,13 @@ from fsrl.core.config import TrainConfig
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
+    FrozenEvaluationBackend,
     FrozenFastWeightEvaluator,
     deterministic_cue_codes,
     load_retro_checkpoint,
+    run_causal_suite,
 )
+from fsrl.infra.runtime import ExecutionProfile
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
@@ -23,7 +26,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         torch.set_num_threads(1)
         torch.manual_seed(3)
         self.config = TrainConfig(bs=3, hs=8, cs=8, nbcues_min=8, nbcues_max=8)
-        self.net = RetroModulRNN(self.config.to_model_dict())
+        self.net = RetroModulRNN(self.config.to_model_dict(), device="cpu")
         self.net.eval()
         self.evaluator = FrozenFastWeightEvaluator(
             self.net,
@@ -32,6 +35,117 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
             cue_seed=5,
             support_seed=7,
         )
+
+    def _batched_evaluator(self):
+        return FrozenFastWeightEvaluator(
+            self.net,
+            self.config,
+            load_ranking_protocol(),
+            cue_seed=5,
+            support_seed=7,
+            backend=FrozenEvaluationBackend.BATCHED_SEQUENCE,
+            execution_profile=ExecutionProfile(
+                device="cpu",
+                compile=False,
+                require_cuda=False,
+            ),
+        )
+
+    def test_batched_input_sequence_matches_legacy_step_builder(self):
+        batched = self._batched_evaluator()
+        trials = [schedule[0] for schedule in batched.support_schedules]
+        left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
+        right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
+        signed = np.asarray(
+            [trial.signed_magnitude for trial in trials], dtype=np.float32
+        )
+        sequence = batched._batched_input_sequence(
+            left,
+            right,
+            signed,
+            num_steps=self.config.triallen,
+            time_value=0.25,
+            support_trial=True,
+        )
+        for step, observed in enumerate(sequence.unbind(0)):
+            expected = batched._step_inputs(
+                left,
+                right,
+                signed,
+                numstep=step,
+                time_value=0.25,
+                support_trial=True,
+            )
+            self.assertTrue(torch.equal(observed, expected))
+
+    def test_batched_backend_preserves_fast_weights_and_query_logits(self):
+        batched = self._batched_evaluator()
+        pairs = tuple(
+            oriented
+            for first, second in combinations(range(self.evaluator.protocol.n_items), 2)
+            for oriented in ((first, second), (second, first))
+        )
+        schedules = tuple(pairs for _ in range(self.config.bs))
+        for intervention in FastWeightIntervention:
+            with self.subTest(intervention=intervention.value):
+                legacy_weights = self.evaluator.learn_fast_weights(intervention)
+                batched_weights = batched.learn_fast_weights(intervention)
+                torch.testing.assert_close(
+                    batched_weights, legacy_weights, rtol=0.0, atol=0.0
+                )
+                legacy_logits = self.evaluator.readout_logits(
+                    legacy_weights,
+                    schedules,
+                    alpha_zero=intervention == FastWeightIntervention.ALPHA_ZERO,
+                )
+                batched_logits = batched.readout_logits(
+                    batched_weights,
+                    schedules,
+                    alpha_zero=intervention == FastWeightIntervention.ALPHA_ZERO,
+                )
+                for legacy_subject, batched_subject in zip(
+                    legacy_logits, batched_logits, strict=True
+                ):
+                    self.assertEqual(set(legacy_subject), set(batched_subject))
+                    np.testing.assert_allclose(
+                        list(batched_subject.values()),
+                        list(legacy_subject.values()),
+                        rtol=1e-6,
+                        atol=1e-7,
+                    )
+
+    def test_batched_backend_records_explicit_prospective_execution(self):
+        record = self._batched_evaluator().evaluation_execution_record()
+        self.assertEqual(record["execution_schema_version"], 2)
+        self.assertEqual(record["backend"], "batched_sequence")
+        self.assertFalse(record["profile"]["compile"])
+        self.assertEqual(record["query_batching"], "all_query_pairs_by_subject")
+
+    def test_batched_causal_suite_records_observed_runtime(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            checkpoint = Path(temp_dir) / "net.dat"
+            torch.save(self.net.state_dict(), checkpoint)
+            result = run_causal_suite(
+                checkpoint,
+                batch_size=self.config.bs,
+                cue_seed=5,
+                support_seed=7,
+                order_seed=11,
+                order_schedules=2,
+                cue_mode="shared",
+                subject_encoding_mode="none",
+                subject_encoding_seed=0,
+                evaluation_backend=FrozenEvaluationBackend.BATCHED_SEQUENCE,
+                execution_profile=ExecutionProfile(
+                    device="cpu",
+                    compile=False,
+                    require_cuda=False,
+                ),
+            )
+        execution = result["evaluation_execution"]
+        self.assertEqual(execution["execution_schema_version"], 2)
+        self.assertEqual(execution["runtime"]["execution_schema_version"], 2)
+        self.assertEqual(execution["runtime"]["blas_thread_limit"], 1)
 
     def test_write_off_and_reset_remove_fast_state(self):
         intact = self.evaluator.learn_fast_weights(FastWeightIntervention.INTACT)

@@ -53,7 +53,7 @@ class CurvatureGateTests(unittest.TestCase):
             fast_weights,
             torch.ones(self.config.bs, 1, device=device),
         )
-        for expected_value, observed_value in zip(expected, observed[:6]):
+        for expected_value, observed_value in zip(expected, observed[:6], strict=True):
             self.assertTrue(torch.equal(expected_value, observed_value))
 
     def test_only_beta_is_trainable_and_conditioned_gamma_is_bounded(self):

@@ -38,7 +38,7 @@ class PolicyResidualTests(unittest.TestCase):
             torch.linalg.vector_norm(hidden_residual, dim=1, keepdim=True),
         )
         observed = policy_residual_statistics(baseline, drive, margin)
-        for actual, target in zip(observed, expected):
+        for actual, target in zip(observed, expected, strict=True):
             self.assertTrue(torch.allclose(actual, target))
 
     def test_eta_zero_exactly_reproduces_every_backbone_output(self):
@@ -59,7 +59,7 @@ class PolicyResidualTests(unittest.TestCase):
             fast_weights,
             torch.zeros(self.config.bs, 1, device=device),
         )
-        for expected_value, observed_value in zip(expected, observed[:6]):
+        for expected_value, observed_value in zip(expected, observed[:6], strict=True):
             self.assertTrue(torch.equal(expected_value, observed_value))
 
     def test_eta_one_restores_first_order_policy_increment(self):
@@ -91,7 +91,9 @@ class PolicyResidualTests(unittest.TestCase):
                 atol=1e-6,
             )
         )
-        for expected_value, observed_value in zip(original[1:], observed[1:6]):
+        for expected_value, observed_value in zip(
+            original[1:], observed[1:6], strict=True
+        ):
             self.assertTrue(torch.equal(expected_value, observed_value))
 
     def test_only_eta_is_trainable_and_gradient_is_finite(self):

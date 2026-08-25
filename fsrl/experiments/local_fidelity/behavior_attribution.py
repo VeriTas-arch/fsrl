@@ -10,6 +10,7 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.policy import bundle_logits, exact_probability
 from fsrl.analysis.statistics import (
     json_values,
     summarize_difference,
@@ -22,10 +23,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_retro_checkpoint,
     retained_relation_mask,
 )
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    bundle_logits,
-    configure_runtime,
-)
+from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
 from fsrl.experiments.local_fidelity.trace_pilot import (
     build_local_trace,
     create_local_trace,
@@ -88,16 +86,6 @@ def validate_sources(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"local-behavior attribution source lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
-
-
-def exact_probability(
-    correct_signed_margin: np.ndarray, temperature: float
-) -> np.ndarray:
-    if temperature <= 0.0:
-        raise ValueError("temperature must be positive")
-    scaled = np.asarray(correct_signed_margin, dtype=np.float64) / temperature
-    scaled = np.clip(scaled, -700.0, 700.0)
-    return 1.0 / (1.0 + np.exp(-scaled))
 
 
 def _masked_subject_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:

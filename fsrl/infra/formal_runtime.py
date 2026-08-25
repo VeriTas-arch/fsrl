@@ -14,6 +14,7 @@ from fsrl.infra.runtime import (
 )
 
 CPU_THREAD_LIMIT = 1
+BLAS_THREAD_LIMIT = 1
 ACTIVE_ENVIRONMENT_VARIABLE = "FSRL_FORMAL_RUNTIME_ACTIVE"
 WORKFLOW_MODULES = {
     "confirmation": "fsrl.experiments.confirmation.behavioral",
@@ -40,13 +41,14 @@ def _formal_profile() -> ExecutionProfile:
     return ExecutionProfile(
         device=default_device(),
         cpu_threads=CPU_THREAD_LIMIT,
+        blas_threads=BLAS_THREAD_LIMIT,
         compile=False,
         require_cuda=False,
     )
 
 
 def configure_formal_runtime() -> dict:
-    """Bound PyTorch CPU work without changing NumPy/BLAS reductions."""
+    """Bound PyTorch and BLAS work before importing a formal workflow."""
 
     configure_runtime(_formal_profile())
     os.environ[ACTIVE_ENVIRONMENT_VARIABLE] = "1"
@@ -57,8 +59,11 @@ def formal_runtime_snapshot() -> dict:
     profile = _formal_profile()
     snapshot = runtime_snapshot(profile)
     return {
+        "execution_schema_version": snapshot["execution_schema_version"],
         "active": os.environ.get(ACTIVE_ENVIRONMENT_VARIABLE) == "1",
         "cpu_thread_limit": CPU_THREAD_LIMIT,
+        "blas_thread_limit": BLAS_THREAD_LIMIT,
+        "blas_threadpools": snapshot["blas_threadpools"],
         "torch_intraop_threads": snapshot["torch_intraop_threads"],
         "torch_interop_threads": snapshot["torch_interop_threads"],
         "torch_version": snapshot["torch_version"],
@@ -66,6 +71,12 @@ def formal_runtime_snapshot() -> dict:
         "cuda_available": snapshot["cuda_available"],
         "device": profile.device,
         "device_name": snapshot["device_name"],
+        "device_capability": snapshot["device_capability"],
+        "float32_matmul_precision": snapshot["float32_matmul_precision"],
+        "deterministic_algorithms": snapshot["deterministic_algorithms"],
+        "cudnn_benchmark": snapshot["cudnn_benchmark"],
+        "cudnn_deterministic": snapshot["cudnn_deterministic"],
+        "cudnn_allow_tf32": snapshot["cudnn_allow_tf32"],
     }
 
 
@@ -75,6 +86,12 @@ def require_formal_runtime() -> dict:
         snapshot["active"]
         and snapshot["torch_intraop_threads"] == CPU_THREAD_LIMIT
         and snapshot["torch_interop_threads"] == CPU_THREAD_LIMIT
+        and snapshot["blas_thread_limit"] == BLAS_THREAD_LIMIT
+        and snapshot["blas_threadpools"]
+        and all(
+            pool["num_threads"] == BLAS_THREAD_LIMIT
+            for pool in snapshot["blas_threadpools"]
+        )
         and snapshot["cuda_available"]
     ):
         raise RuntimeError(

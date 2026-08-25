@@ -3,12 +3,12 @@ import unittest
 import numpy as np
 import torch
 
+from fsrl.analysis.policy import margin_fields
 from fsrl.core.config import TrainConfig
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
 from fsrl.experiments.local_fidelity.curvature_gate import CurvatureGateTransition
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    margin_fields,
     query_binding_summary,
     query_bundle,
 )

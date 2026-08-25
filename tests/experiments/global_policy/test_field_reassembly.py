@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 
 from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.analysis.policy import exact_probability
 from fsrl.experiments.global_policy.amplitude_provenance import NonInterpretableEstimate
 from fsrl.experiments.global_policy.field_reassembly import (
     classify_status,
@@ -12,7 +13,6 @@ from fsrl.experiments.global_policy.field_reassembly import (
     summarize_estimand,
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
-from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
 from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 

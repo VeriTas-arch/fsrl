@@ -42,7 +42,7 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
     make_gate_tasks,
     run_gate_batch,
 )
-from fsrl.infra.formal_runtime import formal_runtime_snapshot
+from fsrl.infra.formal_runtime import configure_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
@@ -70,14 +70,9 @@ CONDITIONS = (
 
 
 def configure_runtime() -> dict:
-    torch.set_num_threads(1)
-    if torch.get_num_interop_threads() != 1:
-        torch.set_num_interop_threads(1)
-    snapshot = formal_runtime_snapshot()
+    snapshot = configure_formal_runtime()
     if not snapshot["cuda_available"]:
         raise RuntimeError("curvature-gate pilot requires a visible CUDA GPU")
-    if snapshot["torch_intraop_threads"] != 1 or snapshot["torch_interop_threads"] != 1:
-        raise RuntimeError("curvature-gate pilot requires one PyTorch CPU thread")
     return snapshot
 
 
@@ -444,20 +439,6 @@ def query_bundle(
         gamma_overrides=overrides,
         alpha_zero=alpha_zero,
     )
-
-
-def bundle_logits(bundle: dict, pair_schedules) -> tuple[dict, ...]:
-    return tuple(
-        {
-            pair: float(bundle["logits"][subject, index])
-            for index, pair in enumerate(pair_schedules[subject])
-        }
-        for subject in range(len(pair_schedules))
-    )
-
-
-def margin_fields(bundle: dict, n_items: int) -> np.ndarray:
-    return 0.5 * (bundle["logits"][:, 0::2] - bundle["logits"][:, 1::2])
 
 
 def field_metrics(
@@ -1325,3 +1306,4 @@ def main(args=None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+from fsrl.analysis.policy import bundle_logits, margin_fields

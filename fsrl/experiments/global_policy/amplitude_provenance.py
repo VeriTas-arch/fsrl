@@ -9,16 +9,16 @@ import numpy as np
 import torch
 
 from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
+from fsrl.analysis.policy import exact_probability
 from fsrl.analysis.posterior import ExactRankingPosterior, RelationEvidence
 from fsrl.analysis.statistics import bootstrap_counts
+from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.trajectory import ordered_query_schedule
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
-from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )

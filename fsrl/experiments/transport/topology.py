@@ -24,6 +24,7 @@ from fsrl.analysis.hodge import (
     hodge_potentials,
     kendall_tau_scores,
 )
+from fsrl.analysis.policy import bundle_logits, margin_fields
 from fsrl.analysis.statistics import (
     json_values,
     stable_sigmoid,
@@ -36,10 +37,6 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
     retained_relation_mask,
-)
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    bundle_logits,
-    margin_fields,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
     build_access_trace,

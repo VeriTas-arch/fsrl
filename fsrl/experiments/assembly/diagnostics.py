@@ -77,7 +77,9 @@ def build_field_design(protocol: RankingProtocol) -> FieldDesign:
     centered = distances - np.mean(distances)
     distance_slope_weights = centered / np.sum(centered * centered)
     slope_weights = np.zeros(len(pairs), dtype=np.float64)
-    for distance, weight in zip(distances.astype(int), distance_slope_weights):
+    for distance, weight in zip(
+        distances.astype(int), distance_slope_weights, strict=True
+    ):
         mask = symbolic_distance == distance
         slope_weights[mask] = weight / np.sum(mask)
 

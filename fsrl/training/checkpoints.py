@@ -51,10 +51,7 @@ def load_retro_checkpoint(
 ) -> tuple[RetroModulRNN, TrainConfig, CheckpointInfo]:
     path = Path(path)
     execution_device = torch.device(device or default_device())
-    try:
-        state_dict = torch.load(path, map_location=execution_device, weights_only=True)
-    except TypeError:
-        state_dict = torch.load(path, map_location=execution_device)
+    state_dict = torch.load(path, map_location=execution_device, weights_only=True)
     hidden_size, input_size = state_dict["i2h.weight"].shape
     cue_remainder = int(input_size) - (1 + ADDINPUT + 2)
     if cue_remainder <= 0 or cue_remainder % 2:

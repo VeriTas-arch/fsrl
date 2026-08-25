@@ -211,15 +211,13 @@ def replay_model_subject_pairs(
     import torch
 
     import fsrl.experiments.local_fidelity.evidence_access_pilot as dual_access
+    from fsrl.analysis.policy import bundle_logits
     from fsrl.evaluation.frozen_fast_weight import (
         FastWeightIntervention,
         FrozenFastWeightEvaluator,
         load_retro_checkpoint,
     )
-    from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-        bundle_logits,
-        configure_runtime,
-    )
+    from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
     from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
         DEFAULT_ARTIFACT_LOCK_PATH,
         DEFAULT_IMPLEMENTATION_LOCK_PATH,

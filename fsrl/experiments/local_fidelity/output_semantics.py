@@ -12,10 +12,8 @@ import torch
 from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
-from fsrl.experiments.assembly.trajectory import (
-    load_frozen_evaluator,
-    ordered_query_schedule,
-)
+from fsrl.evaluation.fields import ordered_query_schedule
+from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
 from fsrl.experiments.local_fidelity.operator_binding import replay_terminal_states
 from fsrl.infra.formal_runtime import configure_formal_runtime

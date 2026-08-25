@@ -10,6 +10,7 @@ from .hodge import (
     potential_alignment,
     vector_gradient_energy_fraction,
 )
+from .policy import bundle_logits, exact_probability, margin_fields
 from .statistics import (
     bootstrap_counts,
     bootstrap_samples,
@@ -22,9 +23,12 @@ __all__ = [
     "bootstrap_counts",
     "bootstrap_samples",
     "build_complete_graph_geometry",
+    "bundle_logits",
+    "exact_probability",
     "gradient_energy_fraction",
     "hodge_potentials",
     "kendall_tau_scores",
+    "margin_fields",
     "normalize_potentials",
     "potential_alignment",
     "summarize_difference",

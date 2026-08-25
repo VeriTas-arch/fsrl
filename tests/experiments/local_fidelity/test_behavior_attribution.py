@@ -2,9 +2,9 @@ import unittest
 
 import numpy as np
 
+from fsrl.analysis.policy import exact_probability
 from fsrl.experiments.local_fidelity.behavior_attribution import (
     decision_summary,
-    exact_probability,
     ratio_summary,
     slope_decomposition,
 )

@@ -7,6 +7,7 @@ import json
 from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 from scipy import stats
@@ -90,8 +91,8 @@ def rdm_spearman(first: np.ndarray, second: np.ndarray) -> float:
     ):
         raise ValueError("RDMs must be equally sized square matrices")
     upper = np.triu_indices(first.shape[0], k=1)
-    correlation = stats.spearmanr(first[upper], second[upper]).statistic
-    return float(correlation)
+    result = cast(Any, stats.spearmanr(first[upper], second[upper]))
+    return float(result.statistic)
 
 
 def analyze_item_geometry(

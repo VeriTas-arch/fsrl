@@ -91,6 +91,10 @@ direnv exec . python -m pip check
 direnv exec . python -c "import fsrl; print(fsrl.__file__)"
 ~~~
 
+`requirements/constraints-py312.txt` records the tested direct dependency
+snapshot. It makes CPU CI and fresh research environments comparable without
+pretending that a CUDA wheel URL is portable across hosts.
+
 When dependencies are already installed, refresh only the local package
 metadata without dependency resolution:
 
@@ -128,6 +132,8 @@ process group and cleans up that group on timeout or interruption:
 
 ~~~bash
 direnv exec . python -m fsrl.infra.test_runtime
+direnv exec . basedpyright
+direnv exec . ruff check fsrl tests tools --select B905
 ~~~
 
 To run one unittest module with a shorter timeout:
@@ -156,14 +162,37 @@ direnv exec . python -m fsrl.training \
   --optimized-execution
 ~~~
 
-This mode implies `torch.compile` with `fullgraph=True` and `mode="default"`,
-compiles complete recurrent trial sequences, batches all independent queries
-while keeping query fast weights frozen, and limits PyTorch CPU threads to the
-requested `--cpu-threads` value (one by default). It writes a distinct
-schema-v2 execution record into the checkpoint metadata. The older
-`--compile-model` path remains the byte-replay-compatible single-cell execution
-used by registered historical backbones; frozen study runners are not silently
-upgraded.
+This mode implies `torch.compile` with `fullgraph=True` and `mode="default"`
+and compiles complete recurrent trial sequences. Runtime schema v2 records the
+device, CUDA capability, matrix precision, determinism flags, and both PyTorch
+and BLAS thread limits; both limits default to one. It writes that record into
+new optimized checkpoints. The older `--compile-model` path remains the
+byte-replay-compatible single-cell execution used by registered historical
+backbones.
+
+Prospective evaluations can separately opt into one compiled sequence per
+support trial and one device transfer for the complete query batch:
+
+~~~bash
+direnv exec . python -m fsrl.evaluation \
+  --checkpoint artifacts/runs/relational_model/seed-1/checkpoint.pt \
+  --output artifacts/runs/relational_model/seed-1/evaluation.json \
+  --evaluation-backend batched_sequence
+~~~
+
+The default remains `legacy_stepwise`, so frozen studies are not silently
+upgraded. The batched result carries its execution profile and observed runtime
+snapshot. Before a large run, benchmark exact parity and throughput on the
+visible CUDA device with a small number of repeats:
+
+~~~bash
+direnv exec . python -m fsrl.evaluation.performance \
+  --warmups 1 --repeats 3 \
+  --output artifacts/runs/runtime/frozen-evaluation-benchmark.json
+~~~
+
+This benchmark is explicitly an engineering diagnostic, not scientific
+evidence and not a hardware-independent performance threshold.
 
 ## Original-paper teaching reproduction
 

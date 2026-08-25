@@ -268,3 +268,23 @@ class MetaTrainingTests(unittest.TestCase):
             self.assertFalse(subject_encoding["contains_rank_label"])
             self.assertEqual(len(metadata["checkpoint"]["sha256"]), 64)
             self.assertEqual(metadata["execution"], COMPILED_TRAINING_EXECUTION)
+
+    def test_prospective_checkpoint_records_observed_runtime(self):
+        runtime = {
+            "execution_schema_version": 2,
+            "blas_thread_limit": 1,
+            "float32_matmul_precision": "highest",
+        }
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir)
+            save_meta_checkpoint(
+                output_dir,
+                self.net,
+                self.training_config,
+                step=0,
+                execution=OPTIMIZED_COMPILED_TRAINING_EXECUTION,
+                runtime=runtime,
+            )
+            metadata = json.loads((output_dir / "config.json").read_text())
+        self.assertEqual(metadata["runtime"], runtime)
+        self.assertEqual(metadata["execution"]["runtime_profile"]["blas_threads"], 1)

@@ -21,6 +21,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 from fsrl.experiments.confirmation.reproduction_map import model_record
 from fsrl.experiments.local_fidelity.evidence_access_pilot import access_factor
 from fsrl.experiments.local_fidelity.trace_pilot import behavior_summaries
+from fsrl.infra.formal_runtime import configure_formal_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -116,19 +117,10 @@ def validate_sources(
 
 
 def configure_runtime() -> dict:
-    torch.set_num_threads(1)
-    if torch.get_num_interop_threads() != 1:
-        torch.set_num_interop_threads(1)
-    if not torch.cuda.is_available():
+    snapshot = configure_formal_runtime()
+    if not snapshot["cuda_available"]:
         raise RuntimeError("registered extraction and fitting require a visible GPU")
-    return {
-        "device": "cuda",
-        "device_name": torch.cuda.get_device_name(0),
-        "torch_version": str(torch.__version__),
-        "cuda_version": torch.version.cuda,
-        "torch_intraop_threads": torch.get_num_threads(),
-        "torch_interop_threads": torch.get_num_interop_threads(),
-    }
+    return snapshot
 
 
 def complete_geometry(n_items: int = 8) -> Geometry:
@@ -174,7 +166,7 @@ def local_edge_compression(
     trace = np.zeros(keys.shape[1], dtype=np.float64)
     edge_state = np.zeros(len(geometry.pairs), dtype=np.float64)
     pair_index = {pair: index for index, pair in enumerate(geometry.pairs)}
-    for trial, value in zip(trials, np.asarray(signed_local_values)):
+    for trial, value in zip(trials, np.asarray(signed_local_values), strict=True):
         trace += float(value) * _numpy_key(
             codes[trial.left_item], codes[trial.right_item]
         )

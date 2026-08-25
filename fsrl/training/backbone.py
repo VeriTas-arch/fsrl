@@ -13,6 +13,7 @@ import torch.nn.functional as F
 from torch import nn
 
 from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
+from fsrl.core.sequence import RecurrentSequence
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.runtime import (
     DEFAULT_COMPILED_PROFILE,
@@ -73,6 +74,7 @@ COMPILED_TRAINING_EXECUTION = {
 
 OPTIMIZED_COMPILED_TRAINING_EXECUTION = {
     "execution_schema_version": 2,
+    "runtime_profile": DEFAULT_COMPILED_PROFILE.to_dict(),
     "torch_compile": {
         "enabled": True,
         "backend": "inductor",
@@ -115,6 +117,7 @@ def compiled_execution_record(profile: ExecutionProfile) -> dict:
 def optimized_compiled_execution_record(profile: ExecutionProfile) -> dict:
     return {
         "execution_schema_version": 2,
+        "runtime_profile": profile.to_dict(),
         "torch_compile": {
             "enabled": True,
             "backend": profile.compile_backend,
@@ -134,36 +137,6 @@ def optimized_compiled_execution_record(profile: ExecutionProfile) -> dict:
             f"one_batched_{profile.device}_to_cpu_transfer_per_meta_batch"
         ),
     }
-
-
-class RecurrentSequence(nn.Module):
-    """Execute one complete trial while preserving its fast-weight policy."""
-
-    def __init__(self, cell: RetroModulRNN):
-        super().__init__()
-        self.cell = cell
-
-    def forward(
-        self,
-        input_sequence: torch.Tensor,
-        hidden: torch.Tensor,
-        eligibility: torch.Tensor,
-        fast_weights: torch.Tensor,
-        update_fast_weights: bool,
-    ):
-        logits = value = dopamine = None
-        for inputs in input_sequence.unbind(0):
-            (
-                logits,
-                value,
-                dopamine,
-                hidden,
-                eligibility,
-                proposed_fast_weights,
-            ) = self.cell(inputs, hidden, eligibility, fast_weights)
-            if update_fast_weights:
-                fast_weights = proposed_fast_weights
-        return logits, value, dopamine, hidden, eligibility, fast_weights
 
 
 def build_meta_inputs(
@@ -538,6 +511,7 @@ def save_meta_checkpoint(
     step: int,
     *,
     execution: dict | None = None,
+    runtime: dict | None = None,
     excluded_signatures: frozenset[GraphSignature] | None = None,
 ) -> None:
     if excluded_signatures is None:
@@ -578,6 +552,8 @@ def save_meta_checkpoint(
     }
     if execution is not None:
         metadata["execution"] = execution
+    if runtime is not None:
+        metadata["runtime"] = runtime
     with (output_dir / "config.json").open("w", encoding="utf-8") as handle:
         json.dump(metadata, handle, indent=2, sort_keys=True)
         handle.write("\n")
@@ -597,7 +573,7 @@ def train_meta_model(
         compile=compile_model or optimized_execution,
         require_cuda=False,
     )
-    configure_runtime(profile)
+    runtime = configure_runtime(profile)
     np.random.seed(training_config.seed)
     torch.manual_seed(training_config.seed)
     rng = np.random.default_rng(training_config.seed)
@@ -667,6 +643,7 @@ def train_meta_model(
                     if profile.compile
                     else None
                 ),
+                runtime=runtime if optimized_execution else None,
                 excluded_signatures=resolved_exclusions,
             )
 
@@ -694,6 +671,7 @@ def parse_args(args=None):
     )
     parser.add_argument("--device", choices=["cpu", "cuda"], default=default_device())
     parser.add_argument("--cpu-threads", type=int, default=1)
+    parser.add_argument("--blas-threads", type=int, default=1)
     parser.add_argument(
         "--subject-encoding",
         choices=["stable_attenuation", "stable_omission"],
@@ -718,10 +696,10 @@ def main(args=None):
     profile = ExecutionProfile(
         device=parsed.device,
         cpu_threads=parsed.cpu_threads,
+        blas_threads=parsed.blas_threads,
         compile=compile_model,
         require_cuda=parsed.device == "cuda",
     )
-    configure_runtime(profile)
     train_meta_model(
         training_config,
         parsed.output_dir,

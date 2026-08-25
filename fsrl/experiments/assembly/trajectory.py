@@ -28,6 +28,7 @@ from fsrl.analysis.statistics import (
     summarize_subjects,
 )
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.evaluation.fields import ordered_query_schedule, readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
@@ -184,35 +185,6 @@ def load_frozen_evaluator(
     return evaluator, behavior
 
 
-def ordered_query_schedule(
-    geometry: CompleteGraphGeometry, subjects: int
-) -> tuple[tuple[tuple[int, int], ...], ...]:
-    ordered = tuple(
-        oriented
-        for first, second in geometry.pairs
-        for oriented in ((first, second), (second, first))
-    )
-    return tuple(ordered for _ in range(subjects))
-
-
-def readout_margin_fields(
-    evaluator: FrozenFastWeightEvaluator,
-    fast_weights,
-    geometry: CompleteGraphGeometry,
-    *,
-    alpha_zero: bool = False,
-) -> np.ndarray:
-    schedules = ordered_query_schedule(geometry, evaluator.config.bs)
-    logits = evaluator.readout_logits(fast_weights, schedules, alpha_zero=alpha_zero)
-    return np.asarray(
-        [
-            [0.5 * (row[pair] - row[(pair[1], pair[0])]) for pair in geometry.pairs]
-            for row in logits
-        ],
-        dtype=np.float64,
-    )
-
-
 def _effect_class_masks(
     relation: tuple[int, int], geometry: CompleteGraphGeometry
 ) -> dict[str, np.ndarray]:
@@ -237,7 +209,7 @@ def classified_effects(
         raise ValueError("one complete pair field is required per relation")
     absolute = {name: [] for name in ("direct", "endpoint_sharing", "remote")}
     aligned = {name: [] for name in ("direct", "endpoint_sharing", "remote")}
-    for row, relation in zip(values, relations):
+    for row, relation in zip(values, relations, strict=True):
         masks = _effect_class_masks(relation, geometry)
         for name, mask in masks.items():
             absolute[name].append(float(np.mean(np.abs(row[mask]))))

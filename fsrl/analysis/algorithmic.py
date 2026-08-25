@@ -7,6 +7,7 @@ import json
 from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 from scipy import stats
@@ -89,9 +90,11 @@ def compare_neural_policy_to_exact_posterior(
             )
             for map_index in map_indices
         )
-        pair_probability_correlation = stats.spearmanr(
-            neural_pair_probability, posterior_pair_probability
-        ).statistic
+        correlation_result = cast(
+            Any,
+            stats.spearmanr(neural_pair_probability, posterior_pair_probability),
+        )
+        pair_probability_correlation = correlation_result.statistic
         pair_probability_correlation = (
             None
             if not np.isfinite(pair_probability_correlation)

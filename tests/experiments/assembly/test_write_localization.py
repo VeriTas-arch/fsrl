@@ -6,11 +6,11 @@ import torch
 from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.core.config import TrainConfig
 from fsrl.core.plastic_rnn import RetroModulRNN
+from fsrl.evaluation.fields import readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
 )
-from fsrl.experiments.assembly.trajectory import readout_margin_fields
 from fsrl.experiments.assembly.write_localization import (
     exact_support_innovations,
     matrix_norm,

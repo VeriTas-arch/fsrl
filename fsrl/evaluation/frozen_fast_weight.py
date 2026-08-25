@@ -14,6 +14,13 @@ import numpy as np
 import torch
 
 from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
+from fsrl.core.sequence import RecurrentSequence
+from fsrl.infra.runtime import (
+    ExecutionProfile,
+    compile_module,
+    configure_runtime,
+    default_device,
+)
 from fsrl.tasks.registered_protocol import (
     DEFAULT_PROTOCOL_PATH,
     RankingProtocol,
@@ -41,6 +48,7 @@ __all__ = [
     "CheckpointInfo",
     "ConditionMetrics",
     "FastWeightIntervention",
+    "FrozenEvaluationBackend",
     "FrozenFastWeightEvaluator",
     "OrderInvarianceMetrics",
     "checkpoint_sha256",
@@ -60,6 +68,13 @@ class FastWeightIntervention(str, Enum):
     ALPHA_ZERO = "alpha_zero"
     RESET = "reset"
     SHUFFLE = "shuffle"
+
+
+class FrozenEvaluationBackend(str, Enum):
+    """Explicit execution backend for frozen causal evaluation."""
+
+    LEGACY_STEPWISE = "legacy_stepwise"
+    BATCHED_SEQUENCE = "batched_sequence"
 
 
 @dataclass(frozen=True)
@@ -156,6 +171,9 @@ class FrozenFastWeightEvaluator:
         subject_encoding_mode: str = "none",
         subject_encoding_seed: int = 0,
         test_time_value: float = 2.0 / 3.0,
+        backend: FrozenEvaluationBackend
+        | str = FrozenEvaluationBackend.LEGACY_STEPWISE,
+        execution_profile: ExecutionProfile | None = None,
     ) -> None:
         if config.bs < 1:
             raise ValueError("batch size must be positive")
@@ -169,6 +187,24 @@ class FrozenFastWeightEvaluator:
             for position, item in enumerate(protocol.true_order_high_to_low)
         }
         self.test_time_value = float(test_time_value)
+        self.backend = FrozenEvaluationBackend(backend)
+        if self.backend == FrozenEvaluationBackend.LEGACY_STEPWISE:
+            if execution_profile is not None:
+                raise ValueError(
+                    "execution_profile is only valid for the batched evaluator"
+                )
+            self.execution_profile = None
+            self.sequence_runner = None
+        else:
+            profile = execution_profile or ExecutionProfile(
+                device=self.device.type,
+                compile=self.device.type == "cuda",
+                require_cuda=self.device.type == "cuda",
+            )
+            if profile.device != self.device.type:
+                raise ValueError("evaluation profile and network device differ")
+            self.execution_profile = profile
+            self.sequence_runner = compile_module(RecurrentSequence(net), profile)
         self.cue_codes = deterministic_cue_codes(
             config.bs, protocol.n_items, config.cs, cue_seed, mode=cue_mode
         )
@@ -311,6 +347,57 @@ class FrozenFastWeightEvaluator:
                 )
         return torch.from_numpy(inputs).to(self.device)
 
+    def _batched_input_sequence(
+        self,
+        left_items: np.ndarray,
+        right_items: np.ndarray,
+        signed_magnitudes: np.ndarray,
+        *,
+        num_steps: int,
+        time_value: float,
+        support_trial: bool,
+        subject_indices: np.ndarray | None = None,
+    ) -> torch.Tensor:
+        batch_size = len(left_items)
+        if right_items.shape != (batch_size,) or signed_magnitudes.shape != (
+            batch_size,
+        ):
+            raise ValueError("batched evaluator inputs do not align")
+        if subject_indices is None:
+            subject_indices = np.arange(batch_size, dtype=np.int64)
+        if subject_indices.shape != (batch_size,):
+            raise ValueError("subject indices do not align with batched inputs")
+        inputs = np.zeros(
+            (num_steps, batch_size, self.config.inputsize), dtype=np.float32
+        )
+        inputs[:, :, self.config.nbstimbits] = 1.0
+        inputs[:, :, self.config.nbstimbits + 1] = time_value
+        inputs[0, :, : self.config.cs] = self.cue_codes[subject_indices, left_items]
+        inputs[0, :, self.config.cs : 2 * self.config.cs] = self.cue_codes[
+            subject_indices, right_items
+        ]
+        if support_trial:
+            inputs[0, :, self.config.nbstimbits + DISTANCE_INPUT_OFFSET] = (
+                signed_magnitudes
+            )
+        if num_steps > NUMRESPONSESTEP:
+            inputs[NUMRESPONSESTEP, :, self.config.nbstimbits - 1] = 1.0
+        return torch.from_numpy(inputs).to(self.device)
+
+    def evaluation_execution_record(self) -> dict:
+        if self.backend == FrozenEvaluationBackend.LEGACY_STEPWISE:
+            return {"execution_schema_version": 1, "backend": self.backend.value}
+        assert self.execution_profile is not None
+        return {
+            "execution_schema_version": 2,
+            "backend": self.backend.value,
+            "profile": self.execution_profile.to_dict(),
+            "compile_scope": "complete_recurrent_trial_sequence",
+            "support_batching": "sequential_trials_one_transfer_each",
+            "query_batching": "all_query_pairs_by_subject",
+            "metric_transfer": "one_batched_device_to_cpu_transfer",
+        }
+
     @contextmanager
     def _alpha_zeroed(self, enabled: bool):
         if not enabled:
@@ -346,6 +433,28 @@ class FrozenFastWeightEvaluator:
         self, intervention: FastWeightIntervention = FastWeightIntervention.INTACT
     ) -> torch.Tensor:
         """Return P_0 after the registered two blank initialization steps."""
+
+        if self.backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
+            assert self.sequence_runner is not None
+            batch_size = self.config.bs
+            blank_sequence = torch.zeros(
+                2,
+                batch_size,
+                self.config.inputsize,
+                device=self.device,
+            )
+            with (
+                torch.no_grad(),
+                self._alpha_zeroed(intervention == FastWeightIntervention.ALPHA_ZERO),
+            ):
+                outputs = self.sequence_runner(
+                    blank_sequence,
+                    self.net.initialZeroState(batch_size),
+                    self.net.initialZeroET(batch_size),
+                    self.net.initialZeroPlasticWeights(batch_size),
+                    intervention != FastWeightIntervention.WRITE_OFF,
+                )
+            return outputs[-1].detach().clone()
 
         hidden = self.net.initialZeroState(self.config.bs)
         eligibility = self.net.initialZeroET(self.config.bs)
@@ -408,6 +517,28 @@ class FrozenFastWeightEvaluator:
             / max(1, self.protocol.support_trials - 1)
             * self.test_time_value
         )
+        if self.backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
+            assert self.sequence_runner is not None
+            input_sequence = self._batched_input_sequence(
+                left,
+                right,
+                signed,
+                num_steps=self.config.triallen,
+                time_value=trial_time,
+                support_trial=True,
+            )
+            with (
+                torch.no_grad(),
+                self._alpha_zeroed(intervention == FastWeightIntervention.ALPHA_ZERO),
+            ):
+                outputs = self.sequence_runner(
+                    input_sequence,
+                    hidden,
+                    eligibility,
+                    fast_weights,
+                    intervention != FastWeightIntervention.WRITE_OFF,
+                )
+            return outputs[-1].detach().clone()
         with (
             torch.no_grad(),
             self._alpha_zeroed(intervention == FastWeightIntervention.ALPHA_ZERO),
@@ -467,6 +598,10 @@ class FrozenFastWeightEvaluator:
         schedule_lengths = {len(schedule) for schedule in pair_schedules}
         if len(schedule_lengths) != 1:
             raise ValueError("all pair schedules must have equal length")
+        if self.backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
+            return self._readout_logits_batched(
+                fast_weights, pair_schedules, alpha_zero=alpha_zero
+            )
         outputs = [{} for _ in range(self.config.bs)]
 
         with torch.no_grad(), self._alpha_zeroed(alpha_zero):
@@ -503,6 +638,66 @@ class FrozenFastWeightEvaluator:
                     outputs[subject][(int(left[subject]), int(right[subject]))] = float(
                         value
                     )
+        return tuple(outputs)
+
+    def _readout_logits_batched(
+        self,
+        fast_weights: torch.Tensor,
+        pair_schedules: tuple[tuple[tuple[int, int], ...], ...],
+        *,
+        alpha_zero: bool,
+    ) -> tuple[dict[tuple[int, int], float], ...]:
+        assert self.sequence_runner is not None
+        pair_count = len(pair_schedules[0])
+        outputs = [{} for _ in range(self.config.bs)]
+        if pair_count == 0:
+            return tuple(outputs)
+        left = np.asarray(
+            [
+                schedule[pair_index][0]
+                for pair_index in range(pair_count)
+                for schedule in pair_schedules
+            ],
+            dtype=np.int64,
+        )
+        right = np.asarray(
+            [
+                schedule[pair_index][1]
+                for pair_index in range(pair_count)
+                for schedule in pair_schedules
+            ],
+            dtype=np.int64,
+        )
+        subject_indices = np.tile(np.arange(self.config.bs, dtype=np.int64), pair_count)
+        query_batch_size = pair_count * self.config.bs
+        input_sequence = self._batched_input_sequence(
+            left,
+            right,
+            np.zeros(query_batch_size, dtype=np.float32),
+            num_steps=NUMRESPONSESTEP + 1,
+            time_value=self.test_time_value,
+            support_trial=False,
+            subject_indices=subject_indices,
+        )
+        query_fast_weights = (
+            fast_weights.unsqueeze(0)
+            .expand(pair_count, -1, -1, -1)
+            .reshape(query_batch_size, self.config.hs, self.config.hs)
+        )
+        with torch.no_grad(), self._alpha_zeroed(alpha_zero):
+            logits, _, _, _, _, _ = self.sequence_runner(
+                input_sequence,
+                self.net.initialZeroState(query_batch_size),
+                self.net.initialZeroET(query_batch_size),
+                query_fast_weights,
+                False,
+            )
+        values = (logits[:, 1] - logits[:, 0]).detach().cpu().numpy()
+        values = values.reshape(pair_count, self.config.bs)
+        for pair_index, row in enumerate(values):
+            for subject, value in enumerate(row):
+                pair = pair_schedules[subject][pair_index]
+                outputs[subject][pair] = float(value)
         return tuple(outputs)
 
     def readout_hidden_states(
@@ -733,10 +928,28 @@ def run_causal_suite(
     subject_encoding_mode: str,
     subject_encoding_seed: int,
     protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
+    evaluation_backend: FrozenEvaluationBackend | str = (
+        FrozenEvaluationBackend.LEGACY_STEPWISE
+    ),
+    execution_profile: ExecutionProfile | None = None,
 ) -> dict:
     protocol_path = Path(protocol_path)
     protocol = load_ranking_protocol(protocol_path)
-    net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
+    backend = FrozenEvaluationBackend(evaluation_backend)
+    runtime = None
+    if backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
+        selected_device = default_device()
+        execution_profile = execution_profile or ExecutionProfile(
+            device=selected_device,
+            compile=selected_device == "cuda",
+            require_cuda=selected_device == "cuda",
+        )
+        runtime = configure_runtime(execution_profile)
+    net, config, checkpoint_info = load_retro_checkpoint(
+        checkpoint,
+        batch_size,
+        device=(execution_profile.device if execution_profile is not None else None),
+    )
     evaluator = FrozenFastWeightEvaluator(
         net,
         config,
@@ -746,6 +959,8 @@ def run_causal_suite(
         cue_mode=cue_mode,
         subject_encoding_mode=subject_encoding_mode,
         subject_encoding_seed=subject_encoding_seed,
+        backend=backend,
+        execution_profile=execution_profile,
     )
     conditions = {}
     condition_winners = {}
@@ -769,7 +984,7 @@ def run_causal_suite(
         intact_fast_weights, schedules=order_schedules, seed=order_seed
     )
     provenance = load_training_provenance(Path(checkpoint), checkpoint_info.sha256)
-    return {
+    result = {
         "protocol_id": protocol.protocol_id,
         "protocol_path": str(protocol_path.resolve()),
         "checkpoint": asdict(checkpoint_info),
@@ -786,6 +1001,10 @@ def run_causal_suite(
         "conditions": conditions,
         "order_invariance": asdict(invariance),
     }
+    if evaluator.backend != FrozenEvaluationBackend.LEGACY_STEPWISE:
+        result["evaluation_execution"] = evaluator.evaluation_execution_record()
+        result["evaluation_execution"]["runtime"] = runtime
+    return result
 
 
 def parse_args(args=None):
@@ -816,6 +1035,11 @@ def parse_args(args=None):
     parser.add_argument("--order-seed", type=int, default=200)
     parser.add_argument("--order-schedules", type=int, default=8)
     parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
+    parser.add_argument(
+        "--evaluation-backend",
+        choices=[backend.value for backend in FrozenEvaluationBackend],
+        default=FrozenEvaluationBackend.LEGACY_STEPWISE.value,
+    )
     return parser.parse_args(args)
 
 
@@ -832,6 +1056,7 @@ def main(args=None):
         subject_encoding_mode=parsed.subject_encoding,
         subject_encoding_seed=parsed.subject_encoding_seed,
         protocol_path=parsed.protocol,
+        evaluation_backend=parsed.evaluation_backend,
     )
     parsed.output.parent.mkdir(parents=True, exist_ok=True)
     with parsed.output.open("w", encoding="utf-8") as handle:

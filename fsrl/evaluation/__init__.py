@@ -1,9 +1,11 @@
 """Stable rollout and intervention interfaces."""
 
+from .fields import ordered_query_schedule, readout_margin_fields
 from .frozen_fast_weight import (
     CheckpointInfo,
     ConditionMetrics,
     FastWeightIntervention,
+    FrozenEvaluationBackend,
     FrozenFastWeightEvaluator,
     OrderInvarianceMetrics,
     deterministic_cue_codes,
@@ -16,10 +18,13 @@ __all__ = [
     "CheckpointInfo",
     "ConditionMetrics",
     "FastWeightIntervention",
+    "FrozenEvaluationBackend",
     "FrozenFastWeightEvaluator",
     "OrderInvarianceMetrics",
     "deterministic_cue_codes",
     "load_retro_checkpoint",
     "load_training_provenance",
+    "ordered_query_schedule",
+    "readout_margin_fields",
     "run_causal_suite",
 ]

@@ -13,6 +13,7 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.policy import bundle_logits, margin_fields
 from fsrl.analysis.statistics import (
     finite_column_mean,
     json_values,
@@ -26,10 +27,6 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
     retained_relation_mask,
-)
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    bundle_logits,
-    margin_fields,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
     build_access_trace,

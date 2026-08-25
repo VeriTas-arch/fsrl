@@ -12,6 +12,7 @@ import numpy as np
 import torch
 
 from fsrl.evaluation.frozen_fast_weight import load_retro_checkpoint
+from fsrl.infra.formal_runtime import configure_formal_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -104,21 +105,12 @@ def validate_sources(
 
 
 def configure_runtime() -> dict:
-    torch.set_num_threads(1)
-    if torch.get_num_interop_threads() != 1:
-        torch.set_num_interop_threads(1)
-    if not torch.cuda.is_available():
+    snapshot = configure_formal_runtime()
+    if not snapshot["cuda_available"]:
         raise RuntimeError(
             "registered functional-P replay and fit require a visible GPU"
         )
-    return {
-        "device": "cuda",
-        "device_name": torch.cuda.get_device_name(0),
-        "torch_version": str(torch.__version__),
-        "cuda_version": torch.version.cuda,
-        "torch_intraop_threads": torch.get_num_threads(),
-        "torch_interop_threads": torch.get_num_interop_threads(),
-    }
+    return snapshot
 
 
 def centered_basis(n_items: int = 8) -> np.ndarray:

@@ -8,20 +8,20 @@ from pathlib import Path
 import numpy as np
 
 from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
+from fsrl.analysis.policy import exact_probability
 from fsrl.analysis.statistics import bootstrap_counts
+from fsrl.evaluation.fields import readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.trajectory import readout_margin_fields
 from fsrl.experiments.global_policy.amplitude_provenance import (
     NonInterpretableEstimate,
     interval_summary,
     posterior_descriptors,
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
-from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )

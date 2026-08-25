@@ -7,6 +7,7 @@ import json
 from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 from scipy import stats
@@ -84,8 +85,15 @@ def fit_beta_distribution(values: np.ndarray) -> dict:
     clipped = np.clip(finite, 1e-3, 1.0 - 1e-3)
     if float(np.var(clipped)) <= 1e-12:
         return {"alpha": None, "beta": None, "class": "not_fit"}
+    alpha: float
+    beta: float
     try:
-        alpha, beta, _location, _scale = stats.beta.fit(clipped, floc=0.0, fscale=1.0)
+        fitted = cast(
+            tuple[float, float, float, float],
+            stats.beta.fit(clipped, floc=0.0, fscale=1.0),
+        )
+        alpha = float(fitted[0])
+        beta = float(fitted[1])
     except (ValueError, FloatingPointError, RuntimeError):
         mean = float(np.mean(clipped))
         variance = float(np.var(clipped, ddof=1))
@@ -153,7 +161,8 @@ def analyze_sampled_query_policy(
             probability_left = _sigmoid(logit)
             choose_left = bool(choice_rng.random() < probability_left)
             chosen_item = trial.left_item if choose_left else trial.right_item
-            pair = tuple(sorted(oriented_pair))
+            first, second = sorted(oriented_pair)
+            pair = (first, second)
             pair_index = pair_to_index[pair]
             total_counts[pair_index] += 1.0
             correct = choose_left == bool(trial.correct_action)
@@ -297,6 +306,9 @@ def analyze_sampled_query_policy(
         if len(slope_values) > 1 and float(np.std(slope_values)) > 1e-12
         else None
     )
+    typed_slope_test = cast(Any, slope_test)
+    slope_statistic = None if slope_test is None else float(typed_slope_test.statistic)
+    slope_pvalue = None if slope_test is None else float(typed_slope_test.pvalue)
 
     inter_subject_tau = []
     analysis_indices = np.flatnonzero(analysis)
@@ -361,8 +373,8 @@ def analyze_sampled_query_policy(
         "stable_error_subject_prevalence": stable_error_prevalence,
         "symbolic_distance_slope": {
             "mean": float(np.mean(slopes)),
-            "t_vs_zero": None if slope_test is None else float(slope_test.statistic),
-            "p_vs_zero": None if slope_test is None else float(slope_test.pvalue),
+            "t_vs_zero": slope_statistic,
+            "p_vs_zero": slope_pvalue,
         },
         "beta_pair_class_counts_analysis": beta_counts,
         "mean_inter_subject_kendall_tau": (

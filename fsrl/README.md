@@ -20,9 +20,10 @@ The packages have deliberately narrow ownership:
 - `tasks/` owns task protocols, generic sparse-graph generation, and evidence-
   admission equations. It does not own study registry paths.
 - `training/` owns generic backbone optimization and checkpoint loading.
-- `evaluation/` owns frozen rollout and causal intervention interfaces.
-- `analysis/` owns reusable pure estimators such as Hodge decomposition and
-  participant bootstrap utilities.
+- `evaluation/` owns frozen rollout, ordered query-field reconstruction, and
+  causal intervention interfaces.
+- `analysis/` owns reusable pure estimators such as Hodge decomposition,
+  policy transforms, and participant bootstrap utilities.
 - `infra/` owns runtime policy, provenance, the study registry, and
   bounded execution helpers.
 - `experiments/` owns maintained evidence-producing runners, grouped by

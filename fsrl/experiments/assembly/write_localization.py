@@ -26,15 +26,12 @@ from fsrl.analysis.statistics import (
     summarize_subjects,
 )
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.evaluation.fields import ordered_query_schedule, readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
 )
-from fsrl.experiments.assembly.trajectory import (
-    load_frozen_evaluator,
-    ordered_query_schedule,
-    readout_margin_fields,
-)
+from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import (
     resolve_record,

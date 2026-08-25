@@ -81,7 +81,8 @@ def scalar_factorial(cells: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
     interaction = hh - hn - nh + nn
     return {
         **{
-            f"cell_{name}": values for name, values in zip(CELL_NAMES, (nn, nh, hn, hh))
+            f"cell_{name}": values
+            for name, values in zip(CELL_NAMES, (nn, nh, hn, hh), strict=True)
         },
         "factor_generation_effect": 0.5 * ((nh - nn) + (hh - hn)),
         "baseline_expression_effect": 0.5 * ((hn - nn) + (hh - nh)),

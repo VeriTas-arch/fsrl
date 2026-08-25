@@ -13,14 +13,12 @@ from scipy import stats
 from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import DEVICE
+from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     retained_relation_mask,
 )
-from fsrl.experiments.assembly.trajectory import (
-    load_frozen_evaluator,
-    ordered_query_schedule,
-)
+from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.assembly.write_localization import trace_support_trial
 from fsrl.experiments.local_fidelity.hidden_residual import (
     validate_registered_sources,

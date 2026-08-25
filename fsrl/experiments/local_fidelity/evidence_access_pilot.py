@@ -12,6 +12,7 @@ import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
 from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
+from fsrl.analysis.policy import bundle_logits, exact_probability, margin_fields
 from fsrl.analysis.statistics import (
     json_values,
     masked_column_mean,
@@ -25,14 +26,9 @@ from fsrl.evaluation.frozen_fast_weight import (
     retained_relation_mask,
 )
 from fsrl.experiments.local_fidelity.behavior_attribution import (
-    exact_probability,
     pair_correct_probabilities,
 )
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
-    bundle_logits,
-    configure_runtime,
-    margin_fields,
-)
+from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
 from fsrl.experiments.local_fidelity.trace_pilot import (
     behavior_summaries,
     build_local_trace,
@@ -730,7 +726,8 @@ def cross_seed_decision(specification: dict, seeds: dict[str, dict]) -> dict:
         links[name] = {
             "status": status,
             "seed_passes": {
-                str(seed): bool(value) for seed, value in zip(mandatory, values)
+                str(seed): bool(value)
+                for seed, value in zip(mandatory, values, strict=True)
             },
         }
     interpretable = all(

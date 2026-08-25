@@ -12,6 +12,7 @@ import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
 from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.analysis.policy import bundle_logits, margin_fields
 from fsrl.analysis.statistics import json_values, summarize_difference
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
@@ -28,11 +29,9 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
 )
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     adaptation_config,
-    bundle_logits,
     conditioned_causal_suite,
     configure_runtime,
     field_metrics,
-    margin_fields,
     query_binding_summary,
     terminal_projection_summary,
 )

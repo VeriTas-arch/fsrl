@@ -133,6 +133,7 @@ def formal_training_source_registration() -> dict:
 
 def validate_formal_runtime_record(result: dict) -> None:
     runtime = result.get("execution_runtime", {})
+    runtime_v2 = runtime.get("execution_schema_version") == 2
     if not (
         runtime.get("active")
         and runtime.get("cpu_thread_limit") == 1
@@ -143,6 +144,18 @@ def validate_formal_runtime_record(result: dict) -> None:
         and runtime.get("torch_version")
         and runtime.get("cuda_version")
         and runtime.get("device_name")
+        and (
+            not runtime_v2
+            or (
+                runtime.get("blas_thread_limit") == 1
+                and runtime.get("blas_threadpools")
+                and all(
+                    pool.get("num_threads") == 1 for pool in runtime["blas_threadpools"]
+                )
+                and runtime.get("float32_matmul_precision")
+                and isinstance(runtime.get("deterministic_algorithms"), bool)
+            )
+        )
     ):
         raise RuntimeError("formal seed result lacks the bounded GPU runtime record")
     registration = result.get("execution_runtime_source", {})

@@ -12,21 +12,19 @@ from fsrl.analysis.hodge import (
     hodge_potentials,
     normalize_potentials,
 )
+from fsrl.analysis.policy import exact_probability
 from fsrl.analysis.statistics import (
     bootstrap_counts,
     summarize_difference,
     summarize_subjects,
 )
+from fsrl.evaluation.fields import readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.experiments.assembly.trajectory import (
-    exact_prefix_trajectory,
-    readout_margin_fields,
-)
-from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
+from fsrl.experiments.assembly.trajectory import exact_prefix_trajectory
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )
