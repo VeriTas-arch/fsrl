@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "repair_id": "liu-support-topology-transport-v1-repair1",
+  "registration_status": "frozen_after_attempt1_and_before_estimator_repair_implementation_or_rerun",
+  "parent_contract": {
+    "path": "benchmarks/liu_support_topology_transport_v1.json",
+    "sha256": "7bbb454a29a41d8cd2757b4d5fdd83e391bc4ca6b5fe961cea0efc37606cb43e"
+  },
+  "attempt1": {
+    "path": "results/liu_support_topology_transport_v1.attempt1.json",
+    "sha256": "5a953515c6d28f41f93fac74426640d50194834541bf52e7c0d1cab54eeb3d04",
+    "registered_outcome": "TOPOLOGY_DEPENDENT_OR_UNRESOLVED",
+    "interpretability": "nonfinal_estimator_execution_failure",
+    "observed_boundary": "All nine cells passed source, artifact, graph, GPU-runtime, tensor-freeze, orientation, and finite-value integrity. All seven non-exact scientific links passed in every cell. Only exact_local_compression failed, and only because all-query raw-read discrepancies were 1.3120313244741055e-6 for balanced_branched_no_triangle and 1.2430416846953563e-6 for moderate_hub_triangular in every backbone; high_hub_compact was 8.170760690262568e-7."
+  },
+  "root_cause": "Attempt 1 compared the actual float32 GPU trace, accumulated sequentially over 32 presentations, with a float64 edge-grouped Gram reconstruction. The two expressions are algebraically identical but use different dtype and reduction order. The graph-constant discrepancies, identical across backbones and centered immediately around the frozen 1e-6 tolerance, therefore measure floating-point execution order rather than failure of the registered exact edge-state identity. The earlier exact-a_T result evaluated the algebra in one common float64 representation.",
+  "repair_scope": {
+    "allowed": "Recompute the registered exact local compression estimand in one common float64 representation: compare the original presentation-ordered tensor sum with the 28-edge ledger tensor sum, and compare direct tensor-key reads with Gram-kernel ledger reads. Continue to report float32 GPU-state and GPU-query differences as execution diagnostics.",
+    "forbidden": "No graph, graph order, checkpoint, gain, cue, support schedule, subject encoding, choice seed, bootstrap, condition, field, LOO replay, model output, threshold, primary link, or outcome rule may change.",
+    "threshold": "The unchanged tensor-state and all-query algebraic reconstruction maximum absolute errors must each be at most 1e-6.",
+    "nonrepair_identity_gate": "After rerun, remove source-validation metadata, the repaired local_exactness block, within-cell decisions, and the cross-cell decision from both results. Every remaining value must be exactly equal to attempt 1. A mismatch makes repair 1 non-interpretable."
+  },
+  "required_outputs": {
+    "repair_lock": "benchmarks/liu_support_topology_transport_v1.repair1.lock.json",
+    "final_result": "results/liu_support_topology_transport_v1.json",
+    "attempt1_preserved": "results/liu_support_topology_transport_v1.attempt1.json"
+  }
+}
