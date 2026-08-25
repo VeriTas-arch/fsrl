@@ -1172,17 +1172,32 @@ balanced-family-specific effect, and a lone bootstrap-boundary miss. Do not
 rerun networks, add densities, alter the 80-percent stable-error definition, or
 pool participants/backbones for that localization.
 
-That read-only localization is now prospectively frozen as
-`liu_sparsity_individualization_localization_v1`. Its two primary paired
-estimands are the density slope of all-participant 80-percent-stable-error
-incidence and the density slope of all-participant mean pairwise subjective-
-order Kendall tau. Correct rankers count as zero stable-error incidence, and
-the same participant bootstrap draw is reused across all four densities.
-Report stable-error count, true-order alignment, exact overall error,
-noncorrect-ranker incidence, historical conditional metrics, and paired E=10
-family contrasts only as registered diagnostics. Use only the frozen sparsity
-result; no checkpoint or new model forward is allowed. The contract is in
-`benchmarks/liu_sparsity_individualization_localization_v1.json`.
+That read-only localization is now complete with outcome
+`ORDER_CONVERGENCE_WITHOUT_REPLICATED_STABLE_ERROR_LOSS`. All-participant
+pairwise subjective-order tau increases with density in both families and all
+three backbones (`+.02377--+.02957` per added relation, every lower bound above
+zero). Stable-error incidence slopes are negative in all six
+(`-.02857---.01688`) but only one upper bound is below zero, so do not call the
+binary incidence loss replicated.
+
+Preserve the convergent registered diagnostics: stable-error *count* falls,
+true-order alignment rises, and exact overall error falls in all six analyses,
+with every interval on the predicted side. Noncorrect-ranker incidence is less
+consistent. All paired E=10 balanced-minus-cycle contrasts are unresolved, so
+the original balanced seed-2103 miss is not a replicated family-specific
+effect. Treat greater density as progressively regularizing individualized
+global orders while many subjects still retain at least one stable error. This
+explains the parent endpoint heterogeneity but does not relabel
+`SPARSITY_DEPENDENT_OR_UNRESOLVED` as a pass. The contract, result, and report
+are in `benchmarks/liu_sparsity_individualization_localization_v1.json`,
+`results/liu_sparsity_individualization_localization_v1.json`, and
+`docs/liu_sparsity_individualization_localization_v1.md`.
+
+The required sparsity localization is resolved. Item-count transport may now
+be prospectively designed, but it must preserve the density-sensitive
+individualization boundary and must freeze size-specific task/model
+compatibility before any new evaluation. List linking and human-mechanism work
+remain deferred.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
