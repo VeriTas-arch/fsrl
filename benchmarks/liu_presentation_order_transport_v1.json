@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "liu-presentation-order-transport-v1",
+  "registration_status": "prospectively_frozen_before_implementation_or_any_nonbaseline_schedule_model_evaluation",
+  "registration_parent_commit": "8128449dea65a0bd82f48815c8f05f0cbc445abd",
+  "scientific_question": "Does the transported P_T/a_T functional asymmetry remain valid when the same 32 Liu support presentations are temporally rearranged, or does it depend on the original blockwise-random presentation regime?",
+  "current_theory": "P_T implements state-dependent iterative global reassembly and may express quantitative order sensitivity, whereas a_T is an exactly additive edge ledger whose terminal state is algebraically presentation-order invariant. The functional division should survive temporal rearrangement even if the final P_T field is not numerically invariant.",
+  "primary_hypothesis": "On the source-correct original Liu graph, blockwise-random, relation-clustered, and exact reverse schedules made from the same subject-specific trial multiset will all retain competent constructive rankings and the same P_T/a_T double dissociation. The a_T ledger and Gram read will additionally be exactly invariant to the three orderings in common float64 arithmetic.",
+  "claim_boundary": "A pass supports development transport across these three registered presentation regimes on the original eight-item Liu graph and three frozen backbones. It does not establish arbitrary temporal robustness, spacing or recency invariance, network-population prevalence, graph-by-order interaction, a human or biological mechanism, or invariance of the high-dimensional P_T state or its exact output field.",
+  "fixed_task_contract": {
+    "protocol": "benchmarks/liu_v2.json",
+    "support_graph": "unchanged source-correct original Liu graph",
+    "n_items": 8,
+    "support_relations": 8,
+    "presentations_per_relation": 4,
+    "support_trials": 32,
+    "query_pairs": 28,
+    "query_blocks": 10,
+    "same_subject_trial_multiset": "For each virtual participant, all schedules contain exactly the same 32 SupportTrial values: item pair, higher/lower identity, signed magnitude, and left-right orientation. Only temporal position and its derived block index change.",
+    "fixed_model": "Reuse the same checkpoints, local gains, v2.4 differential evidence admission, P_T update, a_T address/write/read, tanh, W_out, temperature, cue codes, subject encoding states, and query schedules.",
+    "only_manipulation": "permutation of the 32 already generated passive support presentations"
+  },
+  "schedule_contract": {
+    "conditions_in_execution_order": [
+      "blockwise_random",
+      "relation_clustered",
+      "reverse"
+    ],
+    "blockwise_random": "The unchanged RankingProtocol.support_schedule generated with support_seed 31101 plus subject index: four temporal blocks, every support relation once per block, independently randomized within block.",
+    "relation_clustered": "Stable-sort each subject's unchanged blockwise-random trial list by the relation's index in protocol.support_pairs_higher_lower. Preserve the original relative order of that relation's four presentations. The result has four consecutive presentations per relation in the protocol's fixed relation order.",
+    "reverse": "Reverse each subject's complete unchanged 32-trial blockwise-random list exactly.",
+    "block_index_reassignment": "After either nonbaseline permutation, assign block_index=floor(new_trial_index/8). Block index is metadata; the model receives the unchanged registered trial-index time grid.",
+    "gain_reassembly": "Because stable omission is relation-specific, rebuild subject_trial_gains from the frozen subject_relation_gains and each transformed trial's relation. No admission value is resampled.",
+    "integrity": "For every subject and variant, the trial multiset excluding block_index must be byte-identical to baseline, each relation must occur four times, relation-specific admission must match baseline, and all transformed schedule hashes must be fixed in the result."
+  },
+  "registered_sources": {
+    "liu_protocol": {"path": "benchmarks/liu_v2.json", "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"},
+    "model": {"path": "fsrl/model.py", "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"},
+    "ranking_protocol": {"path": "fsrl/ranking_protocol.py", "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"},
+    "frozen_evaluator": {"path": "fsrl/liu_eval.py", "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"},
+    "subject_encoding": {"path": "fsrl/subject_encoding.py", "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"},
+    "local_trace": {"path": "fsrl/conjunctive_local_trace.py", "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"},
+    "local_query_runtime": {"path": "fsrl/conjunctive_local_trace_pilot.py", "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"},
+    "differential_access_runtime": {"path": "fsrl/dual_evidence_access_pilot.py", "sha256": "b558fa0ac4f08e98662adb2dd2f0bb5bd1497753e271d3a0ade189adab8a22b6"},
+    "hodge_runtime": {"path": "fsrl/assembly_trajectory.py", "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"},
+    "behavior_runtime": {"path": "fsrl/behavioral.py", "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"},
+    "topology_estimators": {"path": "fsrl/support_topology_transport.py", "sha256": "084e65ebfa98a6f35b06c2eef80019476e634a2a3507a6511c5092f61b65e1c4"},
+    "topology_contract": {"path": "benchmarks/liu_support_topology_transport_v1.json", "sha256": "7bbb454a29a41d8cd2757b4d5fdd83e391bc4ca6b5fe961cea0efc37606cb43e"},
+    "topology_result": {"path": "results/liu_support_topology_transport_v1.json", "sha256": "2838a1a7d4a53ff905938368bd91ffb23c3120b5336dd4fe65767a3a1d51ad62"},
+    "topology_report": {"path": "docs/liu_support_topology_transport_v1.md", "sha256": "8f30aae9e3fd49c848ff3e3b001bbeaaa2e7372da745d2f4998e96d6aff8133c"},
+    "formal_runtime_configuration": {"path": "fsrl/formal_runtime.py", "sha256": "364eb558874a59929c185e7c0cfe4af14aff926ed37aff9eb797dd7688f214e0"}
+  },
+  "development_backbones": {
+    "mandatory_seeds": [2101, 2102, 2103],
+    "network_pooling": "forbidden",
+    "artifacts": {
+      "2101": {
+        "checkpoint": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat", "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"},
+        "config": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/config.json", "sha256": "488561727d127af8bbeb2d502e36a52d34defae819ae2363b0b8458a1433b7db"},
+        "gain": {"path": "output/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json", "sha256": "32a0750f3e4ce08703da0f3edca506d649e0e7d123aa67cc0bc3fc91fd059cc8"}
+      },
+      "2102": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/net.dat", "sha256": "83efbfeecab6e1673ff63aac3017d4d484f2f5fdd33caea5f32dbcbc0e3209eb"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/config.json", "sha256": "e3716331c5096574ee6e1e7c9b24985ccfb8e4159ce0cde8e213939988ccaff9"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/local/gain.json", "sha256": "5d352cb941735f20914b8dc7da13146544ea2585583c3f10e684f066069af111"}
+      },
+      "2103": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/net.dat", "sha256": "72046a490f4d9aa56d6aa63a6bc527417eedb639b64e0432c9da12a43413f63d"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/config.json", "sha256": "de77945e3306c5391a87667c37a1394e1d13b73cc17e5918036ead0a2d2b8f3a"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/local/gain.json", "sha256": "d8908f98b250cbc0027b022c3c06778e3c5562e6d02f7c872c2801b9e63ec276"}
+      }
+    }
+  },
+  "evaluation": {
+    "subjects_per_schedule_and_backbone": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed_rule": "760000 + 100 * backbone_seed + schedule_index, with schedule_index one through three in registered order",
+    "bootstrap_unit": "virtual participant within one schedule and one backbone",
+    "execution": "One bounded GPU process through a prospectively source-locked wrapper that calls fsrl.formal_runtime.configure_formal_runtime before importing the evaluator; evaluate schedule order as registered and seed order 2101, 2102, 2103."
+  },
+  "conditions_and_estimands": {
+    "within_schedule_conditions": ["intact", "a_off", "P_off_a_on", "relation_LOO_global", "relation_LOO_P_off_local"],
+    "within_schedule_estimands": "Reuse the exact topology-v1 definitions for exact decision competence, correct probability, Hodge additivity, transitive coherence, Hodge-to-true tau, sampled ranking individualization/stability, global remote and third-party relation-LOO, a-off learned probability loss, P-off local scope, and exact a_T ledger/Gram reconstruction.",
+    "cross_schedule_local_identity": "In common float64 arithmetic compare each nonbaseline terminal a_T ledger state and all 28 Gram reads with blockwise_random for the same participant. Maximum absolute errors must be at most 1e-12.",
+    "cross_schedule_global_diagnostics": "For a-off P_T fields, report participant-level Pearson correlation, centered RMSE, exact decision agreement, Hodge-potential Kendall tau, and changes in remote LOO magnitude for each nonbaseline schedule versus blockwise_random. These are descriptive and cannot rescue or veto the registered functional gates.",
+    "secondary_behavior": "Report sampled learned/nonlearned/overall accuracy, symbolic-distance slope, serial-position endpoint, ranking classes, stable errors, and inter-subject ranking diversity for every cell without human calibration."
+  },
+  "primary_links": {
+    "intact_competence": "Within every schedule-backbone cell, participant-bootstrap lower bounds for intact learned and nonlearned exact decision accuracy both exceed 0.50.",
+    "constructive_global_structure": "Within every cell, intact and a-off Hodge-fraction lower bounds are at least 0.95, intact transitive-triplet lower bound is at least 0.95, and intact Hodge-order tau-to-true lower bound exceeds zero.",
+    "individualized_stable_structure": "Within every cell, at least two eligible non-correct subjects exist, inter-subject tau upper bound is below 0.80, and 80-percent stable-error prevalence lower bound is at least 0.80.",
+    "P_off_global_collapse": "Within every cell, P-off/a-on nonlearned correct-probability upper bound is at most 0.55 and P-off local remote minus 0.25 times intact global remote upper bound is below zero.",
+    "P_remote_reassembly": "Within every cell, global a-off disjoint relation-LOO and third-party relational lower bounds both exceed zero.",
+    "a_off_direct_loss": "Within every cell, intact minus a-off learned correct-probability lower bound exceeds zero.",
+    "P_off_a_on_direct_nontransitive": "Within every cell, P-off/a-on learned correct-probability lower bound exceeds 0.50 and learned-minus-nonlearned lower bound exceeds zero.",
+    "exact_order_invariant_local_algorithm": "Every within-schedule algebraic tensor/read error is at most 1e-6 and every nonbaseline-versus-baseline float64 terminal ledger/read error is at most 1e-12."
+  },
+  "outcome_tree": {
+    "cell": "A schedule-backbone cell passes only if all eight links and all source, artifact, schedule-multiset, gain-reassembly, GPU-runtime, tensor-freeze, orientation, finite-value, and exactness integrity gates pass.",
+    "schedule": "A schedule transports only if it passes independently in all three backbones.",
+    "LIU_PRESENTATION_ORDER_MECHANISM_TRANSPORTED": "All three schedules transport. Promote the asymmetric computation as development-supported across the tested Liu graph and presentation regimes, while retaining quantitative order effects and the claim boundary.",
+    "ORDER_DEPENDENT_OR_UNRESOLVED": "One or two schedules transport or a primary link is heterogeneous across competent backbones. Localize only the registered global field diagnostics before any new schedule family; do not add order conditions post hoc.",
+    "FUNCTIONAL_ASYMMETRY_NOT_ORDER_TRANSPORTED": "All schedule-backbone cells are competent and interpretable but neither nonbaseline schedule transports the complete division. Retain topology transport under blockwise random presentation and reject presentation-order transport.",
+    "PRESENTATION_ORDER_COMPETENCE_NOT_ESTABLISHED": "Any schedule-backbone cell fails intact competence. Its mechanism result is non-interpretable; do not tune the order, graph, model, gain, temperature, or threshold.",
+    "NONINTERPRETABLE_EXECUTION": "Any integrity gate fails. Repair execution under a separately recorded lock without changing schedule transforms, science, or thresholds."
+  },
+  "stop_rules": [
+    "Do not change schedules, schedule order, graph, seeds, participant count, trial multiset, admission, gains, temperature, bootstrap, thresholds, estimands, or outcome tree after implementation or evaluation.",
+    "Do not require exact P_T state or field invariance; P_T is registered as state-dependent and interacting. Functional gates, not output equality, decide transport.",
+    "Do not tune symbolic-distance slope, serial-position endpoints, or original seed inconsistency on any schedule.",
+    "Do not begin sparsity, item-count, list-linking, classic transitive-inference, Miconi-ancestry, MEG, or human-mechanism work before this result is frozen. If transported, sparsity is next."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/liu_presentation_order_transport_v1.lock.json",
+    "result": "results/liu_presentation_order_transport_v1.json",
+    "report": "docs/liu_presentation_order_transport_v1.md"
+  }
+}

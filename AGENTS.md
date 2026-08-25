@@ -1083,6 +1083,18 @@ Liu internal validity in the fixed order: presentation order, sparsity, then
 item count. The next protocol must vary presentation order only while holding
 the transported graph/model contract fixed.
 
+That presentation-order protocol is now prospectively frozen as
+`liu_presentation_order_transport_v1`. On the unchanged source-correct Liu
+graph and seeds 2101--2103, compare the original blockwise-random schedule with
+a relation-clustered stable sort and exact reversal of each subject's same 32
+physical support trials. Rebuild only the position-aligned stable relation
+gains; do not resample admission. Reuse the topology-v1 functional gates and
+add an exact cross-schedule `a_T` ledger/Gram identity gate. Do not require
+`P_T` or its field to be numerically order invariant: report its field changes
+descriptively while requiring competence, construction, remote reassembly, and
+the P/a double dissociation in every schedule and backbone. The contract is in
+`benchmarks/liu_presentation_order_transport_v1.json`.
+
 The model-side theory is now formally consolidated as **asymmetric
 algorithmic organization of relational memory**. Keep three evidence levels
 separate: the frozen 9-row phenomenology map (six reproduced, three qualitative
