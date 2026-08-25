@@ -24,3 +24,23 @@ role = "frozen_result"
 sha256 = "7d76d7262fe41dab9b66199aff51f10ffce338f253deb0bebbb71b4fd9d34b0a"
 bytes = 3391
 source_ref = "refs/tags/liu-mainline-v1"
+
+[[retired_assets]]
+path = "checkpoints/dev-v2-seed1801-step1000/config.json"
+role = "development_checkpoint_config"
+sha256 = "fb6faae8f21a3c1f8bc05975a24eb0007d308a6f150a5636fec81b09bac4922d"
+bytes = 1256
+git_blob = "5ef0d703c0f610ee7548cc0968befdee1cc8b0c0"
+witness_commit = "2e0bdd86f4ee8f247157df5eb748131470246317"
+source_ref = "refs/tags/liu-mainline-v1"
+reason = "The configuration belongs to a superseded single-seed development candidate and is retained through Git provenance rather than as a root-level active asset."
+
+[[retired_assets]]
+path = "checkpoints/dev-v2-seed1801-step1000/net.dat"
+role = "development_checkpoint"
+sha256 = "0fb9f063ba8e35b0d94c5a7ed5b6bf8c80d1ed963baebe3d823176aa7653d690"
+bytes = 358519
+git_blob = "c7e63ab1f7cba83b5dcf6720a7f72092bd4ddb7e"
+witness_commit = "2e0bdd86f4ee8f247157df5eb748131470246317"
+source_ref = "refs/tags/liu-mainline-v1"
+reason = "The weights belong to a superseded single-seed development candidate and are not loaded by the maintained model, tests, workflows, or current evidence chain."

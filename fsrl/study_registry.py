@@ -61,6 +61,16 @@ REQUIRED_RECORD_FIELDS = (
     "bytes",
     "source_ref",
 )
+REQUIRED_RETIRED_ASSET_FIELDS = (
+    "path",
+    "role",
+    "sha256",
+    "bytes",
+    "git_blob",
+    "witness_commit",
+    "source_ref",
+    "reason",
+)
 
 
 def _load_toml(path: Path) -> dict[str, Any]:
@@ -277,6 +287,38 @@ def _validate_record(
     return legacy_path, repository_path.as_posix()
 
 
+def _validate_retired_asset(
+    *, owner_id: str, asset: dict[str, Any], errors: list[str]
+) -> str | None:
+    missing = [field for field in REQUIRED_RETIRED_ASSET_FIELDS if field not in asset]
+    if missing:
+        errors.append(f"{owner_id}: retired asset missing fields {missing}")
+        return None
+    try:
+        path = _safe_relative(asset["path"]).as_posix()
+    except (TypeError, ValueError) as error:
+        errors.append(f"{owner_id}: invalid retired asset path: {error}")
+        return None
+    if (ROOT / path).exists():
+        errors.append(f"{owner_id}: retired asset still exists: {path}")
+    if not isinstance(asset["reason"], str) or not asset["reason"].strip():
+        errors.append(f"{owner_id}: retired asset reason must be non-empty: {path}")
+    try:
+        verification = _verify_source_record(asset)
+        completed = subprocess.run(
+            ["git", "rev-parse", f"{asset['source_ref']}:{path}"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        if completed.stdout.strip() != verification["git_blob"]:
+            errors.append(f"{owner_id}: retired asset source ref mismatch: {path}")
+    except (KeyError, OSError, subprocess.CalledProcessError, ValueError) as error:
+        errors.append(f"{owner_id}: retired asset verification failed: {error}")
+    return path
+
+
 def validate_registry(
     registry: dict[str, Any] | None = None,
     synthesis: dict[str, Any] | None = None,
@@ -412,6 +454,7 @@ def validate_registry(
     record_provenance: dict[str, dict[str, Any]] = {}
     current_paths: set[str] = set()
     role_counts: Counter[str] = Counter()
+    retired_asset_paths: set[str] = set()
     for study_id, study in studies.items():
         for record in study.get("records", []):
             pair = _validate_record(
@@ -436,6 +479,15 @@ def validate_registry(
             }
             current_paths.add(current_path)
             role_counts[record["role"]] += 1
+        for asset in study.get("retired_assets", []):
+            path = _validate_retired_asset(
+                owner_id=study_id, asset=asset, errors=errors
+            )
+            if path is None:
+                continue
+            if path in retired_asset_paths:
+                errors.append(f"duplicate retired asset path: {path}")
+            retired_asset_paths.add(path)
 
     for record in synthesis.get("records", []):
         pair = _validate_record(
@@ -535,6 +587,7 @@ def validate_registry(
             len(study.get("records", [])) for study in studies.values()
         ),
         "synthesis_records": len(synthesis.get("records", [])),
+        "retired_assets": len(retired_asset_paths),
         "source_provenance": len(sources),
         "role_counts": dict(sorted(role_counts.items())),
     }
@@ -613,6 +666,24 @@ def _study_readme(study: dict[str, Any]) -> tuple[Path, str]:
             f"{_link(target, output, record['legacy_path'])} "
             f"(`sha256:{record['sha256'][:12]}`)"
         )
+    retired_assets = study.get("retired_assets", [])
+    if retired_assets:
+        lines.extend(
+            [
+                "",
+                "## Retired historical assets",
+                "",
+                "These files are intentionally absent from the current worktree. Their",
+                "exact bytes remain recoverable from the recorded Git source ref.",
+                "",
+            ]
+        )
+        for asset in retired_assets:
+            lines.append(
+                f"- `{asset['role']}` — `{asset['path']}` "
+                f"(`sha256:{asset['sha256'][:12]}`, source `{asset['source_ref']}`) — "
+                f"{asset['reason']}"
+            )
     lines.extend(
         [
             "",

@@ -24,6 +24,14 @@
 - `report` — [docs/development_plan.md](records/docs/development_plan.md) (`sha256:0a1722fc8053`)
 - `frozen_result` — [results/dev_v2_seed1801_step1000.json](records/results/dev_v2_seed1801_step1000.json) (`sha256:7d76d7262fe4`)
 
+## Retired historical assets
+
+These files are intentionally absent from the current worktree. Their
+exact bytes remain recoverable from the recorded Git source ref.
+
+- `development_checkpoint_config` — `checkpoints/dev-v2-seed1801-step1000/config.json` (`sha256:fb6faae8f21a`, source `refs/tags/liu-mainline-v1`) — The configuration belongs to a superseded single-seed development candidate and is retained through Git provenance rather than as a root-level active asset.
+- `development_checkpoint` — `checkpoints/dev-v2-seed1801-step1000/net.dat` (`sha256:0fb9f063ba8e`, source `refs/tags/liu-mainline-v1`) — The weights belong to a superseded single-seed development candidate and are not loaded by the maintained model, tests, workflows, or current evidence chain.
+
 ## Provenance rule
 
 Files under `records/` are byte-preserving relocations. Their former paths,

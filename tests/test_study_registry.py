@@ -39,10 +39,18 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertEqual(self.validation["records"], 211)
         self.assertEqual(self.validation["study_records"], 191)
         self.assertEqual(self.validation["synthesis_records"], 20)
+        self.assertEqual(self.validation["retired_assets"], 2)
         self.assertEqual(self.validation["source_provenance"], 127)
 
     def test_old_flat_roots_are_not_the_active_layout(self):
-        for directory in ("docs", "benchmarks", "results", "research", "mainlines"):
+        for directory in (
+            "docs",
+            "benchmarks",
+            "results",
+            "research",
+            "mainlines",
+            "checkpoints",
+        ):
             self.assertFalse((ROOT / directory).exists(), directory)
         for record in self.migration["records"]:
             self.assertFalse((ROOT / record["legacy_path"]).exists())
@@ -98,6 +106,13 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertTrue(result["passed"], result["errors"])
         self.assertEqual(result["source_versions"], 127)
         self.assertEqual(result["source_reference_occurrences"], 631)
+
+    def test_retired_development_checkpoint_is_git_backed_not_worktree_state(self):
+        assets = self.studies["development_qualification"]["retired_assets"]
+        self.assertEqual(len(assets), 2)
+        for asset in assets:
+            self.assertFalse((ROOT / asset["path"]).exists())
+            self.assertEqual(asset["source_ref"], "refs/tags/liu-mainline-v1")
 
     def test_migration_provenance_must_match_the_local_authority(self):
         altered = copy.deepcopy(self.migration)
