@@ -144,6 +144,27 @@ outputs belong under `artifacts/reproductions/<capsule>/`. The former top-level
 output into a study requires a registered protocol, exact provenance, a result
 status, and a claim boundary.
 
+## Prospective optimized training
+
+New development training can opt into the schema-v2 GPU execution path:
+
+~~~bash
+direnv exec . python -m fsrl.training \
+  --output-dir artifacts/runs/relational_model/seed-1 \
+  --seed 1 \
+  --device cuda \
+  --optimized-execution
+~~~
+
+This mode implies `torch.compile` with `fullgraph=True` and `mode="default"`,
+compiles complete recurrent trial sequences, batches all independent queries
+while keeping query fast weights frozen, and limits PyTorch CPU threads to the
+requested `--cpu-threads` value (one by default). It writes a distinct
+schema-v2 execution record into the checkpoint metadata. The older
+`--compile-model` path remains the byte-replay-compatible single-cell execution
+used by registered historical backbones; frozen study runners are not silently
+upgraded.
+
 ## Original-paper teaching reproduction
 
 To generate the teaching figures extracted from the upstream main.py:
