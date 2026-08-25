@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "experiment_id": "functional-fast-weight-latent-sufficiency-v1",
+  "repair_status": "prospectively_frozen_after_preoutput_numerical_failure_and_before_any_rerun",
+  "parent_implementation_commit": "4d85e2a",
+  "original_implementation_lock": {
+    "path": "benchmarks/functional_fast_weight_latent_sufficiency_v1.lock.json",
+    "sha256": "47cd34715be26d180413dbf187e0cb969d4c2b210b5f9fcda618c7ab7dc39469"
+  },
+  "observed_failure": {
+    "stage": "seed-2101 natural training fit, before held-out prediction, remote evaluation, fit-artifact writing, or result writing",
+    "error": "torch.linalg.cholesky reported that the float32 dual Gram plus the registered ridge penalty was not positive-definite at leading minor 1567",
+    "registered_outputs_absent_after_failure": true,
+    "scientific_metrics_inspected": false
+  },
+  "diagnosis": "The exact positive-semidefinite functional-state Gram lost numerical positive-definiteness during float32 formation at this condition scale. This is a solver-precision failure, not evidence about held-out predictive or remote sufficiency.",
+  "frozen_repair": {
+    "change": "Cast only the already-defined residual functional-state design and baseline-residual target to GPU float64 while forming and Cholesky-solving the registered dual ridge system. Cast the resulting coefficient matrix back to the original feature dtype before supervised SVD, prediction, and artifact storage.",
+    "unchanged": "All sources, checkpoints, episodes, train/held-out split, functionalization alpha elementwise-multiplied by P, s residualization, target, ridge fraction and scale equation, rank grid, bootstrap, remote estimator, thresholds, outcome tree, and write-once outputs remain unchanged.",
+    "new_diagnostic_or_candidate": false
+  },
+  "rerun_rule": "After tests, lint, the repaired source lock, commit, and push, rerun all three backbones from the beginning exactly once. Do not reuse the interrupted in-memory seed-2101 extraction or fit."
+}

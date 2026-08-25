@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "functional-fast-weight-latent-sufficiency-v1",
+  "freeze_status": "repair1_implementation_frozen_before_full_rerun",
+  "registration_commit": "4dbc214",
+  "original_implementation_commit": "4d85e2a",
+  "specification_sha256": "8c6edfc57a15842bd8da1f2f12e84fa3b2a8c7a60d1f6aad1d60f72d3b910c54",
+  "repair_record": {
+    "path": "benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.json",
+    "sha256": "ec0ed94d8cefae63a7d48abf62bd17595b3b779f2b24c553600fbbc7347f700d"
+  },
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/functional_fast_weight_latent_sufficiency.py",
+      "sha256": "37b6eea60eb842d775c55d2424f5f97cc0ecc8bea9f07ef015bae7868975db1c"
+    },
+    "tests": {
+      "path": "tests/test_functional_fast_weight_latent_sufficiency.py",
+      "sha256": "14e9164e0cdeac0f3331b7fef8e4c147a12537cfd76700ac730c5445224db26f"
+    }
+  },
+  "preexecution_validation": {
+    "targeted_tests": "15 passed across the repaired audit and inherited v1 reduced-algorithm tests",
+    "python_compile": "passed",
+    "ruff_check": "passed",
+    "ruff_format": "passed",
+    "registered_outputs_absent": true,
+    "full_rerun": "not_run"
+  },
+  "next_step": "Commit and push this repair lock before rerunning all three registered backbones from the beginning."
+}

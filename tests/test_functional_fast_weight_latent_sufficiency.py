@@ -30,6 +30,20 @@ class FunctionalFastWeightLatentSufficiencyTests(unittest.TestCase):
         )
         self.assertLess(relative_error, 1e-3)
 
+    def test_dual_ridge_uses_stable_system_and_returns_input_dtype(self):
+        rng = np.random.default_rng(21)
+        base = rng.normal(size=(40, 6)).astype(np.float32)
+        features = np.concatenate((base, base + 1e-7), axis=1)
+        coefficients = rng.normal(size=(12, 3)).astype(np.float32)
+        targets = features @ coefficients
+        fitted, penalty = audit._dual_ridge(
+            torch.as_tensor(features), torch.as_tensor(targets)
+        )
+        self.assertEqual(fitted.dtype, torch.float32)
+        self.assertGreater(penalty, 0.0)
+        prediction_error = np.mean((features @ fitted.numpy() - targets) ** 2)
+        self.assertLess(prediction_error, 1e-5)
+
     def test_rank_seven_projection_reconstructs_full_centered_contribution(self):
         rng = np.random.default_rng(3)
         contribution = rng.normal(size=(200, 7))

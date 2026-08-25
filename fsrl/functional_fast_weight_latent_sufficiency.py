@@ -21,7 +21,9 @@ SPECIFICATION_PATH = (
     ROOT / "benchmarks" / "functional_fast_weight_latent_sufficiency_v1.json"
 )
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "functional_fast_weight_latent_sufficiency_v1.lock.json"
+    ROOT
+    / "benchmarks"
+    / "functional_fast_weight_latent_sufficiency_v1.repair1.lock.json"
 )
 FIT_ARTIFACT_PATH = (
     ROOT / "results" / "functional_fast_weight_latent_sufficiency_v1.fit.npz"
@@ -359,12 +361,15 @@ def _primal_ridge(
 def _dual_ridge(
     features: torch.Tensor, targets: torch.Tensor
 ) -> tuple[torch.Tensor, float]:
-    penalty = _ridge_penalty(features)
-    gram = features @ features.T
+    stable_features = features.to(torch.float64)
+    stable_targets = targets.to(torch.float64)
+    penalty = _ridge_penalty(stable_features)
+    gram = stable_features @ stable_features.T
     identity = torch.eye(gram.shape[0], dtype=gram.dtype, device=gram.device)
     factor = torch.linalg.cholesky(gram + penalty * identity)
-    dual = torch.cholesky_solve(targets, factor)
-    return features.T @ dual, float(penalty.detach().cpu())
+    dual = torch.cholesky_solve(stable_targets, factor)
+    coefficients = stable_features.T @ dual
+    return coefficients.to(features.dtype), float(penalty.detach().cpu())
 
 
 def fit_predictor(
