@@ -1041,29 +1041,47 @@ experiment design. Its contract, repair, result, and report are in
 `results/functional_fast_weight_latent_sufficiency_v1.json`, and
 `docs/functional_fast_weight_latent_sufficiency_v1.md`.
 
-The current active experiment is the prospectively frozen
-`liu_support_topology_transport_v1` development test. It changes only the
-eight-edge support topology while holding the Liu item count, rank-distance
-multiset, four passive presentations, complete query interface, v2.4 evidence
-admission, frozen `P_T`, exact `a_T`, local gain, activation, and readout fixed.
-Three graphs were selected without neural output by deterministic enumeration
-of matched connected graphs into three pairwise non-isomorphic descriptor
-strata. Evaluate every graph independently on mandatory seeds 2101--2103;
-never pool virtual participants across graphs or networks. Only if all nine
-graph-by-backbone cells pass competence, constructive structure,
-individualized stable structure, `P`-off collapse, remote P-LOO, `a`-off direct
-loss, local-only nontransitivity, and exact local compression may the mechanism
-be called transported across the tested Liu-style task class. Partial transport
-is topology-dependent or unresolved, not a majority pass. The frozen contract
-is in `benchmarks/liu_support_topology_transport_v1.json`.
+The prospectively frozen `liu_support_topology_transport_v1` development test
+is complete with registered outcome `LIU_STRUCTURAL_MECHANISM_TRANSPORTED`.
+All three matched, pairwise non-isomorphic alternative graphs pass all eight
+links independently in seeds 2101--2103: nine of nine graph-by-backbone cells
+and 72 of 72 link decisions pass, with no participant pooling or network
+majority rescue. Intact learned and nonlearned competence, near-additive and
+transitive global structure, individualized stable rankings, P-off collapse,
+remote/third-party P-LOO, a-off direct loss, local-only nontransitivity, and
+exact edge-ledger compression all transport.
+
+Preserve the quantitative topology variation. The high-hub graph has lower
+nonlearned performance and Hodge-to-true alignment and a smaller local direct
+benefit than the other graphs, but every registered functional boundary still
+passes. Therefore claim transport of the asymmetric computation, not invariant
+performance across graphs, arbitrary graph generalization, graph identities
+known to be absent from procedural meta-training, or network-population
+prevalence.
+
+Attempt 1 is preserved because its original outcome was
+`TOPOLOGY_DEPENDENT_OR_UNRESOLVED`: two graphs exceeded the `1e-6` local-read
+exactness threshold by only `0.24--0.31e-6` when sequential float32 GPU sums
+were compared with grouped float64 Gram sums. The separately registered repair
+recomputed the already established exact-`a_T` identity in one common float64
+representation while retaining GPU differences as diagnostics. The repaired
+state/read errors are at most `4.44e-16` and `9.77e-15`, and every nonrepair
+value is exactly equal to attempt 1. The contract, repair, preserved attempt,
+final result, and report are in
+`benchmarks/liu_support_topology_transport_v1.json`,
+`benchmarks/liu_support_topology_transport_v1.repair1.json`,
+`results/liu_support_topology_transport_v1.attempt1.json`,
+`results/liu_support_topology_transport_v1.json`, and
+`docs/liu_support_topology_transport_v1.md`.
 
 Carry the excessive symbolic-distance slope, weak serial-position endpoint,
 and original seed-2104 inconsistency as known limitations. Do not tune
 temperature, `W_out`, `P_T`, `a_T`, evidence admission, or graph-specific
 parameters on the alternative graphs. Human-mechanism validation, MEG, list
-linking, Miconi ancestry, and new global compression remain deferred. If the
-topology test transports, continue Liu internal validity in the fixed order:
-presentation order, sparsity, then item count.
+linking, Miconi ancestry, and new global compression remain deferred. Continue
+Liu internal validity in the fixed order: presentation order, sparsity, then
+item count. The next protocol must vary presentation order only while holding
+the transported graph/model contract fixed.
 
 The model-side theory is now formally consolidated as **asymmetric
 algorithmic organization of relational memory**. Keep three evidence levels
