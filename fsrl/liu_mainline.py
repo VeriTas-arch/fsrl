@@ -803,6 +803,7 @@ def status_mainline() -> dict:
     manifest = load_json(MANIFEST_PATH)
     schema = validate_manifest_structure(manifest)
     return {
+        "passed": True,
         "mainline_id": manifest["mainline_id"],
         "status": manifest["status"],
         "claim_nodes": list(manifest["claim_nodes"]),
