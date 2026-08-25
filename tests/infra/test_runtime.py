@@ -59,3 +59,74 @@ print(json.dumps(configure_runtime(profile)))
         )
         self.assertIn(result["float32_matmul_precision"], {"highest", "high", "medium"})
         self.assertIsInstance(result["deterministic_algorithms"], bool)
+
+    def test_process_rejects_incompatible_interop_reconfiguration(self):
+        code = """
+import json
+import torch
+from fsrl.infra.runtime import ExecutionProfile, configure_runtime
+
+first = ExecutionProfile(
+    device="cpu",
+    cpu_threads=1,
+    blas_threads=1,
+    compile=False,
+    require_cuda=False,
+)
+second = ExecutionProfile(
+    device="cpu",
+    cpu_threads=2,
+    blas_threads=2,
+    compile=False,
+    require_cuda=False,
+)
+configure_runtime(first)
+try:
+    configure_runtime(second)
+except RuntimeError as error:
+    print(json.dumps({
+        "error": str(error),
+        "interop_threads": torch.get_num_interop_threads(),
+    }))
+else:
+    raise AssertionError("incompatible runtime reconfiguration was accepted")
+"""
+        completed = subprocess.run(
+            [sys.executable, "-c", code],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        result = json.loads(completed.stdout)
+        self.assertIn("process-global", result["error"])
+        self.assertEqual(result["interop_threads"], 1)
+
+    def test_late_interop_configuration_has_a_clear_error(self):
+        code = """
+import json
+import torch
+from fsrl.infra.runtime import ExecutionProfile, configure_runtime
+
+torch.set_num_interop_threads(1)
+profile = ExecutionProfile(
+    device="cpu",
+    cpu_threads=2,
+    blas_threads=1,
+    compile=False,
+    require_cuda=False,
+)
+try:
+    configure_runtime(profile)
+except RuntimeError as error:
+    print(json.dumps({"error": str(error)}))
+else:
+    raise AssertionError("late inter-op configuration was accepted")
+"""
+        completed = subprocess.run(
+            [sys.executable, "-c", code],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        result = json.loads(completed.stdout)
+        self.assertIn("before parallel work starts", result["error"])

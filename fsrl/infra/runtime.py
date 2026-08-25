@@ -9,6 +9,7 @@ from typing import Any, cast
 from threadpoolctl import threadpool_info, threadpool_limits
 
 _ACTIVE_BLAS_LIMITER = None
+_ACTIVE_INTEROP_THREADS: int | None = None
 _BLAS_ENVIRONMENT_VARIABLES = (
     "BLIS_NUM_THREADS",
     "MKL_NUM_THREADS",
@@ -50,10 +51,19 @@ def default_device() -> str:
 def configure_runtime(profile: ExecutionProfile) -> dict[str, Any]:
     """Apply one prospective runtime profile and return its observed snapshot."""
 
+    global _ACTIVE_BLAS_LIMITER, _ACTIVE_INTEROP_THREADS
     if profile.cpu_threads < 1:
         raise ValueError("cpu_threads must be positive")
     if profile.blas_threads < 1:
         raise ValueError("blas_threads must be positive")
+    if (
+        _ACTIVE_INTEROP_THREADS is not None
+        and _ACTIVE_INTEROP_THREADS != profile.cpu_threads
+    ):
+        raise RuntimeError(
+            "PyTorch inter-op threads are process-global and cannot be reconfigured "
+            f"from {_ACTIVE_INTEROP_THREADS} to {profile.cpu_threads}"
+        )
 
     os.environ["OMP_NUM_THREADS"] = str(profile.cpu_threads)
     for name in _BLAS_ENVIRONMENT_VARIABLES:
@@ -71,12 +81,18 @@ def configure_runtime(profile: ExecutionProfile) -> dict[str, Any]:
 
     torch.set_num_threads(profile.cpu_threads)
     if torch.get_num_interop_threads() != profile.cpu_threads:
-        torch.set_num_interop_threads(profile.cpu_threads)
+        try:
+            torch.set_num_interop_threads(profile.cpu_threads)
+        except RuntimeError as error:
+            raise RuntimeError(
+                "configure_runtime must set PyTorch inter-op threads before parallel "
+                "work starts in this process"
+            ) from error
+    _ACTIVE_INTEROP_THREADS = profile.cpu_threads
 
     # Load NumPy's BLAS before applying a process-global limit. Environment
     # variables above cover SciPy or another BLAS library loaded later.
     np.dot(np.ones((1, 1)), np.ones((1, 1)))
-    global _ACTIVE_BLAS_LIMITER
     if _ACTIVE_BLAS_LIMITER is not None:
         _ACTIVE_BLAS_LIMITER.restore_original_limits()
     _ACTIVE_BLAS_LIMITER = threadpool_limits(

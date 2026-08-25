@@ -114,12 +114,54 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
                         atol=1e-7,
                     )
 
+    def test_batched_backend_preserves_hidden_and_logit_trajectories(self):
+        batched = self._batched_evaluator()
+        pairs = tuple(combinations(range(self.evaluator.protocol.n_items), 2))
+        schedules = tuple(pairs for _ in range(self.config.bs))
+        fast_weights = self.evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
+        for alpha_zero in (False, True):
+            with self.subTest(alpha_zero=alpha_zero):
+                legacy_hidden, legacy_logits = (
+                    self.evaluator.readout_hidden_and_logit_trajectories(
+                        fast_weights, schedules, alpha_zero=alpha_zero
+                    )
+                )
+                batched_hidden, batched_logits = (
+                    batched.readout_hidden_and_logit_trajectories(
+                        fast_weights, schedules, alpha_zero=alpha_zero
+                    )
+                )
+                for subject in range(self.config.bs):
+                    self.assertEqual(
+                        set(legacy_hidden[subject]), set(batched_hidden[subject])
+                    )
+                    self.assertEqual(
+                        set(legacy_logits[subject]), set(batched_logits[subject])
+                    )
+                    for pair in pairs:
+                        np.testing.assert_allclose(
+                            batched_hidden[subject][pair],
+                            legacy_hidden[subject][pair],
+                            rtol=1e-6,
+                            atol=1e-7,
+                        )
+                        np.testing.assert_allclose(
+                            batched_logits[subject][pair],
+                            legacy_logits[subject][pair],
+                            rtol=1e-6,
+                            atol=1e-7,
+                        )
+
     def test_batched_backend_records_explicit_prospective_execution(self):
         record = self._batched_evaluator().evaluation_execution_record()
         self.assertEqual(record["execution_schema_version"], 2)
         self.assertEqual(record["backend"], "batched_sequence")
         self.assertFalse(record["profile"]["compile"])
         self.assertEqual(record["query_batching"], "all_query_pairs_by_subject")
+        self.assertEqual(
+            record["trajectory_transfer"],
+            "one_hidden_and_one_logit_batched_device_to_cpu_transfer",
+        )
 
     def test_batched_causal_suite_records_observed_runtime(self):
         with tempfile.TemporaryDirectory() as temp_dir:

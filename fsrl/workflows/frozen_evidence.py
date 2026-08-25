@@ -398,7 +398,7 @@ def verify_report_view(manifest: dict, view: dict | None = None) -> dict:
 
 def verify_mainline() -> dict:
     manifest = load_json(MANIFEST_PATH)
-    result = {
+    result: dict[str, Any] = {
         "schema": validate_manifest_structure(manifest),
         "freeze": verify_freeze_attestation(manifest),
         "evidence": verify_evidence_files(manifest),
@@ -764,8 +764,18 @@ def replay_stage(stage: str, output: Path | None = None) -> dict:
     if output.exists() or output.is_symlink():
         raise RuntimeError("replay refuses to overwrite an existing result")
     output.parent.mkdir(parents=True, exist_ok=True)
-    replacements = {"{python}": sys.executable, "{result}": str(output)}
-    argv = [replacements.get(argument, argument) for argument in record["argv"]]
+    python_executable = sys.executable
+    if not python_executable:
+        raise RuntimeError("historical replay requires a Python executable")
+    replacements = {"{python}": python_executable, "{result}": str(output)}
+    raw_argv = record["argv"]
+    if not isinstance(raw_argv, list):
+        raise TypeError(f"historical replay argv is invalid: {record_id}")
+    argv: list[str] = []
+    for argument in raw_argv:
+        if not isinstance(argument, str):
+            raise TypeError(f"historical replay argv is invalid: {record_id}")
+        argv.append(replacements.get(argument, argument))
     replay_environment = os.environ.copy()
     replay_environment.update(
         {

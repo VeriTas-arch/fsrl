@@ -11,6 +11,7 @@ import tempfile
 from dataclasses import dataclass
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import matplotlib
 
@@ -915,7 +916,7 @@ def render_figure_02(
         ]
         distribution_axes[column].hist(
             values,
-            bins=np.arange(-0.05, 1.051, 0.1),
+            bins=np.arange(-0.05, 1.051, 0.1).tolist(),
             weights=np.full(len(values), 1.0 / len(values)),
             color=DATASET_COLORS[dataset_id],
             edgecolor="white",
@@ -944,6 +945,7 @@ def render_figure_02(
         if column == 0:
             class_axes[column].set_ylabel("2D  Beta class\nItem 2")
 
+    assert accuracy_image is not None
     fig.colorbar(
         accuracy_image,
         ax=accuracy_axes,
@@ -1068,6 +1070,7 @@ def render_figure_02h(
                         "displayed_as_error": displayed[row_position, pair_index],
                     }
                 )
+    assert image is not None
     fig.colorbar(
         image,
         cax=colorbar_axis,
@@ -1219,7 +1222,8 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
         showmeans=True,
         showextrema=False,
     )
-    for body, dataset_id in zip(violins["bodies"], DATASET_ORDER, strict=True):
+    bodies = cast(list[Any], violins["bodies"])
+    for body, dataset_id in zip(bodies, DATASET_ORDER, strict=True):
         body.set_facecolor(DATASET_COLORS[dataset_id])
         body.set_edgecolor(DATASET_COLORS[dataset_id])
         body.set_alpha(0.55)
@@ -1258,6 +1262,7 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
                 fontsize=11,
                 fontweight="bold",
             )
+    assert exemplar_image is not None
     fig.colorbar(
         exemplar_image,
         ax=exemplar_axes,
@@ -1288,7 +1293,7 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
             norm=item_norm,
         )
         axis.set_title(f"{DATASET_LABELS[dataset_id]} (n={len(indices)})")
-        axis.set_xticks(range(8), range(1, 9))
+        axis.set_xticks(range(8), [str(rank) for rank in range(1, 9)])
         axis.set_xlabel("Subjective rank (high to low)")
         axis.set_ylabel("Analysis subject")
         if dataset_id == "human":
@@ -1301,6 +1306,7 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
                 ha="left",
                 fontweight="bold",
             )
+    assert order_image is not None
     colorbar = fig.colorbar(
         order_image,
         ax=order_axes,

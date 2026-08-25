@@ -568,22 +568,12 @@ def _validate_migration_chain(
     return lookup
 
 
-def validate_registry(
-    registry: dict[str, Any] | None = None,
-    synthesis: dict[str, Any] | None = None,
-    migration: dict[str, Any] | None = None,
-    source_provenance: dict[str, Any] | None = None,
-) -> dict[str, Any]:
-    registry = load_registry() if registry is None else registry
-    synthesis = load_synthesis() if synthesis is None else synthesis
-    migrations = load_migrations(registry)
-    if migration is not None:
-        migrations[0] = migration
-    source_provenance = (
-        load_source_provenance() if source_provenance is None else source_provenance
-    )
-    errors: list[str] = []
-
+def _validate_registry_headers_and_synthesis(
+    registry: dict[str, Any],
+    synthesis: dict[str, Any],
+    source_provenance: dict[str, Any],
+    errors: list[str],
+) -> None:
     if registry.get("schema_version") != 1:
         errors.append("registry schema_version must be 1")
     if synthesis.get("schema_version") != 2:
@@ -613,6 +603,10 @@ def validate_registry(
         if not isinstance(workflow.get(field), str) or not workflow[field].strip():
             errors.append(f"synthesis workflow {field} must be non-empty")
 
+
+def _validate_storage_policy(
+    registry: dict[str, Any], errors: list[str]
+) -> tuple[int, int, set[Any], set[Any]]:
     storage_policy = registry.get("storage_policy", {})
     review_threshold = storage_policy.get("inline_review_threshold_bytes")
     hard_limit = storage_policy.get("inline_hard_limit_bytes")
@@ -629,7 +623,12 @@ def validate_registry(
         hard_limit = 0
     if not historical_inline or not external_backends:
         errors.append("registry storage policy requires historical refs and backends")
+    return review_threshold, hard_limit, historical_inline, external_backends
 
+
+def _validate_source_provenance(
+    source_provenance: dict[str, Any], errors: list[str]
+) -> list[dict[str, Any]]:
     sources = source_provenance.get("sources", [])
     if source_provenance.get("source_version_count") != len(sources):
         errors.append("source provenance count does not match sources")
@@ -688,7 +687,12 @@ def validate_registry(
             _verify_source_record(source)
         except (KeyError, OSError, subprocess.CalledProcessError, ValueError) as error:
             errors.append(f"source provenance verification failed: {error}")
+    return sources
 
+
+def _load_and_validate_studies(
+    registry: dict[str, Any], errors: list[str]
+) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
     chapters = registry.get("chapters", [])
     chapter_ids = [chapter.get("id") for chapter in chapters]
     if len(chapter_ids) != len(set(chapter_ids)):
@@ -737,7 +741,25 @@ def validate_registry(
             errors.append(f"view {view.get('id')}: unknown studies {unknown}")
         if len(references) != len(set(references)):
             errors.append(f"view {view.get('id')}: duplicate study references")
+    return chapters, studies
 
+
+def _collect_registered_records(
+    studies: dict[str, dict[str, Any]],
+    synthesis: dict[str, Any],
+    *,
+    review_threshold: int,
+    hard_limit: int,
+    historical_inline: set[Any],
+    external_backends: set[Any],
+    errors: list[str],
+) -> tuple[
+    dict[str, str],
+    dict[str, dict[str, Any]],
+    set[str],
+    Counter[str],
+    set[str],
+]:
     record_pairs: dict[str, str] = {}
     record_provenance: dict[str, dict[str, Any]] = {}
     current_paths: set[str] = set()
@@ -778,7 +800,8 @@ def validate_registry(
                 and record.get("storage_backend") not in external_backends
             ):
                 errors.append(
-                    f"{study_id}: large record requires an external backend: {current_path}"
+                    f"{study_id}: large record requires an external backend: "
+                    f"{current_path}"
                 )
         for asset in study.get("retired_assets", []):
             path = _validate_retired_asset(
@@ -817,14 +840,18 @@ def validate_registry(
             errors.append(
                 f"{synthesis['id']}: inline record exceeds hard limit: {current_path}"
             )
-
-    migration_pairs = _validate_migration_chain(
-        migrations=migrations,
-        record_pairs=record_pairs,
-        record_provenance=record_provenance,
-        errors=errors,
+    return (
+        record_pairs,
+        record_provenance,
+        current_paths,
+        role_counts,
+        retired_asset_paths,
     )
 
+
+def _validate_runtime_locator_migration(
+    migration_pairs: dict[str, str], current_paths: set[str], errors: list[str]
+) -> list[dict[str, Any]]:
     locator_migration = load_runtime_locator_migration()
     locator_records = locator_migration.get("records", [])
     locator_paths = [record.get("path") for record in locator_records]
@@ -848,7 +875,15 @@ def validate_registry(
         errors.append(
             f"runtime-locator migration has unowned records {unknown_locator_paths}"
         )
+    return locator_records
 
+
+def _validate_record_inventory(
+    source_provenance: dict[str, Any],
+    record_pairs: dict[str, str],
+    current_paths: set[str],
+    errors: list[str],
+) -> None:
     if source_provenance.get("registered_record_files") != len(record_pairs):
         errors.append("source provenance registered-record count is stale")
     for redundant_root in (
@@ -858,7 +893,6 @@ def validate_registry(
         if redundant_root.exists():
             errors.append(f"redundant source tree still exists: {redundant_root}")
 
-    expected_files = current_paths
     observed_files = {
         path.relative_to(ROOT).as_posix()
         for root in (
@@ -871,9 +905,61 @@ def validate_registry(
         and path.name not in {"AGENTS.md", "README.md", "study.toml", "registry.toml"}
         and "migrations" not in path.parts
     }
-    unexpected = sorted(observed_files - expected_files)
+    unexpected = sorted(observed_files - current_paths)
     if unexpected:
         errors.append(f"unregistered record files: {unexpected}")
+
+
+def validate_registry(
+    registry: dict[str, Any] | None = None,
+    synthesis: dict[str, Any] | None = None,
+    migration: dict[str, Any] | None = None,
+    source_provenance: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    registry = load_registry() if registry is None else registry
+    synthesis = load_synthesis() if synthesis is None else synthesis
+    migrations = load_migrations(registry)
+    if migration is not None:
+        migrations[0] = migration
+    source_provenance = (
+        load_source_provenance() if source_provenance is None else source_provenance
+    )
+    errors: list[str] = []
+    _validate_registry_headers_and_synthesis(
+        registry, synthesis, source_provenance, errors
+    )
+    review_threshold, hard_limit, historical_inline, external_backends = (
+        _validate_storage_policy(registry, errors)
+    )
+    sources = _validate_source_provenance(source_provenance, errors)
+    chapters, studies = _load_and_validate_studies(registry, errors)
+    (
+        record_pairs,
+        record_provenance,
+        current_paths,
+        role_counts,
+        retired_asset_paths,
+    ) = _collect_registered_records(
+        studies,
+        synthesis,
+        review_threshold=review_threshold,
+        hard_limit=hard_limit,
+        historical_inline=historical_inline,
+        external_backends=external_backends,
+        errors=errors,
+    )
+
+    migration_pairs = _validate_migration_chain(
+        migrations=migrations,
+        record_pairs=record_pairs,
+        record_provenance=record_provenance,
+        errors=errors,
+    )
+
+    locator_records = _validate_runtime_locator_migration(
+        migration_pairs, current_paths, errors
+    )
+    _validate_record_inventory(source_provenance, record_pairs, current_paths, errors)
 
     return {
         "passed": not errors,

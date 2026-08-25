@@ -77,6 +77,31 @@ class FrozenEvaluationBackend(str, Enum):
     BATCHED_SEQUENCE = "batched_sequence"
 
 
+class _RecurrentTrajectory(torch.nn.Module):
+    """Execute one trial while retaining hidden and margin trajectories."""
+
+    def __init__(self, cell: RetroModulRNN):
+        super().__init__()
+        self.cell = cell
+
+    def forward(
+        self,
+        input_sequence: torch.Tensor,
+        hidden: torch.Tensor,
+        eligibility: torch.Tensor,
+        fast_weights: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        hidden_steps = []
+        margin_steps = []
+        for inputs in input_sequence.unbind(0):
+            logits, _, _, hidden, eligibility, _ = self.cell(
+                inputs, hidden, eligibility, fast_weights
+            )
+            hidden_steps.append(hidden)
+            margin_steps.append(logits[:, 1] - logits[:, 0])
+        return torch.stack(hidden_steps, dim=1), torch.stack(margin_steps, dim=1)
+
+
 @dataclass(frozen=True)
 class ConditionMetrics:
     intervention: str
@@ -195,6 +220,7 @@ class FrozenFastWeightEvaluator:
                 )
             self.execution_profile = None
             self.sequence_runner = None
+            self.trajectory_runner = None
         else:
             profile = execution_profile or ExecutionProfile(
                 device=self.device.type,
@@ -205,6 +231,7 @@ class FrozenFastWeightEvaluator:
                 raise ValueError("evaluation profile and network device differ")
             self.execution_profile = profile
             self.sequence_runner = compile_module(RecurrentSequence(net), profile)
+            self.trajectory_runner = compile_module(_RecurrentTrajectory(net), profile)
         self.cue_codes = deterministic_cue_codes(
             config.bs, protocol.n_items, config.cs, cue_seed, mode=cue_mode
         )
@@ -396,6 +423,9 @@ class FrozenFastWeightEvaluator:
             "support_batching": "sequential_trials_one_transfer_each",
             "query_batching": "all_query_pairs_by_subject",
             "metric_transfer": "one_batched_device_to_cpu_transfer",
+            "trajectory_transfer": (
+                "one_hidden_and_one_logit_batched_device_to_cpu_transfer"
+            ),
         }
 
     @contextmanager
@@ -652,6 +682,36 @@ class FrozenFastWeightEvaluator:
         outputs = [{} for _ in range(self.config.bs)]
         if pair_count == 0:
             return tuple(outputs)
+        input_sequence, query_fast_weights = self._prepare_batched_queries(
+            fast_weights,
+            pair_schedules,
+            num_steps=NUMRESPONSESTEP + 1,
+        )
+        query_batch_size = pair_count * self.config.bs
+        with torch.no_grad(), self._alpha_zeroed(alpha_zero):
+            logits, _, _, _, _, _ = self.sequence_runner(
+                input_sequence,
+                self.net.initialZeroState(query_batch_size),
+                self.net.initialZeroET(query_batch_size),
+                query_fast_weights,
+                False,
+            )
+        values = (logits[:, 1] - logits[:, 0]).detach().cpu().numpy()
+        values = values.reshape(pair_count, self.config.bs)
+        for pair_index, row in enumerate(values):
+            for subject, value in enumerate(row):
+                pair = pair_schedules[subject][pair_index]
+                outputs[subject][pair] = float(value)
+        return tuple(outputs)
+
+    def _prepare_batched_queries(
+        self,
+        fast_weights: torch.Tensor,
+        pair_schedules: tuple[tuple[tuple[int, int], ...], ...],
+        *,
+        num_steps: int,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        pair_count = len(pair_schedules[0])
         left = np.asarray(
             [
                 schedule[pair_index][0]
@@ -674,7 +734,7 @@ class FrozenFastWeightEvaluator:
             left,
             right,
             np.zeros(query_batch_size, dtype=np.float32),
-            num_steps=NUMRESPONSESTEP + 1,
+            num_steps=num_steps,
             time_value=self.test_time_value,
             support_trial=False,
             subject_indices=subject_indices,
@@ -684,21 +744,7 @@ class FrozenFastWeightEvaluator:
             .expand(pair_count, -1, -1, -1)
             .reshape(query_batch_size, self.config.hs, self.config.hs)
         )
-        with torch.no_grad(), self._alpha_zeroed(alpha_zero):
-            logits, _, _, _, _, _ = self.sequence_runner(
-                input_sequence,
-                self.net.initialZeroState(query_batch_size),
-                self.net.initialZeroET(query_batch_size),
-                query_fast_weights,
-                False,
-            )
-        values = (logits[:, 1] - logits[:, 0]).detach().cpu().numpy()
-        values = values.reshape(pair_count, self.config.bs)
-        for pair_index, row in enumerate(values):
-            for subject, value in enumerate(row):
-                pair = pair_schedules[subject][pair_index]
-                outputs[subject][pair] = float(value)
-        return tuple(outputs)
+        return input_sequence, query_fast_weights
 
     def readout_hidden_states(
         self,
@@ -744,6 +790,10 @@ class FrozenFastWeightEvaluator:
         schedule_lengths = {len(schedule) for schedule in pair_schedules}
         if len(schedule_lengths) != 1:
             raise ValueError("all pair schedules must have equal length")
+        if self.backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
+            return self._readout_trajectories_batched(
+                fast_weights, pair_schedules, alpha_zero=alpha_zero
+            )
         hidden_outputs = [{} for _ in range(self.config.bs)]
         logit_outputs = [{} for _ in range(self.config.bs)]
         with torch.no_grad(), self._alpha_zeroed(alpha_zero):
@@ -783,6 +833,56 @@ class FrozenFastWeightEvaluator:
                     pair = (int(left[subject]), int(right[subject]))
                     hidden_outputs[subject][pair] = states.copy()
                     logit_outputs[subject][pair] = stacked_logits[subject].copy()
+        return tuple(hidden_outputs), tuple(logit_outputs)
+
+    def _readout_trajectories_batched(
+        self,
+        fast_weights: torch.Tensor,
+        pair_schedules: tuple[tuple[tuple[int, int], ...], ...],
+        *,
+        alpha_zero: bool,
+    ) -> tuple[
+        tuple[dict[tuple[int, int], np.ndarray], ...],
+        tuple[dict[tuple[int, int], np.ndarray], ...],
+    ]:
+        assert self.trajectory_runner is not None
+        pair_count = len(pair_schedules[0])
+        hidden_outputs = [{} for _ in range(self.config.bs)]
+        logit_outputs = [{} for _ in range(self.config.bs)]
+        if pair_count == 0:
+            return tuple(hidden_outputs), tuple(logit_outputs)
+        input_sequence, query_fast_weights = self._prepare_batched_queries(
+            fast_weights,
+            pair_schedules,
+            num_steps=self.config.triallen,
+        )
+        query_batch_size = pair_count * self.config.bs
+        with torch.no_grad(), self._alpha_zeroed(alpha_zero):
+            hidden, logits = self.trajectory_runner(
+                input_sequence,
+                self.net.initialZeroState(query_batch_size),
+                self.net.initialZeroET(query_batch_size),
+                query_fast_weights,
+            )
+        hidden_values = (
+            hidden.detach()
+            .cpu()
+            .numpy()
+            .reshape(pair_count, self.config.bs, self.config.triallen, self.config.hs)
+        )
+        logit_values = (
+            logits.detach()
+            .cpu()
+            .numpy()
+            .reshape(pair_count, self.config.bs, self.config.triallen)
+        )
+        for pair_index in range(pair_count):
+            for subject in range(self.config.bs):
+                pair = pair_schedules[subject][pair_index]
+                hidden_outputs[subject][pair] = hidden_values[
+                    pair_index, subject
+                ].copy()
+                logit_outputs[subject][pair] = logit_values[pair_index, subject].copy()
         return tuple(hidden_outputs), tuple(logit_outputs)
 
     def condition_evaluation(
