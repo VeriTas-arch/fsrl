@@ -2,13 +2,15 @@
 cache-dir = ".cache/ruff"
 target-version = "py312"
 extend-exclude = [
-    "reproductions/relational_learning_2024/upstream",
+    "reproductions/relational_learning_2024/upstream/base/main.ipynb",
+    "reproductions/relational_learning_2024/upstream/base/simple.ipynb",
+    "reproductions/relational_learning_2024/upstream/addons/TI_FrozenWin.ipynb",
     "synthesis/frozen",
 ]
 
 # Historical study runners and the readable reproduction retain explicit
-# pre-existing lint debt. The exact upstream reproduction bytes are excluded
-# above and locked separately by its source manifest.
+# pre-existing lint debt. Original notebooks remain byte-locked source
+# artifacts; their executable Python exports are linted and formatted.
 [tool.ruff.lint.per-file-ignores]
 "fsrl/config.py" = ["I001"]
 "reproductions/relational_learning_2024/episode.py" = ["RUF059", "UP032"]

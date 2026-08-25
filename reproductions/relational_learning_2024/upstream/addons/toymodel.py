@@ -1,5 +1,5 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import scipy
 
 ALPHA = 1.0
@@ -14,13 +14,12 @@ corrzperplot = []
 for numplot, REINSTATE in enumerate([False, True]):
     valsperepisode = []
     for numepisode in range(NBEPISODES):
-
         vals = 2.0 * np.random.rand(8) - 1.0
         for numtrial in range(20):
             pos1 = np.random.randint(7)
             pos2 = pos1 + 1
             response = vals[pos2] - vals[pos1]
-            correct = True if response < 0 else False  # vals1 should be > vals2
+            correct = response < 0  # vals1 should be > vals2
             incr = ALPHA * (1 if response > 0 else -1) * (-1 if correct else 1)
             if correct and ONLYUPDATEONERROR:
                 incr = 0
@@ -38,7 +37,11 @@ for numplot, REINSTATE in enumerate([False, True]):
         valsperepisode = np.tanh(valsperepisode)
     mycolor = ["b", "r"][numplot]
 
-    corrz = np.corrcoef(valsperepisode, np.arange(8))[NBEPISODES][
+    corrz = np.corrcoef(
+        valsperepisode, np.arange(8)
+    )[
+        NBEPISODES
+    ][
         :NBEPISODES
     ]  # Correlation of each final set of vals (across all episodes) with arange(8); note that we must exclude tha last val which is just corr of arange(8) with itself
     corrzperplot.append(corrz)

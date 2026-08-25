@@ -10,15 +10,15 @@
 # %%
 # Based on the code for the Stimulus-response task as described in Miconi et al. ICLR 2019.
 
-import torch
-import torch.nn as nn
-import numpy as np
-from numpy import random
-import torch.nn.functional as F
-import time
 import platform
+import time
 from pathlib import Path
 
+import numpy as np
+import torch
+import torch.nn.functional as F
+from numpy import random
+from torch import nn
 
 ROOT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
 
@@ -79,10 +79,10 @@ GG["lpw"] = 1e-4  #  3    # plastic weight loss
 
 class RetroModulRNN(nn.Module):
     def __init__(self, GG):
-        super(RetroModulRNN, self).__init__()
+        super().__init__()
         # NOTE: 'outputsize' excludes the value and neuromodulator outputs!
         for paramname in ["outputsize", "inputsize", "hs", "bs"]:
-            if paramname not in GG.keys():
+            if paramname not in GG:
                 raise KeyError(
                     "Must provide missing key in argument 'GG': " + paramname
                 )
@@ -184,7 +184,7 @@ suffix = (
                 and kk != "test_every"
                 else ""
             )
-            for kk, vv in sorted(zip(GG.keys(), GG.values()))
+            for kk, vv in sorted(GG.items())
         ]
     )
     + "_rng"
@@ -244,7 +244,6 @@ all_mean_testrewards_ep = []
 print("Starting episodes!")
 
 for numepisode in range(GG["nbiter"]):
-
     PRINTTRACE = False
     if (numepisode) % (GG["pe"]) == 0:
         PRINTTRACE = True
@@ -322,7 +321,6 @@ for numepisode in range(GG["nbiter"]):
         )  # y  should output raw scores, not probas
 
     for numtrial in range(GG["nbtrials"]):
-
         # To simplify dynamics as much as possible, we reset hidden activations and eligibility traces (but not plastic weights) between trials.
         hidden = net.initialZeroState(BS)
         et = net.initialZeroET(BS)
@@ -378,7 +376,6 @@ for numepisode in range(GG["nbiter"]):
         # Now we are ready to actually  run  the trial:
 
         for numstep in range(GG["triallen"]):
-
             # Preparing inputs
             inputs = np.zeros((BS, GG["inputsize"]), dtype="float32")
             for nb in range(BS):
@@ -468,7 +465,6 @@ for numepisode in range(GG["nbiter"]):
             # Computing the rewards. This is done for each time step.
             reward = np.zeros(BS, dtype="float32")
             for nb in range(BS):
-
                 numactionschosen_alltrialsandsteps_thisep[nb, numtrial, numstep] = (
                     numactionschosen[nb]
                 )
@@ -481,11 +477,12 @@ for numepisode in range(GG["nbiter"]):
                     )  # Store the response in this timestep as the response for the whole trial, for logging/analysis purposes
                     # We must deliver reward (which will be perceived by the agent at the next step), positive or negative, depending on response
                     thistrialhascorrectanswer[nb] = 1
-                    if thistrialhascorrectorder[nb] and numactionschosen[nb] == 1:
-                        reward[nb] += GG["rew"]
-                    elif (not thistrialhascorrectorder[nb]) and numactionschosen[
-                        nb
-                    ] == 0:
+                    if (
+                        thistrialhascorrectorder[nb]
+                        and numactionschosen[nb] == 1
+                        or (not thistrialhascorrectorder[nb])
+                        and numactionschosen[nb] == 0
+                    ):
                         reward[nb] += GG["rew"]
                     else:
                         reward[nb] -= GG["rew"]
@@ -564,7 +561,6 @@ for numepisode in range(GG["nbiter"]):
     all_mean_testrewards_ep.append(sumrewardtest.mean())
 
     if PRINTTRACE:
-
         print("Episode", numepisode, "====")
         previoustime = nowtime
         nowtime = time.time()
@@ -639,7 +635,9 @@ for numepisode in range(GG["nbiter"]):
         if numepisode > 0:
             # print("Saving model parameters...")
             # torch.save(net.state_dict(), 'net_'+suffix+'.dat')
-            torch.save(net.state_dict(), ROOT_DIR / ("netAE" + str(GG["rngseed"]) + ".dat"))
+            torch.save(
+                net.state_dict(), ROOT_DIR / ("netAE" + str(GG["rngseed"]) + ".dat")
+            )
             torch.save(net.state_dict(), ROOT_DIR / "net.dat")
 
         # with open('rewards_'+suffix+'.txt', 'w') as thefile:
@@ -649,5 +647,4 @@ for numepisode in range(GG["nbiter"]):
         #     for item in all_mean_testrewards_ep[::10]:
         #             thefile.write("%s\n" % item)
         with open(ROOT_DIR / ("tAE" + str(GG["rngseed"]) + ".txt"), "w") as thefile:
-            for item in all_mean_testrewards_ep[::10]:
-                thefile.write("%s\n" % item)
+            thefile.writelines(f"{item}\n" for item in all_mean_testrewards_ep[::10])

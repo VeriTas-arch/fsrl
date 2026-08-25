@@ -3,17 +3,18 @@
 This capsule keeps the original paper reproduction separate from the maintained
 FSRL research model. It has three explicit layers:
 
-- `upstream/` is a byte-preserved snapshot of the released notebooks, Python
-  exports, appendix code, and assets. It is excluded from editor analysis and
-  formatting.
+- `upstream/` retains the released notebooks and assets as byte-preserved
+  source artifacts. Its Python exports carry provenance-tracked maintenance
+  repairs and are included in editor analysis, linting, and formatting.
 - `checkpoints/` contains the supplied active and passive network weights.
 - `cli.py`, `training.py`, `episode.py`, `task.py`, and `figures.py` are the
   maintained readable reproduction route. They reuse only the checkpoint-
   compatible plastic RNN and shared logging/configuration from `fsrl`.
 
-`source_manifest.toml` locks every upstream file and supplied checkpoint by
-SHA-256. These files are reproduction inputs, not evidence for the current
-P/L model and not part of the diagnostic study registry.
+`source_manifest.toml` retains the imported SHA-256 for repaired Python exports
+and locks every current upstream file and supplied checkpoint by SHA-256. These
+files are reproduction inputs, not evidence for the current P/L model and not
+part of the diagnostic study registry.
 
 Verify the capsule without executing the upstream code:
 
