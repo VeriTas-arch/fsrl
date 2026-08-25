@@ -1251,6 +1251,16 @@ scientific question and preserve the three behavioral mismatches, the
 sparsity endpoint heterogeneity, density-linked order convergence, and
 cardinality-sensitive global-policy degradation.
 
+Liu Mainline v1 is now formally frozen for reporting at dev commit
+`7bfb896bfee97353d6d745798b28e96b6614408c`; the freeze contract is
+`benchmarks/liu_mainline_freeze_v1.json`. During the reporting phase, do not
+start new Liu evaluation, replay, training, tuning, decomposition, or variant
+work unless the user explicitly opens a new scientific program. Preserve all
+registered outcomes and hashes. Organization may add only derived navigation,
+presentation, manuscript, or figure materials that cite frozen evidence and
+introduce no new estimand. Use `docs/liu_presentation_package_v1.md` as the
+current talk outline and claim-language boundary.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in

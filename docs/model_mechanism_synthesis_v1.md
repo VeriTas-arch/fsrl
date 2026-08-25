@@ -1,5 +1,11 @@
 # Main computational mechanism synthesis v1
 
+> Historical synthesis notice: this document predates the completed topology,
+> presentation-order, sparsity, and item-count transport sequence. Its mechanism
+> evidence remains frozen, but its “next deliverable” roadmap is superseded by
+> `docs/liu_mainline_synthesis_v1.md` and
+> `docs/liu_presentation_package_v1.md`.
+
 ## Scope
 
 This document compresses already confirmed results into the current model-level
