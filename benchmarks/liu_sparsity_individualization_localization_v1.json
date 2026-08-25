@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "liu-sparsity-individualization-localization-v1",
+  "registration_status": "prospectively_frozen_before_any_additional_participant_level_sparsity_decomposition",
+  "registration_parent_commit": "8a85829c34feb3c56e94ec0f278f326ef8de3262",
+  "scientific_question": "Does the lone balanced-branched E=10 stable-error bound failure reflect a replicated density-linked convergence of individualized rankings, a graph-family/backbone-specific change, or no stable localization beyond the registered boundary miss?",
+  "current_theory": "The P_T/a_T causal division remains supported in every sparsity cell, but complete transport fails because one E=10 cell misses only stable-error prevalence. Denser compatible evidence may make independently encoded subject rankings converge before it changes competence or causal architecture.",
+  "claim_boundary": "This read-only analysis can localize participant-level organization of the already generated model rankings. It cannot repair the failed sparsity conjunction, establish a new causal component, infer network-population prevalence, or identify a human mechanism.",
+  "frozen_source": {
+    "result": {"path": "results/liu_evidence_sparsity_transport_v1.json", "sha256": "baad32a2b737cc26a6e9c6a02ccb82da0a51c953d3d80bbfad115c74499d1b41"},
+    "report": {"path": "docs/liu_evidence_sparsity_transport_v1.md", "sha256": "4d251f1871a32ea73e04413f5acb940e257f29715dec8da1b356361dab7f4e6f"},
+    "contract": {"path": "benchmarks/liu_evidence_sparsity_transport_v1.json", "sha256": "682e6fc1bbdbcf83e960b97d4768b1fca9cf6107765fb17d64ce62710f58ebd9"},
+    "behavior_runtime": {"path": "fsrl/behavioral.py", "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"},
+    "topology_estimators": {"path": "fsrl/support_topology_transport.py", "sha256": "084e65ebfa98a6f35b06c2eef80019476e634a2a3507a6511c5092f61b65e1c4"}
+  },
+  "fixed_scope": {
+    "families": ["liu_cycle_centered", "balanced_branched_centered"],
+    "edge_counts": [7, 8, 9, 10],
+    "backbones": [2101, 2102, 2103],
+    "participants_per_cell": 77,
+    "stable_error_threshold": "the already frozen at-least-80-percent within-subject error definition",
+    "input_boundary": "Use only participant rows, exact-decision participant summaries, and registered metadata already stored in the frozen sparsity result. No checkpoint, neural forward pass, resampling of choices, new density, or new graph is permitted.",
+    "pairing": "Participant index is paired across all four densities within a family and backbone. The two families are also compared at the same participant index, but this is a model-side matched index and not an independent human pairing."
+  },
+  "primary_estimands": {
+    "stable_error_incidence_slope": "For each of all 77 participants, define I80(E)=1 if stable_error_pair_counts['80'] is positive and zero otherwise, including correct rankers as zero. Compute the participant's OLS slope across E={7,8,9,10}; summarize the paired participant slopes. Negative values indicate fewer participants with stable errors as density rises.",
+    "all_participant_pairwise_tau_slope": "At each density, compute the mean pairwise Kendall tau among all 77 stored subjective orders, without conditioning on ranking class. Under each paired participant bootstrap draw, use the same resampling counts at all four densities and the standard weighted pairwise-tau formula, then compute the OLS slope over E. Positive values indicate cross-subject order convergence as density rises.",
+    "decision_rules": {
+      "stable_error_incidence_decreases": "participant-bootstrap upper bound below zero",
+      "all_participant_pairwise_tau_increases": "paired-bootstrap lower bound above zero"
+    },
+    "replication_unit": "Each estimand must pass separately within each family and backbone. Never pool participant rows or bootstrap draws across families or networks."
+  },
+  "registered_diagnostics": {
+    "stable_error_count_slope": "Paired participant slope of the number of pair identities with at least 80-percent error.",
+    "truth_alignment_slope": "Paired participant slope of stored Kendall tau between subjective and true order.",
+    "exact_overall_error_slope": "Paired participant slope of one minus intact exact overall decision accuracy.",
+    "noncorrect_ranker_incidence_slope": "Paired participant slope of the indicator that ranking_class is not correct.",
+    "conditional_primary_reproduction": "Report the already frozen noncorrect-only stable-error prevalence and mean pairwise tau at every density, but do not reuse their single-cell confidence intervals as new evidence.",
+    "E10_family_contrasts": "Within every backbone, report paired balanced-branched minus Liu-cycle differences at E=10 for I80, stable-error count, truth alignment, exact overall error, and the all-participant mean pairwise tau.",
+    "decomposition_identity": "At each cell verify all-participant stable-error incidence equals noncorrect-ranker incidence times stable-error prevalence conditional on noncorrect rankers, up to exact count arithmetic."
+  },
+  "bootstrap": {
+    "samples": 10000,
+    "interval": 0.95,
+    "seed_rule": "920000 + 1000 * family_index + 100 * backbone_seed for density slopes; 930000 + 100 * backbone_seed for paired E=10 family contrasts",
+    "unit": "participant, paired across densities and, for E=10 contrasts, across families",
+    "pairwise_tau": "Use one multinomial count draw per bootstrap sample and reuse it across all densities. For a Kendall matrix M with unit diagonal and count vector c summing to N, use (c^T M c - N)/(N(N-1))."
+  },
+  "outcome_tree": {
+    "DENSITY_LINKED_INDIVIDUALIZATION_CONVERGENCE": "Both primary directions pass independently in both families and all three backbones. Treat density-linked convergence as the working explanation of the E=10 boundary while preserving the failed original conjunction.",
+    "ORDER_CONVERGENCE_WITHOUT_REPLICATED_STABLE_ERROR_LOSS": "Pairwise-tau slope passes in all six family-backbone analyses but stable-error incidence does not. Density makes rankings more similar without a fully replicated loss of stable error incidence.",
+    "STABLE_ERROR_LOSS_WITHOUT_REPLICATED_ORDER_CONVERGENCE": "Stable-error incidence slope passes in all six analyses but pairwise-tau slope does not. Density reduces stable errors without a fully replicated convergence of whole orders.",
+    "FAMILY_OR_BACKBONE_SPECIFIC_INDIVIDUALIZATION_CHANGE": "At least one primary direction passes in at least one analysis, but none of the three replicated outcomes above holds. Retain heterogeneity and do not average it away.",
+    "NO_REPLICATED_DENSITY_LOCALIZATION": "Neither primary direction passes in any analysis. Treat the E=10 miss as unlocalized rather than evidence for convergence.",
+    "NONINTERPRETABLE_SOURCE": "Any source hash, expected cell count, participant alignment, finite-value, order-permutation, or decomposition-identity gate fails. Repair execution without changing estimands or reading a new neural output."
+  },
+  "stop_rules": [
+    "Do not change the stable-error threshold, eligible denominator of the historical primary link, family, density, backbone, participant set, bootstrap, estimand, or outcome after reading participant-level results.",
+    "Do not add pair identity, relation admission, posterior, uncertainty, coverage, or neural-state features after seeing this localization.",
+    "Do not pool networks or families, and do not call repeated non-significance equivalence.",
+    "Do not use this read-only analysis to relabel SPARSITY_DEPENDENT_OR_UNRESOLVED as a pass.",
+    "Do not begin item-count transport until this localization is frozen and its outcome is incorporated into the working theory."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/liu_sparsity_individualization_localization_v1.lock.json",
+    "result": "results/liu_sparsity_individualization_localization_v1.json",
+    "report": "docs/liu_sparsity_individualization_localization_v1.md"
+  }
+}

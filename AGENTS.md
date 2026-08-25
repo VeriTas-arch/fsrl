@@ -1172,6 +1172,18 @@ balanced-family-specific effect, and a lone bootstrap-boundary miss. Do not
 rerun networks, add densities, alter the 80-percent stable-error definition, or
 pool participants/backbones for that localization.
 
+That read-only localization is now prospectively frozen as
+`liu_sparsity_individualization_localization_v1`. Its two primary paired
+estimands are the density slope of all-participant 80-percent-stable-error
+incidence and the density slope of all-participant mean pairwise subjective-
+order Kendall tau. Correct rankers count as zero stable-error incidence, and
+the same participant bootstrap draw is reused across all four densities.
+Report stable-error count, true-order alignment, exact overall error,
+noncorrect-ranker incidence, historical conditional metrics, and paired E=10
+family contrasts only as registered diagnostics. Use only the frozen sparsity
+result; no checkpoint or new model forward is allowed. The contract is in
+`benchmarks/liu_sparsity_individualization_localization_v1.json`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
