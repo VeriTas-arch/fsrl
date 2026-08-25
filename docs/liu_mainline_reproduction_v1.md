@@ -182,3 +182,8 @@ pass on pushed `dev`:
 
 After the tag, v1 is immutable. Corrections use an erratum; scientific changes
 use Liu v2.
+
+The completed checks and their exact/semantic boundaries are recorded in
+`mainlines/liu_v1/validation.json`. This attestation is evidence about the
+reproduction process; it does not add a scientific estimand or change any
+historical result.

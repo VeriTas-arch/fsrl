@@ -50,6 +50,8 @@ context; none is inserted into the Liu task-fidelity dependency graph.
   reconstructable Python/CUDA dependency contract.
 - `report_view.json` maps each report metric to a frozen source file and exact
   JSON pointer. It defines presentation, not claim dependency.
+- `validation.json` records the pushed candidate, clean-clone CPU suite,
+  deterministic assets, and separate exact/semantic CPU and GPU replay outcomes.
 - `artifacts/<sha256>.tar.zst` is the current small repository-backed storage
   backend. A future `release_asset` or LFS backend may change storage without
   changing member identities or scientific semantics.

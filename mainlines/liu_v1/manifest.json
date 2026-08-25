@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "mainline_id": "liu_v1",
-  "status": "draft",
+  "status": "frozen",
   "scope": "Model-level Liu task fidelity, behavioral competence, causal computation, algorithmic asymmetry, and prospectively registered one-factor transport. No human-neural implementation or new scientific estimand is introduced.",
   "design_principles": [
     "historical_experiment_is_not_mainline_orchestration_or_presentation",
@@ -421,12 +421,12 @@
     },
     "mainline_readme": {
       "path": "mainlines/liu_v1/README.md",
-      "sha256": "223af5526554983c299b7be1a770077671d64661d1adedf9c93010f409e7693e",
+      "sha256": "6bd2c7a16c97d7284bff6677f8f1acc379f3b94cc6abfd33b48c45075388ee21",
       "role": "overlay_documentation"
     },
     "reproduction_contract": {
       "path": "docs/liu_mainline_reproduction_v1.md",
-      "sha256": "bd3594383b8db9c60f05b205cd00bfa918b09449693ac2fdbfa074da1a8f8771",
+      "sha256": "6c14792ad12e24dba278b53e286c1fb3f09dc64176eda793bf059b057381281a",
       "role": "overlay_documentation"
     },
     "presentation_package": {
@@ -466,7 +466,7 @@
     },
     "report_summary": {
       "path": "docs/assets/liu_mainline_v1/liu_mainline_summary.json",
-      "sha256": "89c5c8fe5b5f5998f868e772d202f42a5e608a5e5c3ce0407011c92dc5eab5c7",
+      "sha256": "c66418304c32b6fadc746e891404833717766a13305841ba1aafa8e00c90f2a6",
       "role": "generated_report_data"
     },
     "report_table": {
@@ -493,6 +493,11 @@
       "path": "docs/assets/liu_mainline_v1/figure_4_transport_boundaries.svg",
       "sha256": "d12498d0f6c2d0da0cb788411ea46ff4c5419ae159c51aa82804cbdfe662d3b1",
       "role": "generated_figure"
+    },
+    "freeze_validation": {
+      "path": "mainlines/liu_v1/validation.json",
+      "sha256": "f712d1a661783e1c832b62dc36d302e93c079706bc73eb5030c2b18d14b4a37f",
+      "role": "freeze_attestation"
     }
   },
   "execution_records": {
@@ -873,8 +878,8 @@
   "environment_registry": "mainlines/liu_v1/environment.json",
   "freeze": {
     "freeze_ref": "refs/tags/liu-mainline-v1",
-    "validated_candidate_commit": null,
-    "canonical_payload_sha256": null,
+    "validated_candidate_commit": "f8543282aff2ebd887c2cecff460ab7fe62b1e0f",
+    "canonical_payload_sha256": "6ebd50d75c16ad3520c1d566ecd1f97045c8335cd78d3365ced5395dd3a75f7a",
     "canonical_payload_hash_scope": "The canonical JSON serialization of this manifest with status=draft and both validated_candidate_commit and canonical_payload_sha256 set to null. This avoids a self-referential commit or file hash."
   },
   "append_only_policy": {

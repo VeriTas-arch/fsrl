@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "mainline_id": "liu_v1",
+  "validation_date": "2026-08-25",
+  "candidate_commit": "f8543282aff2ebd887c2cecff460ab7fe62b1e0f",
+  "candidate_source_ref_at_validation": "refs/heads/dev",
+  "clean_clone": {
+    "source": "git@github.com:VeriTas-arch/fsrl.git",
+    "branch": "dev",
+    "head_matches_remote": true,
+    "initial_git_clean": true,
+    "final_git_clean": true,
+    "overlay_verify_passed": true,
+    "runtime_doctor_passed": true
+  },
+  "runtime": {
+    "python": "3.12.8",
+    "torch": "2.13.0+cu130",
+    "cuda_available_outside_sandbox": true,
+    "locked_python_packages_match": true
+  },
+  "cpu_test_suite": {
+    "artifact_profile": "cpu_test_suite",
+    "artifact_bundle_sha256": "877380ffb6225dc5403c830ce7e25b285657a8c026fd0997ca37932e1f48f0e1",
+    "restored_artifacts": 6,
+    "tests_run": 363,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "boundary": "The six restored files are pre-existing seed-1901/1902 inputs already hash-locked by historical specifications; restoration performs no training or evaluation."
+  },
+  "deterministic_summary": {
+    "passed": true,
+    "metrics": 26,
+    "figures": 4,
+    "candidate_draft_assets_match_committed_draft_bytes": true,
+    "draft_asset_sha256": {
+      "liu_mainline_summary.json": "89c5c8fe5b5f5998f868e772d202f42a5e608a5e5c3ce0407011c92dc5eab5c7",
+      "liu_mainline_tables.csv": "4a2b449ac7968e2f847c0566a8bc7b020f0655e575c71d039c95e5c861b292ba",
+      "figure_1_behavioral_target.svg": "ca6ff864d0b11bec9fde2274bca9b1f5ee8ac75453549d40b2ed158ed800aa7a",
+      "figure_2_causal_mechanism.svg": "5ee37647cb12eb4ce9d1b37fd1e0a90a0ac07fc99f5bc3fad42013c64b93ed82",
+      "figure_3_algorithmic_asymmetry.svg": "818d44d63c32c4a6c390668b8e94ce3bb39b673815be3cda4fd3c0aac71d7741",
+      "figure_4_transport_boundaries.svg": "d12498d0f6c2d0da0cb788411ea46ff4c5419ae159c51aa82804cbdfe662d3b1"
+    },
+    "frozen_asset_sha256": {
+      "liu_mainline_summary.json": "c66418304c32b6fadc746e891404833717766a13305841ba1aafa8e00c90f2a6",
+      "liu_mainline_tables.csv": "4a2b449ac7968e2f847c0566a8bc7b020f0655e575c71d039c95e5c861b292ba",
+      "figure_1_behavioral_target.svg": "ca6ff864d0b11bec9fde2274bca9b1f5ee8ac75453549d40b2ed158ed800aa7a",
+      "figure_2_causal_mechanism.svg": "5ee37647cb12eb4ce9d1b37fd1e0a90a0ac07fc99f5bc3fad42013c64b93ed82",
+      "figure_3_algorithmic_asymmetry.svg": "818d44d63c32c4a6c390668b8e94ce3bb39b673815be3cda4fd3c0aac71d7741",
+      "figure_4_transport_boundaries.svg": "d12498d0f6c2d0da0cb788411ea46ff4c5419ae159c51aa82804cbdfe662d3b1"
+    }
+  },
+  "cpu_historical_replay": {
+    "stage": "behavioral_competence",
+    "execution_commit": "088f74b230566145baeb45112bb532bf6f58e528",
+    "expected_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+    "observed_sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6",
+    "exact_replay": true,
+    "semantic_replay": true,
+    "replay_outcome": "exact_and_semantic"
+  },
+  "gpu_fixed_artifact_replay": {
+    "stage": "global_reassembly",
+    "execution_commit": "741dc3559008ea8453f033622abf9f94e4e77f32",
+    "artifacts_extracted": 12,
+    "expected_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+    "observed_sha256": "6c911a7e92f0d747ce76ec708cc7fa0d6aeaa62ce96255c8e31a6dfdf2d49af8",
+    "exact_replay": false,
+    "semantic_replay": true,
+    "replay_outcome": "semantic_only",
+    "semantic_assertions": {
+      "decision_outcome": "fresh_backbone_confirmation_pass",
+      "all_four_links_pass": true
+    },
+    "exact_mismatch_audit": {
+      "observed_categories": [
+        "checkout-specific absolute artifact and protocol paths",
+        "last-bit floating-point reduction differences"
+      ],
+      "result_normalization_applied": false,
+      "new_tolerance_added": false,
+      "claim_boundary": "This validation records a prospective semantic pass, not a byte-identical GPU replay."
+    }
+  },
+  "freeze_authorization": {
+    "all_required_checks_passed": true,
+    "freeze_ref": "refs/tags/liu-mainline-v1",
+    "post_freeze_policy": "Append-only factual errata; changed science requires liu_v2."
+  }
+}
