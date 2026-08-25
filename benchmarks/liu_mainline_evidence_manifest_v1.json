@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "manifest_id": "liu-mainline-evidence-manifest-v1",
+  "status": "frozen_read_only_synthesis_after_structural_generalization_sequence",
+  "parent_commit": "26d3181387e7ae1bd7d6b91f6ee58fadbc3fc7e4",
+  "scope": "Model-level Liu reproduction and mechanism evidence only; no new estimand, model evaluation, participant pooling, network-population inference, or human/biological mechanism claim.",
+  "evidence": {
+    "behavioral_reproduction_map": {
+      "result": {
+        "path": "results/model_behavior_reproduction_map_v1.json",
+        "sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6"
+      },
+      "report": {
+        "path": "docs/model_behavior_reproduction_map_v1.md",
+        "sha256": "11d7ef2f5c07dbac930a2a741c196d1698a4527acd2f7d8382350ca2fc2fb3e7"
+      },
+      "outcome": "six_of_nine_reproduced_three_qualitative_but_quantitatively_mismatched"
+    },
+    "local_global_causal_replication": {
+      "result": {
+        "path": "results/conjunctive_local_trace_replication_v2_3.json",
+        "sha256": "646bb69eff8e515a5f891dce7bab3957299312d341c04794d75afdd03404bc4f"
+      },
+      "report": {
+        "path": "docs/conjunctive_local_trace_replication_v2_3.md",
+        "sha256": "e2777cde7a30874b038db5a8a1edf74ef82297e50bc8b16a11a3bf71974f78a2"
+      },
+      "outcome": "replicated_mechanism"
+    },
+    "differential_evidence_access_confirmation": {
+      "result": {
+        "path": "results/dual_evidence_access_confirmation_v2_4.json",
+        "sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991"
+      },
+      "report": {
+        "path": "docs/dual_evidence_access_confirmation_v2_4.md",
+        "sha256": "34141e56364588f547c19e9edf60c94a0f1ff024b4cbdf4fb93e6dda23f163d9"
+      },
+      "outcome": "fresh_backbone_confirmation_pass"
+    },
+    "support_topology_transport": {
+      "result": {
+        "path": "results/liu_support_topology_transport_v1.json",
+        "sha256": "2838a1a7d4a53ff905938368bd91ffb23c3120b5336dd4fe65767a3a1d51ad62"
+      },
+      "report": {
+        "path": "docs/liu_support_topology_transport_v1.md",
+        "sha256": "8f30aae9e3fd49c848ff3e3b001bbeaaa2e7372da745d2f4998e96d6aff8133c"
+      },
+      "outcome": "LIU_STRUCTURAL_MECHANISM_TRANSPORTED"
+    },
+    "presentation_order_transport": {
+      "result": {
+        "path": "results/liu_presentation_order_transport_v1.json",
+        "sha256": "d13f0e1ff448cc370a0f0d00c633a8e8a9914968c4f7ea3e73e706d834ca5aba"
+      },
+      "report": {
+        "path": "docs/liu_presentation_order_transport_v1.md",
+        "sha256": "7b7a88f32a04d5184f5c55d1834b39984db3af06d1448fe85e64e6aacfa1e115"
+      },
+      "outcome": "LIU_PRESENTATION_ORDER_MECHANISM_TRANSPORTED"
+    },
+    "evidence_sparsity_transport": {
+      "result": {
+        "path": "results/liu_evidence_sparsity_transport_v1.json",
+        "sha256": "baad32a2b737cc26a6e9c6a02ccb82da0a51c953d3d80bbfad115c74499d1b41"
+      },
+      "report": {
+        "path": "docs/liu_evidence_sparsity_transport_v1.md",
+        "sha256": "4d251f1871a32ea73e04413f5acb940e257f29715dec8da1b356361dab7f4e6f"
+      },
+      "outcome": "SPARSITY_DEPENDENT_OR_UNRESOLVED"
+    },
+    "sparsity_individualization_localization": {
+      "result": {
+        "path": "results/liu_sparsity_individualization_localization_v1.json",
+        "sha256": "70d00237f3aeef0897f31c558008179bccc1ff2d5ec07993084b73aea513e06a"
+      },
+      "report": {
+        "path": "docs/liu_sparsity_individualization_localization_v1.md",
+        "sha256": "4cf4f35202803fc50e580f8f485f941348221b5600ea0296153cccac9a7246e4"
+      },
+      "outcome": "ORDER_CONVERGENCE_WITHOUT_REPLICATED_STABLE_ERROR_LOSS"
+    },
+    "item_count_transport": {
+      "result": {
+        "path": "results/liu_item_count_transport_v1.json",
+        "sha256": "2429ef71c849d1a39b2b8f4d60748f054c90342d93e2130fc8cae6dd87b3eee5"
+      },
+      "report": {
+        "path": "docs/liu_item_count_transport_v1.md",
+        "sha256": "3e134573bed7bfa2ce79833d81aa52fd129893eb843ffc8a0a24c07dcb8e07aa"
+      },
+      "outcome": "LIU_ITEM_COUNT_MECHANISM_TRANSPORTED"
+    }
+  },
+  "integrated_positive_claim": "Across prospectively frozen one-factor variations in Liu support topology, presentation order, evidence density, and item count, the model retains a stable causal division in which selectively admitted evidence feeds P_T for coherent remote and nonlearned assembly, while broader weak observed evidence feeds a_T for query-addressed direct fidelity.",
+  "integrated_boundaries": [
+    "The transport studies are sequential one-factor tests, not a full factorial cross-product.",
+    "The sparsity full conjunction remains SPARSITY_DEPENDENT_OR_UNRESOLVED because one of 24 individualized-stability links failed its frozen binary endpoint; the causal division itself passed all 24 cells.",
+    "N=6 and N=10 are strict cardinality OOD tests of N=8-trained backbones and do not establish arbitrary-size scaling.",
+    "Six of nine registered Liu behavioral phenomena are quantitatively reproduced; distance slope, endpoint contrast, and one network's inconsistency prevalence retain quantitative mismatches.",
+    "No result establishes human neural implementation, biological stores, unique tensor-product coding, or network-population prevalence."
+  ]
+}

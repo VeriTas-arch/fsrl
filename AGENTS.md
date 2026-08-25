@@ -1241,6 +1241,16 @@ complete. Next consolidate its frozen provenance and claim boundaries before
 opening list linking, human-mechanism, MEG, Miconi, or a new intervention. The
 item-count result is in `docs/liu_item_count_transport_v1.md`.
 
+The frozen Liu model evidence stack is consolidated in
+`benchmarks/liu_mainline_evidence_manifest_v1.json` and
+`docs/liu_mainline_synthesis_v1.md`. Treat that synthesis as a provenance and
+claim map, not a new experiment or an upgrade of any registered negative. The
+current model-level Liu structural-generalization program is complete at its
+one-factor boundary. Any continuation must begin from a separately stated
+scientific question and preserve the three behavioral mismatches, the
+sparsity endpoint heterogeneity, density-linked order convergence, and
+cardinality-sensitive global-policy degradation.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
