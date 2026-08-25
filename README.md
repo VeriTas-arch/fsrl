@@ -92,7 +92,7 @@ direnv exec . python -c "import fsrl; print(fsrl.__file__)"
 ~~~
 
 `requirements/constraints-py312.txt` records the tested direct dependency
-snapshot. It makes CPU CI and fresh research environments comparable without
+snapshot. It makes fresh CPU research environments comparable without
 pretending that a CUDA wheel URL is portable across hosts.
 
 When dependencies are already installed, refresh only the local package
