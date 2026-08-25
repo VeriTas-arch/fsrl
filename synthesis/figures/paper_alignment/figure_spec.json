@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "suite_id": "published-behavior-alignment-v1",
+  "status": "reporting_reproduction",
+  "paper": {
+    "title": "Human brains construct individualized global rankings from identical few-shot learning input",
+    "doi": "10.1371/journal.pbio.3003756",
+    "local_pdf": "studies/source_papers/records/docs/Human brains construct individualized global rankings from identical few-shot learning input.pdf",
+    "sha256": "e9fc90dbb255f224f2a8d9f57924aa6725c9376d8d4d1bd667e7e6a4f43e1a0b"
+  },
+  "claim_boundary": "These figures redraw released human behavior and place the frozen computational model on matched behavioral estimands. They do not reproduce the paper's Q-learning controls, MEG measurements, or a human-neural implementation.",
+  "human": {
+    "benchmark": {
+      "path": "studies/task_fidelity/records/benchmarks/liu_human_exact_v1.json",
+      "sha256": "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+    },
+    "cohorts": [
+      "data/external/liu2026/preregistered_experiment_data.csv",
+      "data/external/liu2026/replication_experiment_data.csv"
+    ],
+    "published_panel_sources": [
+      "data/external/liu2026/Figure2d_Data.csv",
+      "data/external/liu2026/Figure3b_left_panel_Data.csv"
+    ]
+  },
+  "model": {
+    "result": {
+      "path": "studies/dual_evidence_access_confirmation/records/results/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991"
+    },
+    "specification": {
+      "path": "studies/dual_evidence_access_confirmation/records/benchmarks/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09"
+    },
+    "artifact_lock": {
+      "path": "studies/dual_evidence_access_confirmation/records/benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json",
+      "sha256": "d2448bd682f5dbd96be9cc80a2a43731926aee4f86e756a824afc732867483f2"
+    },
+    "condition": "dual_access_matched",
+    "network_seeds": [2104, 2105],
+    "network_pooling": "forbidden"
+  },
+  "visual_uncertainty": {
+    "method": "within-dataset participant percentile bootstrap",
+    "samples": 10000,
+    "interval": 0.95,
+    "seed": 20260825
+  },
+  "selection_rules": {
+    "figure_2b_pair": ["C", "D"],
+    "figure_3c_exemplar": "Within each dataset, choose the self-consistent incorrect eligible subject whose Kendall tau to the true order is closest to that group's median; break ties by source subject ID."
+  },
+  "figures": [
+    {
+      "id": "figure_01_group_behavior",
+      "paper_panels": ["1E", "1F", "1G"],
+      "kind": "matched_human_model_estimands",
+      "estimands": ["learned and nonlearned accuracy", "serial-position profile", "symbolic-distance profile"]
+    },
+    {
+      "id": "figure_02_pair_structure",
+      "paper_panels": ["2A", "2B", "2D", "2E"],
+      "kind": "matched_human_model_estimands",
+      "estimands": ["pair accuracy matrix", "C-D cross-subject accuracy distribution", "Beta pair class", "stable-error prevalence"]
+    },
+    {
+      "id": "figure_02h_error_fingerprints",
+      "paper_panels": ["2H"],
+      "kind": "layout_adapted_matched_estimand",
+      "estimands": ["subject-by-pair stable error proportion"]
+    },
+    {
+      "id": "figure_03_global_rankings",
+      "paper_panels": ["3B", "3C", "3D", "3E"],
+      "kind": "matched_human_model_estimands",
+      "estimands": ["ranking classes", "fixed-rule exemplar reconstruction", "inter-subject rank similarity", "all reconstructed subjective orders"]
+    }
+  ],
+  "excluded_panels": {
+    "paper_q_learning_controls": ["1H", "1I", "1J", "2F", "2G", "3B-right"],
+    "meg_behavior_without_local_source_data": ["4C", "4D", "4E"],
+    "meg_measurements_not_generated_by_model": ["5A", "5B", "5C", "5D", "5E", "5F"]
+  },
+  "output_formats": ["svg", "pdf", "png"]
+}

@@ -623,6 +623,13 @@ mapping every panel to study IDs and frozen estimands. Historical presentation
 assets remain under `synthesis/records/` until the second curation pass decides
 whether to regenerate or retire them. Do not copy an image here merely to make
 it easier to find.
+
+## Current suites
+
+- [Published behavioral figure alignment](paper_alignment/README.md) redraws
+  released human results and places the frozen two-network model on the same
+  estimands. Its manifest records the exact sources, exclusions, and rendered
+  outputs.
 """
 
 

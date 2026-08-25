@@ -1,0 +1,42 @@
+{
+  "artifact_validation_passed": true,
+  "execution": "minimal read-only dual_access_matched query replay",
+  "figure_specification_sha256": "ab461e36f11c94e54cddd6d1297d3eda11beeca531b8f66059827ecb7263c41d",
+  "model_result_sha256": "ca7e48e3b4ac3a5a75ef4d876bd56565e4a226e9bc6d8e197675610655643991",
+  "network_pooling": "not_performed",
+  "output": {
+    "path": "synthesis/figures/paper_alignment/source/model_subject_pair_accuracy.csv",
+    "rows": 4312,
+    "sha256": "9cbba23b3735f6addb57363041cabe7083958696b974b16d5a52e3579356cc4f"
+  },
+  "replay_id": "published-behavior-alignment-pair-replay-v1",
+  "runtime": {
+    "cuda_version": "13.0",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.13.0+cu130"
+  },
+  "schema_version": 1,
+  "scientific_estimand": "none; exports the sampled subject-by-pair cells used by already-frozen behavioral summaries",
+  "seeds": {
+    "2104": {
+      "checkpoint_sha256": "cf62bd2488e18fc7d6b776ef63dcbe549d90722183fede66f95d07be7559e92a",
+      "gain_sha256": "73f1a287d83e717094b2e139c79986d9a240e7d665595cac62da6155530ea115",
+      "pair_mean_max_abs_error": 2.220446049250313e-16,
+      "pairs": 28,
+      "stored_behavior_exact_match": true,
+      "subjects": 77
+    },
+    "2105": {
+      "checkpoint_sha256": "10931fa7e11e6af04a20e93562dbf5f808204c1d037e3b9609c13d099553bf92",
+      "gain_sha256": "28230d318c5be0d2e0e0b151512b106604b8fa252e0c695b190e0aa3fc5d04cb",
+      "pair_mean_max_abs_error": 2.220446049250313e-16,
+      "pairs": 28,
+      "stored_behavior_exact_match": true,
+      "subjects": 77
+    }
+  },
+  "source_validation_passed": true
+}

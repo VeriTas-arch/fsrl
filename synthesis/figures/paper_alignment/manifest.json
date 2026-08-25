@@ -1,0 +1,153 @@
+{
+  "claim_boundary": "These figures redraw released human behavior and place the frozen computational model on matched behavioral estimands. They do not reproduce the paper's Q-learning controls, MEG measurements, or a human-neural implementation.",
+  "environment": {
+    "matplotlib": "3.11.0",
+    "numpy": "2.4.6",
+    "python": "3.12.8"
+  },
+  "excluded_panels": {
+    "meg_behavior_without_local_source_data": [
+      "4C",
+      "4D",
+      "4E"
+    ],
+    "meg_measurements_not_generated_by_model": [
+      "5A",
+      "5B",
+      "5C",
+      "5D",
+      "5E",
+      "5F"
+    ],
+    "paper_q_learning_controls": [
+      "1H",
+      "1I",
+      "1J",
+      "2F",
+      "2G",
+      "3B-right"
+    ]
+  },
+  "figure_specification": {
+    "path": "synthesis/figures/paper_alignment/figure_spec.json",
+    "sha256": "ab461e36f11c94e54cddd6d1297d3eda11beeca531b8f66059827ecb7263c41d"
+  },
+  "figures": [
+    {
+      "files": [
+        {
+          "bytes": 98139,
+          "path": "figure_01_group_behavior/figure_01_group_behavior.svg",
+          "sha256": "a9848372f3a922c4ec5c342e57b145a173632b59d90fe550c44f6ed16ef6edaa"
+        },
+        {
+          "bytes": 35566,
+          "path": "figure_01_group_behavior/figure_01_group_behavior.pdf",
+          "sha256": "e078fd800b0f649c8b4d6d4a6366f4d3204468c5a8a952dc520be46ebebf6ef4"
+        },
+        {
+          "bytes": 307860,
+          "path": "figure_01_group_behavior/figure_01_group_behavior.png",
+          "sha256": "d215e1c3c37e4d66b8c2da7f17c7499aed66f0e1dfedab20c8bcf697020a616d"
+        },
+        {
+          "bytes": 4392,
+          "path": "figure_01_group_behavior/source_data.csv",
+          "sha256": "df80d2021b45313c5fcefd33521c748b4312589515dfe54fa3d2c58085bff17f"
+        }
+      ],
+      "id": "figure_01_group_behavior",
+      "source_rows": 51
+    },
+    {
+      "files": [
+        {
+          "bytes": 191566,
+          "path": "figure_02_pair_structure/figure_02_pair_structure.svg",
+          "sha256": "e39a6c9be727c1fb06f791bb4b2fc3f0015b7984b5751dc2ec4329dee16e8695"
+        },
+        {
+          "bytes": 58305,
+          "path": "figure_02_pair_structure/figure_02_pair_structure.pdf",
+          "sha256": "8985a7da6f4ba06bfacea1885fc695301b342a02b2af5fed7044ad5bc6ef4b9c"
+        },
+        {
+          "bytes": 458415,
+          "path": "figure_02_pair_structure/figure_02_pair_structure.png",
+          "sha256": "51fdaa11a4ef30b6d2d96370c23873b32807f36b5dc0d7d0e584c4a1f9252abb"
+        },
+        {
+          "bytes": 19449,
+          "path": "figure_02_pair_structure/source_data.csv",
+          "sha256": "d9746a1ef9bac805b39b6aded134e54f967343402afc5701679ffecec6cecacf"
+        }
+      ],
+      "id": "figure_02_pair_structure",
+      "source_rows": 312
+    },
+    {
+      "files": [
+        {
+          "bytes": 161809,
+          "path": "figure_02h_error_fingerprints/figure_02h_error_fingerprints.svg",
+          "sha256": "04f3ac23cefee9b24040fb7863eae13aff2bd10f6e1b4603d8901491c639b4c2"
+        },
+        {
+          "bytes": 68900,
+          "path": "figure_02h_error_fingerprints/figure_02h_error_fingerprints.pdf",
+          "sha256": "8a8e48a7452014ac60cbc009ec9361ea0cfd8b9eb5e6db8090aab825ff365930"
+        },
+        {
+          "bytes": 260183,
+          "path": "figure_02h_error_fingerprints/figure_02h_error_fingerprints.png",
+          "sha256": "da9a98e0881bf101772cf7d9b8f8fcdc491c359349374fd5ac2fbca86c1d5c2f"
+        },
+        {
+          "bytes": 176239,
+          "path": "figure_02h_error_fingerprints/source_data.csv",
+          "sha256": "81631fe5f80e5eb4feb0af918e4b1f0c3f04452fd764a02e5c1140c7b3131b20"
+        }
+      ],
+      "id": "figure_02h_error_fingerprints",
+      "source_rows": 5964
+    },
+    {
+      "files": [
+        {
+          "bytes": 215890,
+          "path": "figure_03_global_rankings/figure_03_global_rankings.svg",
+          "sha256": "38750f79c8f0907b7a3f1eba9dc36e15b6ccf17eccec728aa8d42a5759d8381b"
+        },
+        {
+          "bytes": 70675,
+          "path": "figure_03_global_rankings/figure_03_global_rankings.pdf",
+          "sha256": "e48169429660b10bed06f355e293efd15fb423abd94e545ba0f77a016a95fb22"
+        },
+        {
+          "bytes": 466061,
+          "path": "figure_03_global_rankings/figure_03_global_rankings.png",
+          "sha256": "a78d165dbfba9c0afd67293d1d2a2151d5dc55123f34af2d649405a97126b821"
+        },
+        {
+          "bytes": 488767,
+          "path": "figure_03_global_rankings/source_data.csv",
+          "sha256": "2ba7d075eab2e3ed26671adf4351735870e6e43d27a12b092bd823dc7c099463"
+        }
+      ],
+      "id": "figure_03_global_rankings",
+      "source_rows": 9256
+    }
+  ],
+  "generator": {
+    "path": "fsrl/paper_figure_alignment.py",
+    "sha256": "c058d4ea5800cfa05db5e1583ed5edaefd31cceb4ae3d1bd99d7581dfe57971e"
+  },
+  "network_pooling": "not_performed",
+  "pair_replay": {
+    "path": "synthesis/figures/paper_alignment/source/model_subject_pair_accuracy.manifest.json",
+    "sha256": "63140e9641307130d97161c71eb8d4b4c3553f5e412a248134c8c99b6bc1d17a"
+  },
+  "schema_version": 1,
+  "status": "reporting_reproduction",
+  "suite_id": "published-behavior-alignment-v1"
+}
