@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "experiment_id": "liu-item-count-transport-v1",
+  "registration_status": "prospectively_frozen_before_implementation_or_any_non_eight_item_model_evaluation",
+  "registration_parent_commit": "00e00559d8dcdbf78961368f9164d121d88c171a",
+  "scientific_question": "Does the frozen P_T/a_T functional organization found in eight-item Liu tasks transport to smaller and larger relational problem sizes, or is it specific to the eight-item meta-training cardinality?",
+  "current_theory": "The frozen model uses item-agnostic cue inputs and has transported its global/local division across topology, presentation order, and seven-to-nine observed-relation density. However, all backbones were meta-trained only on eight-item episodes, so cardinality transport remains an out-of-distribution algorithmic test.",
+  "primary_hypothesis": "On prospectively selected N=6,8,10 degree-two connected support cycles with four presentations per relation, the frozen backbones and local gains will remain competent and retain constructive individualized global structure, P_T-dependent remote/nonlearned assembly, a_T-dependent direct fidelity, P-off/local nontransitivity, and exact local edge-ledger compression.",
+  "claim_boundary": "A pass supports development transport of the frozen algorithm across the registered six-to-ten-item cycle family and three backbones. N=6 and N=10 are outside the backbone's N=8 meta-training distribution. Item count intentionally co-varies with support-relation count N, support trials 4N, query count N(N-1)/2, and direct-query fraction 2/(N-1), while holding mean support degree at two. The result does not establish arbitrary size scaling, retrained size-general learning, network-population prevalence, or a human/biological mechanism.",
+  "training_boundary": {
+    "backbone_meta_training_n_items": 8,
+    "backbone_meta_training_edge_range": [7, 10],
+    "architecture_compatibility": "The network input contains two fixed-width cue vectors plus task channels and has no item-index-sized parameter. P_T is hidden_size by hidden_size and a_T is cue_size squared. Variable N changes only the number of distinct cue codes and support/query trials.",
+    "evaluator_extension": "Implement a separately source-locked variable-item evaluator that changes only the existing FrozenFastWeightEvaluator constructor's hard-coded N=8 guard. Every other method and task interface is inherited unchanged. It must exactly replay the frozen N=8 source cell before N=6 or N=10 is interpretable.",
+    "interpretation": "N=6/10 competence is a prerequisite. Failure is cardinality competence not established, not evidence against a mechanism in a task the model did not solve."
+  },
+  "size_matched_graph_contract": {
+    "item_counts_in_execution_order": [6, 8, 10],
+    "support_relations_rule": "E=N, yielding one connected degree-two Hamiltonian cycle and mean support degree two at every size.",
+    "presentations_per_relation": 4,
+    "query_blocks": 10,
+    "target_distribution": "The source-correct N=8 rank-distance multiset [1,2,3,3,3,4,5,7], normalized by N-1.",
+    "selection_rule": "For N=6 and N=10, enumerate all undirected Hamiltonian cycles on rank positions 0..N-1 in canonical form: start at rank 0 and require the second vertex to be smaller than the last. For each cycle, sort its undirected edge tuple and compute the exact one-dimensional Wasserstein-1 distance between its empirical normalized rank-distance distribution and the frozen N=8 target. Select the lexicographically first sorted edge tuple among all exact minimizers. N=8 is forced to the source-correct Liu graph and has distance zero. No neural, behavioral, checkpoint, local-gain, or human output enters selection.",
+    "graphs": [
+      {
+        "size_id": "N6_matched_cycle",
+        "n_items": 6,
+        "item_labels": ["A", "B", "C", "D", "E", "F"],
+        "true_order_high_to_low": ["F", "E", "D", "C", "B", "A"],
+        "rank_edges": [[0, 1], [0, 5], [1, 3], [2, 4], [2, 5], [3, 4]],
+        "rank_distance_multiset": [1, 1, 2, 2, 3, 5],
+        "normalized_rank_distances": ["1/5", "1/5", "2/5", "2/5", "3/5", "1"],
+        "wasserstein_to_N8_target": "8/105",
+        "number_of_exact_minimizers": 7,
+        "support_trials": 24,
+        "query_pairs": 15,
+        "query_trials": 150
+      },
+      {
+        "size_id": "N8_source_cycle",
+        "n_items": 8,
+        "item_labels": ["A", "B", "C", "D", "E", "F", "G", "H"],
+        "true_order_high_to_low": ["H", "G", "F", "E", "D", "C", "B", "A"],
+        "rank_edges": [[0, 3], [0, 7], [1, 4], [1, 5], [2, 4], [2, 7], [3, 6], [5, 6]],
+        "rank_distance_multiset": [1, 2, 3, 3, 3, 4, 5, 7],
+        "normalized_rank_distances": ["1/7", "2/7", "3/7", "3/7", "3/7", "4/7", "5/7", "1"],
+        "wasserstein_to_N8_target": "0",
+        "number_of_exact_minimizers": 1,
+        "support_trials": 32,
+        "query_pairs": 28,
+        "query_trials": 280
+      },
+      {
+        "size_id": "N10_matched_cycle",
+        "n_items": 10,
+        "item_labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+        "true_order_high_to_low": ["J", "I", "H", "G", "F", "E", "D", "C", "B", "A"],
+        "rank_edges": [[0, 2], [0, 9], [1, 5], [1, 7], [2, 6], [3, 8], [3, 9], [4, 7], [4, 8], [5, 6]],
+        "rank_distance_multiset": [1, 2, 3, 4, 4, 4, 5, 6, 6, 9],
+        "normalized_rank_distances": ["1/9", "2/9", "1/3", "4/9", "4/9", "4/9", "5/9", "2/3", "2/3", "1"],
+        "wasserstein_to_N8_target": "19/420",
+        "number_of_exact_minimizers": 110,
+        "support_trials": 40,
+        "query_pairs": 45,
+        "query_trials": 450
+      }
+    ],
+    "integrity": "Verify exact cycle enumeration and tie counts, connectivity, degree two, E=N, graph descriptors, item labels/order, normalized signed evidence, four occurrences per relation, support/query counts, and deterministic schedule hashes before interpreting a cell."
+  },
+  "task_contract": {
+    "support": "Passive observation, four blocks, every registered relation once per block, randomized order and left-right orientation, signed rank gap divided by N-1, no choice, no feedback.",
+    "query": "All unordered pairs in ten randomized blocks, both item cues visible, no distance input, no feedback, query hidden/eligibility reset, fast weights frozen.",
+    "time": "Normalize support trial index over that size's full support phase to the unchanged support/query boundary 2/3; query time remains 2/3.",
+    "subject_encoding": "Use the unchanged stable-omission state distribution and v2.4 differential evidence-admission equation at every size. Size-specific item-salience vectors and stable omissions are independently generated from the same registered seed; do not claim participant pairing across sizes.",
+    "cue_codes": "Use the unchanged deterministic permuted-shared cue generator with cue_size 15 and the registered cue seed independently at each N.",
+    "fixed_model": "Checkpoint, local gain, P_T update, a_T address/write/read, tanh, W_out, temperature, and all model parameters remain frozen."
+  },
+  "registered_sources": {
+    "base_liu_protocol": {"path": "benchmarks/liu_v2.json", "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"},
+    "model": {"path": "fsrl/model.py", "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"},
+    "ranking_protocol": {"path": "fsrl/ranking_protocol.py", "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"},
+    "frozen_evaluator": {"path": "fsrl/liu_eval.py", "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"},
+    "subject_encoding": {"path": "fsrl/subject_encoding.py", "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"},
+    "local_trace": {"path": "fsrl/conjunctive_local_trace.py", "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"},
+    "local_query_runtime": {"path": "fsrl/conjunctive_local_trace_pilot.py", "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"},
+    "differential_access_runtime": {"path": "fsrl/dual_evidence_access_pilot.py", "sha256": "b558fa0ac4f08e98662adb2dd2f0bb5bd1497753e271d3a0ade189adab8a22b6"},
+    "hodge_runtime": {"path": "fsrl/assembly_trajectory.py", "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"},
+    "behavior_runtime": {"path": "fsrl/behavioral.py", "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"},
+    "topology_estimators": {"path": "fsrl/support_topology_transport.py", "sha256": "084e65ebfa98a6f35b06c2eef80019476e634a2a3507a6511c5092f61b65e1c4"},
+    "formal_runtime_configuration": {"path": "fsrl/formal_runtime.py", "sha256": "364eb558874a59929c185e7c0cfe4af14aff926ed37aff9eb797dd7688f214e0"},
+    "N8_source_result": {"path": "results/liu_evidence_sparsity_transport_v1.json", "sha256": "baad32a2b737cc26a6e9c6a02ccb82da0a51c953d3d80bbfad115c74499d1b41"},
+    "sparsity_localization_result": {"path": "results/liu_sparsity_individualization_localization_v1.json", "sha256": "70d00237f3aeef0897f31c558008179bccc1ff2d5ec07993084b73aea513e06a"},
+    "sparsity_localization_report": {"path": "docs/liu_sparsity_individualization_localization_v1.md", "sha256": "4cf4f35202803fc50e580f8f485f941348221b5600ea0296153cccac9a7246e4"}
+  },
+  "development_backbones": {
+    "mandatory_seeds": [2101, 2102, 2103],
+    "network_pooling": "forbidden",
+    "artifacts": {
+      "2101": {
+        "checkpoint": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat", "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"},
+        "config": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/config.json", "sha256": "488561727d127af8bbeb2d502e36a52d34defae819ae2363b0b8458a1433b7db"},
+        "gain": {"path": "output/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json", "sha256": "32a0750f3e4ce08703da0f3edca506d649e0e7d123aa67cc0bc3fc91fd059cc8"}
+      },
+      "2102": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/net.dat", "sha256": "83efbfeecab6e1673ff63aac3017d4d484f2f5fdd33caea5f32dbcbc0e3209eb"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/config.json", "sha256": "e3716331c5096574ee6e1e7c9b24985ccfb8e4159ce0cde8e213939988ccaff9"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/local/gain.json", "sha256": "5d352cb941735f20914b8dc7da13146544ea2585583c3f10e684f066069af111"}
+      },
+      "2103": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/net.dat", "sha256": "72046a490f4d9aa56d6aa63a6bc527417eedb639b64e0432c9da12a43413f63d"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/config.json", "sha256": "de77945e3306c5391a87667c37a1394e1d13b73cc17e5918036ead0a2d2b8f3a"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/local/gain.json", "sha256": "d8908f98b250cbc0027b022c3c06778e3c5562e6d02f7c872c2801b9e63ec276"}
+      }
+    }
+  },
+  "evaluation": {
+    "subjects_per_size_and_backbone": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed_rule": "For N=8 reuse 760000 + 100 * backbone_seed + 1. For N=6/10 use 980000 + 100 * backbone_seed + size_index, with size_index one and three in registered order.",
+    "bootstrap_unit": "virtual participant within one item count and backbone",
+    "execution": "One bounded GPU process through a prospectively source-locked wrapper; size order N=6,N=8,N=10 and seed order 2101,2102,2103 are fixed.",
+    "no_pooling": "Never pool participants across sizes or networks and never use one size to filter another."
+  },
+  "primary_links": {
+    "intact_competence": "Within every cell, participant-bootstrap lower bounds for intact learned and nonlearned exact decision accuracy both exceed 0.50.",
+    "constructive_global_structure": "Within every cell, intact and a-off Hodge-fraction lower bounds are at least 0.95, intact transitive-triplet lower bound is at least 0.95, and intact Hodge-order tau-to-true lower bound exceeds zero.",
+    "size_normalized_individualized_stable_structure": "Within every cell, at least two eligible non-correct subjects exist, the mean inter-subject order-tau upper bound is below 0.80, and the bootstrap lower bound for mean 80-percent-stable-error pair density among eligible non-correct subjects is above zero. Report but do not gate the size-dependent probability of at least one stable error.",
+    "P_off_global_collapse": "Within every cell, P-off/a-on nonlearned correct-probability upper bound is at most 0.55 and P-off local remote minus 0.25 times intact global remote upper bound is below zero.",
+    "P_remote_reassembly": "Within every cell, global a-off disjoint relation-LOO and third-party relational lower bounds both exceed zero.",
+    "a_off_direct_loss": "Within every cell, intact minus a-off learned correct-probability lower bound exceeds zero.",
+    "P_off_a_on_direct_nontransitive": "Within every cell, P-off/a-on learned correct-probability lower bound exceeds 0.50 and learned-minus-nonlearned lower bound exceeds zero.",
+    "exact_local_compression": "Every finite-value and shape gate passes, and common-float64 tensor-state and all-query raw-read reconstruction maximum absolute errors are each at most 1e-12."
+  },
+  "N8_replay_anchor": "For every backbone, the variable-item evaluator's N=8 support schedules, cue codes, subject states/gains, neural fields, LOO fields, sampled behavior, and every shared metric/interval must exactly equal the frozen Liu-cycle E=8 source cell. Only the newly appended size-normalized stable-error-density metric and source/integrity metadata may differ.",
+  "outcome_tree": {
+    "cell": "A size-backbone cell passes only if all eight links and all source, artifact, graph-enumeration, size-interface, GPU-runtime, tensor-freeze, orientation, finite-value, exactness, and N=8 replay gates pass.",
+    "size": "An item count transports only if all three mandatory backbones pass independently.",
+    "LIU_ITEM_COUNT_MECHANISM_TRANSPORTED": "N=6,8,10 all transport. Promote the frozen asymmetric organization as development-supported across the registered item-count range while retaining the OOD and co-variation boundaries.",
+    "ITEM_COUNT_DEPENDENT_OR_UNRESOLVED": "At least one but not all item counts transports, or a primary link is heterogeneous across competent backbones. Localize only registered size and link effects; do not add sizes or retrain post hoc.",
+    "FUNCTIONAL_ASYMMETRY_NOT_ITEM_COUNT_TRANSPORTED": "All cells are competent and interpretable, N=8 replays, but neither N=6 nor N=10 transports the complete division. Retain eight-item Liu mechanism and reject cardinality transport.",
+    "ITEM_COUNT_COMPETENCE_NOT_ESTABLISHED": "Any N=6/10 cell fails intact learned or nonlearned competence. Its mechanism result is non-interpretable; report the OOD boundary without tuning or retraining within this contract.",
+    "NONINTERPRETABLE_EXECUTION": "Any source, artifact, enumeration, variable-item interface, N=8 replay, GPU-runtime, tensor-freeze, shape, orientation, finite-value, or exact-reassembly gate fails. Repair execution under a separately recorded lock without changing the science."
+  },
+  "mandatory_secondary_reporting": [
+    "all primary estimands and confidence intervals in all nine cells",
+    "learned, nonlearned, and overall sampled accuracy",
+    "symbolic-distance slope, normalized-distance slope, and size-generic serial endpoint contrast",
+    "ranking classes, historical at-least-one stable-error prevalence, stable-error pair density, and inter-subject order diversity",
+    "per-relation direct, disjoint, and third-party LOO effects",
+    "retained versus stable-omitted evidence counts and probabilities",
+    "all-query causal dependence on P_T and a_T",
+    "graph enumeration, normalized distance distribution, schedule hash, support/query count, and direct-query fraction"
+  ],
+  "stop_rules": [
+    "Do not change item counts, cycles, graph-selection metric, exposure rule, evaluator behavior beyond the N guard, seeds, participants, bootstrap, temperature, gains, thresholds, or estimands after implementation or evaluation.",
+    "Do not retrain on N=6/10, adapt the local gain, alter cue size, tune T/W_out/P_T/a_T, rescale evidence beyond rank_gap/(N-1), or choose size-specific parameters inside this contract.",
+    "Do not reuse the combinatorially size-dependent at-least-one-stable-error prevalence as a primary gate or change the registered size-normalized replacement after seeing results.",
+    "Do not begin list linking, classic transitive inference, Miconi ancestry, MEG, human-mechanism, or new global-compression work before this result is frozen and reported."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/liu_item_count_transport_v1.lock.json",
+    "result": "results/liu_item_count_transport_v1.json",
+    "report": "docs/liu_item_count_transport_v1.md"
+  }
+}

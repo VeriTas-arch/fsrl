@@ -1199,6 +1199,23 @@ individualization boundary and must freeze size-specific task/model
 compatibility before any new evaluation. List linking and human-mechanism work
 remain deferred.
 
+That cardinality protocol is now prospectively frozen as
+`liu_item_count_transport_v1`. Treat N=6 and N=10 as strict OOD tests because
+all frozen backbones were meta-trained only at N=8. Use N=6,8,10 connected
+degree-two cycles with E=N and four presentations per relation. The N=6/10
+rank embeddings are selected by exact Wasserstein matching to the normalized
+N=8 evidence-distance distribution with lexicographic tie-breaking; N=8 is the
+source Liu graph.
+
+Extend only the evaluator's hard-coded N=8 constructor guard in a separately
+locked module. Require exact N=8 replay before interpreting N=6/10. Because the
+number of query pairs changes combinatorially, replace the historical
+at-least-one-stable-error primary condition with mean 80-percent-stable-error
+pair density among eligible noncorrect subjects; continue reporting the old
+binary prevalence. All other competence, construction, remote/global,
+local-direct, P-off-scope, and exact-ledger links retain their frozen
+definitions. The contract is in `benchmarks/liu_item_count_transport_v1.json`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
