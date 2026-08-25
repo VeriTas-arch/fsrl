@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "experiment_id": "functional-fast-weight-latent-sufficiency-v1",
+  "registration_status": "prospectively_frozen_after_item_history_v3_and_before_P_reextraction_fit_or_evaluation",
+  "registration_parent_commit": "2d595878aa805d2bb26848287791103b1487b949",
+  "scientific_question": "After the observable global potential s_t and current evidence x_t are known, does the functional fast-weight state alpha elementwise-multiplied by P_t contain a replicated low-dimensional readout that is sufficient for the next global update and remote relation-LOO reassembly?",
+  "current_theory": "The local L_T computation is exactly compressed by an edge accumulator and fixed Gram kernel. The global field is nearly additive, but s_t is not a closed learning state. Scalar history restores remote amount with wrong allocation, whereas item history improves allocation error while losing amount. P_t may retain interacting internal state controlling both update strength and redistribution.",
+  "primary_hypothesis": "Within each independently trained backbone, a supervised low-rank projection of the part of alpha elementwise-multiplied by P_t not linearly predictable from s_t captures at least 95 percent of the held-out one-step benefit of the full functional-P oracle and preserves both the magnitude and allocation of remote relation-LOO effects.",
+  "claim_boundary": "This is a read-only functional sufficiency upper-bound audit. A positive result identifies a backbone-specific predictive readout and a replicated dimensional requirement, not aligned coordinates, an autonomous state update, a unique reduced algorithm, a human mechanism, or a biological variable. Human experiment design and Liu behavioral fitting are outside this stage.",
+  "forbidden_targets": [
+    "Liu participant data, human accuracy, symbolic-distance slope, serial-position profile, posterior comparator, or any human-derived target",
+    "true order, query labels, response labels, reward, relation identity, selected H>A or F>A flags, or local L_T values during fitting",
+    "cross-backbone pooling or coordinate alignment",
+    "checkpoint retraining, P_t intervention, output-readout fitting, behavior calibration, or autonomous latent dynamics fitting",
+    "dimension, ridge, split, threshold, functionalization, residualization, or estimator changes after execution"
+  ],
+  "registered_sources": {
+    "v1_contract": {"path": "benchmarks/dual_state_reduced_algorithm_v1.json", "sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80"},
+    "v1_result": {"path": "results/dual_state_reduced_algorithm_v1.json", "sha256": "573b56ea212849f83d61e6f73d24ed9a5a8e078d6793a18e6a5da73198e871c9"},
+    "v1_trajectory_artifact": {"path": "results/dual_state_reduced_algorithm_v1.trajectories.npz", "sha256": "3bc5f874b459a490a3e66acbe1b057cee863898eeaef9fc2c8492e76d101ce34"},
+    "v1_runner": {"path": "fsrl/dual_state_reduced_algorithm.py", "sha256": "5e1504e3fc1308b8faed2c9d6f955c1d75a90c9f83394118c81ab80269dedd77"},
+    "v3_contract": {"path": "benchmarks/dual_state_reduced_algorithm_v3.json", "sha256": "32c7b3df64ee0c5d0d77ba34bfb1612ba4a035f5936775eafad5d924e401c2b0"},
+    "v3_result": {"path": "results/dual_state_reduced_algorithm_v3.json", "sha256": "44f125cf4d6357c0b385d7c9dcd116c9e686666d4597dbf17c17a2e34698d365"},
+    "v3_report": {"path": "docs/dual_state_reduced_algorithm_v3.md", "sha256": "5124a6b902b4603d31c08cdd25fabe313e0cb74268a5e0d931223c87f43f6b93"},
+    "model_source": {"path": "fsrl/model.py", "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"},
+    "generic_task_source": {"path": "fsrl/meta_tasks.py", "sha256": "d7602a30e101d58fb849ff17f973f83113ce95e522ad41818cb70f3a5fc7bd12"},
+    "generic_runtime_source": {"path": "fsrl/meta_train.py", "sha256": "ad69ec06cc34bc84d1dbab56383dddb70da1e302d94cfa50948b0440263f089a"},
+    "checkpoint_loader": {"path": "fsrl/liu_eval.py", "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"}
+  },
+  "development_artifacts": {
+    "mandatory_seeds": [2101, 2102, 2103],
+    "artifacts": {
+      "2101": {
+        "checkpoint": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat", "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"},
+        "config": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/config.json", "sha256": "488561727d127af8bbeb2d502e36a52d34defae819ae2363b0b8458a1433b7db"}
+      },
+      "2102": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/net.dat", "sha256": "83efbfeecab6e1673ff63aac3017d4d484f2f5fdd33caea5f32dbcbc0e3209eb"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/config.json", "sha256": "e3716331c5096574ee6e1e7c9b24985ccfb8e4159ce0cde8e213939988ccaff9"}
+      },
+      "2103": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/net.dat", "sha256": "72046a490f4d9aa56d6aa63a6bc527417eedb639b64e0432c9da12a43413f63d"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/config.json", "sha256": "de77945e3306c5391a87667c37a1394e1d13b73cc17e5918036ead0a2d2b8f3a"}
+      }
+    }
+  },
+  "trajectory_contract": {
+    "replay": "Recreate the exact v1 generic episodes, schedules, natural prefixes, and lexicographically selected relation-LOO branches with the original per-seed RNG and four batches of 32 episodes.",
+    "identity_gate": "Before any P_t fit or metric is interpreted, natural evidence, every natural s_t and pair field, and terminal LOO s_T and pair field must match the valid frozen v1 NPZ slices to maximum absolute error at most 1e-6.",
+    "functional_state": "The sole primary fast-weight state is vec(alpha elementwise-multiplied by P_t) before the current support trial. No alternative P normalization or raw-P selection is admissible.",
+    "loo_prefixes": "In addition to the v1 terminal LOO identity target, retain functional P_t and s_t at every LOO prefix so the frozen predictor can be evaluated on the complete omitted branch.",
+    "storage": "Raw functional-P trajectories are held only in memory and are not a new scientific artifact. Save the fitted residualization and supervised projection coefficients plus aggregate metrics, not participant or human data."
+  },
+  "within_backbone_split": {
+    "training": "The first three exact v1 extraction batches, episode indices 0 through 95, are training episodes.",
+    "held_out": "The fourth exact v1 extraction batch, episode indices 96 through 127, is the only evaluation set.",
+    "scope": "Fit and evaluate separately inside each backbone. Never pool fast-weight entries, transitions, episodes, coefficients, or projection coordinates across seeds."
+  },
+  "estimators": {
+    "target": "y_t=s_(t+1)-s_t, represented in raw centered eight-item potential coordinates.",
+    "baseline": "Fit y_t from f_t=[s_t,x_t] by no-intercept ridge regression on natural training transitions only.",
+    "potential_residualization": "Fit vec(alpha elementwise-multiplied by P_t)=s_t C+r_t by no-intercept ridge regression on natural training transitions only; use the same C on held-out natural and LOO states.",
+    "full_P_oracle": "Fit the baseline residual y_t-f_t B_0 from r_t with full dual ridge regression on natural training transitions only. The prediction is f_t B_0+r_t B_P.",
+    "supervised_rank_reduction": "Take right singular output directions V of the full oracle's fitted training contribution r_t B_P. For rank k, Q_k=B_P V_k, z_t=r_t Q_k, and the prediction is f_t B_0+z_t V_k^T. Q_k is supervised and backbone-specific.",
+    "rank_grid": [1, 2, 4, 7],
+    "rank_reason": "Centered eight-item updates have at most seven linearly independent output directions. Ranks 8, 16, and 32 would add arbitrary zero-information directions under this frozen linear reduced-rank audit.",
+    "ridge": "For every design matrix X, use lambda_abs=1e-4 times trace(X^T X) divided by its feature count; do not standardize entries, tune lambda, add an intercept, restart, or select a normalization.",
+    "precision": "Extract alpha elementwise-multiplied by P_t in checkpoint float32, fit the large full-P system on GPU in float32, and compute reported errors and summaries in float64."
+  },
+  "sufficiency_estimands": {
+    "one_step": "On held-out natural transitions report E0, Efull, and Ek as mean squared potential-update errors. Define eta_k=(E0-Ek)/(E0-Efull) without clipping, only when Efull<E0. Bootstrap paired episode error differences within each backbone.",
+    "remote_reassembly": "Apply the same B0, C, BP, V, and Qk without refitting to every held-out natural and LOO prefix. Starting from the observed branch s_0, cumulatively sum teacher-forced predicted updates. Compare natural-minus-LOO terminal additive pair fields with the full neural terminal pair-field influence, reporting all-pair correlation plus disjoint-pair magnitude ratio and MSE.",
+    "full_oracle_prerequisite": "Within each backbone the full-P oracle must reduce held-out one-step MSE by at least 10 percent versus baseline with the paired 95 percent episode interval below zero, and must have remote correlation at least 0.70, remote magnitude ratio in [0.50,1.50], and remote MSE below baseline.",
+    "rank_sufficiency": "A rank k is sufficient within one backbone only if eta_k is at least 0.95, its paired one-step improvement interval versus baseline lies below zero, remote correlation is at least 0.70, remote magnitude ratio lies in [0.50,1.50], remote MSE is below baseline, and remote MSE is at most 1.10 times full-oracle remote MSE.",
+    "k_min": "Report the smallest registered k satisfying every rank-sufficiency condition. Do not select separate ranks for one-step and remote metrics."
+  },
+  "bootstrap": {
+    "unit": "held-out generic episode within backbone; networks are never pooled",
+    "samples": 5000,
+    "interval": 0.95,
+    "seeds": {"2101": 49201, "2102": 49202, "2103": 49203}
+  },
+  "runtime": {
+    "device": "A visible GPU is mandatory for frozen neural replay and large full-P regression.",
+    "cpu_threads": "PyTorch intra-op and inter-op threads are each fixed to one.",
+    "compile": "Use the exact frozen v1 replay path without torch.compile because numerical identity to the v1 trajectory artifact is an integrity gate; this audit does not retrain the network."
+  },
+  "outcome_tree": {
+    "replicated_low_dimensional_functional_P_latent": "All integrity and full-oracle prerequisites pass independently, and k_min is at most 4 in all three backbones. Proceed to a separately frozen autonomous latent-dynamics closure test without aligning coordinates.",
+    "replicated_full_output_rank_functional_P_latent": "All integrity and full-oracle prerequisites pass independently and every backbone has a sufficient k_min, but at least one requires k=7. Preserve functional-P sufficiency but do not call the requirement extremely low-dimensional; next closure must retain the replicated required rank.",
+    "one_step_functional_signal_without_remote_sufficiency": "Every full-P oracle has a registered one-step benefit but at least one full oracle or every low-rank readout fails remote sufficiency. Preserve predictive P information but do not use it to design an autonomous reduced state; localize why causal allocation is absent.",
+    "functional_P_linear_audit_insufficient": "Integrity passes but the full-P one-step prerequisite fails in any backbone. The registered linear supervised readout does not establish that residual functional P supplies the missing state; do not feature-engineer another P normalization after inspection.",
+    "noninterpretable": "Any source, artifact, replay identity, split, shape, finite-value, GPU, thread, or algebraic rank-reconstruction gate fails. Repair provenance or implementation under a separately recorded lock before interpretation."
+  },
+  "stop_rules": [
+    "Do not inspect held-out episode metrics before the implementation source lock is committed and pushed.",
+    "Do not add PCA, raw P_t, normalized P_t, absolute-alpha P_t, hidden state, eligibility, nonlinear kernels, alternate ranks, ridge selection, or seed pooling after execution.",
+    "Do not infer autonomous closure from a sufficient readout. A positive audit only licenses a separately frozen z_(t+1)=G(z_t,s_t,x_t) test.",
+    "If full-P prediction improves but remote reassembly fails, do not call z_t the missing global state; preserve the one-step link and localize the remote discrepancy.",
+    "If the audit fails, retain the exact local algorithm and the high-dimensional-interacting-state to low-dimensional-output theory rather than forcing further compression."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/functional_fast_weight_latent_sufficiency_v1.lock.json",
+    "fit_artifact": "results/functional_fast_weight_latent_sufficiency_v1.fit.npz",
+    "result": "results/functional_fast_weight_latent_sufficiency_v1.json",
+    "report": "docs/functional_fast_weight_latent_sufficiency_v1.md"
+  }
+}
