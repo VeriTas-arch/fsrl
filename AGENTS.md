@@ -851,11 +851,14 @@ Advance it in this order:
    relational abstraction/generalization and `L_T` as preserving
    experience-specific fidelity, without claiming unique code, biological
    stores, or human implementation.
-4. Derive a reduced algorithm with coupled states `(P_t,L_t)` and a global
-   plus local policy, then test computational generalization across item count,
-   support topology/sparsity/order/magnitude placement, adjacent transitive
-   inference, and list linking. Validate any new executable design on one to
-   three development seeds before freezing a larger run.
+4. Freeze the asymmetric algorithmic organization established by the completed
+   compression sequence: `a_t` is an exact local edge-state algorithm, whereas
+   `P_t` remains the interacting global implementation that emits a
+   near-additive output but is not closed by the tested reduced states. Stop
+   searching for a symmetric reduced global state. Test whether this functional
+   asymmetry generalizes across list linking first, then item count, support
+   topology/sparsity, and adjacent transitive inference. Use one to three
+   development seeds before freezing any larger run.
 5. Only after the reproduction map and reduced mechanism are stable, perform
    read-only ancestry comparisons with the Miconi active/passive reinstatement
    mechanism. Do not treat analogy as identity or modify the frozen v2.4 model
@@ -863,7 +866,7 @@ Advance it in this order:
 
 The four near-term deliverables are: a Liu-phenomenon/model reproduction map; a
 main causal mechanism figure centered on evidence-to-`P_T` global assembly and
-evidence-to-`L_T` local fidelity; a minimal `(P_t,L_t)` algorithm; and
+evidence-to-`a_T` local fidelity; the frozen asymmetric algorithmic theory; and
 generalization plus mechanism-ancestry tests. Prospective human falsification
 is a later validation layer, not a present model acceptance gate.
 
@@ -1034,6 +1037,37 @@ experiment design. Its contract, repair, result, and report are in
 `benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.json`,
 `results/functional_fast_weight_latent_sufficiency_v1.json`, and
 `docs/functional_fast_weight_latent_sufficiency_v1.md`.
+
+The model-side theory is now formally consolidated as **asymmetric
+algorithmic organization of relational memory**. Keep three evidence levels
+separate: the frozen 9-row phenomenology map (six reproduced, three qualitative
+but quantitatively mismatched, none absent); the replicated functional
+decomposition (`P_T` for remote/global assembly and edge state `a_T` for
+query-addressed direct fidelity); and the algorithmic asymmetry (exact local
+edge-plus-Gram compression versus a near-additive global output whose learning
+dynamics are not closed by any registered reduced state).
+
+Stop the global reduced-algorithm search. The current network implements global
+reassembly through a high-dimensional interacting `P_T`, but do not call that
+dimensionality intrinsic or claim that no nonlinear, trajectory-dependent, or
+episode-coordinate-dependent compact state can exist. Those possibilities are
+logically open but are not a licensed near-term search program. Preserve v2 as
+evidence for history-dependent update amount, v3 as evidence for relational
+allocation structure, and the functional-`P` failure as evidence against a
+stable fixed cross-episode linear coordinate.
+
+The next model question is whether this functional asymmetry generalizes across
+relational-learning regimes. Begin with a separately frozen one-to-three-seed
+list-linking pilot: two learned sequences plus one bridge relation should
+maximize the distinction between `P_T`-dependent remote restructuring and
+`a_T`-dependent bridge/direct fidelity. Freeze task generation, competence,
+`P`-off/local-off interventions, direct-versus-remote estimands, and stop rules
+before execution. Only then consider item count, topology, sparsity, or classic
+adjacent-pair transitive inference. A later Miconi ancestry analysis should
+compare operator-level causal motifs, not align latent coordinates. Human
+experiment design remains deferred. The synthesis and its source-hash registry
+are in `docs/asymmetric_algorithmic_organization_v1.md` and
+`benchmarks/asymmetric_algorithmic_organization_v1.json`.
 
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
