@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "experiment_id": "liu-evidence-sparsity-transport-v1",
+  "registration_status": "prospectively_frozen_before_implementation_or_any_nonbaseline_density_model_evaluation",
+  "registration_parent_commit": "59bd75fc9e0c712dfd0cbc6049f1f6d99649b79a",
+  "scientific_question": "Does the transported P_T/a_T functional asymmetry remain valid as Liu-style observed-relation density changes, or is it specific to eight observed relations among eight items?",
+  "current_theory": "The frozen v2.4 model routes admitted evidence into interacting P_T for coherent remote/global assembly and into exactly additive edge state a_T for direct experience-specific fidelity. This functional division has transported across graph topology and presentation order, but its domain across evidence density is unknown.",
+  "primary_hypothesis": "Across two prospectively fixed nested graph families and edge counts 7, 8, 9, and 10, every competent cell will retain constructive individualized global structure and the P_T/a_T double dissociation. Separately, increasing density is predicted to reduce causal dependence on P_T over all queries and increase causal dependence on a_T over all queries.",
+  "claim_boundary": "A pass supports development transport across the registered seven-to-ten-edge range, two nested graph families, and three frozen backbones. Because every observed relation retains four presentations in a fixed-duration normalized support phase, relation density, total support-trial count, total evidence amount, and event rate intentionally co-vary. The result does not establish arbitrary sparsity, disconnected-graph competence, item-count scaling, network-population prevalence, a unique implementation, or a human/biological mechanism.",
+  "fixed_task_contract": {
+    "base_protocol": "benchmarks/liu_v2.json",
+    "n_items": 8,
+    "true_order": "unchanged",
+    "query_pairs": 28,
+    "query_blocks": 10,
+    "presentations_per_observed_relation": 4,
+    "support_trials_by_edge_count": {"7": 28, "8": 32, "9": 36, "10": 40},
+    "support_observation": "passive; no learning-stage choice and no feedback",
+    "query_feedback": false,
+    "evidence": "signed rank gap divided by seven; each density step removes or adds exactly one rank-distance-three relation",
+    "test_time": "The support trial-index channel is normalized over each condition's full support phase to the unchanged support/query boundary 2/3.",
+    "fixed_model": "Reuse the same checkpoints, local gains, v2.4 differential evidence admission, P_T update, a_T address/write/read, tanh, W_out, temperature, cue codes, and query schedules.",
+    "only_manipulation": "the number of observed relations and therefore the number of four-presentation support trials"
+  },
+  "matched_nested_graph_contract": {
+    "edge_counts_in_execution_order": [7, 8, 9, 10],
+    "family_order": ["liu_cycle_centered", "balanced_branched_centered"],
+    "selection_rule": "For each frozen eight-edge base, remove the lexicographically first rank-distance-three edge whose deletion preserves connectivity for E=7. For E=9 and E=10, add in order the lexicographically first two rank-distance-three nonedges. No model, behavior, checkpoint, local gain, or human result enters selection.",
+    "matching_rule": "At each edge count, both families have the same rank-distance multiset. Moving one density level changes only the multiplicity of rank-distance-three evidence, so per-added-relation displayed magnitude is fixed at 3/7.",
+    "families": [
+      {
+        "family_id": "liu_cycle_centered",
+        "base_source": "source-correct original Liu graph",
+        "deleted_edge_for_E7": [0, 3],
+        "added_edges_for_E9_E10": [[2, 5], [4, 7]],
+        "graphs": {
+          "7": {"rank_edges": [[0, 7], [1, 4], [1, 5], [2, 4], [2, 7], [3, 6], [5, 6]], "distance_multiset": [1, 2, 3, 3, 4, 5, 7], "sorted_degree_sequence": [1, 1, 2, 2, 2, 2, 2, 2], "triangle_count": 0, "diameter": 7},
+          "8": {"rank_edges": [[0, 3], [0, 7], [1, 4], [1, 5], [2, 4], [2, 7], [3, 6], [5, 6]], "distance_multiset": [1, 2, 3, 3, 3, 4, 5, 7], "sorted_degree_sequence": [2, 2, 2, 2, 2, 2, 2, 2], "triangle_count": 0, "diameter": 4},
+          "9": {"rank_edges": [[0, 3], [0, 7], [1, 4], [1, 5], [2, 4], [2, 5], [2, 7], [3, 6], [5, 6]], "distance_multiset": [1, 2, 3, 3, 3, 3, 4, 5, 7], "sorted_degree_sequence": [2, 2, 2, 2, 2, 2, 3, 3], "triangle_count": 0, "diameter": 4},
+          "10": {"rank_edges": [[0, 3], [0, 7], [1, 4], [1, 5], [2, 4], [2, 5], [2, 7], [3, 6], [4, 7], [5, 6]], "distance_multiset": [1, 2, 3, 3, 3, 3, 3, 4, 5, 7], "sorted_degree_sequence": [2, 2, 2, 2, 3, 3, 3, 3], "triangle_count": 1, "diameter": 3}
+        }
+      },
+      {
+        "family_id": "balanced_branched_centered",
+        "base_source": "registered balanced-branched topology-v1 graph",
+        "deleted_edge_for_E7": [3, 6],
+        "added_edges_for_E9_E10": [[0, 3], [4, 7]],
+        "graphs": {
+          "7": {"rank_edges": [[0, 1], [0, 2], [0, 7], [1, 4], [1, 6], [2, 5], [3, 7]], "distance_multiset": [1, 2, 3, 3, 4, 5, 7], "sorted_degree_sequence": [1, 1, 1, 1, 2, 2, 3, 3], "triangle_count": 0, "diameter": 4},
+          "8": {"rank_edges": [[0, 1], [0, 2], [0, 7], [1, 4], [1, 6], [2, 5], [3, 6], [3, 7]], "distance_multiset": [1, 2, 3, 3, 3, 4, 5, 7], "sorted_degree_sequence": [1, 1, 2, 2, 2, 2, 3, 3], "triangle_count": 0, "diameter": 4},
+          "9": {"rank_edges": [[0, 1], [0, 2], [0, 3], [0, 7], [1, 4], [1, 6], [2, 5], [3, 6], [3, 7]], "distance_multiset": [1, 2, 3, 3, 3, 3, 4, 5, 7], "sorted_degree_sequence": [1, 1, 2, 2, 2, 3, 3, 4], "triangle_count": 1, "diameter": 4},
+          "10": {"rank_edges": [[0, 1], [0, 2], [0, 3], [0, 7], [1, 4], [1, 6], [2, 5], [3, 6], [3, 7], [4, 7]], "distance_multiset": [1, 2, 3, 3, 3, 3, 3, 4, 5, 7], "sorted_degree_sequence": [1, 2, 2, 2, 3, 3, 3, 4], "triangle_count": 1, "diameter": 4}
+        }
+      }
+    ]
+  },
+  "matched_schedule_and_admission_contract": {
+    "E8_anchor": "Within each family and subject, the E=8 support schedule, cue codes, encoding states, stable relation gains, and query schedule exactly reproduce the corresponding frozen prior cell: presentation-order blockwise_random for the Liu-cycle family and topology-v1 balanced_branched_no_triangle for the branched family.",
+    "master_schedule": "Within each family, subject, and block, retain the exact E=8 physical trials and their relative order. Generate the two prospectively registered added relations once with a dedicated PCG64 stream, each with its normal signed magnitude, randomized left-right orientation, and continuous insertion key among the eight base trials. Construct E=10 from the resulting master block; obtain E=9, E=8, and E=7 only by filtering the second addition, both additions, or both additions plus the registered deletion. Thus every common relation has identical four physical trials and relative order across densities.",
+    "schedule_rng_seed_rule": "840000 + 1000 * family_index + subject, with family_index one or two; loop block zero through three and then added relations in registered order, drawing orientation then insertion key.",
+    "stable_admission": "Retain every E=8 subject-relation admission value exactly. For each added relation, compute reliability from the same frozen subject encoding state and draw its one episode-stable Bernoulli admission once from a dedicated PCG64 stream. Subset this master relation map across densities; never resample common relations.",
+    "admission_rng_seed_rule": "850000 + family_index; loop subject zero through 76 and added relations in registered order.",
+    "integrity": "For every family and subject, verify graph selection, four occurrences per observed relation, nested common-trial identity excluding temporal index, common-relation admission identity, E8 schedule/gain anchors, fixed query schedules, and registered support-trial counts. Store schedule and admission hashes per density."
+  },
+  "registered_sources": {
+    "base_liu_protocol": {"path": "benchmarks/liu_v2.json", "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"},
+    "model": {"path": "fsrl/model.py", "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"},
+    "ranking_protocol": {"path": "fsrl/ranking_protocol.py", "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"},
+    "frozen_evaluator": {"path": "fsrl/liu_eval.py", "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"},
+    "subject_encoding": {"path": "fsrl/subject_encoding.py", "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"},
+    "local_trace": {"path": "fsrl/conjunctive_local_trace.py", "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"},
+    "local_query_runtime": {"path": "fsrl/conjunctive_local_trace_pilot.py", "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"},
+    "differential_access_runtime": {"path": "fsrl/dual_evidence_access_pilot.py", "sha256": "b558fa0ac4f08e98662adb2dd2f0bb5bd1497753e271d3a0ade189adab8a22b6"},
+    "hodge_runtime": {"path": "fsrl/assembly_trajectory.py", "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"},
+    "behavior_runtime": {"path": "fsrl/behavioral.py", "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"},
+    "topology_estimators": {"path": "fsrl/support_topology_transport.py", "sha256": "084e65ebfa98a6f35b06c2eef80019476e634a2a3507a6511c5092f61b65e1c4"},
+    "topology_contract": {"path": "benchmarks/liu_support_topology_transport_v1.json", "sha256": "7bbb454a29a41d8cd2757b4d5fdd83e391bc4ca6b5fe961cea0efc37606cb43e"},
+    "topology_result": {"path": "results/liu_support_topology_transport_v1.json", "sha256": "2838a1a7d4a53ff905938368bd91ffb23c3120b5336dd4fe65767a3a1d51ad62"},
+    "presentation_order_estimators": {"path": "fsrl/presentation_order_transport.py", "sha256": "78ca801cb4cbf8be1eb64cb2e023297d375b1893a2ee6d55a7aa785f22072e4d"},
+    "presentation_order_contract": {"path": "benchmarks/liu_presentation_order_transport_v1.json", "sha256": "b294a8cf23d3cf56c0395d4cd7382ccb5c6474bdcdd638681b9bdf9aef5d6e36"},
+    "presentation_order_result": {"path": "results/liu_presentation_order_transport_v1.json", "sha256": "d13f0e1ff448cc370a0f0d00c633a8e8a9914968c4f7ea3e73e706d834ca5aba"},
+    "formal_runtime_configuration": {"path": "fsrl/formal_runtime.py", "sha256": "364eb558874a59929c185e7c0cfe4af14aff926ed37aff9eb797dd7688f214e0"}
+  },
+  "development_backbones": {
+    "mandatory_seeds": [2101, 2102, 2103],
+    "network_pooling": "forbidden",
+    "artifacts": {
+      "2101": {
+        "checkpoint": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat", "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"},
+        "config": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/config.json", "sha256": "488561727d127af8bbeb2d502e36a52d34defae819ae2363b0b8458a1433b7db"},
+        "gain": {"path": "output/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json", "sha256": "32a0750f3e4ce08703da0f3edca506d649e0e7d123aa67cc0bc3fc91fd059cc8"}
+      },
+      "2102": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/net.dat", "sha256": "83efbfeecab6e1673ff63aac3017d4d484f2f5fdd33caea5f32dbcbc0e3209eb"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/config.json", "sha256": "e3716331c5096574ee6e1e7c9b24985ccfb8e4159ce0cde8e213939988ccaff9"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/local/gain.json", "sha256": "5d352cb941735f20914b8dc7da13146544ea2585583c3f10e684f066069af111"}
+      },
+      "2103": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/net.dat", "sha256": "72046a490f4d9aa56d6aa63a6bc527417eedb639b64e0432c9da12a43413f63d"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/config.json", "sha256": "de77945e3306c5391a87667c37a1394e1d13b73cc17e5918036ead0a2d2b8f3a"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/local/gain.json", "sha256": "d8908f98b250cbc0027b022c3c06778e3c5562e6d02f7c872c2801b9e63ec276"}
+      }
+    }
+  },
+  "evaluation": {
+    "subjects_per_cell": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission with the registered nested admission coupling",
+    "temperature": 0.25,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed_rule": "For E=8 use the exact source-cell bootstrap seed. Otherwise use 880000 + 1000 * family_index + 100 * backbone_seed + edge_count.",
+    "bootstrap_unit": "virtual participant within one family, density, and backbone",
+    "execution": "One bounded GPU process through a prospectively source-locked wrapper; family order, edge-count order, and seed order 2101, 2102, 2103 are fixed.",
+    "no_pooling": "Never pool participants across families, densities, or networks and never use any cell to filter another."
+  },
+  "within_cell_conditions_and_estimands": {
+    "conditions": ["intact", "a_off", "P_off_a_on", "relation_LOO_global", "relation_LOO_P_off_local"],
+    "estimands": "Reuse the exact topology-v1 definitions for learned/nonlearned exact decisions, correct probability, Hodge additivity, transitive coherence, Hodge-to-true tau, individualization/stability, global remote and third-party relation-LOO, a-off direct loss, P-off local scope, and exact a_T ledger/Gram reconstruction.",
+    "learned_definition": "the E observed graph edges in that cell",
+    "nonlearned_definition": "the remaining 28-E unordered query pairs",
+    "E8_replay_anchor": "The complete non-metadata metric projection for E=8 must be exactly equal to its frozen source cell. Any mismatch makes execution noninterpretable."
+  },
+  "primary_links": {
+    "intact_competence": "Within every cell, participant-bootstrap lower bounds for intact learned and nonlearned exact decision accuracy both exceed 0.50.",
+    "constructive_global_structure": "Within every cell, intact and a-off Hodge-fraction lower bounds are at least 0.95, intact transitive-triplet lower bound is at least 0.95, and intact Hodge-order tau-to-true lower bound exceeds zero.",
+    "individualized_stable_structure": "Within every cell, at least two eligible non-correct subjects exist, inter-subject tau upper bound is below 0.80, and 80-percent stable-error prevalence lower bound is at least 0.80.",
+    "P_off_global_collapse": "Within every cell, P-off/a-on nonlearned correct-probability upper bound is at most 0.55 and P-off local remote minus 0.25 times intact global remote upper bound is below zero.",
+    "P_remote_reassembly": "Within every cell, global a-off disjoint relation-LOO and third-party relational lower bounds both exceed zero.",
+    "a_off_direct_loss": "Within every cell, intact minus a-off learned correct-probability lower bound exceeds zero.",
+    "P_off_a_on_direct_nontransitive": "Within every cell, P-off/a-on learned correct-probability lower bound exceeds 0.50 and learned-minus-nonlearned lower bound exceeds zero.",
+    "exact_local_compression": "Every finite-value and shape gate passes, and common-float64 tensor-state and all-query raw-read reconstruction maximum absolute errors are each at most 1e-12."
+  },
+  "registered_density_allocation_prediction": {
+    "status": "secondary mechanistic prediction that cannot rescue or veto functional transport",
+    "global_dependence": "For each participant and density, mean intact correct probability minus P-off/a-on correct probability over all 28 pairs.",
+    "local_dependence": "For each participant and density, mean intact correct probability minus a-off correct probability over all 28 pairs.",
+    "trend_estimator": "Within each family and backbone, compute each participant's OLS slope across E in {7,8,9,10}, in probability per added observed relation, then participant-bootstrap its mean.",
+    "predictions": [
+      "global-dependence slope upper bound below zero",
+      "local-dependence slope lower bound above zero"
+    ],
+    "replication_rule": "Call the bidirectional allocation trend replicated only if both predictions pass independently in both families and all three backbones. Otherwise report partial, heterogeneous, null, or opposite directions without changing the transport outcome.",
+    "interpretation_boundary": "These are total causal policy dependencies in a nonlinear intact system, not additive norm fractions or unique component attributions."
+  },
+  "outcome_tree": {
+    "cell": "A family-density-backbone cell passes only if all eight primary links and all source, artifact, graph, nested-schedule, nested-admission, E8-anchor, GPU-runtime, tensor-freeze, orientation, finite-value, and exactness gates pass.",
+    "density": "An edge count transports only if both graph families pass independently in all three backbones.",
+    "LIU_SPARSITY_MECHANISM_TRANSPORTED": "All four edge counts transport. Promote the functional asymmetry as development-supported across the registered Liu-style sparsity range while retaining density effects and the claim boundary.",
+    "SPARSITY_DEPENDENT_OR_UNRESOLVED": "At least one but not all edge counts transports, or a primary link is heterogeneous across competent backbones or graph families. Localize only the registered density, family, and link before any item-count protocol; do not add graphs or densities post hoc.",
+    "FUNCTIONAL_ASYMMETRY_NOT_SPARSITY_TRANSPORTED": "All cells are competent and interpretable, both E=8 anchors pass, but no nonbaseline density transports the complete division. Retain topology/order transport at eight edges and reject sparsity transport.",
+    "SPARSITY_COMPETENCE_NOT_ESTABLISHED": "Any cell fails intact competence. Its mechanism result is non-interpretable; do not tune graph, model, gain, temperature, threshold, evidence magnitude, or trial count.",
+    "NONINTERPRETABLE_EXECUTION": "Any integrity or E8 replay-anchor gate fails. Repair execution under a separately recorded lock without changing the registered science."
+  },
+  "mandatory_secondary_reporting": [
+    "all primary estimands and confidence intervals for all 24 cells",
+    "learned, nonlearned, and overall sampled accuracy",
+    "symbolic-distance slope and serial-position endpoint contrast",
+    "all ranking-class counts, stable-error prevalence levels, and pairwise ranking diversity",
+    "per-relation direct, disjoint, and third-party LOO effects",
+    "retained versus stable-omitted evidence counts and correct probabilities",
+    "graph descriptors, support-trial counts, schedule hashes, admission hashes, and deterministic learned-query coverage E/28",
+    "global- and local-dependence participant slopes for every family and backbone",
+    "the excessive original symbolic-distance slope, weak serial endpoint, and seed-2104 inconsistency as carried limitations"
+  ],
+  "stop_rules": [
+    "Do not change graph families, edge identities, edge-count order, schedules, admission coupling, seeds, participant count, bootstrap, temperature, gains, thresholds, estimands, or outcomes after implementation or evaluation.",
+    "Do not tune T, W_out, P_T, a_T, evidence admission, relation magnitude, exposure count, or density-specific parameters to repair any failed cell or secondary behavior.",
+    "Do not reinterpret a secondary density trend as required for functional transport or use functional transport to manufacture a monotonic trend.",
+    "Do not begin item-count, list-linking, classic transitive-inference, Miconi-ancestry, MEG, human-mechanism, or new global-compression work before this result is frozen. If sparsity transports, item count is next."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/liu_evidence_sparsity_transport_v1.lock.json",
+    "result": "results/liu_evidence_sparsity_transport_v1.json",
+    "report": "docs/liu_evidence_sparsity_transport_v1.md"
+  }
+}

@@ -1137,6 +1137,24 @@ and its source-hash registry remain in
 `docs/asymmetric_algorithmic_organization_v1.md` and
 `benchmarks/asymmetric_algorithmic_organization_v1.json`.
 
+That sparsity protocol is now prospectively frozen as
+`liu_evidence_sparsity_transport_v1`. It uses two independent nested graph
+families centered on the original Liu cycle and the already transported
+balanced-branched graph. In each family, `E=7,8,9,10` differs only by removing
+or adding registered rank-distance-three relations, so the two families have
+the same distance multiset at every density. Preserve every common physical
+trial, its relative within-block order, and its stable admission across nested
+conditions; the two `E=8` cells must exactly replay their frozen source cells.
+
+Reuse all eight topology-v1 functional links independently in all 24
+family-by-density-by-backbone cells. The separately registered density
+allocation prediction is secondary: over all 28 queries, causal dependence on
+`P_T` should decrease and causal dependence on `a_T` should increase with each
+added relation. These paired participant slopes cannot rescue or veto
+functional transport. The contract is in
+`benchmarks/liu_evidence_sparsity_transport_v1.json`. Do not implement or run
+item-count transport before this contract is resolved and reported.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
