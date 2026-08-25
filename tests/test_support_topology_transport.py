@@ -107,9 +107,11 @@ class SupportTopologyTransportTests(unittest.TestCase):
         result = reconstruct_local_ledger(
             codes, tuple(schedules), scalars, np.asarray(states), np.asarray(reads)
         )
-        self.assertLessEqual(result["tensor_state_max_abs_error"], 1e-6)
-        self.assertLessEqual(result["ledger_tensor_state_max_abs_error"], 1e-6)
-        self.assertLessEqual(result["all_query_raw_read_max_abs_error"], 1e-6)
+        self.assertLessEqual(result["tensor_state_max_abs_error"], 1e-12)
+        self.assertLessEqual(result["ledger_tensor_state_max_abs_error"], 1e-12)
+        self.assertLessEqual(result["all_query_raw_read_max_abs_error"], 1e-12)
+        self.assertLessEqual(result["gpu_tensor_state_max_abs_error_diagnostic"], 1e-6)
+        self.assertLessEqual(result["gpu_query_read_max_abs_error_diagnostic"], 1e-6)
 
     def test_cross_cell_outcomes_do_not_pool_graphs_or_backbones(self):
         graph_ids = ["g1", "g2", "g3"]

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 from dataclasses import asdict
@@ -55,6 +56,15 @@ DEFAULT_SPECIFICATION_PATH = (
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
     ROOT / "benchmarks" / "liu_support_topology_transport_v1.lock.json"
 )
+DEFAULT_REPAIR_PATH = (
+    ROOT / "benchmarks" / "liu_support_topology_transport_v1.repair1.json"
+)
+DEFAULT_REPAIR_LOCK_PATH = (
+    ROOT / "benchmarks" / "liu_support_topology_transport_v1.repair1.lock.json"
+)
+DEFAULT_ATTEMPT1_PATH = (
+    ROOT / "results" / "liu_support_topology_transport_v1.attempt1.json"
+)
 DEFAULT_RESULT_PATH = ROOT / "results" / "liu_support_topology_transport_v1.json"
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/support_topology_transport.py",
@@ -89,16 +99,36 @@ def write_implementation_lock(
     specification_path: Path = DEFAULT_SPECIFICATION_PATH,
     lock_path: Path = DEFAULT_IMPLEMENTATION_LOCK_PATH,
 ) -> dict:
+    repairing = lock_path.resolve() == DEFAULT_REPAIR_LOCK_PATH.resolve()
     lock = {
         "schema_version": 1,
         "experiment_id": "liu-support-topology-transport-v1",
-        "implementation_status": "frozen_before_any_alternative_graph_model_evaluation",
-        "registration_commit": "b378bec2f5a3ec842b13dd6e6b1340ba6996db00",
+        "implementation_status": (
+            "frozen_after_attempt1_and_before_estimator_only_repair_rerun"
+            if repairing
+            else "frozen_before_any_alternative_graph_model_evaluation"
+        ),
+        "registration_commit": (
+            "a8ecef196ba42b894bf2be314727ad797c2609f2"
+            if repairing
+            else "b378bec2f5a3ec842b13dd6e6b1340ba6996db00"
+        ),
         "specification_sha256": file_sha256(specification_path),
         "implementation_sources": {
             name: _registration(path) for name, path in IMPLEMENTATION_SOURCES.items()
         },
     }
+    if repairing:
+        lock["repair_sources"] = {
+            "repair_registration": {
+                "path": str(DEFAULT_REPAIR_PATH.relative_to(ROOT)),
+                "sha256": file_sha256(DEFAULT_REPAIR_PATH),
+            },
+            "attempt1": {
+                "path": str(DEFAULT_ATTEMPT1_PATH.relative_to(ROOT)),
+                "sha256": file_sha256(DEFAULT_ATTEMPT1_PATH),
+            },
+        }
     write_json_exclusive(lock_path, lock)
     return lock
 
@@ -116,6 +146,7 @@ def validate_sources(
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],
+        **lock.get("repair_sources", {}),
     }
     for seed, artifacts in specification["development_backbones"]["artifacts"].items():
         for name, registration in artifacts.items():
@@ -481,8 +512,9 @@ def reconstruct_local_ledger(
     pairs = tuple(combinations(range(item_codes.shape[1]), 2))
     pair_index = {pair: index for index, pair in enumerate(pairs)}
     state_errors = []
-    ledger_state_errors = []
     read_errors = []
+    gpu_state_errors = []
+    gpu_read_errors = []
     for subject, schedule in enumerate(schedules):
         codes = np.asarray(item_codes[subject], dtype=np.float64)
         keys = np.stack([_key(codes[first], codes[second]) for first, second in pairs])
@@ -497,23 +529,27 @@ def reconstruct_local_ledger(
             orientation = 1.0 if trial.left_item < trial.right_item else -1.0
             ledger[pair_index[canonical]] += orientation * scalar
         ledger_state = ledger @ keys
+        direct_reads = reconstructed @ keys.T
         compressed_reads = (keys @ keys.T) @ ledger
-        state_errors.append(
+        state_errors.append(float(np.max(np.abs(reconstructed - ledger_state))))
+        read_errors.append(float(np.max(np.abs(direct_reads - compressed_reads))))
+        gpu_state_errors.append(
             float(np.max(np.abs(reconstructed - actual_state[subject])))
         )
-        ledger_state_errors.append(
-            float(np.max(np.abs(ledger_state - actual_state[subject])))
-        )
-        read_errors.append(
+        gpu_read_errors.append(
             float(np.max(np.abs(compressed_reads - actual_canonical_reads[subject])))
         )
     return {
         "tensor_state_max_abs_error": max(state_errors, default=0.0),
-        "ledger_tensor_state_max_abs_error": max(ledger_state_errors, default=0.0),
+        "ledger_tensor_state_max_abs_error": max(state_errors, default=0.0),
         "all_query_raw_read_max_abs_error": max(read_errors, default=0.0),
         "raw_subject_tensor_state_max_abs_error": state_errors,
-        "raw_subject_ledger_tensor_state_max_abs_error": ledger_state_errors,
+        "raw_subject_ledger_tensor_state_max_abs_error": state_errors,
         "raw_subject_query_read_max_abs_error": read_errors,
+        "gpu_tensor_state_max_abs_error_diagnostic": max(gpu_state_errors, default=0.0),
+        "gpu_query_read_max_abs_error_diagnostic": max(gpu_read_errors, default=0.0),
+        "raw_subject_gpu_tensor_state_max_abs_error_diagnostic": gpu_state_errors,
+        "raw_subject_gpu_query_read_max_abs_error_diagnostic": gpu_read_errors,
     }
 
 
@@ -753,6 +789,20 @@ def _finite_primary(metrics: dict) -> bool:
     for row in metrics["contrasts"].values():
         values.extend(row["bootstrap"].values())
     return all(value is not None and np.isfinite(value) for value in values)
+
+
+def nonrepair_projection(result: dict) -> dict:
+    """Remove only metadata and estimands authorized to change in repair 1."""
+
+    projected = copy.deepcopy(result)
+    projected.pop("source_validation", None)
+    projected.pop("decision", None)
+    projected.pop("repair_validation", None)
+    for seed in projected["seeds"].values():
+        for cell in seed["graphs"].values():
+            cell.pop("decision", None)
+            cell["metrics"].pop("local_exactness", None)
+    return projected
 
 
 def evaluate_cell(
@@ -1087,7 +1137,7 @@ def evaluate(
             for seed in specification["development_backbones"]["mandatory_seeds"]
         ],
     )
-    return {
+    result = {
         "schema_version": 1,
         "experiment_id": specification["experiment_id"],
         "registration_status": specification["registration_status"],
@@ -1104,6 +1154,24 @@ def evaluate(
             "original-graph seed-2104 self-inconsistency mismatch",
         ],
     }
+    lock = source_validation["lock"]
+    if "repair_sources" in lock:
+        attempt_path = resolve_path(lock["repair_sources"]["attempt1"]["path"])
+        attempt = load_json(attempt_path)
+        identity = nonrepair_projection(result) == nonrepair_projection(attempt)
+        result["repair_validation"] = {
+            "repair_id": "liu-support-topology-transport-v1-repair1",
+            "attempt1_path": str(attempt_path.relative_to(ROOT)),
+            "attempt1_sha256": file_sha256(attempt_path),
+            "nonrepair_values_exactly_equal": identity,
+            "changed_scope": (
+                "local_exactness estimand, dependent within-cell flags, cross-cell "
+                "decision, and source-validation metadata only"
+            ),
+        }
+        if not identity:
+            raise RuntimeError("repair 1 changed a nonrepair model output")
+    return result
 
 
 def main(args=None) -> int:
