@@ -56,7 +56,7 @@
   },
   "matched_schedule_and_admission_contract": {
     "E8_anchor": "Within each family and subject, the E=8 support schedule, cue codes, encoding states, stable relation gains, and query schedule exactly reproduce the corresponding frozen prior cell: presentation-order blockwise_random for the Liu-cycle family and topology-v1 balanced_branched_no_triangle for the branched family.",
-    "master_schedule": "Within each family, subject, and block, retain the exact E=8 physical trials and their relative order. Generate the two prospectively registered added relations once with a dedicated PCG64 stream, each with its normal signed magnitude, randomized left-right orientation, and continuous insertion key among the eight base trials. Construct E=10 from the resulting master block; obtain E=9, E=8, and E=7 only by filtering the second addition, both additions, or both additions plus the registered deletion. Thus every common relation has identical four physical trials and relative order across densities.",
+    "master_schedule": "Within each family, subject, and block, retain the exact E=8 physical trials and their relative order, assigning them fixed sort keys 0.5, 1.5, ..., 7.5. Generate the two prospectively registered added relations once with a dedicated PCG64 stream; for each addition draw left-right orientation and then a continuous insertion key uniformly on [0,8), and sort by (key, registered addition index with base trials before additions on an exact tie). Construct E=10 from the resulting master block; obtain E=9, E=8, and E=7 only by filtering the second addition, both additions, or both additions plus the registered deletion. Thus every common relation has identical four physical trials and relative order across densities.",
     "schedule_rng_seed_rule": "840000 + 1000 * family_index + subject, with family_index one or two; loop block zero through three and then added relations in registered order, drawing orientation then insertion key.",
     "stable_admission": "Retain every E=8 subject-relation admission value exactly. For each added relation, compute reliability from the same frozen subject encoding state and draw its one episode-stable Bernoulli admission once from a dedicated PCG64 stream. Subset this master relation map across densities; never resample common relations.",
     "admission_rng_seed_rule": "850000 + family_index; loop subject zero through 76 and added relations in registered order.",
@@ -113,7 +113,8 @@
     "temperature": 0.25,
     "bootstrap_samples": 10000,
     "bootstrap_interval": 0.95,
-    "bootstrap_seed_rule": "For E=8 use the exact source-cell bootstrap seed. Otherwise use 880000 + 1000 * family_index + 100 * backbone_seed + edge_count.",
+    "bootstrap_seed_rule": "For E=8 use 760000 + 100 * backbone_seed + 1 in the Liu-cycle family and 530000 + 100 * backbone_seed + 1 in the balanced-branched family, exactly matching the frozen source cells. Otherwise use 880000 + 1000 * family_index + 100 * backbone_seed + edge_count.",
+    "density_trend_bootstrap_seed_rule": "860000 + 1000 * family_index + 100 * backbone_seed",
     "bootstrap_unit": "virtual participant within one family, density, and backbone",
     "execution": "One bounded GPU process through a prospectively source-locked wrapper; family order, edge-count order, and seed order 2101, 2102, 2103 are fixed.",
     "no_pooling": "Never pool participants across families, densities, or networks and never use any cell to filter another."
