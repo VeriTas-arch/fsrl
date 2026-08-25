@@ -6,6 +6,7 @@ import numpy as np
 from fsrl.dual_state_reduced_algorithm import (
     ReducedParameters,
     accumulator_fit,
+    antisymmetric_field_from_margin_bundle,
     complete_geometry,
     hodge_potential,
     local_edge_compression,
@@ -27,6 +28,19 @@ class DualStateReducedAlgorithmTests(unittest.TestCase):
         field = potential @ self.geometry.incidence.T
         np.testing.assert_allclose(
             hodge_potential(field, self.geometry), potential, atol=1e-12
+        )
+
+    def test_scalar_margin_bundle_is_antisymmetrized_once(self):
+        bundle = {}
+        expected = []
+        for index, (first, second) in enumerate(self.geometry.pairs):
+            forward = float(index + 1)
+            reverse = float(-index - 0.5)
+            bundle[(first, second)] = forward
+            bundle[(second, first)] = reverse
+            expected.append(0.5 * (forward - reverse))
+        np.testing.assert_allclose(
+            antisymmetric_field_from_margin_bundle(bundle, self.geometry), expected
         )
 
     def test_edge_kernel_exactly_reassembles_tensor_trace(self):

@@ -29,7 +29,7 @@ from .ranking_protocol import load_ranking_protocol
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.json"
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.repair1.lock.json"
+    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.repair2.lock.json"
 )
 TRAJECTORY_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.trajectories.npz"
 RESULT_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.json"
@@ -701,6 +701,18 @@ def _fit_models(
     return accumulator, candidate, unconstrained, fit
 
 
+def antisymmetric_field_from_margin_bundle(
+    bundle: dict[tuple[int, int], float], geometry: Geometry
+) -> np.ndarray:
+    return np.asarray(
+        [
+            0.5 * (float(bundle[(first, second)]) - float(bundle[(second, first)]))
+            for first, second in geometry.pairs
+        ],
+        dtype=np.float64,
+    )
+
+
 def _evaluator_field(evaluator: FrozenFastWeightEvaluator, fast_weights: torch.Tensor, geometry: Geometry) -> np.ndarray:
     ordered = tuple(
         oriented
@@ -712,12 +724,7 @@ def _evaluator_field(evaluator: FrozenFastWeightEvaluator, fast_weights: torch.T
     )
     fields = np.empty((evaluator.config.bs, len(geometry.pairs)), dtype=np.float64)
     for subject, bundle in enumerate(logits):
-        for index, (first, second) in enumerate(geometry.pairs):
-            forward = np.asarray(bundle[(first, second)])
-            reverse = np.asarray(bundle[(second, first)])
-            fields[subject, index] = 0.5 * (
-                (forward[1] - forward[0]) - (reverse[1] - reverse[0])
-            )
+        fields[subject] = antisymmetric_field_from_margin_bundle(bundle, geometry)
     return fields
 
 

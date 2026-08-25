@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v1",
+  "freeze_status": "implementation_repair_frozen_after_noninformative_preservation_interface_failure_and_before_any_result_write_or_interpretation",
+  "registration_commit": "3622dd6",
+  "repair1_commit": "4bb869a",
+  "specification_sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80",
+  "superseded_lock": {
+    "path": "benchmarks/dual_state_reduced_algorithm_v1.repair1.lock.json",
+    "sha256": "2561287af9621ececd130170178f088ff42b009989226a4e45cc5bae255ab2ad"
+  },
+  "failed_attempt": {
+    "stage": "seed-2104 preservation field reconstruction after development extraction and fitting but before any Liu metric assembly, output write, or result print",
+    "error": "IndexError: too many indices for array: array is 0-dimensional, but 1 were indexed",
+    "scientific_metrics_observed": false,
+    "registered_outputs_absent": true,
+    "cause": "FrozenFastWeightEvaluator.readout_logits already returns the scalar action-1-minus-action-0 margin. The compression runner incorrectly indexed each returned scalar as a two-logit vector."
+  },
+  "repair": {
+    "scope": "Antisymmetrize the two registered oriented scalar margins directly and add a scalar-margin bundle regression test.",
+    "scientific_contract_changed": false,
+    "seeds_episodes_models_thresholds_optimizer_or_fit_changed": false,
+    "prior_in_memory_fit_discarded_without_inspection": true
+  },
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/dual_state_reduced_algorithm.py",
+      "sha256": "96f3f278b5f46582f57ec44b66151cc9dc61cfd84324d2d283b6fbe3a9b7fd02"
+    },
+    "tests": {
+      "path": "tests/test_dual_state_reduced_algorithm.py",
+      "sha256": "e167113fb983d60d6b5b42eb2c2f262d502fc343699fbe8620acdfefe8b161ca"
+    }
+  },
+  "preexecution_validation": {
+    "targeted_tests": "8 passed",
+    "python_compile": "passed",
+    "ruff": "passed",
+    "registered_outputs_absent": true
+  },
+  "next_step": "Commit and push this repair lock before restarting the single registered GPU execution from the beginning."
+}
