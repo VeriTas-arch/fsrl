@@ -1,0 +1,42 @@
+schema_version = 1
+id = "dual_state_reduction_v2"
+title = "Scalar-history reduction v2"
+chapter = "algorithmic_compression"
+order = 10
+status = "valid_negative"
+review_state = "indexed"
+question = "Does adding low-capacity scalar history close global update amount?"
+finding = "Scalar history is insufficient, while preserving evidence that update amount depends on history."
+boundary = "The negative does not deny history dependence; it rejects the registered scalar closure."
+
+[[records]]
+path = "records/benchmarks/dual_state_reduced_algorithm_v2.json"
+legacy_path = "benchmarks/dual_state_reduced_algorithm_v2.json"
+role = "registered_contract"
+sha256 = "e8e5497a607be1ca0bd6ee0dd7de6361dd9b5fd768943e55b7800d50a10fdb40"
+bytes = 8742
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/dual_state_reduced_algorithm_v2.lock.json"
+legacy_path = "benchmarks/dual_state_reduced_algorithm_v2.lock.json"
+role = "execution_lock"
+sha256 = "0e12b87e99ba11d00be5b64571a1b74449e55ec1e9689c45dee6ed73f95d8b11"
+bytes = 1018
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/docs/dual_state_reduced_algorithm_v2.md"
+legacy_path = "docs/dual_state_reduced_algorithm_v2.md"
+role = "report"
+sha256 = "6c51d516bdf8950781ce457fd2186f205e4cbf9091ce13a993a301cf4306e2f7"
+bytes = 4902
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/results/dual_state_reduced_algorithm_v2.json"
+legacy_path = "results/dual_state_reduced_algorithm_v2.json"
+role = "frozen_result"
+sha256 = "4326ec76995114848d46ad59e815d365af1b179fad31e563d5fed586a241fe5a"
+bytes = 24063
+source_ref = "refs/tags/liu-mainline-v1"

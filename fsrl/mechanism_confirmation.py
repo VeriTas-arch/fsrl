@@ -26,21 +26,22 @@ from .confirmation import (
 )
 from .formal_runtime import require_formal_runtime
 from .history_state_factorial import run_history_state_factorial
+from .study_registry import resolve_record
 from .support_factor_swap import run_support_factor_swap
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "mechanism_confirmation_v1.json"
-DEFAULT_RESULT_PATH = ROOT / "results" / "mechanism_confirmation_v1.json"
-DEVELOPMENT_TRAINING_PATH = ROOT / "benchmarks" / "pilot_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/mechanism_confirmation_v1.json")
+DEFAULT_RESULT_PATH = resolve_record("results/mechanism_confirmation_v1.json")
+DEVELOPMENT_TRAINING_PATH = resolve_record("benchmarks/pilot_v1.json")
 COMPONENT_SOURCES = {
-    "assembly": ROOT / "benchmarks" / "assembly_trajectory_v1.json",
-    "factor_swap": ROOT / "benchmarks" / "support_factor_swap_v1.json",
-    "history_state": ROOT / "benchmarks" / "history_state_factorial_v1.json",
+    "assembly": resolve_record("benchmarks/assembly_trajectory_v1.json"),
+    "factor_swap": resolve_record("benchmarks/support_factor_swap_v1.json"),
+    "history_state": resolve_record("benchmarks/history_state_factorial_v1.json"),
 }
 COMPONENT_RESULTS = {
-    "assembly": ROOT / "results" / "assembly_trajectory_v1.json",
-    "factor_swap": ROOT / "results" / "support_factor_swap_v1.json",
-    "history_state": ROOT / "results" / "history_state_factorial_v1.json",
+    "assembly": resolve_record("results/assembly_trajectory_v1.json"),
+    "factor_swap": resolve_record("results/support_factor_swap_v1.json"),
+    "history_state": resolve_record("results/history_state_factorial_v1.json"),
 }
 COMPONENT_RUNNERS = {
     "assembly": run_assembly_trajectory,

@@ -25,15 +25,16 @@ from .meta_tasks import GenericRankingTaskGenerator, RankingEpisode
 from .meta_train import build_meta_input_sequence
 from .model_behavior_reproduction_map import _model_record
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-SPECIFICATION_PATH = ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.json"
+SPECIFICATION_PATH = resolve_record("benchmarks/dual_state_reduced_algorithm_v1.json")
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.repair3.lock.json"
+    resolve_record("benchmarks/dual_state_reduced_algorithm_v1.repair3.lock.json")
 )
-TRAJECTORY_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.trajectories.npz"
-RESULT_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.json"
-PROTOCOL_PATH = ROOT / "benchmarks" / "liu_v2.json"
+TRAJECTORY_PATH = resolve_record("results/dual_state_reduced_algorithm_v1.trajectories.npz")
+RESULT_PATH = resolve_record("results/dual_state_reduced_algorithm_v1.json")
+PROTOCOL_PATH = resolve_record("benchmarks/liu_v2.json")
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/dual_state_reduced_algorithm.py",
     "tests": "tests/test_dual_state_reduced_algorithm.py",
@@ -98,7 +99,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],
@@ -109,7 +110,7 @@ def validate_sources(
                 registrations[f"{group}_{seed}_{name}"] = registration
     checks = []
     for name, registration in registrations.items():
-        path = ROOT / registration["path"]
+        path = resolve_record(registration["path"])
         observed = file_sha256(path)
         checks.append(
             {
@@ -794,10 +795,10 @@ def _margin_logits(fields: np.ndarray, geometry: Geometry) -> tuple[dict, ...]:
 
 
 def _human_intervals() -> tuple[dict, dict, dict, dict]:
-    map_spec = load_json(ROOT / "benchmarks" / "model_behavior_reproduction_map_v1.json")
-    map_result = load_json(ROOT / "results" / "model_behavior_reproduction_map_v1.json")
+    map_spec = load_json(resolve_record("benchmarks/model_behavior_reproduction_map_v1.json"))
+    map_result = load_json(resolve_record("results/model_behavior_reproduction_map_v1.json"))
     benchmark_registration = map_spec["registered_sources"]["human_benchmark"]
-    benchmark = load_json(ROOT / benchmark_registration["path"])
+    benchmark = load_json(resolve_record(benchmark_registration["path"]))
     intervals = {
         name: {"lower": float(value["lower"]), "upper": float(value["upper"])}
         for name, value in benchmark["bootstrap"]["metrics"].items()
@@ -814,7 +815,7 @@ def _human_intervals() -> tuple[dict, dict, dict, dict]:
 def _behavior_flags(seed: int, behavior: dict) -> dict:
     map_spec, intervals, serial_interval, tau_interval = _human_intervals()
     evaluation = load_json(
-        ROOT / "benchmarks" / "dual_evidence_access_confirmation_v2_4.json"
+        resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.json")
     )["liu_evaluation"]
     subjects = int(evaluation["subjects"])
     counts = (
@@ -870,9 +871,11 @@ def evaluate_preservation_seed(
     specification: dict,
     geometry: Geometry,
 ) -> tuple[dict, dict[str, np.ndarray]]:
-    evaluation = load_json(ROOT / "benchmarks" / "dual_evidence_access_confirmation_v2_4.json")["liu_evaluation"]
+    evaluation = load_json(resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.json"))["liu_evaluation"]
     protocol = load_ranking_protocol(PROTOCOL_PATH)
-    net, config, _ = load_retro_checkpoint(ROOT / artifact["checkpoint"]["path"], 77)
+    net, config, _ = load_retro_checkpoint(
+        resolve_record(artifact["checkpoint"]["path"]), 77
+    )
     evaluator = FrozenFastWeightEvaluator(
         net,
         config,
@@ -890,7 +893,7 @@ def evaluate_preservation_seed(
     full_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     full_field = _evaluator_field(evaluator, full_weights, geometry)
     local_raw, identity_raw, local_error = _liu_local(evaluator, geometry)
-    gain = float(load_json(ROOT / artifact["gain"]["path"])["lambda_L"])
+    gain = float(load_json(resolve_record(artifact["gain"]["path"]))["lambda_L"])
     intact = global_field + gain * local_raw
     identity_intact = global_field + gain * identity_raw
 
@@ -964,7 +967,7 @@ def evaluate_preservation_seed(
     )
     behavior_record = _behavior_flags(seed, behavior)
     identity_record = _behavior_flags(seed, identity_behavior)
-    reference = load_json(ROOT / "results" / "model_behavior_reproduction_map_v1.json")["networks"][str(seed)]
+    reference = load_json(resolve_record("results/model_behavior_reproduction_map_v1.json"))["networks"][str(seed)]
     behavior_matches = {
         name: behavior_record["flags"][name] == reference["flags"][name]
         for name in reference["flags"]
@@ -1059,7 +1062,7 @@ def build_result(specification_path: Path, implementation_lock_path: Path) -> tu
     for seed in specification["development_artifacts"]["mandatory_seeds"]:
         artifact = specification["development_artifacts"]["artifacts"][str(seed)]
         records = extract_development_seed(
-            ROOT / artifact["checkpoint"]["path"],
+            resolve_record(artifact["checkpoint"]["path"]),
             rng_seed=int(specification["generic_trajectory_contract"]["episode_rng_seeds"][str(seed)]),
             batches=int(specification["generic_trajectory_contract"]["batches_per_backbone"]),
             geometry=geometry,

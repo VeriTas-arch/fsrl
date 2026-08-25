@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 
 from .ranking_protocol import QueryTrial, SupportTrial, load_ranking_protocol
+from .study_registry import resolve_record
 from .subject_encoding import (
     SubjectEncodingConfig,
     SubjectEncodingState,
@@ -50,9 +51,8 @@ def liu_graph_signature() -> GraphSignature:
 def held_out_liu_graph_signatures() -> frozenset[GraphSignature]:
     """Exclude both source-correct Liu geometry and its rank-axis reflection."""
 
-    benchmark_dir = Path(__file__).resolve().parents[1] / "benchmarks"
     return frozenset(
-        graph_signature_from_protocol(benchmark_dir / filename)
+        graph_signature_from_protocol(resolve_record(f"benchmarks/{filename}"))
         for filename in ("liu_v1.json", "liu_v2.json")
     )
 

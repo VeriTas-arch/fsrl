@@ -11,12 +11,13 @@ from fsrl.dual_evidence_access_pilot import (
     blockwise_derangements,
     cross_seed_decision,
 )
+from fsrl.study_registry import resolve_record
 
 
 class DualEvidenceAccessPilotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.specification = load_json("benchmarks/dual_evidence_access_pilot_v2_4.json")
+        cls.specification = load_json(resolve_record("benchmarks/dual_evidence_access_pilot_v2_4.json"))
 
     def test_access_factor_preserves_retained_and_weakens_omitted(self):
         admission = np.asarray([1.0, 0.0, 0.0])

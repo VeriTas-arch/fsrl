@@ -10,6 +10,7 @@ from fsrl.history_state_factorial import (
     validate_registered_sources,
     vector_factorial,
 )
+from fsrl.study_registry import resolve_record
 
 
 class HistoryStateFactorialTests(unittest.TestCase):
@@ -62,12 +63,12 @@ class HistoryStateFactorialTests(unittest.TestCase):
         )
 
     def test_registered_sources_are_immutable(self):
-        specification = load_json("benchmarks/history_state_factorial_v1.json")
+        specification = load_json(resolve_record("benchmarks/history_state_factorial_v1.json"))
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
 
     def test_result_closes_pilots_without_formal_seed_access(self):
-        result = load_json("results/history_state_factorial_v1.json")
+        result = load_json(resolve_record("results/history_state_factorial_v1.json"))
         self.assertEqual(set(result["pilot_seeds"]), {"1901", "1902"})
         self.assertTrue(result["overall_diagnosis"]["pilot_stop_rule_met"])
         self.assertEqual(

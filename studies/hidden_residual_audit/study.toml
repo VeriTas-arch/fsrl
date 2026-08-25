@@ -1,0 +1,34 @@
+schema_version = 1
+id = "hidden_residual_audit"
+title = "Hidden learned-relation residual audit"
+chapter = "local_fidelity"
+order = 0
+status = "valid_negative"
+review_state = "indexed"
+question = "Is an existing cross-relation correctness direction present in response hidden state but suppressed by W_out?"
+finding = "A small direct-enriched residual exists, but no shared correctness direction is hidden from the current readout; the simplest readout-only route is rejected."
+boundary = "The result does not show that persistent local information is absent at earlier operator states."
+
+[[records]]
+path = "records/benchmarks/hidden_residual_audit_v1.json"
+legacy_path = "benchmarks/hidden_residual_audit_v1.json"
+role = "registered_contract"
+sha256 = "cf7f10b3c15251f5bd4dbfec9933a64284fc124de0d6c32690a7c21bf9cb35cc"
+bytes = 9421
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/docs/hidden_residual_audit_v1.md"
+legacy_path = "docs/hidden_residual_audit_v1.md"
+role = "report"
+sha256 = "e0dc5ec20c7af3fcfaffb312b6ceb2ff29855dec84567628e0007cfeaae425b8"
+bytes = 9357
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/results/hidden_residual_audit_v1.json"
+legacy_path = "results/hidden_residual_audit_v1.json"
+role = "frozen_result"
+sha256 = "627577ed0ea2db1fb494cde37bebadc75b824b6873f163a353888ac502a593ff"
+bytes = 174073
+source_ref = "refs/tags/liu-mainline-v1"

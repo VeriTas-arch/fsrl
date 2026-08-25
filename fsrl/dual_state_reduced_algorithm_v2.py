@@ -18,11 +18,12 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-SPECIFICATION_PATH = ROOT / "benchmarks" / "dual_state_reduced_algorithm_v2.json"
-IMPLEMENTATION_LOCK_PATH = ROOT / "benchmarks" / "dual_state_reduced_algorithm_v2.lock.json"
-RESULT_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v2.json"
+SPECIFICATION_PATH = resolve_record("benchmarks/dual_state_reduced_algorithm_v2.json")
+IMPLEMENTATION_LOCK_PATH = resolve_record("benchmarks/dual_state_reduced_algorithm_v2.lock.json")
+RESULT_PATH = resolve_record("results/dual_state_reduced_algorithm_v2.json")
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/dual_state_reduced_algorithm_v2.py",
     "tests": "tests/test_dual_state_reduced_algorithm_v2.py",
@@ -64,18 +65,18 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],
     }
-    v1_contract = load_json(ROOT / registrations["v1_contract"]["path"])
+    v1_contract = load_json(resolve_record(registrations["v1_contract"]["path"]))
     for seed, artifacts in v1_contract["preservation_artifacts"]["artifacts"].items():
         for name, registration in artifacts.items():
             registrations[f"preservation_{seed}_{name}"] = registration
     checks = []
     for name, registration in registrations.items():
-        observed = file_sha256(ROOT / registration["path"])
+        observed = file_sha256(resolve_record(registration["path"]))
         checks.append(
             {
                 "name": name,
@@ -390,11 +391,13 @@ def evaluate_preservation(
     geometry: v1.Geometry,
 ) -> dict:
     confirmation = load_json(
-        ROOT / "benchmarks" / "dual_evidence_access_confirmation_v2_4.json"
+        resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.json")
     )
     evaluation = confirmation["liu_evaluation"]
     protocol = load_ranking_protocol(v1.PROTOCOL_PATH)
-    net, config, _ = load_retro_checkpoint(ROOT / artifact["checkpoint"]["path"], 77)
+    net, config, _ = load_retro_checkpoint(
+        resolve_record(artifact["checkpoint"]["path"]), 77
+    )
     evaluator = FrozenFastWeightEvaluator(
         net,
         config,
@@ -412,7 +415,7 @@ def evaluate_preservation(
     full_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     full_field = v1._evaluator_field(evaluator, full_weights, geometry)
     local_raw, identity_raw, local_error = v1._liu_local(evaluator, geometry)
-    gain = float(load_json(ROOT / artifact["gain"]["path"])["lambda_L"])
+    gain = float(load_json(resolve_record(artifact["gain"]["path"]))["lambda_L"])
     intact = global_field + gain * local_raw
 
     relations = tuple(protocol.support_pairs_higher_lower)
@@ -477,7 +480,7 @@ def evaluate_preservation(
         temperature=temperature,
     )
     behavior_record = v1._behavior_flags(seed, behavior)
-    reference = load_json(ROOT / "results" / "model_behavior_reproduction_map_v1.json")["networks"][str(seed)]
+    reference = load_json(resolve_record("results/model_behavior_reproduction_map_v1.json"))["networks"][str(seed)]
     matches = {
         name: behavior_record["flags"][name] == reference["flags"][name]
         for name in reference["flags"]
@@ -517,8 +520,12 @@ def build_result(
 ) -> dict:
     source_validation = validate_sources(specification_path, implementation_lock_path)
     specification = load_json(specification_path)
-    v1_result = load_json(ROOT / specification["registered_sources"]["v1_result"]["path"])
-    trajectory_path = ROOT / specification["registered_sources"]["v1_trajectory_artifact"]["path"]
+    v1_result = load_json(
+        resolve_record(specification["registered_sources"]["v1_result"]["path"])
+    )
+    trajectory_path = resolve_record(
+        specification["registered_sources"]["v1_trajectory_artifact"]["path"]
+    )
     records, artifact_checks = load_development_records(trajectory_path, v1_result)
     geometry = v1.complete_geometry()
     folds = {}
@@ -544,7 +551,7 @@ def build_result(
     all_records = [record for seed in (2101, 2102, 2103) for record in records[str(seed)]]
     final_parameters = fit_scalar_history(all_records)
     runtime = v1.configure_runtime()
-    v1_specification = load_json(ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.json")
+    v1_specification = load_json(resolve_record("benchmarks/dual_state_reduced_algorithm_v1.json"))
     preservation = {
         str(seed): evaluate_preservation(
             seed,

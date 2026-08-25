@@ -16,11 +16,12 @@ from fsrl.assembly_trajectory import (
 )
 from fsrl.constructive import ExactRankingPosterior
 from fsrl.ranking_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class AssemblyTrajectoryTests(unittest.TestCase):
     def setUp(self):
-        self.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         self.geometry = build_complete_graph_geometry(self.protocol)
 
     def test_scalar_and_vector_additive_fields_have_unit_gradient_fraction(self):
@@ -106,10 +107,10 @@ class AssemblyTrajectoryTests(unittest.TestCase):
         )
 
     def test_registered_result_contains_both_unfiltered_pilot_seeds(self):
-        specification = load_json("benchmarks/assembly_trajectory_v1.json")
+        specification = load_json(resolve_record("benchmarks/assembly_trajectory_v1.json"))
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
-        result = load_json("results/assembly_trajectory_v1.json")
+        result = load_json(resolve_record("results/assembly_trajectory_v1.json"))
         self.assertEqual(set(result["pilot_seeds"]), {"1901", "1902"})
         for row in result["pilot_seeds"].values():
             self.assertIn("raw_subject_level", row)

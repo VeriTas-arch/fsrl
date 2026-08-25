@@ -13,6 +13,7 @@ from fsrl.evidence_sparsity_transport import (
     validate_sparsity_contract,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 def _cell(*, interpretable=True, competence=True, all_pass=True):
@@ -49,7 +50,7 @@ def _trend(passed=True):
 class EvidenceSparsityTransportTests(unittest.TestCase):
     def setUp(self):
         self.specification = load_json(DEFAULT_SPECIFICATION_PATH)
-        self.base = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.base = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
 
     def test_registered_nested_graphs_are_deterministic_and_distance_matched(self):
         result = validate_sparsity_contract(self.specification)

@@ -1,5 +1,4 @@
 import unittest
-from pathlib import Path
 
 import numpy as np
 
@@ -17,6 +16,7 @@ from fsrl.operator_output_semantics import (
     stage_relation_metrics,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 def _summary(lower, upper):
@@ -26,7 +26,7 @@ def _summary(lower, upper):
 class OperatorOutputSemanticsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        cls.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         cls.geometry = build_complete_graph_geometry(cls.protocol)
 
     def test_hodge_removes_additive_field(self):
@@ -96,21 +96,21 @@ class OperatorOutputSemanticsTests(unittest.TestCase):
         )
 
     def test_registered_sources_are_immutable(self):
-        specification = load_json("benchmarks/operator_output_semantics_v1.json")
+        specification = load_json(resolve_record("benchmarks/operator_output_semantics_v1.json"))
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
 
     def test_registered_result_is_complete_and_source_locked(self):
-        result = load_json("results/operator_output_semantics_v1.json")
+        result = load_json(resolve_record("results/operator_output_semantics_v1.json"))
         self.assertFalse(result["formal_seed_access"])
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(Path(result["implementation"]["path"])),
+            file_sha256(resolve_record(result["implementation"]["path"])),
         )
         self.assertEqual(
             result["specification"]["sha256"],
-            file_sha256(Path(result["specification"]["path"])),
+            file_sha256(resolve_record(result["specification"]["path"])),
         )
         self.assertEqual(
             result["overall_diagnosis"]["outcome"],

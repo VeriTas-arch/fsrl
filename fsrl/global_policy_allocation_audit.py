@@ -32,39 +32,36 @@ from .liu_eval import (
 )
 from .local_behavior_attribution import exact_probability
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "global_policy_allocation_audit_v1.json"
+    resolve_record("benchmarks/global_policy_allocation_audit_v1.json")
 )
 INITIAL_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "global_policy_allocation_audit_v1.lock.json"
+    resolve_record("benchmarks/global_policy_allocation_audit_v1.lock.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "global_policy_allocation_audit_v1.repair1.lock.json"
+    resolve_record("benchmarks/global_policy_allocation_audit_v1.repair1.lock.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "global_policy_allocation_audit_v1.json"
+DEFAULT_RESULT_PATH = resolve_record("results/global_policy_allocation_audit_v1.json")
 NONINTERPRETABLE_ATTEMPT_PATH = (
-    ROOT
-    / "results"
-    / "global_policy_allocation_audit_v1_attempt1_noninterpretable.json"
+    resolve_record("results/global_policy_allocation_audit_v1_attempt1_noninterpretable.json")
 )
 UPSTREAM_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "global_policy_field_fingerprint_replication_v1.json"
+    resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.json")
 )
 UPSTREAM_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "global_policy_field_fingerprint_replication_v1.lock.json"
+    resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.lock.json")
 )
 UPSTREAM_ARTIFACT_LOCK_PATH = (
-    ROOT
-    / "benchmarks"
-    / "global_policy_field_fingerprint_replication_v1.artifact_lock.json"
+    resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.artifact_lock.json")
 )
 UPSTREAM_OUTPUT_ROOT = (
     ROOT / "output" / "global-policy-field-fingerprint-replication-v1"
 )
 UPSTREAM_RESULT_PATH = (
-    ROOT / "results" / "global_policy_field_fingerprint_replication_v1.json"
+    resolve_record("results/global_policy_field_fingerprint_replication_v1.json")
 )
 
 TOLERANCE = 1e-10
@@ -105,7 +102,7 @@ UPSTREAM_ONLY_REUSED_SOURCES = {
 
 def _resolve(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def _canonical_paths(parsed: argparse.Namespace) -> None:
@@ -170,11 +167,11 @@ def validate_sources(
     ):
         raise RuntimeError("allocation implementation lock identity mismatch")
     expected_supersedes = {
-        "path": str(INITIAL_IMPLEMENTATION_LOCK_PATH.relative_to(ROOT)),
+        "path": legacy_identifier(INITIAL_IMPLEMENTATION_LOCK_PATH),
         "sha256": file_sha256(INITIAL_IMPLEMENTATION_LOCK_PATH),
     }
     expected_attempt = {
-        "path": str(NONINTERPRETABLE_ATTEMPT_PATH.relative_to(ROOT)),
+        "path": legacy_identifier(NONINTERPRETABLE_ATTEMPT_PATH),
         "sha256": file_sha256(NONINTERPRETABLE_ATTEMPT_PATH),
     }
     if lock.get("supersedes") != expected_supersedes:
@@ -230,7 +227,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "audit_specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["audit_specification_sha256"],
         },
         "superseded_implementation_lock": expected_supersedes,
@@ -316,7 +313,7 @@ def validate_upstream(specification: dict) -> tuple[dict, dict, dict[str, np.nda
             "network_population_inference"
         ],
         "result": {
-            "path": str(UPSTREAM_RESULT_PATH.relative_to(ROOT)),
+            "path": legacy_identifier(UPSTREAM_RESULT_PATH),
             "sha256": file_sha256(UPSTREAM_RESULT_PATH),
         },
     }

@@ -13,14 +13,15 @@ import numpy as np
 from .behavioral import kendall_tau_positions
 from .human_benchmark import load_human_cohort
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-SPECIFICATION_PATH = ROOT / "benchmarks" / "model_behavior_reproduction_map_v1.json"
+SPECIFICATION_PATH = resolve_record("benchmarks/model_behavior_reproduction_map_v1.json")
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "model_behavior_reproduction_map_v1.lock.json"
+    resolve_record("benchmarks/model_behavior_reproduction_map_v1.lock.json")
 )
-OUTPUT_PATH = ROOT / "results" / "model_behavior_reproduction_map_v1.json"
-PROTOCOL_PATH = ROOT / "benchmarks" / "liu_v2.json"
+OUTPUT_PATH = resolve_record("results/model_behavior_reproduction_map_v1.json")
+PROTOCOL_PATH = resolve_record("benchmarks/liu_v2.json")
 
 IMPLEMENTATION_SOURCES = {
     "map_runner": "fsrl/model_behavior_reproduction_map.py",
@@ -57,7 +58,7 @@ def validate_sources(
         == {
             name: {
                 "path": path,
-                "sha256": file_sha256(ROOT / path),
+                "sha256": file_sha256(resolve_record(path)),
             }
             for name, path in IMPLEMENTATION_SOURCES.items()
         }
@@ -65,7 +66,7 @@ def validate_sources(
         raise RuntimeError("behavior reproduction map implementation lock mismatch")
     registrations = {
         "map_specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **specification["registered_sources"],
@@ -73,7 +74,7 @@ def validate_sources(
     }
     checks = []
     for name, registration in registrations.items():
-        path = ROOT / registration["path"]
+        path = resolve_record(registration["path"])
         observed = file_sha256(path)
         checks.append(
             {
@@ -390,8 +391,8 @@ def build_map(
     source_validation = validate_sources(specification_path, implementation_lock_path)
     specification = load_json(specification_path)
     sources = specification["registered_sources"]
-    human_benchmark = load_json(ROOT / sources["human_benchmark"]["path"])
-    model_result = load_json(ROOT / sources["model_result"]["path"])
+    human_benchmark = load_json(resolve_record(sources["human_benchmark"]["path"]))
+    model_result = load_json(resolve_record(sources["model_result"]["path"]))
     protocol = load_ranking_protocol(PROTOCOL_PATH)
     human_subjects = []
     for name, cohort in (
@@ -401,7 +402,7 @@ def build_map(
         registration = sources[name]
         human_subjects.extend(
             load_human_cohort(
-                ROOT / registration["path"],
+                resolve_record(registration["path"]),
                 cohort,
                 protocol,
                 expected_sha256=registration["sha256"],

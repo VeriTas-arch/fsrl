@@ -16,37 +16,32 @@ from scipy import optimize
 
 from .formal_runtime import require_formal_runtime
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.json"
+    resolve_record("benchmarks/human_metric_constructive_comparator_v1.json")
 )
 INITIAL_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.lock.json"
+    resolve_record("benchmarks/human_metric_constructive_comparator_v1.lock.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT
-    / "benchmarks"
-    / "human_metric_constructive_comparator_v1.repair1.lock.json"
+    resolve_record("benchmarks/human_metric_constructive_comparator_v1.repair1.lock.json")
 )
 DEFAULT_REPAIR_PATH = (
-    ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.repair1.json"
+    resolve_record("benchmarks/human_metric_constructive_comparator_v1.repair1.json")
 )
 NONINTERPRETABLE_ATTEMPT_PATH = (
-    ROOT
-    / "results"
-    / "human_metric_constructive_comparator_v1_attempt1_noninterpretable.json"
+    resolve_record("results/human_metric_constructive_comparator_v1_attempt1_noninterpretable.json")
 )
 DEFAULT_PARAMETER_PATH = (
-    ROOT / "benchmarks" / "human_metric_constructive_comparator_v1.parameters.json"
+    resolve_record("benchmarks/human_metric_constructive_comparator_v1.parameters.json")
 )
 DEFAULT_PARAMETER_LOCK_PATH = (
-    ROOT
-    / "benchmarks"
-    / "human_metric_constructive_comparator_v1.parameters.lock.json"
+    resolve_record("benchmarks/human_metric_constructive_comparator_v1.parameters.lock.json")
 )
 DEFAULT_RESULT_PATH = (
-    ROOT / "results" / "human_metric_constructive_comparator_v1.json"
+    resolve_record("results/human_metric_constructive_comparator_v1.json")
 )
 
 REQUIRED_COLUMNS = {
@@ -97,7 +92,7 @@ def write_json_exclusive(path: Path, value: dict) -> None:
 
 def _resolve(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def _git(*arguments: str) -> str:
@@ -177,15 +172,15 @@ def validate_sources(
     lock = load_json(implementation_lock_path)
     repair = load_json(DEFAULT_REPAIR_PATH)
     expected_supersedes = {
-        "path": str(INITIAL_IMPLEMENTATION_LOCK_PATH.relative_to(ROOT)),
+        "path": legacy_identifier(INITIAL_IMPLEMENTATION_LOCK_PATH),
         "sha256": file_sha256(INITIAL_IMPLEMENTATION_LOCK_PATH),
     }
     expected_attempt = {
-        "path": str(NONINTERPRETABLE_ATTEMPT_PATH.relative_to(ROOT)),
+        "path": legacy_identifier(NONINTERPRETABLE_ATTEMPT_PATH),
         "sha256": file_sha256(NONINTERPRETABLE_ATTEMPT_PATH),
     }
     expected_repair = {
-        "path": str(DEFAULT_REPAIR_PATH.relative_to(ROOT)),
+        "path": legacy_identifier(DEFAULT_REPAIR_PATH),
         "sha256": file_sha256(DEFAULT_REPAIR_PATH),
     }
     if not (
@@ -1273,7 +1268,7 @@ def derive(
             DEFAULT_IMPLEMENTATION_LOCK_PATH
         ),
         "parameter_artifact": {
-            "path": str(DEFAULT_PARAMETER_PATH.relative_to(ROOT)),
+            "path": legacy_identifier(DEFAULT_PARAMETER_PATH),
             "sha256": "populated_after_exclusive_artifact_write",
         },
         "derivation_passed": passed,

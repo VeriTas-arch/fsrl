@@ -48,24 +48,25 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "liu_support_topology_transport_v1.json"
+    resolve_record("benchmarks/liu_support_topology_transport_v1.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "liu_support_topology_transport_v1.lock.json"
+    resolve_record("benchmarks/liu_support_topology_transport_v1.lock.json")
 )
 DEFAULT_REPAIR_PATH = (
-    ROOT / "benchmarks" / "liu_support_topology_transport_v1.repair1.json"
+    resolve_record("benchmarks/liu_support_topology_transport_v1.repair1.json")
 )
 DEFAULT_REPAIR_LOCK_PATH = (
-    ROOT / "benchmarks" / "liu_support_topology_transport_v1.repair1.lock.json"
+    resolve_record("benchmarks/liu_support_topology_transport_v1.repair1.lock.json")
 )
 DEFAULT_ATTEMPT1_PATH = (
-    ROOT / "results" / "liu_support_topology_transport_v1.attempt1.json"
+    resolve_record("results/liu_support_topology_transport_v1.attempt1.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "liu_support_topology_transport_v1.json"
+DEFAULT_RESULT_PATH = resolve_record("results/liu_support_topology_transport_v1.json")
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/support_topology_transport.py",
     "tests": "tests/test_support_topology_transport.py",
@@ -88,11 +89,11 @@ def write_json_exclusive(path: Path, value: dict) -> None:
 
 def resolve_path(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(ROOT / path)}
+    return {"path": path, "sha256": file_sha256(resolve_record(path))}
 
 
 def write_implementation_lock(
@@ -121,7 +122,7 @@ def write_implementation_lock(
     if repairing:
         lock["repair_sources"] = {
             "repair_registration": {
-                "path": str(DEFAULT_REPAIR_PATH.relative_to(ROOT)),
+                "path": legacy_identifier(DEFAULT_REPAIR_PATH),
                 "sha256": file_sha256(DEFAULT_REPAIR_PATH),
             },
             "attempt1": {
@@ -142,7 +143,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],

@@ -9,6 +9,7 @@ from fsrl.presentation_order_transport import (
     transform_schedule,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 def _cell(*, interpretable=True, competence=True, all_pass=True):
@@ -35,7 +36,7 @@ def _cell(*, interpretable=True, competence=True, all_pass=True):
 class PresentationOrderTransportTests(unittest.TestCase):
     def setUp(self):
         self.specification = load_json(DEFAULT_SPECIFICATION_PATH)
-        self.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         self.baseline = self.protocol.support_schedule(
             __import__("numpy").random.default_rng(11)
         )

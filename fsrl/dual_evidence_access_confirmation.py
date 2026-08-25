@@ -20,24 +20,25 @@ from .conjunctive_local_trace_replication import (
     train_backbone,
 )
 from .curvature_gate_pilot import configure_runtime, load_json, write_json
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "dual_evidence_access_confirmation_v2_4.json"
+    resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_evidence_access_confirmation_v2_4.lock.json"
+    resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.lock.json")
 )
 DEFAULT_ARTIFACT_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_evidence_access_confirmation_v2_4.artifact_lock.json"
+    resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json")
 )
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "dual-evidence-access-confirmation-v2-4"
-DEFAULT_RESULT_PATH = ROOT / "results" / "dual_evidence_access_confirmation_v2_4.json"
+DEFAULT_RESULT_PATH = resolve_record("results/dual_evidence_access_confirmation_v2_4.json")
 
 
 def _resolve(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def fresh_seeds(specification: dict) -> tuple[int, ...]:

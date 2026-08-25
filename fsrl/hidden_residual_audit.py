@@ -23,10 +23,11 @@ from .config import DEVICE, NUMRESPONSESTEP
 from .formal_runtime import configure_formal_runtime
 from .liu_eval import FastWeightIntervention
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "hidden_residual_audit_v1.json"
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "hidden_residual_audit_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/hidden_residual_audit_v1.json")
+DEFAULT_OUTPUT_PATH = resolve_record("results/hidden_residual_audit_v1.json")
 
 
 def validate_registered_sources(specification: dict) -> dict:

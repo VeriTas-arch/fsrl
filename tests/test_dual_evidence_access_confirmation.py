@@ -8,13 +8,14 @@ from fsrl.dual_evidence_access_confirmation import (
     confirmation_decision,
     fresh_seeds,
 )
+from fsrl.study_registry import resolve_record
 
 
 class DualEvidenceAccessConfirmationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.specification = load_json(
-            "benchmarks/dual_evidence_access_confirmation_v2_4.json"
+            resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.json")
         )
 
     def test_fresh_seed_contract_is_exact(self):

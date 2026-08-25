@@ -36,6 +36,7 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, SupportTrial, load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 from .support_topology_transport import (
     ROOT,
     _finite_primary,
@@ -60,12 +61,12 @@ from .support_topology_transport import (
 )
 
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "liu_evidence_sparsity_transport_v1.json"
+    resolve_record("benchmarks/liu_evidence_sparsity_transport_v1.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "liu_evidence_sparsity_transport_v1.lock.json"
+    resolve_record("benchmarks/liu_evidence_sparsity_transport_v1.lock.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "liu_evidence_sparsity_transport_v1.json"
+DEFAULT_RESULT_PATH = resolve_record("results/liu_evidence_sparsity_transport_v1.json")
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/evidence_sparsity_transport.py",
     "runtime_entrypoint": "fsrl/evidence_sparsity_runtime.py",
@@ -88,7 +89,7 @@ CORE_METRIC_KEYS = (
 
 
 def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(ROOT / path)}
+    return {"path": path, "sha256": file_sha256(resolve_record(path))}
 
 
 def write_implementation_lock(
@@ -118,7 +119,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],

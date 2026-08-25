@@ -6,9 +6,9 @@ import argparse
 import json
 from pathlib import Path
 
-DEFAULT_QUALIFICATION_PATH = (
-    Path(__file__).resolve().parents[1] / "benchmarks" / "qualification_v2.json"
-)
+from .study_registry import resolve_record
+
+DEFAULT_QUALIFICATION_PATH = resolve_record("benchmarks/qualification_v2.json")
 
 
 def evaluate_qualification(result: dict, specification: dict) -> dict:

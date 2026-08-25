@@ -19,9 +19,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .git_provenance import git_blob_sha256, verify_git_registrations
+from .study_registry import SYNTHESIS_ROOT, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-MAINLINE_ROOT = ROOT / "mainlines" / "liu_v1"
+MAINLINE_ROOT = SYNTHESIS_ROOT / "frozen"
 MANIFEST_PATH = MAINLINE_ROOT / "manifest.json"
 ARTIFACTS_PATH = MAINLINE_ROOT / "artifacts.json"
 ENVIRONMENT_PATH = MAINLINE_ROOT / "environment.json"
@@ -47,8 +48,6 @@ REQUIRED_PRINCIPLES = {
     "motivated_by_is_not_depends_on",
     "historical_replay_is_not_live_head_validation",
 }
-
-
 def canonical_manifest_payload_sha256(manifest: dict) -> str:
     """Hash the manifest payload without its one-time freeze attestations."""
 
@@ -82,7 +81,7 @@ def _safe_repo_path(value: str) -> Path:
     pure = PurePosixPath(value)
     if pure.is_absolute() or not pure.parts or ".." in pure.parts:
         raise RuntimeError(f"mainline path must be repository-relative: {value}")
-    return ROOT.joinpath(*pure.parts)
+    return resolve_record(Path(*pure.parts))
 
 
 def json_pointer(document: Any, pointer: str) -> Any:

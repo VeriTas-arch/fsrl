@@ -18,6 +18,7 @@ from fsrl.item_count_transport import (
 )
 from fsrl.liu_eval import FrozenFastWeightEvaluator
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 def _cell(*, interpretable=True, competence=True, all_pass=True):
@@ -44,7 +45,7 @@ def _cell(*, interpretable=True, competence=True, all_pass=True):
 class ItemCountTransportTests(unittest.TestCase):
     def setUp(self):
         self.specification = load_json(DEFAULT_SPECIFICATION_PATH)
-        self.base = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.base = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
 
     def test_registered_cycles_reconstruct_exactly(self):
         result = validate_graph_contract(self.specification)

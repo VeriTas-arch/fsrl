@@ -8,6 +8,7 @@ from fsrl.confirmation import (
     load_json,
     validate_confirmation_contract,
 )
+from fsrl.study_registry import resolve_record
 
 
 class ConfirmationTests(unittest.TestCase):
@@ -16,10 +17,10 @@ class ConfirmationTests(unittest.TestCase):
         self.assertTrue(result["passed"])
 
     def test_pilot_and_formal_seeds_are_disjoint(self):
-        pilot_path = Path("benchmarks/pilot_v1.json")
+        pilot_path = resolve_record("benchmarks/pilot_v1.json")
         self.assertTrue(validate_confirmation_contract(pilot_path)["passed"])
         pilot = load_json(pilot_path)
-        formal = load_json(Path("benchmarks/confirmation_v1.json"))
+        formal = load_json(resolve_record("benchmarks/confirmation_v1.json"))
         self.assertTrue(
             set(pilot["training"]["seeds"]).isdisjoint(
                 formal["training"]["seeds"]

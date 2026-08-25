@@ -21,12 +21,13 @@ from .hidden_residual_audit import validate_registered_sources
 from .liu_eval import FastWeightIntervention
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
 from .relation_trace_localization import _retained_mask
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "state_query_operator_binding_v1.json"
+    resolve_record("benchmarks/state_query_operator_binding_v1.json")
 )
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "state_query_operator_binding_v1.json"
+DEFAULT_OUTPUT_PATH = resolve_record("results/state_query_operator_binding_v1.json")
 
 
 def _unit_rows(values: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray]:
@@ -839,7 +840,7 @@ def run_state_query_operator_binding(
         "registration_status": specification["registration_status"],
         "claim_boundary": specification["claim_boundary"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": file_sha256(specification_path),
         },
         "implementation": {

@@ -25,6 +25,7 @@ from .assembly_trajectory import (
 from .config import DEVICE, NUMRESPONSESTEP
 from .liu_eval import FastWeightIntervention, FrozenFastWeightEvaluator
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import resolve_record
 from .support_write_localization import (
     _replay_without_relation_history,
     matrix_norm,
@@ -34,8 +35,8 @@ from .support_write_localization import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "support_factor_swap_v1.json"
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "support_factor_swap_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/support_factor_swap_v1.json")
+DEFAULT_OUTPUT_PATH = resolve_record("results/support_factor_swap_v1.json")
 
 
 @dataclass(frozen=True)

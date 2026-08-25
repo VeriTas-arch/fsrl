@@ -26,10 +26,11 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "assembly_diagnostics_v1.json"
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "assembly_diagnostics_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_diagnostics_v1.json")
+DEFAULT_OUTPUT_PATH = resolve_record("results/assembly_diagnostics_v1.json")
 
 
 @dataclass(frozen=True)
@@ -58,7 +59,7 @@ def file_sha256(path: Path) -> str:
 
 def resolve_path(path: str) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def build_field_design(protocol: RankingProtocol) -> FieldDesign:

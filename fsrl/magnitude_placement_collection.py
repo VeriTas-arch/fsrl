@@ -15,26 +15,24 @@ from pathlib import Path
 import jsonschema
 import numpy as np
 
+from .study_registry import resolve_record
+
 ROOT = Path(__file__).resolve().parents[1]
-PROTOCOL_PATH = ROOT / "benchmarks" / "magnitude_placement_behavior_v1_1.json"
+PROTOCOL_PATH = resolve_record("benchmarks/magnitude_placement_behavior_v1_1.json")
 READINESS_PATH = (
-    ROOT
-    / "benchmarks"
-    / "magnitude_placement_behavior_v1_1_collection_readiness.json"
+    resolve_record("benchmarks/magnitude_placement_behavior_v1_1_collection_readiness.json")
 )
 RAW_SCHEMA_PATH = (
-    ROOT / "benchmarks" / "magnitude_placement_behavior_v1_1_raw.schema.json"
+    resolve_record("benchmarks/magnitude_placement_behavior_v1_1_raw.schema.json")
 )
 REPAIR_PATH = (
-    ROOT
-    / "benchmarks"
-    / "magnitude_placement_behavior_v1_1_collection_readiness_repair1.json"
+    resolve_record("benchmarks/magnitude_placement_behavior_v1_1_collection_readiness_repair1.json")
 )
 MANIFEST_PATH = (
-    ROOT / "benchmarks" / "magnitude_placement_behavior_v1_1_randomization.json.gz"
+    resolve_record("benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz")
 )
 RESULT_PATH = (
-    ROOT / "results" / "magnitude_placement_behavior_v1_1_collection_readiness.json"
+    resolve_record("results/magnitude_placement_behavior_v1_1_collection_readiness.json")
 )
 
 
@@ -855,7 +853,7 @@ def run_readiness(
         "readiness_repair_parent_hash": readiness_hash
         == repair["original_readiness_contract"]["sha256"],
         "paper_source_hash": file_sha256(
-            ROOT / readiness["source_audit"]["paper"]["path"]
+            resolve_record(readiness["source_audit"]["paper"]["path"])
         )
         == readiness["source_audit"]["paper"]["sha256"],
         "raw_schema_is_valid_draft_2020_12": True,

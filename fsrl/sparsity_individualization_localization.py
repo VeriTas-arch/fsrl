@@ -10,6 +10,7 @@ import numpy as np
 
 from .behavioral import kendall_tau_positions
 from .confirmation import file_sha256
+from .study_registry import legacy_identifier, resolve_record
 from .support_topology_transport import (
     ROOT,
     _json_values,
@@ -21,13 +22,13 @@ from .support_topology_transport import (
 )
 
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "liu_sparsity_individualization_localization_v1.json"
+    resolve_record("benchmarks/liu_sparsity_individualization_localization_v1.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "liu_sparsity_individualization_localization_v1.lock.json"
+    resolve_record("benchmarks/liu_sparsity_individualization_localization_v1.lock.json")
 )
 DEFAULT_RESULT_PATH = (
-    ROOT / "results" / "liu_sparsity_individualization_localization_v1.json"
+    resolve_record("results/liu_sparsity_individualization_localization_v1.json")
 )
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/sparsity_individualization_localization.py",
@@ -37,7 +38,7 @@ REGISTRATION_COMMIT = "619500eaef3aa5a9bedb3ab74397d14cc7e81969"
 
 
 def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(ROOT / path)}
+    return {"path": path, "sha256": file_sha256(resolve_record(path))}
 
 
 def write_implementation_lock(
@@ -67,7 +68,7 @@ def validate_sources(
     registrations = {
         **specification["frozen_source"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],

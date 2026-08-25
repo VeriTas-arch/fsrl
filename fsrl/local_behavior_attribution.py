@@ -31,15 +31,16 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "local_behavior_attribution_v2_3.json"
+    resolve_record("benchmarks/local_behavior_attribution_v2_3.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "local_behavior_attribution_v2_3.lock.json"
+    resolve_record("benchmarks/local_behavior_attribution_v2_3.lock.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "local_behavior_attribution_v2_3.json"
+DEFAULT_RESULT_PATH = resolve_record("results/local_behavior_attribution_v2_3.json")
 
 
 def validate_sources(
@@ -54,7 +55,7 @@ def validate_sources(
         "frozen_backbone": specification["frozen_artifacts"]["backbone"],
         "frozen_gain": specification["frozen_artifacts"]["gain"],
         "analysis_specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["analysis_specification_sha256"],
         },
         **lock["implementation_sources"],

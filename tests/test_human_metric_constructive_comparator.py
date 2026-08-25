@@ -19,15 +19,15 @@ from fsrl.human_metric_constructive_comparator import (
     write_json_exclusive,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class HumanMetricConstructiveComparatorTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.specification = json.loads(DEFAULT_SPECIFICATION_PATH.read_text())
-        protocol_path = (
-            DEFAULT_SPECIFICATION_PATH.parents[1]
-            / cls.specification["registered_sources"]["liu_protocol"]["path"]
+        protocol_path = resolve_record(
+            cls.specification["registered_sources"]["liu_protocol"]["path"]
         )
         cls.protocol = load_ranking_protocol(protocol_path)
         cls.metadata = pair_metadata(cls.protocol)

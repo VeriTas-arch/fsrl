@@ -11,11 +11,12 @@ from fsrl.global_policy_slope_localization import (
     subject_slopes,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class GlobalPolicySlopeLocalizationTests(unittest.TestCase):
     def setUp(self):
-        self.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         self.geometry = build_complete_graph_geometry(self.protocol)
         positions = np.empty(self.protocol.n_items, dtype=np.int64)
         for position, item in enumerate(self.protocol.true_order_high_to_low):
@@ -78,7 +79,7 @@ class GlobalPolicySlopeLocalizationTests(unittest.TestCase):
         self.assertEqual(result["network_population_inference"], "not_performed")
 
     def test_frozen_specification_keeps_local_trace_out_of_primary(self):
-        specification = load_json("benchmarks/global_policy_slope_localization_v1.json")
+        specification = load_json(resolve_record("benchmarks/global_policy_slope_localization_v1.json"))
         self.assertEqual(
             specification["network_contract"]["primary_condition"],
             "Pure L-off v1/global branch with intact P_T and frozen W_out; no local trace is constructed or read.",

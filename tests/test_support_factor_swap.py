@@ -12,6 +12,7 @@ from fsrl.config import TrainConfig
 from fsrl.liu_eval import FastWeightIntervention, FrozenFastWeightEvaluator
 from fsrl.model import RetroModulRNN
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 from fsrl.support_factor_swap import (
     compose_factors,
     donor_indices,
@@ -26,7 +27,7 @@ class SupportFactorSwapTests(unittest.TestCase):
     def setUp(self):
         torch.set_num_threads(1)
         torch.manual_seed(17)
-        self.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         self.config = TrainConfig(bs=3, hs=8, cs=8, nbcues_min=8, nbcues_max=8)
         self.net = RetroModulRNN(self.config.to_model_dict())
         self.net.eval()
@@ -116,12 +117,12 @@ class SupportFactorSwapTests(unittest.TestCase):
         self.assertEqual(donors[0, 0], -1)
 
     def test_registered_sources_are_immutable(self):
-        specification = load_json("benchmarks/support_factor_swap_v1.json")
+        specification = load_json(resolve_record("benchmarks/support_factor_swap_v1.json"))
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
 
     def test_result_reports_both_pilots_and_keeps_formal_seeds_deferred(self):
-        result = load_json("results/support_factor_swap_v1.json")
+        result = load_json(resolve_record("results/support_factor_swap_v1.json"))
         self.assertEqual(set(result["pilot_seeds"]), {"1901", "1902"})
         self.assertEqual(
             result["overall_diagnosis"]["formal_confirmation_status"],

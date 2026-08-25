@@ -8,13 +8,14 @@ from fsrl.conjunctive_local_trace_replication import (
     within_seed_decision,
 )
 from fsrl.curvature_gate_pilot import load_json
+from fsrl.study_registry import resolve_record
 
 
 class ConjunctiveLocalTraceReplicationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.specification = load_json(
-            "benchmarks/conjunctive_local_trace_replication_v2_3.json"
+            resolve_record("benchmarks/conjunctive_local_trace_replication_v2_3.json")
         )
 
     def test_seed_configs_are_frozen_and_independent(self):

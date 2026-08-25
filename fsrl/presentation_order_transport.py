@@ -43,6 +43,7 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, SupportTrial, load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 from .support_topology_transport import (
     _finite_primary,
     _json_values,
@@ -64,12 +65,12 @@ from .support_topology_transport import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "liu_presentation_order_transport_v1.json"
+    resolve_record("benchmarks/liu_presentation_order_transport_v1.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "liu_presentation_order_transport_v1.lock.json"
+    resolve_record("benchmarks/liu_presentation_order_transport_v1.lock.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "liu_presentation_order_transport_v1.json"
+DEFAULT_RESULT_PATH = resolve_record("results/liu_presentation_order_transport_v1.json")
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/presentation_order_transport.py",
     "runtime_entrypoint": "fsrl/presentation_order_runtime.py",
@@ -78,7 +79,7 @@ IMPLEMENTATION_SOURCES = {
 
 
 def _registration(path: str) -> dict:
-    return {"path": path, "sha256": file_sha256(ROOT / path)}
+    return {"path": path, "sha256": file_sha256(resolve_record(path))}
 
 
 def write_implementation_lock(
@@ -108,7 +109,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],

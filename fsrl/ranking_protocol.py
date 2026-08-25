@@ -9,9 +9,9 @@ from pathlib import Path
 
 import numpy as np
 
-DEFAULT_PROTOCOL_PATH = (
-    Path(__file__).resolve().parents[1] / "benchmarks" / "liu_v1.json"
-)
+from .study_registry import resolve_record
+
+DEFAULT_PROTOCOL_PATH = resolve_record("benchmarks/liu_v1.json")
 
 
 @dataclass(frozen=True)

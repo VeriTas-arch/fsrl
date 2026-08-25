@@ -16,13 +16,14 @@ from fsrl.global_policy_field_fingerprint_replication import (
     validate_artifacts,
     validate_sources,
 )
+from fsrl.study_registry import resolve_record
 
 
 class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.specification = load_json(
-            "benchmarks/global_policy_field_fingerprint_replication_v1.json"
+            resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.json")
         )
 
     def test_mandatory_seed_contract_is_exact(self):
@@ -378,9 +379,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
                     )
 
     def test_source_validation_hashes_but_does_not_load_discovery_artifacts(self):
-        specification_path = Path(
-            "benchmarks/global_policy_field_fingerprint_replication_v1.json"
-        ).resolve()
+        specification_path = resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.json").resolve()
         implementation_lock_path = Path("/tmp/fingerprint-implementation-lock.json")
         implementation_sources = {
             name: {"path": path, "sha256": f"implementation-{name}"}
@@ -396,7 +395,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
             "reused_frozen_sources": reused_sources,
         }
         expected_hashes = {
-            (fingerprint.ROOT / registration["path"]).resolve(): registration["sha256"]
+            resolve_record(registration["path"]).resolve(): registration["sha256"]
             for registration in self.specification["registered_sources"].values()
         }
         expected_hashes[specification_path] = "specification-sha256"
@@ -404,7 +403,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
             *implementation_sources.values(),
             *reused_sources.values(),
         ):
-            expected_hashes[(fingerprint.ROOT / registration["path"]).resolve()] = (
+            expected_hashes[resolve_record(registration["path"]).resolve()] = (
                 registration["sha256"]
             )
 
@@ -433,9 +432,7 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
         self.assertEqual(loader.call_count, 2)
 
     def test_source_validation_rejects_missing_extra_or_rebound_sources(self):
-        specification_path = Path(
-            "benchmarks/global_policy_field_fingerprint_replication_v1.json"
-        ).resolve()
+        specification_path = resolve_record("benchmarks/global_policy_field_fingerprint_replication_v1.json").resolve()
         implementation_lock_path = Path("/tmp/fingerprint-invalid-lock.json")
         base = {
             "replication_specification_sha256": "specification-sha256",

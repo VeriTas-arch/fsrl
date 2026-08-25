@@ -297,7 +297,7 @@ begin end-to-end co-adaptation to rescue it. The subsequent separately frozen
 candidate reused the seed-2101 backbone and explicitly preserved the `J_b u`
 first-order branch through a policy residual, with global-mechanism gates and
 matched-magnitude and shuffled controls. The v2.1 result and amplitude-family
-closure are in `docs/policy_opposition_gate_pilot_v2_1.md`.
+closure are in `studies/policy_opposition_gate/records/docs/policy_opposition_gate_pilot_v2_1.md`.
 
 The completed first-order policy-residual v2.2 test is a valid mixed negative.
 Generic-only adaptation selects eta 0.09398. The natural residual causes a
@@ -321,7 +321,7 @@ alongside the confirmed global expected-rank channel. Retain the H>A/F>A
 first-order residual fingerprint as a constraint and possible routing
 diagnostic, not as proof that the residual is a sufficient local channel. The
 v2.2 result and stop/go decision are in
-`docs/policy_residual_pilot_v2_2.md`.
+`studies/policy_residual/records/docs/policy_residual_pilot_v2_2.md`.
 
 The first separately persistent local-component pilot is now complete on the
 same frozen seed-2101 backbone. Its fixed shared address is a normalized
@@ -360,7 +360,7 @@ remaining unavailable to global assembly; if retained low-margin relations
 dominate, test a shared value/expression transform while preserving the now-
 supported storage and query-address mechanism. Do not tune either route before
 this attribution. The v2.3 result is in
-`docs/conjunctive_local_trace_pilot_v2_3.md`.
+`studies/conjunctive_local_trace_pilot/records/docs/conjunctive_local_trace_pilot_v2_3.md`.
 
 That registered read-only attribution is now complete. Stable-omitted learned
 cells account for 71.36 percent of v1 exact learned error mass, with a bootstrap
@@ -401,7 +401,7 @@ required replication contract was prospectively frozen
 with the mechanism unchanged and exact retained probability, direct causal
 rescue, self/query specificity, and the `P`/`L` double dissociation as four
 independent confirmation links. The attribution is in
-`docs/local_behavior_attribution_v2_3.md`.
+`studies/local_behavior_attribution/records/docs/local_behavior_attribution_v2_3.md`.
 
 That two-backbone replication is now complete on mandatory seeds 2102 and
 2103. Both artifact sets were trained and generic-gain-adapted before either
@@ -470,9 +470,9 @@ the retained noninferiority margin, or either routing control. Treat the
 excessive nonlearned/global distance slope as a separate `P_T` policy question;
 begin that family with read-only localization rather than modifying v2.4. The
 v2.3 replication is in
-`docs/conjunctive_local_trace_replication_v2_3.md`, and the differential-access
+`studies/conjunctive_local_trace_replication/records/docs/conjunctive_local_trace_replication_v2_3.md`, and the differential-access
 result and execution-repair audit are in
-`docs/dual_evidence_access_pilot_v2_4.md`.
+`studies/dual_evidence_access_pilot/records/docs/dual_evidence_access_pilot_v2_4.md`.
 
 That fresh-backbone confirmation is now complete on seeds 2104 and 2105. Both
 1000-step backbones and both 500-step generic-only gains were generated before
@@ -790,9 +790,9 @@ and freeze acquisition code, image and randomization manifests, analysis code,
 platform timing, consent/ethics status, source hashes, and write-once result
 paths. Until that explicit authorization, do not begin collection, inspect a
 pilot, continue comparator modeling, or reopen neural intervention. The
-registration is in `benchmarks/magnitude_placement_behavior_v1.json`; the
+registration is in `studies/magnitude_placement_human_program/records/benchmarks/magnitude_placement_behavior_v1.json`; the
 synthetic validation is in
-`results/magnitude_placement_behavior_v1_validation.json`.
+`studies/magnitude_placement_human_program/records/results/magnitude_placement_behavior_v1_validation.json`.
 
 The binary-codebook v1.1 collection-readiness stage is now complete. The
 deterministic renderer, 120-slot counterbalanced manifest, immutable raw schema
@@ -805,11 +805,11 @@ the v1 and v1.1 registrations and artifacts; do not recruit, pilot, inspect new
 human data, or reopen the study without a later explicit user `GO`.
 The revised protocol, readiness contract, repair, frozen randomization, and
 readiness result are in
-`benchmarks/magnitude_placement_behavior_v1_1.json`,
-`benchmarks/magnitude_placement_behavior_v1_1_collection_readiness.json`,
-`benchmarks/magnitude_placement_behavior_v1_1_collection_readiness_repair1.json`,
-`benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz`, and
-`results/magnitude_placement_behavior_v1_1_collection_readiness.json`.
+`studies/magnitude_placement_human_program/records/benchmarks/magnitude_placement_behavior_v1_1.json`,
+`studies/magnitude_placement_human_program/records/benchmarks/magnitude_placement_behavior_v1_1_collection_readiness.json`,
+`studies/magnitude_placement_human_program/records/benchmarks/magnitude_placement_behavior_v1_1_collection_readiness_repair1.json`,
+`studies/magnitude_placement_human_program/records/benchmarks/magnitude_placement_behavior_v1_1_randomization.json.gz`, and
+`studies/magnitude_placement_human_program/records/results/magnitude_placement_behavior_v1_1_collection_readiness.json`.
 
 ## Near-term model-only scope: 2026-08-25 through 2026-09-25
 
@@ -890,9 +890,9 @@ temperature, output-gain, or `P_T`-amplitude repair as the next route. Do not
 tune v2.4 against the map. Proceed to the main `P_T/L_T` causal mechanism
 figure and reduced algorithm using confirmed links, while carrying all three
 mismatches as behavioral shape constraints. The contract and result are in
-`benchmarks/model_behavior_reproduction_map_v1.json` and
-`results/model_behavior_reproduction_map_v1.json`; the interpretation is in
-`docs/model_behavior_reproduction_map_v1.md`.
+`studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json` and
+`studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json`; the interpretation is in
+`studies/behavior_reproduction_map/records/docs/model_behavior_reproduction_map_v1.md`.
 
 The second near-term deliverable is now frozen as a synthesis of existing
 evidence, not a new experiment. The main model has two differentially admitted
@@ -910,7 +910,7 @@ eligibility-direction/DA-gain split is not universal because of competent seed
 the address and `p_sr` are sufficient implementations rather than unique
 codes; and `P_T/L_T` are not identified biological stores. The main mechanism
 figure, equations, causal-link provenance, and negative constraints are in
-`docs/model_mechanism_synthesis_v1.md`. The next active deliverable is a
+`studies/mechanism_confirmation/records/docs/model_mechanism_synthesis_v1.md`. The next active deliverable is a
 read-only reduced-algorithm compression test, not further internal probing or
 model tuning.
 
@@ -950,9 +950,9 @@ Liu double dissociation, and behavior categories. If it fails, do not add
 alternative coverage, time, block, or interaction features after inspection;
 move to a separately registered higher-dimensional state question. The v1
 contract, result, and interpretation are in
-`benchmarks/dual_state_reduced_algorithm_v1.json`,
-`results/dual_state_reduced_algorithm_v1.json`, and
-`docs/dual_state_reduced_algorithm_v1.md`.
+`studies/dual_state_reduction_v1/records/benchmarks/dual_state_reduced_algorithm_v1.json`,
+`studies/dual_state_reduction_v1/records/results/dual_state_reduced_algorithm_v1.json`, and
+`studies/dual_state_reduction_v1/records/docs/dual_state_reduced_algorithm_v1.md`.
 
 That scalar-history v2 test is now complete and is a valid mixed negative.
 Preserve its positive links. The frozen cumulative effective-evidence energy
@@ -978,9 +978,9 @@ separately, reuse the v1 trajectory artifact, and compare it with the
 accumulator and v2 under the same remote, rollout, double-dissociation, and
 behavior gates. If it fails, close task-derived confidence ledgers and move to
 a separately registered `P_t`-derived latent-state audit. The v2 contract,
-result, and report are in `benchmarks/dual_state_reduced_algorithm_v2.json`,
-`results/dual_state_reduced_algorithm_v2.json`, and
-`docs/dual_state_reduced_algorithm_v2.md`.
+result, and report are in `studies/dual_state_reduction_v2/records/benchmarks/dual_state_reduced_algorithm_v2.json`,
+`studies/dual_state_reduction_v2/records/results/dual_state_reduced_algorithm_v2.json`, and
+`studies/dual_state_reduction_v2/records/docs/dual_state_reduced_algorithm_v2.md`.
 
 That capacity-matched item-history v3 test is now complete and is also a valid
 mixed negative. Item allocation is informative: it reduces one-step MSE by
@@ -1005,9 +1005,9 @@ or call PCA coordinates a shared algorithm. Ask whether a low-dimensional
 `P_t` projection predicts residual updates and remote LOO effects beyond
 `(s_t,x_t)`. Only replicated dimensional sufficiency should motivate a later
 cross-network invariant-state construction. The v3 contract, result, and
-report are in `benchmarks/dual_state_reduced_algorithm_v3.json`,
-`results/dual_state_reduced_algorithm_v3.json`, and
-`docs/dual_state_reduced_algorithm_v3.md`.
+report are in `studies/dual_state_reduction_v3/records/benchmarks/dual_state_reduced_algorithm_v3.json`,
+`studies/dual_state_reduction_v3/records/results/dual_state_reduced_algorithm_v3.json`, and
+`studies/dual_state_reduction_v3/records/docs/dual_state_reduced_algorithm_v3.md`.
 
 That functional fast-weight latent-sufficiency audit is now complete and is a
 valid replicated negative under its registered linear readout. Exact v1
@@ -1036,10 +1036,10 @@ whose high-dimensional state produces a near-additive potential observable.
 Consolidate and test claims at this boundary rather than forcing a symmetric
 low-dimensional global algorithm. This model-only audit does not reopen human
 experiment design. Its contract, repair, result, and report are in
-`benchmarks/functional_fast_weight_latent_sufficiency_v1.json`,
-`benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.json`,
-`results/functional_fast_weight_latent_sufficiency_v1.json`, and
-`docs/functional_fast_weight_latent_sufficiency_v1.md`.
+`studies/functional_fast_weight_latent_sufficiency/records/benchmarks/functional_fast_weight_latent_sufficiency_v1.json`,
+`studies/functional_fast_weight_latent_sufficiency/records/benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.json`,
+`studies/functional_fast_weight_latent_sufficiency/records/results/functional_fast_weight_latent_sufficiency_v1.json`, and
+`studies/functional_fast_weight_latent_sufficiency/records/docs/functional_fast_weight_latent_sufficiency_v1.md`.
 
 The prospectively frozen `liu_support_topology_transport_v1` development test
 is complete with registered outcome `LIU_STRUCTURAL_MECHANISM_TRANSPORTED`.
@@ -1068,11 +1068,11 @@ representation while retaining GPU differences as diagnostics. The repaired
 state/read errors are at most `4.44e-16` and `9.77e-15`, and every nonrepair
 value is exactly equal to attempt 1. The contract, repair, preserved attempt,
 final result, and report are in
-`benchmarks/liu_support_topology_transport_v1.json`,
-`benchmarks/liu_support_topology_transport_v1.repair1.json`,
-`results/liu_support_topology_transport_v1.attempt1.json`,
-`results/liu_support_topology_transport_v1.json`, and
-`docs/liu_support_topology_transport_v1.md`.
+`studies/support_topology_transport/records/benchmarks/liu_support_topology_transport_v1.json`,
+`studies/support_topology_transport/records/benchmarks/liu_support_topology_transport_v1.repair1.json`,
+`studies/support_topology_transport/records/results/liu_support_topology_transport_v1.attempt1.json`,
+`studies/support_topology_transport/records/results/liu_support_topology_transport_v1.json`, and
+`studies/support_topology_transport/records/docs/liu_support_topology_transport_v1.md`.
 
 Carry the excessive symbolic-distance slope, weak serial-position endpoint,
 and original seed-2104 inconsistency as known limitations. Do not tune
@@ -1101,9 +1101,9 @@ but every competence, construction, individualization, remote reassembly, and
 P/a double-dissociation gate still passes. Treat this as an exactly commutative
 local edge ledger beside a state-dependent iterative global computation, not
 as behavioral or `P_T` invariance. The contract, result, and report are in
-`benchmarks/liu_presentation_order_transport_v1.json`,
-`results/liu_presentation_order_transport_v1.json`, and
-`docs/liu_presentation_order_transport_v1.md`.
+`studies/presentation_order_transport/records/benchmarks/liu_presentation_order_transport_v1.json`,
+`studies/presentation_order_transport/records/results/liu_presentation_order_transport_v1.json`, and
+`studies/presentation_order_transport/records/docs/liu_presentation_order_transport_v1.md`.
 
 The model-side theory is now formally consolidated as **asymmetric
 algorithmic organization of relational memory**. Keep three evidence levels
@@ -1134,8 +1134,8 @@ through `a_T`. Item-count transport follows only after sparsity. List linking,
 classic transitive inference, Miconi ancestry, MEG, human-mechanism validation,
 and new global-compression work remain deferred. The consolidated synthesis
 and its source-hash registry remain in
-`docs/asymmetric_algorithmic_organization_v1.md` and
-`benchmarks/asymmetric_algorithmic_organization_v1.json`.
+`studies/asymmetric_algorithmic_organization/records/docs/asymmetric_algorithmic_organization_v1.md` and
+`studies/asymmetric_algorithmic_organization/records/benchmarks/asymmetric_algorithmic_organization_v1.json`.
 
 That sparsity test is now complete. Its two nested graph families have matched
 rank-distance multisets at `E=7,8,9,10`, preserve every common physical trial
@@ -1161,9 +1161,9 @@ positive in every cell. Therefore `P_T` is not merely recruited to compensate
 for sparse direct coverage; more compatible evidence can strengthen global
 construction. `a_T` remains a direct-fidelity path whose cross-talk prevents a
 monotonic total-policy gain. The contract, result, and report are in
-`benchmarks/liu_evidence_sparsity_transport_v1.json`,
-`results/liu_evidence_sparsity_transport_v1.json`, and
-`docs/liu_evidence_sparsity_transport_v1.md`.
+`studies/evidence_sparsity_transport/records/benchmarks/liu_evidence_sparsity_transport_v1.json`,
+`studies/evidence_sparsity_transport/records/results/liu_evidence_sparsity_transport_v1.json`, and
+`studies/evidence_sparsity_transport/records/docs/liu_evidence_sparsity_transport_v1.md`.
 
 Do not begin item-count transport yet. First freeze a read-only localization on
 the existing sparsity artifact only, separating general density-linked
@@ -1189,9 +1189,9 @@ effect. Treat greater density as progressively regularizing individualized
 global orders while many subjects still retain at least one stable error. This
 explains the parent endpoint heterogeneity but does not relabel
 `SPARSITY_DEPENDENT_OR_UNRESOLVED` as a pass. The contract, result, and report
-are in `benchmarks/liu_sparsity_individualization_localization_v1.json`,
-`results/liu_sparsity_individualization_localization_v1.json`, and
-`docs/liu_sparsity_individualization_localization_v1.md`.
+are in `studies/sparsity_individualization_localization/records/benchmarks/liu_sparsity_individualization_localization_v1.json`,
+`studies/sparsity_individualization_localization/records/results/liu_sparsity_individualization_localization_v1.json`, and
+`studies/sparsity_individualization_localization/records/docs/liu_sparsity_individualization_localization_v1.md`.
 
 The required sparsity localization is resolved. Item-count transport may now
 be prospectively designed, but it must preserve the density-sensitive
@@ -1214,7 +1214,7 @@ at-least-one-stable-error primary condition with mean 80-percent-stable-error
 pair density among eligible noncorrect subjects; continue reporting the old
 binary prevalence. All other competence, construction, remote/global,
 local-direct, P-off-scope, and exact-ledger links retain their frozen
-definitions. The contract is in `benchmarks/liu_item_count_transport_v1.json`.
+definitions. The contract is in `studies/item_count_transport/records/benchmarks/liu_item_count_transport_v1.json`.
 
 That registered item-count transport is now complete on N=6,8,10 and all three
 development backbones. Both full GPU executions are byte-identical, all source,
@@ -1239,11 +1239,11 @@ global policy remains cardinality-sensitive. Do not tune, retrain on N=6/10,
 or add post-hoc sizes. The four-step Liu structural-generalization sequence is
 complete. Next consolidate its frozen provenance and claim boundaries before
 opening list linking, human-mechanism, MEG, Miconi, or a new intervention. The
-item-count result is in `docs/liu_item_count_transport_v1.md`.
+item-count result is in `studies/item_count_transport/records/docs/liu_item_count_transport_v1.md`.
 
 The frozen Liu model evidence stack is consolidated in
-`benchmarks/liu_mainline_evidence_manifest_v1.json` and
-`docs/liu_mainline_synthesis_v1.md`. Treat that synthesis as a provenance and
+`synthesis/records/benchmarks/liu_mainline_evidence_manifest_v1.json` and
+`synthesis/records/docs/liu_mainline_synthesis_v1.md`. Treat that synthesis as a provenance and
 claim map, not a new experiment or an upgrade of any registered negative. The
 current model-level Liu structural-generalization program is complete at its
 one-factor boundary. Any continuation must begin from a separately stated
@@ -1253,83 +1253,102 @@ cardinality-sensitive global-policy degradation.
 
 Liu Mainline v1 is now formally frozen for reporting at dev commit
 `7bfb896bfee97353d6d745798b28e96b6614408c`; the freeze contract is
-`benchmarks/liu_mainline_freeze_v1.json`. During the reporting phase, do not
+`synthesis/records/benchmarks/liu_mainline_freeze_v1.json`. During the reporting phase, do not
 start new Liu evaluation, replay, training, tuning, decomposition, or variant
 work unless the user explicitly opens a new scientific program. Preserve all
 registered outcomes and hashes. Organization may add only derived navigation,
 presentation, manuscript, or figure materials that cite frozen evidence and
-introduce no new estimand. Use `docs/liu_presentation_package_v1.md` as the
+introduce no new estimand. Use `synthesis/records/docs/liu_presentation_package_v1.md` as the
 current talk outline and claim-language boundary.
 
 The fresh confirmation is in
-`docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
-`docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
-`docs/global_policy_amplitude_provenance_v1.md`, and the field reassembly is in
-`docs/global_policy_field_reassembly_v1.md`; the fresh-backbone fingerprint
+`studies/dual_evidence_access_confirmation/records/docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
+`studies/global_policy_slope_localization/records/docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
+`studies/global_policy_amplitude_provenance/records/docs/global_policy_amplitude_provenance_v1.md`, and the field reassembly is in
+`studies/global_policy_field_reassembly/records/docs/global_policy_field_reassembly_v1.md`; the fresh-backbone fingerprint
 replication is in
-`docs/global_policy_field_fingerprint_replication_v1.md`, and the equal-energy
+`studies/global_policy_field_fingerprint_replication/records/docs/global_policy_field_fingerprint_replication_v1.md`, and the equal-energy
 allocation localization is in
-`docs/global_policy_allocation_audit_v1.md`, and the human-external comparator
+`studies/global_policy_allocation_audit/records/docs/global_policy_allocation_audit_v1.md`, and the human-external comparator
 adequacy result is in
-`docs/global_policy_comparator_adequacy_v1.md`, and the held-out human-only
+`studies/global_policy_comparator_adequacy/records/docs/global_policy_comparator_adequacy_v1.md`, and the held-out human-only
 metric constructive-comparator result is in
-`docs/human_metric_constructive_comparator_v1.md`.
+`studies/human_metric_constructive_comparator/records/docs/human_metric_constructive_comparator_v1.md`.
 
 Start any later v2 replication with only one to three development seeds. Freeze
 estimands, competence gates, and outcome-contingent interpretations before any
 new formal population.
 Keep the seed-2009 complete-write/operator localization separate from the human
 local-fidelity question. The current formal evidence is recorded in
-`docs/formal_confirmation_v1.md`; the response-state negative and its next
-decisive test are in `docs/hidden_residual_audit_v1.md`; the subsequent mixed
-operator-code result is in `docs/relation_trace_localization_v1.md`; its
-functional resolution is in `docs/state_query_operator_binding_v1.md`; the
-value-to-expression localization is in `docs/operator_output_semantics_v1.md`;
+`studies/formal_behavioral_confirmation/records/docs/formal_confirmation_v1.md`; the response-state negative and its next
+decisive test are in `studies/hidden_residual_audit/records/docs/hidden_residual_audit_v1.md`; the subsequent mixed
+operator-code result is in `studies/relation_trace_localization/records/docs/relation_trace_localization_v1.md`; its
+functional resolution is in `studies/state_query_operator_binding/records/docs/state_query_operator_binding_v1.md`; the
+value-to-expression localization is in `studies/operator_output_semantics/records/docs/operator_output_semantics_v1.md`;
 the final amplitude/curvature architecture-selection gate is in
-`docs/operator_amplitude_path_v1.md`; and the first v2 intervention and its
-negative result are in `docs/curvature_gate_pilot_v2.md`. The signed
+`studies/operator_amplitude_path/records/docs/operator_amplitude_path_v1.md`; and the first v2 intervention and its
+negative result are in `studies/curvature_gate/records/docs/curvature_gate_pilot_v2.md`. The signed
 policy-opposition follow-up and amplitude-gating family closure are in
-`docs/policy_opposition_gate_pilot_v2_1.md`; the first-order residual test and
+`studies/policy_opposition_gate/records/docs/policy_opposition_gate_pilot_v2_1.md`; the first-order residual test and
 low-capacity expression-family closure are in
-`docs/policy_residual_pilot_v2_2.md`; and the persistent conjunctive trace and
+`studies/policy_residual/records/docs/policy_residual_pilot_v2_2.md`; and the persistent conjunctive trace and
 causal local/global double dissociation are in
-`docs/conjunctive_local_trace_pilot_v2_3.md`; and the registered explanation of
+`studies/conjunctive_local_trace_pilot/records/docs/conjunctive_local_trace_pilot_v2_3.md`; and the registered explanation of
 its direct-causal versus sampled-behavior mismatch is in
-`docs/local_behavior_attribution_v2_3.md`; and the independent two-backbone
+`studies/local_behavior_attribution/records/docs/local_behavior_attribution_v2_3.md`; and the independent two-backbone
 replication of the local/global decomposition is in
-`docs/conjunctive_local_trace_replication_v2_3.md`; and the registered
+`studies/conjunctive_local_trace_replication/records/docs/conjunctive_local_trace_replication_v2_3.md`; and the registered
 differential evidence-access sufficiency result is in
-`docs/dual_evidence_access_pilot_v2_4.md`; and its blind fresh-backbone
-confirmation is in `docs/dual_evidence_access_confirmation_v2_4.md`.
+`studies/dual_evidence_access_pilot/records/docs/dual_evidence_access_pilot_v2_4.md`; and its blind fresh-backbone
+confirmation is in `studies/dual_evidence_access_confirmation/records/docs/dual_evidence_access_confirmation_v2_4.md`.
 The registered global-policy slope localization is in
-`docs/global_policy_slope_localization_v1.md`; and the registered common-unit
+`studies/global_policy_slope_localization/records/docs/global_policy_slope_localization_v1.md`; and the registered common-unit
 amplitude-provenance result is in
-`docs/global_policy_amplitude_provenance_v1.md`; and the registered
+`studies/global_policy_amplitude_provenance/records/docs/global_policy_amplitude_provenance_v1.md`; and the registered
 additive-by-residual field-reassembly result is in
-`docs/global_policy_field_reassembly_v1.md`; and its prospectively frozen
+`studies/global_policy_field_reassembly/records/docs/global_policy_field_reassembly_v1.md`; and its prospectively frozen
 fresh-backbone fingerprint replication is in
-`docs/global_policy_field_fingerprint_replication_v1.md`; and the registered
+`studies/global_policy_field_fingerprint_replication/records/docs/global_policy_field_fingerprint_replication_v1.md`; and the registered
 equal-energy allocation localization is in
-`docs/global_policy_allocation_audit_v1.md`; and the human-external comparator
+`studies/global_policy_allocation_audit/records/docs/global_policy_allocation_audit_v1.md`; and the human-external comparator
 adequacy result is in
-`docs/global_policy_comparator_adequacy_v1.md`; and the registered human-only
+`studies/global_policy_comparator_adequacy/records/docs/global_policy_comparator_adequacy_v1.md`; and the registered human-only
 metric constructive-comparator derivation and confirmation are in
-`docs/human_metric_constructive_comparator_v1.md`.
+`studies/human_metric_constructive_comparator/records/docs/human_metric_constructive_comparator_v1.md`.
 
 ## Repository workflow
 
 - Work on `dev`; reserve `main` for stable releases.
-- Use `research/liu/README.md` as the human entry point and
-  `mainlines/liu_v1/` as the frozen machine-verifiable evidence object. The
-  generated `docs/INDEX.md`, `benchmarks/INDEX.md`, `results/INDEX.md`, and
-  `research/liu/studies/<study-id>/README.md` pages are navigation, not new
-  evidence; update `research/liu/catalog.json` and rebuild them with
-  `python -m fsrl.liu_catalog build`.
-- Historical Liu files remain canonical at their registered paths because
-  contracts, locks, runners, hashes, and reports depend on those identities.
-  New studies may be capsule-native from inception. Moving a frozen historical
-  file is a separately versioned provenance migration requiring compatibility
-  mapping and full validation, not ordinary cleanup.
+- Use `synthesis/README.md` as the human entry point, `studies/README.md` as
+  the complete evidence ledger, and `synthesis/frozen/` as the historical
+  machine-verifiable overlay. A study's `study.toml` is the local authority for
+  its question, result status, claim boundary, exact records, and hashes;
+  `studies/registry.toml` supplies only cross-study discovery and reading order.
+- The generated `studies/<study-id>/README.md`, `studies/README.md`, and
+  `synthesis/README.md` pages are navigation, not new evidence. Update the TOML
+  authorities and rebuild them with `python -m fsrl.study_registry build`;
+  require `python -m fsrl.study_registry check` before commit.
+- The first organization pass is explicitly `review_state = "indexed"`.
+  Preserve room for a second synthesis pass rather than treating the current
+  reading order, prose, or figure selection as the final paper argument.
+- Historical reports, contracts, locks, and results were relocated without
+  byte changes under study-owned `records/`. Their old identifiers, current
+  paths, hashes, sizes, and source ref are locked in
+  `studies/migrations/flat-records-v1.json`; active historical code must use
+  `fsrl.study_registry.resolve_record`. Another move requires a separately
+  versioned migration and full validation, not ordinary cleanup.
+- Validate this migration with
+  `python tools/provenance/migrate_flat_records_v1.py audit`; keep the active
+  path rewrite and source snapshot checks idempotent with their respective
+  `check` commands under `tools/provenance/`.
+- Pre-refactor Python files named by frozen execution locks are preserved under
+  `synthesis/frozen/source/` and indexed by `synthesis/source-snapshots.toml`.
+  They are provenance evidence, not active code; default Pytest discovery must
+  remain restricted to `tests/`.
+- Put runtime outputs in the ignored `artifacts/` workspace. Promote only a
+  registered evidence object into a study. Study-level figures may be added to
+  `studies/<study-id>/figures/` when needed; cross-study paper figures and their
+  source tables belong in `synthesis/figures/`.
 - Use GPU for neural training and evaluation when it materially helps. CPU is
   appropriate for lightweight tests, data checks, bootstrap summaries, and
   exact enumeration when it is the more efficient implementation.

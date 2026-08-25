@@ -21,10 +21,11 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "assembly_trajectory_v1.json"
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "assembly_trajectory_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_trajectory_v1.json")
+DEFAULT_OUTPUT_PATH = resolve_record("results/assembly_trajectory_v1.json")
 POTENTIAL_ZERO_TOLERANCE = 1e-12
 
 

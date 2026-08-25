@@ -6,9 +6,9 @@ import argparse
 import json
 from pathlib import Path
 
-DEFAULT_SPECIFICATION_PATH = (
-    Path(__file__).resolve().parents[1] / "benchmarks" / "human_fit_v1.json"
-)
+from .study_registry import resolve_record
+
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/human_fit_v1.json")
 
 
 def _cohort_signature(result: dict) -> dict:

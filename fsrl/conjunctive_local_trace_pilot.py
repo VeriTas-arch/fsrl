@@ -50,20 +50,21 @@ from .meta_train import MetaTrainConfig, build_meta_input_sequence
 from .policy_residual import policy_residual_statistics
 from .qualification import evaluate_qualification
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "conjunctive_local_trace_pilot_v2_3.json"
+    resolve_record("benchmarks/conjunctive_local_trace_pilot_v2_3.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "conjunctive_local_trace_pilot_v2_3.lock.json"
+    resolve_record("benchmarks/conjunctive_local_trace_pilot_v2_3.lock.json")
 )
 DEFAULT_ARTIFACT_LOCK_PATH = (
-    ROOT / "benchmarks" / "conjunctive_local_trace_pilot_v2_3.artifact_lock.json"
+    resolve_record("benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json")
 )
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "conjunctive-local-trace-pilot-v2-3"
-DEFAULT_RESULT_PATH = ROOT / "results" / "conjunctive_local_trace_pilot_v2_3.json"
-UNSIGNED_SPECIFICATION_PATH = ROOT / "benchmarks" / "curvature_gate_pilot_v2.json"
+DEFAULT_RESULT_PATH = resolve_record("results/conjunctive_local_trace_pilot_v2_3.json")
+UNSIGNED_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
 CONDITIONS = (
     "original_v1_local_off",
     "dual_intact",
@@ -110,7 +111,7 @@ def validate_sources(
     checks.append(
         {
             "name": "pilot_specification",
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "observed": protocol_hash,
             "expected": lock["pilot_specification_sha256"],
             "passed": protocol_hash == lock["pilot_specification_sha256"],

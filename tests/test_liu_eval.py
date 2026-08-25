@@ -15,6 +15,7 @@ from fsrl.liu_eval import (
 )
 from fsrl.model import RetroModulRNN
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class LiuEvaluatorTests(unittest.TestCase):
@@ -234,7 +235,7 @@ class LiuEvaluatorTests(unittest.TestCase):
         self.assertTrue(0.0 < next(iter(realized)) < 1.0)
 
     def test_source_corrected_protocol_uses_registered_true_order(self):
-        protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         evaluator = FrozenFastWeightEvaluator(
             self.net,
             self.config,

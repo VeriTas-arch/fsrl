@@ -12,12 +12,14 @@ from pathlib import Path
 import numpy as np
 from scipy import integrate, stats
 
+from .study_registry import legacy_identifier, resolve_record
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "magnitude_placement_behavior_v1.json"
+    resolve_record("benchmarks/magnitude_placement_behavior_v1.json")
 )
 DEFAULT_RESULT_PATH = (
-    ROOT / "results" / "magnitude_placement_behavior_v1_validation.json"
+    resolve_record("results/magnitude_placement_behavior_v1_validation.json")
 )
 VALIDATOR_TEST_PATH = ROOT / "tests" / "test_magnitude_placement_behavior.py"
 
@@ -363,7 +365,7 @@ def run_validation(specification_path: Path, output_path: Path) -> dict:
             "sha256": file_sha256(Path(__file__).resolve()),
         },
         "validator_tests": {
-            "path": str(VALIDATOR_TEST_PATH.relative_to(ROOT)),
+            "path": legacy_identifier(VALIDATOR_TEST_PATH),
             "sha256": file_sha256(VALIDATOR_TEST_PATH),
         },
         "registered_source_declarations": specification["registered_sources"],

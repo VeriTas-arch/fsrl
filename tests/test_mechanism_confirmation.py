@@ -1,11 +1,12 @@
 import unittest
 
 from fsrl.assembly_diagnostics import file_sha256, load_json, resolve_path
+from fsrl.study_registry import resolve_record
 
 
 class MechanismConfirmationContractTests(unittest.TestCase):
     def setUp(self):
-        self.contract = load_json("benchmarks/mechanism_confirmation_v1.json")
+        self.contract = load_json(resolve_record("benchmarks/mechanism_confirmation_v1.json"))
 
     def test_every_registered_source_is_immutable(self):
         for registration in self.contract["registered_sources"].values():
@@ -15,7 +16,7 @@ class MechanismConfirmationContractTests(unittest.TestCase):
             )
 
     def test_formal_population_matches_older_frozen_contract(self):
-        older = load_json("benchmarks/confirmation_v1.json")
+        older = load_json(resolve_record("benchmarks/confirmation_v1.json"))
         self.assertEqual(
             self.contract["formal_artifact_contract"]["seeds"],
             older["training"]["seeds"],

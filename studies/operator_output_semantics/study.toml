@@ -1,0 +1,34 @@
+schema_version = 1
+id = "operator_output_semantics"
+title = "Operator-output semantics"
+chapter = "local_fidelity"
+order = 30
+status = "supporting"
+review_state = "indexed"
+question = "At what stage does a correctness-aligned local operator signal become misexpressed?"
+finding = "A and J_b A are correctness-aligned, but exact finite-amplitude tanh degrades the signal and reverses H>A, localizing the missing link to nonlinear expression."
+boundary = "The result does not license a new readout, activation change, or global scalar gain."
+
+[[records]]
+path = "records/benchmarks/operator_output_semantics_v1.json"
+legacy_path = "benchmarks/operator_output_semantics_v1.json"
+role = "registered_contract"
+sha256 = "1ed8a134268f942af9e8c10af3f128c4850735a65c588db2ab007317b224359b"
+bytes = 12421
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/docs/operator_output_semantics_v1.md"
+legacy_path = "docs/operator_output_semantics_v1.md"
+role = "report"
+sha256 = "0a74602f28d9bcc8373434111a3bb043661f69f2a1f87537e4fda85ffd428250"
+bytes = 10789
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/results/operator_output_semantics_v1.json"
+legacy_path = "results/operator_output_semantics_v1.json"
+role = "frozen_result"
+sha256 = "b38f577ad83ffe64866724252e2ff03279185beb748972a7298099855c85837a"
+bytes = 454797
+source_ref = "refs/tags/liu-mainline-v1"

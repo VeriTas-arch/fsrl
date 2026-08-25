@@ -15,20 +15,19 @@ import torch
 from . import dual_state_reduced_algorithm as v1
 from .liu_eval import load_retro_checkpoint
 from .meta_tasks import GenericRankingTaskGenerator
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "functional_fast_weight_latent_sufficiency_v1.json"
+    resolve_record("benchmarks/functional_fast_weight_latent_sufficiency_v1.json")
 )
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT
-    / "benchmarks"
-    / "functional_fast_weight_latent_sufficiency_v1.repair1.lock.json"
+    resolve_record("benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.lock.json")
 )
 FIT_ARTIFACT_PATH = (
-    ROOT / "results" / "functional_fast_weight_latent_sufficiency_v1.fit.npz"
+    resolve_record("results/functional_fast_weight_latent_sufficiency_v1.fit.npz")
 )
-RESULT_PATH = ROOT / "results" / "functional_fast_weight_latent_sufficiency_v1.json"
+RESULT_PATH = resolve_record("results/functional_fast_weight_latent_sufficiency_v1.json")
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/functional_fast_weight_latent_sufficiency.py",
     "tests": "tests/test_functional_fast_weight_latent_sufficiency.py",
@@ -88,7 +87,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["specification_sha256"],
         },
         **lock["implementation_sources"],
@@ -98,7 +97,7 @@ def validate_sources(
             registrations[f"development_{seed}_{name}"] = registration
     checks = []
     for name, registration in registrations.items():
-        path = ROOT / registration["path"]
+        path = resolve_record(registration["path"])
         observed = file_sha256(path)
         checks.append(
             {
@@ -671,10 +670,10 @@ def build_result(
     runtime = configure_runtime()
     geometry = v1.complete_geometry()
     v1_contract = load_json(
-        ROOT / specification["registered_sources"]["v1_contract"]["path"]
+        resolve_record(specification["registered_sources"]["v1_contract"]["path"])
     )
-    v1_trajectory = (
-        ROOT / specification["registered_sources"]["v1_trajectory_artifact"]["path"]
+    v1_trajectory = resolve_record(
+        specification["registered_sources"]["v1_trajectory_artifact"]["path"]
     )
     seeds = specification["development_artifacts"]["mandatory_seeds"]
     results = {}
@@ -689,7 +688,7 @@ def build_result(
                 ]
             )
             records, extraction = extract_backbone(
-                ROOT / artifact["checkpoint"]["path"],
+                resolve_record(artifact["checkpoint"]["path"]),
                 seed=seed,
                 rng_seed=rng_seed,
                 frozen_artifact=frozen_artifact,

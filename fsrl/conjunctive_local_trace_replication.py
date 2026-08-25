@@ -46,24 +46,25 @@ from .local_behavior_attribution import (
 )
 from .meta_train import MetaTrainConfig, train_meta_model
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "conjunctive_local_trace_replication_v2_3.json"
+    resolve_record("benchmarks/conjunctive_local_trace_replication_v2_3.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "conjunctive_local_trace_replication_v2_3.lock.json"
+    resolve_record("benchmarks/conjunctive_local_trace_replication_v2_3.lock.json")
 )
 DEFAULT_ARTIFACT_LOCK_PATH = (
-    ROOT / "benchmarks" / "conjunctive_local_trace_replication_v2_3.artifact_lock.json"
+    resolve_record("benchmarks/conjunctive_local_trace_replication_v2_3.artifact_lock.json")
 )
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "conjunctive-local-trace-replication-v2-3"
-DEFAULT_RESULT_PATH = ROOT / "results" / "conjunctive_local_trace_replication_v2_3.json"
+DEFAULT_RESULT_PATH = resolve_record("results/conjunctive_local_trace_replication_v2_3.json")
 
 
 def _resolve(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def validate_sources(

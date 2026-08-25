@@ -1,5 +1,4 @@
 import unittest
-from pathlib import Path
 
 import numpy as np
 import torch
@@ -15,6 +14,7 @@ from fsrl.operator_amplitude_path import (
     select_v2_outcome,
     subject_crossing_summary,
 )
+from fsrl.study_registry import resolve_record
 
 
 class OperatorAmplitudePathTests(unittest.TestCase):
@@ -91,21 +91,21 @@ class OperatorAmplitudePathTests(unittest.TestCase):
         )
 
     def test_registered_sources_are_immutable(self):
-        specification = load_json("benchmarks/operator_amplitude_path_v1.json")
+        specification = load_json(resolve_record("benchmarks/operator_amplitude_path_v1.json"))
         validation = validate_registered_sources(specification)
         self.assertEqual(len(validation["pilot_artifacts"]), 2)
 
     def test_registered_result_is_complete_and_source_locked(self):
-        result = load_json("results/operator_amplitude_path_v1.json")
+        result = load_json(resolve_record("results/operator_amplitude_path_v1.json"))
         self.assertFalse(result["formal_seed_access"])
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(Path(result["implementation"]["path"])),
+            file_sha256(resolve_record(result["implementation"]["path"])),
         )
         self.assertEqual(
             result["specification"]["sha256"],
-            file_sha256(Path(result["specification"]["path"])),
+            file_sha256(resolve_record(result["specification"]["path"])),
         )
         overall = result["overall_diagnosis"]
         self.assertEqual(overall["replicated_mean_crossing_relations"], ["H>A"])

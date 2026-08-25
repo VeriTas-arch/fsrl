@@ -22,9 +22,10 @@ from .meta_train import (
     train_meta_model,
 )
 from .qualification import evaluate_qualification
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "confirmation_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/confirmation_v1.json")
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "confirmation-v1"
 FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
 FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "formal_runtime.py"
@@ -55,7 +56,7 @@ def resolve_registered_path(specification_path: Path, registered: str) -> Path:
     candidate = Path(registered)
     if candidate.is_absolute():
         return candidate
-    return specification_path.resolve().parents[1] / candidate
+    return resolve_record(candidate)
 
 
 def validate_confirmation_contract(

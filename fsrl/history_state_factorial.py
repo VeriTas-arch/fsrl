@@ -21,6 +21,7 @@ from .assembly_trajectory import (
 )
 from .config import DEVICE
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import resolve_record
 from .support_factor_swap import (
     EpisodeFactors,
     compose_factors,
@@ -34,8 +35,8 @@ from .support_write_localization import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "history_state_factorial_v1.json"
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "history_state_factorial_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/history_state_factorial_v1.json")
+DEFAULT_OUTPUT_PATH = resolve_record("results/history_state_factorial_v1.json")
 CELL_NAMES = ("NN", "NH", "HN", "HH")
 
 

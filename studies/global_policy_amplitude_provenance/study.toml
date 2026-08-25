@@ -1,0 +1,42 @@
+schema_version = 1
+id = "global_policy_amplitude_provenance"
+title = "Global-policy amplitude provenance"
+chapter = "global_policy"
+order = 10
+status = "unresolved"
+review_state = "indexed"
+question = "Is the neural/posterior slope mismatch explained by excessive total additive amplitude?"
+finding = "Neural additive norm is smaller than the posterior comparator even though neural slope is steeper, converting the issue from scalar calibration to field allocation and shape."
+boundary = "The outcome is comparator-sensitive and unresolved; temperature, P_T, W_out, and scalar corrections are not licensed."
+
+[[records]]
+path = "records/benchmarks/global_policy_amplitude_provenance_v1.json"
+legacy_path = "benchmarks/global_policy_amplitude_provenance_v1.json"
+role = "registered_contract"
+sha256 = "08b0a0448c1c6ccc1d783c964e44c0f2e7758b38a1695b802e7416657e985234"
+bytes = 19666
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/global_policy_amplitude_provenance_v1.lock.json"
+legacy_path = "benchmarks/global_policy_amplitude_provenance_v1.lock.json"
+role = "execution_lock"
+sha256 = "f774a4216196bb6c82450011a55045a5c29b22ddaea72f52227779ce0cb01213"
+bytes = 2241
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/docs/global_policy_amplitude_provenance_v1.md"
+legacy_path = "docs/global_policy_amplitude_provenance_v1.md"
+role = "report"
+sha256 = "b51e645bb579849cffdde268465de3e7ebd759ebf9dbd2ca01c9d1af007579a9"
+bytes = 10779
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/results/global_policy_amplitude_provenance_v1.json"
+legacy_path = "results/global_policy_amplitude_provenance_v1.json"
+role = "frozen_result"
+sha256 = "b94a7ff154d66553fedf48469eb509dc7f041e7a9454143228c9a7963b1e61b4"
+bytes = 207054
+source_ref = "refs/tags/liu-mainline-v1"

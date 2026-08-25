@@ -1,5 +1,4 @@
 import unittest
-from pathlib import Path
 
 import numpy as np
 
@@ -10,11 +9,12 @@ from fsrl.relation_trace_localization import (
     prototype_rdm_similarity,
     validate_registered_sources,
 )
+from fsrl.study_registry import resolve_record
 
 
 class RelationTraceLocalizationTests(unittest.TestCase):
     def test_corrected_execution_lock_preserves_registered_sources(self):
-        specification = load_json("benchmarks/relation_trace_localization_v1_1.json")
+        specification = load_json(resolve_record("benchmarks/relation_trace_localization_v1_1.json"))
         self.assertEqual(
             specification["execution_contract"]["floating_reproduction_tolerance"],
             64.0 * np.finfo(np.float32).eps,
@@ -82,12 +82,12 @@ class RelationTraceLocalizationTests(unittest.TestCase):
         )
 
     def test_registered_result_is_complete_and_source_locked(self):
-        result = load_json("results/relation_trace_localization_v1_1.json")
+        result = load_json(resolve_record("results/relation_trace_localization_v1_1.json"))
         self.assertFalse(result["formal_seed_access"])
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(Path(result["implementation"]["path"])),
+            file_sha256(resolve_record(result["implementation"]["path"])),
         )
         expected = {
             "generated_effective_write": False,

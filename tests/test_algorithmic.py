@@ -3,11 +3,12 @@ from itertools import combinations
 
 from fsrl.algorithmic import compare_neural_policy_to_exact_posterior
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class AlgorithmicComparisonTests(unittest.TestCase):
     def test_true_order_logits_match_exact_map_with_full_evidence(self):
-        protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         rank = {
             item: position
             for position, item in enumerate(protocol.true_order_high_to_low)

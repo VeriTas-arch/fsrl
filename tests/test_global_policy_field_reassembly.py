@@ -14,11 +14,12 @@ from fsrl.global_policy_field_reassembly import (
 from fsrl.global_policy_slope_localization import subject_slopes
 from fsrl.local_behavior_attribution import exact_probability
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class GlobalPolicyFieldReassemblyTests(unittest.TestCase):
     def setUp(self):
-        self.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         self.geometry = build_complete_graph_geometry(self.protocol)
         positions = np.empty(self.protocol.n_items, dtype=np.int64)
         for position, item in enumerate(self.protocol.true_order_high_to_low):

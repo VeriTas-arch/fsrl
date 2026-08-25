@@ -1,0 +1,34 @@
+schema_version = 1
+id = "task_fidelity"
+title = "Liu task and human benchmark contract"
+chapter = "orientation"
+order = 10
+status = "frozen_contract"
+review_state = "indexed"
+question = "What information and response boundary must every model-facing Liu analysis preserve?"
+finding = "The task contract preserves item identity, signed displayed magnitude, passive four-presentation learning, all-pair testing, and no test feedback."
+boundary = "Classic rewarded adjacent-pair TI and list linking are context, not descriptions of the Liu observation interface."
+
+[[records]]
+path = "records/benchmarks/liu_human_exact_v1.json"
+legacy_path = "benchmarks/liu_human_exact_v1.json"
+role = "registered_contract"
+sha256 = "c1e3efbbbc03b2412626bf2819d53f20868ca138fd23d09eed4c61d77f0dddb1"
+bytes = 59257
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/liu_v1.json"
+legacy_path = "benchmarks/liu_v1.json"
+role = "registered_contract"
+sha256 = "91cd3358b1590e1082731447b1cc3e1529f561831d7d6625ef56f23f28d6ea64"
+bytes = 2044
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/liu_v2.json"
+legacy_path = "benchmarks/liu_v2.json"
+role = "registered_contract"
+sha256 = "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"
+bytes = 2144
+source_ref = "refs/tags/liu-mainline-v1"

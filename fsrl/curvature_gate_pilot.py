@@ -42,12 +42,13 @@ from .meta_train import MetaTrainConfig, train_meta_model
 from .operator_amplitude_path import collect_amplitude_fields
 from .qualification import evaluate_qualification
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "curvature_gate_pilot_v2.json"
-DEFAULT_LOCK_PATH = ROOT / "benchmarks" / "curvature_gate_pilot_v2.lock.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
+DEFAULT_LOCK_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.lock.json")
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "curvature-gate-pilot-v2"
-DEFAULT_RESULT_PATH = ROOT / "results" / "curvature_gate_pilot_v2.json"
+DEFAULT_RESULT_PATH = resolve_record("results/curvature_gate_pilot_v2.json")
 CONDITIONS = (
     "original_v1",
     "conditioned_gate",
@@ -82,7 +83,7 @@ def configure_runtime() -> dict:
 
 def _resolve_registered(path: str) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def validate_sources(
@@ -109,7 +110,7 @@ def validate_sources(
     checks.append(
         {
             "name": "pilot_specification",
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "observed": protocol_hash,
             "expected": lock["pilot_specification_sha256"],
             "passed": protocol_hash == lock["pilot_specification_sha256"],

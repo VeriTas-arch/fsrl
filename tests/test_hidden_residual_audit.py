@@ -1,5 +1,4 @@
 import unittest
-from pathlib import Path
 
 import numpy as np
 
@@ -10,6 +9,7 @@ from fsrl.hidden_residual_audit import (
     vector_hodge_components,
 )
 from fsrl.ranking_protocol import RankingProtocol
+from fsrl.study_registry import resolve_record
 
 
 class HiddenResidualAuditTests(unittest.TestCase):
@@ -78,12 +78,12 @@ class HiddenResidualAuditTests(unittest.TestCase):
         np.testing.assert_allclose(metrics["output_direct_correctness"], 0.0)
 
     def test_registered_result_is_complete_and_source_locked(self):
-        result = load_json("results/hidden_residual_audit_v1.json")
+        result = load_json(resolve_record("results/hidden_residual_audit_v1.json"))
         self.assertFalse(result["formal_seed_access"])
         self.assertEqual(set(result["seed_results"]), {"1901", "1902"})
         self.assertEqual(
             result["implementation"]["sha256"],
-            file_sha256(Path(result["implementation"]["path"])),
+            file_sha256(resolve_record(result["implementation"]["path"])),
         )
         for row in result["seed_results"].values():
             self.assertEqual(

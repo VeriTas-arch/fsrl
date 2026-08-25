@@ -31,15 +31,14 @@ from fsrl.global_policy_allocation_audit import (
 from fsrl.global_policy_amplitude_provenance import NonInterpretableEstimate
 from fsrl.global_policy_field_reassembly import field_reassembly_estimands
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import legacy_identifier, resolve_record
 
 
 class GlobalPolicyAllocationAuditTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.specification = load_json(DEFAULT_SPECIFICATION_PATH)
-        cls.protocol = load_ranking_protocol(
-            Path(__file__).resolve().parents[1] / "benchmarks" / "liu_v2.json"
-        )
+        cls.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         cls.geometry = build_complete_graph_geometry(cls.protocol)
         cls.metadata = edge_metadata(cls.specification, cls.protocol, cls.geometry)
 
@@ -381,11 +380,7 @@ class GlobalPolicyAllocationAuditTests(unittest.TestCase):
             {
                 **load_json(DEFAULT_SPECIFICATION_PATH)["registered_sources"],
                 "audit_specification": {
-                    "path": str(
-                        DEFAULT_SPECIFICATION_PATH.relative_to(
-                            Path(__file__).resolve().parents[1]
-                        )
-                    ),
+                    "path": legacy_identifier(DEFAULT_SPECIFICATION_PATH),
                     "sha256": lock["audit_specification_sha256"],
                 },
                 "superseded_implementation_lock": lock["supersedes"],

@@ -1,0 +1,42 @@
+schema_version = 1
+id = "local_behavior_attribution"
+title = "Local behavioral non-rescue attribution"
+chapter = "local_fidelity"
+order = 90
+status = "supporting"
+review_state = "indexed"
+question = "Why can a large direct-causal local rescue produce only a tiny sampled learned-accuracy change?"
+finding = "Stable-omitted cells dominate learned error mass, retained cells are mostly near ceiling, and the local trace removes retained exact error while sampled accuracy remains endpoint-sensitive."
+boundary = "The historical 0.65 rule still misses narrowly; the result cannot be relabeled as the original pilot PASS or repaired by increasing gain."
+
+[[records]]
+path = "records/benchmarks/local_behavior_attribution_v2_3.json"
+legacy_path = "benchmarks/local_behavior_attribution_v2_3.json"
+role = "registered_contract"
+sha256 = "ea892ce00c852e029c05d13c4cefc1011ba75ed70ffd714990a3da6ad916ea3c"
+bytes = 9680
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/local_behavior_attribution_v2_3.lock.json"
+legacy_path = "benchmarks/local_behavior_attribution_v2_3.lock.json"
+role = "execution_lock"
+sha256 = "d9b477faddef036acca3839badb843af792895e099ba0f90e7f1151e92d6645f"
+bytes = 1184
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/docs/local_behavior_attribution_v2_3.md"
+legacy_path = "docs/local_behavior_attribution_v2_3.md"
+role = "report"
+sha256 = "ac6345651dc2398f0192da6abbd841e853327340327e7b43796e505414eda516"
+bytes = 10201
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/results/local_behavior_attribution_v2_3.json"
+legacy_path = "results/local_behavior_attribution_v2_3.json"
+role = "frozen_result"
+sha256 = "599b379d1d1a9ae5a0f7f4b4bd8f8a99b30120163f5cee89cf0680a0d2e953d2"
+bytes = 806762
+source_ref = "refs/tags/liu-mainline-v1"

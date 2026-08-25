@@ -17,10 +17,9 @@ from .liu_eval import (
     load_retro_checkpoint,
 )
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import resolve_record
 
-DEFAULT_GEOMETRY_GATE_PATH = (
-    Path(__file__).resolve().parents[1] / "benchmarks" / "geometry_gate_v2.json"
-)
+DEFAULT_GEOMETRY_GATE_PATH = resolve_record("benchmarks/geometry_gate_v2.json")
 
 
 def context_averaged_item_representations(

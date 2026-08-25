@@ -60,16 +60,17 @@ from .liu_eval import (
 )
 from .local_behavior_attribution import _pair_correct_probabilities, exact_probability
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "dual_evidence_access_pilot_v2_4.json"
+    resolve_record("benchmarks/dual_evidence_access_pilot_v2_4.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_evidence_access_pilot_v2_4.repair1.lock.json"
+    resolve_record("benchmarks/dual_evidence_access_pilot_v2_4.repair1.lock.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "dual_evidence_access_pilot_v2_4.json"
-V2_3_RESULT_PATH = ROOT / "results" / "conjunctive_local_trace_replication_v2_3.json"
+DEFAULT_RESULT_PATH = resolve_record("results/dual_evidence_access_pilot_v2_4.json")
+V2_3_RESULT_PATH = resolve_record("results/conjunctive_local_trace_replication_v2_3.json")
 CONDITIONS = (
     "local_off_v1",
     "shared_access_v2_3",
@@ -83,7 +84,7 @@ CONDITIONS = (
 
 def _resolve(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def validate_sources(

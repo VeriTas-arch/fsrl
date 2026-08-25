@@ -1,0 +1,50 @@
+schema_version = 1
+id = "policy_residual"
+title = "First-order policy residual"
+chapter = "local_fidelity"
+order = 70
+status = "valid_negative"
+review_state = "indexed"
+question = "Is preserving the existing first-order branch through one low-capacity policy correction sufficient for local fidelity?"
+finding = "The natural residual causally moves H>A and F>A toward correctness with state-query specificity, but aggregate rescue and control specificity fail and six correct relations decline."
+boundary = "Preserve the causal residual fingerprint, but close low-capacity response-expression correction as a sufficient mechanism."
+
+[[records]]
+path = "records/benchmarks/policy_residual_pilot_v2_2.artifact_lock.json"
+legacy_path = "benchmarks/policy_residual_pilot_v2_2.artifact_lock.json"
+role = "artifact_lock"
+sha256 = "f3c34e12b8e147e07c47e5fe07772904df5b2a0d01e43b49e5e513bb4995f662"
+bytes = 1296
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/policy_residual_pilot_v2_2.json"
+legacy_path = "benchmarks/policy_residual_pilot_v2_2.json"
+role = "registered_contract"
+sha256 = "d53b98b2159d5ea1653e07e1e077b43a8c38dc4f67b6a306ac8ef6d85ff7d4de"
+bytes = 15997
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/benchmarks/policy_residual_pilot_v2_2.lock.json"
+legacy_path = "benchmarks/policy_residual_pilot_v2_2.lock.json"
+role = "execution_lock"
+sha256 = "6cf77a375d698d792eaa558e2043cdfefe97c3ebbc2bcc4b03c2d7fe2f5d05c3"
+bytes = 2134
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/docs/policy_residual_pilot_v2_2.md"
+legacy_path = "docs/policy_residual_pilot_v2_2.md"
+role = "report"
+sha256 = "e777de86204537f597d39d68a82c33143799d1f99c2911dd87667b05aa7e3b9c"
+bytes = 11398
+source_ref = "refs/tags/liu-mainline-v1"
+
+[[records]]
+path = "records/results/policy_residual_pilot_v2_2.json"
+legacy_path = "results/policy_residual_pilot_v2_2.json"
+role = "frozen_result"
+sha256 = "74d8150e2e539907d72a54a01930618b81b90303840a6e45b4c1f9e8f495b628"
+bytes = 1767562
+source_ref = "refs/tags/liu-mainline-v1"

@@ -27,13 +27,14 @@ from .hidden_residual_audit import (
 )
 from .liu_eval import FastWeightIntervention
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 from .support_write_localization import trace_support_trial
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "relation_trace_localization_v1_1.json"
+    resolve_record("benchmarks/relation_trace_localization_v1_1.json")
 )
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "relation_trace_localization_v1_1.json"
+DEFAULT_OUTPUT_PATH = resolve_record("results/relation_trace_localization_v1_1.json")
 
 
 def _unit_rows(values: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray]:
@@ -598,7 +599,7 @@ def run_relation_trace_localization(
         "registration_status": specification["registration_status"],
         "claim_boundary": specification["claim_boundary"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": file_sha256(specification_path),
         },
         "implementation": {

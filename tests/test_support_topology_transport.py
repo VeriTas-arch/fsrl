@@ -4,6 +4,7 @@ from itertools import combinations
 import numpy as np
 
 from fsrl.ranking_protocol import SupportTrial, load_ranking_protocol
+from fsrl.study_registry import resolve_record
 from fsrl.support_topology_transport import (
     DEFAULT_SPECIFICATION_PATH,
     cross_cell_decision,
@@ -58,7 +59,7 @@ class SupportTopologyTransportTests(unittest.TestCase):
         self.assertNotIn((2,) * 8, degrees)
 
     def test_graph_protocol_changes_only_support_identity(self):
-        base = load_ranking_protocol("benchmarks/liu_v2.json")
+        base = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         for graph in self.specification["matched_graph_contract"]["graphs"]:
             protocol = protocol_for_graph(base, graph)
             self.assertEqual(protocol.n_items, 8)

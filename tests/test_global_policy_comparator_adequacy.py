@@ -26,6 +26,7 @@ from fsrl.global_policy_comparator_adequacy import (
     write_json_exclusive,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import ROOT, legacy_identifier, resolve_record
 
 
 class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):
@@ -33,9 +34,8 @@ class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):
     def setUpClass(cls):
         registered = json.loads(DEFAULT_SPECIFICATION_PATH.read_text())
         cls.specification, cls.repair = apply_protocol_repair(registered)
-        protocol_path = (
-            DEFAULT_SPECIFICATION_PATH.parents[1]
-            / cls.specification["registered_sources"]["liu_protocol"]["path"]
+        protocol_path = resolve_record(
+            cls.specification["registered_sources"]["liu_protocol"]["path"]
         )
         cls.protocol = load_ranking_protocol(protocol_path)
         cls.metadata = edge_metadata(cls.specification, cls.protocol)
@@ -56,23 +56,17 @@ class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):
     def test_implementation_source_lock_is_complete(self):
         specification = json.loads(DEFAULT_SPECIFICATION_PATH.read_text())
         lock = json.loads(
-            (
-                DEFAULT_SPECIFICATION_PATH.parents[1]
-                / "benchmarks"
-                / "global_policy_comparator_adequacy_v1.lock.json"
+            resolve_record(
+                "benchmarks/global_policy_comparator_adequacy_v1.lock.json"
             ).read_text()
         )
         validation = verify_git_registrations(
-            DEFAULT_SPECIFICATION_PATH.parents[1],
+            ROOT,
             "44004aa39441e075b915f499aa9d02578c78e471",
             {
                 **specification["registered_sources"],
                 "audit_specification": {
-                    "path": str(
-                        DEFAULT_SPECIFICATION_PATH.relative_to(
-                            DEFAULT_SPECIFICATION_PATH.parents[1]
-                        )
-                    ),
+                    "path": legacy_identifier(DEFAULT_SPECIFICATION_PATH),
                     "sha256": lock["audit_specification_sha256"],
                 },
                 "protocol_repair": lock["protocol_repair"],

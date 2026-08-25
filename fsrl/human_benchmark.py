@@ -21,16 +21,17 @@ from .behavioral import (
     maximum_circular_triads,
 )
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
+from .study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PROTOCOL_PATH = ROOT / "benchmarks" / "liu_v2.json"
+DEFAULT_PROTOCOL_PATH = resolve_record("benchmarks/liu_v2.json")
 DEFAULT_PREREGISTERED_PATH = (
     ROOT / "data" / "external" / "liu2026" / "preregistered_experiment_data.csv"
 )
 DEFAULT_REPLICATION_PATH = (
     ROOT / "data" / "external" / "liu2026" / "replication_experiment_data.csv"
 )
-DEFAULT_OUTPUT_PATH = ROOT / "benchmarks" / "liu_human_exact_v1.json"
+DEFAULT_OUTPUT_PATH = resolve_record("benchmarks/liu_human_exact_v1.json")
 DEFAULT_FIGURE2D_PATH = (
     ROOT / "data" / "external" / "liu2026" / "Figure2d_Data.csv"
 )

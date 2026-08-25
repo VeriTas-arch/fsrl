@@ -24,18 +24,19 @@ from .global_policy_field_fingerprint_replication import require_pushed_freeze
 from .human_benchmark import REQUIRED_COLUMNS
 from .liu_eval import FrozenFastWeightEvaluator
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
-    ROOT / "benchmarks" / "global_policy_comparator_adequacy_v1.json"
+    resolve_record("benchmarks/global_policy_comparator_adequacy_v1.json")
 )
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "global_policy_comparator_adequacy_v1.lock.json"
+    resolve_record("benchmarks/global_policy_comparator_adequacy_v1.lock.json")
 )
 DEFAULT_PROTOCOL_REPAIR_PATH = (
-    ROOT / "benchmarks" / "global_policy_comparator_adequacy_v1.repair1.json"
+    resolve_record("benchmarks/global_policy_comparator_adequacy_v1.repair1.json")
 )
-DEFAULT_RESULT_PATH = ROOT / "results" / "global_policy_comparator_adequacy_v1.json"
+DEFAULT_RESULT_PATH = resolve_record("results/global_policy_comparator_adequacy_v1.json")
 
 REQUIRED_IMPLEMENTATION_SOURCE_PATHS = {
     "audit_runner": "fsrl/global_policy_comparator_adequacy.py",
@@ -58,7 +59,7 @@ REQUIRED_REUSED_SOURCE_NAMES = {
 
 def _resolve(path: str | Path) -> Path:
     candidate = Path(path)
-    return candidate if candidate.is_absolute() else ROOT / candidate
+    return candidate if candidate.is_absolute() else resolve_record(candidate)
 
 
 def _canonical_paths(parsed: argparse.Namespace) -> None:
@@ -106,7 +107,7 @@ def apply_protocol_repair(
         and repair.get("audit_id") == specification.get("audit_id")
         and repair.get("repair_status")
         == "prospectively_frozen_after_static_edge_contract_failure_and_before_any_human_or_posterior_adequacy_evaluation"
-        and original.get("path") == str(DEFAULT_SPECIFICATION_PATH.relative_to(ROOT))
+        and original.get("path") == legacy_identifier(DEFAULT_SPECIFICATION_PATH)
         and original.get("sha256") == file_sha256(DEFAULT_SPECIFICATION_PATH)
         and correction.get("json_pointer")
         == "/field_contract/distance_level_pair_counts"
@@ -175,7 +176,7 @@ def validate_sources(
     registrations = {
         **specification["registered_sources"],
         "audit_specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": lock["audit_specification_sha256"],
         },
         "protocol_repair": lock["protocol_repair"],

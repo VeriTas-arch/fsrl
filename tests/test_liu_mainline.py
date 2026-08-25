@@ -24,6 +24,7 @@ from fsrl.liu_mainline import (
     verify_replay_contracts,
     verify_report_view,
 )
+from fsrl.study_registry import resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -216,7 +217,7 @@ class LiuMainlineTests(unittest.TestCase):
         self.assertTrue(result["passed"])
 
     def test_presentation_v2_defines_exact_L_and_a_equivalence(self):
-        presentation = (ROOT / "docs" / "liu_presentation_package_v2.md").read_text()
+        presentation = resolve_record("docs/liu_presentation_package_v2.md").read_text()
         self.assertIn("L_{t+1}=L_t+s_t^L k_{r_t}", presentation)
         self.assertIn("a_{t+1}=a_t+s_t^L e_{r_t}", presentation)
         self.assertIn("L_T=\\sum_r a_{T,r}k_r", presentation)

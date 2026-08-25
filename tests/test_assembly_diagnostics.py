@@ -10,11 +10,12 @@ from fsrl.assembly_diagnostics import (
     metric_arrays,
 )
 from fsrl.ranking_protocol import load_ranking_protocol
+from fsrl.study_registry import resolve_record
 
 
 class AssemblyDiagnosticsTests(unittest.TestCase):
     def setUp(self):
-        self.protocol = load_ranking_protocol("benchmarks/liu_v2.json")
+        self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
         self.design = build_field_design(self.protocol)
 
     def test_pure_item_potential_has_no_hodge_residual(self):

@@ -41,18 +41,19 @@ from .liu_eval import (
 from .policy_residual import PolicyResidualTransition
 from .qualification import evaluate_qualification
 from .ranking_protocol import load_ranking_protocol
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "policy_residual_pilot_v2_2.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/policy_residual_pilot_v2_2.json")
 DEFAULT_IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "policy_residual_pilot_v2_2.lock.json"
+    resolve_record("benchmarks/policy_residual_pilot_v2_2.lock.json")
 )
 DEFAULT_ARTIFACT_LOCK_PATH = (
-    ROOT / "benchmarks" / "policy_residual_pilot_v2_2.artifact_lock.json"
+    resolve_record("benchmarks/policy_residual_pilot_v2_2.artifact_lock.json")
 )
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "policy-residual-pilot-v2-2"
-DEFAULT_RESULT_PATH = ROOT / "results" / "policy_residual_pilot_v2_2.json"
-UNSIGNED_SPECIFICATION_PATH = ROOT / "benchmarks" / "curvature_gate_pilot_v2.json"
+DEFAULT_RESULT_PATH = resolve_record("results/policy_residual_pilot_v2_2.json")
+UNSIGNED_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
 CONDITIONS = (
     "original_v1",
     "policy_residual",
@@ -98,7 +99,7 @@ def validate_sources(
     checks.append(
         {
             "name": "pilot_specification",
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "observed": protocol_hash,
             "expected": lock["pilot_specification_sha256"],
             "passed": protocol_hash == lock["pilot_specification_sha256"],

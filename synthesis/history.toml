@@ -1,0 +1,15 @@
+schema_version = 1
+
+[[releases]]
+id = "frozen-evidence-overlay-v1"
+status = "frozen"
+git_tag = "liu-mainline-v1"
+commit = "2e0bdd86f4ee8f247157df5eb748131470246317"
+manifest = "frozen/manifest.json"
+note = "The internal Liu v1 identity and content remain historical provenance; the active repository no longer uses a Liu-named structural namespace."
+
+[[migrations]]
+id = "flat-records-v1"
+source_commit = "fb32095df70b1265b5d14b8eda3be6cb65036c6a"
+map = "../studies/migrations/flat-records-v1.json"
+mode = "byte_preserving_physical_relocation"

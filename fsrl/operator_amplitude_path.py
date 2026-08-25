@@ -34,10 +34,11 @@ from .operator_output_semantics import (
 )
 from .ranking_protocol import RankingProtocol, load_ranking_protocol
 from .state_query_operator_binding import _replay_terminal_states
+from .study_registry import legacy_identifier, resolve_record
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SPECIFICATION_PATH = ROOT / "benchmarks" / "operator_amplitude_path_v1.json"
-DEFAULT_OUTPUT_PATH = ROOT / "results" / "operator_amplitude_path_v1.json"
+DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/operator_amplitude_path_v1.json")
+DEFAULT_OUTPUT_PATH = resolve_record("results/operator_amplitude_path_v1.json")
 
 
 def quadratic_coefficient(baseline: torch.Tensor, action: torch.Tensor) -> torch.Tensor:
@@ -910,7 +911,7 @@ def run_operator_amplitude_path(
         "registration_status": specification["registration_status"],
         "claim_boundary": specification["claim_boundary"],
         "specification": {
-            "path": str(specification_path.relative_to(ROOT)),
+            "path": legacy_identifier(specification_path),
             "sha256": file_sha256(specification_path),
         },
         "implementation": {
