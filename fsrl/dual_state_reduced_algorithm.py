@@ -29,7 +29,7 @@ from .ranking_protocol import load_ranking_protocol
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.json"
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.repair2.lock.json"
+    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.repair3.lock.json"
 )
 TRAJECTORY_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.trajectories.npz"
 RESULT_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.json"
@@ -787,8 +787,8 @@ def _margin_logits(fields: np.ndarray, geometry: Geometry) -> tuple[dict, ...]:
         bundle = {}
         for index, (first, second) in enumerate(geometry.pairs):
             margin = float(row[index])
-            bundle[(first, second)] = np.asarray([-0.5 * margin, 0.5 * margin])
-            bundle[(second, first)] = np.asarray([0.5 * margin, -0.5 * margin])
+            bundle[(first, second)] = margin
+            bundle[(second, first)] = -margin
         outputs.append(bundle)
     return tuple(outputs)
 

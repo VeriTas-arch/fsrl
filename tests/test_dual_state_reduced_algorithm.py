@@ -5,6 +5,7 @@ import numpy as np
 
 from fsrl.dual_state_reduced_algorithm import (
     ReducedParameters,
+    _margin_logits,
     accumulator_fit,
     antisymmetric_field_from_margin_bundle,
     complete_geometry,
@@ -42,6 +43,15 @@ class DualStateReducedAlgorithmTests(unittest.TestCase):
         np.testing.assert_allclose(
             antisymmetric_field_from_margin_bundle(bundle, self.geometry), expected
         )
+
+    def test_behavior_adapter_returns_oriented_scalar_contrasts(self):
+        fields = np.arange(56, dtype=np.float64).reshape(2, 28) / 10.0
+        bundles = _margin_logits(fields, self.geometry)
+        for subject, bundle in enumerate(bundles):
+            for index, (first, second) in enumerate(self.geometry.pairs):
+                self.assertIsInstance(bundle[(first, second)], float)
+                self.assertEqual(bundle[(first, second)], fields[subject, index])
+                self.assertEqual(bundle[(second, first)], -fields[subject, index])
 
     def test_edge_kernel_exactly_reassembles_tensor_trace(self):
         rng = np.random.default_rng(2)

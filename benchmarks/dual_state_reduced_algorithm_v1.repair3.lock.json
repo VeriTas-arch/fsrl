@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v1",
+  "freeze_status": "implementation_repair_frozen_after_noninformative_behavior_adapter_failure_and_before_any_result_write_or_interpretation",
+  "registration_commit": "3622dd6",
+  "repair2_commit": "3f9cc7e",
+  "specification_sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80",
+  "superseded_lock": {
+    "path": "benchmarks/dual_state_reduced_algorithm_v1.repair2.lock.json",
+    "sha256": "cff6df9310e698247cf27130329d9ee072d8422cd8818b7e81cfad1c70f2ae2b"
+  },
+  "failed_attempt": {
+    "stage": "seed-2104 sampled-behavior adapter after reduced preservation fields were assembled but before behavior summaries, output write, or result print",
+    "error": "TypeError: only 0-dimensional arrays can be converted to Python scalars",
+    "scientific_metrics_observed": false,
+    "registered_outputs_absent": true,
+    "cause": "analyze_sampled_query_policy consumes one oriented action logit contrast per pair. The adapter incorrectly converted each already scalar reduced margin back into a two-element logit vector."
+  },
+  "repair": {
+    "scope": "Supply scalar m for orientation (i,j) and scalar -m for (j,i), and add a regression test for value, orientation, and scalar type.",
+    "scientific_contract_changed": false,
+    "seeds_episodes_models_thresholds_optimizer_or_fit_changed": false,
+    "prior_in_memory_fit_and_fields_discarded_without_inspection": true
+  },
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/dual_state_reduced_algorithm.py",
+      "sha256": "5e1504e3fc1308b8faed2c9d6f955c1d75a90c9f83394118c81ab80269dedd77"
+    },
+    "tests": {
+      "path": "tests/test_dual_state_reduced_algorithm.py",
+      "sha256": "5e0abef3647f97548f24349ac25480f6aa03928f177a9f56afbd4c5f2b042ac5"
+    }
+  },
+  "preexecution_validation": {
+    "targeted_tests": "9 passed",
+    "python_compile": "passed",
+    "ruff": "passed",
+    "registered_outputs_absent": true
+  },
+  "next_step": "Commit and push this repair lock before restarting the single registered GPU execution from the beginning."
+}
