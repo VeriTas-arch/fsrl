@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 from scipy import integrate, stats
 
-from fsrl.infrastructure.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.study_registry import legacy_identifier, resolve_record
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT

@@ -13,7 +13,7 @@ import numpy as np
 import torch
 
 from fsrl.evaluation.frozen_fast_weight import load_retro_checkpoint
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

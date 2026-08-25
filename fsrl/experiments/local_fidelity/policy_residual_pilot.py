@@ -46,7 +46,7 @@ from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     write_json,
 )
 from fsrl.experiments.local_fidelity.policy_residual import PolicyResidualTransition
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

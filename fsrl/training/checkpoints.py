@@ -9,8 +9,8 @@ from pathlib import Path
 import torch
 
 from fsrl.core.config import ADDINPUT, TrainConfig
-from fsrl.infrastructure.provenance import file_sha256
-from fsrl.infrastructure.runtime import default_device
+from fsrl.infra.provenance import file_sha256
+from fsrl.infra.runtime import default_device
 
 from ..core.plastic_rnn import RetroModulRNN
 

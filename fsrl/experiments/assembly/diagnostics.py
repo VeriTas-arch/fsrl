@@ -25,7 +25,7 @@ from fsrl.experiments.human.benchmark import (
     SOURCE_FILES,
     load_human_cohort,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 

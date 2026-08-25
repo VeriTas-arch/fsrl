@@ -7,7 +7,7 @@ from tqdm.auto import tqdm
 
 from fsrl.core import RetroModulRNN
 from fsrl.core.config import DEVICE
-from fsrl.infrastructure.logging import log
+from fsrl.infra.logging import log
 
 from .episode import run_episode
 

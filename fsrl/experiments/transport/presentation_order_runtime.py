@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sys
 
-from fsrl.infrastructure.formal_runtime import configure_formal_runtime
+from fsrl.infra.formal_runtime import configure_formal_runtime
 
 
 def main(args=None) -> int:

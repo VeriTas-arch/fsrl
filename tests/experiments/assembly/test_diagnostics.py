@@ -9,7 +9,7 @@ from fsrl.experiments.assembly.diagnostics import (
     load_human_choice_fields,
     metric_arrays,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

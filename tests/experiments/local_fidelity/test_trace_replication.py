@@ -8,7 +8,7 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     seed_specification,
     within_seed_decision,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 
 class ConjunctiveLocalTraceReplicationTests(unittest.TestCase):

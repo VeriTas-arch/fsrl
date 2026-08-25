@@ -65,7 +65,7 @@ Implementation:
 - [`fsrl/core/plastic_rnn.py`](../../fsrl/core/plastic_rnn.py)
 - [`fsrl/training/backbone.py`](../../fsrl/training/backbone.py)
 - [`fsrl/training/checkpoints.py`](../../fsrl/training/checkpoints.py)
-- [`fsrl/infrastructure/runtime.py`](../../fsrl/infrastructure/runtime.py)
+- [`fsrl/infra/runtime.py`](../../fsrl/infra/runtime.py)
 
 Evidence:
 
@@ -184,7 +184,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m fsrl.infrastructure.study_registry check`
+- `direnv exec . python -m fsrl.infra.study_registry check`
 
 ## 7. Evidence synthesis and figures
 
@@ -200,7 +200,7 @@ Verification:
 
 Implementation:
 
-- [`fsrl/infrastructure/study_registry.py`](../../fsrl/infrastructure/study_registry.py)
+- [`fsrl/infra/study_registry.py`](../../fsrl/infra/study_registry.py)
 - [`fsrl/workflows/paper_figures.py`](../../fsrl/workflows/paper_figures.py)
 - [`synthesis/manifest.toml`](../../synthesis/manifest.toml)
 
@@ -210,7 +210,7 @@ Evidence:
 
 Verification:
 
-- `direnv exec . python -m fsrl.infrastructure.study_registry check`
+- `direnv exec . python -m fsrl.infra.study_registry check`
 - `direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml`
 
 ## Evidence and figures

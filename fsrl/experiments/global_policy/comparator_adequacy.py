@@ -22,8 +22,8 @@ from fsrl.experiments.global_policy.amplitude_provenance import (
 from fsrl.experiments.global_policy.field_replication import require_pushed_freeze
 from fsrl.experiments.human.benchmark import REQUIRED_COLUMNS
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

@@ -8,7 +8,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from fsrl.infrastructure.runtime import default_device
+from fsrl.infra.runtime import default_device
 
 
 def inverse_softplus(value: float) -> float:

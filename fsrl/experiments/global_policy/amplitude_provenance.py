@@ -30,8 +30,8 @@ from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 

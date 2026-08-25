@@ -111,7 +111,7 @@ wheel and are resolved from this checkout.
 Check the study registry and generated human views:
 
 ~~~bash
-direnv exec . python -m fsrl.infrastructure.study_registry check
+direnv exec . python -m fsrl.infra.study_registry check
 ~~~
 
 Audit the one-time physical migration against its frozen Git sources and check
@@ -128,14 +128,14 @@ Run tests through the timeout-bounded entry point. It creates an independent
 process group and cleans up that group on timeout or interruption:
 
 ~~~bash
-direnv exec . python -m fsrl.infrastructure.test_runtime
+direnv exec . python -m fsrl.infra.test_runtime
 ~~~
 
 To run one unittest module with a shorter timeout:
 
 ~~~bash
-direnv exec . python -m fsrl.infrastructure.test_runtime --timeout 60 \
-  --framework unittest -- tests.infrastructure.test_study_registry -v
+direnv exec . python -m fsrl.infra.test_runtime --timeout 60 \
+  --framework unittest -- tests.infra.test_study_registry -v
 ~~~
 
 Runtime outputs belong under `artifacts/runs/<workflow>/`, including checkpoints,

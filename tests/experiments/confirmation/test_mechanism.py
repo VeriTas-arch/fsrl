@@ -1,7 +1,7 @@
 import unittest
 
 from fsrl.experiments.assembly.diagnostics import load_json, resolve_path
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 
 class MechanismConfirmationContractTests(unittest.TestCase):

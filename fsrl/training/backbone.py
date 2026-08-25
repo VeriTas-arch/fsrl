@@ -12,8 +12,8 @@ import torch
 import torch.nn.functional as F
 
 from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
-from fsrl.infrastructure.provenance import file_sha256
-from fsrl.infrastructure.runtime import (
+from fsrl.infra.provenance import file_sha256
+from fsrl.infra.runtime import (
     DEFAULT_COMPILED_PROFILE,
     ExecutionProfile,
     compile_module,

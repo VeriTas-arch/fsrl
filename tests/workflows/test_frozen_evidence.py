@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.workflows.frozen_evidence import (
     ARTIFACTS_PATH,

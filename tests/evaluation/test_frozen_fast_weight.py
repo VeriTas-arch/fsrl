@@ -14,7 +14,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     deterministic_cue_codes,
     load_retro_checkpoint,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

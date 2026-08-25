@@ -29,8 +29,8 @@ from fsrl.experiments.global_policy.allocation_audit import (
 from fsrl.experiments.global_policy.amplitude_provenance import NonInterpretableEstimate
 from fsrl.experiments.global_policy.field_reassembly import field_reassembly_estimands
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
-from fsrl.infrastructure.git_provenance import verify_git_registrations
-from fsrl.infrastructure.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.git_provenance import verify_git_registrations
+from fsrl.infra.study_registry import legacy_identifier, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 

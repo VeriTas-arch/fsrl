@@ -22,7 +22,7 @@ from fsrl.experiments.assembly.trajectory import (
     readout_margin_fields,
 )
 from fsrl.experiments.assembly.write_localization import trace_support_trial
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

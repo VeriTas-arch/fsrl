@@ -25,7 +25,7 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     seed_specification,
     train_backbone,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT

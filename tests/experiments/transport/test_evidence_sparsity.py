@@ -12,7 +12,7 @@ from fsrl.experiments.transport.evidence_sparsity import (
     load_json,
     validate_sparsity_contract,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

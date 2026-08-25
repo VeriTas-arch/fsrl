@@ -10,7 +10,7 @@ from fsrl.experiments.global_policy.slope_localization import (
     subject_slopes,
 )
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

@@ -66,8 +66,8 @@ from fsrl.experiments.transport.topology import (
     resolve_path,
     write_json_exclusive,
 )
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

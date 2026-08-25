@@ -16,7 +16,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
 DEFAULT_GEOMETRY_GATE_PATH = resolve_record("benchmarks/geometry_gate_v2.json")

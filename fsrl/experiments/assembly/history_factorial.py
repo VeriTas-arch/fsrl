@@ -31,7 +31,7 @@ from fsrl.experiments.assembly.write_localization import (
     row_cosine,
     trace_support_trial,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 

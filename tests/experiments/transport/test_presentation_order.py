@@ -8,7 +8,7 @@ from fsrl.experiments.transport.presentation_order import (
     schedule_integrity,
     transform_schedule,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

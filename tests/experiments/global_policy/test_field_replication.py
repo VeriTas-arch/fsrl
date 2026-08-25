@@ -16,7 +16,7 @@ from fsrl.experiments.global_policy.field_replication import (
     validate_sources,
 )
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import load_json
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 
 class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):

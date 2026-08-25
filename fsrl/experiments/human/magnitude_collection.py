@@ -15,7 +15,7 @@ from pathlib import Path
 import jsonschema
 import numpy as np
 
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT

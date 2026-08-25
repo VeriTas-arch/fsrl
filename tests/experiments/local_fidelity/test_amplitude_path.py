@@ -14,7 +14,7 @@ from fsrl.experiments.local_fidelity.amplitude_path import (
     subject_crossing_summary,
 )
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 
 class OperatorAmplitudePathTests(unittest.TestCase):

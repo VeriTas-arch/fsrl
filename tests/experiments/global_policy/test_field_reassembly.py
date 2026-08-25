@@ -13,7 +13,7 @@ from fsrl.experiments.global_policy.field_reassembly import (
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.experiments.local_fidelity.behavior_attribution import exact_probability
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

@@ -15,7 +15,7 @@ from fsrl.experiments.local_fidelity.output_semantics import (
     normalized_direct_correctness,
     stage_relation_metrics,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

@@ -11,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

@@ -51,7 +51,7 @@ from fsrl.experiments.local_fidelity.trace_pilot import (
     query_bundle,
     run_local_batch,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model

@@ -10,8 +10,8 @@ from itertools import combinations
 import numpy as np
 from scipy import stats
 
-from fsrl.infrastructure.provenance import load_json
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.provenance import load_json
+from fsrl.infra.study_registry import resolve_record
 
 PROTOCOL_PATH = resolve_record("benchmarks/magnitude_placement_behavior_v1_1.json")
 

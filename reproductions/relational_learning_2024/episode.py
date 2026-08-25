@@ -4,7 +4,7 @@ import numpy as np
 import torch
 
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP
-from fsrl.infrastructure.logging import log
+from fsrl.infra.logging import log
 
 from .task import build_step_inputs, generate_cue_data, prepare_trial
 

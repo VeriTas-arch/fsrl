@@ -22,7 +22,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 from fsrl.experiments.confirmation.reproduction_map import _model_record
 from fsrl.experiments.local_fidelity.evidence_access_pilot import access_factor
 from fsrl.experiments.local_fidelity.trace_pilot import _behavior_summaries
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

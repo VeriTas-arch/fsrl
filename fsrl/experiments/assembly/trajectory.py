@@ -35,7 +35,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.assembly.diagnostics import file_sha256, load_json, resolve_path
 from fsrl.experiments.confirmation.behavioral import _validate_checkpoint
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 

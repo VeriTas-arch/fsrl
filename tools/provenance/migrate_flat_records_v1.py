@@ -3,7 +3,7 @@
 This importer is retained as migration provenance.  It is intentionally tied to
 the pre-migration human catalog at commit ``fb32095`` and refuses partial or
 ambiguous ownership.  After application, ongoing validation belongs to
-``python -m fsrl.infrastructure.study_registry check``.
+``python -m fsrl.infra.study_registry check``.
 """
 
 from __future__ import annotations

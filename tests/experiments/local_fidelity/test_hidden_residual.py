@@ -8,7 +8,7 @@ from fsrl.experiments.local_fidelity.hidden_residual import (
     cross_validated_local_direction,
     vector_hodge_components,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.tasks.registered_protocol import RankingProtocol
 
 

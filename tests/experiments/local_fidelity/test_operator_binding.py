@@ -11,7 +11,7 @@ from fsrl.experiments.local_fidelity.operator_binding import (
     overlap_classes,
     structured_contrasts,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 
 class StateQueryOperatorBindingTests(unittest.TestCase):

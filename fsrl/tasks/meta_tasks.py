@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 from .protocol import load_ranking_protocol
 from .sparse_ranking import (

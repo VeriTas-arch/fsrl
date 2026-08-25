@@ -32,7 +32,7 @@ def _import_resolver(content: str, path: Path) -> str:
     if "resolve_record(" not in content:
         return content
     if path.parent.name == "fsrl":
-        statement = "from fsrl.infrastructure.study_registry import resolve_record"
+        statement = "from fsrl.infra.study_registry import resolve_record"
         if statement in content:
             return content
         marker = "from __future__ import annotations\n"
@@ -40,7 +40,7 @@ def _import_resolver(content: str, path: Path) -> str:
             raise RuntimeError(f"cannot place resolver import in {path}")
         return content.replace(marker, marker + "\n" + statement + "\n", 1)
 
-    statement = "from fsrl.infrastructure.study_registry import resolve_record"
+    statement = "from fsrl.infra.study_registry import resolve_record"
     if statement in content:
         return content
     first_fsrl = re.search(r"^from fsrl\.", content, flags=re.MULTILINE)

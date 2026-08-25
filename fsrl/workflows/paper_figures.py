@@ -31,7 +31,7 @@ from fsrl.experiments.human.benchmark import (
     load_human_cohort,
     load_published_figure_checks,
 )
-from fsrl.infrastructure.study_registry import ROOT, resolve_record
+from fsrl.infra.study_registry import ROOT, resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 SUITE_ROOT = ROOT / "synthesis" / "figures" / "paper_alignment"

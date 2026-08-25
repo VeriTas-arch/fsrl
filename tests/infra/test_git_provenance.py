@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fsrl.infrastructure.git_provenance import git_blob_sha256, verify_git_registrations
+from fsrl.infra.git_provenance import git_blob_sha256, verify_git_registrations
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT

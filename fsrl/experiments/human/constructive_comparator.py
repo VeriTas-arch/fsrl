@@ -14,8 +14,8 @@ from pathlib import Path
 import numpy as np
 from scipy import optimize
 
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

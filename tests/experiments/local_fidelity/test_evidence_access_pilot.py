@@ -11,7 +11,7 @@ from fsrl.experiments.local_fidelity.evidence_access_pilot import (
     blockwise_derangements,
     cross_seed_decision,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 
 class DualEvidenceAccessPilotTests(unittest.TestCase):

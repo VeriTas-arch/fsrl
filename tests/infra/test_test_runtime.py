@@ -7,7 +7,7 @@ import time
 import unittest
 from pathlib import Path
 
-from fsrl.infrastructure.test_runtime import TIMEOUT_EXIT_CODE, run_command
+from fsrl.infra.test_runtime import TIMEOUT_EXIT_CODE, run_command
 
 
 @unittest.skipUnless(hasattr(os, "killpg") and Path("/proc").is_dir(), "requires Linux")

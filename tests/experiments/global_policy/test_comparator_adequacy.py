@@ -24,8 +24,8 @@ from fsrl.experiments.global_policy.comparator_adequacy import (
     vector_correlation,
     write_json_exclusive,
 )
-from fsrl.infrastructure.git_provenance import verify_git_registrations
-from fsrl.infrastructure.study_registry import ROOT, legacy_identifier, resolve_record
+from fsrl.infra.git_provenance import verify_git_registrations
+from fsrl.infra.study_registry import ROOT, legacy_identifier, resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

@@ -8,7 +8,7 @@ from fsrl.experiments.confirmation.behavioral import (
     load_json,
     validate_confirmation_contract,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 
 class ConfirmationTests(unittest.TestCase):

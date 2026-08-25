@@ -104,18 +104,18 @@ class CoreArchitectureTests(unittest.TestCase):
 
     def test_package_dependencies_follow_the_explicit_layer_graph(self):
         allowed = {
-            "analysis": {"analysis", "evaluation", "infrastructure", "tasks"},
-            "core": {"core", "infrastructure"},
+            "analysis": {"analysis", "evaluation", "infra", "tasks"},
+            "core": {"core", "infra"},
             "evaluation": {
                 "core",
                 "evaluation",
-                "infrastructure",
+                "infra",
                 "tasks",
                 "training",
             },
-            "infrastructure": {"infrastructure", "paths"},
-            "tasks": {"infrastructure", "tasks"},
-            "training": {"core", "infrastructure", "tasks", "training"},
+            "infra": {"infra", "paths"},
+            "tasks": {"infra", "tasks"},
+            "training": {"core", "infra", "tasks", "training"},
         }
         violations = []
         for owner, dependencies in allowed.items():

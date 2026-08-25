@@ -66,7 +66,7 @@ def require_formal_runtime() -> dict:
     ):
         raise RuntimeError(
             "formal execution requires the GPU and the bounded runtime entry point: "
-            "python -m fsrl.infrastructure.formal_runtime <registered-workflow> ..."
+            "python -m fsrl.infra.formal_runtime <registered-workflow> ..."
         )
     return snapshot
 

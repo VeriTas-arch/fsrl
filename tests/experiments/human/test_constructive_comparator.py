@@ -18,7 +18,7 @@ from fsrl.experiments.human.constructive_comparator import (
     subject_log_likelihood_matrix,
     write_json_exclusive,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

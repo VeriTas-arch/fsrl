@@ -21,8 +21,8 @@ from fsrl.experiments.assembly.trajectory import (
 )
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
 from fsrl.experiments.local_fidelity.operator_binding import _replay_terminal_states
-from fsrl.infrastructure.formal_runtime import configure_formal_runtime
-from fsrl.infrastructure.study_registry import legacy_identifier, resolve_record
+from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.study_registry import legacy_identifier, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 

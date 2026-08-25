@@ -14,8 +14,8 @@ from fsrl.analysis.geometry import run_geometry_analysis
 from fsrl.core.config import DEVICE
 from fsrl.evaluation.frozen_fast_weight import run_causal_suite
 from fsrl.evaluation.qualification import evaluate_qualification
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import canonical_file_sha256, resolve_record
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import canonical_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.meta_tasks import held_out_liu_graph_signatures
 from fsrl.training.backbone import (
@@ -28,7 +28,7 @@ ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/confirmation_v1.json")
 DEFAULT_OUTPUT_ROOT = ROOT / "artifacts" / "runs" / "confirmation-v1"
 FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
-FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "infrastructure" / "formal_runtime.py"
+FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "infra" / "formal_runtime.py"
 FORMAL_TRAINING_SOURCE = ROOT / "fsrl" / "training" / "backbone.py"
 
 

@@ -46,8 +46,8 @@ from fsrl.experiments.local_fidelity.evidence_access_pilot import (
     build_access_trace,
 )
 from fsrl.experiments.local_fidelity.trace_pilot import _query_pass
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

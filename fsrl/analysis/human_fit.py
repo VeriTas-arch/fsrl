@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/human_fit_v1.json")
 

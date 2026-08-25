@@ -10,7 +10,7 @@ from fsrl.experiments.assembly.history_factorial import (
     validate_registered_sources,
     vector_factorial,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 
 class HistoryStateFactorialTests(unittest.TestCase):

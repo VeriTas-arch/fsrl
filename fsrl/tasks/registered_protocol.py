@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 from .protocol import (
     QueryTrial,

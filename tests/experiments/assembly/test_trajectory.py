@@ -15,7 +15,7 @@ from fsrl.experiments.assembly.trajectory import (
     validate_registered_sources,
     vector_gradient_energy_fraction,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
 

@@ -62,7 +62,7 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     seed_specification,
     validate_artifacts,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.evidence import broader_local_admission
 from fsrl.tasks.registered_protocol import load_ranking_protocol

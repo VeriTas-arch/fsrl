@@ -33,7 +33,7 @@ from fsrl.experiments.local_fidelity.trace_pilot import (
     query_bundle,
     write_json,
 )
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

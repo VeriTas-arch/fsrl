@@ -7,7 +7,7 @@ workflows
   -> experiments
        -> analysis / training / evaluation
             -> tasks / core
-                 -> infrastructure / paths
+                 -> infra / paths
 analysis
   -> typed outputs from tasks or evaluation
 ```
@@ -23,7 +23,7 @@ The packages have deliberately narrow ownership:
 - `evaluation/` owns frozen rollout and causal intervention interfaces.
 - `analysis/` owns reusable pure estimators such as Hodge decomposition and
   participant bootstrap utilities.
-- `infrastructure/` owns runtime policy, provenance, the study registry, and
+- `infra/` owns runtime policy, provenance, the study registry, and
   bounded execution helpers.
 - `experiments/` owns maintained evidence-producing runners, grouped by
   assembly, confirmation, local fidelity, global policy, reduction, transport,
@@ -35,7 +35,7 @@ The packages have deliberately narrow ownership:
 
 The maintained command-line boundaries are `python -m fsrl.training` and
 `python -m fsrl.evaluation`. Maintained formal workflows run through
-`python -m fsrl.infrastructure.formal_runtime`; historical commands continue
+`python -m fsrl.infra.formal_runtime`; historical commands continue
 to replay from their exact Git commit.
 
 ## Experiments and historical replay

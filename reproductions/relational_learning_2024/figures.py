@@ -15,7 +15,7 @@ from tqdm.auto import tqdm
 
 from fsrl.core import RetroModulRNN
 from fsrl.core.config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
-from fsrl.infrastructure.logging import log
+from fsrl.infra.logging import log
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 CAPSULE_ROOT = Path(__file__).resolve().parent

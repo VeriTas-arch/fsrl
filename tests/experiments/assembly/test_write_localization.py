@@ -22,7 +22,7 @@ from fsrl.experiments.assembly.write_localization import (
     trace_support_trial,
     validate_registered_sources,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 

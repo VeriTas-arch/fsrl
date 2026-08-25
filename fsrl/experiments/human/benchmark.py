@@ -20,7 +20,7 @@ from fsrl.analysis.behavioral import (
     kendall_tau_positions,
     maximum_circular_triads,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 

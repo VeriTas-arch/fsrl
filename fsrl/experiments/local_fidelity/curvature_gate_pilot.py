@@ -39,8 +39,8 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
     make_gate_tasks,
     run_gate_batch,
 )
-from fsrl.infrastructure.formal_runtime import formal_runtime_snapshot
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.formal_runtime import formal_runtime_snapshot
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

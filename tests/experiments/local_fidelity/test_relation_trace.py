@@ -9,7 +9,7 @@ from fsrl.experiments.local_fidelity.relation_trace import (
     prototype_rdm_similarity,
     validate_registered_sources,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 
 
 class RelationTraceLocalizationTests(unittest.TestCase):

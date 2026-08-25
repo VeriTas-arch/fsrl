@@ -12,7 +12,7 @@ import numpy as np
 
 from fsrl.analysis.behavioral import kendall_tau_positions
 from fsrl.experiments.human.benchmark import load_human_cohort
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     legacy_identifier,
     registered_file_sha256,
     resolve_record,

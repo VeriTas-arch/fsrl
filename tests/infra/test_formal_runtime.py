@@ -12,7 +12,7 @@ from fsrl.experiments.confirmation.behavioral import (
     _validate_formal_runtime_record,
     _validate_formal_training_execution,
 )
-from fsrl.infrastructure import formal_runtime
+from fsrl.infra import formal_runtime
 from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
@@ -132,7 +132,7 @@ class FormalRuntimeTests(unittest.TestCase):
 
     def test_fresh_process_applies_single_thread_policy(self):
         command = (
-            "from fsrl.infrastructure.formal_runtime import configure_formal_runtime; "
+            "from fsrl.infra.formal_runtime import configure_formal_runtime; "
             "import json; print(json.dumps(configure_formal_runtime()))"
         )
         completed = subprocess.run(

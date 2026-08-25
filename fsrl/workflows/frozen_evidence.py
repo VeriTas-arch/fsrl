@@ -18,8 +18,8 @@ import textwrap
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-from fsrl.infrastructure.git_provenance import git_blob_sha256, verify_git_registrations
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.git_provenance import git_blob_sha256, verify_git_registrations
+from fsrl.infra.study_registry import (
     SYNTHESIS_ROOT,
     registered_file_sha256,
     resolve_record,

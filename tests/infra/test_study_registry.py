@@ -3,7 +3,7 @@ import re
 import unittest
 from pathlib import Path
 
-from fsrl.infrastructure.study_registry import (
+from fsrl.infra.study_registry import (
     GENERATED_PATHS,
     MIGRATION_PATH,
     ROOT,

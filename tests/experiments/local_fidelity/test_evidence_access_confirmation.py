@@ -8,7 +8,7 @@ from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     confirmation_decision,
     fresh_seeds,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 
 
 class DualEvidenceAccessConfirmationTests(unittest.TestCase):

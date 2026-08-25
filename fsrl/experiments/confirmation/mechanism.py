@@ -26,8 +26,8 @@ from fsrl.experiments.confirmation.behavioral import (
     _validate_formal_training_execution,
     write_json,
 )
-from fsrl.infrastructure.formal_runtime import require_formal_runtime
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.formal_runtime import require_formal_runtime
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 
 ROOT = REPO_ROOT
@@ -406,7 +406,7 @@ def run_mechanism_seed(
         "registered_nonprimary_seed_means": diagnostics,
         "execution_runtime": runtime,
         "execution_runtime_source": _registered_file(
-            ROOT / "fsrl" / "infrastructure" / "formal_runtime.py"
+            ROOT / "fsrl" / "infra" / "formal_runtime.py"
         ),
         "training_execution": inputs["confirmation"]["training_execution"],
         "training_execution_source": inputs["confirmation"][

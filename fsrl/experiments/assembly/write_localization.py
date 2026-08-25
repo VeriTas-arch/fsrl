@@ -32,7 +32,7 @@ from fsrl.experiments.assembly.trajectory import (
     summarize_difference,
     summarize_subjects,
 )
-from fsrl.infrastructure.study_registry import registered_file_sha256, resolve_record
+from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 

@@ -17,7 +17,7 @@ from fsrl.experiments.transport.item_count import (
     validate_graph_contract,
     validate_n8_evaluator_interface,
 )
-from fsrl.infrastructure.study_registry import resolve_record
+from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 
