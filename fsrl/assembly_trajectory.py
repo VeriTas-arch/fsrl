@@ -6,11 +6,26 @@ import argparse
 import json
 import sys
 from dataclasses import dataclass
-from itertools import combinations
 from pathlib import Path
 
 import numpy as np
 
+from .analysis.hodge import (
+    CompleteGraphGeometry,
+    build_complete_graph_geometry,
+    gradient_energy_fraction,
+    hodge_potentials,
+    kendall_tau_scores,  # noqa: F401 - historical public re-export
+    normalize_potentials,
+    potential_alignment,
+    vector_gradient_energy_fraction,
+)
+from .analysis.statistics import (
+    bootstrap_counts,
+    bootstrap_samples,  # noqa: F401 - historical public re-export
+    summarize_difference,
+    summarize_subjects,
+)
 from .assembly_diagnostics import file_sha256, load_json, resolve_path
 from .config import DEVICE, NUMRESPONSESTEP
 from .confirmation import _validate_checkpoint
@@ -26,17 +41,6 @@ from .study_registry import registered_file_sha256, resolve_record
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_trajectory_v1.json")
 DEFAULT_OUTPUT_PATH = resolve_record("results/assembly_trajectory_v1.json")
-POTENTIAL_ZERO_TOLERANCE = 1e-12
-
-
-@dataclass(frozen=True)
-class CompleteGraphGeometry:
-    pairs: tuple[tuple[int, int], ...]
-    incidence: np.ndarray
-    projection: np.ndarray
-    score_operator: np.ndarray
-    true_sign: np.ndarray
-    true_potential: np.ndarray
 
 
 @dataclass(frozen=True)
@@ -46,133 +50,6 @@ class ExactTrajectory:
     expected_rank_potentials: np.ndarray
     map_potentials: np.ndarray
     expected_rank_equivalence_error: np.ndarray
-
-
-def build_complete_graph_geometry(protocol: RankingProtocol) -> CompleteGraphGeometry:
-    pairs = tuple(combinations(range(protocol.n_items), 2))
-    incidence = np.zeros((len(pairs), protocol.n_items), dtype=np.float64)
-    for index, (first, second) in enumerate(pairs):
-        incidence[index, first] = 1.0
-        incidence[index, second] = -1.0
-    score_operator = np.linalg.pinv(incidence)
-    projection = incidence @ score_operator
-    true_positions = np.empty(protocol.n_items, dtype=np.int64)
-    for position, item in enumerate(protocol.true_order_high_to_low):
-        true_positions[item] = position
-    true_sign = np.asarray(
-        [
-            1.0 if true_positions[first] < true_positions[second] else -1.0
-            for first, second in pairs
-        ],
-        dtype=np.float64,
-    )
-    return CompleteGraphGeometry(
-        pairs=pairs,
-        incidence=incidence,
-        projection=projection,
-        score_operator=score_operator,
-        true_sign=true_sign,
-        true_potential=normalize_potentials(-true_positions.astype(np.float64)),
-    )
-
-
-def hodge_potentials(fields: np.ndarray, geometry: CompleteGraphGeometry) -> np.ndarray:
-    values = np.asarray(fields, dtype=np.float64)
-    if values.shape[-1] != len(geometry.pairs):
-        raise ValueError("field does not match the complete-graph edge order")
-    return values @ geometry.score_operator.T
-
-
-def gradient_energy_fraction(
-    fields: np.ndarray, geometry: CompleteGraphGeometry
-) -> np.ndarray:
-    values = np.asarray(fields, dtype=np.float64)
-    if values.shape[-1] != len(geometry.pairs):
-        raise ValueError("field does not match the complete-graph edge order")
-    gradient = values @ geometry.projection.T
-    gradient_energy = np.sum(gradient * gradient, axis=-1)
-    total_energy = np.sum(values * values, axis=-1)
-    return np.divide(
-        gradient_energy,
-        total_energy,
-        out=np.full_like(total_energy, np.nan),
-        where=total_energy > 0.0,
-    )
-
-
-def vector_gradient_energy_fraction(
-    fields: np.ndarray, geometry: CompleteGraphGeometry
-) -> np.ndarray:
-    values = np.asarray(fields, dtype=np.float64)
-    if values.shape[-2] != len(geometry.pairs):
-        raise ValueError("vector field does not match the complete-graph edge order")
-    gradient = np.einsum("ef,...fd->...ed", geometry.projection, values)
-    gradient_energy = np.sum(gradient * gradient, axis=(-2, -1))
-    total_energy = np.sum(values * values, axis=(-2, -1))
-    return np.divide(
-        gradient_energy,
-        total_energy,
-        out=np.full_like(total_energy, np.nan),
-        where=total_energy > 0.0,
-    )
-
-
-def normalize_potentials(potentials: np.ndarray) -> np.ndarray:
-    values = np.asarray(potentials, dtype=np.float64)
-    centered = values - np.mean(values, axis=-1, keepdims=True)
-    norms = np.linalg.norm(centered, axis=-1, keepdims=True)
-    return np.divide(
-        centered,
-        norms,
-        out=np.zeros_like(centered),
-        where=norms > POTENTIAL_ZERO_TOLERANCE,
-    )
-
-
-def potential_alignment(first: np.ndarray, second: np.ndarray) -> dict[str, np.ndarray]:
-    left = normalize_potentials(first)
-    right = normalize_potentials(second)
-    cosine = np.sum(left * right, axis=-1)
-    valid = (np.linalg.norm(left, axis=-1) > POTENTIAL_ZERO_TOLERANCE) & (
-        np.linalg.norm(right, axis=-1) > POTENTIAL_ZERO_TOLERANCE
-    )
-    cosine = np.where(valid, cosine, np.nan)
-    return {
-        "cosine": cosine,
-        "pearson": cosine.copy(),
-        "kendall_tau": kendall_tau_scores(left, right),
-    }
-
-
-def kendall_tau_scores(first: np.ndarray, second: np.ndarray) -> np.ndarray:
-    left, right = np.broadcast_arrays(
-        np.asarray(first, dtype=np.float64), np.asarray(second, dtype=np.float64)
-    )
-    if left.ndim == 1:
-        left = left[None, :]
-        right = right[None, :]
-        squeeze = True
-    else:
-        squeeze = False
-    flat_left = left.reshape(-1, left.shape[-1])
-    flat_right = right.reshape(-1, right.shape[-1])
-    values = []
-    item_pairs = tuple(combinations(range(left.shape[-1]), 2))
-    for first_row, second_row in zip(flat_left, flat_right):
-        products = np.asarray(
-            [
-                (first_row[i] - first_row[j]) * (second_row[i] - second_row[j])
-                for i, j in item_pairs
-            ]
-        )
-        nonzero = products != 0.0
-        values.append(
-            np.nan
-            if not np.any(nonzero)
-            else float(np.mean(np.sign(products[nonzero])))
-        )
-    result = np.asarray(values).reshape(left.shape[:-1])
-    return result[0] if squeeze else result
 
 
 def exact_prefix_trajectory(
@@ -376,76 +253,6 @@ def classified_effects(
             name: np.asarray(rows) for name, rows in aligned.items()
         },
     }
-
-
-def bootstrap_counts(
-    rng: np.random.Generator, samples: int, subjects: int
-) -> np.ndarray:
-    return rng.multinomial(
-        subjects, np.full(subjects, 1.0 / subjects), size=samples
-    ).astype(np.float64)
-
-
-def bootstrap_samples(values: np.ndarray, counts: np.ndarray) -> np.ndarray:
-    rows = np.asarray(values, dtype=np.float64)
-    if rows.ndim != 1 or rows.shape[0] != counts.shape[1]:
-        raise ValueError("bootstrap values must have one scalar per subject")
-    finite = np.isfinite(rows)
-    if not np.any(finite):
-        return np.asarray([], dtype=np.float64)
-    numerator = counts[:, finite] @ rows[finite]
-    denominator = np.sum(counts[:, finite], axis=1)
-    return np.divide(
-        numerator,
-        denominator,
-        out=np.full_like(numerator, np.nan),
-        where=denominator > 0.0,
-    )
-
-
-def summarize_subjects(
-    values: np.ndarray, counts: np.ndarray, *, interval: float
-) -> dict:
-    rows = np.asarray(values, dtype=np.float64)
-    finite = rows[np.isfinite(rows)]
-    samples = bootstrap_samples(rows, counts)
-    samples = samples[np.isfinite(samples)]
-    if len(finite) == 0:
-        return {
-            "subjects": 0,
-            "mean": None,
-            "median": None,
-            "lower_quartile": None,
-            "upper_quartile": None,
-            "bootstrap": {"mean": None, "lower": None, "upper": None},
-        }
-    tail = (1.0 - interval) / 2.0
-    return {
-        "subjects": len(finite),
-        "mean": float(np.mean(finite)),
-        "median": float(np.median(finite)),
-        "lower_quartile": float(np.quantile(finite, 0.25)),
-        "upper_quartile": float(np.quantile(finite, 0.75)),
-        "bootstrap": {
-            "mean": float(np.mean(samples)),
-            "lower": float(np.quantile(samples, tail)),
-            "upper": float(np.quantile(samples, 1.0 - tail)),
-        },
-    }
-
-
-def summarize_difference(
-    first: np.ndarray,
-    second: np.ndarray,
-    counts: np.ndarray,
-    *,
-    interval: float,
-) -> dict:
-    return summarize_subjects(
-        np.asarray(first, dtype=np.float64) - np.asarray(second, dtype=np.float64),
-        counts,
-        interval=interval,
-    )
 
 
 def json_values(values: np.ndarray) -> list:

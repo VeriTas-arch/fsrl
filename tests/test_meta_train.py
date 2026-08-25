@@ -98,7 +98,12 @@ class MetaTrainingTests(unittest.TestCase):
     def test_compiler_uses_fullgraph_default_mode(self):
         with patch("fsrl.meta_train.torch.compile", return_value=self.net) as compiler:
             self.assertIs(compile_meta_model(self.net), self.net)
-        compiler.assert_called_once_with(self.net, fullgraph=True)
+        compiler.assert_called_once_with(
+            self.net,
+            backend="inductor",
+            fullgraph=True,
+            mode="default",
+        )
 
     def test_saved_config_is_valid_json_and_registers_held_out_graph(self):
         with tempfile.TemporaryDirectory() as temp_dir:

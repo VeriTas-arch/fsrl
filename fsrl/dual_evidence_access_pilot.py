@@ -61,6 +61,7 @@ from .liu_eval import (
 from .local_behavior_attribution import _pair_correct_probabilities, exact_probability
 from .ranking_protocol import load_ranking_protocol
 from .study_registry import registered_file_sha256, resolve_record
+from .tasks.evidence import broader_local_admission
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SPECIFICATION_PATH = (
@@ -133,7 +134,7 @@ def access_factor(global_admission: np.ndarray, reliability: np.ndarray) -> np.n
         raise ValueError("global admission must be binary")
     if not np.all((probability >= 0.0) & (probability <= 1.0)):
         raise ValueError("reliability must lie in [0, 1]")
-    return admission + (1.0 - admission) * probability
+    return broader_local_admission(admission, probability)
 
 
 def blockwise_derangements(

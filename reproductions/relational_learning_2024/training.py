@@ -5,10 +5,11 @@ import numpy as np
 import torch
 from tqdm.auto import tqdm
 
-from .config import DEVICE
+from fsrl.config import DEVICE
+from fsrl.core import RetroModulRNN
+from fsrl.logging import log
+
 from .episode import run_episode
-from .logging import log
-from .model import RetroModulRNN
 
 
 def set_seed(seed):

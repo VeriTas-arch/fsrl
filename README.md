@@ -3,8 +3,9 @@
 This repository develops and audits a plastic recurrent model that transforms
 sparse, partially retained evidence into global relational structure and
 query-specific direct fidelity. It began from the code accompanying Miconi &
-Kay; the unchanged educational/upstream material remains under archive/ and
-addons/.
+Kay; its upstream snapshot, supplied checkpoints, and maintained teaching
+reproduction now live in one isolated capsule under
+`reproductions/relational_learning_2024/`.
 
 ## Start here
 
@@ -16,6 +17,11 @@ addons/.
   machine-verifiable reporting object.
 - [Figure workflow](synthesis/figures/README.md) defines how study outputs
   become report- or paper-facing figures.
+- [Maintained model workflow](workflows/relational_model/README.md) connects
+  code, registered evidence, verification commands, and report outputs in one
+  machine-checked and human-readable route.
+- [Code architecture](fsrl/README.md) defines stable package ownership,
+  compatibility adapters, and the boundary around historical study runners.
 
 The first reorganization pass is intentionally marked
 review_state = "indexed". It establishes ownership, navigation, and provenance
@@ -32,7 +38,8 @@ artifacts/                ignored runtime outputs and regenerated data
 data/external/            tracked source datasets
 fsrl/                     executable model and analysis code
 tests/                    regression and scientific-contract tests
-archive/                  upstream and historical code
+workflows/                schema-driven maintained research routes
+reproductions/            isolated external-paper reproduction capsules
 ~~~
 
 The pre-refactor docs/, benchmarks/, results/, research/liu/, and
@@ -43,8 +50,10 @@ have one authoritative current location.
 
 Frozen execution locks that identify historical Python files are indexed by
 `(path, sha256)` in synthesis/source-provenance.toml and verified against Git
-blobs plus witness commits. The only physical implementation and test surface
-is fsrl/ plus tests/; full historical replay uses a detached Git worktree.
+blobs plus witness commits. The maintained project implementation and tests
+live in `fsrl/` and `tests/`. The separate reproduction capsule has its own
+byte-locked upstream inputs and runnable teaching code; full historical replay
+still uses a detached Git worktree.
 
 ## Current scientific snapshot
 
@@ -112,16 +121,20 @@ a registered protocol, exact provenance, a result status, and a claim boundary.
 The pre-existing ignored output/ and figures/ trees remain legacy runner caches
 for compatibility; they are not part of the study registry or frozen evidence.
 
-## Teaching figures
+## Original-paper teaching reproduction
 
 To generate the teaching figures extracted from the upstream main.py:
 
 ~~~bash
-python eval_figures.py --figures all
+direnv exec . python -m reproductions.relational_learning_2024.figures \
+  --figures all \
+  --model-path reproductions/relational_learning_2024/checkpoints/net_active.dat
 ~~~
 
-Outputs are written to the ignored figures/ directory by default. These are not
-automatically part of the research evidence or paper-figure registry.
+Outputs are written to the ignored
+`artifacts/reproductions/relational_learning_2024/figures/` directory by
+default. They are not automatically part of the research evidence or
+paper-figure registry.
 
 ## Original README
 
@@ -130,11 +143,12 @@ This repository derives from the code for
 plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas
 Miconi and Kenneth Kay, Nature Neuroscience 2024.
 
-The original notebooks and simplified scripts are retained under archive/.
-Parameter files for the active and passive strategies remain at the repository
-root for compatibility with the original evaluation workflow.
+The original notebooks, appendix files, and supplied active/passive parameter
+files are retained together under
+`reproductions/relational_learning_2024/`. Their byte hashes are recorded in
+that capsule's `source_manifest.toml`.
 
-For the original paper figures, copy either net_active.dat or net_passive.dat
-to net.dat, use the archived evaluation notebook, and follow its figure-specific
-settings. For new project-level results, use the registered study and synthesis
-workflow above instead.
+For exact original-paper replay, use the capsule's upstream notebook in a
+detached historical worktree and follow its figure-specific settings. For new
+project-level results, use the registered study, workflow, and synthesis layers
+above instead.

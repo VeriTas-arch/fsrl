@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from .config import ADDINPUT, DEVICE, NUMRESPONSESTEP
+from fsrl.config import ADDINPUT, DEVICE, NUMRESPONSESTEP
 
 
 def generate_cue_data(config, nbcues):

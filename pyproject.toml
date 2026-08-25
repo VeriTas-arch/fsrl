@@ -1,20 +1,21 @@
 [tool.ruff]
 cache-dir = ".cache/ruff"
 target-version = "py312"
-extend-exclude = ["addons", "archive", "synthesis/frozen"]
+extend-exclude = [
+    "reproductions/relational_learning_2024/upstream",
+    "synthesis/frozen",
+]
 
-# These original runtime files are source-locked by historical studies. Keep
-# their exact bytes and make the pre-existing lint debt explicit instead of
-# allowing an editor action to rewrite scientific provenance.
+# Historical study runners and the readable reproduction retain explicit
+# pre-existing lint debt. The exact upstream reproduction bytes are excluded
+# above and locked separately by its source manifest.
 [tool.ruff.lint.per-file-ignores]
-"fsrl/cli.py" = ["I001"]
 "fsrl/config.py" = ["I001"]
-"fsrl/episode.py" = ["RUF059", "UP032"]
-"fsrl/eval_figures.py" = ["I001", "SIM114"]
-"fsrl/model.py" = ["PLR0402"]
-"fsrl/train.py" = ["FURB122"]
+"reproductions/relational_learning_2024/episode.py" = ["RUF059", "UP032"]
+"reproductions/relational_learning_2024/figures.py" = ["I001", "SIM114"]
+"reproductions/relational_learning_2024/training.py" = ["FURB122"]
 
-# Formatting is enforced for new code. These pre-existing files form the
+# Formatting is enforced for new code. These pre-existing runners form the
 # source/provenance formatting baseline and must not be rewritten incidentally.
 [tool.ruff.format]
 exclude = [
@@ -27,7 +28,9 @@ exclude = [
     "fsrl/dual_state_reduced_algorithm.py",
     "fsrl/dual_state_reduced_algorithm_v2.py",
     "fsrl/dual_state_reduced_algorithm_v3.py",
-    "fsrl/eval_figures.py",
+    "reproductions/relational_learning_2024/episode.py",
+    "reproductions/relational_learning_2024/figures.py",
+    "reproductions/relational_learning_2024/training.py",
     "fsrl/evidence_sparsity_transport.py",
     "fsrl/functional_fast_weight_latent_sufficiency.py",
     "fsrl/global_policy_allocation_audit.py",

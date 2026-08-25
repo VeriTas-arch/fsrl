@@ -4,9 +4,26 @@ from __future__ import annotations
 
 import os
 import sys
+from importlib import import_module
 
 CPU_THREAD_LIMIT = 1
 ACTIVE_ENVIRONMENT_VARIABLE = "FSRL_FORMAL_RUNTIME_ACTIVE"
+WORKFLOW_MODULES = {
+    "confirmation": "fsrl.confirmation",
+    "mechanism": "fsrl.mechanism_confirmation",
+    "global-policy-allocation-audit": "fsrl.global_policy_allocation_audit",
+    "global-policy-amplitude-provenance": "fsrl.global_policy_amplitude_provenance",
+    "global-policy-comparator-adequacy": "fsrl.global_policy_comparator_adequacy",
+    "global-policy-field-fingerprint-replication": (
+        "fsrl.global_policy_field_fingerprint_replication"
+    ),
+    "global-policy-field-reassembly": "fsrl.global_policy_field_reassembly",
+    "global-policy-slope-localization": "fsrl.global_policy_slope_localization",
+    "human-metric-constructive-comparator": (
+        "fsrl.human_metric_constructive_comparator"
+    ),
+    "liu-support-topology-transport": "fsrl.support_topology_transport",
+}
 
 
 def configure_formal_runtime() -> dict:
@@ -56,44 +73,11 @@ def require_formal_runtime() -> dict:
 
 def main(args=None) -> int:
     arguments = list(sys.argv[1:] if args is None else args)
-    workflows = {
-        "confirmation",
-        "mechanism",
-        "global-policy-allocation-audit",
-        "global-policy-amplitude-provenance",
-        "global-policy-comparator-adequacy",
-        "global-policy-field-fingerprint-replication",
-        "global-policy-field-reassembly",
-        "global-policy-slope-localization",
-        "human-metric-constructive-comparator",
-        "liu-support-topology-transport",
-    }
-    if not arguments or arguments[0] not in workflows:
+    if not arguments or arguments[0] not in WORKFLOW_MODULES:
         raise ValueError("first argument must select a registered formal workflow")
     workflow = arguments.pop(0)
     configure_formal_runtime()
-    if workflow == "confirmation":
-        from .confirmation import main as workflow_main
-    elif workflow == "mechanism":
-        from .mechanism_confirmation import main as workflow_main
-    elif workflow == "global-policy-slope-localization":
-        from .global_policy_slope_localization import main as workflow_main
-    elif workflow == "global-policy-amplitude-provenance":
-        from .global_policy_amplitude_provenance import main as workflow_main
-    elif workflow == "global-policy-allocation-audit":
-        from .global_policy_allocation_audit import main as workflow_main
-    elif workflow == "global-policy-comparator-adequacy":
-        from .global_policy_comparator_adequacy import main as workflow_main
-    elif workflow == "global-policy-field-reassembly":
-        from .global_policy_field_reassembly import main as workflow_main
-    elif workflow == "global-policy-field-fingerprint-replication":
-        from .global_policy_field_fingerprint_replication import main as workflow_main
-    elif workflow == "human-metric-constructive-comparator":
-        from .human_metric_constructive_comparator import main as workflow_main
-    elif workflow == "liu-support-topology-transport":
-        from .support_topology_transport import main as workflow_main
-    else:
-        raise AssertionError(f"unhandled registered formal workflow: {workflow}")
+    workflow_main = import_module(WORKFLOW_MODULES[workflow]).main
     return workflow_main(arguments)
 
 

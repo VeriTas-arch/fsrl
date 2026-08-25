@@ -3,8 +3,9 @@ from dataclasses import dataclass
 import numpy as np
 import torch
 
-from .config import DEVICE, NUMRESPONSESTEP
-from .logging import log
+from fsrl.config import DEVICE, NUMRESPONSESTEP
+from fsrl.logging import log
+
 from .task import build_step_inputs, generate_cue_data, prepare_trial
 
 

@@ -3,11 +3,14 @@ from pathlib import Path
 
 import numpy as np
 
-from .config import TrainConfig
-from .train import set_seed, train
+from fsrl.config import TrainConfig
 
+from .training import set_seed, train
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+ROOT_DIR = Path(__file__).resolve().parents[2]
+DEFAULT_OUTPUT_DIR = (
+    ROOT_DIR / "artifacts" / "reproductions" / "relational_learning_2024" / "training"
+)
 
 
 def parse_args(args=None):
@@ -19,7 +22,7 @@ def parse_args(args=None):
     parser.add_argument("--seed", type=int, default=-1)
     parser.add_argument("--save-every", type=int, default=200)
     parser.add_argument("--print-every", type=int, default=101)
-    parser.add_argument("--output-dir", default=str(ROOT_DIR))
+    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
     parser.add_argument(
         "--trace-steps",
         action="store_true",
@@ -40,3 +43,7 @@ def main(args=None):
     np.set_printoptions(precision=5)
     set_seed(config.rngseed)
     train(config, Path(parsed_args.output_dir), trace_steps=parsed_args.trace_steps)
+
+
+if __name__ == "__main__":
+    main()

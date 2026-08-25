@@ -17,6 +17,7 @@ A provisional human-readable organization of the frozen model evidence, diagnost
 - [Frozen evidence overlay](frozen/README.md)
 - [Release and migration history](history.toml)
 - [Figure workflow](figures/README.md)
+- [Maintained model workflow](../workflows/relational_model/README.md)
 
 The frozen overlay is a machine-verifiable historical reporting object. This
 page is the editable human synthesis; neither replaces the study records.
@@ -27,8 +28,9 @@ Byte-preserved reports, contracts, locks, results, and presentation assets
 live in study-owned `records/` or `synthesis/records/`. Frozen execution
 locks that name historical Python files are indexed by `(path, sha256)` in
 `synthesis/source-provenance.toml` and verified against immutable Git blobs
-and witness commits. The active `fsrl/` and `tests/` trees are the only
-physical source and test surfaces; historical replay uses a detached Git
+and witness commits. Maintained model source and tests live in `fsrl/` and
+`tests/`; the original-paper reproduction is isolated under `reproductions/`
+with its own upstream byte locks. Historical replay uses a detached Git
 worktree rather than mixing old files into the current import tree.
 
 ## Reading routes

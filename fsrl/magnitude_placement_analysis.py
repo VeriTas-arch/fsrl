@@ -10,7 +10,10 @@ from itertools import combinations
 import numpy as np
 from scipy import stats
 
-from .magnitude_placement_collection import PROTOCOL_PATH, load_json
+from .provenance import load_json
+from .study_registry import resolve_record
+
+PROTOCOL_PATH = resolve_record("benchmarks/magnitude_placement_behavior_v1_1.json")
 
 ROLES = tuple("ABCDEFGH")
 PAIRS = tuple(f"{first}-{second}" for first, second in combinations(ROLES, 2))

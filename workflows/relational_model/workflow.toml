@@ -1,0 +1,99 @@
+schema_version = 1
+id = "relational_model"
+status = "working"
+title = "Relational model mainline"
+purpose = "A reproducible route from the task information boundary through the maintained global/local computation to registered evidence and report-facing figures."
+working_claim = "Sparse signed evidence feeds a meta-learned fast-weight state for global assembly and a query-addressed local trace with broader evidence admission for direct fidelity."
+boundary = "This workflow organizes the current model and its evidence; it does not turn the model into a claim about human neural implementation, erase valid negative studies, or supersede frozen study contracts."
+study_registry = "studies/README.md"
+synthesis = "synthesis/README.md"
+figure_root = "synthesis/figures/README.md"
+
+[execution]
+default_profile = "GPU, torch.compile backend=inductor, fullgraph=true, mode=default"
+pilot_seed_rule = "Use one to three development seeds before freezing any formal multi-seed protocol."
+formal_rule = "Lock all mandatory artifacts before evaluation and analyze participants within each network."
+
+[[stages]]
+id = "task_contract"
+title = "Task and evidence contract"
+question = "What information enters the model, and what is deliberately withheld?"
+method = "Represent each support event by item identity plus signed displayed magnitude, with passive presentation and no query label or test feedback in the input."
+finding = "The maintained task adapter preserves the experimental information boundary while allowing explicit subject-level evidence admission."
+boundary = "Any omission, attenuation, or broader local admission is a model hypothesis rather than a restatement of the task."
+depends_on = []
+implementation = ["fsrl/tasks/protocol.py", "fsrl/tasks/sparse_ranking.py", "fsrl/tasks/evidence.py", "fsrl/core/inputs.py"]
+studies = ["task_fidelity"]
+verify = ["direnv exec . python -m unittest tests.test_ranking_protocol tests.test_meta_tasks"]
+
+[[stages]]
+id = "global_backbone"
+title = "Global fast-weight backbone"
+question = "Can a shared recurrent learner assemble unseen sparse relational graphs?"
+method = "Meta-train the plastic recurrent backbone on generic connected ranking graphs while prospectively holding out the evaluation graph family."
+finding = "Held-out transfer and fast-weight necessity establish a competent global relational assembly substrate."
+boundary = "Competence does not by itself identify the algorithm or reproduce every human behavioral statistic."
+depends_on = ["task_contract"]
+implementation = ["fsrl/core/plastic_rnn.py", "fsrl/training/backbone.py", "fsrl/training/checkpoints.py", "fsrl/runtime.py"]
+studies = ["development_qualification", "formal_behavioral_confirmation"]
+verify = ["direnv exec . python -m unittest tests.test_meta_train tests.test_liu_eval"]
+
+[[stages]]
+id = "global_mechanism"
+title = "Global assembly mechanism"
+question = "How does the fast-weight state transform retained evidence into a coherent global field?"
+method = "Use registered causal ablations, write-factor swaps, trajectory analyses, and expected-rank versus MAP geometry without changing the frozen evaluator."
+finding = "Evidence-specific writes accumulate through a meta-learned recurrent sensitivity landscape toward an expected-rank-like global potential."
+boundary = "The complete DA direction-preservation chain is heterogeneous, and the model is not a sequential Bayesian updater."
+depends_on = ["global_backbone"]
+implementation = ["fsrl/evaluation/frozen_fast_weight.py", "fsrl/analysis/hodge.py", "fsrl/analysis/statistics.py"]
+studies = ["assembly_trajectory", "support_factor_swap", "mechanism_confirmation"]
+verify = ["direnv exec . python -m unittest tests.test_assembly_trajectory tests.test_support_factor_swap tests.test_mechanism_confirmation"]
+
+[[stages]]
+id = "local_mechanism"
+title = "Query-addressed local fidelity"
+question = "What preserves direct experience when nonlinear global expression loses local correctness?"
+method = "Accumulate a fixed antisymmetric conjunctive trace and read it only through the matching query address, with explicit P-off and L-off interventions."
+finding = "Independent backbones replicate a direct-enriched local rescue and a causal P/L double dissociation."
+boundary = "The evidence supports the computation, not a unique tensor-product code or biologically separate memory store."
+depends_on = ["task_contract", "global_backbone"]
+implementation = ["fsrl/core/local_trace.py", "fsrl/core/relational_system.py", "fsrl/core/state.py"]
+studies = ["conjunctive_local_trace_replication", "local_behavior_attribution"]
+verify = ["direnv exec . python -m unittest tests.test_conjunctive_local_trace tests.test_relational_system"]
+
+[[stages]]
+id = "differential_admission"
+title = "Differential evidence admission"
+question = "Can weak observed evidence persist locally when it is not admitted to global assembly?"
+method = "Keep the P and L update/readout mechanisms fixed, use selective effective evidence for P, and use z + (1-z)p for the local write."
+finding = "Four independent backbones confirm omitted direct-fidelity rescue with evidence and query specificity while global inference remains P-dependent."
+boundary = "The broader local writes have a small replicated retained cross-talk cost and do not repair the excessive global distance slope."
+depends_on = ["global_mechanism", "local_mechanism"]
+implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py"]
+studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation"]
+verify = ["direnv exec . python -m unittest tests.test_dual_evidence_access_pilot tests.test_dual_evidence_access_confirmation tests.test_relational_system"]
+
+[[stages]]
+id = "algorithm_and_transport"
+title = "Algorithmic form and transport"
+question = "Which parts of the working model compress exactly, and where does it transport?"
+method = "Reduce the local state to an exact edge ledger plus Gram geometry and test the unchanged causal links across support topology, order, sparsity, and item count."
+finding = "The local computation has an exact reduction and the structural mechanism transports broadly; tested low-dimensional global reductions remain insufficient."
+boundary = "Evidence-density prevalence has an unresolved boundary, and no tested compact global state is yet sufficient."
+depends_on = ["differential_admission"]
+implementation = ["fsrl/core/relational_system.py", "fsrl/analysis/hodge.py"]
+studies = ["asymmetric_algorithmic_organization", "support_topology_transport", "presentation_order_transport", "evidence_sparsity_transport", "item_count_transport"]
+verify = ["direnv exec . python -m fsrl.study_registry check"]
+
+[[stages]]
+id = "reporting"
+title = "Evidence synthesis and figures"
+question = "How are frozen estimands converted into a report without rewriting diagnostic history?"
+method = "Keep study records byte-preserved, organize the cross-study claim in synthesis, and require source data plus panel provenance for promoted figures."
+finding = "The repository exposes a short human route, a machine-verifiable registry, and paper-aligned behavioral figures from the same evidence ownership model."
+boundary = "The current synthesis remains indexed rather than final; a later scientific curation pass may reorder the argument without changing frozen records."
+depends_on = ["algorithm_and_transport"]
+implementation = ["fsrl/study_registry.py", "fsrl/paper_figure_alignment.py", "synthesis/manifest.toml"]
+studies = ["behavior_reproduction_map"]
+verify = ["direnv exec . python -m fsrl.study_registry check", "direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml"]

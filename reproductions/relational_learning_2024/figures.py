@@ -14,11 +14,13 @@ from sklearn.decomposition import PCA
 
 from tqdm.auto import tqdm
 
-from .config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
-from .logging import log
-from .model import RetroModulRNN
+from fsrl.config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
+from fsrl.core import RetroModulRNN
+from fsrl.logging import log
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+ROOT_DIR = Path(__file__).resolve().parents[2]
+CAPSULE_ROOT = Path(__file__).resolve().parent
+CHECKPOINT_ROOT = CAPSULE_ROOT / "checkpoints"
 
 ALPHABET = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
 MODEL_FILENAMES = ("net.dat", "net_active.dat", "net_passive.dat")
@@ -57,13 +59,13 @@ def resolve_model_path(model_path):
         raise FileNotFoundError(f"Model path does not exist or is not a file: {path}")
 
     for candidate in MODEL_FILENAMES:
-        path = ROOT_DIR / candidate
+        path = CHECKPOINT_ROOT / candidate
         if path.exists():
             return path
 
     expected = ", ".join(MODEL_FILENAMES)
     raise FileNotFoundError(
-        f"Expected one of {expected} in the repository root, or pass --model-path."
+        f"Expected one of {expected} in {CHECKPOINT_ROOT}, or pass --model-path."
     )
 
 
@@ -579,7 +581,10 @@ def parse_args(args=None):
     parser.add_argument("--model-path", default=None)
     parser.add_argument("--batch-size", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=None)
-    parser.add_argument("--output-dir", default="figures")
+    parser.add_argument(
+        "--output-dir",
+        default="artifacts/reproductions/relational_learning_2024/figures",
+    )
     return parser.parse_args(args)
 
 
