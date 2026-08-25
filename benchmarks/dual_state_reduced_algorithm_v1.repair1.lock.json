@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v1",
+  "freeze_status": "implementation_repair_frozen_after_noninformative_pre_fit_failure_and_before_any_result_fit_or_evaluation",
+  "registration_commit": "3622dd6",
+  "original_implementation_commit": "30f6f63",
+  "specification_sha256": "1de79c278f3d6ab1fc23b335aa96f46868d79a1d795354ccffd71ad87dfabe80",
+  "superseded_lock": {
+    "path": "benchmarks/dual_state_reduced_algorithm_v1.lock.json",
+    "sha256": "739da286667d1dca221ced8d75e9c392c1ef5b80a57abcaa3bfc5641aaa5af20"
+  },
+  "failed_attempt": {
+    "stage": "first development trajectory extraction before any fit, Liu evaluation, or output write",
+    "error": "RuntimeError: degenerate conjunctive address",
+    "scientific_information_observed": false,
+    "registered_outputs_absent": true,
+    "cause": "The NumPy compression copy raised on a zero-norm antisymmetric key, whereas the frozen original tensor implementation clamps the denominator to 1e-8 and therefore returns the exact zero key. Opposite generic cue vectors are allowed by the frozen generator."
+  },
+  "repair": {
+    "scope": "Replace the exception by division through max(norm,1e-8), exactly matching the frozen local-key semantics, and add a regression test for opposite cues.",
+    "scientific_contract_changed": false,
+    "seeds_episodes_models_thresholds_or_optimizer_changed": false
+  },
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/dual_state_reduced_algorithm.py",
+      "sha256": "7ab845528dca42d3cc6c850ad6ffb4986ffec48a94f7d0ff3e94a7ac61727afd"
+    },
+    "tests": {
+      "path": "tests/test_dual_state_reduced_algorithm.py",
+      "sha256": "3200e33489d6518621d7b681ae0fdc3cd07d1720fa84ab01e68576a03b2d9f02"
+    }
+  },
+  "preexecution_validation": {
+    "targeted_tests": "7 passed",
+    "python_compile": "passed",
+    "ruff": "passed",
+    "registered_outputs_absent": true
+  },
+  "next_step": "Commit and push this repair lock before restarting the single registered GPU execution from the beginning."
+}

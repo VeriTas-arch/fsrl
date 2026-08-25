@@ -45,6 +45,17 @@ class DualStateReducedAlgorithmTests(unittest.TestCase):
         self.assertLessEqual(result["max_abs_error"], 1e-12)
         np.testing.assert_allclose(result["direct"], result["compressed"], atol=1e-12)
 
+    def test_degenerate_opposite_cues_match_original_zero_key_semantics(self):
+        rng = np.random.default_rng(21)
+        codes = rng.normal(size=(8, 5))
+        codes[1] = -codes[0]
+        trial = SimpleNamespace(left_item=0, right_item=1)
+        result = local_edge_compression(
+            codes, (trial,), np.asarray([0.7]), self.geometry
+        )
+        self.assertEqual(result["max_abs_error"], 0.0)
+        np.testing.assert_allclose(result["direct"], result["compressed"], atol=0.0)
+
     def test_accumulator_recovers_linear_centered_update(self):
         rng = np.random.default_rng(3)
         evidence = rng.normal(size=(500, 8))

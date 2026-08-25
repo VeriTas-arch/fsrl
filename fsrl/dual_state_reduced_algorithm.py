@@ -29,7 +29,7 @@ from .ranking_protocol import load_ranking_protocol
 ROOT = Path(__file__).resolve().parents[1]
 SPECIFICATION_PATH = ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.json"
 IMPLEMENTATION_LOCK_PATH = (
-    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.lock.json"
+    ROOT / "benchmarks" / "dual_state_reduced_algorithm_v1.repair1.lock.json"
 )
 TRAJECTORY_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.trajectories.npz"
 RESULT_PATH = ROOT / "results" / "dual_state_reduced_algorithm_v1.json"
@@ -169,9 +169,7 @@ def _numpy_key(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     key = np.outer(left, right) - np.outer(right, left)
     flat = key.reshape(-1).astype(np.float64)
     norm = np.linalg.norm(flat)
-    if norm <= 1e-8:
-        raise RuntimeError("degenerate conjunctive address")
-    return flat / norm
+    return flat / max(norm, 1e-8)
 
 
 def local_edge_compression(
