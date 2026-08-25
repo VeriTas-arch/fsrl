@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "liu-support-topology-transport-v1",
+  "registration_status": "prospectively_frozen_before_implementation_or_any_alternative_graph_model_evaluation",
+  "registration_parent_commit": "e7723f2fe50e63951714f5ddacd551b0332b39ef",
+  "scientific_question": "Does the frozen P_T/a_T functional asymmetry transport across matched Liu-style support topologies, or is it an accidental solution to the original eight-edge Liu support graph?",
+  "current_theory": "The frozen v2.4 system admits observed evidence through different rules to two episode-local computations. High-dimensional interacting fast weights P_T construct a coherent global relational policy, while the exact edge-state a_T preserves broader direct experience-specific evidence through a fixed query kernel.",
+  "primary_hypothesis": "With item count, support count, distance multiset, exposure count, timing, signed metric evidence, query set, backbone, local gain, and readout fixed, the same asymmetric computation will produce competent coherent individualized rankings on three prospectively selected non-isomorphic support graphs: P_T will remain necessary for remote and nonlearned assembly, while a_T will remain necessary for direct fidelity and insufficient for nonlearned reconstruction by itself.",
+  "claim_boundary": "A pass supports transport across these three registered Liu-style graph topologies and three frozen development backbones. It does not establish network-population prevalence, out-of-distribution graph novelty relative to the procedural meta-training distribution, arbitrary graph-size or sparsity generalization, a human or biological mechanism, or uniqueness of either implementation.",
+  "task_fidelity": {
+    "base_protocol": "benchmarks/liu_v2.json",
+    "n_items": 8,
+    "support_relations": 8,
+    "support_blocks": 4,
+    "support_presentations": 32,
+    "query_pairs": 28,
+    "query_blocks": 10,
+    "query_presentations": 280,
+    "support_observation": "passive; no learning-stage choice and no feedback",
+    "query_feedback": false,
+    "evidence": "signed rank gap divided by seven, preserving the displayed metric magnitude",
+    "fixed_across_graphs": [
+      "true order",
+      "item cue generator and cue mode",
+      "support and query timing",
+      "within-block randomization rule",
+      "left-right orientation randomization rule",
+      "stable subject-encoding distribution",
+      "v2.4 differential evidence-admission equation",
+      "P_T recurrent computation",
+      "a_T address, write, read, and frozen gain",
+      "W_out and temperature"
+    ],
+    "only_manipulation": "which eight rank-position pairs form the connected support graph"
+  },
+  "matched_graph_contract": {
+    "original_source_correct_rank_edges": [[0, 3], [0, 7], [1, 4], [1, 5], [2, 4], [2, 7], [3, 6], [5, 6]],
+    "required_edge_count": 8,
+    "required_connected": true,
+    "required_rank_distance_multiset": [1, 2, 3, 3, 3, 4, 5, 7],
+    "selection_rule": "Enumerate every connected eight-edge subset of the 28 rank-position pairs with the required distance multiset. For each prospectively fixed descriptor stratum below, select the lexicographically first sorted edge tuple. No neural output, behavior, checkpoint, local gain, or human result enters selection.",
+    "nonisomorphism_rule": "The three alternatives and the original graph have distinct sorted degree sequences. Distinct degree sequences are a sufficient certificate that the alternatives are pairwise non-isomorphic and non-isomorphic to the original eight-cycle.",
+    "graphs": [
+      {
+        "graph_id": "balanced_branched_no_triangle",
+        "target_sorted_degree_sequence": [1, 1, 2, 2, 2, 2, 3, 3],
+        "target_triangle_count": 0,
+        "target_diameter": 4,
+        "rank_edges": [[0, 1], [0, 2], [0, 7], [1, 4], [1, 6], [2, 5], [3, 6], [3, 7]]
+      },
+      {
+        "graph_id": "moderate_hub_triangular",
+        "target_sorted_degree_sequence": [1, 1, 1, 2, 2, 2, 3, 4],
+        "target_triangle_count": 1,
+        "target_diameter": 5,
+        "rank_edges": [[0, 1], [0, 2], [0, 4], [0, 7], [1, 4], [1, 6], [2, 5], [3, 6]]
+      },
+      {
+        "graph_id": "high_hub_compact",
+        "target_sorted_degree_sequence": [1, 1, 1, 1, 2, 2, 2, 6],
+        "target_triangle_count": 1,
+        "target_diameter": 3,
+        "rank_edges": [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 7], [1, 4], [3, 6]]
+      }
+    ]
+  },
+  "registered_sources": {
+    "base_liu_protocol": {"path": "benchmarks/liu_v2.json", "sha256": "7428f87476c6274caeceb2b56aa1f02800396a8f78e3f4a67d0d9d1c090f2aec"},
+    "model": {"path": "fsrl/model.py", "sha256": "7668cff5d349cbecb2c7772202b3835aa894b1e553095879e8df3d077989c3e7"},
+    "ranking_protocol": {"path": "fsrl/ranking_protocol.py", "sha256": "268be36daa92917048c718f5e53ec185934f9f6295cc537174c8eaf5ec4c3bfd"},
+    "frozen_evaluator": {"path": "fsrl/liu_eval.py", "sha256": "83bc080d221d2a7f5489c2f8ad6b371c9c7013e775cb3ea5658814cbb15c559a"},
+    "subject_encoding": {"path": "fsrl/subject_encoding.py", "sha256": "8a8149eca41fabca481eca64988a9026876138794da8aea74ffecf61f3d966d6"},
+    "local_trace": {"path": "fsrl/conjunctive_local_trace.py", "sha256": "bf2fa24f13032db09f5dec948e710428075184484da3b6e66314a316ee054d2d"},
+    "local_query_runtime": {"path": "fsrl/conjunctive_local_trace_pilot.py", "sha256": "e9eb61a9e58e090d6877fff1aa0741b3c90aff9762906dec69d487df6e7c7d73"},
+    "differential_access_runtime": {"path": "fsrl/dual_evidence_access_pilot.py", "sha256": "b558fa0ac4f08e98662adb2dd2f0bb5bd1497753e271d3a0ade189adab8a22b6"},
+    "hodge_runtime": {"path": "fsrl/assembly_trajectory.py", "sha256": "aa03535b0b044d2e6c05b1921c6a84c738e806e500312f6bb0520babfb9a2769"},
+    "behavior_runtime": {"path": "fsrl/behavioral.py", "sha256": "6d6918a63800982fec811bfda9c0d421eeb7fe7410ad96f6c6aceb80922cd336"}
+  },
+  "development_backbones": {
+    "mandatory_seeds": [2101, 2102, 2103],
+    "network_pooling": "forbidden",
+    "role": "one-to-three-seed development transport test; all three are mandatory and none is a formal population sample",
+    "artifacts": {
+      "2101": {
+        "checkpoint": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/net.dat", "sha256": "3671582a3d0f638f9b383e9bea20b966824462217566edf8b15f8152d2a2c78d"},
+        "config": {"path": "output/curvature-gate-pilot-v2/seed-2101/backbone/config.json", "sha256": "488561727d127af8bbeb2d502e36a52d34defae819ae2363b0b8458a1433b7db"},
+        "gain": {"path": "output/conjunctive-local-trace-pilot-v2-3/seed-2101/local/gain.json", "sha256": "32a0750f3e4ce08703da0f3edca506d649e0e7d123aa67cc0bc3fc91fd059cc8"}
+      },
+      "2102": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/net.dat", "sha256": "83efbfeecab6e1673ff63aac3017d4d484f2f5fdd33caea5f32dbcbc0e3209eb"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/backbone/config.json", "sha256": "e3716331c5096574ee6e1e7c9b24985ccfb8e4159ce0cde8e213939988ccaff9"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2102/local/gain.json", "sha256": "5d352cb941735f20914b8dc7da13146544ea2585583c3f10e684f066069af111"}
+      },
+      "2103": {
+        "checkpoint": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/net.dat", "sha256": "72046a490f4d9aa56d6aa63a6bc527417eedb639b64e0432c9da12a43413f63d"},
+        "config": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/backbone/config.json", "sha256": "de77945e3306c5391a87667c37a1394e1d13b73cc17e5918036ead0a2d2b8f3a"},
+        "gain": {"path": "output/conjunctive-local-trace-replication-v2-3/seed-2103/local/gain.json", "sha256": "d8908f98b250cbc0027b022c3c06778e3c5562e6d02f7c872c2801b9e63ec276"}
+      }
+    }
+  },
+  "evaluation": {
+    "subjects_per_graph_and_backbone": 77,
+    "cue_seed": 31001,
+    "support_seed": 31101,
+    "subject_encoding_seed": 31201,
+    "choice_seed": 31301,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "bootstrap_samples": 10000,
+    "bootstrap_interval": 0.95,
+    "bootstrap_seed_rule": "530000 + 100 * backbone_seed + graph_index, with graph_index one through three in registered order",
+    "bootstrap_unit": "virtual participant within one fixed graph and one fixed backbone",
+    "execution": "single bounded GPU process through fsrl.formal_runtime; evaluate graph order as registered and seed order 2101, 2102, 2103",
+    "no_pooling": "Never pool participants across graphs or networks and never use graph or network performance to filter a cell."
+  },
+  "conditions": {
+    "intact": "natural P_T plus frozen-gain dual-access a_T",
+    "a_off": "natural P_T with the local contribution exactly zero",
+    "P_off_a_on": "replace P_T by zero during query while retaining frozen-gain dual-access a_T",
+    "relation_LOO_global": "for each registered support edge, replay the complete passive support phase with all four presentations of only that relation set to zero, then read the a-off global field",
+    "relation_LOO_P_off_local": "apply the same source-relation omission to a_T with P_T zero; this quantifies kernel cross-talk and cannot count as global reassembly"
+  },
+  "estimands": {
+    "exact_pair_field": "For every unordered pair, antisymmetrize the two query orientations as 0.5 times forward minus reverse logit margin, then correct-sign by the true rank order.",
+    "competence": "Within participant, mean positive-sign exact decisions separately over the eight learned and twenty nonlearned pairs in the intact condition.",
+    "correct_probability": "Apply sigmoid(correct-signed antisymmetric field divided by T=0.25), then average within participant over the specified pair set.",
+    "additivity": "Complete-graph Hodge gradient-energy fraction of the intact and a-off pair fields.",
+    "coherence": "Exact winner transitive-triplet fraction and Kendall tau between the Hodge potential order and true order.",
+    "individualization": "From the frozen 280-query sampler, mean pairwise Kendall tau among eligible non-correct Hodge orders and prevalence of at least one pair with at least 80 percent within-subject error.",
+    "P_remote_reassembly": "On a-off fields, relation-intact minus relation-LOO mean absolute effect over disjoint pairs and gauge-invariant third-party relational potential-energy fraction.",
+    "a_direct_fidelity": "Paired participant difference in learned-pair correct probability between intact and a-off.",
+    "P_off_local_scope": "P-off/a-on learned and nonlearned correct probabilities plus relation-LOO disjoint influence relative to intact global remote influence.",
+    "local_exactness": "For each participant, reconstruct the tensor trace and all 28 raw query reads from the 28-edge coefficient ledger and its frozen Gram kernel; report tensor-state and query-read maximum absolute errors."
+  },
+  "primary_links": {
+    "intact_competence": "Both participant-bootstrap lower bounds for intact learned and nonlearned exact decision accuracy exceed 0.50.",
+    "constructive_global_structure": "Both intact and a-off Hodge gradient-energy-fraction lower bounds are at least 0.95, the intact transitive-triplet-fraction lower bound is at least 0.95, and the intact Hodge-order Kendall-tau lower bound exceeds zero.",
+    "individualized_stable_structure": "The sampled-policy analysis contains at least two non-correct eligible subjects, its bootstrap upper bound for mean inter-subject Kendall tau is below 0.80, and its bootstrap lower bound for 80-percent stable-error prevalence among eligible non-correct subjects is at least 0.80.",
+    "P_off_global_collapse": "The P-off/a-on nonlearned correct-probability bootstrap upper bound is at most 0.55 and the bootstrap upper bound of P-off/local disjoint LOO influence minus 0.25 times intact a-off global disjoint LOO influence is below zero.",
+    "P_remote_reassembly": "On the intact a-off global field, participant-bootstrap lower bounds for mean absolute disjoint relation-LOO influence and third-party relational potential-energy fraction both exceed zero.",
+    "a_off_direct_loss": "The paired participant-bootstrap lower bound for intact minus a-off learned correct probability exceeds zero.",
+    "P_off_a_on_direct_nontransitive": "The P-off/a-on learned correct-probability bootstrap lower bound exceeds 0.50 and the paired bootstrap lower bound for learned minus nonlearned correct probability exceeds zero.",
+    "exact_local_compression": "Every finite-value and shape gate passes, and tensor-state and all-query raw-read reconstruction maximum absolute errors are each at most 1e-6."
+  },
+  "cell_and_cross_cell_decision": {
+    "cell": "Evaluate all eight links independently for each registered graph in each mandatory backbone. A graph-backbone cell passes only if every link passes and all source, artifact, graph, runtime, tensor-freeze, orientation, finite-value, and local-exactness integrity gates pass.",
+    "graph": "A graph transports only if all three mandatory backbones pass its cell. No majority-over-networks rule is permitted.",
+    "LIU_STRUCTURAL_MECHANISM_TRANSPORTED": "All three registered alternative graphs transport. Promote the P_T/a_T asymmetry as a development-supported mechanism for the tested Liu-style task class, while retaining the claim boundary and requiring fresh backbones before population language.",
+    "TOPOLOGY_DEPENDENT_OR_UNRESOLVED": "One or two registered graphs transport while another competent graph fails one or more mechanism links, or a link is heterogeneous across competent backbones. Localize the preregistered graph property before any new graph or intervention; do not add graphs post hoc.",
+    "FUNCTIONAL_ASYMMETRY_NOT_TRANSPORTED": "All graph-backbone cells are competent and interpretable, but no alternative graph transports the complete eight-link division. Retain the original Liu-graph mechanism and reject task-class transport under this contract.",
+    "STRUCTURAL_COMPETENCE_NOT_ESTABLISHED": "Any graph-backbone cell fails either intact competence bound under otherwise valid integrity. Its mechanism result is non-interpretable; do not tune the graph, model, gain, temperature, or threshold.",
+    "NONINTERPRETABLE_EXECUTION": "Any source, artifact, graph, GPU-runtime, tensor-freeze, shape, orientation, finite-value, or exact-reassembly integrity gate fails. Repair execution under a separately recorded lock without changing the registered science."
+  },
+  "mandatory_secondary_reporting": [
+    "all eight primary estimands and confidence intervals for every graph-backbone cell",
+    "learned, nonlearned, and overall sampled accuracy",
+    "symbolic-distance slope",
+    "serial-position endpoint contrast",
+    "seed-2104 inconsistency is a known original-graph limitation and is not redefined here",
+    "all sampled ranking-class counts, stable-error prevalence levels, and pairwise ranking diversity",
+    "per-relation direct, disjoint, and third-party LOO effects",
+    "retained versus stable-omitted evidence counts and correct probabilities",
+    "graph descriptors and exact schedule hashes"
+  ],
+  "stop_rules": [
+    "Do not change the three graphs, graph order, seeds, subject count, schedules, bootstrap, temperature, gains, thresholds, or estimands after implementation or evaluation.",
+    "Do not tune T, W_out, P_T, a_T, the evidence-admission rule, or any graph-specific parameter to repair symbolic-distance slope, serial-position endpoints, seed inconsistency, or a failed transport cell.",
+    "Do not begin presentation-order, sparsity, item-count, list-linking, classic transitive-inference, Miconi-ancestry, MEG, or human-mechanism work before this contract is resolved and reported.",
+    "If transported, the next Liu internal-validity axis is presentation order, followed by sparsity and item count. If heterogeneous, first localize only the already registered graph descriptors."
+  ],
+  "required_outputs": {
+    "implementation_lock": "benchmarks/liu_support_topology_transport_v1.lock.json",
+    "result": "results/liu_support_topology_transport_v1.json",
+    "report": "docs/liu_support_topology_transport_v1.md"
+  }
+}

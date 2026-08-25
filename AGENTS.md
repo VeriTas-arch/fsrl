@@ -855,10 +855,12 @@ Advance it in this order:
    compression sequence: `a_t` is an exact local edge-state algorithm, whereas
    `P_t` remains the interacting global implementation that emits a
    near-additive output but is not closed by the tested reduced states. Stop
-   searching for a symmetric reduced global state. Test whether this functional
-   asymmetry generalizes across list linking first, then item count, support
-   topology/sparsity, and adjacent transitive inference. Use one to three
-   development seeds before freezing any larger run.
+   searching for a symmetric reduced global state. First test whether this
+   functional asymmetry transports across matched Liu support topologies, then
+   vary presentation order, sparsity, and item count one axis at a time. Only
+   after the Liu-style task class is internally secure should list linking or
+   adjacent transitive inference begin. Use one to three development seeds
+   before freezing any larger run.
 5. Only after the reproduction map and reduced mechanism are stable, perform
    read-only ancestry comparisons with the Miconi active/passive reinstatement
    mechanism. Do not treat analogy as identity or modify the frozen v2.4 model
@@ -867,8 +869,9 @@ Advance it in this order:
 The four near-term deliverables are: a Liu-phenomenon/model reproduction map; a
 main causal mechanism figure centered on evidence-to-`P_T` global assembly and
 evidence-to-`a_T` local fidelity; the frozen asymmetric algorithmic theory; and
-generalization plus mechanism-ancestry tests. Prospective human falsification
-is a later validation layer, not a present model acceptance gate.
+Liu-style structural generalization. List linking, mechanism ancestry, and
+prospective human falsification are later layers, not present model acceptance
+gates.
 
 The first deliverable is now complete under a prospectively frozen, read-only
 contract on v2.4 fresh backbones 2104 and 2105. Six of nine Liu phenomena are
@@ -1037,6 +1040,30 @@ experiment design. Its contract, repair, result, and report are in
 `benchmarks/functional_fast_weight_latent_sufficiency_v1.repair1.json`,
 `results/functional_fast_weight_latent_sufficiency_v1.json`, and
 `docs/functional_fast_weight_latent_sufficiency_v1.md`.
+
+The current active experiment is the prospectively frozen
+`liu_support_topology_transport_v1` development test. It changes only the
+eight-edge support topology while holding the Liu item count, rank-distance
+multiset, four passive presentations, complete query interface, v2.4 evidence
+admission, frozen `P_T`, exact `a_T`, local gain, activation, and readout fixed.
+Three graphs were selected without neural output by deterministic enumeration
+of matched connected graphs into three pairwise non-isomorphic descriptor
+strata. Evaluate every graph independently on mandatory seeds 2101--2103;
+never pool virtual participants across graphs or networks. Only if all nine
+graph-by-backbone cells pass competence, constructive structure,
+individualized stable structure, `P`-off collapse, remote P-LOO, `a`-off direct
+loss, local-only nontransitivity, and exact local compression may the mechanism
+be called transported across the tested Liu-style task class. Partial transport
+is topology-dependent or unresolved, not a majority pass. The frozen contract
+is in `benchmarks/liu_support_topology_transport_v1.json`.
+
+Carry the excessive symbolic-distance slope, weak serial-position endpoint,
+and original seed-2104 inconsistency as known limitations. Do not tune
+temperature, `W_out`, `P_T`, `a_T`, evidence admission, or graph-specific
+parameters on the alternative graphs. Human-mechanism validation, MEG, list
+linking, Miconi ancestry, and new global compression remain deferred. If the
+topology test transports, continue Liu internal validity in the fixed order:
+presentation order, sparsity, then item count.
 
 The model-side theory is now formally consolidated as **asymmetric
 algorithmic organization of relational memory**. Keep three evidence levels
