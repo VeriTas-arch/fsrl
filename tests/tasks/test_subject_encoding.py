@@ -39,7 +39,3 @@ class SubjectEncodingTests(unittest.TestCase):
         realized = {next(iter(values)) for values in by_relation.values()}
         self.assertTrue(realized <= {0.0, 1.0})
         self.assertEqual(realized, {0.0, 1.0})
-
-
-if __name__ == "__main__":
-    unittest.main()

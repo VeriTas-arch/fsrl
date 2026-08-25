@@ -91,7 +91,3 @@ class GlobalPolicySlopeLocalizationTests(unittest.TestCase):
             specification["network_contract"]["mandatory_frozen_seeds"],
             [2104, 2105],
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

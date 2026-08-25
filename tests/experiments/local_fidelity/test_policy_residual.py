@@ -116,7 +116,3 @@ class PolicyResidualTests(unittest.TestCase):
         output[0].sum().backward()
         self.assertIsNotNone(self.residual.raw_eta.grad)
         self.assertTrue(np.isfinite(float(self.residual.raw_eta.grad)))
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -66,7 +66,3 @@ class HumanFitTests(unittest.TestCase):
                 [result(1.0, 0.80), result(0.5, 0.86, checkpoint="different")],
                 self.specification,
             )
-
-
-if __name__ == "__main__":
-    unittest.main()

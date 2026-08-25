@@ -69,7 +69,3 @@ class ExactRankingPosteriorTests(unittest.TestCase):
         probability = self.model.pair_probability(state, 1, 6)
         reverse = self.model.pair_probability(state, 6, 1)
         self.assertAlmostEqual(probability + reverse, 1.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -77,7 +77,3 @@ class ConfirmationTests(unittest.TestCase):
             self.assertRaisesRegex(RuntimeError, "all registered seeds"),
         ):
             aggregate_confirmation(output_root=Path(temp_dir))
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -180,7 +180,3 @@ class RelationalSystemTests(unittest.TestCase):
             updated.global_fast_weights, state.global_fast_weights
         )
         self.assertGreater(float(torch.linalg.vector_norm(updated.local_trace)), 0.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

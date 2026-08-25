@@ -61,7 +61,3 @@ class RankingProtocolTests(unittest.TestCase):
         self.assertTrue(query["reset_eligibility_each_trial"])
         self.assertEqual(query["fast_weights"], "freeze_after_support")
         self.assertEqual(query["time_channel"], "constant_at_support_query_boundary")
-
-
-if __name__ == "__main__":
-    unittest.main()

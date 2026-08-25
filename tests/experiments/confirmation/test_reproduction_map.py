@@ -111,7 +111,3 @@ class ModelBehaviorReproductionMapTests(unittest.TestCase):
             self.assertEqual(load_json(path), self.result)
             with self.assertRaises(FileExistsError):
                 write_json_exclusive(path, self.result)
-
-
-if __name__ == "__main__":
-    unittest.main()

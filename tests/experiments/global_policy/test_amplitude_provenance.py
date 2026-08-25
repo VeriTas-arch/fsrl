@@ -287,7 +287,3 @@ class GlobalPolicyAmplitudeProvenanceTests(unittest.TestCase):
             }
         )
         self.assertEqual(replicated["outcome"], "projection_alignment_fingerprint")
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -116,7 +116,3 @@ class CurvatureGatePilotTests(unittest.TestCase):
             self.config.bs,
         )
         self.assertEqual(result["conditioned_minus_original_max_abs"], 0.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

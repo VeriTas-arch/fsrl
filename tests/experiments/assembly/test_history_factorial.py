@@ -77,7 +77,3 @@ class HistoryStateFactorialTests(unittest.TestCase):
             result["overall_diagnosis"]["formal_confirmation_status"],
             "deferred; formal seeds remain untouched",
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

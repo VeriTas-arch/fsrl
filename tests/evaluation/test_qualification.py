@@ -81,7 +81,3 @@ class QualificationTests(unittest.TestCase):
         self.assertFalse(report["passed"])
         failed = {check["name"] for check in report["checks"] if not check["passed"]}
         self.assertIn("reset.mean_pair_decision_agreement_to_intact", failed)
-
-
-if __name__ == "__main__":
-    unittest.main()

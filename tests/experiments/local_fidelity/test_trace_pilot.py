@@ -199,7 +199,3 @@ class ConjunctiveLocalTracePilotTests(unittest.TestCase):
         )
         self.assertFalse(failed["flags"]["local_direct_specificity"])
         self.assertEqual(failed["outcome"], "local_rescue_without_double_dissociation")
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -182,7 +182,3 @@ class CoreArchitectureTests(unittest.TestCase):
         }
         missing = sorted(path for path in expected if not (ROOT / path).is_file())
         self.assertEqual(missing, [])
-
-
-if __name__ == "__main__":
-    unittest.main()

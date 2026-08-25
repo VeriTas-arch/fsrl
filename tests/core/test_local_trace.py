@@ -91,7 +91,3 @@ class ConjunctiveLocalTraceTests(unittest.TestCase):
         corrected.sum().backward()
         self.assertIsNotNone(self.trace.raw_gain.grad)
         self.assertTrue(np.isfinite(float(self.trace.raw_gain.grad)))
-
-
-if __name__ == "__main__":
-    unittest.main()

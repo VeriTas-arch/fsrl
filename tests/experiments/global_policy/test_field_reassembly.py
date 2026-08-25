@@ -405,7 +405,3 @@ class GlobalPolicyFieldReassemblyTests(unittest.TestCase):
             heterogeneous["norm_matched_shape_axis"]["outcome"],
             "mixed_or_unresolved",
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

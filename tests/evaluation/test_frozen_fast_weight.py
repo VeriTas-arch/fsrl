@@ -18,7 +18,7 @@ from fsrl.infra.study_registry import resolve_record
 from fsrl.tasks.registered_protocol import load_ranking_protocol
 
 
-class LiuEvaluatorTests(unittest.TestCase):
+class FrozenFastWeightEvaluatorTests(unittest.TestCase):
     def setUp(self):
         torch.set_num_threads(1)
         torch.manual_seed(3)
@@ -266,7 +266,3 @@ class LiuEvaluatorTests(unittest.TestCase):
         self.assertEqual(metrics.overall_accuracy, 1.0)
         self.assertEqual(metrics.learned_accuracy, 1.0)
         self.assertEqual(metrics.nonlearned_accuracy, 1.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

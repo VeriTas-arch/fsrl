@@ -483,7 +483,3 @@ class GlobalPolicyFieldFingerprintReplicationTests(unittest.TestCase):
                     self.assertRaisesRegex(RuntimeError, "source (lock|path)"),
                 ):
                     validate_sources(specification_path, implementation_lock_path)
-
-
-if __name__ == "__main__":
-    unittest.main()

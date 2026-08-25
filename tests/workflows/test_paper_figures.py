@@ -90,7 +90,3 @@ class PaperFigureAlignmentTests(unittest.TestCase):
         check = check_suite()
         self.assertTrue(check["passed"], check["mismatches"])
         self.assertEqual(check["checked_files"], 17)
-
-
-if __name__ == "__main__":
-    unittest.main()

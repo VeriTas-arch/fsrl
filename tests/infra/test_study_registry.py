@@ -253,7 +253,3 @@ class StudyRegistryTests(unittest.TestCase):
         manifest = load_json(MANIFEST_PATH)
         evidence = verify_evidence_files(manifest)
         self.assertTrue(evidence["passed"], evidence)
-
-
-if __name__ == "__main__":
-    unittest.main()

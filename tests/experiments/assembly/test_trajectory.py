@@ -126,7 +126,3 @@ class AssemblyTrajectoryTests(unittest.TestCase):
                 row["leave_one_relation_out"]["stable_omitted_max_abs_pair_influence"],
                 0.0,
             )
-
-
-if __name__ == "__main__":
-    unittest.main()

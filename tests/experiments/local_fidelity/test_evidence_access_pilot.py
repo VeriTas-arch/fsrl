@@ -87,7 +87,3 @@ class DualEvidenceAccessPilotTests(unittest.TestCase):
         )
         self.assertEqual(result["outcome"], "heterogeneous_or_unresolved")
         self.assertEqual(result["network_population_inference"], "not_performed")
-
-
-if __name__ == "__main__":
-    unittest.main()

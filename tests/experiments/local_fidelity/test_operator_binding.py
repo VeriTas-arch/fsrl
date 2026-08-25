@@ -161,7 +161,3 @@ class StateQueryOperatorBindingTests(unittest.TestCase):
                 ],
                 row["validation"]["floating_reproduction_tolerance"],
             )
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -30,7 +30,7 @@ from fsrl.workflows.frozen_evidence import (
 ROOT = REPO_ROOT
 
 
-class LiuMainlineTests(unittest.TestCase):
+class FrozenReportingSnapshotTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.manifest = load_json(MANIFEST_PATH)
@@ -234,7 +234,3 @@ class LiuMainlineTests(unittest.TestCase):
     def test_complete_overlay_verification_passes(self):
         validation = verify_mainline()
         self.assertTrue(validation["passed"])
-
-
-if __name__ == "__main__":
-    unittest.main()

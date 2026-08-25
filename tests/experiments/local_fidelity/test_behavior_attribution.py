@@ -112,7 +112,3 @@ class LocalBehaviorAttributionTests(unittest.TestCase):
         self.assertEqual(result["outcome"], "dual_evidence_access")
         self.assertTrue(result["flags"]["omission_dominant"])
         self.assertTrue(result["flags"]["retained_local_sufficient"])
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -49,7 +49,3 @@ class AlgorithmicComparisonTests(unittest.TestCase):
         self.assertTrue(result["subjects"][0]["neural_is_map"])
         self.assertEqual(result["group"]["neural_map_proportion"], 1.0)
         self.assertEqual(result["subjects"][0]["closest_map_kendall_tau"], 1.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

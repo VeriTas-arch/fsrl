@@ -71,7 +71,3 @@ class GenericRankingTaskTests(unittest.TestCase):
         self.assertEqual(first.graph_rank_pairs, second.graph_rank_pairs)
         self.assertEqual(first.support_trials, second.support_trials)
         self.assertEqual(first.query_trials, second.query_trials)
-
-
-if __name__ == "__main__":
-    unittest.main()

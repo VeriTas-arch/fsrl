@@ -91,7 +91,3 @@ class AssemblyDiagnosticsTests(unittest.TestCase):
         self.assertTrue(result["evidence_model_contribution"])
         self.assertTrue(result["neural_over_sharpening"])
         self.assertTrue(result["human_mixed_code_signal"])
-
-
-if __name__ == "__main__":
-    unittest.main()

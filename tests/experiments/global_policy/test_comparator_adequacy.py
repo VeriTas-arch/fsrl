@@ -228,7 +228,3 @@ class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 write_json_exclusive(path, {"status": "second"})
             self.assertEqual(json.loads(path.read_text()), {"status": "first"})
-
-
-if __name__ == "__main__":
-    unittest.main()

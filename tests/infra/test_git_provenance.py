@@ -44,7 +44,3 @@ class GitProvenanceTests(unittest.TestCase):
             git_blob_sha256(
                 Path(directory), HISTORICAL_COMMIT, "fsrl/formal_runtime.py"
             )
-
-
-if __name__ == "__main__":
-    unittest.main()

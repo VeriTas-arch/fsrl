@@ -64,7 +64,3 @@ class BehavioralAnalysisTests(unittest.TestCase):
         self.assertEqual(
             result["subjects"][1]["subjective_order_high_to_low"], list(orders[1])
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

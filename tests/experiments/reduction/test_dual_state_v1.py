@@ -126,7 +126,3 @@ class DualStateReducedAlgorithmTests(unittest.TestCase):
         self.assertEqual(values.shape, (4, 8))
         np.testing.assert_allclose(values[0], 0.0)
         np.testing.assert_allclose(values[-1], 3.0 * evidence[0])
-
-
-if __name__ == "__main__":
-    unittest.main()

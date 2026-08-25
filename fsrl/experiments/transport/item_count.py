@@ -567,6 +567,7 @@ def enumerate_matched_cycle(
     best_distance = None
     best_edges = None
     minimizers = 0
+    distance_cache: dict[tuple[Fraction, ...], Fraction] = {}
     for remainder in permutations(range(1, n_items)):
         if remainder[0] >= remainder[-1]:
             continue
@@ -577,8 +578,13 @@ def enumerate_matched_cycle(
                 for index in range(n_items)
             )
         )
-        distances = [Fraction(second - first, n_items - 1) for first, second in edges]
-        distance = _exact_wasserstein(distances, list(target))
+        distances = tuple(
+            sorted(Fraction(second - first, n_items - 1) for first, second in edges)
+        )
+        distance = distance_cache.get(distances)
+        if distance is None:
+            distance = _exact_wasserstein(list(distances), list(target))
+            distance_cache[distances] = distance
         if best_distance is None or distance < best_distance:
             best_distance = distance
             best_edges = edges

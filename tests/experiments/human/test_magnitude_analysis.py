@@ -158,7 +158,3 @@ class MagnitudePlacementAnalysisTests(unittest.TestCase):
         observed = hodge_rank_positions(field)
 
         self.assertEqual([int(value) for value in observed], [7, 6, 5, 4, 3, 2, 1, 0])
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -407,7 +407,3 @@ class GlobalPolicyAllocationAuditTests(unittest.TestCase):
             write_json_exclusive(missing_upstream_path, missing_upstream)
             with self.assertRaisesRegex(RuntimeError, "upstream fingerprint"):
                 validate_sources(DEFAULT_SPECIFICATION_PATH, missing_upstream_path)
-
-
-if __name__ == "__main__":
-    unittest.main()

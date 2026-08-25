@@ -91,7 +91,3 @@ class FunctionalFastWeightLatentSufficiencyTests(unittest.TestCase):
         np.testing.assert_allclose(
             audit._episode_errors(prediction, target, episode_index), [1.0, 4.0]
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

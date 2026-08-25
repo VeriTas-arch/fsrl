@@ -141,7 +141,3 @@ class OperatorAmplitudePathTests(unittest.TestCase):
                 if relation["relation_label"] == "H>A"
             )
             self.assertLess(curvature["direct_correctness"]["bootstrap"]["upper"], 0.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -160,7 +160,3 @@ class ConjunctiveLocalTraceReplicationTests(unittest.TestCase):
         )
         self.assertEqual(decision["outcome"], "heterogeneous_or_unresolved")
         self.assertEqual(decision["network_population_inference"], "not_performed")
-
-
-if __name__ == "__main__":
-    unittest.main()

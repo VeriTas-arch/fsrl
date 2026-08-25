@@ -115,7 +115,3 @@ class RelationTraceLocalizationTests(unittest.TestCase):
                 row["validation"]["realized_minus_intended_max_abs_error"],
                 row["validation"]["floating_reproduction_tolerance"],
             )
-
-
-if __name__ == "__main__":
-    unittest.main()

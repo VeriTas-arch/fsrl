@@ -202,7 +202,3 @@ class FormalRuntimeTests(unittest.TestCase):
         record["training_execution"]["torch_compile"]["fullgraph"] = False
         with self.assertRaisesRegex(RuntimeError, "registered compiled training"):
             validate_formal_training_execution(record)
-
-
-if __name__ == "__main__":
-    unittest.main()

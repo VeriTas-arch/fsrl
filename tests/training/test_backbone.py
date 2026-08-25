@@ -268,7 +268,3 @@ class MetaTrainingTests(unittest.TestCase):
             self.assertFalse(subject_encoding["contains_rank_label"])
             self.assertEqual(len(metadata["checkpoint"]["sha256"]), 64)
             self.assertEqual(metadata["execution"], COMPILED_TRAINING_EXECUTION)
-
-
-if __name__ == "__main__":
-    unittest.main()

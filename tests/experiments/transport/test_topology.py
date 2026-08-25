@@ -149,7 +149,3 @@ class SupportTopologyTransportTests(unittest.TestCase):
             cross_cell_decision(seeds, graph_ids, seed_ids)["outcome"],
             "NONINTERPRETABLE_EXECUTION",
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

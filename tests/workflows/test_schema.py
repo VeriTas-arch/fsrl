@@ -48,7 +48,3 @@ class WorkflowSchemaTests(unittest.TestCase):
         workflow["stages"][-1]["figures"][0]["figure"] = "figure_missing"
         with self.assertRaisesRegex(ValueError, "figure is absent"):
             validate_workflow(workflow)
-
-
-if __name__ == "__main__":
-    unittest.main()

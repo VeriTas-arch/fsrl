@@ -91,7 +91,3 @@ class HiddenResidualAuditTests(unittest.TestCase):
                 row["validation"]["hidden_to_logit_projection_max_abs_error"],
                 row["validation"]["floating_reproduction_tolerance"],
             )
-
-
-if __name__ == "__main__":
-    unittest.main()

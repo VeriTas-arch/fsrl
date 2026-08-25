@@ -154,7 +154,3 @@ class MagnitudePlacementCollectionTests(unittest.TestCase):
         self.assertTrue(all(result["gates"].values()))
         self.assertFalse(result["dry_run"]["human_data_used"])
         self.assertEqual(set(result["external_go_requirements"].values()), {"pending"})
-
-
-if __name__ == "__main__":
-    unittest.main()

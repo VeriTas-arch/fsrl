@@ -93,7 +93,3 @@ class MagnitudePlacementBehaviorTests(unittest.TestCase):
             )
             with self.assertRaises(FileExistsError):
                 run_validation(DEFAULT_SPECIFICATION_PATH, output)
-
-
-if __name__ == "__main__":
-    unittest.main()

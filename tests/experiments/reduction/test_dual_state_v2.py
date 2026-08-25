@@ -71,7 +71,3 @@ class ScalarHistoryReducedAlgorithmTests(unittest.TestCase):
         values = scalar_history_rollout(evidence, parameters)
         np.testing.assert_allclose(values[1], 0.0)
         np.testing.assert_allclose(values[2], evidence[1])
-
-
-if __name__ == "__main__":
-    unittest.main()

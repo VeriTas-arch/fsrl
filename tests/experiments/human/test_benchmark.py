@@ -60,7 +60,3 @@ class HumanBenchmarkTests(unittest.TestCase):
         self.assertAlmostEqual(summary["overall_accuracy"], 0.8523654916512059)
         self.assertAlmostEqual(summary["learned_accuracy"], 0.913961038961039)
         self.assertAlmostEqual(summary["nonlearned_accuracy"], 0.8277272727272728)
-
-
-if __name__ == "__main__":
-    unittest.main()

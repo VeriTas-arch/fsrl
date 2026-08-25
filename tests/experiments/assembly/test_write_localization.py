@@ -128,7 +128,3 @@ class SupportWriteLocalizationTests(unittest.TestCase):
             "alpha_functional_amplification_replicated_across_pilot_seeds",
             result["overall_secondary_exploratory_diagnosis"],
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

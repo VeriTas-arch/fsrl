@@ -86,7 +86,3 @@ class GeometryAnalysisTests(unittest.TestCase):
         self.assertEqual(report["registration_status"], "exploratory-test")
         result["group"]["mean_subjective_minus_true"] = -0.01
         self.assertFalse(evaluate_geometry_gate(result, specification)["passed"])
-
-
-if __name__ == "__main__":
-    unittest.main()

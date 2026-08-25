@@ -149,7 +149,3 @@ class OperatorOutputSemanticsTests(unittest.TestCase):
                 "stable_omitted_residual_max_abs",
             ):
                 self.assertEqual(set(row["validation"][name].values()), {0.0})
-
-
-if __name__ == "__main__":
-    unittest.main()

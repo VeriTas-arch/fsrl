@@ -141,7 +141,3 @@ class SupportFactorSwapTests(unittest.TestCase):
                 "history_policy_attribution_competent_replicated_across_pilot_seeds"
             ]
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -71,7 +71,3 @@ class DualEvidenceAccessConfirmationTests(unittest.TestCase):
             self.assertEqual(dual_access.V2_3_OUTPUT_ROOT, output)
         self.assertEqual(dual_access.V2_3_SPECIFICATION_PATH, original_specification)
         self.assertEqual(dual_access.V2_3_OUTPUT_ROOT, original_output)
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -173,7 +173,3 @@ class PolicyOppositionGatePilotTests(unittest.TestCase):
         )
         self.assertFalse(failing["flags"]["control_specificity"])
         self.assertEqual(failing["outcome"], "valid_local_or_specificity_failure")
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -79,7 +79,3 @@ class SparsityIndividualizationLocalizationTests(unittest.TestCase):
             outcome([row(False, False) for _ in range(6)]),
             "NO_REPLICATED_DENSITY_LOCALIZATION",
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

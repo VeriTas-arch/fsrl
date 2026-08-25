@@ -77,7 +77,3 @@ class ItemHistoryReducedAlgorithmTests(unittest.TestCase):
         with bind_item_rollout(parameters):
             self.assertIsNot(v2.scalar_history_rollout_batch, original)
         self.assertIs(v2.scalar_history_rollout_batch, original)
-
-
-if __name__ == "__main__":
-    unittest.main()

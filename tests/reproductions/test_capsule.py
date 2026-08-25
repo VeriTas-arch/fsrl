@@ -36,7 +36,3 @@ class ReproductionCapsuleTests(unittest.TestCase):
             ROOT / "simple_neo.py",
         ):
             self.assertFalse(path.exists(), path)
-
-
-if __name__ == "__main__":
-    unittest.main()

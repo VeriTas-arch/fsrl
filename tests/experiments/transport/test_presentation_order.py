@@ -1,5 +1,7 @@
 import unittest
 
+import numpy as np
+
 from fsrl.experiments.transport.presentation_order import (
     DEFAULT_SPECIFICATION_PATH,
     cross_cell_decision,
@@ -36,9 +38,7 @@ class PresentationOrderTransportTests(unittest.TestCase):
     def setUp(self):
         self.specification = load_json(DEFAULT_SPECIFICATION_PATH)
         self.protocol = load_ranking_protocol(resolve_record("benchmarks/liu_v2.json"))
-        self.baseline = self.protocol.support_schedule(
-            __import__("numpy").random.default_rng(11)
-        )
+        self.baseline = self.protocol.support_schedule(np.random.default_rng(11))
 
     def test_schedule_transforms_preserve_trials_and_are_deterministic(self):
         schedules = {}
@@ -91,7 +91,3 @@ class PresentationOrderTransportTests(unittest.TestCase):
             cross_cell_decision(seeds, conditions, seed_ids)["outcome"],
             "NONINTERPRETABLE_EXECUTION",
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

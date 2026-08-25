@@ -110,7 +110,3 @@ class PolicyOppositionGateTests(unittest.TestCase):
         (opposition[0].sum() + support[0].sum()).backward()
         self.assertIsNotNone(self.gate.raw_beta.grad)
         self.assertTrue(np.isfinite(float(self.gate.raw_beta.grad)))
-
-
-if __name__ == "__main__":
-    unittest.main()

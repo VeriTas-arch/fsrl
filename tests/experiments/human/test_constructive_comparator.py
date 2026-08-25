@@ -155,7 +155,3 @@ class HumanMetricConstructiveComparatorTests(unittest.TestCase):
             write_json_exclusive(path, {"status": "first"})
             with self.assertRaises(FileExistsError):
                 write_json_exclusive(path, {"status": "second"})
-
-
-if __name__ == "__main__":
-    unittest.main()

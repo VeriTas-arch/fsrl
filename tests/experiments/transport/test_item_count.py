@@ -170,7 +170,3 @@ class ItemCountTransportTests(unittest.TestCase):
             cross_cell_decision(seeds, sizes, seed_ids)["outcome"],
             "NONINTERPRETABLE_EXECUTION",
         )
-
-
-if __name__ == "__main__":
-    unittest.main()
