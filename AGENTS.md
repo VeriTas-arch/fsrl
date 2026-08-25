@@ -908,6 +908,46 @@ figure, equations, causal-link provenance, and negative constraints are in
 read-only reduced-algorithm compression test, not further internal probing or
 model tuning.
 
+The first registered reduced-algorithm test is now complete and is a valid
+negative for the global potential-only transition. The local tensor state
+compresses exactly to edge coefficients plus its fixed Gram kernel:
+`ell_q=(K a_T)_q`, with maximum reconstruction error below `8.89e-15` across
+development and Liu preservation backbones. Promote this edge-addressed local
+memory as the current algorithmic form of `L_T`; do not claim `K=I`, the
+tensor-product key, or a biological store is unique.
+
+Do not promote `s_t` to a closed Markov state under the frozen rank-2
+state-by-evidence transition. In leave-one-backbone-out tests on 2101--2103,
+the candidate is no better than the accumulator, prefix and terminal rollout
+gates fail, and it recovers only 25--35 percent of full remote magnitude.
+The full 576-parameter bilinear diagnostic is also worse than the accumulator,
+so do not increase bilinear rank or refit v1. Preserve the positive boundary:
+full fields remain more than 0.996 Hodge-additive, reduced/full remote
+influence correlations are 0.81--0.82, and untouched Liu potential
+correlations are about 0.91. This supports `s_t` as a strong output observable,
+not the registered closed learning state.
+
+The strict reduced double-dissociation and nine-row behavior-preservation
+conjunctions also fail. Global-only nonlearned inference and local-only learned
+fidelity remain strong, but exact-K local cross-talk retains 30--32 percent of
+intact remote magnitude and several behavior categories change. Do not count a
+newly human-calibrated serial-position category as a repair; human behavior was
+not an optimization target.
+
+The next admissible compression family is one separately frozen scalar
+confidence/history augmentation, reusing the v1 trajectory artifact without
+checkpoint re-extraction:
+`c_(t+1)=c_t+0.5*||x_t||^2` and
+`s_(t+1)=Pi[s_t+A x_t+B(c_t x_t)]`. Compare it with the accumulator and the
+failed v1 candidate under the same held-out backbones, remote LOO, untouched
+Liu double dissociation, and behavior categories. If it fails, do not add
+alternative coverage, time, block, or interaction features after inspection;
+move to a separately registered higher-dimensional state question. The v1
+contract, result, and interpretation are in
+`benchmarks/dual_state_reduced_algorithm_v1.json`,
+`results/dual_state_reduced_algorithm_v1.json`, and
+`docs/dual_state_reduced_algorithm_v1.md`.
+
 The fresh confirmation is in
 `docs/dual_evidence_access_confirmation_v2_4.md`, the slope localization is in
 `docs/global_policy_slope_localization_v1.md`, the amplitude audit is in
