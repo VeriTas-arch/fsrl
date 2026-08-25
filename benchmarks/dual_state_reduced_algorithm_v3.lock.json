@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dual-state-reduced-algorithm-v3-item-history",
+  "freeze_status": "implementation_frozen_after_protocol_commit_and_before_v3_fit_or_evaluation",
+  "registration_commit": "008afed",
+  "specification_sha256": "32c7b3df64ee0c5d0d77ba34bfb1612ba4a035f5936775eafad5d924e401c2b0",
+  "implementation_sources": {
+    "runner": {
+      "path": "fsrl/dual_state_reduced_algorithm_v3.py",
+      "sha256": "98e5f27ee4775ff0804813aa24a3e597299a1f7880afd9abadbbfb53cc822cdd"
+    },
+    "tests": {
+      "path": "tests/test_dual_state_reduced_algorithm_v3.py",
+      "sha256": "fa8a25f23e7feafb5ec2359bdfea34150c7a22f733a5e691e7310c062a0e6b98"
+    }
+  },
+  "preservation_adapter": "The serial scoped binding replaces only the v2 rollout function with the frozen v3 equation, calls the unchanged v2 preservation estimands, and restores the original function in a finally block. A regression test verifies restoration.",
+  "preexecution_validation": {
+    "targeted_tests": "4 passed",
+    "python_compile": "passed",
+    "ruff": "passed",
+    "v1_trajectory_reextraction": "not_run",
+    "v3_fit": "not_run",
+    "liu_preservation": "not_run"
+  },
+  "next_step": "Commit and push this implementation lock before the single registered v3 execution."
+}
