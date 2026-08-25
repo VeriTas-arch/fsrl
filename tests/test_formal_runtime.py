@@ -17,6 +17,22 @@ from fsrl.meta_train import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_support_topology_transport_dispatch_uses_registered_entry_point(self):
+        module_name = "fsrl.support_topology_transport"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=41)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(
+                ["liu-support-topology-transport", "--sentinel"]
+            )
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 41)
+
     def test_human_metric_constructive_comparator_dispatch_uses_registered_entry_point(
         self,
     ):

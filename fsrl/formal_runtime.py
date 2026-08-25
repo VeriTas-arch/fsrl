@@ -66,6 +66,7 @@ def main(args=None) -> int:
         "global-policy-field-reassembly",
         "global-policy-slope-localization",
         "human-metric-constructive-comparator",
+        "liu-support-topology-transport",
     }
     if not arguments or arguments[0] not in workflows:
         raise ValueError("first argument must select a registered formal workflow")
@@ -89,6 +90,8 @@ def main(args=None) -> int:
         from .global_policy_field_fingerprint_replication import main as workflow_main
     elif workflow == "human-metric-constructive-comparator":
         from .human_metric_constructive_comparator import main as workflow_main
+    elif workflow == "liu-support-topology-transport":
+        from .support_topology_transport import main as workflow_main
     else:
         raise AssertionError(f"unhandled registered formal workflow: {workflow}")
     return workflow_main(arguments)
