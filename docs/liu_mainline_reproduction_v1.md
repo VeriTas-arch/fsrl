@@ -23,6 +23,8 @@ direnv allow
 direnv exec . python -m fsrl.liu_mainline status
 direnv exec . python -m fsrl.liu_mainline verify
 direnv exec . python -m fsrl.liu_mainline doctor
+direnv exec . python -m fsrl.liu_mainline restore-test-artifacts
+direnv exec . python -m unittest
 direnv exec . python -m fsrl.liu_mainline summarize \
   --output-dir /tmp/fsrl-mainline-clean-summary
 ```
@@ -39,7 +41,7 @@ The expected verified inventory is:
 | DAG edges | 12 |
 | Historical execution records | 8 |
 | Explicit replay-stage names | 9 |
-| Bundle members | 27 |
+| Bundle members | 33: 27 replay + 6 CPU-test support |
 | Report figures | 4 |
 | Report metrics with JSON pointers | 26 |
 
@@ -123,6 +125,11 @@ Replay extracts only matching members. If a target file already exists, its
 hash must match; otherwise replay fails rather than replacing it. The bundle is
 small enough for the repository backend. Moving it to a release asset or LFS in
 a later mainline version must preserve every member identity.
+
+`restore-test-artifacts` applies the same fail-closed extraction rule to the six
+seed-1901/1902 files referenced by legacy source-integrity tests. It does not
+train or evaluate a model. These files live under ignored `output/` paths, so a
+clean clone remains Git-clean after restoration and the full CPU suite.
 
 ## Environment reconstruction
 

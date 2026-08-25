@@ -269,8 +269,14 @@ def verify_artifact_bundle(artifacts: dict | None = None) -> dict:
     listing = _tar(["-tf", str(bundle_path)]).stdout.decode("utf-8").splitlines()
     members = artifacts.get("members", [])
     registered_names = [member["bundle_member"] for member in members]
-    if len(members) != 27 or len(set(registered_names)) != len(registered_names):
-        raise RuntimeError("artifact member registry must contain 27 unique files")
+    expected_count = bundle.get("member_count")
+    if (
+        not isinstance(expected_count, int)
+        or expected_count <= 0
+        or len(members) != expected_count
+        or len(set(registered_names)) != len(registered_names)
+    ):
+        raise RuntimeError("artifact member registry count or uniqueness mismatch")
     if sorted(listing) != sorted(registered_names):
         raise RuntimeError("artifact bundle member set mismatch")
     checks = []
@@ -675,7 +681,11 @@ def _extract_required_artifacts(worktree: Path, tags: list[str]) -> list[str]:
     for member in selected:
         target = worktree.joinpath(*PurePosixPath(member["bundle_member"]).parts)
         if target.exists():
-            if not target.is_file() or file_sha256(target) != member["sha256"]:
+            if (
+                target.is_symlink()
+                or not target.is_file()
+                or file_sha256(target) != member["sha256"]
+            ):
                 raise RuntimeError(f"existing replay artifact has wrong hash: {target}")
             continue
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -695,9 +705,27 @@ def _extract_required_artifacts(worktree: Path, tags: list[str]) -> list[str]:
         )
         if completed.returncode != 0:
             raise RuntimeError(f"artifact extraction failed: {completed.stderr}")
+        if target.is_symlink() or not target.is_file():
+            raise RuntimeError(
+                f"extracted replay artifact is not a regular file: {target}"
+            )
         if file_sha256(target) != member["sha256"]:
             raise RuntimeError(f"extracted replay artifact has wrong hash: {target}")
     return [member["logical_name"] for member in selected]
+
+
+def restore_test_artifacts() -> dict:
+    """Restore only the six registered artifacts needed by the CPU test suite."""
+
+    verify_artifact_bundle()
+    restored = _extract_required_artifacts(ROOT, ["cpu_test_suite"])
+    if len(restored) != 6:
+        raise RuntimeError("CPU test artifact profile must contain exactly six files")
+    return {
+        "passed": True,
+        "profile": "cpu_test_suite",
+        "restored_artifacts": restored,
+    }
 
 
 def replay_stage(stage: str, output: Path | None = None) -> dict:
@@ -793,6 +821,7 @@ def _parser() -> argparse.ArgumentParser:
     subparsers.add_parser("verify")
     doctor = subparsers.add_parser("doctor")
     doctor.add_argument("--stage", choices=replay_choices)
+    subparsers.add_parser("restore-test-artifacts")
     summarize = subparsers.add_parser("summarize")
     summarize.add_argument(
         "--output-dir",
@@ -813,6 +842,8 @@ def main(args: list[str] | None = None) -> int:
         result = verify_mainline()
     elif parsed.command == "doctor":
         result = doctor_mainline(parsed.stage)
+    elif parsed.command == "restore-test-artifacts":
+        result = restore_test_artifacts()
     elif parsed.command == "summarize":
         result = summarize_mainline(parsed.output_dir)
     elif parsed.command == "replay":

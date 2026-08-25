@@ -42,9 +42,10 @@ context; none is inserted into the Liu task-fidelity dependency graph.
 - `manifest.json` contains the claim DAG, evidence registry, historical
   execution commits, execution/canonical locks, semantic replay assertions,
   research lineage, and implementation lineage.
-- `artifacts.json` binds 27 formerly machine-local files by content hash to one
+- `artifacts.json` binds 33 formerly machine-local files by content hash to one
   repository bundle. Artifact identity is the member SHA-256, not its former
-  `output/` pathname.
+  `output/` pathname. Twenty-seven support registered stage replay; six restore
+  the shared 1901/1902 inputs required by the historical CPU test suite.
 - `environment.json` is descriptive provenance. `requirements-lock.txt` is the
   reconstructable Python/CUDA dependency contract.
 - `report_view.json` maps each report metric to a frozen source file and exact
@@ -101,6 +102,7 @@ source SHA-256, and JSON pointer.
 direnv exec . python -m fsrl.liu_mainline status
 direnv exec . python -m fsrl.liu_mainline verify
 direnv exec . python -m fsrl.liu_mainline doctor
+direnv exec . python -m fsrl.liu_mainline restore-test-artifacts
 direnv exec . python -m fsrl.liu_mainline summarize --output-dir /tmp/liu-summary
 direnv exec . python -m fsrl.liu_mainline replay --stage behavioral_competence
 ```

@@ -13,6 +13,7 @@ from fsrl.liu_mainline import (
     canonical_manifest_payload_sha256,
     doctor_mainline,
     load_json,
+    restore_test_artifacts,
     summarize_mainline,
     validate_manifest_structure,
     verify_artifact_bundle,
@@ -109,13 +110,19 @@ class LiuMainlineTests(unittest.TestCase):
         artifacts = load_json(ARTIFACTS_PATH)
         validation = verify_artifact_bundle(artifacts)
         self.assertTrue(validation["passed"])
-        self.assertEqual(validation["members"], 27)
-        self.assertEqual(validation["uncompressed_member_bytes"], 3212576)
+        self.assertEqual(validation["members"], 33)
+        self.assertEqual(validation["uncompressed_member_bytes"], 4093182)
         bundle = artifacts["bundle"]
         self.assertIn(bundle["sha256"], bundle["path"])
         self.assertEqual(bundle["storage_backend"], "repository_bundle")
         logical_names = [member["logical_name"] for member in artifacts["members"]]
         self.assertEqual(len(logical_names), len(set(logical_names)))
+
+    def test_cpu_test_artifact_profile_is_explicit_and_hash_checked(self):
+        restored = restore_test_artifacts()
+        self.assertTrue(restored["passed"])
+        self.assertEqual(restored["profile"], "cpu_test_suite")
+        self.assertEqual(len(restored["restored_artifacts"]), 6)
 
     def test_exact_and_semantic_replay_contracts_are_distinct(self):
         validation = verify_replay_contracts(self.manifest)
