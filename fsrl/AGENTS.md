@@ -32,13 +32,19 @@ Navigation: [repository guide](../AGENTS.md) · [package architecture](README.md
 3. Preserve checkpoint state keys, input layout, numerical order, and frozen
    evaluator semantics unless the task explicitly authorizes a scientific
    change with a new contract.
-4. Extract a shared helper only when more than one maintained caller needs it.
+4. Keep registered or historical execution separate from prospective optimized
+   execution. An optimization within one execution schema must preserve its RNG
+   stream, input arrays, numerical outputs, gradients, and optimizer trajectory
+   exactly; otherwise version the schema and treat the result as a new
+   prospective execution. Never replace a frozen execution lock with a faster
+   profile.
+5. Extract a shared helper only when more than one maintained caller needs it.
    Do not recreate removed flat modules as compatibility wrappers without a
    concrete active consumer.
-5. Name code by scientific role, not development chronology. Historical
+6. Name code by scientific role, not development chronology. Historical
    version names may remain only where they identify a frozen protocol or
    artifact.
-6. New code must be Ruff-formatted. Do not add formatter exclusion lists for
+7. New code must be Ruff-formatted. Do not add formatter exclusion lists for
    maintained or historical runner files.
 
 ## Validation

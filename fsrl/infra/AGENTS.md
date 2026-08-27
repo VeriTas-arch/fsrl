@@ -16,6 +16,13 @@ Navigation: [package guide](../AGENTS.md) · [study guide](../../studies/AGENTS.
 - Formal meta-training uses one contiguous host-to-device transfer per trial
   and `torch.compile(..., fullgraph=True, mode="default")`. Compiler settings,
   device identity, and source hashes are part of the execution lock.
+- Prospective schema-v3 CUDA training may compile complete recurrent trial
+  sequences with `mode="reduce-overhead"` and mark one explicit CUDA Graph
+  boundary per outer step. This profile does not replace the formal execution
+  lock. Record the effective compile mode, iteration-boundary policy, and
+  runtime snapshot in provenance; mode changes require a fresh parity and
+  performance audit. Keep `max-autotune` modes explicit opt-ins because kernel
+  selection can change floating-point reduction order.
 - Tests run through `python -m fsrl.infra.test_runtime`, which owns an
   independent process group and cleans it on timeout or interruption.
 - Diagnose repeated failures and orphaned CPU use from the exact command,
