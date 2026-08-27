@@ -95,6 +95,39 @@ def rdm_spearman(first: np.ndarray, second: np.ndarray) -> float:
     return float(result.statistic)
 
 
+def _ranked_spearman(
+    first: np.ndarray,
+    first_centered_ranks: np.ndarray,
+    second: np.ndarray,
+    second_centered_ranks: np.ndarray,
+) -> float:
+    """Reuse precomputed ranks while preserving SciPy's exceptional semantics."""
+
+    if (
+        first.size == 0
+        or second.size == 0
+        or not np.all(np.isfinite(first))
+        or not np.all(np.isfinite(second))
+        or np.all(first == first[0])
+        or np.all(second == second[0])
+    ):
+        result = cast(Any, stats.spearmanr(first, second))
+        return float(result.statistic)
+    centered = np.stack((first_centered_ranks, second_centered_ranks))
+    covariance = np.dot(centered, centered.T)
+    covariance *= np.true_divide(1, centered.shape[1] - 1)
+    scale = np.sqrt(np.real(np.diag(covariance)))
+    covariance /= scale[:, None]
+    covariance /= scale[None, :]
+    np.clip(covariance.real, -1, 1, out=covariance.real)
+    return float(covariance[1, 0])
+
+
+def _centered_rdm_ranks(rdm: np.ndarray) -> np.ndarray:
+    ranks = stats.rankdata(rdm)
+    return ranks - np.mean(ranks)
+
+
 def analyze_item_geometry(
     protocol: RankingProtocol,
     representations: tuple[np.ndarray, ...],
@@ -105,11 +138,14 @@ def analyze_item_geometry(
     subjects = behavior["subjects"]
     if len(subjects) != len(representations):
         raise ValueError("behavior and neural representations have different cohorts")
-    true_rdm = ranking_rdm(rank_positions(protocol.true_order_high_to_low))
+    upper = np.triu_indices(protocol.n_items, k=1)
+    true_rdm = ranking_rdm(rank_positions(protocol.true_order_high_to_low))[upper]
+    true_ranks = _centered_rdm_ranks(true_rdm)
     subjective_rdms = tuple(
-        ranking_rdm(rank_positions(subject["subjective_order_high_to_low"]))
+        ranking_rdm(rank_positions(subject["subjective_order_high_to_low"]))[upper]
         for subject in subjects
     )
+    subjective_ranks = tuple(_centered_rdm_ranks(rdm) for rdm in subjective_rdms)
     primary_indices = [
         index
         for index, subject in enumerate(subjects)
@@ -118,13 +154,27 @@ def analyze_item_geometry(
     ]
     rows = []
     for subject_index in primary_indices:
-        neural_rdm = representation_rdm(representations[subject_index])
-        subjective_correlation = rdm_spearman(
-            neural_rdm, subjective_rdms[subject_index]
+        neural_rdm = representation_rdm(representations[subject_index])[upper]
+        neural_ranks = _centered_rdm_ranks(neural_rdm)
+        subjective_correlation = _ranked_spearman(
+            neural_rdm,
+            neural_ranks,
+            subjective_rdms[subject_index],
+            subjective_ranks[subject_index],
         )
-        true_correlation = rdm_spearman(neural_rdm, true_rdm)
+        true_correlation = _ranked_spearman(
+            neural_rdm,
+            neural_ranks,
+            true_rdm,
+            true_ranks,
+        )
         other_correlations = [
-            rdm_spearman(neural_rdm, subjective_rdms[other_index])
+            _ranked_spearman(
+                neural_rdm,
+                neural_ranks,
+                subjective_rdms[other_index],
+                subjective_ranks[other_index],
+            )
             for other_index in primary_indices
             if other_index != subject_index
         ]

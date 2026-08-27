@@ -101,3 +101,10 @@ class GenericRankingTaskTests(unittest.TestCase):
                         optimized_rng.integers(0, 2**31, size=16),
                         reference_rng.integers(0, 2**31, size=16),
                     )
+
+    def test_integer_similarity_threshold_matches_reference_mean(self):
+        for cue_size in range(2, 257):
+            matches = np.arange(cue_size + 1)
+            expected = matches / cue_size <= 0.66
+            observed = matches <= 0.66 * cue_size
+            np.testing.assert_array_equal(observed, expected)

@@ -29,6 +29,36 @@ class ExactRankingPosteriorTests(unittest.TestCase):
             self.model.map_order(state), self.protocol.true_order_high_to_low
         )
 
+    def test_cached_fit_preserves_reference_accumulation_bitwise(self):
+        state = self.model.fit(self.evidence)
+        energy = np.zeros(self.model.n_hypotheses, dtype=np.float64)
+        for observation in self.evidence:
+            predicted = (
+                self.model.positions[:, observation.lower_item]
+                - self.model.positions[:, observation.higher_item]
+            ) / float(self.model.n_items - 1)
+            residual = predicted - observation.magnitude
+            energy += observation.reliability * residual * residual
+        log_weights = -energy / self.model.temperature
+        log_weights -= np.max(log_weights)
+        weights = np.exp(log_weights)
+        probabilities = weights / np.sum(weights)
+        np.testing.assert_array_equal(state.energy, energy)
+        np.testing.assert_array_equal(state.probabilities, probabilities)
+
+    def test_hypothesis_space_is_shared_read_only_and_indexed_exactly(self):
+        second = ExactRankingPosterior(8, temperature=0.1)
+        self.assertIs(self.model.orders, second.orders)
+        self.assertIs(self.model.positions, second.positions)
+        self.assertFalse(self.model.orders.flags.writeable)
+        self.assertFalse(self.model.positions.flags.writeable)
+        indices = np.random.default_rng(93).integers(
+            0, self.model.n_hypotheses, size=100
+        )
+        for index in indices:
+            order = [int(item) for item in self.model.orders[index]]
+            self.assertEqual(self.model.order_index(order), index)
+
     def test_evidence_order_does_not_change_posterior(self):
         forward = self.model.fit(self.evidence)
         reverse = self.model.fit(tuple(reversed(self.evidence)))
@@ -69,3 +99,12 @@ class ExactRankingPosteriorTests(unittest.TestCase):
         probability = self.model.pair_probability(state, 1, 6)
         reverse = self.model.pair_probability(state, 6, 1)
         self.assertAlmostEqual(probability + reverse, 1.0)
+
+        reference = float(
+            np.sum(
+                state.probabilities[
+                    self.model.positions[:, 1] < self.model.positions[:, 6]
+                ]
+            )
+        )
+        self.assertEqual(probability, reference)

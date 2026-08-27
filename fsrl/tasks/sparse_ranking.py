@@ -94,6 +94,7 @@ class GenericRankingTaskGenerator:
             raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
         self.subject_encoding_mode = subject_encoding_mode
         self.excluded_signatures = frozenset(excluded_signatures)
+        self._all_pairs = tuple(combinations(range(self.n_items), 2))
 
     def sample(
         self, rng: np.random.Generator, *, n_edges: int | None = None
@@ -115,7 +116,6 @@ class GenericRankingTaskGenerator:
         )
 
     def _sample_graph(self, rng: np.random.Generator, n_edges: int) -> GraphSignature:
-        all_pairs = tuple(combinations(range(self.n_items), 2))
         for _ in range(1000):
             node_order = [int(node) for node in rng.permutation(self.n_items)]
             connected = [node_order[0]]
@@ -124,7 +124,7 @@ class GenericRankingTaskGenerator:
                 parent = int(rng.choice(connected))
                 edges.add(tuple(sorted((parent, node))))
                 connected.append(node)
-            remaining = [pair for pair in all_pairs if pair not in edges]
+            remaining = [pair for pair in self._all_pairs if pair not in edges]
             rng.shuffle(remaining)
             edges.update(remaining[: n_edges - len(edges)])
             signature = tuple(sorted(edges))
@@ -135,19 +135,18 @@ class GenericRankingTaskGenerator:
 
     def _sample_item_codes(self, rng: np.random.Generator) -> np.ndarray:
         for _ in range(100):
-            codes = np.empty((self.n_items, self.cue_size), dtype=np.float32)
+            codes = np.empty((self.n_items, self.cue_size), dtype=np.int8)
             accepted = 0
             for _ in range(10000):
-                candidate = (
-                    rng.integers(0, 2, self.cue_size, dtype=np.int8) * 2 - 1
-                ).astype(np.float32)
+                candidate = rng.integers(0, 2, self.cue_size, dtype=np.int8) * 2 - 1
                 if accepted == 0 or np.all(
-                    np.mean(codes[:accepted] == candidate, axis=1) <= 0.66
+                    np.count_nonzero(codes[:accepted] == candidate, axis=1)
+                    <= 0.66 * self.cue_size
                 ):
                     codes[accepted] = candidate
                     accepted += 1
                     if accepted == self.n_items:
-                        return codes
+                        return codes.astype(np.float32)
         raise RuntimeError("could not sample a sufficiently distinct cue set")
 
     def _support_schedule(
@@ -199,7 +198,7 @@ class GenericRankingTaskGenerator:
         self, rng: np.random.Generator, true_order: tuple[int, ...]
     ) -> tuple[QueryTrial, ...]:
         rank = {item: position for position, item in enumerate(true_order)}
-        pairs = list(combinations(range(self.n_items), 2))
+        pairs = list(self._all_pairs)
         rng.shuffle(pairs)
         trials = []
         for first, second in pairs:

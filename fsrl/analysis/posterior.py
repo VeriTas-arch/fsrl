@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import cache
 from itertools import permutations
 
 import numpy as np
@@ -23,6 +24,18 @@ class RankingPosteriorState:
     map_index: int
 
 
+@cache
+def _ranking_hypothesis_space(n_items: int) -> tuple[np.ndarray, np.ndarray]:
+    orders = np.asarray(list(permutations(range(n_items))), dtype=np.int16)
+    positions = np.empty_like(orders)
+    positions[np.arange(len(orders))[:, None], orders] = np.arange(
+        n_items, dtype=np.int16
+    )
+    orders.flags.writeable = False
+    positions.flags.writeable = False
+    return orders, positions
+
+
 class ExactRankingPosterior:
     """Enumerate all orders and infer a posterior from support evidence only."""
 
@@ -33,14 +46,9 @@ class ExactRankingPosterior:
             raise ValueError("temperature must be positive")
         self.n_items = int(n_items)
         self.temperature = float(temperature)
-        self.orders = np.asarray(
-            list(permutations(range(self.n_items))), dtype=np.int16
-        )
-        self.positions = np.empty_like(self.orders)
-        hypothesis_indices = np.arange(len(self.orders))[:, None]
-        self.positions[hypothesis_indices, self.orders] = np.arange(
-            self.n_items, dtype=np.int16
-        )
+        self.orders, self.positions = _ranking_hypothesis_space(self.n_items)
+        self._predicted_magnitudes: dict[tuple[int, int], np.ndarray] = {}
+        self._pair_masks: dict[tuple[int, int], np.ndarray] = {}
 
     @property
     def n_hypotheses(self) -> int:
@@ -55,10 +63,15 @@ class ExactRankingPosterior:
         energy = np.zeros(self.n_hypotheses, dtype=np.float64)
         for observation in evidence:
             self._validate_evidence(observation)
-            predicted = (
-                self.positions[:, observation.lower_item]
-                - self.positions[:, observation.higher_item]
-            ) / float(self.n_items - 1)
+            pair = (observation.higher_item, observation.lower_item)
+            predicted = self._predicted_magnitudes.get(pair)
+            if predicted is None:
+                predicted = (
+                    self.positions[:, observation.lower_item]
+                    - self.positions[:, observation.higher_item]
+                ) / float(self.n_items - 1)
+                predicted.flags.writeable = False
+                self._predicted_magnitudes[pair] = predicted
             residual = predicted - observation.magnitude
             energy += observation.reliability * residual * residual
 
@@ -83,6 +96,20 @@ class ExactRankingPosterior:
         self._validate_state(state)
         return tuple(int(item) for item in self.orders[state.map_index])
 
+    def order_index(self, order_high_to_low: tuple[int, ...] | list[int]) -> int:
+        """Return the lexicographic hypothesis index without building a lookup."""
+
+        order = tuple(int(item) for item in order_high_to_low)
+        if len(order) != self.n_items or set(order) != set(range(self.n_items)):
+            raise ValueError("order must contain every item exactly once")
+        remaining = list(range(self.n_items))
+        index = 0
+        for item in order:
+            offset = remaining.index(item)
+            index = index * len(remaining) + offset
+            remaining.pop(offset)
+        return index
+
     def sample_order(
         self, state: RankingPosteriorState, rng: np.random.Generator
     ) -> tuple[int, ...]:
@@ -97,7 +124,12 @@ class ExactRankingPosterior:
 
         self._validate_state(state)
         self._validate_pair(left_item, right_item)
-        left_higher = self.positions[:, left_item] < self.positions[:, right_item]
+        pair = (left_item, right_item)
+        left_higher = self._pair_masks.get(pair)
+        if left_higher is None:
+            left_higher = self.positions[:, left_item] < self.positions[:, right_item]
+            left_higher.flags.writeable = False
+            self._pair_masks[pair] = left_higher
         return float(np.sum(state.probabilities[left_higher]))
 
     def committed_pair_probability(

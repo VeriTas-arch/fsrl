@@ -43,10 +43,6 @@ def compare_neural_policy_to_exact_posterior(
         raise ValueError("behavior and neural logits have different cohorts")
 
     exact = ExactRankingPosterior(protocol.n_items, temperature=posterior_temperature)
-    order_to_index = {
-        tuple(int(item) for item in order): index
-        for index, order in enumerate(exact.orders)
-    }
     pairs = tuple(combinations(range(protocol.n_items), 2))
     rows = []
     for subject_index, (evidence_rows, logits) in enumerate(
@@ -82,7 +78,7 @@ def compare_neural_policy_to_exact_posterior(
             )
         neural_positions = hodge_rank_positions(preference)
         neural_order = tuple(int(item) for item in np.argsort(neural_positions))
-        neural_index = order_to_index[neural_order]
+        neural_index = exact.order_index(neural_order)
         closest_map_tau = max(
             kendall_tau_positions(
                 neural_positions,
@@ -123,7 +119,7 @@ def compare_neural_policy_to_exact_posterior(
                     int(item) for item in exact.orders[int(map_indices[0])]
                 ],
                 "map_order_count": len(map_indices),
-                "neural_is_map": bool(neural_index in set(map_indices.tolist())),
+                "neural_is_map": bool(np.any(map_indices == neural_index)),
                 "neural_posterior_probability": float(
                     posterior.probabilities[neural_index]
                 ),

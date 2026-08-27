@@ -242,6 +242,37 @@ def build_meta_input_sequence(
     return torch.from_numpy(inputs).to(device or default_device())
 
 
+def _build_meta_input_sequence_from_codes(
+    model_config: TrainConfig,
+    item_codes: np.ndarray,
+    left_items: np.ndarray,
+    right_items: np.ndarray,
+    signed_magnitudes: np.ndarray,
+    *,
+    num_steps: int,
+    time_value: float,
+    support_trial: bool,
+    device: str | torch.device | None = None,
+) -> torch.Tensor:
+    batch_size = len(left_items)
+    if item_codes.ndim != 3 or item_codes.shape[0] != batch_size:
+        raise ValueError("item codes do not align with the meta-batch")
+    inputs = np.zeros((num_steps, batch_size, model_config.inputsize), dtype=np.float32)
+    inputs[:, :, model_config.nbstimbits] = 1.0
+    inputs[:, :, model_config.nbstimbits + 1] = time_value
+    subjects = np.arange(batch_size)
+    inputs[0, :, : model_config.cs] = item_codes[subjects, left_items]
+    inputs[0, :, model_config.cs : 2 * model_config.cs] = item_codes[
+        subjects, right_items
+    ]
+    if support_trial:
+        layout = RelationalInputLayout(model_config.cs)
+        inputs[0, :, layout.evidence_index] = signed_magnitudes
+    if num_steps > NUMRESPONSESTEP:
+        inputs[NUMRESPONSESTEP, :, model_config.nbstimbits - 1] = 1.0
+    return torch.from_numpy(inputs).to(device or default_device())
+
+
 def run_meta_batch(
     training_config: MetaTrainConfig,
     model_config: TrainConfig,
@@ -367,6 +398,7 @@ def run_optimized_meta_batch(
         task_generator.sample(rng, n_edges=n_edges)
         for _ in range(training_config.batch_size)
     )
+    episode_item_codes = np.stack([episode.item_codes for episode in episodes])
     hidden = net.initialZeroState(model_config.bs)
     eligibility = net.initialZeroET(model_config.bs)
     fast_weights = net.initialZeroPlasticWeights(model_config.bs)
@@ -393,9 +425,9 @@ def run_optimized_meta_batch(
             trial_index / max(1, n_support - 1) * training_config.support_query_time
         )
         support_input_sequences.append(
-            build_meta_input_sequence(
+            _build_meta_input_sequence_from_codes(
                 model_config,
-                episodes,
+                episode_item_codes,
                 left,
                 right,
                 signed,
@@ -416,7 +448,6 @@ def run_optimized_meta_batch(
         )
 
     n_queries = len(episodes[0].query_trials)
-    query_episodes = episodes * n_queries
     query_trials = [
         episode.query_trials[query_index]
         for query_index in range(n_queries)
@@ -430,9 +461,10 @@ def run_optimized_meta_batch(
         device=device,
     )
     query_batch_size = n_queries * model_config.bs
-    input_sequence = build_meta_input_sequence(
+    query_item_codes = np.tile(episode_item_codes, (n_queries, 1, 1))
+    input_sequence = _build_meta_input_sequence_from_codes(
         model_config,
-        query_episodes,
+        query_item_codes,
         left,
         right,
         np.zeros(query_batch_size, dtype=np.float32),

@@ -10,6 +10,7 @@ import numpy as np
 import torch
 
 from fsrl.infra.runtime import DEFAULT_COMPILED_PROFILE
+from fsrl.training import backbone
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
     OPTIMIZED_COMPILED_TRAINING_EXECUTION,
@@ -81,6 +82,16 @@ class MetaTrainingTests(unittest.TestCase):
                     time_value=0.25,
                     support_trial=support_trial,
                 )
+                optimized_sequence = backbone._build_meta_input_sequence_from_codes(
+                    self.model_config,
+                    np.stack([episode.item_codes for episode in episodes]),
+                    left,
+                    right,
+                    signed,
+                    num_steps=num_steps,
+                    time_value=0.25,
+                    support_trial=support_trial,
+                )
                 expected = torch.stack(
                     [
                         build_meta_inputs(
@@ -97,6 +108,7 @@ class MetaTrainingTests(unittest.TestCase):
                     ]
                 )
                 self.assertTrue(torch.equal(sequence, expected))
+                self.assertTrue(torch.equal(optimized_sequence, sequence))
 
     def test_one_meta_batch_backpropagates_through_passive_support(self):
         stats = run_meta_batch(
