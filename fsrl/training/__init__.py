@@ -3,6 +3,7 @@
 from .backbone import (
     COMPILED_TRAINING_EXECUTION,
     OPTIMIZED_COMPILED_TRAINING_EXECUTION,
+    OPTIMIZED_TRAINING_PROFILE,
     MetaBatchStats,
     MetaTrainConfig,
     RecurrentSequence,
@@ -21,6 +22,7 @@ from .checkpoints import CheckpointInfo, load_retro_checkpoint
 __all__ = [
     "COMPILED_TRAINING_EXECUTION",
     "OPTIMIZED_COMPILED_TRAINING_EXECUTION",
+    "OPTIMIZED_TRAINING_PROFILE",
     "CheckpointInfo",
     "MetaBatchStats",
     "MetaTrainConfig",

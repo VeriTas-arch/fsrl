@@ -152,7 +152,7 @@ status, and a claim boundary.
 
 ## Prospective optimized training
 
-New development training can opt into the schema-v2 GPU execution path:
+New development training can opt into the schema-v3 GPU execution path:
 
 ~~~bash
 direnv exec . python -m fsrl.training \
@@ -162,13 +162,27 @@ direnv exec . python -m fsrl.training \
   --optimized-execution
 ~~~
 
-This mode implies `torch.compile` with `fullgraph=True` and `mode="default"`
-and compiles complete recurrent trial sequences. Runtime schema v2 records the
-device, CUDA capability, matrix precision, determinism flags, and both PyTorch
-and BLAS thread limits; both limits default to one. It writes that record into
-new optimized checkpoints. The older `--compile-model` path remains the
-byte-replay-compatible single-cell execution used by registered historical
-backbones.
+On CUDA, this mode compiles complete recurrent trial sequences with
+`fullgraph=True` and defaults to `mode="reduce-overhead"`. The training loop
+marks one explicit CUDA Graph iteration boundary per outer step. Execution
+schema v3 records that boundary and the effective compile mode; the runtime
+record also includes the device, CUDA capability, matrix precision,
+determinism flags, and both PyTorch and BLAS thread limits. The older
+`--compile-model` path remains the `mode="default"`, byte-replay-compatible
+single-cell execution used by registered historical backbones.
+
+Task sampling preserves the historical RNG stream while vectorizing cue-code
+similarity checks. Each trial sequence is assembled in one preallocated NumPy
+array before the existing batched host-to-device transfer.
+
+Use `--compile-mode default` to retain the non-CUDA-Graph prospective profile.
+The CUDA Graph profile trades extra capture warmup and reserved device memory
+for lower steady-state launch overhead. Use the default mode when memory or
+short-run startup latency matters more than long-run throughput.
+The `max-autotune` modes are explicit opt-ins because selecting different
+matrix kernels can change floating-point reduction order and therefore the
+optimizer trajectory; the selected mode is preserved in checkpoint
+provenance.
 
 Prospective evaluations can separately opt into one compiled sequence per
 support trial and one device transfer for the complete query batch:

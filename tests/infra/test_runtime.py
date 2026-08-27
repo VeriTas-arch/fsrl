@@ -2,11 +2,57 @@ import json
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
 
-from fsrl.infra.runtime import ExecutionProfile, configure_runtime
+from fsrl.infra.runtime import (
+    ExecutionProfile,
+    begin_compiled_iteration,
+    configure_runtime,
+    uses_cuda_graphs,
+)
 
 
 class RuntimeProfileTests(unittest.TestCase):
+    def test_only_inductor_cuda_graph_profiles_mark_iteration_boundaries(self):
+        cuda_graph_profile = ExecutionProfile(
+            device="cuda",
+            compile_mode="reduce-overhead",
+            require_cuda=False,
+        )
+        self.assertTrue(uses_cuda_graphs(cuda_graph_profile))
+        with patch("torch.compiler.cudagraph_mark_step_begin") as marker:
+            begin_compiled_iteration(cuda_graph_profile)
+            marker.assert_called_once_with()
+
+        for profile in (
+            ExecutionProfile(
+                device="cuda",
+                compile_mode="default",
+                require_cuda=False,
+            ),
+            ExecutionProfile(
+                device="cuda",
+                compile_mode="max-autotune-no-cudagraphs",
+                require_cuda=False,
+            ),
+            ExecutionProfile(
+                device="cpu",
+                compile_mode="reduce-overhead",
+                require_cuda=False,
+            ),
+            ExecutionProfile(
+                device="cuda",
+                compile=False,
+                compile_mode="reduce-overhead",
+                require_cuda=False,
+            ),
+        ):
+            with self.subTest(profile=profile):
+                self.assertFalse(uses_cuda_graphs(profile))
+                with patch("torch.compiler.cudagraph_mark_step_begin") as marker:
+                    begin_compiled_iteration(profile)
+                    marker.assert_not_called()
+
     def test_invalid_thread_limits_fail_before_configuration(self):
         with self.assertRaisesRegex(ValueError, "cpu_threads"):
             configure_runtime(

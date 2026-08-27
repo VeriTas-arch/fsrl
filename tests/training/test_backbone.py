@@ -13,6 +13,7 @@ from fsrl.infra.runtime import DEFAULT_COMPILED_PROFILE
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
     OPTIMIZED_COMPILED_TRAINING_EXECUTION,
+    OPTIMIZED_TRAINING_PROFILE,
     MetaTrainConfig,
     RecurrentSequence,
     build_meta_input_sequence,
@@ -26,6 +27,7 @@ from fsrl.training.backbone import (
     run_optimized_meta_batch,
     save_meta_checkpoint,
 )
+from fsrl.training.backbone import main as training_main
 
 
 class MetaTrainingTests(unittest.TestCase):
@@ -64,28 +66,37 @@ class MetaTrainingTests(unittest.TestCase):
         signed = np.asarray(
             [trial.signed_magnitude for trial in trials], dtype=np.float32
         )
-        sequence = build_meta_input_sequence(
-            self.model_config,
-            episodes,
-            left,
-            right,
-            signed,
-            num_steps=self.model_config.triallen,
-            time_value=0.25,
-            support_trial=True,
-        )
-        for numstep, observed in enumerate(sequence.unbind()):
-            expected = build_meta_inputs(
-                self.model_config,
-                episodes,
-                left,
-                right,
-                signed,
-                numstep=numstep,
-                time_value=0.25,
-                support_trial=True,
-            )
-            self.assertTrue(torch.equal(observed, expected))
+        for support_trial, num_steps in (
+            (True, self.model_config.triallen),
+            (False, 2),
+        ):
+            with self.subTest(support_trial=support_trial):
+                sequence = build_meta_input_sequence(
+                    self.model_config,
+                    episodes,
+                    left,
+                    right,
+                    signed,
+                    num_steps=num_steps,
+                    time_value=0.25,
+                    support_trial=support_trial,
+                )
+                expected = torch.stack(
+                    [
+                        build_meta_inputs(
+                            self.model_config,
+                            episodes,
+                            left,
+                            right,
+                            signed,
+                            numstep=numstep,
+                            time_value=0.25,
+                            support_trial=support_trial,
+                        )
+                        for numstep in range(num_steps)
+                    ]
+                )
+                self.assertTrue(torch.equal(sequence, expected))
 
     def test_one_meta_batch_backpropagates_through_passive_support(self):
         stats = run_meta_batch(
@@ -218,7 +229,7 @@ class MetaTrainingTests(unittest.TestCase):
             mode="default",
         )
 
-    def test_sequence_compiler_uses_fullgraph_default_mode(self):
+    def test_sequence_compiler_uses_fullgraph_low_overhead_mode(self):
         compiled_runner = object()
         with patch(
             "fsrl.training.backbone.torch.compile", return_value=compiled_runner
@@ -231,18 +242,68 @@ class MetaTrainingTests(unittest.TestCase):
             sequence_runner,
             backend="inductor",
             fullgraph=True,
-            mode="default",
+            mode="reduce-overhead",
         )
 
     def test_optimized_execution_record_is_versioned(self):
         self.assertEqual(
-            optimized_compiled_execution_record(DEFAULT_COMPILED_PROFILE),
+            optimized_compiled_execution_record(OPTIMIZED_TRAINING_PROFILE),
             OPTIMIZED_COMPILED_TRAINING_EXECUTION,
+        )
+        self.assertEqual(
+            OPTIMIZED_COMPILED_TRAINING_EXECUTION["execution_schema_version"], 3
+        )
+        self.assertEqual(
+            OPTIMIZED_COMPILED_TRAINING_EXECUTION["cuda_graph_iteration_boundary"],
+            "explicit_outer_step",
+        )
+        self.assertEqual(
+            OPTIMIZED_COMPILED_TRAINING_EXECUTION["item_code_sampling"],
+            "sequential_candidates_vectorized_similarity_check",
+        )
+        self.assertEqual(
+            OPTIMIZED_COMPILED_TRAINING_EXECUTION["host_trial_sequence_assembly"],
+            "single_preallocated_numpy_array",
         )
         self.assertEqual(
             compiled_execution_record(DEFAULT_COMPILED_PROFILE),
             COMPILED_TRAINING_EXECUTION,
         )
+
+    def test_cli_keeps_legacy_mode_and_selects_prospective_cuda_mode(self):
+        cases = (
+            (["--compile-model"], "default", False),
+            (["--optimized-execution"], "reduce-overhead", True),
+            (
+                [
+                    "--optimized-execution",
+                    "--compile-mode",
+                    "max-autotune-no-cudagraphs",
+                ],
+                "max-autotune-no-cudagraphs",
+                True,
+            ),
+        )
+        for compile_args, expected_mode, optimized_execution in cases:
+            with (
+                self.subTest(compile_args=compile_args),
+                patch("fsrl.training.backbone.train_meta_model") as trainer,
+            ):
+                training_main(
+                    [
+                        "--output-dir",
+                        "/tmp/fsrl-training-cli-test",
+                        "--device",
+                        "cuda",
+                        *compile_args,
+                    ]
+                )
+                profile = trainer.call_args.kwargs["execution_profile"]
+                self.assertEqual(profile.compile_mode, expected_mode)
+                self.assertEqual(
+                    trainer.call_args.kwargs["optimized_execution"],
+                    optimized_execution,
+                )
 
     def test_saved_config_is_valid_json_and_registers_held_out_graph(self):
         with tempfile.TemporaryDirectory() as temp_dir:

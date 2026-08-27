@@ -17,6 +17,13 @@ _BLAS_ENVIRONMENT_VARIABLES = (
     "OPENBLAS_NUM_THREADS",
     "VECLIB_MAXIMUM_THREADS",
 )
+SUPPORTED_TORCH_COMPILE_MODES = (
+    "default",
+    "reduce-overhead",
+    "max-autotune-no-cudagraphs",
+    "max-autotune",
+)
+_CUDA_GRAPH_COMPILE_MODES = frozenset({"reduce-overhead", "max-autotune"})
 
 
 @dataclass(frozen=True)
@@ -140,6 +147,26 @@ def runtime_snapshot(profile: ExecutionProfile) -> dict[str, Any]:
         "cudnn_deterministic": torch.backends.cudnn.deterministic,
         "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
     }
+
+
+def uses_cuda_graphs(profile: ExecutionProfile) -> bool:
+    """Return whether the profile enables Inductor CUDA Graphs."""
+
+    return (
+        profile.compile
+        and profile.device == "cuda"
+        and profile.compile_backend == "inductor"
+        and profile.compile_mode in _CUDA_GRAPH_COMPILE_MODES
+    )
+
+
+def begin_compiled_iteration(profile: ExecutionProfile) -> None:
+    """Mark one explicit iteration boundary for CUDA Graph execution."""
+
+    if uses_cuda_graphs(profile):
+        import torch
+
+        torch.compiler.cudagraph_mark_step_begin()
 
 
 def compile_module[Compiled](module: Compiled, profile: ExecutionProfile) -> Compiled:

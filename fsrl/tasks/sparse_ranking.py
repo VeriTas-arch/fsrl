@@ -135,15 +135,19 @@ class GenericRankingTaskGenerator:
 
     def _sample_item_codes(self, rng: np.random.Generator) -> np.ndarray:
         for _ in range(100):
-            codes: list[np.ndarray] = []
+            codes = np.empty((self.n_items, self.cue_size), dtype=np.float32)
+            accepted = 0
             for _ in range(10000):
                 candidate = (
                     rng.integers(0, 2, self.cue_size, dtype=np.int8) * 2 - 1
                 ).astype(np.float32)
-                if all(np.mean(previous == candidate) <= 0.66 for previous in codes):
-                    codes.append(candidate)
-                    if len(codes) == self.n_items:
-                        return np.stack(codes)
+                if accepted == 0 or np.all(
+                    np.mean(codes[:accepted] == candidate, axis=1) <= 0.66
+                ):
+                    codes[accepted] = candidate
+                    accepted += 1
+                    if accepted == self.n_items:
+                        return codes
         raise RuntimeError("could not sample a sufficiently distinct cue set")
 
     def _support_schedule(

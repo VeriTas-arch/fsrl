@@ -71,3 +71,33 @@ class GenericRankingTaskTests(unittest.TestCase):
         self.assertEqual(first.graph_rank_pairs, second.graph_rank_pairs)
         self.assertEqual(first.support_trials, second.support_trials)
         self.assertEqual(first.query_trials, second.query_trials)
+
+    def test_item_code_sampling_preserves_reference_rng_stream(self):
+        def reference_item_codes(generator, rng):
+            for _ in range(100):
+                codes = []
+                for _ in range(10000):
+                    candidate = (
+                        rng.integers(0, 2, generator.cue_size, dtype=np.int8) * 2 - 1
+                    ).astype(np.float32)
+                    if all(
+                        np.mean(previous == candidate) <= 0.66 for previous in codes
+                    ):
+                        codes.append(candidate)
+                        if len(codes) == generator.n_items:
+                            return np.stack(codes)
+            raise RuntimeError("reference item-code sampler exhausted")
+
+        for cue_size in (8, 15):
+            generator = GenericRankingTaskGenerator(cue_size=cue_size)
+            for seed in range(100):
+                with self.subTest(cue_size=cue_size, seed=seed):
+                    reference_rng = np.random.default_rng(seed)
+                    optimized_rng = np.random.default_rng(seed)
+                    expected = reference_item_codes(generator, reference_rng)
+                    observed = generator._sample_item_codes(optimized_rng)
+                    np.testing.assert_array_equal(observed, expected)
+                    np.testing.assert_array_equal(
+                        optimized_rng.integers(0, 2**31, size=16),
+                        reference_rng.integers(0, 2**31, size=16),
+                    )

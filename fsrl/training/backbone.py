@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
 import numpy as np
@@ -17,10 +17,13 @@ from fsrl.core.sequence import RecurrentSequence
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.runtime import (
     DEFAULT_COMPILED_PROFILE,
+    SUPPORTED_TORCH_COMPILE_MODES,
     ExecutionProfile,
+    begin_compiled_iteration,
     compile_module,
     configure_runtime,
     default_device,
+    uses_cuda_graphs,
 )
 from fsrl.tasks.subject_encoding import SubjectEncodingConfig
 
@@ -72,17 +75,25 @@ COMPILED_TRAINING_EXECUTION = {
     "trial_input_transfer": "one_contiguous_cpu_to_gpu_transfer_per_trial",
 }
 
+OPTIMIZED_TRAINING_PROFILE = replace(
+    DEFAULT_COMPILED_PROFILE,
+    compile_mode="reduce-overhead",
+)
+
 OPTIMIZED_COMPILED_TRAINING_EXECUTION = {
-    "execution_schema_version": 2,
-    "runtime_profile": DEFAULT_COMPILED_PROFILE.to_dict(),
+    "execution_schema_version": 3,
+    "runtime_profile": OPTIMIZED_TRAINING_PROFILE.to_dict(),
     "torch_compile": {
         "enabled": True,
         "backend": "inductor",
         "fullgraph": True,
-        "mode": "default",
+        "mode": "reduce-overhead",
     },
+    "cuda_graph_iteration_boundary": "explicit_outer_step",
     "compile_scope": "complete_recurrent_trial_sequence",
     "query_batching": "all_queries_vectorized_with_frozen_fast_weights",
+    "item_code_sampling": "sequential_candidates_vectorized_similarity_check",
+    "host_trial_sequence_assembly": "single_preallocated_numpy_array",
     "input_transfer": (
         "one_support_batch_and_one_query_batch_cpu_to_cuda_transfer_per_meta_batch"
     ),
@@ -116,7 +127,7 @@ def compiled_execution_record(profile: ExecutionProfile) -> dict:
 
 def optimized_compiled_execution_record(profile: ExecutionProfile) -> dict:
     return {
-        "execution_schema_version": 2,
+        "execution_schema_version": 3,
         "runtime_profile": profile.to_dict(),
         "torch_compile": {
             "enabled": True,
@@ -124,8 +135,13 @@ def optimized_compiled_execution_record(profile: ExecutionProfile) -> dict:
             "fullgraph": profile.compile_fullgraph,
             "mode": profile.compile_mode,
         },
+        "cuda_graph_iteration_boundary": (
+            "explicit_outer_step" if uses_cuda_graphs(profile) else "not_applicable"
+        ),
         "compile_scope": "complete_recurrent_trial_sequence",
         "query_batching": "all_queries_vectorized_with_frozen_fast_weights",
+        "item_code_sampling": "sequential_candidates_vectorized_similarity_check",
+        "host_trial_sequence_assembly": "single_preallocated_numpy_array",
         "input_transfer": (
             "one_support_batch_and_one_query_batch_cpu_to_"
             f"{profile.device}_transfer_per_meta_batch"
@@ -208,21 +224,21 @@ def build_meta_input_sequence(
     support_trial: bool,
     device: str | torch.device | None = None,
 ) -> torch.Tensor:
-    inputs = np.stack(
-        [
-            _build_meta_input_array(
-                model_config,
-                episodes,
-                left_items,
-                right_items,
-                signed_magnitudes,
-                numstep=numstep,
-                time_value=time_value,
-                support_trial=support_trial,
-            )
-            for numstep in range(num_steps)
-        ]
+    inputs = np.zeros(
+        (num_steps, len(episodes), model_config.inputsize), dtype=np.float32
     )
+    inputs[:, :, model_config.nbstimbits] = 1.0
+    inputs[:, :, model_config.nbstimbits + 1] = time_value
+    for subject, episode in enumerate(episodes):
+        inputs[0, subject, : model_config.cs] = episode.item_codes[left_items[subject]]
+        inputs[0, subject, model_config.cs : 2 * model_config.cs] = episode.item_codes[
+            right_items[subject]
+        ]
+    if support_trial:
+        layout = RelationalInputLayout(model_config.cs)
+        inputs[0, :, layout.evidence_index] = signed_magnitudes
+    if num_steps > NUMRESPONSESTEP:
+        inputs[NUMRESPONSESTEP, :, model_config.nbstimbits - 1] = 1.0
     return torch.from_numpy(inputs).to(device or default_device())
 
 
@@ -342,7 +358,7 @@ def run_optimized_meta_batch(
     task_generator: GenericRankingTaskGenerator,
     rng: np.random.Generator,
 ) -> MetaBatchStats:
-    """Run the prospective vectorized batch execution recorded by schema v2."""
+    """Run the prospective vectorized batch execution recorded by schema v3."""
 
     n_edges = int(
         rng.integers(training_config.min_edges, training_config.max_edges + 1)
@@ -497,7 +513,7 @@ def compile_meta_model(net: RetroModulRNN):
 
 def compile_meta_sequence(
     net: RetroModulRNN,
-    profile: ExecutionProfile = DEFAULT_COMPILED_PROFILE,
+    profile: ExecutionProfile = OPTIMIZED_TRAINING_PROFILE,
 ):
     """Compile the prospective complete-trial execution."""
 
@@ -568,11 +584,20 @@ def train_meta_model(
     execution_profile: ExecutionProfile | None = None,
     excluded_signatures: frozenset[GraphSignature] | None = None,
 ) -> None:
-    profile = execution_profile or ExecutionProfile(
-        device=default_device(),
-        compile=compile_model or optimized_execution,
-        require_cuda=False,
-    )
+    if execution_profile is None:
+        execution_device = default_device()
+        profile = ExecutionProfile(
+            device=execution_device,
+            compile=compile_model or optimized_execution,
+            compile_mode=(
+                OPTIMIZED_TRAINING_PROFILE.compile_mode
+                if optimized_execution and execution_device == "cuda"
+                else DEFAULT_COMPILED_PROFILE.compile_mode
+            ),
+            require_cuda=False,
+        )
+    else:
+        profile = execution_profile
     runtime = configure_runtime(profile)
     np.random.seed(training_config.seed)
     torch.manual_seed(training_config.seed)
@@ -598,6 +623,7 @@ def train_meta_model(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for step in range(training_config.outer_steps):
+        begin_compiled_iteration(profile)
         optimizer.zero_grad()
         if sequence_runner is None:
             stats = run_meta_batch(
@@ -669,6 +695,14 @@ def parse_args(args=None):
             "--compile-model"
         ),
     )
+    parser.add_argument(
+        "--compile-mode",
+        choices=SUPPORTED_TORCH_COMPILE_MODES,
+        help=(
+            "override the torch.compile mode; optimized CUDA execution defaults "
+            "to reduce-overhead"
+        ),
+    )
     parser.add_argument("--device", choices=["cpu", "cuda"], default=default_device())
     parser.add_argument("--cpu-threads", type=int, default=1)
     parser.add_argument("--blas-threads", type=int, default=1)
@@ -693,11 +727,17 @@ def main(args=None):
         subject_encoding_mode=parsed.subject_encoding,
     )
     compile_model = parsed.compile_model or parsed.optimized_execution
+    compile_mode = parsed.compile_mode or (
+        OPTIMIZED_TRAINING_PROFILE.compile_mode
+        if parsed.optimized_execution and parsed.device == "cuda"
+        else DEFAULT_COMPILED_PROFILE.compile_mode
+    )
     profile = ExecutionProfile(
         device=parsed.device,
         cpu_threads=parsed.cpu_threads,
         blas_threads=parsed.blas_threads,
         compile=compile_model,
+        compile_mode=compile_mode,
         require_cuda=parsed.device == "cuda",
     )
     train_meta_model(
