@@ -624,6 +624,8 @@ def _validate_registry_headers_and_synthesis(
         errors.append("registry schema_version must be 1")
     if synthesis.get("schema_version") != 2:
         errors.append("synthesis schema_version must be 2")
+    if synthesis.get("review_state") not in {"indexed", "reviewed"}:
+        errors.append("synthesis review_state must be indexed or reviewed")
     if source_provenance.get("schema_version") != 1:
         errors.append("source provenance schema_version must be 1")
     catalog_value = registry.get("record_catalog")
@@ -647,9 +649,21 @@ def _validate_registry_headers_and_synthesis(
         "snapshot_reference": SYNTHESIS_ROOT / synthesis.get("snapshot_reference", ""),
         "figure_root": SYNTHESIS_ROOT / synthesis.get("figure_root", ""),
     }
+    reader_entrypoint = synthesis.get("reader_entrypoint")
+    if not isinstance(reader_entrypoint, str):
+        errors.append("synthesis reader_entrypoint must be a safe relative path")
+    else:
+        try:
+            synthesis_paths["reader_entrypoint"] = SYNTHESIS_ROOT / _safe_relative(
+                reader_entrypoint
+            )
+        except ValueError:
+            errors.append("synthesis reader_entrypoint must be a safe relative path")
     for name, path in synthesis_paths.items():
         if not path.exists():
             errors.append(f"synthesis {name} path does not exist: {path}")
+        elif name == "reader_entrypoint" and not path.is_file():
+            errors.append("synthesis reader_entrypoint must be a file")
     workflow = (
         _load_toml(synthesis_paths["workflow"])
         if synthesis_paths["workflow"].is_file()
@@ -1085,7 +1099,16 @@ def _link(target: Path, output: Path, label: str) -> str:
     return f"[{label}]({value})"
 
 
-def _notice(source: str) -> list[str]:
+def _notice(source: str, review_state: str = "indexed") -> list[str]:
+    if review_state == "reviewed":
+        return [
+            "> [!NOTE]",
+            f"> This navigation page is generated from `{source}`. The current",
+            '> `review_state = "reviewed"` means its reader-first interpretation has',
+            "> been curated against the workflow and registry. It does not promote or",
+            "> rewrite study-level evidence.",
+            "",
+        ]
     return [
         "> [!NOTE]",
         f"> This navigation page is generated from `{source}`. The current",
@@ -1219,7 +1242,10 @@ def _synthesis_readme(
     output = Path("synthesis/README.md")
     workflow_path = ROOT / synthesis["workflow"]
     workflow = _load_toml(workflow_path)
-    lines = [f"# {synthesis['title']}", ""] + _notice("synthesis/manifest.toml")
+    reader_entrypoint = Path("synthesis") / synthesis["reader_entrypoint"]
+    lines = [f"# {synthesis['title']}", ""] + _notice(
+        "synthesis/manifest.toml", synthesis["review_state"]
+    )
     lines.extend(
         [
             synthesis["scope"],
@@ -1230,15 +1256,17 @@ def _synthesis_readme(
             "",
             "## Start here",
             "",
+            f"- {_link(reader_entrypoint, output, 'Current interpretation (reader first)')}",
             f"- {_link(Path('workflows/relational_model/README.md'), output, 'Current model mainline')}",
             f"- {_link(Path('studies/README.md'), output, 'Complete study registry')}",
             f"- {_link(Path('synthesis/snapshots/README.md'), output, 'Historical reporting snapshots')}",
             f"- {_link(Path('synthesis/history.toml'), output, 'Release and migration history')}",
             f"- {_link(Path('synthesis/figures/README.md'), output, 'Figure workflow')}",
             "",
-            "The workflow is the current claim graph, historical snapshots are immutable",
-            "reporting objects, and this page is their editable human synthesis. None",
-            "replaces the study-owned evidence records.",
+            "Use the current interpretation for the shortest coherent account, then the",
+            "workflow for its machine-readable claim graph and the study registry for",
+            "atomic evidence. Historical snapshots are immutable reporting objects. None",
+            "of these reporting or navigation layers replaces study-owned records.",
             "",
             "## Provenance layers",
             "",
@@ -1252,6 +1280,13 @@ def _synthesis_readme(
             "worktree rather than mixing old files into the current import tree.",
             "",
             "## Reading routes",
+            "",
+            "### Reader-first current interpretation",
+            "",
+            "The five-minute model, frozen training-to-evaluation timeline, and matched",
+            "positive/negative claim cards are maintained in",
+            f"{_link(reader_entrypoint, output, 'the current interpretation')}.",
+            "Use it to understand the result before drilling into the claim graph below.",
             "",
             "### Current reporting mainline",
             "",
@@ -1271,17 +1306,30 @@ def _synthesis_readme(
                 f"`{study['status']}` — {study['finding']}"
             )
         lines.append("")
-    lines.extend(
-        [
-            "## What this first refactor does not claim",
-            "",
-            "The order above is a checked navigation layer, not yet the final manuscript",
-            'argument. `review_state = "indexed"` deliberately leaves room for a second',
-            "pass that compresses methods, chooses paper-level estimands, and promotes only",
-            "the figures needed for the final claim structure.",
-            "",
-        ]
-    )
+    if synthesis["review_state"] == "reviewed":
+        lines.extend(
+            [
+                "## Reviewed interpretation boundary",
+                "",
+                "The reader-first order has been curated against the current workflow and",
+                'registered evidence. `review_state = "reviewed"` does not rewrite frozen',
+                "records, turn unresolved or negative outcomes into support, or extend the",
+                "model-level result to human neural implementation.",
+                "",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "## What this first refactor does not claim",
+                "",
+                "The order above is a checked navigation layer, not yet the final manuscript",
+                'argument. `review_state = "indexed"` deliberately leaves room for a second',
+                "pass that compresses methods, chooses paper-level estimands, and promotes only",
+                "the figures needed for the final claim structure.",
+                "",
+            ]
+        )
     return "\n".join(lines)
 
 

@@ -1,0 +1,106 @@
+{
+  "document_type": "fsrl.refactor_equivalence_contract",
+  "schema_version": 1,
+  "audit_id": "relational-model-refactor-equivalence-v1",
+  "baseline_commit": "daff7e4e731cde955c3059101b158003ba32c04c",
+  "candidate_commit": "079c74e91b0d7e96d29c4a1501e7997d3c0d0a97",
+  "audited_paths": [
+    "fsrl/analysis",
+    "fsrl/core",
+    "fsrl/evaluation",
+    "fsrl/experiments",
+    "fsrl/tasks",
+    "fsrl/training",
+    "fsrl/workflows",
+    "fsrl/paths.py",
+    "fsrl/infra/file_contracts.py",
+    "fsrl/infra/formal_runtime.py",
+    "fsrl/infra/record_catalog.py",
+    "fsrl/infra/runtime.py",
+    "fsrl/infra/semantic_contract.py",
+    "studies/registry.toml",
+    "studies/migrations",
+    ":(glob)studies/*/study.toml",
+    ":(glob)studies/*/records/**",
+    "synthesis/source-provenance.toml",
+    "synthesis/snapshots",
+    "workflows/relational_model/workflow.toml",
+    "data/external",
+    "reproductions",
+    "tests/core/test_architecture.py",
+    "tests/core/test_model_boundary.py",
+    "tests/training/test_backbone.py",
+    "tests/training/test_checkpoints.py",
+    "tests/training/test_legacy_checkpoints.py",
+    "tests/evaluation/test_frozen_fast_weight.py",
+    "tests/analysis/test_geometry.py",
+    "tests/analysis/test_posterior.py"
+  ],
+  "baseline_reference_modules": [
+    "tests.core.test_architecture",
+    "tests.training.test_backbone",
+    "tests.evaluation.test_frozen_fast_weight",
+    "tests.analysis.test_geometry",
+    "tests.analysis.test_posterior"
+  ],
+  "exact_checks": [
+    {
+      "id": "model-and-checkpoint-adapters",
+      "selectors": [
+        "tests.core.test_model_boundary.ModelBoundaryTests.test_typed_and_legacy_configs_initialize_identical_models",
+        "tests.core.test_model_boundary.ModelBoundaryTests.test_typed_state_is_exactly_equivalent_to_legacy_zero_methods",
+        "tests.training.test_checkpoints.CheckpointBoundaryTests.test_loader_reports_format_without_changing_model_state",
+        "tests.training.test_legacy_checkpoints.LegacyCheckpointBoundaryTests.test_one_way_conversion_is_byte_identical_and_refuses_overwrite"
+      ]
+    },
+    {
+      "id": "training-input-and-sequence",
+      "selectors": [
+        "tests.training.test_backbone.MetaTrainingTests.test_batched_input_sequence_matches_stepwise_builder",
+        "tests.training.test_backbone.MetaTrainingTests.test_sequence_runner_matches_stepwise_values_and_gradients"
+      ]
+    },
+    {
+      "id": "analysis-hot-paths",
+      "selectors": [
+        "tests.analysis.test_geometry.GeometryAnalysisTests.test_geometry_rank_reuse_preserves_pairwise_spearman_values_exactly",
+        "tests.analysis.test_posterior.ExactRankingPosteriorTests.test_cached_fit_preserves_reference_accumulation_bitwise"
+      ]
+    }
+  ],
+  "bounded_checks": [
+    {
+      "id": "training-loss-and-gradient",
+      "rtol": 1e-05,
+      "atol": 1e-07,
+      "selectors": [
+        "tests.training.test_backbone.MetaTrainingTests.test_optimized_batch_preserves_loss_accuracy_and_gradients"
+      ]
+    },
+    {
+      "id": "evaluator-fast-state-and-trajectories",
+      "rtol": 1e-06,
+      "atol": 1e-07,
+      "selectors": [
+        "tests.evaluation.test_frozen_fast_weight.FrozenFastWeightEvaluatorTests.test_batched_backend_preserves_fast_weights_and_query_logits",
+        "tests.evaluation.test_frozen_fast_weight.FrozenFastWeightEvaluatorTests.test_batched_backend_preserves_hidden_and_logit_trajectories"
+      ]
+    }
+  ],
+  "semantic_checks": [
+    "study_registry",
+    "file_contracts",
+    "workflow",
+    "paper_figures",
+    "frozen_evidence"
+  ],
+  "claim": "The scoped refactors preserve the retained reference paths at their declared equivalence levels and preserve the frozen evidence and workflow claim boundaries.",
+  "not_claimed": [
+    "byte identity for prospective result documents",
+    "post-candidate documentation or navigation byte identity",
+    "direct cross-commit replay of every maintained analysis entry point",
+    "hardware-independent performance equivalence",
+    "historical replay equivalence for prospective training schema v3",
+    "new scientific evidence or a broader scientific claim"
+  ]
+}

@@ -198,6 +198,52 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual(len(first), len(GENERATED_PATHS) + 42)
 
+    def test_synthesis_has_a_reviewed_reader_first_entrypoint(self):
+        self.assertEqual(self.synthesis["review_state"], "reviewed")
+        entrypoint = ROOT / "synthesis" / self.synthesis["reader_entrypoint"]
+        self.assertTrue(entrypoint.is_file())
+
+        content = render_navigation(self.registry, self.synthesis)[
+            Path("synthesis/README.md")
+        ]
+        reader_link = (
+            "[Current interpretation (reader first)]"
+            "(manuscript/relational_model/README.md)"
+        )
+        workflow_link = (
+            "[Current model mainline](../workflows/relational_model/README.md)"
+        )
+        self.assertIn('`review_state = "reviewed"`', content)
+        self.assertNotIn("pending the second synthesis pass", content)
+        self.assertLess(content.index(reader_link), content.index(workflow_link))
+
+    def test_synthesis_rejects_an_invalid_reader_contract(self):
+        invalid_state = copy.deepcopy(self.synthesis)
+        invalid_state["review_state"] = "draft"
+        validation = validate_registry(self.registry, invalid_state, self.migration)
+        self.assertIn(
+            "synthesis review_state must be indexed or reviewed",
+            validation["errors"],
+        )
+
+        unsafe_entrypoint = copy.deepcopy(self.synthesis)
+        unsafe_entrypoint["reader_entrypoint"] = "../README.md"
+        validation = validate_registry(self.registry, unsafe_entrypoint, self.migration)
+        self.assertIn(
+            "synthesis reader_entrypoint must be a safe relative path",
+            validation["errors"],
+        )
+
+        directory_entrypoint = copy.deepcopy(self.synthesis)
+        directory_entrypoint["reader_entrypoint"] = "manuscript"
+        validation = validate_registry(
+            self.registry, directory_entrypoint, self.migration
+        )
+        self.assertIn(
+            "synthesis reader_entrypoint must be a file",
+            validation["errors"],
+        )
+
     def test_every_study_has_a_human_capsule_and_local_authority(self):
         for study_id, study in self.studies.items():
             directory = ROOT / "studies" / study_id

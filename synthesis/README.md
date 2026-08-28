@@ -2,10 +2,11 @@
 
 > [!NOTE]
 > This navigation page is generated from `synthesis/manifest.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> `review_state = "reviewed"` means its reader-first interpretation has
+> been curated against the workflow and registry. It does not promote or
+> rewrite study-level evidence.
 
-A provisional human-readable organization of the frozen model evidence, diagnostic lineage, closed candidate families, and remaining claim boundaries.
+A reviewed reader-first interpretation and traceable organization of the frozen model evidence, diagnostic lineage, closed candidate families, and remaining claim boundaries.
 
 **Current working claim.** Sparse signed evidence feeds a meta-learned fast-weight state for global assembly and a query-addressed local trace with broader evidence admission for direct fidelity.
 
@@ -13,15 +14,17 @@ A provisional human-readable organization of the frozen model evidence, diagnost
 
 ## Start here
 
+- [Current interpretation (reader first)](manuscript/relational_model/README.md)
 - [Current model mainline](../workflows/relational_model/README.md)
 - [Complete study registry](../studies/README.md)
 - [Historical reporting snapshots](snapshots/README.md)
 - [Release and migration history](history.toml)
 - [Figure workflow](figures/README.md)
 
-The workflow is the current claim graph, historical snapshots are immutable
-reporting objects, and this page is their editable human synthesis. None
-replaces the study-owned evidence records.
+Use the current interpretation for the shortest coherent account, then the
+workflow for its machine-readable claim graph and the study registry for
+atomic evidence. Historical snapshots are immutable reporting objects. None
+of these reporting or navigation layers replaces study-owned records.
 
 ## Provenance layers
 
@@ -35,6 +38,13 @@ with its own upstream byte locks. Historical replay uses a detached Git
 worktree rather than mixing old files into the current import tree.
 
 ## Reading routes
+
+### Reader-first current interpretation
+
+The five-minute model, frozen training-to-evaluation timeline, and matched
+positive/negative claim cards are maintained in
+[the current interpretation](manuscript/relational_model/README.md).
+Use it to understand the result before drilling into the claim graph below.
 
 ### Current reporting mainline
 
@@ -100,9 +110,9 @@ Completed boundary work and prepared acquisition materials that are intentionall
 2. [Human-only metric constructive comparator](../studies/human_metric_constructive_comparator/README.md) — `valid_negative` — The candidate reproduces held-out human distance slope but fails the reliable distance-residualized pair field and cannot become a neural target.
 3. [Magnitude-placement human validation program](../studies/magnitude_placement_human_program/README.md) — `deferred` — The protocol, randomization, schema, synthetic validation, and collection-readiness records are preserved for a later human experiment.
 
-## What this first refactor does not claim
+## Reviewed interpretation boundary
 
-The order above is a checked navigation layer, not yet the final manuscript
-argument. `review_state = "indexed"` deliberately leaves room for a second
-pass that compresses methods, chooses paper-level estimands, and promotes only
-the figures needed for the final claim structure.
+The reader-first order has been curated against the current workflow and
+registered evidence. `review_state = "reviewed"` does not rewrite frozen
+records, turn unresolved or negative outcomes into support, or extend the
+model-level result to human neural implementation.

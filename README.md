@@ -9,6 +9,9 @@ reproduction now live in one isolated capsule under
 
 ## Start here
 
+- [Current interpretation](synthesis/manuscript/relational_model/README.md) is
+  the reader-first account of the model, its causal evidence, retained negative
+  results, and exact claim limits.
 - [Relational model mainline](workflows/relational_model/README.md) is the
   shortest claim-to-code-to-evidence route and the current machine-readable
   scientific workflow.
@@ -25,9 +28,10 @@ reproduction now live in one isolated capsule under
 - [Analysis-file contract](artifacts/README.md) defines runtime manifests,
   format roles, and the non-destructive historical-conversion boundary.
 
-The first reorganization pass is intentionally marked
-review_state = "indexed". It establishes ownership, navigation, and provenance
-without pretending that the current prose is already the final paper argument.
+The current synthesis is marked `review_state = "reviewed"`: its reader-first
+ordering has been checked against the workflow and registry. This status does
+not promote evidence or alter authority. Read current interpretation → workflow
+claim graph → study-owned records whenever a statement needs to be audited.
 
 ~~~text
 studies/                 experiment-level questions and exact records
@@ -137,6 +141,17 @@ direnv exec . python tools/provenance/index_source_provenance_v1.py check
 direnv exec . python -m tools.provenance.backfill_run_manifests_v1
 ~~~
 
+Audit the scoped refactors against their pinned baseline, retained exact and
+bounded comparisons, and current frozen-evidence contracts:
+
+~~~bash
+direnv exec . python -m tools.provenance.audit_refactor_equivalence_v1
+~~~
+
+This audit does not claim direct cross-commit replay of every maintained entry
+point; its exact coverage and exclusions are recorded in the versioned
+contract.
+
 Run tests through the timeout-bounded entry point. It creates an independent
 process group and cleans up that group on timeout or interruption:
 
@@ -210,7 +225,8 @@ direnv exec . python -m fsrl.evaluation \
   --evaluation-backend batched_sequence
 ~~~
 
-The default remains `legacy_stepwise`, so frozen studies are not silently
+The current high-level default is `batched_sequence`; frozen studies retain
+their explicit `legacy_stepwise` execution records and are not silently
 upgraded. The batched result carries its execution profile and observed runtime
 snapshot. Before a large run, benchmark exact parity and throughput on the
 visible CUDA device with a small number of repeats:
