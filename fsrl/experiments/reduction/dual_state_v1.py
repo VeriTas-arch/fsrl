@@ -29,8 +29,9 @@ from fsrl.infra.study_registry import (
     resolve_record,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator, RankingEpisode
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.holdouts import registered_holdout_signatures
+from fsrl.tasks.protocol import load_ranking_protocol
+from fsrl.tasks.sparse_ranking import GenericRankingTaskGenerator, RankingEpisode
 from fsrl.training.backbone import build_meta_input_sequence
 
 ROOT = REPO_ROOT
@@ -278,9 +279,9 @@ def fit_rank2_candidate(
 
 
 def _initial_fast_weights(net, config) -> torch.Tensor:
-    hidden = net.initialZeroState(config.bs)
-    eligibility = net.initialZeroET(config.bs)
-    fast_weights = net.initialZeroPlasticWeights(config.bs)
+    hidden = net.initial_hidden(config.bs)
+    eligibility = net.initial_eligibility(config.bs)
+    fast_weights = net.initial_fast_weights(config.bs)
     blank = torch.zeros(config.bs, config.inputsize, device=fast_weights.device)
     with torch.no_grad():
         for _ in range(2):
@@ -299,8 +300,8 @@ def _advance_generic(
     *,
     zero_relations: tuple[tuple[int, int], ...] | None = None,
 ) -> tuple[torch.Tensor, np.ndarray]:
-    hidden = net.initialZeroState(config.bs)
-    eligibility = net.initialZeroET(config.bs)
+    hidden = net.initial_hidden(config.bs)
+    eligibility = net.initial_eligibility(config.bs)
     trials = [episode.support_trials[trial_index] for episode in episodes]
     left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
     right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
@@ -346,8 +347,8 @@ def _generic_field(
     for pair_index, (first, second) in enumerate(geometry.pairs):
         oriented_margins = []
         for left_value, right_value in ((first, second), (second, first)):
-            hidden = net.initialZeroState(config.bs)
-            eligibility = net.initialZeroET(config.bs)
+            hidden = net.initial_hidden(config.bs)
+            eligibility = net.initial_eligibility(config.bs)
             left = np.full(config.bs, left_value, dtype=np.int64)
             right = np.full(config.bs, right_value, dtype=np.int64)
             sequence = build_meta_input_sequence(
@@ -420,7 +421,7 @@ def extract_development_seed(
         min_edges=7,
         max_edges=10,
         support_blocks=4,
-        exclude_liu_graph=True,
+        excluded_signatures=registered_holdout_signatures(),
         subject_encoding_mode="stable_omission",
     )
     rng = np.random.default_rng(rng_seed)

@@ -23,7 +23,7 @@ from fsrl.infra.file_contracts import dataset_file, load_dataset_manifest
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import EXTERNAL_DATA_ROOT, REPO_ROOT
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_PROTOCOL_PATH = resolve_record("benchmarks/liu_v2.json")
@@ -41,29 +41,6 @@ DEFAULT_OUTPUT_PATH = resolve_record("benchmarks/liu_human_exact_v1.json")
 DEFAULT_FIGURE2D_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["figure2d"]["path"]
 DEFAULT_FIGURE3B_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["figure3b"]["path"]
 
-SOURCE_FILES = {
-    "preregistered": {
-        "download_url": LIU_DATASET_FILES["preregistered"]["source_url"],
-        "sha256": LIU_DATASET_FILES["preregistered"]["sha256"],
-        "participants": LIU_DATASET_FILES["preregistered"]["participants"],
-    },
-    "replication": {
-        "download_url": LIU_DATASET_FILES["replication"]["source_url"],
-        "sha256": LIU_DATASET_FILES["replication"]["sha256"],
-        "participants": LIU_DATASET_FILES["replication"]["participants"],
-    },
-    "figure2d": {
-        "download_url": LIU_DATASET_FILES["figure2d"]["source_url"],
-        "sha256": LIU_DATASET_FILES["figure2d"]["sha256"],
-        "pairs": LIU_DATASET_FILES["figure2d"]["pairs"],
-    },
-    "figure3b": {
-        "download_url": LIU_DATASET_FILES["figure3b"]["source_url"],
-        "sha256": LIU_DATASET_FILES["figure3b"]["sha256"],
-        "participants": LIU_DATASET_FILES["figure3b"]["participants"],
-    },
-}
-
 REQUIRED_COLUMNS = {
     "id",
     "trial",
@@ -73,6 +50,20 @@ REQUIRED_COLUMNS = {
     "film_index_2",
     "r_or_w",
 }
+
+
+def published_source_metadata(file_id: str) -> dict:
+    """Project one canonical dataset entry into the historical report shape."""
+
+    entry = LIU_DATASET_FILES[file_id]
+    metadata = {
+        "download_url": entry["source_url"],
+        "sha256": entry["sha256"],
+    }
+    for field in ("participants", "pairs"):
+        if field in entry:
+            metadata[field] = entry[field]
+    return metadata
 
 
 def portable_path(path: Path) -> str:
@@ -260,8 +251,8 @@ def load_published_figure_checks(
     figure2d_path: Path, figure3b_path: Path, protocol: RankingProtocol
 ) -> dict:
     expected_paths = {
-        figure2d_path: SOURCE_FILES["figure2d"]["sha256"],
-        figure3b_path: SOURCE_FILES["figure3b"]["sha256"],
+        figure2d_path: LIU_DATASET_FILES["figure2d"]["sha256"],
+        figure3b_path: LIU_DATASET_FILES["figure3b"]["sha256"],
     }
     for path, expected_hash in expected_paths.items():
         if file_sha256(path) != expected_hash:
@@ -645,17 +636,17 @@ def build_human_benchmark(
         preregistered_path,
         "preregistered",
         protocol,
-        expected_sha256=SOURCE_FILES["preregistered"]["sha256"],
+        expected_sha256=LIU_DATASET_FILES["preregistered"]["sha256"],
     )
     replication = load_human_cohort(
         replication_path,
         "replication",
         protocol,
-        expected_sha256=SOURCE_FILES["replication"]["sha256"],
+        expected_sha256=LIU_DATASET_FILES["replication"]["sha256"],
     )
-    if len(preregistered) != SOURCE_FILES["preregistered"]["participants"]:
+    if len(preregistered) != LIU_DATASET_FILES["preregistered"]["participants"]:
         raise RuntimeError("preregistered cohort participant count changed")
-    if len(replication) != SOURCE_FILES["replication"]["participants"]:
+    if len(replication) != LIU_DATASET_FILES["replication"]["participants"]:
         raise RuntimeError("replication cohort participant count changed")
     published = load_published_figure_checks(figure2d_path, figure3b_path, protocol)
     combined = preregistered + replication
@@ -694,7 +685,8 @@ def build_human_benchmark(
                     }[name]
                 ),
             }
-            for name, metadata in SOURCE_FILES.items()
+            for name in LIU_DATASET_FILES
+            for metadata in (published_source_metadata(name),)
         },
         "analysis_contract": {
             "below_chance_exclusion": "overall_accuracy < 0.5",

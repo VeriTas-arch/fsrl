@@ -7,9 +7,11 @@ import json
 from pathlib import Path
 
 from fsrl.infra.provenance import load_json
-from fsrl.infra.study_registry import resolve_record
+from fsrl.infra.record_catalog import resolve_record_id
 
-DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/human_fit_v1.json")
+DEFAULT_SPECIFICATION_PATH = resolve_record_id(
+    "study.magnitude_placement_human_program.benchmarks_human_fit_v1_json"
+)
 
 
 def _cohort_signature(result: dict) -> dict:

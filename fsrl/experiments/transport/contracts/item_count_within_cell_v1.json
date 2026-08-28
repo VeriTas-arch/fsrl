@@ -1,0 +1,147 @@
+{
+  "contract_id": "liu_item_count_within_cell_v1",
+  "criteria": {
+    "P_off_a_on_direct_nontransitive": [
+      {
+        "expected": 0.5,
+        "json_pointer": "/metrics/conditions/P_off_a_on/summary/correct_probability/learned/bootstrap/lower",
+        "operator": "greater_than"
+      },
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/contrasts/P_off_learned_minus_nonlearned_probability/bootstrap/lower",
+        "operator": "greater_than"
+      }
+    ],
+    "P_off_global_collapse": [
+      {
+        "expected": 0.55,
+        "json_pointer": "/metrics/conditions/P_off_a_on/summary/correct_probability/nonlearned/bootstrap/upper",
+        "operator": "less_equal"
+      },
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/contrasts/P_off_local_remote_minus_quarter_global/bootstrap/upper",
+        "operator": "less_than"
+      }
+    ],
+    "P_remote_reassembly": [
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/global_relation_LOO/summary/remote_absolute/bootstrap/lower",
+        "operator": "greater_than"
+      },
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/global_relation_LOO/summary/third_party_relational/bootstrap/lower",
+        "operator": "greater_than"
+      }
+    ],
+    "a_off_direct_loss": [
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/contrasts/intact_minus_a_off_learned_probability/bootstrap/lower",
+        "operator": "greater_than"
+      }
+    ],
+    "constructive_global_structure": [
+      {
+        "expected": 0.95,
+        "json_pointer": "/metrics/constructive/summary/intact_gradient_energy_fraction/bootstrap/lower",
+        "operator": "greater_equal"
+      },
+      {
+        "expected": 0.95,
+        "json_pointer": "/metrics/constructive/summary/a_off_gradient_energy_fraction/bootstrap/lower",
+        "operator": "greater_equal"
+      },
+      {
+        "expected": 0.95,
+        "json_pointer": "/metrics/constructive/summary/intact_transitive_triplet_fraction/bootstrap/lower",
+        "operator": "greater_equal"
+      },
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/constructive/summary/intact_hodge_order_kendall_tau_to_true/bootstrap/lower",
+        "operator": "greater_than"
+      }
+    ],
+    "exact_local_compression": [
+      {
+        "expected": 1e-12,
+        "json_pointer": "/metrics/local_exactness/tensor_state_max_abs_error",
+        "operator": "less_equal"
+      },
+      {
+        "expected": 1e-12,
+        "json_pointer": "/metrics/local_exactness/ledger_tensor_state_max_abs_error",
+        "operator": "less_equal"
+      },
+      {
+        "expected": 1e-12,
+        "json_pointer": "/metrics/local_exactness/all_query_raw_read_max_abs_error",
+        "operator": "less_equal"
+      }
+    ],
+    "intact_competence": [
+      {
+        "expected": 0.5,
+        "json_pointer": "/metrics/conditions/intact/summary/exact_decision_accuracy/learned/bootstrap/lower",
+        "operator": "greater_than"
+      },
+      {
+        "expected": 0.5,
+        "json_pointer": "/metrics/conditions/intact/summary/exact_decision_accuracy/nonlearned/bootstrap/lower",
+        "operator": "greater_than"
+      }
+    ],
+    "size_normalized_individualized_stable_structure": [
+      {
+        "expected": 2,
+        "json_pointer": "/metrics/individualized/eligible_noncorrect_subjects",
+        "operator": "greater_equal"
+      },
+      {
+        "expected": 0.8,
+        "json_pointer": "/metrics/individualized/mean_pairwise_kendall_tau/bootstrap/upper",
+        "operator": "less_than"
+      },
+      {
+        "expected": 0.0,
+        "json_pointer": "/metrics/individualized/stable_error_80_pair_density/bootstrap/lower",
+        "operator": "greater_than"
+      }
+    ]
+  },
+  "decision_outputs": {
+    "all_primary_links_pass": {
+      "all_required": true
+    },
+    "competence_passed": {
+      "criterion": "intact_competence"
+    }
+  },
+  "document_type": "fsrl.semantic_contract",
+  "integrity_assertions": [
+    {
+      "json_pointer": "/integrity/all_passed",
+      "operator": "is_true"
+    }
+  ],
+  "required_criteria": [
+    "intact_competence",
+    "constructive_global_structure",
+    "size_normalized_individualized_stable_structure",
+    "P_off_global_collapse",
+    "P_remote_reassembly",
+    "a_off_direct_loss",
+    "P_off_a_on_direct_nontransitive",
+    "exact_local_compression"
+  ],
+  "schema_version": 1,
+  "source": {
+    "criteria_pointer": "/primary_links",
+    "materialized_sha256": "0ba9090453bafd28fc1908afdb727747a06ba069838aae994fb90b17dd36646e",
+    "record_id": "study.item_count_transport.benchmarks_liu_item_count_transport_v1_json"
+  }
+}

@@ -19,7 +19,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 def _order_positions(order: tuple[int, ...] | list[int]) -> np.ndarray:

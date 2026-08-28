@@ -1,12 +1,10 @@
-"""Compatibility adapter for the historical registered training distribution."""
+"""Legacy constructor adapter for the historical training distribution."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from fsrl.infra.study_registry import resolve_record
-
-from .protocol import load_ranking_protocol
+from .holdouts import graph_signature_for_protocol, registered_holdout_signatures
 from .sparse_ranking import (
     GenericRankingTaskGenerator as _GenericRankingTaskGenerator,
 )
@@ -21,9 +19,11 @@ from .sparse_ranking import (
 
 
 def graph_signature_from_protocol(path: Path | str | None = None) -> GraphSignature:
-    protocol_path = resolve_record("benchmarks/liu_v1.json") if path is None else path
-    protocol = load_ranking_protocol(protocol_path)
-    return _graph_signature_from_protocol(protocol)
+    if path is None:
+        return graph_signature_for_protocol("liu_v1")
+    from .protocol import load_ranking_protocol
+
+    return _graph_signature_from_protocol(load_ranking_protocol(path))
 
 
 def liu_graph_signature() -> GraphSignature:
@@ -35,10 +35,7 @@ def liu_graph_signature() -> GraphSignature:
 def held_out_liu_graph_signatures() -> frozenset[GraphSignature]:
     """Return the two prospectively excluded registered graph signatures."""
 
-    return frozenset(
-        graph_signature_from_protocol(resolve_record(f"benchmarks/{filename}"))
-        for filename in ("liu_v1.json", "liu_v2.json")
-    )
+    return registered_holdout_signatures()
 
 
 class GenericRankingTaskGenerator(_GenericRankingTaskGenerator):

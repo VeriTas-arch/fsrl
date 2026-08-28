@@ -38,8 +38,7 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(

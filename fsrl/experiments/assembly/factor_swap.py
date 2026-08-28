@@ -43,7 +43,7 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/support_factor_swap_v1.json")
@@ -161,7 +161,7 @@ def readout_effective_margin_fields_batched(
 
     with torch.no_grad():
         for pair_index in range(len(schedules[0])):
-            hidden = evaluator.net.initialZeroState(conditions * subjects)
+            hidden = evaluator.net.initial_hidden(conditions * subjects)
             left = np.asarray(
                 [schedule[pair_index][0] for schedule in schedules], dtype=np.int64
             )

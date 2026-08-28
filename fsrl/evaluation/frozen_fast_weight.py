@@ -21,11 +21,8 @@ from fsrl.infra.runtime import (
     configure_runtime,
     default_device,
 )
-from fsrl.tasks.registered_protocol import (
-    DEFAULT_PROTOCOL_PATH,
-    RankingProtocol,
-    load_ranking_protocol,
-)
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
 from fsrl.tasks.subject_encoding import (
     SubjectEncodingConfig,
     SubjectEncodingState,
@@ -41,6 +38,7 @@ from ..training.checkpoints import (
     load_training_provenance,
 )
 
+DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
 DISTANCE_INPUT_OFFSET = EVIDENCE_AUXILIARY_OFFSET
 
 __all__ = [
@@ -479,16 +477,16 @@ class FrozenFastWeightEvaluator:
             ):
                 outputs = self.sequence_runner(
                     blank_sequence,
-                    self.net.initialZeroState(batch_size),
-                    self.net.initialZeroET(batch_size),
-                    self.net.initialZeroPlasticWeights(batch_size),
+                    self.net.initial_hidden(batch_size),
+                    self.net.initial_eligibility(batch_size),
+                    self.net.initial_fast_weights(batch_size),
                     intervention != FastWeightIntervention.WRITE_OFF,
                 )
             return outputs[-1].detach().clone()
 
-        hidden = self.net.initialZeroState(self.config.bs)
-        eligibility = self.net.initialZeroET(self.config.bs)
-        fast_weights = self.net.initialZeroPlasticWeights(self.config.bs)
+        hidden = self.net.initial_hidden(self.config.bs)
+        eligibility = self.net.initial_eligibility(self.config.bs)
+        fast_weights = self.net.initial_fast_weights(self.config.bs)
         blank = torch.zeros(self.config.bs, self.config.inputsize, device=self.device)
 
         with (
@@ -526,8 +524,8 @@ class FrozenFastWeightEvaluator:
         ):
             raise ValueError("fast_weights has the wrong shape")
 
-        hidden = self.net.initialZeroState(self.config.bs)
-        eligibility = self.net.initialZeroET(self.config.bs)
+        hidden = self.net.initial_hidden(self.config.bs)
+        eligibility = self.net.initial_eligibility(self.config.bs)
         trials = [schedule[trial_index] for schedule in self.support_schedules]
         left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
         right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
@@ -636,8 +634,8 @@ class FrozenFastWeightEvaluator:
 
         with torch.no_grad(), self._alpha_zeroed(alpha_zero):
             for pair_index in range(next(iter(schedule_lengths))):
-                hidden = self.net.initialZeroState(self.config.bs)
-                eligibility = self.net.initialZeroET(self.config.bs)
+                hidden = self.net.initial_hidden(self.config.bs)
+                eligibility = self.net.initial_eligibility(self.config.bs)
                 left = np.asarray(
                     [schedule[pair_index][0] for schedule in pair_schedules],
                     dtype=np.int64,
@@ -691,8 +689,8 @@ class FrozenFastWeightEvaluator:
         with torch.no_grad(), self._alpha_zeroed(alpha_zero):
             logits, _, _, _, _, _ = self.sequence_runner(
                 input_sequence,
-                self.net.initialZeroState(query_batch_size),
-                self.net.initialZeroET(query_batch_size),
+                self.net.initial_hidden(query_batch_size),
+                self.net.initial_eligibility(query_batch_size),
                 query_fast_weights,
                 False,
             )
@@ -798,8 +796,8 @@ class FrozenFastWeightEvaluator:
         logit_outputs = [{} for _ in range(self.config.bs)]
         with torch.no_grad(), self._alpha_zeroed(alpha_zero):
             for pair_index in range(next(iter(schedule_lengths))):
-                hidden = self.net.initialZeroState(self.config.bs)
-                eligibility = self.net.initialZeroET(self.config.bs)
+                hidden = self.net.initial_hidden(self.config.bs)
+                eligibility = self.net.initial_eligibility(self.config.bs)
                 left = np.asarray(
                     [schedule[pair_index][0] for schedule in pair_schedules],
                     dtype=np.int64,
@@ -860,8 +858,8 @@ class FrozenFastWeightEvaluator:
         with torch.no_grad(), self._alpha_zeroed(alpha_zero):
             hidden, logits = self.trajectory_runner(
                 input_sequence,
-                self.net.initialZeroState(query_batch_size),
-                self.net.initialZeroET(query_batch_size),
+                self.net.initial_hidden(query_batch_size),
+                self.net.initial_eligibility(query_batch_size),
                 query_fast_weights,
             )
         hidden_values = (
@@ -1029,7 +1027,7 @@ def run_causal_suite(
     subject_encoding_seed: int,
     protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
     evaluation_backend: FrozenEvaluationBackend | str = (
-        FrozenEvaluationBackend.LEGACY_STEPWISE
+        FrozenEvaluationBackend.BATCHED_SEQUENCE
     ),
     execution_profile: ExecutionProfile | None = None,
 ) -> dict:
@@ -1138,7 +1136,7 @@ def parse_args(args=None):
     parser.add_argument(
         "--evaluation-backend",
         choices=[backend.value for backend in FrozenEvaluationBackend],
-        default=FrozenEvaluationBackend.LEGACY_STEPWISE.value,
+        default=FrozenEvaluationBackend.BATCHED_SEQUENCE.value,
     )
     return parser.parse_args(args)
 

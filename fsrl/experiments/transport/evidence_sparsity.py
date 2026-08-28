@@ -61,11 +61,11 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import (
+from fsrl.tasks.protocol import (
     RankingProtocol,
     SupportTrial,
     load_ranking_protocol,
+    ordered_pairs,
 )
 
 DEFAULT_SPECIFICATION_PATH = resolve_record(

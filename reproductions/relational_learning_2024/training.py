@@ -47,11 +47,14 @@ def print_episode_summary(config, episode_index, stats, start_time):
 
 def save_checkpoint(config, net, output_dir, test_rewards):
     output_dir.mkdir(parents=True, exist_ok=True)
-    torch.save(net.state_dict(), output_dir / ("netAE" + str(config.rngseed) + ".dat"))
-    torch.save(net.state_dict(), output_dir / "net.dat")
-    with open(output_dir / ("tAE" + str(config.rngseed) + ".txt"), "w") as thefile:
-        thefile.writelines(f"{item}\n" for item in test_rewards[::10])
-    log(f"[save] Wrote checkpoint and test-reward log to {output_dir}")
+    torch.save(net.state_dict(), output_dir / "net.pth")
+    sampled_episodes = np.arange(0, len(test_rewards), 10, dtype=np.int64)
+    np.savez_compressed(
+        output_dir / "training_metrics.npz",
+        episode=sampled_episodes,
+        test_reward=np.asarray(test_rewards[::10], dtype=np.float64),
+    )
+    log(f"[save] Wrote checkpoint and metrics archive to {output_dir}")
 
 
 def train(config, output_dir, trace_steps=False):

@@ -72,7 +72,7 @@ class PolicyResidualTransition(nn.Module):
         fast_weights: torch.Tensor,
     ) -> tuple[torch.Tensor, ...]:
         batch_size = inputs.shape[0]
-        hidden_size = self.backbone.GG["hs"]
+        hidden_size = self.backbone.model_config.hidden_size
         hidden_column = hidden.view(batch_size, hidden_size, 1)
         baseline = (
             self.backbone.i2h(inputs).view(batch_size, hidden_size, 1)

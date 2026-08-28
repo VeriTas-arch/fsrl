@@ -18,10 +18,13 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_retro_checkpoint,
 )
 from fsrl.infra.provenance import load_json
-from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.infra.record_catalog import resolve_record_id
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
-DEFAULT_GEOMETRY_GATE_PATH = resolve_record("benchmarks/geometry_gate_v2.json")
+DEFAULT_GEOMETRY_GATE_PATH = resolve_record_id(
+    "study.formal_behavioral_confirmation.benchmarks_geometry_gate_v2_json"
+)
 
 
 def context_averaged_item_representations(
@@ -313,7 +316,7 @@ def run_geometry_analysis(
         raise ValueError("behavior result and checkpoint SHA-256 do not match")
     protocol_path_value = behavior.get("protocol_path")
     protocol = (
-        load_ranking_protocol()
+        load_registered_protocol("liu_v1")
         if protocol_path_value is None
         else load_ranking_protocol(protocol_path_value)
     )

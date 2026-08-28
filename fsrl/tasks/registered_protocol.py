@@ -1,8 +1,6 @@
-"""Compatibility entry point for the registered v1 ranking protocol."""
+"""Legacy v1-default adapter; current code uses :mod:`protocol_catalog`."""
 
 from pathlib import Path
-
-from fsrl.infra.study_registry import resolve_record
 
 from .protocol import (
     QueryTrial,
@@ -12,8 +10,9 @@ from .protocol import (
 from .protocol import (
     load_ranking_protocol as _load_ranking_protocol,
 )
+from .protocol_catalog import LIU_V1_PROTOCOL_PATH
 
-DEFAULT_PROTOCOL_PATH = resolve_record("benchmarks/liu_v1.json")
+DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
 
 
 def load_ranking_protocol(

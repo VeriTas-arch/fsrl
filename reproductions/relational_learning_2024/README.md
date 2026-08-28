@@ -33,6 +33,10 @@ direnv exec . python -m reproductions.relational_learning_2024.cli \
 
 Runtime outputs go to
 `artifacts/reproductions/relational_learning_2024/training/` by default.
+The maintained adapter writes one canonical `net.pth` state dict and one
+`training_metrics.npz` numeric archive. It does not create legacy `.dat`
+checkpoints or numeric `.txt` logs. The byte-locked supplied `.dat` files remain
+read-only inputs and are loaded through the checkpoint compatibility boundary.
 
 Render the maintained teaching approximations of the original figure panels:
 

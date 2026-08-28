@@ -17,11 +17,10 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_retro_checkpoint,
 )
-from fsrl.tasks.registered_protocol import (
-    DEFAULT_PROTOCOL_PATH,
-    RankingProtocol,
-    load_ranking_protocol,
-)
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
+
+DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
 
 Pair = tuple[int, int]
 

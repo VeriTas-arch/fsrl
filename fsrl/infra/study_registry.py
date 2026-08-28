@@ -119,8 +119,14 @@ def load_source_provenance(path: Path = SOURCE_PROVENANCE_PATH) -> dict[str, Any
     return _load_toml(path)
 
 
-def canonical_file_sha256(path: Path | str) -> str:
-    """Return the registered identity across a locator-only content rewrite."""
+def materialized_file_sha256(path: Path | str) -> str:
+    """Return the SHA-256 of the bytes present in the current checkout."""
+
+    return file_sha256(path)
+
+
+def historical_registered_file_sha256(path: Path | str) -> str:
+    """Return the frozen pre-rewrite identity for historical verification."""
 
     target = Path(path)
     try:
@@ -143,6 +149,16 @@ def canonical_file_sha256(path: Path | str) -> str:
             f"runtime-locator rewritten content mismatch: {repository_path}"
         )
     return rewrite["before_sha256"]
+
+
+def canonical_file_sha256(path: Path | str) -> str:
+    """Compatibility alias for the historical registered file identity.
+
+    New code should select :func:`materialized_file_sha256` for current bytes
+    or :func:`historical_registered_file_sha256` for a frozen source identity.
+    """
+
+    return historical_registered_file_sha256(path)
 
 
 def _safe_relative(value: str) -> Path:
@@ -274,7 +290,7 @@ def registered_file_sha256(
             raise RuntimeError(
                 f"runtime-locator source hash mismatch: {repository_path}"
             )
-        return canonical_file_sha256(target)
+        return historical_registered_file_sha256(target)
     if candidate.is_absolute():
         return file_sha256(target)
     path = _safe_relative(candidate.as_posix()).as_posix()
@@ -308,9 +324,38 @@ def resolve_registered_path(value: str | Path) -> Path:
 
 
 def canonical_file_registration(path: str) -> dict[str, str]:
-    """Build the path/hash entry used by prospective source locks."""
+    """Compatibility entry using the historical registered identity."""
 
     return {"path": path, "sha256": canonical_file_sha256(resolve_record(path))}
+
+
+def materialized_file_registration(path: str | Path) -> dict[str, str | int]:
+    """Build an explicit current-locator/current-bytes registration."""
+
+    target = resolve_registered_path(path).resolve()
+    try:
+        repository_path = target.relative_to(ROOT).as_posix()
+    except ValueError as error:
+        raise ValueError(
+            "materialized registration must be inside the repository"
+        ) from error
+    if not target.is_file():
+        raise FileNotFoundError(f"materialized registration is unavailable: {target}")
+    return {
+        "path": repository_path,
+        "sha256": materialized_file_sha256(target),
+        "bytes": target.stat().st_size,
+    }
+
+
+def historical_file_registration(path: str | Path) -> dict[str, str]:
+    """Build an explicit legacy-locator/frozen-identity registration."""
+
+    target = resolve_registered_path(path)
+    return {
+        "path": legacy_identifier(target),
+        "sha256": historical_registered_file_sha256(target),
+    }
 
 
 def validate_registered_file(registration: dict[str, str]) -> dict[str, str]:

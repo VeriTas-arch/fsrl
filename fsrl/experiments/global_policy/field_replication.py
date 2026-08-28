@@ -41,13 +41,13 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import symbolic_distances
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol, symbolic_distances
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
     MetaTrainConfig,
     train_meta_model,
 )
+from fsrl.training.checkpoints import resolve_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -289,7 +289,7 @@ def seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
     backbone = output_root / f"seed-{seed}" / "backbone"
     return {
         "backbone_dir": backbone,
-        "checkpoint": backbone / "net.dat",
+        "checkpoint": resolve_checkpoint_path(backbone),
         "backbone_config": backbone / "config.json",
         "backbone_log": backbone / "train_log.jsonl",
         "backbone_manifest": backbone / "replication_manifest.json",
@@ -424,7 +424,7 @@ def validate_complete_backbone(
     ):
         raise RuntimeError(f"seed {seed} contains non-backbone artifacts")
     expected_backbone_members = {
-        "net.dat",
+        paths["checkpoint"].name,
         "config.json",
         "train_log.jsonl",
         "replication_manifest.json",
@@ -517,7 +517,6 @@ def train_backbone(
         training,
         paths["backbone_dir"],
         compile_model=True,
-        checkpoint_filename="net.dat",
     )
     manifest = {
         "schema_version": 1,

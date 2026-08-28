@@ -1,9 +1,13 @@
+from collections.abc import Mapping
+from typing import Any
+
 import numpy as np
 import torch
 from torch import nn
 
 from fsrl.infra.runtime import default_device
 
+from .model_config import RetroModelConfig
 from .state import PlasticRNNState
 
 
@@ -14,30 +18,46 @@ class RetroModulRNN(nn.Module):
     plastic recurrent weight matrix. Only ``pw`` changes during an episode.
     """
 
-    def __init__(self, config, *, device: str | torch.device | None = None):
+    def __init__(
+        self,
+        config: RetroModelConfig | Mapping[str, Any],
+        *,
+        device: str | torch.device | None = None,
+    ):
         super().__init__()
-        for paramname in ["outputsize", "inputsize", "hs", "bs"]:
-            if paramname not in config:
-                raise KeyError("Must provide missing key in config: " + paramname)
+        if isinstance(config, RetroModelConfig):
+            model_config = config
+            legacy_config = config.to_legacy_mapping()
+        else:
+            model_config = RetroModelConfig.from_legacy_mapping(config)
+            legacy_config = dict(config)
 
         nbda = 2
-        self.GG = config
+        self.model_config = model_config
+        self.GG = legacy_config
         self.execution_device = torch.device(device or default_device())
         self.activ = torch.tanh
-        self.i2h = torch.nn.Linear(config["inputsize"], config["hs"]).to(
-            self.execution_device
-        )
+        self.i2h = torch.nn.Linear(
+            model_config.input_size, model_config.hidden_size
+        ).to(self.execution_device)
         self.w = torch.nn.Parameter(
             (
-                (1.0 / np.sqrt(config["hs"]))
-                * (2.0 * torch.rand(config["hs"], config["hs"]) - 1.0)
+                (1.0 / np.sqrt(model_config.hidden_size))
+                * (
+                    2.0 * torch.rand(model_config.hidden_size, model_config.hidden_size)
+                    - 1.0
+                )
             ).to(self.execution_device),
             requires_grad=True,
         )
         self.alpha = torch.nn.Parameter(
-            (0.01 * (2.0 * torch.rand(config["hs"], config["hs"]) - 1.0)).to(
-                self.execution_device
-            ),
+            (
+                0.01
+                * (
+                    2.0 * torch.rand(model_config.hidden_size, model_config.hidden_size)
+                    - 1.0
+                )
+            ).to(self.execution_device),
             requires_grad=True,
         )
         self.etaet = torch.nn.Parameter(
@@ -46,15 +66,19 @@ class RetroModulRNN(nn.Module):
         self.DAmult = torch.nn.Parameter(
             (1.0 * torch.ones(1)).to(self.execution_device), requires_grad=True
         )
-        self.h2DA = torch.nn.Linear(config["hs"], nbda).to(self.execution_device)
-        self.h2o = torch.nn.Linear(config["hs"], config["outputsize"]).to(
+        self.h2DA = torch.nn.Linear(model_config.hidden_size, nbda).to(
             self.execution_device
         )
-        self.h2v = torch.nn.Linear(config["hs"], 1).to(self.execution_device)
+        self.h2o = torch.nn.Linear(
+            model_config.hidden_size, model_config.output_size
+        ).to(self.execution_device)
+        self.h2v = torch.nn.Linear(model_config.hidden_size, 1).to(
+            self.execution_device
+        )
 
     def forward(self, inputs, hidden, et, pw):
         batch_size = inputs.shape[0]
-        hidden_size = self.GG["hs"]
+        hidden_size = self.model_config.hidden_size
         assert pw.shape[0] == hidden.shape[0] == et.shape[0] == batch_size
 
         hactiv = self.activ(
@@ -83,20 +107,39 @@ class RetroModulRNN(nn.Module):
 
         return activout, valueout, daout, hactiv, et, pw
 
-    def initialZeroET(self, batch_size):
-        return self.w.new_zeros(batch_size, self.GG["hs"], self.GG["hs"])
+    def initial_hidden(self, batch_size: int) -> torch.Tensor:
+        return self.w.new_zeros(batch_size, self.model_config.hidden_size)
 
-    def initialZeroPlasticWeights(self, batch_size):
-        return self.w.new_zeros(batch_size, self.GG["hs"], self.GG["hs"])
+    def initial_eligibility(self, batch_size: int) -> torch.Tensor:
+        return self.w.new_zeros(
+            batch_size, self.model_config.hidden_size, self.model_config.hidden_size
+        )
 
-    def initialZeroState(self, batch_size):
-        return self.w.new_zeros(batch_size, self.GG["hs"])
+    def initial_fast_weights(self, batch_size: int) -> torch.Tensor:
+        return self.w.new_zeros(
+            batch_size, self.model_config.hidden_size, self.model_config.hidden_size
+        )
 
     def initial_state(self, batch_size: int) -> PlasticRNNState:
-        """Return the typed equivalent of the three historical zero-state calls."""
+        """Return the canonical typed recurrent state."""
 
         return PlasticRNNState(
-            hidden=self.initialZeroState(batch_size),
-            eligibility=self.initialZeroET(batch_size),
-            fast_weights=self.initialZeroPlasticWeights(batch_size),
+            hidden=self.initial_hidden(batch_size),
+            eligibility=self.initial_eligibility(batch_size),
+            fast_weights=self.initial_fast_weights(batch_size),
         )
+
+    def initialZeroET(self, batch_size):
+        """Compatibility adapter for the historical camelCase method."""
+
+        return self.initial_eligibility(batch_size)
+
+    def initialZeroPlasticWeights(self, batch_size):
+        """Compatibility adapter for the historical camelCase method."""
+
+        return self.initial_fast_weights(batch_size)
+
+    def initialZeroState(self, batch_size):
+        """Compatibility adapter for the historical camelCase method."""
+
+        return self.initial_hidden(batch_size)

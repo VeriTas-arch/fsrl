@@ -103,11 +103,11 @@ OPTIMIZED_COMPILED_TRAINING_EXECUTION = {
 
 
 def registered_excluded_signatures() -> frozenset[GraphSignature]:
-    """Resolve the historical two-graph holdout only at the workflow boundary."""
+    """Resolve the explicit current two-protocol holdout contract."""
 
-    from fsrl.tasks.meta_tasks import held_out_liu_graph_signatures
+    from fsrl.tasks.holdouts import registered_holdout_signatures
 
-    return held_out_liu_graph_signatures()
+    return registered_holdout_signatures()
 
 
 def compiled_execution_record(profile: ExecutionProfile) -> dict:
@@ -289,9 +289,9 @@ def run_meta_batch(
         task_generator.sample(rng, n_edges=n_edges)
         for _ in range(training_config.batch_size)
     )
-    hidden = net.initialZeroState(model_config.bs)
-    eligibility = net.initialZeroET(model_config.bs)
-    fast_weights = net.initialZeroPlasticWeights(model_config.bs)
+    hidden = net.initial_hidden(model_config.bs)
+    eligibility = net.initial_eligibility(model_config.bs)
+    fast_weights = net.initial_fast_weights(model_config.bs)
     device = next(net.parameters()).device
     blank = torch.zeros(model_config.bs, model_config.inputsize, device=device)
     for _ in range(2):
@@ -300,8 +300,8 @@ def run_meta_batch(
         )
 
     n_support = len(episodes[0].support_trials)
-    zero_hidden = net.initialZeroState(model_config.bs)
-    zero_eligibility = net.initialZeroET(model_config.bs)
+    zero_hidden = net.initial_hidden(model_config.bs)
+    zero_eligibility = net.initial_eligibility(model_config.bs)
     for trial_index in range(n_support):
         hidden = zero_hidden
         eligibility = zero_eligibility
@@ -399,9 +399,9 @@ def run_optimized_meta_batch(
         for _ in range(training_config.batch_size)
     )
     episode_item_codes = np.stack([episode.item_codes for episode in episodes])
-    hidden = net.initialZeroState(model_config.bs)
-    eligibility = net.initialZeroET(model_config.bs)
-    fast_weights = net.initialZeroPlasticWeights(model_config.bs)
+    hidden = net.initial_hidden(model_config.bs)
+    eligibility = net.initial_eligibility(model_config.bs)
+    fast_weights = net.initial_fast_weights(model_config.bs)
     device = next(net.parameters()).device
     blank = torch.zeros(model_config.bs, model_config.inputsize, device=device)
     blank_sequence = blank.unsqueeze(0).expand(2, -1, -1)
@@ -410,8 +410,8 @@ def run_optimized_meta_batch(
     )
 
     n_support = len(episodes[0].support_trials)
-    zero_hidden = net.initialZeroState(model_config.bs)
-    zero_eligibility = net.initialZeroET(model_config.bs)
+    zero_hidden = net.initial_hidden(model_config.bs)
+    zero_eligibility = net.initial_eligibility(model_config.bs)
     support_input_sequences = []
     for trial_index in range(n_support):
         trials = [episode.support_trials[trial_index] for episode in episodes]
@@ -480,8 +480,8 @@ def run_optimized_meta_batch(
     )
     response_logits, _, _, _, _, _ = sequence_runner(
         input_sequence,
-        net.initialZeroState(query_batch_size),
-        net.initialZeroET(query_batch_size),
+        net.initial_hidden(query_batch_size),
+        net.initial_eligibility(query_batch_size),
         query_fast_weights,
         False,
     )
@@ -566,21 +566,19 @@ def save_meta_checkpoint(
     if excluded_signatures is None:
         excluded_signatures = registered_excluded_signatures()
     checkpoint_name = Path(checkpoint_filename)
-    if checkpoint_name.name != checkpoint_filename or checkpoint_name.suffix not in {
-        ".pth",
-        ".dat",
-    }:
-        raise ValueError(
-            "checkpoint_filename must be a basename ending in .pth or .dat"
-        )
+    if checkpoint_name.name != checkpoint_filename or checkpoint_name.suffix != ".pth":
+        raise ValueError("new checkpoints must use a basename ending in .pth")
     output_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_path = output_dir / checkpoint_name
     torch.save(net.state_dict(), checkpoint_path)
     metadata = {
-        "schema_version": 1,
+        "schema_version": 2,
         "training": asdict(training_config),
         "completed_outer_steps": step + 1,
+        "model": asdict(net.model_config),
         "checkpoint": {
+            "schema_version": 1,
+            "format": "pytorch_state_dict",
             "path": checkpoint_path.name,
             "sha256": file_sha256(checkpoint_path),
         },
@@ -651,10 +649,12 @@ def train_meta_model(
     )
     resolved_exclusions = task_generator.excluded_signatures
     if optimized_execution:
-        if not profile.compile:
-            raise ValueError("optimized execution requires torch.compile")
         training_net = net
-        sequence_runner = compile_meta_sequence(net, profile)
+        sequence_runner = (
+            compile_meta_sequence(net, profile)
+            if profile.compile
+            else RecurrentSequence(net)
+        )
     else:
         training_net = compile_module(net, profile) if profile.compile else net
         sequence_runner = None
@@ -731,12 +731,18 @@ def parse_args(args=None):
     parser.add_argument("--save-every", type=int, default=500)
     parser.add_argument("--compile-model", action="store_true")
     parser.add_argument(
+        "--execution-schema",
+        choices=("current", "historical"),
+        default="current",
+        help=(
+            "current uses the versioned sequence execution; historical preserves "
+            "the registered stepwise implementation"
+        ),
+    )
+    parser.add_argument(
         "--optimized-execution",
         action="store_true",
-        help=(
-            "use the prospective vectorized trial-sequence execution; implies "
-            "--compile-model"
-        ),
+        help=("compatibility alias for --execution-schema current"),
     )
     parser.add_argument(
         "--compile-mode",
@@ -769,10 +775,15 @@ def main(args=None):
         save_every=parsed.save_every,
         subject_encoding_mode=parsed.subject_encoding,
     )
-    compile_model = parsed.compile_model or parsed.optimized_execution
+    optimized_execution = (
+        parsed.execution_schema == "current" or parsed.optimized_execution
+    )
+    compile_model = parsed.compile_model or (
+        optimized_execution and parsed.device == "cuda"
+    )
     compile_mode = parsed.compile_mode or (
         OPTIMIZED_TRAINING_PROFILE.compile_mode
-        if parsed.optimized_execution and parsed.device == "cuda"
+        if optimized_execution and parsed.device == "cuda"
         else DEFAULT_COMPILED_PROFILE.compile_mode
     )
     profile = ExecutionProfile(
@@ -787,7 +798,7 @@ def main(args=None):
         training_config,
         parsed.output_dir,
         compile_model=compile_model,
-        optimized_execution=parsed.optimized_execution,
+        optimized_execution=optimized_execution,
         execution_profile=profile,
     )
 

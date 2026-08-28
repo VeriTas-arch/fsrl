@@ -17,6 +17,7 @@ from fsrl.workflows.frozen_evidence import (
     load_json,
     restore_test_artifacts,
     summarize_mainline,
+    validate_current_result,
     validate_manifest_structure,
     verify_artifact_bundle,
     verify_evidence_files,
@@ -140,6 +141,25 @@ class FrozenReportingSnapshotTests(unittest.TestCase):
             policy = record["replay_policy"]
             self.assertIn("expected_sha256", policy["exact"])
             self.assertTrue(policy["semantic"]["assertions"])
+
+    def test_current_result_can_pass_semantics_without_byte_identity(self):
+        record_id = "dual_access_confirmation"
+        registration = self.manifest["evidence_files"][
+            self.manifest["execution_records"][record_id]["result"]
+        ]
+        source = resolve_record(registration["path"])
+        document = json.loads(source.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            current_result = Path(directory) / "current-result.json"
+            current_result.write_text(
+                json.dumps(document, indent=1, sort_keys=False) + "\n",
+                encoding="utf-8",
+            )
+            result = validate_current_result(self.manifest, record_id, current_result)
+        self.assertTrue(result["semantic_replay"])
+        self.assertFalse(result["exact_replay"])
+        self.assertEqual(result["replay_outcome"], "semantic_only")
+        self.assertEqual(result["replay_track"], "current_semantic_validation")
 
     def test_report_view_has_four_figures_and_resolved_pointers(self):
         view = load_json(REPORT_VIEW_PATH)

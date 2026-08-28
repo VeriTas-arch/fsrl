@@ -45,8 +45,7 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -322,8 +321,8 @@ def query_pass(
     }
     with torch.no_grad(), evaluator._alpha_zeroed(alpha_zero):
         for pair_index in range(pair_count):
-            hidden = evaluator.net.initialZeroState(subjects)
-            eligibility = evaluator.net.initialZeroET(subjects)
+            hidden = evaluator.net.initial_hidden(subjects)
+            eligibility = evaluator.net.initial_eligibility(subjects)
             left = np.asarray(
                 [schedule[pair_index][0] for schedule in pair_schedules],
                 dtype=np.int64,

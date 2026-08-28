@@ -20,6 +20,7 @@ from typing import Any
 
 from fsrl.infra.git_provenance import git_blob_sha256, verify_git_registrations
 from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.semantic_contract import evaluate_assertions, json_pointer
 from fsrl.infra.study_registry import (
     SYNTHESIS_ROOT,
     registered_file_sha256,
@@ -78,23 +79,6 @@ def _safe_repo_path(value: str) -> Path:
     if pure.is_absolute() or not pure.parts or ".." in pure.parts:
         raise RuntimeError(f"mainline path must be repository-relative: {value}")
     return resolve_record(Path(*pure.parts))
-
-
-def json_pointer(document: Any, pointer: str) -> Any:
-    if pointer == "":
-        return document
-    if not pointer.startswith("/"):
-        raise RuntimeError(f"invalid JSON pointer: {pointer}")
-    value = document
-    for raw in pointer[1:].split("/"):
-        token = raw.replace("~1", "/").replace("~0", "~")
-        if isinstance(value, list):
-            value = value[int(token)]
-        elif isinstance(value, dict):
-            value = value[token]
-        else:
-            raise TypeError(f"JSON pointer crosses a scalar: {pointer}")
-    return value
 
 
 def validate_manifest_structure(manifest: dict) -> dict:
@@ -310,27 +294,39 @@ def verify_artifact_bundle(artifacts: dict | None = None) -> dict:
     }
 
 
-def _assert_semantic(document: dict, assertion: dict) -> dict:
-    observed = json_pointer(document, assertion["json_pointer"])
-    operator = assertion.get("operator", "equals")
-    expected = assertion.get("expected")
-    if operator == "equals":
-        passed = observed == expected
-    elif operator == "is_true":
-        passed = observed is True
-        expected = True
-    elif operator == "less_equal":
-        passed = observed <= expected
-    elif operator == "greater_equal":
-        passed = observed >= expected
-    else:
-        raise RuntimeError(f"unsupported semantic assertion operator: {operator}")
+def validate_current_result(
+    manifest: dict, record_id: str, result_path: Path | str
+) -> dict:
+    """Validate a current implementation result by semantics, not source layout."""
+
+    try:
+        record = manifest["execution_records"][record_id]
+    except KeyError as error:
+        raise KeyError(f"unknown execution record: {record_id}") from error
+    path = Path(result_path)
+    if not path.is_file() or path.is_symlink():
+        raise FileNotFoundError(f"current semantic result is unavailable: {path}")
+    document = load_json(path)
+    assertions = evaluate_assertions(
+        document, record["replay_policy"]["semantic"]["assertions"]
+    )
+    semantic = all(assertion["passed"] for assertion in assertions)
+    if not semantic:
+        raise RuntimeError(f"current result failed semantic assertions: {assertions}")
+    observed_sha256 = file_sha256(path)
+    expected_sha256 = record["replay_policy"]["exact"]["expected_sha256"]
+    exact = observed_sha256 == expected_sha256
     return {
-        "json_pointer": assertion["json_pointer"],
-        "operator": operator,
-        "expected": expected,
-        "observed": observed,
-        "passed": passed,
+        "passed": True,
+        "replay_track": "current_semantic_validation",
+        "record_id": record_id,
+        "result": str(path.resolve()),
+        "expected_sha256": expected_sha256,
+        "observed_sha256": observed_sha256,
+        "exact_replay": exact,
+        "semantic_replay": True,
+        "replay_outcome": "exact_and_semantic" if exact else "semantic_only",
+        "semantic_assertions": assertions,
     }
 
 
@@ -343,10 +339,7 @@ def verify_replay_contracts(manifest: dict) -> dict:
         if policy["exact"]["expected_sha256"] != result_registration["sha256"]:
             raise RuntimeError(f"exact replay hash is not bound to result: {record_id}")
         document = load_json(_safe_repo_path(result_registration["path"]))
-        assertions = [
-            _assert_semantic(document, assertion)
-            for assertion in policy["semantic"]["assertions"]
-        ]
+        assertions = evaluate_assertions(document, policy["semantic"]["assertions"])
         if not assertions or not all(assertion["passed"] for assertion in assertions):
             raise RuntimeError(f"semantic replay contract failed: {record_id}")
         validations.append(
@@ -801,10 +794,9 @@ def replay_stage(stage: str, output: Path | None = None) -> dict:
     expected_sha = record["replay_policy"]["exact"]["expected_sha256"]
     exact = observed_sha == expected_sha
     document = load_json(output)
-    assertions = [
-        _assert_semantic(document, assertion)
-        for assertion in record["replay_policy"]["semantic"]["assertions"]
-    ]
+    assertions = evaluate_assertions(
+        document, record["replay_policy"]["semantic"]["assertions"]
+    )
     semantic = bool(assertions and all(assertion["passed"] for assertion in assertions))
     if not semantic:
         raise RuntimeError(
@@ -812,6 +804,7 @@ def replay_stage(stage: str, output: Path | None = None) -> dict:
         )
     return {
         "passed": True,
+        "replay_track": "historical_execution",
         "stage": stage,
         "record_id": record_id,
         "execution_commit": record["execution_commit"],
@@ -860,6 +853,11 @@ def _parser() -> argparse.ArgumentParser:
     replay = subparsers.add_parser("replay")
     replay.add_argument("--stage", required=True, choices=replay_choices)
     replay.add_argument("--output", type=Path)
+    current = subparsers.add_parser("verify-current")
+    current.add_argument(
+        "--record-id", required=True, choices=sorted(manifest["execution_records"])
+    )
+    current.add_argument("--result", required=True, type=Path)
     return parser
 
 
@@ -877,6 +875,10 @@ def main(args: list[str] | None = None) -> int:
         result = summarize_mainline(parsed.output_dir)
     elif parsed.command == "replay":
         result = replay_stage(parsed.stage, parsed.output)
+    elif parsed.command == "verify-current":
+        result = validate_current_result(
+            load_json(MANIFEST_PATH), parsed.record_id, parsed.result
+        )
     else:
         raise AssertionError(f"unhandled Liu mainline command: {parsed.command}")
     print(json.dumps(result, indent=2, sort_keys=True, allow_nan=False))

@@ -17,7 +17,14 @@ from .backbone import (
     save_meta_checkpoint,
     train_meta_model,
 )
-from .checkpoints import CheckpointInfo, load_retro_checkpoint
+from .checkpoints import (
+    CheckpointInfo,
+    checkpoint_format,
+    convert_legacy_checkpoint,
+    load_checkpoint_state,
+    load_retro_checkpoint,
+    resolve_checkpoint_path,
+)
 
 __all__ = [
     "COMPILED_TRAINING_EXECUTION",
@@ -29,10 +36,14 @@ __all__ = [
     "RecurrentSequence",
     "build_meta_input_sequence",
     "build_meta_inputs",
+    "checkpoint_format",
     "compile_meta_model",
     "compile_meta_sequence",
+    "convert_legacy_checkpoint",
+    "load_checkpoint_state",
     "load_retro_checkpoint",
     "make_model_and_tasks",
+    "resolve_checkpoint_path",
     "run_meta_batch",
     "run_optimized_meta_batch",
     "save_meta_checkpoint",

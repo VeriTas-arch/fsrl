@@ -24,9 +24,9 @@ class EpisodeStats:
 
 def run_episode(config, net, nbcues, print_trace=False):
     """Run one full episode and return the differentiable training loss."""
-    hidden = net.initialZeroState(config.bs)
-    et = net.initialZeroET(config.bs)
-    pw = net.initialZeroPlasticWeights(config.bs)
+    hidden = net.initial_hidden(config.bs)
+    et = net.initial_eligibility(config.bs)
+    pw = net.initial_fast_weights(config.bs)
     cue_data = generate_cue_data(config, nbcues)
 
     reward = np.zeros(config.bs, dtype="float32")
@@ -59,8 +59,8 @@ def run_episode(config, net, nbcues, print_trace=False):
 
     numstep_ep = 0
     for numtrial in range(config.nbtrials):
-        hidden = net.initialZeroState(config.bs)
-        et = net.initialZeroET(config.bs)
+        hidden = net.initial_hidden(config.bs)
+        et = net.initial_eligibility(config.bs)
         cues, _cue_pairs, correct_order, adjacent = prepare_trial(
             config, nbcues, nbtrials
         )

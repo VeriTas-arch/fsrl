@@ -49,9 +49,8 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator, RankingEpisode
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
+from fsrl.tasks.sparse_ranking import GenericRankingTaskGenerator, RankingEpisode
 from fsrl.training.backbone import MetaTrainConfig, build_meta_input_sequence
 
 ROOT = REPO_ROOT
@@ -236,9 +235,9 @@ def run_local_batch(
         task_generator.sample(rng, n_edges=n_edges)
         for _ in range(training_config.batch_size)
     )
-    hidden = backbone.initialZeroState(model_config.bs)
-    eligibility = backbone.initialZeroET(model_config.bs)
-    fast_weights = backbone.initialZeroPlasticWeights(model_config.bs)
+    hidden = backbone.initial_hidden(model_config.bs)
+    eligibility = backbone.initial_eligibility(model_config.bs)
+    fast_weights = backbone.initial_fast_weights(model_config.bs)
     local_state = local.initial_state(model_config.bs)
     blank = torch.zeros(
         model_config.bs, model_config.inputsize, device=fast_weights.device
@@ -249,8 +248,8 @@ def run_local_batch(
         )
 
     n_support = len(episodes[0].support_trials)
-    zero_hidden = backbone.initialZeroState(model_config.bs)
-    zero_eligibility = backbone.initialZeroET(model_config.bs)
+    zero_hidden = backbone.initial_hidden(model_config.bs)
+    zero_eligibility = backbone.initial_eligibility(model_config.bs)
     evidence_index = model_config.nbstimbits + DISTANCE_INPUT_OFFSET
     for trial_index in range(n_support):
         hidden = zero_hidden
@@ -523,8 +522,8 @@ def query_pass(
     all_pairs = ordered_pairs(evaluator.protocol.n_items)
     with torch.no_grad():
         for pair_index in range(pair_count):
-            hidden = evaluator.net.initialZeroState(subjects)
-            eligibility = evaluator.net.initialZeroET(subjects)
+            hidden = evaluator.net.initial_hidden(subjects)
+            eligibility = evaluator.net.initial_eligibility(subjects)
             left = np.asarray(
                 [schedule[pair_index][0] for schedule in pair_schedules], dtype=np.int64
             )

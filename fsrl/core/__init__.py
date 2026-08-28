@@ -2,6 +2,7 @@
 
 from .inputs import RelationalInputLayout
 from .local_trace import ConjunctiveLocalTrace, antisymmetric_conjunctive_key
+from .model_config import RetroModelConfig
 from .plastic_rnn import RetroModulRNN
 from .relational_system import (
     GlobalLocalRelationalSystem,
@@ -20,6 +21,7 @@ __all__ = [
     "RelationalInputLayout",
     "RelationalIntervention",
     "RelationalQueryReadout",
+    "RetroModelConfig",
     "RetroModulRNN",
     "antisymmetric_conjunctive_key",
 ]

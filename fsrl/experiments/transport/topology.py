@@ -7,6 +7,7 @@ import copy
 import hashlib
 import json
 from dataclasses import asdict
+from functools import lru_cache
 from itertools import combinations, product
 from pathlib import Path
 
@@ -46,6 +47,10 @@ from fsrl.experiments.local_fidelity.evidence_access_pilot import (
 from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
+from fsrl.infra.semantic_contract import (
+    evaluate_semantic_contract,
+    load_semantic_contract,
+)
 from fsrl.infra.study_registry import (
     canonical_file_registration,
     legacy_identifier,
@@ -55,8 +60,7 @@ from fsrl.infra.study_registry import (
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol, ordered_pairs
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -75,6 +79,9 @@ DEFAULT_ATTEMPT1_PATH = resolve_record(
     "results/liu_support_topology_transport_v1.attempt1.json"
 )
 DEFAULT_RESULT_PATH = resolve_record("results/liu_support_topology_transport_v1.json")
+DECISION_CONTRACT_PATH = (
+    Path(__file__).with_name("contracts") / "topology_within_cell_v1.json"
+)
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/support_topology_transport.py",
     "tests": "tests/test_support_topology_transport.py",
@@ -627,81 +634,19 @@ def support_schedule_hash(evaluator: FrozenFastWeightEvaluator) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
-def _summary_value(summary: dict, boundary: str) -> float | None:
-    return summary.get("bootstrap", {}).get(boundary)
+@lru_cache(maxsize=1)
+def _decision_contract() -> dict:
+    return load_semantic_contract(DECISION_CONTRACT_PATH)
 
 
 def within_cell_decision(metrics: dict, integrity: dict) -> dict:
-    intact = metrics["conditions"]["intact"]["summary"]
-    p_off = metrics["conditions"]["P_off_a_on"]["summary"]
-    constructive = metrics["constructive"]["summary"]
-    individualized = metrics["individualized"]
-    global_loo = metrics["global_relation_LOO"]["summary"]
-    contrasts = metrics["contrasts"]
-    local = metrics["local_exactness"]
-    criteria = {
-        "intact_competence": bool(
-            _summary_value(intact["exact_decision_accuracy"]["learned"], "lower") > 0.50
-            and _summary_value(intact["exact_decision_accuracy"]["nonlearned"], "lower")
-            > 0.50
-        ),
-        "constructive_global_structure": bool(
-            _summary_value(constructive["intact_gradient_energy_fraction"], "lower")
-            >= 0.95
-            and _summary_value(constructive["a_off_gradient_energy_fraction"], "lower")
-            >= 0.95
-            and _summary_value(
-                constructive["intact_transitive_triplet_fraction"], "lower"
-            )
-            >= 0.95
-            and _summary_value(
-                constructive["intact_hodge_order_kendall_tau_to_true"], "lower"
-            )
-            > 0.0
-        ),
-        "individualized_stable_structure": bool(
-            individualized["eligible_noncorrect_subjects"] >= 2
-            and individualized["mean_pairwise_kendall_tau"]["bootstrap"]["upper"] < 0.80
-            and individualized["stable_error_80_prevalence"]["bootstrap"]["lower"]
-            >= 0.80
-        ),
-        "P_off_global_collapse": bool(
-            _summary_value(p_off["correct_probability"]["nonlearned"], "upper") <= 0.55
-            and _summary_value(
-                contrasts["P_off_local_remote_minus_quarter_global"], "upper"
-            )
-            < 0.0
-        ),
-        "P_remote_reassembly": bool(
-            _summary_value(global_loo["remote_absolute"], "lower") > 0.0
-            and _summary_value(global_loo["third_party_relational"], "lower") > 0.0
-        ),
-        "a_off_direct_loss": bool(
-            _summary_value(contrasts["intact_minus_a_off_learned_probability"], "lower")
-            > 0.0
-        ),
-        "P_off_a_on_direct_nontransitive": bool(
-            _summary_value(p_off["correct_probability"]["learned"], "lower") > 0.50
-            and _summary_value(
-                contrasts["P_off_learned_minus_nonlearned_probability"], "lower"
-            )
-            > 0.0
-        ),
-        "exact_local_compression": bool(
-            local["tensor_state_max_abs_error"] <= 1e-6
-            and local["ledger_tensor_state_max_abs_error"] <= 1e-6
-            and local["all_query_raw_read_max_abs_error"] <= 1e-6
-        ),
-    }
-    flags = {
-        name: bool(integrity["all_passed"] and value)
-        for name, value in criteria.items()
-    }
+    evaluation = evaluate_semantic_contract(
+        {"metrics": metrics, "integrity": integrity}, _decision_contract()
+    )
     return {
-        "interpretable": bool(integrity["all_passed"]),
-        "competence_passed": flags["intact_competence"],
-        "all_eight_primary_links_pass": all(flags.values()),
-        "flags": flags,
+        "interpretable": evaluation["interpretable"],
+        **evaluation["decision_outputs"],
+        "flags": evaluation["flags"],
     }
 
 

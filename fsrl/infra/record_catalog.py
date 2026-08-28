@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import tomllib
 from collections import Counter
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,73 @@ def _load_toml(path: Path) -> dict[str, Any]:
 
 def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=1)
+def load_record_catalog(path: Path = CATALOG_PATH) -> dict[str, Any]:
+    """Load the checked-in logical record catalog.
+
+    Callers use stable ``record_id`` values for current code. Historical
+    locators remain catalog metadata and are not reconstructed by consumers.
+    """
+
+    return _load_json(path)
+
+
+@lru_cache(maxsize=1)
+def record_catalog_lookup(path: Path = CATALOG_PATH) -> dict[str, dict[str, Any]]:
+    """Index catalog entries by their stable logical record ID."""
+
+    catalog = load_record_catalog(path)
+    records = catalog.get("records", [])
+    lookup = {record["record_id"]: record for record in records}
+    if len(lookup) != len(records):
+        raise RuntimeError("record catalog contains duplicate logical IDs")
+    return lookup
+
+
+def catalog_record(record_id: str) -> dict[str, Any]:
+    """Return one catalog entry selected without a historical path alias."""
+
+    try:
+        return record_catalog_lookup()[record_id]
+    except KeyError as error:
+        raise KeyError(f"unknown registered record ID: {record_id}") from error
+
+
+def resolve_record_id(record_id: str) -> Path:
+    """Resolve one materialized record from its stable logical ID."""
+
+    record = catalog_record(record_id)
+    repository_path = record.get("locator", {}).get("repository_path")
+    if record.get("availability") != "materialized" or not repository_path:
+        raise FileNotFoundError(f"registered record is not materialized: {record_id}")
+    path = REPO_ROOT / safe_relative_path(repository_path)
+    if not path.is_file():
+        raise FileNotFoundError(f"registered record is unavailable: {record_id}")
+    return path
+
+
+def record_reference(record_id: str) -> dict[str, Any]:
+    """Return explicit logical, historical, and current identities for a record."""
+
+    record = catalog_record(record_id)
+    result = {
+        "record_id": record_id,
+        "availability": record["availability"],
+        "registered_identity": record["registered_identity"],
+        "materialized_identity": record["materialized_identity"],
+        "repository_path": record["locator"]["repository_path"],
+    }
+    if record["availability"] == "materialized":
+        path = resolve_record_id(record_id)
+        observed = {
+            "sha256": file_sha256(path),
+            "bytes": path.stat().st_size,
+        }
+        if observed != record["materialized_identity"]:
+            raise RuntimeError(f"materialized record identity mismatch: {record_id}")
+    return result
 
 
 def _normalization(format_name: str, byte_count: int) -> dict[str, Any]:

@@ -39,7 +39,7 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -137,8 +137,8 @@ def trace_support_trial(
         if scales.shape != (evaluator.config.bs,):
             raise ValueError("evidence_scales must have one value per subject")
     left, right, signed, time_value = _trial_inputs(evaluator, trial_index, scales)
-    hidden = evaluator.net.initialZeroState(evaluator.config.bs)
-    eligibility = evaluator.net.initialZeroET(evaluator.config.bs)
+    hidden = evaluator.net.initial_hidden(evaluator.config.bs)
+    eligibility = evaluator.net.initial_eligibility(evaluator.config.bs)
     current = fast_weights.detach().clone()
     da_steps = []
     eligibility_steps = []
@@ -207,7 +207,7 @@ def readout_effective_margin_fields(
     outputs = [{} for _ in range(evaluator.config.bs)]
     with torch.no_grad():
         for pair_index in range(len(schedules[0])):
-            hidden = evaluator.net.initialZeroState(evaluator.config.bs)
+            hidden = evaluator.net.initial_hidden(evaluator.config.bs)
             left = np.asarray(
                 [schedule[pair_index][0] for schedule in schedules], dtype=np.int64
             )

@@ -24,7 +24,7 @@ from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/hidden_residual_audit_v1.json")

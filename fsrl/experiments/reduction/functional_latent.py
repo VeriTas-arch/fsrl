@@ -20,7 +20,8 @@ from fsrl.infra.study_registry import (
     resolve_record,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator
+from fsrl.tasks.holdouts import registered_holdout_signatures
+from fsrl.tasks.sparse_ranking import GenericRankingTaskGenerator
 
 from . import dual_state_v1 as v1
 
@@ -184,7 +185,7 @@ def extract_backbone(
         min_edges=7,
         max_edges=10,
         support_blocks=4,
-        exclude_liu_graph=True,
+        excluded_signatures=registered_holdout_signatures(),
         subject_encoding_mode="stable_omission",
     )
     rng = np.random.default_rng(rng_seed)

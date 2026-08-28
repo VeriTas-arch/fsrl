@@ -22,7 +22,7 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(

@@ -21,7 +21,7 @@ from fsrl.experiments.confirmation.behavioral import validate_checkpoint
 from fsrl.experiments.human.benchmark import (
     DEFAULT_PREREGISTERED_PATH,
     DEFAULT_REPLICATION_PATH,
-    SOURCE_FILES,
+    LIU_DATASET_FILES,
     load_human_cohort,
 )
 from fsrl.infra.provenance import file_sha256, load_json
@@ -33,7 +33,7 @@ from fsrl.infra.study_registry import (
     resolve_registered_path as resolve_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_diagnostics_v1.json")
@@ -329,13 +329,13 @@ def load_human_choice_fields(
         DEFAULT_PREREGISTERED_PATH,
         "preregistered",
         protocol,
-        expected_sha256=SOURCE_FILES["preregistered"]["sha256"],
+        expected_sha256=LIU_DATASET_FILES["preregistered"]["sha256"],
     )
     replication = load_human_cohort(
         DEFAULT_REPLICATION_PATH,
         "replication",
         protocol,
-        expected_sha256=SOURCE_FILES["replication"]["sha256"],
+        expected_sha256=LIU_DATASET_FILES["replication"]["sha256"],
     )
     eligible = [
         subject

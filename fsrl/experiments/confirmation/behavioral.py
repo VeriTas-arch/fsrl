@@ -21,12 +21,13 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.meta_tasks import held_out_liu_graph_signatures
+from fsrl.tasks.holdouts import registered_holdout_signatures
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
     MetaTrainConfig,
     train_meta_model,
 )
+from fsrl.training.checkpoints import resolve_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/confirmation_v1.json")
@@ -202,7 +203,7 @@ def validate_checkpoint(checkpoint: Path, specification: dict, seed: int) -> dic
             "held_out_rank_graph_signatures", []
         )
     }
-    if observed_signatures != set(held_out_liu_graph_signatures()):
+    if observed_signatures != set(registered_holdout_signatures()):
         raise RuntimeError(
             f"seed {seed} training did not exclude both Liu graph signatures"
         )
@@ -225,7 +226,7 @@ def train_confirmation_seed(
     _require_registered_runtime(specification)
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
-    checkpoint = seed_dir / "net.dat"
+    checkpoint = resolve_checkpoint_path(seed_dir)
     if checkpoint.exists():
         validate_checkpoint(checkpoint, specification, seed)
         return checkpoint
@@ -233,7 +234,6 @@ def train_confirmation_seed(
         _training_config(specification, seed),
         seed_dir,
         compile_model=specification["confirmation_id"] == FORMAL_CONFIRMATION_ID,
-        checkpoint_filename="net.dat",
     )
     validate_checkpoint(checkpoint, specification, seed)
     return checkpoint
@@ -330,7 +330,7 @@ def evaluate_confirmation_seed(
     runtime = _require_registered_runtime(specification)
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
-    checkpoint = seed_dir / "net.dat"
+    checkpoint = resolve_checkpoint_path(seed_dir)
     checkpoint_metadata = validate_checkpoint(checkpoint, specification, seed)
     evaluation = specification["evaluation"]
 

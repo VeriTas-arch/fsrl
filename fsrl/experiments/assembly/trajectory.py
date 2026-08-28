@@ -42,7 +42,7 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_trajectory_v1.json")
@@ -621,7 +621,7 @@ def summarize_baselines(
     *,
     interval: float,
 ) -> tuple[dict, dict]:
-    zero_weights = evaluator.net.initialZeroPlasticWeights(evaluator.config.bs)
+    zero_weights = evaluator.net.initial_fast_weights(evaluator.config.bs)
     write_off_weights = evaluator.learn_fast_weights(FastWeightIntervention.WRITE_OFF)
     alpha_zero_weights = evaluator.learn_fast_weights(FastWeightIntervention.ALPHA_ZERO)
     fields = {

@@ -30,12 +30,12 @@ from fsrl.experiments.human.benchmark import (
     DEFAULT_FIGURE3B_PATH,
     DEFAULT_PREREGISTERED_PATH,
     DEFAULT_REPLICATION_PATH,
-    SOURCE_FILES,
+    LIU_DATASET_FILES,
     load_human_cohort,
     load_published_figure_checks,
 )
 from fsrl.infra.study_registry import ROOT, resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 SUITE_ROOT = ROOT / "synthesis" / "figures" / "paper_alignment"
 SPECIFICATION_PATH = SUITE_ROOT / "figure_spec.json"
@@ -398,13 +398,13 @@ def _load_human_subjects(protocol) -> tuple[list[dict], dict, dict]:
         DEFAULT_PREREGISTERED_PATH,
         "preregistered",
         protocol,
-        expected_sha256=SOURCE_FILES["preregistered"]["sha256"],
+        expected_sha256=LIU_DATASET_FILES["preregistered"]["sha256"],
     )
     replication = load_human_cohort(
         DEFAULT_REPLICATION_PATH,
         "replication",
         protocol,
-        expected_sha256=SOURCE_FILES["replication"]["sha256"],
+        expected_sha256=LIU_DATASET_FILES["replication"]["sha256"],
     )
     published = load_published_figure_checks(
         DEFAULT_FIGURE2D_PATH, DEFAULT_FIGURE3B_PATH, protocol

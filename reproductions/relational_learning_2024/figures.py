@@ -22,7 +22,7 @@ CAPSULE_ROOT = Path(__file__).resolve().parent
 CHECKPOINT_ROOT = CAPSULE_ROOT / "checkpoints"
 
 ALPHABET = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
-MODEL_FILENAMES = ("net.dat", "net_active.dat", "net_passive.dat")
+MODEL_FILENAMES = ("net.pth", "net.dat", "net_active.dat", "net_passive.dat")
 
 
 def default_params(batch_size):
@@ -212,9 +212,9 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
 
         if episode_index % params["nbepsbwresets"] == 0:
             old_cue_data = []
-            hidden = net.initialZeroState(batch_size)
-            et = net.initialZeroET(batch_size)
-            pw = net.initialZeroPlasticWeights(batch_size)
+            hidden = net.initial_hidden(batch_size)
+            et = net.initial_eligibility(batch_size)
+            pw = net.initial_fast_weights(batch_size)
         else:
             hidden = hidden.detach()
             et = et.detach()
@@ -259,8 +259,8 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
             file=sys.stdout,
         )
         for trial_index in trial_iter:
-            hidden = net.initialZeroState(batch_size)
-            et = net.initialZeroET(batch_size)
+            hidden = net.initial_hidden(batch_size)
+            et = net.initial_eligibility(batch_size)
 
             cues = []
             cue_pairs_thistrial = []
@@ -585,8 +585,8 @@ def single_item_alignment(result, params, net):
         inputs1 = inputs0.clone()
         inputs1[:, :nbstimbits] = 0
 
-        hidden = net.initialZeroState(batch_size)
-        et = net.initialZeroET(batch_size)
+        hidden = net.initial_hidden(batch_size)
+        et = net.initial_eligibility(batch_size)
 
         _, _, _, hidden, et, pw = net(inputs0, hidden, et, pwtest)
         _, _, _, hiddenout, _, _ = net(inputs1, hidden, et, pw)

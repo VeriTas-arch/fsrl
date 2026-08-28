@@ -56,6 +56,43 @@ Eponymous protocol names remain only where they identify frozen historical
 records or compatibility APIs. New workflow and package names describe the
 scientific computation instead.
 
+## Equivalence and compatibility boundaries
+
+Current code is allowed to change structure without imitating a historical
+checkout. The boundary is explicit:
+
+- registered records are selected by stable `record_id`; the catalog exposes
+  historical registered identity and current materialized identity separately;
+- exact historical replay runs at its recorded Git commit, while current
+  outputs are accepted through versioned semantic assertions;
+- current semantic replay rules are versioned in checked-in contract JSON whose
+  source points to one registered protocol record. The active topology and item-
+  count transport decisions use this boundary now; protocol-specific rules in
+  other frozen study runners remain historical-execution code until migrated
+  one study at a time, and are not current public APIs;
+- new checkpoints are plain state dictionaries written as `.pth`; `.dat` is a
+  read-only legacy input and can be materialized as a byte-identical `.pth`
+  view;
+- structured declarations use TOML, contracts/results/metadata use JSON,
+  append-only runtime logs use JSONL, and dense numeric arrays use NPZ. CSV is
+  reserved for external or tabular interchange. New model weights do not use
+  `.dat`, `.pt`, pickle, or NPY; `.pt` remains reserved for a serialized program
+  if one is ever explicitly registered;
+- `RetroModelConfig`, `PlasticRNNState`, protocol IDs, and explicit holdout
+  signatures are the current model/task APIs. CamelCase state methods,
+  v1-default protocol imports, and the `exclude_liu_graph` switch are confined
+  to compatibility adapters. `TrainConfig` still carries the historical
+  episode/evaluation field names, but model construction crosses one typed
+  `RetroModelConfig` boundary instead of spreading its short-key dictionary;
+- high-level training and causal evaluation default to the current versioned
+  sequence/batched execution. Historical stepwise execution remains an
+  explicit profile and is never silently substituted for a frozen lock.
+
+Equivalence is layered: bytes for immutable evidence and normalized legacy
+views; exact tensors/state dictionaries for adapters; numerical trajectory and
+gradient parity for execution refactors; semantic decision parity for result
+documents; and unchanged claim boundaries at the workflow layer.
+
 ## External-paper reproduction
 
 The original rewarded relational-learning implementation is not part of this

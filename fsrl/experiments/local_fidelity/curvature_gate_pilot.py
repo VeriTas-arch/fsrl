@@ -52,9 +52,9 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model
+from fsrl.training.checkpoints import resolve_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
@@ -137,13 +137,12 @@ def _backbone_training_config(specification: dict) -> MetaTrainConfig:
 def train_backbone(specification: dict, output_root: Path, runtime: dict) -> Path:
     training = _backbone_training_config(specification)
     seed_dir = output_root / f"seed-{training.seed}" / "backbone"
-    checkpoint = seed_dir / "net.dat"
+    checkpoint = resolve_checkpoint_path(seed_dir)
     if not checkpoint.exists():
         train_meta_model(
             training,
             seed_dir,
             compile_model=True,
-            checkpoint_filename="net.dat",
         )
     metadata = load_json(seed_dir / "config.json")
     if metadata["training"] != asdict(training):
@@ -340,8 +339,8 @@ def query_pass(
     applied_gammas = np.empty_like(logits)
     with torch.no_grad(), evaluator._alpha_zeroed(alpha_zero):
         for pair_index in range(pair_count):
-            hidden = evaluator.net.initialZeroState(subjects)
-            eligibility = evaluator.net.initialZeroET(subjects)
+            hidden = evaluator.net.initial_hidden(subjects)
+            eligibility = evaluator.net.initial_eligibility(subjects)
             left = np.asarray(
                 [schedule[pair_index][0] for schedule in pair_schedules],
                 dtype=np.int64,
@@ -1281,7 +1280,9 @@ def main(args=None) -> int:
     source_validation = validate_sources(parsed.specification, parsed.lock)
     specification = load_json(parsed.specification)
     seed = int(specification["development_seed_contract"]["mandatory_seed"])
-    checkpoint = parsed.output_root / f"seed-{seed}" / "backbone" / "net.dat"
+    checkpoint = resolve_checkpoint_path(
+        parsed.output_root / f"seed-{seed}" / "backbone"
+    )
     artifact = parsed.output_root / f"seed-{seed}" / "gate" / "gate.json"
     if parsed.stage in ("train-backbone", "all"):
         checkpoint = train_backbone(specification, parsed.output_root, runtime)

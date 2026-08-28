@@ -52,9 +52,9 @@ from fsrl.infra.study_registry import (
     resolve_registered_path,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model
+from fsrl.training.checkpoints import resolve_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -126,7 +126,7 @@ def seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
     seed_dir = output_root / f"seed-{seed}"
     return {
         "backbone_dir": seed_dir / "backbone",
-        "checkpoint": seed_dir / "backbone" / "net.dat",
+        "checkpoint": resolve_checkpoint_path(seed_dir / "backbone"),
         "backbone_config": seed_dir / "backbone" / "config.json",
         "backbone_log": seed_dir / "backbone" / "train_log.jsonl",
         "backbone_manifest": seed_dir / "backbone" / "replication_manifest.json",
@@ -232,7 +232,6 @@ def train_backbone(
         training,
         paths["backbone_dir"],
         compile_model=True,
-        checkpoint_filename="net.dat",
     )
     manifest = {
         "schema_version": 1,

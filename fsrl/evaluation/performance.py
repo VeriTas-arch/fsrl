@@ -20,7 +20,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
 )
 from fsrl.infra.runtime import ExecutionProfile, configure_runtime
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 def _synchronize() -> None:
@@ -94,7 +94,7 @@ def benchmark_frozen_evaluation(
     )
     runtime = configure_runtime(profile)
     torch.manual_seed(1701)
-    protocol = load_ranking_protocol()
+    protocol = load_registered_protocol("liu_v1")
     config = TrainConfig(
         bs=batch_size,
         hs=hidden_size,

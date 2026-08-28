@@ -282,9 +282,10 @@ class MetaTrainingTests(unittest.TestCase):
             COMPILED_TRAINING_EXECUTION,
         )
 
-    def test_cli_keeps_legacy_mode_and_selects_prospective_cuda_mode(self):
+    def test_cli_defaults_current_and_keeps_historical_mode_explicit(self):
         cases = (
-            (["--compile-model"], "default", False),
+            ([], "reduce-overhead", True),
+            (["--execution-schema", "historical", "--compile-model"], "default", False),
             (["--optimized-execution"], "reduce-overhead", True),
             (
                 [
@@ -317,6 +318,20 @@ class MetaTrainingTests(unittest.TestCase):
                     optimized_execution,
                 )
 
+    def test_current_cpu_schema_uses_sequence_execution_without_compilation(self):
+        with patch("fsrl.training.backbone.train_meta_model") as trainer:
+            training_main(
+                [
+                    "--output-dir",
+                    "/tmp/fsrl-training-cli-test",
+                    "--device",
+                    "cpu",
+                ]
+            )
+        profile = trainer.call_args.kwargs["execution_profile"]
+        self.assertFalse(profile.compile)
+        self.assertTrue(trainer.call_args.kwargs["optimized_execution"])
+
     def test_saved_config_is_valid_json_and_registers_held_out_graph(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             output_dir = Path(temp_dir)
@@ -330,6 +345,11 @@ class MetaTrainingTests(unittest.TestCase):
             with (output_dir / "config.json").open(encoding="utf-8") as handle:
                 metadata = json.load(handle)
             self.assertTrue((output_dir / "net.pth").is_file())
+            self.assertEqual(metadata["schema_version"], 2)
+            self.assertEqual(
+                metadata["model"]["hidden_size"], self.net.model_config.hidden_size
+            )
+            self.assertEqual(metadata["checkpoint"]["format"], "pytorch_state_dict")
             self.assertEqual(metadata["checkpoint"]["path"], "net.pth")
             self.assertTrue(metadata["task_distribution"]["liu_graph_held_out"])
             self.assertFalse(
@@ -364,15 +384,15 @@ class MetaTrainingTests(unittest.TestCase):
         self.assertEqual(metadata["runtime"], runtime)
         self.assertEqual(metadata["execution"]["runtime_profile"]["blas_threads"], 1)
 
-    def test_legacy_checkpoint_suffix_requires_explicit_compatibility_name(self):
+    def test_new_checkpoint_writer_rejects_legacy_suffix(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             output_dir = Path(temp_dir)
-            save_meta_checkpoint(
-                output_dir,
-                self.net,
-                self.training_config,
-                step=0,
-                checkpoint_filename="net.dat",
-            )
-            metadata = json.loads((output_dir / "config.json").read_text())
-        self.assertEqual(metadata["checkpoint"]["path"], "net.dat")
+            with self.assertRaisesRegex(ValueError, "must use.*\\.pth"):
+                save_meta_checkpoint(
+                    output_dir,
+                    self.net,
+                    self.training_config,
+                    step=0,
+                    checkpoint_filename="net.dat",
+                )
+            self.assertFalse((output_dir / "net.dat").exists())

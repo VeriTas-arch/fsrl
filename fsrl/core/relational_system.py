@@ -44,7 +44,7 @@ class GlobalLocalRelationalSystem(nn.Module):
         response_step: int = RESPONSE_STEP,
     ) -> None:
         super().__init__()
-        if backbone.GG["cs"] != local_trace.cue_size:
+        if backbone.model_config.cue_size != local_trace.cue_size:
             raise ValueError("backbone and local trace use different cue sizes")
         if response_step < 0:
             raise ValueError("response_step must be non-negative")
@@ -54,7 +54,7 @@ class GlobalLocalRelationalSystem(nn.Module):
 
     @property
     def cue_size(self) -> int:
-        return int(self.backbone.GG["cs"])
+        return self.backbone.model_config.cue_size
 
     def initialize_episode(
         self, batch_size: int, *, blank_steps: int = 2
@@ -64,7 +64,9 @@ class GlobalLocalRelationalSystem(nn.Module):
         if blank_steps < 0:
             raise ValueError("blank_steps must be non-negative")
         recurrent = self.backbone.initial_state(batch_size)
-        blank = recurrent.hidden.new_zeros(batch_size, self.backbone.GG["inputsize"])
+        blank = recurrent.hidden.new_zeros(
+            batch_size, self.backbone.model_config.input_size
+        )
         hidden = recurrent.hidden
         eligibility = recurrent.eligibility
         fast_weights = recurrent.fast_weights
@@ -88,8 +90,8 @@ class GlobalLocalRelationalSystem(nn.Module):
         local_write: bool = True,
     ) -> RelationalEpisodeState:
         self._validate_sequence(state, input_sequence, pair_cues)
-        hidden = self.backbone.initialZeroState(input_sequence.shape[1])
-        eligibility = self.backbone.initialZeroET(input_sequence.shape[1])
+        hidden = self.backbone.initial_hidden(input_sequence.shape[1])
+        eligibility = self.backbone.initial_eligibility(input_sequence.shape[1])
         fast_weights = state.global_fast_weights
         local_state = state.local_trace
         if local_write:
@@ -115,8 +117,8 @@ class GlobalLocalRelationalSystem(nn.Module):
         if input_sequence.shape[0] <= self.response_step:
             raise ValueError("query sequence does not contain the response step")
         batch_size = input_sequence.shape[1]
-        hidden = self.backbone.initialZeroState(batch_size)
-        eligibility = self.backbone.initialZeroET(batch_size)
+        hidden = self.backbone.initial_hidden(batch_size)
+        eligibility = self.backbone.initial_eligibility(batch_size)
         fast_weights = state.global_fast_weights
         if intervention == RelationalIntervention.GLOBAL_OFF:
             fast_weights = torch.zeros_like(fast_weights)
@@ -155,7 +157,7 @@ class GlobalLocalRelationalSystem(nn.Module):
         if input_sequence.ndim != 3:
             raise ValueError("input_sequence must be [steps, batch, input]")
         batch_size = input_sequence.shape[1]
-        if input_sequence.shape[2] != self.backbone.GG["inputsize"]:
+        if input_sequence.shape[2] != self.backbone.model_config.input_size:
             raise ValueError("input sequence does not match backbone input width")
         if state.global_fast_weights.shape[0] != batch_size:
             raise ValueError("global state batch does not match input sequence")

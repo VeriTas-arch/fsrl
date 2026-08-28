@@ -12,7 +12,8 @@ from torch import nn
 from fsrl.core.config import DEVICE, NUMRESPONSESTEP, TrainConfig
 from fsrl.core.local_trace import inverse_softplus
 from fsrl.core.plastic_rnn import RetroModulRNN
-from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator, RankingEpisode
+from fsrl.tasks.holdouts import registered_holdout_signatures
+from fsrl.tasks.sparse_ranking import GenericRankingTaskGenerator, RankingEpisode
 from fsrl.training.backbone import MetaTrainConfig, build_meta_input_sequence
 
 
@@ -66,7 +67,7 @@ class CurvatureGateTransition(nn.Module):
         gamma_override: torch.Tensor | None = None,
     ):
         batch_size = inputs.shape[0]
-        hidden_size = self.backbone.GG["hs"]
+        hidden_size = self.backbone.model_config.hidden_size
         hidden_column = hidden.view(batch_size, hidden_size, 1)
         baseline = (
             self.backbone.i2h(inputs).view(batch_size, hidden_size, 1)
@@ -146,9 +147,9 @@ def run_gate_batch(
         task_generator.sample(rng, n_edges=n_edges)
         for _ in range(training_config.batch_size)
     )
-    hidden = backbone.initialZeroState(model_config.bs)
-    eligibility = backbone.initialZeroET(model_config.bs)
-    fast_weights = backbone.initialZeroPlasticWeights(model_config.bs)
+    hidden = backbone.initial_hidden(model_config.bs)
+    eligibility = backbone.initial_eligibility(model_config.bs)
+    fast_weights = backbone.initial_fast_weights(model_config.bs)
     blank = torch.zeros(model_config.bs, model_config.inputsize, device=DEVICE)
     for _ in range(2):
         _, _, _, hidden, eligibility, fast_weights = backbone(
@@ -156,8 +157,8 @@ def run_gate_batch(
         )
 
     n_support = len(episodes[0].support_trials)
-    zero_hidden = backbone.initialZeroState(model_config.bs)
-    zero_eligibility = backbone.initialZeroET(model_config.bs)
+    zero_hidden = backbone.initial_hidden(model_config.bs)
+    zero_eligibility = backbone.initial_eligibility(model_config.bs)
     for trial_index in range(n_support):
         hidden = zero_hidden
         eligibility = zero_eligibility
@@ -252,6 +253,6 @@ def make_gate_tasks(training_config: MetaTrainConfig) -> GenericRankingTaskGener
         min_edges=training_config.min_edges,
         max_edges=training_config.max_edges,
         support_blocks=training_config.support_blocks,
-        exclude_liu_graph=True,
+        excluded_signatures=registered_holdout_signatures(),
         subject_encoding_mode=training_config.subject_encoding_mode,
     )

@@ -1,9 +1,16 @@
+import tempfile
 import unittest
 from pathlib import Path
 
+import numpy as np
+import torch
+
+from fsrl.core import RetroModelConfig, RetroModulRNN
+from fsrl.core.config import TrainConfig
 from fsrl.paths import REPO_ROOT
 from reproductions.relational_learning_2024 import figures
 from reproductions.relational_learning_2024.cli import parse_args
+from reproductions.relational_learning_2024.training import save_checkpoint
 from reproductions.relational_learning_2024.verify import verify_manifest
 
 ROOT = REPO_ROOT
@@ -25,6 +32,37 @@ class ReproductionCapsuleTests(unittest.TestCase):
         parsed = parse_args([])
         output = Path(parsed.output_dir)
         self.assertTrue(output.is_relative_to(ROOT / "artifacts"))
+
+    def test_maintained_training_writes_only_canonical_binary_formats(self):
+        config = TrainConfig(rngseed=7, bs=2, hs=4, cs=3)
+        model_config = RetroModelConfig(
+            input_size=config.inputsize,
+            hidden_size=config.hs,
+            output_size=config.outputsize,
+            batch_size=config.bs,
+        )
+        torch.manual_seed(89)
+        net = RetroModulRNN(model_config, device="cpu")
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            save_checkpoint(config, net, output, [0.1, 0.2, 0.3])
+            self.assertEqual(
+                {path.name for path in output.iterdir()},
+                {"net.pth", "training_metrics.npz"},
+            )
+            with np.load(output / "training_metrics.npz", allow_pickle=False) as data:
+                np.testing.assert_array_equal(data["episode"], [0])
+                np.testing.assert_allclose(data["test_reward"], [0.1])
+
+    def test_model_directory_prefers_pth_but_reads_legacy_dat(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            legacy = root / "net.dat"
+            legacy.write_bytes(b"legacy")
+            self.assertEqual(figures.resolve_model_path_from_dir(root), legacy)
+            canonical = root / "net.pth"
+            canonical.write_bytes(b"canonical")
+            self.assertEqual(figures.resolve_model_path_from_dir(root), canonical)
 
     def test_old_flat_reproduction_paths_are_absent(self):
         for path in (

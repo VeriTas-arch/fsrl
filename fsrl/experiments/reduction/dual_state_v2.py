@@ -22,7 +22,7 @@ from fsrl.infra.study_registry import (
     resolve_record,
 )
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 from . import dual_state_v1 as v1
 

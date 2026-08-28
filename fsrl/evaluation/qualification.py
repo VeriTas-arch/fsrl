@@ -7,9 +7,11 @@ import json
 from pathlib import Path
 
 from fsrl.infra.provenance import load_json
-from fsrl.infra.study_registry import resolve_record
+from fsrl.infra.record_catalog import resolve_record_id
 
-DEFAULT_QUALIFICATION_PATH = resolve_record("benchmarks/qualification_v2.json")
+DEFAULT_QUALIFICATION_PATH = resolve_record_id(
+    "study.formal_behavioral_confirmation.benchmarks_qualification_v2_json"
+)
 
 
 def evaluate_qualification(result: dict, specification: dict) -> dict:
