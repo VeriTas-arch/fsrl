@@ -182,9 +182,11 @@ def deterministic_cue_codes(
 class FrozenFastWeightEvaluator:
     """Evaluate one shared network under explicit fast-weight interventions."""
 
+    _required_protocol_item_count: int | None = 8
+
     def __init__(
         self,
-        net: RetroModulRNN,
+        net: RetroModulRNN | None,
         config: TrainConfig,
         protocol: RankingProtocol,
         *,
@@ -197,12 +199,18 @@ class FrozenFastWeightEvaluator:
         backend: FrozenEvaluationBackend
         | str = FrozenEvaluationBackend.LEGACY_STEPWISE,
         execution_profile: ExecutionProfile | None = None,
+        protocol_only: bool = False,
     ) -> None:
         if config.bs < 1:
             raise ValueError("batch size must be positive")
-        if protocol.n_items != 8:
+        if net is None and not protocol_only:
+            raise ValueError("a neural network is required outside protocol-only mode")
+        if (
+            self._required_protocol_item_count is not None
+            and protocol.n_items != self._required_protocol_item_count
+        ):
             raise ValueError("The current neural evaluator requires eight items")
-        self.net = net
+        self._net = net
         self.config = config
         self.protocol = protocol
         self.item_rank = {
@@ -211,6 +219,8 @@ class FrozenFastWeightEvaluator:
         }
         self.test_time_value = float(test_time_value)
         self.backend = FrozenEvaluationBackend(backend)
+        if net is None and self.backend != FrozenEvaluationBackend.LEGACY_STEPWISE:
+            raise ValueError("protocol-only mode requires the legacy backend")
         if self.backend == FrozenEvaluationBackend.LEGACY_STEPWISE:
             if execution_profile is not None:
                 raise ValueError(
@@ -220,6 +230,8 @@ class FrozenFastWeightEvaluator:
             self.sequence_runner = None
             self.trajectory_runner = None
         else:
+            if net is None:
+                raise ValueError("batched execution requires a neural network")
             profile = execution_profile or ExecutionProfile(
                 device=self.device.type,
                 compile=self.device.type == "cuda",
@@ -336,6 +348,16 @@ class FrozenFastWeightEvaluator:
             self.subject_trial_gains = tuple(trial_gains)
         self.subject_encoding_mode = subject_encoding_mode
         self.subject_encoding_seed = subject_encoding_seed
+
+    @property
+    def net(self) -> RetroModulRNN:
+        """Return the neural module, rejecting rollouts in protocol-only mode."""
+
+        if self._net is None:
+            raise RuntimeError(
+                "protocol-only evaluators cannot execute neural rollouts"
+            )
+        return self._net
 
     @property
     def device(self) -> torch.device:

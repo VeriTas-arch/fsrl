@@ -12,7 +12,8 @@ from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
 class PairGeometry(Protocol):
     """Minimal complete-graph geometry surface required by field readout."""
 
-    pairs: tuple[tuple[int, int], ...]
+    @property
+    def pairs(self) -> tuple[tuple[int, int], ...]: ...
 
 
 def ordered_query_schedule(

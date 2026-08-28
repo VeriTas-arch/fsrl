@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -1042,7 +1043,7 @@ def cross_network_analysis(
             "network_population_inference": "not_performed",
         }, {"passed": False, "reason": "seed_integrity"}
     first, second = (internal[key] for key in seed_keys)
-    cross_integrity = {
+    cross_integrity: dict[str, Any] = {
         "uncertainty_cross_network_max_abs_error": float(
             np.max(np.abs(first["uncertainty"] - second["uncertainty"]))
         ),

@@ -30,12 +30,12 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     adaptation_config,
     conditioned_causal_suite,
-    configure_runtime,
     field_metrics,
     query_binding_summary,
     terminal_projection_summary,
 )
 from fsrl.experiments.local_fidelity.policy_residual import PolicyResidualTransition
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
@@ -955,7 +955,7 @@ def parse_args(args=None):
 
 def main(args=None) -> int:
     parsed = parse_args(args)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     source_validation = validate_sources(
         parsed.specification, parsed.implementation_lock
     )

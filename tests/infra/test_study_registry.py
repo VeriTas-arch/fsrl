@@ -7,7 +7,6 @@ from pathlib import Path
 from fsrl.infra.study_registry import (
     GENERATED_PATHS,
     MIGRATION_PATH,
-    ROOT,
     SYNTHESIS_SNAPSHOT_MIGRATION_PATH,
     check_navigation,
     file_sha256,
@@ -23,6 +22,7 @@ from fsrl.infra.study_registry import (
     validate_registry,
     verify_source_lock,
 )
+from fsrl.paths import REPO_ROOT
 from fsrl.workflows.frozen_evidence import (
     MANIFEST_PATH,
     load_json,
@@ -30,6 +30,8 @@ from fsrl.workflows.frozen_evidence import (
 )
 from tools.provenance.index_source_provenance_v1 import run as check_source_provenance
 from tools.provenance.rewrite_runtime_locators_v1 import audit as audit_runtime_locators
+
+ROOT = REPO_ROOT
 
 
 class StudyRegistryTests(unittest.TestCase):

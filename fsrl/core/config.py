@@ -1,9 +1,5 @@
 from dataclasses import dataclass
 
-import torch
-
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
 ADDINPUT = 4
 NUMRESPONSESTEP = 1
 

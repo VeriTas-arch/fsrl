@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -36,6 +37,7 @@ from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import load_ranking_protocol, symbolic_distances
 
 ROOT = REPO_ROOT
+EstimandBundle = dict[str, Any]
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/global_policy_field_reassembly_v1.json"
 )
@@ -160,7 +162,7 @@ def field_reassembly_estimands(
     distances: np.ndarray,
     nonlearned_mask: np.ndarray,
     choice_temperature: float = 0.25,
-) -> dict[str, np.ndarray | dict[str, np.ndarray]]:
+) -> EstimandBundle:
     """Construct the frozen factorial and norm-matched participant estimands."""
 
     neural = np.asarray(neural_margin, dtype=np.float64)
@@ -561,7 +563,7 @@ def _artifact_validation(specification: dict) -> dict:
 
 
 def _bootstrap_identity_errors(
-    estimands: dict[str, np.ndarray], counts: np.ndarray
+    estimands: EstimandBundle, counts: np.ndarray
 ) -> dict[str, float]:
     denominators = np.sum(counts, axis=1)
     samples = {
@@ -574,9 +576,7 @@ def _bootstrap_identity_errors(
     }
 
 
-def _seed_statistics(
-    specification: dict, seed: int, estimands: dict[str, np.ndarray]
-) -> dict:
+def _seed_statistics(specification: dict, seed: int, estimands: EstimandBundle) -> dict:
     contract = specification["statistical_estimands"]
     bootstrap = contract["bootstrap"]
     counts = bootstrap_counts(

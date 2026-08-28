@@ -7,6 +7,7 @@ import json
 from dataclasses import dataclass
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
@@ -21,7 +22,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 from fsrl.experiments.confirmation.reproduction_map import model_record
 from fsrl.experiments.local_fidelity.evidence_access_pilot import access_factor
 from fsrl.experiments.local_fidelity.trace_pilot import behavior_summaries
-from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -115,13 +116,6 @@ def validate_sources(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"reduced-algorithm source lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
-
-
-def configure_runtime() -> dict:
-    snapshot = configure_formal_runtime()
-    if not snapshot["cuda_available"]:
-        raise RuntimeError("registered extraction and fitting require a visible GPU")
-    return snapshot
 
 
 def complete_geometry(n_items: int = 8) -> Geometry:
@@ -368,6 +362,8 @@ def _generic_field(
                         inputs, hidden, eligibility, fast_weights
                     )
                     response = logits
+            if response is None:
+                raise RuntimeError("generic query sequence produced no response")
             oriented_margins.append((response[:, 1] - response[:, 0]).cpu().numpy())
         fields[:, pair_index] = 0.5 * (oriented_margins[0] - oriented_margins[1])
     return fields
@@ -796,6 +792,9 @@ def rollout_batch(evidence: np.ndarray, parameters: ReducedParameters) -> np.nda
 def _liu_local(
     evaluator: FrozenFastWeightEvaluator, geometry: Geometry
 ) -> tuple[np.ndarray, np.ndarray, float]:
+    encoding_states = evaluator.subject_encoding_states
+    if encoding_states is None:
+        raise RuntimeError("Liu local compression requires subject encoding states")
     compressed = []
     identity = []
     max_error = 0.0
@@ -803,9 +802,7 @@ def _liu_local(
         values = []
         for trial_index, trial in enumerate(schedule):
             admission = evaluator._encoding_reliability(subject, trial_index)
-            probability = evaluator.subject_encoding_states[
-                subject
-            ].relation_reliability(
+            probability = encoding_states[subject].relation_reliability(
                 trial.higher_item,
                 trial.lower_item,
                 evaluator.item_rank[trial.lower_item]
@@ -942,6 +939,9 @@ def evaluate_preservation_seed(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
         test_time_value=2.0 / 3.0,
     )
+    encoding_states = evaluator.subject_encoding_states
+    if encoding_states is None:
+        raise RuntimeError("Liu preservation requires subject encoding states")
     evidence = _liu_evidence(evaluator)
     potential = rollout_batch(evidence, parameters)
     global_field = potential @ geometry.incidence.T
@@ -972,9 +972,7 @@ def evaluate_preservation_seed(
                     values.append(0.0)
                     continue
                 admission = evaluator._encoding_reliability(subject, trial_index)
-                probability = evaluator.subject_encoding_states[
-                    subject
-                ].relation_reliability(
+                probability = encoding_states[subject].relation_reliability(
                     trial.higher_item,
                     trial.lower_item,
                     evaluator.item_rank[trial.lower_item]
@@ -1127,6 +1125,8 @@ def _pad_records(seed: int, records: list[EpisodeTrajectory]) -> dict[str, np.nd
 def _parameter_json(parameters: ReducedParameters) -> dict:
     value = {"A": parameters.A.tolist()}
     if parameters.U is not None:
+        if parameters.V is None or parameters.W is None:
+            raise RuntimeError("reduced parameter factors must be complete")
         value.update(
             {
                 "U": parameters.U.tolist(),
@@ -1142,7 +1142,7 @@ def build_result(
 ) -> tuple[dict, dict[str, np.ndarray]]:
     source_validation = validate_sources(specification_path, implementation_lock_path)
     specification = load_json(specification_path)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     geometry = complete_geometry()
     development = {}
     arrays: dict[str, np.ndarray] = {}
@@ -1207,6 +1207,11 @@ def build_result(
         preservation[str(seed)] = result
         arrays.update(raw)
 
+    factor_arrays = (final_candidate.U, final_candidate.V, final_candidate.W)
+    if any(value is None for value in factor_arrays):
+        raise RuntimeError("final reduced candidate is missing factor arrays")
+    complete_factors = cast(tuple[np.ndarray, np.ndarray, np.ndarray], factor_arrays)
+
     integrity = {
         "source_validation": source_validation["passed"],
         "exact_development_seed_set": set(development) == {"2101", "2102", "2103"},
@@ -1217,9 +1222,7 @@ def build_result(
             np.all(np.isfinite(value))
             for value in (
                 final_candidate.A,
-                final_candidate.U,
-                final_candidate.V,
-                final_candidate.W,
+                *complete_factors,
             )
         ),
         "all_local_exact": all(
@@ -1287,7 +1290,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     arguments.trajectory_output.parent.mkdir(parents=True, exist_ok=True)
     with arguments.trajectory_output.open("xb") as handle:
-        np.savez_compressed(handle, **arrays)
+        cast(Any, np.savez_compressed)(handle, **arrays)
     result["trajectory_artifact"] = {
         "path": str(arguments.trajectory_output.relative_to(ROOT)),
         "sha256": file_sha256(arguments.trajectory_output),

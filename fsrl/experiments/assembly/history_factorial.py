@@ -17,7 +17,6 @@ from fsrl.analysis.statistics import (
     masked_column_mean,
     summarize_subjects,
 )
-from fsrl.core.config import DEVICE
 from fsrl.experiments.assembly.factor_swap import (
     EpisodeFactors,
     compose_factors,
@@ -31,6 +30,7 @@ from fsrl.experiments.assembly.write_localization import (
     trace_support_trial,
 )
 from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
     validate_registered_file,
@@ -58,10 +58,12 @@ def validate_registered_sources(specification: dict) -> dict:
         "model_equation_source",
         "frozen_evaluator_source",
     )
-    validated = {name: validate_registered_file(sources[name]) for name in names}
-    artifacts = []
+    validated: dict[str, object] = {
+        name: validate_registered_file(sources[name]) for name in names
+    }
+    artifacts: list[dict[str, object]] = []
     for registration in sources["pilot_artifacts"]:
-        row = {"seed": int(registration["seed"])}
+        row: dict[str, object] = {"seed": int(registration["seed"])}
         for prefix in ("checkpoint", "config", "behavior"):
             path = resolve_path(registration[f"{prefix}_path"])
             observed = file_sha256(path)
@@ -503,7 +505,7 @@ def run_history_state_factorial(
         "registration_parent_commit": specification["registration_parent_commit"],
         "claim_boundary": specification["claim_boundary"],
         "working_theory": specification["working_theory"],
-        "device": {"neural_replay": DEVICE, "summaries": "cpu_numpy"},
+        "device": {"neural_replay": default_device(), "summaries": "cpu_numpy"},
         "artifact_validation": artifact_validation,
         "execution_contract": contract,
         "state_and_factor_contract": specification["state_and_factor_contract"],

@@ -84,9 +84,12 @@ def validate_sources(
 
 
 def _pair_indices(pair: list[int] | list[str]) -> tuple[int, int]:
-    if isinstance(pair[0], str):
-        return ord(pair[0]) - ord("A"), ord(pair[1]) - ord("A")
-    return int(pair[0]), int(pair[1])
+    first, second = pair
+    if isinstance(first, str) and isinstance(second, str):
+        return ord(first) - ord("A"), ord(second) - ord("A")
+    if isinstance(first, int) and isinstance(second, int):
+        return first, second
+    raise TypeError("pair entries must use one representation")
 
 
 def position_profile(

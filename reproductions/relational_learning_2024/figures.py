@@ -14,8 +14,9 @@ from sklearn.decomposition import PCA
 from tqdm.auto import tqdm
 
 from fsrl.core import RetroModulRNN
-from fsrl.core.config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
+from fsrl.core.config import ADDINPUT, NUMRESPONSESTEP, TrainConfig
 from fsrl.infra.logging import log
+from fsrl.infra.runtime import default_device
 from fsrl.training.checkpoints import load_checkpoint_state
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
@@ -87,7 +88,7 @@ def resolve_model_path_from_dir(path):
 
 
 def load_model_state(path):
-    state_dict, _, _ = load_checkpoint_state(path, device=DEVICE)
+    state_dict, _, _ = load_checkpoint_state(path, device=default_device())
     return state_dict
 
 
@@ -97,7 +98,7 @@ def load_network(params, model_path):
     net.load_state_dict(load_model_state(model_path))
     net.eval()
     log(
-        f"[model] Ready on {DEVICE}; batch_size={params['bs']}, hidden_size={params['hs']}"
+        f"[model] Ready on {default_device()}; batch_size={params['bs']}, hidden_size={params['hs']}"
     )
     return net
 
@@ -241,7 +242,7 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
         numactionschosen = np.zeros(batch_size, dtype="int32")
 
         inputs = np.zeros((batch_size, params["inputsize"]), dtype="float32")
-        inputs_t = torch.from_numpy(inputs).detach().to(DEVICE)
+        inputs_t = torch.from_numpy(inputs).detach().to(default_device())
         for _ in range(2):
             _, _, _, hidden, et, pw = net(inputs_t, hidden, et, pw)
 
@@ -301,7 +302,7 @@ def run_eval(params, net, linked_lists=False, linking_is_sham=False, keep_rates=
                     if numstep == NUMRESPONSESTEP + 1:
                         inputs[nb, nbstimbits + ADDINPUT + numactionschosen[nb]] = 1
 
-                inputs_t = torch.from_numpy(inputs).detach().to(DEVICE)
+                inputs_t = torch.from_numpy(inputs).detach().to(default_device())
                 y, _, _, hidden, et, pw = net(inputs_t, hidden, et, pw)
 
                 if keep_rates:
@@ -555,7 +556,7 @@ def single_item_alignment(result, params, net):
     nbstimbits = 2 * params["cs"] + 1
     inputs = np.zeros((batch_size, params["inputsize"]), dtype="float32")
     cue_data = np.array(result.cue_data)
-    pwtest = torch.from_numpy(result.pw_trial20_step1).to(DEVICE)
+    pwtest = torch.from_numpy(result.pw_trial20_step1).to(default_device())
 
     wo = net.h2o.weight.detach().cpu().numpy()
     wo = wo[1, :] - wo[0, :]
@@ -577,7 +578,7 @@ def single_item_alignment(result, params, net):
         inputs[:, nbstimbits + 1] = 0
         inputs[:, nbstimbits + 2] = 0
 
-        inputs0 = torch.from_numpy(inputs).detach().to(DEVICE)
+        inputs0 = torch.from_numpy(inputs).detach().to(default_device())
         inputs1 = inputs0.clone()
         inputs1[:, :nbstimbits] = 0
 

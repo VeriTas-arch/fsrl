@@ -7,7 +7,6 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import fsrl.experiments.local_fidelity.evidence_access_pilot as dual_access
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
 from fsrl.experiments.local_fidelity.trace_pilot import (
     evaluate_pilot as evaluate_v2_3_pilot,
 )
@@ -20,6 +19,7 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     validate_complete_backbone,
     validate_complete_gain,
 )
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import load_json, write_json
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
@@ -338,7 +338,7 @@ def parse_args(args=None):
 
 def main(args=None) -> int:
     parsed = parse_args(args)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     source_validation = validate_sources(
         parsed.specification, parsed.implementation_lock
     )

@@ -237,10 +237,20 @@ def render_trial_svg(trial: dict, protocol: dict, readiness: dict) -> str:
         left_xy = layout["left_item_xy"]
         right_xy = layout["right_item_xy"]
         parts.append(
-            _item_svg(codebooks[codebook][trial["code_left"]], *left_xy, renderer)
+            _item_svg(
+                codebooks[codebook][trial["code_left"]],
+                left_xy[0],
+                left_xy[1],
+                renderer,
+            )
         )
         parts.append(
-            _item_svg(codebooks[codebook][trial["code_right"]], *right_xy, renderer)
+            _item_svg(
+                codebooks[codebook][trial["code_right"]],
+                right_xy[0],
+                right_xy[1],
+                renderer,
+            )
         )
         parts.append(
             _bar_svg(int(layout["left_bar_x"]), trial["bar_left_level"], renderer)
@@ -253,14 +263,16 @@ def render_trial_svg(trial: dict, protocol: dict, readiness: dict) -> str:
         parts.append(
             _item_svg(
                 codebooks[codebook][trial["code_left"]],
-                *layout["left_item_xy"],
+                layout["left_item_xy"][0],
+                layout["left_item_xy"][1],
                 renderer,
             )
         )
         parts.append(
             _item_svg(
                 codebooks[codebook][trial["code_right"]],
-                *layout["right_item_xy"],
+                layout["right_item_xy"][0],
+                layout["right_item_xy"][1],
                 renderer,
             )
         )

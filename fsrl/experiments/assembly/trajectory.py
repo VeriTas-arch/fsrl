@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+from torch import Tensor
 
 from fsrl.analysis.hodge import (
     CompleteGraphGeometry,
@@ -27,7 +28,7 @@ from fsrl.analysis.statistics import (
     summarize_difference,
     summarize_subjects,
 )
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule, readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
@@ -36,6 +37,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.confirmation.behavioral import validate_checkpoint
 from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
     validate_registered_file,
@@ -132,7 +134,7 @@ def exact_prefix_trajectory(
 
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
-    validated = {
+    validated: dict[str, object] = {
         name: validate_registered_file(sources[name])
         for name in (
             "pilot_specification",
@@ -141,9 +143,9 @@ def validate_registered_sources(specification: dict) -> dict:
             "assembly_diagnostic_result",
         )
     }
-    artifacts = []
+    artifacts: list[dict[str, object]] = []
     for registration in sources["pilot_artifacts"]:
-        row = {"seed": int(registration["seed"])}
+        row: dict[str, object] = {"seed": int(registration["seed"])}
         for prefix in ("checkpoint", "config", "behavior"):
             path = resolve_path(registration[f"{prefix}_path"])
             observed = file_sha256(path)
@@ -227,7 +229,7 @@ def run_prefix_branches(
     geometry: CompleteGraphGeometry,
     *,
     tolerance: float,
-) -> tuple[object, np.ndarray, dict]:
+) -> tuple[Tensor, np.ndarray, dict]:
     """Run P_0..P_T and each matched zero-evidence one-step branch."""
 
     fast_weights = evaluator.initialize_fast_weights()
@@ -679,7 +681,7 @@ def summarize_baselines(
 
 def query_time_localization(
     evaluator: FrozenFastWeightEvaluator,
-    states: dict[str, object],
+    states: dict[str, Tensor],
     response_fields: dict[str, np.ndarray],
     geometry: CompleteGraphGeometry,
     counts: np.ndarray,
@@ -968,7 +970,7 @@ def run_assembly_trajectory(
         ].items()
         if isinstance(value, bool)
     )
-    overall = {
+    overall: dict[str, object] = {
         f"{name}_replicated_across_pilot_seeds": all(
             row["directional_diagnosis"][name] for row in per_seed.values()
         )
@@ -985,7 +987,10 @@ def run_assembly_trajectory(
         "registration_status": specification["registration_status"],
         "registration_parent_commit": specification["registration_parent_commit"],
         "claim_boundary": specification["claim_boundary"],
-        "device": {"neural_evaluation": DEVICE, "exact_posterior": "cpu_numpy"},
+        "device": {
+            "neural_evaluation": default_device(),
+            "exact_posterior": "cpu_numpy",
+        },
         "artifact_validation": validation,
         "execution_contract": specification["execution_contract"],
         "field_contract": specification["field_contract"],

@@ -7,6 +7,7 @@ import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import TypedDict
 
 import numpy as np
 import torch
@@ -22,7 +23,7 @@ from fsrl.analysis.statistics import (
     masked_column_mean,
     summarize_subjects,
 )
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
@@ -37,6 +38,7 @@ from fsrl.experiments.assembly.write_localization import (
     trace_support_trial,
 )
 from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
     validate_registered_file,
@@ -66,6 +68,13 @@ class EpisodeFactors:
     validation: dict
 
 
+class HistoryFactorialMetrics(TypedDict):
+    trial_indices: np.ndarray
+    retained: np.ndarray
+    policy: dict[str, np.ndarray]
+    write: dict[str, np.ndarray]
+
+
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
     names = (
@@ -77,10 +86,12 @@ def validate_registered_sources(specification: dict) -> dict:
         "model_equation_source",
         "frozen_evaluator_source",
     )
-    validated = {name: validate_registered_file(sources[name]) for name in names}
-    artifacts = []
+    validated: dict[str, object] = {
+        name: validate_registered_file(sources[name]) for name in names
+    }
+    artifacts: list[dict[str, object]] = []
     for registration in sources["pilot_artifacts"]:
-        row = {"seed": int(registration["seed"])}
+        row: dict[str, object] = {"seed": int(registration["seed"])}
         for prefix in ("checkpoint", "config", "behavior"):
             path = resolve_path(registration[f"{prefix}_path"])
             observed = file_sha256(path)
@@ -557,7 +568,7 @@ def history_factorial_metrics(
     factors: EpisodeFactors,
     geometry: CompleteGraphGeometry,
     effective_steps: tuple[int, ...],
-) -> tuple[dict[str, np.ndarray], dict]:
+) -> tuple[HistoryFactorialMetrics, dict[str, float]]:
     trial_indices = np.flatnonzero(np.all(factors.exposure == 4, axis=1))
     if len(trial_indices) != len(evaluator.protocol.support_pairs_higher_lower):
         raise RuntimeError("fourth-exposure trial count changed")
@@ -782,7 +793,7 @@ def summarize_seed(
     factors: EpisodeFactors,
     eligibility: dict[str, np.ndarray],
     da: dict[str, np.ndarray],
-    history: dict,
+    history: HistoryFactorialMetrics,
     alpha: dict[str, np.ndarray],
     validation: dict,
     counts: np.ndarray,
@@ -971,7 +982,7 @@ def run_support_factor_swap(
     diagnosis_names = tuple(
         next(iter(per_seed.values()))["registered_directional_diagnosis"]
     )
-    overall = {
+    overall: dict[str, object] = {
         f"{name}_replicated_across_pilot_seeds": all(
             row["registered_directional_diagnosis"][name] for row in per_seed.values()
         )
@@ -986,7 +997,7 @@ def run_support_factor_swap(
         "registration_parent_commit": specification["registration_parent_commit"],
         "claim_boundary": specification["claim_boundary"],
         "working_theory": specification["working_theory"],
-        "device": {"neural_replay": DEVICE, "summaries": "cpu_numpy"},
+        "device": {"neural_replay": default_device(), "summaries": "cpu_numpy"},
         "artifact_validation": artifact_validation,
         "execution_contract": contract,
         "factor_contract": specification["factor_contract"],

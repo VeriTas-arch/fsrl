@@ -8,6 +8,7 @@ import json
 from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 from scipy import stats
@@ -135,7 +136,7 @@ def load_human_cohort(
             first = first_source - 1
             second = second_source - 1
             chosen = chosen_source - 1
-            pair = tuple(sorted((first, second)))
+            pair = cast(tuple[int, int], tuple(sorted((first, second))))
             pair_index = pair_to_index[pair]
             total_counts[pair_index] += 1.0
             correct_counts[pair_index] += correct
@@ -228,7 +229,10 @@ def fit_source_beta_distribution(values: np.ndarray, *, clip: float = 0.01) -> d
     """Recompute the Figure 2d MLE with an explicit endpoint convention."""
 
     clipped = np.clip(np.asarray(values, dtype=np.float64), clip, 1.0 - clip)
-    alpha, beta, _location, _scale = stats.beta.fit(clipped, floc=0.0, fscale=1.0)
+    alpha, beta, _location, _scale = cast(
+        tuple[float, float, float, float],
+        stats.beta.fit(clipped, floc=0.0, fscale=1.0),
+    )
     if alpha > 1.0 and beta < 1.0:
         distribution_class = "high_accuracy"
     elif alpha < 1.0 and beta < 1.0:
@@ -426,13 +430,16 @@ def summarize_human_subjects(protocol: RankingProtocol, subjects: list[dict]) ->
         "symbolic_distance_slope": {
             "mean": mean("symbolic_distance_slope"),
             "t_vs_zero": float(
-                stats.ttest_1samp(
-                    [
-                        subject["symbolic_distance_slope"]
-                        for subject in subjects
-                        if subject["overall_accuracy"] >= 0.5
-                    ],
-                    0.0,
+                cast(
+                    Any,
+                    stats.ttest_1samp(
+                        [
+                            subject["symbolic_distance_slope"]
+                            for subject in subjects
+                            if subject["overall_accuracy"] >= 0.5
+                        ],
+                        0.0,
+                    ),
                 ).statistic
             ),
         },

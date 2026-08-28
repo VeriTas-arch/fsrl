@@ -7,6 +7,7 @@ import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
@@ -25,7 +26,7 @@ from fsrl.analysis.statistics import (
     summarize_difference,
     summarize_subjects,
 )
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule, readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
@@ -33,6 +34,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
     validate_registered_file,
@@ -78,10 +80,12 @@ def validate_registered_sources(specification: dict) -> dict:
         "model_equation_source",
         "frozen_evaluator_source",
     )
-    validated = {name: validate_registered_file(sources[name]) for name in names}
-    artifacts = []
+    validated: dict[str, object] = {
+        name: validate_registered_file(sources[name]) for name in names
+    }
+    artifacts: list[dict[str, object]] = []
     for registration in sources["pilot_artifacts"]:
-        row = {"seed": int(registration["seed"])}
+        row: dict[str, object] = {"seed": int(registration["seed"])}
         for prefix in ("checkpoint", "config", "behavior"):
             path = resolve_path(registration[f"{prefix}_path"])
             observed = file_sha256(path)
@@ -423,9 +427,8 @@ def within_subject_spearman(
         ):
             correlations.append(np.nan)
         else:
-            correlations.append(
-                float(stats.spearmanr(left[finite], right[finite]).statistic)
-            )
+            correlation = cast(Any, stats.spearmanr(left[finite], right[finite]))
+            correlations.append(float(correlation.statistic))
     return np.asarray(correlations)
 
 
@@ -453,9 +456,8 @@ def exposure_adjusted_spearman(
         ):
             correlations.append(np.nan)
         else:
-            correlations.append(
-                float(stats.spearmanr(left[finite], right[finite]).statistic)
-            )
+            correlation = cast(Any, stats.spearmanr(left[finite], right[finite]))
+            correlations.append(float(correlation.statistic))
     return np.asarray(correlations)
 
 
@@ -1261,7 +1263,7 @@ def run_support_write_localization(
     diagnosis_names = tuple(
         next(iter(per_seed.values()))["registered_directional_diagnosis"]
     )
-    overall = {
+    overall: dict[str, object] = {
         f"{name}_replicated_across_pilot_seeds": all(
             row["registered_directional_diagnosis"][name] for row in per_seed.values()
         )
@@ -1291,7 +1293,10 @@ def run_support_write_localization(
                 "actual-alpha functional-amplification contrasts",
             ],
         },
-        "device": {"neural_evaluation": DEVICE, "exact_posterior": "cpu_numpy"},
+        "device": {
+            "neural_evaluation": default_device(),
+            "exact_posterior": "cpu_numpy",
+        },
         "artifact_validation": validation,
         "execution_contract": specification["execution_contract"],
         "step_trace_contract": specification["step_trace_contract"],

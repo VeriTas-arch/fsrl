@@ -17,6 +17,25 @@ from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_direct_formal_cuda_runtime_requires_cuda_device(self):
+        cuda_snapshot = {"cuda_available": True, "device": "cuda"}
+        with patch.object(
+            formal_runtime,
+            "configure_formal_runtime",
+            return_value=cuda_snapshot,
+        ):
+            self.assertIs(formal_runtime.configure_formal_cuda_runtime(), cuda_snapshot)
+
+        with (
+            patch.object(
+                formal_runtime,
+                "configure_formal_runtime",
+                return_value={"cuda_available": False, "device": "cpu"},
+            ),
+            self.assertRaisesRegex(RuntimeError, "visible CUDA GPU"),
+        ):
+            formal_runtime.configure_formal_cuda_runtime()
+
     def test_transport_dispatches_use_registered_entry_points(self):
         workflows = {
             "liu-evidence-sparsity-transport": (

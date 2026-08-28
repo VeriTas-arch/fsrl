@@ -51,6 +51,25 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
             ),
         )
 
+    def test_protocol_only_mode_requires_an_explicit_non_neural_contract(self):
+        protocol = load_ranking_protocol()
+        with self.assertRaisesRegex(ValueError, "neural network is required"):
+            FrozenFastWeightEvaluator(None, self.config, protocol)
+
+        evaluator = FrozenFastWeightEvaluator(
+            None,
+            self.config,
+            protocol,
+            cue_seed=5,
+            support_seed=7,
+            protocol_only=True,
+        )
+        evidence = evaluator.realized_support_evidence()
+        self.assertEqual(len(evidence), self.config.bs)
+        self.assertTrue(all(len(rows) == protocol.support_trials for rows in evidence))
+        with self.assertRaisesRegex(RuntimeError, "cannot execute neural rollouts"):
+            evaluator.initialize_fast_weights()
+
     def test_batched_input_sequence_matches_legacy_step_builder(self):
         batched = self._batched_evaluator()
         trials = [schedule[0] for schedule in batched.support_schedules]

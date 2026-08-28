@@ -2,6 +2,12 @@ import unittest
 
 import numpy as np
 
+from fsrl.workflows import (
+    paper_figure_contract,
+    paper_figure_data,
+    paper_figure_replay,
+    paper_figures,
+)
 from fsrl.workflows.paper_figures import (
     DATASET_ORDER,
     REPLAY_CSV_PATH,
@@ -42,6 +48,14 @@ class PaperFigureAlignmentTests(unittest.TestCase):
         self.assertIn(
             "meg_measurements_not_generated_by_model",
             self.specification["excluded_panels"],
+        )
+
+    def test_public_entrypoint_reexports_split_contracts(self):
+        self.assertIs(paper_figures.Dataset, paper_figure_contract.Dataset)
+        self.assertIs(paper_figures.load_datasets, paper_figure_data.load_datasets)
+        self.assertIs(
+            paper_figures.replay_model_subject_pairs,
+            paper_figure_replay.replay_model_subject_pairs,
         )
 
     def test_subject_pair_replay_matches_the_frozen_results(self):

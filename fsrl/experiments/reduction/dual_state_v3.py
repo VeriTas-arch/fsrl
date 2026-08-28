@@ -7,9 +7,11 @@ import json
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -340,7 +342,12 @@ def evaluate_preservation(
     geometry: v1.Geometry,
 ) -> dict:
     with bind_item_rollout(parameters):
-        return v2.evaluate_preservation(seed, artifact, parameters, geometry)
+        return v2.evaluate_preservation(
+            seed,
+            artifact,
+            cast(v2.ScalarHistoryParameters, parameters),
+            geometry,
+        )
 
 
 def build_result(
@@ -386,7 +393,7 @@ def build_result(
         record for seed in (2101, 2102, 2103) for record in records[str(seed)]
     ]
     final_parameters = fit_item_history(all_records)
-    runtime = v1.configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     v1_specification = load_json(
         resolve_record("benchmarks/dual_state_reduced_algorithm_v1.json")
     )

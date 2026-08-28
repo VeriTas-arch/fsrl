@@ -7,12 +7,13 @@ import gc
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
 
 from fsrl.evaluation.frozen_fast_weight import load_frozen_retro_checkpoint
-from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -105,15 +106,6 @@ def validate_sources(
     return {"passed": True, "checks": checks, "lock": lock}
 
 
-def configure_runtime() -> dict:
-    snapshot = configure_formal_runtime()
-    if not snapshot["cuda_available"]:
-        raise RuntimeError(
-            "registered functional-P replay and fit require a visible GPU"
-        )
-    return snapshot
-
-
 def centered_basis(n_items: int = 8) -> np.ndarray:
     contrast = np.eye(n_items, dtype=np.float64)[:, :-1]
     contrast[-1] = -1.0
@@ -160,7 +152,9 @@ def _extract_branch(
     )
 
 
-def _maximum_error(observed: np.ndarray, expected: np.ndarray) -> float:
+def _maximum_error(
+    observed: np.ndarray | tuple[int, int], expected: np.ndarray
+) -> float:
     return float(
         np.max(
             np.abs(
@@ -650,7 +644,7 @@ def build_result(
 ) -> tuple[dict, dict[str, np.ndarray]]:
     source_validation = validate_sources(specification_path, implementation_lock_path)
     specification = load_json(specification_path)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     geometry = v1.complete_geometry()
     v1_contract = load_json(
         resolve_record(specification["registered_sources"]["v1_contract"]["path"])
@@ -764,7 +758,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     arguments.fit_artifact.parent.mkdir(parents=True, exist_ok=True)
     with arguments.fit_artifact.open("xb") as handle:
-        np.savez_compressed(handle, **arrays)
+        cast(Any, np.savez_compressed)(handle, **arrays)
     result["fit_artifact"] = {
         "path": str(arguments.fit_artifact.relative_to(ROOT)),
         "sha256": file_sha256(arguments.fit_artifact),

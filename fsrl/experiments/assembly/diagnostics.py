@@ -11,7 +11,6 @@ from pathlib import Path
 import numpy as np
 
 from fsrl.analysis.posterior import ExactRankingPosterior, RelationEvidence
-from fsrl.core.config import DEVICE
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
@@ -25,6 +24,7 @@ from fsrl.experiments.human.benchmark import (
     load_human_cohort,
 )
 from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
     validate_registered_file,
@@ -301,13 +301,13 @@ def directional_diagnosis(
 
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
-    validated = {
+    validated: dict[str, object] = {
         name: validate_registered_file(sources[name])
         for name in ("pilot_specification", "protocol", "human_benchmark")
     }
-    artifacts = []
+    artifacts: list[dict[str, object]] = []
     for registration in sources["pilot_artifacts"]:
-        row = {"seed": registration["seed"]}
+        row: dict[str, object] = {"seed": registration["seed"]}
         for prefix in ("checkpoint", "config", "behavior"):
             path = resolve_path(registration[f"{prefix}_path"])
             observed = file_sha256(path)
@@ -585,7 +585,7 @@ def run_assembly_diagnostics(
         "registration_status": specification["registration_status"],
         "claim_boundary": specification["claim_boundary"],
         "device": {
-            "neural_readout": DEVICE,
+            "neural_readout": default_device(),
             "posterior_hodge_bootstrap": "cpu_numpy",
         },
         "artifact_validation": validation,

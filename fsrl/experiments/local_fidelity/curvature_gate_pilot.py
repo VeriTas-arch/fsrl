@@ -7,6 +7,7 @@ import json
 from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
@@ -42,7 +43,7 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
     make_gate_tasks,
     run_gate_batch,
 )
-from fsrl.infra.formal_runtime import configure_formal_runtime
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
@@ -67,13 +68,6 @@ CONDITIONS = (
     "matched_global_scalar",
     "shuffled_gate",
 )
-
-
-def configure_runtime() -> dict:
-    snapshot = configure_formal_runtime()
-    if not snapshot["cuda_available"]:
-        raise RuntimeError("curvature-gate pilot requires a visible CUDA GPU")
-    return snapshot
 
 
 def validate_sources(
@@ -827,7 +821,7 @@ def crossing_alignment(
                     break
     selector = np.isfinite(midpoints)
     if np.sum(selector) >= 3:
-        correlation = stats.spearmanr(gammas[selector], midpoints[selector])
+        correlation = cast(Any, stats.spearmanr(gammas[selector], midpoints[selector]))
         rho = float(correlation.statistic)
         pvalue = float(correlation.pvalue)
     else:
@@ -884,7 +878,7 @@ def decision_summary(
     original_qualification: dict,
     conditioned_qualification: dict,
     causal: dict,
-    local: dict[str, dict],
+    local: dict[str, Any],
     binding: dict,
     terminal: dict,
     crossing: dict,
@@ -1086,7 +1080,7 @@ def evaluate_pilot(
 
     condition_bundles = {}
     condition_fields = {}
-    local = {"counts": counts, "interval": interval}
+    local: dict[str, Any] = {"counts": counts, "interval": interval}
     behavior = {}
     shuffle_errors = []
     for condition in CONDITIONS:
@@ -1276,7 +1270,7 @@ def parse_args(args=None):
 
 def main(args=None) -> int:
     parsed = parse_args(args)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     source_validation = validate_sources(parsed.specification, parsed.lock)
     specification = load_json(parsed.specification)
     seed = int(specification["development_seed_contract"]["mandatory_seed"])

@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP, TrainConfig
+from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
 from fsrl.core.local_trace import inverse_softplus
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.tasks.holdouts import registered_holdout_signatures
@@ -48,9 +48,10 @@ class CurvatureGateTransition(nn.Module):
         self.epsilon = float(epsilon)
         for parameter in self.backbone.parameters():
             parameter.requires_grad_(False)
+        device = next(self.backbone.parameters()).device
         self.raw_beta = nn.Parameter(
             torch.tensor(
-                [inverse_softplus(initial_beta)], dtype=torch.float32, device=DEVICE
+                [inverse_softplus(initial_beta)], dtype=torch.float32, device=device
             )
         )
 
@@ -147,10 +148,11 @@ def run_gate_batch(
         task_generator.sample(rng, n_edges=n_edges)
         for _ in range(training_config.batch_size)
     )
+    device = next(backbone.parameters()).device
     hidden = backbone.initial_hidden(model_config.bs)
     eligibility = backbone.initial_eligibility(model_config.bs)
     fast_weights = backbone.initial_fast_weights(model_config.bs)
-    blank = torch.zeros(model_config.bs, model_config.inputsize, device=DEVICE)
+    blank = torch.zeros(model_config.bs, model_config.inputsize, device=device)
     for _ in range(2):
         _, _, _, hidden, eligibility, fast_weights = backbone(
             blank, hidden, eligibility, fast_weights
@@ -181,17 +183,18 @@ def run_gate_batch(
             num_steps=model_config.triallen,
             time_value=time_value,
             support_trial=True,
+            device=device,
         )
         for inputs in input_sequence.unbind():
             _, _, _, hidden, eligibility, fast_weights = backbone(
                 inputs, hidden, eligibility, fast_weights
             )
 
-    query_loss = torch.zeros((), device=DEVICE)
+    query_loss = torch.zeros((), device=device)
     correct = 0
     total = 0
-    gamma_sum = torch.zeros((), device=DEVICE)
-    risk_sum = torch.zeros((), device=DEVICE)
+    gamma_sum = torch.zeros((), device=device)
+    risk_sum = torch.zeros((), device=device)
     gamma_count = 0
     n_queries = len(episodes[0].query_trials)
     for query_index in range(n_queries):
@@ -201,7 +204,7 @@ def run_gate_batch(
         left = np.asarray([trial.left_item for trial in trials], dtype=np.int64)
         right = np.asarray([trial.right_item for trial in trials], dtype=np.int64)
         targets = torch.tensor(
-            [trial.correct_action for trial in trials], dtype=torch.long, device=DEVICE
+            [trial.correct_action for trial in trials], dtype=torch.long, device=device
         )
         signed = np.zeros(model_config.bs, dtype=np.float32)
         input_sequence = build_meta_input_sequence(
@@ -213,6 +216,7 @@ def run_gate_batch(
             num_steps=NUMRESPONSESTEP + 1,
             time_value=training_config.support_query_time,
             support_trial=False,
+            device=device,
         )
         step0, response = input_sequence.unbind()
         _, _, _, hidden, eligibility, _proposed = backbone(

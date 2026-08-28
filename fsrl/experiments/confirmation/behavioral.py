@@ -11,11 +11,11 @@ import numpy as np
 from fsrl.analysis.algorithmic import run_algorithmic_comparison
 from fsrl.analysis.behavioral import run_behavioral_analysis
 from fsrl.analysis.geometry import run_geometry_analysis
-from fsrl.core.config import DEVICE
 from fsrl.evaluation.frozen_fast_weight import run_causal_suite
 from fsrl.evaluation.qualification import evaluate_qualification
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     canonical_file_sha256 as file_sha256,
 )
@@ -390,7 +390,7 @@ def evaluate_confirmation_seed(
     summary = {
         "confirmation_id": specification["confirmation_id"],
         "seed": seed,
-        "device": DEVICE,
+        "device": runtime["device"] if runtime is not None else default_device(),
         "checkpoint": checkpoint_metadata["checkpoint"],
         "fixed_outer_steps": checkpoint_metadata["completed_outer_steps"],
         "fixed_temperature": evaluation["temperature"],

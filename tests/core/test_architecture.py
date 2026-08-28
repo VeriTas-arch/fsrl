@@ -133,6 +133,7 @@ class CoreArchitectureTests(unittest.TestCase):
                 "infra",
                 "paths",
                 "tasks",
+                "workflows",
             },
         }
         violations = []
@@ -163,6 +164,48 @@ class CoreArchitectureTests(unittest.TestCase):
         root_tests = list((ROOT / "tests").glob("test_*.py"))
         self.assertEqual(source_files, {"__init__.py", "paths.py"})
         self.assertEqual(root_tests, [])
+
+    def test_repository_root_and_runtime_primitives_keep_single_owners(self):
+        root_import_violations = []
+        runtime_import_violations = []
+        for tree_root in (ROOT / "fsrl", ROOT / "tests"):
+            for source in tree_root.rglob("*.py"):
+                tree = ast.parse(
+                    source.read_text(encoding="utf-8"), filename=str(source)
+                )
+                for node in ast.walk(tree):
+                    if not isinstance(node, ast.ImportFrom):
+                        continue
+                    imported_names = {alias.name for alias in node.names}
+                    if "ROOT" in imported_names and node.module != "fsrl.paths":
+                        root_import_violations.append(
+                            f"{source.relative_to(ROOT)} -> {node.module}.ROOT"
+                        )
+                    if (
+                        node.module is not None
+                        and node.module.startswith("fsrl.experiments.")
+                        and imported_names
+                        & {"configure_runtime", "configure_formal_cuda_runtime"}
+                    ):
+                        runtime_import_violations.append(
+                            f"{source.relative_to(ROOT)} -> {node.module}"
+                        )
+        self.assertEqual(root_import_violations, [])
+        self.assertEqual(runtime_import_violations, [])
+
+    def test_device_is_not_fixed_when_core_config_is_imported(self):
+        source = ROOT / "fsrl" / "core" / "config.py"
+        tree = ast.parse(source.read_text(encoding="utf-8"), filename=str(source))
+        assigned_names = {
+            target.id
+            for node in tree.body
+            if isinstance(node, (ast.Assign, ast.AnnAssign))
+            for target in (
+                node.targets if isinstance(node, ast.Assign) else (node.target,)
+            )
+            if isinstance(target, ast.Name)
+        }
+        self.assertNotIn("DEVICE", assigned_names)
 
     def test_scoped_agent_guides_cover_distinct_repository_boundaries(self):
         expected = {

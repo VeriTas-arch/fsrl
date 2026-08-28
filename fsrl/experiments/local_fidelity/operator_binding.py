@@ -10,7 +10,6 @@ import numpy as np
 import torch
 
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
-from fsrl.core.config import DEVICE
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     retained_relation_mask,
@@ -359,6 +358,7 @@ def collect_factorial(
     relation_count = len(relations)
     subjects = evaluator.config.bs
     hidden_size = evaluator.config.hs
+    device = evaluator.device
     schedules = tuple(
         tuple(pair for relation_pairs in oriented for pair in relation_pairs)
         for _ in range(subjects)
@@ -375,10 +375,10 @@ def collect_factorial(
         relation_count,
         2,
         hidden_size,
-        device=DEVICE,
+        device=device,
     )
     hidden_effect = torch.empty_like(action)
-    h0_values = torch.empty(subjects, relation_count, 2, hidden_size, device=DEVICE)
+    h0_values = torch.empty(subjects, relation_count, 2, hidden_size, device=device)
     validation = {
         "manual_h0_max_abs_error": 0.0,
         "loo_h0_invariance_max_abs_error": 0.0,
@@ -412,7 +412,7 @@ def collect_factorial(
                 h0_values[:, query_index, orientation] = h0
                 actual_h0 = torch.from_numpy(
                     _stack_hidden_step(intact_rows, pair, 0)
-                ).to(DEVICE)
+                ).to(device)
                 validation["manual_h0_max_abs_error"] = max(
                     validation["manual_h0_max_abs_error"],
                     float(torch.max(torch.abs(h0 - actual_h0)).item()),
@@ -426,7 +426,7 @@ def collect_factorial(
                 )
                 actual_intact_h1 = torch.from_numpy(
                     _stack_hidden_step(intact_rows, pair, 1)
-                ).to(DEVICE)
+                ).to(device)
                 for state_index in range(relation_count):
                     baseline = input_drive + torch.matmul(
                         evaluator.net.w
@@ -462,10 +462,10 @@ def collect_factorial(
                     )
                     actual_loo_h0 = torch.from_numpy(
                         _stack_hidden_step(loo_rows[state_index], pair, 0)
-                    ).to(DEVICE)
+                    ).to(device)
                     actual_loo_h1 = torch.from_numpy(
                         _stack_hidden_step(loo_rows[state_index], pair, 1)
-                    ).to(DEVICE)
+                    ).to(device)
                     validation["loo_h0_invariance_max_abs_error"] = max(
                         validation["loo_h0_invariance_max_abs_error"],
                         float(torch.max(torch.abs(actual_h0 - actual_loo_h0)).item()),
@@ -811,7 +811,7 @@ def run_state_query_operator_binding(
     specification = load_json(specification_path)
     validation = validate_registered_sources(specification)
     runtime = configure_formal_runtime()
-    if not runtime["cuda_available"] or DEVICE != "cuda":
+    if not runtime["cuda_available"] or runtime["device"] != "cuda":
         raise RuntimeError("state-query operator binding requires visible CUDA")
     sources = specification["registered_sources"]
     pilot_specification = load_json(

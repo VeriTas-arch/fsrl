@@ -1,7 +1,8 @@
 import numpy as np
 import torch
 
-from fsrl.core.config import ADDINPUT, DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import ADDINPUT, NUMRESPONSESTEP
+from fsrl.infra.runtime import default_device
 
 
 def generate_cue_data(config, nbcues):
@@ -64,7 +65,7 @@ def build_step_inputs(
                 config.nbstimbits + ADDINPUT + previous_actions[batch_index],
             ] = 1
 
-    return torch.from_numpy(inputs).detach().to(DEVICE)
+    return torch.from_numpy(inputs).detach().to(default_device())
 
 
 def prepare_trial(config, nbcues, nbtrials):

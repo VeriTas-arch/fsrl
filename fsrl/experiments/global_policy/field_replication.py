@@ -27,6 +27,7 @@ from fsrl.experiments.global_policy.amplitude_provenance import (
     posterior_descriptors,
 )
 from fsrl.experiments.global_policy.field_reassembly import (
+    EstimandBundle,
     classify_status,
     field_reassembly_estimands,
     summarize_estimand,
@@ -763,7 +764,7 @@ def _bootstrap_counts(specification: dict, seed: int, subjects: int) -> np.ndarr
 def _statistics(
     specification: dict,
     seed: int,
-    estimands: dict[str, np.ndarray],
+    estimands: EstimandBundle,
     direct_endpoints: dict[str, np.ndarray],
 ) -> dict:
     subjects = len(np.asarray(estimands["D"]))

@@ -10,6 +10,7 @@ from dataclasses import asdict
 from functools import lru_cache
 from itertools import combinations, product
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 import torch
@@ -184,7 +185,10 @@ def _graph_connected(edges: tuple[tuple[int, int], ...], n_items: int = 8) -> bo
 
 
 def graph_descriptor(edges: tuple[tuple[int, int], ...], n_items: int = 8) -> dict:
-    edges = tuple(sorted(tuple(sorted(edge)) for edge in edges))
+    edges = cast(
+        tuple[tuple[int, int], ...],
+        tuple(sorted(tuple(sorted(edge)) for edge in edges)),
+    )
     adjacency = [set() for _ in range(n_items)]
     for first, second in edges:
         adjacency[first].add(second)

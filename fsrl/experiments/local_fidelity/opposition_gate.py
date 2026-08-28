@@ -6,7 +6,6 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from fsrl.core.config import DEVICE
 from fsrl.core.local_trace import inverse_softplus
 from fsrl.core.plastic_rnn import RetroModulRNN
 
@@ -72,9 +71,10 @@ class PolicyOppositionGateTransition(nn.Module):
         self.epsilon = float(epsilon)
         for parameter in self.backbone.parameters():
             parameter.requires_grad_(False)
+        device = next(self.backbone.parameters()).device
         self.raw_beta = nn.Parameter(
             torch.tensor(
-                [inverse_softplus(initial_beta)], dtype=torch.float32, device=DEVICE
+                [inverse_softplus(initial_beta)], dtype=torch.float32, device=device
             )
         )
 

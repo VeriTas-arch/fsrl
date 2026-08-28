@@ -10,7 +10,7 @@ import numpy as np
 
 from fsrl.analysis.behavioral import kendall_tau_positions
 from fsrl.analysis.statistics import json_values, summarize_subjects
-from fsrl.experiments.transport.topology import ROOT, bootstrap_counts
+from fsrl.experiments.transport.topology import bootstrap_counts
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     canonical_file_registration,
@@ -20,10 +20,12 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
+from fsrl.paths import REPO_ROOT
 
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/liu_sparsity_individualization_localization_v1.json"
 )
+ROOT = REPO_ROOT
 DEFAULT_IMPLEMENTATION_LOCK_PATH = resolve_record(
     "benchmarks/liu_sparsity_individualization_localization_v1.lock.json"
 )

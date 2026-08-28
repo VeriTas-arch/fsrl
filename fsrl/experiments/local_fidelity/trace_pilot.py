@@ -7,6 +7,7 @@ import json
 from dataclasses import asdict, dataclass
 from itertools import combinations
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 import torch
@@ -34,12 +35,12 @@ from fsrl.evaluation.qualification import evaluate_qualification
 from fsrl.experiments.local_fidelity.curvature_gate import make_gate_tasks
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     adaptation_config,
-    configure_runtime,
     field_metrics,
     query_binding_summary,
     terminal_projection_summary,
 )
 from fsrl.experiments.local_fidelity.policy_residual import policy_residual_statistics
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
@@ -444,7 +445,7 @@ def shuffled_pair_indices(subjects: int, n_items: int, seed: int) -> np.ndarray:
     canonical_index = {pair: index for index, pair in enumerate(canonical)}
     for subject in range(subjects):
         for index, pair in enumerate(ordered):
-            base = tuple(sorted(pair))
+            base = cast(tuple[int, int], tuple(sorted(pair)))
             mapped = canonical[int(derangements[subject, canonical_index[base]])]
             oriented = mapped if pair == base else (mapped[1], mapped[0])
             rows[subject, index] = ordered_index[oriented]
@@ -1207,7 +1208,7 @@ def parse_args(args=None):
 
 def main(args=None) -> int:
     parsed = parse_args(args)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     source_validation = validate_sources(
         parsed.specification, parsed.implementation_lock
     )

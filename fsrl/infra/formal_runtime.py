@@ -55,6 +55,15 @@ def configure_formal_runtime() -> dict:
     return formal_runtime_snapshot()
 
 
+def configure_formal_cuda_runtime() -> dict:
+    """Configure the formal runtime and require CUDA for a direct workflow call."""
+
+    snapshot = configure_formal_runtime()
+    if not snapshot["cuda_available"] or snapshot["device"] != "cuda":
+        raise RuntimeError("formal execution requires a visible CUDA GPU")
+    return snapshot
+
+
 def formal_runtime_snapshot() -> dict:
     profile = _formal_profile()
     snapshot = runtime_snapshot(profile)

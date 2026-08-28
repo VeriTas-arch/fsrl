@@ -3,8 +3,9 @@ from dataclasses import dataclass
 import numpy as np
 import torch
 
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.infra.logging import log
+from fsrl.infra.runtime import default_device
 
 from .task import build_step_inputs, generate_cue_data, prepare_trial
 
@@ -52,7 +53,7 @@ def run_episode(config, net, nbcues, print_trace=False):
 
     # Two blank steps before the episode, matching the original script.
     blank_inputs = torch.zeros(config.bs, config.inputsize, requires_grad=False).to(
-        DEVICE
+        default_device()
     )
     for _ in range(2):
         _, _, _, hidden, et, pw = net(blank_inputs, hidden, et, pw)
@@ -135,11 +136,11 @@ def run_episode(config, net, nbcues, print_trace=False):
             nbtesttrials_nonadjacent += np.sum(1 - adjacent)
             nbtesttrials_nonadjacent_correct += np.sum((1 - adjacent) * correct_answer)
 
-    bootstrap_return = torch.zeros(config.bs, requires_grad=False).to(DEVICE)
+    bootstrap_return = torch.zeros(config.bs, requires_grad=False).to(default_device())
     for numstepb in reversed(range(config.eplen)):
         bootstrap_return = config.gr * bootstrap_return + torch.from_numpy(
             rewards[numstepb]
-        ).detach().to(DEVICE)
+        ).detach().to(default_device())
         advantage = bootstrap_return - values[numstepb][:, 0]
         lossv = lossv + advantage.pow(2).sum() / config.bs
         loss_multiplier = (

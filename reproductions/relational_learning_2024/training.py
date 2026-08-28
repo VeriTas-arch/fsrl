@@ -6,8 +6,8 @@ import torch
 from tqdm.auto import tqdm
 
 from fsrl.core import RetroModulRNN
-from fsrl.core.config import DEVICE
 from fsrl.infra.logging import log
+from fsrl.infra.runtime import default_device
 
 from .episode import run_episode
 
@@ -65,7 +65,7 @@ def train(config, output_dir, trace_steps=False):
     )
     test_rewards = []
 
-    log(f"[setup] Device: {DEVICE}")
+    log(f"[setup] Device: {default_device()}")
     log(
         f"[setup] Batch size: {config.bs}; episodes: {config.nbiter}; output: {output_dir}"
     )

@@ -582,7 +582,10 @@ class DerivationObjective:
         )
         loss = -log_likelihood
         loss.backward()
-        gradient = parameters.grad.detach().cpu().numpy().astype(np.float64)
+        parameter_gradient = parameters.grad
+        if parameter_gradient is None:
+            raise RuntimeError("autograd did not produce the comparator gradient")
+        gradient = parameter_gradient.detach().cpu().numpy().astype(np.float64)
         return float(loss.detach().cpu()), gradient
 
 

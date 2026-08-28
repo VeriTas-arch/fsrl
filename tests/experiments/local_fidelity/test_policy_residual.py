@@ -118,3 +118,8 @@ class PolicyResidualTests(unittest.TestCase):
         output[0].sum().backward()
         self.assertIsNotNone(self.residual.raw_eta.grad)
         self.assertTrue(np.isfinite(float(self.residual.raw_eta.grad)))
+
+    def test_residual_parameter_follows_an_explicit_backbone_device(self):
+        backbone = RetroModulRNN(self.config.to_model_dict(), device="cpu")
+        residual = PolicyResidualTransition(backbone)
+        self.assertEqual(residual.raw_eta.device, backbone.w.device)

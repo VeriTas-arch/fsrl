@@ -35,7 +35,6 @@ from fsrl.experiments.local_fidelity.evidence_access_pilot import (
 )
 from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
-    ROOT,
     bootstrap_counts,
     condition_metrics,
     constructive_metrics,
@@ -61,6 +60,7 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
+from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import (
     RankingProtocol,
     SupportTrial,
@@ -71,6 +71,7 @@ from fsrl.tasks.protocol import (
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/liu_evidence_sparsity_transport_v1.json"
 )
+ROOT = REPO_ROOT
 DEFAULT_IMPLEMENTATION_LOCK_PATH = resolve_record(
     "benchmarks/liu_evidence_sparsity_transport_v1.lock.json"
 )

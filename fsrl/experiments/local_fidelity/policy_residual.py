@@ -7,7 +7,6 @@ import math
 import torch
 from torch import nn
 
-from fsrl.core.config import DEVICE
 from fsrl.core.plastic_rnn import RetroModulRNN
 
 
@@ -51,9 +50,10 @@ class PolicyResidualTransition(nn.Module):
         self.backbone = backbone
         for parameter in self.backbone.parameters():
             parameter.requires_grad_(False)
+        device = next(self.backbone.parameters()).device
         self.raw_eta = nn.Parameter(
             torch.tensor(
-                [inverse_sigmoid(initial_eta)], dtype=torch.float32, device=DEVICE
+                [inverse_sigmoid(initial_eta)], dtype=torch.float32, device=device
             )
         )
 

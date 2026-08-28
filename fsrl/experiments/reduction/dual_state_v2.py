@@ -6,6 +6,7 @@ import argparse
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 
@@ -15,6 +16,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
 )
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -215,7 +217,10 @@ def load_development_records(
                         evidence=used[2].copy(),
                         loo_potential=loo_potential[index].copy(),
                         loo_field=loo_field[index].copy(),
-                        loo_relation=tuple(int(value) for value in loo_relation[index]),
+                        loo_relation=cast(
+                            tuple[int, int],
+                            tuple(int(value) for value in loo_relation[index]),
+                        ),
                         local_exact_error=local_error,
                         local_identity_raw=np.empty(0),
                         local_kernel_raw=np.empty(0),
@@ -422,6 +427,9 @@ def evaluate_preservation(
         subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
         test_time_value=2.0 / 3.0,
     )
+    encoding_states = evaluator.subject_encoding_states
+    if encoding_states is None:
+        raise RuntimeError("Liu preservation requires subject encoding states")
     evidence = v1._liu_evidence(evaluator)
     potential = scalar_history_rollout_batch(evidence, parameters)
     global_field = potential @ geometry.incidence.T
@@ -452,9 +460,7 @@ def evaluate_preservation(
                     values.append(0.0)
                     continue
                 admission = evaluator._encoding_reliability(subject, trial_index)
-                probability = evaluator.subject_encoding_states[
-                    subject
-                ].relation_reliability(
+                probability = encoding_states[subject].relation_reliability(
                     trial.higher_item,
                     trial.lower_item,
                     evaluator.item_rank[trial.lower_item]
@@ -512,7 +518,7 @@ def evaluate_preservation(
     }
     behavior = analyze_sampled_query_policy(
         protocol,
-        v1._margin_logits(intact, geometry),
+        v1.margin_logits(intact, geometry),
         seed=int(evaluation["choice_seed"]),
         temperature=temperature,
     )
@@ -593,7 +599,7 @@ def build_result(
         record for seed in (2101, 2102, 2103) for record in records[str(seed)]
     ]
     final_parameters = fit_scalar_history(all_records)
-    runtime = v1.configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     v1_specification = load_json(
         resolve_record("benchmarks/dual_state_reduced_algorithm_v1.json")
     )

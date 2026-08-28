@@ -25,8 +25,11 @@ from fsrl.experiments.global_policy.comparator_adequacy import (
 )
 from fsrl.infra.git_provenance import verify_git_registrations
 from fsrl.infra.provenance import write_json_exclusive
-from fsrl.infra.study_registry import ROOT, legacy_identifier, resolve_record
+from fsrl.infra.study_registry import legacy_identifier, resolve_record
+from fsrl.paths import REPO_ROOT
 from fsrl.tasks.registered_protocol import load_ranking_protocol
+
+ROOT = REPO_ROOT
 
 
 class GlobalPolicyComparatorAdequacyTests(unittest.TestCase):

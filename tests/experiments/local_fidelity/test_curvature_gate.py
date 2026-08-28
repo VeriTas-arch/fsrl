@@ -78,3 +78,8 @@ class CurvatureGateTests(unittest.TestCase):
         output[0].sum().backward()
         self.assertIsNotNone(self.gate.raw_beta.grad)
         self.assertTrue(np.isfinite(float(self.gate.raw_beta.grad)))
+
+    def test_gate_parameter_follows_an_explicit_backbone_device(self):
+        backbone = RetroModulRNN(self.config.to_model_dict(), device="cpu")
+        gate = CurvatureGateTransition(backbone)
+        self.assertEqual(gate.raw_beta.device, backbone.w.device)

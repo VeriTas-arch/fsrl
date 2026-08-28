@@ -5,13 +5,14 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
 
 from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
@@ -85,7 +86,8 @@ def relation_geometry(
     direct_edges = []
     remote_masks = []
     for relation in protocol.support_pairs_higher_lower:
-        direct_edges.append(edge_lookup[tuple(sorted(relation))])
+        canonical = cast(tuple[int, int], tuple(sorted(relation)))
+        direct_edges.append(edge_lookup[canonical])
         endpoints = set(relation)
         remote_masks.append(
             np.asarray(
@@ -113,11 +115,12 @@ def collect_nested_fields(
     retained: np.ndarray,
     *,
     tolerance: float,
-) -> tuple[dict[str, np.ndarray], dict]:
+) -> tuple[dict[str, dict[str, np.ndarray]], dict[str, Any]]:
     """Collect output-projected A, J_b A, and exact H over all query edges."""
 
     relation_count = len(protocol.support_pairs_higher_lower)
     subjects = evaluator.config.bs
+    device = evaluator.device
     edge_count = len(geometry.pairs)
     oriented = tuple((pair, (pair[1], pair[0])) for pair in geometry.pairs)
     schedules = ordered_query_schedule(geometry, subjects)
@@ -133,7 +136,7 @@ def collect_nested_fields(
         stage: np.empty((relation_count, subjects, edge_count, 2), dtype=np.float64)
         for stage in STAGES
     }
-    validation = {
+    scalar_validation: dict[str, float] = {
         "manual_h0_max_abs_error": 0.0,
         "loo_h0_invariance_max_abs_error": 0.0,
         "operator_preactivation_reconstruction_max_abs_error": 0.0,
@@ -143,7 +146,7 @@ def collect_nested_fields(
     }
     output = evaluator.net.h2o.weight[1] - evaluator.net.h2o.weight[0]
     output = output.detach()
-    retained_device = torch.from_numpy(retained).to(device=DEVICE)
+    retained_device = torch.from_numpy(retained).to(device=device)
     omitted_scalar_max = {stage: 0.0 for stage in STAGES}
 
     with torch.no_grad():
@@ -203,8 +206,12 @@ def collect_nested_fields(
                     evaluator.net.w + evaluator.net.alpha.detach() * intact,
                     h0.view(subjects, evaluator.config.hs, 1),
                 )
-                validation["operator_preactivation_reconstruction_max_abs_error"] = max(
-                    validation["operator_preactivation_reconstruction_max_abs_error"],
+                scalar_validation[
+                    "operator_preactivation_reconstruction_max_abs_error"
+                ] = max(
+                    scalar_validation[
+                        "operator_preactivation_reconstruction_max_abs_error"
+                    ],
                     float(
                         torch.max(
                             torch.abs(baseline + action - intact_preactivation[None])
@@ -212,44 +219,48 @@ def collect_nested_fields(
                     ),
                 )
                 actual_h0 = torch.from_numpy(stack_step(intact_hidden, pair, 0)).to(
-                    DEVICE
+                    device
                 )
-                validation["manual_h0_max_abs_error"] = max(
-                    validation["manual_h0_max_abs_error"],
+                scalar_validation["manual_h0_max_abs_error"] = max(
+                    scalar_validation["manual_h0_max_abs_error"],
                     float(torch.max(torch.abs(actual_h0 - h0)).item()),
                 )
                 direct_scalar = torch.einsum("qsh,h->qs", action[..., 0], output)
                 covector = torch.einsum("qshk,h->qsk", effective, output)
                 bilinear_scalar = torch.einsum("qsh,sh->qs", covector, h0)
-                validation["bilinear_operator_identity_max_abs_error"] = max(
-                    validation["bilinear_operator_identity_max_abs_error"],
+                scalar_validation["bilinear_operator_identity_max_abs_error"] = max(
+                    scalar_validation["bilinear_operator_identity_max_abs_error"],
                     float(torch.max(torch.abs(direct_scalar - bilinear_scalar)).item()),
                 )
 
                 actual_intact_h1 = torch.from_numpy(
                     stack_step(intact_hidden, pair, NUMRESPONSESTEP)
-                ).to(DEVICE)
+                ).to(device)
                 actual_intact_logit = torch.from_numpy(
                     stack_step(intact_logits, pair, NUMRESPONSESTEP)
-                ).to(DEVICE)
+                ).to(device)
                 for relation_index, (loo_hidden, loo_logits) in enumerate(
                     loo_trajectories
                 ):
                     actual_loo_h0 = torch.from_numpy(
                         stack_step(loo_hidden, pair, 0)
-                    ).to(DEVICE)
+                    ).to(device)
                     actual_loo_h1 = torch.from_numpy(
                         stack_step(loo_hidden, pair, NUMRESPONSESTEP)
-                    ).to(DEVICE)
+                    ).to(device)
                     actual_loo_logit = torch.from_numpy(
                         stack_step(loo_logits, pair, NUMRESPONSESTEP)
-                    ).to(DEVICE)
-                    validation["loo_h0_invariance_max_abs_error"] = max(
-                        validation["loo_h0_invariance_max_abs_error"],
+                    ).to(device)
+                    scalar_validation["loo_h0_invariance_max_abs_error"] = max(
+                        scalar_validation["loo_h0_invariance_max_abs_error"],
                         float(torch.max(torch.abs(actual_h0 - actual_loo_h0)).item()),
                     )
-                    validation["nonlinear_hidden_reconstruction_max_abs_error"] = max(
-                        validation["nonlinear_hidden_reconstruction_max_abs_error"],
+                    scalar_validation[
+                        "nonlinear_hidden_reconstruction_max_abs_error"
+                    ] = max(
+                        scalar_validation[
+                            "nonlinear_hidden_reconstruction_max_abs_error"
+                        ],
                         float(
                             torch.max(
                                 torch.abs(
@@ -262,10 +273,10 @@ def collect_nested_fields(
                     projected = torch.einsum(
                         "sh,h->s", hidden_effect[relation_index, :, :, 0], output
                     )
-                    validation[
+                    scalar_validation[
                         "exact_hidden_to_actual_logit_influence_max_abs_error"
                     ] = max(
-                        validation[
+                        scalar_validation[
                             "exact_hidden_to_actual_logit_influence_max_abs_error"
                         ],
                         float(
@@ -298,15 +309,14 @@ def collect_nested_fields(
         stable_omitted_residual_max[stage] = float(
             np.max(np.abs(residual[omitted_selector]))
         )
-    validation.update(
-        {
-            "hodge_reconstruction_max_abs_error": hodge_error,
-            "stable_omitted_oriented_scalar_max_abs": omitted_scalar_max,
-            "stable_omitted_field_max_abs": omitted_field_max,
-            "stable_omitted_residual_max_abs": stable_omitted_residual_max,
-            "floating_reproduction_tolerance": tolerance,
-        }
-    )
+    validation: dict[str, Any] = {
+        **scalar_validation,
+        "hodge_reconstruction_max_abs_error": hodge_error,
+        "stable_omitted_oriented_scalar_max_abs": omitted_scalar_max,
+        "stable_omitted_field_max_abs": omitted_field_max,
+        "stable_omitted_residual_max_abs": stable_omitted_residual_max,
+        "floating_reproduction_tolerance": tolerance,
+    }
     error_names = (
         "manual_h0_max_abs_error",
         "loo_h0_invariance_max_abs_error",
@@ -316,7 +326,7 @@ def collect_nested_fields(
         "bilinear_operator_identity_max_abs_error",
         "hodge_reconstruction_max_abs_error",
     )
-    if any(validation[name] > tolerance for name in error_names):
+    if any(float(validation[name]) > tolerance for name in error_names):
         raise RuntimeError(f"nested-map reconstruction failed: {validation}")
     return {
         "fields": fields,
@@ -753,7 +763,7 @@ def run_operator_output_semantics(
     specification = load_json(specification_path)
     validation = validate_registered_sources(specification)
     runtime = configure_formal_runtime()
-    if not runtime["cuda_available"] or DEVICE != "cuda":
+    if not runtime["cuda_available"] or runtime["device"] != "cuda":
         raise RuntimeError("operator-output semantics requires a visible CUDA device")
     sources = specification["registered_sources"]
     pilot_specification = load_json(

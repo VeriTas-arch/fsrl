@@ -1,10 +1,15 @@
 import unittest
 
 import numpy as np
+import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
 from fsrl.core.config import TrainConfig
-from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
+from fsrl.core.plastic_rnn import RetroModulRNN
+from fsrl.evaluation.frozen_fast_weight import (
+    FastWeightIntervention,
+    FrozenFastWeightEvaluator,
+)
 from fsrl.experiments.transport.item_count import (
     DEFAULT_SPECIFICATION_PATH,
     VariableItemFrozenFastWeightEvaluator,
@@ -74,7 +79,8 @@ class ItemCountTransportTests(unittest.TestCase):
         )
 
     def test_variable_evaluator_exactly_replays_n8_constructor(self):
-        config = TrainConfig(bs=3, cs=6)
+        config = TrainConfig(bs=3, hs=4, cs=6)
+        net = RetroModulRNN(config.to_model_dict(), device="cpu")
         kwargs = {
             "cue_seed": 13,
             "support_seed": 17,
@@ -82,11 +88,44 @@ class ItemCountTransportTests(unittest.TestCase):
             "subject_encoding_mode": "stable_omission",
             "subject_encoding_seed": 19,
         }
-        frozen = FrozenFastWeightEvaluator(object(), config, self.base, **kwargs)
+        frozen = FrozenFastWeightEvaluator(net, config, self.base, **kwargs)
         variable = VariableItemFrozenFastWeightEvaluator(
-            object(), config, self.base, **kwargs
+            net, config, self.base, **kwargs
         )
         self.assertTrue(validate_n8_evaluator_interface(variable, frozen)["passed"])
+
+    def test_variable_evaluator_reuses_complete_rollout_initialization(self):
+        torch.manual_seed(37)
+        config = TrainConfig(bs=2, hs=4, cs=6)
+        net = RetroModulRNN(config.to_model_dict(), device="cpu")
+        kwargs = {
+            "cue_seed": 13,
+            "support_seed": 17,
+            "subject_encoding_mode": "stable_omission",
+            "subject_encoding_seed": 19,
+        }
+        frozen = FrozenFastWeightEvaluator(net, config, self.base, **kwargs)
+        variable = VariableItemFrozenFastWeightEvaluator(
+            net, config, self.base, **kwargs
+        )
+        frozen_weights = frozen.learn_fast_weights(FastWeightIntervention.INTACT)
+        variable_weights = variable.learn_fast_weights(FastWeightIntervention.INTACT)
+        torch.testing.assert_close(variable_weights, frozen_weights, rtol=0.0, atol=0.0)
+
+        schedules = tuple(((0, 1), (1, 0)) for _ in range(config.bs))
+        self.assertEqual(
+            variable.readout_logits(variable_weights, schedules),
+            frozen.readout_logits(frozen_weights, schedules),
+        )
+
+        n6_protocol = protocol_for_size(
+            self.base,
+            self.specification["size_matched_graph_contract"]["graphs"][0],
+        )
+        n6 = VariableItemFrozenFastWeightEvaluator(net, config, n6_protocol, **kwargs)
+        n6_weights = n6.initialize_fast_weights()
+        n6_weights = n6.advance_support_trial(n6_weights, 0)
+        self.assertEqual(n6_weights.shape, (config.bs, config.hs, config.hs))
 
     def test_size_generic_behavior_is_exact_at_n8_and_runs_at_n6(self):
         rng = np.random.default_rng(23)

@@ -11,6 +11,7 @@ from fractions import Fraction
 from functools import lru_cache
 from itertools import combinations, pairwise, permutations
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
@@ -37,12 +38,10 @@ from fsrl.analysis.statistics import (
     summarize_difference,
     summarize_subjects,
 )
-from fsrl.core.config import TrainConfig
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    deterministic_cue_codes,
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
@@ -53,7 +52,6 @@ from fsrl.experiments.local_fidelity.evidence_access_pilot import (
 )
 from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
-    ROOT,
     bootstrap_counts,
     condition_metrics,
     finite_primary,
@@ -75,15 +73,13 @@ from fsrl.infra.study_registry import (
 )
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
+from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol, ordered_pairs
-from fsrl.tasks.subject_encoding import (
-    SubjectEncodingState,
-    sample_subject_encoding_states,
-)
 
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/liu_item_count_transport_v1.json"
 )
+ROOT = REPO_ROOT
 DEFAULT_IMPLEMENTATION_LOCK_PATH = resolve_record(
     "benchmarks/liu_item_count_transport_v1.lock.json"
 )
@@ -158,132 +154,7 @@ def validate_sources(
 class VariableItemFrozenFastWeightEvaluator(FrozenFastWeightEvaluator):
     """Frozen evaluator whose only source change is removal of the N=8 guard."""
 
-    def __init__(
-        self,
-        net,
-        config: TrainConfig,
-        protocol: RankingProtocol,
-        *,
-        cue_seed: int = 0,
-        support_seed: int = 0,
-        cue_mode: str = "shared",
-        subject_encoding_mode: str = "none",
-        subject_encoding_seed: int = 0,
-        test_time_value: float = 2.0 / 3.0,
-    ) -> None:
-        if config.bs < 1:
-            raise ValueError("batch size must be positive")
-        self.net = net
-        self.config = config
-        self.protocol = protocol
-        self.item_rank = {
-            item: position
-            for position, item in enumerate(protocol.true_order_high_to_low)
-        }
-        self.test_time_value = float(test_time_value)
-        self.cue_codes = deterministic_cue_codes(
-            config.bs, protocol.n_items, config.cs, cue_seed, mode=cue_mode
-        )
-        self.cue_mode = cue_mode
-        supported_encoding_modes = {
-            "none",
-            "stable_bottleneck",
-            "stable_omission",
-            "presentationwise_omission",
-            "blockwise_omission",
-            "uniform_no_bottleneck",
-        }
-        if subject_encoding_mode not in supported_encoding_modes:
-            raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
-        self.support_schedules = tuple(
-            protocol.support_schedule(np.random.default_rng(support_seed + subject))
-            for subject in range(config.bs)
-        )
-        self.subject_relation_gains: tuple[dict[tuple[int, int], float], ...] | None
-        self.subject_trial_gains: tuple[tuple[float, ...], ...] | None
-        if subject_encoding_mode == "none":
-            self.subject_encoding_states: tuple[SubjectEncodingState, ...] | None = None
-            self.subject_relation_gains = None
-            self.subject_trial_gains = None
-        else:
-            encoding_rng = np.random.default_rng(subject_encoding_seed)
-            self.subject_encoding_states = sample_subject_encoding_states(
-                encoding_rng, config.bs, protocol.n_items
-            )
-            probabilities = []
-            for state in self.subject_encoding_states:
-                subject_probabilities = {}
-                for higher, lower in protocol.support_pairs_higher_lower:
-                    symbolic_distance = self.item_rank[lower] - self.item_rank[higher]
-                    subject_probabilities[(higher, lower)] = state.relation_reliability(
-                        higher, lower, symbolic_distance
-                    )
-                probabilities.append(subject_probabilities)
-            if subject_encoding_mode == "stable_bottleneck":
-                relation_gains = probabilities
-            elif subject_encoding_mode == "stable_omission":
-                relation_gains = [
-                    {
-                        pair: float(encoding_rng.random() < probability)
-                        for pair, probability in subject_probabilities.items()
-                    }
-                    for subject_probabilities in probabilities
-                ]
-            elif subject_encoding_mode == "uniform_no_bottleneck":
-                uniform_gain = float(
-                    np.mean(
-                        [
-                            probability
-                            for subject_probabilities in probabilities
-                            for probability in subject_probabilities.values()
-                        ]
-                    )
-                )
-                relation_gains = [
-                    {pair: uniform_gain for pair in subject_probabilities}
-                    for subject_probabilities in probabilities
-                ]
-            else:
-                relation_gains = probabilities
-            self.subject_relation_gains = tuple(relation_gains)
-            trial_gains = []
-            for subject, schedule in enumerate(self.support_schedules):
-                if subject_encoding_mode == "presentationwise_omission":
-                    values = tuple(
-                        float(
-                            encoding_rng.random()
-                            < probabilities[subject][
-                                (trial.higher_item, trial.lower_item)
-                            ]
-                        )
-                        for trial in schedule
-                    )
-                elif subject_encoding_mode == "blockwise_omission":
-                    block_relation_gains = {
-                        (block, pair): float(
-                            encoding_rng.random() < probabilities[subject][pair]
-                        )
-                        for block in range(protocol.support_blocks)
-                        for pair in protocol.support_pairs_higher_lower
-                    }
-                    values = tuple(
-                        block_relation_gains[
-                            (
-                                trial.block_index,
-                                (trial.higher_item, trial.lower_item),
-                            )
-                        ]
-                        for trial in schedule
-                    )
-                else:
-                    values = tuple(
-                        relation_gains[subject][(trial.higher_item, trial.lower_item)]
-                        for trial in schedule
-                    )
-                trial_gains.append(values)
-            self.subject_trial_gains = tuple(trial_gains)
-        self.subject_encoding_mode = subject_encoding_mode
-        self.subject_encoding_seed = subject_encoding_seed
+    _required_protocol_item_count = None
 
 
 def _mean_subject_column(
@@ -331,7 +202,7 @@ def analyze_size_generic_sampled_query_policy(
             probability_left = _choice_sigmoid(logit)
             choose_left = bool(choice_rng.random() < probability_left)
             chosen_item = trial.left_item if choose_left else trial.right_item
-            pair = tuple(sorted(oriented_pair))
+            pair = cast(tuple[int, int], tuple(sorted(oriented_pair)))
             pair_index = pair_to_index[pair]
             total_counts[pair_index] += 1.0
             correct = choose_left == bool(trial.correct_action)
@@ -466,7 +337,7 @@ def analyze_size_generic_sampled_query_policy(
         slopes.append(float(np.polyfit(distances, values, 1)[0]))
     slope_values = np.asarray(slopes)
     slope_test = (
-        stats.ttest_1samp(slope_values, 0.0)
+        cast(Any, stats.ttest_1samp(slope_values, 0.0))
         if len(slope_values) > 1 and float(np.std(slope_values)) > 1e-12
         else None
     )
@@ -595,21 +466,30 @@ def enumerate_matched_cycle(
             minimizers = 1
         elif distance == best_distance:
             minimizers += 1
+            if best_edges is None:
+                raise RuntimeError("cycle minimizer state is incomplete")
             best_edges = min(best_edges, edges)
     if best_distance is None or best_edges is None:
         raise RuntimeError("could not enumerate a Hamiltonian cycle")
-    return best_edges, best_distance, minimizers
+    return (
+        cast(tuple[tuple[int, int], ...], best_edges),
+        best_distance,
+        minimizers,
+    )
 
 
 def _rank_edges(protocol: RankingProtocol) -> tuple[tuple[int, int], ...]:
     rank = {
         item: position for position, item in enumerate(protocol.true_order_high_to_low)
     }
-    return tuple(
-        sorted(
-            tuple(sorted((rank[higher], rank[lower])))
-            for higher, lower in protocol.support_pairs_higher_lower
-        )
+    return cast(
+        tuple[tuple[int, int], ...],
+        tuple(
+            sorted(
+                tuple(sorted((rank[higher], rank[lower])))
+                for higher, lower in protocol.support_pairs_higher_lower
+            )
+        ),
     )
 
 

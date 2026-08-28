@@ -7,6 +7,7 @@ import csv
 import json
 from collections import defaultdict
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 
@@ -353,7 +354,10 @@ def load_trial_cohort(
                 and correct == int(chosen_source == max(first_source, second_source))
             ):
                 raise RuntimeError(f"invalid human trial for {cohort}:{source_id}")
-            pair = tuple(sorted((first_source - 1, second_source - 1)))
+            pair = cast(
+                tuple[int, int],
+                tuple(sorted((first_source - 1, second_source - 1))),
+            )
             pair_index = pair_to_index[pair]
             if np.isfinite(matrix[block - 1, pair_index]):
                 raise RuntimeError(
@@ -488,6 +492,7 @@ def posterior_fields(specification: dict, metadata: dict) -> tuple[dict, dict]:
         cue_mode=str(contract["cue_mode"]),
         subject_encoding_mode=str(contract["subject_encoding_mode"]),
         subject_encoding_seed=int(contract["subject_encoding_seed"]),
+        protocol_only=True,
     )
     posterior, posterior_integrity = posterior_descriptors(
         evaluator,

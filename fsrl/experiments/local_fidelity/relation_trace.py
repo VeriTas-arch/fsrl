@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 import torch
@@ -12,7 +13,6 @@ from scipy import stats
 
 from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
-from fsrl.core.config import DEVICE
 from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
@@ -191,7 +191,9 @@ def prototype_rdm_similarity(
     upper = np.triu_indices(first.shape[1], k=1)
     values = np.asarray(
         [
-            stats.spearmanr(first[fold][upper], second[fold][upper]).statistic
+            cast(
+                Any, stats.spearmanr(first[fold][upper], second[fold][upper])
+            ).statistic
             for fold in range(first.shape[0])
         ],
         dtype=np.float64,
@@ -228,8 +230,8 @@ def trace_generated_writes(
 ) -> tuple[dict[str, np.ndarray], torch.Tensor, np.ndarray, dict]:
     relations = len(protocol.support_pairs_higher_lower)
     shape = (relations, evaluator.config.bs, evaluator.config.hs, evaluator.config.hs)
-    cumulative_raw = torch.zeros(shape, device=DEVICE)
-    cumulative_intended = torch.zeros(shape, device=DEVICE)
+    cumulative_raw = torch.zeros(shape, device=evaluator.device)
+    cumulative_intended = torch.zeros(shape, device=evaluator.device)
     exposure_counts = np.zeros((relations, evaluator.config.bs), dtype=np.int64)
     natural = evaluator.initialize_fast_weights()
     validation = {
@@ -543,7 +545,7 @@ def run_relation_trace_localization(
     specification = load_json(specification_path)
     validation = validate_registered_sources(specification)
     runtime = configure_formal_runtime()
-    if not runtime["cuda_available"] or DEVICE != "cuda":
+    if not runtime["cuda_available"] or runtime["device"] != "cuda":
         raise RuntimeError("relation trace localization requires a visible CUDA device")
 
     sources = specification["registered_sources"]

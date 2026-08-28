@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 
@@ -15,7 +16,7 @@ from fsrl.analysis.hodge import (
     vector_gradient_energy_fraction,
 )
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import FastWeightIntervention
 from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
@@ -33,7 +34,7 @@ DEFAULT_OUTPUT_PATH = resolve_record("results/hidden_residual_audit_v1.json")
 
 def validate_registered_sources(specification: dict) -> dict:
     sources = specification["registered_sources"]
-    validated = {}
+    validated: dict[str, object] = {}
     for name, registration in sources.items():
         if name == "pilot_artifacts":
             continue
@@ -45,9 +46,9 @@ def validate_registered_sources(specification: dict) -> dict:
             raise RuntimeError(f"registered SHA-256 mismatch: {path}")
         validated[name] = {"path": registration["path"], "sha256": observed}
 
-    artifacts = []
+    artifacts: list[dict[str, object]] = []
     for registration in sources["pilot_artifacts"]:
-        row = {"seed": int(registration["seed"])}
+        row: dict[str, object] = {"seed": int(registration["seed"])}
         for prefix in ("checkpoint", "config", "behavior"):
             path = resolve_path(registration[f"{prefix}_path"])
             observed = file_sha256(path)
@@ -114,7 +115,7 @@ def relation_geometry(
     signs = []
     remote_masks = []
     for relation in protocol.support_pairs_higher_lower:
-        canonical = tuple(sorted(relation))
+        canonical = cast(tuple[int, int], tuple(sorted(relation)))
         edge = edge_lookup[canonical]
         direct_edges.append(edge)
         signs.append(geometry.true_sign[edge])
@@ -497,7 +498,7 @@ def run_hidden_residual_audit(
     specification = load_json(specification_path)
     validation = validate_registered_sources(specification)
     runtime = configure_formal_runtime()
-    if not runtime["cuda_available"] or DEVICE != "cuda":
+    if not runtime["cuda_available"] or runtime["device"] != "cuda":
         raise RuntimeError("hidden residual audit requires a visible CUDA device")
 
     sources = specification["registered_sources"]

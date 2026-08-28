@@ -12,7 +12,7 @@ import torch
 
 from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
-from fsrl.core.config import DEVICE, NUMRESPONSESTEP
+from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
@@ -204,6 +204,7 @@ def collect_amplitude_fields(
 ) -> tuple[dict, dict]:
     relation_count = len(protocol.support_pairs_higher_lower)
     subjects = evaluator.config.bs
+    device = evaluator.device
     edge_count = len(geometry.pairs)
     oriented = tuple((pair, (pair[1], pair[0])) for pair in geometry.pairs)
     schedules = ordered_query_schedule(geometry, subjects)
@@ -224,7 +225,7 @@ def collect_amplitude_fields(
     )
     curvature_scalars = np.empty_like(jacobian_scalars)
     output = (evaluator.net.h2o.weight[1] - evaluator.net.h2o.weight[0]).detach()
-    retained_device = torch.from_numpy(retained).to(DEVICE)
+    retained_device = torch.from_numpy(retained).to(device)
     validation = {
         "manual_h0_max_abs_error": 0.0,
         "loo_h0_invariance_max_abs_error": 0.0,
@@ -314,7 +315,7 @@ def collect_amplitude_fields(
                     )
                 )
                 actual_h0 = torch.from_numpy(stack_step(intact_hidden, pair, 0)).to(
-                    DEVICE
+                    device
                 )
                 validation["manual_h0_max_abs_error"] = max(
                     validation["manual_h0_max_abs_error"],
@@ -323,22 +324,22 @@ def collect_amplitude_fields(
                 exact_one = torch.tanh(baseline + action) - baseline_hidden
                 actual_intact_h1 = torch.from_numpy(
                     stack_step(intact_hidden, pair, NUMRESPONSESTEP)
-                ).to(DEVICE)
+                ).to(device)
                 actual_intact_logit = torch.from_numpy(
                     stack_step(intact_logits, pair, NUMRESPONSESTEP)
-                ).to(DEVICE)
+                ).to(device)
                 for relation_index, (loo_hidden, loo_logits) in enumerate(
                     loo_trajectories
                 ):
                     actual_loo_h0 = torch.from_numpy(
                         stack_step(loo_hidden, pair, 0)
-                    ).to(DEVICE)
+                    ).to(device)
                     actual_loo_h1 = torch.from_numpy(
                         stack_step(loo_hidden, pair, NUMRESPONSESTEP)
-                    ).to(DEVICE)
+                    ).to(device)
                     actual_loo_logit = torch.from_numpy(
                         stack_step(loo_logits, pair, NUMRESPONSESTEP)
-                    ).to(DEVICE)
+                    ).to(device)
                     validation["loo_h0_invariance_max_abs_error"] = max(
                         validation["loo_h0_invariance_max_abs_error"],
                         float(torch.max(torch.abs(actual_h0 - actual_loo_h0)).item()),
@@ -874,7 +875,7 @@ def run_operator_amplitude_path(
     specification = load_json(specification_path)
     validation = validate_registered_sources(specification)
     runtime = configure_formal_runtime()
-    if not runtime["cuda_available"] or DEVICE != "cuda":
+    if not runtime["cuda_available"] or runtime["device"] != "cuda":
         raise RuntimeError("operator amplitude path requires a visible CUDA device")
     sources = specification["registered_sources"]
     pilot_specification = load_json(

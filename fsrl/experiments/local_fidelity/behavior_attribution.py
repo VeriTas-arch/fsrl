@@ -23,12 +23,12 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
-from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
 from fsrl.experiments.local_fidelity.trace_pilot import (
     build_local_trace,
     create_local_trace,
     query_bundle,
 )
+from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import load_json, write_json
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
@@ -432,7 +432,8 @@ def pair_correct_probabilities(
         forward_sign = 1.0 if first_higher else -1.0
         reverse_sign = -forward_sign
         forward = forward_sign * bundle["logits"][:, pair_index[pair]]
-        reverse = reverse_sign * bundle["logits"][:, pair_index[pair[::-1]]]
+        reverse_pair = (pair[1], pair[0])
+        reverse = reverse_sign * bundle["logits"][:, pair_index[reverse_pair]]
         values[:, edge] = 0.5 * (
             exact_probability(forward, temperature)
             + exact_probability(reverse, temperature)
@@ -515,7 +516,7 @@ def slope_decomposition(
         for name, values in raw_contributions["original_v1_local_off"].items()
     }
     output["largest_positive_original_contributor"] = max(
-        original_means, key=original_means.get
+        original_means, key=lambda name: original_means[name]
     )
     return output
 
@@ -824,7 +825,7 @@ def parse_args(args=None):
 
 def main(args=None) -> int:
     parsed = parse_args(args)
-    runtime = configure_runtime()
+    runtime = configure_formal_cuda_runtime()
     source_validation = validate_sources(
         parsed.specification, parsed.implementation_lock
     )
