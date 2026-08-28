@@ -15,7 +15,7 @@ from scipy import stats
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
@@ -410,7 +410,7 @@ def run_behavioral_analysis(
 ) -> dict:
     protocol_path = Path(protocol_path)
     protocol = load_ranking_protocol(protocol_path)
-    net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
+    net, config, checkpoint_info = load_frozen_retro_checkpoint(checkpoint, batch_size)
     evaluator = FrozenFastWeightEvaluator(
         net,
         config,

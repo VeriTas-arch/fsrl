@@ -20,7 +20,6 @@ from .backbone import (
 from .checkpoints import (
     CheckpointInfo,
     checkpoint_format,
-    convert_legacy_checkpoint,
     load_checkpoint_state,
     load_retro_checkpoint,
     resolve_checkpoint_path,
@@ -39,7 +38,6 @@ __all__ = [
     "checkpoint_format",
     "compile_meta_model",
     "compile_meta_sequence",
-    "convert_legacy_checkpoint",
     "load_checkpoint_state",
     "load_retro_checkpoint",
     "make_model_and_tasks",

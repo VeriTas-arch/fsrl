@@ -9,7 +9,7 @@ from .frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     OrderInvarianceMetrics,
     deterministic_cue_codes,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     load_training_provenance,
     run_causal_suite,
 )
@@ -22,7 +22,7 @@ __all__ = [
     "FrozenFastWeightEvaluator",
     "OrderInvarianceMetrics",
     "deterministic_cue_codes",
-    "load_retro_checkpoint",
+    "load_frozen_retro_checkpoint",
     "load_training_provenance",
     "ordered_query_schedule",
     "readout_margin_fields",

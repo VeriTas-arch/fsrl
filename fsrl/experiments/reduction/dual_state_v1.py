@@ -16,7 +16,7 @@ from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.experiments.confirmation.reproduction_map import model_record
 from fsrl.experiments.local_fidelity.evidence_access_pilot import access_factor
@@ -415,7 +415,7 @@ def extract_development_seed(
     batches: int,
     geometry: Geometry,
 ) -> list[EpisodeTrajectory]:
-    net, config, _ = load_retro_checkpoint(checkpoint, 32)
+    net, config, _ = load_frozen_retro_checkpoint(checkpoint, 32)
     generator = GenericRankingTaskGenerator(
         cue_size=config.cs,
         min_edges=7,
@@ -928,7 +928,7 @@ def evaluate_preservation_seed(
         resolve_record("benchmarks/dual_evidence_access_confirmation_v2_4.json")
     )["liu_evaluation"]
     protocol = load_ranking_protocol(PROTOCOL_PATH)
-    net, config, _ = load_retro_checkpoint(
+    net, config, _ = load_frozen_retro_checkpoint(
         resolve_record(artifact["checkpoint"]["path"]), 77
     )
     evaluator = FrozenFastWeightEvaluator(

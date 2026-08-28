@@ -14,7 +14,7 @@ from fsrl.evaluation.fields import readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.experiments.global_policy.amplitude_provenance import (
     NonInterpretableEstimate,
@@ -663,7 +663,7 @@ def analyze_seed(specification: dict, seed: int, artifact_validation: dict) -> d
     evaluation = specification["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
     checkpoint_path = resolve_registered_path(artifact["path"])
-    backbone, model_config, checkpoint = load_retro_checkpoint(
+    backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():

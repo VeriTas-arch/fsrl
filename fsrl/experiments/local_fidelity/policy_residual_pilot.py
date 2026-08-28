@@ -18,7 +18,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     retained_relation_mask,
     run_causal_suite,
 )
@@ -210,7 +210,7 @@ def adapt_eta(
 ) -> Path:
     runtime_specification = _runtime_specification(specification)
     adaptation = adaptation_config(runtime_specification)
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
     before = tensor_hashes(backbone)
@@ -667,7 +667,7 @@ def evaluate_pilot(
         raise RuntimeError("eta artifact belongs to a different pilot")
     if artifact["backbone"]["sha256"] != checkpoint_sha256(checkpoint):
         raise RuntimeError("eta artifact and frozen backbone do not match")
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, int(evaluation["subjects"])
     )
     residual = _new_residual(backbone, specification)

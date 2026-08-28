@@ -13,7 +13,7 @@ from fsrl.analysis.behavioral import analyze_sampled_query_policy
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
@@ -408,7 +408,7 @@ def evaluate_preservation(
     )
     evaluation = confirmation["liu_evaluation"]
     protocol = load_ranking_protocol(v1.PROTOCOL_PATH)
-    net, config, _ = load_retro_checkpoint(
+    net, config, _ = load_frozen_retro_checkpoint(
         resolve_record(artifact["checkpoint"]["path"]), 77
     )
     evaluator = FrozenFastWeightEvaluator(

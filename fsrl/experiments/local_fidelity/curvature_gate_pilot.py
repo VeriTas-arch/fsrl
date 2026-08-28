@@ -29,7 +29,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     load_training_provenance,
     retained_relation_mask,
     run_causal_suite,
@@ -54,7 +54,7 @@ from fsrl.infra.study_registry import (
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model
-from fsrl.training.checkpoints import resolve_checkpoint_path
+from fsrl.training.legacy_checkpoints import resolve_frozen_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/curvature_gate_pilot_v2.json")
@@ -137,7 +137,7 @@ def _backbone_training_config(specification: dict) -> MetaTrainConfig:
 def train_backbone(specification: dict, output_root: Path, runtime: dict) -> Path:
     training = _backbone_training_config(specification)
     seed_dir = output_root / f"seed-{training.seed}" / "backbone"
-    checkpoint = resolve_checkpoint_path(seed_dir)
+    checkpoint = resolve_frozen_checkpoint_path(seed_dir)
     if not checkpoint.exists():
         train_meta_model(
             training,
@@ -241,7 +241,7 @@ def adapt_gate(
     runtime: dict,
 ) -> Path:
     adaptation = adaptation_config(specification)
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
     before = tensor_hashes(backbone)
@@ -1009,7 +1009,7 @@ def evaluate_pilot(
     artifact = load_json(gate_artifact_path)
     if artifact["backbone"]["sha256"] != checkpoint_sha256(checkpoint):
         raise RuntimeError("gate artifact and backbone checkpoint do not match")
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, int(evaluation["subjects"])
     )
     gate = CurvatureGateTransition(
@@ -1020,7 +1020,7 @@ def evaluate_pilot(
     with torch.no_grad():
         gate.raw_beta.fill_(float(artifact["raw_beta"]))
     gamma_global = float(artifact["calibration"]["gamma_global"])
-    recalibration_backbone, recalibration_config, _ = load_retro_checkpoint(
+    recalibration_backbone, recalibration_config, _ = load_frozen_retro_checkpoint(
         checkpoint, int(specification["matched_global_calibration"]["batch_size"])
     )
     recalibration_gate = CurvatureGateTransition(
@@ -1280,7 +1280,7 @@ def main(args=None) -> int:
     source_validation = validate_sources(parsed.specification, parsed.lock)
     specification = load_json(parsed.specification)
     seed = int(specification["development_seed_contract"]["mandatory_seed"])
-    checkpoint = resolve_checkpoint_path(
+    checkpoint = resolve_frozen_checkpoint_path(
         parsed.output_root / f"seed-{seed}" / "backbone"
     )
     artifact = parsed.output_root / f"seed-{seed}" / "gate" / "gate.json"

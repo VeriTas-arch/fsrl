@@ -22,7 +22,7 @@ from fsrl.analysis.statistics import (
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
 from fsrl.experiments.local_fidelity.behavior_attribution import (
@@ -779,7 +779,7 @@ def evaluate_seed(
     evaluation = specification["liu_evaluation"]
     paths = seed_paths(V2_3_OUTPUT_ROOT, seed)
     gain_artifact = load_json(paths["gain"])
-    backbone, model_config, checkpoint = load_retro_checkpoint(
+    backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
         paths["checkpoint"], int(evaluation["subjects"])
     )
     before = tensor_hashes(backbone)

@@ -1,13 +1,11 @@
-"""Versioned checkpoint loading shared by training and evaluation."""
+"""Canonical ``.pth`` checkpoint loading for maintained execution."""
 
 from __future__ import annotations
 
 import json
-import shutil
 from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 import torch
 
@@ -36,37 +34,25 @@ def checkpoint_sha256(path: Path | str) -> str:
 
 
 def checkpoint_format(path: Path | str) -> tuple[str, str]:
-    """Classify canonical and read-only legacy checkpoint suffixes."""
+    """Classify one canonical checkpoint and reject compatibility formats."""
 
     suffix = Path(path).suffix.lower()
     if suffix == ".pth":
         return "pytorch_state_dict", "canonical"
-    if suffix == ".dat":
-        return "legacy_pytorch_state_dict", "legacy_read_only"
-    raise ValueError("checkpoint must end in .pth or legacy read-only .dat")
+    raise ValueError("current checkpoints must end in .pth")
 
 
 def resolve_checkpoint_path(directory: Path | str, basename: str = "net") -> Path:
-    """Prefer a canonical checkpoint and fall back to one legacy input."""
+    """Return the canonical checkpoint path without legacy fallback."""
 
-    root = Path(directory)
-    canonical = root / f"{basename}.pth"
-    legacy = root / f"{basename}.dat"
-    if canonical.is_file():
-        return canonical
-    if legacy.is_file():
-        return legacy
-    return canonical
+    return Path(directory) / f"{basename}.pth"
 
 
-def load_checkpoint_state(
-    path: Path | str, *, device: str | torch.device | None = None
-) -> tuple[dict[str, torch.Tensor], str, str]:
-    """Normalize a canonical or legacy checkpoint to one state-dict boundary."""
+def _load_tensor_state_dict(
+    source: Path, execution_device: torch.device
+) -> dict[str, torch.Tensor]:
+    """Load and validate the shared tensor-only state-dict envelope."""
 
-    source = Path(path)
-    source_format, compatibility_mode = checkpoint_format(source)
-    execution_device = torch.device(device or default_device())
     payload = torch.load(source, map_location=execution_device, weights_only=True)
     if not isinstance(payload, Mapping) or not all(
         isinstance(key, str) and isinstance(value, torch.Tensor)
@@ -78,39 +64,19 @@ def load_checkpoint_state(
     missing = sorted(required - state_dict.keys())
     if missing:
         raise ValueError(f"checkpoint state_dict is missing keys: {missing}")
+    return state_dict
+
+
+def load_checkpoint_state(
+    path: Path | str, *, device: str | torch.device | None = None
+) -> tuple[dict[str, torch.Tensor], str, str]:
+    """Load one canonical checkpoint through the tensor-only boundary."""
+
+    source = Path(path)
+    source_format, compatibility_mode = checkpoint_format(source)
+    execution_device = torch.device(device or default_device())
+    state_dict = _load_tensor_state_dict(source, execution_device)
     return state_dict, source_format, compatibility_mode
-
-
-def convert_legacy_checkpoint(source: Path | str, target: Path | str) -> dict[str, Any]:
-    """Materialize a one-way, byte-identical ``.dat`` to ``.pth`` view."""
-
-    source_path = Path(source)
-    target_path = Path(target)
-    source_format, compatibility_mode = checkpoint_format(source_path)
-    if source_format != "legacy_pytorch_state_dict":
-        raise ValueError("legacy checkpoint conversion requires a .dat source")
-    if target_path.suffix.lower() != ".pth":
-        raise ValueError("legacy checkpoint conversion target must end in .pth")
-    if target_path.exists() or target_path.is_symlink():
-        raise FileExistsError(f"checkpoint conversion refuses overwrite: {target_path}")
-    load_checkpoint_state(source_path, device="cpu")
-    target_path.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(source_path, target_path)
-    source_hash = checkpoint_sha256(source_path)
-    target_hash = checkpoint_sha256(target_path)
-    if source_hash != target_hash:
-        raise RuntimeError("legacy checkpoint conversion changed source bytes")
-    return {
-        "passed": True,
-        "source": str(source_path.resolve()),
-        "target": str(target_path.resolve()),
-        "source_format": source_format,
-        "target_format": "pytorch_state_dict",
-        "compatibility_mode": compatibility_mode,
-        "transformation": "byte_identity_extension_normalization",
-        "sha256": target_hash,
-        "bytes": target_path.stat().st_size,
-    }
 
 
 def load_training_provenance(checkpoint: Path, checkpoint_hash: str) -> dict:
@@ -139,6 +105,27 @@ def load_retro_checkpoint(
     state_dict, source_format, compatibility_mode = load_checkpoint_state(
         path, device=execution_device
     )
+    return _restore_retro_checkpoint(
+        path,
+        state_dict,
+        batch_size,
+        execution_device=execution_device,
+        source_format=source_format,
+        compatibility_mode=compatibility_mode,
+    )
+
+
+def _restore_retro_checkpoint(
+    path: Path,
+    state_dict: dict[str, torch.Tensor],
+    batch_size: int,
+    *,
+    execution_device: torch.device,
+    source_format: str,
+    compatibility_mode: str,
+) -> tuple[RetroModulRNN, TrainConfig, CheckpointInfo]:
+    """Restore a validated state dict for canonical or explicit legacy callers."""
+
     hidden_size, input_size = state_dict["i2h.weight"].shape
     cue_remainder = int(input_size) - (1 + ADDINPUT + 2)
     if cue_remainder <= 0 or cue_remainder % 2:

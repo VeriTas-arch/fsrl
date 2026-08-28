@@ -20,7 +20,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
@@ -647,7 +647,7 @@ def run_attribution(
         specification["frozen_artifacts"]["gain"]["path"]
     )
     gain_artifact = load_json(gain_path)
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         backbone_path, int(execution["subjects"])
     )
     for parameter in backbone.parameters():

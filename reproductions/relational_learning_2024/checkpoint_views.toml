@@ -1,0 +1,23 @@
+schema_version = 1
+document_type = "checkpoint_views"
+source_manifest = "source_manifest.toml"
+source_manifest_sha256 = "bb9b05c3332448d6e24ef6382364ea85e70e3a26aad67b4e02926987b27e98bb"
+transformation = "byte_identity_extension_normalization"
+
+[[views]]
+source = "checkpoints/net_active.dat"
+view = "checkpoints/net_active.pth"
+sha256 = "aac06db04f457d98bc49b44cfbea23648721943fd6dc752c13703e188532940a"
+bytes = 357953
+
+[[views]]
+source = "checkpoints/net_passive.dat"
+view = "checkpoints/net_passive.pth"
+sha256 = "3726423c7eb3a4b7e994e4480dc28bbbd998f6ace39124c18449b5c1cb8336f4"
+bytes = 358159
+
+[[views]]
+source = "upstream/addons/net_FrozenInputWeights.dat"
+view = "checkpoints/net_frozen_input_weights.pth"
+sha256 = "9e86fb6dd2a9fdec2027e87da6c1275c46e87ebb6ad9c334637b27a3a3cf47b8"
+bytes = 358066

@@ -7,9 +7,9 @@ import torch
 from fsrl.core import RetroModelConfig, RetroModulRNN
 from fsrl.training.checkpoints import (
     checkpoint_format,
-    convert_legacy_checkpoint,
     load_checkpoint_state,
     load_retro_checkpoint,
+    resolve_checkpoint_path,
 )
 
 
@@ -21,36 +21,27 @@ class CheckpointBoundaryTests(unittest.TestCase):
         )
         self.net = RetroModulRNN(self.config, device="cpu")
 
-    def test_pth_is_canonical_and_dat_is_read_only_legacy(self):
+    def test_current_boundary_accepts_only_pth(self):
         self.assertEqual(
             checkpoint_format("net.pth"), ("pytorch_state_dict", "canonical")
         )
-        self.assertEqual(
-            checkpoint_format("net.dat"),
-            ("legacy_pytorch_state_dict", "legacy_read_only"),
-        )
+        with self.assertRaisesRegex(ValueError, "must end in"):
+            checkpoint_format("net.dat")
         with self.assertRaisesRegex(ValueError, "must end in"):
             checkpoint_format("net.pt")
 
-    def test_canonical_and_legacy_suffixes_normalize_to_same_state(self):
+    def test_current_loader_rejects_dat_even_when_payload_is_valid(self):
+        with tempfile.TemporaryDirectory() as directory:
+            legacy = Path(directory) / "net.dat"
+            torch.save(self.net.state_dict(), legacy)
+            with self.assertRaisesRegex(ValueError, "must end in .pth"):
+                load_checkpoint_state(legacy, device="cpu")
+
+    def test_current_resolver_never_falls_back_to_dat(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            canonical = root / "net.pth"
-            legacy = root / "net.dat"
-            torch.save(self.net.state_dict(), canonical)
-            torch.save(self.net.state_dict(), legacy)
-            canonical_state, canonical_format, canonical_mode = load_checkpoint_state(
-                canonical, device="cpu"
-            )
-            legacy_state, legacy_format, legacy_mode = load_checkpoint_state(
-                legacy, device="cpu"
-            )
-            for name in canonical_state:
-                self.assertTrue(torch.equal(canonical_state[name], legacy_state[name]))
-            self.assertEqual(canonical_format, "pytorch_state_dict")
-            self.assertEqual(canonical_mode, "canonical")
-            self.assertEqual(legacy_format, "legacy_pytorch_state_dict")
-            self.assertEqual(legacy_mode, "legacy_read_only")
+            (root / "net.dat").write_bytes(b"legacy")
+            self.assertEqual(resolve_checkpoint_path(root), root / "net.pth")
 
     def test_loader_reports_format_without_changing_model_state(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -66,20 +57,6 @@ class CheckpointBoundaryTests(unittest.TestCase):
         self.assertEqual(loaded.model_config.hidden_size, self.config.hidden_size)
         for name, value in self.net.state_dict().items():
             self.assertTrue(torch.equal(value, loaded.state_dict()[name]))
-
-    def test_one_way_conversion_is_byte_identical_and_refuses_overwrite(self):
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            source = root / "net.dat"
-            target = root / "net.pth"
-            torch.save(self.net.state_dict(), source)
-            result = convert_legacy_checkpoint(source, target)
-            self.assertEqual(source.read_bytes(), target.read_bytes())
-            self.assertEqual(
-                result["transformation"], "byte_identity_extension_normalization"
-            )
-            with self.assertRaisesRegex(FileExistsError, "refuses overwrite"):
-                convert_legacy_checkpoint(source, target)
 
     def test_checkpoint_payload_must_be_plain_tensor_state_dict(self):
         with tempfile.TemporaryDirectory() as directory:

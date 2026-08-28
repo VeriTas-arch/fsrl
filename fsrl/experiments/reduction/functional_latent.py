@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from fsrl.evaluation.frozen_fast_weight import load_retro_checkpoint
+from fsrl.evaluation.frozen_fast_weight import load_frozen_retro_checkpoint
 from fsrl.infra.formal_runtime import configure_formal_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
@@ -179,7 +179,7 @@ def extract_backbone(
     frozen_artifact: np.lib.npyio.NpzFile,
     geometry: v1.Geometry,
 ) -> tuple[list[FunctionalEpisode], dict]:
-    net, config, info = load_retro_checkpoint(checkpoint, 32)
+    net, config, info = load_frozen_retro_checkpoint(checkpoint, 32)
     generator = GenericRankingTaskGenerator(
         cue_size=config.cs,
         min_edges=7,

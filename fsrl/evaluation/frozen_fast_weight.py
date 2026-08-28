@@ -34,9 +34,9 @@ from ..core.plastic_rnn import RetroModulRNN
 from ..training.checkpoints import (
     CheckpointInfo,
     checkpoint_sha256,
-    load_retro_checkpoint,
     load_training_provenance,
 )
+from ..training.legacy_checkpoints import load_frozen_retro_checkpoint
 
 DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
 DISTANCE_INPUT_OFFSET = EVIDENCE_AUXILIARY_OFFSET
@@ -51,7 +51,7 @@ __all__ = [
     "OrderInvarianceMetrics",
     "checkpoint_sha256",
     "deterministic_cue_codes",
-    "load_retro_checkpoint",
+    "load_frozen_retro_checkpoint",
     "load_training_provenance",
     "main",
     "parse_args",
@@ -1043,7 +1043,7 @@ def run_causal_suite(
             require_cuda=selected_device == "cuda",
         )
         runtime = configure_runtime(execution_profile)
-    net, config, checkpoint_info = load_retro_checkpoint(
+    net, config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint,
         batch_size,
         device=(execution_profile.device if execution_profile is not None else None),

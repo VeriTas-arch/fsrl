@@ -43,7 +43,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     deterministic_cue_codes,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
@@ -1446,7 +1446,7 @@ def evaluate(
     seeds = {}
     for seed in specification["development_backbones"]["mandatory_seeds"]:
         artifacts = specification["development_backbones"]["artifacts"][str(seed)]
-        backbone, model_config, checkpoint = load_retro_checkpoint(
+        backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
             resolve_path(artifacts["checkpoint"]["path"]),
             int(evaluation["subjects_per_size_and_backbone"]),
         )

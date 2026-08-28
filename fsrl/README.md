@@ -70,9 +70,10 @@ checkout. The boundary is explicit:
   count transport decisions use this boundary now; protocol-specific rules in
   other frozen study runners remain historical-execution code until migrated
   one study at a time, and are not current public APIs;
-- new checkpoints are plain state dictionaries written as `.pth`; `.dat` is a
-  read-only legacy input and can be materialized as a byte-identical `.pth`
-  view;
+- new checkpoints are plain state dictionaries written as `.pth`; the current
+  loader accepts only `.pth`. Historical `.dat` inputs are confined to the
+  explicit frozen-replay adapter and can be materialized as byte-identical
+  `.pth` views;
 - structured declarations use TOML, contracts/results/metadata use JSON,
   append-only runtime logs use JSONL, and dense numeric arrays use NPZ. CSV is
   reserved for external or tabular interchange. New model weights do not use

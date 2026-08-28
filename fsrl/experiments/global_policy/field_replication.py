@@ -18,7 +18,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     load_training_provenance,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
@@ -47,7 +47,7 @@ from fsrl.training.backbone import (
     MetaTrainConfig,
     train_meta_model,
 )
-from fsrl.training.checkpoints import resolve_checkpoint_path
+from fsrl.training.legacy_checkpoints import resolve_frozen_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -289,7 +289,7 @@ def seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
     backbone = output_root / f"seed-{seed}" / "backbone"
     return {
         "backbone_dir": backbone,
-        "checkpoint": resolve_checkpoint_path(backbone),
+        "checkpoint": resolve_frozen_checkpoint_path(backbone),
         "backbone_config": backbone / "config.json",
         "backbone_log": backbone / "train_log.jsonl",
         "backbone_manifest": backbone / "replication_manifest.json",
@@ -904,7 +904,7 @@ def analyze_seed(
     evaluation = specification["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
     checkpoint_path = resolve_registered_path(artifact["path"])
-    backbone, model_config, checkpoint = load_retro_checkpoint(
+    backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():

@@ -18,7 +18,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     retained_relation_mask,
     run_causal_suite,
 )
@@ -186,7 +186,7 @@ def adapt_gate(
 ) -> Path:
     runtime_specification = _runtime_specification(specification)
     adaptation = adaptation_config(runtime_specification)
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
     before = tensor_hashes(backbone)
@@ -592,7 +592,7 @@ def evaluate_pilot(
         raise RuntimeError("gate artifact belongs to a different pilot")
     if artifact["backbone"]["sha256"] != checkpoint_sha256(checkpoint):
         raise RuntimeError("gate artifact and frozen backbone do not match")
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, int(evaluation["subjects"])
     )
     gate = _new_gate(backbone, specification)
@@ -601,7 +601,7 @@ def evaluate_pilot(
     gamma_global = float(artifact["calibration"]["gamma_global"])
 
     calibration_size = int(specification["matched_global_calibration"]["batch_size"])
-    calibration_backbone, calibration_config, _ = load_retro_checkpoint(
+    calibration_backbone, calibration_config, _ = load_frozen_retro_checkpoint(
         checkpoint, calibration_size
     )
     calibration_gate = _new_gate(calibration_backbone, specification)

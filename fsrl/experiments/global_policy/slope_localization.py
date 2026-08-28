@@ -22,7 +22,7 @@ from fsrl.evaluation.fields import readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.experiments.assembly.trajectory import exact_prefix_trajectory
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
@@ -205,7 +205,7 @@ def analyze_seed(
     evaluation = specification["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
     checkpoint_path = resolve_registered_path(artifact["path"])
-    backbone, model_config, checkpoint = load_retro_checkpoint(
+    backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():

@@ -8,6 +8,7 @@ import torch
 from fsrl.core import RetroModelConfig, RetroModulRNN
 from fsrl.core.config import TrainConfig
 from fsrl.paths import REPO_ROOT
+from fsrl.training.checkpoints import load_checkpoint_state
 from reproductions.relational_learning_2024 import figures
 from reproductions.relational_learning_2024.cli import parse_args
 from reproductions.relational_learning_2024.training import save_checkpoint
@@ -23,10 +24,23 @@ class ReproductionCapsuleTests(unittest.TestCase):
         self.assertTrue(result["passed"])
         self.assertEqual(result["capsule_id"], "relational_learning_2024")
         self.assertEqual(result["files"], 11)
+        self.assertEqual(result["views"], 3)
+
+    def test_checkpoint_views_are_byte_identical_and_canonical_loadable(self):
+        for check in verify_manifest()["view_checks"]:
+            source = CAPSULE / check["source"]
+            view = CAPSULE / check["view"]
+            self.assertEqual(source.read_bytes(), view.read_bytes())
+            state_dict, source_format, compatibility_mode = load_checkpoint_state(
+                view, device="cpu"
+            )
+            self.assertTrue(state_dict)
+            self.assertEqual(source_format, "pytorch_state_dict")
+            self.assertEqual(compatibility_mode, "canonical")
 
     def test_default_figure_checkpoint_resolves_inside_capsule(self):
         path = figures.resolve_model_path(None)
-        self.assertEqual(path, CAPSULE / "checkpoints" / "net_active.dat")
+        self.assertEqual(path, CAPSULE / "checkpoints" / "net_active.pth")
 
     def test_training_outputs_default_to_ignored_artifacts(self):
         parsed = parse_args([])
@@ -54,12 +68,15 @@ class ReproductionCapsuleTests(unittest.TestCase):
                 np.testing.assert_array_equal(data["episode"], [0])
                 np.testing.assert_allclose(data["test_reward"], [0.1])
 
-    def test_model_directory_prefers_pth_but_reads_legacy_dat(self):
+    def test_model_directory_rejects_legacy_dat(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             legacy = root / "net.dat"
             legacy.write_bytes(b"legacy")
-            self.assertEqual(figures.resolve_model_path_from_dir(root), legacy)
+            with self.assertRaises(FileNotFoundError):
+                figures.resolve_model_path_from_dir(root)
+            with self.assertRaisesRegex(ValueError, "must end in .pth"):
+                figures.resolve_model_path(legacy)
             canonical = root / "net.pth"
             canonical.write_bytes(b"canonical")
             self.assertEqual(figures.resolve_model_path_from_dir(root), canonical)

@@ -16,13 +16,19 @@ from tqdm.auto import tqdm
 from fsrl.core import RetroModulRNN
 from fsrl.core.config import ADDINPUT, DEVICE, NUMRESPONSESTEP, TrainConfig
 from fsrl.infra.logging import log
+from fsrl.training.checkpoints import load_checkpoint_state
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 CAPSULE_ROOT = Path(__file__).resolve().parent
 CHECKPOINT_ROOT = CAPSULE_ROOT / "checkpoints"
 
 ALPHABET = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
-MODEL_FILENAMES = ("net.pth", "net.dat", "net_active.dat", "net_passive.dat")
+MODEL_FILENAMES = (
+    "net.pth",
+    "net_active.pth",
+    "net_passive.pth",
+    "net_frozen_input_weights.pth",
+)
 
 
 def default_params(batch_size):
@@ -54,6 +60,8 @@ def resolve_model_path(model_path):
         if path.is_dir():
             return resolve_model_path_from_dir(path)
         if path.is_file():
+            if path.suffix.lower() != ".pth":
+                raise ValueError("maintained reproduction checkpoints must end in .pth")
             return path
         raise FileNotFoundError(f"Model path does not exist or is not a file: {path}")
 
@@ -74,25 +82,13 @@ def resolve_model_path_from_dir(path):
         if candidate_path.is_file():
             return candidate_path
 
-    netae_candidates = sorted(
-        path.glob("netAE*.dat"),
-        key=lambda candidate: (candidate.stat().st_mtime, candidate.name),
-        reverse=True,
-    )
-    if netae_candidates:
-        return netae_candidates[0]
-
     expected = ", ".join(MODEL_FILENAMES)
-    raise FileNotFoundError(
-        f"Model directory {path} does not contain {expected} or netAE*.dat."
-    )
+    raise FileNotFoundError(f"Model directory {path} does not contain {expected}.")
 
 
 def load_model_state(path):
-    try:
-        return torch.load(path, map_location=DEVICE, weights_only=True)
-    except TypeError:
-        return torch.load(path, map_location=DEVICE)
+    state_dict, _, _ = load_checkpoint_state(path, device=DEVICE)
+    return state_dict
 
 
 def load_network(params, model_path):

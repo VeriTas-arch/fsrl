@@ -15,7 +15,7 @@ from scipy import stats
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.infra.provenance import load_json
 from fsrl.infra.record_catalog import resolve_record_id
@@ -311,7 +311,7 @@ def run_geometry_analysis(
 ) -> dict:
     behavior = load_json(behavior_path)
     batch_size = len(behavior["subjects"])
-    net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
+    net, config, checkpoint_info = load_frozen_retro_checkpoint(checkpoint, batch_size)
     if behavior.get("checkpoint", {}).get("sha256") != checkpoint_info.sha256:
         raise ValueError("behavior result and checkpoint SHA-256 do not match")
     protocol_path_value = behavior.get("protocol_path")

@@ -13,6 +13,21 @@ COMPATIBILITY_FILES = {
 
 
 class CompatibilityBoundaryTests(unittest.TestCase):
+    def test_current_checkpoint_api_does_not_expose_dat_compatibility(self):
+        current_loader = (REPO_ROOT / "fsrl" / "training" / "checkpoints.py").read_text(
+            encoding="utf-8"
+        )
+        public_api = (REPO_ROOT / "fsrl" / "training" / "__init__.py").read_text(
+            encoding="utf-8"
+        )
+        maintained_reproduction = (
+            REPO_ROOT / "reproductions" / "relational_learning_2024" / "figures.py"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn(".dat", current_loader)
+        self.assertNotIn("legacy_checkpoints", public_api)
+        self.assertNotIn("convert_legacy_checkpoint", public_api)
+        self.assertNotIn(".dat", maintained_reproduction)
+
     def test_active_code_does_not_call_legacy_model_or_task_interfaces(self):
         violations = []
         legacy_tokens = (

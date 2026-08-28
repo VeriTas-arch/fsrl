@@ -16,7 +16,7 @@ from fsrl.evaluation.fields import ordered_query_schedule
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
@@ -1085,7 +1085,7 @@ def analyze_seed(specification: dict, seed: int, artifact_validation: dict) -> d
     )["evaluation"]
     artifact = artifact_validation["lock"]["artifacts"][str(seed)]["checkpoint"]
     checkpoint_path = resolve_registered_path(artifact["path"])
-    backbone, model_config, checkpoint = load_retro_checkpoint(
+    backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
         checkpoint_path, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():

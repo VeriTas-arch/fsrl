@@ -32,7 +32,7 @@ from fsrl.evaluation.fields import ordered_query_schedule, readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.experiments.confirmation.behavioral import validate_checkpoint
 from fsrl.infra.provenance import file_sha256, load_json
@@ -167,7 +167,7 @@ def load_frozen_evaluator(
     checkpoint = resolve_path(registration["checkpoint_path"])
     validate_checkpoint(checkpoint, pilot_specification, seed)
     behavior = load_json(resolve_path(registration["behavior_path"]))
-    net, config, checkpoint_info = load_retro_checkpoint(
+    net, config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, len(behavior["subjects"])
     )
     if behavior["checkpoint"]["sha256"] != checkpoint_info.sha256:

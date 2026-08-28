@@ -13,7 +13,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenEvaluationBackend,
     FrozenFastWeightEvaluator,
     deterministic_cue_codes,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     run_causal_suite,
 )
 from fsrl.infra.runtime import ExecutionProfile
@@ -301,7 +301,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = Path(temp_dir) / "net.dat"
             torch.save(self.net.state_dict(), path)
-            loaded, config, info = load_retro_checkpoint(path, batch_size=2)
+            loaded, config, info = load_frozen_retro_checkpoint(path, batch_size=2)
         self.assertEqual(config.bs, 2)
         self.assertEqual(info.hidden_size, self.config.hs)
         self.assertEqual(info.cue_size, self.config.cs)

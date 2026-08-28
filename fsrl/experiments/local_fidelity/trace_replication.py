@@ -19,7 +19,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     checkpoint_sha256,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
 from fsrl.experiments.local_fidelity.behavior_attribution import (
@@ -54,7 +54,7 @@ from fsrl.infra.study_registry import (
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
 from fsrl.training.backbone import MetaTrainConfig, train_meta_model
-from fsrl.training.checkpoints import resolve_checkpoint_path
+from fsrl.training.legacy_checkpoints import resolve_frozen_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -126,7 +126,7 @@ def seed_paths(output_root: Path, seed: int) -> dict[str, Path]:
     seed_dir = output_root / f"seed-{seed}"
     return {
         "backbone_dir": seed_dir / "backbone",
-        "checkpoint": resolve_checkpoint_path(seed_dir / "backbone"),
+        "checkpoint": resolve_frozen_checkpoint_path(seed_dir / "backbone"),
         "backbone_config": seed_dir / "backbone" / "config.json",
         "backbone_log": seed_dir / "backbone" / "train_log.jsonl",
         "backbone_manifest": seed_dir / "backbone" / "replication_manifest.json",
@@ -285,7 +285,7 @@ def adapt_gain(
     if paths["local_dir"].exists():
         return validate_complete_gain(specification, output_root, seed)
     adaptation = local_adaptation_config(specification, seed)
-    backbone, model_config, checkpoint_info = load_retro_checkpoint(
+    backbone, model_config, checkpoint_info = load_frozen_retro_checkpoint(
         checkpoint, adaptation.batch_size
     )
     for parameter in backbone.parameters():
@@ -490,7 +490,7 @@ def attribution_for_seed(
 ) -> dict:
     evaluation = specification["liu_evaluation"]
     gain = load_json(gain_path)
-    backbone, model_config, _ = load_retro_checkpoint(
+    backbone, model_config, _ = load_frozen_retro_checkpoint(
         checkpoint, int(evaluation["subjects"])
     )
     for parameter in backbone.parameters():

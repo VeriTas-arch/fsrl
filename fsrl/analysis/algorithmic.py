@@ -17,7 +17,7 @@ from fsrl.analysis.posterior import ExactRankingPosterior, RelationEvidence
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_retro_checkpoint,
+    load_frozen_retro_checkpoint,
 )
 from fsrl.tasks.protocol import load_ranking_protocol
 
@@ -186,7 +186,7 @@ def run_algorithmic_comparison(
         behavior = json.load(handle)
     protocol = load_ranking_protocol(behavior["protocol_path"])
     batch_size = len(behavior["subjects"])
-    net, config, checkpoint_info = load_retro_checkpoint(checkpoint, batch_size)
+    net, config, checkpoint_info = load_frozen_retro_checkpoint(checkpoint, batch_size)
     if behavior.get("checkpoint", {}).get("sha256") != checkpoint_info.sha256:
         raise ValueError("behavior result and checkpoint SHA-256 do not match")
     evaluator = FrozenFastWeightEvaluator(

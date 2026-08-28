@@ -183,8 +183,9 @@ record also includes the device, CUDA capability, matrix precision,
 determinism flags, and both PyTorch and BLAS thread limits. The older
 `--compile-model` path remains the `mode="default"`, byte-replay-compatible
 single-cell execution used by registered historical backbones. The maintained
-training CLI writes `net.pth`; frozen runners explicitly request `net.dat` only
-when replaying their registered checkpoint contract.
+training CLI writes `net.pth`. Frozen runners prefer a byte-identical `.pth`
+view and use an explicitly named legacy adapter only when an untouched
+registered checkpoint contract still points to `.dat`.
 
 Task sampling preserves the historical RNG stream while vectorizing cue-code
 similarity checks. Each trial sequence is assembled in one preallocated NumPy
@@ -230,7 +231,7 @@ To generate the teaching figures extracted from the upstream main.py:
 ~~~bash
 direnv exec . python -m reproductions.relational_learning_2024.figures \
   --figures all \
-  --model-path reproductions/relational_learning_2024/checkpoints/net_active.dat
+  --model-path reproductions/relational_learning_2024/checkpoints/net_active.pth
 ~~~
 
 Outputs are written to the ignored

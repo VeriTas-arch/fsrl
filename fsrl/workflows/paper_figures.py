@@ -216,7 +216,7 @@ def replay_model_subject_pairs(
     from fsrl.evaluation.frozen_fast_weight import (
         FastWeightIntervention,
         FrozenFastWeightEvaluator,
-        load_retro_checkpoint,
+        load_frozen_retro_checkpoint,
     )
     from fsrl.experiments.local_fidelity.curvature_gate_pilot import configure_runtime
     from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
@@ -260,7 +260,7 @@ def replay_model_subject_pairs(
     for seed in specification["model"]["network_seeds"]:
         paths = seed_paths(DEFAULT_OUTPUT_ROOT, int(seed))
         gain = load_json(paths["gain"])
-        backbone, model_config, checkpoint = load_retro_checkpoint(
+        backbone, model_config, checkpoint = load_frozen_retro_checkpoint(
             paths["checkpoint"], int(evaluation["subjects"])
         )
         for parameter in backbone.parameters():

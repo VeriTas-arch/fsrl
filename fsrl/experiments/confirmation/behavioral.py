@@ -27,7 +27,7 @@ from fsrl.training.backbone import (
     MetaTrainConfig,
     train_meta_model,
 )
-from fsrl.training.checkpoints import resolve_checkpoint_path
+from fsrl.training.legacy_checkpoints import resolve_frozen_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/confirmation_v1.json")
@@ -226,7 +226,7 @@ def train_confirmation_seed(
     _require_registered_runtime(specification)
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
-    checkpoint = resolve_checkpoint_path(seed_dir)
+    checkpoint = resolve_frozen_checkpoint_path(seed_dir)
     if checkpoint.exists():
         validate_checkpoint(checkpoint, specification, seed)
         return checkpoint
@@ -330,7 +330,7 @@ def evaluate_confirmation_seed(
     runtime = _require_registered_runtime(specification)
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
-    checkpoint = resolve_checkpoint_path(seed_dir)
+    checkpoint = resolve_frozen_checkpoint_path(seed_dir)
     checkpoint_metadata = validate_checkpoint(checkpoint, specification, seed)
     evaluation = specification["evaluation"]
 
