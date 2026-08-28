@@ -9,6 +9,11 @@ with:
 
 Source project: https://osf.io/gya95/
 
+[`dataset.toml`](dataset.toml) is the machine-readable authority for stable file
+IDs, source URLs, formats, byte counts, hashes, row counts, and CSV columns. The
+table below is its human-readable summary; source files remain exact upstream
+bytes.
+
 | Local file | OSF download | SHA-256 | Rows excluding header |
 | --- | --- | --- | ---: |
 | `preregistered_experiment_data.csv` | https://osf.io/download/mjqpe/ | `6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227` | 11,200 |

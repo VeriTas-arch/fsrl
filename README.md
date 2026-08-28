@@ -22,6 +22,8 @@ reproduction now live in one isolated capsule under
   become report- or paper-facing figures.
 - [Code architecture](fsrl/README.md) defines stable package ownership,
   compatibility adapters, and the boundary around historical study runners.
+- [Analysis-file contract](artifacts/README.md) defines runtime manifests,
+  format roles, and the non-destructive historical-conversion boundary.
 
 The first reorganization pass is intentionally marked
 review_state = "indexed". It establishes ownership, navigation, and provenance
@@ -34,7 +36,7 @@ studies/                 experiment-level questions and exact records
     study.toml            authoritative metadata and record hashes
     records/              byte-preserved reports, contracts, locks, results
 synthesis/                current cross-study account, figures, and snapshots
-artifacts/runs/           ignored training, evaluation, and checkpoint runs
+artifacts/runs/           ignored workflow/execution runs with local manifests
 artifacts/reproductions/  ignored regenerated external-paper outputs
 data/external/            tracked immutable external source datasets
 fsrl/                     executable model and analysis code
@@ -47,6 +49,11 @@ The pre-refactor flat paths and the later synthesis-snapshot relocation are
 recorded in versioned maps under `studies/migrations/`. Active code resolves
 every historical identifier through `fsrl.infra.study_registry.resolve_record`;
 the files themselves have one authoritative current location.
+
+`studies/catalogs/record-catalog-v2.json` provides stable logical IDs and typed
+format metadata for every registered record and retired Git-backed asset. It is
+a generated compatibility view: original record bytes, hashes, and claim
+pointers remain authoritative.
 
 Frozen execution locks that identify historical Python files are indexed by
 `(path, sha256)` in synthesis/source-provenance.toml and verified against Git
@@ -115,6 +122,8 @@ Check the study registry and generated human views:
 
 ~~~bash
 direnv exec . python -m fsrl.infra.study_registry check
+direnv exec . python -m fsrl.infra.file_contracts check
+direnv exec . python -m tools.provenance.build_record_catalog_v2
 ~~~
 
 Audit the one-time physical migration against its frozen Git sources and check
@@ -125,6 +134,7 @@ direnv exec . python tools/provenance/migrate_flat_records_v1.py audit
 direnv exec . python tools/provenance/rewrite_runtime_locators_v1.py audit
 direnv exec . python tools/provenance/rewrite_active_record_paths_v1.py check
 direnv exec . python tools/provenance/index_source_provenance_v1.py check
+direnv exec . python -m tools.provenance.backfill_run_manifests_v1
 ~~~
 
 Run tests through the timeout-bounded entry point. It creates an independent
@@ -143,8 +153,11 @@ direnv exec . python -m fsrl.infra.test_runtime --timeout 60 \
   --framework unittest -- tests.infra.test_study_registry -v
 ~~~
 
-Runtime outputs belong under `artifacts/runs/<workflow>/`, including checkpoints,
-logs, evaluations, and previews owned by that run. External-paper teaching
+Prospective runtime outputs belong under
+`artifacts/runs/<workflow>/<execution-id>/`, including one `run.json` plus the
+checkpoints, logs, evaluations, and previews owned by that execution. Historical
+workflow roots retain their original layout and may carry additive backfilled
+manifests. External-paper teaching
 outputs belong under `artifacts/reproductions/<capsule>/`. The former top-level
 `output/`, `figures/`, and `checkpoints/` layouts are retired. Promoting an
 output into a study requires a registered protocol, exact provenance, a result
@@ -169,7 +182,9 @@ schema v3 records that boundary and the effective compile mode; the runtime
 record also includes the device, CUDA capability, matrix precision,
 determinism flags, and both PyTorch and BLAS thread limits. The older
 `--compile-model` path remains the `mode="default"`, byte-replay-compatible
-single-cell execution used by registered historical backbones.
+single-cell execution used by registered historical backbones. The maintained
+training CLI writes `net.pth`; frozen runners explicitly request `net.dat` only
+when replaying their registered checkpoint contract.
 
 Task sampling preserves the historical RNG stream while vectorizing cue-code
 similarity checks. Each trial sequence is assembled in one preallocated NumPy
@@ -189,7 +204,7 @@ support trial and one device transfer for the complete query batch:
 
 ~~~bash
 direnv exec . python -m fsrl.evaluation \
-  --checkpoint artifacts/runs/relational_model/seed-1/checkpoint.pt \
+  --checkpoint artifacts/runs/relational_model/seed-1/net.pth \
   --output artifacts/runs/relational_model/seed-1/evaluation.json \
   --evaluation-backend batched_sequence
 ~~~

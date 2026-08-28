@@ -19,45 +19,48 @@ from fsrl.analysis.behavioral import (
     kendall_tau_positions,
     maximum_circular_triads,
 )
+from fsrl.infra.file_contracts import dataset_file, load_dataset_manifest
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.study_registry import resolve_record
-from fsrl.paths import REPO_ROOT
+from fsrl.paths import EXTERNAL_DATA_ROOT, REPO_ROOT
 from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_PROTOCOL_PATH = resolve_record("benchmarks/liu_v2.json")
+LIU_DATASET_ROOT = EXTERNAL_DATA_ROOT / "liu2026"
+LIU_DATASET = load_dataset_manifest(LIU_DATASET_ROOT / "dataset.toml")
+LIU_DATASET_FILES = {
+    file_id: dataset_file(LIU_DATASET, file_id)
+    for file_id in ("preregistered", "replication", "figure2d", "figure3b")
+}
 DEFAULT_PREREGISTERED_PATH = (
-    ROOT / "data" / "external" / "liu2026" / "preregistered_experiment_data.csv"
+    LIU_DATASET_ROOT / LIU_DATASET_FILES["preregistered"]["path"]
 )
-DEFAULT_REPLICATION_PATH = (
-    ROOT / "data" / "external" / "liu2026" / "replication_experiment_data.csv"
-)
+DEFAULT_REPLICATION_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["replication"]["path"]
 DEFAULT_OUTPUT_PATH = resolve_record("benchmarks/liu_human_exact_v1.json")
-DEFAULT_FIGURE2D_PATH = ROOT / "data" / "external" / "liu2026" / "Figure2d_Data.csv"
-DEFAULT_FIGURE3B_PATH = (
-    ROOT / "data" / "external" / "liu2026" / "Figure3b_left_panel_Data.csv"
-)
+DEFAULT_FIGURE2D_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["figure2d"]["path"]
+DEFAULT_FIGURE3B_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["figure3b"]["path"]
 
 SOURCE_FILES = {
     "preregistered": {
-        "download_url": "https://osf.io/download/mjqpe/",
-        "sha256": "6dcae48511018a85765e3ab7ceed6f358f5185f5ce399ce47543dbc7aad0c227",
-        "participants": 40,
+        "download_url": LIU_DATASET_FILES["preregistered"]["source_url"],
+        "sha256": LIU_DATASET_FILES["preregistered"]["sha256"],
+        "participants": LIU_DATASET_FILES["preregistered"]["participants"],
     },
     "replication": {
-        "download_url": "https://osf.io/download/698e858121336f1da3c72b17/",
-        "sha256": "c322cedd587d8e119442f873679d5fd5315e31736f4bf4266dbb89849c068249",
-        "participants": 37,
+        "download_url": LIU_DATASET_FILES["replication"]["source_url"],
+        "sha256": LIU_DATASET_FILES["replication"]["sha256"],
+        "participants": LIU_DATASET_FILES["replication"]["participants"],
     },
     "figure2d": {
-        "download_url": "https://osf.io/download/69c8941cdda521b5dd9ac12f/",
-        "sha256": "c20d660279a06acbdb03d343157ac70158d4346097ccc9aa76bc6c17f6567734",
-        "pairs": 28,
+        "download_url": LIU_DATASET_FILES["figure2d"]["source_url"],
+        "sha256": LIU_DATASET_FILES["figure2d"]["sha256"],
+        "pairs": LIU_DATASET_FILES["figure2d"]["pairs"],
     },
     "figure3b": {
-        "download_url": "https://osf.io/download/69c89449dda521b5dd9ac14e/",
-        "sha256": "395e1eac5b3379e480def18d073e90234109f4d8c3d73d158f772e05ef1efed0",
-        "participants": 77,
+        "download_url": LIU_DATASET_FILES["figure3b"]["source_url"],
+        "sha256": LIU_DATASET_FILES["figure3b"]["sha256"],
+        "participants": LIU_DATASET_FILES["figure3b"]["participants"],
     },
 }
 

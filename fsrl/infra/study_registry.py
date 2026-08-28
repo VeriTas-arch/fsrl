@@ -27,6 +27,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from fsrl.infra.provenance import file_sha256
+from fsrl.infra.record_catalog import CATALOG_PATH, check_record_catalog
 from fsrl.paths import REPO_ROOT, STUDIES_ROOT, SYNTHESIS_ROOT
 
 ROOT = REPO_ROOT
@@ -580,6 +581,18 @@ def _validate_registry_headers_and_synthesis(
         errors.append("synthesis schema_version must be 2")
     if source_provenance.get("schema_version") != 1:
         errors.append("source provenance schema_version must be 1")
+    catalog_value = registry.get("record_catalog")
+    if not isinstance(catalog_value, str):
+        errors.append("registry record_catalog must be a safe relative path")
+    else:
+        try:
+            catalog_path = STUDIES_ROOT / _safe_relative(catalog_value)
+        except ValueError:
+            errors.append("registry record_catalog must be a safe relative path")
+        else:
+            catalog_check = check_record_catalog(catalog_path)
+            if not catalog_check["passed"]:
+                errors.append(f"record catalog is stale: {catalog_check['catalog']}")
 
     synthesis_paths = {
         "registry": (SYNTHESIS_ROOT / synthesis.get("registry", "")).resolve(),
@@ -902,6 +915,7 @@ def _validate_record_inventory(
         if root.exists()
         for path in root.rglob("*")
         if path.is_file()
+        and path != CATALOG_PATH
         and path.name not in {"AGENTS.md", "README.md", "study.toml", "registry.toml"}
         and "migrations" not in path.parts
     }
@@ -948,6 +962,18 @@ def validate_registry(
         external_backends=external_backends,
         errors=errors,
     )
+    role_legend = registry.get("record_role_legend", {})
+    if not isinstance(role_legend, dict) or not role_legend:
+        errors.append("record_role_legend must be a non-empty table")
+    else:
+        observed_roles = set(role_counts)
+        declared_roles = set(role_legend)
+        unknown_roles = sorted(observed_roles - declared_roles)
+        unused_roles = sorted(declared_roles - observed_roles)
+        if unknown_roles:
+            errors.append(f"unknown record roles: {unknown_roles}")
+        if unused_roles:
+            errors.append(f"unused record roles: {unused_roles}")
 
     migration_pairs = _validate_migration_chain(
         migrations=migrations,

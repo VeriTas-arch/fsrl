@@ -228,7 +228,12 @@ def train_backbone(
     if paths["backbone_dir"].exists():
         return validate_complete_backbone(specification, output_root, seed)
     training = backbone_training_config(specification, seed)
-    train_meta_model(training, paths["backbone_dir"], compile_model=True)
+    train_meta_model(
+        training,
+        paths["backbone_dir"],
+        compile_model=True,
+        checkpoint_filename="net.dat",
+    )
     manifest = {
         "schema_version": 1,
         "replication_id": specification["replication_id"],

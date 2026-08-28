@@ -139,7 +139,12 @@ def train_backbone(specification: dict, output_root: Path, runtime: dict) -> Pat
     seed_dir = output_root / f"seed-{training.seed}" / "backbone"
     checkpoint = seed_dir / "net.dat"
     if not checkpoint.exists():
-        train_meta_model(training, seed_dir, compile_model=True)
+        train_meta_model(
+            training,
+            seed_dir,
+            compile_model=True,
+            checkpoint_filename="net.dat",
+        )
     metadata = load_json(seed_dir / "config.json")
     if metadata["training"] != asdict(training):
         raise RuntimeError("backbone training configuration mismatch")

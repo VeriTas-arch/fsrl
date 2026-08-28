@@ -561,11 +561,20 @@ def save_meta_checkpoint(
     execution: dict | None = None,
     runtime: dict | None = None,
     excluded_signatures: frozenset[GraphSignature] | None = None,
+    checkpoint_filename: str = "net.pth",
 ) -> None:
     if excluded_signatures is None:
         excluded_signatures = registered_excluded_signatures()
+    checkpoint_name = Path(checkpoint_filename)
+    if checkpoint_name.name != checkpoint_filename or checkpoint_name.suffix not in {
+        ".pth",
+        ".dat",
+    }:
+        raise ValueError(
+            "checkpoint_filename must be a basename ending in .pth or .dat"
+        )
     output_dir.mkdir(parents=True, exist_ok=True)
-    checkpoint_path = output_dir / "net.dat"
+    checkpoint_path = output_dir / checkpoint_name
     torch.save(net.state_dict(), checkpoint_path)
     metadata = {
         "schema_version": 1,
@@ -615,6 +624,7 @@ def train_meta_model(
     optimized_execution: bool = False,
     execution_profile: ExecutionProfile | None = None,
     excluded_signatures: frozenset[GraphSignature] | None = None,
+    checkpoint_filename: str = "net.pth",
 ) -> None:
     if execution_profile is None:
         execution_device = default_device()
@@ -703,6 +713,7 @@ def train_meta_model(
                 ),
                 runtime=runtime if optimized_execution else None,
                 excluded_signatures=resolved_exclusions,
+                checkpoint_filename=checkpoint_filename,
             )
 
 

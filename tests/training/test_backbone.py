@@ -329,6 +329,8 @@ class MetaTrainingTests(unittest.TestCase):
             )
             with (output_dir / "config.json").open(encoding="utf-8") as handle:
                 metadata = json.load(handle)
+            self.assertTrue((output_dir / "net.pth").is_file())
+            self.assertEqual(metadata["checkpoint"]["path"], "net.pth")
             self.assertTrue(metadata["task_distribution"]["liu_graph_held_out"])
             self.assertFalse(
                 metadata["task_distribution"]["query_labels_enter_episode_inputs"]
@@ -361,3 +363,16 @@ class MetaTrainingTests(unittest.TestCase):
             metadata = json.loads((output_dir / "config.json").read_text())
         self.assertEqual(metadata["runtime"], runtime)
         self.assertEqual(metadata["execution"]["runtime_profile"]["blas_threads"], 1)
+
+    def test_legacy_checkpoint_suffix_requires_explicit_compatibility_name(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir)
+            save_meta_checkpoint(
+                output_dir,
+                self.net,
+                self.training_config,
+                step=0,
+                checkpoint_filename="net.dat",
+            )
+            metadata = json.loads((output_dir / "config.json").read_text())
+        self.assertEqual(metadata["checkpoint"]["path"], "net.dat")

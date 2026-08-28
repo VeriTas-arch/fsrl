@@ -513,7 +513,12 @@ def train_backbone(
             implementation_lock_path,
         )
     training = backbone_training_config(specification, seed)
-    train_meta_model(training, paths["backbone_dir"], compile_model=True)
+    train_meta_model(
+        training,
+        paths["backbone_dir"],
+        compile_model=True,
+        checkpoint_filename="net.dat",
+    )
     manifest = {
         "schema_version": 1,
         "replication_id": specification["replication_id"],

@@ -233,6 +233,7 @@ def train_confirmation_seed(
         _training_config(specification, seed),
         seed_dir,
         compile_model=specification["confirmation_id"] == FORMAL_CONFIRMATION_ID,
+        checkpoint_filename="net.dat",
     )
     validate_checkpoint(checkpoint, specification, seed)
     return checkpoint
