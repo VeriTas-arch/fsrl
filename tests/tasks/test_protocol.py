@@ -3,7 +3,7 @@ import unittest
 
 import numpy as np
 
-from fsrl.tasks.registered_protocol import DEFAULT_PROTOCOL_PATH, load_ranking_protocol
+from fsrl.tasks.registered_protocol import default_protocol_path, load_ranking_protocol
 
 
 class RankingProtocolTests(unittest.TestCase):
@@ -52,7 +52,7 @@ class RankingProtocolTests(unittest.TestCase):
         self.assertEqual(set(pair_counts.values()), {10})
 
     def test_json_declares_strict_frozen_readout_contract(self):
-        with DEFAULT_PROTOCOL_PATH.open(encoding="utf-8") as handle:
+        with default_protocol_path().open(encoding="utf-8") as handle:
             raw = json.load(handle)
         query = raw["query"]
         self.assertFalse(query["feedback"])

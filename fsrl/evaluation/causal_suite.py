@@ -13,7 +13,7 @@ from fsrl.infra.runtime import (
     default_device,
 )
 from fsrl.tasks.protocol import load_ranking_protocol
-from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
+from fsrl.tasks.protocol_catalog import protocol_path as registered_protocol_path
 from fsrl.tasks.subject_encoding import SubjectEncodingConfig
 from fsrl.training.checkpoints import load_training_provenance
 from fsrl.training.legacy_checkpoints import load_frozen_retro_checkpoint
@@ -24,7 +24,7 @@ from .contracts import (
 )
 from .frozen_fast_weight import FrozenFastWeightEvaluator
 
-DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
+DEFAULT_PROTOCOL_ID = "liu_v1"
 
 
 def run_causal_suite(
@@ -38,14 +38,18 @@ def run_causal_suite(
     cue_mode: str,
     subject_encoding_mode: str,
     subject_encoding_seed: int,
-    protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
+    protocol_path: Path | str | None = None,
     evaluation_backend: FrozenEvaluationBackend | str = (
         FrozenEvaluationBackend.BATCHED_SEQUENCE
     ),
     execution_profile: ExecutionProfile | None = None,
 ) -> dict:
-    protocol_path = Path(protocol_path)
-    protocol = load_ranking_protocol(protocol_path)
+    resolved_protocol_path = (
+        registered_protocol_path(DEFAULT_PROTOCOL_ID)
+        if protocol_path is None
+        else Path(protocol_path)
+    )
+    protocol = load_ranking_protocol(resolved_protocol_path)
     backend = FrozenEvaluationBackend(evaluation_backend)
     runtime = None
     if backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
@@ -97,7 +101,7 @@ def run_causal_suite(
     provenance = load_training_provenance(Path(checkpoint), checkpoint_info.sha256)
     result = {
         "protocol_id": protocol.protocol_id,
-        "protocol_path": str(protocol_path.resolve()),
+        "protocol_path": str(resolved_protocol_path.resolve()),
         "checkpoint": asdict(checkpoint_info),
         "batch_size": batch_size,
         "cue_seed": cue_seed,

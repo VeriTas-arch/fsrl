@@ -18,9 +18,9 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.infra.provenance import write_json_exclusive
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
-from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
+from fsrl.tasks.protocol_catalog import protocol_path as registered_protocol_path
 
-DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
+DEFAULT_PROTOCOL_ID = "liu_v1"
 
 Pair = tuple[int, int]
 
@@ -406,10 +406,14 @@ def run_behavioral_analysis(
     choice_seed: int,
     temperature: float,
     subject_encoding_mode: str = "stable_omission",
-    protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
+    protocol_path: Path | str | None = None,
 ) -> dict:
-    protocol_path = Path(protocol_path)
-    protocol = load_ranking_protocol(protocol_path)
+    resolved_protocol_path = (
+        registered_protocol_path(DEFAULT_PROTOCOL_ID)
+        if protocol_path is None
+        else Path(protocol_path)
+    )
+    protocol = load_ranking_protocol(resolved_protocol_path)
     net, config, checkpoint_info = load_frozen_retro_checkpoint(checkpoint, batch_size)
     evaluator = FrozenFastWeightEvaluator(
         net,
@@ -438,7 +442,7 @@ def run_behavioral_analysis(
     result["support_seed"] = support_seed
     result["subject_encoding_seed"] = subject_encoding_seed
     result["subject_encoding_mode"] = subject_encoding_mode
-    result["protocol_path"] = str(protocol_path.resolve())
+    result["protocol_path"] = str(resolved_protocol_path.resolve())
     return result
 
 
@@ -465,7 +469,11 @@ def parse_args(args=None):
         ],
         default="stable_omission",
     )
-    parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
+    parser.add_argument(
+        "--protocol",
+        type=Path,
+        help=f"default: registered protocol {DEFAULT_PROTOCOL_ID}",
+    )
     return parser.parse_args(args)
 
 

@@ -49,6 +49,32 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual(len(wheels), 1)
             with zipfile.ZipFile(wheels[0]) as archive:
                 names = set(archive.namelist())
+                installed = root / "installed"
+                archive.extractall(installed)
+
+            import_check = subprocess.run(
+                [
+                    sys.executable,
+                    "-P",
+                    "-c",
+                    (
+                        "import fsrl, fsrl.analysis, fsrl.core, fsrl.evaluation, "
+                        "fsrl.experiments, fsrl.infra, fsrl.tasks, fsrl.training, "
+                        "fsrl.workflows; print(fsrl.__file__)"
+                    ),
+                ],
+                cwd=root,
+                check=False,
+                capture_output=True,
+                text=True,
+                env={
+                    **environment,
+                    "PYTHONNOUSERSITE": "1",
+                    "PYTHONPATH": str(installed),
+                },
+            )
+            self.assertEqual(import_check.returncode, 0, import_check.stderr)
+            self.assertIn(str(installed), import_check.stdout)
 
         required = {
             "fsrl/experiments/transport/contracts/item_count_within_cell_v1.json",

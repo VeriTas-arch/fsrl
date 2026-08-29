@@ -47,7 +47,9 @@ contract. Reusable code lives in the stable packages above; evidence-producing
 code lives below `experiments/`. Tests mirror the same ownership structure.
 The wheel contains the `fsrl` namespace and the two transport contracts read
 from package-relative paths; repository evidence and workflow data remain
-outside the wheel by design.
+outside the wheel by design. Importing the installed public packages does not
+resolve repository records; registered protocols and evidence are resolved
+only when their repository-backed operations are called.
 
 Frozen contracts may still name former flat modules. Those identities are
 verified against Git blobs and witness commits rather than recreated as a large

@@ -18,6 +18,32 @@ from fsrl.tasks.protocol import RankingProtocol as CanonicalProtocol
 ROOT = REPO_ROOT
 
 
+def imported_modules(source, tree):
+    relative = source.relative_to(ROOT / "fsrl")
+    package = ("fsrl", *relative.parent.parts)
+    modules = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            modules.extend(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom):
+            if node.level:
+                parent_count = node.level - 1
+                base = package[: len(package) - parent_count]
+                if node.module:
+                    modules.append(".".join((*base, *node.module.split("."))))
+                else:
+                    modules.extend(
+                        ".".join((*base, *alias.name.split(".")))
+                        for alias in node.names
+                    )
+            else:
+                if node.module == "fsrl":
+                    modules.extend(f"fsrl.{alias.name}" for alias in node.names)
+                else:
+                    modules.append(node.module or "")
+    return modules
+
+
 class CoreArchitectureTests(unittest.TestCase):
     def test_public_packages_export_canonical_objects(self):
         self.assertIs(RetroModulRNN, CanonicalRNN)
@@ -142,22 +168,29 @@ class CoreArchitectureTests(unittest.TestCase):
                 tree = ast.parse(
                     source.read_text(encoding="utf-8"), filename=str(source)
                 )
-                for node in ast.walk(tree):
-                    if isinstance(node, ast.ImportFrom):
-                        module = node.module or ""
-                    elif isinstance(node, ast.Import):
-                        modules = [alias.name for alias in node.names]
-                    else:
+                for module in imported_modules(source, tree):
+                    if not module.startswith("fsrl."):
                         continue
-                    if isinstance(node, ast.ImportFrom):
-                        modules = [module]
-                    for module in modules:
-                        if not module.startswith("fsrl."):
-                            continue
-                        dependency = module.split(".")[1]
-                        if dependency not in dependencies:
-                            violations.append(f"{source.relative_to(ROOT)} -> {module}")
+                    dependency = module.split(".")[1]
+                    if dependency not in dependencies:
+                        violations.append(f"{source.relative_to(ROOT)} -> {module}")
         self.assertEqual(violations, [])
+
+    def test_relative_imports_resolve_before_dependency_checks(self):
+        source = ROOT / "fsrl" / "core" / "synthetic.py"
+        tree = ast.parse(
+            "from ..experiments.runner import main\n"
+            "from .. import experiments\n"
+            "from fsrl import experiments\n"
+        )
+        self.assertEqual(
+            imported_modules(source, tree),
+            [
+                "fsrl.experiments.runner",
+                "fsrl.experiments",
+                "fsrl.experiments",
+            ],
+        )
 
     def test_source_and_test_roots_are_not_flat_module_collections(self):
         source_files = {path.name for path in (ROOT / "fsrl").glob("*.py")}

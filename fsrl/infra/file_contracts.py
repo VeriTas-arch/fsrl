@@ -317,8 +317,6 @@ def _validate_run_file_set(
     declared_paths: set[str],
     errors: list[str],
 ) -> None:
-    if manifest.get("lifecycle_state") == "running":
-        return
     actual_paths = _materialized_run_paths(manifest_path, manifest)
     for relative in sorted(actual_paths - declared_paths):
         errors.append(f"run file is not declared: {relative}")
@@ -342,6 +340,8 @@ def validate_run_manifest(path: Path | str) -> dict[str, Any]:
             "files": 0,
         }
     _validate_run_header(manifest, errors)
+    if manifest.get("lifecycle_state") == "running":
+        errors.append("prospective run is not finalized")
     entries = manifest.get("files", [])
     if not isinstance(entries, list) or not all(
         isinstance(entry, dict) for entry in entries

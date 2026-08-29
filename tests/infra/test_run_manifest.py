@@ -2,9 +2,10 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from fsrl.infra.file_contracts import validate_run_manifest
-from fsrl.infra.provenance import write_json_exclusive
+from fsrl.infra.provenance import write_json, write_json_exclusive
 from fsrl.infra.run_manifest import ProspectiveRun
 
 
@@ -77,6 +78,47 @@ class ProspectiveRunTests(unittest.TestCase):
 
             self.assertFalse(result["passed"])
             self.assertIn("run file is not declared: late-file.txt", result["errors"])
+
+    def test_running_manifest_is_not_a_completed_file_contract(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory) / "execution-1"
+            run = self._start(output_dir)
+            (output_dir / "partial.json").write_text("{}\n", encoding="utf-8")
+
+            result = validate_run_manifest(run.manifest_path)
+
+            self.assertFalse(result["passed"])
+            self.assertIn("prospective run is not finalized", result["errors"])
+            self.assertIn("run file is not declared: partial.json", result["errors"])
+
+
+class ExclusiveJsonWriterTests(unittest.TestCase):
+    def test_exclusive_writer_preserves_canonical_json_bytes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            regular = root / "regular.json"
+            exclusive = root / "exclusive.json"
+            value = {"nested": {"score": 1.0}, "status": "pass"}
+
+            write_json(regular, value)
+            write_json_exclusive(exclusive, value)
+
+            self.assertEqual(exclusive.read_bytes(), regular.read_bytes())
+
+    def test_publish_failure_leaves_no_final_or_temporary_file(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "result.json"
+            with (
+                patch(
+                    "fsrl.infra.provenance.os.link",
+                    side_effect=OSError("synthetic publish failure"),
+                ),
+                self.assertRaisesRegex(OSError, "synthetic publish failure"),
+            ):
+                write_json_exclusive(output, {"score": 1.0})
+
+            self.assertFalse(output.exists())
+            self.assertEqual(list(Path(directory).iterdir()), [])
 
 
 if __name__ == "__main__":

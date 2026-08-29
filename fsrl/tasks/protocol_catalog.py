@@ -16,8 +16,6 @@ PROTOCOL_DOCUMENT_IDS = {
     "liu_v1": "liu-constructive-ranking-v1",
     "liu_v2": "liu-constructive-ranking-v2-source-corrected",
 }
-LIU_V1_PROTOCOL_PATH = resolve_record_id(PROTOCOL_RECORD_IDS["liu_v1"])
-LIU_V2_PROTOCOL_PATH = resolve_record_id(PROTOCOL_RECORD_IDS["liu_v2"])
 
 
 def protocol_path(protocol_id: str) -> Path:

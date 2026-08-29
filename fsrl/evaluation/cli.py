@@ -7,7 +7,7 @@ from pathlib import Path
 
 from fsrl.infra.provenance import write_json_exclusive
 
-from .causal_suite import DEFAULT_PROTOCOL_PATH, run_causal_suite
+from .causal_suite import DEFAULT_PROTOCOL_ID, run_causal_suite
 from .contracts import FrozenEvaluationBackend
 
 
@@ -38,7 +38,11 @@ def parse_args(args=None):
     parser.add_argument("--support-seed", type=int, default=100)
     parser.add_argument("--order-seed", type=int, default=200)
     parser.add_argument("--order-schedules", type=int, default=8)
-    parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
+    parser.add_argument(
+        "--protocol",
+        type=Path,
+        help=f"default: registered protocol {DEFAULT_PROTOCOL_ID}",
+    )
     parser.add_argument(
         "--evaluation-backend",
         choices=[backend.value for backend in FrozenEvaluationBackend],
