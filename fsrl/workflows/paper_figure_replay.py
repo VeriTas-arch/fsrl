@@ -67,13 +67,13 @@ def replay_model_subject_pairs(
 
     import torch
 
-    import fsrl.experiments.local_fidelity.evidence_access_pilot as dual_access
     from fsrl.analysis.policy import bundle_logits
     from fsrl.evaluation.frozen_fast_weight import (
         FastWeightIntervention,
         FrozenFastWeightEvaluator,
         load_frozen_retro_checkpoint,
     )
+    from fsrl.evaluation.local_access import build_access_trace
     from fsrl.evaluation.relational_query import readout_relational_query_bundle
     from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
         DEFAULT_ARTIFACT_LOCK_PATH,
@@ -140,7 +140,7 @@ def replay_model_subject_pairs(
             ordered_pairs(protocol.n_items) for _ in range(model_config.bs)
         )
         fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-        trace = dual_access.build_access_trace(evaluator, local, dual_access=True)
+        trace = build_access_trace(evaluator, local, dual_access=True)
         bundle = readout_relational_query_bundle(
             evaluator,
             local,

@@ -11,18 +11,14 @@ from fractions import Fraction
 from functools import lru_cache
 from itertools import combinations, pairwise, permutations
 from pathlib import Path
-from typing import Any, cast
+from typing import cast
 
 import numpy as np
 import torch
-from scipy import stats
 
 from fsrl.analysis.behavioral import (
-    count_circular_triads,
-    fit_beta_distribution,
-    hodge_rank_positions,
+    analyze_sampled_query_policy,
     kendall_tau_positions,
-    maximum_circular_triads,
 )
 from fsrl.analysis.hodge import (
     build_complete_graph_geometry,
@@ -31,7 +27,9 @@ from fsrl.analysis.hodge import (
     kendall_tau_scores,
 )
 from fsrl.analysis.policy import bundle_logits, margin_fields
+from fsrl.analysis.relational_transport import condition_metrics, finite_primary
 from fsrl.analysis.statistics import (
+    bootstrap_counts,
     finite_column_mean,
     json_values,
     stable_sigmoid,
@@ -40,25 +38,19 @@ from fsrl.analysis.statistics import (
 )
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
-    FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
-from fsrl.evaluation.relational_query import readout_relational_query_bundle
-from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    build_access_trace,
-    build_fast_weight_loo,
+from fsrl.evaluation.local_access import (
     measure_presentation_invariance,
+    readout_dual_access_query_conditions,
 )
-from fsrl.experiments.transport.topology import (
-    bootstrap_counts,
-    condition_metrics,
-    finite_primary,
-    graph_descriptor,
+from fsrl.evaluation.local_ledger import (
     reconstruct_local_ledger,
     support_schedule_hash,
 )
+from fsrl.evaluation.metrics import count_circular_triads
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.semantic_contract import (
@@ -75,6 +67,7 @@ from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol, ordered_pairs
+from fsrl.tasks.transport_graph import graph_descriptor
 
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/liu_item_count_transport_v1.json"
@@ -149,275 +142,6 @@ def validate_sources(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"item-count source or artifact lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
-
-
-def _mean_subject_column(
-    subjects: list[dict], name: str, mask: np.ndarray
-) -> float | None:
-    values = np.asarray([subject[name] for subject in subjects], dtype=np.float64)[mask]
-    return None if len(values) == 0 else float(np.nanmean(values))
-
-
-def _choice_sigmoid(value: float) -> float:
-    return float(1.0 / (1.0 + np.exp(-value)))
-
-
-def analyze_size_generic_sampled_query_policy(
-    protocol: RankingProtocol,
-    subject_logits: tuple[dict[tuple[int, int], float], ...],
-    *,
-    seed: int,
-    temperature: float = 1.0,
-) -> dict:
-    """Exact size-generic counterpart of the frozen N=8 behavioral estimator."""
-
-    if temperature <= 0.0:
-        raise ValueError("temperature must be positive")
-    pairs = tuple(combinations(range(protocol.n_items), 2))
-    pair_to_index = {pair: index for index, pair in enumerate(pairs)}
-    learned = protocol.learned_pairs
-    true_positions = np.empty(protocol.n_items, dtype=np.int64)
-    for position, item in enumerate(protocol.true_order_high_to_low):
-        true_positions[item] = position
-    subjects = []
-    pair_accuracies = []
-    subject_ranks = []
-    for subject_index, logits in enumerate(subject_logits):
-        schedule_rng = np.random.default_rng(seed + 2 * subject_index)
-        choice_rng = np.random.default_rng(seed + 2 * subject_index + 1)
-        schedule = protocol.query_schedule(schedule_rng)
-        correct_counts = np.zeros(len(pairs), dtype=np.float64)
-        choose_first_counts = np.zeros(len(pairs), dtype=np.float64)
-        total_counts = np.zeros(len(pairs), dtype=np.float64)
-        probability_correct = []
-        for trial in schedule:
-            oriented_pair = (trial.left_item, trial.right_item)
-            logit = logits[oriented_pair] / temperature
-            probability_left = _choice_sigmoid(logit)
-            choose_left = bool(choice_rng.random() < probability_left)
-            chosen_item = trial.left_item if choose_left else trial.right_item
-            pair = cast(tuple[int, int], tuple(sorted(oriented_pair)))
-            pair_index = pair_to_index[pair]
-            total_counts[pair_index] += 1.0
-            correct = choose_left == bool(trial.correct_action)
-            correct_counts[pair_index] += float(correct)
-            choose_first_counts[pair_index] += float(chosen_item == pair[0])
-            probability_correct.append(
-                probability_left if trial.correct_action else 1.0 - probability_left
-            )
-        pair_accuracy = correct_counts / total_counts
-        pair_accuracies.append(pair_accuracy)
-        winners = {}
-        preference = np.zeros((protocol.n_items, protocol.n_items), dtype=np.float64)
-        ties = 0
-        for pair_index, pair in enumerate(pairs):
-            first_choices = choose_first_counts[pair_index]
-            second_choices = total_counts[pair_index] - first_choices
-            preference_value = (first_choices - second_choices) / total_counts[
-                pair_index
-            ]
-            preference[pair] = preference_value
-            preference[(pair[1], pair[0])] = -preference_value
-            if first_choices > second_choices:
-                winners[pair] = pair[0]
-            elif second_choices > first_choices:
-                winners[pair] = pair[1]
-            else:
-                ties += 1
-                canonical_margin = 0.5 * (logits[pair] - logits[(pair[1], pair[0])])
-                winners[pair] = pair[0] if canonical_margin > 0.0 else pair[1]
-        circular = count_circular_triads(winners, protocol.n_items)
-        rank_positions = hodge_rank_positions(preference)
-        subject_ranks.append(rank_positions)
-        majority_correct = all(
-            true_positions[winners[pair]]
-            < true_positions[pair[1] if winners[pair] == pair[0] else pair[0]]
-            for pair in pairs
-        )
-        if majority_correct:
-            ranking_class = "correct"
-        elif circular == 0:
-            ranking_class = "self_consistent_incorrect"
-        else:
-            ranking_class = "self_inconsistent"
-        learned_mask = np.asarray([pair in learned for pair in pairs])
-        distance_accuracy = {}
-        for distance in range(1, protocol.n_items):
-            distance_mask = np.asarray(
-                [
-                    abs(true_positions[first] - true_positions[second]) == distance
-                    for first, second in pairs
-                ]
-            )
-            distance_accuracy[str(distance)] = float(
-                np.mean(pair_accuracy[distance_mask])
-            )
-        stable_errors = {}
-        for threshold in (0.6, 0.7, 0.8, 0.9, 1.0):
-            count = int(np.sum((1.0 - pair_accuracy) >= threshold - 1e-9))
-            stable_errors[str(round(threshold * 100))] = count
-        subjects.append(
-            {
-                "subject": subject_index,
-                "overall_accuracy": float(np.mean(pair_accuracy)),
-                "learned_accuracy": float(np.mean(pair_accuracy[learned_mask])),
-                "nonlearned_accuracy": float(np.mean(pair_accuracy[~learned_mask])),
-                "mean_probability_correct": float(np.mean(probability_correct)),
-                "distance_accuracy": distance_accuracy,
-                "circular_triads": circular,
-                "self_consistency_coefficient": float(
-                    1.0 - circular / maximum_circular_triads(protocol.n_items)
-                ),
-                "ranking_class": ranking_class,
-                "kendall_tau_subjective_to_true": kendall_tau_positions(
-                    rank_positions, true_positions
-                ),
-                "subjective_order_high_to_low": [
-                    int(item) for item in np.argsort(rank_positions)
-                ],
-                "majority_ties": ties,
-                "stable_error_pair_counts": stable_errors,
-            }
-        )
-    pair_accuracies_array = np.asarray(pair_accuracies)
-    subject_ranks_array = np.asarray(subject_ranks)
-    overall = np.asarray(
-        [subject["overall_accuracy"] for subject in subjects], dtype=np.float64
-    )
-    eligible = overall >= 0.5
-    correct_rankers = np.asarray(
-        [subject["ranking_class"] == "correct" for subject in subjects]
-    )
-    analysis = eligible & ~correct_rankers
-    pair_rows = []
-    beta_counts = {
-        name: 0
-        for name in (
-            "ordinary_unimodal",
-            "high_accuracy",
-            "low_accuracy",
-            "bimodal",
-            "boundary",
-            "not_fit",
-        )
-    }
-    for pair_index, pair in enumerate(pairs):
-        fit = fit_beta_distribution(pair_accuracies_array[analysis, pair_index])
-        beta_counts[fit["class"]] += 1
-        pair_rows.append(
-            {
-                "pair": list(pair),
-                "symbolic_distance": int(
-                    abs(true_positions[pair[0]] - true_positions[pair[1]])
-                ),
-                "learned": pair in learned,
-                "mean_accuracy_all": float(
-                    np.mean(pair_accuracies_array[:, pair_index])
-                ),
-                "mean_accuracy_analysis": (
-                    None
-                    if not np.any(analysis)
-                    else float(np.mean(pair_accuracies_array[analysis, pair_index]))
-                ),
-                "beta_fit_analysis": fit,
-            }
-        )
-    distances = np.arange(1, protocol.n_items)
-    slopes = []
-    for subject in subjects:
-        values = np.asarray(
-            [subject["distance_accuracy"][str(distance)] for distance in distances]
-        )
-        slopes.append(float(np.polyfit(distances, values, 1)[0]))
-    slope_values = np.asarray(slopes)
-    slope_test = (
-        cast(Any, stats.ttest_1samp(slope_values, 0.0))
-        if len(slope_values) > 1 and float(np.std(slope_values)) > 1e-12
-        else None
-    )
-    inter_subject_tau = []
-    analysis_indices = np.flatnonzero(analysis)
-    for first_index, second_index in combinations(analysis_indices, 2):
-        inter_subject_tau.append(
-            kendall_tau_positions(
-                subject_ranks_array[first_index], subject_ranks_array[second_index]
-            )
-        )
-    ranking_counts = {
-        ranking_class: int(
-            sum(
-                eligible[index] and subject["ranking_class"] == ranking_class
-                for index, subject in enumerate(subjects)
-            )
-        )
-        for ranking_class in (
-            "correct",
-            "self_consistent_incorrect",
-            "self_inconsistent",
-        )
-    }
-    stable_error_prevalence = {}
-    for threshold in (60, 70, 80, 90, 100):
-        all_values = np.asarray(
-            [
-                subject["stable_error_pair_counts"][str(threshold)] > 0
-                for subject in subjects
-            ]
-        )
-        stable_error_prevalence[str(threshold)] = {
-            "eligible": float(np.mean(all_values[eligible]))
-            if np.any(eligible)
-            else None,
-            "analysis": float(np.mean(all_values[analysis]))
-            if np.any(analysis)
-            else None,
-        }
-    summary = {
-        "generated_subjects": len(subjects),
-        "eligible_subjects": int(np.sum(eligible)),
-        "excluded_below_chance": int(np.sum(~eligible)),
-        "analysis_subjects_excluding_correct_rankers": int(np.sum(analysis)),
-        "overall_accuracy": _mean_subject_column(
-            subjects, "overall_accuracy", eligible
-        ),
-        "learned_accuracy": _mean_subject_column(
-            subjects, "learned_accuracy", eligible
-        ),
-        "nonlearned_accuracy": _mean_subject_column(
-            subjects, "nonlearned_accuracy", eligible
-        ),
-        "mean_probability_correct": _mean_subject_column(
-            subjects, "mean_probability_correct", eligible
-        ),
-        "mean_self_consistency_coefficient": _mean_subject_column(
-            subjects, "self_consistency_coefficient", eligible
-        ),
-        "ranking_class_counts": ranking_counts,
-        "stable_error_subject_prevalence": stable_error_prevalence,
-        "symbolic_distance_slope": {
-            "mean": float(np.mean(slopes)),
-            "t_vs_zero": None if slope_test is None else float(slope_test.statistic),
-            "p_vs_zero": None if slope_test is None else float(slope_test.pvalue),
-        },
-        "beta_pair_class_counts_analysis": beta_counts,
-        "mean_inter_subject_kendall_tau": (
-            None if not inter_subject_tau else float(np.mean(inter_subject_tau))
-        ),
-    }
-    return {
-        "protocol_id": protocol.protocol_id,
-        "sampling": {
-            "seed": seed,
-            "temperature": temperature,
-            "test_blocks": protocol.query_blocks,
-            "trials_per_subject": protocol.query_trials,
-            "query_fast_weights": "frozen",
-            "query_hidden_and_eligibility": "reset_each_trial",
-        },
-        "summary": summary,
-        "subjects": subjects,
-        "pairs": pair_rows,
-    }
 
 
 def _exact_wasserstein(first: list[Fraction], second: list[Fraction]) -> Fraction:
@@ -954,81 +678,20 @@ def evaluate_cell(
     )
     query_schedules = tuple(ordered_pairs(n_items) for _ in range(evaluator.config.bs))
     before = tensor_hashes(evaluator.net)
-    intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
-    intact_trace = build_access_trace(evaluator, local, dual_access=True)
-    loo_traces = [
-        build_access_trace(
-            evaluator, local, dual_access=True, zero_relations=frozenset((relation,))
-        )
-        for relation in relations
-    ]
-    intact_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        query_schedules,
-        local_off=False,
-        global_off=False,
-        shuffled_indices=None,
-    )
-    a_off_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        query_schedules,
-        local_off=True,
-        global_off=False,
-        shuffled_indices=None,
-    )
-    p_off_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        query_schedules,
-        local_off=False,
-        global_off=True,
-        shuffled_indices=None,
-    )
-    loo_global_bundles = [
-        readout_relational_query_bundle(
-            evaluator,
-            local,
-            loo_fast_weights[index],
-            loo_traces[index].state,
-            query_schedules,
-            local_off=True,
-            global_off=False,
-            shuffled_indices=None,
-        )
-        for index in range(len(relations))
-    ]
-    loo_local_bundles = [
-        readout_relational_query_bundle(
-            evaluator,
-            local,
-            intact_fast_weights,
-            loo_traces[index].state,
-            query_schedules,
-            local_off=False,
-            global_off=True,
-            shuffled_indices=None,
-        )
-        for index in range(len(relations))
-    ]
+    readout = readout_dual_access_query_conditions(evaluator, local, query_schedules)
+    intact_trace = readout["intact_trace"]
+    condition_bundles = readout["condition_bundles"]
+    intact_bundle = condition_bundles["intact"]
+    a_off_bundle = condition_bundles["a_off"]
     fields = {
-        "intact": margin_fields(intact_bundle, n_items),
-        "a_off": margin_fields(a_off_bundle, n_items),
-        "P_off_a_on": margin_fields(p_off_bundle, n_items),
+        name: margin_fields(bundle, n_items)
+        for name, bundle in condition_bundles.items()
     }
     loo_global_fields = np.asarray(
-        [margin_fields(bundle, n_items) for bundle in loo_global_bundles]
+        [margin_fields(bundle, n_items) for bundle in readout["global_loo_bundles"]]
     )
     loo_local_fields = np.asarray(
-        [margin_fields(bundle, n_items) for bundle in loo_local_bundles]
+        [margin_fields(bundle, n_items) for bundle in readout["local_loo_bundles"]]
     )
     conditions = {
         name: condition_metrics(
@@ -1077,7 +740,7 @@ def evaluate_cell(
             local_remote - 0.25 * global_remote, counts, interval=interval
         ),
     }
-    behavior = analyze_size_generic_sampled_query_policy(
+    behavior = analyze_sampled_query_policy(
         protocol,
         bundle_logits(intact_bundle, query_schedules),
         seed=int(evaluation["choice_seed"]),

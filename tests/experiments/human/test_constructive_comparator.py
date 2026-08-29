@@ -19,7 +19,7 @@ from fsrl.experiments.human.constructive_comparator import (
 )
 from fsrl.infra.provenance import write_json_exclusive
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 class HumanMetricConstructiveComparatorTests(unittest.TestCase):

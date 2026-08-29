@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
+from fsrl.analysis.field_factorial import factorial_identity_errors
 from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.analysis.policy import exact_probability
 from fsrl.evaluation.fields import readout_margin_fields
@@ -714,45 +715,6 @@ def validate_artifacts(
     return {"passed": True, "checks": checks, "lock": lock}
 
 
-def _factorial_identity_errors(values: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
-    return {
-        "D_equals_A_plus_R": np.abs(values["D"] - values["A"] - values["R"]),
-        "D_equals_Delta_A_plus_C_A": np.abs(
-            values["D"] - values["Delta_A"] - values["C_A"]
-        ),
-        "D_equals_Delta_R_plus_C_R": np.abs(
-            values["D"] - values["Delta_R"] - values["C_R"]
-        ),
-        "D_equals_Q_shape_plus_C_shape": np.abs(
-            values["D"] - values["Q_shape"] - values["C_shape"]
-        ),
-        "I_equals_Delta_A_minus_C_R": np.abs(
-            values["I"] - values["Delta_A"] + values["C_R"]
-        ),
-        "I_equals_Delta_R_minus_C_A": np.abs(
-            values["I"] - values["Delta_R"] + values["C_A"]
-        ),
-        "Delta_A_equals_A_plus_half_I": np.abs(
-            values["Delta_A"] - values["A"] - 0.5 * values["I"]
-        ),
-        "C_A_equals_R_minus_half_I": np.abs(
-            values["C_A"] - values["R"] + 0.5 * values["I"]
-        ),
-        "Delta_R_equals_R_plus_half_I": np.abs(
-            values["Delta_R"] - values["R"] - 0.5 * values["I"]
-        ),
-        "C_R_equals_A_minus_half_I": np.abs(
-            values["C_R"] - values["A"] + 0.5 * values["I"]
-        ),
-        "Delta_A_equals_Q_shape_plus_Q_amp": np.abs(
-            values["Delta_A"] - values["Q_shape"] - values["Q_amp"]
-        ),
-        "C_shape_equals_C_A_plus_Q_amp": np.abs(
-            values["C_shape"] - values["C_A"] - values["Q_amp"]
-        ),
-    }
-
-
 def _bootstrap_counts(specification: dict, seed: int, subjects: int) -> np.ndarray:
     bootstrap = specification["statistical_estimands"]["bootstrap"]
     return (
@@ -797,7 +759,7 @@ def _statistics(
     }
     bootstrap_identity = {
         name: float(np.max(error))
-        for name, error in _factorial_identity_errors(bootstrap_values).items()
+        for name, error in factorial_identity_errors(bootstrap_values).items()
     }
     raw = {
         name: np.asarray(estimands[name], dtype=np.float64).tolist()

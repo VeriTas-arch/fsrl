@@ -13,12 +13,11 @@ import numpy as np
 from scipy import stats
 
 from fsrl.analysis.behavioral import (
-    count_circular_triads,
     fit_beta_distribution,
     hodge_rank_positions,
     kendall_tau_positions,
-    maximum_circular_triads,
 )
+from fsrl.evaluation.metrics import count_circular_triads, maximum_circular_triads
 from fsrl.infra.file_contracts import dataset_file, load_dataset_manifest
 from fsrl.infra.provenance import file_sha256, write_json_exclusive
 from fsrl.infra.study_registry import resolve_record

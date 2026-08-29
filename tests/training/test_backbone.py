@@ -139,11 +139,10 @@ class MetaTrainingTests(unittest.TestCase):
             with self.subTest(update_fast_weights=update_fast_weights):
                 stepwise_net = copy.deepcopy(self.net)
                 sequence_net = copy.deepcopy(self.net)
-                hidden = stepwise_net.initialZeroState(self.model_config.bs)
-                eligibility = stepwise_net.initialZeroET(self.model_config.bs)
-                fast_weights = stepwise_net.initialZeroPlasticWeights(
-                    self.model_config.bs
-                )
+                stepwise_state = stepwise_net.initial_state(self.model_config.bs)
+                hidden = stepwise_state.hidden
+                eligibility = stepwise_state.eligibility
+                fast_weights = stepwise_state.fast_weights
                 stepwise_outputs = None
                 for inputs in input_sequence.unbind(0):
                     stepwise_outputs = stepwise_net(
@@ -157,11 +156,12 @@ class MetaTrainingTests(unittest.TestCase):
                 assert stepwise_outputs is not None
                 stepwise_outputs = (*stepwise_outputs[:5], fast_weights)
 
+                sequence_state = sequence_net.initial_state(self.model_config.bs)
                 sequence_outputs = RecurrentSequence(sequence_net)(
                     input_sequence,
-                    sequence_net.initialZeroState(self.model_config.bs),
-                    sequence_net.initialZeroET(self.model_config.bs),
-                    sequence_net.initialZeroPlasticWeights(self.model_config.bs),
+                    sequence_state.hidden,
+                    sequence_state.eligibility,
+                    sequence_state.fast_weights,
                     update_fast_weights,
                 )
                 for observed, expected in zip(

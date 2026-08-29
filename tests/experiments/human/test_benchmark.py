@@ -6,7 +6,7 @@ from fsrl.experiments.human.benchmark import (
     DEFAULT_REPLICATION_PATH,
     build_human_benchmark,
 )
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 class HumanBenchmarkTests(unittest.TestCase):

@@ -1,15 +1,9 @@
 import ast
 import unittest
-from pathlib import Path
 
 from fsrl.paths import REPO_ROOT
 
 ACTIVE_SOURCE_ROOT = REPO_ROOT / "fsrl"
-COMPATIBILITY_FILES = {
-    Path("fsrl/core/plastic_rnn.py"),
-    Path("fsrl/tasks/meta_tasks.py"),
-    Path("fsrl/tasks/registered_protocol.py"),
-}
 
 
 class CompatibilityBoundaryTests(unittest.TestCase):
@@ -28,7 +22,13 @@ class CompatibilityBoundaryTests(unittest.TestCase):
         self.assertNotIn("convert_legacy_checkpoint", public_api)
         self.assertNotIn(".dat", maintained_reproduction)
 
-    def test_active_code_does_not_call_legacy_model_or_task_interfaces(self):
+    def test_legacy_model_and_task_adapters_are_absent(self):
+        for relative in (
+            "fsrl/tasks/meta_tasks.py",
+            "fsrl/tasks/registered_protocol.py",
+        ):
+            self.assertFalse((REPO_ROOT / relative).exists())
+
         violations = []
         legacy_tokens = (
             "initialZeroState",
@@ -46,7 +46,7 @@ class CompatibilityBoundaryTests(unittest.TestCase):
         for root in roots:
             for source in root.rglob("*.py"):
                 relative = source.relative_to(REPO_ROOT)
-                if relative in COMPATIBILITY_FILES or "upstream" in source.parts:
+                if "upstream" in source.parts:
                     continue
                 text = source.read_text(encoding="utf-8")
                 for token in legacy_tokens:

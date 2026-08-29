@@ -9,8 +9,7 @@ from pathlib import Path
 import numpy as np
 
 from fsrl.analysis.behavioral import kendall_tau_positions
-from fsrl.analysis.statistics import json_values, summarize_subjects
-from fsrl.experiments.transport.topology import bootstrap_counts
+from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
     canonical_file_registration,

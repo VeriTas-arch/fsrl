@@ -4,7 +4,7 @@ from importlib import import_module
 import numpy as np
 
 from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
-from fsrl.tasks.registered_protocol import RankingProtocol
+from fsrl.tasks.protocol import RankingProtocol
 
 _PROVENANCE = import_module("fsrl.experiments.global_policy.amplitude_provenance")
 amplitude_ledger = _PROVENANCE.amplitude_ledger

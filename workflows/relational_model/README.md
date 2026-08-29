@@ -43,7 +43,7 @@ Implementation:
 Tests:
 
 - [`tests/tasks/test_protocol.py`](../../tests/tasks/test_protocol.py)
-- [`tests/tasks/test_meta_tasks.py`](../../tests/tasks/test_meta_tasks.py)
+- [`tests/tasks/test_sparse_ranking.py`](../../tests/tasks/test_sparse_ranking.py)
 
 Exact evidence:
 
@@ -51,7 +51,7 @@ Exact evidence:
 
 Verification:
 
-- `task_contract_tests` (`cpu`): `direnv exec . python -m unittest tests.tasks.test_protocol tests.tasks.test_meta_tasks`
+- `task_contract_tests` (`cpu`): `direnv exec . python -m unittest tests.tasks.test_protocol tests.tasks.test_sparse_ranking`
 
 ## 2. Global fast-weight backbone
 

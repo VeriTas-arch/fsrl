@@ -11,17 +11,17 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
 )
+from fsrl.evaluation.support_trace import trace_support_trial
 from fsrl.experiments.assembly.write_localization import (
     exact_support_innovations,
     matrix_norm,
     norm_match,
     readout_effective_margin_fields,
-    trace_support_trial,
     validate_registered_sources,
 )
 from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 class SupportWriteLocalizationTests(unittest.TestCase):

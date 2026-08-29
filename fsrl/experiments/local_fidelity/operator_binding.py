@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.geometry import unit_rows
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
@@ -26,20 +27,6 @@ ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/state_query_operator_binding_v1.json"
 )
-
-
-def _unit_rows(values: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray]:
-    rows = np.asarray(values, dtype=np.float64)
-    norms = np.linalg.norm(rows, axis=1)
-    return (
-        np.divide(
-            rows,
-            norms[:, None],
-            out=np.zeros_like(rows),
-            where=norms[:, None] > tolerance,
-        ),
-        norms,
-    )
 
 
 def _masked_mean(
@@ -102,7 +89,7 @@ def contextual_identity_metrics(
                 prototypes[identity] = prototype / norm
 
             for identity in range(identities):
-                rows, norms = _unit_rows(
+                rows, norms = unit_rows(
                     flat[identity, test_subjects, test_context], tolerance
                 )
                 row_valid = valid[identity, test_subjects, test_context] & (

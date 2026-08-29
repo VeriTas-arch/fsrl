@@ -209,6 +209,28 @@ def validate_artifacts(
     return {"passed": True, "checks": checks, "lock": lock}
 
 
+def validate_registered_confirmation_artifacts(
+    specification: dict,
+    output_root: Path = DEFAULT_OUTPUT_ROOT,
+) -> dict:
+    """Resolve and validate the confirmation artifacts named by a downstream spec."""
+
+    sources = specification["registered_sources"]
+    confirmation_path = resolve_registered_path(
+        sources["v2_4_confirmation_specification"]["path"]
+    )
+    confirmation = load_json(confirmation_path)
+    return validate_artifacts(
+        confirmation,
+        confirmation_path,
+        resolve_registered_path(
+            sources["v2_4_confirmation_implementation_lock"]["path"]
+        ),
+        resolve_registered_path(sources["v2_4_confirmation_artifact_lock"]["path"]),
+        output_root,
+    )
+
+
 def _v2_3_reference_seed(
     specification: dict,
     output_root: Path,

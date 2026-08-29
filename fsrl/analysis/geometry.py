@@ -74,6 +74,22 @@ def representation_rdm(representations: np.ndarray) -> np.ndarray:
     return np.sqrt(np.sum(differences**2, axis=-1))
 
 
+def unit_rows(values: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray]:
+    """Normalize matrix rows, leaving sub-tolerance rows at zero."""
+
+    rows = np.asarray(values, dtype=np.float64)
+    norms = np.linalg.norm(rows, axis=1)
+    return (
+        np.divide(
+            rows,
+            norms[:, None],
+            out=np.zeros_like(rows),
+            where=norms[:, None] > tolerance,
+        ),
+        norms,
+    )
+
+
 def rank_positions(order_high_to_low: list[int] | tuple[int, ...]) -> np.ndarray:
     positions = np.empty(len(order_high_to_low), dtype=np.int64)
     for position, item in enumerate(order_high_to_low):

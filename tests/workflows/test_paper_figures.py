@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 
+from fsrl.analysis.geometry import rank_positions
 from fsrl.workflows import (
     paper_figure_contract,
     paper_figure_data,
@@ -17,7 +18,6 @@ from fsrl.workflows.paper_figures import (
     file_sha256,
     load_datasets,
     load_json,
-    ranking_positions,
     select_exemplar,
     validate_specification,
 )
@@ -74,7 +74,7 @@ class PaperFigureAlignmentTests(unittest.TestCase):
             self.assertEqual(dataset.pair_accuracy.shape, (77, 28))
             self.assertTrue(np.all(np.isfinite(dataset.pair_accuracy)))
 
-        true_positions = ranking_positions(list(protocol.true_order_high_to_low))
+        true_positions = rank_positions(list(protocol.true_order_high_to_low))
         displayed_ids = []
         for dataset in datasets.values():
             index = select_exemplar(dataset, true_positions)

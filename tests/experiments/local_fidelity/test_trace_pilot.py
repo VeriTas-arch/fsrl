@@ -18,7 +18,7 @@ from fsrl.experiments.local_fidelity.trace_pilot import (
     shuffled_pair_indices,
 )
 from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 class ConjunctiveLocalTracePilotTests(unittest.TestCase):
@@ -26,7 +26,7 @@ class ConjunctiveLocalTracePilotTests(unittest.TestCase):
         torch.manual_seed(107)
         self.config = TrainConfig(bs=3, hs=8, cs=8, nbcues_min=8, nbcues_max=8)
         self.net = RetroModulRNN(self.config.to_model_dict())
-        self.protocol = load_ranking_protocol()
+        self.protocol = load_registered_protocol("liu_v1")
         self.evaluator = FrozenFastWeightEvaluator(
             self.net,
             self.config,

@@ -27,14 +27,11 @@ class RetroModulRNN(nn.Module):
         super().__init__()
         if isinstance(config, RetroModelConfig):
             model_config = config
-            legacy_config = config.to_legacy_mapping()
         else:
             model_config = RetroModelConfig.from_legacy_mapping(config)
-            legacy_config = dict(config)
 
         nbda = 2
         self.model_config = model_config
-        self.GG = legacy_config
         self.execution_device = torch.device(device or default_device())
         self.activ = torch.tanh
         self.i2h = torch.nn.Linear(
@@ -128,18 +125,3 @@ class RetroModulRNN(nn.Module):
             eligibility=self.initial_eligibility(batch_size),
             fast_weights=self.initial_fast_weights(batch_size),
         )
-
-    def initialZeroET(self, batch_size):
-        """Compatibility adapter for the historical camelCase method."""
-
-        return self.initial_eligibility(batch_size)
-
-    def initialZeroPlasticWeights(self, batch_size):
-        """Compatibility adapter for the historical camelCase method."""
-
-        return self.initial_fast_weights(batch_size)
-
-    def initialZeroState(self, batch_size):
-        """Compatibility adapter for the historical camelCase method."""
-
-        return self.initial_hidden(batch_size)

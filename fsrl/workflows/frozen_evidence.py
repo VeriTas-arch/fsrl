@@ -18,6 +18,7 @@ import textwrap
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from fsrl.infra.file_contracts import safe_relative_path
 from fsrl.infra.git_provenance import git_blob_sha256, verify_git_registrations
 from fsrl.infra.provenance import file_sha256, load_json
 from fsrl.infra.semantic_contract import evaluate_assertions, json_pointer
@@ -75,9 +76,12 @@ def canonical_manifest_payload_sha256(manifest: dict) -> str:
 
 
 def _safe_repo_path(value: str) -> Path:
-    pure = PurePosixPath(value)
-    if pure.is_absolute() or not pure.parts or ".." in pure.parts:
-        raise RuntimeError(f"mainline path must be repository-relative: {value}")
+    try:
+        pure = safe_relative_path(value)
+    except ValueError as error:
+        raise RuntimeError(
+            f"mainline path must be repository-relative: {value}"
+        ) from error
     return resolve_record(Path(*pure.parts))
 
 

@@ -35,6 +35,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_training_provenance,
     retained_relation_mask,
 )
+from fsrl.evaluation.metrics import count_circular_triads
 from fsrl.evaluation.qualification import evaluate_qualification
 from fsrl.experiments.assembly.trajectory import exact_prefix_trajectory
 from fsrl.experiments.local_fidelity.amplitude_path import collect_amplitude_fields
@@ -587,12 +588,7 @@ def _condition_metrics(protocol, bundle: dict, fast_weights, intervention: str):
                 ]
             )
             winners[pair] = pair[0] if 0.5 * (forward - reverse) > 0.0 else pair[1]
-        cycles = 0
-        for a, b, c in combinations(range(protocol.n_items), 3):
-            ab, ac, bc = winners[(a, b)], winners[(a, c)], winners[(b, c)]
-            cycles += int(
-                (ab == a and bc == b and ac == c) or (ab == b and bc == c and ac == a)
-            )
+        cycles = count_circular_triads(winners, protocol.n_items)
         overall_rows.append(np.mean(correct))
         learned_rows.append(np.mean(correct_learned))
         nonlearned_rows.append(np.mean(correct_nonlearned))

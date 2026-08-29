@@ -12,7 +12,6 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.transport.item_count import (
     DEFAULT_SPECIFICATION_PATH,
-    analyze_size_generic_sampled_query_policy,
     cross_cell_decision,
     individualized_metrics_generic,
     protocol_for_size,
@@ -21,7 +20,7 @@ from fsrl.experiments.transport.item_count import (
 )
 from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 def _cell(*, interpretable=True, competence=True, all_pass=True):
@@ -128,7 +127,7 @@ class ItemCountTransportTests(unittest.TestCase):
         n6_weights = n6.advance_support_trial(n6_weights, 0)
         self.assertEqual(n6_weights.shape, (config.bs, config.hs, config.hs))
 
-    def test_size_generic_behavior_is_exact_at_n8_and_runs_at_n6(self):
+    def test_behavior_estimator_runs_at_registered_sizes(self):
         rng = np.random.default_rng(23)
         for graph in self.specification["size_matched_graph_contract"]["graphs"][:2]:
             protocol = protocol_for_size(self.base, graph)
@@ -141,16 +140,11 @@ class ItemCountTransportTests(unittest.TestCase):
                 }
                 for _ in range(3)
             )
-            generic = analyze_size_generic_sampled_query_policy(
+            behavior = analyze_sampled_query_policy(
                 protocol, logits, seed=29, temperature=0.25
             )
-            self.assertEqual(len(generic["subjects"]), 3)
-            self.assertEqual(len(generic["pairs"]), protocol.query_trials // 10)
-            if protocol.n_items == 8:
-                frozen = analyze_sampled_query_policy(
-                    protocol, logits, seed=29, temperature=0.25
-                )
-                self.assertEqual(generic, frozen)
+            self.assertEqual(len(behavior["subjects"]), 3)
+            self.assertEqual(len(behavior["pairs"]), protocol.query_trials // 10)
 
     def test_size_normalized_stable_error_density(self):
         behavior = {

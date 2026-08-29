@@ -10,6 +10,7 @@ import numpy as np
 import torch
 from scipy import stats
 
+from fsrl.analysis.geometry import unit_rows
 from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geometry
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.evaluation.fields import ordered_query_schedule
@@ -18,7 +19,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     retained_relation_mask,
 )
 from fsrl.evaluation.registered import load_registered_frozen_evaluator
-from fsrl.experiments.assembly.write_localization import trace_support_trial
+from fsrl.evaluation.support_trace import trace_support_trial
 from fsrl.experiments.local_fidelity.hidden_residual import (
     validate_registered_sources,
     vector_hodge_components,
@@ -34,20 +35,6 @@ ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/relation_trace_localization_v1_1.json"
 )
-
-
-def _unit_rows(values: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray]:
-    rows = np.asarray(values, dtype=np.float64)
-    norms = np.linalg.norm(rows, axis=1)
-    return (
-        np.divide(
-            rows,
-            norms[:, None],
-            out=np.zeros_like(rows),
-            where=norms[:, None] > tolerance,
-        ),
-        norms,
-    )
 
 
 def prototype_identity_metrics(
@@ -76,7 +63,7 @@ def prototype_identity_metrics(
             prototypes[fold, relation] = prototype / norm
         test_subjects = np.flatnonzero(subject_fold == fold)
         for relation in range(relations):
-            rows, norms = _unit_rows(flat[relation, test_subjects], tolerance)
+            rows, norms = unit_rows(flat[relation, test_subjects], tolerance)
             valid = norms > tolerance
             relation_similarities = rows @ prototypes[fold].T
             relation_similarities[~valid] = np.nan

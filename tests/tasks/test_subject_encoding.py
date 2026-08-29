@@ -2,7 +2,8 @@ import unittest
 
 import numpy as np
 
-from fsrl.tasks.meta_tasks import GenericRankingTaskGenerator
+from fsrl.tasks.holdouts import registered_holdout_signatures
+from fsrl.tasks.sparse_ranking import GenericRankingTaskGenerator
 from fsrl.tasks.subject_encoding import (
     SubjectEncodingConfig,
     sample_subject_encoding_states,
@@ -27,9 +28,9 @@ class SubjectEncodingTests(unittest.TestCase):
         self.assertFalse(hasattr(state, "subjective_order"))
 
     def test_one_relation_keeps_one_reliability_across_support_blocks(self):
-        episode = GenericRankingTaskGenerator(cue_size=8).sample(
-            np.random.default_rng(63), n_edges=8
-        )
+        episode = GenericRankingTaskGenerator(
+            cue_size=8, excluded_signatures=registered_holdout_signatures()
+        ).sample(np.random.default_rng(63), n_edges=8)
         by_relation = {}
         for trial in episode.support_trials:
             relation = (trial.higher_item, trial.lower_item)

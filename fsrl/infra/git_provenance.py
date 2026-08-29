@@ -8,15 +8,19 @@ import subprocess
 from collections.abc import Mapping
 from pathlib import Path, PurePosixPath
 
+from fsrl.infra.file_contracts import safe_relative_path
+
 _FULL_COMMIT = re.compile(r"[0-9a-f]{40}")
 _SHA256 = re.compile(r"[0-9a-f]{64}")
 
 
 def _registered_path(value: str) -> PurePosixPath:
-    path = PurePosixPath(value)
-    if path.is_absolute() or not path.parts or ".." in path.parts:
-        raise RuntimeError(f"registered Git path must be repository-relative: {value}")
-    return path
+    try:
+        return safe_relative_path(value)
+    except ValueError as error:
+        raise RuntimeError(
+            f"registered Git path must be repository-relative: {value}"
+        ) from error
 
 
 def git_blob_sha256(root: Path, commit: str, path: str) -> str:

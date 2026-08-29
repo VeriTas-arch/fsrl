@@ -3,18 +3,17 @@ from itertools import combinations
 
 import numpy as np
 
+from fsrl.evaluation.local_ledger import reconstruct_local_ledger
 from fsrl.experiments.transport.topology import (
     DEFAULT_SPECIFICATION_PATH,
     cross_cell_decision,
     enumerate_registered_graphs,
-    graph_descriptor,
-    protocol_for_graph,
-    reconstruct_local_ledger,
     validate_graph_contract,
 )
 from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import SupportTrial, load_ranking_protocol
+from fsrl.tasks.protocol import SupportTrial, load_ranking_protocol
+from fsrl.tasks.transport_graph import graph_descriptor, protocol_for_graph
 
 
 def _cell(*, interpretable=True, competence=True, all_pass=True):

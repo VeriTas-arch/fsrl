@@ -2,23 +2,27 @@ import unittest
 
 import numpy as np
 
-from fsrl.tasks.meta_tasks import (
+from fsrl.tasks.holdouts import (
+    graph_signature_for_protocol,
+    registered_holdout_signatures,
+)
+from fsrl.tasks.sparse_ranking import (
     GenericRankingTaskGenerator,
     graph_is_connected,
-    held_out_liu_graph_signatures,
-    liu_graph_signature,
 )
 
 
 class GenericRankingTaskTests(unittest.TestCase):
     def setUp(self):
-        self.generator = GenericRankingTaskGenerator(cue_size=8)
+        self.generator = GenericRankingTaskGenerator(
+            cue_size=8, excluded_signatures=registered_holdout_signatures()
+        )
 
     def test_samples_connected_sparse_graphs_and_holds_out_liu(self):
         rng = np.random.default_rng(31)
-        held_out = held_out_liu_graph_signatures()
+        held_out = registered_holdout_signatures()
         self.assertEqual(len(held_out), 2)
-        self.assertIn(liu_graph_signature(), held_out)
+        self.assertIn(graph_signature_for_protocol("liu_v1"), held_out)
         observed_sizes = set()
         for _ in range(100):
             episode = self.generator.sample(rng)

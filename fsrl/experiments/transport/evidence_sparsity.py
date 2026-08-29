@@ -14,7 +14,16 @@ import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
 from fsrl.analysis.policy import bundle_logits, margin_fields
+from fsrl.analysis.relational_transport import (
+    condition_metrics,
+    constructive_metrics,
+    finite_primary,
+    individualized_metrics,
+    relation_loo_metrics,
+    serial_position_endpoint,
+)
 from fsrl.analysis.statistics import (
+    bootstrap_counts,
     finite_column_mean,
     json_values,
     stable_sigmoid,
@@ -23,31 +32,19 @@ from fsrl.analysis.statistics import (
 )
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
-    FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
-from fsrl.evaluation.relational_query import readout_relational_query_bundle
-from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    build_access_trace,
-    build_fast_weight_loo,
+from fsrl.evaluation.local_access import (
     measure_presentation_invariance,
+    readout_dual_access_query_conditions,
 )
-from fsrl.experiments.transport.topology import (
-    bootstrap_counts,
-    condition_metrics,
-    constructive_metrics,
-    finite_primary,
-    graph_descriptor,
-    individualized_metrics,
-    protocol_for_graph,
+from fsrl.evaluation.local_ledger import (
     reconstruct_local_ledger,
-    relation_loo_metrics,
-    serial_position_endpoint,
     support_schedule_hash,
 )
-from fsrl.experiments.transport.topology import (
+from fsrl.experiments.transport.topology_decision import (
     within_cell_decision as topology_within_cell_decision,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
@@ -67,6 +64,7 @@ from fsrl.tasks.protocol import (
     load_ranking_protocol,
     ordered_pairs,
 )
+from fsrl.tasks.transport_graph import graph_descriptor, protocol_for_graph
 
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/liu_evidence_sparsity_transport_v1.json"
@@ -586,81 +584,26 @@ def evaluate_prepared_cell(
         ordered_pairs(protocol.n_items) for _ in range(evaluator.config.bs)
     )
     before = tensor_hashes(evaluator.net)
-    intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
-    intact_trace = build_access_trace(evaluator, local, dual_access=True)
-    loo_traces = [
-        build_access_trace(
-            evaluator, local, dual_access=True, zero_relations=frozenset((relation,))
-        )
-        for relation in relations
-    ]
-    intact_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        query_schedules,
-        local_off=False,
-        global_off=False,
-        shuffled_indices=None,
-    )
-    a_off_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        query_schedules,
-        local_off=True,
-        global_off=False,
-        shuffled_indices=None,
-    )
-    p_off_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        query_schedules,
-        local_off=False,
-        global_off=True,
-        shuffled_indices=None,
-    )
-    loo_global_bundles = [
-        readout_relational_query_bundle(
-            evaluator,
-            local,
-            loo_fast_weights[index],
-            loo_traces[index].state,
-            query_schedules,
-            local_off=True,
-            global_off=False,
-            shuffled_indices=None,
-        )
-        for index in range(len(relations))
-    ]
-    loo_local_bundles = [
-        readout_relational_query_bundle(
-            evaluator,
-            local,
-            intact_fast_weights,
-            loo_traces[index].state,
-            query_schedules,
-            local_off=False,
-            global_off=True,
-            shuffled_indices=None,
-        )
-        for index in range(len(relations))
-    ]
+    readout = readout_dual_access_query_conditions(evaluator, local, query_schedules)
+    intact_trace = readout["intact_trace"]
+    condition_bundles = readout["condition_bundles"]
+    intact_bundle = condition_bundles["intact"]
+    a_off_bundle = condition_bundles["a_off"]
     fields = {
-        "intact": margin_fields(intact_bundle, protocol.n_items),
-        "a_off": margin_fields(a_off_bundle, protocol.n_items),
-        "P_off_a_on": margin_fields(p_off_bundle, protocol.n_items),
+        name: margin_fields(bundle, protocol.n_items)
+        for name, bundle in condition_bundles.items()
     }
     loo_global_fields = np.asarray(
-        [margin_fields(bundle, protocol.n_items) for bundle in loo_global_bundles]
+        [
+            margin_fields(bundle, protocol.n_items)
+            for bundle in readout["global_loo_bundles"]
+        ]
     )
     loo_local_fields = np.asarray(
-        [margin_fields(bundle, protocol.n_items) for bundle in loo_local_bundles]
+        [
+            margin_fields(bundle, protocol.n_items)
+            for bundle in readout["local_loo_bundles"]
+        ]
     )
     conditions = {
         name: condition_metrics(

@@ -11,6 +11,7 @@ from typing import cast
 
 import numpy as np
 
+from fsrl.analysis.statistics import bootstrap_mean_interval, correlation_or_zero
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
@@ -259,7 +260,7 @@ def evaluate_fold(
         "frozen_v2_mse": float(v2_metrics["one_step"]["candidate_mse"]),
         "candidate_nrmse": candidate_mse / transition_energy,
         "candidate_to_accumulator_ratio": candidate_mse / null_mse,
-        "candidate_minus_accumulator_episode_bootstrap": v1._bootstrap_interval(
+        "candidate_minus_accumulator_episode_bootstrap": bootstrap_mean_interval(
             differences, samples, seed
         ),
     }
@@ -273,7 +274,7 @@ def evaluate_fold(
     }
     remote_denominator = float(np.mean(np.abs(full_remote)))
     remote = {
-        "all_pair_influence_correlation": v1._correlation(
+        "all_pair_influence_correlation": correlation_or_zero(
             full_influences, candidate_influences
         ),
         "remote_magnitude_ratio": float(

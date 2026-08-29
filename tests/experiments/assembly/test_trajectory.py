@@ -18,7 +18,7 @@ from fsrl.experiments.assembly.trajectory import (
 )
 from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import RankingProtocol, load_ranking_protocol
+from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 
 class AssemblyTrajectoryTests(unittest.TestCase):

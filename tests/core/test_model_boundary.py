@@ -26,11 +26,9 @@ class ModelBoundaryTests(unittest.TestCase):
         net = RetroModulRNN(config, device="cpu")
         state = net.initial_state(3)
         self.assertIsInstance(state, PlasticRNNState)
-        self.assertTrue(torch.equal(state.hidden, net.initialZeroState(3)))
-        self.assertTrue(torch.equal(state.eligibility, net.initialZeroET(3)))
-        self.assertTrue(
-            torch.equal(state.fast_weights, net.initialZeroPlasticWeights(3))
-        )
+        self.assertTrue(torch.equal(state.hidden, net.initial_hidden(3)))
+        self.assertTrue(torch.equal(state.eligibility, net.initial_eligibility(3)))
+        self.assertTrue(torch.equal(state.fast_weights, net.initial_fast_weights(3)))
 
     def test_typed_config_rejects_invalid_dimensions(self):
         with self.assertRaisesRegex(ValueError, "hidden_size"):

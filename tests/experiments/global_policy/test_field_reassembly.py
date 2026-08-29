@@ -14,7 +14,7 @@ from fsrl.experiments.global_policy.field_reassembly import (
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 class GlobalPolicyFieldReassemblyTests(unittest.TestCase):

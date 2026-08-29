@@ -13,14 +13,15 @@ import numpy as np
 import torch
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.statistics import bootstrap_mean_interval, correlation_or_zero
 from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
 )
+from fsrl.evaluation.local_access import access_factor
 from fsrl.experiments.confirmation.reproduction_map import model_record
-from fsrl.experiments.local_fidelity.evidence_access_pilot import access_factor
 from fsrl.experiments.local_fidelity.trace_pilot import behavior_summaries
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
@@ -500,29 +501,6 @@ def rollout(
     return np.asarray(values)
 
 
-def _bootstrap_interval(values: np.ndarray, samples: int, seed: int) -> dict:
-    values = np.asarray(values, dtype=np.float64)
-    rng = np.random.default_rng(seed)
-    counts = rng.multinomial(
-        len(values), np.full(len(values), 1.0 / len(values)), size=samples
-    )
-    draws = counts @ values / len(values)
-    lower, upper = np.quantile(draws, [0.025, 0.975])
-    return {
-        "point": float(np.mean(values)),
-        "lower": float(lower),
-        "upper": float(upper),
-    }
-
-
-def _correlation(first: np.ndarray, second: np.ndarray) -> float:
-    left = np.asarray(first, dtype=np.float64).reshape(-1)
-    right = np.asarray(second, dtype=np.float64).reshape(-1)
-    if np.std(left) <= 1e-12 or np.std(right) <= 1e-12:
-        return 0.0
-    return float(np.corrcoef(left, right)[0, 1])
-
-
 def evaluate_development_fold(
     records: list[EpisodeTrajectory],
     accumulator: ReducedParameters,
@@ -648,7 +626,7 @@ def evaluate_development_fold(
             "unconstrained_bilinear_mse": float(np.mean(unconstrained_error)),
             "candidate_nrmse": candidate_mse / energy,
             "candidate_to_accumulator_ratio": candidate_mse / null_mse,
-            "candidate_minus_accumulator_episode_bootstrap": _bootstrap_interval(
+            "candidate_minus_accumulator_episode_bootstrap": bootstrap_mean_interval(
                 episode_differences, bootstrap_samples, bootstrap_seed
             ),
         },
@@ -664,7 +642,7 @@ def evaluate_development_fold(
             ),
         },
         "remote_reassembly": {
-            "all_pair_influence_correlation": _correlation(
+            "all_pair_influence_correlation": correlation_or_zero(
                 full_influences, candidate_influences
             ),
             "remote_magnitude_ratio": float(
@@ -1069,7 +1047,7 @@ def evaluate_preservation_seed(
                 / np.sum(full_field**2, axis=1)
             )
         ),
-        "reduced_to_full_terminal_potential_correlation": _correlation(
+        "reduced_to_full_terminal_potential_correlation": correlation_or_zero(
             potential, hodge_potential(full_field, geometry)
         ),
         "local_exact_max_abs_error": local_error,

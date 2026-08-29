@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 
 from fsrl.infra.provenance import write_json_exclusive
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 def _sha256(value: bytes) -> str:
@@ -19,7 +19,7 @@ def _sha256(value: bytes) -> str:
 
 
 def build_snapshot() -> dict[str, object]:
-    protocol = load_ranking_protocol()
+    protocol = load_registered_protocol("liu_v1")
     payload = {
         "protocol": asdict(protocol),
         "support_schedule": [

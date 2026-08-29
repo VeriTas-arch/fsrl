@@ -6,9 +6,11 @@ import json
 import re
 import shlex
 import tomllib
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from typing import Any
 
+from fsrl.infra.file_contracts import safe_relative_path
+from fsrl.infra.semantic_contract import json_pointer
 from fsrl.infra.study_registry import (
     load_registry,
     load_studies,
@@ -41,27 +43,13 @@ def load_workflow(path: Path | str) -> dict[str, Any]:
 
 
 def _safe_repo_path(value: str) -> Path:
-    pure = PurePosixPath(value)
-    if pure.is_absolute() or not pure.parts or ".." in pure.parts:
-        raise ValueError(f"workflow path must be repository-relative: {value!r}")
+    try:
+        pure = safe_relative_path(value)
+    except ValueError as error:
+        raise ValueError(
+            f"workflow path must be repository-relative: {value!r}"
+        ) from error
     return ROOT.joinpath(*pure.parts)
-
-
-def _json_pointer(document: Any, pointer: str) -> Any:
-    if pointer == "":
-        return document
-    if not pointer.startswith("/"):
-        raise ValueError(f"JSON pointer must start with '/': {pointer!r}")
-    value = document
-    for raw in pointer[1:].split("/"):
-        token = raw.replace("~1", "/").replace("~0", "~")
-        if isinstance(value, list):
-            value = value[int(token)]
-        elif isinstance(value, dict):
-            value = value[token]
-        else:
-            raise TypeError(f"JSON pointer crosses a scalar: {pointer!r}")
-    return value
 
 
 def _study_record(
@@ -120,7 +108,7 @@ def _validate_evidence(
             if path.suffix != ".json":
                 raise ValueError(f"JSON pointer targets a non-JSON record: {path}")
             try:
-                _json_pointer(json.loads(path.read_text(encoding="utf-8")), pointer)
+                json_pointer(json.loads(path.read_text(encoding="utf-8")), pointer)
             except (IndexError, KeyError, TypeError, ValueError) as error:
                 raise ValueError(
                     f"workflow evidence pointer does not resolve: "

@@ -16,6 +16,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
 )
+from fsrl.evaluation.metrics import count_circular_triads, maximum_circular_triads
 from fsrl.infra.provenance import write_json_exclusive
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 from fsrl.tasks.protocol_catalog import protocol_path as registered_protocol_path
@@ -27,23 +28,6 @@ Pair = tuple[int, int]
 
 def _sigmoid(value: float) -> float:
     return float(1.0 / (1.0 + np.exp(-value)))
-
-
-def count_circular_triads(winners: dict[Pair, int], n_items: int) -> int:
-    cycles = 0
-    for first, second, third in combinations(range(n_items), 3):
-        wins = {first: 0, second: 0, third: 0}
-        for pair in ((first, second), (first, third), (second, third)):
-            wins[winners[pair]] += 1
-        if set(wins.values()) == {1}:
-            cycles += 1
-    return cycles
-
-
-def maximum_circular_triads(n_items: int) -> int:
-    if n_items % 2:
-        return (n_items**3 - n_items) // 24
-    return (n_items**3 - 4 * n_items) // 24
 
 
 def hodge_rank_positions(preference: np.ndarray) -> np.ndarray:
@@ -132,7 +116,7 @@ def analyze_sampled_query_policy(
     seed: int,
     temperature: float = 1.0,
 ) -> dict:
-    """Sample the registered 280-query protocol from fixed conditional logits."""
+    """Sample a ranking protocol from fixed conditional logits."""
 
     if temperature <= 0.0:
         raise ValueError("temperature must be positive")
@@ -293,12 +277,13 @@ def analyze_sampled_query_policy(
             }
         )
 
+    distances = np.arange(1, protocol.n_items)
     slopes = []
     for subject in subjects:
         values = np.asarray(
-            [subject["distance_accuracy"][str(distance)] for distance in range(1, 8)]
+            [subject["distance_accuracy"][str(distance)] for distance in distances]
         )
-        slopes.append(float(np.polyfit(np.arange(1, 8), values, 1)[0]))
+        slopes.append(float(np.polyfit(distances, values, 1)[0]))
     slope_values = np.asarray(slopes)
     slope_test = (
         stats.ttest_1samp(slope_values, 0.0)

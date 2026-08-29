@@ -23,7 +23,7 @@ finding = "The maintained task adapter preserves the experimental information bo
 boundary = "Any omission, attenuation, or broader local admission is a model hypothesis rather than a restatement of the task."
 depends_on = []
 implementation = ["fsrl/tasks/protocol.py", "fsrl/tasks/sparse_ranking.py", "fsrl/tasks/evidence.py", "fsrl/core/inputs.py"]
-tests = ["tests/tasks/test_protocol.py", "tests/tasks/test_meta_tasks.py"]
+tests = ["tests/tasks/test_protocol.py", "tests/tasks/test_sparse_ranking.py"]
 studies = ["task_fidelity"]
 
 [[stages.evidence]]
@@ -35,7 +35,7 @@ description = "Frozen task interface and information boundary used by the mainta
 [[stages.verification]]
 id = "task_contract_tests"
 resource = "cpu"
-argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.tasks.test_protocol", "tests.tasks.test_meta_tasks"]
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.tasks.test_protocol", "tests.tasks.test_sparse_ranking"]
 
 [[stages]]
 id = "global_backbone"

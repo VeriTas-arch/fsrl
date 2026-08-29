@@ -8,13 +8,13 @@ from fsrl.analysis.posterior import (
     RelationEvidence,
     evidence_from_protocol,
 )
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 class ExactRankingPosteriorTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.protocol = load_ranking_protocol()
+        cls.protocol = load_registered_protocol("liu_v1")
         cls.model = ExactRankingPosterior(8, temperature=0.02)
         cls.evidence = evidence_from_protocol(cls.protocol)
 

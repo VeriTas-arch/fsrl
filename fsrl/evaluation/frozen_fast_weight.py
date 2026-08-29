@@ -265,6 +265,7 @@ class FrozenFastWeightEvaluator:
         if self.backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
             assert self.sequence_runner is not None
             batch_size = self.config.bs
+            recurrent = self.net.initial_state(batch_size)
             blank_sequence = torch.zeros(
                 2,
                 batch_size,
@@ -277,16 +278,17 @@ class FrozenFastWeightEvaluator:
             ):
                 outputs = self.sequence_runner(
                     blank_sequence,
-                    self.net.initial_hidden(batch_size),
-                    self.net.initial_eligibility(batch_size),
-                    self.net.initial_fast_weights(batch_size),
+                    recurrent.hidden,
+                    recurrent.eligibility,
+                    recurrent.fast_weights,
                     intervention != FastWeightIntervention.WRITE_OFF,
                 )
             return outputs[-1].detach().clone()
 
-        hidden = self.net.initial_hidden(self.config.bs)
-        eligibility = self.net.initial_eligibility(self.config.bs)
-        fast_weights = self.net.initial_fast_weights(self.config.bs)
+        recurrent = self.net.initial_state(self.config.bs)
+        hidden = recurrent.hidden
+        eligibility = recurrent.eligibility
+        fast_weights = recurrent.fast_weights
         blank = torch.zeros(self.config.bs, self.config.inputsize, device=self.device)
 
         with (

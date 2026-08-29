@@ -31,7 +31,7 @@ from fsrl.infra.git_provenance import verify_git_registrations
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 class GlobalPolicyAllocationAuditTests(unittest.TestCase):

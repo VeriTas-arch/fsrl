@@ -20,7 +20,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
-    validate_artifacts,
+    validate_registered_confirmation_artifacts,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
@@ -41,9 +41,6 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = resolve_record(
 )
 DEFAULT_RESULT_PATH = resolve_record(
     "results/global_policy_amplitude_provenance_v1.json"
-)
-CONFIRMATION_OUTPUT_ROOT = (
-    ROOT / "artifacts" / "runs" / "dual-evidence-access-confirmation-v2-4"
 )
 
 
@@ -342,23 +339,6 @@ def _source_validation(
     if not all(row["passed"] for row in checks):
         raise RuntimeError(f"amplitude-provenance source lock failed: {checks}")
     return {"passed": True, "checks": checks}
-
-
-def _artifact_validation(specification: dict) -> dict:
-    sources = specification["registered_sources"]
-    confirmation_path = resolve_registered_path(
-        sources["v2_4_confirmation_specification"]["path"]
-    )
-    confirmation = load_json(confirmation_path)
-    return validate_artifacts(
-        confirmation,
-        confirmation_path,
-        resolve_registered_path(
-            sources["v2_4_confirmation_implementation_lock"]["path"]
-        ),
-        resolve_registered_path(sources["v2_4_confirmation_artifact_lock"]["path"]),
-        CONFIRMATION_OUTPUT_ROOT,
-    )
 
 
 def _pack_trajectories(rows, pairs, step: int) -> np.ndarray:
@@ -1320,7 +1300,7 @@ def main(args=None) -> int:
     source_validation = _source_validation(
         specification, parsed.specification, implementation_lock
     )
-    artifact_validation = _artifact_validation(specification)
+    artifact_validation = validate_registered_confirmation_artifacts(specification)
     result = run_diagnostic(
         specification, source_validation, artifact_validation, runtime
     )

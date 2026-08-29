@@ -3,9 +3,8 @@ from types import SimpleNamespace
 
 import numpy as np
 
+from fsrl.evaluation.local_access import apply_blockwise_route
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    access_factor,
-    apply_blockwise_route,
     blockwise_derangements,
     cross_seed_decision,
     learned_probabilities,
@@ -20,16 +19,6 @@ class DualEvidenceAccessPilotTests(unittest.TestCase):
         cls.specification = load_json(
             resolve_record("benchmarks/dual_evidence_access_pilot_v2_4.json")
         )
-
-    def test_access_factor_preserves_retained_and_weakens_omitted(self):
-        admission = np.asarray([1.0, 0.0, 0.0])
-        reliability = np.asarray([0.2, 0.3, 0.8])
-        observed = access_factor(admission, reliability)
-        np.testing.assert_array_equal(observed, np.asarray([1.0, 0.3, 0.8]))
-
-    def test_access_factor_rejects_nonbinary_global_admission(self):
-        with self.assertRaisesRegex(ValueError, "binary"):
-            access_factor(np.asarray([0.5]), np.asarray([0.5]))
 
     def test_learned_probability_reuses_frozen_component_sum_estimand(self):
         evaluator = SimpleNamespace(

@@ -29,12 +29,12 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
 )
 from fsrl.evaluation.registered import load_registered_frozen_evaluator
+from fsrl.evaluation.support_trace import trace_support_trial
 from fsrl.experiments.assembly.write_localization import (
     matrix_norm,
     readout_effective_margin_fields,
     replay_without_relation_history,
     row_cosine,
-    trace_support_trial,
 )
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.runtime import default_device

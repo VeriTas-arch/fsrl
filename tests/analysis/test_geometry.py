@@ -12,12 +12,12 @@ from fsrl.analysis.geometry import (
     rdm_spearman,
     representation_rdm,
 )
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 class GeometryAnalysisTests(unittest.TestCase):
     def setUp(self):
-        self.protocol = load_ranking_protocol()
+        self.protocol = load_registered_protocol("liu_v1")
 
     def test_context_average_requires_both_pair_orientations(self):
         hidden = {}

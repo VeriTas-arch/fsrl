@@ -6,10 +6,10 @@ import torch
 from tqdm.auto import tqdm
 
 from fsrl.core import RetroModulRNN
-from fsrl.infra.logging import log
 from fsrl.infra.runtime import default_device
 
 from .episode import run_episode
+from .runtime_logging import log
 
 
 def set_seed(seed):

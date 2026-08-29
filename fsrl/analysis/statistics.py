@@ -51,6 +51,33 @@ def bootstrap_counts(
     ).astype(np.float64)
 
 
+def bootstrap_mean_interval(values: np.ndarray, samples: int, seed: int) -> dict:
+    """Return the point mean and fixed 95% participant-bootstrap interval."""
+
+    array = np.asarray(values, dtype=np.float64)
+    rng = np.random.default_rng(seed)
+    counts = rng.multinomial(
+        len(array), np.full(len(array), 1.0 / len(array)), size=samples
+    )
+    draws = counts @ array / len(array)
+    lower, upper = np.quantile(draws, [0.025, 0.975])
+    return {
+        "point": float(np.mean(array)),
+        "lower": float(lower),
+        "upper": float(upper),
+    }
+
+
+def correlation_or_zero(first: np.ndarray, second: np.ndarray) -> float:
+    """Return flattened Pearson correlation, or zero for a constant input."""
+
+    left = np.asarray(first, dtype=np.float64).reshape(-1)
+    right = np.asarray(second, dtype=np.float64).reshape(-1)
+    if np.std(left) <= 1e-12 or np.std(right) <= 1e-12:
+        return 0.0
+    return float(np.corrcoef(left, right)[0, 1])
+
+
 def bootstrap_samples(values: np.ndarray, counts: np.ndarray) -> np.ndarray:
     rows = np.asarray(values, dtype=np.float64)
     if rows.ndim != 1 or rows.shape[0] != counts.shape[1]:

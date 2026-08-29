@@ -19,7 +19,7 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.local_fidelity.trace_pilot import build_local_trace, query_bundle
 from fsrl.tasks.protocol import ordered_pairs
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 def _digest_bytes(value: bytes) -> str:
@@ -37,7 +37,7 @@ def build_snapshot() -> dict[str, Any]:
     torch.manual_seed(107)
     config = TrainConfig(bs=3, hs=8, cs=8, nbcues_min=8, nbcues_max=8)
     net = RetroModulRNN(config.to_model_dict(), device="cpu")
-    protocol = load_ranking_protocol()
+    protocol = load_registered_protocol("liu_v1")
     evaluator = FrozenFastWeightEvaluator(
         net,
         config,

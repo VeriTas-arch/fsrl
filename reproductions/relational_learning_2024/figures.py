@@ -15,9 +15,10 @@ from tqdm.auto import tqdm
 
 from fsrl.core import RetroModulRNN
 from fsrl.core.config import ADDINPUT, NUMRESPONSESTEP, TrainConfig
-from fsrl.infra.logging import log
 from fsrl.infra.runtime import default_device
 from fsrl.training.checkpoints import load_checkpoint_state
+
+from .runtime_logging import log
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 CAPSULE_ROOT = Path(__file__).resolve().parent

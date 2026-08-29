@@ -11,7 +11,7 @@ from fsrl.experiments.global_policy.slope_localization import (
 )
 from fsrl.infra.provenance import load_json
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
 
 
 class GlobalPolicySlopeLocalizationTests(unittest.TestCase):

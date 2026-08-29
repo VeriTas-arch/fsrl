@@ -12,6 +12,7 @@ from typing import Any, cast
 import numpy as np
 import torch
 
+from fsrl.analysis.statistics import bootstrap_mean_interval, correlation_or_zero
 from fsrl.evaluation.frozen_fast_weight import load_frozen_retro_checkpoint
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
@@ -429,29 +430,6 @@ def predict_updates(
     return predictions, target.astype(np.float64), episode_index
 
 
-def _bootstrap_interval(values: np.ndarray, samples: int, seed: int) -> dict:
-    values = np.asarray(values, dtype=np.float64)
-    rng = np.random.default_rng(seed)
-    counts = rng.multinomial(
-        len(values), np.full(len(values), 1.0 / len(values)), size=samples
-    )
-    draws = counts @ values / len(values)
-    lower, upper = np.quantile(draws, [0.025, 0.975])
-    return {
-        "point": float(np.mean(values)),
-        "lower": float(lower),
-        "upper": float(upper),
-    }
-
-
-def _correlation(first: np.ndarray, second: np.ndarray) -> float:
-    left = np.asarray(first, dtype=np.float64).reshape(-1)
-    right = np.asarray(second, dtype=np.float64).reshape(-1)
-    if np.std(left) <= 1e-12 or np.std(right) <= 1e-12:
-        return 0.0
-    return float(np.corrcoef(left, right)[0, 1])
-
-
 def _episode_errors(
     predictions: np.ndarray, target: np.ndarray, episode_index: np.ndarray
 ) -> np.ndarray:
@@ -520,7 +498,9 @@ def remote_metrics(
         all_values = np.asarray(candidate_all[name])
         remote_values = np.asarray(candidate_remote[name])
         result[name] = {
-            "all_pair_influence_correlation": _correlation(full_all_array, all_values),
+            "all_pair_influence_correlation": correlation_or_zero(
+                full_all_array, all_values
+            ),
             "remote_magnitude_ratio": float(
                 np.mean(np.abs(remote_values)) / denominator
             ),
@@ -558,7 +538,7 @@ def evaluate_backbone(
         "baseline_mse": e0,
         "full_P_mse": e_full,
         "full_P_to_baseline_ratio": e_full / e0,
-        "full_P_minus_baseline_episode_bootstrap": _bootstrap_interval(
+        "full_P_minus_baseline_episode_bootstrap": bootstrap_mean_interval(
             full_error - baseline_error, bootstrap_samples, bootstrap_seed
         ),
         "ranks": {},
@@ -580,7 +560,7 @@ def evaluate_backbone(
         error = episode_errors[name]
         value = float(np.mean(error))
         eta = float((e0 - value) / denominator) if denominator > 0.0 else None
-        interval = _bootstrap_interval(
+        interval = bootstrap_mean_interval(
             error - baseline_error, bootstrap_samples, bootstrap_seed + rank
         )
         rank_remote = remote[name]

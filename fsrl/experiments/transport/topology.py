@@ -4,30 +4,26 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
-import json
 from dataclasses import asdict
-from functools import lru_cache
 from itertools import combinations, product
 from pathlib import Path
-from typing import cast
 
 import numpy as np
 import torch
 
-from fsrl.analysis.behavioral import (
-    analyze_sampled_query_policy,
-    count_circular_triads,
-    kendall_tau_positions,
-)
-from fsrl.analysis.hodge import (
-    build_complete_graph_geometry,
-    gradient_energy_fraction,
-    hodge_potentials,
-    kendall_tau_scores,
-)
+from fsrl.analysis.behavioral import analyze_sampled_query_policy
+from fsrl.analysis.hodge import build_complete_graph_geometry
 from fsrl.analysis.policy import bundle_logits, margin_fields
+from fsrl.analysis.relational_transport import (
+    condition_metrics,
+    constructive_metrics,
+    finite_primary,
+    individualized_metrics,
+    relation_loo_metrics,
+    serial_position_endpoint,
+)
 from fsrl.analysis.statistics import (
+    bootstrap_counts,
     json_values,
     stable_sigmoid,
     summarize_difference,
@@ -35,23 +31,20 @@ from fsrl.analysis.statistics import (
 )
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.evaluation.frozen_fast_weight import (
-    FastWeightIntervention,
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
-from fsrl.evaluation.relational_query import readout_relational_query_bundle
-from fsrl.experiments.local_fidelity.evidence_access_pilot import (
-    build_access_trace,
-    build_fast_weight_loo,
+from fsrl.evaluation.local_access import (
     measure_presentation_invariance,
+    readout_dual_access_query_conditions,
+)
+from fsrl.evaluation.local_ledger import (
+    reconstruct_local_ledger,
+    support_schedule_hash,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
-from fsrl.infra.semantic_contract import (
-    evaluate_semantic_contract,
-    load_semantic_contract,
-)
 from fsrl.infra.study_registry import (
     canonical_file_registration,
     legacy_identifier,
@@ -61,7 +54,10 @@ from fsrl.infra.study_registry import (
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol, ordered_pairs
+from fsrl.tasks.protocol import load_ranking_protocol, ordered_pairs
+from fsrl.tasks.transport_graph import graph_descriptor, protocol_for_graph
+
+from .topology_decision import within_cell_decision
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
@@ -80,9 +76,6 @@ DEFAULT_ATTEMPT1_PATH = resolve_record(
     "results/liu_support_topology_transport_v1.attempt1.json"
 )
 DEFAULT_RESULT_PATH = resolve_record("results/liu_support_topology_transport_v1.json")
-DECISION_CONTRACT_PATH = (
-    Path(__file__).with_name("contracts") / "topology_within_cell_v1.json"
-)
 IMPLEMENTATION_SOURCES = {
     "runner": "fsrl/support_topology_transport.py",
     "tests": "tests/test_support_topology_transport.py",
@@ -166,65 +159,6 @@ def validate_sources(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"support-topology source or artifact lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
-
-
-def _graph_connected(edges: tuple[tuple[int, int], ...], n_items: int = 8) -> bool:
-    adjacency = [set() for _ in range(n_items)]
-    for first, second in edges:
-        adjacency[first].add(second)
-        adjacency[second].add(first)
-    visited = {0}
-    frontier = [0]
-    while frontier:
-        item = frontier.pop()
-        for neighbor in adjacency[item]:
-            if neighbor not in visited:
-                visited.add(neighbor)
-                frontier.append(neighbor)
-    return len(visited) == n_items
-
-
-def graph_descriptor(edges: tuple[tuple[int, int], ...], n_items: int = 8) -> dict:
-    edges = cast(
-        tuple[tuple[int, int], ...],
-        tuple(sorted(tuple(sorted(edge)) for edge in edges)),
-    )
-    adjacency = [set() for _ in range(n_items)]
-    for first, second in edges:
-        adjacency[first].add(second)
-        adjacency[second].add(first)
-    distances = []
-    for source in range(n_items):
-        shortest = {source: 0}
-        frontier = [source]
-        while frontier:
-            item = frontier.pop(0)
-            for neighbor in adjacency[item]:
-                if neighbor not in shortest:
-                    shortest[neighbor] = shortest[item] + 1
-                    frontier.append(neighbor)
-        if len(shortest) != n_items:
-            diameter = None
-            break
-        distances.extend(shortest.values())
-    else:
-        diameter = max(distances)
-    triangles = sum(
-        int(
-            tuple(sorted((first, second))) in edges
-            and tuple(sorted((first, third))) in edges
-            and tuple(sorted((second, third))) in edges
-        )
-        for first, second, third in combinations(range(n_items), 3)
-    )
-    return {
-        "edge_count": len(edges),
-        "connected": _graph_connected(edges, n_items),
-        "distance_multiset": sorted(abs(first - second) for first, second in edges),
-        "sorted_degree_sequence": sorted(len(neighbors) for neighbors in adjacency),
-        "triangle_count": triangles,
-        "diameter": diameter,
-    }
 
 
 def enumerate_registered_graphs(
@@ -317,343 +251,6 @@ def validate_graph_contract(specification: dict) -> dict:
     }
 
 
-def protocol_for_graph(base: RankingProtocol, graph: dict) -> RankingProtocol:
-    rank_edges = tuple(map(tuple, graph["rank_edges"]))
-    support_pairs = tuple(
-        (base.true_order_high_to_low[higher], base.true_order_high_to_low[lower])
-        for higher, lower in rank_edges
-    )
-    return RankingProtocol(
-        protocol_id=f"liu-support-topology-v1-{graph['graph_id']}",
-        item_labels=base.item_labels,
-        true_order_high_to_low=base.true_order_high_to_low,
-        support_pairs_higher_lower=support_pairs,
-        support_blocks=base.support_blocks,
-        query_blocks=base.query_blocks,
-        human_targets={},
-    )
-
-
-def bootstrap_counts(
-    rng: np.random.Generator, samples: int, subjects: int
-) -> np.ndarray:
-    return rng.multinomial(
-        subjects, np.full(subjects, 1.0 / subjects), size=samples
-    ).astype(np.float64)
-
-
-def _subject_group_mean(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
-    return np.mean(np.asarray(values, dtype=np.float64)[:, mask], axis=1)
-
-
-def condition_metrics(
-    field: np.ndarray,
-    geometry,
-    learned_mask: np.ndarray,
-    counts: np.ndarray,
-    interval: float,
-    temperature: float,
-) -> dict:
-    correct = np.asarray(field, dtype=np.float64) * geometry.true_sign[None]
-    decision = (correct > 0.0).astype(np.float64)
-    probability = stable_sigmoid(correct / temperature)
-    groups = {
-        "overall": np.ones(len(geometry.pairs), dtype=bool),
-        "learned": learned_mask,
-        "nonlearned": ~learned_mask,
-    }
-    raw = {
-        "exact_decision_accuracy": {
-            name: _subject_group_mean(decision, mask) for name, mask in groups.items()
-        },
-        "correct_probability": {
-            name: _subject_group_mean(probability, mask)
-            for name, mask in groups.items()
-        },
-    }
-    return {
-        "summary": {
-            metric: {
-                name: summarize_subjects(values, counts, interval=interval)
-                for name, values in rows.items()
-            }
-            for metric, rows in raw.items()
-        },
-        "raw_subject": {
-            metric: {name: json_values(values) for name, values in rows.items()}
-            for metric, rows in raw.items()
-        },
-        "correct_signed_field": json_values(correct),
-    }
-
-
-def constructive_metrics(
-    intact_field: np.ndarray,
-    global_field: np.ndarray,
-    geometry,
-    counts: np.ndarray,
-    interval: float,
-) -> dict:
-    intact_gradient = gradient_energy_fraction(intact_field, geometry)
-    global_gradient = gradient_energy_fraction(global_field, geometry)
-    potentials = hodge_potentials(intact_field, geometry)
-    true = np.broadcast_to(geometry.true_potential, potentials.shape)
-    hodge_tau = kendall_tau_scores(potentials, true)
-    transitivity = []
-    for row in intact_field:
-        winners = {
-            pair: pair[0] if row[index] > 0.0 else pair[1]
-            for index, pair in enumerate(geometry.pairs)
-        }
-        circular = count_circular_triads(winners, len(geometry.true_potential))
-        transitivity.append(1.0 - circular / len(tuple(combinations(range(8), 3))))
-    raw = {
-        "intact_gradient_energy_fraction": intact_gradient,
-        "a_off_gradient_energy_fraction": global_gradient,
-        "intact_transitive_triplet_fraction": np.asarray(transitivity),
-        "intact_hodge_order_kendall_tau_to_true": hodge_tau,
-    }
-    return {
-        "summary": {
-            name: summarize_subjects(values, counts, interval=interval)
-            for name, values in raw.items()
-        },
-        "raw_subject": {name: json_values(values) for name, values in raw.items()},
-    }
-
-
-def relation_loo_metrics(
-    intact: np.ndarray,
-    loo: np.ndarray,
-    relations: tuple[tuple[int, int], ...],
-    geometry,
-    counts: np.ndarray,
-    interval: float,
-) -> dict:
-    influence = intact[None] - loo
-    remote = np.empty((len(relations), intact.shape[0]), dtype=np.float64)
-    third_party = np.full_like(remote, np.nan)
-    intact_potential = hodge_potentials(intact, geometry)
-    for relation_index, relation in enumerate(relations):
-        endpoints = set(relation)
-        remote_mask = np.asarray(
-            [not endpoints.intersection(pair) for pair in geometry.pairs], dtype=bool
-        )
-        remote[relation_index] = np.mean(
-            np.abs(influence[relation_index][:, remote_mask]), axis=1
-        )
-        delta = intact_potential - hodge_potentials(loo[relation_index], geometry)
-        denominator = np.sum(delta * delta, axis=1)
-        third_items = np.asarray(
-            [item for item in range(8) if item not in endpoints], dtype=np.int64
-        )
-        relational = delta[:, third_items] - np.mean(
-            delta[:, third_items], axis=1, keepdims=True
-        )
-        numerator = np.sum(relational * relational, axis=1)
-        third_party[relation_index] = np.divide(
-            numerator,
-            denominator,
-            out=np.full_like(numerator, np.nan),
-            where=denominator > 1e-14,
-        )
-    subject_remote = np.mean(remote, axis=0)
-    finite = np.sum(np.isfinite(third_party), axis=0)
-    subject_third = np.divide(
-        np.nansum(third_party, axis=0),
-        finite,
-        out=np.full(intact.shape[0], np.nan),
-        where=finite > 0,
-    )
-    return {
-        "summary": {
-            "remote_absolute": summarize_subjects(
-                subject_remote, counts, interval=interval
-            ),
-            "third_party_relational": summarize_subjects(
-                subject_third, counts, interval=interval
-            ),
-        },
-        "raw_subject": {
-            "remote_absolute": json_values(subject_remote),
-            "third_party_relational": json_values(subject_third),
-        },
-        "raw_relation_subject": {
-            "remote_absolute": json_values(remote),
-            "third_party_relational": json_values(third_party),
-        },
-    }
-
-
-def edge_key(left: np.ndarray, right: np.ndarray) -> np.ndarray:
-    flat = (
-        (np.outer(left, right) - np.outer(right, left)).reshape(-1).astype(np.float64)
-    )
-    return flat / max(float(np.linalg.norm(flat)), 1e-8)
-
-
-def reconstruct_local_ledger(
-    item_codes: np.ndarray,
-    schedules,
-    natural_scalars: np.ndarray,
-    actual_state: np.ndarray,
-    actual_canonical_reads: np.ndarray,
-) -> dict:
-    pairs = tuple(combinations(range(item_codes.shape[1]), 2))
-    pair_index = {pair: index for index, pair in enumerate(pairs)}
-    state_errors = []
-    read_errors = []
-    gpu_state_errors = []
-    gpu_read_errors = []
-    for subject, schedule in enumerate(schedules):
-        codes = np.asarray(item_codes[subject], dtype=np.float64)
-        keys = np.stack(
-            [edge_key(codes[first], codes[second]) for first, second in pairs]
-        )
-        reconstructed = np.zeros(keys.shape[1], dtype=np.float64)
-        ledger = np.zeros(len(pairs), dtype=np.float64)
-        for trial_index, trial in enumerate(schedule):
-            scalar = float(natural_scalars[subject, trial_index])
-            reconstructed += scalar * edge_key(
-                codes[trial.left_item], codes[trial.right_item]
-            )
-            canonical = tuple(sorted((trial.left_item, trial.right_item)))
-            orientation = 1.0 if trial.left_item < trial.right_item else -1.0
-            ledger[pair_index[canonical]] += orientation * scalar
-        ledger_state = ledger @ keys
-        direct_reads = reconstructed @ keys.T
-        compressed_reads = (keys @ keys.T) @ ledger
-        state_errors.append(float(np.max(np.abs(reconstructed - ledger_state))))
-        read_errors.append(float(np.max(np.abs(direct_reads - compressed_reads))))
-        gpu_state_errors.append(
-            float(np.max(np.abs(reconstructed - actual_state[subject])))
-        )
-        gpu_read_errors.append(
-            float(np.max(np.abs(compressed_reads - actual_canonical_reads[subject])))
-        )
-    return {
-        "tensor_state_max_abs_error": max(state_errors, default=0.0),
-        "ledger_tensor_state_max_abs_error": max(state_errors, default=0.0),
-        "all_query_raw_read_max_abs_error": max(read_errors, default=0.0),
-        "raw_subject_tensor_state_max_abs_error": state_errors,
-        "raw_subject_ledger_tensor_state_max_abs_error": state_errors,
-        "raw_subject_query_read_max_abs_error": read_errors,
-        "gpu_tensor_state_max_abs_error_diagnostic": max(gpu_state_errors, default=0.0),
-        "gpu_query_read_max_abs_error_diagnostic": max(gpu_read_errors, default=0.0),
-        "raw_subject_gpu_tensor_state_max_abs_error_diagnostic": gpu_state_errors,
-        "raw_subject_gpu_query_read_max_abs_error_diagnostic": gpu_read_errors,
-    }
-
-
-def individualized_metrics(
-    behavior: dict, rng: np.random.Generator, samples: int
-) -> dict:
-    eligible = [row for row in behavior["subjects"] if row["overall_accuracy"] >= 0.5]
-    analysis = [row for row in eligible if row["ranking_class"] != "correct"]
-    stable = np.asarray(
-        [row["stable_error_pair_counts"]["80"] > 0 for row in analysis],
-        dtype=np.float64,
-    )
-    if len(stable):
-        stable_counts = bootstrap_counts(rng, samples, len(stable))
-        stable_summary = summarize_subjects(stable, stable_counts, interval=0.95)
-    else:
-        stable_summary = summarize_subjects(
-            np.asarray([], dtype=np.float64), np.zeros((samples, 0)), interval=0.95
-        )
-    orders = [row["subjective_order_high_to_low"] for row in analysis]
-    if len(orders) >= 2:
-        positions = []
-        for order in orders:
-            row = np.empty(8, dtype=np.int64)
-            row[np.asarray(order, dtype=np.int64)] = np.arange(8)
-            positions.append(row)
-        positions = np.asarray(positions)
-        matrix = np.eye(len(positions), dtype=np.float64)
-        for first, second in combinations(range(len(positions)), 2):
-            value = kendall_tau_positions(positions[first], positions[second])
-            matrix[first, second] = value
-            matrix[second, first] = value
-        point = float(np.mean(matrix[np.triu_indices(len(positions), 1)]))
-        tau_counts = bootstrap_counts(rng, samples, len(positions))
-        quadratic = np.einsum(
-            "bi,ij,bj->b", tau_counts, matrix, tau_counts, optimize=True
-        )
-        diagonal = np.sum(tau_counts, axis=1)
-        draws = (quadratic - diagonal) / (len(positions) * (len(positions) - 1))
-        lower, upper = np.quantile(draws, [0.025, 0.975])
-        tau = {
-            "subjects": len(positions),
-            "mean": point,
-            "bootstrap": {
-                "mean": float(np.mean(draws)),
-                "lower": float(lower),
-                "upper": float(upper),
-            },
-        }
-    else:
-        tau = {
-            "subjects": len(orders),
-            "mean": None,
-            "bootstrap": {"mean": None, "lower": None, "upper": None},
-        }
-    return {
-        "eligible_subjects": len(eligible),
-        "eligible_noncorrect_subjects": len(analysis),
-        "stable_error_80_prevalence": stable_summary,
-        "mean_pairwise_kendall_tau": tau,
-    }
-
-
-def serial_position_endpoint(behavior: dict, protocol: RankingProtocol) -> dict:
-    rank = {
-        item: position for position, item in enumerate(protocol.true_order_high_to_low)
-    }
-    totals = np.zeros(8, dtype=np.float64)
-    counts = np.zeros(8, dtype=np.float64)
-    for row in behavior["pairs"]:
-        value = float(row["mean_accuracy_all"])
-        for item in row["pair"]:
-            totals[rank[item]] += value
-            counts[rank[item]] += 1.0
-    profile = totals / counts
-    interior = float(np.mean(profile[1:7]))
-    return {
-        "profile_high_to_low": json_values(profile),
-        "interior_mean": interior,
-        "mean_endpoint_contrast": float(np.mean(profile[[0, 7]]) - interior),
-        "minimum_endpoint_advantage": float(min(profile[0], profile[7]) - interior),
-    }
-
-
-def support_schedule_hash(evaluator: FrozenFastWeightEvaluator) -> str:
-    payload = json.dumps(
-        [
-            [asdict(trial) for trial in schedule]
-            for schedule in evaluator.support_schedules
-        ],
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode()
-    return hashlib.sha256(payload).hexdigest()
-
-
-@lru_cache(maxsize=1)
-def _decision_contract() -> dict:
-    return load_semantic_contract(DECISION_CONTRACT_PATH)
-
-
-def within_cell_decision(metrics: dict, integrity: dict) -> dict:
-    evaluation = evaluate_semantic_contract(
-        {"metrics": metrics, "integrity": integrity}, _decision_contract()
-    )
-    return {
-        "interpretable": evaluation["interpretable"],
-        **evaluation["decision_outputs"],
-        "flags": evaluation["flags"],
-    }
-
-
 def cross_cell_decision(
     seeds: dict, graph_ids: list[str], mandatory_seeds: list[int]
 ) -> dict:
@@ -704,21 +301,6 @@ def cross_cell_decision(
         "graph_passes": None,
         "heterogeneous_across_backbones": None,
     }
-
-
-def finite_primary(metrics: dict) -> bool:
-    values = []
-    for condition in metrics["conditions"].values():
-        for metric in condition["summary"].values():
-            for group in metric.values():
-                values.extend(group["bootstrap"].values())
-    for row in metrics["constructive"]["summary"].values():
-        values.extend(row["bootstrap"].values())
-    for row in metrics["global_relation_LOO"]["summary"].values():
-        values.extend(row["bootstrap"].values())
-    for row in metrics["contrasts"].values():
-        values.extend(row["bootstrap"].values())
-    return all(value is not None and np.isfinite(value) for value in values)
 
 
 def nonrepair_projection(result: dict) -> dict:
@@ -779,81 +361,26 @@ def evaluate_cell(
     )
     schedules = tuple(ordered_pairs(protocol.n_items) for _ in range(model_config.bs))
     before = tensor_hashes(backbone)
-    intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    loo_fast_weights = build_fast_weight_loo(evaluator, relations)
-    intact_trace = build_access_trace(evaluator, local, dual_access=True)
-    loo_traces = [
-        build_access_trace(
-            evaluator, local, dual_access=True, zero_relations=frozenset((relation,))
-        )
-        for relation in relations
-    ]
-    intact_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        schedules,
-        local_off=False,
-        global_off=False,
-        shuffled_indices=None,
-    )
-    a_off_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        schedules,
-        local_off=True,
-        global_off=False,
-        shuffled_indices=None,
-    )
-    p_off_bundle = readout_relational_query_bundle(
-        evaluator,
-        local,
-        intact_fast_weights,
-        intact_trace.state,
-        schedules,
-        local_off=False,
-        global_off=True,
-        shuffled_indices=None,
-    )
-    loo_global_bundles = [
-        readout_relational_query_bundle(
-            evaluator,
-            local,
-            loo_fast_weights[index],
-            loo_traces[index].state,
-            schedules,
-            local_off=True,
-            global_off=False,
-            shuffled_indices=None,
-        )
-        for index in range(len(relations))
-    ]
-    loo_p_off_bundles = [
-        readout_relational_query_bundle(
-            evaluator,
-            local,
-            intact_fast_weights,
-            loo_traces[index].state,
-            schedules,
-            local_off=False,
-            global_off=True,
-            shuffled_indices=None,
-        )
-        for index in range(len(relations))
-    ]
+    readout = readout_dual_access_query_conditions(evaluator, local, schedules)
+    intact_trace = readout["intact_trace"]
+    condition_bundles = readout["condition_bundles"]
+    intact_bundle = condition_bundles["intact"]
+    a_off_bundle = condition_bundles["a_off"]
     fields = {
-        "intact": margin_fields(intact_bundle, protocol.n_items),
-        "a_off": margin_fields(a_off_bundle, protocol.n_items),
-        "P_off_a_on": margin_fields(p_off_bundle, protocol.n_items),
+        name: margin_fields(bundle, protocol.n_items)
+        for name, bundle in condition_bundles.items()
     }
     loo_global_fields = np.asarray(
-        [margin_fields(bundle, protocol.n_items) for bundle in loo_global_bundles]
+        [
+            margin_fields(bundle, protocol.n_items)
+            for bundle in readout["global_loo_bundles"]
+        ]
     )
     loo_p_off_fields = np.asarray(
-        [margin_fields(bundle, protocol.n_items) for bundle in loo_p_off_bundles]
+        [
+            margin_fields(bundle, protocol.n_items)
+            for bundle in readout["local_loo_bundles"]
+        ]
     )
     conditions = {
         name: condition_metrics(

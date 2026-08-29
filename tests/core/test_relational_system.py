@@ -12,7 +12,7 @@ from fsrl.core import (
 from fsrl.core.config import TrainConfig
 from fsrl.evaluation import FrozenFastWeightEvaluator
 from fsrl.tasks.evidence import broader_local_admission
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 class RelationalSystemTests(unittest.TestCase):
@@ -29,7 +29,7 @@ class RelationalSystemTests(unittest.TestCase):
             nbcues_max=8,
         )
         self.backbone = RetroModulRNN(self.config.to_model_dict(), device="cpu")
-        self.protocol = load_ranking_protocol()
+        self.protocol = load_registered_protocol("liu_v1")
         self.evaluator = FrozenFastWeightEvaluator(
             self.backbone,
             self.config,

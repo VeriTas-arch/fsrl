@@ -2,7 +2,7 @@ import unittest
 from itertools import combinations
 
 from fsrl.analysis.behavioral import analyze_sampled_query_policy
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 def logits_for_orders(orders, magnitude=20.0):
@@ -21,7 +21,7 @@ def logits_for_orders(orders, magnitude=20.0):
 
 class BehavioralAnalysisTests(unittest.TestCase):
     def setUp(self):
-        self.protocol = load_ranking_protocol()
+        self.protocol = load_registered_protocol("liu_v1")
 
     def test_perfect_policy_produces_correct_rankers(self):
         logits = logits_for_orders([tuple(range(8))] * 4)

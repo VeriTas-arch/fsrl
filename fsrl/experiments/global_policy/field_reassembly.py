@@ -8,6 +8,7 @@ from typing import Any
 
 import numpy as np
 
+from fsrl.analysis.field_factorial import factorial_identity_errors
 from fsrl.analysis.hodge import build_complete_graph_geometry, hodge_potentials
 from fsrl.analysis.policy import exact_probability
 from fsrl.analysis.statistics import bootstrap_counts
@@ -24,7 +25,7 @@ from fsrl.experiments.global_policy.amplitude_provenance import (
 )
 from fsrl.experiments.global_policy.slope_localization import subject_slopes
 from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
-    validate_artifacts,
+    validate_registered_confirmation_artifacts,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
@@ -45,10 +46,6 @@ DEFAULT_IMPLEMENTATION_LOCK_PATH = resolve_record(
     "benchmarks/global_policy_field_reassembly_v1.lock.json"
 )
 DEFAULT_RESULT_PATH = resolve_record("results/global_policy_field_reassembly_v1.json")
-CONFIRMATION_OUTPUT_ROOT = (
-    ROOT / "artifacts" / "runs" / "dual-evidence-access-confirmation-v2-4"
-)
-
 PRIMARY_ESTIMANDS = (
     "S_NN",
     "S_PN",
@@ -111,47 +108,6 @@ def decompose_field(field: np.ndarray, geometry) -> dict[str, np.ndarray]:
         "reconstruction_error": _subject_max_abs(values - gradient - residual),
         "zero_sum_gauge_error": np.abs(np.sum(potential, axis=1)),
         "residual_orthogonality_error": _subject_max_abs(residual @ geometry.incidence),
-    }
-
-
-def _factorial_identity_errors(values: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
-    """Evaluate every registered dependent contrast identity row by row."""
-
-    return {
-        "D_equals_A_plus_R": np.abs(values["D"] - values["A"] - values["R"]),
-        "D_equals_Delta_A_plus_C_A": np.abs(
-            values["D"] - values["Delta_A"] - values["C_A"]
-        ),
-        "D_equals_Delta_R_plus_C_R": np.abs(
-            values["D"] - values["Delta_R"] - values["C_R"]
-        ),
-        "D_equals_Q_shape_plus_C_shape": np.abs(
-            values["D"] - values["Q_shape"] - values["C_shape"]
-        ),
-        "I_equals_Delta_A_minus_C_R": np.abs(
-            values["I"] - values["Delta_A"] + values["C_R"]
-        ),
-        "I_equals_Delta_R_minus_C_A": np.abs(
-            values["I"] - values["Delta_R"] + values["C_A"]
-        ),
-        "Delta_A_equals_A_plus_half_I": np.abs(
-            values["Delta_A"] - values["A"] - 0.5 * values["I"]
-        ),
-        "C_A_equals_R_minus_half_I": np.abs(
-            values["C_A"] - values["R"] + 0.5 * values["I"]
-        ),
-        "Delta_R_equals_R_plus_half_I": np.abs(
-            values["Delta_R"] - values["R"] - 0.5 * values["I"]
-        ),
-        "C_R_equals_A_minus_half_I": np.abs(
-            values["C_R"] - values["A"] + 0.5 * values["I"]
-        ),
-        "Delta_A_equals_Q_shape_plus_Q_amp": np.abs(
-            values["Delta_A"] - values["Q_shape"] - values["Q_amp"]
-        ),
-        "C_shape_equals_C_A_plus_Q_amp": np.abs(
-            values["C_shape"] - values["C_A"] - values["Q_amp"]
-        ),
     }
 
 
@@ -324,7 +280,7 @@ def field_reassembly_estimands(
         "margin_field_interaction_error": _subject_max_abs(margin_field_i),
         "margin_I": margin_i,
     }
-    identity_errors = _factorial_identity_errors(estimands)
+    identity_errors = factorial_identity_errors(estimands)
     return {
         **estimands,
         **diagnostics,
@@ -545,23 +501,6 @@ def _source_validation(
     return {"passed": True, "checks": checks}
 
 
-def _artifact_validation(specification: dict) -> dict:
-    sources = specification["registered_sources"]
-    confirmation_specification_path = resolve_registered_path(
-        sources["v2_4_confirmation_specification"]["path"]
-    )
-    confirmation_specification = load_json(confirmation_specification_path)
-    return validate_artifacts(
-        confirmation_specification,
-        confirmation_specification_path,
-        resolve_registered_path(
-            sources["v2_4_confirmation_implementation_lock"]["path"]
-        ),
-        resolve_registered_path(sources["v2_4_confirmation_artifact_lock"]["path"]),
-        CONFIRMATION_OUTPUT_ROOT,
-    )
-
-
 def _bootstrap_identity_errors(
     estimands: EstimandBundle, counts: np.ndarray
 ) -> dict[str, float]:
@@ -572,7 +511,7 @@ def _bootstrap_identity_errors(
     }
     return {
         name: float(np.max(error))
-        for name, error in _factorial_identity_errors(samples).items()
+        for name, error in factorial_identity_errors(samples).items()
     }
 
 
@@ -942,7 +881,7 @@ def main(args=None) -> int:
     source_validation = _source_validation(
         specification, parsed.specification, implementation_lock
     )
-    artifact_validation = _artifact_validation(specification)
+    artifact_validation = validate_registered_confirmation_artifacts(specification)
     result = run_diagnostic(
         specification, source_validation, artifact_validation, runtime
     )

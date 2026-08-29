@@ -86,9 +86,10 @@ checkout. The boundary is explicit:
   `.dat`, `.pt`, pickle, or NPY; `.pt` remains reserved for a serialized program
   if one is ever explicitly registered;
 - `RetroModelConfig`, `PlasticRNNState`, protocol IDs, and explicit holdout
-  signatures are the current model/task APIs. CamelCase state methods,
-  v1-default protocol imports, and the `exclude_liu_graph` switch are confined
-  to compatibility adapters. `TrainConfig` still carries the historical
+  signatures are the current model/task APIs. The former CamelCase state
+  methods, v1-default protocol adapter, and `exclude_liu_graph` switch are
+  available only through historical Git/reproduction sources, not the
+  maintained package. `TrainConfig` still carries the historical
   episode/evaluation field names, but model construction crosses one typed
   `RetroModelConfig` boundary instead of spreading its short-key dictionary;
 - high-level training and causal evaluation default to the current versioned

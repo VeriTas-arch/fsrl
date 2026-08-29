@@ -23,9 +23,10 @@ import sys
 import tomllib
 from collections import Counter
 from functools import cache, lru_cache
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from typing import Any
 
+from fsrl.infra.file_contracts import safe_relative_path
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.record_catalog import CATALOG_PATH, check_record_catalog
 from fsrl.paths import REPO_ROOT, STUDIES_ROOT, SYNTHESIS_ROOT
@@ -162,9 +163,12 @@ def canonical_file_sha256(path: Path | str) -> str:
 
 
 def _safe_relative(value: str) -> Path:
-    pure = PurePosixPath(value)
-    if pure.is_absolute() or not pure.parts or ".." in pure.parts:
-        raise ValueError(f"repository path must be a safe relative path: {value!r}")
+    try:
+        pure = safe_relative_path(value)
+    except ValueError as error:
+        raise ValueError(
+            f"repository path must be a safe relative path: {value!r}"
+        ) from error
     return Path(*pure.parts)
 
 

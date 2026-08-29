@@ -13,6 +13,7 @@ from pathlib import Path
 import numpy as np
 from scipy import optimize
 
+from fsrl.evaluation.metrics import maximum_circular_triads
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import (
@@ -893,10 +894,6 @@ def confirmation_statistics(
         "bootstrap_eta_pair": eta_boot.tolist(),
     }
     return statistics, integrity, raw
-
-
-def maximum_circular_triads(n_items: int) -> int:
-    return (n_items**3 - 4 * n_items) // 24
 
 
 def efficient_inter_subject_tau(rank_positions: np.ndarray) -> float:

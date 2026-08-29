@@ -23,6 +23,7 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 from matplotlib.patches import Patch
 
 from fsrl.analysis.behavioral import kendall_tau_positions
+from fsrl.analysis.geometry import rank_positions
 from fsrl.workflows.paper_figure_contract import (
     DATASET_COLORS,
     DATASET_LABELS,
@@ -157,16 +158,9 @@ def _matrix(values: np.ndarray, n_items: int) -> np.ma.MaskedArray:
     return np.ma.masked_invalid(output)
 
 
-def ranking_positions(order: list[int]) -> np.ndarray:
-    positions = np.empty(len(order), dtype=np.int64)
-    for position, item in enumerate(order):
-        positions[item] = position
-    return positions
-
-
 def _pairwise_tau(dataset: Dataset) -> np.ndarray:
     positions = [
-        ranking_positions(subject["subjective_order_high_to_low"])
+        rank_positions(subject["subjective_order_high_to_low"])
         for subject, include in zip(dataset.subjects, dataset.analysis, strict=True)
         if include
     ]
@@ -186,7 +180,7 @@ def _subject_id(dataset: Dataset, index: int) -> int:
 
 def _subject_tau_to_true(subject: dict, true_positions: np.ndarray) -> float:
     return kendall_tau_positions(
-        ranking_positions(subject["subjective_order_high_to_low"]), true_positions
+        rank_positions(subject["subjective_order_high_to_low"]), true_positions
     )
 
 
@@ -688,7 +682,7 @@ def render_figure_03(output_root: Path, protocol, datasets: dict[str, Dataset]) 
     order_rows = []
     tau_values = {}
     exemplars = {}
-    true_positions = ranking_positions(list(protocol.true_order_high_to_low))
+    true_positions = rank_positions(list(protocol.true_order_high_to_low))
     for dataset_id in DATASET_ORDER:
         dataset = datasets[dataset_id]
         counts = {

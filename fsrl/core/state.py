@@ -18,9 +18,3 @@ class PlasticRNNState:
 class RelationalEpisodeState:
     global_fast_weights: torch.Tensor
     local_trace: torch.Tensor
-
-    def detached_clone(self) -> RelationalEpisodeState:
-        return RelationalEpisodeState(
-            self.global_fast_weights.detach().clone(),
-            self.local_trace.detach().clone(),
-        )

@@ -17,6 +17,7 @@ from fsrl.analysis.statistics import (
     summarize_subjects,
 )
 from fsrl.evaluation.registered import load_registered_frozen_evaluator
+from fsrl.evaluation.support_trace import trace_support_trial
 from fsrl.experiments.assembly.factor_swap import (
     EpisodeFactors,
     compose_factors,
@@ -26,7 +27,6 @@ from fsrl.experiments.assembly.factor_swap import (
 from fsrl.experiments.assembly.write_localization import (
     replay_without_relation_history,
     row_cosine,
-    trace_support_trial,
 )
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.runtime import default_device

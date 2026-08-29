@@ -18,7 +18,8 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.infra.runtime import ExecutionProfile
 from fsrl.infra.study_registry import resolve_record
-from fsrl.tasks.registered_protocol import load_ranking_protocol
+from fsrl.tasks.protocol import load_ranking_protocol
+from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 
 class FrozenFastWeightEvaluatorTests(unittest.TestCase):
@@ -31,7 +32,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         self.evaluator = FrozenFastWeightEvaluator(
             self.net,
             self.config,
-            load_ranking_protocol(),
+            load_registered_protocol("liu_v1"),
             cue_seed=5,
             support_seed=7,
         )
@@ -40,7 +41,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         return FrozenFastWeightEvaluator(
             self.net,
             self.config,
-            load_ranking_protocol(),
+            load_registered_protocol("liu_v1"),
             cue_seed=5,
             support_seed=7,
             backend=FrozenEvaluationBackend.BATCHED_SEQUENCE,
@@ -52,7 +53,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         )
 
     def test_protocol_only_mode_requires_an_explicit_non_neural_contract(self):
-        protocol = load_ranking_protocol()
+        protocol = load_registered_protocol("liu_v1")
         with self.assertRaisesRegex(ValueError, "neural network is required"):
             FrozenFastWeightEvaluator(None, self.config, protocol)
 
@@ -350,7 +351,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         evaluator = FrozenFastWeightEvaluator(
             self.net,
             self.config,
-            load_ranking_protocol(),
+            load_registered_protocol("liu_v1"),
             cue_seed=5,
             support_seed=7,
             subject_encoding_mode="stable_omission",
@@ -377,7 +378,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
             evaluator = FrozenFastWeightEvaluator(
                 self.net,
                 self.config,
-                load_ranking_protocol(),
+                load_registered_protocol("liu_v1"),
                 cue_seed=5,
                 support_seed=7,
                 subject_encoding_mode=mode,
@@ -395,7 +396,7 @@ class FrozenFastWeightEvaluatorTests(unittest.TestCase):
         evaluator = FrozenFastWeightEvaluator(
             self.net,
             self.config,
-            load_ranking_protocol(),
+            load_registered_protocol("liu_v1"),
             cue_seed=5,
             support_seed=7,
             subject_encoding_mode="uniform_no_bottleneck",
