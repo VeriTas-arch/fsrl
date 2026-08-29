@@ -17,6 +17,12 @@ from tools.provenance.audit_refactor_equivalence_v2 import (
 from tools.provenance.audit_refactor_equivalence_v2 import (
     load_contract as load_v2_contract,
 )
+from tools.provenance.audit_refactor_equivalence_v3 import (
+    DEFAULT_CONTRACT as V3_CONTRACT,
+)
+from tools.provenance.audit_refactor_equivalence_v3 import (
+    load_contract as load_v3_contract,
+)
 
 
 class RefactorEquivalenceAuditTests(unittest.TestCase):
@@ -38,9 +44,9 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
         for group in (*contract["exact_checks"], *contract["bounded_checks"]):
             for selector in group["selectors"]:
                 parts = selector.split(".")
-                module = importlib.import_module(".".join(parts[:3]))
-                test_case = getattr(module, parts[3])
-                self.assertTrue(callable(getattr(test_case, parts[4])))
+                module = importlib.import_module(".".join(parts[:-2]))
+                test_case = getattr(module, parts[-2])
+                self.assertTrue(callable(getattr(test_case, parts[-1])))
 
     def test_contract_rejects_a_negative_tolerance(self):
         contract = load_contract()
@@ -80,6 +86,28 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "relative Python paths"):
                 load_v2_contract(path)
 
+    def test_v3_contract_pins_closing_fix_candidate(self):
+        contract = load_v3_contract()
+        self.assertEqual(
+            contract["audit_id"], "relational-model-refactor-equivalence-v3"
+        )
+        self.assertEqual(
+            contract["baseline_commit"],
+            "c4f6ee14044b296181693a0dcd62e985f63636f9",
+        )
+        self.assertEqual(
+            contract["candidate_commit"],
+            "b864f2542cd49613dd320aebff35f98e53b0c8dc",
+        )
+        self.assertEqual(len(contract["cross_commit_checks"]), 2)
+        self.assertTrue(V3_CONTRACT.is_file())
+        for group in (*contract["exact_checks"], *contract["bounded_checks"]):
+            for selector in group["selectors"]:
+                parts = selector.split(".")
+                module = importlib.import_module(".".join(parts[:-2]))
+                test_case = getattr(module, parts[-2])
+                self.assertTrue(callable(getattr(test_case, parts[-1])))
+
     def test_root_readme_matches_the_current_evaluation_default(self):
         readme = DEFAULT_CONTRACT.parents[2] / "README.md"
         text = readme.read_text(encoding="utf-8")
@@ -91,6 +119,10 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
         )
         self.assertIn(
             "python -m tools.provenance.audit_refactor_equivalence_v2",
+            text,
+        )
+        self.assertIn(
+            "python -m tools.provenance.audit_refactor_equivalence_v3",
             text,
         )
         default = (

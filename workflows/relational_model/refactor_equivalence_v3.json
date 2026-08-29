@@ -1,0 +1,131 @@
+{
+  "document_type": "fsrl.refactor_equivalence_contract",
+  "schema_version": 1,
+  "audit_id": "relational-model-refactor-equivalence-v3",
+  "baseline_commit": "c4f6ee14044b296181693a0dcd62e985f63636f9",
+  "candidate_commit": "b864f2542cd49613dd320aebff35f98e53b0c8dc",
+  "audited_paths": [
+    "fsrl/README.md",
+    "fsrl/analysis/behavioral.py",
+    "fsrl/evaluation/__init__.py",
+    "fsrl/evaluation/causal_suite.py",
+    "fsrl/evaluation/cli.py",
+    "fsrl/infra/file_contracts.py",
+    "fsrl/infra/provenance.py",
+    "fsrl/infra/run_manifest.py",
+    "fsrl/tasks/__init__.py",
+    "fsrl/tasks/holdouts.py",
+    "fsrl/tasks/protocol.py",
+    "fsrl/tasks/protocol_catalog.py",
+    "fsrl/tasks/registered_protocol.py",
+    "fsrl/training/__init__.py",
+    "pyproject.toml",
+    "tests/core/test_architecture.py",
+    "tests/core/test_packaging.py",
+    "tests/evaluation/test_execution_defaults.py",
+    "tests/evaluation/test_frozen_fast_weight.py",
+    "tests/infra/test_file_contracts.py",
+    "tests/infra/test_run_manifest.py",
+    "tests/tasks/test_protocol.py",
+    "studies/registry.toml",
+    "studies/migrations",
+    ":(glob)studies/*/study.toml",
+    ":(glob)studies/*/records/**",
+    "synthesis/source-provenance.toml",
+    "synthesis/snapshots",
+    "workflows/relational_model/workflow.toml",
+    "workflows/relational_model/README.md",
+    "data/external",
+    "reproductions"
+  ],
+  "baseline_reference_modules": [
+    "tests.core.test_architecture",
+    "tests.core.test_packaging",
+    "tests.analysis.test_behavioral",
+    "tests.evaluation.test_execution_defaults",
+    "tests.evaluation.test_frozen_fast_weight",
+    "tests.infra.test_file_contracts",
+    "tests.infra.test_run_manifest",
+    "tests.tasks.test_protocol"
+  ],
+  "cross_commit_checks": [
+    {
+      "id": "encoding-and-relational-query-snapshot",
+      "script": "tools/provenance/refactor_equivalence_snapshot_v2.py"
+    },
+    {
+      "id": "registered-protocol-and-exclusive-json-snapshot",
+      "script": "tools/provenance/refactor_equivalence_snapshot_v3.py"
+    }
+  ],
+  "exact_checks": [
+    {
+      "id": "registered-protocol-default",
+      "selectors": [
+        "tests.tasks.test_protocol.RankingProtocolTests.test_registered_protocol_counts_and_graph",
+        "tests.tasks.test_protocol.RankingProtocolTests.test_json_declares_strict_frozen_readout_contract",
+        "tests.evaluation.test_execution_defaults.CurrentExecutionDefaultTests.test_high_level_causal_suite_defaults_to_current_batched_schema"
+      ]
+    },
+    {
+      "id": "atomic-output-and-run-lifecycle",
+      "selectors": [
+        "tests.infra.test_run_manifest.ProspectiveRunTests.test_complete_run_records_every_owned_file",
+        "tests.infra.test_run_manifest.ProspectiveRunTests.test_running_manifest_is_not_a_completed_file_contract",
+        "tests.infra.test_run_manifest.ExclusiveJsonWriterTests.test_exclusive_writer_preserves_canonical_json_bytes",
+        "tests.infra.test_run_manifest.ExclusiveJsonWriterTests.test_publish_failure_leaves_no_final_or_temporary_file"
+      ]
+    },
+    {
+      "id": "installed-package-and-dependency-guard",
+      "selectors": [
+        "tests.core.test_packaging.PackagingTests.test_wheel_contains_code_and_required_internal_contracts_only",
+        "tests.core.test_architecture.CoreArchitectureTests.test_package_dependencies_follow_the_explicit_layer_graph",
+        "tests.core.test_architecture.CoreArchitectureTests.test_relative_imports_resolve_before_dependency_checks"
+      ]
+    },
+    {
+      "id": "retained-relational-numerics",
+      "selectors": [
+        "tests.core.test_relational_system.RelationalSystemTests.test_global_rollout_and_query_match_frozen_evaluator",
+        "tests.experiments.transport.test_item_count.ItemCountTransportTests.test_variable_evaluator_exactly_replays_n8_constructor",
+        "tests.experiments.transport.test_item_count.ItemCountTransportTests.test_variable_evaluator_reuses_complete_rollout_initialization"
+      ]
+    }
+  ],
+  "bounded_checks": [
+    {
+      "id": "training-loss-and-gradient",
+      "rtol": 1e-05,
+      "atol": 1e-07,
+      "selectors": [
+        "tests.training.test_backbone.MetaTrainingTests.test_optimized_batch_preserves_loss_accuracy_and_gradients"
+      ]
+    },
+    {
+      "id": "evaluator-fast-state-and-trajectories",
+      "rtol": 1e-06,
+      "atol": 1e-07,
+      "selectors": [
+        "tests.evaluation.test_frozen_fast_weight.FrozenFastWeightEvaluatorTests.test_batched_backend_preserves_fast_weights_and_query_logits",
+        "tests.evaluation.test_frozen_fast_weight.FrozenFastWeightEvaluatorTests.test_batched_backend_preserves_hidden_and_logit_trajectories"
+      ]
+    }
+  ],
+  "semantic_checks": [
+    "study_registry",
+    "file_contracts",
+    "workflow",
+    "paper_figures",
+    "frozen_evidence"
+  ],
+  "claim": "The wheel-import, run-lifecycle, exclusive-output, and dependency-guard fixes preserve the registered protocol, retained numerical paths, frozen evidence, and workflow claim boundaries at their declared equivalence levels.",
+  "not_claimed": [
+    "standalone execution of repository-registered protocols or evidence from an installed wheel",
+    "recovery or reclassification of pre-existing stale run directories",
+    "cross-filesystem or remote-filesystem atomic publication semantics",
+    "power-loss durability beyond the file synchronization and same-directory hard-link boundary",
+    "direct cross-commit replay of every maintained analysis entry point",
+    "new scientific evidence or a broader scientific claim"
+  ]
+}
