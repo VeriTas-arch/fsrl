@@ -179,9 +179,9 @@ class GlobalLocalRelationalSystem(nn.Module):
         exact_increment = torch.tanh(baseline + drive) - baseline_hidden
         linear_increment = (1.0 - baseline_hidden.square()) * drive
         margin = (self.backbone.h2o.weight[1] - self.backbone.h2o.weight[0]).view(1, -1)
-        return torch.sum(
-            margin * (linear_increment - exact_increment), dim=1, keepdim=True
-        )
+        exact_policy = torch.sum(margin * exact_increment, dim=1, keepdim=True)
+        linear_policy = torch.sum(margin * linear_increment, dim=1, keepdim=True)
+        return linear_policy - exact_policy
 
     def _validate_sequence(
         self,

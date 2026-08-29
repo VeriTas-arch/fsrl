@@ -145,11 +145,17 @@ class RelationalSystemTests(unittest.TestCase):
             exact_increment = torch.tanh(baseline + drive) - baseline_hidden
             linear_increment = (1.0 - baseline_hidden.square()) * drive
             margin = self.backbone.h2o.weight[1] - self.backbone.h2o.weight[0]
-            expected_residual = torch.sum(
-                margin.view(1, -1) * (linear_increment - exact_increment),
+            exact_policy = torch.sum(
+                margin.view(1, -1) * exact_increment,
                 dim=1,
                 keepdim=True,
             )
+            linear_policy = torch.sum(
+                margin.view(1, -1) * linear_increment,
+                dim=1,
+                keepdim=True,
+            )
+            expected_residual = linear_policy - exact_policy
             torch.testing.assert_close(readout.policy_residual, expected_residual)
 
             local_off = self.system.query(
