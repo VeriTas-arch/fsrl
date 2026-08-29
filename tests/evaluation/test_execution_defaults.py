@@ -1,11 +1,9 @@
 import inspect
 import unittest
 
-from fsrl.evaluation.frozen_fast_weight import (
-    FrozenEvaluationBackend,
-    parse_args,
-    run_causal_suite,
-)
+from fsrl.evaluation.causal_suite import run_causal_suite
+from fsrl.evaluation.cli import parse_args
+from fsrl.evaluation.frozen_fast_weight import FrozenEvaluationBackend
 
 
 class CurrentExecutionDefaultTests(unittest.TestCase):

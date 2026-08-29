@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -33,10 +32,9 @@ from fsrl.evaluation.fields import ordered_query_schedule, readout_margin_fields
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
-    load_frozen_retro_checkpoint,
 )
-from fsrl.experiments.confirmation.behavioral import validate_checkpoint
-from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.evaluation.registered import load_registered_frozen_evaluator
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
@@ -48,7 +46,6 @@ from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_trajectory_v1.json")
-DEFAULT_OUTPUT_PATH = resolve_record("results/assembly_trajectory_v1.json")
 
 
 @dataclass(frozen=True)
@@ -158,33 +155,6 @@ def validate_registered_sources(specification: dict) -> dict:
         artifacts.append(row)
     validated["pilot_artifacts"] = artifacts
     return validated
-
-
-def load_frozen_evaluator(
-    registration: dict,
-    pilot_specification: dict,
-    protocol: RankingProtocol,
-) -> tuple[FrozenFastWeightEvaluator, dict]:
-    seed = int(registration["seed"])
-    checkpoint = resolve_path(registration["checkpoint_path"])
-    validate_checkpoint(checkpoint, pilot_specification, seed)
-    behavior = load_json(resolve_path(registration["behavior_path"]))
-    net, config, checkpoint_info = load_frozen_retro_checkpoint(
-        checkpoint, len(behavior["subjects"])
-    )
-    if behavior["checkpoint"]["sha256"] != checkpoint_info.sha256:
-        raise RuntimeError(f"seed {seed} behavior and checkpoint do not match")
-    evaluator = FrozenFastWeightEvaluator(
-        net,
-        config,
-        protocol,
-        cue_seed=int(behavior["cue_seed"]),
-        support_seed=int(behavior["support_seed"]),
-        cue_mode="permuted_shared",
-        subject_encoding_mode=behavior["subject_encoding_mode"],
-        subject_encoding_seed=int(behavior["subject_encoding_seed"]),
-    )
-    return evaluator, behavior
 
 
 def _effect_class_masks(
@@ -860,7 +830,7 @@ def run_assembly_trajectory(
     for registration in sources["pilot_artifacts"]:
         seed = int(registration["seed"])
         print(f"[assembly-trajectory] loading frozen seed {seed}", file=sys.stderr)
-        evaluator, behavior = load_frozen_evaluator(
+        evaluator, behavior = load_registered_frozen_evaluator(
             registration, pilot_specification, protocol
         )
         evidence = evaluator.realized_support_evidence()
@@ -1007,17 +977,14 @@ def parse_args(args=None):
     parser.add_argument(
         "--specification", type=Path, default=DEFAULT_SPECIFICATION_PATH
     )
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args(args)
 
 
 def main(args=None):
     parsed = parse_args(args)
     result = run_assembly_trajectory(parsed.specification)
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
     return 0
 
 

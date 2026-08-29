@@ -74,6 +74,7 @@ def replay_model_subject_pairs(
         FrozenFastWeightEvaluator,
         load_frozen_retro_checkpoint,
     )
+    from fsrl.evaluation.relational_query import readout_relational_query_bundle
     from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
         DEFAULT_ARTIFACT_LOCK_PATH,
         DEFAULT_IMPLEMENTATION_LOCK_PATH,
@@ -84,7 +85,6 @@ def replay_model_subject_pairs(
     )
     from fsrl.experiments.local_fidelity.trace_pilot import (
         create_local_trace,
-        query_pass,
     )
     from fsrl.experiments.local_fidelity.trace_replication import (
         seed_paths,
@@ -141,7 +141,7 @@ def replay_model_subject_pairs(
         )
         fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
         trace = dual_access.build_access_trace(evaluator, local, dual_access=True)
-        bundle = query_pass(
+        bundle = readout_relational_query_bundle(
             evaluator,
             local,
             fast_weights,

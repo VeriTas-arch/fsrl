@@ -26,6 +26,7 @@ from fsrl.analysis.statistics import (
     summarize_difference,
     summarize_subjects,
 )
+from fsrl.evaluation.causal_suite import run_causal_suite
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
@@ -33,7 +34,6 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_frozen_retro_checkpoint,
     load_training_provenance,
     retained_relation_mask,
-    run_causal_suite,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
 from fsrl.experiments.assembly.trajectory import exact_prefix_trajectory
@@ -44,7 +44,12 @@ from fsrl.experiments.local_fidelity.curvature_gate import (
     run_gate_batch,
 )
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
-from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.provenance import (
+    load_json,
+    tensor_hashes,
+    write_json,
+    write_json_exclusive,
+)
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -1300,7 +1305,7 @@ def main(args=None) -> int:
             source_validation,
             runtime,
         )
-        write_json(parsed.result, result)
+        write_json_exclusive(parsed.result, result)
     return 0
 
 

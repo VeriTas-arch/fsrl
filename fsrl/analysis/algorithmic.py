@@ -19,6 +19,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
 )
+from fsrl.infra.provenance import write_json_exclusive
 from fsrl.tasks.protocol import load_ranking_protocol
 
 
@@ -241,10 +242,7 @@ def main(args=None):
         parsed.behavior,
         posterior_temperature=parsed.posterior_temperature,
     )
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
 
 
 if __name__ == "__main__":

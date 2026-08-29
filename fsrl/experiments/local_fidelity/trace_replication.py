@@ -44,7 +44,12 @@ from fsrl.experiments.local_fidelity.trace_pilot import (
     run_local_batch,
 )
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
-from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.provenance import (
+    load_json,
+    tensor_hashes,
+    write_json,
+    write_json_exclusive,
+)
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     registered_file_sha256,
@@ -864,7 +869,7 @@ def main(args=None) -> int:
         artifact_validation,
         runtime,
     )
-    write_json(parsed.result, result)
+    write_json_exclusive(parsed.result, result)
     return 0
 
 

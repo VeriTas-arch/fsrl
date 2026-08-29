@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
-from fsrl.infra.provenance import load_json
+from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.record_catalog import resolve_record_id
 
 DEFAULT_QUALIFICATION_PATH = resolve_record_id(
@@ -130,10 +129,7 @@ def main(args=None):
     report = evaluate_qualification(
         load_json(parsed.result), load_json(parsed.specification)
     )
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(report, handle, indent=2, sort_keys=True)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, report)
     return 0 if report["passed"] else 1
 
 

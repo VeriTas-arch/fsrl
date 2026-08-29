@@ -11,6 +11,7 @@ import numpy as np
 from fsrl.infra.file_contracts import (
     classify_path,
     dataset_file,
+    find_unmanifested_run_roots,
     load_dataset_manifest,
     stable_record_id,
     validate_dataset_manifest,
@@ -27,6 +28,25 @@ from tools.provenance.materialize_historical_file_views_v1 import (
 
 
 class FileContractTests(unittest.TestCase):
+    def test_unmanifested_run_roots_are_not_invisible(self):
+        with tempfile.TemporaryDirectory() as directory:
+            runs_root = Path(directory) / "artifacts" / "runs"
+            legacy_root = runs_root / "legacy-workflow"
+            legacy_root.mkdir(parents=True)
+            (legacy_root / "result.json").write_text("{}\n", encoding="utf-8")
+
+            workflow_root = runs_root / "prospective-workflow"
+            manifested = workflow_root / "execution-1"
+            manifested.mkdir(parents=True)
+            (manifested / "run.json").write_text("{}\n", encoding="utf-8")
+            missing = workflow_root / "execution-2"
+            missing.mkdir()
+            (missing / "metrics.json").write_text("{}\n", encoding="utf-8")
+
+            observed = find_unmanifested_run_roots(runs_root)
+
+            self.assertEqual(observed, [legacy_root, missing])
+
     def test_compound_formats_and_legacy_checkpoint_are_explicit(self):
         self.assertEqual(classify_path("record.schema.json")["format"], "json_schema")
         self.assertEqual(classify_path("record.json.gz")["format"], "gzip_json")

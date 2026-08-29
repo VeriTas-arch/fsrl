@@ -5,10 +5,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fsrl.evaluation.frozen_fast_weight import (
-    FrozenEvaluationBackend,
-    run_causal_suite,
-)
+from fsrl.evaluation.causal_suite import run_causal_suite
+from fsrl.evaluation.frozen_fast_weight import FrozenEvaluationBackend
 from tools.provenance.audit_refactor_equivalence_v1 import (
     DEFAULT_CONTRACT,
     load_contract,

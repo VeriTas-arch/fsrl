@@ -18,15 +18,18 @@ from .backbone import (
     train_meta_model,
 )
 from .checkpoints import (
+    FORMAL_CONFIRMATION_ID,
     CheckpointInfo,
     checkpoint_format,
     load_checkpoint_state,
     load_retro_checkpoint,
     resolve_checkpoint_path,
+    validate_meta_checkpoint,
 )
 
 __all__ = [
     "COMPILED_TRAINING_EXECUTION",
+    "FORMAL_CONFIRMATION_ID",
     "OPTIMIZED_COMPILED_TRAINING_EXECUTION",
     "OPTIMIZED_TRAINING_PROFILE",
     "CheckpointInfo",
@@ -46,4 +49,5 @@ __all__ = [
     "run_optimized_meta_batch",
     "save_meta_checkpoint",
     "train_meta_model",
+    "validate_meta_checkpoint",
 ]

@@ -8,13 +8,13 @@ import torch
 
 from fsrl.core.config import TrainConfig
 from fsrl.core.plastic_rnn import RetroModulRNN
+from fsrl.evaluation.causal_suite import run_causal_suite
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenEvaluationBackend,
     FrozenFastWeightEvaluator,
     deterministic_cue_codes,
     load_frozen_retro_checkpoint,
-    run_causal_suite,
 )
 from fsrl.infra.runtime import ExecutionProfile
 from fsrl.infra.study_registry import resolve_record

@@ -45,12 +45,12 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
+from fsrl.evaluation.relational_query import readout_relational_query_bundle
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
     build_access_trace,
     build_fast_weight_loo,
     measure_presentation_invariance,
 )
-from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
     bootstrap_counts,
     condition_metrics,
@@ -149,12 +149,6 @@ def validate_sources(
     if not all(check["passed"] for check in checks):
         raise RuntimeError(f"item-count source or artifact lock failed: {checks}")
     return {"passed": True, "checks": checks, "lock": lock}
-
-
-class VariableItemFrozenFastWeightEvaluator(FrozenFastWeightEvaluator):
-    """Frozen evaluator whose only source change is removal of the N=8 guard."""
-
-    _required_protocol_item_count = None
 
 
 def _mean_subject_column(
@@ -573,7 +567,7 @@ def validate_graph_contract(specification: dict) -> dict:
     return {"passed": True, "checks": checks}
 
 
-def _admission_hash(evaluator: VariableItemFrozenFastWeightEvaluator) -> str:
+def _admission_hash(evaluator: FrozenFastWeightEvaluator) -> str:
     payload = [
         [[list(relation), value] for relation, value in sorted(subject.items())]
         for subject in evaluator.subject_relation_gains or ()
@@ -583,11 +577,11 @@ def _admission_hash(evaluator: VariableItemFrozenFastWeightEvaluator) -> str:
     ).hexdigest()
 
 
-def _cue_hash(evaluator: VariableItemFrozenFastWeightEvaluator) -> str:
+def _cue_hash(evaluator: FrozenFastWeightEvaluator) -> str:
     return hashlib.sha256(evaluator.cue_codes.tobytes()).hexdigest()
 
 
-def validate_size_interface(evaluator: VariableItemFrozenFastWeightEvaluator) -> dict:
+def validate_size_interface(evaluator: FrozenFastWeightEvaluator) -> dict:
     protocol = evaluator.protocol
     expected_relations = set(protocol.support_pairs_higher_lower)
     counts = True
@@ -657,7 +651,7 @@ def validate_size_interface(evaluator: VariableItemFrozenFastWeightEvaluator) ->
 
 
 def validate_n8_evaluator_interface(
-    variable: VariableItemFrozenFastWeightEvaluator,
+    variable: FrozenFastWeightEvaluator,
     frozen: FrozenFastWeightEvaluator,
 ) -> dict:
     checks = {
@@ -933,7 +927,7 @@ def evaluate_cell(
     seed: int,
     graph: dict,
     size_index: int,
-    evaluator: VariableItemFrozenFastWeightEvaluator,
+    evaluator: FrozenFastWeightEvaluator,
     local: ConjunctiveLocalTrace,
     runtime: dict,
     source_validation: dict,
@@ -969,7 +963,7 @@ def evaluate_cell(
         )
         for relation in relations
     ]
-    intact_bundle = query_pass(
+    intact_bundle = readout_relational_query_bundle(
         evaluator,
         local,
         intact_fast_weights,
@@ -979,7 +973,7 @@ def evaluate_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    a_off_bundle = query_pass(
+    a_off_bundle = readout_relational_query_bundle(
         evaluator,
         local,
         intact_fast_weights,
@@ -989,7 +983,7 @@ def evaluate_cell(
         global_off=False,
         shuffled_indices=None,
     )
-    p_off_bundle = query_pass(
+    p_off_bundle = readout_relational_query_bundle(
         evaluator,
         local,
         intact_fast_weights,
@@ -1000,7 +994,7 @@ def evaluate_cell(
         shuffled_indices=None,
     )
     loo_global_bundles = [
-        query_pass(
+        readout_relational_query_bundle(
             evaluator,
             local,
             loo_fast_weights[index],
@@ -1013,7 +1007,7 @@ def evaluate_cell(
         for index in range(len(relations))
     ]
     loo_local_bundles = [
-        query_pass(
+        readout_relational_query_bundle(
             evaluator,
             local,
             intact_fast_weights,
@@ -1339,7 +1333,7 @@ def evaluate(
         size_results = {}
         for size_index, graph in enumerate(graphs, start=1):
             protocol = protocol_for_size(base, graph)
-            evaluator = VariableItemFrozenFastWeightEvaluator(
+            evaluator = FrozenFastWeightEvaluator(
                 backbone,
                 model_config,
                 protocol,
@@ -1348,6 +1342,7 @@ def evaluate(
                 cue_mode=str(evaluation["cue_mode"]),
                 subject_encoding_mode=str(evaluation["subject_encoding_mode"]),
                 subject_encoding_seed=int(evaluation["subject_encoding_seed"]),
+                required_item_count=None,
             )
             size_interface = validate_size_interface(evaluator)
             if protocol.n_items == 8:

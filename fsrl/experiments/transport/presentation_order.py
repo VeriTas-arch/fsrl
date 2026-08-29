@@ -33,12 +33,12 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
+from fsrl.evaluation.relational_query import readout_relational_query_bundle
 from fsrl.experiments.local_fidelity.evidence_access_pilot import (
     build_access_trace,
     build_fast_weight_loo,
     measure_presentation_invariance,
 )
-from fsrl.experiments.local_fidelity.trace_pilot import query_pass
 from fsrl.experiments.transport.topology import (
     bootstrap_counts,
     condition_metrics,
@@ -331,7 +331,7 @@ def evaluate_schedule(
         )
         for relation in relations
     ]
-    intact_bundle = query_pass(
+    intact_bundle = readout_relational_query_bundle(
         evaluator,
         local,
         intact_fast_weights,
@@ -341,7 +341,7 @@ def evaluate_schedule(
         global_off=False,
         shuffled_indices=None,
     )
-    a_off_bundle = query_pass(
+    a_off_bundle = readout_relational_query_bundle(
         evaluator,
         local,
         intact_fast_weights,
@@ -351,7 +351,7 @@ def evaluate_schedule(
         global_off=False,
         shuffled_indices=None,
     )
-    p_off_bundle = query_pass(
+    p_off_bundle = readout_relational_query_bundle(
         evaluator,
         local,
         intact_fast_weights,
@@ -362,7 +362,7 @@ def evaluate_schedule(
         shuffled_indices=None,
     )
     loo_global_bundles = [
-        query_pass(
+        readout_relational_query_bundle(
             evaluator,
             local,
             loo_fast_weights[index],
@@ -375,7 +375,7 @@ def evaluate_schedule(
         for index in range(len(relations))
     ]
     loo_local_bundles = [
-        query_pass(
+        readout_relational_query_bundle(
             evaluator,
             local,
             intact_fast_weights,

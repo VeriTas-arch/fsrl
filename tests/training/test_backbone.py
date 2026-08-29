@@ -9,7 +9,8 @@ from unittest.mock import patch
 import numpy as np
 import torch
 
-from fsrl.infra.runtime import DEFAULT_COMPILED_PROFILE
+from fsrl.infra.file_contracts import validate_run_manifest
+from fsrl.infra.runtime import CPU_TEST_PROFILE, DEFAULT_COMPILED_PROFILE
 from fsrl.training import backbone
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
@@ -28,7 +29,7 @@ from fsrl.training.backbone import (
     run_optimized_meta_batch,
     save_meta_checkpoint,
 )
-from fsrl.training.backbone import main as training_main
+from fsrl.training.cli import main as training_main
 
 
 class MetaTrainingTests(unittest.TestCase):
@@ -118,9 +119,10 @@ class MetaTrainingTests(unittest.TestCase):
             self.generator,
             np.random.default_rng(41),
         )
+        metrics = stats.materialize_metrics()
         self.assertTrue(torch.isfinite(stats.loss))
-        self.assertTrue(0.0 <= stats.query_accuracy <= 1.0)
-        self.assertGreater(stats.mean_abs_fast_weight, 0.0)
+        self.assertTrue(0.0 <= metrics.query_accuracy <= 1.0)
+        self.assertGreater(metrics.mean_abs_fast_weight, 0.0)
         stats.loss.backward()
         self.assertIsNotNone(self.net.alpha.grad)
         self.assertGreater(float(torch.sum(torch.abs(self.net.alpha.grad))), 0.0)
@@ -199,16 +201,20 @@ class MetaTrainingTests(unittest.TestCase):
             self.generator,
             np.random.default_rng(97),
         )
+        stepwise_metrics = stepwise_stats.materialize_metrics()
+        optimized_metrics = optimized_stats.materialize_metrics()
         self.assertEqual(stepwise_stats.n_edges, optimized_stats.n_edges)
-        self.assertEqual(stepwise_stats.query_accuracy, optimized_stats.query_accuracy)
+        self.assertEqual(
+            stepwise_metrics.query_accuracy, optimized_metrics.query_accuracy
+        )
         self.assertAlmostEqual(
-            stepwise_stats.query_cross_entropy,
-            optimized_stats.query_cross_entropy,
+            stepwise_metrics.query_cross_entropy,
+            optimized_metrics.query_cross_entropy,
             places=6,
         )
         self.assertEqual(
-            stepwise_stats.mean_abs_fast_weight,
-            optimized_stats.mean_abs_fast_weight,
+            stepwise_metrics.mean_abs_fast_weight,
+            optimized_metrics.mean_abs_fast_weight,
         )
         torch.testing.assert_close(
             stepwise_stats.loss.detach(), optimized_stats.loss.detach()
@@ -300,7 +306,7 @@ class MetaTrainingTests(unittest.TestCase):
         for compile_args, expected_mode, optimized_execution in cases:
             with (
                 self.subTest(compile_args=compile_args),
-                patch("fsrl.training.backbone.train_meta_model") as trainer,
+                patch("fsrl.training.cli.train_meta_model") as trainer,
             ):
                 training_main(
                     [
@@ -319,7 +325,7 @@ class MetaTrainingTests(unittest.TestCase):
                 )
 
     def test_current_cpu_schema_uses_sequence_execution_without_compilation(self):
-        with patch("fsrl.training.backbone.train_meta_model") as trainer:
+        with patch("fsrl.training.cli.train_meta_model") as trainer:
             training_main(
                 [
                     "--output-dir",
@@ -396,3 +402,35 @@ class MetaTrainingTests(unittest.TestCase):
                     checkpoint_filename="net.dat",
                 )
             self.assertFalse((output_dir / "net.dat").exists())
+
+    def test_training_owns_a_new_manifested_execution_directory(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "execution-41"
+            backbone.train_meta_model(
+                self.training_config,
+                output_dir,
+                optimized_execution=True,
+                execution_profile=CPU_TEST_PROFILE,
+                excluded_signatures=frozenset(),
+            )
+            manifest = json.loads((output_dir / "run.json").read_text())
+            self.assertEqual(manifest["lifecycle_state"], "complete")
+            self.assertEqual(manifest["execution_id"], "execution-41")
+            self.assertEqual(
+                {entry["path"] for entry in manifest["files"]},
+                {"config.json", "net.pth", "train_log.jsonl"},
+            )
+            self.assertTrue(validate_run_manifest(output_dir / "run.json")["passed"])
+
+    def test_training_refuses_to_reuse_an_execution_directory(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir) / "execution-41"
+            output_dir.mkdir()
+            with self.assertRaisesRegex(FileExistsError, "already exists"):
+                backbone.train_meta_model(
+                    self.training_config,
+                    output_dir,
+                    optimized_execution=True,
+                    execution_profile=CPU_TEST_PROFILE,
+                    excluded_signatures=frozenset(),
+                )

@@ -25,6 +25,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     load_frozen_retro_checkpoint,
     retained_relation_mask,
 )
+from fsrl.evaluation.relational_query import readout_relational_query_bundle
 from fsrl.experiments.local_fidelity.behavior_attribution import (
     pair_correct_probabilities,
 )
@@ -32,7 +33,6 @@ from fsrl.experiments.local_fidelity.trace_pilot import (
     behavior_summaries,
     build_local_trace,
     create_local_trace,
-    query_pass,
     shuffled_pair_indices,
 )
 from fsrl.experiments.local_fidelity.trace_replication import (
@@ -53,7 +53,11 @@ from fsrl.experiments.local_fidelity.trace_replication import (
     validate_artifacts,
 )
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
-from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.provenance import (
+    load_json,
+    tensor_hashes,
+    write_json_exclusive,
+)
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     registered_file_sha256,
@@ -855,7 +859,7 @@ def evaluate_seed(
             condition
         )
         shuffled = query_shuffle if query_shuffled else None
-        condition_bundles[condition] = query_pass(
+        condition_bundles[condition] = readout_relational_query_bundle(
             evaluator,
             local,
             intact_fast_weights,
@@ -866,7 +870,7 @@ def evaluate_seed(
             shuffled_indices=shuffled,
         )
         condition_loo_bundles[condition] = [
-            query_pass(
+            readout_relational_query_bundle(
                 evaluator,
                 local,
                 loo_fast_weights[index],
@@ -1244,7 +1248,7 @@ def main(args=None) -> int:
     result = evaluate_pilot(
         specification, source_validation, artifact_validation, runtime
     )
-    write_json(parsed.result, result)
+    write_json_exclusive(parsed.result, result)
     return 0
 
 

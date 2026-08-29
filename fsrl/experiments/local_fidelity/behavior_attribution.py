@@ -29,7 +29,7 @@ from fsrl.experiments.local_fidelity.trace_pilot import (
     query_bundle,
 )
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
-from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -831,7 +831,7 @@ def main(args=None) -> int:
     )
     specification = load_json(parsed.specification)
     result = run_attribution(specification, source_validation, runtime)
-    write_json(parsed.result, result)
+    write_json_exclusive(parsed.result, result)
     return 0
 
 

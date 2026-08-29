@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -32,8 +31,8 @@ from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
     FrozenFastWeightEvaluator,
 )
-from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
-from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.evaluation.registered import load_registered_frozen_evaluator
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
@@ -47,7 +46,6 @@ ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/support_write_localization_v1.json"
 )
-DEFAULT_OUTPUT_PATH = resolve_record("results/support_write_localization_v1.json")
 
 
 @dataclass(frozen=True)
@@ -1211,7 +1209,7 @@ def run_support_write_localization(
     for registration in sources["pilot_artifacts"]:
         seed = int(registration["seed"])
         print(f"[support-write] loading frozen seed {seed}", file=sys.stderr)
-        evaluator, behavior = load_frozen_evaluator(
+        evaluator, behavior = load_registered_frozen_evaluator(
             registration, pilot_specification, protocol
         )
         evidence = evaluator.realized_support_evidence()
@@ -1315,17 +1313,14 @@ def parse_args(args=None):
     parser.add_argument(
         "--specification", type=Path, default=DEFAULT_SPECIFICATION_PATH
     )
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args(args)
 
 
 def main(args=None):
     parsed = parse_args(args)
     result = run_support_write_localization(parsed.specification)
-    payload = json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        handle.write(payload)
+    write_json_exclusive(parsed.output, result)
     return 0
 
 

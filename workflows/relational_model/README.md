@@ -70,7 +70,12 @@ Implementation:
 - [`fsrl/core/plastic_rnn.py`](../../fsrl/core/plastic_rnn.py)
 - [`fsrl/training/backbone.py`](../../fsrl/training/backbone.py)
 - [`fsrl/training/checkpoints.py`](../../fsrl/training/checkpoints.py)
+- [`fsrl/evaluation/contracts.py`](../../fsrl/evaluation/contracts.py)
+- [`fsrl/evaluation/execution.py`](../../fsrl/evaluation/execution.py)
 - [`fsrl/evaluation/frozen_fast_weight.py`](../../fsrl/evaluation/frozen_fast_weight.py)
+- [`fsrl/evaluation/sampling.py`](../../fsrl/evaluation/sampling.py)
+- [`fsrl/evaluation/subject_encoding.py`](../../fsrl/evaluation/subject_encoding.py)
+- [`fsrl/infra/run_manifest.py`](../../fsrl/infra/run_manifest.py)
 - [`fsrl/infra/runtime.py`](../../fsrl/infra/runtime.py)
 
 Tests:
@@ -103,6 +108,7 @@ Verification:
 Implementation:
 
 - [`fsrl/evaluation/frozen_fast_weight.py`](../../fsrl/evaluation/frozen_fast_weight.py)
+- [`fsrl/evaluation/registered.py`](../../fsrl/evaluation/registered.py)
 - [`fsrl/analysis/hodge.py`](../../fsrl/analysis/hodge.py)
 - [`fsrl/analysis/statistics.py`](../../fsrl/analysis/statistics.py)
 - [`fsrl/experiments/assembly/trajectory.py`](../../fsrl/experiments/assembly/trajectory.py)
@@ -143,6 +149,7 @@ Implementation:
 - [`fsrl/core/local_trace.py`](../../fsrl/core/local_trace.py)
 - [`fsrl/core/relational_system.py`](../../fsrl/core/relational_system.py)
 - [`fsrl/core/state.py`](../../fsrl/core/state.py)
+- [`fsrl/evaluation/relational_query.py`](../../fsrl/evaluation/relational_query.py)
 - [`fsrl/experiments/local_fidelity/trace_replication.py`](../../fsrl/experiments/local_fidelity/trace_replication.py)
 - [`fsrl/experiments/local_fidelity/behavior_attribution.py`](../../fsrl/experiments/local_fidelity/behavior_attribution.py)
 

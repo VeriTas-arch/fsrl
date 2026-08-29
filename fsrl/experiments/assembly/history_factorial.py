@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -17,19 +16,19 @@ from fsrl.analysis.statistics import (
     masked_column_mean,
     summarize_subjects,
 )
+from fsrl.evaluation.registered import load_registered_frozen_evaluator
 from fsrl.experiments.assembly.factor_swap import (
     EpisodeFactors,
     compose_factors,
     readout_effective_margin_fields_batched,
     trace_natural_episode,
 )
-from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
 from fsrl.experiments.assembly.write_localization import (
     replay_without_relation_history,
     row_cosine,
     trace_support_trial,
 )
-from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
@@ -43,7 +42,6 @@ ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/history_state_factorial_v1.json"
 )
-DEFAULT_OUTPUT_PATH = resolve_record("results/history_state_factorial_v1.json")
 CELL_NAMES = ("NN", "NH", "HN", "HH")
 
 
@@ -449,7 +447,7 @@ def run_history_state_factorial(
     for registration in sources["pilot_artifacts"]:
         seed = int(registration["seed"])
         print(f"[history-closure] loading frozen seed {seed}", file=sys.stderr)
-        evaluator, behavior = load_frozen_evaluator(
+        evaluator, behavior = load_registered_frozen_evaluator(
             registration, pilot_specification, protocol
         )
         counts = bootstrap_counts(rng, int(bootstrap["samples"]), evaluator.config.bs)
@@ -527,17 +525,14 @@ def parse_args(args=None):
     parser.add_argument(
         "--specification", type=Path, default=DEFAULT_SPECIFICATION_PATH
     )
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args(args)
 
 
 def main(args=None):
     parsed = parse_args(args)
     result = run_history_state_factorial(parsed.specification)
-    payload = json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n"
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        handle.write(payload)
+    write_json_exclusive(parsed.output, result)
     return 0
 
 

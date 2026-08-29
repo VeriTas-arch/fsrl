@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
@@ -17,6 +16,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
 )
+from fsrl.infra.provenance import write_json_exclusive
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
 
@@ -482,10 +482,7 @@ def main(args=None):
         subject_encoding_mode=parsed.subject_encoding,
         protocol_path=parsed.protocol,
     )
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
 
 
 if __name__ == "__main__":

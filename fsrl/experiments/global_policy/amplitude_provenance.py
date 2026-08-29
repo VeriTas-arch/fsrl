@@ -23,7 +23,7 @@ from fsrl.experiments.local_fidelity.evidence_access_confirmation import (
     validate_artifacts,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.study_registry import (
     registered_file_sha256,
     resolve_record,
@@ -1324,7 +1324,7 @@ def main(args=None) -> int:
     result = run_diagnostic(
         specification, source_validation, artifact_validation, runtime
     )
-    write_json(parsed.result, result)
+    write_json_exclusive(parsed.result, result)
     return 0
 
 

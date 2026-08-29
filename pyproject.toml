@@ -31,6 +31,9 @@ test = [
 [tool.setuptools.packages.find]
 include = ["fsrl*"]
 
+[tool.setuptools.package-data]
+"fsrl.experiments.transport" = ["contracts/*.json"]
+
 [tool.ruff]
 cache-dir = ".cache/ruff"
 target-version = "py312"
@@ -43,3 +46,16 @@ extend-exclude = [
 [tool.pytest.ini_options]
 cache_dir = ".cache/pytest"
 testpaths = ["tests"]
+
+[tool.basedpyright]
+include = ["fsrl"]
+pythonVersion = "3.12"
+typeCheckingMode = "basic"
+strict = [
+    "fsrl/evaluation/contracts.py",
+    "fsrl/evaluation/execution.py",
+    "fsrl/evaluation/metrics.py",
+    "fsrl/evaluation/sampling.py",
+    "fsrl/evaluation/subject_encoding.py",
+    "fsrl/infra/run_manifest.py",
+]

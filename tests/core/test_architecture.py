@@ -207,6 +207,43 @@ class CoreArchitectureTests(unittest.TestCase):
         }
         self.assertNotIn("DEVICE", assigned_names)
 
+    def test_cli_result_writers_are_exclusive(self):
+        violations = []
+        for source in (ROOT / "fsrl").rglob("*.py"):
+            tree = ast.parse(source.read_text(encoding="utf-8"), filename=str(source))
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Call) or not node.args:
+                    continue
+                first_argument = node.args[0]
+                if (
+                    isinstance(node.func, ast.Name)
+                    and node.func.id == "write_json"
+                    and (
+                        (
+                            isinstance(first_argument, ast.Attribute)
+                            and first_argument.attr in {"output", "result"}
+                        )
+                        or (
+                            isinstance(first_argument, ast.Name)
+                            and first_argument.id == "output"
+                            and len(node.args) > 1
+                            and isinstance(node.args[1], ast.Name)
+                            and node.args[1].id == "result"
+                        )
+                    )
+                ):
+                    violations.append(f"{source.relative_to(ROOT)}:{node.lineno}")
+                if (
+                    isinstance(node.func, ast.Attribute)
+                    and node.func.attr == "open"
+                    and isinstance(node.func.value, ast.Attribute)
+                    and node.func.value.attr in {"output", "result"}
+                    and isinstance(first_argument, ast.Constant)
+                    and first_argument.value == "w"
+                ):
+                    violations.append(f"{source.relative_to(ROOT)}:{node.lineno}")
+        self.assertEqual(violations, [])
+
     def test_scoped_agent_guides_cover_distinct_repository_boundaries(self):
         expected = {
             "fsrl/AGENTS.md",

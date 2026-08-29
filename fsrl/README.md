@@ -21,7 +21,8 @@ The packages have deliberately narrow ownership:
   admission equations. It does not own study registry paths.
 - `training/` owns generic backbone optimization and checkpoint loading.
 - `evaluation/` owns frozen rollout, ordered query-field reconstruction, and
-  causal intervention interfaces.
+  causal intervention interfaces. Registered checkpoint loading and the shared
+  global/local query bundle live here rather than in an experiment runner.
 - `analysis/` owns reusable pure estimators such as Hodge decomposition,
   policy transforms, and participant bootstrap utilities.
 - `infra/` owns runtime policy, provenance, the study registry, and
@@ -44,6 +45,9 @@ to replay from their exact Git commit.
 The package root contains only `__init__.py` and the explicit `paths.py`
 contract. Reusable code lives in the stable packages above; evidence-producing
 code lives below `experiments/`. Tests mirror the same ownership structure.
+The wheel contains the `fsrl` namespace and the two transport contracts read
+from package-relative paths; repository evidence and workflow data remain
+outside the wheel by design.
 
 Frozen contracts may still name former flat modules. Those identities are
 verified against Git blobs and witness commits rather than recreated as a large
@@ -88,6 +92,14 @@ checkout. The boundary is explicit:
 - high-level training and causal evaluation default to the current versioned
   sequence/batched execution. Historical stepwise execution remains an
   explicit profile and is never silently substituted for a frozen lock.
+- production global/local query paths call `GlobalLocalRelationalSystem`; the
+  direct local correction, global fast-weight intervention, and policy residual
+  therefore cross one maintained P/L readout boundary.
+- `basedpyright` checks the complete maintained package at its incremental
+  baseline and applies strict mode to new contract and pure-computation
+  modules. The complexity budget rejects new C901 violations or increases in
+  registered legacy hotspots without forcing frozen runners into a cosmetic
+  rewrite.
 
 Equivalence is layered: bytes for immutable evidence and normalized legacy
 views; exact tensors/state dictionaries for adapters; numerical trajectory and

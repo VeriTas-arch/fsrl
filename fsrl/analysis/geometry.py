@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 from dataclasses import asdict
 from itertools import combinations
 from pathlib import Path
@@ -17,7 +16,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenFastWeightEvaluator,
     load_frozen_retro_checkpoint,
 )
-from fsrl.infra.provenance import load_json
+from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.record_catalog import resolve_record_id
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 from fsrl.tasks.protocol_catalog import load_registered_protocol
@@ -391,10 +390,7 @@ def parse_args(args=None):
 def main(args=None):
     parsed = parse_args(args)
     result = run_geometry_analysis(parsed.checkpoint, parsed.behavior, parsed.gate)
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
     return 0 if result["gate"]["passed"] else 1
 
 

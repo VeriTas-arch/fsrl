@@ -218,36 +218,59 @@ def validate_dataset_manifest(path: Path | str) -> dict[str, Any]:
     }
 
 
-def validate_run_manifest(path: Path | str) -> dict[str, Any]:
-    """Verify a prospective or backfilled run manifest against local bytes."""
-
-    manifest_path = Path(path)
-    errors: list[str] = []
-    try:
-        manifest = _loads_strict_json(manifest_path.read_text(encoding="utf-8"))
-    except (OSError, ValueError) as error:
-        return {"passed": False, "errors": [str(error)], "files": 0}
-    document_type = manifest.get("document_type")
-    if document_type not in {
-        "fsrl.run_manifest",
-        "fsrl.legacy_run_manifest",
+def _validate_prospective_lifecycle(
+    manifest: dict[str, Any], errors: list[str]
+) -> None:
+    lifecycle_state = manifest.get("lifecycle_state")
+    if lifecycle_state not in {
+        "running",
+        "complete",
+        "failed",
+        "materialized_compatibility_view",
     }:
+        errors.append("prospective run manifest has invalid lifecycle_state")
+    if lifecycle_state == "failed" and not isinstance(manifest.get("error"), dict):
+        errors.append("failed prospective run manifest requires error")
+    if lifecycle_state != "failed" and "error" in manifest:
+        errors.append("only failed prospective runs may record error")
+
+
+def _validate_prospective_run_header(
+    manifest: dict[str, Any], errors: list[str]
+) -> None:
+    for field in ("workflow_id", "execution_id", "lifecycle_state"):
+        if not isinstance(manifest.get(field), str) or not manifest[field]:
+            errors.append(f"prospective run manifest requires {field}")
+    for field in ("producer", "resolved_config"):
+        if not isinstance(manifest.get(field), dict):
+            errors.append(f"prospective run manifest requires {field}")
+    _validate_prospective_lifecycle(manifest, errors)
+
+
+def _validate_legacy_run_header(manifest: dict[str, Any], errors: list[str]) -> None:
+    if manifest.get("lifecycle_state") != "historical_unclassified":
+        errors.append("legacy run manifest lifecycle_state mismatch")
+    if not isinstance(manifest.get("conversion_contract"), dict):
+        errors.append("legacy run manifest requires conversion_contract")
+
+
+def _validate_run_header(manifest: dict[str, Any], errors: list[str]) -> None:
+    document_type = manifest.get("document_type")
+    if document_type not in {"fsrl.run_manifest", "fsrl.legacy_run_manifest"}:
         errors.append("invalid run-manifest document_type")
     if manifest.get("schema_version") != 1:
         errors.append("run-manifest schema_version must be 1")
     if document_type == "fsrl.run_manifest":
-        for field in ("workflow_id", "execution_id", "lifecycle_state"):
-            if not isinstance(manifest.get(field), str) or not manifest[field]:
-                errors.append(f"prospective run manifest requires {field}")
-        for field in ("producer", "resolved_config"):
-            if not isinstance(manifest.get(field), dict):
-                errors.append(f"prospective run manifest requires {field}")
+        _validate_prospective_run_header(manifest, errors)
     elif document_type == "fsrl.legacy_run_manifest":
-        if manifest.get("lifecycle_state") != "historical_unclassified":
-            errors.append("legacy run manifest lifecycle_state mismatch")
-        if not isinstance(manifest.get("conversion_contract"), dict):
-            errors.append("legacy run manifest requires conversion_contract")
-    entries = manifest.get("files", [])
+        _validate_legacy_run_header(manifest, errors)
+
+
+def _validate_run_entries(
+    manifest_path: Path,
+    entries: list[dict[str, Any]],
+    errors: list[str],
+) -> tuple[list[str], int]:
     paths: list[str] = []
     checked = 0
     for entry in entries:
@@ -263,12 +286,81 @@ def validate_run_manifest(path: Path | str) -> dict[str, Any]:
             checked += 1
         except (KeyError, OSError, ValueError) as error:
             errors.append(f"invalid run file entry: {error}")
+    return paths, checked
+
+
+def _materialized_run_paths(manifest_path: Path, manifest: dict[str, Any]) -> set[str]:
+    if manifest.get("layout") == "legacy_loose_files":
+        payload_files = [
+            candidate
+            for candidate in manifest_path.parent.iterdir()
+            if candidate.is_file() and not candidate.name.endswith(".run.json")
+        ]
+    else:
+        payload_files = [
+            candidate
+            for candidate in manifest_path.parent.rglob("*")
+            if candidate.is_file()
+            and candidate.name != "run.json"
+            and not candidate.name.endswith(".run.json")
+            and candidate.name != ".run.json.tmp"
+        ]
+    return {
+        candidate.relative_to(manifest_path.parent).as_posix()
+        for candidate in payload_files
+    }
+
+
+def _validate_run_file_set(
+    manifest_path: Path,
+    manifest: dict[str, Any],
+    declared_paths: set[str],
+    errors: list[str],
+) -> None:
+    if manifest.get("lifecycle_state") == "running":
+        return
+    actual_paths = _materialized_run_paths(manifest_path, manifest)
+    for relative in sorted(actual_paths - declared_paths):
+        errors.append(f"run file is not declared: {relative}")
+    for relative in sorted(declared_paths - actual_paths):
+        errors.append(f"declared run file is absent: {relative}")
+
+
+def validate_run_manifest(path: Path | str) -> dict[str, Any]:
+    """Verify a prospective or backfilled run manifest against local bytes."""
+
+    manifest_path = Path(path)
+    errors: list[str] = []
+    try:
+        manifest = _loads_strict_json(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as error:
+        return {"passed": False, "errors": [str(error)], "files": 0}
+    if not isinstance(manifest, dict):
+        return {
+            "passed": False,
+            "errors": ["run manifest must be a JSON object"],
+            "files": 0,
+        }
+    _validate_run_header(manifest, errors)
+    entries = manifest.get("files", [])
+    if not isinstance(entries, list) or not all(
+        isinstance(entry, dict) for entry in entries
+    ):
+        return {
+            "passed": False,
+            "errors": [*errors, "run manifest files must be a list of objects"],
+            "execution_id": manifest.get("execution_id"),
+            "files": 0,
+            "checked_files": 0,
+        }
+    paths, checked = _validate_run_entries(manifest_path, entries, errors)
     if len(paths) != len(set(paths)):
         errors.append("run file paths must be unique")
     if manifest.get("file_count") != len(entries):
         errors.append("run file_count mismatch")
     if manifest.get("bytes") != sum(entry.get("bytes", 0) for entry in entries):
         errors.append("run byte total mismatch")
+    _validate_run_file_set(manifest_path, manifest, set(paths), errors)
     return {
         "passed": not errors,
         "errors": errors,
@@ -276,6 +368,63 @@ def validate_run_manifest(path: Path | str) -> dict[str, Any]:
         "files": len(entries),
         "checked_files": checked,
     }
+
+
+def find_unmanifested_run_roots(runs_root: Path = RUNS_ROOT) -> list[Path]:
+    """Find materialized run roots that have no owning manifest."""
+
+    if not runs_root.is_dir():
+        return []
+
+    def contains_payload(directory: Path) -> bool:
+        return any(
+            path.is_file()
+            and path.name != "run.json"
+            and not path.name.endswith(".run.json")
+            for path in directory.rglob("*")
+        )
+
+    missing = []
+    root_payloads = [
+        path
+        for path in runs_root.iterdir()
+        if path.is_file() and not path.name.endswith(".run.json")
+    ]
+    root_manifests = [
+        path
+        for path in runs_root.iterdir()
+        if path.is_file() and path.name.endswith(".run.json")
+    ]
+    if root_payloads and not root_manifests:
+        missing.append(runs_root)
+
+    for workflow_root in sorted(path for path in runs_root.iterdir() if path.is_dir()):
+        if (workflow_root / "run.json").is_file():
+            continue
+        execution_roots = [
+            path
+            for path in workflow_root.iterdir()
+            if path.is_dir()
+            and (contains_payload(path) or (path / "run.json").is_file())
+        ]
+        has_manifested_execution = any(
+            (path / "run.json").is_file() for path in execution_roots
+        )
+        if not has_manifested_execution:
+            if contains_payload(workflow_root):
+                missing.append(workflow_root)
+            continue
+        if any(
+            path.is_file()
+            and path.name != "run.json"
+            and not path.name.endswith(".run.json")
+            for path in workflow_root.iterdir()
+        ):
+            missing.append(workflow_root)
+        missing.extend(
+            path for path in execution_roots if not (path / "run.json").is_file()
+        )
+    return missing
 
 
 def audit_repository_file_contracts() -> dict[str, Any]:
@@ -302,13 +451,22 @@ def audit_repository_file_contracts() -> dict[str, Any]:
         for path, check in zip(run_paths, run_checks, strict=True)
         if not check["passed"]
     ]
+    missing_run_roots = [
+        path.relative_to(REPO_ROOT).as_posix() for path in find_unmanifested_run_roots()
+    ]
     return {
-        "passed": dataset["passed"] and catalog["passed"] and not run_errors,
+        "passed": (
+            dataset["passed"]
+            and catalog["passed"]
+            and not run_errors
+            and not missing_run_roots
+        ),
         "dataset": dataset,
         "record_catalog": catalog,
         "run_manifests": len(run_paths),
         "run_manifest_files": sum(check["files"] for check in run_checks),
         "run_errors": run_errors,
+        "unmanifested_run_roots": missing_run_roots,
     }
 
 

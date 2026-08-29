@@ -27,6 +27,7 @@ class RelationalQueryReadout:
     raw_local_margin: torch.Tensor
     local_gain: torch.Tensor
     local_correction: torch.Tensor
+    policy_residual: torch.Tensor
 
 
 class GlobalLocalRelationalSystem(nn.Module):
@@ -123,7 +124,12 @@ class GlobalLocalRelationalSystem(nn.Module):
         if intervention == RelationalIntervention.GLOBAL_OFF:
             fast_weights = torch.zeros_like(fast_weights)
         response_logits = None
+        response_inputs = None
+        pre_response_hidden = None
         for step, inputs in enumerate(input_sequence.unbind()):
+            if step == self.response_step:
+                response_inputs = inputs
+                pre_response_hidden = hidden
             logits, _, _, hidden, eligibility, _ = self.backbone(
                 inputs, hidden, eligibility, fast_weights
             )
@@ -131,6 +137,8 @@ class GlobalLocalRelationalSystem(nn.Module):
                 response_logits = logits
         if response_logits is None:
             raise RuntimeError("response logits were not produced")
+        if response_inputs is None or pre_response_hidden is None:
+            raise RuntimeError("response state was not captured")
         gain_override = None
         if intervention == RelationalIntervention.LOCAL_OFF:
             gain_override = response_logits.new_zeros(batch_size, 1)
@@ -146,6 +154,33 @@ class GlobalLocalRelationalSystem(nn.Module):
             raw_local_margin=raw,
             local_gain=gain,
             local_correction=correction,
+            policy_residual=self._policy_residual(
+                response_inputs, pre_response_hidden, fast_weights
+            ),
+        )
+
+    def _policy_residual(
+        self,
+        inputs: torch.Tensor,
+        hidden: torch.Tensor,
+        fast_weights: torch.Tensor,
+    ) -> torch.Tensor:
+        batch_size = inputs.shape[0]
+        hidden_size = self.backbone.model_config.hidden_size
+        hidden_column = hidden.view(batch_size, hidden_size, 1)
+        baseline = (
+            self.backbone.i2h(inputs).view(batch_size, hidden_size, 1)
+            + torch.matmul(self.backbone.w, hidden_column)
+        ).view(batch_size, hidden_size)
+        drive = torch.matmul(self.backbone.alpha * fast_weights, hidden_column).view(
+            batch_size, hidden_size
+        )
+        baseline_hidden = torch.tanh(baseline)
+        exact_increment = torch.tanh(baseline + drive) - baseline_hidden
+        linear_increment = (1.0 - baseline_hidden.square()) * drive
+        margin = (self.backbone.h2o.weight[1] - self.backbone.h2o.weight[0]).view(1, -1)
+        return torch.sum(
+            margin * (linear_increment - exact_increment), dim=1, keepdim=True
         )
 
     def _validate_sequence(

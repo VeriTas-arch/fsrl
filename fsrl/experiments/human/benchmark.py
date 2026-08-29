@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
 from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
@@ -21,7 +20,7 @@ from fsrl.analysis.behavioral import (
     maximum_circular_triads,
 )
 from fsrl.infra.file_contracts import dataset_file, load_dataset_manifest
-from fsrl.infra.provenance import file_sha256
+from fsrl.infra.provenance import file_sha256, write_json_exclusive
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import EXTERNAL_DATA_ROOT, REPO_ROOT
 from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
@@ -38,7 +37,6 @@ DEFAULT_PREREGISTERED_PATH = (
     LIU_DATASET_ROOT / LIU_DATASET_FILES["preregistered"]["path"]
 )
 DEFAULT_REPLICATION_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["replication"]["path"]
-DEFAULT_OUTPUT_PATH = resolve_record("benchmarks/liu_human_exact_v1.json")
 DEFAULT_FIGURE2D_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["figure2d"]["path"]
 DEFAULT_FIGURE3B_PATH = LIU_DATASET_ROOT / LIU_DATASET_FILES["figure3b"]["path"]
 
@@ -733,7 +731,7 @@ def parse_args(args=None):
     )
     parser.add_argument("--replication", type=Path, default=DEFAULT_REPLICATION_PATH)
     parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--bootstrap-seed", type=int, default=20260823)
     parser.add_argument("--bootstrap-samples", type=int, default=10000)
     return parser.parse_args(args)
@@ -748,10 +746,7 @@ def main(args=None):
         bootstrap_seed=parsed.bootstrap_seed,
         bootstrap_samples=parsed.bootstrap_samples,
     )
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
 
 
 if __name__ == "__main__":

@@ -16,16 +16,20 @@ from fsrl.experiments.assembly.history_factorial import run_history_state_factor
 from fsrl.experiments.assembly.trajectory import run_assembly_trajectory
 from fsrl.experiments.confirmation.behavioral import (
     DEFAULT_OUTPUT_ROOT,
-    FORMAL_CONFIRMATION_ID,
-    validate_checkpoint,
     validate_formal_runtime_record,
     validate_formal_training_execution,
 )
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.provenance import file_sha256, load_json, write_json
+from fsrl.infra.provenance import (
+    file_sha256,
+    load_json,
+    write_json,
+    write_json_exclusive,
+)
 from fsrl.infra.study_registry import registered_file_sha256, resolve_record
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
+from fsrl.training.checkpoints import FORMAL_CONFIRMATION_ID, validate_meta_checkpoint
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/mechanism_confirmation_v1.json")
@@ -125,7 +129,7 @@ def _seed_input_registration(
     for path in (checkpoint, config, behavior, confirmation, qualification):
         if not path.is_file():
             raise RuntimeError(f"registered seed artifact is missing: {path}")
-    metadata = validate_checkpoint(checkpoint, training_specification, seed)
+    metadata = validate_meta_checkpoint(checkpoint, training_specification, seed)
     behavior_result = load_json(behavior)
     confirmation_result = load_json(confirmation)
     if training_specification["confirmation_id"] == FORMAL_CONFIRMATION_ID:
@@ -626,7 +630,7 @@ def main(args=None):
     if output is None:
         print(json.dumps(result, indent=2, sort_keys=True, allow_nan=False))
     else:
-        write_json(output, result)
+        write_json_exclusive(output, result)
     return 0 if result.get("passed", True) else 1
 
 

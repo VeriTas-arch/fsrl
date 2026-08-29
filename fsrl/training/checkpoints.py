@@ -13,8 +13,12 @@ from fsrl.core.config import ADDINPUT, TrainConfig
 from fsrl.core.model_config import RetroModelConfig
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.runtime import default_device
+from fsrl.tasks.holdouts import registered_holdout_signatures
 
 from ..core.plastic_rnn import RetroModulRNN
+from .backbone import COMPILED_TRAINING_EXECUTION
+
+FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
 
 
 @dataclass(frozen=True)
@@ -92,6 +96,45 @@ def load_training_provenance(checkpoint: Path, checkpoint_hash: str) -> dict:
         "checkpoint_sha_matches": registered_hash == checkpoint_hash,
         "task_distribution": metadata.get("task_distribution"),
     }
+
+
+def validate_meta_checkpoint(checkpoint: Path, specification: dict, seed: int) -> dict:
+    """Validate a registered meta-training checkpoint without loading weights."""
+
+    metadata_path = checkpoint.parent / "config.json"
+    with metadata_path.open(encoding="utf-8") as handle:
+        metadata = json.load(handle)
+    expected_training = dict(specification["training"])
+    expected_training.pop("seeds")
+    expected_training.pop("checkpoint_selection")
+    expected_training["seed"] = seed
+    if metadata["training"] != expected_training:
+        raise RuntimeError(
+            f"seed {seed} checkpoint training configuration is not registered"
+        )
+    if (
+        specification["confirmation_id"] == FORMAL_CONFIRMATION_ID
+        and metadata.get("execution") != COMPILED_TRAINING_EXECUTION
+    ):
+        raise RuntimeError(
+            f"seed {seed} checkpoint was not trained with the registered compiler"
+        )
+    if metadata["completed_outer_steps"] != specification["training"]["outer_steps"]:
+        raise RuntimeError(f"seed {seed} checkpoint is not the fixed final step")
+    observed_signatures = {
+        tuple(tuple(pair) for pair in signature)
+        for signature in metadata["task_distribution"].get(
+            "held_out_rank_graph_signatures", []
+        )
+    }
+    if observed_signatures != set(registered_holdout_signatures()):
+        raise RuntimeError(
+            f"seed {seed} training did not exclude both Liu graph signatures"
+        )
+    observed_hash = file_sha256(checkpoint)
+    if metadata["checkpoint"]["sha256"] != observed_hash:
+        raise RuntimeError(f"seed {seed} checkpoint hash does not match metadata")
+    return metadata
 
 
 def load_retro_checkpoint(

@@ -22,6 +22,7 @@ from fsrl.analysis.statistics import (
     summarize_subjects,
 )
 from fsrl.core.local_trace import ConjunctiveLocalTrace
+from fsrl.evaluation.causal_suite import run_causal_suite
 from fsrl.evaluation.frozen_fast_weight import (
     DISTANCE_INPUT_OFFSET,
     FastWeightIntervention,
@@ -29,9 +30,9 @@ from fsrl.evaluation.frozen_fast_weight import (
     checkpoint_sha256,
     load_frozen_retro_checkpoint,
     retained_relation_mask,
-    run_causal_suite,
 )
 from fsrl.evaluation.qualification import evaluate_qualification
+from fsrl.evaluation.relational_query import readout_relational_query_bundle
 from fsrl.experiments.local_fidelity.curvature_gate import make_gate_tasks
 from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     adaptation_config,
@@ -39,9 +40,13 @@ from fsrl.experiments.local_fidelity.curvature_gate_pilot import (
     query_binding_summary,
     terminal_projection_summary,
 )
-from fsrl.experiments.local_fidelity.policy_residual import policy_residual_statistics
 from fsrl.infra.formal_runtime import configure_formal_cuda_runtime
-from fsrl.infra.provenance import load_json, tensor_hashes, write_json
+from fsrl.infra.provenance import (
+    load_json,
+    tensor_hashes,
+    write_json,
+    write_json_exclusive,
+)
 from fsrl.infra.study_registry import canonical_file_sha256 as file_sha256
 from fsrl.infra.study_registry import (
     legacy_identifier,
@@ -495,115 +500,6 @@ def build_local_trace(
     return state.detach().clone()
 
 
-def query_pass(
-    evaluator: FrozenFastWeightEvaluator,
-    local: ConjunctiveLocalTrace,
-    fast_weights: torch.Tensor,
-    local_state: torch.Tensor,
-    pair_schedules,
-    *,
-    local_off: bool,
-    global_off: bool,
-    shuffled_indices: np.ndarray | None,
-) -> dict:
-    subjects = evaluator.config.bs
-    pair_count = len(pair_schedules[0])
-    arrays = {
-        name: np.empty((subjects, pair_count), dtype=np.float64)
-        for name in (
-            "logits",
-            "global_logits",
-            "raw_local_margins",
-            "applied_local_margins",
-            "local_gains",
-            "policy_residuals",
-        )
-    }
-    query_weights = torch.zeros_like(fast_weights) if global_off else fast_weights
-    all_pairs = ordered_pairs(evaluator.protocol.n_items)
-    with torch.no_grad():
-        for pair_index in range(pair_count):
-            hidden = evaluator.net.initial_hidden(subjects)
-            eligibility = evaluator.net.initial_eligibility(subjects)
-            left = np.asarray(
-                [schedule[pair_index][0] for schedule in pair_schedules], dtype=np.int64
-            )
-            right = np.asarray(
-                [schedule[pair_index][1] for schedule in pair_schedules], dtype=np.int64
-            )
-            signed = np.zeros(subjects, dtype=np.float32)
-            step0 = evaluator._step_inputs(
-                left,
-                right,
-                signed,
-                numstep=0,
-                time_value=evaluator.test_time_value,
-                support_trial=False,
-            )
-            response = evaluator._step_inputs(
-                left,
-                right,
-                signed,
-                numstep=1,
-                time_value=evaluator.test_time_value,
-                support_trial=False,
-            )
-            _, _, _, hidden, eligibility, _ = evaluator.net(
-                step0, hidden, eligibility, query_weights
-            )
-            global_output, _, _, _, _, _ = evaluator.net(
-                response, hidden, eligibility, query_weights
-            )
-            local_step0 = step0
-            if shuffled_indices is not None:
-                mapped = [
-                    all_pairs[int(shuffled_indices[subject, pair_index])]
-                    for subject in range(subjects)
-                ]
-                local_step0 = evaluator._step_inputs(
-                    np.asarray([pair[0] for pair in mapped], dtype=np.int64),
-                    np.asarray([pair[1] for pair in mapped], dtype=np.int64),
-                    signed,
-                    numstep=0,
-                    time_value=evaluator.test_time_value,
-                    support_trial=False,
-                )
-            gain_override = (
-                torch.zeros(subjects, 1, device=fast_weights.device)
-                if local_off
-                else None
-            )
-            corrected, raw_margin, gain, correction = local(
-                global_output,
-                local_state,
-                local_step0[:, : 2 * evaluator.config.cs],
-                gain_override,
-            )
-            hidden_column = hidden.view(subjects, evaluator.config.hs, 1)
-            baseline = (
-                evaluator.net.i2h(response).view(subjects, evaluator.config.hs, 1)
-                + torch.matmul(evaluator.net.w, hidden_column)
-            ).view(subjects, evaluator.config.hs)
-            drive = torch.matmul(
-                evaluator.net.alpha * query_weights, hidden_column
-            ).view(subjects, evaluator.config.hs)
-            margin_direction = evaluator.net.h2o.weight[1] - evaluator.net.h2o.weight[0]
-            residual = policy_residual_statistics(baseline, drive, margin_direction)[0]
-            arrays["logits"][:, pair_index] = (
-                (corrected[:, 1] - corrected[:, 0]).cpu().numpy()
-            )
-            arrays["global_logits"][:, pair_index] = (
-                (global_output[:, 1] - global_output[:, 0]).cpu().numpy()
-            )
-            arrays["raw_local_margins"][:, pair_index] = raw_margin[:, 0].cpu().numpy()
-            arrays["applied_local_margins"][:, pair_index] = (
-                correction[:, 0].cpu().numpy()
-            )
-            arrays["local_gains"][:, pair_index] = gain[:, 0].cpu().numpy()
-            arrays["policy_residuals"][:, pair_index] = residual[:, 0].cpu().numpy()
-    return arrays
-
-
 def query_bundle(
     evaluator,
     local,
@@ -621,7 +517,7 @@ def query_bundle(
         shuffled = shuffled_pair_indices(
             evaluator.config.bs, evaluator.protocol.n_items, shuffle_seed
         )
-    return query_pass(
+    return readout_relational_query_bundle(
         evaluator,
         local,
         fast_weights,
@@ -1242,7 +1138,7 @@ def main(args=None) -> int:
         artifact_validation,
         runtime,
     )
-    write_json(parsed.result, result)
+    write_json_exclusive(parsed.result, result)
     return 0
 
 

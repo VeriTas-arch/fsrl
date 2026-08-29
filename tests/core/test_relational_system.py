@@ -128,6 +128,30 @@ class RelationalSystemTests(unittest.TestCase):
             observed_margins = readout.global_logits[:, 1] - readout.global_logits[:, 0]
             torch.testing.assert_close(observed_margins, expected_margins)
 
+            hidden = self.backbone.initial_hidden(self.config.bs)
+            eligibility = self.backbone.initial_eligibility(self.config.bs)
+            _, _, _, hidden, eligibility, _ = self.backbone(
+                sequence[0], hidden, eligibility, expected_weights
+            )
+            hidden_column = hidden.view(self.config.bs, self.config.hs, 1)
+            baseline = (
+                self.backbone.i2h(sequence[1]).view(self.config.bs, self.config.hs, 1)
+                + torch.matmul(self.backbone.w, hidden_column)
+            ).view(self.config.bs, self.config.hs)
+            drive = torch.matmul(
+                self.backbone.alpha * expected_weights, hidden_column
+            ).view(self.config.bs, self.config.hs)
+            baseline_hidden = torch.tanh(baseline)
+            exact_increment = torch.tanh(baseline + drive) - baseline_hidden
+            linear_increment = (1.0 - baseline_hidden.square()) * drive
+            margin = self.backbone.h2o.weight[1] - self.backbone.h2o.weight[0]
+            expected_residual = torch.sum(
+                margin.view(1, -1) * (linear_increment - exact_increment),
+                dim=1,
+                keepdim=True,
+            )
+            torch.testing.assert_close(readout.policy_residual, expected_residual)
+
             local_off = self.system.query(
                 state,
                 sequence,

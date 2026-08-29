@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 from typing import Any, cast
 
@@ -14,11 +13,11 @@ from fsrl.analysis.hodge import CompleteGraphGeometry, build_complete_graph_geom
 from fsrl.analysis.statistics import bootstrap_counts, json_values, summarize_subjects
 from fsrl.core.config import NUMRESPONSESTEP
 from fsrl.evaluation.fields import ordered_query_schedule
-from fsrl.experiments.assembly.trajectory import load_frozen_evaluator
+from fsrl.evaluation.registered import load_registered_frozen_evaluator
 from fsrl.experiments.local_fidelity.hidden_residual import validate_registered_sources
 from fsrl.experiments.local_fidelity.operator_binding import replay_terminal_states
 from fsrl.infra.formal_runtime import configure_formal_runtime
-from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import legacy_identifier, resolve_record
 from fsrl.infra.study_registry import resolve_registered_path as resolve_path
 from fsrl.paths import REPO_ROOT
@@ -28,7 +27,6 @@ ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record(
     "benchmarks/operator_output_semantics_v1.json"
 )
-DEFAULT_OUTPUT_PATH = resolve_record("results/operator_output_semantics_v1.json")
 STAGES = ("A_operator_value", "J_linearized_expression", "H_exact_expression")
 
 
@@ -551,7 +549,7 @@ def _run_seed(
     specification: dict,
     counts: np.ndarray,
 ) -> dict:
-    evaluator, _behavior = load_frozen_evaluator(
+    evaluator, _behavior = load_registered_frozen_evaluator(
         registration, pilot_specification, protocol
     )
     intact, loo, effective, retained = replay_terminal_states(evaluator, protocol)
@@ -827,17 +825,14 @@ def parse_args(args=None):
     parser.add_argument(
         "--specification", type=Path, default=DEFAULT_SPECIFICATION_PATH
     )
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args(args)
 
 
 def main(args=None):
     parsed = parse_args(args)
     result = run_operator_output_semantics(parsed.specification)
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
     return 0
 
 

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
 import json
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
@@ -15,9 +14,9 @@ from torch import nn
 from fsrl.core.config import NUMRESPONSESTEP, TrainConfig
 from fsrl.core.sequence import RecurrentSequence
 from fsrl.infra.provenance import file_sha256
+from fsrl.infra.run_manifest import ProspectiveRun
 from fsrl.infra.runtime import (
     DEFAULT_COMPILED_PROFILE,
-    SUPPORTED_TORCH_COMPILE_MODES,
     ExecutionProfile,
     begin_compiled_iteration,
     compile_module,
@@ -55,12 +54,32 @@ class MetaTrainConfig:
 
 
 @dataclass(frozen=True)
-class MetaBatchStats:
-    loss: torch.Tensor
+class MetaBatchMetrics:
+    loss: float
     query_cross_entropy: float
     query_accuracy: float
     mean_abs_fast_weight: float
     n_edges: int
+
+
+@dataclass(frozen=True)
+class MetaBatchStats:
+    loss: torch.Tensor
+    diagnostics: torch.Tensor
+    query_count: int
+    n_edges: int
+
+    def materialize_metrics(self) -> MetaBatchMetrics:
+        loss, query_cross_entropy, correct_count, mean_abs_fast_weight = (
+            self.diagnostics.detach().cpu().tolist()
+        )
+        return MetaBatchMetrics(
+            loss=loss,
+            query_cross_entropy=query_cross_entropy,
+            query_accuracy=correct_count / self.query_count,
+            mean_abs_fast_weight=mean_abs_fast_weight,
+            n_edges=self.n_edges,
+        )
 
 
 # Frozen execution record for the already registered backbones. Do not rewrite it
@@ -99,6 +118,8 @@ OPTIMIZED_COMPILED_TRAINING_EXECUTION = {
     ),
     "target_transfer": "one_query_target_cpu_to_cuda_transfer_per_meta_batch",
     "metric_transfer": "one_batched_cuda_to_cpu_transfer_per_meta_batch",
+    "metric_transfer_phase": "after_optimizer_step",
+    "training_log_writer": "one_exclusive_buffered_open_per_execution",
 }
 
 
@@ -152,6 +173,8 @@ def optimized_compiled_execution_record(profile: ExecutionProfile) -> dict:
         "metric_transfer": (
             f"one_batched_{profile.device}_to_cpu_transfer_per_meta_batch"
         ),
+        "metric_transfer_phase": "after_optimizer_step",
+        "training_log_writer": "one_exclusive_buffered_open_per_execution",
     }
 
 
@@ -372,11 +395,18 @@ def run_meta_batch(
     loss = query_loss + training_config.fast_weight_penalty * torch.mean(
         fast_weights**2
     )
+    diagnostics = torch.stack(
+        (
+            loss.detach(),
+            query_loss.detach(),
+            torch.tensor(correct, dtype=query_loss.dtype, device=device),
+            torch.mean(torch.abs(fast_weights)).detach(),
+        )
+    )
     return MetaBatchStats(
         loss=loss,
-        query_cross_entropy=float(query_loss.detach()),
-        query_accuracy=correct / total,
-        mean_abs_fast_weight=float(torch.mean(torch.abs(fast_weights)).detach()),
+        diagnostics=diagnostics,
+        query_count=total,
         n_edges=n_edges,
     )
 
@@ -492,19 +522,50 @@ def run_optimized_meta_batch(
     )
     diagnostics = torch.stack(
         (
+            loss.detach(),
             query_loss.detach(),
             correct.detach().to(query_loss.dtype),
             torch.mean(torch.abs(fast_weights)).detach(),
         )
-    ).cpu()
-    query_cross_entropy, correct_count, mean_abs_fast_weight = diagnostics.tolist()
+    )
     return MetaBatchStats(
         loss=loss,
-        query_cross_entropy=query_cross_entropy,
-        query_accuracy=correct_count / query_batch_size,
-        mean_abs_fast_weight=mean_abs_fast_weight,
+        diagnostics=diagnostics,
+        query_count=query_batch_size,
         n_edges=n_edges,
     )
+
+
+def apply_meta_batch_update(
+    training_config: MetaTrainConfig,
+    model_config: TrainConfig,
+    net: RetroModulRNN,
+    training_net: RetroModulRNN,
+    sequence_runner: nn.Module | None,
+    task_generator: GenericRankingTaskGenerator,
+    rng: np.random.Generator,
+    optimizer: torch.optim.Optimizer,
+) -> MetaBatchStats:
+    """Apply one optimizer update without synchronizing diagnostics to the host."""
+
+    optimizer.zero_grad()
+    if sequence_runner is None:
+        stats = run_meta_batch(
+            training_config, model_config, training_net, task_generator, rng
+        )
+    else:
+        stats = run_optimized_meta_batch(
+            training_config,
+            model_config,
+            net,
+            sequence_runner,
+            task_generator,
+            rng,
+        )
+    stats.loss.backward()
+    torch.nn.utils.clip_grad_norm_(net.parameters(), training_config.gradient_clip)
+    optimizer.step()
+    return stats
 
 
 def make_model_and_tasks(
@@ -648,160 +709,83 @@ def train_meta_model(
         device=profile.device,
     )
     resolved_exclusions = task_generator.excluded_signatures
-    if optimized_execution:
-        training_net = net
-        sequence_runner = (
-            compile_meta_sequence(net, profile)
-            if profile.compile
-            else RecurrentSequence(net)
-        )
-    else:
-        training_net = compile_module(net, profile) if profile.compile else net
-        sequence_runner = None
-    optimizer = torch.optim.Adam(
-        training_net.parameters(), lr=training_config.learning_rate
+    run = ProspectiveRun.start(
+        output_dir,
+        workflow_id="relational_model",
+        execution_id=output_dir.name,
+        producer={
+            "module": "fsrl.training.backbone",
+            "callable": "train_meta_model",
+        },
+        resolved_config={
+            "training": asdict(training_config),
+            "execution_profile": profile.to_dict(),
+            "execution_schema": "current" if optimized_execution else "historical",
+            "checkpoint_filename": checkpoint_filename,
+            "held_out_rank_graph_signatures": [
+                [list(pair) for pair in signature]
+                for signature in sorted(resolved_exclusions)
+            ],
+        },
     )
-    log_path = output_dir / "train_log.jsonl"
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    for step in range(training_config.outer_steps):
-        begin_compiled_iteration(profile)
-        optimizer.zero_grad()
-        if sequence_runner is None:
-            stats = run_meta_batch(
-                training_config, model_config, training_net, task_generator, rng
+    with run:
+        if optimized_execution:
+            training_net = net
+            sequence_runner = (
+                compile_meta_sequence(net, profile)
+                if profile.compile
+                else RecurrentSequence(net)
             )
         else:
-            stats = run_optimized_meta_batch(
-                training_config,
-                model_config,
-                net,
-                sequence_runner,
-                task_generator,
-                rng,
-            )
-        stats.loss.backward()
-        torch.nn.utils.clip_grad_norm_(net.parameters(), training_config.gradient_clip)
-        optimizer.step()
-        record = {
-            "outer_step": step,
-            "loss": float(stats.loss.detach()),
-            "query_cross_entropy": stats.query_cross_entropy,
-            "query_accuracy": stats.query_accuracy,
-            "mean_abs_fast_weight": stats.mean_abs_fast_weight,
-            "n_edges": stats.n_edges,
-        }
-        with log_path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, sort_keys=True) + "\n")
-        if training_config.save_every > 0 and (
-            (step + 1) % training_config.save_every == 0
-            or step + 1 == training_config.outer_steps
-        ):
-            save_meta_checkpoint(
-                output_dir,
-                net,
-                training_config,
-                step,
-                execution=(
-                    (
-                        optimized_compiled_execution_record(profile)
-                        if optimized_execution
-                        else compiled_execution_record(profile)
+            training_net = compile_module(net, profile) if profile.compile else net
+            sequence_runner = None
+        optimizer = torch.optim.Adam(
+            training_net.parameters(), lr=training_config.learning_rate
+        )
+        log_path = output_dir / "train_log.jsonl"
+
+        with log_path.open("x", encoding="utf-8") as log_handle:
+            for step in range(training_config.outer_steps):
+                begin_compiled_iteration(profile)
+                stats = apply_meta_batch_update(
+                    training_config,
+                    model_config,
+                    net,
+                    training_net,
+                    sequence_runner,
+                    task_generator,
+                    rng,
+                    optimizer,
+                )
+                metrics = stats.materialize_metrics()
+                record = {
+                    "outer_step": step,
+                    "loss": metrics.loss,
+                    "query_cross_entropy": metrics.query_cross_entropy,
+                    "query_accuracy": metrics.query_accuracy,
+                    "mean_abs_fast_weight": metrics.mean_abs_fast_weight,
+                    "n_edges": metrics.n_edges,
+                }
+                log_handle.write(json.dumps(record, sort_keys=True) + "\n")
+                if training_config.save_every > 0 and (
+                    (step + 1) % training_config.save_every == 0
+                    or step + 1 == training_config.outer_steps
+                ):
+                    save_meta_checkpoint(
+                        output_dir,
+                        net,
+                        training_config,
+                        step,
+                        execution=(
+                            (
+                                optimized_compiled_execution_record(profile)
+                                if optimized_execution
+                                else compiled_execution_record(profile)
+                            )
+                            if profile.compile
+                            else None
+                        ),
+                        runtime=runtime if optimized_execution else None,
+                        excluded_signatures=resolved_exclusions,
+                        checkpoint_filename=checkpoint_filename,
                     )
-                    if profile.compile
-                    else None
-                ),
-                runtime=runtime if optimized_execution else None,
-                excluded_signatures=resolved_exclusions,
-                checkpoint_filename=checkpoint_filename,
-            )
-
-
-def parse_args(args=None):
-    parser = argparse.ArgumentParser(
-        description="Meta-train a plastic RNN on generic sparse ranking graphs."
-    )
-    parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--outer-steps", type=int, default=30000)
-    parser.add_argument("--batch-size", type=int, default=32)
-    parser.add_argument("--hidden-size", type=int, default=200)
-    parser.add_argument("--cue-size", type=int, default=15)
-    parser.add_argument("--seed", type=int, default=1)
-    parser.add_argument("--learning-rate", type=float, default=1e-4)
-    parser.add_argument("--save-every", type=int, default=500)
-    parser.add_argument("--compile-model", action="store_true")
-    parser.add_argument(
-        "--execution-schema",
-        choices=("current", "historical"),
-        default="current",
-        help=(
-            "current uses the versioned sequence execution; historical preserves "
-            "the registered stepwise implementation"
-        ),
-    )
-    parser.add_argument(
-        "--optimized-execution",
-        action="store_true",
-        help=("compatibility alias for --execution-schema current"),
-    )
-    parser.add_argument(
-        "--compile-mode",
-        choices=SUPPORTED_TORCH_COMPILE_MODES,
-        help=(
-            "override the torch.compile mode; optimized CUDA execution defaults "
-            "to reduce-overhead"
-        ),
-    )
-    parser.add_argument("--device", choices=["cpu", "cuda"], default=default_device())
-    parser.add_argument("--cpu-threads", type=int, default=1)
-    parser.add_argument("--blas-threads", type=int, default=1)
-    parser.add_argument(
-        "--subject-encoding",
-        choices=["stable_attenuation", "stable_omission"],
-        default="stable_omission",
-    )
-    return parser.parse_args(args)
-
-
-def main(args=None):
-    parsed = parse_args(args)
-    training_config = MetaTrainConfig(
-        seed=parsed.seed,
-        outer_steps=parsed.outer_steps,
-        batch_size=parsed.batch_size,
-        hidden_size=parsed.hidden_size,
-        cue_size=parsed.cue_size,
-        learning_rate=parsed.learning_rate,
-        save_every=parsed.save_every,
-        subject_encoding_mode=parsed.subject_encoding,
-    )
-    optimized_execution = (
-        parsed.execution_schema == "current" or parsed.optimized_execution
-    )
-    compile_model = parsed.compile_model or (
-        optimized_execution and parsed.device == "cuda"
-    )
-    compile_mode = parsed.compile_mode or (
-        OPTIMIZED_TRAINING_PROFILE.compile_mode
-        if optimized_execution and parsed.device == "cuda"
-        else DEFAULT_COMPILED_PROFILE.compile_mode
-    )
-    profile = ExecutionProfile(
-        device=parsed.device,
-        cpu_threads=parsed.cpu_threads,
-        blas_threads=parsed.blas_threads,
-        compile=compile_model,
-        compile_mode=compile_mode,
-        require_cuda=parsed.device == "cuda",
-    )
-    train_meta_model(
-        training_config,
-        parsed.output_dir,
-        compile_model=compile_model,
-        optimized_execution=optimized_execution,
-        execution_profile=profile,
-    )
-
-
-if __name__ == "__main__":
-    main()

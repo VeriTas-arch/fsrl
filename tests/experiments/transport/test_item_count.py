@@ -12,7 +12,6 @@ from fsrl.evaluation.frozen_fast_weight import (
 )
 from fsrl.experiments.transport.item_count import (
     DEFAULT_SPECIFICATION_PATH,
-    VariableItemFrozenFastWeightEvaluator,
     analyze_size_generic_sampled_query_policy,
     cross_cell_decision,
     individualized_metrics_generic,
@@ -89,8 +88,8 @@ class ItemCountTransportTests(unittest.TestCase):
             "subject_encoding_seed": 19,
         }
         frozen = FrozenFastWeightEvaluator(net, config, self.base, **kwargs)
-        variable = VariableItemFrozenFastWeightEvaluator(
-            net, config, self.base, **kwargs
+        variable = FrozenFastWeightEvaluator(
+            net, config, self.base, required_item_count=None, **kwargs
         )
         self.assertTrue(validate_n8_evaluator_interface(variable, frozen)["passed"])
 
@@ -105,8 +104,8 @@ class ItemCountTransportTests(unittest.TestCase):
             "subject_encoding_seed": 19,
         }
         frozen = FrozenFastWeightEvaluator(net, config, self.base, **kwargs)
-        variable = VariableItemFrozenFastWeightEvaluator(
-            net, config, self.base, **kwargs
+        variable = FrozenFastWeightEvaluator(
+            net, config, self.base, required_item_count=None, **kwargs
         )
         frozen_weights = frozen.learn_fast_weights(FastWeightIntervention.INTACT)
         variable_weights = variable.learn_fast_weights(FastWeightIntervention.INTACT)
@@ -122,7 +121,9 @@ class ItemCountTransportTests(unittest.TestCase):
             self.base,
             self.specification["size_matched_graph_contract"]["graphs"][0],
         )
-        n6 = VariableItemFrozenFastWeightEvaluator(net, config, n6_protocol, **kwargs)
+        n6 = FrozenFastWeightEvaluator(
+            net, config, n6_protocol, required_item_count=None, **kwargs
+        )
         n6_weights = n6.initialize_fast_weights()
         n6_weights = n6.advance_support_trial(n6_weights, 0)
         self.assertEqual(n6_weights.shape, (config.bs, config.hs, config.hs))

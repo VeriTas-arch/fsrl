@@ -11,28 +11,27 @@ import numpy as np
 from fsrl.analysis.algorithmic import run_algorithmic_comparison
 from fsrl.analysis.behavioral import run_behavioral_analysis
 from fsrl.analysis.geometry import run_geometry_analysis
-from fsrl.evaluation.frozen_fast_weight import run_causal_suite
+from fsrl.evaluation.causal_suite import run_causal_suite
 from fsrl.evaluation.qualification import evaluate_qualification
 from fsrl.infra.formal_runtime import require_formal_runtime
-from fsrl.infra.provenance import load_json, write_json
+from fsrl.infra.provenance import load_json, write_json, write_json_exclusive
 from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     canonical_file_sha256 as file_sha256,
 )
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
-from fsrl.tasks.holdouts import registered_holdout_signatures
 from fsrl.training.backbone import (
     COMPILED_TRAINING_EXECUTION,
     MetaTrainConfig,
     train_meta_model,
 )
+from fsrl.training.checkpoints import FORMAL_CONFIRMATION_ID, validate_meta_checkpoint
 from fsrl.training.legacy_checkpoints import resolve_frozen_checkpoint_path
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/confirmation_v1.json")
 DEFAULT_OUTPUT_ROOT = ROOT / "artifacts" / "runs" / "confirmation-v1"
-FORMAL_CONFIRMATION_ID = "liu-neural-constructive-ranking-confirmation-v1"
 FORMAL_RUNTIME_SOURCE = ROOT / "fsrl" / "infra" / "formal_runtime.py"
 FORMAL_TRAINING_SOURCE = ROOT / "fsrl" / "training" / "backbone.py"
 
@@ -177,42 +176,6 @@ def _validate_seed(specification: dict, seed: int) -> None:
         raise ValueError(f"seed {seed} is not registered for confirmation")
 
 
-def validate_checkpoint(checkpoint: Path, specification: dict, seed: int) -> dict:
-    metadata = load_json(checkpoint.parent / "config.json")
-    expected_training = dict(specification["training"])
-    expected_training.pop("seeds")
-    expected_training.pop("checkpoint_selection")
-    expected_training["seed"] = seed
-    observed_training = metadata["training"]
-    if observed_training != expected_training:
-        raise RuntimeError(
-            f"seed {seed} checkpoint training configuration is not registered"
-        )
-    if (
-        specification["confirmation_id"] == FORMAL_CONFIRMATION_ID
-        and metadata.get("execution") != COMPILED_TRAINING_EXECUTION
-    ):
-        raise RuntimeError(
-            f"seed {seed} checkpoint was not trained with the registered compiler"
-        )
-    if metadata["completed_outer_steps"] != specification["training"]["outer_steps"]:
-        raise RuntimeError(f"seed {seed} checkpoint is not the fixed final step")
-    observed_signatures = {
-        tuple(tuple(pair) for pair in signature)
-        for signature in metadata["task_distribution"].get(
-            "held_out_rank_graph_signatures", []
-        )
-    }
-    if observed_signatures != set(registered_holdout_signatures()):
-        raise RuntimeError(
-            f"seed {seed} training did not exclude both Liu graph signatures"
-        )
-    observed_hash = file_sha256(checkpoint)
-    if metadata["checkpoint"]["sha256"] != observed_hash:
-        raise RuntimeError(f"seed {seed} checkpoint hash does not match metadata")
-    return metadata
-
-
 def train_confirmation_seed(
     seed: int,
     *,
@@ -228,14 +191,14 @@ def train_confirmation_seed(
     seed_dir = output_root / f"seed-{seed}"
     checkpoint = resolve_frozen_checkpoint_path(seed_dir)
     if checkpoint.exists():
-        validate_checkpoint(checkpoint, specification, seed)
+        validate_meta_checkpoint(checkpoint, specification, seed)
         return checkpoint
     train_meta_model(
         _training_config(specification, seed),
         seed_dir,
         compile_model=specification["confirmation_id"] == FORMAL_CONFIRMATION_ID,
     )
-    validate_checkpoint(checkpoint, specification, seed)
+    validate_meta_checkpoint(checkpoint, specification, seed)
     return checkpoint
 
 
@@ -331,7 +294,7 @@ def evaluate_confirmation_seed(
     _validate_seed(specification, seed)
     seed_dir = output_root / f"seed-{seed}"
     checkpoint = resolve_frozen_checkpoint_path(seed_dir)
-    checkpoint_metadata = validate_checkpoint(checkpoint, specification, seed)
+    checkpoint_metadata = validate_meta_checkpoint(checkpoint, specification, seed)
     evaluation = specification["evaluation"]
 
     causal = run_causal_suite(
@@ -554,7 +517,7 @@ def main(args=None):
                 output_root=parsed.output_root,
             )
     if parsed.output is not None:
-        write_json(parsed.output, result)
+        write_json_exclusive(parsed.output, result)
     else:
         print(json.dumps(result, indent=2, sort_keys=True, allow_nan=False))
     return 0 if result.get("passed", True) else 1

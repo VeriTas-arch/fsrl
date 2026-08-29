@@ -2,13 +2,8 @@
 
 from __future__ import annotations
 
-import argparse
-import json
 from contextlib import contextmanager
-from dataclasses import asdict, dataclass
-from enum import Enum
 from itertools import combinations
-from pathlib import Path
 
 import numpy as np
 import torch
@@ -18,16 +13,8 @@ from fsrl.core.sequence import RecurrentSequence
 from fsrl.infra.runtime import (
     ExecutionProfile,
     compile_module,
-    configure_runtime,
-    default_device,
 )
-from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
-from fsrl.tasks.protocol_catalog import LIU_V1_PROTOCOL_PATH
-from fsrl.tasks.subject_encoding import (
-    SubjectEncodingConfig,
-    SubjectEncodingState,
-    sample_subject_encoding_states,
-)
+from fsrl.tasks.protocol import RankingProtocol
 
 from ..core.inputs import EVIDENCE_AUXILIARY_OFFSET
 from ..core.plastic_rnn import RetroModulRNN
@@ -37,8 +24,20 @@ from ..training.checkpoints import (
     load_training_provenance,
 )
 from ..training.legacy_checkpoints import load_frozen_retro_checkpoint
+from .contracts import (
+    ConditionMetrics,
+    FastWeightIntervention,
+    FrozenEvaluationBackend,
+    OrderInvarianceMetrics,
+)
+from .execution import RecurrentTrajectory, evaluation_execution_record
+from .metrics import count_circular_triads
+from .sampling import deterministic_cue_codes, retained_relation_mask
+from .subject_encoding import (
+    build_frozen_subject_encoding,
+    realized_support_evidence,
+)
 
-DEFAULT_PROTOCOL_PATH = LIU_V1_PROTOCOL_PATH
 DISTANCE_INPUT_OFFSET = EVIDENCE_AUXILIARY_OFFSET
 
 __all__ = [
@@ -53,136 +52,12 @@ __all__ = [
     "deterministic_cue_codes",
     "load_frozen_retro_checkpoint",
     "load_training_provenance",
-    "main",
-    "parse_args",
     "retained_relation_mask",
-    "run_causal_suite",
 ]
-
-
-class FastWeightIntervention(str, Enum):
-    INTACT = "intact"
-    WRITE_OFF = "write_off"
-    ALPHA_ZERO = "alpha_zero"
-    RESET = "reset"
-    SHUFFLE = "shuffle"
-
-
-class FrozenEvaluationBackend(str, Enum):
-    """Explicit execution backend for frozen causal evaluation."""
-
-    LEGACY_STEPWISE = "legacy_stepwise"
-    BATCHED_SEQUENCE = "batched_sequence"
-
-
-class _RecurrentTrajectory(torch.nn.Module):
-    """Execute one trial while retaining hidden and margin trajectories."""
-
-    def __init__(self, cell: RetroModulRNN):
-        super().__init__()
-        self.cell = cell
-
-    def forward(
-        self,
-        input_sequence: torch.Tensor,
-        hidden: torch.Tensor,
-        eligibility: torch.Tensor,
-        fast_weights: torch.Tensor,
-    ) -> tuple[torch.Tensor, torch.Tensor]:
-        hidden_steps = []
-        margin_steps = []
-        for inputs in input_sequence.unbind(0):
-            logits, _, _, hidden, eligibility, _ = self.cell(
-                inputs, hidden, eligibility, fast_weights
-            )
-            hidden_steps.append(hidden)
-            margin_steps.append(logits[:, 1] - logits[:, 0])
-        return torch.stack(hidden_steps, dim=1), torch.stack(margin_steps, dim=1)
-
-
-@dataclass(frozen=True)
-class ConditionMetrics:
-    intervention: str
-    overall_accuracy: float
-    learned_accuracy: float
-    nonlearned_accuracy: float
-    mean_probability_correct: float
-    mean_abs_fast_weight: float
-    mean_circular_triads: float
-    mean_transitive_triplet_fraction: float
-
-
-@dataclass(frozen=True)
-class OrderInvarianceMetrics:
-    schedules: int
-    pairs: int
-    max_abs_logit_delta: float
-    mean_abs_logit_delta: float
-
-
-def retained_relation_mask(
-    evaluator: FrozenFastWeightEvaluator, relations
-) -> np.ndarray:
-    """Return relation-by-subject retention under the evaluator's encoding."""
-
-    if evaluator.subject_relation_gains is None:
-        return np.ones((len(relations), evaluator.config.bs), dtype=bool)
-    return np.asarray(
-        [
-            [
-                evaluator.subject_relation_gains[subject][relation] > 0.0
-                for subject in range(evaluator.config.bs)
-            ]
-            for relation in relations
-        ],
-        dtype=bool,
-    )
-
-
-def deterministic_cue_codes(
-    n_subjects: int,
-    n_items: int,
-    cue_size: int,
-    seed: int,
-    *,
-    mode: str = "shared",
-) -> np.ndarray:
-    """Generate a shared cue set with optional subject-specific item mappings."""
-
-    if cue_size > 20:
-        raise ValueError("cue_size > 20 is not supported by exhaustive code generation")
-    rng = np.random.default_rng(seed)
-    values = np.arange(1 << cue_size, dtype=np.uint32)
-    bit_positions = np.arange(cue_size, dtype=np.uint32)
-    bits = ((values[:, None] >> bit_positions) & 1).astype(np.int8)
-    candidates = (bits * 2 - 1).astype(np.float32)
-    for _ in range(100):
-        codes: list[np.ndarray] = []
-        for candidate_index in rng.permutation(len(candidates)):
-            candidate = candidates[int(candidate_index)]
-            if all(np.mean(previous == candidate) <= 0.66 for previous in codes):
-                codes.append(candidate)
-                if len(codes) == n_items:
-                    shared = np.stack(codes)
-                    if mode == "shared":
-                        return np.repeat(shared[None, :, :], n_subjects, axis=0)
-                    if mode == "permuted_shared":
-                        return np.stack(
-                            [
-                                shared[rng.permutation(n_items)]
-                                for _ in range(n_subjects)
-                            ]
-                        )
-                    raise ValueError(f"unknown cue mode: {mode}")
-    raise ValueError(
-        f"Could not construct {n_items} sufficiently distinct {cue_size}-bit cues"
-    )
 
 
 class FrozenFastWeightEvaluator:
     """Evaluate one shared network under explicit fast-weight interventions."""
-
-    _required_protocol_item_count: int | None = 8
 
     def __init__(
         self,
@@ -200,16 +75,18 @@ class FrozenFastWeightEvaluator:
         | str = FrozenEvaluationBackend.LEGACY_STEPWISE,
         execution_profile: ExecutionProfile | None = None,
         protocol_only: bool = False,
+        required_item_count: int | None = 8,
     ) -> None:
         if config.bs < 1:
             raise ValueError("batch size must be positive")
         if net is None and not protocol_only:
             raise ValueError("a neural network is required outside protocol-only mode")
-        if (
-            self._required_protocol_item_count is not None
-            and protocol.n_items != self._required_protocol_item_count
-        ):
-            raise ValueError("The current neural evaluator requires eight items")
+        if required_item_count is not None and required_item_count < 2:
+            raise ValueError("required_item_count must be at least two or None")
+        if required_item_count is not None and protocol.n_items != required_item_count:
+            raise ValueError(
+                f"the evaluator requires {required_item_count} protocol items"
+            )
         self._net = net
         self.config = config
         self.protocol = protocol
@@ -241,111 +118,26 @@ class FrozenFastWeightEvaluator:
                 raise ValueError("evaluation profile and network device differ")
             self.execution_profile = profile
             self.sequence_runner = compile_module(RecurrentSequence(net), profile)
-            self.trajectory_runner = compile_module(_RecurrentTrajectory(net), profile)
+            self.trajectory_runner = compile_module(RecurrentTrajectory(net), profile)
         self.cue_codes = deterministic_cue_codes(
             config.bs, protocol.n_items, config.cs, cue_seed, mode=cue_mode
         )
         self.cue_mode = cue_mode
-        supported_encoding_modes = {
-            "none",
-            "stable_bottleneck",
-            "stable_omission",
-            "presentationwise_omission",
-            "blockwise_omission",
-            "uniform_no_bottleneck",
-        }
-        if subject_encoding_mode not in supported_encoding_modes:
-            raise ValueError(f"unknown subject encoding mode: {subject_encoding_mode}")
         self.support_schedules = tuple(
             protocol.support_schedule(np.random.default_rng(support_seed + subject))
             for subject in range(config.bs)
         )
-        self.subject_relation_gains: tuple[dict[tuple[int, int], float], ...] | None
-        self.subject_trial_gains: tuple[tuple[float, ...], ...] | None
-        if subject_encoding_mode == "none":
-            self.subject_encoding_states: tuple[SubjectEncodingState, ...] | None = None
-            self.subject_relation_gains = None
-            self.subject_trial_gains = None
-        else:
-            encoding_rng = np.random.default_rng(subject_encoding_seed)
-            self.subject_encoding_states = sample_subject_encoding_states(
-                encoding_rng,
-                config.bs,
-                protocol.n_items,
-            )
-            probabilities = []
-            for state in self.subject_encoding_states:
-                subject_probabilities = {}
-                for higher, lower in protocol.support_pairs_higher_lower:
-                    symbolic_distance = self.item_rank[lower] - self.item_rank[higher]
-                    subject_probabilities[(higher, lower)] = state.relation_reliability(
-                        higher, lower, symbolic_distance
-                    )
-                probabilities.append(subject_probabilities)
-            if subject_encoding_mode == "stable_bottleneck":
-                relation_gains = probabilities
-            elif subject_encoding_mode == "stable_omission":
-                relation_gains = [
-                    {
-                        pair: float(encoding_rng.random() < probability)
-                        for pair, probability in subject_probabilities.items()
-                    }
-                    for subject_probabilities in probabilities
-                ]
-            elif subject_encoding_mode == "uniform_no_bottleneck":
-                uniform_gain = float(
-                    np.mean(
-                        [
-                            probability
-                            for subject_probabilities in probabilities
-                            for probability in subject_probabilities.values()
-                        ]
-                    )
-                )
-                relation_gains = [
-                    {pair: uniform_gain for pair in subject_probabilities}
-                    for subject_probabilities in probabilities
-                ]
-            else:
-                relation_gains = probabilities
-            self.subject_relation_gains = tuple(relation_gains)
-
-            trial_gains = []
-            for subject, schedule in enumerate(self.support_schedules):
-                if subject_encoding_mode == "presentationwise_omission":
-                    values = tuple(
-                        float(
-                            encoding_rng.random()
-                            < probabilities[subject][
-                                (trial.higher_item, trial.lower_item)
-                            ]
-                        )
-                        for trial in schedule
-                    )
-                elif subject_encoding_mode == "blockwise_omission":
-                    block_relation_gains = {
-                        (block, pair): float(
-                            encoding_rng.random() < probabilities[subject][pair]
-                        )
-                        for block in range(protocol.support_blocks)
-                        for pair in protocol.support_pairs_higher_lower
-                    }
-                    values = tuple(
-                        block_relation_gains[
-                            (
-                                trial.block_index,
-                                (trial.higher_item, trial.lower_item),
-                            )
-                        ]
-                        for trial in schedule
-                    )
-                else:
-                    values = tuple(
-                        relation_gains[subject][(trial.higher_item, trial.lower_item)]
-                        for trial in schedule
-                    )
-                trial_gains.append(values)
-            self.subject_trial_gains = tuple(trial_gains)
+        encoding = build_frozen_subject_encoding(
+            config,
+            protocol,
+            self.item_rank,
+            self.support_schedules,
+            mode=subject_encoding_mode,
+            seed=subject_encoding_seed,
+        )
+        self.subject_encoding_states = encoding.states
+        self.subject_relation_gains = encoding.relation_gains
+        self.subject_trial_gains = encoding.trial_gains
         self.subject_encoding_mode = subject_encoding_mode
         self.subject_encoding_seed = subject_encoding_seed
 
@@ -432,21 +224,7 @@ class FrozenFastWeightEvaluator:
         return torch.from_numpy(inputs).to(self.device)
 
     def evaluation_execution_record(self) -> dict:
-        if self.backend == FrozenEvaluationBackend.LEGACY_STEPWISE:
-            return {"execution_schema_version": 1, "backend": self.backend.value}
-        assert self.execution_profile is not None
-        return {
-            "execution_schema_version": 2,
-            "backend": self.backend.value,
-            "profile": self.execution_profile.to_dict(),
-            "compile_scope": "complete_recurrent_trial_sequence",
-            "support_batching": "sequential_trials_one_transfer_each",
-            "query_batching": "all_query_pairs_by_subject",
-            "metric_transfer": "one_batched_device_to_cpu_transfer",
-            "trajectory_transfer": (
-                "one_hidden_and_one_logit_batched_device_to_cpu_transfer"
-            ),
-        }
+        return evaluation_execution_record(self.backend, self.execution_profile)
 
     @contextmanager
     def _alpha_zeroed(self, enabled: bool):
@@ -620,21 +398,9 @@ class FrozenFastWeightEvaluator:
     def realized_support_evidence(self) -> tuple[tuple[dict, ...], ...]:
         """Return the exact support evidence presented to each virtual subject."""
 
-        rows = []
-        for subject, schedule in enumerate(self.support_schedules):
-            rows.append(
-                tuple(
-                    {
-                        "higher_item": trial.higher_item,
-                        "lower_item": trial.lower_item,
-                        "magnitude": abs(trial.signed_magnitude),
-                        "reliability": self._encoding_reliability(subject, trial_index),
-                        "block_index": trial.block_index,
-                    }
-                    for trial_index, trial in enumerate(schedule)
-                )
-            )
-        return tuple(rows)
+        return realized_support_evidence(
+            self.support_schedules, self.subject_trial_gains
+        )
 
     def readout_logits(
         self,
@@ -962,7 +728,7 @@ class FrozenFastWeightEvaluator:
                 target.extend(pair_correct)
                 canonical_margin = 0.5 * (forward_logit - reverse_logit)
                 winners[pair] = pair[0] if canonical_margin > 0.0 else pair[1]
-            cycles = _count_circular_triads(winners, self.protocol.n_items)
+            cycles = count_circular_triads(winners, self.protocol.n_items)
             subject_overall.append(np.mean(correct))
             subject_learned.append(np.mean(correct_learned))
             subject_nonlearned.append(np.mean(correct_nonlearned))
@@ -1023,166 +789,3 @@ class FrozenFastWeightEvaluator:
             max_abs_logit_delta=float(max(deltas, default=0.0)),
             mean_abs_logit_delta=float(np.mean(deltas)) if deltas else 0.0,
         )
-
-
-def _count_circular_triads(winners: dict[tuple[int, int], int], n_items: int) -> int:
-    cycles = 0
-    for a, b, c in combinations(range(n_items), 3):
-        ab = winners[(a, b)]
-        ac = winners[(a, c)]
-        bc = winners[(b, c)]
-        if (ab == a and bc == b and ac == c) or (ab == b and bc == c and ac == a):
-            cycles += 1
-    return cycles
-
-
-def run_causal_suite(
-    checkpoint: Path | str,
-    *,
-    batch_size: int,
-    cue_seed: int,
-    support_seed: int,
-    order_seed: int,
-    order_schedules: int,
-    cue_mode: str,
-    subject_encoding_mode: str,
-    subject_encoding_seed: int,
-    protocol_path: Path | str = DEFAULT_PROTOCOL_PATH,
-    evaluation_backend: FrozenEvaluationBackend | str = (
-        FrozenEvaluationBackend.BATCHED_SEQUENCE
-    ),
-    execution_profile: ExecutionProfile | None = None,
-) -> dict:
-    protocol_path = Path(protocol_path)
-    protocol = load_ranking_protocol(protocol_path)
-    backend = FrozenEvaluationBackend(evaluation_backend)
-    runtime = None
-    if backend == FrozenEvaluationBackend.BATCHED_SEQUENCE:
-        selected_device = default_device()
-        execution_profile = execution_profile or ExecutionProfile(
-            device=selected_device,
-            compile=selected_device == "cuda",
-            require_cuda=selected_device == "cuda",
-        )
-        runtime = configure_runtime(execution_profile)
-    net, config, checkpoint_info = load_frozen_retro_checkpoint(
-        checkpoint,
-        batch_size,
-        device=(execution_profile.device if execution_profile is not None else None),
-    )
-    evaluator = FrozenFastWeightEvaluator(
-        net,
-        config,
-        protocol,
-        cue_seed=cue_seed,
-        support_seed=support_seed,
-        cue_mode=cue_mode,
-        subject_encoding_mode=subject_encoding_mode,
-        subject_encoding_seed=subject_encoding_seed,
-        backend=backend,
-        execution_profile=execution_profile,
-    )
-    conditions = {}
-    condition_winners = {}
-    for intervention in FastWeightIntervention:
-        metrics, winners = evaluator.condition_evaluation(intervention)
-        conditions[intervention.value] = asdict(metrics)
-        condition_winners[intervention.value] = winners
-    intact_winners = condition_winners[FastWeightIntervention.INTACT.value]
-    for intervention, winners_by_subject in condition_winners.items():
-        agreements = []
-        for subject, winners in enumerate(winners_by_subject):
-            agreements.extend(
-                int(winner == intact_winners[subject][pair])
-                for pair, winner in winners.items()
-            )
-        conditions[intervention]["mean_pair_decision_agreement_to_intact"] = float(
-            np.mean(agreements)
-        )
-    intact_fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
-    invariance = evaluator.order_invariance(
-        intact_fast_weights, schedules=order_schedules, seed=order_seed
-    )
-    provenance = load_training_provenance(Path(checkpoint), checkpoint_info.sha256)
-    result = {
-        "protocol_id": protocol.protocol_id,
-        "protocol_path": str(protocol_path.resolve()),
-        "checkpoint": asdict(checkpoint_info),
-        "batch_size": batch_size,
-        "cue_seed": cue_seed,
-        "cue_mode": cue_mode,
-        "subject_encoding": {
-            "mode": subject_encoding_mode,
-            "seed": subject_encoding_seed,
-            "configuration": SubjectEncodingConfig().to_dict(),
-        },
-        "training_provenance": provenance,
-        "support_seed": support_seed,
-        "conditions": conditions,
-        "order_invariance": asdict(invariance),
-    }
-    if evaluator.backend != FrozenEvaluationBackend.LEGACY_STEPWISE:
-        result["evaluation_execution"] = evaluator.evaluation_execution_record()
-        result["evaluation_execution"]["runtime"] = runtime
-    return result
-
-
-def parse_args(args=None):
-    parser = argparse.ArgumentParser(
-        description="Run the registered fast-weight causal qualification suite."
-    )
-    parser.add_argument("--checkpoint", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--batch-size", type=int, default=16)
-    parser.add_argument("--cue-seed", type=int, default=1)
-    parser.add_argument(
-        "--cue-mode", choices=["shared", "permuted_shared"], default="permuted_shared"
-    )
-    parser.add_argument(
-        "--subject-encoding",
-        choices=[
-            "none",
-            "stable_bottleneck",
-            "stable_omission",
-            "presentationwise_omission",
-            "blockwise_omission",
-            "uniform_no_bottleneck",
-        ],
-        default="stable_omission",
-    )
-    parser.add_argument("--subject-encoding-seed", type=int, default=300)
-    parser.add_argument("--support-seed", type=int, default=100)
-    parser.add_argument("--order-seed", type=int, default=200)
-    parser.add_argument("--order-schedules", type=int, default=8)
-    parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL_PATH)
-    parser.add_argument(
-        "--evaluation-backend",
-        choices=[backend.value for backend in FrozenEvaluationBackend],
-        default=FrozenEvaluationBackend.BATCHED_SEQUENCE.value,
-    )
-    return parser.parse_args(args)
-
-
-def main(args=None):
-    parsed = parse_args(args)
-    result = run_causal_suite(
-        parsed.checkpoint,
-        batch_size=parsed.batch_size,
-        cue_seed=parsed.cue_seed,
-        support_seed=parsed.support_seed,
-        order_seed=parsed.order_seed,
-        order_schedules=parsed.order_schedules,
-        cue_mode=parsed.cue_mode,
-        subject_encoding_mode=parsed.subject_encoding,
-        subject_encoding_seed=parsed.subject_encoding_seed,
-        protocol_path=parsed.protocol,
-        evaluation_backend=parsed.evaluation_backend,
-    )
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True)
-        handle.write("\n")
-
-
-if __name__ == "__main__":
-    main()

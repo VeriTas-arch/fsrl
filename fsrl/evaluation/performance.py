@@ -19,6 +19,7 @@ from fsrl.evaluation.frozen_fast_weight import (
     FrozenEvaluationBackend,
     FrozenFastWeightEvaluator,
 )
+from fsrl.infra.provenance import write_json_exclusive
 from fsrl.infra.runtime import ExecutionProfile, configure_runtime
 from fsrl.tasks.protocol_catalog import load_registered_protocol
 
@@ -200,8 +201,7 @@ def main(args=None) -> None:
     if parsed.output is None:
         print(rendered, end="")
     else:
-        parsed.output.parent.mkdir(parents=True, exist_ok=True)
-        parsed.output.write_text(rendered, encoding="utf-8")
+        write_json_exclusive(parsed.output, result)
 
 
 if __name__ == "__main__":

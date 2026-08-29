@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 from dataclasses import dataclass
 from itertools import combinations
 from pathlib import Path
@@ -13,17 +12,15 @@ import numpy as np
 from fsrl.analysis.posterior import ExactRankingPosterior, RelationEvidence
 from fsrl.evaluation.frozen_fast_weight import (
     FastWeightIntervention,
-    FrozenFastWeightEvaluator,
-    load_frozen_retro_checkpoint,
 )
-from fsrl.experiments.confirmation.behavioral import validate_checkpoint
+from fsrl.evaluation.registered import load_registered_frozen_evaluator
 from fsrl.experiments.human.benchmark import (
     DEFAULT_PREREGISTERED_PATH,
     DEFAULT_REPLICATION_PATH,
     LIU_DATASET_FILES,
     load_human_cohort,
 )
-from fsrl.infra.provenance import file_sha256, load_json
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.runtime import default_device
 from fsrl.infra.study_registry import (
     resolve_record,
@@ -37,7 +34,6 @@ from fsrl.tasks.protocol import RankingProtocol, load_ranking_protocol
 
 ROOT = REPO_ROOT
 DEFAULT_SPECIFICATION_PATH = resolve_record("benchmarks/assembly_diagnostics_v1.json")
-DEFAULT_OUTPUT_PATH = resolve_record("results/assembly_diagnostics_v1.json")
 
 
 @dataclass(frozen=True)
@@ -352,25 +348,8 @@ def _read_frozen_pilot(
     pilot_specification: dict,
     protocol: RankingProtocol,
 ) -> tuple[np.ndarray, tuple[tuple[dict, ...], ...], float]:
-    seed = int(registration["seed"])
-    checkpoint = resolve_path(registration["checkpoint_path"])
-    behavior_path = resolve_path(registration["behavior_path"])
-    validate_checkpoint(checkpoint, pilot_specification, seed)
-    behavior = load_json(behavior_path)
-    net, config, checkpoint_info = load_frozen_retro_checkpoint(
-        checkpoint, len(behavior["subjects"])
-    )
-    if behavior["checkpoint"]["sha256"] != checkpoint_info.sha256:
-        raise RuntimeError(f"seed {seed} behavior and checkpoint do not match")
-    evaluator = FrozenFastWeightEvaluator(
-        net,
-        config,
-        protocol,
-        cue_seed=int(behavior["cue_seed"]),
-        support_seed=int(behavior["support_seed"]),
-        cue_mode="permuted_shared",
-        subject_encoding_mode=behavior["subject_encoding_mode"],
-        subject_encoding_seed=int(behavior["subject_encoding_seed"]),
+    evaluator, behavior = load_registered_frozen_evaluator(
+        registration, pilot_specification, protocol
     )
     fast_weights = evaluator.learn_fast_weights(FastWeightIntervention.INTACT)
     ordered_pairs = tuple(
@@ -612,17 +591,14 @@ def parse_args(args=None):
     parser.add_argument(
         "--specification", type=Path, default=DEFAULT_SPECIFICATION_PATH
     )
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args(args)
 
 
 def main(args=None):
     parsed = parse_args(args)
     result = run_assembly_diagnostics(parsed.specification)
-    parsed.output.parent.mkdir(parents=True, exist_ok=True)
-    with parsed.output.open("w", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
+    write_json_exclusive(parsed.output, result)
     return 0
 
 

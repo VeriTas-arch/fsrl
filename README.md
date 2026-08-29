@@ -158,6 +158,7 @@ process group and cleans up that group on timeout or interruption:
 ~~~bash
 direnv exec . python -m fsrl.infra.test_runtime
 direnv exec . basedpyright
+direnv exec . python -m tools.quality.complexity_budget
 direnv exec . ruff check fsrl tests tools --select B905
 ~~~
 
@@ -198,13 +199,18 @@ record also includes the device, CUDA capability, matrix precision,
 determinism flags, and both PyTorch and BLAS thread limits. The older
 `--compile-model` path remains the `mode="default"`, byte-replay-compatible
 single-cell execution used by registered historical backbones. The maintained
-training CLI writes `net.pth`. Frozen runners prefer a byte-identical `.pth`
-view and use an explicitly named legacy adapter only when an untouched
-registered checkpoint contract still points to `.dat`.
+training CLI requires a new, previously nonexistent execution directory. It
+creates `run.json` before training, marks the run `complete` or `failed`, and
+records the final owned-file hashes without reusing an earlier execution ID.
+It writes `net.pth`; frozen runners prefer a byte-identical `.pth` view and use
+an explicitly named legacy adapter only when an untouched registered checkpoint
+contract still points to `.dat`.
 
 Task sampling preserves the historical RNG stream while vectorizing cue-code
 similarity checks. Each trial sequence is assembled in one preallocated NumPy
-array before the existing batched host-to-device transfer.
+array before the existing batched host-to-device transfer. Four scalar training
+diagnostics are transferred together only after the optimizer step, and the
+JSONL training log uses one exclusive buffered file handle per execution.
 
 Use `--compile-mode default` to retain the non-CUDA-Graph prospective profile.
 The CUDA Graph profile trades extra capture warmup and reserved device memory
@@ -234,11 +240,25 @@ visible CUDA device with a small number of repeats:
 ~~~bash
 direnv exec . python -m fsrl.evaluation.performance \
   --warmups 1 --repeats 3 \
-  --output artifacts/runs/runtime/frozen-evaluation-benchmark.json
+  --output /tmp/fsrl-frozen-evaluation-benchmark.json
 ~~~
 
 This benchmark is explicitly an engineering diagnostic, not scientific
 evidence and not a hardware-independent performance threshold.
+
+The prospective training path has a separate optimizer-step benchmark covering
+throughput, diagnostic synchronization placement, and peak CUDA memory:
+
+~~~bash
+direnv exec . python -m fsrl.training.performance \
+  --warmups 2 --repeats 5 \
+  --output /tmp/fsrl-training-hot-path-benchmark.json
+~~~
+
+This output has the same engineering-only status. With variable edge counts,
+individual timed samples may include compilation of a sequence shape not seen
+during warmup; inspect the aligned duration and edge-count samples and report
+the aggregate and median separately rather than hiding those startup costs.
 
 ## Original-paper teaching reproduction
 
