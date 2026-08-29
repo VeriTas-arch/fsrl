@@ -145,8 +145,11 @@ Audit the scoped refactors against their pinned baseline, retained exact and
 bounded comparisons, and current frozen-evidence contracts:
 
 ~~~bash
-direnv exec . python -m tools.provenance.audit_refactor_equivalence_v1
+direnv exec . python -m tools.provenance.audit_refactor_equivalence_v2
 ~~~
+
+The v1 audit remains available for its earlier pinned candidate:
+`direnv exec . python -m tools.provenance.audit_refactor_equivalence_v1`.
 
 This audit does not claim direct cross-commit replay of every maintained entry
 point; its exact coverage and exclusions are recorded in the versioned

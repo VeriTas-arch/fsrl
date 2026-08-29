@@ -1,0 +1,132 @@
+{
+  "document_type": "fsrl.refactor_equivalence_contract",
+  "schema_version": 1,
+  "audit_id": "relational-model-refactor-equivalence-v2",
+  "baseline_commit": "1b53919661c72c098b2607ee61667e576ff9d190",
+  "candidate_commit": "c9319b69043ea3521f768aae887dc876408032d5",
+  "audited_paths": [
+    "fsrl/README.md",
+    "fsrl/analysis",
+    "fsrl/core",
+    "fsrl/evaluation",
+    "fsrl/experiments",
+    "fsrl/tasks",
+    "fsrl/training",
+    "fsrl/workflows",
+    "fsrl/paths.py",
+    "fsrl/infra/file_contracts.py",
+    "fsrl/infra/formal_runtime.py",
+    "fsrl/infra/record_catalog.py",
+    "fsrl/infra/run_manifest.py",
+    "fsrl/infra/runtime.py",
+    "fsrl/infra/semantic_contract.py",
+    "pyproject.toml",
+    "tools/quality",
+    "studies/registry.toml",
+    "studies/migrations",
+    ":(glob)studies/*/study.toml",
+    ":(glob)studies/*/records/**",
+    "synthesis/source-provenance.toml",
+    "synthesis/snapshots",
+    "workflows/relational_model/workflow.toml",
+    "workflows/relational_model/README.md",
+    "data/external",
+    "reproductions",
+    "tests/core/test_architecture.py",
+    "tests/core/test_packaging.py",
+    "tests/core/test_quality_gates.py",
+    "tests/core/test_relational_system.py",
+    "tests/evaluation/test_execution_defaults.py",
+    "tests/evaluation/test_frozen_fast_weight.py",
+    "tests/experiments/transport/test_item_count.py",
+    "tests/infra/test_file_contracts.py",
+    "tests/infra/test_run_manifest.py",
+    "tests/training/test_backbone.py",
+    "tests/training/test_performance.py"
+  ],
+  "baseline_reference_modules": [
+    "tests.core.test_architecture",
+    "tests.core.test_relational_system",
+    "tests.training.test_backbone",
+    "tests.evaluation.test_frozen_fast_weight",
+    "tests.experiments.local_fidelity.test_trace_pilot",
+    "tests.infra.test_file_contracts"
+  ],
+  "cross_commit_checks": [
+    {
+      "id": "encoding-and-relational-query-snapshot",
+      "script": "tools/provenance/refactor_equivalence_snapshot_v2.py"
+    }
+  ],
+  "exact_checks": [
+    {
+      "id": "model-and-checkpoint-adapters",
+      "selectors": [
+        "tests.core.test_model_boundary.ModelBoundaryTests.test_typed_and_legacy_configs_initialize_identical_models",
+        "tests.core.test_model_boundary.ModelBoundaryTests.test_typed_state_is_exactly_equivalent_to_legacy_zero_methods",
+        "tests.training.test_checkpoints.CheckpointBoundaryTests.test_loader_reports_format_without_changing_model_state",
+        "tests.training.test_legacy_checkpoints.LegacyCheckpointBoundaryTests.test_one_way_conversion_is_byte_identical_and_refuses_overwrite"
+      ]
+    },
+    {
+      "id": "training-input-and-sequence",
+      "selectors": [
+        "tests.training.test_backbone.MetaTrainingTests.test_batched_input_sequence_matches_stepwise_builder",
+        "tests.training.test_backbone.MetaTrainingTests.test_sequence_runner_matches_stepwise_values_and_gradients"
+      ]
+    },
+    {
+      "id": "evaluator-and-relational-system",
+      "selectors": [
+        "tests.core.test_relational_system.RelationalSystemTests.test_global_rollout_and_query_match_frozen_evaluator",
+        "tests.experiments.transport.test_item_count.ItemCountTransportTests.test_variable_evaluator_exactly_replays_n8_constructor",
+        "tests.experiments.transport.test_item_count.ItemCountTransportTests.test_variable_evaluator_reuses_complete_rollout_initialization"
+      ]
+    },
+    {
+      "id": "execution-and-package-ownership",
+      "selectors": [
+        "tests.infra.test_run_manifest.ProspectiveRunTests.test_complete_run_records_every_owned_file",
+        "tests.infra.test_run_manifest.ProspectiveRunTests.test_existing_execution_directory_is_never_reused",
+        "tests.core.test_packaging.PackagingTests.test_wheel_contains_code_and_required_internal_contracts_only",
+        "tests.core.test_quality_gates.QualityGateTests.test_complexity_debt_cannot_expand_or_worsen"
+      ]
+    }
+  ],
+  "bounded_checks": [
+    {
+      "id": "training-loss-and-gradient",
+      "rtol": 1e-05,
+      "atol": 1e-07,
+      "selectors": [
+        "tests.training.test_backbone.MetaTrainingTests.test_optimized_batch_preserves_loss_accuracy_and_gradients"
+      ]
+    },
+    {
+      "id": "evaluator-fast-state-and-trajectories",
+      "rtol": 1e-06,
+      "atol": 1e-07,
+      "selectors": [
+        "tests.evaluation.test_frozen_fast_weight.FrozenFastWeightEvaluatorTests.test_batched_backend_preserves_fast_weights_and_query_logits",
+        "tests.evaluation.test_frozen_fast_weight.FrozenFastWeightEvaluatorTests.test_batched_backend_preserves_hidden_and_logit_trajectories"
+      ]
+    }
+  ],
+  "semantic_checks": [
+    "study_registry",
+    "file_contracts",
+    "workflow",
+    "paper_figures",
+    "frozen_evidence"
+  ],
+  "claim": "The execution-safety, performance-path, ownership, file-splitting, typing, complexity, and packaging refactors preserve the retained numerical paths at their declared equivalence levels and preserve all frozen evidence and workflow claim boundaries.",
+  "not_claimed": [
+    "byte identity for prospective result documents whose output ownership is now exclusive",
+    "post-candidate audit code or root documentation byte identity",
+    "direct cross-commit replay of every maintained analysis entry point",
+    "hardware-independent performance equivalence",
+    "a speedup for variable-shape compilation samples",
+    "historical replay equivalence for prospective training schema v3",
+    "new scientific evidence or a broader scientific claim"
+  ]
+}

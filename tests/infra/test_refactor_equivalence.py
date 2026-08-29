@@ -11,6 +11,12 @@ from tools.provenance.audit_refactor_equivalence_v1 import (
     DEFAULT_CONTRACT,
     load_contract,
 )
+from tools.provenance.audit_refactor_equivalence_v2 import (
+    DEFAULT_CONTRACT as V2_CONTRACT,
+)
+from tools.provenance.audit_refactor_equivalence_v2 import (
+    load_contract as load_v2_contract,
+)
 
 
 class RefactorEquivalenceAuditTests(unittest.TestCase):
@@ -45,6 +51,35 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "non-negative tolerances"):
                 load_contract(path)
 
+    def test_v2_contract_pins_cross_commit_snapshot_and_current_candidate(self):
+        contract = load_v2_contract()
+        self.assertEqual(
+            contract["audit_id"], "relational-model-refactor-equivalence-v2"
+        )
+        self.assertEqual(
+            contract["candidate_commit"],
+            "c9319b69043ea3521f768aae887dc876408032d5",
+        )
+        self.assertEqual(
+            contract["cross_commit_checks"],
+            [
+                {
+                    "id": "encoding-and-relational-query-snapshot",
+                    "script": ("tools/provenance/refactor_equivalence_snapshot_v2.py"),
+                }
+            ],
+        )
+        self.assertTrue(V2_CONTRACT.is_file())
+
+    def test_contract_rejects_an_escaping_cross_commit_script(self):
+        contract = load_v2_contract()
+        contract["cross_commit_checks"][0]["script"] = "../outside.py"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "invalid.json"
+            path.write_text(json.dumps(contract), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "relative Python paths"):
+                load_v2_contract(path)
+
     def test_root_readme_matches_the_current_evaluation_default(self):
         readme = DEFAULT_CONTRACT.parents[2] / "README.md"
         text = readme.read_text(encoding="utf-8")
@@ -52,6 +87,10 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
         self.assertNotIn("The default remains `legacy_stepwise`", text)
         self.assertIn(
             "python -m tools.provenance.audit_refactor_equivalence_v1",
+            text,
+        )
+        self.assertIn(
+            "python -m tools.provenance.audit_refactor_equivalence_v2",
             text,
         )
         default = (

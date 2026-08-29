@@ -34,6 +34,32 @@ SEMANTIC_COMMANDS = {
 }
 
 
+def _validate_cross_commit_checks(
+    contract: dict[str, Any], errors: list[str]
+) -> list[str]:
+    checks = contract.get("cross_commit_checks", [])
+    if not isinstance(checks, list):
+        errors.append("cross_commit_checks must be a list")
+        return []
+    ids = []
+    for check in checks:
+        if not isinstance(check, dict):
+            errors.append("cross_commit_checks entries must be objects")
+            continue
+        ids.append(check.get("id"))
+        script = check.get("script")
+        if (
+            not isinstance(script, str)
+            or Path(script).is_absolute()
+            or ".." in Path(script).parts
+            or not script.endswith(".py")
+        ):
+            errors.append("cross-commit scripts must be relative Python paths")
+        elif not (ROOT / script).is_file():
+            errors.append(f"cross-commit script does not exist: {script}")
+    return ids
+
+
 def _sha256(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
@@ -88,6 +114,7 @@ def load_contract(path: Path = DEFAULT_CONTRACT) -> dict[str, Any]:
                 check.get("rtol", -1) < 0 or check.get("atol", -1) < 0
             ):
                 errors.append("bounded checks require non-negative tolerances")
+    ids.extend(_validate_cross_commit_checks(contract, errors))
     if any(not isinstance(value, str) or not value for value in ids):
         errors.append("check IDs must be non-empty strings")
     if len(ids) != len(set(ids)):
@@ -161,6 +188,27 @@ def _run_groups(groups: list[dict[str, Any]], cwd: Path) -> dict[str, Any]:
     return {"passed": all(check["passed"] for check in checks), "checks": checks}
 
 
+def _run_cross_commit_checks(
+    checks: list[dict[str, Any]], baseline_root: Path
+) -> dict[str, Any]:
+    results = []
+    for check in checks:
+        script = str(ROOT / check["script"])
+        baseline = _run(f"{check['id']}-baseline", [script], cwd=baseline_root)
+        candidate = _run(f"{check['id']}-candidate", [script], cwd=ROOT)
+        hashes_match = baseline["stdout_sha256"] == candidate["stdout_sha256"]
+        results.append(
+            {
+                "id": check["id"],
+                "passed": baseline["passed"] and candidate["passed"] and hashes_match,
+                "stdout_sha256_match": hashes_match,
+                "baseline": baseline,
+                "candidate": candidate,
+            }
+        )
+    return {"passed": all(check["passed"] for check in results), "checks": results}
+
+
 def _export_commit(commit: str, destination: Path) -> None:
     archive = destination.parent / f"{commit}.tar"
     _git("archive", "--format=tar", f"--output={archive}", commit)
@@ -206,6 +254,9 @@ def run_audit(contract_path: Path = DEFAULT_CONTRACT) -> dict[str, Any]:
             cwd=baseline_root,
             extra={"commit": baseline},
         )
+        cross_commit = _run_cross_commit_checks(
+            contract.get("cross_commit_checks", []), baseline_root
+        )
 
     exact = _run_groups(contract["exact_checks"], ROOT)
     bounded = _run_groups(contract["bounded_checks"], ROOT)
@@ -218,10 +269,15 @@ def run_audit(contract_path: Path = DEFAULT_CONTRACT) -> dict[str, Any]:
         "passed": all(check["passed"] for check in semantic_checks),
         "checks": semantic_checks,
     }
-    passed = exact["passed"] and bounded["passed"] and semantic["passed"]
+    passed = (
+        cross_commit["passed"]
+        and exact["passed"]
+        and bounded["passed"]
+        and semantic["passed"]
+    )
     failures = [
         check["id"]
-        for group in (exact, bounded, semantic)
+        for group in (cross_commit, exact, bounded, semantic)
         for check in group["checks"]
         if not check["passed"]
     ]
@@ -242,6 +298,7 @@ def run_audit(contract_path: Path = DEFAULT_CONTRACT) -> dict[str, Any]:
             "audited_paths": contract["audited_paths"],
             "not_claimed": contract["not_claimed"],
         },
+        "cross_commit_exact_parity": cross_commit,
         "exact_parity": exact,
         "bounded_parity": bounded,
         "semantic_parity": semantic,
@@ -254,16 +311,18 @@ def run_audit(contract_path: Path = DEFAULT_CONTRACT) -> dict[str, Any]:
     }
 
 
-def _parser() -> argparse.ArgumentParser:
+def _parser(default_contract: Path = DEFAULT_CONTRACT) -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--contract", type=Path, default=DEFAULT_CONTRACT)
+    parser.add_argument("--contract", type=Path, default=default_contract)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--validate-contract", action="store_true")
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
-    arguments = _parser().parse_args(argv)
+def main(
+    argv: list[str] | None = None, *, default_contract: Path = DEFAULT_CONTRACT
+) -> int:
+    arguments = _parser(default_contract).parse_args(argv)
     if arguments.validate_contract:
         contract = load_contract(arguments.contract)
         result = {"passed": True, "audit_id": contract["audit_id"]}
