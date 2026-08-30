@@ -17,6 +17,9 @@ reproduction now live in one isolated capsule under
   scientific workflow.
 - [Current synthesis](synthesis/README.md) organizes diagnostic history,
   closed candidate families, unresolved boundaries, and reporting context.
+- [Research discussions](discussions/README.md) records literature connections,
+  interpretation choices, and proposed tests without becoming scientific
+  evidence or reopening frozen results.
 - [Study registry](studies/README.md) lists every registered positive, negative,
   mixed, unresolved, transported, and deferred study.
 - [Historical reporting snapshots](synthesis/snapshots/README.md) provides the
@@ -40,6 +43,7 @@ studies/                 experiment-level questions and exact records
     study.toml            authoritative metadata and record hashes
     records/              byte-preserved reports, contracts, locks, results
 synthesis/                current cross-study account, figures, and snapshots
+discussions/              non-authoritative literature and design discussions
 artifacts/runs/           ignored workflow/execution runs with local manifests
 artifacts/reproductions/  ignored regenerated external-paper outputs
 data/external/            tracked immutable external source datasets

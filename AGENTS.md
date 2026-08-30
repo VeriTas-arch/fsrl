@@ -13,6 +13,7 @@ editing within a subtree.
 | [`studies/`](studies/) | [`studies/AGENTS.md`](studies/AGENTS.md) | Experiment manifests, frozen records, generated human capsules, and migration ledgers |
 | [`workflows/`](workflows/) | [`workflows/AGENTS.md`](workflows/AGENTS.md) | Current cross-study scientific mainlines and their schemas |
 | [`synthesis/`](synthesis/) | [`synthesis/AGENTS.md`](synthesis/AGENTS.md) | Human synthesis, report figures, and immutable reporting snapshots |
+| [`discussions/`](discussions/) | this guide | Non-authoritative literature, interpretation, and experiment-design discussions |
 | [`tests/`](tests/) | [`tests/AGENTS.md`](tests/AGENTS.md) | Unit, scientific-contract, architecture, and repository tests |
 | [`reproductions/`](reproductions/) | [`reproductions/AGENTS.md`](reproductions/AGENTS.md) | Isolated external-paper source and teaching reproductions |
 | [`tools/`](tools/) | [`tools/AGENTS.md`](tools/AGENTS.md) | Versioned provenance and migration tools |
@@ -28,6 +29,8 @@ and package workflow code. The synthesis guide links the figure-specific guide.
   [`workflows/relational_model/README.md`](workflows/relational_model/README.md)
 - Diagnostic synthesis and unresolved boundaries:
   [`synthesis/README.md`](synthesis/README.md)
+- Non-authoritative literature and design discussions:
+  [`discussions/README.md`](discussions/README.md)
 - Complete registered evidence ledger: [`studies/README.md`](studies/README.md)
 - Maintained code architecture: [`fsrl/README.md`](fsrl/README.md)
 - Historical reporting snapshots:
@@ -37,6 +40,12 @@ The machine-readable workflow is the authority for the current claim graph.
 Study manifests and frozen records are the authority for atomic scientific
 facts. Do not turn an `AGENTS.md`, generated README, or conversational summary
 into a competing evidence database.
+
+Files under `discussions/` may explain how external work bears on the project
+and why a test is proposed, deferred, or rejected. They must link observed
+project claims to their workflow or study authority, label inference
+separately, and must not register a result, alter a frozen boundary, or
+authorize execution.
 
 ## Scientific north star
 
