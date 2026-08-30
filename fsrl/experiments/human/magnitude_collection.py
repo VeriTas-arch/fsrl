@@ -879,7 +879,7 @@ def run_readiness(
         ROOT / "fsrl" / "experiments" / "human" / "magnitude_analysis.py",
         ROOT / "tests" / "experiments" / "human" / "test_magnitude_collection.py",
         ROOT / "tests" / "experiments" / "human" / "test_magnitude_analysis.py",
-        ROOT / "requirements.txt",
+        ROOT / "pyproject.toml",
     )
     gates = {
         "scientific_protocol_hash": protocol_hash

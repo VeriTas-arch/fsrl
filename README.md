@@ -101,14 +101,14 @@ namespace, reproduction dependencies, and test tools in editable mode and
 verify the environment:
 
 ~~~bash
-direnv exec . python -m pip install -r requirements.txt
+direnv exec . python -m pip install -e ".[reproduction,test]"
 direnv exec . python -m pip check
 direnv exec . python -c "import fsrl; print(fsrl.__file__)"
 ~~~
 
-`requirements/constraints-py312.txt` records the tested direct dependency
-snapshot. It makes fresh CPU research environments comparable without
-pretending that a CUDA wheel URL is portable across hosts.
+`pyproject.toml` is the single dependency authority. The `reproduction` and
+`test` extras add the external-paper reproduction and repository validation
+dependencies, respectively.
 
 When dependencies are already installed, refresh only the local package
 metadata without dependency resolution:
