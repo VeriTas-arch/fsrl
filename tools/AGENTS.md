@@ -2,8 +2,9 @@
 
 This file applies to `tools/`.
 
-Navigation: [repository guide](../AGENTS.md) · [study guide](../studies/AGENTS.md)
-· [infrastructure guide](../fsrl/infra/AGENTS.md)
+Navigation: [repository guide](../AGENTS.md) · [audit commands](README.md) ·
+[study guide](../studies/AGENTS.md) ·
+[infrastructure guide](../fsrl/infra/AGENTS.md)
 
 - Provenance tools audit or perform explicitly versioned migrations. Default to
   read-only `check` or `audit` behavior; never mutate registered evidence as a

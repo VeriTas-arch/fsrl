@@ -1,9 +1,17 @@
 # Unsigned curvature gate
 
+<!-- fsrl-doc role=generated-navigation source=studies/curvature_gate/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/curvature_gate/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/curvature_gate/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,19 +21,32 @@
 
 ## Scientific role
 
-**Question.** Can unsigned hidden-space curvature magnitude safely control local response amplitude?
+**Question.** Can unsigned hidden-space curvature magnitude safely control local
+response amplitude?
 
-**Finding.** The gate preserves competence and global mechanism but fails aggregate rescue and specificity, harms the other seven relations, and assigns attenuation in the wrong state direction.
+**Finding.** The gate preserves competence and global mechanism but fails aggregate
+rescue and specificity, harms the other seven relations, and assigns attenuation in the
+wrong state direction.
 
-**Claim boundary.** Reject unsigned curvature magnitude as the online control variable; preserved global and operator positives remain supported.
+**Claim boundary.** Reject unsigned curvature magnitude as the online control variable;
+preserved global and operator positives remain supported.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/curvature_gate_pilot_v2.json](records/benchmarks/curvature_gate_pilot_v2.json) (`sha256:8aa515072d95`)
-- `execution_lock` — [benchmarks/curvature_gate_pilot_v2.lock.json](records/benchmarks/curvature_gate_pilot_v2.lock.json) (`sha256:aeecf673aaa2`)
-- `execution_lock` — [benchmarks/curvature_gate_pilot_v2.lock_v2.json](records/benchmarks/curvature_gate_pilot_v2.lock_v2.json) (`sha256:22c7ffd3bcb8`)
-- `report` — [docs/curvature_gate_pilot_v2.md](records/docs/curvature_gate_pilot_v2.md) (`sha256:8039578fa974`)
-- `frozen_result` — [results/curvature_gate_pilot_v2.json](records/results/curvature_gate_pilot_v2.json) (`sha256:35d251ba919b`)
+- `registered_contract` —
+  [benchmarks/curvature_gate_pilot_v2.json](records/benchmarks/curvature_gate_pilot_v2.json)
+  (`sha256:8aa515072d95`)
+- `execution_lock` —
+  [benchmarks/curvature_gate_pilot_v2.lock.json](records/benchmarks/curvature_gate_pilot_v2.lock.json)
+  (`sha256:aeecf673aaa2`)
+- `execution_lock` —
+  [benchmarks/curvature_gate_pilot_v2.lock_v2.json](records/benchmarks/curvature_gate_pilot_v2.lock_v2.json)
+  (`sha256:22c7ffd3bcb8`)
+- `report` — [docs/curvature_gate_pilot_v2.md](records/docs/curvature_gate_pilot_v2.md)
+  (`sha256:8039578fa974`)
+- `frozen_result` —
+  [results/curvature_gate_pilot_v2.json](records/results/curvature_gate_pilot_v2.json)
+  (`sha256:35d251ba919b`)
 
 ## Provenance rule
 

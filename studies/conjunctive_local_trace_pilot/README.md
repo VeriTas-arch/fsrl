@@ -1,9 +1,17 @@
 # Conjunctive persistent local-trace pilot
 
+<!-- fsrl-doc role=generated-navigation source=studies/conjunctive_local_trace_pilot/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/conjunctive_local_trace_pilot/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/conjunctive_local_trace_pilot/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,19 +21,33 @@
 
 ## Scientific role
 
-**Question.** Can a separately persistent, query-addressed local state preserve direct experience alongside P_T?
+**Question.** Can a separately persistent, query-addressed local state preserve direct
+experience alongside P_T?
 
-**Finding.** The pilot establishes a strong P/L causal double dissociation and direct-enriched local rescue, but its registered sampled learned-accuracy conjunction fails.
+**Finding.** The pilot establishes a strong P/L causal double dissociation and
+direct-enriched local rescue, but its registered sampled learned-accuracy conjunction
+fails.
 
-**Claim boundary.** The discovery pilot is not a full behavioral rescue and does not establish unique tensor-product coding or biological stores.
+**Claim boundary.** The discovery pilot is not a full behavioral rescue and does not
+establish unique tensor-product coding or biological stores.
 
 ## Frozen records
 
-- `artifact_lock` — [benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json](records/benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json) (`sha256:a4a1e5c284e5`)
-- `registered_contract` — [benchmarks/conjunctive_local_trace_pilot_v2_3.json](records/benchmarks/conjunctive_local_trace_pilot_v2_3.json) (`sha256:8ee6dcb4309e`)
-- `execution_lock` — [benchmarks/conjunctive_local_trace_pilot_v2_3.lock.json](records/benchmarks/conjunctive_local_trace_pilot_v2_3.lock.json) (`sha256:49d376f743cb`)
-- `report` — [docs/conjunctive_local_trace_pilot_v2_3.md](records/docs/conjunctive_local_trace_pilot_v2_3.md) (`sha256:578a90b6ca96`)
-- `frozen_result` — [results/conjunctive_local_trace_pilot_v2_3.json](records/results/conjunctive_local_trace_pilot_v2_3.json) (`sha256:5176802b4377`)
+- `artifact_lock` —
+  [benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json](records/benchmarks/conjunctive_local_trace_pilot_v2_3.artifact_lock.json)
+  (`sha256:a4a1e5c284e5`)
+- `registered_contract` —
+  [benchmarks/conjunctive_local_trace_pilot_v2_3.json](records/benchmarks/conjunctive_local_trace_pilot_v2_3.json)
+  (`sha256:8ee6dcb4309e`)
+- `execution_lock` —
+  [benchmarks/conjunctive_local_trace_pilot_v2_3.lock.json](records/benchmarks/conjunctive_local_trace_pilot_v2_3.lock.json)
+  (`sha256:49d376f743cb`)
+- `report` —
+  [docs/conjunctive_local_trace_pilot_v2_3.md](records/docs/conjunctive_local_trace_pilot_v2_3.md)
+  (`sha256:578a90b6ca96`)
+- `frozen_result` —
+  [results/conjunctive_local_trace_pilot_v2_3.json](records/results/conjunctive_local_trace_pilot_v2_3.json)
+  (`sha256:5176802b4377`)
 
 ## Provenance rule
 

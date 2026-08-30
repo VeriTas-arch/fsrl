@@ -1,9 +1,17 @@
 # Support-topology transport
 
+<!-- fsrl-doc role=generated-navigation source=studies/support_topology_transport/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/support_topology_transport/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/support_topology_transport/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,21 +21,38 @@
 
 ## Scientific role
 
-**Question.** Does the P_T/a_T mechanism survive a one-factor change in the Liu support graph?
+**Question.** Does the P_T/a_T mechanism survive a one-factor change in the Liu support
+graph?
 
-**Finding.** The registered structural mechanism transports under the repaired, source-locked topology contract.
+**Finding.** The registered structural mechanism transports under the repaired,
+source-locked topology contract.
 
-**Claim boundary.** The original attempt is retained as an attempt result; transport across selected graphs is not an arbitrary-graph guarantee.
+**Claim boundary.** The original attempt is retained as an attempt result; transport
+across selected graphs is not an arbitrary-graph guarantee.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/liu_support_topology_transport_v1.json](records/benchmarks/liu_support_topology_transport_v1.json) (`sha256:7bbb454a29a4`)
-- `execution_lock` — [benchmarks/liu_support_topology_transport_v1.lock.json](records/benchmarks/liu_support_topology_transport_v1.lock.json) (`sha256:d45653c32efb`)
-- `repair_contract` — [benchmarks/liu_support_topology_transport_v1.repair1.json](records/benchmarks/liu_support_topology_transport_v1.repair1.json) (`sha256:b004070c7807`)
-- `repair_lock` — [benchmarks/liu_support_topology_transport_v1.repair1.lock.json](records/benchmarks/liu_support_topology_transport_v1.repair1.lock.json) (`sha256:593c15806ac5`)
-- `report` — [docs/liu_support_topology_transport_v1.md](records/docs/liu_support_topology_transport_v1.md) (`sha256:8f30aae9e3fd`)
-- `superseded_repair_source` — [results/liu_support_topology_transport_v1.attempt1.json](records/results/liu_support_topology_transport_v1.attempt1.json) (`sha256:5a953515c6d2`)
-- `frozen_result` — [results/liu_support_topology_transport_v1.json](records/results/liu_support_topology_transport_v1.json) (`sha256:2838a1a7d4a5`)
+- `registered_contract` —
+  [benchmarks/liu_support_topology_transport_v1.json](records/benchmarks/liu_support_topology_transport_v1.json)
+  (`sha256:7bbb454a29a4`)
+- `execution_lock` —
+  [benchmarks/liu_support_topology_transport_v1.lock.json](records/benchmarks/liu_support_topology_transport_v1.lock.json)
+  (`sha256:d45653c32efb`)
+- `repair_contract` —
+  [benchmarks/liu_support_topology_transport_v1.repair1.json](records/benchmarks/liu_support_topology_transport_v1.repair1.json)
+  (`sha256:b004070c7807`)
+- `repair_lock` —
+  [benchmarks/liu_support_topology_transport_v1.repair1.lock.json](records/benchmarks/liu_support_topology_transport_v1.repair1.lock.json)
+  (`sha256:593c15806ac5`)
+- `report` —
+  [docs/liu_support_topology_transport_v1.md](records/docs/liu_support_topology_transport_v1.md)
+  (`sha256:8f30aae9e3fd`)
+- `superseded_repair_source` —
+  [results/liu_support_topology_transport_v1.attempt1.json](records/results/liu_support_topology_transport_v1.attempt1.json)
+  (`sha256:5a953515c6d2`)
+- `frozen_result` —
+  [results/liu_support_topology_transport_v1.json](records/results/liu_support_topology_transport_v1.json)
+  (`sha256:2838a1a7d4a5`)
 
 ## Provenance rule
 

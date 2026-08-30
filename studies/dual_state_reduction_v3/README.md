@@ -1,9 +1,17 @@
 # Item-history reduction v3
 
+<!-- fsrl-doc role=generated-navigation source=studies/dual_state_reduction_v3/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/dual_state_reduction_v3/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/dual_state_reduction_v3/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -15,16 +23,26 @@
 
 **Question.** Does a richer item-history coordinate close global learning dynamics?
 
-**Finding.** The registered item-history state is insufficient, while exposing relational allocation structure that scalar history misses.
+**Finding.** The registered item-history state is insufficient, while exposing
+relational allocation structure that scalar history misses.
 
-**Claim boundary.** Do not infer irreducible high dimensionality from failure of this registered coordinate family.
+**Claim boundary.** Do not infer irreducible high dimensionality from failure of this
+registered coordinate family.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/dual_state_reduced_algorithm_v3.json](records/benchmarks/dual_state_reduced_algorithm_v3.json) (`sha256:32c7b3df64ee`)
-- `execution_lock` — [benchmarks/dual_state_reduced_algorithm_v3.lock.json](records/benchmarks/dual_state_reduced_algorithm_v3.lock.json) (`sha256:d901c8565cc2`)
-- `report` — [docs/dual_state_reduced_algorithm_v3.md](records/docs/dual_state_reduced_algorithm_v3.md) (`sha256:5124a6b902b4`)
-- `frozen_result` — [results/dual_state_reduced_algorithm_v3.json](records/results/dual_state_reduced_algorithm_v3.json) (`sha256:44f125cf4d63`)
+- `registered_contract` —
+  [benchmarks/dual_state_reduced_algorithm_v3.json](records/benchmarks/dual_state_reduced_algorithm_v3.json)
+  (`sha256:32c7b3df64ee`)
+- `execution_lock` —
+  [benchmarks/dual_state_reduced_algorithm_v3.lock.json](records/benchmarks/dual_state_reduced_algorithm_v3.lock.json)
+  (`sha256:d901c8565cc2`)
+- `report` —
+  [docs/dual_state_reduced_algorithm_v3.md](records/docs/dual_state_reduced_algorithm_v3.md)
+  (`sha256:5124a6b902b4`)
+- `frozen_result` —
+  [results/dual_state_reduced_algorithm_v3.json](records/results/dual_state_reduced_algorithm_v3.json)
+  (`sha256:44f125cf4d63`)
 
 ## Provenance rule
 

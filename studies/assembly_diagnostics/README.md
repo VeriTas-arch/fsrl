@@ -1,9 +1,17 @@
 # Assembly slope and Hodge diagnostics
 
+<!-- fsrl-doc role=generated-navigation source=studies/assembly_diagnostics/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/assembly_diagnostics/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/assembly_diagnostics/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,17 +21,25 @@
 
 ## Scientific role
 
-**Question.** Does stable evidence omission explain the excessive symbolic-distance slope?
+**Question.** Does stable evidence omission explain the excessive symbolic-distance
+slope?
 
-**Finding.** The slope mismatch localizes to the neural policy transformation: neural fields are almost additive while human choices retain a stronger learned-pair residual.
+**Finding.** The slope mismatch localizes to the neural policy transformation: neural
+fields are almost additive while human choices retain a stronger learned-pair residual.
 
-**Claim boundary.** This is a policy-level mixed-code signal, not proof of a local memory store.
+**Claim boundary.** This is a policy-level mixed-code signal, not proof of a local
+memory store.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/assembly_diagnostics_v1.json](records/benchmarks/assembly_diagnostics_v1.json) (`sha256:e96cd83e0d02`)
-- `report` — [docs/assembly_diagnostics_v1.md](records/docs/assembly_diagnostics_v1.md) (`sha256:bdcd1eef5852`)
-- `frozen_result` — [results/assembly_diagnostics_v1.json](records/results/assembly_diagnostics_v1.json) (`sha256:a768495fe84b`)
+- `registered_contract` —
+  [benchmarks/assembly_diagnostics_v1.json](records/benchmarks/assembly_diagnostics_v1.json)
+  (`sha256:e96cd83e0d02`)
+- `report` — [docs/assembly_diagnostics_v1.md](records/docs/assembly_diagnostics_v1.md)
+  (`sha256:bdcd1eef5852`)
+- `frozen_result` —
+  [results/assembly_diagnostics_v1.json](records/results/assembly_diagnostics_v1.json)
+  (`sha256:a768495fe84b`)
 
 ## Provenance rule
 

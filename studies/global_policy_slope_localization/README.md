@@ -1,9 +1,17 @@
 # Global-policy slope localization
 
+<!-- fsrl-doc role=generated-navigation source=studies/global_policy_slope_localization/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/global_policy_slope_localization/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/global_policy_slope_localization/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,29 @@
 
 ## Scientific role
 
-**Question.** Which algebraic part of the pure-global neural policy carries the excessive nonlearned distance slope?
+**Question.** Which algebraic part of the pure-global neural policy carries the
+excessive nonlearned distance slope?
 
-**Finding.** The positive neural margin slope is already in the additive potential; the Hodge residual and fixed sigmoid are compressive rather than amplifying.
+**Finding.** The positive neural margin slope is already in the additive potential; the
+Hodge residual and fixed sigmoid are compressive rather than amplifying.
 
-**Claim boundary.** The later common-unit audit rejects the stronger claim that neural additive norm is globally over-sharp relative to the posterior comparator.
+**Claim boundary.** The later common-unit audit rejects the stronger claim that neural
+additive norm is globally over-sharp relative to the posterior comparator.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/global_policy_slope_localization_v1.json](records/benchmarks/global_policy_slope_localization_v1.json) (`sha256:a32878f67132`)
-- `execution_lock` — [benchmarks/global_policy_slope_localization_v1.lock.json](records/benchmarks/global_policy_slope_localization_v1.lock.json) (`sha256:4d2ddb28f275`)
-- `report` — [docs/global_policy_slope_localization_v1.md](records/docs/global_policy_slope_localization_v1.md) (`sha256:cef52c9efe1d`)
-- `frozen_result` — [results/global_policy_slope_localization_v1.json](records/results/global_policy_slope_localization_v1.json) (`sha256:a10060d6bd87`)
+- `registered_contract` —
+  [benchmarks/global_policy_slope_localization_v1.json](records/benchmarks/global_policy_slope_localization_v1.json)
+  (`sha256:a32878f67132`)
+- `execution_lock` —
+  [benchmarks/global_policy_slope_localization_v1.lock.json](records/benchmarks/global_policy_slope_localization_v1.lock.json)
+  (`sha256:4d2ddb28f275`)
+- `report` —
+  [docs/global_policy_slope_localization_v1.md](records/docs/global_policy_slope_localization_v1.md)
+  (`sha256:cef52c9efe1d`)
+- `frozen_result` —
+  [results/global_policy_slope_localization_v1.json](records/results/global_policy_slope_localization_v1.json)
+  (`sha256:a10060d6bd87`)
 
 ## Provenance rule
 

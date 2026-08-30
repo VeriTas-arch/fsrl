@@ -12,7 +12,8 @@ now live in an isolated reproduction capsule.
   the reader-first account of the model, causal evidence, retained negative
   results, and exact claim limits.
 - [Relational model mainline](workflows/relational_model/README.md) is the
-  machine-readable claim-to-code-to-evidence route.
+  generated human view of the machine-readable claim-to-code-to-evidence
+  route.
 - [Study registry](studies/README.md) owns atomic questions, estimands,
   protocols, results, and claim boundaries.
 - [Current synthesis](synthesis/README.md) organizes diagnostic history,

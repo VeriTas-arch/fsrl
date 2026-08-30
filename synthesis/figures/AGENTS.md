@@ -8,6 +8,8 @@ Navigation: [synthesis guide](../AGENTS.md) · [figure portal](README.md) ·
 
 - Cross-study report figures belong here; study-specific diagnostic figures
   remain with their owning study.
+- `README.md` is hand-maintained navigation. Figure specifications, source-data
+  tables, and render manifests are the machine-readable authorities.
 - Every promoted figure needs a stable figure ID, panel purpose, source study
   and estimand, source-data table, deterministic generation command, output
   paths, and render manifest.

@@ -1,9 +1,17 @@
 # Prefix and relation-LOO assembly trajectory
 
+<!-- fsrl-doc role=generated-navigation source=studies/assembly_trajectory/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/assembly_trajectory/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/assembly_trajectory/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,17 +21,26 @@
 
 ## Scientific role
 
-**Question.** How does retained evidence causally shape remote relations and the terminal global field?
+**Question.** How does retained evidence causally shape remote relations and the
+terminal global field?
 
-**Finding.** Retained support trials immediately affect remote pairs, leave relation-specific LOO signatures, and converge toward an expected-rank-like terminal potential rather than a hard MAP order.
+**Finding.** Retained support trials immediately affect remote pairs, leave
+relation-specific LOO signatures, and converge toward an expected-rank-like terminal
+potential rather than a hard MAP order.
 
-**Claim boundary.** Remote absolute effects are robust, but independent correctness-propagating Bayesian updates are not established.
+**Claim boundary.** Remote absolute effects are robust, but independent
+correctness-propagating Bayesian updates are not established.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/assembly_trajectory_v1.json](records/benchmarks/assembly_trajectory_v1.json) (`sha256:9fb6eed990e2`)
-- `report` — [docs/assembly_trajectory_v1.md](records/docs/assembly_trajectory_v1.md) (`sha256:7a561e0fa279`)
-- `frozen_result` — [results/assembly_trajectory_v1.json](records/results/assembly_trajectory_v1.json) (`sha256:0d47b8b5e61c`)
+- `registered_contract` —
+  [benchmarks/assembly_trajectory_v1.json](records/benchmarks/assembly_trajectory_v1.json)
+  (`sha256:9fb6eed990e2`)
+- `report` — [docs/assembly_trajectory_v1.md](records/docs/assembly_trajectory_v1.md)
+  (`sha256:7a561e0fa279`)
+- `frozen_result` —
+  [results/assembly_trajectory_v1.json](records/results/assembly_trajectory_v1.json)
+  (`sha256:0d47b8b5e61c`)
 
 ## Provenance rule
 

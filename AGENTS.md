@@ -18,7 +18,7 @@ editing within a subtree.
 | [`reproductions/`](reproductions/) | [`reproductions/AGENTS.md`](reproductions/AGENTS.md) | Isolated external-paper source and teaching reproductions |
 | [`tools/`](tools/) | [`tools/AGENTS.md`](tools/AGENTS.md) | Versioned provenance and migration tools |
 | `artifacts/` | this guide | Ignored run and reproduction outputs |
-| `data/external/` | this guide | Immutable external input data |
+| [`data/`](data/README.md) | this guide | Tracked immutable external inputs and their dataset contracts |
 
 The source guide links additional rules for `tasks/`, `experiments/`, `infra/`,
 and package workflow code. The synthesis guide links the figure-specific guide.
@@ -102,9 +102,10 @@ minimum for a completed structural change is:
 
 ```bash
 direnv exec . python -m fsrl.infra.study_registry check
-direnv exec . python -m fsrl.workflows check \
-  workflows/relational_model/workflow.toml
+direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml
 direnv exec . python -m fsrl.workflows.paper_figures check
+direnv exec . basedpyright
+direnv exec . python -m tools.quality.complexity_budget
 direnv exec . ruff check fsrl tests tools reproductions
 direnv exec . ruff format --check fsrl tests tools reproductions
 direnv exec . python -m fsrl.infra.test_runtime

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from fsrl.infra.file_contracts import safe_relative_path
+from fsrl.infra.markdown_rendering import wrap_markdown
 from fsrl.infra.semantic_contract import json_pointer
 from fsrl.infra.study_registry import (
     load_registry,
@@ -288,69 +289,123 @@ def validate_workflow(workflow: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _record_link(study_id: str, record: str, pointer: str | None) -> str:
+def _record_link(study_id: str, record: str) -> str:
     target = f"../../studies/{study_id}/{record}"
     label = f"{study_id}:{record}"
-    suffix = f" `{pointer}`" if pointer is not None else ""
-    return f"[{label}]({target}){suffix}"
+    return f"[{label}]({target})"
+
+
+def _format_command(argv: list[str], width: int = 84) -> list[str]:
+    lines: list[str] = []
+    current = ""
+    for argument in argv:
+        token = shlex.quote(argument)
+        candidate = f"{current} {token}" if current else token
+        if current and len(candidate) > width:
+            lines.append(f"{current} \\")
+            current = f"  {token}"
+        else:
+            current = candidate
+    if current:
+        lines.append(current)
+    return lines
 
 
 def render_workflow(workflow: dict[str, Any]) -> str:
     """Render the exact workflow schema as the human mainline."""
 
     validate_workflow(workflow)
+    source = f"workflows/{workflow['id']}/workflow.toml"
     lines = [
         f"# {workflow['title']}",
         "",
-        "> This page is generated from `workflow.toml`. The TOML is the machine-readable",
-        "> claim, evidence, implementation, verification, and figure contract.",
+        f"<!-- fsrl-doc role=generated-navigation source={source} -->",
         "",
-        workflow["purpose"],
+        "> [!NOTE]",
+        "> **Generated navigation.**",
+        ">",
+        f"> - **Authority:** `{source}`",
+        f"> - **Rebuild:** `direnv exec . python -m fsrl.workflows render {source}`",
+        "> - **Edit:** do not edit this README directly.",
+        ">",
+        "> `workflow.toml` is the machine-readable claim, evidence, implementation,",
+        "> verification, and figure contract.",
         "",
-        f"**Current working claim.** {workflow['working_claim']}",
-        "",
-        f"**Claim boundary.** {workflow['boundary']}",
-        "",
-        "## How to read this mainline",
-        "",
-        "| Stage | Scientific question | Current result |",
-        "| --- | --- | --- |",
     ]
+    lines.extend(wrap_markdown(workflow["purpose"]))
+    lines.append("")
+    lines.extend(
+        wrap_markdown(f"**Current working claim.** {workflow['working_claim']}")
+    )
+    lines.append("")
+    lines.extend(wrap_markdown(f"**Claim boundary.** {workflow['boundary']}"))
+    lines.extend(
+        [
+            "",
+            "## How to read this mainline",
+            "",
+        ]
+    )
     for index, stage in enumerate(workflow["stages"], start=1):
-        lines.append(
-            f"| {index}. [{stage['title']}](#{stage['id'].replace('_', '-')}) "
-            f"| {stage['question']} | {stage['finding']} |"
+        anchor = stage["id"].replace("_", "-")
+        lines.append(f"{index}. [{stage['title']}](#{anchor})")
+        lines.extend(
+            wrap_markdown(
+                f"**Question.** {stage['question']}",
+                initial_indent="   - ",
+                subsequent_indent="     ",
+            )
         )
+        lines.extend(
+            wrap_markdown(
+                f"**Current result.** {stage['finding']}",
+                initial_indent="   - ",
+                subsequent_indent="     ",
+            )
+        )
+        lines.append("")
 
     for index, stage in enumerate(workflow["stages"], start=1):
         lines.extend(
             [
-                "",
                 f"## {index}. {stage['title']}",
                 "",
                 f'<a id="{stage["id"].replace("_", "-")}"></a>',
                 "",
-                f"**Question.** {stage['question']}",
-                "",
-                f"**Method.** {stage['method']}",
-                "",
-                f"**Result.** {stage['finding']}",
-                "",
-                f"**Boundary.** {stage['boundary']}",
-                "",
-                "Implementation:",
-                "",
             ]
         )
+        for label, value in (
+            ("Question", stage["question"]),
+            ("Method", stage["method"]),
+            ("Result", stage["finding"]),
+            ("Boundary", stage["boundary"]),
+        ):
+            lines.extend(wrap_markdown(f"**{label}.** {value}"))
+            lines.append("")
+        lines.extend(["Implementation:", ""])
         lines.extend(f"- [`{path}`](../../{path})" for path in stage["implementation"])
         lines.extend(["", "Tests:", ""])
         lines.extend(f"- [`{path}`](../../{path})" for path in stage["tests"])
         lines.extend(["", "Exact evidence:", ""])
         for entry in stage["evidence"]:
-            link = _record_link(
-                entry["study"], entry["record"], entry.get("json_pointer")
+            link = _record_link(entry["study"], entry["record"])
+            lines.append(f"- `{entry['use']}` — {link}")
+            pointer = entry.get("json_pointer")
+            if pointer is not None:
+                lines.extend(
+                    wrap_markdown(
+                        f"**JSON pointer:** `{pointer}`",
+                        initial_indent="  - ",
+                        subsequent_indent="    ",
+                    )
+                )
+            lines.extend(
+                wrap_markdown(
+                    f"**Meaning:** {entry['description']}",
+                    initial_indent="  - ",
+                    subsequent_indent="    ",
+                )
             )
-            lines.append(f"- `{entry['use']}` — {link} — {entry['description']}")
         if stage.get("figures"):
             lines.extend(["", "Figures:", ""])
             for entry in stage["figures"]:
@@ -358,14 +413,27 @@ def render_workflow(workflow: dict[str, Any]) -> str:
                 figure_root = Path(specification).parent
                 figure = entry["figure"]
                 target = f"../../{figure_root.as_posix()}/{figure}/{figure}.svg"
-                lines.append(
-                    f"- [{figure}]({target}) — {entry['description']} "
-                    f"([specification](../../{specification}))"
+                lines.append(f"- [{figure}]({target})")
+                lines.extend(
+                    wrap_markdown(
+                        f"**Purpose:** {entry['description']}",
+                        initial_indent="  - ",
+                        subsequent_indent="    ",
+                    )
                 )
+                lines.append(f"  - **Specification:** [JSON](../../{specification})")
         lines.extend(["", "Verification:", ""])
         for entry in stage["verification"]:
-            command = shlex.join(entry["argv"])
-            lines.append(f"- `{entry['id']}` (`{entry['resource']}`): `{command}`")
+            lines.extend(
+                [
+                    f"**`{entry['id']}`** (`{entry['resource']}`):",
+                    "",
+                    "```bash",
+                    *_format_command(entry["argv"]),
+                    "```",
+                    "",
+                ]
+            )
 
     lines.extend(
         [

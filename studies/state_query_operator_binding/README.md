@@ -1,9 +1,17 @@
 # State-by-query operator binding
 
+<!-- fsrl-doc role=generated-navigation source=studies/state_query_operator_binding/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/state_query_operator_binding/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/state_query_operator_binding/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,17 +21,26 @@
 
 ## Scientific role
 
-**Question.** Does the fast-weight state preserve relation identity through congruent query-dependent operator action?
+**Question.** Does the fast-weight state preserve relation identity through congruent
+query-dependent operator action?
 
-**Finding.** State-relation identity and exact query matching replicate in preactivation and nonlinear hidden effects, while query-invariant cross-query identity fails.
+**Finding.** State-relation identity and exact query matching replicate in preactivation
+and nonlinear hidden effects, while query-invariant cross-query identity fails.
 
-**Claim boundary.** The state is a basis-dependent query-addressable operator, not a rank-one key-value memory or an established correctness code.
+**Claim boundary.** The state is a basis-dependent query-addressable operator, not a
+rank-one key-value memory or an established correctness code.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/state_query_operator_binding_v1.json](records/benchmarks/state_query_operator_binding_v1.json) (`sha256:145d85a579b3`)
-- `report` — [docs/state_query_operator_binding_v1.md](records/docs/state_query_operator_binding_v1.md) (`sha256:d2f36739ec92`)
-- `frozen_result` — [results/state_query_operator_binding_v1.json](records/results/state_query_operator_binding_v1.json) (`sha256:7d334170296b`)
+- `registered_contract` —
+  [benchmarks/state_query_operator_binding_v1.json](records/benchmarks/state_query_operator_binding_v1.json)
+  (`sha256:145d85a579b3`)
+- `report` —
+  [docs/state_query_operator_binding_v1.md](records/docs/state_query_operator_binding_v1.md)
+  (`sha256:d2f36739ec92`)
+- `frozen_result` —
+  [results/state_query_operator_binding_v1.json](records/results/state_query_operator_binding_v1.json)
+  (`sha256:7d334170296b`)
 
 ## Provenance rule
 

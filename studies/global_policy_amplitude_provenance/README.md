@@ -1,9 +1,17 @@
 # Global-policy amplitude provenance
 
+<!-- fsrl-doc role=generated-navigation source=studies/global_policy_amplitude_provenance/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/global_policy_amplitude_provenance/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/global_policy_amplitude_provenance/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,30 @@
 
 ## Scientific role
 
-**Question.** Is the neural/posterior slope mismatch explained by excessive total additive amplitude?
+**Question.** Is the neural/posterior slope mismatch explained by excessive total
+additive amplitude?
 
-**Finding.** Neural additive norm is smaller than the posterior comparator even though neural slope is steeper, converting the issue from scalar calibration to field allocation and shape.
+**Finding.** Neural additive norm is smaller than the posterior comparator even though
+neural slope is steeper, converting the issue from scalar calibration to field
+allocation and shape.
 
-**Claim boundary.** The outcome is comparator-sensitive and unresolved; temperature, P_T, W_out, and scalar corrections are not licensed.
+**Claim boundary.** The outcome is comparator-sensitive and unresolved; temperature,
+P_T, W_out, and scalar corrections are not licensed.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/global_policy_amplitude_provenance_v1.json](records/benchmarks/global_policy_amplitude_provenance_v1.json) (`sha256:08b0a0448c1c`)
-- `execution_lock` — [benchmarks/global_policy_amplitude_provenance_v1.lock.json](records/benchmarks/global_policy_amplitude_provenance_v1.lock.json) (`sha256:f774a4216196`)
-- `report` — [docs/global_policy_amplitude_provenance_v1.md](records/docs/global_policy_amplitude_provenance_v1.md) (`sha256:b51e645bb579`)
-- `frozen_result` — [results/global_policy_amplitude_provenance_v1.json](records/results/global_policy_amplitude_provenance_v1.json) (`sha256:b94a7ff154d6`)
+- `registered_contract` —
+  [benchmarks/global_policy_amplitude_provenance_v1.json](records/benchmarks/global_policy_amplitude_provenance_v1.json)
+  (`sha256:08b0a0448c1c`)
+- `execution_lock` —
+  [benchmarks/global_policy_amplitude_provenance_v1.lock.json](records/benchmarks/global_policy_amplitude_provenance_v1.lock.json)
+  (`sha256:f774a4216196`)
+- `report` —
+  [docs/global_policy_amplitude_provenance_v1.md](records/docs/global_policy_amplitude_provenance_v1.md)
+  (`sha256:b51e645bb579`)
+- `frozen_result` —
+  [results/global_policy_amplitude_provenance_v1.json](records/results/global_policy_amplitude_provenance_v1.json)
+  (`sha256:b94a7ff154d6`)
 
 ## Provenance rule
 

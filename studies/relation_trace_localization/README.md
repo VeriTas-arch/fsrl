@@ -1,9 +1,17 @@
 # Relation-trace localization
 
+<!-- fsrl-doc role=generated-navigation source=studies/relation_trace_localization/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/relation_trace_localization/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/relation_trace_localization/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,30 @@
 
 ## Scientific role
 
-**Question.** Where does relation identity appear between generated writes, terminal fast weights, and query dynamics?
+**Question.** Where does relation identity appear between generated writes, terminal
+fast weights, and query dynamics?
 
-**Finding.** Registered static prototype geometry fails in write and terminal matrices, but relation identity appears at the first fast-weight-sensitive query transition and persists after response.
+**Finding.** Registered static prototype geometry fails in write and terminal matrices,
+but relation identity appears at the first fast-weight-sensitive query transition and
+persists after response.
 
-**Claim boundary.** This is a mixed operator-code result, not a shared static embedding, correctness channel, or proof that persistent information is absent.
+**Claim boundary.** This is a mixed operator-code result, not a shared static embedding,
+correctness channel, or proof that persistent information is absent.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/relation_trace_localization_v1.json](records/benchmarks/relation_trace_localization_v1.json) (`sha256:cf416f58ebc1`)
-- `registered_contract` — [benchmarks/relation_trace_localization_v1_1.json](records/benchmarks/relation_trace_localization_v1_1.json) (`sha256:8701af7535e0`)
-- `report` — [docs/relation_trace_localization_v1.md](records/docs/relation_trace_localization_v1.md) (`sha256:50d8461605cc`)
-- `frozen_result` — [results/relation_trace_localization_v1_1.json](records/results/relation_trace_localization_v1_1.json) (`sha256:8248e72452e7`)
+- `registered_contract` —
+  [benchmarks/relation_trace_localization_v1.json](records/benchmarks/relation_trace_localization_v1.json)
+  (`sha256:cf416f58ebc1`)
+- `registered_contract` —
+  [benchmarks/relation_trace_localization_v1_1.json](records/benchmarks/relation_trace_localization_v1_1.json)
+  (`sha256:8701af7535e0`)
+- `report` —
+  [docs/relation_trace_localization_v1.md](records/docs/relation_trace_localization_v1.md)
+  (`sha256:50d8461605cc`)
+- `frozen_result` —
+  [results/relation_trace_localization_v1_1.json](records/results/relation_trace_localization_v1_1.json)
+  (`sha256:8248e72452e7`)
 
 ## Provenance rule
 

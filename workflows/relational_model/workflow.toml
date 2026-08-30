@@ -292,9 +292,9 @@ title = "Evidence synthesis and figures"
 question = "How are frozen estimands converted into a report without rewriting diagnostic history?"
 method = "Keep study records byte-preserved, organize the cross-study claim in the mainline workflow, and require source data plus panel provenance for promoted figures."
 finding = "The repository exposes one current claim graph, a complete evidence ledger, historical snapshots, and paper-aligned behavioral figures."
-boundary = "The current synthesis remains indexed rather than final; a later scientific curation pass may reorder the argument without changing frozen records."
+boundary = "Presentation may be curated or reordered, but it cannot rewrite frozen records, promote unsupported claims, or extend the model result to human neural implementation."
 depends_on = ["algorithm_and_transport"]
-implementation = ["fsrl/infra/study_registry.py", "fsrl/workflows/schema.py", "fsrl/workflows/frozen_evidence.py", "fsrl/workflows/paper_figures.py"]
+implementation = ["fsrl/infra/markdown_rendering.py", "fsrl/infra/study_registry.py", "fsrl/workflows/schema.py", "fsrl/workflows/frozen_evidence.py", "fsrl/workflows/paper_figures.py"]
 tests = ["tests/infra/test_study_registry.py", "tests/workflows/test_schema.py", "tests/workflows/test_frozen_evidence.py", "tests/workflows/test_paper_figures.py"]
 studies = ["behavior_reproduction_map"]
 

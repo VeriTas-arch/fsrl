@@ -1,9 +1,17 @@
 # Fresh-backbone differential-access confirmation
 
+<!-- fsrl-doc role=generated-navigation source=studies/dual_evidence_access_confirmation/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/dual_evidence_access_confirmation/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/dual_evidence_access_confirmation/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,19 +21,32 @@
 
 ## Scientific role
 
-**Question.** Does the unchanged v2.4 differential-admission mechanism confirm on fresh independent backbones?
+**Question.** Does the unchanged v2.4 differential-admission mechanism confirm on fresh
+independent backbones?
 
-**Finding.** All four links confirm independently on seeds 2104 and 2105, promoting P_T/a_T with differential evidence admission to the working model mechanism.
+**Finding.** All four links confirm independently on seeds 2104 and 2105, promoting
+P_T/a_T with differential evidence admission to the working model mechanism.
 
-**Claim boundary.** Retained probability has a small replicated cross-talk cost, global distance slope remains excessive, and population prevalence is not established.
+**Claim boundary.** Retained probability has a small replicated cross-talk cost, global
+distance slope remains excessive, and population prevalence is not established.
 
 ## Frozen records
 
-- `artifact_lock` — [benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json](records/benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json) (`sha256:d2448bd682f5`)
-- `registered_contract` — [benchmarks/dual_evidence_access_confirmation_v2_4.json](records/benchmarks/dual_evidence_access_confirmation_v2_4.json) (`sha256:2e24e5509304`)
-- `execution_lock` — [benchmarks/dual_evidence_access_confirmation_v2_4.lock.json](records/benchmarks/dual_evidence_access_confirmation_v2_4.lock.json) (`sha256:5c67201b17b1`)
-- `report` — [docs/dual_evidence_access_confirmation_v2_4.md](records/docs/dual_evidence_access_confirmation_v2_4.md) (`sha256:34141e563645`)
-- `frozen_result` — [results/dual_evidence_access_confirmation_v2_4.json](records/results/dual_evidence_access_confirmation_v2_4.json) (`sha256:ca7e48e3b4ac`)
+- `artifact_lock` —
+  [benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json](records/benchmarks/dual_evidence_access_confirmation_v2_4.artifact_lock.json)
+  (`sha256:d2448bd682f5`)
+- `registered_contract` —
+  [benchmarks/dual_evidence_access_confirmation_v2_4.json](records/benchmarks/dual_evidence_access_confirmation_v2_4.json)
+  (`sha256:2e24e5509304`)
+- `execution_lock` —
+  [benchmarks/dual_evidence_access_confirmation_v2_4.lock.json](records/benchmarks/dual_evidence_access_confirmation_v2_4.lock.json)
+  (`sha256:5c67201b17b1`)
+- `report` —
+  [docs/dual_evidence_access_confirmation_v2_4.md](records/docs/dual_evidence_access_confirmation_v2_4.md)
+  (`sha256:34141e563645`)
+- `frozen_result` —
+  [results/dual_evidence_access_confirmation_v2_4.json](records/results/dual_evidence_access_confirmation_v2_4.json)
+  (`sha256:ca7e48e3b4ac`)
 
 ## Provenance rule
 

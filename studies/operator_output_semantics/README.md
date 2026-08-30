@@ -1,9 +1,17 @@
 # Operator-output semantics
 
+<!-- fsrl-doc role=generated-navigation source=studies/operator_output_semantics/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/operator_output_semantics/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/operator_output_semantics/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,17 +21,27 @@
 
 ## Scientific role
 
-**Question.** At what stage does a correctness-aligned local operator signal become misexpressed?
+**Question.** At what stage does a correctness-aligned local operator signal become
+misexpressed?
 
-**Finding.** A and J_b A are correctness-aligned, but exact finite-amplitude tanh degrades the signal and reverses H>A, localizing the missing link to nonlinear expression.
+**Finding.** A and J_b A are correctness-aligned, but exact finite-amplitude tanh
+degrades the signal and reverses H>A, localizing the missing link to nonlinear
+expression.
 
-**Claim boundary.** The result does not license a new readout, activation change, or global scalar gain.
+**Claim boundary.** The result does not license a new readout, activation change, or
+global scalar gain.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/operator_output_semantics_v1.json](records/benchmarks/operator_output_semantics_v1.json) (`sha256:1ed8a134268f`)
-- `report` — [docs/operator_output_semantics_v1.md](records/docs/operator_output_semantics_v1.md) (`sha256:0a74602f28d9`)
-- `frozen_result` — [results/operator_output_semantics_v1.json](records/results/operator_output_semantics_v1.json) (`sha256:b38f577ad83f`)
+- `registered_contract` —
+  [benchmarks/operator_output_semantics_v1.json](records/benchmarks/operator_output_semantics_v1.json)
+  (`sha256:1ed8a134268f`)
+- `report` —
+  [docs/operator_output_semantics_v1.md](records/docs/operator_output_semantics_v1.md)
+  (`sha256:0a74602f28d9`)
+- `frozen_result` —
+  [results/operator_output_semantics_v1.json](records/results/operator_output_semantics_v1.json)
+  (`sha256:b38f577ad83f`)
 
 ## Provenance rule
 

@@ -1,9 +1,17 @@
 # Presentation-order transport
 
+<!-- fsrl-doc role=generated-navigation source=studies/presentation_order_transport/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/presentation_order_transport/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/presentation_order_transport/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,29 @@
 
 ## Scientific role
 
-**Question.** Does the mechanism persist when the same physical support trials are reordered?
+**Question.** Does the mechanism persist when the same physical support trials are
+reordered?
 
-**Finding.** All registered links transport across random, clustered, and reversed schedules; the local ledger is exactly commutative while P_T remains quantitatively order-sensitive.
+**Finding.** All registered links transport across random, clustered, and reversed
+schedules; the local ledger is exactly commutative while P_T remains quantitatively
+order-sensitive.
 
 **Claim boundary.** Mechanism transport is not behavioral or P_T invariance.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/liu_presentation_order_transport_v1.json](records/benchmarks/liu_presentation_order_transport_v1.json) (`sha256:b294a8cf23d3`)
-- `execution_lock` — [benchmarks/liu_presentation_order_transport_v1.lock.json](records/benchmarks/liu_presentation_order_transport_v1.lock.json) (`sha256:2d9d2ed6f55c`)
-- `report` — [docs/liu_presentation_order_transport_v1.md](records/docs/liu_presentation_order_transport_v1.md) (`sha256:7b7a88f32a04`)
-- `frozen_result` — [results/liu_presentation_order_transport_v1.json](records/results/liu_presentation_order_transport_v1.json) (`sha256:d13f0e1ff448`)
+- `registered_contract` —
+  [benchmarks/liu_presentation_order_transport_v1.json](records/benchmarks/liu_presentation_order_transport_v1.json)
+  (`sha256:b294a8cf23d3`)
+- `execution_lock` —
+  [benchmarks/liu_presentation_order_transport_v1.lock.json](records/benchmarks/liu_presentation_order_transport_v1.lock.json)
+  (`sha256:2d9d2ed6f55c`)
+- `report` —
+  [docs/liu_presentation_order_transport_v1.md](records/docs/liu_presentation_order_transport_v1.md)
+  (`sha256:7b7a88f32a04`)
+- `frozen_result` —
+  [results/liu_presentation_order_transport_v1.json](records/results/liu_presentation_order_transport_v1.json)
+  (`sha256:d13f0e1ff448`)
 
 ## Provenance rule
 

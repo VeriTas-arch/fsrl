@@ -1,9 +1,17 @@
 # Source papers and background
 
+<!-- fsrl-doc role=generated-navigation source=studies/source_papers/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/source_papers/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/source_papers/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -15,13 +23,17 @@
 
 **Question.** Which source documents define the experimental and model lineage?
 
-**Finding.** The Liu source paper and background neural-network paper are retained as reading context.
+**Finding.** The Liu source paper and background neural-network paper are retained as
+reading context.
 
-**Claim boundary.** A source PDF is not a frozen model result, registered contract, or causal evidence node.
+**Claim boundary.** A source PDF is not a frozen model result, registered contract, or
+causal evidence node.
 
 ## Frozen records
 
-- `source_context` — [docs/Human brains construct individualized global rankings from identical few-shot learning input.pdf](<records/docs/Human brains construct individualized global rankings from identical few-shot learning input.pdf>) (`sha256:e9fc90dbb255`)
+- `source_context` —
+  [docs/Human brains construct individualized global rankings from identical few-shot learning input.pdf](<records/docs/Human brains construct individualized global rankings from identical few-shot learning input.pdf>)
+  (`sha256:e9fc90dbb255`)
 - `source_context` — [docs/NN.pdf](records/docs/NN.pdf) (`sha256:cb2564c4743f`)
 
 ## Provenance rule

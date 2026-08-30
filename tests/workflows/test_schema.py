@@ -48,3 +48,10 @@ class WorkflowSchemaTests(unittest.TestCase):
         workflow["stages"][-1]["figures"][0]["figure"] = "figure_missing"
         with self.assertRaisesRegex(ValueError, "figure is absent"):
             validate_workflow(workflow)
+
+    def test_reporting_boundary_does_not_duplicate_synthesis_review_state(self):
+        workflow = load_workflow(WORKFLOW)
+        reporting = next(
+            stage for stage in workflow["stages"] if stage["id"] == "reporting"
+        )
+        self.assertNotRegex(reporting["boundary"], r"\b(?:indexed|reviewed)\b")

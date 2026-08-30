@@ -1,5 +1,9 @@
 # Figure workflow
 
+> [!NOTE]
+> This is a hand-maintained navigation page. Each suite's specification and
+> render manifest are the machine-readable authorities for its figures.
+
 This directory is reserved for cross-study figures intended for a report or
 paper. The architecture distinguishes three layers:
 

@@ -1,9 +1,17 @@
 # Formal mechanism confirmation
 
+<!-- fsrl-doc role=generated-navigation source=studies/mechanism_confirmation/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/mechanism_confirmation/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/mechanism_confirmation/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,31 @@
 
 ## Scientific role
 
-**Question.** Does the registered global fast-weight mechanism replicate across ten unfiltered formal networks?
+**Question.** Does the registered global fast-weight mechanism replicate across ten
+unfiltered formal networks?
 
-**Finding.** Six of seven primary mechanism links confirm, including global reassembly, direction transfer, sensitivity placement, history effects, and expected-rank-over-MAP projection; the DA direction-preservation threshold fails through seed-2009 heterogeneity.
+**Finding.** Six of seven primary mechanism links confirm, including global reassembly,
+direction transfer, sensitivity placement, history effects, and expected-rank-over-MAP
+projection; the DA direction-preservation threshold fails through seed-2009
+heterogeneity.
 
-**Claim boundary.** The complete seven-link chain is not confirmed, and seed 2009 cannot be filtered or used to erase the six replicated links.
+**Claim boundary.** The complete seven-link chain is not confirmed, and seed 2009 cannot
+be filtered or used to erase the six replicated links.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/mechanism_confirmation_v1.json](records/benchmarks/mechanism_confirmation_v1.json) (`sha256:fe9f3bbac5ed`)
-- `report` — [docs/mechanism_confirmation_protocol.md](records/docs/mechanism_confirmation_protocol.md) (`sha256:c03e766cd0fa`)
-- `report` — [docs/model_mechanism_synthesis_v1.md](records/docs/model_mechanism_synthesis_v1.md) (`sha256:81a032cd35f8`)
-- `frozen_result` — [results/mechanism_confirmation_v1.json](records/results/mechanism_confirmation_v1.json) (`sha256:88ef7616dc94`)
+- `registered_contract` —
+  [benchmarks/mechanism_confirmation_v1.json](records/benchmarks/mechanism_confirmation_v1.json)
+  (`sha256:fe9f3bbac5ed`)
+- `report` —
+  [docs/mechanism_confirmation_protocol.md](records/docs/mechanism_confirmation_protocol.md)
+  (`sha256:c03e766cd0fa`)
+- `report` —
+  [docs/model_mechanism_synthesis_v1.md](records/docs/model_mechanism_synthesis_v1.md)
+  (`sha256:81a032cd35f8`)
+- `frozen_result` —
+  [results/mechanism_confirmation_v1.json](records/results/mechanism_confirmation_v1.json)
+  (`sha256:88ef7616dc94`)
 
 ## Provenance rule
 

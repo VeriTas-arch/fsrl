@@ -10,3 +10,9 @@ Each prospective dataset also has a machine-readable `dataset.toml`. It owns
 stable file IDs, source URLs, formats, byte counts, hashes, and tabular schemas;
 the original source files remain byte-preserved and are never rewritten to fit
 the repository's preferred representation.
+
+## Available datasets
+
+- [Liu, Wang, and Luo (2026) behavioral source data](external/liu2026/README.md)
+  contains the byte-preserved public trial-level and published-panel files used
+  by the current relational-model reporting workflow.

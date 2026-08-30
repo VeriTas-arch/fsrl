@@ -249,9 +249,10 @@ class StudyRegistryTests(unittest.TestCase):
             directory = ROOT / "studies" / study_id
             self.assertTrue((directory / "study.toml").is_file())
             content = (directory / "README.md").read_text(encoding="utf-8")
-            self.assertIn(study["question"], content)
-            self.assertIn(study["finding"], content)
-            self.assertIn(study["boundary"], content)
+            normalized = " ".join(content.split())
+            self.assertIn(" ".join(study["question"].split()), normalized)
+            self.assertIn(" ".join(study["finding"].split()), normalized)
+            self.assertIn(" ".join(study["boundary"].split()), normalized)
             self.assertEqual(study["review_state"], "indexed")
 
     def test_every_generated_local_link_resolves(self):

@@ -1,9 +1,17 @@
 # Asymmetric algorithmic organization synthesis
 
+<!-- fsrl-doc role=generated-navigation source=studies/asymmetric_algorithmic_organization/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/asymmetric_algorithmic_organization/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/asymmetric_algorithmic_organization/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,16 +21,24 @@
 
 ## Scientific role
 
-**Question.** What is the simplest algorithmic statement supported by the complete model evidence stack?
+**Question.** What is the simplest algorithmic statement supported by the complete model
+evidence stack?
 
-**Finding.** The local L_T state has an exact edge-ledger-plus-Gram reduction a_T, while the global output is geometrically near-additive but its tested learning states do not close.
+**Finding.** The local L_T state has an exact edge-ledger-plus-Gram reduction a_T, while
+the global output is geometrically near-additive but its tested learning states do not
+close.
 
-**Claim boundary.** Simple output geometry does not imply simple learning dynamics, and failed reductions do not prove intrinsic high dimension.
+**Claim boundary.** Simple output geometry does not imply simple learning dynamics, and
+failed reductions do not prove intrinsic high dimension.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/asymmetric_algorithmic_organization_v1.json](records/benchmarks/asymmetric_algorithmic_organization_v1.json) (`sha256:7b3f3bae344b`)
-- `report` — [docs/asymmetric_algorithmic_organization_v1.md](records/docs/asymmetric_algorithmic_organization_v1.md) (`sha256:c8ba8557ea45`)
+- `registered_contract` —
+  [benchmarks/asymmetric_algorithmic_organization_v1.json](records/benchmarks/asymmetric_algorithmic_organization_v1.json)
+  (`sha256:7b3f3bae344b`)
+- `report` —
+  [docs/asymmetric_algorithmic_organization_v1.md](records/docs/asymmetric_algorithmic_organization_v1.md)
+  (`sha256:c8ba8557ea45`)
 
 ## Provenance rule
 

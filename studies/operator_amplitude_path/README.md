@@ -1,9 +1,17 @@
 # Operator amplitude and curvature path
 
+<!-- fsrl-doc role=generated-navigation source=studies/operator_amplitude_path/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/operator_amplitude_path/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/operator_amplitude_path/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,17 +21,26 @@
 
 ## Scientific role
 
-**Question.** How does finite-amplitude nonlinear expression reverse otherwise correct local value?
+**Question.** How does finite-amplitude nonlinear expression reverse otherwise correct
+local value?
 
-**Finding.** H>A shows a robust mean zero crossing, F>A crosses in a subset, and correctness-opposed quadratic curvature is relation- and subject-conditioned.
+**Finding.** H>A shows a robust mean zero crossing, F>A crosses in a subset, and
+correctness-opposed quadratic curvature is relation- and subject-conditioned.
 
-**Claim boundary.** The pattern is not generic saturation and does not select global clipping or post-hoc adaptive amplitude points.
+**Claim boundary.** The pattern is not generic saturation and does not select global
+clipping or post-hoc adaptive amplitude points.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/operator_amplitude_path_v1.json](records/benchmarks/operator_amplitude_path_v1.json) (`sha256:2a93d1c5fab3`)
-- `report` — [docs/operator_amplitude_path_v1.md](records/docs/operator_amplitude_path_v1.md) (`sha256:a51476056f22`)
-- `frozen_result` — [results/operator_amplitude_path_v1.json](records/results/operator_amplitude_path_v1.json) (`sha256:b88d39b062a2`)
+- `registered_contract` —
+  [benchmarks/operator_amplitude_path_v1.json](records/benchmarks/operator_amplitude_path_v1.json)
+  (`sha256:2a93d1c5fab3`)
+- `report` —
+  [docs/operator_amplitude_path_v1.md](records/docs/operator_amplitude_path_v1.md)
+  (`sha256:a51476056f22`)
+- `frozen_result` —
+  [results/operator_amplitude_path_v1.json](records/results/operator_amplitude_path_v1.json)
+  (`sha256:b88d39b062a2`)
 
 ## Provenance rule
 

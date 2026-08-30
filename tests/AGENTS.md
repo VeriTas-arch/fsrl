@@ -3,7 +3,8 @@
 This file applies to `tests/`. Tests also follow the nearest guide for the code
 under test.
 
-Navigation: [repository guide](../AGENTS.md) · [package guide](../fsrl/AGENTS.md)
+Navigation: [repository guide](../AGENTS.md) · [test commands](README.md) ·
+[package guide](../fsrl/AGENTS.md)
 
 - Mirror maintained source ownership: core, tasks, training, evaluation,
   analysis, experiments, infrastructure, and workflows have corresponding test

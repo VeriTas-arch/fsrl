@@ -1,9 +1,17 @@
 # Item-count transport
 
+<!-- fsrl-doc role=generated-navigation source=studies/item_count_transport/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/item_count_transport/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/item_count_transport/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,29 @@
 
 ## Scientific role
 
-**Question.** Does the functional asymmetry transport out of distribution to six- and ten-item Liu-style cycles?
+**Question.** Does the functional asymmetry transport out of distribution to six- and
+ten-item Liu-style cycles?
 
-**Finding.** All primary links pass at N=6, 8, and 10 across all three development backbones, including exact local ledger reconstruction and P/a double dissociation.
+**Finding.** All primary links pass at N=6, 8, and 10 across all three development
+backbones, including exact local ledger reconstruction and P/a double dissociation.
 
-**Claim boundary.** N covaries with support duration, query count, and direct-query fraction; global policy degrades with size, so this is not arbitrary-size scaling.
+**Claim boundary.** N covaries with support duration, query count, and direct-query
+fraction; global policy degrades with size, so this is not arbitrary-size scaling.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/liu_item_count_transport_v1.json](records/benchmarks/liu_item_count_transport_v1.json) (`sha256:236c4076a421`)
-- `execution_lock` — [benchmarks/liu_item_count_transport_v1.lock.json](records/benchmarks/liu_item_count_transport_v1.lock.json) (`sha256:a29b72cf573d`)
-- `report` — [docs/liu_item_count_transport_v1.md](records/docs/liu_item_count_transport_v1.md) (`sha256:3e134573bed7`)
-- `frozen_result` — [results/liu_item_count_transport_v1.json](records/results/liu_item_count_transport_v1.json) (`sha256:2429ef71c849`)
+- `registered_contract` —
+  [benchmarks/liu_item_count_transport_v1.json](records/benchmarks/liu_item_count_transport_v1.json)
+  (`sha256:236c4076a421`)
+- `execution_lock` —
+  [benchmarks/liu_item_count_transport_v1.lock.json](records/benchmarks/liu_item_count_transport_v1.lock.json)
+  (`sha256:a29b72cf573d`)
+- `report` —
+  [docs/liu_item_count_transport_v1.md](records/docs/liu_item_count_transport_v1.md)
+  (`sha256:3e134573bed7`)
+- `frozen_result` —
+  [results/liu_item_count_transport_v1.json](records/results/liu_item_count_transport_v1.json)
+  (`sha256:2429ef71c849`)
 
 ## Provenance rule
 

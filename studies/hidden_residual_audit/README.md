@@ -1,9 +1,17 @@
 # Hidden learned-relation residual audit
 
+<!-- fsrl-doc role=generated-navigation source=studies/hidden_residual_audit/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/hidden_residual_audit/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/hidden_residual_audit/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,17 +21,27 @@
 
 ## Scientific role
 
-**Question.** Is an existing cross-relation correctness direction present in response hidden state but suppressed by W_out?
+**Question.** Is an existing cross-relation correctness direction present in response
+hidden state but suppressed by W_out?
 
-**Finding.** A small direct-enriched residual exists, but no shared correctness direction is hidden from the current readout; the simplest readout-only route is rejected.
+**Finding.** A small direct-enriched residual exists, but no shared correctness
+direction is hidden from the current readout; the simplest readout-only route is
+rejected.
 
-**Claim boundary.** The result does not show that persistent local information is absent at earlier operator states.
+**Claim boundary.** The result does not show that persistent local information is absent
+at earlier operator states.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/hidden_residual_audit_v1.json](records/benchmarks/hidden_residual_audit_v1.json) (`sha256:cf7f10b3c152`)
-- `report` — [docs/hidden_residual_audit_v1.md](records/docs/hidden_residual_audit_v1.md) (`sha256:e0dc5ec20c7a`)
-- `frozen_result` — [results/hidden_residual_audit_v1.json](records/results/hidden_residual_audit_v1.json) (`sha256:627577ed0ea2`)
+- `registered_contract` —
+  [benchmarks/hidden_residual_audit_v1.json](records/benchmarks/hidden_residual_audit_v1.json)
+  (`sha256:cf7f10b3c152`)
+- `report` —
+  [docs/hidden_residual_audit_v1.md](records/docs/hidden_residual_audit_v1.md)
+  (`sha256:e0dc5ec20c7a`)
+- `frozen_result` —
+  [results/hidden_residual_audit_v1.json](records/results/hidden_residual_audit_v1.json)
+  (`sha256:627577ed0ea2`)
 
 ## Provenance rule
 

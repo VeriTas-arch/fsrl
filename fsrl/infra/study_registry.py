@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import Any
 
 from fsrl.infra.file_contracts import safe_relative_path
+from fsrl.infra.markdown_rendering import wrap_markdown
 from fsrl.infra.provenance import file_sha256
 from fsrl.infra.record_catalog import CATALOG_PATH, check_record_catalog
 from fsrl.paths import REPO_ROOT, STUDIES_ROOT, SYNTHESIS_ROOT
@@ -47,7 +48,6 @@ GIT_SHA1_PATTERN = re.compile(r"[0-9a-f]{40}")
 GENERATED_PATHS = (
     Path("studies/README.md"),
     Path("synthesis/README.md"),
-    Path("synthesis/figures/README.md"),
 )
 REQUIRED_STUDY_FIELDS = (
     "schema_version",
@@ -1104,22 +1104,36 @@ def _link(target: Path, output: Path, label: str) -> str:
 
 
 def _notice(source: str, review_state: str = "indexed") -> list[str]:
+    lines = [
+        f"<!-- fsrl-doc role=generated-navigation source={source} -->",
+        "",
+        "> [!NOTE]",
+        "> **Generated navigation.**",
+        ">",
+        f"> - **Authority:** `{source}`",
+        "> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`",
+        "> - **Edit:** do not edit this README directly.",
+        ">",
+    ]
     if review_state == "reviewed":
-        return [
-            "> [!NOTE]",
-            f"> This navigation page is generated from `{source}`. The current",
-            '> `review_state = "reviewed"` means its reader-first interpretation has',
-            "> been curated against the workflow and registry. It does not promote or",
-            "> rewrite study-level evidence.",
+        lines.extend(
+            [
+                '> `review_state = "reviewed"` means the reader-first interpretation has',
+                "> been curated against the workflow and registry. It does not promote or",
+                "> rewrite study-level evidence.",
+                "",
+            ]
+        )
+        return lines
+    lines.extend(
+        [
+            '> `review_state = "indexed"` means the records are organized and',
+            "> structurally checked. This page is navigation, not reviewed cross-study",
+            "> synthesis or independent scientific evidence.",
             "",
         ]
-    return [
-        "> [!NOTE]",
-        f"> This navigation page is generated from `{source}`. The current",
-        '> `review_state = "indexed"` means the records are organized and checked,',
-        "> but the prose is intentionally provisional pending the second synthesis pass.",
-        "",
-    ]
+    )
+    return lines
 
 
 def _study_readme(study: dict[str, Any]) -> tuple[Path, str]:
@@ -1135,22 +1149,26 @@ def _study_readme(study: dict[str, Any]) -> tuple[Path, str]:
             "",
             "## Scientific role",
             "",
-            f"**Question.** {study['question']}",
-            "",
-            f"**Finding.** {study['finding']}",
-            "",
-            f"**Claim boundary.** {study['boundary']}",
-            "",
-            "## Frozen records",
-            "",
         ]
     )
+    for label, value in (
+        ("Question", study["question"]),
+        ("Finding", study["finding"]),
+        ("Claim boundary", study["boundary"]),
+    ):
+        lines.extend(wrap_markdown(f"**{label}.** {value}"))
+        lines.append("")
+    lines.extend(["## Frozen records", ""])
     for record in study["records"]:
         target = Path("studies") / study["id"] / record["path"]
-        lines.append(
-            f"- `{record['role']}` — "
-            f"{_link(target, output, record['legacy_path'])} "
-            f"(`sha256:{record['sha256'][:12]}`)"
+        lines.extend(
+            wrap_markdown(
+                f"`{record['role']}` — "
+                f"{_link(target, output, record['legacy_path'])} "
+                f"(`sha256:{record['sha256'][:12]}`)",
+                initial_indent="- ",
+                subsequent_indent="  ",
+            )
         )
     retired_assets = study.get("retired_assets", [])
     if retired_assets:
@@ -1165,10 +1183,14 @@ def _study_readme(study: dict[str, Any]) -> tuple[Path, str]:
             ]
         )
         for asset in retired_assets:
-            lines.append(
-                f"- `{asset['role']}` — `{asset['path']}` "
-                f"(`sha256:{asset['sha256'][:12]}`, source `{asset['source_ref']}`) — "
-                f"{asset['reason']}"
+            lines.extend(
+                wrap_markdown(
+                    f"`{asset['role']}` — `{asset['path']}` "
+                    f"(`sha256:{asset['sha256'][:12]}`, "
+                    f"source `{asset['source_ref']}`) — {asset['reason']}",
+                    initial_indent="- ",
+                    subsequent_indent="  ",
+                )
             )
     lines.extend(
         [
@@ -1211,11 +1233,19 @@ def _studies_readme(
         ]
     )
     for chapter in _ordered_chapters(registry):
-        lines.extend([f"## {chapter['title']}", "", chapter["purpose"], ""])
+        lines.extend([f"## {chapter['title']}", ""])
+        lines.extend(wrap_markdown(chapter["purpose"]))
+        lines.append("")
         for study in _ordered_studies(registry, studies, chapter["id"]):
             lines.append(
-                f"- [{study['title']}]({study['id']}/README.md) — "
-                f"`{study['status']}` — {study['finding']}"
+                f"- [{study['title']}]({study['id']}/README.md) — `{study['status']}`"
+            )
+            lines.extend(
+                wrap_markdown(
+                    f"**Finding:** {study['finding']}",
+                    initial_indent="  - ",
+                    subsequent_indent="    ",
+                )
             )
         lines.append("")
     lines.extend(["## Status vocabulary", ""])
@@ -1250,14 +1280,16 @@ def _synthesis_readme(
     lines = [f"# {synthesis['title']}", ""] + _notice(
         "synthesis/manifest.toml", synthesis["review_state"]
     )
+    lines.extend(wrap_markdown(synthesis["scope"]))
+    lines.append("")
+    lines.extend(
+        wrap_markdown(f"**Current working claim.** {workflow['working_claim']}")
+    )
+    lines.append("")
+    lines.extend(wrap_markdown(f"**Boundary.** {workflow['boundary']}"))
+    lines.append("")
     lines.extend(
         [
-            synthesis["scope"],
-            "",
-            f"**Current working claim.** {workflow['working_claim']}",
-            "",
-            f"**Boundary.** {workflow['boundary']}",
-            "",
             "## Start here",
             "",
             f"- {_link(reader_entrypoint, output, 'Current interpretation (reader first)')}",
@@ -1301,13 +1333,22 @@ def _synthesis_readme(
         ]
     )
     for view in registry["views"]:
-        lines.extend([f"### {view['title']}", "", view["purpose"], ""])
+        lines.extend([f"### {view['title']}", ""])
+        lines.extend(wrap_markdown(view["purpose"]))
+        lines.append("")
         for index, study_id in enumerate(view["studies"], start=1):
             study = studies[study_id]
             target = Path("studies") / study_id / "README.md"
             lines.append(
                 f"{index}. {_link(target, output, study['title'])} — "
-                f"`{study['status']}` — {study['finding']}"
+                f"`{study['status']}`"
+            )
+            lines.extend(
+                wrap_markdown(
+                    f"**Finding:** {study['finding']}",
+                    initial_indent="   - ",
+                    subsequent_indent="     ",
+                )
             )
         lines.append("")
     if synthesis["review_state"] == "reviewed":
@@ -1337,32 +1378,6 @@ def _synthesis_readme(
     return "\n".join(lines)
 
 
-def _figures_readme() -> str:
-    return """# Figure workflow
-
-This directory is reserved for cross-study figures intended for a report or
-paper. The architecture distinguishes three layers:
-
-1. exact historical outputs remain under each study's `records/` directory;
-2. reproducible study-level figures may be promoted to `studies/<id>/figures/`;
-3. cross-study figures and their machine-readable source tables live here.
-
-Every promoted figure should have a source-data file, a generation command, and
-study/estimand provenance. Prefer a stable figure ID whose directory contains
-the rendered panel, source table, generation script or command, and a manifest
-mapping every panel to study IDs and frozen estimands. Historical presentation
-assets remain in their versioned reporting snapshot. Do not copy an image here
-merely to make it easier to find.
-
-## Current suites
-
-- [Published behavioral figure alignment](paper_alignment/README.md) redraws
-  released human results and places the frozen two-network model on the same
-  estimands. Its manifest records the exact sources, exclusions, and rendered
-  outputs.
-"""
-
-
 def render_navigation(
     registry: dict[str, Any] | None = None,
     synthesis: dict[str, Any] | None = None,
@@ -1373,7 +1388,6 @@ def render_navigation(
     rendered = {
         GENERATED_PATHS[0]: _studies_readme(registry, studies),
         GENERATED_PATHS[1]: _synthesis_readme(registry, studies, synthesis),
-        GENERATED_PATHS[2]: _figures_readme(),
     }
     for study in studies.values():
         path, content = _study_readme(study)

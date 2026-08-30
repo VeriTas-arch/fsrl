@@ -1,9 +1,17 @@
 # Frozen v2.4 behavioral reproduction map
 
+<!-- fsrl-doc role=generated-navigation source=studies/behavior_reproduction_map/study.toml -->
+
 > [!NOTE]
-> This navigation page is generated from `studies/behavior_reproduction_map/study.toml`. The current
-> `review_state = "indexed"` means the records are organized and checked,
-> but the prose is intentionally provisional pending the second synthesis pass.
+> **Generated navigation.**
+>
+> - **Authority:** `studies/behavior_reproduction_map/study.toml`
+> - **Rebuild:** `direnv exec . python -m fsrl.infra.study_registry build`
+> - **Edit:** do not edit this README directly.
+>
+> `review_state = "indexed"` means the records are organized and
+> structurally checked. This page is navigation, not reviewed cross-study
+> synthesis or independent scientific evidence.
 
 [Back to the study registry](../README.md)
 
@@ -13,18 +21,29 @@
 
 ## Scientific role
 
-**Question.** Which Liu behavioral phenomena are quantitatively reproduced and which remain mismatched by the final frozen model?
+**Question.** Which Liu behavioral phenomena are quantitatively reproduced and which
+remain mismatched by the final frozen model?
 
-**Finding.** Six of nine registered phenomena are reproduced and three are qualitatively reproduced but quantitatively mismatched; none is absent.
+**Finding.** Six of nine registered phenomena are reproduced and three are qualitatively
+reproduced but quantitatively mismatched; none is absent.
 
-**Claim boundary.** This is a competence and phenomenology map, not evidence that humans use the same internal mechanism or that the fit is complete.
+**Claim boundary.** This is a competence and phenomenology map, not evidence that humans
+use the same internal mechanism or that the fit is complete.
 
 ## Frozen records
 
-- `registered_contract` — [benchmarks/model_behavior_reproduction_map_v1.json](records/benchmarks/model_behavior_reproduction_map_v1.json) (`sha256:62f2176314b9`)
-- `execution_lock` — [benchmarks/model_behavior_reproduction_map_v1.lock.json](records/benchmarks/model_behavior_reproduction_map_v1.lock.json) (`sha256:466604fb507f`)
-- `report` — [docs/model_behavior_reproduction_map_v1.md](records/docs/model_behavior_reproduction_map_v1.md) (`sha256:11d7ef2f5c07`)
-- `frozen_result` — [results/model_behavior_reproduction_map_v1.json](records/results/model_behavior_reproduction_map_v1.json) (`sha256:6c6096443519`)
+- `registered_contract` —
+  [benchmarks/model_behavior_reproduction_map_v1.json](records/benchmarks/model_behavior_reproduction_map_v1.json)
+  (`sha256:62f2176314b9`)
+- `execution_lock` —
+  [benchmarks/model_behavior_reproduction_map_v1.lock.json](records/benchmarks/model_behavior_reproduction_map_v1.lock.json)
+  (`sha256:466604fb507f`)
+- `report` —
+  [docs/model_behavior_reproduction_map_v1.md](records/docs/model_behavior_reproduction_map_v1.md)
+  (`sha256:11d7ef2f5c07`)
+- `frozen_result` —
+  [results/model_behavior_reproduction_map_v1.json](records/results/model_behavior_reproduction_map_v1.json)
+  (`sha256:6c6096443519`)
 
 ## Provenance rule
 

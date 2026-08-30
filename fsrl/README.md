@@ -1,4 +1,4 @@
-# Maintained code architecture
+# Maintained package: setup and architecture
 
 ## Development installation
 
