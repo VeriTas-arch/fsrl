@@ -1,7 +1,11 @@
 # Relational-learning 2024 reproduction capsule
 
-This capsule keeps the original paper reproduction separate from the maintained
-FSRL research model. It has three explicit layers:
+This capsule preserves the released materials for
+[Neural mechanisms of relational learning and fast knowledge reassembly in
+plastic neural networks](https://thomasmiconi.github.io/NN.pdf), by Thomas
+Miconi and Kenneth Kay, Nature Neuroscience 2024, while keeping the original
+paper reproduction separate from the maintained FSRL research model. It has
+three explicit layers:
 
 - `upstream/` retains the released notebooks and assets as byte-preserved
   source artifacts. Its Python exports carry provenance-tracked maintenance

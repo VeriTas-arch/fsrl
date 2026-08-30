@@ -1,5 +1,44 @@
 # Maintained code architecture
 
+## Development installation
+
+The repository uses Python 3.12 and an editable local installation. Its
+`.envrc` selects the shared Conda environment named `ipex`:
+
+```bash
+conda create -n ipex python=3.12 pip
+direnv allow
+direnv exec . python -m pip install --upgrade pip
+```
+
+For a CUDA-specific build, install PyTorch first using the command from the
+[PyTorch installation guide](https://pytorch.org/get-started/locally/). Then
+install the maintained package, reproduction dependencies, and test tools:
+
+```bash
+direnv exec . python -m pip install -e ".[reproduction,test]"
+direnv exec . python -m pip check
+direnv exec . python -c "import fsrl; print(fsrl.__file__)"
+```
+
+`pyproject.toml` is the single dependency and tool-configuration authority.
+When dependencies are already present, refresh packaging metadata without
+dependency resolution:
+
+```bash
+direnv exec . python -m pip install --no-deps -e .
+```
+
+Ordinary source edits are visible immediately through the editable install.
+The distribution is named `fsrl-relational-model`; the import namespace is
+`fsrl`. Registered studies, synthesis records, and external data remain
+repository-owned and are not bundled into the wheel.
+
+See [training](training/README.md) and [evaluation](evaluation/README.md) for
+the maintained command-line interfaces.
+
+## Package architecture
+
 `fsrl` now has one dependency direction for new work:
 
 ```text
@@ -19,10 +58,12 @@ The packages have deliberately narrow ownership:
   intervention API.
 - `tasks/` owns task protocols, generic sparse-graph generation, and evidence-
   admission equations. It does not own study registry paths.
-- `training/` owns generic backbone optimization and checkpoint loading.
-- `evaluation/` owns frozen rollout, ordered query-field reconstruction, and
-  causal intervention interfaces. Registered checkpoint loading and the shared
-  global/local query bundle live here rather than in an experiment runner.
+- [`training/`](training/README.md) owns generic backbone optimization and
+  checkpoint loading.
+- [`evaluation/`](evaluation/README.md) owns frozen rollout, ordered query-field
+  reconstruction, and causal intervention interfaces. Registered checkpoint
+  loading and the shared global/local query bundle live here rather than in an
+  experiment runner.
 - `analysis/` owns reusable pure estimators such as Hodge decomposition,
   policy transforms, and participant bootstrap utilities.
 - `infra/` owns runtime policy, provenance, the study registry, and

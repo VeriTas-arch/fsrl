@@ -108,11 +108,23 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
                 test_case = getattr(module, parts[-2])
                 self.assertTrue(callable(getattr(test_case, parts[-1])))
 
-    def test_root_readme_matches_the_current_evaluation_default(self):
-        readme = DEFAULT_CONTRACT.parents[2] / "README.md"
+    def test_evaluation_readme_matches_the_current_default(self):
+        root = DEFAULT_CONTRACT.parents[2]
+        readme = root / "fsrl" / "evaluation" / "README.md"
         text = readme.read_text(encoding="utf-8")
         self.assertIn("current high-level default is `batched_sequence`", text)
         self.assertNotIn("The default remains `legacy_stepwise`", text)
+        default = (
+            inspect.signature(run_causal_suite).parameters["evaluation_backend"].default
+        )
+        self.assertEqual(
+            default,
+            FrozenEvaluationBackend.BATCHED_SEQUENCE,
+        )
+
+    def test_tools_readme_lists_all_refactor_equivalence_audits(self):
+        root = DEFAULT_CONTRACT.parents[2]
+        text = (root / "tools" / "README.md").read_text(encoding="utf-8")
         self.assertIn(
             "python -m tools.provenance.audit_refactor_equivalence_v1",
             text,
@@ -124,13 +136,6 @@ class RefactorEquivalenceAuditTests(unittest.TestCase):
         self.assertIn(
             "python -m tools.provenance.audit_refactor_equivalence_v3",
             text,
-        )
-        default = (
-            inspect.signature(run_causal_suite).parameters["evaluation_backend"].default
-        )
-        self.assertEqual(
-            default,
-            FrozenEvaluationBackend.BATCHED_SEQUENCE,
         )
 
 

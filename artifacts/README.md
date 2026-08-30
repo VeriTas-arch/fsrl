@@ -41,7 +41,7 @@ Prospective bulk numerical output should use compact JSON summaries plus NPZ,
 not monolithic JSON. Historical sources are different: run the reversible view
 materializer rather than redesigning their study-specific structure:
 
-~~~bash
+```bash
 direnv exec . python -m tools.provenance.materialize_historical_file_views_v1 --apply
 direnv exec . python -m tools.provenance.materialize_historical_file_views_v1
-~~~
+```
