@@ -225,13 +225,14 @@ trajectories.
   - **Finding:** A prospective model-neutral admission contract is registered. No new
     model is promoted; development, fresh replication, simulation stability and
     conditional biological realization are separate requirements.
-- [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `frozen_contract`
-  - **Finding:** All nine mandatory final fits (three paired seeds,
-    Exact/Persistent/Resampled) are jointly locked after the passed finite-grid non-Liu
-    recovery screen. Each fit completed 1500 updates to both shared parameters; paired
-    base episodes and encoding-uniform streams match. Saved Liu and generic inputs were
-    locked before training. Evaluation has not begun; no main-model promotion is
-    claimed.
+- [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `mixed`
+  - **Finding:** All nine source/artifact-locked fits passed generic competence,
+    evidence binding and all nine original qualitative rules. Exact, Persistent and
+    Resampled each matched 2/9, 4/9 and 8/9 original quantitative rows across all three
+    paired training streams; all recipes are partial_behavioral_reproduction. Resampled
+    misses the unchanged distance-slope interval; Persistent overproduces incorrect
+    rankings. No recipe is eligible for unchanged replication or main-model promotion.
+    The fixed matrix is complete and frozen.
 
 ## One-factor structural transport
 

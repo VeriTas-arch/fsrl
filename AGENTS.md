@@ -133,6 +133,13 @@ promote a main model: unchanged fresh replication, simulation stability and
 selected-parameter biological-boundary verification remain required. Do not
 reinterpret a partial behavioral match as completion of the user's goal.
 
+The fixed nine-fit `quantized_relational_learner` pilot is complete and frozen.
+Its result and interpretation records govern the outcome; no pilot recipe met
+the unchanged complete-behavior gate. Do not rerun, tune or promote a recipe,
+or treat the completed execution gates as standing permission for additional
+cohorts. A successor or a diagnostic of a failed recipe requires a separately
+authorized prospective question; preserve the original admission target.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

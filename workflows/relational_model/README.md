@@ -71,10 +71,11 @@ studies, or supersede frozen study contracts.
 8. [Single-stage model-neutral admission](#single-stage-admission)
    - **Question.** Can a single-stage compact learner meet the complete Liu behavior
      target with a defensible biological implementation boundary?
-   - **Current result.** The two-scalar score learner establishes task-level qualitative
-     sufficiency but retains six quantitative mismatches. New admission and codec
-     contracts are frozen; the codec and independent reference have unit tests, but the
-     new scientific matrix has not run.
+   - **Current result.** The complete three-stream codec pilot passes generic
+     competence, evidence binding and nine qualitative rules in all nine fits.
+     Exact/Persistent/Resampled match 2/9, 4/9 and 8/9 quantitative rows respectively;
+     all three recipes remain partial_behavioral_reproduction. Resampled misses the
+     fixed distance-slope interval, while Persistent overproduces incorrect rankings.
 
 ## 1. Task and evidence contract
 
@@ -545,15 +546,18 @@ with a defensible biological implementation boundary?
 fixed four-valued teaching codec against matched exact and independently resampled codes
 on three new training streams.
 
-**Result.** The two-scalar score learner establishes task-level qualitative sufficiency
-but retains six quantitative mismatches. New admission and codec contracts are frozen;
-the codec and independent reference have unit tests, but the new scientific matrix has
-not run.
+**Result.** The complete three-stream codec pilot passes generic competence, evidence
+binding and nine qualitative rules in all nine fits. Exact/Persistent/Resampled match
+2/9, 4/9 and 8/9 quantitative rows respectively; all three recipes remain
+partial_behavioral_reproduction. Resampled misses the fixed distance-slope interval,
+while Persistent overproduces incorrect rankings.
 
-**Boundary.** This is an open candidate program, not main-model promotion. A four-valued
-code is an imposed budget, not human memory capacity; pilot success still requires
-unchanged fresh replication, simulation stability and selected-parameter biological
-verification.
+**Boundary.** The fixed matrix is complete and frozen, with no recipe eligible for
+unchanged replication or main-model promotion. The three training streams share one
+locked evaluation cohort; they are not independent human or simulation-cohort
+confirmations. Four-valued capacity and persistence remain imposed hypotheses, not
+biological identification. No tuning or new cohort evaluation is authorized by this
+completed pilot.
 
 Implementation:
 
@@ -561,11 +565,18 @@ Implementation:
 - [`fsrl/experiments/quantized_learner/protocol.py`](../../fsrl/experiments/quantized_learner/protocol.py)
 - [`fsrl/experiments/quantized_learner/encoding.py`](../../fsrl/experiments/quantized_learner/encoding.py)
 - [`fsrl/experiments/quantized_learner/reference.py`](../../fsrl/experiments/quantized_learner/reference.py)
+- [`fsrl/experiments/quantized_learner/evidence.py`](../../fsrl/experiments/quantized_learner/evidence.py)
+- [`fsrl/experiments/quantized_learner/evaluation.py`](../../fsrl/experiments/quantized_learner/evaluation.py)
+- [`fsrl/experiments/quantized_learner/verification.py`](../../fsrl/experiments/quantized_learner/verification.py)
+- [`fsrl/experiments/quantized_learner/reporting.py`](../../fsrl/experiments/quantized_learner/reporting.py)
 
 Tests:
 
 - [`tests/experiments/quantized_learner/test_encoding.py`](../../tests/experiments/quantized_learner/test_encoding.py)
 - [`tests/experiments/quantized_learner/test_model.py`](../../tests/experiments/quantized_learner/test_model.py)
+- [`tests/experiments/quantized_learner/test_pipeline.py`](../../tests/experiments/quantized_learner/test_pipeline.py)
+- [`tests/experiments/quantized_learner/test_recovery.py`](../../tests/experiments/quantized_learner/test_recovery.py)
+- [`tests/experiments/quantized_learner/test_qualification.py`](../../tests/experiments/quantized_learner/test_qualification.py)
 
 Exact evidence:
 
@@ -585,6 +596,18 @@ Exact evidence:
   - **Meaning:** The complete three-codec/three-stream pilot, fixed recovery screen,
     code-memory semantics, source/artifact locks and stop rules, before any new
     scientific execution.
+- `constrains` — [quantized_relational_learner:records/results/quantized_relational_learner_v1.json](../../studies/quantized_relational_learner/records/results/quantized_relational_learner_v1.json)
+  - **Meaning:** All nine fits preserve competence, binding and qualitative behavior,
+    but no recipe passes complete quantitative reproduction or qualifies for unchanged
+    replication.
+- `constrains` — [quantized_relational_learner:records/reports/quantized_relational_learner_v1.interpretation.md](../../studies/quantized_relational_learner/records/reports/quantized_relational_learner_v1.interpretation.md)
+  - **Meaning:** Complete per-recipe failure directions, original reference intervals,
+    fixed-parameter controls, state costs, independent verification and the
+    shared-cohort limitation; no main-model promotion or frozen-recipe repair.
+- `supports` — [quantized_relational_learner:records/results/recovery.json](../../studies/quantized_relational_learner/records/results/recovery.json)
+  - **Meaning:** A finite non-Liu grid recovery screen distinguishes the three codec
+    families after marginalizing unobserved admission and codes; not human evidence for
+    persistent encoding.
 
 Verification:
 
