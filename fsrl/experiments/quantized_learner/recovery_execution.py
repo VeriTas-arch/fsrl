@@ -17,6 +17,15 @@ from .recovery import decode_choices, generate_choices, recovery_summary
 from .recovery_inputs import ObservedDesign
 
 
+def generation_shards(generation: dict) -> dict:
+    """Lossless 32-design file shards; no split of any likelihood/cohort estimand."""
+    shards = {}
+    for key, value in generation.items():
+        shard = f"generation-{int(key.split('__', 1)[0]) // 32}"
+        shards.setdefault(shard, {})[key] = value
+    return shards
+
+
 def execute_recovery() -> dict:
     source = validate_source()
     execution = runtime()
@@ -68,7 +77,7 @@ def execute_recovery() -> dict:
     destination.mkdir(parents=True, exist_ok=True)
     payloads = {
         "observations": observations,
-        "generation": generation,
+        **generation_shards(generation),
         "likelihoods": {"per_episode": np.asarray(likelihoods)},
     }
     files = {}
@@ -99,6 +108,12 @@ def verify_recovery(result: dict | None = None) -> dict:
     for name, ref in result["files"].items():
         with np.load(verify_reference(ref), allow_pickle=False) as saved:
             arrays[name] = {key: saved[key] for key in saved.files}
+    arrays["generation"] = {
+        key: value
+        for name, shard in arrays.items()
+        if name.startswith("generation-")
+        for key, value in shard.items()
+    }
     rng = np.random.default_rng(result["settings"]["integration_rng_seed"])
     codebook = specification()["encoding"]["codebook"]
     errors = []

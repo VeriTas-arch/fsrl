@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "document_type": "quantized_learner_storage_repair",
+  "scope": "Storage-only prospective execution repair before any model training or Liu evaluation. No change to codebook, equations, parameters, random seeds, likelihood estimands, thresholds, or mandatory fits.",
+  "reason": "The first recovery generation NPZ is 5347796 bytes, exceeding the 5000000-byte inline registry threshold. Preserve that unregistered run as an immutable local forensic archive and store the replay in two lossless 32-design NPZ shards.",
+  "parent_source_lock": {
+    "path": "studies/quantized_relational_learner/records/benchmarks/source_lock.json",
+    "sha256": "8d4e475efb668f53baceee30aac6881da310f276ccb4b46c0e0badbb4b636ce3",
+    "bytes": 39906
+  },
+  "parent_source_commit": "a3e38cff62aa2b2dafad601b41e4f136c9e34843",
+  "preserved_recovery_outcome": "distinguishable_on_registered_screen",
+  "archive_boundary": "These archived runtime files preserve the original execution, not a dependency required to verify the successor's public scientific record.",
+  "append_only_archive_map": [
+    {
+      "original_path": "studies/quantized_relational_learner/records/results/recovery-generation.npz",
+      "archive": {
+        "path": "artifacts/runs/quantized_relational_learner_v1/recovery-storage-327pID/recovery-generation.npz",
+        "sha256": "c8d385f6935bff22f2602d4859b7a054d80a88aeba26144b645106e09f3fc0a0",
+        "bytes": 5347796
+      }
+    },
+    {
+      "original_path": "studies/quantized_relational_learner/records/results/recovery-likelihoods.npz",
+      "archive": {
+        "path": "artifacts/runs/quantized_relational_learner_v1/recovery-storage-327pID/recovery-likelihoods.npz",
+        "sha256": "19688db987b7d8a56f2359300f6342504a195ac87a8b2a91bbf5c577434a4236",
+        "bytes": 696317
+      }
+    },
+    {
+      "original_path": "studies/quantized_relational_learner/records/results/recovery-observations.npz",
+      "archive": {
+        "path": "artifacts/runs/quantized_relational_learner_v1/recovery-storage-327pID/recovery-observations.npz",
+        "sha256": "ea279a50ff940c2554442f309299fefa43d09b5915db7e257336035d573dd952",
+        "bytes": 75927
+      }
+    },
+    {
+      "original_path": "studies/quantized_relational_learner/records/results/recovery.json",
+      "archive": {
+        "path": "artifacts/runs/quantized_relational_learner_v1/recovery-storage-327pID/recovery.json",
+        "sha256": "86878e2f1dc1fe610e3143bca9719cc729f90f1dded6b609c7ab5757decb3fd8",
+        "bytes": 81537
+      }
+    }
+  ],
+  "prospective_sequence": "Commit this repair and the packaging-only source changes; requalify the resulting source; append new qualification/source locks while retaining the previous locks and unchanged evaluation inputs; replay recovery using identical declared RNGs and verify decoded arrays and decisions match the preserved first execution; commit all recovery records before training.",
+  "verification": "All 64 designs and 27 generating settings remain one unchanged recovery analysis. File sharding does not split a likelihood, pool, participant bootstrap or scientific endpoint. No candidate selection from the first recovery screen."
+}

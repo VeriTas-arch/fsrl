@@ -31,9 +31,10 @@ from .protocol import (
 from .qualification import CPU_TEST_LOG, CPU_TESTS, sources
 from .recovery import recovery_summary
 
-SOURCE_LOCK = RECORDS / "benchmarks/source_lock.json"
+SOURCE_LOCK = RECORDS / "benchmarks/source_lock.storage_v2.json"
 ARTIFACT_LOCK = RECORDS / "benchmarks/artifact_lock.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification.storage_v2.json"
+STORAGE_REPAIR = RECORDS / "benchmarks/storage_repair.json"
 RECOVERY_RESULT = RECORDS / "results/recovery.json"
 
 
@@ -106,7 +107,7 @@ def validate_qualification(record: dict) -> None:
 def scientific_inputs() -> list[dict]:
     spec = specification()
     records = {row["path"]: row for row in parent_inputs()}
-    for path in (PROTOCOL, REPO_ROOT / spec["admission_protocol"]):
+    for path in (PROTOCOL, REPO_ROOT / spec["admission_protocol"], STORAGE_REPAIR):
         records[path.relative_to(REPO_ROOT).as_posix()] = reference(path)
     return [records[key] for key in sorted(records)]
 
@@ -120,7 +121,19 @@ def lock_source(qualification_directory) -> dict:
         verify_reference(row, commit=commit)
     if record["source_commit"] != commit:
         raise RuntimeError("qualify the final committed implementation before locking")
-    inputs = save_evaluation_inputs(resolved_specification())
+    if INPUT_MANIFEST.exists():
+        verify_reference(reference(INPUT_MANIFEST), commit=commit)
+        inputs = load_json(INPUT_MANIFEST)
+        if (
+            inputs["evaluation"] != resolved_specification()["evaluation"]
+            or inputs["model_rollout_performed"]
+        ):
+            raise RuntimeError("previously locked evaluation inputs cannot change")
+        for groups in inputs["cohorts"].values():
+            for row in groups.values():
+                verify_reference(row["arrays"], commit=commit)
+    else:
+        inputs = save_evaluation_inputs(resolved_specification())
     write_json_exclusive(
         QUALIFICATION,
         {

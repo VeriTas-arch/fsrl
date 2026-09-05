@@ -24,11 +24,11 @@
 **Question.** Can fixed four-valued encoding repair the score learner's complete Liu
 behavior, and is persistent code reuse distinguishable from fresh quantization?
 
-**Finding.** All execution, recovery, original-behavior evaluation and
-portable-verification paths are implemented. The final implementation passed 817 non-Liu
-CUDA/numerical checks; source and all evaluation inputs are now jointly locked before
-recovery or training. All three paired training streams remain mandatory; no new Liu
-behavioral result or main-model promotion exists.
+**Finding.** The full pipeline and first joint source/input lock are in place. A
+prospective storage-only repair now splits recovery generation arrays into lossless
+32-design files; previous inputs and execution witnesses remain immutable.
+Requalification and a successor source lock precede replay and all mandatory training.
+No Liu behavioral result or main-model promotion exists.
 
 **Claim boundary.** Two-bit code content is an imposed resource hypothesis, not human
 capacity or total model memory. The frozen candidate cannot be repaired after
@@ -39,6 +39,9 @@ evaluation; pilot success alone cannot promote the main model.
 - `registered_contract` —
   [studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json](records/benchmarks/quantized_relational_learner_v1.json)
   (`sha256:0b8cfb3084af`)
+- `repair_contract` —
+  [studies/quantized_relational_learner/records/benchmarks/storage_repair.json](records/benchmarks/storage_repair.json)
+  (`sha256:ea7fb7cd3909`)
 - `randomization_record` —
   [studies/quantized_relational_learner/records/benchmarks/evaluation_inputs.json](records/benchmarks/evaluation_inputs.json)
   (`sha256:1e1471c4fd9d`)

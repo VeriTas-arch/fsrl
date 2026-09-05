@@ -27,11 +27,25 @@ from fsrl.experiments.quantized_learner.protocol import (
     resolved_specification,
     specification,
 )
+from fsrl.experiments.quantized_learner.recovery_execution import generation_shards
 from fsrl.experiments.quantized_learner.verification import reconstruct_codes
 from fsrl.experiments.training_strategy.batches import sample_episodes
 
 
 class PipelineTests(unittest.TestCase):
+    def test_generation_shards_preserve_every_array_and_design_identity(self):
+        original = {
+            f"{index}__value": np.array([index, index + 1], dtype=np.float64)
+            for index in range(64)
+        }
+        shards = generation_shards(original)
+        self.assertEqual(set(shards), {"generation-0", "generation-1"})
+        self.assertEqual([len(row) for row in shards.values()], [32, 32])
+        combined = {key: value for row in shards.values() for key, value in row.items()}
+        self.assertEqual(set(combined), set(original))
+        for key, value in original.items():
+            np.testing.assert_array_equal(combined[key], value)
+
     def setUp(self):
         self.spec = resolved_specification()
         self.candidate = specification()

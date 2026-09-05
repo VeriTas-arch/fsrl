@@ -226,11 +226,11 @@ trajectories.
     model is promoted; development, fresh replication, simulation stability and
     conditional biological realization are separate requirements.
 - [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `frozen_contract`
-  - **Finding:** All execution, recovery, original-behavior evaluation and
-    portable-verification paths are implemented. The final implementation passed 817
-    non-Liu CUDA/numerical checks; source and all evaluation inputs are now jointly
-    locked before recovery or training. All three paired training streams remain
-    mandatory; no new Liu behavioral result or main-model promotion exists.
+  - **Finding:** The full pipeline and first joint source/input lock are in place. A
+    prospective storage-only repair now splits recovery generation arrays into lossless
+    32-design files; previous inputs and execution witnesses remain immutable.
+    Requalification and a successor source lock precede replay and all mandatory
+    training. No Liu behavioral result or main-model promotion exists.
 
 ## One-factor structural transport
 
