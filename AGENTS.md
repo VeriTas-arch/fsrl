@@ -121,6 +121,18 @@ result is not permission for another run, biological-parameter tuning, a new
 admission mechanism, human fitting, or main-model promotion. A successor requires
 a separately authorized prospective question.
 
+The user has opened a model-neutral main-model admission program and its first
+`quantized_relational_learner` candidate. The prospective authorities are
+[`studies/main_model_admission/`](studies/main_model_admission/) and
+[`studies/quantized_relational_learner/`](studies/quantized_relational_learner/).
+Freeze the four-valued exact/persistent/resampled comparison before execution;
+qualify and source-lock before the non-Liu recovery screen and all three paired
+training streams, then jointly lock all nine fits before evaluation. This opens
+neither historical retuning nor human fitting. Pilot success alone cannot
+promote a main model: unchanged fresh replication, simulation stability and
+selected-parameter biological-boundary verification remain required. Do not
+reinterpret a partial behavioral match as completion of the user's goal.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

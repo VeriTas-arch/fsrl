@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment_id": "main_model_admission_v1",
+  "status": "prospective_model_neutral_contract",
+  "authorization": "User goal: execute the reviewed plan and determine a biologically defensible single-stage main model that reproduces the target experiment.",
+  "parent_commit": "b9ed572c0f46c8670856eadc1ea51d57715340b8",
+  "question": "Which single-stage learner meets the complete frozen Liu behavioral target with reproducible simulation behavior and an explicit, defensible biological implementation boundary?",
+  "scope": "Model-level admission, not identification of the true human mechanism. Historical studies remain frozen; no human collection, human parameter fitting, posterior calibration or closed-family repair.",
+  "information": {
+    "support": "Ordinary item cues and displayed signed metric evidence, once per scheduled presentation. The existing subject-encoding distribution and stable admission rule remain explicit inherited hypotheses.",
+    "query": "Only ordinary query cues and terminal model state; no query feedback, true rank, learned/omitted labels, posterior, retained exact metric cache or offline diagnostic target.",
+    "single_stage": "Every trainable slow parameter is optimized from the first to final generic training step under one frozen objective. No staged freezing, later gain/temperature fit, checkpoint selection or extra adaptation. Support and query within an episode are not two optimizer stages.",
+    "human_exposure": "The old Liu data, encoding choices and T=0.25 are exposed historical references. New fits and simulated people test robustness, never new independent human confirmation."
+  },
+  "behavior_authority": {
+    "contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+    "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json",
+    "classifiers": "fsrl/experiments/training_strategy/behavior.py:classify_rows",
+    "estimators": "fsrl/experiments/training_strategy/behavior.py:behavior_metrics",
+    "requirement": "Preserve all nine qualitative and all nine quantitative flags, including their original cohorts, exclusions, denominators, query sampling and distance-level weighting. Undefined is never PASS. Interval inclusion remains the historical descriptive criterion, not proof of human-model equivalence.",
+    "slope": "All 28 pairs, sampled choices, seven distance-level means with equal-level OLS. Do not substitute the 20-nonlearned expected-probability slope."
+  },
+  "admission_levels": {
+    "pilot": "Every mandatory development fit must pass generic competence and all nine qualitative flags. Complete quantitative reproduction additionally requires all nine quantitative flags on every mandatory anchor fit. A partial quantitative result is retained but cannot be promoted.",
+    "replication": "A pilot-qualified recipe must be frozen unchanged before fresh training-stream and evaluation-instance replication. All mandatory fits are locked before any evaluation; all mandatory cohorts are fixed before execution. The candidate protocol must identify those future artifacts before that stage starts. Development success alone never promotes the main model.",
+    "simulation_stability": "Use the original analysis separately on each 77-subject cohort. Require the Monte Carlo mean of each interval-tested ORIGINAL cohort statistic, with its 95% uncertainty interval, to lie entirely within its original human reference interval. Also reproduce all nine original flags in each of three prospectively fixed witness cohorts per confirmation fit. Do not pool participants across fits or replace cohort statistics by statistics of an averaged policy.",
+    "stability_sampling": {
+      "cohorts_per_confirmation_fit": 400,
+      "subjects_per_cohort": 77,
+      "uncertainty": "For continuous cohort-statistic means, 10000 bootstrap resamples of whole independent simulated cohorts within a fit. These are simulation uncertainty intervals, not new human equivalence intervals. Undefined cohort endpoints make the respective stability gate unresolved, not silently excluded.",
+      "joint_pass_rate": "Report the observed simultaneous nine-row pass rate and Wilson 95% interval, plus individual-row rates. No separate pass-rate cutoff defines promotion; 400 cohorts bound the worst-case Bernoulli Monte Carlo standard error at 0.025. This is a precision budget, not a fitted success threshold.",
+      "morphology": "Report the full joint distribution of bimodal, ordinary-unimodal and low-accuracy pair counts, in addition to the unchanged nine-row tests on the three witness cohorts. Do not pretend its historical qualitative classifier is a continuous equivalence test.",
+      "randomness": "Train-stream, cue, support order/orientation, subject admission, encoding and choice RNGs are independently declared. The three witness cohorts and 400 precision cohorts are disjoint. Per-fit outcomes remain separate."
+    }
+  },
+  "functional_requirements": {
+    "generic_competence": "On prospectively held-out generic graphs, learned and nonlearned exact correctness each have participant/episode bootstrap 95% lower bound above chance (0.5).",
+    "binding": "A frozen distribution-preserving evidence-routing control must reduce intact correctness with a paired 95% lower bound above zero. Zero admitted updates must yield neutral state and chance policy; query reads must not write.",
+    "architecture_neutrality": "Require supported direct-experience fidelity and unseen-relation inference, not named P/L modules or old RNN-specific necessity thresholds. Report deterministic internal orders separately from sampled choices."
+  },
+  "biological_requirements": {
+    "state_ledger": "Account for all persistent/transient state, addresses, admission variables, representational budgets and slow parameters. Distinguish imposed capacity from inferred human capacity.",
+    "online_rule": "No support/query-label leakage or replay; identify the locally available activities, teaching signal and any shared normalization required by the update.",
+    "realization": "Before final biologically defensible main-model promotion, verify the selected new parameters/input envelope against a bounded finite-time implementation of its online plasticity rule. Existing score-circuit results support a conditional route but do not automatically cover new fits. Explicitly describe any encoder/cache/address mechanism still modeled algorithmically rather than neurally.",
+    "claim": "Conditional biological plausibility and model-level sufficiency only; no claim that the slow optimizer, exact cue addressing, stochastic quantizer, memory capacity or whole system has been identified in human tissue."
+  },
+  "selection": {
+    "eligibility": "Only recipes passing information, single-stage, complete behavior, fresh replication, simulation stability, functional and biological-boundary requirements are eligible.",
+    "competition": "No preselected score-only, quantized, persistent or joint-RNN winner. Compare eligible recipes by explicit state/parameter/exposure/compute costs and maintained assumptions; do not rank models merely by counts of heterogeneous PASS flags.",
+    "ties": "If eligible recipes have incomparable resource/implementation tradeoffs, report the Pareto alternatives and the unresolved choice rather than inventing a post-result weighted objective.",
+    "failure": "Retain every valid positive and negative result. A failed candidate does not lower the Liu target or authorize post-result tuning of its frozen recipe. Register a distinct evidence-motivated successor before a different scientific execution."
+  }
+}

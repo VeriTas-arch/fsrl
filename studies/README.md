@@ -221,6 +221,14 @@ trajectories.
     independently reconstructed. Historical qualitative 9/9 and quantitative 3/9
     behavior remain unchanged. Complete and frozen; no training, calibration or
     main-model promotion.
+- [Single-stage main-model admission](main_model_admission/README.md) — `frozen_contract`
+  - **Finding:** A prospective model-neutral admission contract is registered. No new
+    model is promoted; development, fresh replication, simulation stability and
+    conditional biological realization are separate requirements.
+- [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `frozen_contract`
+  - **Finding:** Prospectively registered exact/persistent/resampled comparison on three
+    paired new training streams, with a non-Liu recovery screen and independent
+    code/parameter estimands. No new training or evaluation result exists.
 
 ## One-factor structural transport
 

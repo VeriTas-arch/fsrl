@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "quantized_relational_learner_v1",
+  "status": "prospective_three_stream_pilot",
+  "parent_commit": "b9ed572c0f46c8670856eadc1ea51d57715340b8",
+  "parent_protocol": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.json",
+  "parent_protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+  "admission_protocol": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json",
+  "question": "Can an explicitly four-valued relation teaching code repair the complete Liu behavior of the single-stage score learner, and do fresh versus persistent encodings produce distinguishable joint predictions?",
+  "hypothesis": "Finite precision changes the distribution of individualized terminal score fields while leaving the online score computation unchanged. Persistence is a separate first-code reuse hypothesis, not implied by two-bit storage.",
+  "prior_evidence": "The exposed score-only fits are qualitatively sufficient but match 3/9 quantitative rows. Broader admission and minimum-norm integration increase already excessive accuracy. This motivates, but does not validate, finite-precision encoding.",
+  "inherit": "Inherit the parent task, graph holdouts, cue size/distribution, stable-omission law, update equation, parameter initialization, optimizer/exposure, human references, T=1 training and T=0.25 Liu sampling, statistical definitions and CUDA numerical profile. Explicit changes below are the complete candidate delta. No local trace is present.",
+  "seeds": {
+    "mandatory": [2114, 2115, 2116],
+    "conditions": ["exact", "persistent", "resampled"],
+    "execution_order": {
+      "2114": ["exact", "persistent", "resampled"],
+      "2115": ["persistent", "resampled", "exact"],
+      "2116": ["resampled", "exact", "persistent"]
+    },
+    "training_rng_offset": 950000,
+    "encoding_rng_offset": 960000,
+    "training_encoding": "Recreate the same base task stream per condition; use a separate encoding RNG with the same initial seed for persistent/resampled. Draw one full trial-by-subject uniform array per step in all three conditions, even exact, before applying the condition-specific reuse rule."
+  },
+  "encoding": {
+    "codebook": [-1, -0.3333333333333333, 0.3333333333333333, 1],
+    "range": [-1, 1],
+    "normalization": "The inherited displayed signed rank-gap/(n_items-1), not a new per-episode or empirical normalization. Reject nonfinite/out-of-range input; no clipping.",
+    "rounding": "For adjacent q_low <= d <= q_high, choose q_high with probability (d-q_low)/(q_high-q_low), else q_low. Endpoints and exact code values are deterministic. This defines both conditional mean d and variance (d-q_low)*(q_high-d).",
+    "address": "Lexicographically canonical unordered pair of the two ordinary cue vectors, with an orientation sign. No true rank, support relation ID from a hidden task graph, query labels or original magnitude are address keys.",
+    "admission": "Original p and z remain fixed, computed from the original observed evidence. Require binary z stable across repeated pairs. z=0 skips the entire score update and creates no persistent code cache entry.",
+    "persistent": "At the first admitted presentation, round the canonical signed value and retain ONLY its 2-bit code index under the cue-derived address. Later admitted presentations decode that same index with current orientation. Do not retain exact d or a removable error. Never read the cache during queries.",
+    "resampled": "At every admitted support presentation, independently round the same canonical observed value using the current trial's uniform draw. No persistent code cache. Query state is still fixed after support.",
+    "exact": "Fresh matched training with unchanged raw observed signed value; not reuse of an old fitted checkpoint.",
+    "scope": "Fixed-value repeated relations only. Persistent assumes no code refresh on later observations. Input code content is two bits per admitted relation, not a total two-bit bound including z, addresses and continuous w.",
+    "reset": "All code indices, addresses and w reset at episode start. Each invocation is a fresh episode; no state carries between training batches or evaluation subjects."
+  },
+  "optimization": {
+    "total_steps": 1500,
+    "batch_size": 32,
+    "total_episode_exposures": 48000,
+    "trainable_parameters": ["raw_eta", "raw_global_gain"],
+    "loss": "Mean softplus(-y*M) over original equally weighted generic queries. Same optimizer as parent. The codec is fixed, so no straight-through or Gumbel estimator is used.",
+    "selection": "Final step only, all nine fits mandatory, no validation selection or additional tuning. Warmup cannot consume extra task/encoding RNG or optimizer steps."
+  },
+  "evaluation": {
+    "generic": {"episodes": 256, "rng_seed": 970001},
+    "liu": {
+      "subjects": 77,
+      "cue_seed": 971001,
+      "support_seed": 971002,
+      "subject_encoding_seed": 971003,
+      "choice_seed": 971004,
+      "encoding_seed": 971005,
+      "routing_seed": 971006,
+      "protocol_id": "liu_v2"
+    },
+    "pairing": "Every fit uses the same prospectively saved base evaluation instances. Within each cohort, code uniforms and sampled-choice uniforms are paired across recipes; never pool participants across training fits.",
+    "primary": "Full original nine-row qualitative and quantitative map on one prospectively fixed 77-subject anchor cohort, per fit, plus generic competence. New independent cohort definitions are not selected after results.",
+    "internal": "Correct-signed query margins, strict correct internal order proportion, per-pair expected correctness and deterministic rank distribution; distinguish these from historical sampled Hodge rankings.",
+    "fixed_parameter_control": "For each seed, use its newly trained exact eta/gamma for all three codecs on the same base inputs and code uniforms. Report the effect of codec replacement separately from each recipe's own-parameter effect; no added optimizer phase.",
+    "binding_control": "Within subject, permute canonical admitted internal teaching values across admitted relation addresses, then reuse the permuted value at the corresponding occurrence within each block; preserve z, x, timing and the per-block value multiset. Quantify paired intact-minus-shuffled correctness. This is a diagnostic intervention, never a candidate readout.",
+    "persistent_enumeration": "At fixed x/z/order/eta/gain, enumerate the at-most-two code outcomes of each admitted relation with exact product weights. In Liu there are at most 128 effective combinations. Verify code-averaged margins equal the exact-codec margin, and analytic covariance equals enumerated covariance. Compute expected probability and strict order outcomes by averaging conditional outputs, NEVER by sampling all queries from an averaged policy.",
+    "uncertainty": "Parent 10000 participant bootstrap samples and 95% intervals, within each fit. Conditional code enumeration is not a new participant cohort. Uncertainty over human reference values is not refitted.",
+    "storage": "Save base inputs, uniforms, internal signed values, code indices/address witnesses, raw final parameters, per-condition margins, terminal w, sampled choices, cohort denominators and all decisions as deterministic allow_pickle=False arrays plus write-once JSON. Preserve source witnesses; do not require ignored runtime files for final report verification."
+  },
+  "identifiability": {
+    "stage": "Non-Liu synthetic recovery screen after implementation qualification/source lock and before mandatory training. No Liu behavioral evaluation or parameter tuning at this stage.",
+    "task_rng_seed": 972001,
+    "simulation_rng_seed": 972002,
+    "integration_rng_seed": 972003,
+    "episodes_per_generating_setting": 64,
+    "eta_grid": [0.25, 0.6, 0.99],
+    "gain_grid": [1, 4, 8],
+    "choice_repetitions": 10,
+    "nuisance_draws": 512,
+    "integration_check_draws": 1024,
+    "generation": "All three codecs at every eta/gain grid point, on the same 64 non-Liu held-out generic episode designs; draw original admission latents and codec randomness, then ten choices per unordered query from each fixed terminal state. No fitted-model selection.",
+    "recovery": "Grid-marginal model likelihood with a uniform prior over the nine declared eta/gain settings. Integrate unobserved admission and encoding using separately drawn common nuisance samples from the unchanged generative laws. Decoder sees only ordinary cues, observed support values/order and terminal choices; never the generating z, code, w or true rank. Repeat at 1024 nuisance draws without selecting whichever result is better.",
+    "criterion": "Report three-by-three confusion matrices, parameter-grid recovery and log-score differences. Distinguishable_on_registered_screen requires each family's diagonal recovery fraction over its nine generating settings to have Wilson 95% lower bound above 1/3, and unchanged winning family for all settings under the integration-budget check. Otherwise persistence specificity is unresolved; behavioral sufficiency testing may still proceed.",
+    "boundary": "A finite synthetic recovery screen, not a population guarantee or human evidence for persistent encoding. Covariance separation alone is insufficient for discrete code distributions."
+  },
+  "integrity": {
+    "qualification_seed": 973001,
+    "fixtures": "Non-Liu fixtures only: exact baseline parity; unbiased code mean/variance by analytic branch enumeration; cue-canonical reversal; stable retained code; independent fresh draws; no z=0 cache/write; episode reset; query read-only; no access to raw metric after cached write; matched task RNG; code-only memory ledger; analytic covariance; positive finite gradients and Adam updates of both scalars; eager/fullgraph-default output/loss/gradient/update parity.",
+    "tolerances": {"float64_atol": 1e-9, "float64_rtol": 1e-7, "cuda_atol": 1e-5, "cuda_rtol": 0.0001},
+    "execution": "CUDA for training, fullgraph=True mode=default backend=inductor; float32, no TF32/autocast. PyTorch intra/inter-op, BLAS and compiler each one thread. CPU float64 allowed for bounded exact enumeration and statistics.",
+    "sequence": "Commit/push both contracts, then implementation; qualify on non-Liu fixtures; jointly lock committed sources/inputs; run the fixed recovery screen and all nine mandatory fits; commit/push their all-artifact lock before ANY generic/Liu fitted-model evaluation. Preserve failed attempts, do not overwrite records.",
+    "recovery_artifacts": "Recovery inputs, choices, conditional mixture calculations and decisions are write-once registered records before training. They cannot be used to change the protocol, optimizer, codebook or grid.",
+    "verification": "Independently reconstruct the quantizer/online recurrence in float64 and all primary behavior flags from registered raw inputs/outputs; validate run counters, paired base-stream hashes and every source/artifact lock."
+  },
+  "decision": {
+    "competence": "For each fit, generic learned and nonlearned exact accuracy bootstrap lower bounds >0.5. A failed gate does not suppress reporting; it blocks a competence-qualified mechanism claim.",
+    "behavior": "Complete_pilot_reproduction for a recipe requires generic competence plus all nine qualitative and all nine original quantitative flags in all three mandatory fits. Partial matches remain explicit partial results; no majority-vote promotion.",
+    "binding": "Intact-minus-evidence-shuffled correctness has paired 95% lower bound >0 in generic and Liu cohorts for each fit; z-off and query no-write identities pass.",
+    "outcomes": ["noninterpretable_implementation", "incompetent_recipe", "partial_behavioral_reproduction", "complete_pilot_reproduction_specificity_unresolved", "complete_pilot_reproduction_recoverable_codec"],
+    "promotion": "No pilot outcome itself promotes a main model. An eligible recipe proceeds only to unchanged fresh replication, model-neutral simulation stability and selected-parameter biological implementation verification under a separate prospective descendant contract.",
+    "stop": "After the full fixed matrix, stop and report. No replacement codebook, extra bit depth, sign protection, refreshing mixture, local trace, temperature/gain correction or extra steps as repair of this study. Failure constrains this exact codec/reuse recipe, not all possible finite-capacity models."
+  }
+}

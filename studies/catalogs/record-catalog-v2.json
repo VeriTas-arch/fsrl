@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 288,
+  "entry_count": 290,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 174,
+    "json": 176,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 54,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 266,
+    "already_conformant": 268,
     "historical_gzip_view": 21,
     "historical_pth_view": 1
   },
@@ -5281,6 +5281,40 @@
         "prospective_suffix": ".json"
       },
       "locator": {
+        "legacy_path": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json",
+        "repository_path": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 7748,
+        "sha256": "15bfacda90d83ac2befd413f0bdbd6b14c54f830fe52a3c7b3ad7a20cef5546b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "main_model_admission",
+        "kind": "study"
+      },
+      "record_id": "study.main_model_admission.studies_main_model_admission_records_benchmarks_main_model_admission_v1_json",
+      "registered_identity": {
+        "bytes": 7748,
+        "sha256": "15bfacda90d83ac2befd413f0bdbd6b14c54f830fe52a3c7b3ad7a20cef5546b",
+        "source_ref": "sha256:15bfacda90d83ac2befd413f0bdbd6b14c54f830fe52a3c7b3ad7a20cef5546b"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
         "legacy_path": "benchmarks/mechanism_confirmation_v1.json",
         "repository_path": "studies/mechanism_confirmation/records/benchmarks/mechanism_confirmation_v1.json"
       },
@@ -6841,6 +6875,40 @@
         "migration_id": "runtime-locators-v1",
         "replacements": 15
       }
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 12570,
+        "sha256": "0b8cfb3084af61a5dd045d08094d269f8f9e7a0e9bb7ebcec2a232aea666639b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_quantized_relational_learner_v1_json",
+      "registered_identity": {
+        "bytes": 12570,
+        "sha256": "0b8cfb3084af61a5dd045d08094d269f8f9e7a0e9bb7ebcec2a232aea666639b",
+        "source_ref": "sha256:0b8cfb3084af61a5dd045d08094d269f8f9e7a0e9bb7ebcec2a232aea666639b"
+      },
+      "role": "registered_contract"
     },
     {
       "availability": "materialized",
@@ -10029,7 +10097,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 286,
+  "registered_record_count": 288,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -10050,7 +10118,7 @@
     "presentation_view": 1,
     "randomization_record": 1,
     "readiness_result": 2,
-    "registered_contract": 58,
+    "registered_contract": 60,
     "repair_contract": 4,
     "repair_lock": 8,
     "report": 53,
@@ -10063,7 +10131,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "60880b2a105dc22afbc3d9ebfcd7fe1e2590c187880deb87c77c376cb2cf19e8"
+      "sha256": "388beeb640aad4a4c1a71e9d7a4966a11789643b1e89000d8accf4eb02c5dac5"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",
