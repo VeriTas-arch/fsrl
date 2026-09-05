@@ -24,10 +24,11 @@
 **Question.** Can a compact online score learner, with or without direct relational
 memory, explain the Liu behavioral map?
 
-**Finding.** Prospective independent comparison of score_trace and independently trained
-score_only on three paired training streams, with fixed final-step selection, inherited
-task information, all nine behavior rows, and an exact history-sensitivity bridge. No
-candidate has been implemented, trained, or evaluated at registration.
+**Finding.** The independent score_trace/score_only implementation and non-Liu CUDA
+output/gradient/update parity checks are locked before scientific training. The fixed
+three-stream comparison retains inherited evidence, nine behavior rows, independently
+trained score-only, and an exact history-sensitivity bridge; no scientific evaluation
+has begun.
 
 **Claim boundary.** Task-level sufficiency under explicit structural and encoding
 priors, not old-network trajectory compression, universal minimality, joint-training
@@ -38,6 +39,9 @@ repair, or fresh human confirmation.
 - `registered_contract` —
   [studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.json](records/benchmarks/minimal_relational_learner_v1.json)
   (`sha256:6586f2e51eef`)
+- `execution_lock` —
+  [studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.source_lock.json](records/benchmarks/minimal_relational_learner_v1.source_lock.json)
+  (`sha256:ee28e3d49b1f`)
 
 ## Provenance rule
 

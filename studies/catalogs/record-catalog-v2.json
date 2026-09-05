@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 226,
+  "entry_count": 227,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 158,
+    "json": 159,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 48,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 205,
+    "already_conformant": 206,
     "historical_gzip_view": 20,
     "historical_pth_view": 1
   },
@@ -5444,6 +5444,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.source_lock.json",
+        "repository_path": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.source_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 30159,
+        "sha256": "ee28e3d49b1f608bd1470d0a38bc86bfa3eb67410f3b47400e99830a7deead14"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_benchmarks_minimal_relational_learner_v1_source_lock_json",
+      "registered_identity": {
+        "bytes": 30159,
+        "sha256": "ee28e3d49b1f608bd1470d0a38bc86bfa3eb67410f3b47400e99830a7deead14",
+        "source_ref": "sha256:ee28e3d49b1f608bd1470d0a38bc86bfa3eb67410f3b47400e99830a7deead14"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -7919,7 +7953,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 224,
+  "registered_record_count": 225,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -7930,7 +7964,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 30,
+    "execution_lock": 31,
     "freeze_validation": 1,
     "frozen_parameters": 1,
     "frozen_result": 40,
