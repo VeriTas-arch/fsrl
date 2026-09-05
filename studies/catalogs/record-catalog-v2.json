@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 290,
+  "entry_count": 298,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 176,
+    "json": 179,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 54,
-    "numpy_npz": 48,
+    "numpy_npz": 53,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 268,
+    "already_conformant": 276,
     "historical_gzip_view": 21,
     "historical_pth_view": 1
   },
@@ -6878,6 +6878,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.randomization_record",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/evaluation_inputs.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/evaluation_inputs.json"
+      },
+      "materialized_identity": {
+        "bytes": 5295,
+        "sha256": "1e1471c4fd9d18ada9e7285490900a9fff6cd82c860c2ee179c060a14238cb5c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_evaluation_inputs_json",
+      "registered_identity": {
+        "bytes": 5295,
+        "sha256": "1e1471c4fd9d18ada9e7285490900a9fff6cd82c860c2ee179c060a14238cb5c",
+        "source_ref": "sha256:1e1471c4fd9d18ada9e7285490900a9fff6cd82c860c2ee179c060a14238cb5c"
+      },
+      "role": "randomization_record"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.readiness_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/qualification.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 127147,
+        "sha256": "8abd5b9cd6ec61ebca276cd4557167aa961c2a45683abe09e34a1b3b42ac2ada"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 127147,
+        "sha256": "8abd5b9cd6ec61ebca276cd4557167aa961c2a45683abe09e34a1b3b42ac2ada",
+        "source_ref": "sha256:8abd5b9cd6ec61ebca276cd4557167aa961c2a45683abe09e34a1b3b42ac2ada"
+      },
+      "role": "readiness_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -6909,6 +6977,210 @@
         "source_ref": "sha256:0b8cfb3084af61a5dd045d08094d269f8f9e7a0e9bb7ebcec2a232aea666639b"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/source_lock.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/source_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 39906,
+        "sha256": "8d4e475efb668f53baceee30aac6881da310f276ccb4b46c0e0badbb4b636ce3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_source_lock_json",
+      "registered_identity": {
+        "bytes": 39906,
+        "sha256": "8d4e475efb668f53baceee30aac6881da310f276ccb4b46c0e0badbb4b636ce3",
+        "source_ref": "sha256:8d4e475efb668f53baceee30aac6881da310f276ccb4b46c0e0badbb4b636ce3"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/inputs/generic-28.npz",
+        "repository_path": "studies/quantized_relational_learner/records/inputs/generic-28.npz"
+      },
+      "materialized_identity": {
+        "bytes": 69948,
+        "sha256": "3ccf2e9c15f5ef3d1e604ef3f246eca7b1c9ef6c3f80c0ee4efc3d4fc21ff2f8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_inputs_generic_28_npz",
+      "registered_identity": {
+        "bytes": 69948,
+        "sha256": "3ccf2e9c15f5ef3d1e604ef3f246eca7b1c9ef6c3f80c0ee4efc3d4fc21ff2f8",
+        "source_ref": "sha256:3ccf2e9c15f5ef3d1e604ef3f246eca7b1c9ef6c3f80c0ee4efc3d4fc21ff2f8"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/inputs/generic-32.npz",
+        "repository_path": "studies/quantized_relational_learner/records/inputs/generic-32.npz"
+      },
+      "materialized_identity": {
+        "bytes": 56571,
+        "sha256": "73d066d9cde58d376195e572738c3c90191fb2690a582a7d61820bf6f0ac846b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_inputs_generic_32_npz",
+      "registered_identity": {
+        "bytes": 56571,
+        "sha256": "73d066d9cde58d376195e572738c3c90191fb2690a582a7d61820bf6f0ac846b",
+        "source_ref": "sha256:73d066d9cde58d376195e572738c3c90191fb2690a582a7d61820bf6f0ac846b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/inputs/generic-36.npz",
+        "repository_path": "studies/quantized_relational_learner/records/inputs/generic-36.npz"
+      },
+      "materialized_identity": {
+        "bytes": 68951,
+        "sha256": "11531fb1c9e5f7c6c45be8081db876915470d740d34fe16fc0d940d86a593894"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_inputs_generic_36_npz",
+      "registered_identity": {
+        "bytes": 68951,
+        "sha256": "11531fb1c9e5f7c6c45be8081db876915470d740d34fe16fc0d940d86a593894",
+        "source_ref": "sha256:11531fb1c9e5f7c6c45be8081db876915470d740d34fe16fc0d940d86a593894"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/inputs/generic-40.npz",
+        "repository_path": "studies/quantized_relational_learner/records/inputs/generic-40.npz"
+      },
+      "materialized_identity": {
+        "bytes": 80610,
+        "sha256": "a585e0ab501507465590514652e69a645ebf2304d3e8a0b555fb1870df41c924"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_inputs_generic_40_npz",
+      "registered_identity": {
+        "bytes": 80610,
+        "sha256": "a585e0ab501507465590514652e69a645ebf2304d3e8a0b555fb1870df41c924",
+        "source_ref": "sha256:a585e0ab501507465590514652e69a645ebf2304d3e8a0b555fb1870df41c924"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/inputs/liu-all.npz",
+        "repository_path": "studies/quantized_relational_learner/records/inputs/liu-all.npz"
+      },
+      "materialized_identity": {
+        "bytes": 73939,
+        "sha256": "3713cbe23340aa6ace0b316f71b9e7a7a8838356397c9c599b1d86195eb910b7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_inputs_liu_all_npz",
+      "registered_identity": {
+        "bytes": 73939,
+        "sha256": "3713cbe23340aa6ace0b316f71b9e7a7a8838356397c9c599b1d86195eb910b7",
+        "source_ref": "sha256:3713cbe23340aa6ace0b316f71b9e7a7a8838356397c9c599b1d86195eb910b7"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -10097,7 +10369,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 288,
+  "registered_record_count": 296,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -10108,7 +10380,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 33,
+    "execution_lock": 34,
     "freeze_validation": 1,
     "frozen_parameters": 1,
     "frozen_result": 43,
@@ -10116,15 +10388,15 @@
     "noninterpretable_attempt": 3,
     "presentation_asset": 6,
     "presentation_view": 1,
-    "randomization_record": 1,
-    "readiness_result": 2,
+    "randomization_record": 2,
+    "readiness_result": 3,
     "registered_contract": 60,
     "repair_contract": 4,
     "repair_lock": 8,
     "report": 53,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 52,
+    "supporting_artifact": 57,
     "validation_result": 3
   },
   "schema_version": 2,

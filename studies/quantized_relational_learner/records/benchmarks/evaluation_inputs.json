@@ -1,0 +1,98 @@
+{
+  "cohorts": {
+    "generic": {
+      "28": {
+        "arrays": {
+          "bytes": 69948,
+          "path": "studies/quantized_relational_learner/records/inputs/generic-28.npz",
+          "sha256": "3ccf2e9c15f5ef3d1e604ef3f246eca7b1c9ef6c3f80c0ee4efc3d4fc21ff2f8"
+        },
+        "batch_sha256": "43cff124baaa1f7d9c9bbe85fbd934ae2bf19dbf3ba424bdc086474c3f032c1d"
+      },
+      "32": {
+        "arrays": {
+          "bytes": 56571,
+          "path": "studies/quantized_relational_learner/records/inputs/generic-32.npz",
+          "sha256": "73d066d9cde58d376195e572738c3c90191fb2690a582a7d61820bf6f0ac846b"
+        },
+        "batch_sha256": "b0aa21593fd85abe6c4aa922f013f5ee76f4c6ce1fe9c8802e44e41fe26a1e5a"
+      },
+      "36": {
+        "arrays": {
+          "bytes": 68951,
+          "path": "studies/quantized_relational_learner/records/inputs/generic-36.npz",
+          "sha256": "11531fb1c9e5f7c6c45be8081db876915470d740d34fe16fc0d940d86a593894"
+        },
+        "batch_sha256": "0bee7509f060ea03ac124202bd6c91be4274e1d12c2738459cdd781c4e0f8503"
+      },
+      "40": {
+        "arrays": {
+          "bytes": 80610,
+          "path": "studies/quantized_relational_learner/records/inputs/generic-40.npz",
+          "sha256": "a585e0ab501507465590514652e69a645ebf2304d3e8a0b555fb1870df41c924"
+        },
+        "batch_sha256": "4d59be5cc99167a829734fcd83fbf7e27c5a800cadc8557a4ec2c2eb87255b95"
+      }
+    },
+    "liu": {
+      "all": {
+        "arrays": {
+          "bytes": 73939,
+          "path": "studies/quantized_relational_learner/records/inputs/liu-all.npz",
+          "sha256": "3713cbe23340aa6ace0b316f71b9e7a7a8838356397c9c599b1d86195eb910b7"
+        },
+        "batch_sha256": "5fda683438121ff70f75efc33abdcba81fab3c16406faa3a0f794d522c933e54"
+      }
+    }
+  },
+  "evaluation": {
+    "generic": {
+      "conditions": [
+        "intact",
+        "local_off",
+        "global_off"
+      ],
+      "episodes": 256,
+      "partition": "bucket zero with protected Liu graphs excluded",
+      "rng_seed": 970001,
+      "rule": "Same 256 tasks in both recipes/all seeds, sampled without any fitted-model-dependent selection.",
+      "temperature": 1
+    },
+    "history": {
+      "bridge": "For w0=0, g_q=sum_t d_t*S_tq exactly at fixed encoding. Also report sum d_t*D_tq and sum d_t*H_tq; their sum equals g_q. This is NOT a full intervention that recomputes p/z after changing d.",
+      "decomposition": "D_tq=gamma_G*a_t*dot(x_q,x_t); H_tq=S_tq-D_tq. Preserve all S,D,H arrays. This separates direct feature overlap from future-update context, not semantic truth from geometry.",
+      "definition": "At fixed cues, z, sequence and constrained parameters, a_t=eta*z_t/(epsilon+||x_t||^2), A_t=I-a_t*x_t*x_t^T. S_tq=gamma_G*a_t*x_q^T*A_(T-1)*...*A_(t+1)*x_t is derivative of terminal GLOBAL margin wrt displayed d_t.",
+      "geometry": "Report global and combined Hodge structure/transitive triplets. Pure global additivity is imposed; no high-Hodge success claim.",
+      "summary": "Within subject, report mean absolute d*S, d*D, d*H over all canonical queries/trials and separately remote pairs disjoint from the support pair. Report raw signed arrays; no slope-targeted selection, new fitted control, significance gate, or attribution of all history effects to useful inference."
+    },
+    "liu": {
+      "behavior": "Use frozen nine-row definitions and human intervals through existing shared behavior/statistics functions; quantify every row, cohort and undefined endpoint. All nine qualitative flags define behavioral adequacy; all nine quantitative flags are descriptive and not new hard gates.",
+      "calibration": "Inherited historical human-informed temperature, fixed and not refit.",
+      "choice_seed": 971004,
+      "conditions": [
+        "intact",
+        "local_off",
+        "global_off",
+        "query_shuffle",
+        "evidence_shuffle"
+      ],
+      "controls": "In score_trace, query shuffle deranges canonical pair addresses within subject with reversal preserved; evidence shuffle deranges local values across support addresses within subject/block preserving multiset and timing. Never alter w, its evidence, or gains. Report global_off nonlearned to reveal local cross-talk. In score_only, unused local controls are exact identities/zero-global behavior, not counted as mechanism support.",
+      "cue_mode": "permuted_shared",
+      "cue_seed": 971001,
+      "encoding_seed": 971005,
+      "evidence_shuffle_seed": 32301,
+      "historical": "Read only frozen joint/staged results for seeds 2108/2109/2110 for all nine rows, probability groups and costs. No network pooling or fitted historical-model changes; different training seeds mean historical deltas are descriptive, not paired recipe effects.",
+      "order_seed": 31401,
+      "protocol_id": "liu_v2",
+      "query_shuffle_seed": 31801,
+      "routing_seed": 971006,
+      "subject_encoding_mode": "stable_omission",
+      "subject_encoding_seed": 971003,
+      "subjects": 77,
+      "support_seed": 971002,
+      "temperature": 0.25
+    }
+  },
+  "model_rollout_performed": false,
+  "randomness": "Encoding and routing seeds reset per cohort; sorted-length generic groups; all fits share saved arrays. Historical choice sampling resets the registered choice seed per fit."
+}
