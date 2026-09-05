@@ -21,6 +21,7 @@ WORKFLOW_MODULES = {
     "mechanism": "fsrl.experiments.confirmation.mechanism",
     "joint-training-strategy": "fsrl.experiments.training_strategy.__main__",
     "minimal-relational-learner": "fsrl.experiments.minimal_learner.__main__",
+    "quantized-relational-learner": "fsrl.experiments.quantized_learner.__main__",
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",
