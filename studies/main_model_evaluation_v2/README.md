@@ -25,10 +25,10 @@
 quantitative fidelity, and what do the frozen Resampled outputs imply for the next
 minimal single-stage learner?
 
-**Finding.** A prospective claim-relative evaluation contract is registered. It
-preserves the complete legacy 9/9 metric while adding a core-mechanism label, a joint
-ranking-composition profile and a read-only internal-to-sampled localization. No new
-result or model promotion is registered yet.
+**Finding.** The claim-relative evaluation contract, qualified read-only evaluator and
+all-input execution lock are frozen. It preserves the complete legacy 9/9 metric while
+adding a core-mechanism label, a joint ranking-composition profile and an
+internal-to-sampled localization. No new result or model promotion is registered yet.
 
 **Claim boundary.** Evaluation and read-only diagnostic authority only. The current
 Resampled result is exposed and may be classified retrospectively but not confirmed
@@ -40,6 +40,12 @@ main-model promotion is authorized.
 - `registered_contract` —
   [studies/main_model_evaluation_v2/records/benchmarks/main_model_evaluation_v2.json](records/benchmarks/main_model_evaluation_v2.json)
   (`sha256:bbdedc413849`)
+- `readiness_result` —
+  [studies/main_model_evaluation_v2/records/benchmarks/main_model_evaluation_v2.qualification.json](records/benchmarks/main_model_evaluation_v2.qualification.json)
+  (`sha256:4bf2f8420344`)
+- `execution_lock` —
+  [studies/main_model_evaluation_v2/records/benchmarks/main_model_evaluation_v2.execution_lock.json](records/benchmarks/main_model_evaluation_v2.execution_lock.json)
+  (`sha256:ccecca1a2a6f`)
 
 ## Provenance rule
 
