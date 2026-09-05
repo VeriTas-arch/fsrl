@@ -1,0 +1,819 @@
+{
+  "creation_commit": "efc7b07657ad016b4ea523ee734dfbac507c5341",
+  "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+  "runs": {
+    "2111/score_only": {
+      "config": {
+        "checkpoint": {
+          "bytes": 1877,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_only/model.pth",
+          "sha256": "02f90cd3e01a2bc7078857347c9f680a17c6fba9f6fd1aae96a77f4ad1fdb0b4"
+        },
+        "condition": "score_only",
+        "cost": {
+          "global_persistent_entries": 15,
+          "local_persistent_entries": 0,
+          "peak_allocated_bytes": 101084672,
+          "peak_reserved_bytes": 102760448,
+          "total_seconds": 135.80685852600436,
+          "trainable_parameters": 2,
+          "warm_training_seconds": 19.72876900609117,
+          "warmup_seconds": 115.97522684598516
+        },
+        "episodes": 48000,
+        "final_parameters": {
+          "raw_eta": "acddc39d7ad5c963b40c6f40c851d783ddfc56047cc28d42dac073529ca1d667",
+          "raw_global_gain": "d89bc38cdfad800b544425881d35f83d33c3b5291486b426b8cf062dfbe66234"
+        },
+        "initial_parameters": {
+          "raw_eta": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "raw_global_gain": "0578c65d0a1ad24b6322a8beafb8c64bf69cf76b4d70766be57507836a27a241"
+        },
+        "optimization": {
+          "batch_size": 32,
+          "clipping": "One norm over all trainable scalar parameters of each model.",
+          "gradient_clip": 2,
+          "initial_eta": 0.5,
+          "initial_global_gain": 1,
+          "initial_local_gain": 0.1,
+          "learning_rate": 0.01,
+          "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+          "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+          "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+          "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1,
+          "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+        },
+        "optimizer_steps": {
+          "raw_eta": 1500,
+          "raw_global_gain": 1500
+        },
+        "physical_parameters": {
+          "eta": 0.9884949326515198,
+          "gamma_G": 7.179845333099365,
+          "gamma_L": 0.0
+        },
+        "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "recompile_limit": 64,
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "seed": 2111,
+        "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+        "stream_sha256": "b700ebff72da33283b43bfb9664e2d95f46303dbb00bd98b144629eea00ee62b"
+      },
+      "files": [
+        {
+          "bytes": 4066,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_only/config.json",
+          "sha256": "9eb0525619ae2efb4e2e43eacf49bffc7b41d6147285d9bd2cefca9201409271"
+        },
+        {
+          "bytes": 1877,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_only/model.pth",
+          "sha256": "02f90cd3e01a2bc7078857347c9f680a17c6fba9f6fd1aae96a77f4ad1fdb0b4"
+        },
+        {
+          "bytes": 20312,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_only/run.json",
+          "sha256": "2bdc5b52546a6f5245a723e1ae8995d331dd001c7256a52bb6003dfa59971842"
+        },
+        {
+          "bytes": 548265,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_only/train_log.jsonl",
+          "sha256": "9ce2541d836574c317110cfb5fdd610e0d1a473fba9826886e1115616c7d462f"
+        }
+      ]
+    },
+    "2111/score_trace": {
+      "config": {
+        "checkpoint": {
+          "bytes": 2191,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_trace/model.pth",
+          "sha256": "66533864d46888d4b5177f4cdbe36dfb2c569830c2b97057b7104b4c457f587e"
+        },
+        "condition": "score_trace",
+        "cost": {
+          "global_persistent_entries": 15,
+          "local_persistent_entries": 225,
+          "peak_allocated_bytes": 101176320,
+          "peak_reserved_bytes": 102760448,
+          "total_seconds": 141.61593931700918,
+          "trainable_parameters": 3,
+          "warm_training_seconds": 20.939048868836835,
+          "warmup_seconds": 120.56041996501153
+        },
+        "episodes": 48000,
+        "final_parameters": {
+          "local.raw_gain": "cd8d173670365d08f3b53616183027a01e8264bd7d378e18c7cbfdea5c0703a2",
+          "raw_eta": "a4e6cb9d25580c538e8537d2485bcaa093dccc09b0b9862f9f37dfd64024e02c",
+          "raw_global_gain": "39ed2c216a575cbd8b988659c08db2b8c59dd1442b57d632fa8ba86ff313801d"
+        },
+        "initial_parameters": {
+          "local.raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf",
+          "raw_eta": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "raw_global_gain": "0578c65d0a1ad24b6322a8beafb8c64bf69cf76b4d70766be57507836a27a241"
+        },
+        "optimization": {
+          "batch_size": 32,
+          "clipping": "One norm over all trainable scalar parameters of each model.",
+          "gradient_clip": 2,
+          "initial_eta": 0.5,
+          "initial_global_gain": 1,
+          "initial_local_gain": 0.1,
+          "learning_rate": 0.01,
+          "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+          "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+          "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+          "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1,
+          "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+        },
+        "optimizer_steps": {
+          "local.raw_gain": 1500,
+          "raw_eta": 1500,
+          "raw_global_gain": 1500
+        },
+        "physical_parameters": {
+          "eta": 0.9886998534202576,
+          "gamma_G": 7.14223575592041,
+          "gamma_L": 0.24688567221164703
+        },
+        "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "recompile_limit": 64,
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "seed": 2111,
+        "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+        "stream_sha256": "b700ebff72da33283b43bfb9664e2d95f46303dbb00bd98b144629eea00ee62b"
+      },
+      "files": [
+        {
+          "bytes": 4294,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_trace/config.json",
+          "sha256": "1af21e4fe12d5a1ec8586e716e948b054be6b16b43526c5cfab5efe807a382c0"
+        },
+        {
+          "bytes": 2191,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_trace/model.pth",
+          "sha256": "66533864d46888d4b5177f4cdbe36dfb2c569830c2b97057b7104b4c457f587e"
+        },
+        {
+          "bytes": 20313,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_trace/run.json",
+          "sha256": "e53286f6919fb4fb530ef73afe3c0f6bcde44b4d5afd1773931c36665de44206"
+        },
+        {
+          "bytes": 571617,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2111/score_trace/train_log.jsonl",
+          "sha256": "ca52a59ee6845242c2eed7bd52f1d9d566113d5268e610e50e0dee49db1138f0"
+        }
+      ]
+    },
+    "2112/score_only": {
+      "config": {
+        "checkpoint": {
+          "bytes": 1877,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_only/model.pth",
+          "sha256": "7272fef1c1781b997ebc1d479e6bc500b4b7a45c5ea84ea0a9881574cf37ac5a"
+        },
+        "condition": "score_only",
+        "cost": {
+          "global_persistent_entries": 15,
+          "local_persistent_entries": 0,
+          "peak_allocated_bytes": 474624,
+          "peak_reserved_bytes": 2097152,
+          "total_seconds": 22.121285115994397,
+          "trainable_parameters": 2,
+          "warm_training_seconds": 22.01056754340243,
+          "warmup_seconds": 0.011699085007421672
+        },
+        "episodes": 48000,
+        "final_parameters": {
+          "raw_eta": "f4581fbed6c948e95e0bb724d494e5475d0ff0ad3ba9ab7dd55a4fdee94054df",
+          "raw_global_gain": "d594f1a25186fc6f7fd96ae94cbf377aa510df02143490b80750644d21b004e6"
+        },
+        "initial_parameters": {
+          "raw_eta": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "raw_global_gain": "0578c65d0a1ad24b6322a8beafb8c64bf69cf76b4d70766be57507836a27a241"
+        },
+        "optimization": {
+          "batch_size": 32,
+          "clipping": "One norm over all trainable scalar parameters of each model.",
+          "gradient_clip": 2,
+          "initial_eta": 0.5,
+          "initial_global_gain": 1,
+          "initial_local_gain": 0.1,
+          "learning_rate": 0.01,
+          "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+          "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+          "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+          "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1,
+          "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+        },
+        "optimizer_steps": {
+          "raw_eta": 1500,
+          "raw_global_gain": 1500
+        },
+        "physical_parameters": {
+          "eta": 0.9887556433677673,
+          "gamma_G": 7.163000106811523,
+          "gamma_L": 0.0
+        },
+        "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "recompile_limit": 64,
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "seed": 2112,
+        "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+        "stream_sha256": "4c83f317e34ef98741b09e4c8e12e4830a02e98eb7273335f3ef44548fdb4e7f"
+      },
+      "files": [
+        {
+          "bytes": 4063,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_only/config.json",
+          "sha256": "baeafa73719ded8666f8e46a662479f9fd0b0f921e48371d617c23c466cdbc7b"
+        },
+        {
+          "bytes": 1877,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_only/model.pth",
+          "sha256": "7272fef1c1781b997ebc1d479e6bc500b4b7a45c5ea84ea0a9881574cf37ac5a"
+        },
+        {
+          "bytes": 20312,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_only/run.json",
+          "sha256": "a2e4f73159c6b7c1610ed6c46e4041799dbbf476c77f38522096f54c955f7751"
+        },
+        {
+          "bytes": 548292,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_only/train_log.jsonl",
+          "sha256": "3900fbf9ed806a0921c545b2c068c0be30bd794ed82a12f444a002b2208984f4"
+        }
+      ]
+    },
+    "2112/score_trace": {
+      "config": {
+        "checkpoint": {
+          "bytes": 2191,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_trace/model.pth",
+          "sha256": "714a79f1dbfdc55c0a7dd2c7c610dbadafc87aa5f3ec445a59ad27e073a46d3f"
+        },
+        "condition": "score_trace",
+        "cost": {
+          "global_persistent_entries": 15,
+          "local_persistent_entries": 225,
+          "peak_allocated_bytes": 513024,
+          "peak_reserved_bytes": 2097152,
+          "total_seconds": 22.728931948993704,
+          "trainable_parameters": 3,
+          "warm_training_seconds": 22.606076451964327,
+          "warmup_seconds": 0.007400413989671506
+        },
+        "episodes": 48000,
+        "final_parameters": {
+          "local.raw_gain": "b9de204706ed8bd42ab4af28846181a6662c9d07d8051486e55b661f46616de7",
+          "raw_eta": "966359afa739e21a0773ae62b3353644d6a47fff9370bba26ee1672da528c5e5",
+          "raw_global_gain": "a2c7b6e8e05fd8a1da6da586377a3ff05c3c68e065b01988a0e0615186c48554"
+        },
+        "initial_parameters": {
+          "local.raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf",
+          "raw_eta": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "raw_global_gain": "0578c65d0a1ad24b6322a8beafb8c64bf69cf76b4d70766be57507836a27a241"
+        },
+        "optimization": {
+          "batch_size": 32,
+          "clipping": "One norm over all trainable scalar parameters of each model.",
+          "gradient_clip": 2,
+          "initial_eta": 0.5,
+          "initial_global_gain": 1,
+          "initial_local_gain": 0.1,
+          "learning_rate": 0.01,
+          "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+          "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+          "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+          "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1,
+          "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+        },
+        "optimizer_steps": {
+          "local.raw_gain": 1500,
+          "raw_eta": 1500,
+          "raw_global_gain": 1500
+        },
+        "physical_parameters": {
+          "eta": 0.9889477491378784,
+          "gamma_G": 7.123929977416992,
+          "gamma_L": 0.22932417690753937
+        },
+        "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "recompile_limit": 64,
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "seed": 2112,
+        "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+        "stream_sha256": "4c83f317e34ef98741b09e4c8e12e4830a02e98eb7273335f3ef44548fdb4e7f"
+      },
+      "files": [
+        {
+          "bytes": 4292,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_trace/config.json",
+          "sha256": "7f2500b9a5b0966748b0d5afb06ee3d633a4a9b1de8db91e9f6001f00da4f9b7"
+        },
+        {
+          "bytes": 2191,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_trace/model.pth",
+          "sha256": "714a79f1dbfdc55c0a7dd2c7c610dbadafc87aa5f3ec445a59ad27e073a46d3f"
+        },
+        {
+          "bytes": 20313,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_trace/run.json",
+          "sha256": "a4352c3c5c89fbd2ba9728fade249fc98d109b6b36ef82ccdce10d023512213b"
+        },
+        {
+          "bytes": 571596,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2112/score_trace/train_log.jsonl",
+          "sha256": "db1916855220cb0f6d8bc502621f7fbe723433a574af36b2456027c408fd52b7"
+        }
+      ]
+    },
+    "2113/score_only": {
+      "config": {
+        "checkpoint": {
+          "bytes": 1877,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_only/model.pth",
+          "sha256": "07c9760c438e7473901913d6051af100572deda34edd93126f4a6207cbba270c"
+        },
+        "condition": "score_only",
+        "cost": {
+          "global_persistent_entries": 15,
+          "local_persistent_entries": 0,
+          "peak_allocated_bytes": 474624,
+          "peak_reserved_bytes": 2097152,
+          "total_seconds": 21.513533158999053,
+          "trainable_parameters": 2,
+          "warm_training_seconds": 21.40387139376253,
+          "warmup_seconds": 0.011029645000235178
+        },
+        "episodes": 48000,
+        "final_parameters": {
+          "raw_eta": "5c7c156f526d02ebd4f076a48ef595fadee493e607104d979788715522998957",
+          "raw_global_gain": "ba5152cf3955f42a085615624f42a2f907ae4a5f6af87864dede025017d3075e"
+        },
+        "initial_parameters": {
+          "raw_eta": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "raw_global_gain": "0578c65d0a1ad24b6322a8beafb8c64bf69cf76b4d70766be57507836a27a241"
+        },
+        "optimization": {
+          "batch_size": 32,
+          "clipping": "One norm over all trainable scalar parameters of each model.",
+          "gradient_clip": 2,
+          "initial_eta": 0.5,
+          "initial_global_gain": 1,
+          "initial_local_gain": 0.1,
+          "learning_rate": 0.01,
+          "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+          "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+          "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+          "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1,
+          "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+        },
+        "optimizer_steps": {
+          "raw_eta": 1500,
+          "raw_global_gain": 1500
+        },
+        "physical_parameters": {
+          "eta": 0.9885913729667664,
+          "gamma_G": 7.197957515716553,
+          "gamma_L": 0.0
+        },
+        "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "recompile_limit": 64,
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "seed": 2113,
+        "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+        "stream_sha256": "4cf43b6ffea76fe377554a267d836f73922ffc58fd93ac6f18c5727ff47f095b"
+      },
+      "files": [
+        {
+          "bytes": 4063,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_only/config.json",
+          "sha256": "a12edc02c726d27acb92cdbe9e731ffe32e0d830f392ffcc28115977ba45e121"
+        },
+        {
+          "bytes": 1877,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_only/model.pth",
+          "sha256": "07c9760c438e7473901913d6051af100572deda34edd93126f4a6207cbba270c"
+        },
+        {
+          "bytes": 20312,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_only/run.json",
+          "sha256": "de072fcfe11aaa1fe8720fcefa9aeaa8d322f7bf03d3c605f64a589d06983b62"
+        },
+        {
+          "bytes": 548212,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_only/train_log.jsonl",
+          "sha256": "5e35d7c02d1364639d2d561eb31f564484c1bd6136b9fb1c9556118ead9f3566"
+        }
+      ]
+    },
+    "2113/score_trace": {
+      "config": {
+        "checkpoint": {
+          "bytes": 2191,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_trace/model.pth",
+          "sha256": "925f420fc1b332a0d24ccf3e7214c854ba28265ef3048424ab86f31bedfb0f8f"
+        },
+        "condition": "score_trace",
+        "cost": {
+          "global_persistent_entries": 15,
+          "local_persistent_entries": 225,
+          "peak_allocated_bytes": 513024,
+          "peak_reserved_bytes": 2097152,
+          "total_seconds": 22.226406182002393,
+          "trainable_parameters": 3,
+          "warm_training_seconds": 22.098145711119287,
+          "warmup_seconds": 0.013180318012018688
+        },
+        "episodes": 48000,
+        "final_parameters": {
+          "local.raw_gain": "e95257e6c93f6f37f6971b8772cd3c11357e7ed91854b74bc5a4cd07922af2aa",
+          "raw_eta": "1b96514084dcab7889ca7b0db8a2e7c09ff6b5dd3eb3b590f5ad1e0497b3217e",
+          "raw_global_gain": "508bc3a6d69cfeb208485eaeb01e1ff4601d24ac2b9c8beb64bd5b4344137f71"
+        },
+        "initial_parameters": {
+          "local.raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf",
+          "raw_eta": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "raw_global_gain": "0578c65d0a1ad24b6322a8beafb8c64bf69cf76b4d70766be57507836a27a241"
+        },
+        "optimization": {
+          "batch_size": 32,
+          "clipping": "One norm over all trainable scalar parameters of each model.",
+          "gradient_clip": 2,
+          "initial_eta": 0.5,
+          "initial_global_gain": 1,
+          "initial_local_gain": 0.1,
+          "learning_rate": 0.01,
+          "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+          "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+          "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+          "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1,
+          "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+        },
+        "optimizer_steps": {
+          "local.raw_gain": 1500,
+          "raw_eta": 1500,
+          "raw_global_gain": 1500
+        },
+        "physical_parameters": {
+          "eta": 0.9887816309928894,
+          "gamma_G": 7.160130500793457,
+          "gamma_L": 0.23005518317222595
+        },
+        "protocol_sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "recompile_limit": 64,
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "seed": 2113,
+        "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+        "stream_sha256": "4cf43b6ffea76fe377554a267d836f73922ffc58fd93ac6f18c5727ff47f095b"
+      },
+      "files": [
+        {
+          "bytes": 4292,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_trace/config.json",
+          "sha256": "977703a71365f1130c061f751e2fc7448d575648615c7a6aba9c5cbdba40013b"
+        },
+        {
+          "bytes": 2191,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_trace/model.pth",
+          "sha256": "925f420fc1b332a0d24ccf3e7214c854ba28265ef3048424ab86f31bedfb0f8f"
+        },
+        {
+          "bytes": 20313,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_trace/run.json",
+          "sha256": "e669f8e47c30eeaa36754749ad44d3f0278e91037f9076c5e855f31671802af7"
+        },
+        {
+          "bytes": 571653,
+          "path": "artifacts/runs/minimal_relational_learner_v1/seed-2113/score_trace/train_log.jsonl",
+          "sha256": "cbc682241ad1cd29a5826fdb63340716aec5a542bd9a6868d4b12476b18e9be6"
+        }
+      ]
+    }
+  },
+  "source_commit": "cdfd0bff2f6f06d8d69ebf0090543aeef0a7d1f0",
+  "source_lock": {
+    "bytes": 30159,
+    "path": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.source_lock.json",
+    "sha256": "ee28e3d49b1f608bd1470d0a38bc86bfa3eb67410f3b47400e99830a7deead14"
+  }
+}

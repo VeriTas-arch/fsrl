@@ -197,11 +197,11 @@ Test simpler task-level learners independently of reconstructing frozen recurren
 trajectories.
 
 - [Minimal metric-error relational learner](minimal_relational_learner/README.md) — `frozen_contract`
-  - **Finding:** The independent score_trace/score_only implementation and non-Liu CUDA
-    output/gradient/update parity checks are locked before scientific training. The
-    fixed three-stream comparison retains inherited evidence, nine behavior rows,
-    independently trained score-only, and an exact history-sensitivity bridge; no
-    scientific evaluation has begun.
+  - **Finding:** All six final score_trace/score_only models are jointly locked before
+    generic or Liu evaluation. Each completed 48,000 episodes and 1,500 updates for
+    every scalar; paired numerical training streams and shared initial parameters match
+    exactly. The independent comparison retains inherited evidence, nine behavior rows,
+    independently trained score-only, and an exact history-sensitivity bridge.
 
 ## One-factor structural transport
 
