@@ -24,11 +24,11 @@
 **Question.** Can fixed four-valued encoding repair the score learner's complete Liu
 behavior, and is persistent code reuse distinguishable from fresh quantization?
 
-**Finding.** The locked non-Liu recovery screen passed its finite-grid criterion: Exact
-9/9, Persistent 9/9 and Resampled 8/9, with all 27 family winners unchanged between 512
-and 1024 nuisance draws. Independent likelihood replay error is zero. Lossless storage
-replay preserves all 961 arrays. All nine mandatory training fits and Liu evaluation
-remain pending; no human mechanism identification or main-model promotion is claimed.
+**Finding.** All nine mandatory final fits (three paired seeds,
+Exact/Persistent/Resampled) are jointly locked after the passed finite-grid non-Liu
+recovery screen. Each fit completed 1500 updates to both shared parameters; paired base
+episodes and encoding-uniform streams match. Saved Liu and generic inputs were locked
+before training. Evaluation has not begun; no main-model promotion is claimed.
 
 **Claim boundary.** Two-bit code content is an imposed resource hypothesis, not human
 capacity or total model memory. The frozen candidate cannot be repaired after
@@ -39,6 +39,36 @@ evaluation; pilot success alone cannot promote the main model.
 - `registered_contract` —
   [studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json](records/benchmarks/quantized_relational_learner_v1.json)
   (`sha256:0b8cfb3084af`)
+- `artifact_lock` —
+  [studies/quantized_relational_learner/records/benchmarks/artifact_lock.json](records/benchmarks/artifact_lock.json)
+  (`sha256:588cc2eb2d05`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2114-exact.json](records/results/training-2114-exact.json)
+  (`sha256:b8ea7575c748`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2114-persistent.json](records/results/training-2114-persistent.json)
+  (`sha256:50dc2b914ea8`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2114-resampled.json](records/results/training-2114-resampled.json)
+  (`sha256:02278139adda`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2115-exact.json](records/results/training-2115-exact.json)
+  (`sha256:2574e8b2e00c`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2115-persistent.json](records/results/training-2115-persistent.json)
+  (`sha256:8dec4ebb71ee`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2115-resampled.json](records/results/training-2115-resampled.json)
+  (`sha256:029357204617`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2116-exact.json](records/results/training-2116-exact.json)
+  (`sha256:50b5e907a8bc`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2116-persistent.json](records/results/training-2116-persistent.json)
+  (`sha256:8f1ba060707a`)
+- `frozen_parameters` —
+  [studies/quantized_relational_learner/records/results/training-2116-resampled.json](records/results/training-2116-resampled.json)
+  (`sha256:196e71fb45d8`)
 - `supporting_artifact` —
   [studies/quantized_relational_learner/records/results/recovery-generation-0.npz](records/results/recovery-generation-0.npz)
   (`sha256:9b98f9908ff7`)

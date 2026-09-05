@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 307,
+  "entry_count": 317,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 184,
+    "json": 194,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 54,
@@ -22,8 +22,8 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 285,
-    "historical_gzip_view": 21,
+    "already_conformant": 286,
+    "historical_gzip_view": 30,
     "historical_pth_view": 1
   },
   "records": [
@@ -6878,6 +6878,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/artifact_lock.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/artifact_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 2625,
+        "sha256": "588cc2eb2d0532898e1fd937a572bf462df1783701972c735f8a2c07344f57ab"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_artifact_lock_json",
+      "registered_identity": {
+        "bytes": 2625,
+        "sha256": "588cc2eb2d0532898e1fd937a572bf462df1783701972c735f8a2c07344f57ab",
+        "source_ref": "sha256:588cc2eb2d0532898e1fd937a572bf462df1783701972c735f8a2c07344f57ab"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.randomization_record",
       "format": {
         "format": "json",
@@ -7487,6 +7521,330 @@
         "source_ref": "sha256:1c79cd0630ef437fb74c569c29361407d67bd96014bb0fe2264b73b8314a0145"
       },
       "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2114-exact.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2114-exact.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286783,
+        "sha256": "b8ea7575c74874b6f0658ab9c3c91a75021d8d329322c57969570ea31d0f86f0"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2114_exact_json",
+      "registered_identity": {
+        "bytes": 1286783,
+        "sha256": "b8ea7575c74874b6f0658ab9c3c91a75021d8d329322c57969570ea31d0f86f0",
+        "source_ref": "sha256:b8ea7575c74874b6f0658ab9c3c91a75021d8d329322c57969570ea31d0f86f0"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2114-persistent.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2114-persistent.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286532,
+        "sha256": "50dc2b914ea85dcb55776da591c4b846cc5095e5f64f3c122bd33d5d293f5422"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2114_persistent_json",
+      "registered_identity": {
+        "bytes": 1286532,
+        "sha256": "50dc2b914ea85dcb55776da591c4b846cc5095e5f64f3c122bd33d5d293f5422",
+        "source_ref": "sha256:50dc2b914ea85dcb55776da591c4b846cc5095e5f64f3c122bd33d5d293f5422"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2114-resampled.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2114-resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286749,
+        "sha256": "02278139adda956e0a631f326393b8f21f36bad9df26d69da3ee32899d67249e"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2114_resampled_json",
+      "registered_identity": {
+        "bytes": 1286749,
+        "sha256": "02278139adda956e0a631f326393b8f21f36bad9df26d69da3ee32899d67249e",
+        "source_ref": "sha256:02278139adda956e0a631f326393b8f21f36bad9df26d69da3ee32899d67249e"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2115-exact.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2115-exact.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286851,
+        "sha256": "2574e8b2e00c29f8b3b73fb88d3e871312dac5ee57a88b1b0188cee496b2addc"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2115_exact_json",
+      "registered_identity": {
+        "bytes": 1286851,
+        "sha256": "2574e8b2e00c29f8b3b73fb88d3e871312dac5ee57a88b1b0188cee496b2addc",
+        "source_ref": "sha256:2574e8b2e00c29f8b3b73fb88d3e871312dac5ee57a88b1b0188cee496b2addc"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2115-persistent.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2115-persistent.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286692,
+        "sha256": "8dec4ebb71ee5f7ae244bd925e211397639b8729e985d8662662ce09dcbfe982"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2115_persistent_json",
+      "registered_identity": {
+        "bytes": 1286692,
+        "sha256": "8dec4ebb71ee5f7ae244bd925e211397639b8729e985d8662662ce09dcbfe982",
+        "source_ref": "sha256:8dec4ebb71ee5f7ae244bd925e211397639b8729e985d8662662ce09dcbfe982"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2115-resampled.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2115-resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286855,
+        "sha256": "0293572046174399c363b5efc7f4e1d15ab3d1e0ccaf48fda8da5f09ac408c69"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2115_resampled_json",
+      "registered_identity": {
+        "bytes": 1286855,
+        "sha256": "0293572046174399c363b5efc7f4e1d15ab3d1e0ccaf48fda8da5f09ac408c69",
+        "source_ref": "sha256:0293572046174399c363b5efc7f4e1d15ab3d1e0ccaf48fda8da5f09ac408c69"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2116-exact.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2116-exact.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286875,
+        "sha256": "50b5e907a8bc0f0b938694901539d2df76025ca5e37558c877ba8a10cea3f78e"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2116_exact_json",
+      "registered_identity": {
+        "bytes": 1286875,
+        "sha256": "50b5e907a8bc0f0b938694901539d2df76025ca5e37558c877ba8a10cea3f78e",
+        "source_ref": "sha256:50b5e907a8bc0f0b938694901539d2df76025ca5e37558c877ba8a10cea3f78e"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2116-persistent.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2116-persistent.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286707,
+        "sha256": "8f1ba060707a76259072829315203bad73b40d651eb7c3cf67e5325cf1df1778"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2116_persistent_json",
+      "registered_identity": {
+        "bytes": 1286707,
+        "sha256": "8f1ba060707a76259072829315203bad73b40d651eb7c3cf67e5325cf1df1778",
+        "source_ref": "sha256:8f1ba060707a76259072829315203bad73b40d651eb7c3cf67e5325cf1df1778"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/results/training-2116-resampled.json",
+        "repository_path": "studies/quantized_relational_learner/records/results/training-2116-resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1286882,
+        "sha256": "196e71fb45d8df89dae815d3710fa6ce7793d662355e9d893420ca671664c240"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_results_training_2116_resampled_json",
+      "registered_identity": {
+        "bytes": 1286882,
+        "sha256": "196e71fb45d8df89dae815d3710fa6ce7793d662355e9d893420ca671664c240",
+        "source_ref": "sha256:196e71fb45d8df89dae815d3710fa6ce7793d662355e9d893420ca671664c240"
+      },
+      "role": "frozen_parameters"
     },
     {
       "availability": "materialized",
@@ -10675,11 +11033,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 305,
+  "registered_record_count": 315,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 7,
+    "artifact_lock": 8,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
@@ -10688,7 +11046,7 @@
     "environment_contract": 2,
     "execution_lock": 34,
     "freeze_validation": 1,
-    "frozen_parameters": 1,
+    "frozen_parameters": 10,
     "frozen_result": 44,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,
