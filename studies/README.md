@@ -226,11 +226,11 @@ trajectories.
     model is promoted; development, fresh replication, simulation stability and
     conditional biological realization are separate requirements.
 - [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `frozen_contract`
-  - **Finding:** The full pipeline and first joint source/input lock are in place. A
-    prospective storage-only repair now splits recovery generation arrays into lossless
-    32-design files; previous inputs and execution witnesses remain immutable.
-    Requalification and a successor source lock precede replay and all mandatory
-    training. No Liu behavioral result or main-model promotion exists.
+  - **Finding:** The storage-only sharding repair passed all 817 numerical checks and
+    has an append-only successor source lock. Original protocols, evaluation inputs and
+    earlier execution witnesses remain unchanged. Recovery replay and all mandatory
+    paired training follow this lock; no Liu behavioral result or main-model promotion
+    exists.
 
 ## One-factor structural transport
 

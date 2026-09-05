@@ -24,11 +24,10 @@
 **Question.** Can fixed four-valued encoding repair the score learner's complete Liu
 behavior, and is persistent code reuse distinguishable from fresh quantization?
 
-**Finding.** The full pipeline and first joint source/input lock are in place. A
-prospective storage-only repair now splits recovery generation arrays into lossless
-32-design files; previous inputs and execution witnesses remain immutable.
-Requalification and a successor source lock precede replay and all mandatory training.
-No Liu behavioral result or main-model promotion exists.
+**Finding.** The storage-only sharding repair passed all 817 numerical checks and has an
+append-only successor source lock. Original protocols, evaluation inputs and earlier
+execution witnesses remain unchanged. Recovery replay and all mandatory paired training
+follow this lock; no Liu behavioral result or main-model promotion exists.
 
 **Claim boundary.** Two-bit code content is an imposed resource hypothesis, not human
 capacity or total model memory. The frozen candidate cannot be repaired after
@@ -39,6 +38,12 @@ evaluation; pilot success alone cannot promote the main model.
 - `registered_contract` —
   [studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json](records/benchmarks/quantized_relational_learner_v1.json)
   (`sha256:0b8cfb3084af`)
+- `readiness_result` —
+  [studies/quantized_relational_learner/records/benchmarks/qualification.storage_v2.json](records/benchmarks/qualification.storage_v2.json)
+  (`sha256:fd0dd23cf1de`)
+- `repair_lock` —
+  [studies/quantized_relational_learner/records/benchmarks/source_lock.storage_v2.json](records/benchmarks/source_lock.storage_v2.json)
+  (`sha256:8227ed4f7d00`)
 - `repair_contract` —
   [studies/quantized_relational_learner/records/benchmarks/storage_repair.json](records/benchmarks/storage_repair.json)
   (`sha256:ea7fb7cd3909`)

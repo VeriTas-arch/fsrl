@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 299,
+  "entry_count": 301,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 180,
+    "json": 182,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 54,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 277,
+    "already_conformant": 279,
     "historical_gzip_view": 21,
     "historical_pth_view": 1
   },
@@ -6946,6 +6946,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.readiness_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/qualification.storage_v2.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/qualification.storage_v2.json"
+      },
+      "materialized_identity": {
+        "bytes": 127349,
+        "sha256": "fd0dd23cf1de2cf3642fb27db873df5b8f60a776fa1437107fc71959e3cd55f8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_qualification_storage_v2_json",
+      "registered_identity": {
+        "bytes": 127349,
+        "sha256": "fd0dd23cf1de2cf3642fb27db873df5b8f60a776fa1437107fc71959e3cd55f8",
+        "source_ref": "sha256:fd0dd23cf1de2cf3642fb27db873df5b8f60a776fa1437107fc71959e3cd55f8"
+      },
+      "role": "readiness_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -7011,6 +7045,40 @@
         "source_ref": "sha256:8d4e475efb668f53baceee30aac6881da310f276ccb4b46c0e0badbb4b636ce3"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.repair_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/quantized_relational_learner/records/benchmarks/source_lock.storage_v2.json",
+        "repository_path": "studies/quantized_relational_learner/records/benchmarks/source_lock.storage_v2.json"
+      },
+      "materialized_identity": {
+        "bytes": 40127,
+        "sha256": "8227ed4f7d00ba6a14720f67a67cdb10d329ac75f0dd0396bea90f8e32851716"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "quantized_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.quantized_relational_learner.studies_quantized_relational_learner_records_benchmarks_source_lock_storage_v2_json",
+      "registered_identity": {
+        "bytes": 40127,
+        "sha256": "8227ed4f7d00ba6a14720f67a67cdb10d329ac75f0dd0396bea90f8e32851716",
+        "source_ref": "sha256:8227ed4f7d00ba6a14720f67a67cdb10d329ac75f0dd0396bea90f8e32851716"
+      },
+      "role": "repair_lock"
     },
     {
       "availability": "materialized",
@@ -10403,7 +10471,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 297,
+  "registered_record_count": 299,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -10423,10 +10491,10 @@
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 2,
-    "readiness_result": 3,
+    "readiness_result": 4,
     "registered_contract": 60,
     "repair_contract": 5,
-    "repair_lock": 8,
+    "repair_lock": 9,
     "report": 53,
     "source_context": 2,
     "superseded_repair_source": 1,
