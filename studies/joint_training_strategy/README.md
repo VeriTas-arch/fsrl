@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `joint_training_strategy`
 
@@ -24,11 +24,14 @@
 **Question.** Can a shared query objective preserve global assembly, direct fidelity,
 and Liu behavior without staged optimization?
 
-**Finding.** All six final training artifacts for paired seeds 2108/2109/2110 are
-jointly locked before generic validation or Liu evaluation. Every run completed 48,000
-episode exposures; matched initialization and full training-stream fingerprints agree
-within each pair, actual Adam counters match the registered schedules, and each staged
-backbone is unchanged during local adaptation. Scientific evaluation is pending.
+**Finding.** All six matched staged/joint models are competent; all three joint networks
+preserve nine qualitative behavior rows and improve nonlearned correct probability.
+Registered outcome: competent_but_not_noninferior, because seed 2108 omitted NI has
+lower bound -0.0270 versus -0.02. Both schedules fail the retained local-benefit
+materiality gate in every seed, despite positive effects; the other four causal links
+and omitted rescue pass. Joint preserves all six named quantitative behavior rows in
+2108/2110, not 2109, and is slower at equal episode exposure. The complete comparison is
+frozen with no automatic tuning or seed expansion.
 
 **Claim boundary.** This new candidate tests a fixed training recipe under imposed P/L
 structural priors. It does not replace frozen v2.4 evidence, establish minimal
@@ -45,6 +48,33 @@ architecture or human neural learning, or identify an order-only effect at equal
 - `artifact_lock` —
   [studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.artifact_lock.json](records/benchmarks/joint_training_strategy_v1.artifact_lock.json)
   (`sha256:b423816701e7`)
+- `report` —
+  [studies/joint_training_strategy/records/reports/joint_training_strategy_v1.interpretation.md](records/reports/joint_training_strategy_v1.interpretation.md)
+  (`sha256:436788e7d32c`)
+- `report` —
+  [studies/joint_training_strategy/records/reports/joint_training_strategy_v1.md](records/reports/joint_training_strategy_v1.md)
+  (`sha256:cfa9d4b8713d`)
+- `frozen_result` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.json](records/results/joint_training_strategy_v1.json)
+  (`sha256:08a6509f246a`)
+- `supporting_artifact` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.joint.npz](records/results/joint_training_strategy_v1.seed-2108.joint.npz)
+  (`sha256:b44e8819eced`)
+- `supporting_artifact` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.matched_staged.npz](records/results/joint_training_strategy_v1.seed-2108.matched_staged.npz)
+  (`sha256:09fc65753edd`)
+- `supporting_artifact` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.joint.npz](records/results/joint_training_strategy_v1.seed-2109.joint.npz)
+  (`sha256:de4842a5a6da`)
+- `supporting_artifact` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.matched_staged.npz](records/results/joint_training_strategy_v1.seed-2109.matched_staged.npz)
+  (`sha256:0cfafcbf1c43`)
+- `supporting_artifact` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.joint.npz](records/results/joint_training_strategy_v1.seed-2110.joint.npz)
+  (`sha256:c9f0f4c12357`)
+- `supporting_artifact` —
+  [studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.matched_staged.npz](records/results/joint_training_strategy_v1.seed-2110.matched_staged.npz)
+  (`sha256:7691cf7cfa2c`)
 
 ## Provenance rule
 

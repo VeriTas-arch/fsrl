@@ -7,23 +7,23 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 216,
+  "entry_count": 225,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 156,
+    "json": 157,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 46,
-    "numpy_npz": 2,
+    "markdown": 48,
+    "numpy_npz": 8,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 196,
-    "historical_gzip_view": 19,
+    "already_conformant": 204,
+    "historical_gzip_view": 20,
     "historical_pth_view": 1
   },
   "records": [
@@ -4526,6 +4526,314 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/reports/joint_training_strategy_v1.interpretation.md",
+        "repository_path": "studies/joint_training_strategy/records/reports/joint_training_strategy_v1.interpretation.md"
+      },
+      "materialized_identity": {
+        "bytes": 6078,
+        "sha256": "436788e7d32c4523a240bee346b3ee02b6dc4d1385a91897462bc246a026f34b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_reports_joint_training_strategy_v1_interpretation_md",
+      "registered_identity": {
+        "bytes": 6078,
+        "sha256": "436788e7d32c4523a240bee346b3ee02b6dc4d1385a91897462bc246a026f34b",
+        "source_ref": "sha256:436788e7d32c4523a240bee346b3ee02b6dc4d1385a91897462bc246a026f34b"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/reports/joint_training_strategy_v1.md",
+        "repository_path": "studies/joint_training_strategy/records/reports/joint_training_strategy_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 15600,
+        "sha256": "cfa9d4b8713dfc5140e9713f1eebc9addfd48670e3f50d8a756114f42e9ed5ae"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_reports_joint_training_strategy_v1_md",
+      "registered_identity": {
+        "bytes": 15600,
+        "sha256": "cfa9d4b8713dfc5140e9713f1eebc9addfd48670e3f50d8a756114f42e9ed5ae",
+        "source_ref": "sha256:cfa9d4b8713dfc5140e9713f1eebc9addfd48670e3f50d8a756114f42e9ed5ae"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 1998586,
+        "sha256": "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_json",
+      "registered_identity": {
+        "bytes": 1998586,
+        "sha256": "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c",
+        "source_ref": "sha256:08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.joint.npz",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.joint.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1282274,
+        "sha256": "b44e8819eced9daaf97c7e455a8e35b8e8e0bfc700e8b2dda2a0138068c08b8a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_seed_2108_joint_npz",
+      "registered_identity": {
+        "bytes": 1282274,
+        "sha256": "b44e8819eced9daaf97c7e455a8e35b8e8e0bfc700e8b2dda2a0138068c08b8a",
+        "source_ref": "sha256:b44e8819eced9daaf97c7e455a8e35b8e8e0bfc700e8b2dda2a0138068c08b8a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.matched_staged.npz",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.matched_staged.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1283374,
+        "sha256": "09fc65753edd48f7dc71c6c5503923d8df560745376e019d141278d78d012636"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_seed_2108_matched_staged_npz",
+      "registered_identity": {
+        "bytes": 1283374,
+        "sha256": "09fc65753edd48f7dc71c6c5503923d8df560745376e019d141278d78d012636",
+        "source_ref": "sha256:09fc65753edd48f7dc71c6c5503923d8df560745376e019d141278d78d012636"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.joint.npz",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.joint.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1283432,
+        "sha256": "de4842a5a6da5f681e95fbb6919ec78969c3a4394b005b15592bcc7544553475"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_seed_2109_joint_npz",
+      "registered_identity": {
+        "bytes": 1283432,
+        "sha256": "de4842a5a6da5f681e95fbb6919ec78969c3a4394b005b15592bcc7544553475",
+        "source_ref": "sha256:de4842a5a6da5f681e95fbb6919ec78969c3a4394b005b15592bcc7544553475"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.matched_staged.npz",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.matched_staged.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1283949,
+        "sha256": "0cfafcbf1c438adb1d09d187ad76c70feb4efdb39059b2c73ff2a2d34d5a35ed"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_seed_2109_matched_staged_npz",
+      "registered_identity": {
+        "bytes": 1283949,
+        "sha256": "0cfafcbf1c438adb1d09d187ad76c70feb4efdb39059b2c73ff2a2d34d5a35ed",
+        "source_ref": "sha256:0cfafcbf1c438adb1d09d187ad76c70feb4efdb39059b2c73ff2a2d34d5a35ed"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.joint.npz",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.joint.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1282972,
+        "sha256": "c9f0f4c12357c73e560ec1a13f8cd53cb1907db59e543ca1469ff6fac491df9d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_seed_2110_joint_npz",
+      "registered_identity": {
+        "bytes": 1282972,
+        "sha256": "c9f0f4c12357c73e560ec1a13f8cd53cb1907db59e543ca1469ff6fac491df9d",
+        "source_ref": "sha256:c9f0f4c12357c73e560ec1a13f8cd53cb1907db59e543ca1469ff6fac491df9d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.matched_staged.npz",
+        "repository_path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.matched_staged.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1283686,
+        "sha256": "7691cf7cfa2c5b433c921a7f3ac8b497da31123e9c222a61e015ed9df5657d27"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_results_joint_training_strategy_v1_seed_2110_matched_staged_npz",
+      "registered_identity": {
+        "bytes": 1283686,
+        "sha256": "7691cf7cfa2c5b433c921a7f3ac8b497da31123e9c222a61e015ed9df5657d27",
+        "source_ref": "sha256:7691cf7cfa2c5b433c921a7f3ac8b497da31123e9c222a61e015ed9df5657d27"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -7577,7 +7885,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 214,
+  "registered_record_count": 223,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -7591,7 +7899,7 @@
     "execution_lock": 30,
     "freeze_validation": 1,
     "frozen_parameters": 1,
-    "frozen_result": 39,
+    "frozen_result": 40,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,
     "presentation_asset": 6,
@@ -7601,10 +7909,10 @@
     "registered_contract": 55,
     "repair_contract": 4,
     "repair_lock": 8,
-    "report": 45,
+    "report": 47,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2,
+    "supporting_artifact": 8,
     "validation_result": 1
   },
   "schema_version": 2,

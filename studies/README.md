@@ -180,13 +180,16 @@ fail to close the dynamics.
   - **Finding:** The local L_T state has an exact edge-ledger-plus-Gram reduction a_T,
     while the global output is geometrically near-additive but its tested learning
     states do not close.
-- [Matched single-stage versus staged training](joint_training_strategy/README.md) — `frozen_contract`
-  - **Finding:** All six final training artifacts for paired seeds 2108/2109/2110 are
-    jointly locked before generic validation or Liu evaluation. Every run completed
-    48,000 episode exposures; matched initialization and full training-stream
-    fingerprints agree within each pair, actual Adam counters match the registered
-    schedules, and each staged backbone is unchanged during local adaptation. Scientific
-    evaluation is pending.
+- [Matched single-stage versus staged training](joint_training_strategy/README.md) — `mixed`
+  - **Finding:** All six matched staged/joint models are competent; all three joint
+    networks preserve nine qualitative behavior rows and improve nonlearned correct
+    probability. Registered outcome: competent_but_not_noninferior, because seed 2108
+    omitted NI has lower bound -0.0270 versus -0.02. Both schedules fail the retained
+    local-benefit materiality gate in every seed, despite positive effects; the other
+    four causal links and omitted rescue pass. Joint preserves all six named
+    quantitative behavior rows in 2108/2110, not 2109, and is slower at equal episode
+    exposure. The complete comparison is frozen with no automatic tuning or seed
+    expansion.
 
 ## One-factor structural transport
 

@@ -3,10 +3,10 @@ id = "joint_training_strategy"
 title = "Matched single-stage versus staged training"
 chapter = "algorithmic_compression"
 order = 1000
-status = "frozen_contract"
+status = "mixed"
 review_state = "indexed"
 question = "Can a shared query objective preserve global assembly, direct fidelity, and Liu behavior without staged optimization?"
-finding = "All six final training artifacts for paired seeds 2108/2109/2110 are jointly locked before generic validation or Liu evaluation. Every run completed 48,000 episode exposures; matched initialization and full training-stream fingerprints agree within each pair, actual Adam counters match the registered schedules, and each staged backbone is unchanged during local adaptation. Scientific evaluation is pending."
+finding = "All six matched staged/joint models are competent; all three joint networks preserve nine qualitative behavior rows and improve nonlearned correct probability. Registered outcome: competent_but_not_noninferior, because seed 2108 omitted NI has lower bound -0.0270 versus -0.02. Both schedules fail the retained local-benefit materiality gate in every seed, despite positive effects; the other four causal links and omitted rescue pass. Joint preserves all six named quantitative behavior rows in 2108/2110, not 2109, and is slower at equal episode exposure. The complete comparison is frozen with no automatic tuning or seed expansion."
 boundary = "This new candidate tests a fixed training recipe under imposed P/L structural priors. It does not replace frozen v2.4 evidence, establish minimal architecture or human neural learning, or identify an order-only effect at equal FLOPs."
 
 [[records]]
@@ -35,3 +35,85 @@ role = "artifact_lock"
 sha256 = "b423816701e74c8b0f31efca59db92b2b4afdbc66a03b7d741d6b301a4d4cd06"
 bytes = 62590
 source_ref = "sha256:b423816701e74c8b0f31efca59db92b2b4afdbc66a03b7d741d6b301a4d4cd06"
+
+
+[[records]]
+path = "records/reports/joint_training_strategy_v1.interpretation.md"
+legacy_path = "studies/joint_training_strategy/records/reports/joint_training_strategy_v1.interpretation.md"
+origin = "native"
+role = "report"
+sha256 = "436788e7d32c4523a240bee346b3ee02b6dc4d1385a91897462bc246a026f34b"
+bytes = 6078
+source_ref = "sha256:436788e7d32c4523a240bee346b3ee02b6dc4d1385a91897462bc246a026f34b"
+
+[[records]]
+path = "records/reports/joint_training_strategy_v1.md"
+legacy_path = "studies/joint_training_strategy/records/reports/joint_training_strategy_v1.md"
+origin = "native"
+role = "report"
+sha256 = "cfa9d4b8713dfc5140e9713f1eebc9addfd48670e3f50d8a756114f42e9ed5ae"
+bytes = 15600
+source_ref = "sha256:cfa9d4b8713dfc5140e9713f1eebc9addfd48670e3f50d8a756114f42e9ed5ae"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.json"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+bytes = 1998586
+source_ref = "sha256:08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.seed-2108.joint.npz"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.joint.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b44e8819eced9daaf97c7e455a8e35b8e8e0bfc700e8b2dda2a0138068c08b8a"
+bytes = 1282274
+source_ref = "sha256:b44e8819eced9daaf97c7e455a8e35b8e8e0bfc700e8b2dda2a0138068c08b8a"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.seed-2108.matched_staged.npz"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2108.matched_staged.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "09fc65753edd48f7dc71c6c5503923d8df560745376e019d141278d78d012636"
+bytes = 1283374
+source_ref = "sha256:09fc65753edd48f7dc71c6c5503923d8df560745376e019d141278d78d012636"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.seed-2109.joint.npz"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.joint.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "de4842a5a6da5f681e95fbb6919ec78969c3a4394b005b15592bcc7544553475"
+bytes = 1283432
+source_ref = "sha256:de4842a5a6da5f681e95fbb6919ec78969c3a4394b005b15592bcc7544553475"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.seed-2109.matched_staged.npz"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2109.matched_staged.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0cfafcbf1c438adb1d09d187ad76c70feb4efdb39059b2c73ff2a2d34d5a35ed"
+bytes = 1283949
+source_ref = "sha256:0cfafcbf1c438adb1d09d187ad76c70feb4efdb39059b2c73ff2a2d34d5a35ed"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.seed-2110.joint.npz"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.joint.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c9f0f4c12357c73e560ec1a13f8cd53cb1907db59e543ca1469ff6fac491df9d"
+bytes = 1282972
+source_ref = "sha256:c9f0f4c12357c73e560ec1a13f8cd53cb1907db59e543ca1469ff6fac491df9d"
+
+[[records]]
+path = "records/results/joint_training_strategy_v1.seed-2110.matched_staged.npz"
+legacy_path = "studies/joint_training_strategy/records/results/joint_training_strategy_v1.seed-2110.matched_staged.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7691cf7cfa2c5b433c921a7f3ac8b497da31123e9c222a61e015ed9df5657d27"
+bytes = 1283686
+source_ref = "sha256:7691cf7cfa2c5b433c921a7f3ac8b497da31123e9c222a61e015ed9df5657d27"
