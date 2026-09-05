@@ -12,7 +12,7 @@ from fsrl.paths import REPO_ROOT, STUDIES_ROOT
 RECORDS = STUDIES_ROOT / "score_circuit/records"
 PROTOCOL = RECORDS / "benchmarks/score_circuit_v1.json"
 PROTOCOL_HASH = "c01cf52ee9a4720ee2d2b9067014bcee832e01bd9771f8f5f4285aa310b22e1b"
-PROTOCOL_COMMIT = "db71450"
+PROTOCOL_COMMIT = "db7145093501ba2051b11e0628182cd19525de72"
 LOCK = RECORDS / "benchmarks/score_circuit_v1.execution_lock.json"
 QUALIFICATION = RECORDS / "benchmarks/score_circuit_v1.qualification.json"
 

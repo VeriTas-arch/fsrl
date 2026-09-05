@@ -8,11 +8,21 @@ import numpy as np
 
 from fsrl.experiments.score_circuit.analysis import endpoint_vectors, summarize
 from fsrl.experiments.score_circuit.decisions import behavior_preservation, decide_fit
+from fsrl.experiments.score_circuit.evidence import (
+    input_records,
+    parameters,
+    specification,
+)
 from fsrl.experiments.score_circuit.verification import check_estimate, manual_endpoints
 from fsrl.tasks.protocol import RankingProtocol
 
 
 class AnalysisTests(unittest.TestCase):
+    def test_frozen_input_witnesses_without_evaluation(self):
+        self.assertEqual(specification()["seeds"], [2111, 2112, 2113])
+        self.assertTrue(input_records())
+        self.assertEqual(set(parameters()), {"2111", "2112", "2113"})
+
     def test_independent_scoring_with_undefined_groups(self):
         protocol = RankingProtocol(
             "synthetic", ("a", "b", "c"), (2, 0, 1), ((2, 0),), 1, 1, {}
