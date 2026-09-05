@@ -339,3 +339,44 @@ argv = ["direnv", "exec", ".", "python", "-m", "fsrl.workflows", "check", "workf
 id = "figure_check"
 resource = "cpu"
 argv = ["direnv", "exec", ".", "python", "-m", "fsrl.workflows.paper_figures", "check"]
+
+[[stages]]
+id = "single_stage_admission"
+title = "Single-stage model-neutral admission"
+question = "Can a single-stage compact learner meet the complete Liu behavior target with a defensible biological implementation boundary?"
+method = "Keep the current working mechanism frozen while testing a prospectively fixed four-valued teaching codec against matched exact and independently resampled codes on three new training streams."
+finding = "The two-scalar score learner establishes task-level qualitative sufficiency but retains six quantitative mismatches. New admission and codec contracts are frozen; the codec and independent reference have unit tests, but the new scientific matrix has not run."
+boundary = "This is an open candidate program, not main-model promotion. A four-valued code is an imposed budget, not human memory capacity; pilot success still requires unchanged fresh replication, simulation stability and selected-parameter biological verification."
+depends_on = ["task_contract"]
+implementation = ["fsrl/experiments/minimal_learner/model.py", "fsrl/experiments/quantized_learner/protocol.py", "fsrl/experiments/quantized_learner/encoding.py", "fsrl/experiments/quantized_learner/reference.py"]
+tests = ["tests/experiments/quantized_learner/test_encoding.py", "tests/experiments/quantized_learner/test_model.py"]
+studies = ["minimal_relational_learner", "score_circuit", "main_model_admission", "quantized_relational_learner"]
+
+[[stages.evidence]]
+study = "minimal_relational_learner"
+record = "records/reports/minimal_relational_learner_v1.interpretation.md"
+use = "constrains"
+description = "Three paired streams establish nine qualitative phenomena with a score-only learner, but only three of nine frozen quantitative classifiers match. This is independent task-level sufficiency, not reconstruction of an old RNN trajectory."
+
+[[stages.evidence]]
+study = "score_circuit"
+record = "records/reports/score_circuit_v1.interpretation.md"
+use = "supports"
+description = "A bounded finite-time opponent circuit conditionally realizes the old frozen score updates; it does not validate a new encoder, new parameters or complete human behavior."
+
+[[stages.evidence]]
+study = "main_model_admission"
+record = "records/benchmarks/main_model_admission_v1.json"
+use = "defines"
+description = "Model-neutral single-stage, information, full behavioral, fresh-replication, simulation-stability and biological-boundary admission."
+
+[[stages.evidence]]
+study = "quantized_relational_learner"
+record = "records/benchmarks/quantized_relational_learner_v1.json"
+use = "defines"
+description = "The complete three-codec/three-stream pilot, fixed recovery screen, code-memory semantics, source/artifact locks and stop rules, before any new scientific execution."
+
+[[stages.verification]]
+id = "quantized_codec_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.quantized_learner.test_encoding", "tests.experiments.quantized_learner.test_model"]

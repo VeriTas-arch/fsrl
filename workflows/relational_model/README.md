@@ -68,6 +68,14 @@ studies, or supersede frozen study contracts.
    - **Current result.** The repository exposes one current claim graph, a complete
      evidence ledger, historical snapshots, and paper-aligned behavioral figures.
 
+8. [Single-stage model-neutral admission](#single-stage-admission)
+   - **Question.** Can a single-stage compact learner meet the complete Liu behavior
+     target with a defensible biological implementation boundary?
+   - **Current result.** The two-scalar score learner establishes task-level qualitative
+     sufficiency but retains six quantitative mismatches. New admission and codec
+     contracts are frozen; the codec and independent reference have unit tests, but the
+     new scientific matrix has not run.
+
 ## 1. Task and evidence contract
 
 <a id="task-contract"></a>
@@ -524,6 +532,67 @@ direnv exec . python -m fsrl.workflows check \
 
 ```bash
 direnv exec . python -m fsrl.workflows.paper_figures check
+```
+
+## 8. Single-stage model-neutral admission
+
+<a id="single-stage-admission"></a>
+
+**Question.** Can a single-stage compact learner meet the complete Liu behavior target
+with a defensible biological implementation boundary?
+
+**Method.** Keep the current working mechanism frozen while testing a prospectively
+fixed four-valued teaching codec against matched exact and independently resampled codes
+on three new training streams.
+
+**Result.** The two-scalar score learner establishes task-level qualitative sufficiency
+but retains six quantitative mismatches. New admission and codec contracts are frozen;
+the codec and independent reference have unit tests, but the new scientific matrix has
+not run.
+
+**Boundary.** This is an open candidate program, not main-model promotion. A four-valued
+code is an imposed budget, not human memory capacity; pilot success still requires
+unchanged fresh replication, simulation stability and selected-parameter biological
+verification.
+
+Implementation:
+
+- [`fsrl/experiments/minimal_learner/model.py`](../../fsrl/experiments/minimal_learner/model.py)
+- [`fsrl/experiments/quantized_learner/protocol.py`](../../fsrl/experiments/quantized_learner/protocol.py)
+- [`fsrl/experiments/quantized_learner/encoding.py`](../../fsrl/experiments/quantized_learner/encoding.py)
+- [`fsrl/experiments/quantized_learner/reference.py`](../../fsrl/experiments/quantized_learner/reference.py)
+
+Tests:
+
+- [`tests/experiments/quantized_learner/test_encoding.py`](../../tests/experiments/quantized_learner/test_encoding.py)
+- [`tests/experiments/quantized_learner/test_model.py`](../../tests/experiments/quantized_learner/test_model.py)
+
+Exact evidence:
+
+- `constrains` — [minimal_relational_learner:records/reports/minimal_relational_learner_v1.interpretation.md](../../studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.interpretation.md)
+  - **Meaning:** Three paired streams establish nine qualitative phenomena with a
+    score-only learner, but only three of nine frozen quantitative classifiers match.
+    This is independent task-level sufficiency, not reconstruction of an old RNN
+    trajectory.
+- `supports` — [score_circuit:records/reports/score_circuit_v1.interpretation.md](../../studies/score_circuit/records/reports/score_circuit_v1.interpretation.md)
+  - **Meaning:** A bounded finite-time opponent circuit conditionally realizes the old
+    frozen score updates; it does not validate a new encoder, new parameters or complete
+    human behavior.
+- `defines` — [main_model_admission:records/benchmarks/main_model_admission_v1.json](../../studies/main_model_admission/records/benchmarks/main_model_admission_v1.json)
+  - **Meaning:** Model-neutral single-stage, information, full behavioral,
+    fresh-replication, simulation-stability and biological-boundary admission.
+- `defines` — [quantized_relational_learner:records/benchmarks/quantized_relational_learner_v1.json](../../studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json)
+  - **Meaning:** The complete three-codec/three-stream pilot, fixed recovery screen,
+    code-memory semantics, source/artifact locks and stop rules, before any new
+    scientific execution.
+
+Verification:
+
+**`quantized_codec_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m unittest tests.experiments.quantized_learner.test_encoding \
+  tests.experiments.quantized_learner.test_model
 ```
 
 

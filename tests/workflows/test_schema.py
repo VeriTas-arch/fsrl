@@ -45,7 +45,10 @@ class WorkflowSchemaTests(unittest.TestCase):
 
     def test_figure_id_must_exist_in_its_specification(self):
         workflow = copy.deepcopy(load_workflow(WORKFLOW))
-        workflow["stages"][-1]["figures"][0]["figure"] = "figure_missing"
+        reporting = next(
+            stage for stage in workflow["stages"] if stage["id"] == "reporting"
+        )
+        reporting["figures"][0]["figure"] = "figure_missing"
         with self.assertRaisesRegex(ValueError, "figure is absent"):
             validate_workflow(workflow)
 

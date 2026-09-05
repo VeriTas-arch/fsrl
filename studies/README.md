@@ -227,8 +227,10 @@ trajectories.
     conditional biological realization are separate requirements.
 - [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `frozen_contract`
   - **Finding:** Prospectively registered exact/persistent/resampled comparison on three
-    paired new training streams, with a non-Liu recovery screen and independent
-    code/parameter estimands. No new training or evaluation result exists.
+    paired new training streams. Cue-addressed encoding and an independent float64
+    recurrence/exact-mixture reference are implemented with unit-tested code and
+    information invariants. CUDA qualification, recovery, source/artifact locks,
+    training and scientific evaluation remain pending; no new behavior result exists.
 
 ## One-factor structural transport
 
