@@ -7,14 +7,14 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 443,
+  "entry_count": 444,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
     "json": 228,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 58,
+    "markdown": 59,
     "numpy_npz": 145,
     "pdf": 2,
     "svg": 4,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 411,
+    "already_conformant": 412,
     "historical_gzip_view": 31,
     "historical_pth_view": 1
   },
@@ -10887,6 +10887,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.verification_note.md",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.verification_note.md"
+      },
+      "materialized_identity": {
+        "bytes": 2257,
+        "sha256": "71c736234c6989abac002c7e2028736ff69dd2a74aa980512e562a882d968e5d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_reports_resampled_cohort_diagnostic_v1_verification_note_md",
+      "registered_identity": {
+        "bytes": 2257,
+        "sha256": "71c736234c6989abac002c7e2028736ff69dd2a74aa980512e562a882d968e5d",
+        "source_ref": "sha256:71c736234c6989abac002c7e2028736ff69dd2a74aa980512e562a882d968e5d"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.supporting_artifact",
       "format": {
         "format": "json",
@@ -15319,7 +15353,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 441,
+  "registered_record_count": 442,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -15343,7 +15377,7 @@
     "registered_contract": 61,
     "repair_contract": 5,
     "repair_lock": 9,
-    "report": 57,
+    "report": 58,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 178,

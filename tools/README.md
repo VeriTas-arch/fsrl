@@ -43,6 +43,18 @@ A physical evidence move requires a new append-only migration map and exact
 source-commit, byte, hash, and active-locator verification. Never rewrite an
 older migration to make the current layout appear direct.
 
+## Frozen cohort publication
+
+The frozen Resampled cohort publication has a read-only reconstruction audit:
+
+```bash
+direnv exec . python -m tools.provenance.verify_resampled_cohort_v1
+```
+
+It checks all saved numerical outputs and reconstructs the original pre-JSON
+report order. See the [verification note](../studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.verification_note.md)
+for the original verifier's serialization-order failure and preserved boundary.
+
 ## Refactor equivalence
 
 The current closing audit is version 3:

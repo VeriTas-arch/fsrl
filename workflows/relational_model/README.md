@@ -681,6 +681,10 @@ Exact evidence:
 - `constrains` — [resampled_cohort_diagnostic:records/reports/resampled_cohort_diagnostic_v1.interpretation.md](../../studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.interpretation.md)
   - **Meaning:** Preserved positive endpoints, original-estimand confidence intervals,
     descriptive joint rates, compositional ranking boundaries and the stop rule.
+- `constrains` — [resampled_cohort_diagnostic:records/reports/resampled_cohort_diagnostic_v1.verification_note.md](../../studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.verification_note.md)
+  - **Meaning:** The original portable verifier passed numerical reconstruction but
+    failed its report-order comparison; the separate read-only audit reproduces
+    pre-serialization order without changing frozen sources or records.
 
 Verification:
 
@@ -688,6 +692,12 @@ Verification:
 
 ```bash
 direnv exec . python -m unittest tests.experiments.cohort_diagnostic.test_diagnostic
+```
+
+**`cohort_publication_audit`** (`cpu`):
+
+```bash
+direnv exec . python -m tools.provenance.verify_resampled_cohort_v1
 ```
 
 

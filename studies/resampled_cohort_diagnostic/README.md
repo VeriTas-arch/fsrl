@@ -236,6 +236,9 @@ unchanged.
 - `frozen_result` —
   [studies/resampled_cohort_diagnostic/records/results/resampled_cohort_diagnostic_v1.json](records/results/resampled_cohort_diagnostic_v1.json)
   (`sha256:9cc7ff054de2`)
+- `report` —
+  [studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.verification_note.md](records/reports/resampled_cohort_diagnostic_v1.verification_note.md)
+  (`sha256:71c736234c69`)
 
 ## Provenance rule
 

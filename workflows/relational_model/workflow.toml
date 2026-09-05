@@ -441,3 +441,14 @@ description = "Preserved positive endpoints, original-estimand confidence interv
 id = "cohort_diagnostic_tests"
 resource = "cpu"
 argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.cohort_diagnostic.test_diagnostic"]
+
+[[stages.evidence]]
+study = "resampled_cohort_diagnostic"
+record = "records/reports/resampled_cohort_diagnostic_v1.verification_note.md"
+use = "constrains"
+description = "The original portable verifier passed numerical reconstruction but failed its report-order comparison; the separate read-only audit reproduces pre-serialization order without changing frozen sources or records."
+
+[[stages.verification]]
+id = "cohort_publication_audit"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "tools.provenance.verify_resampled_cohort_v1"]
