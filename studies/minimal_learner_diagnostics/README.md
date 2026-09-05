@@ -25,8 +25,8 @@
 local cross-address expression organize the exposed minimal learner's quantitative
 differences?
 
-**Finding.** Prospective diagnostic contract only; all three saved training streams are
-mandatory. No new scientific results yet.
+**Finding.** Prospective protocol and tested implementation/input lock are complete; all
+three saved training streams remain mandatory. No new scientific results yet.
 
 **Claim boundary.** Read-only model-level diagnosis of exposed frozen fits, not human
 confirmation, calibration, retraining or main-model promotion. Offline reference cells
@@ -37,6 +37,9 @@ are not candidate models.
 - `registered_contract` —
   [studies/minimal_learner_diagnostics/records/benchmarks/minimal_learner_diagnostics_v1.json](records/benchmarks/minimal_learner_diagnostics_v1.json)
   (`sha256:08aac3c95b5d`)
+- `execution_lock` —
+  [studies/minimal_learner_diagnostics/records/benchmarks/minimal_learner_diagnostics_v1.execution_lock.json](records/benchmarks/minimal_learner_diagnostics_v1.execution_lock.json)
+  (`sha256:b7ebba077f3c`)
 
 ## Provenance rule
 

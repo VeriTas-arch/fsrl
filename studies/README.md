@@ -205,8 +205,8 @@ trajectories.
     probability; it is useful but not required for this registered qualitative
     sufficiency. The fixed comparison is complete and frozen.
 - [Frozen minimal learner: quantitative-source diagnosis](minimal_learner_diagnostics/README.md) — `frozen_contract`
-  - **Finding:** Prospective diagnostic contract only; all three saved training streams
-    are mandatory. No new scientific results yet.
+  - **Finding:** Prospective protocol and tested implementation/input lock are complete;
+    all three saved training streams remain mandatory. No new scientific results yet.
 
 ## One-factor structural transport
 
