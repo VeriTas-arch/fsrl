@@ -19,6 +19,7 @@ ACTIVE_ENVIRONMENT_VARIABLE = "FSRL_FORMAL_RUNTIME_ACTIVE"
 WORKFLOW_MODULES = {
     "confirmation": "fsrl.experiments.confirmation.behavioral",
     "mechanism": "fsrl.experiments.confirmation.mechanism",
+    "joint-training-strategy": "fsrl.experiments.training_strategy.__main__",
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",

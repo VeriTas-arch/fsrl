@@ -78,7 +78,7 @@ class EpisodeBatch:
         )
 
 
-def _input_arrays(
+def input_arrays(
     codes: np.ndarray,
     pairs: np.ndarray,
     evidence: np.ndarray,
@@ -157,14 +157,14 @@ def prepare_batch(
         ],
         dtype=np.int64,
     ).reshape(-1)
-    support = _input_arrays(
+    support = input_arrays(
         codes,
         values["support_pairs"],
         signed * retained,
         np.arange(n_support) / max(1, n_support - 1) * support_query_time,
         4,
     )
-    query = _input_arrays(
+    query = input_arrays(
         codes,
         query_pairs,
         np.zeros((n_queries, batch_size)),
