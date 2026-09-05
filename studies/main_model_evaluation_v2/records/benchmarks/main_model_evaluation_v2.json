@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "main_model_evaluation_v2",
+  "status": "prospective_claim_relative_evaluation_contract",
+  "authorization": "The user explicitly authorized an additional, more appropriate evaluation system while retaining every existing metric, followed by read-only analysis of how the next single-stage main-model candidate should improve.",
+  "parent_commit": "055ab2d7e1c5303c67bb2c73af063b3d6f6832ac",
+  "question": "How should core Liu-mechanism adequacy be distinguished from strict full quantitative fidelity, and what do the frozen Resampled outputs imply for the next minimal single-stage learner?",
+  "scope": "Register a claim-relative evaluation layer, retrospectively audit only the already exposed frozen Resampled fits, and freeze a successor decision route. No training, calibration, parameter selection, candidate promotion, new human data or revision of any historical result is authorized.",
+  "authorities": {
+    "legacy_behavior_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+    "legacy_main_model_contract": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json",
+    "legacy_pilot_result": "studies/quantized_relational_learner/records/results/quantized_relational_learner_v1.json",
+    "cohort_contract": "studies/resampled_cohort_diagnostic/records/benchmarks/resampled_cohort_diagnostic_v1.json",
+    "cohort_result": "studies/resampled_cohort_diagnostic/records/results/resampled_cohort_diagnostic_v1.json",
+    "human_composition": {"correct": 8, "self_consistent_incorrect": 64, "self_inconsistent": 5, "denominator": 77}
+  },
+  "evaluation_principle": {
+    "claim_relative": "A metric is a hard gate only for a claim that requires it. Reproducing the central constructive phenomena, matching every registered summary statistic, biological plausibility and identification of the human mechanism are distinct claims.",
+    "retain_not_replace": "The original nine estimators, qualitative flags, human bootstrap intervals, quantitative flags, denominators, exclusions, query sampling and joint 9/9 result remain byte- and meaning-preserved. This contract adds labels and summaries; it never reclassifies a frozen historical outcome.",
+    "interval_boundary": "Point-estimate membership in a human bootstrap confidence interval is retained as the historical quantitative criterion. It is not renamed distributional equality, equivalence or posterior predictive fit: the interval represents uncertainty of a human summary estimator, not an acceptance region for the complete human data-generating distribution.",
+    "compositional_boundary": "Correct, self-consistent incorrect and self-inconsistent ranking fractions sum to one and are evaluated jointly as a composition in the added profile. Their three legacy row flags remain reported separately for exact parity."
+  },
+  "labels": {
+    "full_quantitative_fidelity": {
+      "definition": "The unchanged main_model_admission_v1 requirement: every mandatory fit passes generic competence and all nine legacy qualitative and all nine legacy quantitative flags, followed by its unchanged fresh replication, simulation-stability, functional and biological-boundary requirements.",
+      "role": "Strongest behavioral calibration label. Failure remains scientifically informative but does not by itself negate a separately demonstrated core mechanism.",
+      "historical_immutability": "All existing partial_behavioral_reproduction and failed admission outcomes remain unchanged."
+    },
+    "core_mechanism_adequacy": {
+      "definition": "A working-model behavioral gate for the central Liu phenomena under a comparable task-difficulty regime. It is weaker than full_quantitative_fidelity and cannot establish human-process identity.",
+      "difficulty_guardrails": "For each fit, the 95% whole-cohort simulation uncertainty interval for mean learned accuracy and mean nonlearned accuracy must lie entirely inside their unchanged human reference intervals. These two guardrails prevent a trivially easy or hard regime but are not equivalence tests.",
+      "qualitative_phenomena": {
+        "competence": ["learned_accuracy above chance", "nonlearned_accuracy above chance"],
+        "canonical_directions": ["positive symbolic-distance effect", "serial-position endpoint advantage"],
+        "constructive_core": ["bimodal local-pair accuracy with the registered exclusions", "high stable within-subject error prevalence", "self-consistent incorrect rankings exceed self-inconsistent rankings", "all eligible Hodge reconstructions are valid permutations and correct rankers remain a minority", "inter-subject ranking diversity remains below the registered similarity ceiling"]
+      },
+      "joint_rule": "Apply the unchanged nine qualitative classifiers to every independent 77-subject cohort. Within every mandatory fit, require the Wilson 95% lower confidence bound of the simultaneous all-nine qualitative pass probability to exceed 0.90 across 400 prospectively fixed cohorts.",
+      "threshold_provenance": "The 0.90 stability floor is frozen now for unseen successor candidates. Because the current Resampled cohorts were already exposed before registration, their application is explicitly retrospective and cannot confirm this threshold.",
+      "undefined": "Any undefined legacy endpoint fails the corresponding cohort and is reported; it is never silently excluded."
+    },
+    "quantitative_profile": {
+      "legacy": "Report every unchanged continuous point estimate, reference interval, qualitative flag, quantitative flag, per-row pass rate and joint 9/9 rate whether or not either label passes.",
+      "ranking_composition": "For each cohort use p=(correct,self_consistent_incorrect,self_inconsistent) and frozen human h=(8,64,5)/77. Report total variation D_rank=0.5*sum(abs(p-h)); do not reinterpret it as a likelihood or absolute equivalence test.",
+      "future_paired_improvement": "For an authorized successor, compare D_rank against its prospectively paired fixed-eta baseline on identical cohorts. Improvement requires the whole-cohort bootstrap 95% upper bound of mean(D_rank_candidate-D_rank_baseline) to be below zero. This relative gate adds no fitted absolute tolerance.",
+      "other_mismatch": "Report signed deviations and uncertainty for distance, serial-position, morphology and ranking rows. No post-result weighted aggregate or selected subset is allowed."
+    },
+    "core_working_model_eligible": {
+      "definition": "An unseen frozen recipe may become eligible only after core_mechanism_adequacy, unchanged fresh training-stream replication, the registered functional/information-boundary controls, state accounting, and selected-parameter biological-boundary verification all pass.",
+      "not_sufficient": "Retrospective success, development success, full quantitative fidelity alone, or an existing circuit analogy alone cannot promote a model."
+    }
+  },
+  "read_only_resampled_audit": {
+    "status": "retrospective_localization_only",
+    "inputs": "Use all three fixed Resampled fits and all 400 already registered independent cohorts per fit. Reconstruct only from registered allow_pickle=False input/output shards, locked fit parameters and frozen choice seeds. Do not generate a new cohort, choice draw, fit or calibration.",
+    "separation": "The frozen parent pilot outcome remains partial_behavioral_reproduction. The audit may assign retrospective_core_behavior_supported but never core_working_model_eligible.",
+    "internal_order": {
+      "item_scores": "For each subject compute the eight deterministic terminal item scores from the registered terminal score vector and registered item codes.",
+      "strict_correct": "All 28 unordered correct-signed score differences must be strictly positive. A tie is incorrect.",
+      "inversions": "Count nonpositive correct-signed differences over those 28 pairs and report the fixed bins 0, 1, 2-3 and 4+.",
+      "boundary": "This deterministic internal classification has no observed human counterpart and is never compared to a human latent-state target."
+    },
+    "sampled_order": "Reconstruct the unchanged sampled query policy with the registered choice seed and existing classifier, yielding correct, self-consistent incorrect or self-inconsistent for each subject.",
+    "transition_estimands": {
+      "matrix": "Per cohort and fit, report the 2-by-3 joint fractions from internal strict correct/incorrect to sampled correct/self-consistent incorrect/self-inconsistent.",
+      "marginals": ["internal strict-correct fraction", "sampled correct fraction", "internal inversion-bin fractions"],
+      "flows": ["loss flow: internal correct to sampled noncorrect", "rescue flow: internal incorrect to sampled correct", "net sampling shift: sampled correct fraction minus internal strict-correct fraction"],
+      "ranking_profile": "Report D_rank and the three sampled composition fractions."
+    },
+    "uncertainty": "For each fit independently, use 10000 bootstrap resamples of all 400 whole cohorts and a frozen audit bootstrap seed equal to 3200000 plus fit seed. Reuse the same multinomial count matrix for every audit estimand within a fit. No participant or fit pooling.",
+    "decision_reading": {
+      "sampling_loss": "If the 95% interval for net sampling shift is entirely below zero, the fixed behavior generator measurably masks deterministic strict correctness; plasticity changes alone cannot be claimed to explain that loss.",
+      "sampling_rescue": "If the interval is entirely above zero, stochastic choice measurably rescues more strict internal errors than it destroys; behavior-level fit cannot be read as deterministic-order fit.",
+      "unresolved": "If the interval includes zero, no net direction is assigned. Transition cells and inversion bins remain descriptive localization.",
+      "no_dominance_claim": "No arbitrary magnitude threshold declares either the update rule or behavior generator the unique bottleneck. The audit constrains the successor but does not select a winner from human behavior after exposure."
+    }
+  },
+  "successor_hypothesis": {
+    "name": "relation_specific_experience_dependent_plasticity",
+    "scientific_question": "Can a relation-addressed decline in online plasticity reduce late-code domination and improve deterministic relational organization while preserving the core Liu phenomena in one training stage?",
+    "preserve": "Keep the four-valued Resampled codebook, stable subject admission, 15-dimensional score state, ordinary support/query information, normalized metric-error update, fixed query form and single-stage generic objective. Do not tune Liu behavior, temperature or a post-hoc readout.",
+    "sole_algorithmic_delta": "Replace fixed eta by eta_sr,t=eta0/(1+n_sr,t*eta0), where n_sr,t counts prior admitted presentations of the addressed relation and increments only after the current admitted update. eta0 and the global choice gain remain the only fitted slow scalars.",
+    "equivalent_state_form": "The dynamic efficacy can be maintained locally as a_sr(0)=eta0 and a_sr(next)=a_sr/(1+a_sr), making the extra persistent relation-addressed plasticity state explicit rather than hiding it in an optimizer schedule.",
+    "known_consequence": "For repeated identical evidence this rule changes both finite-sample shrinkage of the mean estimate and propagation of encoding variance. Any benefit must therefore be decomposed into mean-field and variance effects; it cannot be called noise stabilization by inspection.",
+    "confound_control": "The inherited generic and Liu schedules present every relation once per block, so relation count is confounded with global block time. Before a biological relation-specific claim, use a prospectively fixed nonbalanced generic schedule with matched total presentations to distinguish relation-addressed efficacy from a global time schedule.",
+    "future_development": "Only after separate execution authorization, compare fresh fixed-eta and experience-dependent fits from scratch on one to three paired development seeds, identical base episodes and independent declared RNG streams. Do not initialize from or repair exposed fits.",
+    "development_success": ["preserve all core qualitative phenomena and learned/nonlearned difficulty guardrails", "reduce paired D_rank relative to the fixed-eta baseline", "improve internal strict-correct/inversion organization rather than relying only on sampled-choice rescue", "reduce registered late-presentation sensitivity under both balanced and nonbalanced schedule diagnostics", "retain generic competence, evidence binding, no query write and a complete state ledger"],
+    "legacy_reporting": "Always report the full unchanged 9/9 quantitative label. It is not required for core working-model eligibility, but achieving it remains stronger evidence and may never be hidden.",
+    "promotion_sequence": "A development success must be frozen unchanged before fresh replication, 400-cohort stability evaluation and a finite-time circuit check covering the selected eta0/input envelope. Existing score-circuit results do not automatically validate the new efficacy state.",
+    "stop": "If the fixed successor fails its internal-organization and core-behavior gates, close this decay-rule candidate without shopping decay curves, temperatures or codebooks. The next hypothesis should address joint encoding-error structure or individual precision, not lower the evaluation target."
+  },
+  "execution": {
+    "sequence": "Commit and push this contract; implement and qualify a narrow read-only evaluator; lock exact source and every registered input/output identity in a clean pushed commit; commit and push that lock; then evaluate, independently verify and publish the retrospective result. Stop before training.",
+    "runtime": "Bounded single-process CPU analysis is sufficient; no model rollout, GPU training or worker pool. Use deterministic float64 reconstruction and allow_pickle=False.",
+    "verification": "Fail closed on any missing shard, hash mismatch, fit/cohort mismatch, duplicate cohort, nonfinite value, query-grid mismatch, probability-composition mismatch or disagreement with the published frozen cohort summaries.",
+    "claim_boundary": "The result can distinguish a strict calibration label from a core working-model gate and localize internal-to-sampled behavior in exposed simulations. It cannot validate the 0.90 threshold, identify a human latent state, authorize training or establish a biological or human mechanism."
+  }
+}

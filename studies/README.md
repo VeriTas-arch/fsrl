@@ -241,6 +241,11 @@ trajectories.
     inside their references. All-nine qualitative cohort pass rates are 97.25%; joint
     quantitative/qualitative rates are 2.00%, 2.00% and 2.75%, reported descriptively
     without a new cutoff. No parent-outcome revision or main-model promotion.
+- [Claim-relative single-stage main-model evaluation](main_model_evaluation_v2/README.md) — `frozen_contract`
+  - **Finding:** A prospective claim-relative evaluation contract is registered. It
+    preserves the complete legacy 9/9 metric while adding a core-mechanism label, a
+    joint ranking-composition profile and a read-only internal-to-sampled localization.
+    No new result or model promotion is registered yet.
 
 ## One-factor structural transport
 

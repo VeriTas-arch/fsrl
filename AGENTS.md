@@ -154,6 +154,17 @@ new diagnostic axes, parameter repair or biological-realization run is
 authorized by its completed execution gates. A successor needs a separately
 authorized prospective question.
 
+The user has opened `main_model_evaluation_v2`: a claim-relative evaluation
+layer that retains the complete legacy 9/9 quantitative profile while adding a
+prospective core-mechanism label and a read-only internal-to-sampled audit of
+the already frozen Resampled cohorts. Its authority is
+[`studies/main_model_evaluation_v2/`](studies/main_model_evaluation_v2/).
+Freeze and source-lock the evaluator before the retrospective audit. Applying
+the new stability threshold to exposed cohorts is descriptive, not confirmation.
+This authorization does not permit training, calibration, candidate repair or
+main-model promotion. A future experience-dependent plasticity comparison needs
+separate execution authorization and fresh paired development fits.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,
