@@ -24,11 +24,11 @@
 **Question.** Can a shared query objective preserve global assembly, direct fidelity,
 and Liu behavior without staged optimization?
 
-**Finding.** Protocol and complete implementation are prospectively locked after CPU
-contract tests and non-Liu CUDA output, gradient, optimizer-update, and query-readout
-parity checks. The three paired seeds, equal-episode-budget comparator, fixed dual
-evidence admission, and separate competence, noninferiority, behavior, and cost
-decisions are unchanged. Final training artifacts and scientific evaluation are pending.
+**Finding.** All six final training artifacts for paired seeds 2108/2109/2110 are
+jointly locked before generic validation or Liu evaluation. Every run completed 48,000
+episode exposures; matched initialization and full training-stream fingerprints agree
+within each pair, actual Adam counters match the registered schedules, and each staged
+backbone is unchanged during local adaptation. Scientific evaluation is pending.
 
 **Claim boundary.** This new candidate tests a fixed training recipe under imposed P/L
 structural priors. It does not replace frozen v2.4 evidence, establish minimal
@@ -42,6 +42,9 @@ architecture or human neural learning, or identify an order-only effect at equal
 - `execution_lock` —
   [studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.execution_lock.json](records/benchmarks/joint_training_strategy_v1.execution_lock.json)
   (`sha256:c2baf711692c`)
+- `artifact_lock` —
+  [studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.artifact_lock.json](records/benchmarks/joint_training_strategy_v1.artifact_lock.json)
+  (`sha256:b423816701e7`)
 
 ## Provenance rule
 

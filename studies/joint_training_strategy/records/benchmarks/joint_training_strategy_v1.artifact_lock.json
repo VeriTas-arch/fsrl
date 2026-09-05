@@ -1,0 +1,1669 @@
+{
+  "creation_commit": "bd24dd7a21bfc1b380089cd15da0cf7aed0039bc",
+  "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+  "runs": {
+    "2108/joint": {
+      "files": [
+        {
+          "bytes": 6874,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/joint/config.json",
+          "sha256": "df0d53c03d6c306b012ff9e30b1f4833c4a275d744ac1f860f92759ea0b270af"
+        },
+        {
+          "bytes": 1641,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/joint/local.pth",
+          "sha256": "018b003f369c7a9584f003e6d34de22cb401e58f2be33ad47e9a7983e587a632"
+        },
+        {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/joint/net.pth",
+          "sha256": "2ac00192572323cf38735fbfbd522da3f992c5dde3b00c698f46dc5819819d6e"
+        },
+        {
+          "bytes": 5911,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/joint/run.json",
+          "sha256": "a55db7b2916598bfa842b173f8c276ec2fed40ec2c35db8baa74e9de3fd8525a"
+        },
+        {
+          "bytes": 580742,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/joint/train_log.jsonl",
+          "sha256": "b529253fc57c7fbc7229bd87c17b6bdcdc03205b8cac8514593471bd0aab1919"
+        }
+      ],
+      "metadata": {
+        "backbone_updates": 1500,
+        "checkpoint": {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/joint/net.pth",
+          "sha256": "2ac00192572323cf38735fbfbd522da3f992c5dde3b00c698f46dc5819819d6e"
+        },
+        "condition": "joint",
+        "cost": {
+          "backbone_parameters": 88607,
+          "local_parameters": 1,
+          "peak_allocated_bytes": 2336935424,
+          "peak_reserved_bytes": 2503999488,
+          "persistent_L_scalars_per_episode": 225,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 59.55207906498981,
+          "warm_training_seconds": 59.157410520114354,
+          "warmup_seconds": 0.03722686400578823
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "DAmult": "08b523323067aee91de8544dce07dd06a07d1a597f70d0cad610d7e747d5c831",
+          "alpha": "9993e2f2f8acdad2c6e30ea757f40235e1b73afba301caf0a906a2fac04a3b53",
+          "etaet": "cfcf2effda00342e9def583eda13769d50ec486b8498bf21b4c553f16853c70b",
+          "h2DA.bias": "abacdaf2fdfd55235b02a3ab0e0c91c0f286f75811b1d400372cca685a86c05c",
+          "h2DA.weight": "da3e69ce5cb79eb566dbbb30eb8825a13769ad93d313d4fea909161150a9d9a3",
+          "h2o.bias": "5bcbab5e2431b428f55110c59d54c2910f686c7ee2ee26fe715d1f22fa6aefd4",
+          "h2o.weight": "e30f1ea580369ae5b7377056726086c5fc88dbbf2552e240517bc8930cf7b276",
+          "h2v.bias": "b86fae35b86e4f4e9261f73ef283a9b314af7e9a4c8d242042d25ebec34579d1",
+          "h2v.weight": "fa117027eb0d6127693562cdcff2fef48bc7ecc614fe8d3ffd32434056def0df",
+          "i2h.bias": "cb86fb81407dcbf49f6d0640fd5513a5e983c205a7975c7eeb3299ecd1cc8834",
+          "i2h.weight": "f194fe92046ddb116689fdb74b82d4ddd4bdf1f1b5820e837330af6ea573a230",
+          "w": "6de1e1ca2c31a5bfab07112c8fa5b0dce8e1227541eccd3a1e1c2455b9cac340"
+        },
+        "final_local": {
+          "raw_gain": "c179adb5c365ecb50be7135f0a8bf6dac7ee3ff1c5ca919c45bd41bb14dbccc2"
+        },
+        "initial_backbone": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "3a75ff4e09c7d5a54910583913544eb535b54534b97c6ef6aa26229bcbb009d6",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "51148e993ccbca6a1920d221e752b972774a2cacca2983290e4798521c4631f8",
+          "h2DA.weight": "b5935994adec6aad61eee8fe71e80e0f878740b323932986cd5f6827b2049b15",
+          "h2o.bias": "208d3bbdac842a91a6f8882319289c4b6965ef173d8dcee1527af36dab3a2094",
+          "h2o.weight": "5518ac742c08ef94d0b190423c37cd9e7b6d60dcaf4706326927c1e39b8836db",
+          "h2v.bias": "b86fae35b86e4f4e9261f73ef283a9b314af7e9a4c8d242042d25ebec34579d1",
+          "h2v.weight": "fa117027eb0d6127693562cdcff2fef48bc7ecc614fe8d3ffd32434056def0df",
+          "i2h.bias": "1d4a8ecd6a78cdf7a6d8adb5db5eb2b856e320d3fab0f03ac1b67b02011537b2",
+          "i2h.weight": "b0644990944a4a2273eef7ff99ad8402b956b004ec7cdceb30ad14609f14cca3",
+          "w": "e4ab06f74d55c1173651b0c87a0fd50d71012405416a838dab5f069d5a445270"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.2891618013381958,
+        "local_updates": 1500,
+        "model": {
+          "batch_size": 32,
+          "hidden_size": 200,
+          "input_size": 37,
+          "output_size": 2
+        },
+        "optimizer_parameter_steps": {
+          "backbone.DAmult": 1500,
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2DA.bias": 1500,
+          "backbone.h2DA.weight": 1500,
+          "backbone.h2o.bias": 1500,
+          "backbone.h2o.weight": 1500,
+          "backbone.h2v.bias": 1500,
+          "backbone.h2v.weight": 1500,
+          "backbone.i2h.bias": 1500,
+          "backbone.i2h.weight": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "phases": {
+          "joint": {
+            "episode_exposures": 48000,
+            "peak_allocated_bytes": 2336935424,
+            "peak_reserved_bytes": 2503999488,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 1500,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 59.19463738412014,
+            "trainable_backbone_parameters": 88607,
+            "trainable_local_parameters": 1,
+            "training_seconds": 59.157410520114354,
+            "warmup_seconds": 0.03722686400578823
+          }
+        },
+        "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "raw_gain": -1.092706561088562,
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2108,
+        "stage_boundary_backbone": null,
+        "stream_fingerprint": "7493480036c84f3a163198b2166da03abed420a3b6a35a0b8a5e35adf315df85",
+        "task_distribution": {
+          "held_out_rank_graph_signatures": [
+            [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                7
+              ]
+            ]
+          ],
+          "liu_graph_held_out": true,
+          "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded"
+        },
+        "training": {
+          "batch_size": 32,
+          "cue_size": 15,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "hidden_size": 200,
+          "learning_rate": 0.0001,
+          "max_edges": 10,
+          "min_edges": 7,
+          "outer_steps": 1500,
+          "save_every": 1500,
+          "seed": 2108,
+          "subject_encoding_mode": "stable_omission",
+          "support_blocks": 4,
+          "support_query_time": 0.6666666666666666
+        }
+      }
+    },
+    "2108/matched_staged": {
+      "files": [
+        {
+          "bytes": 8434,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/matched_staged/config.json",
+          "sha256": "5cf30f04e8f6d7394c6f3dd4c25c7635d6e6aa392e5587deb87a797036143256"
+        },
+        {
+          "bytes": 1641,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/matched_staged/local.pth",
+          "sha256": "09c276d7c165895dfa1fb7ecf960a810fcaa7a477518e39b0ef4363752df37bd"
+        },
+        {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/matched_staged/net.pth",
+          "sha256": "06846f852262adc672246ae91d0a1428f4162796176bf9c53fe76095c847bde4"
+        },
+        {
+          "bytes": 5929,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/matched_staged/run.json",
+          "sha256": "c86222521b444ad2895c301daba68c7b811b0fef55d7165d7bb0f00caee03986"
+        },
+        {
+          "bytes": 582554,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/matched_staged/train_log.jsonl",
+          "sha256": "d92eee9f2f9a4967cf1ffb125a24f40614082c0cfde96ec4a66414d2dcc8d654"
+        }
+      ],
+      "metadata": {
+        "backbone_updates": 1000,
+        "checkpoint": {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2108/matched_staged/net.pth",
+          "sha256": "06846f852262adc672246ae91d0a1428f4162796176bf9c53fe76095c847bde4"
+        },
+        "condition": "matched_staged",
+        "cost": {
+          "backbone_parameters": 88607,
+          "local_parameters": 1,
+          "peak_allocated_bytes": 2335624192,
+          "peak_reserved_bytes": 2434793472,
+          "persistent_L_scalars_per_episode": 225,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 63.62825173100282,
+          "warm_training_seconds": 49.21402737191238,
+          "warmup_seconds": 14.0875941740087
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "DAmult": "177be0034432f395a770e9dc6f1407bc250a2d771448b0fbd33602722c78268f",
+          "alpha": "6807d666745fea6192a3cf95e7ee2ae8b9d01253785722866fb4ac489872d898",
+          "etaet": "33de5b3be4e98dff7c24ee4963673d935b4c41e273a5c7c8964dbb6663cc25c8",
+          "h2DA.bias": "4a34b4590fd97003d4a663a70d83074a64cbc1eff64801bb628e9a9725adc884",
+          "h2DA.weight": "b5987eb9ef8ea0d845396c85732c4c2c4ff8959a3107b1488a7cd6d509859140",
+          "h2o.bias": "56fb8189d613c26ae243fcad2517a116fa96f4e282c689fb59104af7b3ff16a3",
+          "h2o.weight": "6844ef8a9275f01d53d36a92ff26db197047040953263e9f61527ee9c59d241e",
+          "h2v.bias": "b86fae35b86e4f4e9261f73ef283a9b314af7e9a4c8d242042d25ebec34579d1",
+          "h2v.weight": "fa117027eb0d6127693562cdcff2fef48bc7ecc614fe8d3ffd32434056def0df",
+          "i2h.bias": "c17df3707ac79348ddee76b79964d0ae120a6e4df5f6f8a07ee7c1f83ff3350c",
+          "i2h.weight": "297f6f51f0f574cbb474282f66c8a647b5652e5b0a2f481309ba032097da81f0",
+          "w": "9fedbafa7dc3ed2c153822e9cceb688c3d25c9d55971475f91ec64668e8c7ecd"
+        },
+        "final_local": {
+          "raw_gain": "9473300836522eecdab904bfa101ef8232f163ef275e45c6063c39d4eccc5d5d"
+        },
+        "initial_backbone": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "3a75ff4e09c7d5a54910583913544eb535b54534b97c6ef6aa26229bcbb009d6",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "51148e993ccbca6a1920d221e752b972774a2cacca2983290e4798521c4631f8",
+          "h2DA.weight": "b5935994adec6aad61eee8fe71e80e0f878740b323932986cd5f6827b2049b15",
+          "h2o.bias": "208d3bbdac842a91a6f8882319289c4b6965ef173d8dcee1527af36dab3a2094",
+          "h2o.weight": "5518ac742c08ef94d0b190423c37cd9e7b6d60dcaf4706326927c1e39b8836db",
+          "h2v.bias": "b86fae35b86e4f4e9261f73ef283a9b314af7e9a4c8d242042d25ebec34579d1",
+          "h2v.weight": "fa117027eb0d6127693562cdcff2fef48bc7ecc614fe8d3ffd32434056def0df",
+          "i2h.bias": "1d4a8ecd6a78cdf7a6d8adb5db5eb2b856e320d3fab0f03ac1b67b02011537b2",
+          "i2h.weight": "b0644990944a4a2273eef7ff99ad8402b956b004ec7cdceb30ad14609f14cca3",
+          "w": "e4ab06f74d55c1173651b0c87a0fd50d71012405416a838dab5f069d5a445270"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.2923326790332794,
+        "local_updates": 500,
+        "model": {
+          "batch_size": 32,
+          "hidden_size": 200,
+          "input_size": 37,
+          "output_size": 2
+        },
+        "optimizer_parameter_steps": {
+          "backbone.DAmult": 1000,
+          "backbone.alpha": 1000,
+          "backbone.etaet": 1000,
+          "backbone.h2DA.bias": 1000,
+          "backbone.h2DA.weight": 1000,
+          "backbone.h2o.bias": 1000,
+          "backbone.h2o.weight": 1000,
+          "backbone.h2v.bias": 1000,
+          "backbone.h2v.weight": 1000,
+          "backbone.i2h.bias": 1000,
+          "backbone.i2h.weight": 1000,
+          "backbone.w": 1000,
+          "local.raw_gain": 500
+        },
+        "phases": {
+          "global": {
+            "episode_exposures": 32000,
+            "peak_allocated_bytes": 2335624192,
+            "peak_reserved_bytes": 2434793472,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 1000,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 49.906523091049166,
+            "trainable_backbone_parameters": 88607,
+            "trainable_local_parameters": 0,
+            "training_seconds": 39.15285741003754,
+            "warmup_seconds": 10.753665681011626
+          },
+          "local": {
+            "episode_exposures": 16000,
+            "peak_allocated_bytes": 666565632,
+            "peak_reserved_bytes": 2434793472,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 500,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 13.395098454871913,
+            "trainable_backbone_parameters": 0,
+            "trainable_local_parameters": 1,
+            "training_seconds": 10.061169961874839,
+            "warmup_seconds": 3.3339284929970745
+          }
+        },
+        "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "raw_gain": -1.0801382064819336,
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2108,
+        "stage_boundary_backbone": {
+          "DAmult": "177be0034432f395a770e9dc6f1407bc250a2d771448b0fbd33602722c78268f",
+          "alpha": "6807d666745fea6192a3cf95e7ee2ae8b9d01253785722866fb4ac489872d898",
+          "etaet": "33de5b3be4e98dff7c24ee4963673d935b4c41e273a5c7c8964dbb6663cc25c8",
+          "h2DA.bias": "4a34b4590fd97003d4a663a70d83074a64cbc1eff64801bb628e9a9725adc884",
+          "h2DA.weight": "b5987eb9ef8ea0d845396c85732c4c2c4ff8959a3107b1488a7cd6d509859140",
+          "h2o.bias": "56fb8189d613c26ae243fcad2517a116fa96f4e282c689fb59104af7b3ff16a3",
+          "h2o.weight": "6844ef8a9275f01d53d36a92ff26db197047040953263e9f61527ee9c59d241e",
+          "h2v.bias": "b86fae35b86e4f4e9261f73ef283a9b314af7e9a4c8d242042d25ebec34579d1",
+          "h2v.weight": "fa117027eb0d6127693562cdcff2fef48bc7ecc614fe8d3ffd32434056def0df",
+          "i2h.bias": "c17df3707ac79348ddee76b79964d0ae120a6e4df5f6f8a07ee7c1f83ff3350c",
+          "i2h.weight": "297f6f51f0f574cbb474282f66c8a647b5652e5b0a2f481309ba032097da81f0",
+          "w": "9fedbafa7dc3ed2c153822e9cceb688c3d25c9d55971475f91ec64668e8c7ecd"
+        },
+        "stream_fingerprint": "7493480036c84f3a163198b2166da03abed420a3b6a35a0b8a5e35adf315df85",
+        "task_distribution": {
+          "held_out_rank_graph_signatures": [
+            [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                7
+              ]
+            ]
+          ],
+          "liu_graph_held_out": true,
+          "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded"
+        },
+        "training": {
+          "batch_size": 32,
+          "cue_size": 15,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "hidden_size": 200,
+          "learning_rate": 0.0001,
+          "max_edges": 10,
+          "min_edges": 7,
+          "outer_steps": 1500,
+          "save_every": 1500,
+          "seed": 2108,
+          "subject_encoding_mode": "stable_omission",
+          "support_blocks": 4,
+          "support_query_time": 0.6666666666666666
+        }
+      }
+    },
+    "2109/joint": {
+      "files": [
+        {
+          "bytes": 6876,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/joint/config.json",
+          "sha256": "6d7ac64922a6018042e6f4c39b498133af21d6ee71b4b39036563bd58a5fa33d"
+        },
+        {
+          "bytes": 1641,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/joint/local.pth",
+          "sha256": "edad85f0475c15efefb844d0c0e2a5014d3ac463f642afed6ae8dc036d0aa1ee"
+        },
+        {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/joint/net.pth",
+          "sha256": "0f9ee9551a32751eba13f0fcd2dd24fcd151ea0f8af8e52495517e576167b236"
+        },
+        {
+          "bytes": 5911,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/joint/run.json",
+          "sha256": "45ebf2cf162350939861ba63b049fbbdc4ca5ef3a32d5c7591fb5d519b2514f5"
+        },
+        {
+          "bytes": 580642,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/joint/train_log.jsonl",
+          "sha256": "79d65641229d5269c7af642cb651d0cacf6b4aaa849bfd0a3c800118f254e1eb"
+        }
+      ],
+      "metadata": {
+        "backbone_updates": 1500,
+        "checkpoint": {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/joint/net.pth",
+          "sha256": "0f9ee9551a32751eba13f0fcd2dd24fcd151ea0f8af8e52495517e576167b236"
+        },
+        "condition": "joint",
+        "cost": {
+          "backbone_parameters": 88607,
+          "local_parameters": 1,
+          "peak_allocated_bytes": 2339827200,
+          "peak_reserved_bytes": 2506096640,
+          "persistent_L_scalars_per_episode": 225,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 59.41394223899988,
+          "warm_training_seconds": 59.01861629556515,
+          "warmup_seconds": 0.040885606009396724
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "DAmult": "9085301f9c172a00d9ce75812893382d9392872b8bc3ed77393b907a9e376748",
+          "alpha": "4ecead73196e7582bb25db34e48b7e6e5826f5ac20f679fa1056272e0a026d6a",
+          "etaet": "85e78d15d154a5099bbb7dbf54d1c7f73584c32b276e4875c9e36ac770268adf",
+          "h2DA.bias": "d894be0daffdd6868543675ef899c67c5637e708f90810c76c62bef198d98e8c",
+          "h2DA.weight": "1a72facc728d898b68c8e1b3cfd5f50f3cee6ffe33004fba112a272a74409e98",
+          "h2o.bias": "6270d8ab1bfdcca84a4ec5e50df48156f6af60f929fc181f106af5c5d2cf6653",
+          "h2o.weight": "81f5d3be0a3715f375e3f8474e078a6bf631674ae4ac1982cd7ce56d978c56ca",
+          "h2v.bias": "31ac14161cca6ab23396263aa03dc76ee047cffaa5a258a3373547f4399b1c74",
+          "h2v.weight": "b52438fc07e3c5ae668e1c991480f3f57b6c63e7ed402ff85feb0d7729a4e9c1",
+          "i2h.bias": "74a0256d0c54a1ea7fa40ec0ba225510d2203e61a907f116af2364111c8758dd",
+          "i2h.weight": "593543956cba1c3878bf230fe532ac4c2f40cb5ad485c54d48cdf59062dd319c",
+          "w": "a64928f522440897206c3a93b537a1d9fb0df2a6d7357efd2a5e5dcd355f324e"
+        },
+        "final_local": {
+          "raw_gain": "96ff4e742d24e3f3dd4c658baa696353a4cff0624527276f02212cb46720b91c"
+        },
+        "initial_backbone": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "6af9ffca7b16b049dc478c9e4e227e397784350c6596afbeb624d2b990556556",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "9a08dbdb7fd5e1f0805d9c598739e1016e8359043d43f3c2be3d6d03053dbd81",
+          "h2DA.weight": "9e79b85eead08688b0f1afc909c5d865ac333b11cd0539345c67051403a9f5c5",
+          "h2o.bias": "a3712992d9724329aa0118e85785fa70d9441bc856ef1f6fa09af22389a6e156",
+          "h2o.weight": "2949ea48b889c2e43d66fcd40a4e70d5bba5c2767d0f1ce636f8f9c9b7d2d89d",
+          "h2v.bias": "31ac14161cca6ab23396263aa03dc76ee047cffaa5a258a3373547f4399b1c74",
+          "h2v.weight": "b52438fc07e3c5ae668e1c991480f3f57b6c63e7ed402ff85feb0d7729a4e9c1",
+          "i2h.bias": "08f3566a0260fe1030468016baa0f6c66354f572d96d2814cf109c3ed69de54f",
+          "i2h.weight": "de97b1b322a98fdce0fed3ea0d1d8e1a59b7b45abd2f14426926869ff501515f",
+          "w": "2bb0a374ce9afb1faebf57e9a7d53bc79ae51758a269a2352a3f4f7a4c2e0dde"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.28652942180633545,
+        "local_updates": 1500,
+        "model": {
+          "batch_size": 32,
+          "hidden_size": 200,
+          "input_size": 37,
+          "output_size": 2
+        },
+        "optimizer_parameter_steps": {
+          "backbone.DAmult": 1500,
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2DA.bias": 1500,
+          "backbone.h2DA.weight": 1500,
+          "backbone.h2o.bias": 1500,
+          "backbone.h2o.weight": 1500,
+          "backbone.h2v.bias": 1500,
+          "backbone.h2v.weight": 1500,
+          "backbone.i2h.bias": 1500,
+          "backbone.i2h.weight": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "phases": {
+          "joint": {
+            "episode_exposures": 48000,
+            "peak_allocated_bytes": 2339827200,
+            "peak_reserved_bytes": 2506096640,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 1500,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 59.05950190157455,
+            "trainable_backbone_parameters": 88607,
+            "trainable_local_parameters": 1,
+            "training_seconds": 59.01861629556515,
+            "warmup_seconds": 0.040885606009396724
+          }
+        },
+        "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "raw_gain": -1.1032308340072632,
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2109,
+        "stage_boundary_backbone": null,
+        "stream_fingerprint": "e167bd82833491ce70468ec69740cf5344238a8852ca5363243e2d6388cda6da",
+        "task_distribution": {
+          "held_out_rank_graph_signatures": [
+            [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                7
+              ]
+            ]
+          ],
+          "liu_graph_held_out": true,
+          "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded"
+        },
+        "training": {
+          "batch_size": 32,
+          "cue_size": 15,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "hidden_size": 200,
+          "learning_rate": 0.0001,
+          "max_edges": 10,
+          "min_edges": 7,
+          "outer_steps": 1500,
+          "save_every": 1500,
+          "seed": 2109,
+          "subject_encoding_mode": "stable_omission",
+          "support_blocks": 4,
+          "support_query_time": 0.6666666666666666
+        }
+      }
+    },
+    "2109/matched_staged": {
+      "files": [
+        {
+          "bytes": 8441,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/matched_staged/config.json",
+          "sha256": "940e674ee35b7b56a1054eeaabc29d01002a92d7ece1c94376cd5944a217295e"
+        },
+        {
+          "bytes": 1641,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/matched_staged/local.pth",
+          "sha256": "7635356f43ee1c76ed2bbe70ffc130ce4bc2aeed9f3ba92175a6042df2db2cd9"
+        },
+        {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/matched_staged/net.pth",
+          "sha256": "4adefa5ac62f5f81ceda295ad3b39e8bc5db3f96d76778bf3b788f038404e735"
+        },
+        {
+          "bytes": 5929,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/matched_staged/run.json",
+          "sha256": "94c352ce55e4fa46996db907717c4de7f1c870dc1a4cf4e9f78cbe6d4ca7ee48"
+        },
+        {
+          "bytes": 582602,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/matched_staged/train_log.jsonl",
+          "sha256": "36f47f3273130a7bb91891299ee40f048452cd2fb1e0c0e853165c32cdd41a23"
+        }
+      ],
+      "metadata": {
+        "backbone_updates": 1000,
+        "checkpoint": {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2109/matched_staged/net.pth",
+          "sha256": "4adefa5ac62f5f81ceda295ad3b39e8bc5db3f96d76778bf3b788f038404e735"
+        },
+        "condition": "matched_staged",
+        "cost": {
+          "backbone_parameters": 88607,
+          "local_parameters": 1,
+          "peak_allocated_bytes": 2339818496,
+          "peak_reserved_bytes": 2506096640,
+          "persistent_L_scalars_per_episode": 225,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 49.69474442799401,
+          "warm_training_seconds": 49.32716805038217,
+          "warmup_seconds": 0.05076659799669869
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "DAmult": "0b4f0f8a94ed510ba3aade4ec7dc8242bad97057429cd3860e94ab2ed944ab8a",
+          "alpha": "f2fc7a8e9ed3f160e0681592e639262eb35dfaa105dda7bb88ee3ac49bd70bed",
+          "etaet": "8a03d522cd2268084f23905ae66c50e86e0e63c11ea715da1d76c51d3b2839a4",
+          "h2DA.bias": "b2eb5b89720362b7c91cb129d51072e417ad3a7438c6271c0ba4c140af0d8ee7",
+          "h2DA.weight": "28702493ac969ca67891ec84d3291d75687a4cba38b6018857baa5859a1fa48f",
+          "h2o.bias": "26595344a97de9c032c98240e61aa01697ecd6d4958417c40ac77f1ca8d6c011",
+          "h2o.weight": "d31e853f683567a7d708e2f47eb31810ffe8de1cb002ad17494d9c4a948e2fb7",
+          "h2v.bias": "31ac14161cca6ab23396263aa03dc76ee047cffaa5a258a3373547f4399b1c74",
+          "h2v.weight": "b52438fc07e3c5ae668e1c991480f3f57b6c63e7ed402ff85feb0d7729a4e9c1",
+          "i2h.bias": "e487cf5c1a3959098781ef59c953e86d0f606b9b861cd0ec80a07a5741cc1752",
+          "i2h.weight": "2ffbc7ad987ff1eae40035b49d6505c7a9c771750a423551263d4c0779115942",
+          "w": "25f8f9a492c9982a4a255ba1dd07546415e514fe51bc5deff136e88f92e6ad3d"
+        },
+        "final_local": {
+          "raw_gain": "b59a27a24ba91a9acf8bb8643740ecdf6f6c13e42b979eacd2268ffe3da8da2d"
+        },
+        "initial_backbone": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "6af9ffca7b16b049dc478c9e4e227e397784350c6596afbeb624d2b990556556",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "9a08dbdb7fd5e1f0805d9c598739e1016e8359043d43f3c2be3d6d03053dbd81",
+          "h2DA.weight": "9e79b85eead08688b0f1afc909c5d865ac333b11cd0539345c67051403a9f5c5",
+          "h2o.bias": "a3712992d9724329aa0118e85785fa70d9441bc856ef1f6fa09af22389a6e156",
+          "h2o.weight": "2949ea48b889c2e43d66fcd40a4e70d5bba5c2767d0f1ce636f8f9c9b7d2d89d",
+          "h2v.bias": "31ac14161cca6ab23396263aa03dc76ee047cffaa5a258a3373547f4399b1c74",
+          "h2v.weight": "b52438fc07e3c5ae668e1c991480f3f57b6c63e7ed402ff85feb0d7729a4e9c1",
+          "i2h.bias": "08f3566a0260fe1030468016baa0f6c66354f572d96d2814cf109c3ed69de54f",
+          "i2h.weight": "de97b1b322a98fdce0fed3ea0d1d8e1a59b7b45abd2f14426926869ff501515f",
+          "w": "2bb0a374ce9afb1faebf57e9a7d53bc79ae51758a269a2352a3f4f7a4c2e0dde"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.28109773993492126,
+        "local_updates": 500,
+        "model": {
+          "batch_size": 32,
+          "hidden_size": 200,
+          "input_size": 37,
+          "output_size": 2
+        },
+        "optimizer_parameter_steps": {
+          "backbone.DAmult": 1000,
+          "backbone.alpha": 1000,
+          "backbone.etaet": 1000,
+          "backbone.h2DA.bias": 1000,
+          "backbone.h2DA.weight": 1000,
+          "backbone.h2o.bias": 1000,
+          "backbone.h2o.weight": 1000,
+          "backbone.h2v.bias": 1000,
+          "backbone.h2v.weight": 1000,
+          "backbone.i2h.bias": 1000,
+          "backbone.i2h.weight": 1000,
+          "backbone.w": 1000,
+          "local.raw_gain": 500
+        },
+        "phases": {
+          "global": {
+            "episode_exposures": 32000,
+            "peak_allocated_bytes": 2339818496,
+            "peak_reserved_bytes": 2506096640,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 1000,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 39.32445474738779,
+            "trainable_backbone_parameters": 88607,
+            "trainable_local_parameters": 0,
+            "training_seconds": 39.284423319390044,
+            "warmup_seconds": 0.040031427997746505
+          },
+          "local": {
+            "episode_exposures": 16000,
+            "peak_allocated_bytes": 666565632,
+            "peak_reserved_bytes": 2506096640,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 500,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 10.053479900991078,
+            "trainable_backbone_parameters": 0,
+            "trainable_local_parameters": 1,
+            "training_seconds": 10.042744730992126,
+            "warmup_seconds": 0.010735169998952188
+          }
+        },
+        "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "raw_gain": -1.125213861465454,
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2109,
+        "stage_boundary_backbone": {
+          "DAmult": "0b4f0f8a94ed510ba3aade4ec7dc8242bad97057429cd3860e94ab2ed944ab8a",
+          "alpha": "f2fc7a8e9ed3f160e0681592e639262eb35dfaa105dda7bb88ee3ac49bd70bed",
+          "etaet": "8a03d522cd2268084f23905ae66c50e86e0e63c11ea715da1d76c51d3b2839a4",
+          "h2DA.bias": "b2eb5b89720362b7c91cb129d51072e417ad3a7438c6271c0ba4c140af0d8ee7",
+          "h2DA.weight": "28702493ac969ca67891ec84d3291d75687a4cba38b6018857baa5859a1fa48f",
+          "h2o.bias": "26595344a97de9c032c98240e61aa01697ecd6d4958417c40ac77f1ca8d6c011",
+          "h2o.weight": "d31e853f683567a7d708e2f47eb31810ffe8de1cb002ad17494d9c4a948e2fb7",
+          "h2v.bias": "31ac14161cca6ab23396263aa03dc76ee047cffaa5a258a3373547f4399b1c74",
+          "h2v.weight": "b52438fc07e3c5ae668e1c991480f3f57b6c63e7ed402ff85feb0d7729a4e9c1",
+          "i2h.bias": "e487cf5c1a3959098781ef59c953e86d0f606b9b861cd0ec80a07a5741cc1752",
+          "i2h.weight": "2ffbc7ad987ff1eae40035b49d6505c7a9c771750a423551263d4c0779115942",
+          "w": "25f8f9a492c9982a4a255ba1dd07546415e514fe51bc5deff136e88f92e6ad3d"
+        },
+        "stream_fingerprint": "e167bd82833491ce70468ec69740cf5344238a8852ca5363243e2d6388cda6da",
+        "task_distribution": {
+          "held_out_rank_graph_signatures": [
+            [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                7
+              ]
+            ]
+          ],
+          "liu_graph_held_out": true,
+          "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded"
+        },
+        "training": {
+          "batch_size": 32,
+          "cue_size": 15,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "hidden_size": 200,
+          "learning_rate": 0.0001,
+          "max_edges": 10,
+          "min_edges": 7,
+          "outer_steps": 1500,
+          "save_every": 1500,
+          "seed": 2109,
+          "subject_encoding_mode": "stable_omission",
+          "support_blocks": 4,
+          "support_query_time": 0.6666666666666666
+        }
+      }
+    },
+    "2110/joint": {
+      "files": [
+        {
+          "bytes": 6878,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/joint/config.json",
+          "sha256": "d6bc36436274662f196e8e575f30faf3f60ecf4a30f4a02af2788093cd4ef9b1"
+        },
+        {
+          "bytes": 1641,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/joint/local.pth",
+          "sha256": "451737cdf3a3cecece798712859ccdf24657db47a45caab3593979f2f7502029"
+        },
+        {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/joint/net.pth",
+          "sha256": "a2ae6c0ecd99ba0eec0219ca0280307860c30fb76e895c0cbf1c9cabfaa9e777"
+        },
+        {
+          "bytes": 5911,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/joint/run.json",
+          "sha256": "2b84e5a081c4d7c6de978284fb1316123836c998f484815161ee97ee2601be8e"
+        },
+        {
+          "bytes": 580681,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/joint/train_log.jsonl",
+          "sha256": "4c84ec567042988254e57c3356a1b14a33bb3389cb9f2b92ed05ea77a9d02e84"
+        }
+      ],
+      "metadata": {
+        "backbone_updates": 1500,
+        "checkpoint": {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/joint/net.pth",
+          "sha256": "a2ae6c0ecd99ba0eec0219ca0280307860c30fb76e895c0cbf1c9cabfaa9e777"
+        },
+        "condition": "joint",
+        "cost": {
+          "backbone_parameters": 88607,
+          "local_parameters": 1,
+          "peak_allocated_bytes": 2330185216,
+          "peak_reserved_bytes": 2499805184,
+          "persistent_L_scalars_per_episode": 225,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 60.171297076987685,
+          "warm_training_seconds": 59.767541570035974,
+          "warmup_seconds": 0.029374019999522716
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "DAmult": "877f1c97e2a6000c9ca7845f3f3f081a9cd2a24771db7c65d18ac91f9b468664",
+          "alpha": "e14e2e50a1b283ea80554ac1ad1e760796dba502823cc05a2e51daed14b13465",
+          "etaet": "c6779d2acc3d7f4d934f87cbc7c9a8c87e3ede1ea2dfcd0dbae1a78a35f9bb72",
+          "h2DA.bias": "37e2c6f0cf281fa5c0b6aa74faf0e97916547595aa245735f644f2935fd66366",
+          "h2DA.weight": "9dad6cb925fecdabb7afa1a8f97b69893f215d0ed91402aefe071bfe285073de",
+          "h2o.bias": "6af34b5c7499aeeb564524ce8e0cd559b985c49b42a574d4043d4387ac135bcc",
+          "h2o.weight": "9b98770b6c99af27dc86ef0ea93ff5d09f6d4ccd61c63a602ec56086d86e4f20",
+          "h2v.bias": "b5e7117aeeafd068539ec5a9da506de1c71276f3462bd36691c3cbf137d397e2",
+          "h2v.weight": "9a45b49a1866d7a8fb26b132e31f17f138f687d49af09a6ebb9a98c34166e87c",
+          "i2h.bias": "2959ebffbf38865c7e66089684e26d5d2738878679953de2f9b613319d2dba95",
+          "i2h.weight": "7c31ce3515059dffb5f6b1c21092c3c48b2b1f7377acc48783a872922b6560bd",
+          "w": "3bf4775db0e81cdcc598e283c9170d83ccb42cfa14f88b6f49c1574ad40cd310"
+        },
+        "final_local": {
+          "raw_gain": "e8f91adafd6ab2f6d066d5ffc5253bcefecaee22fa1465a8148d732152ee3ae7"
+        },
+        "initial_backbone": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "674e40cdd131b7b9b85cbe833d5418b7e5b5f51803058f17df31bc52279cc09f",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "bdef9332815fd1772a0c7893f61ec9cc04e5c4e97c336d2feec2ceab8ddc8e7e",
+          "h2DA.weight": "7e40a8923e1ff8d5bbe5577e58b4e1af9628911424342abaa805efd8a2d8352f",
+          "h2o.bias": "0a2ff383909fafbf26481c8c9c83e657e4e11aac78e33e68a827d1865b7ee3fd",
+          "h2o.weight": "4478b97746525451b2fa58b042952561d792b911636652c0699787f11f13434a",
+          "h2v.bias": "b5e7117aeeafd068539ec5a9da506de1c71276f3462bd36691c3cbf137d397e2",
+          "h2v.weight": "9a45b49a1866d7a8fb26b132e31f17f138f687d49af09a6ebb9a98c34166e87c",
+          "i2h.bias": "c442f4512e284ecb28877099ecb1d6064372ad77bd81f4d01ebfaf8480a80f2b",
+          "i2h.weight": "c2b01db184e1f7f9571a33191decc69ddac8f8abb447141555be4b08a5c77d51",
+          "w": "d3c38b2ee1799e40962b7946724c4c15b3354a83724d33076b1bef1c5b03e744"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.2609558701515198,
+        "local_updates": 1500,
+        "model": {
+          "batch_size": 32,
+          "hidden_size": 200,
+          "input_size": 37,
+          "output_size": 2
+        },
+        "optimizer_parameter_steps": {
+          "backbone.DAmult": 1500,
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2DA.bias": 1500,
+          "backbone.h2DA.weight": 1500,
+          "backbone.h2o.bias": 1500,
+          "backbone.h2o.weight": 1500,
+          "backbone.h2v.bias": 1500,
+          "backbone.h2v.weight": 1500,
+          "backbone.i2h.bias": 1500,
+          "backbone.i2h.weight": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "phases": {
+          "joint": {
+            "episode_exposures": 48000,
+            "peak_allocated_bytes": 2330185216,
+            "peak_reserved_bytes": 2499805184,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 1500,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 59.796915590035496,
+            "trainable_backbone_parameters": 88607,
+            "trainable_local_parameters": 1,
+            "training_seconds": 59.767541570035974,
+            "warmup_seconds": 0.029374019999522716
+          }
+        },
+        "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "raw_gain": -1.210090160369873,
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2110,
+        "stage_boundary_backbone": null,
+        "stream_fingerprint": "7e6d5458b3b0c49c5357c7a133cf1d300ea60488ce81a09621f9bc0bec0a2635",
+        "task_distribution": {
+          "held_out_rank_graph_signatures": [
+            [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                7
+              ]
+            ]
+          ],
+          "liu_graph_held_out": true,
+          "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded"
+        },
+        "training": {
+          "batch_size": 32,
+          "cue_size": 15,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "hidden_size": 200,
+          "learning_rate": 0.0001,
+          "max_edges": 10,
+          "min_edges": 7,
+          "outer_steps": 1500,
+          "save_every": 1500,
+          "seed": 2110,
+          "subject_encoding_mode": "stable_omission",
+          "support_blocks": 4,
+          "support_query_time": 0.6666666666666666
+        }
+      }
+    },
+    "2110/matched_staged": {
+      "files": [
+        {
+          "bytes": 8438,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/matched_staged/config.json",
+          "sha256": "41f3af94a60554bee9bc6a60242797858632c0c4d0fc0c43b300ed4b05ae1653"
+        },
+        {
+          "bytes": 1641,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/matched_staged/local.pth",
+          "sha256": "acef4532a8ff82af76fcfdc048a04e4227f7b7c0f832b4e5fd0c7404676383af"
+        },
+        {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/matched_staged/net.pth",
+          "sha256": "da8ce07bdc85b958444540ae5c0074555416a80ca2676a27bb61a83313c11fa7"
+        },
+        {
+          "bytes": 5929,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/matched_staged/run.json",
+          "sha256": "6a5355b1235ca4a7798ec25c880a973c9a7531350fc62325b1fa5f7f5d077090"
+        },
+        {
+          "bytes": 582474,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/matched_staged/train_log.jsonl",
+          "sha256": "d940108571fa902d76429c9dcf8b06296f4db56fd3b9e5b32b34f1adb72c9d23"
+        }
+      ],
+      "metadata": {
+        "backbone_updates": 1000,
+        "checkpoint": {
+          "bytes": 358719,
+          "path": "artifacts/runs/joint_training_strategy_v1/seed-2110/matched_staged/net.pth",
+          "sha256": "da8ce07bdc85b958444540ae5c0074555416a80ca2676a27bb61a83313c11fa7"
+        },
+        "condition": "matched_staged",
+        "cost": {
+          "backbone_parameters": 88607,
+          "local_parameters": 1,
+          "peak_allocated_bytes": 2330176512,
+          "peak_reserved_bytes": 2499805184,
+          "persistent_L_scalars_per_episode": 225,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 49.79013274800673,
+          "warm_training_seconds": 49.43646551808342,
+          "warmup_seconds": 0.04441528700408526
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "DAmult": "dda88e9d6cb57c6e02f2a09525992065ea28e358ef841427d7a14048b5b249e8",
+          "alpha": "8ee282063f004f1c332d073d20d0ef2ee622364c6527c3149df7e5d4002790c0",
+          "etaet": "b82bd693b4199f9ddc75b99373e5df32225b83f0bffcac1c2dfb7a3e43ee195d",
+          "h2DA.bias": "38c56a4f6cb4e6e9bf6703a7abea7cfe096fe57e7c8973eedb85bfe2d4b05d6e",
+          "h2DA.weight": "aa1ecba13e113a9e0d7dfbafd59f5879555175b0a6d0798b2f3e19f7b20ce765",
+          "h2o.bias": "1853d48f4900950c455aefd9a730660d9fb8014d935087fc3d302f3c6349e148",
+          "h2o.weight": "8d3f4fcf402a9de3ad3a675e3bed63072006216d6a061319b5d92645bacc2423",
+          "h2v.bias": "b5e7117aeeafd068539ec5a9da506de1c71276f3462bd36691c3cbf137d397e2",
+          "h2v.weight": "9a45b49a1866d7a8fb26b132e31f17f138f687d49af09a6ebb9a98c34166e87c",
+          "i2h.bias": "2e5858eb436eac73b6fc9228b611341a8c21648ade91d292b909ba46204ae33a",
+          "i2h.weight": "e1fc91d697e5d500b6f70406a1946afab687c1d05f2edb3dc453537b171b6a2f",
+          "w": "e9f7e7eb9d8044ce994440ab4543cab6498ba3bbe988bf2348a15a36e20f7eef"
+        },
+        "final_local": {
+          "raw_gain": "9df909c53f24828d44e2999b9bfa46bcef72bb588dc8129fcd5e4e00581ab7fc"
+        },
+        "initial_backbone": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "674e40cdd131b7b9b85cbe833d5418b7e5b5f51803058f17df31bc52279cc09f",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "bdef9332815fd1772a0c7893f61ec9cc04e5c4e97c336d2feec2ceab8ddc8e7e",
+          "h2DA.weight": "7e40a8923e1ff8d5bbe5577e58b4e1af9628911424342abaa805efd8a2d8352f",
+          "h2o.bias": "0a2ff383909fafbf26481c8c9c83e657e4e11aac78e33e68a827d1865b7ee3fd",
+          "h2o.weight": "4478b97746525451b2fa58b042952561d792b911636652c0699787f11f13434a",
+          "h2v.bias": "b5e7117aeeafd068539ec5a9da506de1c71276f3462bd36691c3cbf137d397e2",
+          "h2v.weight": "9a45b49a1866d7a8fb26b132e31f17f138f687d49af09a6ebb9a98c34166e87c",
+          "i2h.bias": "c442f4512e284ecb28877099ecb1d6064372ad77bd81f4d01ebfaf8480a80f2b",
+          "i2h.weight": "c2b01db184e1f7f9571a33191decc69ddac8f8abb447141555be4b08a5c77d51",
+          "w": "d3c38b2ee1799e40962b7946724c4c15b3354a83724d33076b1bef1c5b03e744"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.2552456557750702,
+        "local_updates": 500,
+        "model": {
+          "batch_size": 32,
+          "hidden_size": 200,
+          "input_size": 37,
+          "output_size": 2
+        },
+        "optimizer_parameter_steps": {
+          "backbone.DAmult": 1000,
+          "backbone.alpha": 1000,
+          "backbone.etaet": 1000,
+          "backbone.h2DA.bias": 1000,
+          "backbone.h2DA.weight": 1000,
+          "backbone.h2o.bias": 1000,
+          "backbone.h2o.weight": 1000,
+          "backbone.h2v.bias": 1000,
+          "backbone.h2v.weight": 1000,
+          "backbone.i2h.bias": 1000,
+          "backbone.i2h.weight": 1000,
+          "backbone.w": 1000,
+          "local.raw_gain": 500
+        },
+        "phases": {
+          "global": {
+            "episode_exposures": 32000,
+            "peak_allocated_bytes": 2330176512,
+            "peak_reserved_bytes": 2499805184,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 1000,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 39.320878470127354,
+            "trainable_backbone_parameters": 88607,
+            "trainable_local_parameters": 0,
+            "training_seconds": 39.28817870312196,
+            "warmup_seconds": 0.03269976700539701
+          },
+          "local": {
+            "episode_exposures": 16000,
+            "peak_allocated_bytes": 666565632,
+            "peak_reserved_bytes": 2499805184,
+            "persistent_L_scalars_per_episode": 225,
+            "persistent_P_scalars_per_episode": 40000,
+            "steps": 500,
+            "total_backbone_parameters": 88607,
+            "total_local_parameters": 1,
+            "total_seconds": 10.160002334960154,
+            "trainable_backbone_parameters": 0,
+            "trainable_local_parameters": 1,
+            "training_seconds": 10.148286814961466,
+            "warmup_seconds": 0.01171551999868825
+          }
+        },
+        "protocol_sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "raw_gain": -1.235192894935608,
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.13.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2110,
+        "stage_boundary_backbone": {
+          "DAmult": "dda88e9d6cb57c6e02f2a09525992065ea28e358ef841427d7a14048b5b249e8",
+          "alpha": "8ee282063f004f1c332d073d20d0ef2ee622364c6527c3149df7e5d4002790c0",
+          "etaet": "b82bd693b4199f9ddc75b99373e5df32225b83f0bffcac1c2dfb7a3e43ee195d",
+          "h2DA.bias": "38c56a4f6cb4e6e9bf6703a7abea7cfe096fe57e7c8973eedb85bfe2d4b05d6e",
+          "h2DA.weight": "aa1ecba13e113a9e0d7dfbafd59f5879555175b0a6d0798b2f3e19f7b20ce765",
+          "h2o.bias": "1853d48f4900950c455aefd9a730660d9fb8014d935087fc3d302f3c6349e148",
+          "h2o.weight": "8d3f4fcf402a9de3ad3a675e3bed63072006216d6a061319b5d92645bacc2423",
+          "h2v.bias": "b5e7117aeeafd068539ec5a9da506de1c71276f3462bd36691c3cbf137d397e2",
+          "h2v.weight": "9a45b49a1866d7a8fb26b132e31f17f138f687d49af09a6ebb9a98c34166e87c",
+          "i2h.bias": "2e5858eb436eac73b6fc9228b611341a8c21648ade91d292b909ba46204ae33a",
+          "i2h.weight": "e1fc91d697e5d500b6f70406a1946afab687c1d05f2edb3dc453537b171b6a2f",
+          "w": "e9f7e7eb9d8044ce994440ab4543cab6498ba3bbe988bf2348a15a36e20f7eef"
+        },
+        "stream_fingerprint": "7e6d5458b3b0c49c5357c7a133cf1d300ea60488ce81a09621f9bc0bec0a2635",
+        "task_distribution": {
+          "held_out_rank_graph_signatures": [
+            [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            [
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                7
+              ]
+            ]
+          ],
+          "liu_graph_held_out": true,
+          "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded"
+        },
+        "training": {
+          "batch_size": 32,
+          "cue_size": 15,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "hidden_size": 200,
+          "learning_rate": 0.0001,
+          "max_edges": 10,
+          "min_edges": 7,
+          "outer_steps": 1500,
+          "save_every": 1500,
+          "seed": 2110,
+          "subject_encoding_mode": "stable_omission",
+          "support_blocks": 4,
+          "support_query_time": 0.6666666666666666
+        }
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_commit": "837f350ce1fbd52c37e89dc5abe22f2e68cb5e46",
+  "source_lock": {
+    "bytes": 35222,
+    "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.execution_lock.json",
+    "sha256": "c2baf711692c32242c4bf4f40b07bc7cb235ebb85c9bce1d90f21d33d1c7331d"
+  }
+}

@@ -181,12 +181,12 @@ fail to close the dynamics.
     while the global output is geometrically near-additive but its tested learning
     states do not close.
 - [Matched single-stage versus staged training](joint_training_strategy/README.md) — `frozen_contract`
-  - **Finding:** Protocol and complete implementation are prospectively locked after CPU
-    contract tests and non-Liu CUDA output, gradient, optimizer-update, and
-    query-readout parity checks. The three paired seeds, equal-episode-budget
-    comparator, fixed dual evidence admission, and separate competence, noninferiority,
-    behavior, and cost decisions are unchanged. Final training artifacts and scientific
-    evaluation are pending.
+  - **Finding:** All six final training artifacts for paired seeds 2108/2109/2110 are
+    jointly locked before generic validation or Liu evaluation. Every run completed
+    48,000 episode exposures; matched initialization and full training-stream
+    fingerprints agree within each pair, actual Adam counters match the registered
+    schedules, and each staged backbone is unchanged during local adaptation. Scientific
+    evaluation is pending.
 
 ## One-factor structural transport
 
