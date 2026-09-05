@@ -196,12 +196,14 @@ fail to close the dynamics.
 Test simpler task-level learners independently of reconstructing frozen recurrent
 trajectories.
 
-- [Minimal metric-error relational learner](minimal_relational_learner/README.md) — `frozen_contract`
-  - **Finding:** All six final score_trace/score_only models are jointly locked before
-    generic or Liu evaluation. Each completed 48,000 episodes and 1,500 updates for
-    every scalar; paired numerical training streams and shared initial parameters match
-    exactly. The independent comparison retains inherited evidence, nine behavior rows,
-    independently trained score-only, and an exact history-sensitivity bridge.
+- [Minimal metric-error relational learner](minimal_relational_learner/README.md) — `confirmed`
+  - **Finding:** All three paired training streams yield score_only_sufficient: the
+    independently fitted two-scalar, 15-state learner passes competence and all nine
+    qualitative behavior rules. All six fits pass those rules, but each matches only
+    three of nine frozen quantitative classifiers. The trace passes all five
+    local-support rules and improves omitted probability, while reducing nonlearned
+    probability; it is useful but not required for this registered qualitative
+    sufficiency. The fixed comparison is complete and frozen.
 
 ## One-factor structural transport
 

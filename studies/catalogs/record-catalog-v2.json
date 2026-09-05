@@ -7,23 +7,23 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 228,
+  "entry_count": 237,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 160,
+    "json": 161,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 48,
-    "numpy_npz": 8,
+    "markdown": 50,
+    "numpy_npz": 14,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 207,
-    "historical_gzip_view": 20,
+    "already_conformant": 215,
+    "historical_gzip_view": 21,
     "historical_pth_view": 1
   },
   "records": [
@@ -5512,6 +5512,314 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.interpretation.md",
+        "repository_path": "studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.interpretation.md"
+      },
+      "materialized_identity": {
+        "bytes": 10028,
+        "sha256": "0fbe87ee75e55aa169f330d79ab03715491b7e3b08db9f7b9cb525430a962826"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_reports_minimal_relational_learner_v1_interpretation_md",
+      "registered_identity": {
+        "bytes": 10028,
+        "sha256": "0fbe87ee75e55aa169f330d79ab03715491b7e3b08db9f7b9cb525430a962826",
+        "source_ref": "sha256:0fbe87ee75e55aa169f330d79ab03715491b7e3b08db9f7b9cb525430a962826"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.md",
+        "repository_path": "studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 14373,
+        "sha256": "5162b90db488b6d0929600c654f6163572c80697da7903daab021342a0a02dfc"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_reports_minimal_relational_learner_v1_md",
+      "registered_identity": {
+        "bytes": 14373,
+        "sha256": "5162b90db488b6d0929600c654f6163572c80697da7903daab021342a0a02dfc",
+        "source_ref": "sha256:5162b90db488b6d0929600c654f6163572c80697da7903daab021342a0a02dfc"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.json",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 1666966,
+        "sha256": "35530ca80c95546884d1b848c6c0aa44a5109aa9a9c70cfca82484f2c334a01d"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_json",
+      "registered_identity": {
+        "bytes": 1666966,
+        "sha256": "35530ca80c95546884d1b848c6c0aa44a5109aa9a9c70cfca82484f2c334a01d",
+        "source_ref": "sha256:35530ca80c95546884d1b848c6c0aa44a5109aa9a9c70cfca82484f2c334a01d"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_only.npz",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_only.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1296261,
+        "sha256": "a41b5d063b7782ace8affb03d4c990da15095bf660db30c64e82fde250ec77cd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_seed_2111_score_only_npz",
+      "registered_identity": {
+        "bytes": 1296261,
+        "sha256": "a41b5d063b7782ace8affb03d4c990da15095bf660db30c64e82fde250ec77cd",
+        "source_ref": "sha256:a41b5d063b7782ace8affb03d4c990da15095bf660db30c64e82fde250ec77cd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_trace.npz",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_trace.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1403636,
+        "sha256": "8137be61dcaf916a23d9da5048b8b05aa14144677f732baf6377ec5db21b7bd1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_seed_2111_score_trace_npz",
+      "registered_identity": {
+        "bytes": 1403636,
+        "sha256": "8137be61dcaf916a23d9da5048b8b05aa14144677f732baf6377ec5db21b7bd1",
+        "source_ref": "sha256:8137be61dcaf916a23d9da5048b8b05aa14144677f732baf6377ec5db21b7bd1"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_only.npz",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_only.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1296657,
+        "sha256": "9147f5951fccdeef4db8badf548af9d1a4fc0d3776a83f4a09065daaddd96653"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_seed_2112_score_only_npz",
+      "registered_identity": {
+        "bytes": 1296657,
+        "sha256": "9147f5951fccdeef4db8badf548af9d1a4fc0d3776a83f4a09065daaddd96653",
+        "source_ref": "sha256:9147f5951fccdeef4db8badf548af9d1a4fc0d3776a83f4a09065daaddd96653"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_trace.npz",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_trace.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1403893,
+        "sha256": "ff84a6effbaa1364df494a3c766224fb63d13c116a6f901bfd7384c3d3e459fd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_seed_2112_score_trace_npz",
+      "registered_identity": {
+        "bytes": 1403893,
+        "sha256": "ff84a6effbaa1364df494a3c766224fb63d13c116a6f901bfd7384c3d3e459fd",
+        "source_ref": "sha256:ff84a6effbaa1364df494a3c766224fb63d13c116a6f901bfd7384c3d3e459fd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_only.npz",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_only.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1296233,
+        "sha256": "dfde651510a849069c94c27ddc75e7793c5de17bc4118345ed0dfc05ece0201f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_seed_2113_score_only_npz",
+      "registered_identity": {
+        "bytes": 1296233,
+        "sha256": "dfde651510a849069c94c27ddc75e7793c5de17bc4118345ed0dfc05ece0201f",
+        "source_ref": "sha256:dfde651510a849069c94c27ddc75e7793c5de17bc4118345ed0dfc05ece0201f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_trace.npz",
+        "repository_path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_trace.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1404009,
+        "sha256": "cd0a64593c9212e156243ac0e19b69a49d2a88ecc8d4c631fc0b51b1e39f3e5c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_relational_learner",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_relational_learner.studies_minimal_relational_learner_records_results_minimal_relational_learner_v1_seed_2113_score_trace_npz",
+      "registered_identity": {
+        "bytes": 1404009,
+        "sha256": "cd0a64593c9212e156243ac0e19b69a49d2a88ecc8d4c631fc0b51b1e39f3e5c",
+        "source_ref": "sha256:cd0a64593c9212e156243ac0e19b69a49d2a88ecc8d4c631fc0b51b1e39f3e5c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -7987,7 +8295,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 226,
+  "registered_record_count": 235,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -8001,7 +8309,7 @@
     "execution_lock": 31,
     "freeze_validation": 1,
     "frozen_parameters": 1,
-    "frozen_result": 40,
+    "frozen_result": 41,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,
     "presentation_asset": 6,
@@ -8011,10 +8319,10 @@
     "registered_contract": 56,
     "repair_contract": 4,
     "repair_lock": 8,
-    "report": 47,
+    "report": 49,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 8,
+    "supporting_artifact": 14,
     "validation_result": 1
   },
   "schema_version": 2,

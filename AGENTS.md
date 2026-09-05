@@ -92,6 +92,10 @@ trained score-only baseline. Its prospective authority is
 This is not a repair of joint training or a reconstruction of old P trajectories.
 Freeze its own behavior, local-use, history-sensitivity, and complexity criteria;
 do not inherit every historical intervention threshold or reopen human fitting.
+Its fixed three-pair comparison is now complete and frozen for reporting.
+The registered execution gates are not standing permission for another run:
+extra training, evaluation, calibration, or candidate repair requires a new
+explicitly authorized prospective question.
 
 ## Repository invariants
 

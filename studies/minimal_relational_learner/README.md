@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `confirmed`
 - **Review state:** `indexed`
 - **Study ID:** `minimal_relational_learner`
 
@@ -24,15 +24,19 @@
 **Question.** Can a compact online score learner, with or without direct relational
 memory, explain the Liu behavioral map?
 
-**Finding.** All six final score_trace/score_only models are jointly locked before
-generic or Liu evaluation. Each completed 48,000 episodes and 1,500 updates for every
-scalar; paired numerical training streams and shared initial parameters match exactly.
-The independent comparison retains inherited evidence, nine behavior rows, independently
-trained score-only, and an exact history-sensitivity bridge.
+**Finding.** All three paired training streams yield score_only_sufficient: the
+independently fitted two-scalar, 15-state learner passes competence and all nine
+qualitative behavior rules. All six fits pass those rules, but each matches only three
+of nine frozen quantitative classifiers. The trace passes all five local-support rules
+and improves omitted probability, while reducing nonlearned probability; it is useful
+but not required for this registered qualitative sufficiency. The fixed comparison is
+complete and frozen.
 
-**Claim boundary.** Task-level sufficiency under explicit structural and encoding
-priors, not old-network trajectory compression, universal minimality, joint-training
-repair, or fresh human confirmation.
+**Claim boundary.** Sufficiency for the frozen qualitative criteria under imposed
+additive geometry and inherited encoding/temperature, not quantitative Liu equivalence,
+universal minimality, old-network trajectory compression, or human confirmation. Three
+paired training streams are not independent random backbones; no post-result tuning or
+seed expansion.
 
 ## Frozen records
 
@@ -45,6 +49,33 @@ repair, or fresh human confirmation.
 - `artifact_lock` —
   [studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.artifact_lock.json](records/benchmarks/minimal_relational_learner_v1.artifact_lock.json)
   (`sha256:0b0e64ae8d1e`)
+- `report` —
+  [studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.interpretation.md](records/reports/minimal_relational_learner_v1.interpretation.md)
+  (`sha256:0fbe87ee75e5`)
+- `report` —
+  [studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.md](records/reports/minimal_relational_learner_v1.md)
+  (`sha256:5162b90db488`)
+- `frozen_result` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.json](records/results/minimal_relational_learner_v1.json)
+  (`sha256:35530ca80c95`)
+- `supporting_artifact` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_only.npz](records/results/minimal_relational_learner_v1.seed-2111.score_only.npz)
+  (`sha256:a41b5d063b77`)
+- `supporting_artifact` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_trace.npz](records/results/minimal_relational_learner_v1.seed-2111.score_trace.npz)
+  (`sha256:8137be61dcaf`)
+- `supporting_artifact` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_only.npz](records/results/minimal_relational_learner_v1.seed-2112.score_only.npz)
+  (`sha256:9147f5951fcc`)
+- `supporting_artifact` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_trace.npz](records/results/minimal_relational_learner_v1.seed-2112.score_trace.npz)
+  (`sha256:ff84a6effbaa`)
+- `supporting_artifact` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_only.npz](records/results/minimal_relational_learner_v1.seed-2113.score_only.npz)
+  (`sha256:dfde651510a8`)
+- `supporting_artifact` —
+  [studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_trace.npz](records/results/minimal_relational_learner_v1.seed-2113.score_trace.npz)
+  (`sha256:cd0a64593c92`)
 
 ## Provenance rule
 

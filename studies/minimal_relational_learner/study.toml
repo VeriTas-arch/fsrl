@@ -3,11 +3,11 @@ id = "minimal_relational_learner"
 title = "Minimal metric-error relational learner"
 chapter = "minimal_models"
 order = 10
-status = "frozen_contract"
+status = "confirmed"
 review_state = "indexed"
 question = "Can a compact online score learner, with or without direct relational memory, explain the Liu behavioral map?"
-finding = "All six final score_trace/score_only models are jointly locked before generic or Liu evaluation. Each completed 48,000 episodes and 1,500 updates for every scalar; paired numerical training streams and shared initial parameters match exactly. The independent comparison retains inherited evidence, nine behavior rows, independently trained score-only, and an exact history-sensitivity bridge."
-boundary = "Task-level sufficiency under explicit structural and encoding priors, not old-network trajectory compression, universal minimality, joint-training repair, or fresh human confirmation."
+finding = "All three paired training streams yield score_only_sufficient: the independently fitted two-scalar, 15-state learner passes competence and all nine qualitative behavior rules. All six fits pass those rules, but each matches only three of nine frozen quantitative classifiers. The trace passes all five local-support rules and improves omitted probability, while reducing nonlearned probability; it is useful but not required for this registered qualitative sufficiency. The fixed comparison is complete and frozen."
+boundary = "Sufficiency for the frozen qualitative criteria under imposed additive geometry and inherited encoding/temperature, not quantitative Liu equivalence, universal minimality, old-network trajectory compression, or human confirmation. Three paired training streams are not independent random backbones; no post-result tuning or seed expansion."
 
 [[records]]
 path = "records/benchmarks/minimal_relational_learner_v1.json"
@@ -35,3 +35,84 @@ role = "artifact_lock"
 sha256 = "0b0e64ae8d1e88a2b1026192aab5d6a015877764e2cf6e40ac564bf65dbed836"
 bytes = 35522
 source_ref = "sha256:0b0e64ae8d1e88a2b1026192aab5d6a015877764e2cf6e40ac564bf65dbed836"
+
+[[records]]
+path = "records/reports/minimal_relational_learner_v1.interpretation.md"
+legacy_path = "studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.interpretation.md"
+origin = "native"
+role = "report"
+sha256 = "0fbe87ee75e55aa169f330d79ab03715491b7e3b08db9f7b9cb525430a962826"
+bytes = 10028
+source_ref = "sha256:0fbe87ee75e55aa169f330d79ab03715491b7e3b08db9f7b9cb525430a962826"
+
+[[records]]
+path = "records/reports/minimal_relational_learner_v1.md"
+legacy_path = "studies/minimal_relational_learner/records/reports/minimal_relational_learner_v1.md"
+origin = "native"
+role = "report"
+sha256 = "5162b90db488b6d0929600c654f6163572c80697da7903daab021342a0a02dfc"
+bytes = 14373
+source_ref = "sha256:5162b90db488b6d0929600c654f6163572c80697da7903daab021342a0a02dfc"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.json"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "35530ca80c95546884d1b848c6c0aa44a5109aa9a9c70cfca82484f2c334a01d"
+bytes = 1666966
+source_ref = "sha256:35530ca80c95546884d1b848c6c0aa44a5109aa9a9c70cfca82484f2c334a01d"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.seed-2111.score_only.npz"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_only.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a41b5d063b7782ace8affb03d4c990da15095bf660db30c64e82fde250ec77cd"
+bytes = 1296261
+source_ref = "sha256:a41b5d063b7782ace8affb03d4c990da15095bf660db30c64e82fde250ec77cd"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.seed-2111.score_trace.npz"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2111.score_trace.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8137be61dcaf916a23d9da5048b8b05aa14144677f732baf6377ec5db21b7bd1"
+bytes = 1403636
+source_ref = "sha256:8137be61dcaf916a23d9da5048b8b05aa14144677f732baf6377ec5db21b7bd1"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.seed-2112.score_only.npz"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_only.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9147f5951fccdeef4db8badf548af9d1a4fc0d3776a83f4a09065daaddd96653"
+bytes = 1296657
+source_ref = "sha256:9147f5951fccdeef4db8badf548af9d1a4fc0d3776a83f4a09065daaddd96653"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.seed-2112.score_trace.npz"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2112.score_trace.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ff84a6effbaa1364df494a3c766224fb63d13c116a6f901bfd7384c3d3e459fd"
+bytes = 1403893
+source_ref = "sha256:ff84a6effbaa1364df494a3c766224fb63d13c116a6f901bfd7384c3d3e459fd"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.seed-2113.score_only.npz"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_only.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dfde651510a849069c94c27ddc75e7793c5de17bc4118345ed0dfc05ece0201f"
+bytes = 1296233
+source_ref = "sha256:dfde651510a849069c94c27ddc75e7793c5de17bc4118345ed0dfc05ece0201f"
+
+[[records]]
+path = "records/results/minimal_relational_learner_v1.seed-2113.score_trace.npz"
+legacy_path = "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.seed-2113.score_trace.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cd0a64593c9212e156243ac0e19b69a49d2a88ecc8d4c631fc0b51b1e39f3e5c"
+bytes = 1404009
+source_ref = "sha256:cd0a64593c9212e156243ac0e19b69a49d2a88ecc8d4c631fc0b51b1e39f3e5c"
