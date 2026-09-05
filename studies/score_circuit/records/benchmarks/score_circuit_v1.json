@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "score_circuit_v1",
+  "question": "Can a finite-time opponent compartment circuit, using local centered presynaptic activity and a shared compartment-mismatch signal, implement the frozen score-only learner without losing its task function?",
+  "authority": "User authorized testing the preceding biological-realization plan in a new worktree. This is a new conditional circuit-sufficiency study, not a continuation or repair of the completed source diagnosis.",
+  "parent_commit": "6449fdedbadc8973bb72a241313196a3738d6ecc",
+  "parent_study": "studies/minimal_relational_learner/study.toml",
+  "parent_result": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.json",
+  "seeds": [2111, 2112, 2113],
+  "recipe": "score_only",
+  "data": {
+    "source": "The three parent registered typed NPZ files, including all 256 saved generic validation episodes and 77 saved virtual Liu subjects, original cues, support order, metric evidence, retention and query inputs. No fresh human data or retraining.",
+    "lock": "Protocol committed and pushed before implementation. All three parameter sets, parent records, saved input arrays and implementation jointly locked and pushed before any registered generic/Liu circuit evaluation.",
+    "labels": "Only the scorer reads query targets, true ranks and learned/omitted labels. The circuit sees current feature activities, support teaching evidence and original admission masks. No learned-query flag or offline comparison state enters a circuit update.",
+    "subject_boundary": "Three exposed training streams sharing evaluation inputs, not independent RNN initializations or new human samples. Participant summaries and bootstrap remain separate per fit."
+  },
+  "circuit": {
+    "input": "x=c_left-c_right; original cue entries are +/-1. Nonnegative presynaptic rates r=2+x; a local fixed baseline b=2 supplies centered activity x=r-b. No fitted sensory encoder or injected noise.",
+    "state": "Two actual nonnegative efficacy arrays g_plus,g_minus of 15 entries each, and six effective activity deviations D_plus,D_minus,S_plus,S_minus,E_plus,E_minus. These states are integrated directly; never update w then split it into positive/negative parts.",
+    "initial": "g_plus=g_minus=1, all six deviations zero. Initial neutral task memory is an explicit new-episode assumption, not a modeled whole-brain reset or forgetting mechanism.",
+    "prediction": "tau_D*dD_plus/dt=sum_k(g_plus_k*(r_k-2))-D_plus, and likewise for minus. Query prediction is D_plus-D_minus, with the frozen positive gamma_G.",
+    "teaching": "tau_S*dS_plus/dt=(1-kappa*m)*D_plus+kappa*m*d/2-S_plus; tau_S*dS_minus/dt=(1-kappa*m)*D_minus-kappa*m*d/2-S_minus. m is teaching availability, one on support and zero on query, never target correctness.",
+    "normalization": "n=2*sum_k(abs(r_k-2)) equals sum_k(x_k*x_k) for the frozen binary cue geometry. Pooling is instantaneous in this candidate. Error gain is implemented by a shunting-like dynamic, not an externally evaluated reciprocal.",
+    "error": "C=(S_plus-D_plus)-(S_minus-D_minus); tau_E*dE_plus/dt=C/2-(epsilon+n)*E_plus; tau_E*dE_minus/dt=-C/2-(epsilon+n)*E_minus. C uses only actual compartment states, never d-dot(w,x) computed outside the circuit.",
+    "plasticity": "dg_plus_k/dt=alpha*m*z*(r_k-2)*E_plus and dg_minus_k/dt=alpha*m*z*(r_k-2)*E_minus; each efficacy is projected into [0,2] after each RK4 step. Any active bound on a formal valid-input trajectory fails the claimed unsaturated equivalence, but remains a valid reported bounded-circuit result.",
+    "rate_sign": "All afferent efficacies are excitatory into opposing populations; fixed subtractive comparators require inhibitory relays with fixed output sign. The six activity deviations are represented relative to a fixed baseline 64; track baseline-plus-deviation nonnegativity. This is a rate-level opponent realization, not an anatomically validated conductance or spike model.",
+    "gain_mapping": "kappa=0.5; alpha=-log(1-eta)/kappa, inherited from each frozen eta and support duration 1. In the fast-compartment, negligible-epsilon limit this reproduces the original discrete eta. No parameter fitting corrects finite-time discrepancies.",
+    "epsilon": 1e-8,
+    "kappa": 0.5,
+    "efficacy_initial": 1.0,
+    "efficacy_bounds": [0.0, 2.0],
+    "presynaptic_baseline": 2.0,
+    "activity_baseline": 64.0,
+    "support_duration": 1.0,
+    "query_duration": 0.1,
+    "base_tau_D": 0.002,
+    "base_tau_S": 0.002,
+    "base_tau_E": 0.06,
+    "scales": {"fast": 0.5, "primary": 1.0, "slow": 2.0},
+    "time_units": "Dimensionless, not fitted milliseconds. Neither an empirical membrane constant nor a biological learning-rate estimate.",
+    "query": "m=0 guarantees no writes even with residual E or S activity. Integrate the decoupled prediction compartments analytically for the fixed duration, sequentially across the supplied queries without resets; this is the exact query solution of the same circuit. Record/query-check unchanged efficacies."
+  },
+  "numerics": {
+    "integrator": "Fixed-step RK4 for support, including both efficacy arrays and all six compartment states, projection only after the complete step.",
+    "steps_per_support": [4096, 8192],
+    "primary_steps": 4096,
+    "dtype": "float64",
+    "runtime": "CUDA, torch.compile fullgraph=True mode=default over a fixed short integration chunk; no TF32; torch/BLAS/compiler threads=1. GPU invisibility may be checked outside the sandbox. No all-core CPU use.",
+    "cpu_reference": "Independent small affine matrix-exponential propagation for the unsaturated effective dynamics, using scipy.linalg.expm on CPU with one BLAS thread; reconstruct efficacy changes by integrating the actual error state. This is a numerical reference, not the candidate or a least-squares evidence solver.",
+    "array_bridge_atol": 1e-5,
+    "algebra_atol": 1e-9,
+    "integration_atol": 1e-5,
+    "query_atol": 0.005,
+    "run_directory": "artifacts/runs/score_circuit_v1/evaluation-v1"
+  },
+  "non_liu_qualification": {
+    "seed": 930101,
+    "fixtures": "Fixed synthetic cue/rate/evidence fixtures, no Liu arrays or training. Verify positive/negative/zero error writes; z=0 and m=0 exact no-write; left/right plus teaching reversal invariance; no instantaneous update for initially equal compartments; shunting steady-state identity; nonnegative rates and efficacies; g_plus+g_minus=2 when unsaturated; deliberate boundary engagement; compiler/eager parity; timestep refinement; affine-reference agreement; duration response.",
+    "deliberate_bound_case": "A synthetic out-of-task teaching magnitude must engage the fixed efficacy bound; report its departure from the unbounded reference rather than silently bypassing clipping.",
+    "duration": "One isolated fixed relation at durations 0.25,0.5,1,2; compare to exact finite-time affine reference and report the fast-limit exponential learning prediction. This is not a fitted human learning curve.",
+    "stop": "Resolve implementation bugs using non-Liu fixtures before the implementation lock. Do not choose new circuit constants or acceptance margins from formal input outcomes."
+  },
+  "conditions": {
+    "mandatory": "Every scale fast/primary/slow at both fixed step sizes, all three mandatory fits and both saved generic/Liu domains. No selection of a best scale or seed.",
+    "reference": "The original frozen linear normalized discrete score update, with per-support w trajectories retained. Reconstruct its saved margins and states before comparison.",
+    "teacher_off": "At primary scale/steps set m=0 during all support presentations. Keep original feature input and z. Expect neutral weights and chance exact-tie-scored performance.",
+    "mismatch_clamp": "At primary scale/steps retain teaching drive but set the shared actual compartment mismatch C to zero. Expect no efficacy changes; this is an implementation/mechanism consistency control, not an independent behavioral discovery.",
+    "teaching_shuffle": "At primary scale/steps circularly shift support d by one presentation within each episode, preserving its multiset while breaking current feature-teaching matching. Do not alter z or x. Report paired correctness change; a positive effect alone is not a prerequisite for numerical correspondence.",
+    "query_checks": "At primary scale/steps compare 0.05,0.1,0.2 query durations and forward/reversed query order after restoring index order, without any writing. No best readout time selection."
+  },
+  "estimands": {
+    "trajectory": "Maximum absolute per-support effective state difference from original w; maximum paired-sum error; efficacy extrema/bound engagements and baseline-shifted activity minima; numerical reference and coarse/fine differences.",
+    "behavior": "Per-episode/subject correct probability and exact accuracy for generic learned/nonlearned, and Liu overall/learned/nonlearned/retained/omitted. Use T=1 generic and frozen T=0.25 Liu; include N/exclusions. Original nine-row qualitative and quantitative results are preserved as historical anchors, never reclassified by the new endpoint names.",
+    "behavior_map": "For primary scale and primary steps only, also run the original nine-row sampled behavior estimator using the original frozen sampling settings/seeds and unchanged human benchmarks. All nine rows must be reported; quantitative improvement is not a selection rule or scientific success criterion.",
+    "uncertainty": "Paired subjectwise differences and percentile mean bootstrap, 10000 resamples, 95% intervals, seed 98000+fit seed, separate per fit and domain, drop undefined group subjects before resampling. No participant pooling across fits.",
+    "controls": "Teacher-off, mismatch-clamp and teaching-shuffle per-subject endpoints; after-training withdrawal of teaching is the normal query condition, not a separate retraining condition.",
+    "complexity": "Report 30 integrated nonnegative efficacies plus six effective compartment/error states (36 scalars), compared with 15 original effective weights; fixed connectivity, baselines, pooling and centered-activity assumptions; external z/cue encoding state is not counted as absent. No extra learned parameter, optimizer or local trace."
+  },
+  "decision": {
+    "integrity": "Parent witnesses/parameters/input hashes, output finite/type contracts, original margin reconstruction and integration/reference checks all pass, or mark execution noninterpretable rather than a mechanism failure.",
+    "physical_constraints": "All valid-input rates/efficacies remain nonnegative, all efficacies <=2, no bound engagement on registered valid inputs, paired efficacy sums remain 2 within algebra_atol, and query no-write and mapping invariants pass.",
+    "correspondence": "For every scale and fit, per-support effective-state maximum difference <=0.01 and oriented query-margin maximum difference <=0.1 from the original discrete learner. Report violations without adjusting tau or gain.",
+    "behavior_preservation": "For every scale and fit at primary steps, each predefined correctness-probability difference CI lies entirely in [-0.01,0.01]; exact accuracy mean absolute difference <=0.01 for each group; generic original competence thresholds retained. Primary sampled behavior retains all nine qualitative rows. Historical quantitative failures remain visible.",
+    "robustness": "All coarse/fine effective-state and query-margin differences <=integration_atol; finite-time affine reference agrees at primary scale for every saved Liu episode; query duration/order disagreement <=query_atol at primary scale. All three scale conditions required, not chosen post hoc.",
+    "outcomes": ["conditional_circuit_sufficiency", "qualified_circuit_mismatch", "noninterpretable_execution"],
+    "rule": "conditional_circuit_sufficiency only if integrity, physical constraints, correspondence, behavior preservation and robustness all pass in each of the three fits. Otherwise preserve valid positive links and report qualified_circuit_mismatch if integrity passed. No biological/human confirmation outcome exists."
+  },
+  "boundaries": [
+    "The circuit tests conditional rate-level implementability. Centered presynaptic activity, opposite teaching signs, fixed baseline cancellation, pooled gain, stable evidence admission and neutral episode initialization remain explicit assumptions, not validated cellular mechanisms.",
+    "Stable z is supplied by the original external encoder; its persistent relation-specific implementation is not explained by these 36 states. No new gate, noise model, eligibility mechanism, BTSP or dopamine interpretation is introduced.",
+    "The exact sign wiring and nonnegative efficacy implementation do not establish a full conductance-based or spiking realization, a brain-region attribution, or a human mechanism.",
+    "No training, eta/gamma/temperature calibration, new seed search, altered task evidence, feedback during query, human fitting, or main-model promotion. The source diagnosis and all historical studies remain frozen.",
+    "The new worktree is detached from the locked dev parent; scoped validated commits are pushed to origin/dev without a new remote branch. The original worktree files remain untouched."
+  ],
+  "references": [
+    "https://pubmed.ncbi.nlm.nih.gov/24507189/",
+    "https://www.nature.com/articles/nature13664",
+    "https://www.nature.com/articles/nn.4249"
+  ],
+  "deliverables": ["Committed prospective protocol and study registration", "Independent worktree and auditable source/input/parameter lock", "Non-Liu qualification tests and record", "All mandatory circuit/reference/control evaluations with typed raw arrays", "Independent numerical/endpoint/decision verification", "Report preserving positive and negative findings and unresolved biological assumptions", "Scoped repository validation and clean commits pushed to origin/dev"],
+  "stop_rule": "Execute the complete fixed matrix once after qualification and lock, report all seeds/scales/controls, then stop. A valid failure does not authorize changing the parameters, bounds, admission, readout, or the current candidate. Any successor biological constraint requires a new prospective question."
+}

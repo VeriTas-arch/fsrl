@@ -212,6 +212,10 @@ trajectories.
     nonlearned acute local cost is exactly cross-address expression, with separate small
     global-fit differences. All 927 estimates independently verified. The fixed
     diagnostic study is complete.
+- [Score-only: finite-time opponent circuit realization](score_circuit/README.md) — `frozen_contract`
+  - **Finding:** Prospective protocol only. Three frozen score-only fits; no training or
+    calibration. Non-Liu qualification and joint implementation/input lock must precede
+    the complete circuit evaluation matrix.
 
 ## One-factor structural transport
 

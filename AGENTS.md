@@ -108,6 +108,15 @@ Its fixed three-stream diagnostic execution is now complete and frozen.
 Further analysis axes or model changes require a new prospective authorization;
 the completed diagnostic controls are not a standing tuning program.
 
+The user has opened `score_circuit` in an independent worktree: a frozen-parameter
+test of a finite-time opponent compartment realization of score-only, not a
+behavioral repair. Its prospective authority is [`studies/score_circuit/`](studies/score_circuit/).
+Freeze the protocol, qualify on non-Liu fixtures, then jointly lock all three
+existing fits, saved inputs and implementation before evaluation. No training,
+calibration or main-model promotion is authorized. Keep the original checkout
+files untouched; the detached dev-descendant worktree may push scoped, validated
+commits directly to `origin/dev` without creating a remote branch.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,
