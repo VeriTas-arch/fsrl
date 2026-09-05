@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "minimal_learner_diagnostics_v1",
+  "question": "Where do the exposed single-stage minimal learner's quantitative behavior differences arise: evidence admission, finite online integration, fixed choice readout, or local cross-address expression?",
+  "evidence_grade": "Prospectively specified diagnosis of exposed frozen model artifacts, not fresh confirmation, model selection, human fitting, or a new trained candidate.",
+  "parent_commit": "5faae497f7bbeec5b1ca7e55fab3abf45251d5e9",
+  "parent_manifest": "studies/minimal_relational_learner/study.toml",
+  "parent_manifest_sha256": "30a0feefde5565e0f93102bd515744f692a3e2d06e8ab1d55b2a2614cb2a008f",
+  "seeds": [2111, 2112, 2113],
+  "conditions": ["score_only", "score_trace"],
+  "data": {
+    "source": "All six registered minimal_relational_learner_v1 NPZ and canonical JSON, original protocol and source/artifact locks, with record hashes and parent Git witnesses verified.",
+    "evaluation": "Only the saved Liu support/query arrays and masks; 77 subjects, 32 support presentations, 56 ordered queries, fixed liu_v2 task. Generic competence and all nine original behavior rows are retained as frozen anchors, not rerun or reclassified.",
+    "parameters": "Use each fit's frozen eta, gamma_G, gamma_L from the canonical result, already witnessed by the original all-artifact lock. No checkpoint updates or parameter estimation.",
+    "information_boundary": "References use only observed support cue differences and signed metric values. True ranks and pair labels are used solely for scoring/diagnostic grouping, never for state construction. z=0 skips an update; it is not a zero-value observation."
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "float64",
+    "blas_threads": 1,
+    "reason": "Small saved-array algebra, 15-column SVD, and participant bootstrap; no neural training, gradient execution, or GPU rollout. No all-core execution.",
+    "run_directory": "artifacts/runs/minimal_learner_diagnostics_v1/analysis-v1"
+  },
+  "integrity": {
+    "float32_bridge_atol": 0.00001,
+    "algebra_atol": 0.0000000001,
+    "svd_rcond": 0.000000000001,
+    "rank_tie_tolerance": 0.0000000001,
+    "prerequisites": [
+      "Original per-fit competence and nine qualitative flags passed; old outcomes unchanged.",
+      "Protocol committed/pushed before diagnostic implementation; implementation and all inputs jointly locked/committed/pushed before analysis.",
+      "All six registered arrays and input/source witnesses valid; paired source inputs equal where their contracts require equality.",
+      "Float64 online replay reconstructs saved global margins and states within float32_bridge_atol; local decomposition reconstructs saved local margins within the same tolerance.",
+      "Both orientations and the frozen mask ordering reconstruct; exact factor, sigmoid-attribution, and SVD residual identities pass.",
+      "New inputs and locked implementation remain unchanged after analysis; no frozen record overwritten."
+    ],
+    "failure": "Any violated integrity identity makes the affected execution noninterpretable. Preserve its failed run manifest; do not silently patch/reuse the scientific run."
+  },
+  "global_diagnostic": {
+    "recipe": "score_only for every mandatory seed",
+    "cells": {
+      "RF": "Retained admission z with original finite 32-step online update, original eta and gamma_G; w0=0.",
+      "AF": "All observed evidence admitted (z=1), otherwise exactly RF: same cues, d, order, number of steps, eta and gamma_G.",
+      "RL": "Minimum-norm least-squares state solving retained observed Xw=d; zero rows are omitted, not assigned d=0. Use np.linalg.lstsq rcond=1e-12, zero state if no retained row; same gamma_G.",
+      "AL": "Same least-squares reference as RL with all actually presented support evidence."
+    },
+    "reference_boundary": "The L cells are offline computational references, not extra training, new human posterior comparators, biological implementations, or correctness targets. Their difference from F includes removal of finite-order effects under the specified minimum-norm convention. A cells change a model admission assumption, not what was presented to the participant. Higher reference accuracy is not better human fidelity.",
+    "contrasts": {
+      "admission_at_finite": "AF-RF",
+      "integration_at_retained": "RL-RF",
+      "admission_at_least_squares": "AL-RL",
+      "integration_at_all": "AL-AF",
+      "interaction": "(AL-RL)-(AF-RF)",
+      "total": "AL-RF"
+    },
+    "endpoints": [
+      "Correct probability and exact-decision accuracy for overall, learned, nonlearned, retained and omitted groups, averaging orientations after sigmoid at fixed T=0.25.",
+      "Per-subject nonlearned OLS probability-distance slope over the fixed 20 unordered pairs.",
+      "Per-subject nonlearned serial endpoint contrast: item-position mean probability profile, mean of first and last positions minus mean of six interior positions, each position averaging its incident nonlearned pairs; same positional weighting as the frozen endpoint_statistics definition.",
+      "Strict latent correct-order fraction over all 77 subjects: all true-adjacent score differences exceed 1e-10; tied/incorrect remainder reported, not called the historical sampled ranking classifier.",
+      "Latent true-pair discordance fraction (wrong=1, tie within 1e-10=0.5), and retained/all support RMSE in observed metric units."
+    ],
+    "coverage": "Report retained support-graph connected-component count per subject and RF/RL strict-order outcomes by connected vs disconnected cohorts; also probability means by these cohorts. This is a prespecified mechanistic stratifier, not a new fitted evidence definition or covariate search.",
+    "raw": "Save all four states, oriented margins, subject endpoint vectors, support residuals, SVD ranks, component counts and per-pair expected/exact correctness."
+  },
+  "readout_diagnostic": {
+    "parameters": "No temperature/gain interventions, grid, calibration, choice resampling, or revised human intervals.",
+    "estimands": [
+      "RF probability minus RF exact-decision endpoints, including distance and serial contrasts, at frozen T=0.25.",
+      "For correct RF margins, report probability shortfall from 1; for wrong RF margins, probability rescue above 0; report exact ties separately. Report groupwise subject contributions and their exact sum to probability-minus-exact accuracy.",
+      "Report gamma_G/T and raw latent order diagnostics separately from the original sampled behavior metrics and cohort definitions copied from the frozen parent result."
+    ],
+    "boundary": "Positive scalar gain cannot change latent ordering; it can change sampled rankings. Deterministic latent order is not the historical Hodge ranking class inferred from sampled choices. The fixed-readout decomposition does not identify an optimal choice rule."
+  },
+  "local_diagnostic": {
+    "recipe": "score_trace for every mandatory seed; same frozen local evidence and normalized antisymmetric cue keys",
+    "margin_identity": "l_q = sum_t gamma_L * local_evidence_t * dot(k_t,k_q) = self_q + cross_q. Self means the same unordered support/query pair; reverse orientations preserve the signed key. Save each trial-query contribution. For nonlearned queries self_q is identically zero.",
+    "cells": ["G", "G+self", "G+cross", "G+self+cross"],
+    "probability_attribution": "Two-order Shapley identity at fixed sigmoid: self_effect=0.5*((p(G+self)-p(G))+(p(G+self+cross)-p(G+cross))); cross_effect=0.5*((p(G+cross)-p(G))+(p(G+self+cross)-p(G+self))); sum equals intact-minus-G. Also report full-minus-self-only nonlearned effect, exactly cross-only there.",
+    "groups": ["overall", "learned", "nonlearned", "retained", "omitted"],
+    "between_recipe_bridge": "Trace intact minus independently fitted score-only = (trace intact minus trace G) + (trace G minus score-only RF), in probability for each participant/group; never attribute differing fitted global parameters to the local ablation.",
+    "boundary": "Self-only expression uses relation identity only as an offline attribution control; it is not a deployable candidate or permission to provide a learned-query flag. No new address function, routing gate, write rule, or local gain is trained."
+  },
+  "statistics": {
+    "samples": 10000,
+    "interval": 0.95,
+    "seed_offset": 97000,
+    "estimator": "Existing participant multinomial bootstrap and percentile mean intervals, each fit separately. Paired contrasts use subjectwise differences. Drop undefined group subjects before resampling; report N and excluded indices. No participant pooling, network population bootstrap, multiplicity-adjusted confirmation, or post-hoc axis selection.",
+    "direction_label": "A contrast is consistently positive/negative only if each of the three individual 95% intervals lies strictly above/below zero. Otherwise report mixed_or_uncertain. These are descriptive diagnostic direction labels without familywise confirmation or new materiality thresholds.",
+    "closure": "No PASS conjunction, equivalence-to-human decision, noise-hypothesis acceptance, or main-model promotion. Report every frozen contrast regardless of direction."
+  },
+  "deliverables": [
+    "Separate immutable protocol, source/input execution lock, typed NPZ arrays, canonical JSON with all participant denominators and intervals, and interpretation report.",
+    "Synthetic tests before source lock for reconstruction, mask semantics, SVD empty/rank-deficient cases, orientation signs, local self/cross isolation, fixed-sigmoid exact attribution and paired between-recipe identity.",
+    "Independent post-execution reconstruction of numerical identities from registered arrays; repository/provenance checks; scoped commit and clean origin/dev push."
+  ],
+  "stop_rule": "After all three fixed-fit analyses, stop and report which model-level routes are localized and which remain unidentified. No retraining, additional seeds, eta/gain/temperature searches, encoding-noise implementation, human fitting, new task battery or reopening closed families. A model change requires a separately authorized prospective question.",
+  "claim_boundary": "These controls locate consequences of assumptions in an already exposed minimal learner. They cannot establish human encoding precision, recover unavailable participant support histories, identify a unique human mechanism, or make a quantitatively incomplete model the final main model."
+}

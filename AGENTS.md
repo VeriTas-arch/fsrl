@@ -97,6 +97,14 @@ The registered execution gates are not standing permission for another run:
 extra training, evaluation, calibration, or candidate repair requires a new
 explicitly authorized prospective question.
 
+The user has opened `minimal_learner_diagnostics`: a prospective analysis of
+the six already exposed minimal-learner fits, without training or calibration.
+Its authority is [`studies/minimal_learner_diagnostics/`](studies/minimal_learner_diagnostics/).
+Freeze the diagnostic contract and implementation/input witnesses before
+execution. This admission covers encoding/integration references, fixed-readout
+analysis, and exact local cross-address attribution only; it does not authorize
+an encoding-noise candidate, new training, or main-model promotion.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,
