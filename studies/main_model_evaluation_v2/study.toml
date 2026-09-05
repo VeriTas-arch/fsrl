@@ -3,11 +3,11 @@ id = "main_model_evaluation_v2"
 title = "Claim-relative single-stage main-model evaluation"
 chapter = "minimal_models"
 order = 60
-status = "frozen_contract"
+status = "supporting"
 review_state = "indexed"
 question = "How should core Liu-mechanism adequacy be distinguished from strict full quantitative fidelity, and what do the frozen Resampled outputs imply for the next minimal single-stage learner?"
-finding = "The claim-relative evaluation contract, qualified read-only evaluator and all-input execution lock are frozen. It preserves the complete legacy 9/9 metric while adding a core-mechanism label, a joint ranking-composition profile and an internal-to-sampled localization. No new result or model promotion is registered yet."
-boundary = "Evaluation and read-only diagnostic authority only. The current Resampled result is exposed and may be classified retrospectively but not confirmed under the new threshold. No training, calibration, candidate repair, human fitting or main-model promotion is authorized."
+finding = "All three frozen Resampled fits retrospectively satisfy the added core-behavior layer while retaining their legacy 8/9 quantitative pilot status. Internal strict correctness is only about 3.4%, and sampled choice has no directional net effect on correct-ranker prevalence; ranking-composition TV is about 0.118. This supports targeting the update rule before the readout, while retaining sampling inconsistency as a separate boundary."
+boundary = "Retrospective evaluation of exposed simulations, not prospective validation of the new 0.90 threshold, full quantitative fidelity, human latent-state measurement or main-model promotion. No training, calibration, candidate repair or human fitting occurred."
 
 [[records]]
 path = "records/benchmarks/main_model_evaluation_v2.json"
@@ -35,3 +35,39 @@ role = "execution_lock"
 sha256 = "ccecca1a2a6f25e43c6710fcd2faaba8628c481b62188bc740c49b0020618863"
 bytes = 17409
 source_ref = "sha256:ccecca1a2a6f25e43c6710fcd2faaba8628c481b62188bc740c49b0020618863"
+
+[[records]]
+path = "records/results/main_model_evaluation_v2.json"
+legacy_path = "studies/main_model_evaluation_v2/records/results/main_model_evaluation_v2.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "c134122bb6a656feb25cfdcf12b19307b55dd22f3a9e8cc418d25ac043e2bed6"
+bytes = 19170
+source_ref = "sha256:c134122bb6a656feb25cfdcf12b19307b55dd22f3a9e8cc418d25ac043e2bed6"
+
+[[records]]
+path = "records/results/main_model_evaluation_v2.npz"
+legacy_path = "studies/main_model_evaluation_v2/records/results/main_model_evaluation_v2.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5f9d9b10435d55ff40cd432b30efa10dc58f07b111c58c4a532a7acafe31b1d4"
+bytes = 9420
+source_ref = "sha256:5f9d9b10435d55ff40cd432b30efa10dc58f07b111c58c4a532a7acafe31b1d4"
+
+[[records]]
+path = "records/reports/main_model_evaluation_v2.md"
+legacy_path = "studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.md"
+origin = "native"
+role = "report"
+sha256 = "2507e6033c7114ea4189889783ac2bec66506dd1aa6edad5fa8e404ec7643b34"
+bytes = 5231
+source_ref = "sha256:2507e6033c7114ea4189889783ac2bec66506dd1aa6edad5fa8e404ec7643b34"
+
+[[records]]
+path = "records/reports/main_model_evaluation_v2.interpretation.md"
+legacy_path = "studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.interpretation.md"
+origin = "native"
+role = "report"
+sha256 = "5ce1b39433b7d0e4ec86832e12edd0f891aadbbde6c9f1c877e94171f87221c8"
+bytes = 8640
+source_ref = "sha256:5ce1b39433b7d0e4ec86832e12edd0f891aadbbde6c9f1c877e94171f87221c8"

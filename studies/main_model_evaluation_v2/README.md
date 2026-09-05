@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `supporting`
 - **Review state:** `indexed`
 - **Study ID:** `main_model_evaluation_v2`
 
@@ -25,15 +25,17 @@
 quantitative fidelity, and what do the frozen Resampled outputs imply for the next
 minimal single-stage learner?
 
-**Finding.** The claim-relative evaluation contract, qualified read-only evaluator and
-all-input execution lock are frozen. It preserves the complete legacy 9/9 metric while
-adding a core-mechanism label, a joint ranking-composition profile and an
-internal-to-sampled localization. No new result or model promotion is registered yet.
+**Finding.** All three frozen Resampled fits retrospectively satisfy the added
+core-behavior layer while retaining their legacy 8/9 quantitative pilot status. Internal
+strict correctness is only about 3.4%, and sampled choice has no directional net effect
+on correct-ranker prevalence; ranking-composition TV is about 0.118. This supports
+targeting the update rule before the readout, while retaining sampling inconsistency as
+a separate boundary.
 
-**Claim boundary.** Evaluation and read-only diagnostic authority only. The current
-Resampled result is exposed and may be classified retrospectively but not confirmed
-under the new threshold. No training, calibration, candidate repair, human fitting or
-main-model promotion is authorized.
+**Claim boundary.** Retrospective evaluation of exposed simulations, not prospective
+validation of the new 0.90 threshold, full quantitative fidelity, human latent-state
+measurement or main-model promotion. No training, calibration, candidate repair or human
+fitting occurred.
 
 ## Frozen records
 
@@ -46,6 +48,18 @@ main-model promotion is authorized.
 - `execution_lock` —
   [studies/main_model_evaluation_v2/records/benchmarks/main_model_evaluation_v2.execution_lock.json](records/benchmarks/main_model_evaluation_v2.execution_lock.json)
   (`sha256:ccecca1a2a6f`)
+- `frozen_result` —
+  [studies/main_model_evaluation_v2/records/results/main_model_evaluation_v2.json](records/results/main_model_evaluation_v2.json)
+  (`sha256:c134122bb6a6`)
+- `supporting_artifact` —
+  [studies/main_model_evaluation_v2/records/results/main_model_evaluation_v2.npz](records/results/main_model_evaluation_v2.npz)
+  (`sha256:5f9d9b10435d`)
+- `report` —
+  [studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.md](records/reports/main_model_evaluation_v2.md)
+  (`sha256:2507e6033c71`)
+- `report` —
+  [studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.interpretation.md](records/reports/main_model_evaluation_v2.interpretation.md)
+  (`sha256:5ce1b39433b7`)
 
 ## Provenance rule
 

@@ -1,0 +1,628 @@
+{
+  "arrays": {
+    "bytes": 9420,
+    "path": "studies/main_model_evaluation_v2/records/results/main_model_evaluation_v2.npz",
+    "sha256": "5f9d9b10435d55ff40cd432b30efa10dc58f07b111c58c4a532a7acafe31b1d4"
+  },
+  "claim_boundary": "The result can distinguish a strict calibration label from a core working-model gate and localize internal-to-sampled behavior in exposed simulations. It cannot validate the 0.90 threshold, identify a human latent state, authorize training or establish a biological or human mechanism.",
+  "contract_sha256": "bbdedc41384987f3c38588c29f14b6ee88203991543edb2980e8073f3f9ce41b",
+  "execution_lock": {
+    "bytes": 17409,
+    "path": "studies/main_model_evaluation_v2/records/benchmarks/main_model_evaluation_v2.execution_lock.json",
+    "sha256": "ccecca1a2a6f25e43c6710fcd2faaba8628c481b62188bc740c49b0020618863"
+  },
+  "experiment_id": "main_model_evaluation_v2",
+  "fits": {
+    "2114": {
+      "core_stability_threshold_prospective_for_this_fit": false,
+      "difficulty_guardrails": {
+        "learned_accuracy": {
+          "classification": "mean_within_reference",
+          "interval": {
+            "lower": 0.8990860186688311,
+            "upper": 0.9016099837662336
+          },
+          "mean": 0.9003603896103896,
+          "reference": {
+            "lower": 0.8931818181818183,
+            "upper": 0.933766233766234
+          },
+          "undefined_cohorts": []
+        },
+        "nonlearned_accuracy": {
+          "classification": "mean_within_reference",
+          "interval": {
+            "lower": 0.8318660673701297,
+            "upper": 0.8347532508116884
+          },
+          "mean": 0.8333241883116884,
+          "reference": {
+            "lower": 0.8033100649350651,
+            "upper": 0.8501964285714286
+          },
+          "undefined_cohorts": []
+        }
+      },
+      "internal_to_sampled": {
+        "classification": "direction_unresolved",
+        "internal_strict_correct": {
+          "interval": {
+            "lower": 0.03168749999999997,
+            "upper": 0.03574675324675323
+          },
+          "mean": 0.03370129870129881
+        },
+        "inversion_bins": {
+          "0": {
+            "interval": {
+              "lower": 0.03168749999999997,
+              "upper": 0.03574675324675323
+            },
+            "mean": 0.03370129870129881
+          },
+          "1": {
+            "interval": {
+              "lower": 0.11720779220779215,
+              "upper": 0.12506493506493502
+            },
+            "mean": 0.12113636363636365
+          },
+          "2-3": {
+            "interval": {
+              "lower": 0.34551948051948067,
+              "upper": 0.3568506493506494
+            },
+            "mean": 0.35120129870129885
+          },
+          "4+": {
+            "interval": {
+              "lower": 0.48662337662337657,
+              "upper": 0.501331168831169
+            },
+            "mean": 0.49396103896103943
+          }
+        },
+        "loss_flow": {
+          "interval": {
+            "lower": 0.005779220779220777,
+            "upper": 0.0075324675324675286
+          },
+          "mean": 0.006623376623376617
+        },
+        "net_sampling_shift": {
+          "interval": {
+            "lower": -0.0015909090909090912,
+            "upper": 0.0008766233766233767
+          },
+          "mean": -0.00035714285714285714
+        },
+        "rescue_flow": {
+          "interval": {
+            "lower": 0.005422077922077922,
+            "upper": 0.00714285714285714
+          },
+          "mean": 0.006266233766233761
+        },
+        "sampled_correct_all_subjects": {
+          "interval": {
+            "lower": 0.03133116883116882,
+            "upper": 0.035357142857142844
+          },
+          "mean": 0.03334415584415596
+        },
+        "transition": {
+          "incorrect": {
+            "correct": {
+              "interval": {
+                "lower": 0.005422077922077922,
+                "upper": 0.00714285714285714
+              },
+              "mean": 0.006266233766233761
+            },
+            "self_consistent_incorrect": {
+              "interval": {
+                "lower": 0.9401948051948054,
+                "upper": 0.9453896103896108
+              },
+              "mean": 0.9427922077922084
+            },
+            "self_inconsistent": {
+              "interval": {
+                "lower": 0.015779220779220764,
+                "upper": 0.01870129870129869
+              },
+              "mean": 0.01724025974025979
+            }
+          },
+          "strict_correct": {
+            "correct": {
+              "interval": {
+                "lower": 0.025194805194805193,
+                "upper": 0.028961038961038948
+              },
+              "mean": 0.027077922077922163
+            },
+            "self_consistent_incorrect": {
+              "interval": {
+                "lower": 0.005649350649350649,
+                "upper": 0.0074025974025973985
+              },
+              "mean": 0.006493506493506487
+            },
+            "self_inconsistent": {
+              "interval": {
+                "lower": 3.246753246753247e-05,
+                "upper": 0.00025974025974025974
+              },
+              "mean": 0.00012987012987012987
+            }
+          }
+        }
+      },
+      "legacy_full_quantitative_fidelity": false,
+      "legacy_joint_qualitative": {
+        "cohorts": 400,
+        "lower": 0.9514345181143852,
+        "rate": 0.9725,
+        "successes": 389,
+        "upper": 0.9845763637397046
+      },
+      "legacy_joint_quantitative": {
+        "cohorts": 400,
+        "lower": 0.010168386791664645,
+        "rate": 0.02,
+        "successes": 8,
+        "upper": 0.03896341576926
+      },
+      "legacy_pilot_rows": {
+        "qualitative": 9,
+        "quantitative": 8,
+        "total": 9
+      },
+      "ranking_composition": {
+        "correct": {
+          "interval": {
+            "lower": 0.031385998234221904,
+            "upper": 0.0354277802460697
+          },
+          "mean": 0.033404123946229325
+        },
+        "self_consistent_incorrect": {
+          "interval": {
+            "lower": 0.9472007635566192,
+            "upper": 0.9522584703235366
+          },
+          "mean": 0.9497498689906582
+        },
+        "self_inconsistent": {
+          "interval": {
+            "lower": 0.015381966848940522,
+            "upper": 0.018313948507632703
+          },
+          "mean": 0.016846007063112362
+        }
+      },
+      "ranking_composition_total_variation": {
+        "interval": {
+          "lower": 0.11615053870471627,
+          "upper": 0.12116186360788328
+        },
+        "mean": 0.11867844041922991
+      },
+      "retrospective_core_behavior_supported": true
+    },
+    "2115": {
+      "core_stability_threshold_prospective_for_this_fit": false,
+      "difficulty_guardrails": {
+        "learned_accuracy": {
+          "classification": "mean_within_reference",
+          "interval": {
+            "lower": 0.8991562500000002,
+            "upper": 0.901639620535714
+          },
+          "mean": 0.9004334415584415,
+          "reference": {
+            "lower": 0.8931818181818183,
+            "upper": 0.933766233766234
+          },
+          "undefined_cohorts": []
+        },
+        "nonlearned_accuracy": {
+          "classification": "mean_within_reference",
+          "interval": {
+            "lower": 0.8319420292207792,
+            "upper": 0.8348001988636361
+          },
+          "mean": 0.8333798701298701,
+          "reference": {
+            "lower": 0.8033100649350651,
+            "upper": 0.8501964285714286
+          },
+          "undefined_cohorts": []
+        }
+      },
+      "internal_to_sampled": {
+        "classification": "direction_unresolved",
+        "internal_strict_correct": {
+          "interval": {
+            "lower": 0.03194805194805193,
+            "upper": 0.03607142857142857
+          },
+          "mean": 0.03396103896103907
+        },
+        "inversion_bins": {
+          "0": {
+            "interval": {
+              "lower": 0.03194805194805193,
+              "upper": 0.03607142857142856
+            },
+            "mean": 0.03396103896103907
+          },
+          "1": {
+            "interval": {
+              "lower": 0.11698051948051948,
+              "upper": 0.12512987012987012
+            },
+            "mean": 0.12110389610389623
+          },
+          "2-3": {
+            "interval": {
+              "lower": 0.3459415584415585,
+              "upper": 0.3571761363636365
+            },
+            "mean": 0.3516233766233766
+          },
+          "4+": {
+            "interval": {
+              "lower": 0.48616801948051946,
+              "upper": 0.5006818181818182
+            },
+            "mean": 0.4933116883116886
+          }
+        },
+        "loss_flow": {
+          "interval": {
+            "lower": 0.005551948051948051,
+            "upper": 0.007337662337662334
+          },
+          "mean": 0.0064285714285714215
+        },
+        "net_sampling_shift": {
+          "interval": {
+            "lower": -0.0014935064935064934,
+            "upper": 0.0010389610389610385
+          },
+          "mean": -0.0002272727272727271
+        },
+        "rescue_flow": {
+          "interval": {
+            "lower": 0.005357142857142857,
+            "upper": 0.0070779220779220746
+          },
+          "mean": 0.006201298701298696
+        },
+        "sampled_correct_all_subjects": {
+          "interval": {
+            "lower": 0.03172077922077921,
+            "upper": 0.03577922077922078
+          },
+          "mean": 0.033733766233766345
+        },
+        "transition": {
+          "incorrect": {
+            "correct": {
+              "interval": {
+                "lower": 0.005357142857142857,
+                "upper": 0.0070779220779220746
+              },
+              "mean": 0.006201298701298696
+            },
+            "self_consistent_incorrect": {
+              "interval": {
+                "lower": 0.9400000000000002,
+                "upper": 0.9452272727272728
+              },
+              "mean": 0.9426298701298707
+            },
+            "self_inconsistent": {
+              "interval": {
+                "lower": 0.015746753246753235,
+                "upper": 0.01870211038961037
+              },
+              "mean": 0.017207792207792248
+            }
+          },
+          "strict_correct": {
+            "correct": {
+              "interval": {
+                "lower": 0.025714285714285693,
+                "upper": 0.02944805194805194
+              },
+              "mean": 0.027532467532467617
+            },
+            "self_consistent_incorrect": {
+              "interval": {
+                "lower": 0.005454545454545454,
+                "upper": 0.007207792207792203
+              },
+              "mean": 0.0062987012987012906
+            },
+            "self_inconsistent": {
+              "interval": {
+                "lower": 3.246753246753247e-05,
+                "upper": 0.00025974025974025974
+              },
+              "mean": 0.00012987012987012987
+            }
+          }
+        }
+      },
+      "legacy_full_quantitative_fidelity": false,
+      "legacy_joint_qualitative": {
+        "cohorts": 400,
+        "lower": 0.9514345181143852,
+        "rate": 0.9725,
+        "successes": 389,
+        "upper": 0.9845763637397046
+      },
+      "legacy_joint_quantitative": {
+        "cohorts": 400,
+        "lower": 0.010168386791664645,
+        "rate": 0.02,
+        "successes": 8,
+        "upper": 0.03896341576926
+      },
+      "legacy_pilot_rows": {
+        "qualitative": 9,
+        "quantitative": 8,
+        "total": 9
+      },
+      "ranking_composition": {
+        "correct": {
+          "interval": {
+            "lower": 0.03177949262360445,
+            "upper": 0.03586574547163362
+          },
+          "mean": 0.033795511506037934
+        },
+        "self_consistent_incorrect": {
+          "interval": {
+            "lower": 0.9468593928001823,
+            "upper": 0.9518070044429261
+          },
+          "mean": 0.9493554454317606
+        },
+        "self_inconsistent": {
+          "interval": {
+            "lower": 0.015410600079744805,
+            "upper": 0.018377119218500784
+          },
+          "mean": 0.016849043062200985
+        }
+      },
+      "ranking_composition_total_variation": {
+        "interval": {
+          "lower": 0.11581302688539528,
+          "upper": 0.12070401785714276
+        },
+        "mean": 0.1182840168603327
+      },
+      "retrospective_core_behavior_supported": true
+    },
+    "2116": {
+      "core_stability_threshold_prospective_for_this_fit": false,
+      "difficulty_guardrails": {
+        "learned_accuracy": {
+          "classification": "mean_within_reference",
+          "interval": {
+            "lower": 0.8992037337662336,
+            "upper": 0.9016973315746756
+          },
+          "mean": 0.9004517045454545,
+          "reference": {
+            "lower": 0.8931818181818183,
+            "upper": 0.933766233766234
+          },
+          "undefined_cohorts": []
+        },
+        "nonlearned_accuracy": {
+          "classification": "mean_within_reference",
+          "interval": {
+            "lower": 0.8318937987012988,
+            "upper": 0.8347655884740259
+          },
+          "mean": 0.8333464285714285,
+          "reference": {
+            "lower": 0.8033100649350651,
+            "upper": 0.8501964285714286
+          },
+          "undefined_cohorts": []
+        }
+      },
+      "internal_to_sampled": {
+        "classification": "direction_unresolved",
+        "internal_strict_correct": {
+          "interval": {
+            "lower": 0.031882305194805165,
+            "upper": 0.036006493506493494
+          },
+          "mean": 0.03392857142857154
+        },
+        "inversion_bins": {
+          "0": {
+            "interval": {
+              "lower": 0.031882305194805165,
+              "upper": 0.036006493506493494
+            },
+            "mean": 0.03392857142857154
+          },
+          "1": {
+            "interval": {
+              "lower": 0.11779220779220775,
+              "upper": 0.126038961038961
+            },
+            "mean": 0.12191558441558448
+          },
+          "2-3": {
+            "interval": {
+              "lower": 0.34568181818181815,
+              "upper": 0.3569155844155846
+            },
+            "mean": 0.3513636363636369
+          },
+          "4+": {
+            "interval": {
+              "lower": 0.4857142857142858,
+              "upper": 0.5001306818181821
+            },
+            "mean": 0.49279220779220767
+          }
+        },
+        "loss_flow": {
+          "interval": {
+            "lower": 0.005227272727272727,
+            "upper": 0.00691558441558441
+          },
+          "mean": 0.006071428571428564
+        },
+        "net_sampling_shift": {
+          "interval": {
+            "lower": -0.0008766233766233768,
+            "upper": 0.0016558441558441562
+          },
+          "mean": 0.0003896103896103896
+        },
+        "rescue_flow": {
+          "interval": {
+            "lower": 0.005584415584415583,
+            "upper": 0.007370129870129864
+          },
+          "mean": 0.0064610389610389556
+        },
+        "sampled_correct_all_subjects": {
+          "interval": {
+            "lower": 0.03227191558441556,
+            "upper": 0.036363636363636355
+          },
+          "mean": 0.034318181818181935
+        },
+        "transition": {
+          "incorrect": {
+            "correct": {
+              "interval": {
+                "lower": 0.005584415584415583,
+                "upper": 0.007370129870129864
+              },
+              "mean": 0.0064610389610389556
+            },
+            "self_consistent_incorrect": {
+              "interval": {
+                "lower": 0.9399025974025977,
+                "upper": 0.9451298701298703
+              },
+              "mean": 0.942564935064935
+            },
+            "self_inconsistent": {
+              "interval": {
+                "lower": 0.015519480519480511,
+                "upper": 0.018538961038961025
+              },
+              "mean": 0.01704545454545459
+            }
+          },
+          "strict_correct": {
+            "correct": {
+              "interval": {
+                "lower": 0.02594155844155843,
+                "upper": 0.029805194805194786
+              },
+              "mean": 0.027857142857142934
+            },
+            "self_consistent_incorrect": {
+              "interval": {
+                "lower": 0.005064935064935065,
+                "upper": 0.006688311688311685
+              },
+              "mean": 0.00587662337662337
+            },
+            "self_inconsistent": {
+              "interval": {
+                "lower": 6.493506493506494e-05,
+                "upper": 0.00035714285714285714
+              },
+              "mean": 0.00019480519480519483
+            }
+          }
+        }
+      },
+      "legacy_full_quantitative_fidelity": false,
+      "legacy_joint_qualitative": {
+        "cohorts": 400,
+        "lower": 0.9514345181143852,
+        "rate": 0.9725,
+        "successes": 389,
+        "upper": 0.9845763637397046
+      },
+      "legacy_joint_quantitative": {
+        "cohorts": 400,
+        "lower": 0.015423636260295411,
+        "rate": 0.0275,
+        "successes": 11,
+        "upper": 0.048565481885614784
+      },
+      "legacy_pilot_rows": {
+        "qualitative": 9,
+        "quantitative": 8,
+        "total": 9
+      },
+      "ranking_composition": {
+        "correct": {
+          "interval": {
+            "lower": 0.03231870528594212,
+            "upper": 0.036439909290271126
+          },
+          "mean": 0.03438163590795181
+        },
+        "self_consistent_incorrect": {
+          "interval": {
+            "lower": 0.9462622318580547,
+            "upper": 0.9513010802574621
+          },
+          "mean": 0.9488022271588055
+        },
+        "self_inconsistent": {
+          "interval": {
+            "lower": 0.015291005069491903,
+            "upper": 0.01830753916040099
+          },
+          "mean": 0.01681613693324223
+        }
+      },
+      "ranking_composition_total_variation": {
+        "interval": {
+          "lower": 0.11515843401116421,
+          "upper": 0.12018504699248113
+        },
+        "mean": 0.11769833105491001
+      },
+      "retrospective_core_behavior_supported": true
+    }
+  },
+  "labels": {
+    "core_working_model_eligible": false,
+    "full_quantitative_fidelity": false,
+    "retrospective_core_behavior_supported": true
+  },
+  "new_simulation_performed": false,
+  "next_model": {
+    "primary_candidate": "relation_specific_experience_dependent_plasticity",
+    "reason": "Test whether reducing late-code domination improves deterministic internal organization under the frozen paired-development design.",
+    "sampling_boundary": "The internal-to-sampled result is a separate policy-expression contribution and must not be attributed to the update rule.",
+    "training_authorized": false
+  },
+  "outcome": "retrospective_core_behavior_supported",
+  "sampling_localization": "direction_unresolved",
+  "schema_version": 1,
+  "source_commit": "cadf696e8382928b1a93e62078e1c7e8abc0df73",
+  "training_performed": false
+}

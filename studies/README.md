@@ -241,12 +241,13 @@ trajectories.
     inside their references. All-nine qualitative cohort pass rates are 97.25%; joint
     quantitative/qualitative rates are 2.00%, 2.00% and 2.75%, reported descriptively
     without a new cutoff. No parent-outcome revision or main-model promotion.
-- [Claim-relative single-stage main-model evaluation](main_model_evaluation_v2/README.md) — `frozen_contract`
-  - **Finding:** The claim-relative evaluation contract, qualified read-only evaluator
-    and all-input execution lock are frozen. It preserves the complete legacy 9/9 metric
-    while adding a core-mechanism label, a joint ranking-composition profile and an
-    internal-to-sampled localization. No new result or model promotion is registered
-    yet.
+- [Claim-relative single-stage main-model evaluation](main_model_evaluation_v2/README.md) — `supporting`
+  - **Finding:** All three frozen Resampled fits retrospectively satisfy the added
+    core-behavior layer while retaining their legacy 8/9 quantitative pilot status.
+    Internal strict correctness is only about 3.4%, and sampled choice has no
+    directional net effect on correct-ranker prevalence; ranking-composition TV is about
+    0.118. This supports targeting the update rule before the readout, while retaining
+    sampling inconsistency as a separate boundary.
 
 ## One-factor structural transport
 
