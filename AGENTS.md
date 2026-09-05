@@ -85,6 +85,14 @@ Follow its protocol, implementation-lock, all-artifact-lock, then evaluation
 sequence. This does not reopen historical experiments, human data collection,
 closed candidate families, or unrestricted model tuning.
 
+The user has also opened `minimal_relational_learner`: an independent compact
+metric-error score learner, with the confirmed local trace and a separately
+trained score-only baseline. Its prospective authority is
+[`studies/minimal_relational_learner/`](studies/minimal_relational_learner/).
+This is not a repair of joint training or a reconstruction of old P trajectories.
+Freeze its own behavior, local-use, history-sensitivity, and complexity criteria;
+do not inherit every historical intervention threshold or reopen human fitting.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

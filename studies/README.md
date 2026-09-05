@@ -191,6 +191,18 @@ fail to close the dynamics.
     exposure. The complete comparison is frozen with no automatic tuning or seed
     expansion.
 
+## Minimal explanatory models
+
+Test simpler task-level learners independently of reconstructing frozen recurrent
+trajectories.
+
+- [Minimal metric-error relational learner](minimal_relational_learner/README.md) — `frozen_contract`
+  - **Finding:** Prospective independent comparison of score_trace and independently
+    trained score_only on three paired training streams, with fixed final-step
+    selection, inherited task information, all nine behavior rows, and an exact
+    history-sensitivity bridge. No candidate has been implemented, trained, or evaluated
+    at registration.
+
 ## One-factor structural transport
 
 Test topology, presentation order, evidence density, and item count without silently

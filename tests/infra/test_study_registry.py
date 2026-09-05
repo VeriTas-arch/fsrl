@@ -54,7 +54,7 @@ class StudyRegistryTests(unittest.TestCase):
         self.assertEqual(len(migrated_studies), 42)
         self.assertTrue(migrated_studies.issubset(self.studies))
         self.assertEqual(self.validation["studies"], len(self.studies))
-        self.assertEqual(self.validation["chapters"], 9)
+        self.assertEqual(self.validation["chapters"], len(self.registry["chapters"]))
         self.assertEqual(self.validation["migrated_records"], 211)
         self.assertEqual(
             self.validation["records"], 211 + self.validation["native_records"]

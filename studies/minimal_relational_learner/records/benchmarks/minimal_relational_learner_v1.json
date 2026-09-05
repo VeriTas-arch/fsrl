@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_relational_learner",
+  "experiment_id": "minimal-relational-learner-v1",
+  "registration_status": "prospective_before_candidate_implementation_or_training",
+  "registration_parent_commit": "7bf44616f1e81e27683fcb93d1b51f652c993672",
+  "question": "Can a normalized online metric-error score learner, with or without the confirmed conjunctive local trace, explain the frozen Liu behavioral map without a plastic recurrent global constructor?",
+  "claim_boundary": {
+    "scope": "Independent model-side sufficiency study, not a joint-training repair, compression of old P trajectories, replication of Yang-Maass equations, or renewed human posterior-comparator search.",
+    "structural_priors": "Fixed item cues, additive score differences, a normalized delta rule, the inherited subject-encoding distribution and (only in score_trace) the fixed local rule are imposed. Additive geometry/transitivity of the global branch is not an emergent finding. Count fixed assumptions as well as trainable parameters.",
+    "human": "Existing Liu data and temperature informed project development. Newly trained runs are not new human-data confirmation. No human fitting, data collection, actual participant support-order reconstruction, or human model selection is authorized.",
+    "independence": "Three paired training streams, not three independent recurrent backbones. Initial scalar values are identical in all runs; stochasticity comes from generic episodes. Participant uncertainty is conditional on each fitted model, not a network population CI.",
+    "historical": "Preserve the complete joint-training outcome and all earlier studies. Historical models are frozen descriptive references, not targets for matching internal trajectories or refitting gains.",
+    "necessity": "An acute L-off intervention measures use by a fitted model; the separately trained score_only condition tests whether L is needed within this fixed two-recipe comparison. A failed baseline does not establish universal necessity.",
+    "biology": "Online stimulus/error-dependent updates are biological inspiration; the normalization, error circuit, fixed conjunction, and outer Adam/BPTT are not established human neural mechanisms."
+  },
+  "seeds": {
+    "mandatory": [
+      2111,
+      2112,
+      2113
+    ],
+    "conditions": [
+      "score_trace",
+      "score_only"
+    ],
+    "training_rng_offset": 100000,
+    "initialization": "Same fixed constrained scalar initial values in every run. No random network weights.",
+    "execution_order": {
+      "2111": [
+        "score_only",
+        "score_trace"
+      ],
+      "2112": [
+        "score_trace",
+        "score_only"
+      ],
+      "2113": [
+        "score_only",
+        "score_trace"
+      ]
+    },
+    "rule": "Execute all six final runs; no seed replacement, optional continuation, filtering, or result-dependent extension."
+  },
+  "task": {
+    "n_items": 8,
+    "cue_size": 15,
+    "min_edges": 7,
+    "max_edges": 10,
+    "support_blocks": 4,
+    "subject_encoding_mode": "stable_omission",
+    "encoding": "Unchanged SubjectEncodingConfig and original episode SubjectEncodingState; recover original p, never resample z across repetitions.",
+    "queries": "All 28 unordered generic pairs with original randomized orientation/order, equally weighted.",
+    "information": "Use original binary item cues and observed signed metric d; no true rank, query answer, learned/omitted flag, posterior, or diagnostic target in state/readout inputs. z,p are inherited internal evidence-admission hypotheses, not extra participant observations.",
+    "global_evidence": "z gates the ENTIRE update, not just d. z=0 means no update, never a target of equality.",
+    "local_evidence": "d * (z + (1-z)*p), with p recovered from original subject state and abs(displayed d)*(n_items-1).",
+    "split": "Reuse the frozen reflection-canonical SHA256 modulo-16 graph split from joint-training-strategy-v1: bucket 0 validation, 1..15 train. Exclude liu_v1/liu_v2 support signatures and reflections. Same generator, cue distribution and graph budget.",
+    "time": "Support events occur once in their given order, then query read-only terminal states. No extra presentations, query feedback, or hidden-state warmup observations."
+  },
+  "model": {
+    "global_state": "w in R^15, w0=0 each episode",
+    "relation_feature": "x=c_left-c_right",
+    "update": "w_next=w+eta*z*(d-dot(w,x))*x/(epsilon+dot(x,x))",
+    "epsilon": 1e-8,
+    "eta": "sigmoid(raw_eta), strictly between zero and one",
+    "global_read": "gamma_G*dot(w_T,c_left-c_right)",
+    "local_key": "Reuse antisymmetric_conjunctive_key(c_left,c_right,epsilon=1e-8)",
+    "local_state": "L in R^(15*15), L0=0; L_next=L+d*(z+(1-z)*p)*k once per support presentation",
+    "local_read": "gamma_L*dot(L_T,k_query)",
+    "margin": "M=global_read+local_read in score_trace; M=global_read in independently trained score_only",
+    "gains": "gamma_G=softplus(raw_global_gain); score_trace gamma_L=softplus(local.raw_gain). No local parameter/state in score_only.",
+    "parameters": "score_trace has exactly three trainable scalars; score_only has exactly two. Preserve original fixed local keys and writes; no learned projection, gate, auxiliary head, recurrent hidden state, extra optimizer phase or P penalty.",
+    "sign": "y=2*correct_action-1; positive M means left higher; binary query loss softplus(-y*M)."
+  },
+  "optimization": {
+    "total_steps": 1500,
+    "batch_size": 32,
+    "total_episode_exposures": 48000,
+    "initial_eta": 0.5,
+    "initial_global_gain": 1,
+    "initial_local_gain": 0.1,
+    "learning_rate": 0.01,
+    "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false",
+    "gradient_clip": 2,
+    "clipping": "One norm over all trainable scalar parameters of each model.",
+    "objective": "Mean binary cross-entropy of combined raw margins over all queries and episodes; no auxiliary loss or regularization.",
+    "training_temperature": 1,
+    "selection": "Fixed final step only. No validation-selected checkpoint, tuning, early stopping, extra steps or post-training calibration. This freezes a first recipe rather than claiming optimal generic development.",
+    "pairing": "Same per-step episodes, p/z, cues, support/query schedules and answers within each seed. Log numerical batch fingerprints and cumulative hash, actual Adam counters, scalar trajectory and losses.",
+    "warmup": "Warmup the compiled shape on the first batch of that shape without optimizer updates; no extra RNG draws; verify unchanged parameter hashes; exclude warmup from training timing and report separately."
+  },
+  "execution": {
+    "launcher": "python -m fsrl.infra.formal_runtime minimal-relational-learner",
+    "runtime_root": "artifacts/runs/minimal_relational_learner_v1",
+    "device": "CUDA required for training and candidate rollout; bounded CPU for numerical summaries and analytic diagnostics",
+    "compile": {
+      "fullgraph": true,
+      "mode": "default",
+      "backend": "inductor"
+    },
+    "threads": {
+      "torch": 1,
+      "interop": 1,
+      "blas": 1,
+      "compiler": 1
+    },
+    "precision": "float32 neural computation, no autocast/TF32; float64 statistics and analytic sensitivity audit",
+    "cost": "Record warmup and total/warm training seconds, per-episode inference timing with warmup excluded, peak allocated/reserved GPU memory, trainable scalars, persistent state entries, updates and episode exposure. Exact arithmetic state counts are not measured speed ratios; historical timings are descriptive, not a new head-to-head hardware benchmark."
+  },
+  "integrity": {
+    "smoke_seed": 910101,
+    "fixtures": "Non-Liu synthetic fixtures only before lock. Check z=0 exact no-op, p/z distinction, orientation reversal, gain constraints, episode reset/query no-write, fixed local-rule parity, task CE gradients and one Adam step for every scalar, paired streams, protected graph partition, independent score-only updates, and correct-sign conventions.",
+    "analytic": "Float64 derivative identity vs autograd and centered finite difference at fixed x/z/order/eta/gains. Sum_t d_t*S_tq equals global margin. Identity case no later update equals direct overlap. Tolerances analytic atol=1e-9 rtol=1e-7; finite difference atol=1e-6 rtol=1e-5.",
+    "cuda": "Eager versus fullgraph/default margins, loss, all scalar gradients and one Adam update: atol=1e-5 rtol=1e-4. Compare batched queries with single-query read from identical terminal states.",
+    "locking": "Commit/push protocol before implementation. Commit/push current implementation, then non-Liu smoke and source/input lock before all scientific training. Jointly lock/commit/push all six final artifacts before ANY generic or Liu evaluation. Never bypass locks to choose settings.",
+    "failure": "Preserve invalid attempts. Implementation-only repairs before scientific execution require new append-only witnesses under unchanged protocol. Optimization failure under a valid implementation is fixed-recipe insufficiency; no tuning using outcomes."
+  },
+  "evaluation": {
+    "generic": {
+      "episodes": 256,
+      "rng_seed": 84001,
+      "temperature": 1,
+      "partition": "bucket zero with protected Liu graphs excluded",
+      "conditions": [
+        "intact",
+        "local_off",
+        "global_off"
+      ],
+      "rule": "Same 256 tasks in both recipes/all seeds, sampled without any fitted-model-dependent selection."
+    },
+    "liu": {
+      "protocol_id": "liu_v2",
+      "subjects": 77,
+      "cue_mode": "permuted_shared",
+      "subject_encoding_mode": "stable_omission",
+      "cue_seed": 31001,
+      "support_seed": 31101,
+      "subject_encoding_seed": 31201,
+      "choice_seed": 31301,
+      "order_seed": 31401,
+      "query_shuffle_seed": 31801,
+      "evidence_shuffle_seed": 32301,
+      "temperature": 0.25,
+      "calibration": "Inherited historical human-informed temperature, fixed and not refit.",
+      "conditions": [
+        "intact",
+        "local_off",
+        "global_off",
+        "query_shuffle",
+        "evidence_shuffle"
+      ],
+      "controls": "In score_trace, query shuffle deranges canonical pair addresses within subject with reversal preserved; evidence shuffle deranges local values across support addresses within subject/block preserving multiset and timing. Never alter w, its evidence, or gains. Report global_off nonlearned to reveal local cross-talk. In score_only, unused local controls are exact identities/zero-global behavior, not counted as mechanism support.",
+      "behavior": "Use frozen nine-row definitions and human intervals through existing shared behavior/statistics functions; quantify every row, cohort and undefined endpoint. All nine qualitative flags define behavioral adequacy; all nine quantitative flags are descriptive and not new hard gates.",
+      "historical": "Read only frozen joint/staged results for seeds 2108/2109/2110 for all nine rows, probability groups and costs. No network pooling or fitted historical-model changes; different training seeds mean historical deltas are descriptive, not paired recipe effects."
+    },
+    "history": {
+      "definition": "At fixed cues, z, sequence and constrained parameters, a_t=eta*z_t/(epsilon+||x_t||^2), A_t=I-a_t*x_t*x_t^T. S_tq=gamma_G*a_t*x_q^T*A_(T-1)*...*A_(t+1)*x_t is derivative of terminal GLOBAL margin wrt displayed d_t.",
+      "decomposition": "D_tq=gamma_G*a_t*dot(x_q,x_t); H_tq=S_tq-D_tq. Preserve all S,D,H arrays. This separates direct feature overlap from future-update context, not semantic truth from geometry.",
+      "bridge": "For w0=0, g_q=sum_t d_t*S_tq exactly at fixed encoding. Also report sum d_t*D_tq and sum d_t*H_tq; their sum equals g_q. This is NOT a full intervention that recomputes p/z after changing d.",
+      "summary": "Within subject, report mean absolute d*S, d*D, d*H over all canonical queries/trials and separately remote pairs disjoint from the support pair. Report raw signed arrays; no slope-targeted selection, new fitted control, significance gate, or attribution of all history effects to useful inference.",
+      "geometry": "Report global and combined Hodge structure/transitive triplets. Pure global additivity is imposed; no high-Hodge success claim."
+    }
+  },
+  "statistics": {
+    "samples": 10000,
+    "interval": 0.95,
+    "bootstrap": "Liu seed 85000+training_seed, generic 86000+training_seed. Percentile participant/episode bootstrap, paired within training seed, endpoint complete cases before resampling. No pooling or population bootstrap.",
+    "probability": "Compute sigmoid(y*M/T) for each orientation before averaging; then equal-weight pairs within subject and subjects. Exact decision ties=0.5.",
+    "groups": "overall, learned, nonlearned, retained and omitted learned pairs for Liu; learned/nonlearned generic. Expose denominators/excluded indices; no performance-based participant filtering outside the frozen descriptive behavior-map cohorts."
+  },
+  "decision_contract": {
+    "competence": {
+      "generic_learned": 0.75,
+      "generic_nonlearned": 0.7,
+      "liu_overall": 0.75,
+      "liu_nonlearned": 0.7,
+      "measure": "Mean intact exact decision, not sampled choice or sigmoid probability."
+    },
+    "behavior": {
+      "reference_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json",
+      "adequacy": "All nine frozen qualitative rules independently in each run. Undefined fails, not dropped; all quantitative matches still reported."
+    },
+    "local_support": {
+      "omitted_contribution": "score_trace intact-minus-local_off omitted correct-probability CI lower >0",
+      "query_specificity": "score_trace intact-minus-query_shuffle learned probability CI lower >0",
+      "evidence_specificity": "score_trace intact-minus-evidence_shuffle learned probability CI lower >0",
+      "between_recipe": "score_trace-minus-score_only omitted probability CI lower >0",
+      "retained_preservation": "score_trace-minus-score_only retained probability CI lower >=-0.02",
+      "boundary": "No mandatory retained acute benefit size. Report retained and omitted probability headroom 1-p_global separately; do not assert a ceiling explanation without checking values. Positive acute use plus independent recipe comparison supports a local contribution only within this comparison."
+    },
+    "outcomes": {
+      "score_only_sufficient": "score_only passes competence and all nine qualitative rows; report score_trace regardless. Prefer the simpler sufficient recipe, without global minimality claim.",
+      "compact_dual_state_candidate": "score_only not behaviorally adequate; score_trace competent and adequate, and all five local_support rules pass.",
+      "compact_behavior_solution_mechanism_unresolved": "Only score_trace adequate but at least one local_support rule does not pass.",
+      "competent_behavior_incomplete": "Neither recipe behaviorally adequate, but at least one passes competence.",
+      "fixed_recipe_insufficient": "Neither recipe passes competence; preserve outcomes without asserting that the algorithm family cannot learn.",
+      "across_seeds": "Same outcome label only if all three paired streams individually meet it; otherwise heterogeneous, with complete per-run matrices. Computational state reduction reported separately, not used to override behavior."
+    },
+    "stop_rule": "After all six fixed training/evaluation runs, freeze and report. No extra seed, auxiliary objective, gain/temperature calibration, projection, alternative cue geometry, longer training or architecture patch. Only a separately authorized prospective question can follow. Failure localizes what this fixed recipe does not explain, not universal impossibility."
+  },
+  "deliverables": [
+    "Prospective protocol and native study registration",
+    "Non-Liu integrity/CUDA smoke and source/input lock with Git witness",
+    "Six final two/three-scalar checkpoints, configs, complete logs, data fingerprints and jointly committed artifact lock",
+    "All generic/Liu raw oriented margins, masks, routing and analytic history arrays as typed NPZ allow_pickle=False",
+    "Per-run/paired uncertainty, nine-row behavioral map, history bridge, local controls, complexity/costs, frozen historical comparison and explicit outcome/claim boundaries",
+    "Registered immutable JSON and human-readable report; full applicable checks, scoped dev commit, clean worktree and origin/dev push"
+  ]
+}
