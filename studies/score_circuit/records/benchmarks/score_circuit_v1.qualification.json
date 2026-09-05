@@ -1,0 +1,117 @@
+{
+  "checks": {
+    "affine/0.5/4096": 3.375077994860476e-14,
+    "affine/0.5/8192": 6.572520305780927e-14,
+    "affine/1.0/4096": 3.019806626980426e-14,
+    "affine/1.0/8192": 1.0480505352461478e-13,
+    "affine/2.0/4096": 4.440892098500626e-14,
+    "affine/2.0/8192": 4.085620730620576e-14,
+    "mismatch_clamp": true,
+    "teacher_off": true
+  },
+  "compiler": {
+    "compile_warmup_seconds": 37.15800615599437,
+    "max_abs_errors": [
+      2.220446049250313e-16,
+      0.0
+    ]
+  },
+  "deliberate_bound": {
+    "bounded_max_efficacy": 2.0,
+    "engagement_count": 97680.0,
+    "unbounded_max_efficacy": 2.64845334359273
+  },
+  "duration": {
+    "0.25": {
+      "fast_limit_fraction": 0.6761468159535633,
+      "realized_fraction": [
+        0.6735616628353859,
+        0.6734820922830589,
+        0.6736207022545797,
+        0.6735616628353108
+      ]
+    },
+    "0.5": {
+      "fast_limit_fraction": 0.8951191151829848,
+      "realized_fraction": [
+        0.8954399455631815,
+        0.8951519954807102,
+        0.8956567192428024,
+        0.8954399455631239
+      ]
+    },
+    "1.0": {
+      "fast_limit_fraction": 0.989,
+      "realized_fraction": [
+        0.9892725848492029,
+        0.9891889842979535,
+        0.9893353095139241,
+        0.9892725848491898
+      ]
+    },
+    "2.0": {
+      "fast_limit_fraction": 0.999879,
+      "realized_fraction": [
+        0.9998870844737118,
+        0.9998850578925581,
+        0.9998885921503076,
+        0.9998870844737178
+      ]
+    }
+  },
+  "experiment_id": "score_circuit_v1",
+  "liu_evaluated": false,
+  "passed": true,
+  "runtime": {
+    "blas_thread_limit": 1,
+    "blas_threadpools": [
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.188.0"
+      },
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.dev"
+      }
+    ],
+    "compiler_threads": 1,
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "device_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "execution_schema_version": 2,
+    "float32_matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "profile": {
+      "blas_threads": 1,
+      "compile": true,
+      "compile_backend": "inductor",
+      "compile_fullgraph": true,
+      "compile_mode": "default",
+      "cpu_threads": 1,
+      "device": "cuda",
+      "require_cuda": true
+    },
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.13.0+cu130"
+  },
+  "seed": 930101
+}
