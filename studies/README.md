@@ -204,9 +204,14 @@ trajectories.
     local-support rules and improves omitted probability, while reducing nonlearned
     probability; it is useful but not required for this registered qualitative
     sufficiency. The fixed comparison is complete and frozen.
-- [Frozen minimal learner: quantitative-source diagnosis](minimal_learner_diagnostics/README.md) — `frozen_contract`
-  - **Finding:** Prospective protocol and tested implementation/input lock are complete;
-    all three saved training streams remain mandatory. No new scientific results yet.
+- [Frozen minimal learner: quantitative-source diagnosis](minimal_learner_diagnostics/README.md) — `supporting`
+  - **Finding:** All three locked fits completed diagnostic_localization. Broader
+    admission and minimum-norm integration references each increase nonlearned
+    probability and strict latent correctness; fixed readout changes but does not
+    originate all sign errors. Direct local self contributions are positive, while
+    nonlearned acute local cost is exactly cross-address expression, with separate small
+    global-fit differences. All 927 estimates independently verified. The fixed
+    diagnostic study is complete.
 
 ## One-factor structural transport
 

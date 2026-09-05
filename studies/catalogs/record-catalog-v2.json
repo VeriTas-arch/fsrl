@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 239,
+  "entry_count": 244,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 163,
+    "json": 165,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 50,
-    "numpy_npz": 14,
+    "markdown": 52,
+    "numpy_npz": 15,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 217,
+    "already_conformant": 222,
     "historical_gzip_view": 21,
     "historical_pth_view": 1
   },
@@ -5478,6 +5478,176 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_learner_diagnostics/records/reports/minimal_learner_diagnostics_v1.interpretation.md",
+        "repository_path": "studies/minimal_learner_diagnostics/records/reports/minimal_learner_diagnostics_v1.interpretation.md"
+      },
+      "materialized_identity": {
+        "bytes": 10914,
+        "sha256": "b7f7e14c93b61c8f43d9c57ca7aa348f44a5360315b654e406beb1d499983844"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_learner_diagnostics",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_learner_diagnostics.studies_minimal_learner_diagnostics_records_reports_minimal_learner_diagnostics_v1_interpretation_md",
+      "registered_identity": {
+        "bytes": 10914,
+        "sha256": "b7f7e14c93b61c8f43d9c57ca7aa348f44a5360315b654e406beb1d499983844",
+        "source_ref": "sha256:b7f7e14c93b61c8f43d9c57ca7aa348f44a5360315b654e406beb1d499983844"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_learner_diagnostics/records/reports/minimal_learner_diagnostics_v1.md",
+        "repository_path": "studies/minimal_learner_diagnostics/records/reports/minimal_learner_diagnostics_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 81660,
+        "sha256": "235ffdd554e54908cfacce4f97c1660d6f44f17509891a9fa0cc307283c37a7e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_learner_diagnostics",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_learner_diagnostics.studies_minimal_learner_diagnostics_records_reports_minimal_learner_diagnostics_v1_md",
+      "registered_identity": {
+        "bytes": 81660,
+        "sha256": "235ffdd554e54908cfacce4f97c1660d6f44f17509891a9fa0cc307283c37a7e",
+        "source_ref": "sha256:235ffdd554e54908cfacce4f97c1660d6f44f17509891a9fa0cc307283c37a7e"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_learner_diagnostics/records/results/minimal_learner_diagnostics_v1.json",
+        "repository_path": "studies/minimal_learner_diagnostics/records/results/minimal_learner_diagnostics_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 843969,
+        "sha256": "b5af961556084db2a97c86d19aa98ff9a75398088d8d953093556c36e161f39b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_learner_diagnostics",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_learner_diagnostics.studies_minimal_learner_diagnostics_records_results_minimal_learner_diagnostics_v1_json",
+      "registered_identity": {
+        "bytes": 843969,
+        "sha256": "b5af961556084db2a97c86d19aa98ff9a75398088d8d953093556c36e161f39b",
+        "source_ref": "sha256:b5af961556084db2a97c86d19aa98ff9a75398088d8d953093556c36e161f39b"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_learner_diagnostics/records/results/minimal_learner_diagnostics_v1.npz",
+        "repository_path": "studies/minimal_learner_diagnostics/records/results/minimal_learner_diagnostics_v1.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1977261,
+        "sha256": "d28225d21b70f27947aefa95ff4b8e19cb06261cc3b25e7ce8159e3bcd75638d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_learner_diagnostics",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_learner_diagnostics.studies_minimal_learner_diagnostics_records_results_minimal_learner_diagnostics_v1_npz",
+      "registered_identity": {
+        "bytes": 1977261,
+        "sha256": "d28225d21b70f27947aefa95ff4b8e19cb06261cc3b25e7ce8159e3bcd75638d",
+        "source_ref": "sha256:d28225d21b70f27947aefa95ff4b8e19cb06261cc3b25e7ce8159e3bcd75638d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_learner_diagnostics/records/results/minimal_learner_diagnostics_v1.validation.json",
+        "repository_path": "studies/minimal_learner_diagnostics/records/results/minimal_learner_diagnostics_v1.validation.json"
+      },
+      "materialized_identity": {
+        "bytes": 715,
+        "sha256": "0ee739f37a1368de53016a6a3a88d5683014eb05050f84ab2e1201dc1af60065"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_learner_diagnostics",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_learner_diagnostics.studies_minimal_learner_diagnostics_records_results_minimal_learner_diagnostics_v1_validation_json",
+      "registered_identity": {
+        "bytes": 715,
+        "sha256": "0ee739f37a1368de53016a6a3a88d5683014eb05050f84ab2e1201dc1af60065",
+        "source_ref": "sha256:0ee739f37a1368de53016a6a3a88d5683014eb05050f84ab2e1201dc1af60065"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.artifact_lock",
       "format": {
         "format": "json",
@@ -8363,7 +8533,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 237,
+  "registered_record_count": 242,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -8377,7 +8547,7 @@
     "execution_lock": 32,
     "freeze_validation": 1,
     "frozen_parameters": 1,
-    "frozen_result": 41,
+    "frozen_result": 42,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,
     "presentation_asset": 6,
@@ -8387,11 +8557,11 @@
     "registered_contract": 57,
     "repair_contract": 4,
     "repair_lock": 8,
-    "report": 49,
+    "report": 51,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 14,
-    "validation_result": 1
+    "supporting_artifact": 15,
+    "validation_result": 2
   },
   "schema_version": 2,
   "sources": {

@@ -104,6 +104,9 @@ Freeze the diagnostic contract and implementation/input witnesses before
 execution. This admission covers encoding/integration references, fixed-readout
 analysis, and exact local cross-address attribution only; it does not authorize
 an encoding-noise candidate, new training, or main-model promotion.
+Its fixed three-stream diagnostic execution is now complete and frozen.
+Further analysis axes or model changes require a new prospective authorization;
+the completed diagnostic controls are not a standing tuning program.
 
 ## Repository invariants
 
