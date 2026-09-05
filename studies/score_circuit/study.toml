@@ -3,10 +3,10 @@ id = "score_circuit"
 title = "Score-only: finite-time opponent circuit realization"
 chapter = "minimal_models"
 order = 30
-status = "frozen_contract"
+status = "confirmed"
 review_state = "indexed"
 question = "Can local centered activity and compartment mismatch implement the frozen score learner with bounded nonnegative efficacies at finite time scales?"
-finding = "Prospective protocol only. Three frozen score-only fits; no training or calibration. Non-Liu qualification and joint implementation/input lock must precede the complete circuit evaluation matrix."
+finding = "All three exposed frozen score-only fits satisfy conditional_circuit_sufficiency across all locked scales and step sizes. Actual bounded nonnegative efficacies, finite-time compartment mismatch and pooled error gain preserve the original task function; teaching-off and mismatch-clamp give no writes, and shuffled teaching loses competence. All 798 endpoint/interval estimates independently reconstructed. Historical qualitative 9/9 and quantitative 3/9 behavior remain unchanged. Complete and frozen; no training, calibration or main-model promotion."
 boundary = "Conditional rate-level circuit sufficiency under explicit centered-activity, opponent-teaching, pooled-gain and external admission assumptions; not full conductance/spike implementation, human confirmation or main-model promotion."
 
 [[records]]
@@ -35,3 +35,372 @@ role = "execution_lock"
 sha256 = "79ab405169474cce07080b56e95c32262d97531cad5fcc4a0d561d90b32934d9"
 bytes = 36785
 source_ref = "sha256:79ab405169474cce07080b56e95c32262d97531cad5fcc4a0d561d90b32934d9"
+
+[[records]]
+path = "records/reports/score_circuit_v1.interpretation.md"
+legacy_path = "studies/score_circuit/records/reports/score_circuit_v1.interpretation.md"
+origin = "native"
+role = "report"
+sha256 = "be12264d533028cc3469c3a704d8510b3bc1dbda4712c545256adc12b3ad382f"
+bytes = 8979
+source_ref = "sha256:be12264d533028cc3469c3a704d8510b3bc1dbda4712c545256adc12b3ad382f"
+
+[[records]]
+path = "records/reports/score_circuit_v1.md"
+legacy_path = "studies/score_circuit/records/reports/score_circuit_v1.md"
+origin = "native"
+role = "report"
+sha256 = "9d4ec51e982349f4dc33783667a06f1ac26ffce8592e6f8e6008d78886b9a993"
+bytes = 75032
+source_ref = "sha256:9d4ec51e982349f4dc33783667a06f1ac26ffce8592e6f8e6008d78886b9a993"
+
+[[records]]
+path = "records/results/run.json"
+legacy_path = "studies/score_circuit/records/results/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "34776df744e10f6d8e5cb2c33553dc2191daaa8c108e66b6afa0e46617513be4"
+bytes = 29156
+source_ref = "sha256:34776df744e10f6d8e5cb2c33553dc2191daaa8c108e66b6afa0e46617513be4"
+
+[[records]]
+path = "records/results/score_circuit_v1.json"
+legacy_path = "studies/score_circuit/records/results/score_circuit_v1.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "740e4694c06050a774b0619e29270ba809df27d47382314732e4ff5c6eb11356"
+bytes = 553225
+source_ref = "sha256:740e4694c06050a774b0619e29270ba809df27d47382314732e4ff5c6eb11356"
+
+[[records]]
+path = "records/results/score_circuit_v1.validation.json"
+legacy_path = "studies/score_circuit/records/results/score_circuit_v1.validation.json"
+origin = "native"
+role = "validation_result"
+sha256 = "63854049180929d5c4a64f3bf8e9d1a9d040b39d3b7579ec0ea8b3134934d4e1"
+bytes = 510
+source_ref = "sha256:63854049180929d5c4a64f3bf8e9d1a9d040b39d3b7579ec0ea8b3134934d4e1"
+
+[[records]]
+path = "records/results/seed-2111-fast-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-fast-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b4aa6d1c251a147801ddf06b6d66e266e4900e086296eafac3c42d579e879b3d"
+bytes = 1528133
+source_ref = "sha256:b4aa6d1c251a147801ddf06b6d66e266e4900e086296eafac3c42d579e879b3d"
+
+[[records]]
+path = "records/results/seed-2111-fast-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-fast-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "10cfe90585576325f969bb1dd2d1fb863d704912ede0ac7afd3a523381b6e964"
+bytes = 1528344
+source_ref = "sha256:10cfe90585576325f969bb1dd2d1fb863d704912ede0ac7afd3a523381b6e964"
+
+[[records]]
+path = "records/results/seed-2111-mismatch_clamp.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-mismatch_clamp.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e5723a479c56dd98bf4838b3bc90f74acb5196faf22c006f0c178539385cfa9a"
+bytes = 94344
+source_ref = "sha256:e5723a479c56dd98bf4838b3bc90f74acb5196faf22c006f0c178539385cfa9a"
+
+[[records]]
+path = "records/results/seed-2111-primary-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-primary-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9edee232936d1ae96e872e6f66f25952791f3971c7dc0787df4bd0dd2f3de8e5"
+bytes = 1528247
+source_ref = "sha256:9edee232936d1ae96e872e6f66f25952791f3971c7dc0787df4bd0dd2f3de8e5"
+
+[[records]]
+path = "records/results/seed-2111-primary-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-primary-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d8f20f7207510402917ace345cdad142945689fb6133ec31b81767a5d9cfb071"
+bytes = 1528317
+source_ref = "sha256:d8f20f7207510402917ace345cdad142945689fb6133ec31b81767a5d9cfb071"
+
+[[records]]
+path = "records/results/seed-2111-reference-checks.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-reference-checks.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b9d5405b3f9a40fde6c30f2c0fad711f122e33ad54203b42350f19a127299308"
+bytes = 457471
+source_ref = "sha256:b9d5405b3f9a40fde6c30f2c0fad711f122e33ad54203b42350f19a127299308"
+
+[[records]]
+path = "records/results/seed-2111-reference.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-reference.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "051b60df75bc4aef6bf22896d185bcc8c92fb0bcfbd3cfc5d3f467b71ffdedf6"
+bytes = 596127
+source_ref = "sha256:051b60df75bc4aef6bf22896d185bcc8c92fb0bcfbd3cfc5d3f467b71ffdedf6"
+
+[[records]]
+path = "records/results/seed-2111-sampled-behavior.json"
+legacy_path = "studies/score_circuit/records/results/seed-2111-sampled-behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "85b138feb9cf9595803b712ed7aba2a68b614db1cee1cc6bcc7e8a79b1239768"
+bytes = 77799
+source_ref = "sha256:85b138feb9cf9595803b712ed7aba2a68b614db1cee1cc6bcc7e8a79b1239768"
+
+[[records]]
+path = "records/results/seed-2111-slow-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-slow-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "27bd6866f7184a338559dcbb5c532682288cb0af025608eaf3dee2a5259cb2e9"
+bytes = 1534613
+source_ref = "sha256:27bd6866f7184a338559dcbb5c532682288cb0af025608eaf3dee2a5259cb2e9"
+
+[[records]]
+path = "records/results/seed-2111-slow-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-slow-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "403f2cedf441f7b08e358f5c136eea82951d3f0a4987a5ac84d3134544367b70"
+bytes = 1534746
+source_ref = "sha256:403f2cedf441f7b08e358f5c136eea82951d3f0a4987a5ac84d3134544367b70"
+
+[[records]]
+path = "records/results/seed-2111-teacher_off.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-teacher_off.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1759d97bb8b78690bf8018be19ab4e4eec83b8959f37973f5d382ef8efc230d6"
+bytes = 49867
+source_ref = "sha256:1759d97bb8b78690bf8018be19ab4e4eec83b8959f37973f5d382ef8efc230d6"
+
+[[records]]
+path = "records/results/seed-2111-teaching_shuffle.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2111-teaching_shuffle.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fcde97ce1880b15c8961983cfd7af85ef57537e7194792bd5b550c6a7b3e15ae"
+bytes = 1546691
+source_ref = "sha256:fcde97ce1880b15c8961983cfd7af85ef57537e7194792bd5b550c6a7b3e15ae"
+
+[[records]]
+path = "records/results/seed-2112-fast-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-fast-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "32492657365bc9e1d2c45009dbc4718cc6b27c7742b8247fadefd9029e2cac56"
+bytes = 1528001
+source_ref = "sha256:32492657365bc9e1d2c45009dbc4718cc6b27c7742b8247fadefd9029e2cac56"
+
+[[records]]
+path = "records/results/seed-2112-fast-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-fast-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "826f94243119da2394635858a98210f0296a41e493f4fda72951e5da2e413012"
+bytes = 1528294
+source_ref = "sha256:826f94243119da2394635858a98210f0296a41e493f4fda72951e5da2e413012"
+
+[[records]]
+path = "records/results/seed-2112-mismatch_clamp.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-mismatch_clamp.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e5723a479c56dd98bf4838b3bc90f74acb5196faf22c006f0c178539385cfa9a"
+bytes = 94344
+source_ref = "sha256:e5723a479c56dd98bf4838b3bc90f74acb5196faf22c006f0c178539385cfa9a"
+
+[[records]]
+path = "records/results/seed-2112-primary-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-primary-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b878e3eb3c18396d450f780aeeaf3fabce491aac06478b8410e03bcd32c3977a"
+bytes = 1528189
+source_ref = "sha256:b878e3eb3c18396d450f780aeeaf3fabce491aac06478b8410e03bcd32c3977a"
+
+[[records]]
+path = "records/results/seed-2112-primary-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-primary-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "820a3701b6768a03f65588fc69309a48063acf8f182f048186a735e0447eae94"
+bytes = 1528357
+source_ref = "sha256:820a3701b6768a03f65588fc69309a48063acf8f182f048186a735e0447eae94"
+
+[[records]]
+path = "records/results/seed-2112-reference-checks.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-reference-checks.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "56d1d8b29a5870782c7e71e1dc4b58ffafbf9147b88b102940abbfb0157e9b1f"
+bytes = 457540
+source_ref = "sha256:56d1d8b29a5870782c7e71e1dc4b58ffafbf9147b88b102940abbfb0157e9b1f"
+
+[[records]]
+path = "records/results/seed-2112-reference.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-reference.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0bc63f6facc6f810afca5e87f9264b9d3b6f629a39afa17357cbcf7f38286659"
+bytes = 596217
+source_ref = "sha256:0bc63f6facc6f810afca5e87f9264b9d3b6f629a39afa17357cbcf7f38286659"
+
+[[records]]
+path = "records/results/seed-2112-sampled-behavior.json"
+legacy_path = "studies/score_circuit/records/results/seed-2112-sampled-behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4806dd6140ac91f7fcfc9a64467a7e2cdbfd5a709fe9a77d24f91609f925e953"
+bytes = 77810
+source_ref = "sha256:4806dd6140ac91f7fcfc9a64467a7e2cdbfd5a709fe9a77d24f91609f925e953"
+
+[[records]]
+path = "records/results/seed-2112-slow-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-slow-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d48bbe0beef9e7f2a3e1f28d279da7b2ae5a74bc84a6a0a784b00d97915461a5"
+bytes = 1534548
+source_ref = "sha256:d48bbe0beef9e7f2a3e1f28d279da7b2ae5a74bc84a6a0a784b00d97915461a5"
+
+[[records]]
+path = "records/results/seed-2112-slow-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-slow-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "87a541bf2a6958d8bc6c62ebeb138eb51eb3a1adcf830cf8a58e2af9b2f209ce"
+bytes = 1534601
+source_ref = "sha256:87a541bf2a6958d8bc6c62ebeb138eb51eb3a1adcf830cf8a58e2af9b2f209ce"
+
+[[records]]
+path = "records/results/seed-2112-teacher_off.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-teacher_off.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1759d97bb8b78690bf8018be19ab4e4eec83b8959f37973f5d382ef8efc230d6"
+bytes = 49867
+source_ref = "sha256:1759d97bb8b78690bf8018be19ab4e4eec83b8959f37973f5d382ef8efc230d6"
+
+[[records]]
+path = "records/results/seed-2112-teaching_shuffle.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2112-teaching_shuffle.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5bbaff443b7038cb1a64d4bf460a2b42c6eba402c33215e653912a465c1520c4"
+bytes = 1546695
+source_ref = "sha256:5bbaff443b7038cb1a64d4bf460a2b42c6eba402c33215e653912a465c1520c4"
+
+[[records]]
+path = "records/results/seed-2113-fast-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-fast-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d4a99a0b805416201d70d470ba385ec328ec2c519cd3109aa6e64b9cd220963a"
+bytes = 1528190
+source_ref = "sha256:d4a99a0b805416201d70d470ba385ec328ec2c519cd3109aa6e64b9cd220963a"
+
+[[records]]
+path = "records/results/seed-2113-fast-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-fast-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5f4f66f7f0ac4e1439807ebaf393160eb5061f11edca454019ff95d478bd305f"
+bytes = 1528331
+source_ref = "sha256:5f4f66f7f0ac4e1439807ebaf393160eb5061f11edca454019ff95d478bd305f"
+
+[[records]]
+path = "records/results/seed-2113-mismatch_clamp.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-mismatch_clamp.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e5723a479c56dd98bf4838b3bc90f74acb5196faf22c006f0c178539385cfa9a"
+bytes = 94344
+source_ref = "sha256:e5723a479c56dd98bf4838b3bc90f74acb5196faf22c006f0c178539385cfa9a"
+
+[[records]]
+path = "records/results/seed-2113-primary-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-primary-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4a0067cc5c949be2246dd60c3374500dda99b8e93fbfeea8773b455723917aa3"
+bytes = 1528504
+source_ref = "sha256:4a0067cc5c949be2246dd60c3374500dda99b8e93fbfeea8773b455723917aa3"
+
+[[records]]
+path = "records/results/seed-2113-primary-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-primary-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b44b7eab6ddc2234ae998d24e18e12c41fb3d06e03147c531ad778cf2985b6dc"
+bytes = 1528489
+source_ref = "sha256:b44b7eab6ddc2234ae998d24e18e12c41fb3d06e03147c531ad778cf2985b6dc"
+
+[[records]]
+path = "records/results/seed-2113-reference-checks.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-reference-checks.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d7156d2e2725b7dd757a83d57121fa7caf1e7f24abbb3a65be151bd1cb906adb"
+bytes = 458038
+source_ref = "sha256:d7156d2e2725b7dd757a83d57121fa7caf1e7f24abbb3a65be151bd1cb906adb"
+
+[[records]]
+path = "records/results/seed-2113-reference.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-reference.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7de311875543e640720974636754aaf9e9f35addfa0c2fa8a3158efe6d6de953"
+bytes = 596124
+source_ref = "sha256:7de311875543e640720974636754aaf9e9f35addfa0c2fa8a3158efe6d6de953"
+
+[[records]]
+path = "records/results/seed-2113-sampled-behavior.json"
+legacy_path = "studies/score_circuit/records/results/seed-2113-sampled-behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "13100d4ddb0f67357149ae887d5b1ecd603576b6b29c72595d92d4684bc8532b"
+bytes = 77810
+source_ref = "sha256:13100d4ddb0f67357149ae887d5b1ecd603576b6b29c72595d92d4684bc8532b"
+
+[[records]]
+path = "records/results/seed-2113-slow-4096.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-slow-4096.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5c39ae3dc225202999ccbf564ec563c3345a51506d993b9df9ee99fa3a10c1b0"
+bytes = 1534513
+source_ref = "sha256:5c39ae3dc225202999ccbf564ec563c3345a51506d993b9df9ee99fa3a10c1b0"
+
+[[records]]
+path = "records/results/seed-2113-slow-8192.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-slow-8192.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "28ec1af1e53c9bd256053629198184354109ca3967ded88693c3e0fa7f27009f"
+bytes = 1534704
+source_ref = "sha256:28ec1af1e53c9bd256053629198184354109ca3967ded88693c3e0fa7f27009f"
+
+[[records]]
+path = "records/results/seed-2113-teacher_off.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-teacher_off.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1759d97bb8b78690bf8018be19ab4e4eec83b8959f37973f5d382ef8efc230d6"
+bytes = 49867
+source_ref = "sha256:1759d97bb8b78690bf8018be19ab4e4eec83b8959f37973f5d382ef8efc230d6"
+
+[[records]]
+path = "records/results/seed-2113-teaching_shuffle.npz"
+legacy_path = "studies/score_circuit/records/results/seed-2113-teaching_shuffle.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "95dfd7f56282cb136e89e1d60a8b892885e02933d2d3013f935b6b8d4cd6baa2"
+bytes = 1546784
+source_ref = "sha256:95dfd7f56282cb136e89e1d60a8b892885e02933d2d3013f935b6b8d4cd6baa2"

@@ -212,10 +212,15 @@ trajectories.
     nonlearned acute local cost is exactly cross-address expression, with separate small
     global-fit differences. All 927 estimates independently verified. The fixed
     diagnostic study is complete.
-- [Score-only: finite-time opponent circuit realization](score_circuit/README.md) — `frozen_contract`
-  - **Finding:** Prospective protocol only. Three frozen score-only fits; no training or
-    calibration. Non-Liu qualification and joint implementation/input lock must precede
-    the complete circuit evaluation matrix.
+- [Score-only: finite-time opponent circuit realization](score_circuit/README.md) — `confirmed`
+  - **Finding:** All three exposed frozen score-only fits satisfy
+    conditional_circuit_sufficiency across all locked scales and step sizes. Actual
+    bounded nonnegative efficacies, finite-time compartment mismatch and pooled error
+    gain preserve the original task function; teaching-off and mismatch-clamp give no
+    writes, and shuffled teaching loses competence. All 798 endpoint/interval estimates
+    independently reconstructed. Historical qualitative 9/9 and quantitative 3/9
+    behavior remain unchanged. Complete and frozen; no training, calibration or
+    main-model promotion.
 
 ## One-factor structural transport
 

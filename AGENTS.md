@@ -116,6 +116,10 @@ existing fits, saved inputs and implementation before evaluation. No training,
 calibration or main-model promotion is authorized. Keep the original checkout
 files untouched; the detached dev-descendant worktree may push scoped, validated
 commits directly to `origin/dev` without creating a remote branch.
+The complete fixed matrix is now finished and frozen. This conditional circuit
+result is not permission for another run, biological-parameter tuning, a new
+admission mechanism, human fitting, or main-model promotion. A successor requires
+a separately authorized prospective question.
 
 ## Repository invariants
 
