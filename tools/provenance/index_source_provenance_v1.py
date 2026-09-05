@@ -40,19 +40,34 @@ def _sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def _owner_record_paths(manifest_path: Path) -> tuple[list[Path], set[Path]]:
+    """Exclude prospectively native evidence from the frozen v1 source index."""
+
+    owner = tomllib.loads(manifest_path.read_text(encoding="utf-8"))
+    historical: list[Path] = []
+    native: set[Path] = set()
+    for record in owner["records"]:
+        path = manifest_path.parent / record["path"]
+        if record.get("origin", "migrated") == "native":
+            native.add(path)
+        else:
+            historical.append(path)
+    if not historical:
+        native.add(manifest_path)
+    return historical, native
+
+
 def _record_paths() -> tuple[list[Path], int]:
     registry = tomllib.loads(
         (STUDIES_ROOT / "registry.toml").read_text(encoding="utf-8")
     )
     paths: list[Path] = []
-    for entry in registry.get("studies", []):
-        study_path = ROOT / entry["path"]
-        study = tomllib.loads(study_path.read_text(encoding="utf-8"))
-        paths.extend(study_path.parent / record["path"] for record in study["records"])
-
-    synthesis_path = SYNTHESIS_ROOT / "manifest.toml"
-    synthesis = tomllib.loads(synthesis_path.read_text(encoding="utf-8"))
-    paths.extend(SYNTHESIS_ROOT / record["path"] for record in synthesis["records"])
+    native_paths: set[Path] = set()
+    manifests = [ROOT / entry["path"] for entry in registry.get("studies", [])]
+    for manifest in [*manifests, SYNTHESIS_ROOT / "manifest.toml"]:
+        historical, native = _owner_record_paths(manifest)
+        paths.extend(historical)
+        native_paths.update(native)
     registered_count = len(paths)
     tracked = _git("ls-files", "-z", "--", "studies", "synthesis")
     assert isinstance(tracked, bytes)
@@ -60,7 +75,7 @@ def _record_paths() -> tuple[list[Path], int]:
         if not value:
             continue
         path = ROOT / value.decode()
-        if path == MANIFEST_PATH or not path.is_file():
+        if path == MANIFEST_PATH or path in native_paths or not path.is_file():
             continue
         if path.suffix in {".json", ".toml"} or path.name.endswith(".json.gz"):
             paths.append(path)

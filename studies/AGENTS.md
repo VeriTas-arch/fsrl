@@ -32,6 +32,15 @@ Navigation: [repository guide](../AGENTS.md) · [study portal](README.md) ·
 5. Shared maintained code may appear in multiple study contracts, but an
    artifact remains owned by exactly one study.
 
+New records created in this layout declare `origin = "native"`. Their
+`legacy_path` is their actual repository-relative path, not a fabricated old
+locator, and `source_ref` is `sha256:<sha256>` of the immutable record. A later
+execution or artifact lock records the committed protocol/source witness before
+the corresponding scientific execution. Native records do not enter the frozen
+historical migration or source-provenance inventory; their own prospective locks
+must verify current sources and Git witnesses. Omitted `origin` means migrated
+historical evidence and retains all existing migration checks.
+
 ## Migration and storage
 
 - Physical evidence moves occur only through a new append-only migration file

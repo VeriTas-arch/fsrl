@@ -46,11 +46,24 @@ class StudyRegistryTests(unittest.TestCase):
 
     def test_registry_owns_the_complete_migrated_record(self):
         self.assertTrue(self.validation["passed"], self.validation["errors"])
-        self.assertEqual(self.validation["studies"], 42)
+        migrated_studies = {
+            record["owner_id"]
+            for record in self.migration["records"]
+            if record["owner_kind"] == "study"
+        }
+        self.assertEqual(len(migrated_studies), 42)
+        self.assertTrue(migrated_studies.issubset(self.studies))
+        self.assertEqual(self.validation["studies"], len(self.studies))
         self.assertEqual(self.validation["chapters"], 9)
-        self.assertEqual(self.validation["records"], 211)
+        self.assertEqual(self.validation["migrated_records"], 211)
+        self.assertEqual(
+            self.validation["records"], 211 + self.validation["native_records"]
+        )
         self.assertEqual(self.validation["migration_steps"], 231)
-        self.assertEqual(self.validation["study_records"], 191)
+        self.assertEqual(
+            self.validation["study_records"],
+            sum(len(study["records"]) for study in self.studies.values()),
+        )
         self.assertEqual(self.validation["synthesis_records"], 20)
         self.assertEqual(self.validation["retired_assets"], 2)
         self.assertEqual(self.validation["runtime_locator_rewrites"], 76)
@@ -196,7 +209,7 @@ class StudyRegistryTests(unittest.TestCase):
         first = render_navigation(self.registry, self.synthesis)
         second = render_navigation(self.registry, self.synthesis)
         self.assertEqual(first, second)
-        self.assertEqual(len(first), len(GENERATED_PATHS) + 42)
+        self.assertEqual(len(first), len(GENERATED_PATHS) + len(self.studies))
 
     def test_synthesis_has_a_reviewed_reader_first_entrypoint(self):
         self.assertEqual(self.synthesis["review_state"], "reviewed")

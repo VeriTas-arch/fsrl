@@ -1,4 +1,4 @@
-"""Deterministic v2 catalog over byte-preserved historical research files."""
+"""Deterministic v2 catalog over immutable registered research files."""
 
 from __future__ import annotations
 
@@ -178,6 +178,8 @@ def _materialized_record(
             "migration_id": "runtime-locators-v1",
             "replacements": rewrite["replacements"],
         }
+    if record.get("origin") == "native":
+        result["origin"] = "native"
     return result
 
 

@@ -432,6 +432,7 @@ def _validate_record(
     except (KeyError, ValueError) as error:
         errors.append(f"{owner_id}: invalid record path: {error}")
         return None
+    _validate_record_origin(record, repository_path.as_posix(), errors)
     path = ROOT / repository_path
     if not path.is_file():
         errors.append(f"{owner_id}: missing record {repository_path.as_posix()}")
@@ -466,6 +467,27 @@ def _validate_record(
                     f"{repository_path.as_posix()}"
                 )
     return legacy_path, repository_path.as_posix()
+
+
+def _validate_record_origin(
+    record: dict[str, Any], repository_path: str, errors: list[str]
+) -> None:
+    """Keep native content identities separate from the historical import."""
+
+    origin = record.get("origin", "migrated")
+    if origin not in {"migrated", "native"}:
+        errors.append(f"unknown record origin for {repository_path}: {origin}")
+    if origin != "native":
+        return
+    if record["legacy_path"] != repository_path:
+        errors.append(f"native record cannot invent a legacy alias: {repository_path}")
+    digest = record["sha256"]
+    if not isinstance(digest, str) or SHA256_PATTERN.fullmatch(digest) is None:
+        errors.append(f"native record has an invalid SHA-256: {repository_path}")
+    if record["source_ref"] != f"sha256:{digest}":
+        errors.append(
+            f"native record must use its content source_ref: {repository_path}"
+        )
 
 
 def _validate_retired_asset(
@@ -856,6 +878,7 @@ def _collect_registered_records(
             record_pairs[legacy_path] = current_path
             record_provenance[legacy_path] = {
                 "path": current_path,
+                "origin": record.get("origin", "migrated"),
                 "owner_id": study_id,
                 "owner_kind": "study",
                 **{
@@ -903,6 +926,7 @@ def _collect_registered_records(
         record_pairs[legacy_path] = current_path
         record_provenance[legacy_path] = {
             "path": current_path,
+            "origin": record.get("origin", "migrated"),
             "owner_id": synthesis["id"],
             "owner_kind": "synthesis",
             **{
@@ -1038,9 +1062,14 @@ def validate_registry(
         if unused_roles:
             errors.append(f"unused record roles: {unused_roles}")
 
+    migrated_records = {
+        legacy: path
+        for legacy, path in record_pairs.items()
+        if record_provenance[legacy]["origin"] != "native"
+    }
     migration_pairs = _validate_migration_chain(
         migrations=migrations,
-        record_pairs=record_pairs,
+        record_pairs=migrated_records,
         record_provenance=record_provenance,
         errors=errors,
     )
@@ -1048,7 +1077,9 @@ def validate_registry(
     locator_records = _validate_runtime_locator_migration(
         migration_pairs, current_paths, errors
     )
-    _validate_record_inventory(source_provenance, record_pairs, current_paths, errors)
+    _validate_record_inventory(
+        source_provenance, migrated_records, current_paths, errors
+    )
 
     return {
         "passed": not errors,
@@ -1056,6 +1087,8 @@ def validate_registry(
         "studies": len(studies),
         "chapters": len(chapters),
         "records": len(record_pairs),
+        "migrated_records": len(migrated_records),
+        "native_records": len(record_pairs) - len(migrated_records),
         "migration_steps": sum(
             len(migration.get("records", [])) for migration in migrations
         ),
