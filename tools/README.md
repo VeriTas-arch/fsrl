@@ -55,6 +55,17 @@ It checks all saved numerical outputs and reconstructs the original pre-JSON
 report order. See the [verification note](../studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.verification_note.md)
 for the original verifier's serialization-order failure and preserved boundary.
 
+The frozen claim-relative main-model audit has an analogous read-only
+publication check:
+
+```bash
+direnv exec . python -m tools.provenance.verify_main_model_evaluation_v2
+```
+
+It reconstructs all internal/sample transition counts, summaries and the exact
+pre-JSON report bytes without modifying the locked scientific implementation or
+registered result.
+
 ## Refactor equivalence
 
 The current closing audit is version 3:
