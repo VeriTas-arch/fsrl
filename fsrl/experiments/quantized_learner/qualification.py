@@ -34,6 +34,7 @@ CPU_TESTS = (
     "tests.experiments.quantized_learner.test_recovery",
     "tests.experiments.quantized_learner.test_qualification",
 )
+CPU_TEST_LOG = "cpu-tests.txt"
 
 
 def sources() -> list[dict]:
@@ -175,7 +176,7 @@ def qualify(attempt: int) -> dict:
             "-v",
             *CPU_TESTS,
         ]
-        with (directory / "cpu-tests.log").open("x") as handle:
+        with (directory / CPU_TEST_LOG).open("x") as handle:
             completed = subprocess.run(
                 command,
                 cwd=REPO_ROOT,

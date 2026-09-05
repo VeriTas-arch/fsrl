@@ -1,5 +1,7 @@
 import copy
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
@@ -15,9 +17,27 @@ from fsrl.experiments.quantized_learner.protocol import (
 )
 from fsrl.experiments.training_strategy.batches import sample_episodes
 from fsrl.infra import formal_runtime
+from fsrl.infra.file_contracts import validate_run_manifest
+from fsrl.infra.run_manifest import ProspectiveRun
 
 
 class QualificationTests(unittest.TestCase):
+    def test_cpu_transcript_allows_run_manifest_completion(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary) / "qualification"
+            with ProspectiveRun.start(
+                directory,
+                workflow_id="fixture",
+                execution_id="fixture",
+                producer={},
+                resolved_config={},
+            ):
+                (directory / qualification.CPU_TEST_LOG).write_text(
+                    "fixture tests passed\n"
+                )
+            result = validate_run_manifest(directory / "run.json")
+            self.assertTrue(result["passed"], result)
+
     def test_scratch_optimizer_checks_every_state_and_parameter(self):
         spec = resolved_specification()
         rng = np.random.default_rng(973001)
