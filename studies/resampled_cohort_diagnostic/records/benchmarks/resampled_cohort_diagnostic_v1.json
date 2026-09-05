@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment_id": "resampled_cohort_diagnostic_v1",
+  "authorization": "User explicitly confirmed the separately proposed fixed-parameter independent-cohort diagnostic after the completed quantized pilot stop boundary.",
+  "parent_commit": "92512132be11869a96d6d926db9b70507ef13914",
+  "parent_study": "quantized_relational_learner",
+  "question": "Is the Resampled pilot's slightly excessive original Liu distance slope sustained across independent simulated cohorts, and are its other eight behavioral rows stable?",
+  "scope": "Diagnostic of an exposed, failed recipe; not unchanged confirmation, human mechanism identification, model repair or main-model admission. The parent partial_behavioral_reproduction outcome is immutable regardless of this result.",
+  "fits": [2114, 2115, 2116],
+  "condition": "resampled",
+  "parameters": "Use each fit's exact final raw_eta/raw_global_gain from the parent's jointly locked training archive. No optimizer, gain or temperature adaptation, bit-depth change, checkpoint selection, new model or new training seed.",
+  "inherit": "All task, ordinary cue, evidence, stable admission, normalized update, codebook, independent per-presentation stochastic rounding, readout and original nine-row behavioral definitions remain unchanged. Liu temperature remains the historically informed fixed 0.25; queries have no teaching signal or labels.",
+  "cohorts": {
+    "count": 400,
+    "subjects": 77,
+    "pairing": "All three fits use the same 400 prospective base cohorts and code/choice RNGs. Cohorts are independent within a fit, fits are not treated as independent participant cohorts. No participant or network pooling.",
+    "precision": "Reuse the admission contract's 400-cohort precision budget, not its confirmation eligibility or witness-cohort gates. No separate witness cohorts and no optional stopping or cohort selection.",
+    "seed_base": 2000000,
+    "cohort_stride": 1000,
+    "offsets": {"cue_seed": 0, "support_seed": 200, "subject_encoding_seed": 400, "encoding_seed": 600, "choice_seed": 800},
+    "rng": "For zero-based cohort c, each source seed is base + stride*c + source offset. Inherited support uses seed+subject and inherited choice schedule/choice use seed+2*subject and seed+2*subject+1. These ranges are disjoint within and between cohorts, and separate from parent seeds. All base arrays and quantization uniforms are saved before any new fitted-model rollout. Original choice sampling is reproduced from the locked seed using the unchanged sampling function.",
+    "shard_size": 20
+  },
+  "estimands": {
+    "authority": "fsrl.experiments.training_strategy.behavior:behavior_metrics and classify_rows, with unchanged fsrl.analysis.behavioral:analyze_sampled_query_policy sampling and classification.",
+    "point_extraction": "Extract exactly the same original cohort point statistics and flags; omit redundant within-cohort bootstrap intervals because the diagnostic uncertainty unit is a whole independent 77-person cohort. Qualify extraction against all nine already published parent behavior records and synthetic exclusion/undefined cases before execution.",
+    "primary": "Within each fit, the mean original cohort distance slope minus the frozen human interval upper bound. The slope uses all 28 unordered pairs, each subject's seven equally weighted distance-level means, original sampled choices and OLS; never substitute the 20-nonlearned probability slope.",
+    "continuous": ["learned_accuracy", "nonlearned_accuracy", "symbolic_distance_effect", "serial_position_effect", "stable_within_subject_errors", "self_consistent_incorrect", "self_inconsistent", "correct_ranker", "inter_subject_ranking_diversity"],
+    "secondary": "Report each original qualitative/quantitative flag's cohort pass rate, all-nine qualitative, all-nine quantitative and their joint pass rates with Wilson 95% intervals. Report all six beta morphology class counts and the joint distribution of bimodal/ordinary-unimodal/low-accuracy counts. No new pass-rate cutoff or post-result axis.",
+    "denominators": "Learned/nonlearned accuracy over all 77 subjects; ranking proportions over the original eligible subjects; stable errors and inter-subject tau over the original analysis subjects excluding correct rankers. Preserve undefined endpoints: report their counts, mark that fit/endpoint unresolved, and never silently exclude those cohorts.",
+    "uncertainty": {"samples": 10000, "confidence": 0.95, "seed_base": 2980000, "unit": "whole independent cohorts within each fit", "method": "Uniform multinomial counts over all 400 cohorts. Reuse the same bootstrap count matrix for all continuous endpoints within a fit. Seed is seed_base + fit seed; no pooling. Pointwise intervals, not simultaneous familywise coverage."}
+  },
+  "classification": {
+    "per_fit": "If any distance cohort statistic is undefined: unresolved. Otherwise sustained_above_reference if the 95% CI lower endpoint for mean slope exceeds the original upper bound; sustained_below_reference if its upper endpoint is below the original lower bound; mean_within_reference if the entire CI lies inside the original reference interval; boundary_unresolved otherwise. mean_within_reference diagnoses the cohort mean only, not equivalence to humans or per-cohort success.",
+    "study": "Report the common classification only if all three fits agree; otherwise report training_fit_heterogeneity. Continue to report every secondary statistic regardless of primary outcome. No classification qualifies the failed recipe for promotion or rewrites its pilot.",
+    "stop": "After all 400 cohorts for all three fits, publish and stop. No extra cohorts, retuning, new codebook, metric/readout shopping, new architecture or biological-realization run as repair. Any successor requires a new question and authorization."
+  },
+  "execution": {
+    "sequence": "Commit/push protocol; commit/push implementation; qualify only on non-Liu numerical fixtures and exposed parent statistics; jointly lock qualification, implementation, all three parent parameter archives, reference authorities and all 400 saved inputs; commit/push the lock before new cohort evaluation; evaluate full matrix, independently reconstruct and publish all results.",
+    "qualification_seed": 2990001,
+    "qualification": "Use a deterministic non-Liu generic validation fixture at support length 32 and batch size 77 (repeat fixture episodes if necessary), all three unchanged parameters, eager/fullgraph CUDA versus independent float64 recurrence, no parameter/state write during query, neutral z-off and independent quantizer parity. CPU tests include original point/flag parity on all nine parent records, undefined handling, seed disjointness, complete-matrix guards, classification boundaries, bootstrap/Wilson and array round trips.",
+    "runtime": "Formal bounded CUDA float32 fullgraph=True mode=default backend=inductor; TF32/autocast off, Torch/BLAS/compiler each one thread. Unchanged original behavioral analysis and whole-cohort summaries use bounded CPU. No parallel agent or multi-core worker pool.",
+    "tolerances": {"cuda_atol": 0.00001, "cuda_rtol": 0.0001, "point_atol": 0.000000000001},
+    "storage": "Use deterministic allow_pickle=False NPZ shards of exactly 20 cohorts. Save base inputs/uniforms before rollout; save all fit margins and terminal weights plus cohort identity and complete point/flag/morphology records. Parameters remain referenced by committed parent archives. Result verification reconstructs codes/float64 recurrence and original sampled behavior/points from registered arrays and seeds; does not need ignored checkpoints. Review every payload against existing storage thresholds; never silently alter numerical content to fit a threshold.",
+    "resumption": "Only verified complete output shards may be reused. Preserve partial or failed attempts and fail closed; no restart or overwriting based solely on an observation timeout."
+  }
+}

@@ -140,6 +140,13 @@ or treat the completed execution gates as standing permission for additional
 cohorts. A successor or a diagnostic of a failed recipe requires a separately
 authorized prospective question; preserve the original admission target.
 
+The user has explicitly authorized `resampled_cohort_diagnostic`, a separate
+fixed-parameter diagnostic of the completed pilot's three Resampled fits.
+Its authority is [`studies/resampled_cohort_diagnostic/`](studies/resampled_cohort_diagnostic/).
+Freeze its protocol, qualify and jointly lock every input and existing fit
+before new-cohort evaluation. No training, tuning, main-model promotion or
+revision of the failed parent outcome is authorized by this diagnostic.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

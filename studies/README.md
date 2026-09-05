@@ -233,6 +233,10 @@ trajectories.
     misses the unchanged distance-slope interval; Persistent overproduces incorrect
     rankings. No recipe is eligible for unchanged replication or main-model promotion.
     The fixed matrix is complete and frozen.
+- [Fixed Resampled learner across independent cohorts](resampled_cohort_diagnostic/README.md) — `frozen_contract`
+  - **Finding:** The separate fixed-parameter diagnostic is prospectively specified for
+    three existing fits and 400 paired 77-person cohorts. No new cohort has been
+    evaluated; the parent pilot remains partial_behavioral_reproduction.
 
 ## One-factor structural transport
 
