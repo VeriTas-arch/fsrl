@@ -24,10 +24,11 @@
 **Question.** Can fixed four-valued encoding repair the score learner's complete Liu
 behavior, and is persistent code reuse distinguishable from fresh quantization?
 
-**Finding.** The storage-only sharding repair passed all 817 numerical checks and has an
-append-only successor source lock. Original protocols, evaluation inputs and earlier
-execution witnesses remain unchanged. Recovery replay and all mandatory paired training
-follow this lock; no Liu behavioral result or main-model promotion exists.
+**Finding.** The locked non-Liu recovery screen passed its finite-grid criterion: Exact
+9/9, Persistent 9/9 and Resampled 8/9, with all 27 family winners unchanged between 512
+and 1024 nuisance draws. Independent likelihood replay error is zero. Lossless storage
+replay preserves all 961 arrays. All nine mandatory training fits and Liu evaluation
+remain pending; no human mechanism identification or main-model promotion is claimed.
 
 **Claim boundary.** Two-bit code content is an imposed resource hypothesis, not human
 capacity or total model memory. The frozen candidate cannot be repaired after
@@ -38,6 +39,24 @@ evaluation; pilot success alone cannot promote the main model.
 - `registered_contract` —
   [studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json](records/benchmarks/quantized_relational_learner_v1.json)
   (`sha256:0b8cfb3084af`)
+- `supporting_artifact` —
+  [studies/quantized_relational_learner/records/results/recovery-generation-0.npz](records/results/recovery-generation-0.npz)
+  (`sha256:9b98f9908ff7`)
+- `supporting_artifact` —
+  [studies/quantized_relational_learner/records/results/recovery-generation-1.npz](records/results/recovery-generation-1.npz)
+  (`sha256:089fcb5f247a`)
+- `supporting_artifact` —
+  [studies/quantized_relational_learner/records/results/recovery-likelihoods.npz](records/results/recovery-likelihoods.npz)
+  (`sha256:19688db987b7`)
+- `supporting_artifact` —
+  [studies/quantized_relational_learner/records/results/recovery-observations.npz](records/results/recovery-observations.npz)
+  (`sha256:ea279a50ff94`)
+- `frozen_result` —
+  [studies/quantized_relational_learner/records/results/recovery.json](records/results/recovery.json)
+  (`sha256:9544968d9591`)
+- `validation_result` —
+  [studies/quantized_relational_learner/records/results/storage_replay_validation.json](records/results/storage_replay_validation.json)
+  (`sha256:1c79cd0630ef`)
 - `readiness_result` —
   [studies/quantized_relational_learner/records/benchmarks/qualification.storage_v2.json](records/benchmarks/qualification.storage_v2.json)
   (`sha256:fd0dd23cf1de`)

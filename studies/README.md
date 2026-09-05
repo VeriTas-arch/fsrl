@@ -226,11 +226,12 @@ trajectories.
     model is promoted; development, fresh replication, simulation stability and
     conditional biological realization are separate requirements.
 - [Four-valued relational teaching codes](quantized_relational_learner/README.md) — `frozen_contract`
-  - **Finding:** The storage-only sharding repair passed all 817 numerical checks and
-    has an append-only successor source lock. Original protocols, evaluation inputs and
-    earlier execution witnesses remain unchanged. Recovery replay and all mandatory
-    paired training follow this lock; no Liu behavioral result or main-model promotion
-    exists.
+  - **Finding:** The locked non-Liu recovery screen passed its finite-grid criterion:
+    Exact 9/9, Persistent 9/9 and Resampled 8/9, with all 27 family winners unchanged
+    between 512 and 1024 nuisance draws. Independent likelihood replay error is zero.
+    Lossless storage replay preserves all 961 arrays. All nine mandatory training fits
+    and Liu evaluation remain pending; no human mechanism identification or main-model
+    promotion is claimed.
 
 ## One-factor structural transport
 
