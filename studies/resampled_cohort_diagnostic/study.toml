@@ -6,7 +6,7 @@ order = 50
 status = "frozen_contract"
 review_state = "indexed"
 question = "Does the failed Resampled pilot show sustained original Liu distance-slope mismatch across new simulated cohorts, and are the other behavioral rows stable?"
-finding = "The separate fixed-parameter diagnostic is prospectively specified for three existing fits and 400 paired 77-person cohorts. No new cohort has been evaluated; the parent pilot remains partial_behavioral_reproduction."
+finding = "Non-Liu CUDA/float64 qualification passed for all three existing fits; point/flag extraction matches all nine exposed parent records exactly. All 400 paired cohorts, quantization uniforms, parameters and implementation are jointly locked before new-cohort evaluation. No diagnostic result yet; the parent failure remains unchanged."
 boundary = "Not confirmation, human equivalence or main-model promotion. No training or calibration; original human intervals and failed parent outcomes remain unchanged."
 
 [[records]]
@@ -17,3 +17,201 @@ role = "registered_contract"
 sha256 = "57a1a4005a0ce4bab294f5f1068d7d566e7e64e061e54751603ab496e9fa6f17"
 bytes = 8005
 source_ref = "sha256:57a1a4005a0ce4bab294f5f1068d7d566e7e64e061e54751603ab496e9fa6f17"
+
+[[records]]
+path = "records/benchmarks/execution_lock.json"
+legacy_path = "studies/resampled_cohort_diagnostic/records/benchmarks/execution_lock.json"
+origin = "native"
+role = "execution_lock"
+sha256 = "a2cc34a7d99e9356f7f5455b87e28ed4e089df2f88556d869dd1776d20ed82a7"
+bytes = 45008
+source_ref = "sha256:a2cc34a7d99e9356f7f5455b87e28ed4e089df2f88556d869dd1776d20ed82a7"
+
+[[records]]
+path = "records/benchmarks/qualification.json"
+legacy_path = "studies/resampled_cohort_diagnostic/records/benchmarks/qualification.json"
+origin = "native"
+role = "readiness_result"
+sha256 = "33ef389b00075e8e2c5e5ef3d66221c82602154f9075c4b6a16eb8b7b149fde0"
+bytes = 39186
+source_ref = "sha256:33ef389b00075e8e2c5e5ef3d66221c82602154f9075c4b6a16eb8b7b149fde0"
+
+[[records]]
+path = "records/inputs/cohorts-000.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-000.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e3d0323adb98fcc1bbee1e7fa5ae22655b03a2574587ee246ecdcb0b486d36f9"
+bytes = 1406385
+source_ref = "sha256:e3d0323adb98fcc1bbee1e7fa5ae22655b03a2574587ee246ecdcb0b486d36f9"
+
+[[records]]
+path = "records/inputs/cohorts-020.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-020.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ccc4f13fb7adc61a1cd835a809df5a2b960eb60dbc4e0a01db8d512c343bb862"
+bytes = 1407501
+source_ref = "sha256:ccc4f13fb7adc61a1cd835a809df5a2b960eb60dbc4e0a01db8d512c343bb862"
+
+[[records]]
+path = "records/inputs/cohorts-040.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-040.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2c250aa12963b99371f2bc4e6b97df7f7d48d2a45fd56f5c2e5df744a7aa7f60"
+bytes = 1409310
+source_ref = "sha256:2c250aa12963b99371f2bc4e6b97df7f7d48d2a45fd56f5c2e5df744a7aa7f60"
+
+[[records]]
+path = "records/inputs/cohorts-060.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-060.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "28b65dad05ccca9a1c7c0a322f20b847fbd315188eeb9dd250087186100ec33a"
+bytes = 1410767
+source_ref = "sha256:28b65dad05ccca9a1c7c0a322f20b847fbd315188eeb9dd250087186100ec33a"
+
+[[records]]
+path = "records/inputs/cohorts-080.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-080.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9d1a6a89cc1365cf2d10f86f3cb0f3f07b4de7d0a0142985d1bc4df9086d3336"
+bytes = 1406787
+source_ref = "sha256:9d1a6a89cc1365cf2d10f86f3cb0f3f07b4de7d0a0142985d1bc4df9086d3336"
+
+[[records]]
+path = "records/inputs/cohorts-100.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-100.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d3b37f446c93530cb7f4be894b102996d8d39d2fb1e9072518ce39712b2c637f"
+bytes = 1410073
+source_ref = "sha256:d3b37f446c93530cb7f4be894b102996d8d39d2fb1e9072518ce39712b2c637f"
+
+[[records]]
+path = "records/inputs/cohorts-120.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-120.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "27d859629c036284704a899a87793003239c17f8e3850fdb8149b79c015ed0cc"
+bytes = 1403210
+source_ref = "sha256:27d859629c036284704a899a87793003239c17f8e3850fdb8149b79c015ed0cc"
+
+[[records]]
+path = "records/inputs/cohorts-140.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-140.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "510f0a8bb63b2ca49024c061b1e1018186e3439d449c8eb3afb7d3a6ca459e30"
+bytes = 1407375
+source_ref = "sha256:510f0a8bb63b2ca49024c061b1e1018186e3439d449c8eb3afb7d3a6ca459e30"
+
+[[records]]
+path = "records/inputs/cohorts-160.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-160.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6735a23419dd3f0fa75ef2dee059bc98f6ad5b4ef3a32bbdcabb33a05f619380"
+bytes = 1407273
+source_ref = "sha256:6735a23419dd3f0fa75ef2dee059bc98f6ad5b4ef3a32bbdcabb33a05f619380"
+
+[[records]]
+path = "records/inputs/cohorts-180.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-180.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "291ae5076cbf9d7effc12af3d6c81b84bf02bfbf90dcf5c22f7c23b0aa3bf97a"
+bytes = 1408097
+source_ref = "sha256:291ae5076cbf9d7effc12af3d6c81b84bf02bfbf90dcf5c22f7c23b0aa3bf97a"
+
+[[records]]
+path = "records/inputs/cohorts-200.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-200.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a6b7ea6fd724a6a9f66d043fbecc2d35b9fcd380b67bd91ec84bcf41b5138558"
+bytes = 1403474
+source_ref = "sha256:a6b7ea6fd724a6a9f66d043fbecc2d35b9fcd380b67bd91ec84bcf41b5138558"
+
+[[records]]
+path = "records/inputs/cohorts-220.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-220.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "67d0b27102baf544e477a2c12bfedce1cf57d15269a6d2d7cd5d70bc2a2f5fa9"
+bytes = 1406453
+source_ref = "sha256:67d0b27102baf544e477a2c12bfedce1cf57d15269a6d2d7cd5d70bc2a2f5fa9"
+
+[[records]]
+path = "records/inputs/cohorts-240.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-240.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9ff1f0aedbe3ffd6164f2f1660340077f6be53ea2459a16d7c7718bbf1dd6712"
+bytes = 1407673
+source_ref = "sha256:9ff1f0aedbe3ffd6164f2f1660340077f6be53ea2459a16d7c7718bbf1dd6712"
+
+[[records]]
+path = "records/inputs/cohorts-260.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-260.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3038d91ad3b2d3d8a53e62b175cb401b45fbbdcbd9ad072fc3a132711c40d550"
+bytes = 1405399
+source_ref = "sha256:3038d91ad3b2d3d8a53e62b175cb401b45fbbdcbd9ad072fc3a132711c40d550"
+
+[[records]]
+path = "records/inputs/cohorts-280.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-280.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2c4fbbc226702e4477e1bc7bb0f01e03db1461715c839fbe7cb2e531ece958b9"
+bytes = 1407229
+source_ref = "sha256:2c4fbbc226702e4477e1bc7bb0f01e03db1461715c839fbe7cb2e531ece958b9"
+
+[[records]]
+path = "records/inputs/cohorts-300.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-300.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "88853d668698d03a7add7f4150ee7cd69e47af4d7c421a96cfebc37538713fc8"
+bytes = 1402060
+source_ref = "sha256:88853d668698d03a7add7f4150ee7cd69e47af4d7c421a96cfebc37538713fc8"
+
+[[records]]
+path = "records/inputs/cohorts-320.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-320.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7d98aa142727cafd72585888315e6ec5c4bcc99222c015e7958e86002a4bd6e1"
+bytes = 1410098
+source_ref = "sha256:7d98aa142727cafd72585888315e6ec5c4bcc99222c015e7958e86002a4bd6e1"
+
+[[records]]
+path = "records/inputs/cohorts-340.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-340.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bca957c12c0275f97f1fe1e6b94b8ab36efa489c89a723fef595d378022d4e91"
+bytes = 1401268
+source_ref = "sha256:bca957c12c0275f97f1fe1e6b94b8ab36efa489c89a723fef595d378022d4e91"
+
+[[records]]
+path = "records/inputs/cohorts-360.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-360.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "04d78bdbcea5d15495a5ee742fad653bc6c8a50a31e65680884bc93ac09f29d1"
+bytes = 1410473
+source_ref = "sha256:04d78bdbcea5d15495a5ee742fad653bc6c8a50a31e65680884bc93ac09f29d1"
+
+[[records]]
+path = "records/inputs/cohorts-380.npz"
+legacy_path = "studies/resampled_cohort_diagnostic/records/inputs/cohorts-380.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "be95892da812e9de5481ffc89c95dc3c492aac78327629abc44a7dc8244f2747"
+bytes = 1406204
+source_ref = "sha256:be95892da812e9de5481ffc89c95dc3c492aac78327629abc44a7dc8244f2747"

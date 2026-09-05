@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 378,
+  "entry_count": 400,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 205,
+    "json": 207,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 56,
-    "numpy_npz": 105,
+    "numpy_npz": 125,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 346,
+    "already_conformant": 368,
     "historical_gzip_view": 31,
     "historical_pth_view": 1
   },
@@ -10037,6 +10037,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/benchmarks/execution_lock.json",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/benchmarks/execution_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 45008,
+        "sha256": "a2cc34a7d99e9356f7f5455b87e28ed4e089df2f88556d869dd1776d20ed82a7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_benchmarks_execution_lock_json",
+      "registered_identity": {
+        "bytes": 45008,
+        "sha256": "a2cc34a7d99e9356f7f5455b87e28ed4e089df2f88556d869dd1776d20ed82a7",
+        "source_ref": "sha256:a2cc34a7d99e9356f7f5455b87e28ed4e089df2f88556d869dd1776d20ed82a7"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.readiness_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/benchmarks/qualification.json",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 39186,
+        "sha256": "33ef389b00075e8e2c5e5ef3d66221c82602154f9075c4b6a16eb8b7b149fde0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 39186,
+        "sha256": "33ef389b00075e8e2c5e5ef3d66221c82602154f9075c4b6a16eb8b7b149fde0",
+        "source_ref": "sha256:33ef389b00075e8e2c5e5ef3d66221c82602154f9075c4b6a16eb8b7b149fde0"
+      },
+      "role": "readiness_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -10068,6 +10136,686 @@
         "source_ref": "sha256:57a1a4005a0ce4bab294f5f1068d7d566e7e64e061e54751603ab496e9fa6f17"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-000.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-000.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1406385,
+        "sha256": "e3d0323adb98fcc1bbee1e7fa5ae22655b03a2574587ee246ecdcb0b486d36f9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_000_npz",
+      "registered_identity": {
+        "bytes": 1406385,
+        "sha256": "e3d0323adb98fcc1bbee1e7fa5ae22655b03a2574587ee246ecdcb0b486d36f9",
+        "source_ref": "sha256:e3d0323adb98fcc1bbee1e7fa5ae22655b03a2574587ee246ecdcb0b486d36f9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-020.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-020.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407501,
+        "sha256": "ccc4f13fb7adc61a1cd835a809df5a2b960eb60dbc4e0a01db8d512c343bb862"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_020_npz",
+      "registered_identity": {
+        "bytes": 1407501,
+        "sha256": "ccc4f13fb7adc61a1cd835a809df5a2b960eb60dbc4e0a01db8d512c343bb862",
+        "source_ref": "sha256:ccc4f13fb7adc61a1cd835a809df5a2b960eb60dbc4e0a01db8d512c343bb862"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-040.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-040.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1409310,
+        "sha256": "2c250aa12963b99371f2bc4e6b97df7f7d48d2a45fd56f5c2e5df744a7aa7f60"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_040_npz",
+      "registered_identity": {
+        "bytes": 1409310,
+        "sha256": "2c250aa12963b99371f2bc4e6b97df7f7d48d2a45fd56f5c2e5df744a7aa7f60",
+        "source_ref": "sha256:2c250aa12963b99371f2bc4e6b97df7f7d48d2a45fd56f5c2e5df744a7aa7f60"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-060.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-060.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1410767,
+        "sha256": "28b65dad05ccca9a1c7c0a322f20b847fbd315188eeb9dd250087186100ec33a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_060_npz",
+      "registered_identity": {
+        "bytes": 1410767,
+        "sha256": "28b65dad05ccca9a1c7c0a322f20b847fbd315188eeb9dd250087186100ec33a",
+        "source_ref": "sha256:28b65dad05ccca9a1c7c0a322f20b847fbd315188eeb9dd250087186100ec33a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-080.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-080.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1406787,
+        "sha256": "9d1a6a89cc1365cf2d10f86f3cb0f3f07b4de7d0a0142985d1bc4df9086d3336"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_080_npz",
+      "registered_identity": {
+        "bytes": 1406787,
+        "sha256": "9d1a6a89cc1365cf2d10f86f3cb0f3f07b4de7d0a0142985d1bc4df9086d3336",
+        "source_ref": "sha256:9d1a6a89cc1365cf2d10f86f3cb0f3f07b4de7d0a0142985d1bc4df9086d3336"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-100.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-100.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1410073,
+        "sha256": "d3b37f446c93530cb7f4be894b102996d8d39d2fb1e9072518ce39712b2c637f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_100_npz",
+      "registered_identity": {
+        "bytes": 1410073,
+        "sha256": "d3b37f446c93530cb7f4be894b102996d8d39d2fb1e9072518ce39712b2c637f",
+        "source_ref": "sha256:d3b37f446c93530cb7f4be894b102996d8d39d2fb1e9072518ce39712b2c637f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-120.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-120.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1403210,
+        "sha256": "27d859629c036284704a899a87793003239c17f8e3850fdb8149b79c015ed0cc"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_120_npz",
+      "registered_identity": {
+        "bytes": 1403210,
+        "sha256": "27d859629c036284704a899a87793003239c17f8e3850fdb8149b79c015ed0cc",
+        "source_ref": "sha256:27d859629c036284704a899a87793003239c17f8e3850fdb8149b79c015ed0cc"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-140.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-140.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407375,
+        "sha256": "510f0a8bb63b2ca49024c061b1e1018186e3439d449c8eb3afb7d3a6ca459e30"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_140_npz",
+      "registered_identity": {
+        "bytes": 1407375,
+        "sha256": "510f0a8bb63b2ca49024c061b1e1018186e3439d449c8eb3afb7d3a6ca459e30",
+        "source_ref": "sha256:510f0a8bb63b2ca49024c061b1e1018186e3439d449c8eb3afb7d3a6ca459e30"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-160.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-160.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407273,
+        "sha256": "6735a23419dd3f0fa75ef2dee059bc98f6ad5b4ef3a32bbdcabb33a05f619380"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_160_npz",
+      "registered_identity": {
+        "bytes": 1407273,
+        "sha256": "6735a23419dd3f0fa75ef2dee059bc98f6ad5b4ef3a32bbdcabb33a05f619380",
+        "source_ref": "sha256:6735a23419dd3f0fa75ef2dee059bc98f6ad5b4ef3a32bbdcabb33a05f619380"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-180.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-180.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1408097,
+        "sha256": "291ae5076cbf9d7effc12af3d6c81b84bf02bfbf90dcf5c22f7c23b0aa3bf97a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_180_npz",
+      "registered_identity": {
+        "bytes": 1408097,
+        "sha256": "291ae5076cbf9d7effc12af3d6c81b84bf02bfbf90dcf5c22f7c23b0aa3bf97a",
+        "source_ref": "sha256:291ae5076cbf9d7effc12af3d6c81b84bf02bfbf90dcf5c22f7c23b0aa3bf97a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-200.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-200.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1403474,
+        "sha256": "a6b7ea6fd724a6a9f66d043fbecc2d35b9fcd380b67bd91ec84bcf41b5138558"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_200_npz",
+      "registered_identity": {
+        "bytes": 1403474,
+        "sha256": "a6b7ea6fd724a6a9f66d043fbecc2d35b9fcd380b67bd91ec84bcf41b5138558",
+        "source_ref": "sha256:a6b7ea6fd724a6a9f66d043fbecc2d35b9fcd380b67bd91ec84bcf41b5138558"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-220.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-220.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1406453,
+        "sha256": "67d0b27102baf544e477a2c12bfedce1cf57d15269a6d2d7cd5d70bc2a2f5fa9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_220_npz",
+      "registered_identity": {
+        "bytes": 1406453,
+        "sha256": "67d0b27102baf544e477a2c12bfedce1cf57d15269a6d2d7cd5d70bc2a2f5fa9",
+        "source_ref": "sha256:67d0b27102baf544e477a2c12bfedce1cf57d15269a6d2d7cd5d70bc2a2f5fa9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-240.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-240.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407673,
+        "sha256": "9ff1f0aedbe3ffd6164f2f1660340077f6be53ea2459a16d7c7718bbf1dd6712"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_240_npz",
+      "registered_identity": {
+        "bytes": 1407673,
+        "sha256": "9ff1f0aedbe3ffd6164f2f1660340077f6be53ea2459a16d7c7718bbf1dd6712",
+        "source_ref": "sha256:9ff1f0aedbe3ffd6164f2f1660340077f6be53ea2459a16d7c7718bbf1dd6712"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-260.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-260.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1405399,
+        "sha256": "3038d91ad3b2d3d8a53e62b175cb401b45fbbdcbd9ad072fc3a132711c40d550"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_260_npz",
+      "registered_identity": {
+        "bytes": 1405399,
+        "sha256": "3038d91ad3b2d3d8a53e62b175cb401b45fbbdcbd9ad072fc3a132711c40d550",
+        "source_ref": "sha256:3038d91ad3b2d3d8a53e62b175cb401b45fbbdcbd9ad072fc3a132711c40d550"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-280.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-280.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407229,
+        "sha256": "2c4fbbc226702e4477e1bc7bb0f01e03db1461715c839fbe7cb2e531ece958b9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_280_npz",
+      "registered_identity": {
+        "bytes": 1407229,
+        "sha256": "2c4fbbc226702e4477e1bc7bb0f01e03db1461715c839fbe7cb2e531ece958b9",
+        "source_ref": "sha256:2c4fbbc226702e4477e1bc7bb0f01e03db1461715c839fbe7cb2e531ece958b9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-300.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-300.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1402060,
+        "sha256": "88853d668698d03a7add7f4150ee7cd69e47af4d7c421a96cfebc37538713fc8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_300_npz",
+      "registered_identity": {
+        "bytes": 1402060,
+        "sha256": "88853d668698d03a7add7f4150ee7cd69e47af4d7c421a96cfebc37538713fc8",
+        "source_ref": "sha256:88853d668698d03a7add7f4150ee7cd69e47af4d7c421a96cfebc37538713fc8"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-320.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-320.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1410098,
+        "sha256": "7d98aa142727cafd72585888315e6ec5c4bcc99222c015e7958e86002a4bd6e1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_320_npz",
+      "registered_identity": {
+        "bytes": 1410098,
+        "sha256": "7d98aa142727cafd72585888315e6ec5c4bcc99222c015e7958e86002a4bd6e1",
+        "source_ref": "sha256:7d98aa142727cafd72585888315e6ec5c4bcc99222c015e7958e86002a4bd6e1"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-340.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-340.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1401268,
+        "sha256": "bca957c12c0275f97f1fe1e6b94b8ab36efa489c89a723fef595d378022d4e91"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_340_npz",
+      "registered_identity": {
+        "bytes": 1401268,
+        "sha256": "bca957c12c0275f97f1fe1e6b94b8ab36efa489c89a723fef595d378022d4e91",
+        "source_ref": "sha256:bca957c12c0275f97f1fe1e6b94b8ab36efa489c89a723fef595d378022d4e91"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-360.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-360.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1410473,
+        "sha256": "04d78bdbcea5d15495a5ee742fad653bc6c8a50a31e65680884bc93ac09f29d1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_360_npz",
+      "registered_identity": {
+        "bytes": 1410473,
+        "sha256": "04d78bdbcea5d15495a5ee742fad653bc6c8a50a31e65680884bc93ac09f29d1",
+        "source_ref": "sha256:04d78bdbcea5d15495a5ee742fad653bc6c8a50a31e65680884bc93ac09f29d1"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-380.npz",
+        "repository_path": "studies/resampled_cohort_diagnostic/records/inputs/cohorts-380.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1406204,
+        "sha256": "be95892da812e9de5481ffc89c95dc3c492aac78327629abc44a7dc8244f2747"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "resampled_cohort_diagnostic",
+        "kind": "study"
+      },
+      "record_id": "study.resampled_cohort_diagnostic.studies_resampled_cohort_diagnostic_records_inputs_cohorts_380_npz",
+      "registered_identity": {
+        "bytes": 1406204,
+        "sha256": "be95892da812e9de5481ffc89c95dc3c492aac78327629abc44a7dc8244f2747",
+        "source_ref": "sha256:be95892da812e9de5481ffc89c95dc3c492aac78327629abc44a7dc8244f2747"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -13109,7 +13857,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 376,
+  "registered_record_count": 398,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -13120,7 +13868,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 34,
+    "execution_lock": 35,
     "freeze_validation": 1,
     "frozen_parameters": 10,
     "frozen_result": 45,
@@ -13129,14 +13877,14 @@
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 2,
-    "readiness_result": 4,
+    "readiness_result": 5,
     "registered_contract": 61,
     "repair_contract": 5,
     "repair_lock": 9,
     "report": 55,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 118,
+    "supporting_artifact": 138,
     "validation_result": 4
   },
   "schema_version": 2,
