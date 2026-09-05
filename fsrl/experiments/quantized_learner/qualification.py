@@ -33,6 +33,7 @@ CPU_TESTS = (
     "tests.experiments.quantized_learner.test_model",
     "tests.experiments.quantized_learner.test_recovery",
     "tests.experiments.quantized_learner.test_qualification",
+    "tests.experiments.quantized_learner.test_pipeline",
 )
 CPU_TEST_LOG = "cpu-tests.txt"
 
