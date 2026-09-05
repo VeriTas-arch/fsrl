@@ -247,7 +247,8 @@ trajectories.
     Internal strict correctness is only about 3.4%, and sampled choice has no
     directional net effect on correct-ranker prevalence; ranking-composition TV is about
     0.118. This supports targeting the update rule before the readout, while retaining
-    sampling inconsistency as a separate boundary.
+    sampling inconsistency as a separate boundary. All arrays, summaries and report
+    bytes were independently reconstructed.
 
 ## One-factor structural transport
 

@@ -30,7 +30,8 @@ core-behavior layer while retaining their legacy 8/9 quantitative pilot status. 
 strict correctness is only about 3.4%, and sampled choice has no directional net effect
 on correct-ranker prevalence; ranking-composition TV is about 0.118. This supports
 targeting the update rule before the readout, while retaining sampling inconsistency as
-a separate boundary.
+a separate boundary. All arrays, summaries and report bytes were independently
+reconstructed.
 
 **Claim boundary.** Retrospective evaluation of exposed simulations, not prospective
 validation of the new 0.90 threshold, full quantitative fidelity, human latent-state
@@ -60,6 +61,9 @@ fitting occurred.
 - `report` —
   [studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.interpretation.md](records/reports/main_model_evaluation_v2.interpretation.md)
   (`sha256:5ce1b39433b7`)
+- `report` —
+  [studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.verification_note.md](records/reports/main_model_evaluation_v2.verification_note.md)
+  (`sha256:aae50262be32`)
 
 ## Provenance rule
 

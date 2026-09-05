@@ -64,7 +64,9 @@ direnv exec . python -m tools.provenance.verify_main_model_evaluation_v2
 
 It reconstructs all internal/sample transition counts, summaries and the exact
 pre-JSON report bytes without modifying the locked scientific implementation or
-registered result.
+registered result. See the
+[verification note](../studies/main_model_evaluation_v2/records/reports/main_model_evaluation_v2.verification_note.md)
+for the preserved original failure and the audit boundary.
 
 ## Refactor equivalence
 
