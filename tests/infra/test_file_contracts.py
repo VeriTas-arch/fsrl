@@ -4,6 +4,7 @@ import json
 import tempfile
 import unittest
 import zipfile
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -102,12 +103,17 @@ class FileContractTests(unittest.TestCase):
     def test_registered_record_catalog_is_current_and_complete(self):
         result = check_record_catalog(CATALOG_PATH)
         self.assertTrue(result["passed"], result)
-        self.assertEqual(result["entries"], 213)
         catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
-        self.assertEqual(catalog["registered_record_count"], 211)
+        historical = [
+            record for record in catalog["records"] if record.get("origin") != "native"
+        ]
+        native_count = len(catalog["records"]) - len(historical)
+        self.assertEqual(len(historical), 213)
+        self.assertEqual(result["entries"], 213 + native_count)
+        self.assertEqual(catalog["registered_record_count"], 211 + native_count)
         self.assertEqual(catalog["retired_asset_count"], 2)
         self.assertEqual(
-            catalog["normalization_counts"],
+            Counter(record["normalization"]["status"] for record in historical),
             {
                 "already_conformant": 193,
                 "historical_gzip_view": 19,

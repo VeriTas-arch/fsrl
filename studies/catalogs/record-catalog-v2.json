@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 213,
+  "entry_count": 214,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 153,
+    "json": 154,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 46,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 193,
+    "already_conformant": 194,
     "historical_gzip_view": 19,
     "historical_pth_view": 1
   },
@@ -4432,6 +4432,40 @@
         "prospective_suffix": ".json"
       },
       "locator": {
+        "legacy_path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+        "repository_path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 25549,
+        "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "joint_training_strategy",
+        "kind": "study"
+      },
+      "record_id": "study.joint_training_strategy.studies_joint_training_strategy_records_benchmarks_joint_training_strategy_v1_json",
+      "registered_identity": {
+        "bytes": 25549,
+        "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+        "source_ref": "sha256:af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
         "legacy_path": "benchmarks/local_behavior_attribution_v2_3.json",
         "repository_path": "studies/local_behavior_attribution/records/benchmarks/local_behavior_attribution_v2_3.json"
       },
@@ -7475,7 +7509,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 211,
+  "registered_record_count": 212,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -7496,7 +7530,7 @@
     "presentation_view": 1,
     "randomization_record": 1,
     "readiness_result": 1,
-    "registered_contract": 54,
+    "registered_contract": 55,
     "repair_contract": 4,
     "repair_lock": 8,
     "report": 45,
@@ -7509,7 +7543,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "bca75c1f0fff8d52b1ed10df0a597806893ef2d87106536cb467cde93a9629a6"
+      "sha256": "f89f21c23aaad90916e7c642acaba96fe53f83861043322821f43506586e0ca6"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

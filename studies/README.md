@@ -180,6 +180,11 @@ fail to close the dynamics.
   - **Finding:** The local L_T state has an exact edge-ledger-plus-Gram reduction a_T,
     while the global output is geometrically near-additive but its tested learning
     states do not close.
+- [Matched single-stage versus staged training](joint_training_strategy/README.md) — `frozen_contract`
+  - **Finding:** Prospectively registers three paired new seeds, an equal-episode-budget
+    comparator, fixed dual evidence admission, causal controls, and separate competence,
+    noninferiority, behavioral, and cost decisions. No trained artifact or scientific
+    result exists yet.
 
 ## One-factor structural transport
 

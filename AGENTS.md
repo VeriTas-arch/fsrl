@@ -77,6 +77,14 @@ for reporting. Organization, figures, packaging, and reproducibility work may
 continue; do not start training, tuning, new evaluation, or a new scientific
 estimand unless the user explicitly opens that program.
 
+The user has opened the narrowly scoped `joint_training_strategy` comparison:
+same final P/L architecture and evidence rules, matched staged versus joint
+optimization on three paired new seeds. Its prospective authority is
+[`studies/joint_training_strategy/`](studies/joint_training_strategy/).
+Follow its protocol, implementation-lock, all-artifact-lock, then evaluation
+sequence. This does not reopen historical experiments, human data collection,
+closed candidate families, or unrestricted model tuning.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

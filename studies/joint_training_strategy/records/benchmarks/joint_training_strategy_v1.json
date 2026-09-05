@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "study_id": "joint_training_strategy",
+  "experiment_id": "joint-training-strategy-v1",
+  "registration_status": "prospective_before_experiment_implementation_training_or_evaluation",
+  "registration_parent_commit": "9d7fc69507e94f88123bff232e80c4dc70366f69",
+  "scientific_question": "At a fixed generic episode budget, can simultaneous optimization replace global-then-local fitting in the same final differential-admission P/L architecture while preserving competence, causal organization, and the frozen Liu behavioral phenomena?",
+  "hypothesis": "A shared final query objective can train the recurrent backbone and the one positive local gain together without requiring staged parameter freezing to obtain compatible global assembly and direct-experience fidelity.",
+  "claim_boundary": {
+    "candidate": "An independent prospective training-strategy candidate; all historical v1, v2.3, v2.4, transport, and reporting artifacts remain immutable.",
+    "comparison": "Equal episode exposure, not equal backbone updates or equal FLOPs. This compares two complete optimization schedules, not an isolated causal effect of temporal ordering.",
+    "architecture": "The dual states, their addresses, write/read equations, differential evidence admission, and positive local gain are imposed structural priors. Only backbone parameters theta and local raw gain rho are optimized. Neither autonomous emergence of two stores nor minimal architecture is tested.",
+    "learning_timescales": "Single stage removes sequential outer-loop parameter fitting, not support-before-query task structure or the distinction between outer optimization and episode-local state construction.",
+    "human": "Liu data and the historical temperature have already informed the project. New network seeds are not new human-data confirmation. Generic query supervision is an outer training signal, not feedback supplied during human-like Liu query trials.",
+    "biology": "Differentiable neuromodulated plasticity is a biological inspiration. BPTT and the fixed local tensor-product rule are not established human neural implementations.",
+    "coupling": "P and L are separately constructed within each episode; coadaptation occurs through the shared outer query error, not episode-local feedback from L to P.",
+    "closed_routes": "No scalar amplitude gate, policy residual correction, activation replacement, comparator tuning, new auxiliary loss, or additional scientific task variant is reopened."
+  },
+  "seeds": {
+    "mandatory": [2108, 2109, 2110],
+    "conditions": ["matched_staged", "joint"],
+    "independent_units": "Three paired initializations, six fitted conditions; not six independent network draws.",
+    "selection": "Next three unused consecutive development seeds after 2107. Before registration there were no seed-2108/2109/2110 runtime directories or registered trained artifacts; 2108 occurs only in rejection-test examples, not prior training.",
+    "model_initialization": "torch.manual_seed(network_seed), identical state_dict and raw_gain initialization in both conditions; verify exact initial tensor hashes.",
+    "training_rng": "numpy.default_rng(100000 + network_seed), reset identically for each condition.",
+    "mandatory_execution": "Train all six final artifacts and jointly lock their hashes, configurations, complete step logs, initial hashes, and stream fingerprints before evaluating any Liu condition.",
+    "filtering_replacement_optional_seed_extension_or_result_dependent_stopping": "forbidden"
+  },
+  "task": {
+    "n_items": 8,
+    "cue_size": 15,
+    "min_edges": 7,
+    "max_edges": 10,
+    "support_blocks": 4,
+    "query_pairs": "All 28 unordered pairs, with the existing generator's randomized left/right orientation and order; no learned/nonlearned reweighting.",
+    "subject_encoding_mode": "stable_omission",
+    "subject_encoding_parameters": "Unchanged SubjectEncodingConfig from the implementation witness; retain the sampled SubjectEncodingState and recover its original relation probability p without resampling.",
+    "evidence_boundary": "Only ordinary pair cues and displayed signed support magnitude enter memory writes. No true rank, query answer, learned-pair flag, omitted-pair flag, posterior, or diagnostic residual enters the recurrent input.",
+    "global_evidence": "s_G = signed_magnitude * z",
+    "local_evidence": "s_L = signed_magnitude * (z + (1-z) * p)",
+    "probability_recovery": "Compute p from the episode's original SubjectEncodingState, observed cue identities, and the distance recoverable from abs(displayed_signed_magnitude)*(n_items-1). Do not mistake binary SupportTrial.encoding_reliability for p.",
+    "repeated_presentation": "One p and one Bernoulli retention z per subject-relation, shared across its four presentations; never resample at local write time.",
+    "protected_holdouts": "Exclude the registered liu_v1 and liu_v2 rank-graph signatures and their rank-axis reflections from every generic training or validation episode.",
+    "generic_graph_split": {
+      "serialization": "Sort canonical (lower_rank_index, higher_rank_index) edges and separately their rank-axis reflection (7-j,7-i). Take the lexicographically smaller sorted edge list, then json.dumps(edge_list, separators=(',', ':')) encoded as ASCII. A graph and its reflection must share one partition.",
+      "bucket": "int(sha256(serialization).hexdigest()[:8], 16) % 16",
+      "validation_bucket": 0,
+      "training_buckets": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      "implementation": "Use the existing generic task generator and reject complete episodes in the wrong partition. Choose one edge count per training batch and retain it during rejection. This is a fixed graph-level validation split within the generic distribution, not an added transport task."
+    }
+  },
+  "architecture": {
+    "backbone": "Unchanged RetroModulRNN equations and checkpoint parameter names",
+    "hidden_size": 200,
+    "input_size": 37,
+    "activation": "tanh",
+    "support_trial_steps": 4,
+    "query_steps": 2,
+    "blank_initial_steps": 2,
+    "support_query_time": 0.6666666666666666,
+    "state_reset": "Reset hidden and eligibility per support/query trial, preserve P over support trials, reset both P and L for each episode.",
+    "query_state": "Read the same terminal P_T and L_T for every query without writeback. During training, retain the gradient path through P_T to support computation.",
+    "local_key": "k = vec(c_left c_right^T - c_right c_left^T) / max(norm(vec(...)), 1e-8)",
+    "local_write": "L_next = L + s_L*k, exactly once per support trial",
+    "local_read": "ell_q = dot(L_T, k_q)",
+    "local_gain": "lambda_L = softplus(rho)",
+    "margin": "M_q = (global_logits[1]-global_logits[0]) + lambda_L*ell_q",
+    "logit_combination": "Subtract half the local correction from logit 0 and add half to logit 1, retaining the original global bias.",
+    "target_sign": "y_q = 2*correct_action-1; positive margin means left item higher."
+  },
+  "optimization": {
+    "batch_size": 32,
+    "total_steps": 1500,
+    "total_episode_exposures": 48000,
+    "global_only_steps": 1000,
+    "local_only_steps": 500,
+    "initial_local_gain": 0.1,
+    "backbone_learning_rate": 0.0001,
+    "local_learning_rate": 0.01,
+    "optimizer": "Adam; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+    "gradient_clip": 2.0,
+    "clipping_scope": "Clip backbone parameters and [local.raw_gain] separately, before their Adam updates, in both conditions. Do not use one joint norm across differently sized groups.",
+    "fast_weight_penalty": 0.0001,
+    "training_temperature": 1.0,
+    "query_loss": "Mean cross-entropy over every query and episode of the batch, using the combined raw logits when the local contribution is active.",
+    "matched_staged": {
+      "steps_0_to_999": "Local correction is exactly OFF, not merely fixed at gain 0.1. Optimize theta using global query CE plus 1e-4*mean(P_T^2); rho remains exactly at initialization.",
+      "steps_1000_to_1499": "Freeze theta, activate the FINAL dual-access local evidence rule, and optimize rho from its original initialization using combined query CE. A P penalty is constant with respect to rho and is excluded from this phase's optimized loss.",
+      "backbone_updates": 1000,
+      "local_updates": 500
+    },
+    "joint": {
+      "steps_0_to_1499": "Activate both branches and optimize theta and rho from initialization using combined query CE plus 1e-4*mean(P_T^2). No intermediate backbone freeze or separate gain adaptation.",
+      "backbone_updates": 1500,
+      "local_updates": 1500
+    },
+    "matching": "Identical per-step generic episodes, cues, support schedules, signed magnitudes, original probabilities p, masks z, queries, and targets within each paired seed. Hash the full numerical stream and compare both cumulative and per-step fingerprints.",
+    "checkpoint_selection": "Final registered step only; no intermediate checkpoint evaluation, early stopping, gain refit, or temperature refit.",
+    "warmup": "Compiler warmups perform no optimizer update and do not advance the training RNG. Reuse the first batch of the phase, verify unchanged parameter hashes, and clear gradients before the counted first update. Report warmup cost separately.",
+    "local_stage_integrity": "Exact final staged backbone tensor hashes must equal its step-1000 backbone hashes. The new L-off identity is against each model's own global output, not the historical v1 checkpoint."
+  },
+  "execution": {
+    "workflow": "joint-training-strategy",
+    "runtime_root": "artifacts/runs/joint_training_strategy_v1",
+    "launcher": "python -m fsrl.infra.formal_runtime joint-training-strategy",
+    "device": "CUDA required for training and neural evaluation; sandbox invisibility permits an elevated GPU invocation",
+    "torch_cpu_threads": 1,
+    "torch_interop_threads": 1,
+    "blas_threads": 1,
+    "compiler_threads": 1,
+    "compile": {"enabled": true, "backend": "inductor", "fullgraph": true, "mode": "default"},
+    "prospective_execution": "Compile complete recurrent trial sequences with fullgraph/default; prepare contiguous batched support inputs and transfer them together, and batch terminal queries without changing their shared support state. Same numerical execution in both conditions, except the declared gradient and local-activation schedule.",
+    "precision": "float32 neural computation, no autocast or TF32; float64 statistical summaries",
+    "condition_execution_order": {"2108": ["matched_staged", "joint"], "2109": ["joint", "matched_staged"], "2110": ["matched_staged", "joint"]},
+    "costs": "Per phase record warmup/compilation time, measured training wall time, total wall time, updates, episode exposures, trainable/total parameter counts, P/L persistent-state sizes, CUDA peak allocated/reserved memory, runtime versions and device identity. Report paired ratios; efficiency is separate from scientific preservation.",
+    "artifact_policy": "Exclusive output creation with a prospective run manifest. Never overwrite an incomplete or failed attempt. A verified complete run may be reused only after all hashes and step counts match. A technical interruption may be replayed from initialization under the same locked contract in a separately identified attempt, never resumed from an unverified partial state."
+  },
+  "implementation_gates": {
+    "cpu_unit_tests": "Verify z/p distinction, retained and omitted writes, reversal identities, exact local-off readout identity, graph split and protected exclusions, paired RNG/fingerprints, loss sign, step schedule, optimizer groups, and final-only selection on small deterministic fixtures.",
+    "gradient_tests": "With fast-weight penalty disabled, query CE must have a finite nonzero gradient through terminal P_T and into support-time fast-weight writes, as well as into local.raw_gain. Verify actual parameter updates, staged rho inactivity in phase one, and exact theta freeze in phase two. Unused legacy heads need not receive gradients.",
+    "cuda_parity": "On a non-Liu smoke fixture using seed 910001, compare eager versus fullgraph/default recurrent sequence outputs, task loss, gradients, and one optimizer update using atol=1e-5, rtol=1e-4. Also compare batched queries against per-query readout from the same P_T. Scientific seeds are not used for choosing implementations or hyperparameters.",
+    "resource_gate": "Formal runtime confirms visible CUDA and all CPU/BLAS thread limits. Report, do not infer, GPU memory and timing.",
+    "failure": "A failed implementation identity blocks interpretation and is repaired before scientific execution under unchanged equations and thresholds. Actual optimization divergence under an integrity-valid implementation is a recipe failure, not permission to tune or replace seeds."
+  },
+  "evaluation": {
+    "timing": "No new generic competence or Liu outcomes are computed until all six trained artifacts have been jointly locked, committed, and pushed. Generic training losses and the non-Liu implementation smoke are permitted before that lock.",
+    "generic": {
+      "episodes": 256,
+      "rng_seed": 84001,
+      "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+      "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+      "temperature": 1.0,
+      "conditions": ["intact", "local_off", "P_off"]
+    },
+    "liu": {
+      "protocol_id": "liu_v2",
+      "subjects": 77,
+      "cue_mode": "permuted_shared",
+      "subject_encoding_mode": "stable_omission",
+      "cue_seed": 31001,
+      "support_seed": 31101,
+      "subject_encoding_seed": 31201,
+      "choice_seed": 31301,
+      "order_seed": 31401,
+      "query_shuffle_seed": 31801,
+      "evidence_shuffle_seed": 32301,
+      "temperature": 0.25,
+      "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant.",
+      "conditions": ["intact", "local_off", "P_off", "query_shuffle", "evidence_shuffle"],
+      "pairing": "Reuse the same virtual subjects, cue codes, support order, p/z, and choice random numbers across conditions and paired networks.",
+      "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+      "evidence_shuffle": "Within subject and support block, derange the eight local signed evidence scalars across support cue addresses. Preserve the scalar multiset, key multiset, write count, timing, P_T, and gain.",
+      "LOO": "Replay all eight support-relation removals. Remove both orientations of the source evidence while preserving schedules, cues, original p/z, and maps. Retain global-only, local-only, and combined canonical margin fields to distinguish remote recurrent assembly from local cross-talk.",
+      "legacy_diagnostics": "Report own-global qualification_v2 ablations (write_off, alpha_zero, reset, shuffle), query-order invariance, and expected-rank versus MAP projection at the historical posterior temperature 0.05. These are secondary audits; the complete old global-only competence conjunction is not silently imposed on a jointly specialized backbone."
+    }
+  },
+  "statistics": {
+    "samples": 10000,
+    "interval": 0.95,
+    "bootstrap_seed": "85000 + network_seed for Liu; 86000 + network_seed for generic validation",
+    "unit": "Virtual participant within one Liu network or generic episode within one network; reuse resampling counts for each paired comparison.",
+    "interval_rule": "Percentile participant bootstrap with 0.025 and 0.975 quantiles; primary effect directions and margins are frozen below. No network population bootstrap or participant pooling across networks.",
+    "probability": "Compute sigmoid(y*margin/T) before averaging orientations. In Liu evaluate both orientations for each canonical pair, then average their correct probabilities. Do not sigmoid an antisymmetrized margin for primary probability endpoints.",
+    "exact_decision": "Mean sign correctness of the raw oriented margins with ties assigned 0.5, not a sampled-choice accuracy.",
+    "groups": "Learned/nonlearned are the presented support relations and their complement. Within learned pairs, retained/omitted refer to original stable z=1/0, not correctness or posterior labels.",
+    "group_averaging": "Average pairs within participant, then participants equally. For empty retained/omitted groups, omit that participant only from that endpoint and its paired resampling; report the endpoint denominator. Never omit a network or poor-performing participant from competence or schedule comparisons.",
+    "canonical_margin": "For Hodge and LOO only, field(i,j) = (margin(i,j)-margin(j,i))/2 for i<j.",
+    "remote": "For each removed relation, average absolute canonical margin change over pairs with no source endpoint, then average relations within participant.",
+    "third_party": "Use existing relation_loo_metrics: source-removal Hodge-potential change, centered among the six non-source items, divided by total potential-change energy; average defined relations within participant. Undefined zero-energy cases are explicitly reported.",
+    "scope": "Three paired networks support recipe-level replication only. A participant CI is not uncertainty over the network population."
+  },
+  "decision_contract": {
+    "per_condition_competence": {
+      "generic_intact_exact_decision_mean_minimum": {"learned": 0.75, "nonlearned": 0.70},
+      "liu_intact_exact_decision_mean_minimum": {"overall": 0.75, "nonlearned": 0.70},
+      "liu_intact_transitive_triplet_mean_minimum": 0.95,
+      "rationale": "Retain the existing global task-competence scale on the combined model; do not require the joint model's isolated global branch to reproduce the former independently trained v1."
+    },
+    "paired_noninferiority": {
+      "estimand": "Per-participant or per-episode joint minus matched_staged correct probability",
+      "minimum_lower_bound": -0.02,
+      "generic_groups": ["learned", "nonlearned"],
+      "liu_groups": ["learned", "nonlearned", "retained", "omitted"],
+      "rule": "All six paired lower bounds must be at least -0.02 within each seed. The two-percentage-point tolerance is chosen prospectively as the largest accepted absolute loss for this training-strategy substitution; it is not inferred from new results."
+    },
+    "core_mechanism_per_condition": {
+      "global_necessity": "Liu intact-minus-P_off nonlearned correct-probability lower bound >=0.10, and P_off nonlearned correct-probability upper bound <=0.55.",
+      "remote_reassembly": "Own-global all-relation remote_absolute lower bound >0.01 raw margin units and third_party_relational lower bound >0.05. These measure influence, not ground-truth-directed improvement of every source relation.",
+      "direct_local_fidelity": "Liu intact-minus-local_off correct-probability lower bound >=0.01 separately on retained and omitted learned pairs.",
+      "query_evidence_specificity": "Matched intact-minus-query_shuffle and intact-minus-evidence_shuffle learned correct-probability lower bounds each >=0.01.",
+      "local_only_partition": "P_off learned correct-probability lower bound >0.50, P_off nonlearned upper bound <=0.55, and the upper bound of paired (local-only remote - 0.25*combined-intact remote) <=0.",
+      "rule": "Report every link independently in each condition and seed. Mechanism-preserving schedule substitution requires all links in both conditions plus paired noninferiority; a differently organized successful model is reported as another solution, not assigned the old mechanism claims."
+    },
+    "behavior": {
+      "reference_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json",
+      "method": "Reuse all nine frozen row definitions, human intervals, Beta classes, and qualitative/quantitative classifications. Do not recompute human reference intervals, select a subset after results, or treat interval membership as a formal model-human equivalence test.",
+      "qualitative_preservation": "All nine qualitative row rules pass independently for the joint model in each seed.",
+      "historically_quantitative_rows": ["learned_accuracy", "nonlearned_accuracy", "difficult_pair_bimodality", "stable_within_subject_errors", "hodge_reconstructed_subjective_ranking", "inter_subject_ranking_diversity"],
+      "quantitative_preservation": "All six named historically quantitative rows retain their frozen reproduced classification in each joint network. Do not replace this requirement with a count of any six passing rows.",
+      "old_mismatches": "Report distance slope, serial endpoints, and self-inconsistency completely; improvement is welcome and old mismatches need not persist.",
+      "cohort_rule": "Use existing behavioral eligible/analysis definitions only for the inherited map, report exclusions and missing endpoints. Undefined rows fail behavioral preservation rather than being silently dropped. Primary paired competence and intervention comparisons retain all subjects.",
+      "interpretation": "This is a descriptive phenomenon-preservation layer, not human neural confirmation or a scalar target to optimize. Stable errors and diversity are not quantities to maximize."
+    },
+    "cost": {
+      "primary_report": "Paired joint/staged warm training time and peak memory ratios, plus absolute compilation-inclusive time and all update counts.",
+      "efficiency_advantage": "Only label measured compute efficiency advantageous when joint warm training time is no greater and peak allocated memory is no greater in every pair. This is separate from feasibility and mechanism/behavior preservation; no superiority claim from fewer stages alone."
+    },
+    "outcomes": {
+      "joint_recipe_insufficient": "Integrity-valid joint training fails competence in one or more mandatory seeds; close this fixed recipe without claiming that all joint optimization is impossible.",
+      "matched_comparator_insufficient": "A staged comparator fails competence; preserve all observations, but do not claim an established matched substitution result.",
+      "competent_but_not_noninferior": "Both conditions are competent but at least one registered paired noninferiority test fails.",
+      "alternative_computational_solution": "Competence and noninferiority pass but the registered common causal organization does not; report the surviving links and differences.",
+      "mechanism_preserved_behavior_incomplete": "Competence, noninferiority, and both-condition causal gates pass but joint behavioral preservation does not.",
+      "single_stage_preserves_mechanism_and_behavior": "All competence, noninferiority, both-condition core mechanism, and joint behavioral preservation rules pass separately in all three pairs. Single-stage may enter an independent confirmation program; this is not proof of minimal architecture or biological learning.",
+      "heterogeneity": "Always expose the per-seed/per-link matrix. No pooled mean, majority vote, seed replacement, or successful seed can repair a failed all-seed claim.",
+      "integrity_failure": "Retain the invalid attempt as noninterpretable. An implementation-only repair needs an append-only locked record; never tune thresholds, losses, evidence rules, or seeds using the exposed result."
+    },
+    "stop_rule": "After this complete registered comparison, freeze the result and report positive, negative, and unresolved links. No automatic extra seeds, learning-rate sweep, gain/temperature calibration, auxiliary losses, alternative readouts, input redesign, or new task expansion follows from failure. A new scientific candidate requires a separately authorized and prospectively registered question."
+  },
+  "lifecycle": [
+    "Commit and push this native contract and study registration before experiment implementation or any seed artifact generation.",
+    "Implement the paired runner and focused contract tests; pass repository validation and the non-Liu CUDA integrity/parity smoke. Commit and push an implementation/source lock that verifies this protocol's Git witness.",
+    "Train all six final artifacts with bounded CUDA runtime and the frozen paired stream; record complete logs and costs without any Liu outcome inspection.",
+    "Write, commit, and push one joint artifact lock over all six complete runs, exact steps, initial tensors, stream hashes, checkpoints, configurations, local gains, logs, and runtime manifests.",
+    "Evaluate all three paired networks on generic validation and Liu under the single frozen evaluation contract. Record raw arrays, paired bootstrap results, all nine behavior rows, legacy diagnostics, and costs.",
+    "Register compact immutable results and a human report, retain dense arrays as typed NPZ with allow_pickle=False, and update study metadata without altering historical studies or claiming confirmation beyond this seed scope.",
+    "Run the complete applicable repository checks, inspect the scoped diff, commit on dev, verify a clean worktree, and push origin/dev."
+  ]
+}
