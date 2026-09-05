@@ -77,6 +77,15 @@ studies, or supersede frozen study contracts.
      all three recipes remain partial_behavioral_reproduction. Resampled misses the
      fixed distance-slope interval, while Persistent overproduces incorrect rankings.
 
+9. [Fixed Resampled independent-cohort diagnostic](#cohort-precision-diagnostic)
+   - **Question.** Does the pilot's near-match persist across independently generated
+     cohorts without training or calibration?
+   - **Current result.** All three fits show sustained_above_reference original Liu
+     distance slope, excessive self-consistent incorrect proportions and deficient
+     correct-ranker proportions. Six other continuous endpoint mean intervals lie inside
+     the frozen references. All-nine qualitative pass rates are 97.25%; descriptive
+     joint qualitative/quantitative rates are 2.00%, 2.00% and 2.75%.
+
 ## 1. Task and evidence contract
 
 <a id="task-contract"></a>
@@ -616,6 +625,69 @@ Verification:
 ```bash
 direnv exec . python -m unittest tests.experiments.quantized_learner.test_encoding \
   tests.experiments.quantized_learner.test_model
+```
+
+## 9. Fixed Resampled independent-cohort diagnostic
+
+<a id="cohort-precision-diagnostic"></a>
+
+**Question.** Does the pilot's near-match persist across independently generated cohorts
+without training or calibration?
+
+**Method.** Qualify and jointly lock all inputs and three existing fits, evaluate 400
+independent 77-person cohorts per fit with paired inputs across fits, and bootstrap
+whole cohorts separately within each fit. Independently reconstruct all saved outputs
+and original behavioral points before publication.
+
+**Result.** All three fits show sustained_above_reference original Liu distance slope,
+excessive self-consistent incorrect proportions and deficient correct-ranker
+proportions. Six other continuous endpoint mean intervals lie inside the frozen
+references. All-nine qualitative pass rates are 97.25%; descriptive joint
+qualitative/quantitative rates are 2.00%, 2.00% and 2.75%.
+
+**Boundary.** The fixed matrix is complete and frozen. These are pointwise
+simulation-mean intervals, not human equivalence or independent training replication;
+the three fits share paired cohorts and are not pooled. The diagnostic does not revise
+the failed pilot or promote a main model. It does not localize the cause of the
+rank-category mismatch or authorize tuning, extra cohorts, new analysis axes or
+biological realization.
+
+Implementation:
+
+- [`fsrl/experiments/cohort_diagnostic/protocol.py`](../../fsrl/experiments/cohort_diagnostic/protocol.py)
+- [`fsrl/experiments/cohort_diagnostic/inputs.py`](../../fsrl/experiments/cohort_diagnostic/inputs.py)
+- [`fsrl/experiments/cohort_diagnostic/qualification.py`](../../fsrl/experiments/cohort_diagnostic/qualification.py)
+- [`fsrl/experiments/cohort_diagnostic/locks.py`](../../fsrl/experiments/cohort_diagnostic/locks.py)
+- [`fsrl/experiments/cohort_diagnostic/execution.py`](../../fsrl/experiments/cohort_diagnostic/execution.py)
+- [`fsrl/experiments/cohort_diagnostic/statistics.py`](../../fsrl/experiments/cohort_diagnostic/statistics.py)
+- [`fsrl/experiments/cohort_diagnostic/reporting.py`](../../fsrl/experiments/cohort_diagnostic/reporting.py)
+
+Tests:
+
+- [`tests/experiments/cohort_diagnostic/test_diagnostic.py`](../../tests/experiments/cohort_diagnostic/test_diagnostic.py)
+
+Exact evidence:
+
+- `defines` — [resampled_cohort_diagnostic:records/benchmarks/resampled_cohort_diagnostic_v1.json](../../studies/resampled_cohort_diagnostic/records/benchmarks/resampled_cohort_diagnostic_v1.json)
+  - **Meaning:** Fixed-parameter diagnostic with 400 independent cohorts, unchanged
+    human intervals, whole-cohort uncertainty and no admission promotion.
+- `defines` — [resampled_cohort_diagnostic:records/benchmarks/execution_lock.json](../../studies/resampled_cohort_diagnostic/records/benchmarks/execution_lock.json)
+  - **Meaning:** Qualification, source, all three existing fits and all cohort inputs
+    locked before new-cohort evaluation.
+- `constrains` — [resampled_cohort_diagnostic:records/results/resampled_cohort_diagnostic_v1.json](../../studies/resampled_cohort_diagnostic/records/results/resampled_cohort_diagnostic_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** Complete independently reconstructed matrix: sustained slope excess in
+    all fits, plus stable rank-category mismatch, without revising the parent outcome.
+- `constrains` — [resampled_cohort_diagnostic:records/reports/resampled_cohort_diagnostic_v1.interpretation.md](../../studies/resampled_cohort_diagnostic/records/reports/resampled_cohort_diagnostic_v1.interpretation.md)
+  - **Meaning:** Preserved positive endpoints, original-estimand confidence intervals,
+    descriptive joint rates, compositional ranking boundaries and the stop rule.
+
+Verification:
+
+**`cohort_diagnostic_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m unittest tests.experiments.cohort_diagnostic.test_diagnostic
 ```
 
 

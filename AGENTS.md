@@ -147,6 +147,13 @@ Freeze its protocol, qualify and jointly lock every input and existing fit
 before new-cohort evaluation. No training, tuning, main-model promotion or
 revision of the failed parent outcome is authorized by this diagnostic.
 
+The complete fixed independent-cohort diagnostic is now finished and frozen.
+Its result and interpretation records govern the cohort-level findings; they
+neither revise the parent pilot nor qualify a main model. No extra cohorts,
+new diagnostic axes, parameter repair or biological-realization run is
+authorized by its completed execution gates. A successor needs a separately
+authorized prospective question.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

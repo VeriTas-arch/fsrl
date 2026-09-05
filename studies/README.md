@@ -233,12 +233,14 @@ trajectories.
     misses the unchanged distance-slope interval; Persistent overproduces incorrect
     rankings. No recipe is eligible for unchanged replication or main-model promotion.
     The fixed matrix is complete and frozen.
-- [Fixed Resampled learner across independent cohorts](resampled_cohort_diagnostic/README.md) — `frozen_contract`
-  - **Finding:** Non-Liu CUDA/float64 qualification passed for all three existing fits;
-    point/flag extraction matches all nine exposed parent records exactly. All 400
-    paired cohorts, quantization uniforms, parameters and implementation are jointly
-    locked before new-cohort evaluation. No diagnostic result yet; the parent failure
-    remains unchanged.
+- [Fixed Resampled learner across independent cohorts](resampled_cohort_diagnostic/README.md) — `mixed`
+  - **Finding:** All 400 independent cohorts per frozen fit are complete and
+    independently reconstructed. All three fits have sustained_above_reference distance
+    slope; self-consistent incorrect proportions are also above reference and
+    correct-ranker proportions below. Six other continuous endpoint means have intervals
+    inside their references. All-nine qualitative cohort pass rates are 97.25%; joint
+    quantitative/qualitative rates are 2.00%, 2.00% and 2.75%, reported descriptively
+    without a new cutoff. No parent-outcome revision or main-model promotion.
 
 ## One-factor structural transport
 
