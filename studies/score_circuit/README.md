@@ -40,6 +40,9 @@ not full conductance/spike implementation, human confirmation or main-model prom
 - `readiness_result` —
   [studies/score_circuit/records/benchmarks/score_circuit_v1.qualification.json](records/benchmarks/score_circuit_v1.qualification.json)
   (`sha256:a17543070062`)
+- `execution_lock` —
+  [studies/score_circuit/records/benchmarks/score_circuit_v1.execution_lock.json](records/benchmarks/score_circuit_v1.execution_lock.json)
+  (`sha256:79ab40516947`)
 
 ## Provenance rule
 
