@@ -148,6 +148,20 @@ def rollout_liu(evaluator, local, specification: dict) -> dict:
             ]
         ),
         "cue_codes": evaluator.cue_codes,
+        "support_pairs": np.asarray(
+            [
+                [(trial.left_item, trial.right_item) for trial in schedule]
+                for schedule in evaluator.support_schedules
+            ],
+            dtype=np.int64,
+        ),
+        "observed_signed_evidence": np.asarray(
+            [
+                [trial.signed_magnitude for trial in schedule]
+                for schedule in evaluator.support_schedules
+            ],
+            dtype=np.float64,
+        ),
         "natural_local_evidence": trace.natural_scalars,
         "shuffled_local_evidence": shuffled_trace.applied_scalars,
         "evidence_routing": routing,

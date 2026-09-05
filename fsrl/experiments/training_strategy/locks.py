@@ -131,13 +131,20 @@ def _validate_smoke(smoke: dict) -> None:
         runtime.get(key) != value for key, value in effective.items()
     ):
         raise RuntimeError("CUDA smoke used a different numerical execution profile")
-    required = {
-        "P_T",
-        "logits",
-        "loss",
-        "updated_raw_gain",
-        "updated_backbone_h2DA.weight",
-    } | {f"gradient_{i}" for i in range(4)}
+    required = (
+        {
+            "P_T",
+            "logits",
+            "loss",
+            "updated_raw_gain",
+            "updated_backbone_h2DA.weight",
+        }
+        | {f"gradient_{i}" for i in range(4)}
+        | {
+            f"evaluation_{condition}_logits"
+            for condition in ("intact", "local_off", "P_off", "query_shuffle")
+        }
+    )
     if not required.issubset(smoke["checks"]) or not all(
         row["passed"] is True for row in smoke["checks"].values()
     ):

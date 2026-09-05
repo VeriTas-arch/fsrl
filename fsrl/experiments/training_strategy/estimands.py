@@ -38,9 +38,12 @@ def estimate(values: np.ndarray, *, seed: int, statistics: dict) -> dict:
 
 
 def paired_estimate(
-    first: np.ndarray, second: np.ndarray, *, seed: int, statistics: dict
+    first: ArrayLike, second: ArrayLike, *, seed: int, statistics: dict
 ) -> dict:
-    first, second = np.asarray(first), np.asarray(second)
+    first, second = (
+        np.asarray(first, dtype=np.float64),
+        np.asarray(second, dtype=np.float64),
+    )
     if first.ndim != 1 or first.shape != second.shape:
         raise ValueError("paired endpoints must have the same subject axis")
     return estimate(first - second, seed=seed, statistics=statistics)

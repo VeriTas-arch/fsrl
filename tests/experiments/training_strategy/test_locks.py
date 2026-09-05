@@ -163,6 +163,10 @@ class TrainingLockTests(unittest.TestCase):
                     "gradient_1",
                     "gradient_2",
                     "gradient_3",
+                    "evaluation_intact_logits",
+                    "evaluation_local_off_logits",
+                    "evaluation_P_off_logits",
+                    "evaluation_query_shuffle_logits",
                 )
             },
         }

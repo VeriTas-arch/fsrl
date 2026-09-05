@@ -1,16 +1,22 @@
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import build_complete_graph_geometry, normalize_potentials
 from fsrl.core.config import TrainConfig
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.core.plastic_rnn import RetroModulRNN
 from fsrl.evaluation.contracts import FrozenEvaluationBackend
 from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
 from fsrl.evaluation.relational_query import readout_relational_query_bundle
+from fsrl.experiments.assembly.trajectory import exact_prefix_trajectory
+from fsrl.experiments.training_strategy.evaluation import condition_analysis, json_ready
+from fsrl.experiments.training_strategy.legacy_diagnostics import terminal_posterior
 from fsrl.experiments.training_strategy.liu_rollout import readout_bundle, rollout_liu
 from fsrl.experiments.training_strategy.protocol import load_specification
+from fsrl.experiments.training_strategy.reporting import assemble_result, report_text
 from fsrl.experiments.training_strategy.summaries import (
     liu_endpoints,
     mechanism_effects,
@@ -123,3 +129,66 @@ class BatchedQueryParityTests(unittest.TestCase):
         self.assertEqual(
             geometry["loo_relation_subject"]["global"]["remote_absolute"].shape, (8, 2)
         )
+
+    def test_terminal_comparator_matches_frozen_prefix_calculation(self):
+        terminal = terminal_posterior(self.evaluator)
+        old = exact_prefix_trajectory(
+            self.evaluator,
+            self.protocol,
+            build_complete_graph_geometry(self.protocol),
+            temperature=0.05,
+        )
+        np.testing.assert_allclose(
+            normalize_potentials(terminal["expected_rank"]),
+            old.expected_rank_potentials[-1],
+            atol=1e-14,
+            rtol=1e-14,
+        )
+        np.testing.assert_allclose(
+            normalize_potentials(terminal["MAP"]),
+            old.map_potentials[-1],
+            atol=1e-14,
+            rtol=1e-14,
+        )
+
+    def test_complete_synthetic_analysis_to_report(self):
+        specification = load_specification()
+        specification["statistics"]["samples"] = 100
+        specification["evaluation"]["generic"]["episodes"] = 8
+        metadata = {
+            "task_distribution": {"liu_graph_held_out": True},
+            "cost": {"warm_training_seconds": 1.0, "peak_allocated_bytes": 1024},
+        }
+        profile = ExecutionProfile(device="cpu", compile=False, require_cuda=False)
+        with patch(
+            "fsrl.experiments.training_strategy.generic_validation.PROFILE", profile
+        ):
+            result, raw = condition_analysis(
+                self.evaluator, self.local, metadata, 2108, specification
+            )
+        self.assertEqual(len(result["behavior"]["flags"]), 9)
+        self.assertIn("liu__loo__combined", raw["arrays"])
+        self.assertIn("projection__local_off__expected_minus_MAP", raw["arrays"])
+        conditions = {
+            f"{seed}/{name}": json_ready(result)
+            for seed in specification["seeds"]["mandatory"]
+            for name in specification["seeds"]["conditions"]
+        }
+        with (
+            patch(
+                "fsrl.experiments.training_strategy.reporting.verify_matched_evaluation"
+            ),
+            patch(
+                "fsrl.experiments.training_strategy.reporting.reference",
+                return_value={},
+            ),
+        ):
+            assembled = assemble_result(
+                conditions, {"source_commit": "synthetic"}, specification
+            )
+        text = report_text(assembled)
+        for seed in (2108, 2109, 2110):
+            self.assertIn(f"## Seed {seed}", text)
+        self.assertIn("single-stage", text)
+        self.assertIn("symbolic_distance_effect", text)
+        self.assertIn("48,000", text)

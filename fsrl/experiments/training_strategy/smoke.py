@@ -12,13 +12,18 @@ import torch
 
 from fsrl.core.local_trace import ConjunctiveLocalTrace
 from fsrl.core.sequence import RecurrentSequence
+from fsrl.evaluation.contracts import FrozenEvaluationBackend
+from fsrl.evaluation.frozen_fast_weight import FrozenFastWeightEvaluator
+from fsrl.evaluation.relational_query import readout_relational_query_bundle
 from fsrl.infra.provenance import write_json_exclusive
 from fsrl.infra.run_manifest import ProspectiveRun
 from fsrl.infra.runtime import compile_module
+from fsrl.tasks.protocol import RankingProtocol, ordered_pairs
 from fsrl.training.backbone import make_model_and_tasks
 
 from .batches import TensorBatch, prepare_batch, sample_episodes
 from .execution import PROFILE, configure_execution
+from .liu_rollout import readout_bundle
 from .locks import implementation_sources
 from .optimization import forward_batch, make_optimizer, query_from_state, training_step
 from .protocol import PROTOCOL_SHA256, load_specification, training_config
@@ -100,7 +105,7 @@ def run_smoke(directory: Path) -> dict:
     runtime = configure_execution()
     config = replace(training_config(specification, 910001), batch_size=2)
     torch.manual_seed(910001)
-    _, backbone, tasks = make_model_and_tasks(config, device="cuda")
+    model_config, backbone, tasks = make_model_and_tasks(config, device="cuda")
     local = ConjunctiveLocalTrace(config.cue_size, device="cuda")
     second_backbone, second_local = copy.deepcopy(backbone), copy.deepcopy(local)
     cpu_batch = prepare_batch(sample_episodes(tasks, np.random.default_rng(910001), 2))
@@ -134,6 +139,7 @@ def run_smoke(directory: Path) -> dict:
                 "passed": True,
                 "max_abs_error": float((eager[key] - compiled[key]).abs().max()),
             }
+        checks.update(evaluation_parity(backbone, local, model_config))
         result = {
             "passed": True,
             "seed": 910001,
@@ -146,3 +152,68 @@ def run_smoke(directory: Path) -> dict:
         }
         write_json_exclusive(directory / "smoke.json", result)
     return result
+
+
+def evaluation_parity(backbone, local, model_config) -> dict:
+    """Non-Liu synthetic query interface, with no scientific outcome measured."""
+
+    protocol = RankingProtocol(
+        "synthetic-cuda-query-parity",
+        tuple(str(i) for i in range(8)),
+        tuple(range(8)),
+        tuple((i, i + 1) for i in range(7)) + ((0, 2),),
+        1,
+        2,
+        {},
+    )
+    evaluator = FrozenFastWeightEvaluator(
+        backbone,
+        model_config,
+        protocol,
+        cue_seed=910001,
+        support_seed=910001,
+        backend=FrozenEvaluationBackend.BATCHED_SEQUENCE,
+        execution_profile=PROFILE,
+    )
+    weights = (
+        torch.randn(model_config.bs, model_config.hs, model_config.hs, device="cuda")
+        * 0.1
+    )
+    state = torch.randn(model_config.bs, local.cue_size**2, device="cuda") * 0.1
+    shuffled = np.broadcast_to(
+        np.roll(np.arange(56).reshape(28, 2), 1, axis=0).reshape(56),
+        (model_config.bs, 56),
+    ).copy()
+    checks = {}
+    for name, local_off, global_off, indices in (
+        ("intact", False, False, None),
+        ("local_off", True, False, None),
+        ("P_off", False, True, None),
+        ("query_shuffle", False, False, shuffled),
+    ):
+        compiled = readout_bundle(
+            evaluator,
+            local,
+            weights,
+            state,
+            local_off=local_off,
+            global_off=global_off,
+            shuffled_indices=indices,
+        )
+        eager = readout_relational_query_bundle(
+            evaluator,
+            local,
+            weights,
+            state,
+            (ordered_pairs(8),) * model_config.bs,
+            local_off=local_off,
+            global_off=global_off,
+            shuffled_indices=indices,
+        )
+        for key, values in compiled.items():
+            np.testing.assert_allclose(values, eager[key], atol=1e-5, rtol=1e-4)
+            checks[f"evaluation_{name}_{key}"] = {
+                "passed": True,
+                "max_abs_error": float(np.max(np.abs(values - eager[key]))),
+            }
+    return checks

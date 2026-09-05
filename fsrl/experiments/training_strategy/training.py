@@ -71,6 +71,7 @@ def _train_steps(
             digest.update(bytes.fromhex(fingerprint))
             batch = cpu_batch.to("cuda")
             if phase != previous_phase:
+                torch.cuda.reset_peak_memory_stats()
                 phases[phase] = {
                     "warmup_seconds": warm_phase(
                         backbone, local, sequence, batch, phase
@@ -83,6 +84,15 @@ def _train_steps(
                     "trainable_local_parameters": sum(
                         p.numel() for p in local.parameters() if p.requires_grad
                     ),
+                    "total_backbone_parameters": sum(
+                        p.numel() for p in backbone.parameters()
+                    ),
+                    "total_local_parameters": sum(
+                        p.numel() for p in local.parameters()
+                    ),
+                    "persistent_P_scalars_per_episode": backbone.model_config.hidden_size
+                    ** 2,
+                    "persistent_L_scalars_per_episode": local.cue_size**2,
                 }
                 if phase == "local":
                     boundary = tensor_hashes(backbone)
@@ -113,6 +123,16 @@ def _train_steps(
                 elapsed -= phases[phase]["warmup_seconds"]
             phases[phase]["steps"] += 1
             phases[phase]["training_seconds"] += elapsed
+            phases[phase].update(
+                {
+                    "episode_exposures": phases[phase]["steps"]
+                    * optimization["batch_size"],
+                    "total_seconds": phases[phase]["training_seconds"]
+                    + phases[phase]["warmup_seconds"],
+                    "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
+                    "peak_reserved_bytes": torch.cuda.max_memory_reserved(),
+                }
+            )
             row = {
                 "step": step,
                 "phase": phase,
@@ -201,6 +221,14 @@ def train_one(
             "condition": condition,
             "training": asdict(config),
             "model": asdict(backbone.model_config),
+            "task_distribution": {
+                "liu_graph_held_out": True,
+                "held_out_rank_graph_signatures": [
+                    [list(pair) for pair in graph]
+                    for graph in sorted(tasks.excluded_signatures)
+                ],
+                "validation_graph_partition": "sha256-reflection-canonical bucket 0 excluded",
+            },
             "runtime": runtime,
             "initial_backbone": initial_backbone,
             "initial_local": initial_local,
@@ -218,8 +246,12 @@ def train_one(
                 "warmup_seconds": sum(
                     phase["warmup_seconds"] for phase in stats["phases"].values()
                 ),
-                "peak_allocated_bytes": torch.cuda.max_memory_allocated(),
-                "peak_reserved_bytes": torch.cuda.max_memory_reserved(),
+                "peak_allocated_bytes": max(
+                    phase["peak_allocated_bytes"] for phase in stats["phases"].values()
+                ),
+                "peak_reserved_bytes": max(
+                    phase["peak_reserved_bytes"] for phase in stats["phases"].values()
+                ),
                 "backbone_parameters": sum(p.numel() for p in backbone.parameters()),
                 "local_parameters": local.raw_gain.numel(),
                 "persistent_P_scalars_per_episode": config.hidden_size**2,
