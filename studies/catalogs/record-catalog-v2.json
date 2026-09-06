@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 944,
+  "entry_count": 947,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 437,
+    "json": 440,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 77,
@@ -23,7 +23,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 869,
+    "already_conformant": 872,
     "historical_gzip_view": 74,
     "historical_pth_view": 1
   },
@@ -4428,6 +4428,108 @@
         "migration_id": "runtime-locators-v1",
         "replacements": 6
       }
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/benchmarks/protocol.json",
+        "repository_path": "studies/effective_write_cost/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 15572,
+        "sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 15572,
+        "sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0",
+        "source_ref": "sha256:e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/benchmarks/qualification.final.json",
+        "repository_path": "studies/effective_write_cost/records/benchmarks/qualification.final.json"
+      },
+      "materialized_identity": {
+        "bytes": 61504,
+        "sha256": "6960fa06cb4e68e7ddef50af5b390a4b41d172844986b84fc185a10031336755"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_benchmarks_qualification_final_json",
+      "registered_identity": {
+        "bytes": 61504,
+        "sha256": "6960fa06cb4e68e7ddef50af5b390a4b41d172844986b84fc185a10031336755",
+        "source_ref": "sha256:6960fa06cb4e68e7ddef50af5b390a4b41d172844986b84fc185a10031336755"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/benchmarks/qualification.json",
+        "repository_path": "studies/effective_write_cost/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 61504,
+        "sha256": "d82cebdd98a1077232f4d0c8b33d72da0ba463a8cb2ff41b9c6d4373f17306fd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 61504,
+        "sha256": "d82cebdd98a1077232f4d0c8b33d72da0ba463a8cb2ff41b9c6d4373f17306fd",
+        "source_ref": "sha256:d82cebdd98a1077232f4d0c8b33d72da0ba463a8cb2ff41b9c6d4373f17306fd"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -32440,7 +32542,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 942,
+  "registered_record_count": 945,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -32461,20 +32563,20 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 71,
+    "registered_contract": 72,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 72,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 520,
+    "supporting_artifact": 522,
     "validation_result": 12
   },
   "schema_version": 2,
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "ea0fc92ea48165a1f330ee8fb493a80e3ba3b83bb3b9db153a973bf1adf774c3"
+      "sha256": "50a74127a109b362b991cf1b9b2ea7419a0c6cd7b27b2ff0588e4ee9da475e68"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

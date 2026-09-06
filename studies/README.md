@@ -204,6 +204,8 @@ fail to close the dynamics.
     cells passing core checks. Accuracy decreases materially; shared also has
     core-qualified networks, so isolation is not established as necessary. Frozen
     development evidence, without main-model promotion.
+- [Effective global write cost and learned evidence selection](effective_write_cost/README.md) — `unresolved`
+  - **Finding:** Prospectively registered; execution pending.
 
 ## Minimal explanatory models
 
