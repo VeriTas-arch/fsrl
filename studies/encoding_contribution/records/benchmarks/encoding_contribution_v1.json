@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "encoding_contribution_v1",
+  "authorization": "Execute the reviewed M10-M11 difference-source diagnostic in task 01a075eb-08fa-73c0-b87d-2d75c242af2f using existing data and model analysis.",
+  "question": "Does resampled four-valued encoding contribute terminal-state variation and behavioral changes independently of the two fitted slow parameters, and how does finite-cohort joint classification contextualize the previous failures?",
+  "parent_commit": "ecee7e5283a1f8d076fd4895e146c4a7b72d1fa2",
+  "parent": "studies/structural_identification",
+  "scope": "Independent development diagnostic. Zero training, no parameter fitting, no new humans, no author contact, no observer or gate changes, no model promotion. Parent results remain frozen; counterfactual parameter transfers are diagnostic controls, not admitted candidates.",
+  "cross": {
+    "seeds": [
+      2126,
+      2127,
+      2128
+    ],
+    "structures": [
+      "M10",
+      "M11"
+    ],
+    "parameter_donors": [
+      "M10",
+      "M11"
+    ],
+    "schedule": "decay",
+    "parameters": "Transfer the complete frozen raw eta and global-gain vector within each training seed. No interpolation, selection, optimization or donor averaging.",
+    "inputs": "Reuse all 100 paired parent Liu cohorts of 77 subjects and all 256 parent generic competence episodes. Same physical inputs, stable admission, code uniforms and choice seeds in every cell. Reconstruct the six diagonal cells from the parent portable arrays; evaluate only six off-diagonal cells.",
+    "observations": "All nine common and legacy rows and continuous endpoints, with unchanged references, exclusions, integer-count Hodge ranks and query schedule. Internal deterministic nonlearned sign correctness and exact latent ranking are separate diagnostics, never inputs to common classification.",
+    "contrasts": "Within each seed and parameter donor: M11 minus M10 for all endpoints. Also report the difference of these effects between the two parameter donors, and donor changes within each structure. Primary: nonlearned accuracy and the three-component ranking composition; other original endpoints are supporting, never a weighted selection score.",
+    "uncertainty": "10000 paired whole-cohort bootstrap draws per contrast, seed 8400000+training_seed. Per-network pointwise 95-percent intervals; no network pooling or familywise significance claim. A direction is persistent only if the same endpoint contrast has a same-sign interval excluding zero under both donors in all three networks. Otherwise report heterogeneous or unresolved, not a rescued model.",
+    "competence": "Off-diagonal generic learned and nonlearned deterministic accuracy must have episode-bootstrap lower bounds above 0.5, and address-shuffled teaching must reduce accuracy with paired lower bound above zero. Failure makes the affected behavioral mechanism interpretation noninterpretable; preserve and report it.",
+    "profile_parity": "Profiles reuse parent bootstrap seed 7900001+training_seed for exact diagonal profile verification; all paired contrasts use 8400000+training_seed."
+  },
+  "moments": {
+    "conditioning": "Condition on the actual parent cues, displayed teaching values, order and fixed admission mask, separately for both parameter donors in all three networks and all 100 Liu cohorts.",
+    "equations": "k_t=a_t*z_t/(epsilon+||x_t||^2); B_t=I-k_t*x_t*x_t^T; mu_next=B_t*mu+k_t*d_t*x_t; Sigma_next=B_t*Sigma*B_t^T+k_t^2*v(d_t)*x_t*x_t^T; initialize both at zero. v(d)=(d-lower_code)*(upper_code-d). Query variance is gain^2*q^T*Sigma*q.",
+    "checks": "Verify mean and covariance against full independent enumeration of a four-trial synthetic encoding fixture, including zero admission and direction reversal. Verify exact-model conditional means against independent float64 recurrence and CUDA output at inherited parameters. Absolute tolerance 1e-5 and relative tolerance 1e-4 for CUDA, 1e-12 and 1e-10 for float64. Covariance symmetry and nonnegative query variance tolerance 1e-10.",
+    "outputs": "Per-person exact conditional means and query variances, covariance traces and maximum mean parity errors. Summarize nonlearned query variance within each network. No Gaussian replacement, no claim that two moments determine choices, no extra persistent model state."
+  },
+  "finite_cohort": {
+    "source": "The unchanged 77 human choice records and the parent's frozen common reference.",
+    "cohorts": 1000,
+    "size": 77,
+    "seed": 8410001,
+    "method": "Sample whole participants with replacement from the original combined 77-person empirical distribution; retain each complete 10-by-28 choice record. Recompute all nine common flags, including nonlinear Beta classifications and exclusions, with fixed reference intervals. Never recompute reference intervals per bootstrap cohort or filter undefined outcomes.",
+    "outputs": "Joint and qualitative pass rates, per-row failure rates, joint-failure matrix, and signed below/inside/above/undefined counts for each continuous reference interval. Compare with reconstructed existing diagonal model cohorts separately by seed. Wilson intervals describe Monte Carlo rate uncertainty only.",
+    "boundary": "Conditional empirical diagnostic using already exposed data and references estimated from those data. Neither independent human confirmation nor calibrated population type-I error; cannot excuse model mismatch or modify parent qualification."
+  },
+  "manipulations": {
+    "source": "Only existing parent diagonal manipulation arrays; no new support conditions or rollouts.",
+    "primary": "D_K=(A_M11,K8-A_M11,K4)-(A_M10,K8-A_M10,K4), balanced schedules, original 16 cross-component queries.",
+    "secondary": "Analogous difference of changes from balanced K4 for clustered K4 and reverse-clustered K4, separately. Report bridge-only counterparts as supporting diagnostics.",
+    "pairing": "10000 paired whole-instance bootstrap draws over the 256 common graph/subject instances, seed 8420000+training_seed. Keep both models and both conditions together; report each training seed independently.",
+    "boundary": "The 16-pair cross-component outcome includes the trained bridge. Do not rename it pure nonlearned inference or select a new 15-pair subset. Positive D_K across all three pointwise intervals supports a model-level prediction difference, not human encoding necessity."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.encoding_contribution",
+    "freeze": "Commit protocol and implementation, qualify synthetic computations, and freeze source plus parent/input identities before cross evaluation or human reanalysis. Parent fits are already jointly locked. Every new record is append-only; resume validated completed units only.",
+    "runtime": "Reuse registered bounded single-thread numerical runtime and float32 CUDA inference without TF32/autocast; float64 analytic moments and statistics. Runtime artifacts under artifacts/runs/encoding_contribution_v1.",
+    "outputs": "Protocol, source/input lock, qualification, cross-cell observations and internal/moment arrays, bootstrap participant indices and complete rows, direct paired contrasts, canonical result and a concise positive/negative interpretation. Archive compact reconstructable arrays, register native records and rebuild navigation.",
+    "stop": "Any integrity failure stops affected scientific interpretation. Complete valid negative or unresolved diagnostics without changing seeds, parameters, conditions, references, thresholds or the parent verdict. No automatic successor or main-model promotion."
+  }
+}

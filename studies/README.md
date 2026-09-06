@@ -271,6 +271,9 @@ trajectories.
     no recipe passes the complete witness qualification; no structural deletion or
     main-model promotion is supported. Original measurement correspondence remains
     unresolved.
+- [Encoding contribution and finite-cohort diagnosis](encoding_contribution/README.md) — `frozen_contract`
+  - **Finding:** Prospective fixed-parameter cross, analytic moment, empirical cohort
+    and paired manipulation diagnostic; no new outcome available.
 
 ## One-factor structural transport
 
