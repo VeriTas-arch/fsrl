@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 562,
+  "entry_count": 584,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 286,
+    "json": 288,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 64,
-    "numpy_npz": 200,
+    "numpy_npz": 220,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 518,
+    "already_conformant": 540,
     "historical_gzip_view": 43,
     "historical_pth_view": 1
   },
@@ -6027,6 +6027,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/benchmarks/liu_input_lock.json",
+        "repository_path": "studies/global_decay_replication/records/benchmarks/liu_input_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 5221,
+        "sha256": "b9c4a8670f994a755f247c210bdd201033d187dbd27e83cf3a0bbcb2acf305f8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_benchmarks_liu_input_lock_json",
+      "registered_identity": {
+        "bytes": 5221,
+        "sha256": "b9c4a8670f994a755f247c210bdd201033d187dbd27e83cf3a0bbcb2acf305f8",
+        "source_ref": "sha256:b9c4a8670f994a755f247c210bdd201033d187dbd27e83cf3a0bbcb2acf305f8"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.randomization_record",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/benchmarks/liu_inputs.json",
+        "repository_path": "studies/global_decay_replication/records/benchmarks/liu_inputs.json"
+      },
+      "materialized_identity": {
+        "bytes": 4243,
+        "sha256": "d5cf327201a4759599169acc49dd01a20fa75771d05c66ead9a79afb603b2516"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_benchmarks_liu_inputs_json",
+      "registered_identity": {
+        "bytes": 4243,
+        "sha256": "d5cf327201a4759599169acc49dd01a20fa75771d05c66ead9a79afb603b2516",
+        "source_ref": "sha256:d5cf327201a4759599169acc49dd01a20fa75771d05c66ead9a79afb603b2516"
+      },
+      "role": "randomization_record"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.readiness_result",
       "format": {
         "format": "json",
@@ -6260,6 +6328,686 @@
         "bytes": 83842,
         "sha256": "3d2a8b07b6a9ed6bd18d9262f9c90953edc52faf0cf46198866ba5962d5b1bea",
         "source_ref": "sha256:3d2a8b07b6a9ed6bd18d9262f9c90953edc52faf0cf46198866ba5962d5b1bea"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-000.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-000.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1402492,
+        "sha256": "3f5325c371ea8cd55fb216f8324f7e9284fa51a49a90d2c175d1e0219d5e7c2f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_000_npz",
+      "registered_identity": {
+        "bytes": 1402492,
+        "sha256": "3f5325c371ea8cd55fb216f8324f7e9284fa51a49a90d2c175d1e0219d5e7c2f",
+        "source_ref": "sha256:3f5325c371ea8cd55fb216f8324f7e9284fa51a49a90d2c175d1e0219d5e7c2f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-020.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-020.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1405560,
+        "sha256": "327937ce25c3958881f02280f1072bfc9438d4aa123261cbd09577354c415238"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_020_npz",
+      "registered_identity": {
+        "bytes": 1405560,
+        "sha256": "327937ce25c3958881f02280f1072bfc9438d4aa123261cbd09577354c415238",
+        "source_ref": "sha256:327937ce25c3958881f02280f1072bfc9438d4aa123261cbd09577354c415238"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-040.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-040.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407137,
+        "sha256": "76bc1fe3f80b6b83c8eab178aec39be8beab8dff905591012b839501d2274ec3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_040_npz",
+      "registered_identity": {
+        "bytes": 1407137,
+        "sha256": "76bc1fe3f80b6b83c8eab178aec39be8beab8dff905591012b839501d2274ec3",
+        "source_ref": "sha256:76bc1fe3f80b6b83c8eab178aec39be8beab8dff905591012b839501d2274ec3"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-060.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-060.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1409307,
+        "sha256": "6569567bc0736113848b86139d31855955a13009f5be128fac905338ee5da625"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_060_npz",
+      "registered_identity": {
+        "bytes": 1409307,
+        "sha256": "6569567bc0736113848b86139d31855955a13009f5be128fac905338ee5da625",
+        "source_ref": "sha256:6569567bc0736113848b86139d31855955a13009f5be128fac905338ee5da625"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-080.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-080.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1405455,
+        "sha256": "5a9e13b34de0d2ca386b9c983205056db6a4352c410f1b3398d9c613c76e0963"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_080_npz",
+      "registered_identity": {
+        "bytes": 1405455,
+        "sha256": "5a9e13b34de0d2ca386b9c983205056db6a4352c410f1b3398d9c613c76e0963",
+        "source_ref": "sha256:5a9e13b34de0d2ca386b9c983205056db6a4352c410f1b3398d9c613c76e0963"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-100.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-100.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407713,
+        "sha256": "9804712961695fd876b0321556cbb0b039c3857c04f88a0d04d07398e611286e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_100_npz",
+      "registered_identity": {
+        "bytes": 1407713,
+        "sha256": "9804712961695fd876b0321556cbb0b039c3857c04f88a0d04d07398e611286e",
+        "source_ref": "sha256:9804712961695fd876b0321556cbb0b039c3857c04f88a0d04d07398e611286e"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-120.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-120.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407938,
+        "sha256": "be0a32df25d015eae089af5d894d7ad4184d0f1b4acaa43f66ce9bf20f7d867f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_120_npz",
+      "registered_identity": {
+        "bytes": 1407938,
+        "sha256": "be0a32df25d015eae089af5d894d7ad4184d0f1b4acaa43f66ce9bf20f7d867f",
+        "source_ref": "sha256:be0a32df25d015eae089af5d894d7ad4184d0f1b4acaa43f66ce9bf20f7d867f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-140.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-140.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1401693,
+        "sha256": "2be4641b60edd3f64d0936843433d182d15289a086636d93c6e1063a5fe827e7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_140_npz",
+      "registered_identity": {
+        "bytes": 1401693,
+        "sha256": "2be4641b60edd3f64d0936843433d182d15289a086636d93c6e1063a5fe827e7",
+        "source_ref": "sha256:2be4641b60edd3f64d0936843433d182d15289a086636d93c6e1063a5fe827e7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-160.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-160.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1404758,
+        "sha256": "67a4071016b45ee844e686968ffcf9f0caec66cd64116a87494710d69a2754a6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_160_npz",
+      "registered_identity": {
+        "bytes": 1404758,
+        "sha256": "67a4071016b45ee844e686968ffcf9f0caec66cd64116a87494710d69a2754a6",
+        "source_ref": "sha256:67a4071016b45ee844e686968ffcf9f0caec66cd64116a87494710d69a2754a6"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-180.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-180.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1404334,
+        "sha256": "5f3d2c419bb2cf4821002309faaa1556f37ee36e53d6a4767cba5f3dc669b627"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_180_npz",
+      "registered_identity": {
+        "bytes": 1404334,
+        "sha256": "5f3d2c419bb2cf4821002309faaa1556f37ee36e53d6a4767cba5f3dc669b627",
+        "source_ref": "sha256:5f3d2c419bb2cf4821002309faaa1556f37ee36e53d6a4767cba5f3dc669b627"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-200.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-200.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407129,
+        "sha256": "323cca468cdc57a7d52efec720d1e138398785c4d5aa061c97ab08af798d7ab1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_200_npz",
+      "registered_identity": {
+        "bytes": 1407129,
+        "sha256": "323cca468cdc57a7d52efec720d1e138398785c4d5aa061c97ab08af798d7ab1",
+        "source_ref": "sha256:323cca468cdc57a7d52efec720d1e138398785c4d5aa061c97ab08af798d7ab1"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-220.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-220.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1408325,
+        "sha256": "3a157f4831db6a52f76e93eb581a07584016302747d4a6283254d7a518323b8b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_220_npz",
+      "registered_identity": {
+        "bytes": 1408325,
+        "sha256": "3a157f4831db6a52f76e93eb581a07584016302747d4a6283254d7a518323b8b",
+        "source_ref": "sha256:3a157f4831db6a52f76e93eb581a07584016302747d4a6283254d7a518323b8b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-240.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-240.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1407185,
+        "sha256": "b67bd44bce8bf74c49dfb58498d28a482cafe11a47e0a035a9b7e37d585c3cc8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_240_npz",
+      "registered_identity": {
+        "bytes": 1407185,
+        "sha256": "b67bd44bce8bf74c49dfb58498d28a482cafe11a47e0a035a9b7e37d585c3cc8",
+        "source_ref": "sha256:b67bd44bce8bf74c49dfb58498d28a482cafe11a47e0a035a9b7e37d585c3cc8"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-260.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-260.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1409204,
+        "sha256": "556ef312b2613d3683423088e0a1afddc36dbe6e06ff7bd1eb96f7146eec9021"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_260_npz",
+      "registered_identity": {
+        "bytes": 1409204,
+        "sha256": "556ef312b2613d3683423088e0a1afddc36dbe6e06ff7bd1eb96f7146eec9021",
+        "source_ref": "sha256:556ef312b2613d3683423088e0a1afddc36dbe6e06ff7bd1eb96f7146eec9021"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-280.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-280.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1405864,
+        "sha256": "b83c25864babea22c2a4c8bcf23177a12ba4b393ac33768ef5556140053e0472"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_280_npz",
+      "registered_identity": {
+        "bytes": 1405864,
+        "sha256": "b83c25864babea22c2a4c8bcf23177a12ba4b393ac33768ef5556140053e0472",
+        "source_ref": "sha256:b83c25864babea22c2a4c8bcf23177a12ba4b393ac33768ef5556140053e0472"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-300.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-300.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1402606,
+        "sha256": "d75d12b0cb51608eab1234320163a184213b4b7bc1439ec9c7e3cc6cbe3e02c6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_300_npz",
+      "registered_identity": {
+        "bytes": 1402606,
+        "sha256": "d75d12b0cb51608eab1234320163a184213b4b7bc1439ec9c7e3cc6cbe3e02c6",
+        "source_ref": "sha256:d75d12b0cb51608eab1234320163a184213b4b7bc1439ec9c7e3cc6cbe3e02c6"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-320.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-320.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1406874,
+        "sha256": "843098d5aefd5a5d767579059115774fb9a8189df09bdc996303f6f0e15a2d76"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_320_npz",
+      "registered_identity": {
+        "bytes": 1406874,
+        "sha256": "843098d5aefd5a5d767579059115774fb9a8189df09bdc996303f6f0e15a2d76",
+        "source_ref": "sha256:843098d5aefd5a5d767579059115774fb9a8189df09bdc996303f6f0e15a2d76"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-340.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-340.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1402942,
+        "sha256": "053cf97b3556f9dd219088a2d4a528712922190dff8373d2f99cd706f40952eb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_340_npz",
+      "registered_identity": {
+        "bytes": 1402942,
+        "sha256": "053cf97b3556f9dd219088a2d4a528712922190dff8373d2f99cd706f40952eb",
+        "source_ref": "sha256:053cf97b3556f9dd219088a2d4a528712922190dff8373d2f99cd706f40952eb"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-360.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-360.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1410460,
+        "sha256": "b03bc60c3e497cd04e751993f6700b91616c74bdd2725d0221d6fd8a471830d5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_360_npz",
+      "registered_identity": {
+        "bytes": 1410460,
+        "sha256": "b03bc60c3e497cd04e751993f6700b91616c74bdd2725d0221d6fd8a471830d5",
+        "source_ref": "sha256:b03bc60c3e497cd04e751993f6700b91616c74bdd2725d0221d6fd8a471830d5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/inputs/liu-cohorts-380.npz",
+        "repository_path": "studies/global_decay_replication/records/inputs/liu-cohorts-380.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1406597,
+        "sha256": "c5c645eabea258699916b0fb773d81a1a8c78926e58955f8d8610cc0f120251f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_inputs_liu_cohorts_380_npz",
+      "registered_identity": {
+        "bytes": 1406597,
+        "sha256": "c5c645eabea258699916b0fb773d81a1a8c78926e58955f8d8610cc0f120251f",
+        "source_ref": "sha256:c5c645eabea258699916b0fb773d81a1a8c78926e58955f8d8610cc0f120251f"
       },
       "role": "supporting_artifact"
     },
@@ -19389,7 +20137,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 560,
+  "registered_record_count": 582,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -19400,7 +20148,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 41,
+    "execution_lock": 42,
     "freeze_validation": 1,
     "frozen_parameters": 22,
     "frozen_result": 49,
@@ -19408,7 +20156,7 @@
     "noninterpretable_attempt": 3,
     "presentation_asset": 6,
     "presentation_view": 1,
-    "randomization_record": 5,
+    "randomization_record": 6,
     "readiness_result": 9,
     "registered_contract": 65,
     "repair_contract": 7,
@@ -19416,7 +20164,7 @@
     "report": 62,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 253,
+    "supporting_artifact": 273,
     "validation_result": 6
   },
   "schema_version": 2,

@@ -91,6 +91,72 @@ promote a main model.
 - `supporting_artifact` —
   [studies/global_decay_replication/records/results/generic_confirmation.npz](records/results/generic_confirmation.npz)
   (`sha256:e5e173704a52`)
+- `randomization_record` —
+  [studies/global_decay_replication/records/benchmarks/liu_inputs.json](records/benchmarks/liu_inputs.json)
+  (`sha256:d5cf327201a4`)
+- `execution_lock` —
+  [studies/global_decay_replication/records/benchmarks/liu_input_lock.json](records/benchmarks/liu_input_lock.json)
+  (`sha256:b9c4a8670f99`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-000.npz](records/inputs/liu-cohorts-000.npz)
+  (`sha256:3f5325c371ea`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-020.npz](records/inputs/liu-cohorts-020.npz)
+  (`sha256:327937ce25c3`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-040.npz](records/inputs/liu-cohorts-040.npz)
+  (`sha256:76bc1fe3f80b`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-060.npz](records/inputs/liu-cohorts-060.npz)
+  (`sha256:6569567bc073`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-080.npz](records/inputs/liu-cohorts-080.npz)
+  (`sha256:5a9e13b34de0`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-100.npz](records/inputs/liu-cohorts-100.npz)
+  (`sha256:980471296169`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-120.npz](records/inputs/liu-cohorts-120.npz)
+  (`sha256:be0a32df25d0`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-140.npz](records/inputs/liu-cohorts-140.npz)
+  (`sha256:2be4641b60ed`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-160.npz](records/inputs/liu-cohorts-160.npz)
+  (`sha256:67a4071016b4`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-180.npz](records/inputs/liu-cohorts-180.npz)
+  (`sha256:5f3d2c419bb2`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-200.npz](records/inputs/liu-cohorts-200.npz)
+  (`sha256:323cca468cdc`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-220.npz](records/inputs/liu-cohorts-220.npz)
+  (`sha256:3a157f4831db`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-240.npz](records/inputs/liu-cohorts-240.npz)
+  (`sha256:b67bd44bce8b`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-260.npz](records/inputs/liu-cohorts-260.npz)
+  (`sha256:556ef312b261`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-280.npz](records/inputs/liu-cohorts-280.npz)
+  (`sha256:b83c25864bab`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-300.npz](records/inputs/liu-cohorts-300.npz)
+  (`sha256:d75d12b0cb51`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-320.npz](records/inputs/liu-cohorts-320.npz)
+  (`sha256:843098d5aefd`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-340.npz](records/inputs/liu-cohorts-340.npz)
+  (`sha256:053cf97b3556`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-360.npz](records/inputs/liu-cohorts-360.npz)
+  (`sha256:b03bc60c3e49`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/liu-cohorts-380.npz](records/inputs/liu-cohorts-380.npz)
+  (`sha256:c5c645eabea2`)
 
 ## Provenance rule
 
