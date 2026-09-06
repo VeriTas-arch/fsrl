@@ -196,6 +196,20 @@ Do not rerun, tune, or use these confirmation seeds to choose a common-state
 encoder. Common encoding state and circuit realization require their own
 prospective authorities.
 
+The user has explicitly opened `common_encoding_state`, a marginally matched
+test of whether episode-wide encoding quality changes joint ranking composition
+beyond relation-shared repetition dependence. Its prospective authority is
+[`studies/common_encoding_state/`](studies/common_encoding_state/). Preserve the
+replicated four-valued encoder marginals, global decay, readout, temperature and
+task-information boundary. Select the smallest identifiable rho only through
+the registered non-Liu model-recovery screen; stop before training if recovery
+fails. Otherwise lock rho, train and jointly lock all nine 2123--2125 fits, then
+lock every Liu cohort and latent stream before evaluation. The primary contrast
+is episode-common minus relation-common within each fit; do not pool networks or
+use Liu outcomes to tune rho. A positive development result is not main-model
+promotion and still requires unchanged fresh replication and a separate
+biological-boundary test.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

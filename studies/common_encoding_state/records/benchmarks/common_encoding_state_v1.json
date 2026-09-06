@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "common_encoding_state_v1",
+  "registered_on": "2026-09-06",
+  "question": "Does an episode-level common encoding state improve the joint correct/self-consistent-error/self-inconsistent ranking composition beyond a marginally matched relation-shared control while preserving the replicated global-decay learner?",
+  "status": "prospective_unexecuted",
+  "theory": {
+    "supported_parent_link": "Finite-precision four-valued evidence combined with global blockwise diminishing plasticity improves internal ordering and ranking composition on development fits and three unchanged fresh replications.",
+    "remaining_boundary": "Self-consistent incorrect classifications remain above the frozen human-reference upper bound even though the other principal behavioral means are retained.",
+    "candidate_link": "A subject-level state shared across different relations within one episode can redistribute encoding errors across subjects without changing any single presentation's quantization distribution.",
+    "excluded_interpretation": "The candidate is not an overconfidence correction, an increase in mean sensory precision, a relation-familiarity mechanism, or a biological implementation."
+  },
+  "parent_evidence": {
+    "development_result": "studies/experience_dependent_plasticity/records/results/experience_dependent_plasticity_v1.json",
+    "fresh_replication_result": "studies/global_decay_replication/records/results/global_decay_replication_v1.json",
+    "fresh_replication_outcome": "replicated_global_decay",
+    "use_restriction": "Confirmation seeds 2120--2122 may enter only the registered fixed-parameter substitution analysis after rho is locked. They cannot select rho, an encoder, a threshold, or a training recipe."
+  },
+  "information_boundary": {
+    "available": [
+      "ordinary support cue pair",
+      "displayed signed support magnitude",
+      "stable subject admission state",
+      "task-defined presentation index",
+      "independent registered random draws"
+    ],
+    "forbidden": [
+      "true latent rank",
+      "query answer",
+      "posterior comparator",
+      "Liu endpoint values during rho selection",
+      "relation difficulty or error labels",
+      "confirmation-seed outcome-guided choices"
+    ]
+  },
+  "frozen_learner": {
+    "score_state": "the existing 15-dimensional metric score w",
+    "update": "w_(t+1)=w_t+a_b z_t ((d_tilde-w_t^T x_t)/(epsilon+||x_t||^2)) x_t",
+    "global_schedule": "a_b=eta0/(1+b eta0), equivalently a_(b+1)=a_b/(1+a_b)",
+    "readout": "M_ij=gamma_G w_T^T(c_i-c_j)",
+    "trainable_scalars": ["eta0", "gamma_G"],
+    "unchanged": [
+      "four-valued codebook",
+      "stable admission mask",
+      "global decay equation",
+      "single choice readout",
+      "single-stage final-margin objective",
+      "temperature and choice sampler"
+    ]
+  },
+  "encoder": {
+    "codebook": [-1.0, -0.3333333333333333, 0.3333333333333333, 1.0],
+    "near_probability": "p_t is the existing stochastic-rounding probability for the code adjacent in the registered interpolation direction; deterministic codebook values remain deterministic.",
+    "copula": "U_(s,t)=Phi(sqrt(rho) A_(s,g(t))+sqrt(1-rho) epsilon_(s,t)); choose the registered upper adjacent code iff U_(s,t)<p_t.",
+    "conditions": {
+      "independent": "rho=0; every presentation uses its idiosyncratic epsilon draw.",
+      "relation_common": "g(t) is the ordinary-cue relation address; one A_(s,r) is shared only across repetitions of that relation.",
+      "episode_common": "g(t) is the episode; one A_s is shared across every admitted relation and repetition in that episode."
+    },
+    "primary_control_logic": "episode_common minus relation_common isolates cross-relation common state while matching rho, each presentation's marginal distribution, and within-relation repetition dependence.",
+    "marginal_identity": "For every condition and presentation U_(s,t) is marginally Uniform(0,1), hence code probabilities, conditional mean and conditional variance match the original Resampled codec exactly.",
+    "latent_independence": "A and epsilon are independent of cues, admission, support order, displayed magnitude, targets, queries and choice draws.",
+    "orientation": "The existing canonical ordinary-cue orientation and antisymmetric reconstruction are unchanged."
+  },
+  "rho_selection": {
+    "scope": "non-Liu generic model-recovery only",
+    "grid": [0.125, 0.25, 0.5],
+    "generic_episodes_per_dataset": 256,
+    "recovery_datasets_per_generator": 128,
+    "quadrature_nodes": 32,
+    "candidate_models": ["independent", "relation_common", "episode_common"],
+    "likelihood": "Use the exact Bernoulli likelihood conditional on the Gaussian shared state and fixed Gauss-Hermite integration over that state. The observed per-presentation p_t and ordinary-cue relation grouping are the only covariates.",
+    "architecture_recovery_gate": "At a rho grid point, each of independent, relation_common and episode_common must be selected under its own generator in at least 90% of 128 untouched recovery datasets, and each Wilson 95% lower bound must exceed 0.84.",
+    "rho_recovery_gate": "Within the correctly selected relation_common and episode_common architectures, the generating rho grid point must maximize likelihood in at least 80% of datasets.",
+    "selection_rule": "Select the smallest rho grid point passing every architecture- and rho-recovery gate. If none passes, stop before training and before any Liu cohort is generated or evaluated.",
+    "claim_boundary": "The selected rho is a minimally identifiable generic perturbation strength, not an estimate of human common-state variance."
+  },
+  "training": {
+    "seeds": [2123, 2124, 2125],
+    "conditions": ["independent", "relation_common", "episode_common"],
+    "execution_order": {
+      "2123": ["independent", "relation_common", "episode_common"],
+      "2124": ["relation_common", "episode_common", "independent"],
+      "2125": ["episode_common", "independent", "relation_common"]
+    },
+    "total_steps": 1500,
+    "paired_task_stream": "Within each seed, all encoder conditions receive identical generic task episodes. Registered normal streams are paired by shape and source seed but transformed only according to the condition.",
+    "optimization": "Each fit is trained from initialization in one final-margin optimization stage. Rho is frozen and receives no gradient.",
+    "artifact_rule": "All nine fits must finish and be jointly locked before generic competence confirmation or Liu evaluation."
+  },
+  "fixed_parameter_substitution": {
+    "parameters": "Use the three frozen adaptive global-decay fits from fresh replication seeds 2120--2122 without retraining.",
+    "purpose": "Estimate the direct consequence of changing only the encoder's joint sampling structure.",
+    "pairing": "Each frozen fit is evaluated under independent, relation_common and episode_common encodings on identical locked cohorts and paired latent streams."
+  },
+  "generic_gates": {
+    "marginal_parity": "Enumerated and Monte Carlo code probabilities, means and variances match independent Resampled within registered numerical and binomial tolerances for every condition.",
+    "binding": "Relation-shared draws bind only by canonical ordinary-cue relation address; episode-shared draws bind only within a subject episode; query labels and hidden ranks cannot affect either.",
+    "competence": "For every trained fit independently, learned and nonlearned exact correctness have participant/episode-bootstrap 95% lower bounds above 0.5.",
+    "global_decay": "Every model uses the already replicated global schedule and passes its frozen late-sensitivity and numerical-reference checks."
+  },
+  "liu_evaluation": {
+    "cohorts_per_fit": 400,
+    "subjects_per_cohort": 77,
+    "pairing": "Base Liu episodes, admission states, idiosyncratic normals, relation normals, episode normals and choice draws are generated prospectively and locked before any candidate rollout.",
+    "network_inference": "Every seed and every fixed substitution is analyzed independently; participants are never pooled across fits or networks.",
+    "mandatory_report": [
+      "joint correct/self-consistent-incorrect/self-inconsistent composition",
+      "ranking-composition total variation",
+      "internal strict-correct fraction",
+      "mean inversion count and inversion bins",
+      "internal-to-sampled transition matrix",
+      "the complete frozen nine-endpoint quantitative profile",
+      "the six preservation outcomes",
+      "condition-wise eta0 and gamma_G",
+      "fixed-parameter and trained-recipe contrasts"
+    ]
+  },
+  "primary_estimands": {
+    "mechanism_contrast": "episode_common minus relation_common at the same selected rho",
+    "fixed_parameter": [
+      "correct_ranker",
+      "self_consistent_incorrect",
+      "self_inconsistent",
+      "ranking_composition_total_variation",
+      "internal_strict_correct",
+      "mean_inversion_count"
+    ],
+    "trained_recipe": [
+      "correct_ranker",
+      "self_consistent_incorrect",
+      "self_inconsistent",
+      "ranking_composition_total_variation",
+      "internal_strict_correct",
+      "mean_inversion_count"
+    ],
+    "secondary_contrasts": [
+      "relation_common minus independent",
+      "episode_common minus independent",
+      "trained minus fixed-parameter response within encoder"
+    ]
+  },
+  "primary_success_rules": {
+    "fixed_encoder_specificity": "For each frozen 2120--2122 fit independently, the paired-cohort 95% interval for episode_common minus relation_common is above zero for correct_ranker and below zero for both self_consistent_incorrect and ranking-composition total variation.",
+    "trained_encoder_specificity": "For each 2123--2125 seed independently, the same three directional paired-cohort intervals pass for the from-scratch episode_common fit versus its relation_common control.",
+    "joint_allocation": "For every episode_common fit, self_inconsistent remains within its frozen human-reference interval; improvements cannot be counted if they merely move mass from self-consistent error into inconsistency.",
+    "internal_localization": "Internal strict-correct, inversion, and internal-to-sampled transitions are mandatory mechanistic diagnostics but are not individually required to move if the registered joint-composition links pass.",
+    "preservation": "Every trained episode_common fit passes the unchanged core-behavior and six-outcome preservation gates; learned and nonlearned accuracy cannot materially decrease under the inherited margins.",
+    "all_seed_rule": "No pooled-network decision is allowed. Every registered primary link must pass independently in all three corresponding fits."
+  },
+  "outcome_tree": {
+    "common_encoding_supported": "Generic rho recovery and all fixed-parameter, trained-recipe, joint-allocation and preservation gates pass.",
+    "fixed_effect_only": "The fixed-parameter encoder contrast passes but trained specificity fails; common sampling has a direct effect but is not stably retained under joint adaptation.",
+    "coadaptation_only": "Trained specificity passes but fixed substitution fails; the result cannot establish a direct common-state mechanism and is limited to recipe-level co-adaptation.",
+    "joint_structure_unresolved": "Generic recovery passes but neither complete mechanism route passes.",
+    "noninterpretable": "Rho recovery, marginal identity, binding, source lock, competence, global-decay, or artifact/input integrity fails."
+  },
+  "stop_rule": {
+    "after_failure": "Do not tune rho on Liu, change the codebook, temperature, decay, loss, local branch, classifier, threshold, seed, checkpoint, or common-state grouping to rescue a failed result.",
+    "after_success": "A successful development study remains a candidate mechanism. It requires unchanged fresh replication and a separate biological-boundary test before main-model promotion.",
+    "full_distribution_boundary": "Failure to place every one of nine endpoint means inside a human interval does not by itself reject the candidate; the registered joint-composition and preservation estimands govern this study."
+  },
+  "execution_sequence": [
+    "commit_and_push_contract",
+    "implement_encoder_recovery_training_and_evaluation_without_liu_access",
+    "qualify_on_non_liu_fixtures",
+    "commit_and_push_implementation",
+    "lock_source",
+    "run_generic_model_recovery_and_lock_selected_rho",
+    "commit_and_push_rho_lock",
+    "train_all_nine_fits",
+    "jointly_lock_all_fits",
+    "run_and_lock_generic_competence",
+    "generate_and_lock_all_liu_cohorts_and_latent_streams",
+    "commit_and_push_all_locks",
+    "evaluate_fixed_parameter_and_trained_recipe_matrices",
+    "independently_reconstruct_publish_validate_commit_and_push"
+  ]
+}

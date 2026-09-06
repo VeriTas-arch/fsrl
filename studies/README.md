@@ -260,6 +260,10 @@ trajectories.
     independently on all three mandatory fresh seeds 2120--2122: internal strict
     correctness increased, inversion count and ranking-composition total variation
     decreased, and the frozen core and preservation gates passed.
+- [Marginally matched common encoding state](common_encoding_state/README.md) — `frozen_contract`
+  - **Finding:** A prospective three-condition development test is registered; rho must
+    first be selected by non-Liu model recovery, and no common-state outcome has been
+    observed.
 
 ## One-factor structural transport
 
