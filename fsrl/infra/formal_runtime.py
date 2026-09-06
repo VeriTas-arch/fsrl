@@ -23,6 +23,7 @@ WORKFLOW_MODULES = {
     "minimal-relational-learner": "fsrl.experiments.minimal_learner.__main__",
     "quantized-relational-learner": "fsrl.experiments.quantized_learner.__main__",
     "resampled-cohort-diagnostic": "fsrl.experiments.cohort_diagnostic.__main__",
+    "experience-dependent-plasticity": "fsrl.experiments.adaptive_plasticity.__main__",
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",
