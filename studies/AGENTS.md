@@ -32,6 +32,14 @@ Navigation: [repository guide](../AGENTS.md) · [study portal](README.md) ·
 5. Shared maintained code may appear in multiple study contracts, but an
    artifact remains owned by exactly one study.
 
+For new development studies, use the compact
+[protocol outline](../fsrl/experiments/AGENTS.md#research-lifecycle). Keep one
+authoritative protocol, its required locks, a canonical machine-readable result
+with sufficient artifacts, and a concise interpretation. Reference unchanged
+contracts and derive navigation from these authorities. Extra admission/review
+records follow the [root validation boundary](../AGENTS.md#validation-boundary);
+the default record set does not expand at each execution stage.
+
 New records created in this layout declare `origin = "native"`. Their
 `legacy_path` is their actual repository-relative path, not a fabricated old
 locator, and `source_ref` is `sha256:<sha256>` of the immutable record. A later

@@ -1,9 +1,8 @@
 # FSRL repository agent guide
 
-This file applies to the complete repository. More specific `AGENTS.md` files
-under the maintained source, evidence, workflow, synthesis, reproduction, test,
-and provenance-tool trees add local rules. Follow the nearest guide before
-editing within a subtree.
+This file applies to the complete repository. Follow the nearest `AGENTS.md`
+before editing a subtree. Local guides add domain contracts; task execution and
+validation defaults are maintained here.
 
 ## Directory index
 
@@ -77,14 +76,26 @@ for reporting. Organization, figures, packaging, and reproducibility work may
 continue; do not start training, tuning, new evaluation, or a new scientific
 estimand unless the user explicitly opens that program.
 
-Read the relevant study's `study.toml` and referenced protocol, locks, results,
-and interpretation for its status and scientific boundary. Keep those details
-in their existing authorities rather than repeating them in agent guides.
 Completed execution gates do not authorize reruns, extra cohorts, new analysis
 axes, tuning, human fitting, or main-model promotion. A successor requires a
-separately authorized prospective question. Within an already authorized
-program, complete the registered steps without seeking approval again unless
-the scope changes.
+separately authorized prospective question.
+
+## Task execution
+
+1. Establish scope once: inspect worktree status, applicable guides, and only the
+   study records, code, and callers needed for the task. Expand to resolve concrete
+   dependencies or questions; routine work needs no repository-wide audit.
+2. State the intended outcome and smallest required checks briefly, then complete
+   the authorized scope continuously without repeated approval. Pause for a scope
+   change, a protocol stop, or a decision that requires user input.
+3. Close once: review the final diff, complete affected checks, summarize results
+   and limits, and commit intended paths. Batch commits and pushes at required
+   scientific freeze points and result archival. Existing registered sequences
+   remain binding; do not add a checkpoint for every implementation step.
+
+Use the [experiment guide](fsrl/experiments/AGENTS.md#research-lifecycle) for new
+development protocols. Process simplification applies prospectively; it does not
+rewrite frozen records, waive registered gates, or authorize scientific work.
 
 ## Repository invariants
 
@@ -106,10 +117,11 @@ the scope changes.
 
 ## Validation boundary
 
-Choose validation by the affected behavior or contract, using the applicable
-rows below and the local guide. Editing documentation inside a source or
-evidence directory does not by itself require code or evidence validation.
-Read-only audits need checks only when they help answer the question.
+Choose checks by the affected behavior or contract below and the local guide.
+State their coverage and trigger together in the brief task plan. Documentation
+inside a source or evidence directory does not itself require code or evidence
+validation. Read-only questions need checks only when they help answer the
+question.
 
 | Change | Required validation |
 | --- | --- |
@@ -120,15 +132,19 @@ Read-only audits need checks only when they help answer the question.
 | Historical source, evidence locators, or migration metadata | Affected provenance, migration, and frozen-evidence checks. Physical moves also follow the rule below. |
 | Authorized scientific execution | The owning study's protocol, source/input/artifact locks, and scientific gates. Engineering checks do not revalidate an estimand. |
 
-Run the smallest affected checks while iterating and the required broader
-checks once the change is ready. Reuse successful checks within the task while
-their relevant files, inputs, dependencies, and environment remain unchanged.
-A broader passing suite can cover a standalone check when it verifies the same
-inputs and assertions. Rerun affected checks after changes, failures, or new
-concerns; committing or handing off unchanged work alone does not require a
-rerun. This does not waive a scientific protocol's required locks or gates.
-Summarize validation in the handoff using existing tools; routine maintenance
-does not need additional validation manifests or tracking machinery.
+Run the smallest affected checks while iterating and the required broader checks
+once the change is ready. Reuse successful checks within the task while their
+relevant files, inputs, dependencies, and environment remain unchanged. A broader
+passing suite covers an identical standalone check without another invocation.
+Rerun only affected checks after changes, failures, or new concrete concerns.
+Committing, pushing, or handing off unchanged work does not trigger another test
+run or closing audit; check Git status and references for delivery instead.
+Honor an explicitly requested audit or registered verification stage without
+duplicating unchanged checks it already covers.
+
+Summarize validation in the existing handoff. Do not add validation manifests,
+per-stage audit reports, approval records, or tracking machinery unless they
+carry required new information under the task or registered protocol.
 
 A physical evidence move additionally requires a new append-only migration map,
 source-commit and byte verification, active-locator checks, and a frozen-evidence

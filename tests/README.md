@@ -48,9 +48,9 @@ direnv exec . python -m fsrl.infra.test_runtime --timeout 60 \
   tests.infra.test_study_registry.StudyRegistryTests.test_active_human_docs_have_live_local_links_and_python_modules -v
 ```
 
-While iterating, run the smallest tests that exercise the changed contract.
-Choose broader checks and affected registry/workflow/figure validators using
-the repository guide. A documentation-only change needs the documentation/link
-checks above and `git diff --check`. Reuse a passing check when its relevant
-files, inputs, dependencies, and environment are unchanged; a broader suite can
-cover an identical standalone check without another invocation.
+Select checks from the [root validation boundary](../AGENTS.md#validation-boundary)
+and reuse successful checks under its unchanged-input rule. Run the smallest
+affected tests while iterating and any required broader checks once the change
+is ready. A documentation-only change needs the documentation/link checks above
+and `git diff --check`. Commit, push, and handoff are not test triggers; inspect
+Git status and references for delivery without a second closing audit.

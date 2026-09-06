@@ -27,6 +27,8 @@ Navigation: [package guide](../AGENTS.md) · [study guide](../../studies/AGENTS.
   validators may reuse exact results within that session, but caches must not
   cross commands or hide changes to branch, HEAD, or worktree cleanliness.
   Network and Git-blob witnesses may be reused after those local checks pass.
+  This runtime-cache boundary does not require rerunning completed engineering
+  checks; reuse those under the [root validation boundary](../../AGENTS.md#validation-boundary).
 
 ## Registry and provenance
 

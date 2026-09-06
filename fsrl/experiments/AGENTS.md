@@ -8,14 +8,37 @@ Navigation: [package guide](../AGENTS.md) · [study guide](../../studies/AGENTS.
 
 ## Research lifecycle
 
-For each substantive stage, record in order: the question and current theory;
-the prospective protocol, estimands, controls, competence gates, and stop
-rules; the analysis or experiment; positive and negative results with
-uncertainty; supported, rejected, and unidentified links; the revised theory;
-and the next discriminating test.
+Apply the [root task execution rules](../../AGENTS.md#task-execution) to each new
+authorized development study:
 
-- Prefer read-only diagnosis before intervention and use one to three
-  development seeds before freezing formal work.
+1. Before execution, write a compact prospective protocol using the outline
+   below, qualify the affected computation, and record source/configuration/input
+   identities in the required locks before the corresponding execution or outcome
+   exposure. Reference unchanged task, metric, and runtime contracts.
+2. Execute continuously with the mandatory correctness, competence, integrity,
+   and stop checks.
+3. Close once with the canonical machine-readable result, the artifacts needed
+   to reconstruct it, and a concise interpretation: positive and negative results
+   with uncertainty, supported/rejected/unidentified links, revised theory, and
+   the next discriminating question. Update the owning study and generated views.
+
+Use this outline in the study's existing protocol format; it is not a new schema
+or an additional document:
+
+```text
+Question: current theory, primary contrast/estimand, and intended claim boundary.
+Design: development or confirmation, controls, seeds, cohorts, and fixed inputs.
+Decision: uncertainty method, competence/integrity gates, and stop/outcome rules.
+Execution: command, runtime, source/configuration/RNG identities, and freeze points.
+Outputs: required locks, sufficient artifacts, canonical result, and interpretation.
+```
+
+Do not copy another study's admission records, review reports, or commit/push
+sequence into a new protocol unless the design needs them. Required locks precede
+the execution or outcome exposure they protect.
+
+## Scientific gates
+
 - Never edit a frozen candidate, contract, seed set, threshold, or outcome rule
   after seeing its result. Register a successor study instead.
 - Preserve competence and integrity gates. A failed competence gate is
@@ -28,22 +51,21 @@ and the next discriminating test.
 - Do not add relation labels, hard-case flags, offline targets, posterior
   targets, or evaluation labels to make a candidate pass.
 
-Development and confirmation use different amounts of evidence, not different
-claim standards. A development study should use one to three seeds, the minimum
-prospectively fixed cohort count needed to discriminate its primary contrast,
-focused parity checks, and compact sufficient statistics. Promote raw model
-outputs only when they are needed to reconstruct the estimand; otherwise keep
-them in ignored runtime artifacts. Full-scale cohorts, fresh seeds, exhaustive
-numerical reconstruction, and the complete engineering suite belong at a
-registered confirmation or final promotion boundary rather than every
-intermediate lock. In either tier, freeze the protocol before outcome exposure,
-lock mandatory artifacts before evaluation, preserve negative results, and do
-not tune on the evaluated seeds or cohorts.
+Development uses one to three seeds, the minimum prospectively fixed cohort count
+needed to discriminate the primary contrast, focused parity checks, and compact
+sufficient statistics. Promote raw outputs only when needed to reconstruct the
+estimand; otherwise keep them in ignored runtime artifacts. Schedule complete
+independent numerical reconstruction at registered confirmation or promotion
+gates, or for a concrete correctness concern; it is not a default development
+step. A new or changed equation needs a focused independent correctness check
+before use. Full engineering checks follow the
+[root validation boundary](../../AGENTS.md#validation-boundary) and registered gates.
 
-The current model program is frozen for reporting. Read the workflow and study
-registry for current boundaries; do not infer current status from runner names.
-Starting an experiment requires explicit user authorization for a new
-scientific program.
+In either tier, freeze the protocol before outcome exposure, lock mandatory
+artifacts before evaluation, and do not tune on evaluated seeds or cohorts.
+Development results retain their seed scope; extra engineering checks do not
+make them confirmatory. The [root scientific boundary](../../AGENTS.md#scientific-north-star)
+governs authorization; runner names do not establish study status.
 
 ## Implementation boundary
 

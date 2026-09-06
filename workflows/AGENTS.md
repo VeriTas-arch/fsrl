@@ -27,7 +27,9 @@ tests, verification commands, and promoted figures.
 
 Do not edit the generated README directly or use the workflow to rewrite study
 outcomes. A new scientific result first becomes a study-owned frozen record;
-only then may a reviewed workflow change promote or constrain a claim.
+only then may a workflow change with explicit evidence references promote or
+constrain a claim. Review it within the authorized task's normal diff review;
+do not add a separate approval or review record by default.
 
 After workflow-contract or generated-view changes, validate with:
 
