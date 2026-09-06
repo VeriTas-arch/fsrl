@@ -265,9 +265,12 @@ trajectories.
     fits all preserve the global-decay learner, but episode-common encoding fails the
     registered specificity contrast against the marginally matched relation-common
     control in every network. The registered outcome is joint_structure_unresolved.
-- [Minimal sufficient structure identification](structural_identification/README.md) — `frozen_contract`
-  - **Finding:** Prospective measurement bridge and matched structural-deletion study;
-    no candidate outcome is available.
+- [Minimal sufficient structure identification](structural_identification/README.md) — `unresolved`
+  - **Finding:** All 24 fits pass generic competence and binding. M11 with decay retains
+    every common-reference continuous mean interval across three training streams, but
+    no recipe passes the complete witness qualification; no structural deletion or
+    main-model promotion is supported. Original measurement correspondence remains
+    unresolved.
 
 ## One-factor structural transport
 
