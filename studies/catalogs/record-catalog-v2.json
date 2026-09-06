@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 473,
+  "entry_count": 475,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 245,
+    "json": 247,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 62,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 435,
+    "already_conformant": 437,
     "historical_gzip_view": 37,
     "historical_pth_view": 1
   },
@@ -2408,6 +2408,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.readiness_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/benchmarks/qualification_repair_1.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/benchmarks/qualification_repair_1.json"
+      },
+      "materialized_identity": {
+        "bytes": 45524,
+        "sha256": "580a23a01e276311a58aefcf82f60ffbcfc06374559cce4c7fe9b6b98ed20769"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_benchmarks_qualification_repair_1_json",
+      "registered_identity": {
+        "bytes": 45524,
+        "sha256": "580a23a01e276311a58aefcf82f60ffbcfc06374559cce4c7fe9b6b98ed20769",
+        "source_ref": "sha256:580a23a01e276311a58aefcf82f60ffbcfc06374559cce4c7fe9b6b98ed20769"
+      },
+      "role": "readiness_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -2439,6 +2473,40 @@
         "source_ref": "sha256:0526de68d7879f009d9b3eff532a5e9cea28bdd210dd32d1f98c0f8515894c2a"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.repair_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/benchmarks/source_lock_repair_1.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/benchmarks/source_lock_repair_1.json"
+      },
+      "materialized_identity": {
+        "bytes": 45263,
+        "sha256": "ee5f78a8f6e075d423e17b18cffd431efad0a68fee48618f692389aa58c3f538"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_benchmarks_source_lock_repair_1_json",
+      "registered_identity": {
+        "bytes": 45263,
+        "sha256": "ee5f78a8f6e075d423e17b18cffd431efad0a68fee48618f692389aa58c3f538",
+        "source_ref": "sha256:ee5f78a8f6e075d423e17b18cffd431efad0a68fee48618f692389aa58c3f538"
+      },
+      "role": "repair_lock"
     },
     {
       "availability": "materialized",
@@ -16351,7 +16419,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 471,
+  "registered_record_count": 473,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -16371,10 +16439,10 @@
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 3,
-    "readiness_result": 7,
+    "readiness_result": 8,
     "registered_contract": 64,
     "repair_contract": 6,
-    "repair_lock": 9,
+    "repair_lock": 10,
     "report": 61,
     "source_context": 2,
     "superseded_repair_source": 1,

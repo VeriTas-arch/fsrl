@@ -25,17 +25,16 @@
 order formation and ranking composition in the two-scalar Resampled score learner?
 
 **Finding.** The prospective paired fixed-eta versus experience-dependent Resampled
-design is non-Liu qualified, source-locked and trained on all six mandatory 2117--2119
-fits. Their paired streams and artifacts were jointly locked. The first
-generic-evaluation wrapper failed before scientific output because it read generic
-inputs from the artifact rather than source-lock view; a no-scientific-change
-append-only repair is registered before implementation.
+design is trained on all six mandatory 2117--2119 fits with jointly locked paired
+streams and artifacts. After the first generic wrapper failed before output, the
+registered no-scientific-change repair passed the complete non-Liu qualification and was
+append-only source-locked while retaining the original fits. No scheduler or Liu result
+exists yet.
 
-**Claim boundary.** Qualification, source/input readiness and locked training artifacts
-only, not a behavioral or mechanism result. Only the registered evaluation-plumbing
-repair and the unchanged frozen sequence are authorized. Calibration, scientific
-candidate repair, fresh replication, circuit verification and main-model promotion
-remain closed.
+**Claim boundary.** Repaired evaluation readiness and unchanged locked training
+artifacts only, not a behavioral or mechanism result. The frozen scheduler decision and
+subsequent Liu evaluation remain authorized. Calibration, scientific candidate repair,
+fresh replication, circuit verification and main-model promotion remain closed.
 
 ## Frozen records
 
@@ -102,6 +101,12 @@ remain closed.
 - `repair_contract` —
   [studies/experience_dependent_plasticity/records/benchmarks/generic_selection_repair_v1.json](records/benchmarks/generic_selection_repair_v1.json)
   (`sha256:c70c68e77e75`)
+- `readiness_result` —
+  [studies/experience_dependent_plasticity/records/benchmarks/qualification_repair_1.json](records/benchmarks/qualification_repair_1.json)
+  (`sha256:580a23a01e27`)
+- `repair_lock` —
+  [studies/experience_dependent_plasticity/records/benchmarks/source_lock_repair_1.json](records/benchmarks/source_lock_repair_1.json)
+  (`sha256:ee5f78a8f6e0`)
 
 ## Provenance rule
 
