@@ -39,6 +39,9 @@ automatic promotion.
 - `validation_result` —
   [studies/weak_evidence_routing/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:77208d2f2261`)
+- `execution_lock` —
+  [studies/weak_evidence_routing/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:4bfb9d213fc2`)
 
 ## Provenance rule
 
