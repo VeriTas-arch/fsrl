@@ -4,7 +4,9 @@ from fsrl.experiments.training_strategy.locks import reference
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol_catalog import protocol_path
 
-from .protocol import DESIGN
+from .protocol import DESIGN, RECORDS
+
+REPAIR = RECORDS / "benchmarks/qualification_repair_v1.json"
 
 
 def implementation_sources() -> list[dict]:
@@ -19,6 +21,7 @@ def implementation_sources() -> list[dict]:
 def scientific_inputs() -> list[dict]:
     paths = {
         DESIGN,
+        REPAIR,
         REPO_ROOT
         / "studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.json",
         REPO_ROOT

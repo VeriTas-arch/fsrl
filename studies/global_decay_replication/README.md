@@ -37,6 +37,9 @@ promote a main model.
 - `registered_contract` —
   [studies/global_decay_replication/records/benchmarks/global_decay_replication_v1.json](records/benchmarks/global_decay_replication_v1.json)
   (`sha256:8e9c259355d8`)
+- `repair_contract` —
+  [studies/global_decay_replication/records/benchmarks/qualification_repair_v1.json](records/benchmarks/qualification_repair_v1.json)
+  (`sha256:5ab9e1e0ca3b`)
 
 ## Provenance rule
 

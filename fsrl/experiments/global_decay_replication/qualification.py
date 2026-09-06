@@ -107,12 +107,19 @@ def numerical_checks(condition: str, batch: ModelBatch, spec: dict) -> dict:
             error_if_nonfinite=True,
         )
         optimizer.step()
+    update_checks = {
+        name: comparison(first, second)
+        for (name, first), second in zip(
+            eager.named_parameters(), model.parameters(), strict=True
+        )
+    }
     checks["adam-update"] = {
         "passed": all(
             previous != tensor_hashes(current)
             for previous, current in zip(before, (eager, model), strict=True)
         )
-        and tensor_hashes(eager) == tensor_hashes(model)
+        and all(value["passed"] for value in update_checks.values()),
+        "parameters": update_checks,
     }
     if condition == "adaptive_eta_resampled":
         relation = make_model(condition, spec, "cuda", scheduler="relation")
@@ -123,9 +130,7 @@ def numerical_checks(condition: str, batch: ModelBatch, spec: dict) -> dict:
         for index, (first, second) in enumerate(
             zip(relation_output, global_output, strict=True)
         ):
-            checks[f"historical-balanced-identity-{index}"] = comparison(
-                first, second, atol=0, rtol=0
-            )
+            checks[f"historical-balanced-identity-{index}"] = comparison(first, second)
     return checks
 
 

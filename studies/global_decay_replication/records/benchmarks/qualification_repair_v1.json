@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "experiment_id": "global_decay_replication_v1",
+  "record_type": "qualification_repair",
+  "failed_attempt": {
+    "source_commit": "ae29c4a882382187bafa345be6589a54dd05fec5",
+    "runtime_path": "artifacts/runs/global_decay_replication_v1/qualification/attempt-1",
+    "liu_evaluated": false,
+    "parameters_trained": false,
+    "passed_checks": "Eager versus CUDA fullgraph outputs, float64 reference recurrence, losses, gradients and nonzero-gradient checks all passed.",
+    "failed_checks": {
+      "adaptive_balanced_relation_global_identity": "The implementation required bitwise equality after an Adam step although the two algebraically equivalent float32 paths differed by at most 1.1920928955078125e-07 in margins and 7.450580596923828e-09 in weights.",
+      "fixed_adam_update": "Both eager and compiled parameters changed and pre-update gradients agreed within 1.862645149230957e-09, but the implementation required identical parameter hashes after Adam rather than the registered numerical parity tolerance."
+    }
+  },
+  "diagnosis": "The failed predicates were stricter than the contract and stricter than the existing output, loss, gradient and independent-reference tolerances. They do not identify a scientific equation, data, RNG, optimizer or runtime mismatch.",
+  "authorized_repair": "Retain the failed attempt. Apply the already registered comparison tolerance (atol=1e-5, rtol=1e-4) to the balanced scheduler identity and to every post-Adam parameter tensor, while still requiring that both models update. Change no equation, parameter, seed, input, optimizer operation or other qualification check.",
+  "required_requalification": "Commit and push the repaired implementation, then run a new complete non-Liu qualification attempt. Only the new successful attempt may enter the prospective source lock."
+}
