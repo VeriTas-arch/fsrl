@@ -82,6 +82,15 @@ promote a main model.
 - `frozen_parameters` —
   [studies/global_decay_replication/records/results/training-2122-adaptive_eta_resampled.json](records/results/training-2122-adaptive_eta_resampled.json)
   (`sha256:ac83afe8c36a`)
+- `execution_lock` —
+  [studies/global_decay_replication/records/benchmarks/generic_confirmation_lock.json](records/benchmarks/generic_confirmation_lock.json)
+  (`sha256:2ac1a7b577aa`)
+- `validation_result` —
+  [studies/global_decay_replication/records/results/generic_confirmation.json](records/results/generic_confirmation.json)
+  (`sha256:3ed49294973c`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/generic_confirmation.npz](records/results/generic_confirmation.npz)
+  (`sha256:e5e173704a52`)
 
 ## Provenance rule
 

@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 559,
+  "entry_count": 562,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 284,
+    "json": 286,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 64,
-    "numpy_npz": 199,
+    "numpy_npz": 200,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 515,
+    "already_conformant": 518,
     "historical_gzip_view": 43,
     "historical_pth_view": 1
   },
@@ -5925,6 +5925,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/benchmarks/generic_confirmation_lock.json",
+        "repository_path": "studies/global_decay_replication/records/benchmarks/generic_confirmation_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 820,
+        "sha256": "2ac1a7b577aae2c32a813dbc74cf82b5b7de1b2790a623b0ca4e9d3ff725c2da"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_benchmarks_generic_confirmation_lock_json",
+      "registered_identity": {
+        "bytes": 820,
+        "sha256": "2ac1a7b577aae2c32a813dbc74cf82b5b7de1b2790a623b0ca4e9d3ff725c2da",
+        "source_ref": "sha256:2ac1a7b577aae2c32a813dbc74cf82b5b7de1b2790a623b0ca4e9d3ff725c2da"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.randomization_record",
       "format": {
         "format": "json",
@@ -6226,6 +6260,74 @@
         "bytes": 83842,
         "sha256": "3d2a8b07b6a9ed6bd18d9262f9c90953edc52faf0cf46198866ba5962d5b1bea",
         "source_ref": "sha256:3d2a8b07b6a9ed6bd18d9262f9c90953edc52faf0cf46198866ba5962d5b1bea"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/generic_confirmation.json",
+        "repository_path": "studies/global_decay_replication/records/results/generic_confirmation.json"
+      },
+      "materialized_identity": {
+        "bytes": 11783,
+        "sha256": "3ed49294973c441946370ecbbabfb323eccd46098fe2ab4d90828998aeca9524"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_generic_confirmation_json",
+      "registered_identity": {
+        "bytes": 11783,
+        "sha256": "3ed49294973c441946370ecbbabfb323eccd46098fe2ab4d90828998aeca9524",
+        "source_ref": "sha256:3ed49294973c441946370ecbbabfb323eccd46098fe2ab4d90828998aeca9524"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/generic_confirmation.npz",
+        "repository_path": "studies/global_decay_replication/records/results/generic_confirmation.npz"
+      },
+      "materialized_identity": {
+        "bytes": 116835,
+        "sha256": "e5e173704a528b1cdb78fcb20661a4653480bc407907e1a6dc2e8799ad9da7eb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_generic_confirmation_npz",
+      "registered_identity": {
+        "bytes": 116835,
+        "sha256": "e5e173704a528b1cdb78fcb20661a4653480bc407907e1a6dc2e8799ad9da7eb",
+        "source_ref": "sha256:e5e173704a528b1cdb78fcb20661a4653480bc407907e1a6dc2e8799ad9da7eb"
       },
       "role": "supporting_artifact"
     },
@@ -19287,7 +19389,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 557,
+  "registered_record_count": 560,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -19298,7 +19400,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 40,
+    "execution_lock": 41,
     "freeze_validation": 1,
     "frozen_parameters": 22,
     "frozen_result": 49,
@@ -19314,8 +19416,8 @@
     "report": 62,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 252,
-    "validation_result": 5
+    "supporting_artifact": 253,
+    "validation_result": 6
   },
   "schema_version": 2,
   "sources": {
