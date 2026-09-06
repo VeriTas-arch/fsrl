@@ -21,6 +21,7 @@ WORKFLOW_MODULES = {
     "confirmation": "fsrl.experiments.confirmation.behavioral",
     "mechanism": "fsrl.experiments.confirmation.mechanism",
     "joint-training-strategy": "fsrl.experiments.training_strategy.__main__",
+    "matched-memory-structure": "fsrl.experiments.memory_structure.__main__",
     "minimal-relational-learner": "fsrl.experiments.minimal_learner.__main__",
     "quantized-relational-learner": "fsrl.experiments.quantized_learner.__main__",
     "resampled-cohort-diagnostic": "fsrl.experiments.cohort_diagnostic.__main__",

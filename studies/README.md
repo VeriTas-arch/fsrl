@@ -190,6 +190,9 @@ fail to close the dynamics.
     quantitative behavior rows in 2108/2110, not 2109, and is slower at equal episode
     exposure. The complete comparison is frozen with no automatic tuning or seed
     expansion.
+- [Information-matched single-stage RNN memory structure](matched_memory_structure/README.md) — `unresolved`
+  - **Finding:** Prospective three-pair development comparison; no model outcome has
+    been evaluated.
 
 ## Minimal explanatory models
 
