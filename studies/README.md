@@ -190,9 +190,13 @@ fail to close the dynamics.
     quantitative behavior rows in 2108/2110, not 2109, and is slower at equal episode
     exposure. The complete comparison is frozen with no automatic tuning or seed
     expansion.
-- [Information-matched single-stage RNN memory structure](matched_memory_structure/README.md) — `unresolved`
-  - **Finding:** Prospective three-pair development comparison; no model outcome has
-    been evaluated.
+- [Information-matched single-stage RNN memory structure](matched_memory_structure/README.md) — `mixed`
+  - **Finding:** Registered outcome: both_fail_core. All six models are competent and
+    all nine paired direct/nonlearned/omitted contrasts pass single-arm noninferiority,
+    but every N=8 candidate fails individual diversity. No stable added local-trace
+    benefit is identified under the shared effective-evidence interface. All 18
+    size-by-model cells retain task competence; the individualization deficit persists.
+    The comparison is frozen, without main-model promotion or automatic repair.
 
 ## Minimal explanatory models
 
