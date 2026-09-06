@@ -40,6 +40,27 @@ promote a main model.
 - `repair_contract` —
   [studies/global_decay_replication/records/benchmarks/qualification_repair_v1.json](records/benchmarks/qualification_repair_v1.json)
   (`sha256:5ab9e1e0ca3b`)
+- `readiness_result` —
+  [studies/global_decay_replication/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:4072fa8c6016`)
+- `randomization_record` —
+  [studies/global_decay_replication/records/benchmarks/generic_inputs.json](records/benchmarks/generic_inputs.json)
+  (`sha256:2d017529cdc2`)
+- `execution_lock` —
+  [studies/global_decay_replication/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:bc393dd2c92b`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/generic-28.npz](records/inputs/generic-28.npz)
+  (`sha256:32549b332917`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/generic-32.npz](records/inputs/generic-32.npz)
+  (`sha256:32071f0841b6`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/generic-36.npz](records/inputs/generic-36.npz)
+  (`sha256:aedbf5253d09`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/inputs/generic-40.npz](records/inputs/generic-40.npz)
+  (`sha256:3d2a8b07b6a9`)
 
 ## Provenance rule
 
