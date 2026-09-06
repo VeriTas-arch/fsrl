@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "repair_id": "experience_dependent_plasticity_generic_selection_repair_v1",
+  "registered_before_repair": true,
+  "failure": {
+    "source_commit": "e72e54168f5f82f0f58acd3538708455510edf8a",
+    "artifact_lock_commit": "26843dc471e677691ca2d36d8a32f10cd941537f",
+    "stage": "generic-scheduler-selection",
+    "exception_type": "KeyError",
+    "exception_message": "'generic_groups'",
+    "failed_run_manifest": {
+      "path": "artifacts/runs/experience_dependent_plasticity_v1/generic-selection/run.json",
+      "sha256": "e6a0d9b166ebb3e5f10acb33e1600e075e624561494c04b94c49dd09938bce97",
+      "bytes": 2165
+    },
+    "scientific_output_written": false,
+    "liu_evaluated": false
+  },
+  "cause": "evaluate_generic passed the artifact-lock view to _evaluate_groups, although generic_groups is owned by the validated source-lock view.",
+  "authorized_repair": {
+    "source_change": "Read generic_groups from the separately validated active source lock while continuing to read fitted models from the unchanged artifact lock.",
+    "lifecycle_change": "Use append-only repaired qualification/source-lock and generic-evaluation attempt paths. Retain the original source lock, artifact lock, six fitted parameter records and failed runtime manifest unchanged.",
+    "verification": "Repeat the complete non-Liu CPU, independent-float64 and CUDA fullgraph qualification on the repaired source. Verify every original training record and paired stream hash before evaluation.",
+    "scientific_change": false
+  },
+  "forbidden": [
+    "model equation changes",
+    "parameter or fitted-artifact changes",
+    "seed or input changes",
+    "scheduler threshold changes",
+    "Liu access before the repaired scheduler lock",
+    "post-result candidate repair"
+  ],
+  "claim_boundary": "This repair can restore the registered execution path only. It cannot improve, reinterpret or promote the candidate."
+}

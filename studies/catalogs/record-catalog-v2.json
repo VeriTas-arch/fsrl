@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 472,
+  "entry_count": 473,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 244,
+    "json": 245,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 62,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 434,
+    "already_conformant": 435,
     "historical_gzip_view": 37,
     "historical_pth_view": 1
   },
@@ -2337,6 +2337,40 @@
         "source_ref": "sha256:92035d137ea447e5885604ec893770cef9e8543b03ed1e68595b973468ff55ec"
       },
       "role": "randomization_record"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/benchmarks/generic_selection_repair_v1.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/benchmarks/generic_selection_repair_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 1931,
+        "sha256": "c70c68e77e75a3d44bed1aad0606ae721820ee64a4c04597d154bea154f5b7d7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_benchmarks_generic_selection_repair_v1_json",
+      "registered_identity": {
+        "bytes": 1931,
+        "sha256": "c70c68e77e75a3d44bed1aad0606ae721820ee64a4c04597d154bea154f5b7d7",
+        "source_ref": "sha256:c70c68e77e75a3d44bed1aad0606ae721820ee64a4c04597d154bea154f5b7d7"
+      },
+      "role": "repair_contract"
     },
     {
       "availability": "materialized",
@@ -16317,7 +16351,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 470,
+  "registered_record_count": 471,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -16339,7 +16373,7 @@
     "randomization_record": 3,
     "readiness_result": 7,
     "registered_contract": 64,
-    "repair_contract": 5,
+    "repair_contract": 6,
     "repair_lock": 9,
     "report": 61,
     "source_context": 2,

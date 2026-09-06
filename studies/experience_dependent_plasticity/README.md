@@ -26,13 +26,16 @@ order formation and ranking composition in the two-scalar Resampled score learne
 
 **Finding.** The prospective paired fixed-eta versus experience-dependent Resampled
 design is non-Liu qualified, source-locked and trained on all six mandatory 2117--2119
-fits. Their paired streams and artifacts were jointly locked before any scheduler or Liu
-evaluation. No behavioral or scheduler result exists yet.
+fits. Their paired streams and artifacts were jointly locked. The first
+generic-evaluation wrapper failed before scientific output because it read generic
+inputs from the artifact rather than source-lock view; a no-scientific-change
+append-only repair is registered before implementation.
 
 **Claim boundary.** Qualification, source/input readiness and locked training artifacts
-only, not a behavioral or mechanism result. The frozen scheduler decision and subsequent
-Liu evaluation remain authorized. Calibration, candidate repair, fresh replication,
-circuit verification and main-model promotion remain closed.
+only, not a behavioral or mechanism result. Only the registered evaluation-plumbing
+repair and the unchanged frozen sequence are authorized. Calibration, scientific
+candidate repair, fresh replication, circuit verification and main-model promotion
+remain closed.
 
 ## Frozen records
 
@@ -96,6 +99,9 @@ circuit verification and main-model promotion remain closed.
 - `frozen_parameters` —
   [studies/experience_dependent_plasticity/records/results/training-2119-adaptive_eta_resampled.json](records/results/training-2119-adaptive_eta_resampled.json)
   (`sha256:4f66c2a87160`)
+- `repair_contract` —
+  [studies/experience_dependent_plasticity/records/benchmarks/generic_selection_repair_v1.json](records/benchmarks/generic_selection_repair_v1.json)
+  (`sha256:c70c68e77e75`)
 
 ## Provenance rule
 

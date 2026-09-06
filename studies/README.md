@@ -252,8 +252,10 @@ trajectories.
 - [Experience-dependent score plasticity design](experience_dependent_plasticity/README.md) — `frozen_contract`
   - **Finding:** The prospective paired fixed-eta versus experience-dependent Resampled
     design is non-Liu qualified, source-locked and trained on all six mandatory
-    2117--2119 fits. Their paired streams and artifacts were jointly locked before any
-    scheduler or Liu evaluation. No behavioral or scheduler result exists yet.
+    2117--2119 fits. Their paired streams and artifacts were jointly locked. The first
+    generic-evaluation wrapper failed before scientific output because it read generic
+    inputs from the artifact rather than source-lock view; a no-scientific-change
+    append-only repair is registered before implementation.
 
 ## One-factor structural transport
 
