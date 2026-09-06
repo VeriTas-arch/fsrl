@@ -33,6 +33,9 @@ modification proxy, no physiological budget or automatic main-model promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/effective_write_cost/records/benchmarks/development_model_lock.json](records/benchmarks/development_model_lock.json)
+  (`sha256:fb8f21ee5b96`)
 - `registered_contract` —
   [studies/effective_write_cost/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:e1234f0afd67`)
@@ -45,6 +48,9 @@ modification proxy, no physiological budget or automatic main-model promotion.
 - `artifact_lock` —
   [studies/effective_write_cost/records/benchmarks/scale_lock.json](records/benchmarks/scale_lock.json)
   (`sha256:b3f75d2233b7`)
+- `artifact_lock` —
+  [studies/effective_write_cost/records/benchmarks/selection_lock.json](records/benchmarks/selection_lock.json)
+  (`sha256:45519ea1c0f5`)
 - `execution_lock` —
   [studies/effective_write_cost/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:1703a545c12c`)
