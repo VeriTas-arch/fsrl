@@ -15,6 +15,7 @@ from fsrl.experiments.training_strategy.locks import (
     verify_reference,
 )
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
+from fsrl.infra.validation_session import reuse_validation
 
 from .inputs import GENERIC_MANIFEST, load_group, save_generic_inputs
 from .protocol import (
@@ -110,6 +111,7 @@ def lock_source(qualification_directory) -> dict:
     return result
 
 
+@reuse_validation
 def validate_source() -> dict:
     commit = require_pushed_clean()
     lock = load_json(verify_reference(reference(SOURCE_LOCK), commit=commit))
@@ -139,6 +141,7 @@ def validate_source() -> dict:
     return lock
 
 
+@reuse_validation
 def validate_recovery() -> dict:
     source = validate_source()
     commit = require_pushed_clean()
@@ -162,6 +165,7 @@ def validate_recovery() -> dict:
     return {**lock, "lock_reference": lock_reference, "result_record": result}
 
 
+@reuse_validation
 def validate_training(seed: int, condition: str) -> dict:
     recovery = validate_recovery()
     directory = run_directory(seed, condition)
@@ -256,6 +260,7 @@ def lock_artifacts() -> dict:
     return result
 
 
+@reuse_validation
 def validate_artifacts() -> dict:
     source = validate_source()
     recovery = validate_recovery()

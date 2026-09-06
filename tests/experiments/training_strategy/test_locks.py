@@ -14,6 +14,7 @@ from fsrl.experiments.training_strategy.protocol import (
     phase_for_step,
     training_config,
 )
+from fsrl.infra.validation_session import validation_session
 
 
 class TrainingLockTests(unittest.TestCase):
@@ -124,6 +125,62 @@ class TrainingLockTests(unittest.TestCase):
         ):
             locks.validate_artifact_lock()
 
+    def test_remote_witness_is_reused_only_within_a_session(self):
+        def git_result(*arguments):
+            if arguments == ("branch", "--show-current"):
+                return "dev"
+            if arguments == ("status", "--porcelain=v1", "--untracked-files=all"):
+                return ""
+            if arguments == ("rev-parse", "HEAD"):
+                return "commit"
+            if arguments == (
+                "ls-remote",
+                "--exit-code",
+                "origin",
+                "refs/heads/dev",
+            ):
+                return "commit\trefs/heads/dev"
+            raise AssertionError(arguments)
+
+        with patch.object(locks, "git_text", side_effect=git_result) as git:
+            with validation_session():
+                self.assertEqual(locks.require_pushed_clean(), "commit")
+                self.assertEqual(locks.require_pushed_clean(), "commit")
+            self.assertEqual(
+                sum(call.args[0] == "ls-remote" for call in git.call_args_list), 1
+            )
+            self.assertEqual(
+                sum(call.args[0] == "status" for call in git.call_args_list), 2
+            )
+
+    def test_session_does_not_hide_a_worktree_change(self):
+        statuses = iter(("", " M result.json"))
+
+        def git_result(*arguments):
+            if arguments == ("branch", "--show-current"):
+                return "dev"
+            if arguments == ("status", "--porcelain=v1", "--untracked-files=all"):
+                return next(statuses)
+            if arguments == ("rev-parse", "HEAD"):
+                return "commit"
+            if arguments == (
+                "ls-remote",
+                "--exit-code",
+                "origin",
+                "refs/heads/dev",
+            ):
+                return "commit\trefs/heads/dev"
+            raise AssertionError(arguments)
+
+        with patch.object(locks, "git_text", side_effect=git_result) as git:
+            with validation_session():
+                self.assertEqual(locks.require_pushed_clean(), "commit")
+                with self.assertRaisesRegex(RuntimeError, "clean committed worktree"):
+                    locks.require_pushed_clean()
+            self.assertEqual(
+                sum(call.args[0] == "ls-remote" for call in git.call_args_list), 1
+            )
+
     def test_source_lock_rejects_stale_smoke_source_set_and_profile(self):
         # Reuse only the shape of a development integrity record, never its pass status.
         smoke = {
@@ -187,3 +244,16 @@ class TrainingLockTests(unittest.TestCase):
             self.assertRaisesRegex(RuntimeError, "source set"),
         ):
             locks._validate_smoke(smoke)
+
+
+class TrainingWitnessReuseTests(unittest.TestCase):
+    def test_git_blob_witness_is_reused_only_within_a_session(self):
+        record = {"path": "record", "sha256": "sha"}
+        with (
+            patch.object(locks, "reference", return_value=record),
+            patch.object(locks, "git_blob_sha256", return_value="sha") as blob,
+            validation_session(),
+        ):
+            locks.verify_reference(record, commit="commit")
+            locks.verify_reference(record, commit="commit")
+        blob.assert_called_once_with(locks.REPO_ROOT, "commit", "record")

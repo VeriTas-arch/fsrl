@@ -23,6 +23,10 @@ Navigation: [package guide](../AGENTS.md) · [study guide](../../studies/AGENTS.
 - Diagnose repeated failures and orphaned CPU use from the exact command,
   working directory, parent/process group, age, and trigger parameters before
   terminating or changing lifecycle code.
+- One formal-runtime command owns one process-local validation session. Pure
+  validators may reuse exact results within that session, but caches must not
+  cross commands or hide changes to branch, HEAD, or worktree cleanliness.
+  Network and Git-blob witnesses may be reused after those local checks pass.
 
 ## Registry and provenance
 

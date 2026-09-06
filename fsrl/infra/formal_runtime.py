@@ -12,6 +12,7 @@ from fsrl.infra.runtime import (
     default_device,
     runtime_snapshot,
 )
+from fsrl.infra.validation_session import validation_session
 
 CPU_THREAD_LIMIT = 1
 BLAS_THREAD_LIMIT = 1
@@ -124,7 +125,8 @@ def main(args=None) -> int:
     workflow = arguments.pop(0)
     configure_formal_runtime()
     workflow_main = import_module(WORKFLOW_MODULES[workflow]).main
-    return workflow_main(arguments)
+    with validation_session():
+        return workflow_main(arguments)
 
 
 if __name__ == "__main__":

@@ -13,10 +13,35 @@ from fsrl.experiments.confirmation.behavioral import (
     validate_formal_training_execution,
 )
 from fsrl.infra import formal_runtime
+from fsrl.infra.validation_session import reuse_validation
 from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_each_dispatch_owns_one_validation_session(self):
+        module_name = "fsrl.experiments.transport.topology"
+        module = ModuleType(module_name)
+        operation = Mock(return_value={"passed": True})
+        validate = reuse_validation(operation)
+
+        def workflow(_arguments):
+            validate()
+            validate()
+            return 41
+
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime"),
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            self.assertEqual(
+                formal_runtime.main(["liu-support-topology-transport"]), 41
+            )
+            self.assertEqual(
+                formal_runtime.main(["liu-support-topology-transport"]), 41
+            )
+        self.assertEqual(operation.call_count, 2)
+
     def test_direct_formal_cuda_runtime_requires_cuda_device(self):
         cuda_snapshot = {"cuda_available": True, "device": "cuda"}
         with patch.object(

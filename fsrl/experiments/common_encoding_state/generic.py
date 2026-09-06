@@ -24,6 +24,7 @@ from fsrl.experiments.training_strategy.locks import (
 )
 from fsrl.infra.provenance import load_json, tensor_hashes, write_json_exclusive
 from fsrl.infra.run_manifest import ProspectiveRun
+from fsrl.infra.validation_session import reuse_validation
 
 from .encoding import encode_common
 from .evidence import ARTIFACT_LOCK, SOURCE_LOCK, validate_artifacts, validate_source
@@ -234,6 +235,7 @@ def lock_generic(directory) -> dict:
     return lock
 
 
+@reuse_validation
 def validate_generic() -> dict:
     source = validate_source()
     artifacts = validate_artifacts()

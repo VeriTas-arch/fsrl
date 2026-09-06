@@ -28,6 +28,7 @@ from fsrl.experiments.training_strategy.locks import (
 )
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.run_manifest import ProspectiveRun
+from fsrl.infra.validation_session import reuse_validation
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol import RankingProtocol, ordered_pairs
 from fsrl.tasks.protocol_catalog import load_registered_protocol
@@ -107,6 +108,7 @@ def lock_liu_inputs() -> dict:
     return lock
 
 
+@reuse_validation
 def validate_input_lock() -> dict:
     validate_artifacts()
     generic = validate_generic()

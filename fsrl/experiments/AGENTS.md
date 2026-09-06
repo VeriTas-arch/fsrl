@@ -28,6 +28,18 @@ and the next discriminating test.
 - Do not add relation labels, hard-case flags, offline targets, posterior
   targets, or evaluation labels to make a candidate pass.
 
+Development and confirmation use different amounts of evidence, not different
+claim standards. A development study should use one to three seeds, the minimum
+prospectively fixed cohort count needed to discriminate its primary contrast,
+focused parity checks, and compact sufficient statistics. Promote raw model
+outputs only when they are needed to reconstruct the estimand; otherwise keep
+them in ignored runtime artifacts. Full-scale cohorts, fresh seeds, exhaustive
+numerical reconstruction, and the complete engineering suite belong at a
+registered confirmation or final promotion boundary rather than every
+intermediate lock. In either tier, freeze the protocol before outcome exposure,
+lock mandatory artifacts before evaluation, preserve negative results, and do
+not tune on the evaluated seeds or cohorts.
+
 The current model program is frozen for reporting. Read the workflow and study
 registry for current boundaries; do not infer current status from runner names.
 Starting an experiment requires explicit user authorization for a new

@@ -12,6 +12,7 @@ from fsrl.infra.file_contracts import safe_relative_path, validate_run_manifest
 from fsrl.infra.git_provenance import git_blob_sha256
 from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.infra.study_registry import resolve_record
+from fsrl.infra.validation_session import reuse_validation
 from fsrl.paths import REPO_ROOT, RUNS_ROOT, STUDIES_ROOT
 from fsrl.tasks.protocol_catalog import protocol_path
 
@@ -40,13 +41,18 @@ def git_text(*arguments: str) -> str:
     ).stdout.strip()
 
 
+@reuse_validation
+def _origin_dev_head() -> str:
+    return git_text("ls-remote", "--exit-code", "origin", "refs/heads/dev").split()[0]
+
+
 def require_pushed_clean() -> str:
     if git_text("branch", "--show-current") != "dev":
         raise RuntimeError("the prospective workflow requires shared dev")
     if git_text("status", "--porcelain=v1", "--untracked-files=all"):
         raise RuntimeError("scientific execution requires a clean committed worktree")
     commit = git_text("rev-parse", "HEAD")
-    remote = git_text("ls-remote", "--exit-code", "origin", "refs/heads/dev").split()[0]
+    remote = _origin_dev_head()
     if commit != remote:
         raise RuntimeError(
             "HEAD must be pushed to origin/dev before scientific execution"
@@ -54,12 +60,27 @@ def require_pushed_clean() -> str:
     return commit
 
 
-def reference(path: Path) -> dict:
+@reuse_validation
+def _reference_at_state(
+    path: Path, size: int, _modified_ns: int, _changed_ns: int
+) -> dict:
     return {
         "path": path.relative_to(REPO_ROOT).as_posix(),
         "sha256": file_sha256(path),
-        "bytes": path.stat().st_size,
+        "bytes": size,
     }
+
+
+def reference(path: Path) -> dict:
+    state = path.stat()
+    return _reference_at_state(
+        path, state.st_size, state.st_mtime_ns, state.st_ctime_ns
+    )
+
+
+@reuse_validation
+def _git_blob_witness(commit: str, path: str) -> str:
+    return git_blob_sha256(REPO_ROOT, commit, path)
 
 
 def verify_reference(record: dict, *, commit: str | None = None) -> Path:
@@ -68,7 +89,7 @@ def verify_reference(record: dict, *, commit: str | None = None) -> Path:
         raise RuntimeError(f"locked file identity changed: {record['path']}")
     if (
         commit is not None
-        and git_blob_sha256(REPO_ROOT, commit, record["path"]) != record["sha256"]
+        and _git_blob_witness(commit, record["path"]) != record["sha256"]
     ):
         raise RuntimeError(f"Git witness differs: {record['path']}")
     return path
