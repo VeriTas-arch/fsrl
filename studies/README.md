@@ -274,9 +274,10 @@ trajectories.
 - [Encoding contribution and finite-cohort diagnosis](encoding_contribution/README.md) — `supporting`
   - **Finding:** Completed fixed-parameter encoding cross, exact conditional moments,
     1000 empirical cohorts and paired support contrasts; no main-model promotion.
-- [Moment-matched encoding distribution comparison](encoding_distribution/README.md) — `frozen_contract`
-  - **Finding:** Prospective fixed-parameter three-condition distribution comparison; no
-    new outcome available.
+- [Moment-matched encoding distribution comparison](encoding_distribution/README.md) — `mixed`
+  - **Finding:** All six Gaussian cells met Liu primary equivalence; none met the
+    tradeoff-improvement rule; the triggered K4-K8 equivalence check remained
+    unresolved.
 
 ## One-factor structural transport
 
