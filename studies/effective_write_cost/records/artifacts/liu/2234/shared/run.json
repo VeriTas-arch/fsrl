@@ -1,0 +1,96 @@
+{
+  "bytes": 466222,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "liu-2234-shared",
+  "file_count": 3,
+  "files": [
+    {
+      "bytes": 75665,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "behavior-N8.json",
+      "prospective_suffix": ".json",
+      "sha256": "67127e5fb1abbbfe33afcbe6b5d322928c9f261c5e9d3bda86457ce7c4a9da2a"
+    },
+    {
+      "bytes": 344010,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "614caae476a9f66ebf17683d5ee6b5bff06c232250cbc98e4505d48570b8a92a"
+    },
+    {
+      "bytes": 46547,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "e15f8f3210d68e897814c5e235b7b6dfc62d48d0b861d383eeaa0b37971725fd"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "shared",
+    "protocol_sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0",
+    "seed": 2234
+  },
+  "resolved_config": {
+    "evaluation": {
+      "cohorts": 1,
+      "generic": {
+        "conditions": [
+          "intact"
+        ],
+        "episodes": 256,
+        "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+        "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+        "rng_seed": 95201,
+        "temperature": 1.0
+      },
+      "generic_development": {
+        "episodes": 256,
+        "rng_seed": 95200
+      },
+      "item_counts": [
+        8
+      ],
+      "liu": {
+        "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+        "choice_seed": 95214,
+        "conditions": [
+          "intact",
+          "local_off",
+          "P_off",
+          "query_shuffle",
+          "evidence_shuffle"
+        ],
+        "cue_mode": "permuted_shared",
+        "cue_seed": 95211,
+        "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+        "evidence_shuffle_seed": 95216,
+        "order_seed": 31401,
+        "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+        "protocol_id": "liu_v2",
+        "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+        "query_shuffle_seed": 95215,
+        "subject_encoding_mode": "stable_omission",
+        "subject_encoding_seed": 95213,
+        "subjects": 77,
+        "support_seed": 95212,
+        "temperature": 0.25,
+        "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+      },
+      "transport": "Evaluate N6/10 for all six models only if >=1 cost model has generic competence, mean write <= .5 paired shared, all Liu N8 core gates, and positive nonlearned intact-P_off and intact-evidence_shuffle lower bounds. No re-training or best-seed selection.",
+      "transport_item_counts": [
+        6,
+        10
+      ]
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "effective_write_cost_v1"
+}

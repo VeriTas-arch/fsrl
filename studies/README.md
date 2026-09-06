@@ -204,8 +204,13 @@ fail to close the dynamics.
     cells passing core checks. Accuracy decreases materially; shared also has
     core-qualified networks, so isolation is not established as necessary. Frozen
     development evidence, without main-model promotion.
-- [Effective global write cost and learned evidence selection](effective_write_cost/README.md) — `unresolved`
-  - **Finding:** Prospectively registered; execution pending.
+- [Effective global write cost and learned evidence selection](effective_write_cost/README.md) — `mixed`
+  - **Finding:** All three paired fits retain competence and reduce effective writes by
+    71-80%; bridge-history write-share interactions are positive in all three. The
+    registered joint functional-selection gate and Liu core behavior each pass 0/3;
+    limited ranking diversification is retained as positive evidence. N6/10 transport
+    not triggered; isolated remains the working model. Frozen development evidence
+    without main-model promotion.
 
 ## Minimal explanatory models
 

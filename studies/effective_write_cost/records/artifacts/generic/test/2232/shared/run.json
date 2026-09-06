@@ -1,0 +1,81 @@
+{
+  "bytes": 42453,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "test-2232-shared",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 40430,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "7491b38426047b1396be9a2d41f14803c2aecc43bbc2b30219bcc9fcf14ea484"
+    },
+    {
+      "bytes": 2023,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "03cc231de242d53ac6b9c7ee8d7da1ae8bbb381787ef9e9c1c3c933e6154c940"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "shared",
+    "protocol_sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0",
+    "seed": 2232,
+    "split": "test"
+  },
+  "resolved_config": {
+    "evaluation": {
+      "conditions": [
+        "intact"
+      ],
+      "episodes": 256,
+      "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+      "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+      "rng_seed": 95201,
+      "temperature": 1.0
+    },
+    "inputs": {
+      "test-28": {
+        "file": {
+          "bytes": 82822,
+          "path": "artifacts/runs/effective_write_cost_v1/inputs/test-28.npz",
+          "sha256": "ec326543d07dbaa7b7d80dd543663e12ad06631f4d3231fa29d11ed7cd466677"
+        },
+        "fingerprint": "f0f063a5940ce7065a404af117fcdd9c9ddffcad522fb48fa98da498a89a34ba"
+      },
+      "test-32": {
+        "file": {
+          "bytes": 86797,
+          "path": "artifacts/runs/effective_write_cost_v1/inputs/test-32.npz",
+          "sha256": "2cda471571b82b10c384f8217ab539dd103a8c6ec44f2684cd1829fa34703144"
+        },
+        "fingerprint": "5386cc31e0e2d8126be43d77a13a0880595c18a245414f5bb27956edf9601e3f"
+      },
+      "test-36": {
+        "file": {
+          "bytes": 72951,
+          "path": "artifacts/runs/effective_write_cost_v1/inputs/test-36.npz",
+          "sha256": "d0c6fcb541d9fed3fda68b4ae0efb660ddba007b45fa3711a03480e9902db4e9"
+        },
+        "fingerprint": "8aa103908b75a0f2b37b53c74e9d7748a4b07e1ef9ad6299e4f12f1fdb3e41e5"
+      },
+      "test-40": {
+        "file": {
+          "bytes": 92058,
+          "path": "artifacts/runs/effective_write_cost_v1/inputs/test-40.npz",
+          "sha256": "494e0db8835155658f004bf057ef2910b2ef867e0a9f4cb3a338fe5b6c17dff7"
+        },
+        "fingerprint": "8786b3e9646751873b904a743a5d4e602fc816fbef20b350ea039eea91bc71d2"
+      }
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "effective_write_cost_v1"
+}

@@ -1,0 +1,1430 @@
+{
+  "arm": "cost",
+  "cells": {
+    "8": {
+      "behavior": {
+        "analysis_subjects": 55,
+        "coherence": {
+          "bootstrap": {
+            "lower": 0.996728754572705,
+            "mean": 0.996976516374014,
+            "upper": 0.9972274452214136
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.9962067231702036,
+          "mean": 0.9969762781912188,
+          "median": 0.9972406296551948,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.9977895566016571
+        },
+        "diversity": {
+          "interval": {
+            "lower": 0.7855675805675805,
+            "upper": 0.8336748436748437
+          },
+          "point": 0.8069264069264069
+        },
+        "eligible_subjects": 77,
+        "historical_nine_rows": {
+          "analysis_subjects_excluding_correct_rankers": 55,
+          "eligible_subjects": 77,
+          "flags": {
+            "difficult_pair_bimodality": {
+              "calibration": false,
+              "qualitative": false
+            },
+            "hodge_reconstructed_subjective_ranking": {
+              "calibration": false,
+              "qualitative": true
+            },
+            "inter_subject_ranking_diversity": {
+              "calibration": false,
+              "qualitative": false
+            },
+            "learned_accuracy": {
+              "calibration": false,
+              "qualitative": true
+            },
+            "nonlearned_accuracy": {
+              "calibration": false,
+              "qualitative": true
+            },
+            "self_consistent_vs_inconsistent_errors": {
+              "calibration": false,
+              "qualitative": true
+            },
+            "serial_position_effect": {
+              "calibration": false,
+              "qualitative": true
+            },
+            "stable_within_subject_errors": {
+              "calibration": false,
+              "qualitative": true
+            },
+            "symbolic_distance_effect": {
+              "calibration": false,
+              "qualitative": true
+            }
+          },
+          "metrics": {
+            "difficult_pair_bimodality": {
+              "bimodal": 8,
+              "boundary": 0,
+              "high_accuracy": 8,
+              "low_accuracy": 0,
+              "not_fit": 12,
+              "ordinary_unimodal": 0
+            },
+            "hodge_reconstructed_subjective_ranking": {
+              "all_orders_are_permutations": true,
+              "correct_ranker": {
+                "interval": {
+                  "lower": 0.18181818181818182,
+                  "upper": 0.37662337662337664
+                },
+                "point": 0.2857142857142857,
+                "subjects": 77
+              }
+            },
+            "inter_subject_ranking_diversity": {
+              "interval": {
+                "lower": 0.7855675805675805,
+                "upper": 0.8336748436748437
+              },
+              "point": 0.8069264069264069,
+              "subjects": 55
+            },
+            "learned_accuracy": {
+              "interval": {
+                "lower": 0.9827922077922078,
+                "upper": 0.9941558441558443
+              },
+              "point": 0.9889610389610388,
+              "subjects": 77
+            },
+            "nonlearned_accuracy": {
+              "interval": {
+                "lower": 0.9245454545454546,
+                "upper": 0.9436363636363636
+              },
+              "point": 0.9344155844155848,
+              "subjects": 77
+            },
+            "self_consistent_vs_inconsistent_errors": {
+              "self_consistent_incorrect": {
+                "interval": {
+                  "lower": 0.5974025974025974,
+                  "upper": 0.8051948051948052
+                },
+                "point": 0.7012987012987013,
+                "subjects": 77
+              },
+              "self_inconsistent": {
+                "interval": {
+                  "lower": 0.0,
+                  "upper": 0.03896103896103896
+                },
+                "point": 0.012987012987012988,
+                "subjects": 77
+              }
+            },
+            "serial_position_effect": {
+              "participant_interval": "not registered; frozen point-profile classifier",
+              "profiles": {
+                "all": {
+                  "both_endpoints_above_interior": true,
+                  "interior_mean": 0.9425788497217068,
+                  "mean_endpoint_contrast": 0.029684601113172504,
+                  "minimum_endpoint_advantage": 0.01994434137291279,
+                  "profile_low_to_high": [
+                    0.9820037105751391,
+                    0.9641929499072356,
+                    0.9523191094619666,
+                    0.9294990723562152,
+                    0.9246753246753247,
+                    0.9393320964749536,
+                    0.9454545454545454,
+                    0.9625231910946196
+                  ]
+                },
+                "learned": {
+                  "both_endpoints_above_interior": true,
+                  "interior_mean": 0.9852813852813852,
+                  "mean_endpoint_contrast": 0.014718614718614798,
+                  "minimum_endpoint_advantage": 0.014718614718614798,
+                  "profile_low_to_high": [
+                    1.0,
+                    0.9610389610389611,
+                    0.9616883116883117,
+                    0.9948051948051948,
+                    0.9993506493506494,
+                    0.9948051948051948,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "nonlearned": {
+                  "both_endpoints_above_interior": true,
+                  "interior_mean": 0.9254978354978355,
+                  "mean_endpoint_contrast": 0.03567099567099563,
+                  "minimum_endpoint_advantage": 0.022034632034631962,
+                  "profile_low_to_high": [
+                    0.9748051948051948,
+                    0.9654545454545455,
+                    0.9485714285714286,
+                    0.9033766233766233,
+                    0.8948051948051947,
+                    0.917142857142857,
+                    0.9236363636363636,
+                    0.9475324675324674
+                  ]
+                }
+              }
+            },
+            "stable_within_subject_errors": {
+              "interval": {
+                "lower": 0.6909090909090909,
+                "upper": 0.9090909090909091
+              },
+              "point": 0.8,
+              "subjects": 55
+            },
+            "symbolic_distance_effect": {
+              "mean": 0.02068159731425043,
+              "p_vs_zero": 5.24707298877162e-22,
+              "t_vs_zero": 13.573282418855051
+            }
+          }
+        },
+        "organized_error_difference": {
+          "bootstrap": {
+            "lower": 0.5844155844155844,
+            "mean": 0.6886168831168832,
+            "upper": 0.7922077922077922
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.0,
+          "mean": 0.6883116883116883,
+          "median": 1.0,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 1.0
+        },
+        "stable_error_density": {
+          "bootstrap": {
+            "lower": 0.02365491651205936,
+            "mean": 0.030271103896103897,
+            "upper": 0.037569573283858994
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.0,
+          "mean": 0.030148423005565854,
+          "median": 0.03571428571428571,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.03571428571428571
+        },
+        "stable_prevalence": {
+          "bootstrap": {
+            "lower": 0.6909090909090909,
+            "mean": 0.8008454545454544,
+            "upper": 0.9090909090909091
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 1.0,
+          "mean": 0.8,
+          "median": 1.0,
+          "subjects": 55,
+          "total_subjects": 55,
+          "upper_quartile": 1.0
+        }
+      },
+      "competence": true,
+      "core_flags": {
+        "coherence": true,
+        "competence": true,
+        "individual_diversity": false,
+        "organized_errors": true,
+        "stable_errors": true
+      },
+      "core_passed": false,
+      "effects": {
+        "direct_absolute_margin_change": {
+          "bootstrap": {
+            "lower": 4.190531613148731,
+            "mean": 4.265019619315178,
+            "upper": 4.334966765581358
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 4.005950309801847,
+          "mean": 4.265217284927472,
+          "median": 4.298444725573063,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 4.499238950200379
+        },
+        "disjoint_remote_absolute_margin_change": {
+          "bootstrap": {
+            "lower": 0.9823372657550071,
+            "mean": 1.01107993809907,
+            "upper": 1.0414761999375952
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.9218006638499598,
+          "mean": 1.0110117744275438,
+          "median": 1.009015526762232,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 1.0927565461645523
+        },
+        "intact_minus_P_off_learned": {
+          "bootstrap": {
+            "lower": 0.31245141464432963,
+            "mean": 0.33050620038441014,
+            "upper": 0.3490435150667621
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.2723511142335343,
+          "mean": 0.3308255694452099,
+          "median": 0.35624882874549546,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.3942068299749558
+        },
+        "intact_minus_P_off_nonlearned": {
+          "bootstrap": {
+            "lower": 0.4441817635986771,
+            "mean": 0.46044786489416323,
+            "upper": 0.4767539622162405
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.40291816236899525,
+          "mean": 0.4609456622463639,
+          "median": 0.4647469074283965,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.5099136681750575
+        },
+        "intact_minus_P_off_omitted": {
+          "bootstrap": {
+            "lower": 0.35515868201121503,
+            "mean": 0.3899216121149408,
+            "upper": 0.4239339717825943
+          },
+          "excluded_subject_indices": [
+            2,
+            9,
+            31,
+            37,
+            43,
+            47,
+            56,
+            60,
+            64,
+            68,
+            72
+          ],
+          "lower_quartile": 0.2869231044506484,
+          "mean": 0.39105663225861015,
+          "median": 0.39444091493405214,
+          "subjects": 66,
+          "total_subjects": 77,
+          "upper_quartile": 0.47121493079234655
+        },
+        "intact_minus_evidence_shuffle_learned": {
+          "bootstrap": {
+            "lower": 0.45891979287227663,
+            "mean": 0.4932753001603461,
+            "upper": 0.5286597308080988
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.3827235480846116,
+          "mean": 0.49271500736672813,
+          "median": 0.4998630094141591,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.5671493583833058
+        },
+        "intact_minus_evidence_shuffle_nonlearned": {
+          "bootstrap": {
+            "lower": 0.4010551181056389,
+            "mean": 0.43046936211955483,
+            "upper": 0.4594849983508095
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.33367998212152483,
+          "mean": 0.4307699817591928,
+          "median": 0.4332769503580961,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.5132207422890155
+        },
+        "intact_minus_evidence_shuffle_omitted": {
+          "bootstrap": {
+            "lower": 0.4311381687295438,
+            "mean": 0.5147694134215424,
+            "upper": 0.5956798039044373
+          },
+          "excluded_subject_indices": [
+            2,
+            9,
+            31,
+            37,
+            43,
+            47,
+            56,
+            60,
+            64,
+            68,
+            72
+          ],
+          "lower_quartile": 0.2590217109936785,
+          "mean": 0.5148557192312094,
+          "median": 0.5055494491356523,
+          "subjects": 66,
+          "total_subjects": 77,
+          "upper_quartile": 0.8269098283072452
+        },
+        "intact_minus_local_off_learned": {
+          "bootstrap": {
+            "lower": 0.0006207595338242153,
+            "mean": 0.001455704044420333,
+            "upper": 0.002447165853969127
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 4.224897416138518e-06,
+          "mean": 0.0014384716964837988,
+          "median": 7.477590413029755e-05,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.0008154842854245503
+        },
+        "intact_minus_local_off_nonlearned": {
+          "bootstrap": {
+            "lower": -0.003199278894420821,
+            "mean": -0.002113218405110922,
+            "upper": -0.0010882840229365163
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": -0.004663805865489423,
+          "mean": -0.0021186924695526118,
+          "median": -0.0016907987193094387,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.0007378818644566687
+        },
+        "intact_minus_local_off_omitted": {
+          "bootstrap": {
+            "lower": 2.4704902471135643e-05,
+            "mean": 0.0007519918604379222,
+            "upper": 0.0018741885779799635
+          },
+          "excluded_subject_indices": [
+            2,
+            9,
+            31,
+            37,
+            43,
+            47,
+            56,
+            60,
+            64,
+            68,
+            72
+          ],
+          "lower_quartile": 4.440892098500626e-16,
+          "mean": 0.0007444431732393929,
+          "median": 1.103009640290864e-07,
+          "subjects": 66,
+          "total_subjects": 77,
+          "upper_quartile": 1.8931621456413916e-05
+        },
+        "intact_minus_query_shuffle_learned": {
+          "bootstrap": {
+            "lower": -0.0003853828812730782,
+            "mean": 0.0007246040833246324,
+            "upper": 0.0019842372164210974
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": -0.00011770463009830312,
+          "mean": 0.0007089195015467073,
+          "median": 5.09103151007384e-05,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.0004963594818861994
+        },
+        "intact_minus_query_shuffle_nonlearned": {
+          "bootstrap": {
+            "lower": -0.0054848558183069876,
+            "mean": -0.0035652403861301217,
+            "upper": -0.0017251271736561898
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": -0.008778456913069999,
+          "mean": -0.0035635965896560835,
+          "median": -0.0021799156184213464,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.002291623456192715
+        },
+        "intact_minus_query_shuffle_omitted": {
+          "bootstrap": {
+            "lower": 3.618331666606516e-05,
+            "mean": 0.0017589750400436959,
+            "upper": 0.004252337563963055
+          },
+          "excluded_subject_indices": [
+            2,
+            9,
+            31,
+            37,
+            43,
+            47,
+            56,
+            60,
+            64,
+            68,
+            72
+          ],
+          "lower_quartile": -1.7787048500750302e-08,
+          "mean": 0.0017643064882100414,
+          "median": 2.946458077524028e-10,
+          "subjects": 66,
+          "total_subjects": 77,
+          "upper_quartile": 1.5212898421934629e-05
+        }
+      },
+      "global_internal": {
+        "all_subject_order_tau": {
+          "interval": {
+            "lower": 0.8433734498584121,
+            "upper": 0.8903427399668
+          },
+          "point": 0.8652963577775609
+        },
+        "stable_error_density": {
+          "bootstrap": {
+            "lower": 0.018552875695732836,
+            "mean": 0.024695500927643783,
+            "upper": 0.031076066790352498
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.0,
+          "mean": 0.02458256029684601,
+          "median": 0.0,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.03571428571428571
+        },
+        "stable_error_prevalence": {
+          "bootstrap": {
+            "lower": 0.38961038961038963,
+            "mean": 0.49467532467532466,
+            "upper": 0.5974025974025974
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.0,
+          "mean": 0.4935064935064935,
+          "median": 0.0,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 1.0
+        }
+      },
+      "internal": {
+        "all_subject_order_tau": {
+          "interval": {
+            "lower": 0.8439605507274681,
+            "upper": 0.8902951371936335
+          },
+          "point": 0.8658822380626892
+        },
+        "stable_error_density": {
+          "bootstrap": {
+            "lower": 0.02087198515769944,
+            "mean": 0.02746173469387755,
+            "upper": 0.03433441558441552
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.0,
+          "mean": 0.027365491651205925,
+          "median": 0.03571428571428571,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 0.03571428571428571
+        },
+        "stable_error_prevalence": {
+          "bootstrap": {
+            "lower": 0.4025974025974026,
+            "mean": 0.5076688311688312,
+            "upper": 0.6103896103896104
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.0,
+          "mean": 0.5064935064935064,
+          "median": 1.0,
+          "subjects": 77,
+          "total_subjects": 77,
+          "upper_quartile": 1.0
+        }
+      },
+      "mean_cost": 0.00024246117391157895,
+      "mean_total_write": 0.031035030260682106,
+      "summaries": {
+        "P_off": {
+          "exact_decision": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.6923701298701299,
+                "mean": 0.7222922077922078,
+                "upper": 0.7508116883116883
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.625,
+              "mean": 0.7215909090909091,
+              "median": 0.6875,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.8125
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.44382305194805205,
+                "mean": 0.4662454545454546,
+                "upper": 0.48928571428571427
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.4,
+              "mean": 0.465909090909091,
+              "median": 0.45,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.55
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.5584343434343436,
+                "mean": 0.6289112373737373,
+                "upper": 0.6974747474747476
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.5,
+              "mean": 0.6268939393939394,
+              "median": 0.6666666666666666,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.8333333333333334
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.5185470779220779,
+                "mean": 0.5394016697588127,
+                "upper": 0.5607606679035249
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.48214285714285715,
+              "mean": 0.538961038961039,
+              "median": 0.5357142857142857,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.6071428571428571
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.7176480364873223,
+                "mean": 0.7510803262213976,
+                "upper": 0.7832415352504639
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.625,
+              "mean": 0.7505952380952382,
+              "median": 0.75,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.8571428571428571
+            }
+          },
+          "probability": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.6427270087417252,
+                "mean": 0.6596254286888225,
+                "upper": 0.6763159901756464
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.6030825066129466,
+              "mean": 0.6592998549078226,
+              "median": 0.642288767429441,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.7215122980442621
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.4611121048206321,
+                "mean": 0.4741826435087545,
+                "upper": 0.4876233197150534
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.4275591850166167,
+              "mean": 0.4739573417719546,
+              "median": 0.46985182819136917,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.5163955937019309
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.5726922017509745,
+                "mean": 0.6069603806683581,
+                "upper": 0.6419890862419155
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.5259672176842214,
+              "mean": 0.6058278479401152,
+              "median": 0.5967051949651321,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.7016365067651072
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.5143241627468016,
+                "mean": 0.5271662964173452,
+                "upper": 0.5401285415889685
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.48683465262729725,
+              "mean": 0.5269123455250598,
+              "median": 0.5226788895844662,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.5664685374039877
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.6575976567628582,
+                "mean": 0.6771592257088569,
+                "upper": 0.696880566304858
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.6101228003984179,
+              "mean": 0.6769042023462258,
+              "median": 0.6771066702828775,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.7285617461974083
+            }
+          }
+        },
+        "evidence_shuffle": {
+          "exact_decision": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.461038961038961,
+                "mean": 0.4977378246753247,
+                "upper": 0.5332792207792207
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.375,
+              "mean": 0.49837662337662336,
+              "median": 0.5,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.625
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.4753246753246753,
+                "mean": 0.5032303571428571,
+                "upper": 0.5302029220779221
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.425,
+              "mean": 0.5032467532467534,
+              "median": 0.5,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.575
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.4002178030303031,
+                "mean": 0.48150075757575755,
+                "upper": 0.5660353535353535
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.21250000000000002,
+              "mean": 0.48143939393939394,
+              "median": 0.5,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.75
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.47541743970315403,
+                "mean": 0.5016610621521336,
+                "upper": 0.5278351113172542
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.42857142857142855,
+              "mean": 0.5018552875695733,
+              "median": 0.5,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.5892857142857143
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.46599451144094006,
+                "mean": 0.5084816944959802,
+                "upper": 0.5519642857142857
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.375,
+              "mean": 0.5093073593073594,
+              "median": 0.5,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.6428571428571429
+            }
+          },
+          "probability": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.46103346433923287,
+                "mean": 0.49685632891288634,
+                "upper": 0.5316833330524066
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.40461292483826317,
+              "mean": 0.49741041698630467,
+              "median": 0.4939650020783684,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.6172517268919251
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.47729279198548535,
+                "mean": 0.5041611462833628,
+                "upper": 0.5308935258081698
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.4276294206566062,
+              "mean": 0.5041330222591259,
+              "median": 0.5108463354799508,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.5798761881530293
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.40118466661849683,
+                "mean": 0.4821125793617565,
+                "upper": 0.5654529134960553
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.17185099725024555,
+              "mean": 0.48202876096751596,
+              "median": 0.4944369471884438,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.740561384084152
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.47595044149252913,
+                "mean": 0.5020740556060839,
+                "upper": 0.5282008012382535
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.42740522615877324,
+              "mean": 0.5022122778954626,
+              "median": 0.5038676296016508,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.582926319844239
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.4639123329983236,
+                "mean": 0.5069171442820253,
+                "upper": 0.5485811656769738
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.3854285996010115,
+              "mean": 0.5077034596267126,
+              "median": 0.49999448119542267,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.6558198681197558
+            }
+          }
+        },
+        "intact": {
+          "exact_decision": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9862012987012987,
+                "mean": 0.9919155844155845,
+                "upper": 0.9967532467532467
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 1.0,
+              "mean": 0.9918831168831169,
+              "median": 1.0,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.9301948051948054,
+                "mean": 0.9406875,
+                "upper": 0.9506574675324677
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.925,
+              "mean": 0.9409090909090909,
+              "median": 0.95,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.975
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 1.0,
+                "mean": 1.0,
+                "upper": 1.0
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 1.0,
+              "mean": 1.0,
+              "median": 1.0,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.9475881261595547,
+                "mean": 0.9553240955473099,
+                "upper": 0.9629000463821893
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9285714285714286,
+              "mean": 0.955473098330241,
+              "median": 0.9642857142857143,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9821428571428571
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.9811216759431046,
+                "mean": 0.9893521529066173,
+                "upper": 0.9964071196660483
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 1.0,
+              "mean": 0.9893243661100806,
+              "median": 1.0,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            }
+          },
+          "probability": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9843752196674574,
+                "mean": 0.9901316290732325,
+                "upper": 0.9949482134437057
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9963306073879222,
+              "mean": 0.9901254243530327,
+              "median": 0.9994955452259155,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999160507638098
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.9248564039678105,
+                "mean": 0.9346305084029176,
+                "upper": 0.9440123034331525
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.908551447328688,
+              "mean": 0.9349030040183184,
+              "median": 0.940737701342543,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.971832700467948
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.9946220043026598,
+                "mean": 0.9968819927832989,
+                "upper": 0.9987020005925047
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.9992532890736892,
+              "mean": 0.9968844801987254,
+              "median": 0.9999911875967797,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999999842426763
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.9431571299841724,
+                "mean": 0.950487971451579,
+                "upper": 0.9577550915215045
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.931213321237131,
+              "mean": 0.9506808383996653,
+              "median": 0.9558957637218859,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9798390768135039
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.980385465667173,
+                "mean": 0.9881562253851615,
+                "upper": 0.9947263347390596
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9989092119453683,
+              "mean": 0.9881642365986415,
+              "median": 0.9998240498236162,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.999987218033236
+            }
+          }
+        },
+        "local_off": {
+          "exact_decision": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9853896103896104,
+                "mean": 0.9918920454545455,
+                "upper": 0.997564935064935
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 1.0,
+              "mean": 0.9918831168831169,
+              "median": 1.0,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.9301948051948054,
+                "mean": 0.9403431818181819,
+                "upper": 0.9499999999999998
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9,
+              "mean": 0.9405844155844155,
+              "median": 0.95,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.975
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 1.0,
+                "mean": 1.0,
+                "upper": 1.0
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 1.0,
+              "mean": 1.0,
+              "median": 1.0,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.9475881261595547,
+                "mean": 0.9550714285714285,
+                "upper": 0.962436224489796
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9285714285714286,
+              "mean": 0.9552411873840444,
+              "median": 0.9642857142857143,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9821428571428571
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.9805411255411256,
+                "mean": 0.9894771529066172,
+                "upper": 0.9967532467532467
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 1.0,
+              "mean": 0.9894789734075448,
+              "median": 1.0,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            }
+          },
+          "probability": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9824458688817028,
+                "mean": 0.9886759250288122,
+                "upper": 0.9939979389150617
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9950215092150128,
+              "mean": 0.9886869526565488,
+              "median": 0.9993712722194825,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999040436881756
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.9272970488078004,
+                "mean": 0.9367437268080286,
+                "upper": 0.9459576335459459
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9096355750288823,
+              "mean": 0.9370216964878714,
+              "median": 0.9436821299093534,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9728826179228104
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.9931663956723634,
+                "mean": 0.9961300009228609,
+                "upper": 0.9985309294408249
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.9991832994840327,
+              "mean": 0.9961400370254859,
+              "median": 0.999989173970371,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999999794649477
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.9442996641415747,
+                "mean": 0.9515814977282524,
+                "upper": 0.958818713758908
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.931585807907374,
+              "mean": 0.9517831982503504,
+              "median": 0.9563488827298406,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.980564064262064
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.9781667628280516,
+                "mean": 0.9866459972753232,
+                "upper": 0.9937862540637051
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.998031819132609,
+              "mean": 0.9866815314008652,
+              "median": 0.9997446349687032,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999820173406229
+            }
+          }
+        },
+        "query_shuffle": {
+          "exact_decision": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9878246753246753,
+                "mean": 0.9934943181818182,
+                "upper": 0.9983766233766234
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 1.0,
+              "mean": 0.9935064935064936,
+              "median": 1.0,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.933116883116883,
+                "mean": 0.9438969155844156,
+                "upper": 0.9542207792207793
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9,
+              "mean": 0.9441558441558444,
+              "median": 0.95,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.975
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 1.0,
+                "mean": 1.0,
+                "upper": 1.0
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 1.0,
+              "mean": 1.0,
+              "median": 1.0,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.9496753246753247,
+                "mean": 0.9580676020408162,
+                "upper": 0.9661410018552877
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9285714285714286,
+              "mean": 0.958256029684601,
+              "median": 0.9642857142857143,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9821428571428571
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.9822796846011133,
+                "mean": 0.9907588474025975,
+                "upper": 0.9974489795918368
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 1.0,
+              "mean": 0.9907931354359926,
+              "median": 1.0,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 1.0
+            }
+          },
+          "probability": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9835524073030166,
+                "mean": 0.9894070249899078,
+                "upper": 0.99452975757235
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9968183914095966,
+              "mean": 0.9894165048514859,
+              "median": 0.9995687718196462,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999064589437772
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.9283317594036395,
+                "mean": 0.9381957487890478,
+                "upper": 0.9477287415542228
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9105213950344899,
+              "mean": 0.9384666006079743,
+              "median": 0.9441178949127135,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9805704044643699
+            },
+            "omitted": {
+              "bootstrap": {
+                "lower": 0.9906780999231597,
+                "mean": 0.9951230177432551,
+                "upper": 0.9983284731530432
+              },
+              "excluded_subject_indices": [
+                2,
+                9,
+                31,
+                37,
+                43,
+                47,
+                56,
+                60,
+                64,
+                68,
+                72
+              ],
+              "lower_quartile": 0.9993073271416609,
+              "mean": 0.9951201737105154,
+              "median": 0.9999876241971133,
+              "subjects": 66,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999999871894506
+            },
+            "overall": {
+              "bootstrap": {
+                "lower": 0.945370437336641,
+                "mean": 0.9528275419892935,
+                "upper": 0.960219201727563
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.9312637366761922,
+              "mean": 0.9530237161061207,
+              "median": 0.9584235610351487,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9846881683151715
+            },
+            "retained": {
+              "bootstrap": {
+                "lower": 0.9797694715859084,
+                "mean": 0.9878326954170773,
+                "upper": 0.9946871827595819
+              },
+              "excluded_subject_indices": [],
+              "lower_quartile": 0.997605859158756,
+              "mean": 0.9878732845427242,
+              "median": 0.9998175233342236,
+              "subjects": 77,
+              "total_subjects": 77,
+              "upper_quartile": 0.9999829995195494
+            }
+          }
+        }
+      }
+    }
+  },
+  "protocol_sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0",
+  "seed": 2234
+}

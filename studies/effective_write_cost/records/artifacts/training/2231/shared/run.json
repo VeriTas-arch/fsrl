@@ -1,0 +1,335 @@
+{
+  "bytes": 784606,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "train-2231-shared",
+  "file_count": 4,
+  "files": [
+    {
+      "bytes": 1641,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "local.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "94ac65447a59ffd9e1a25b0576724a0840d6e3f82f3deae5b8c0f69e90f73ad3"
+    },
+    {
+      "bytes": 359487,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "net.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "a0921448bcd6e902cc7f7cd94d586fd55fe2b97c50a1b9556b48b2be63910bcf"
+    },
+    {
+      "bytes": 4480,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "d8a1d35e64a9abebadac6015468014c8f5b9a1da99aad0253a0459dc7fa59d61"
+    },
+    {
+      "bytes": 418998,
+      "format": "json_lines",
+      "legacy_format": false,
+      "media_type": "application/x-ndjson",
+      "path": "train_log.jsonl",
+      "prospective_suffix": ".jsonl",
+      "sha256": "3dbe622d828139177700c2304a50aa0f27ca94e684564c1ed13c607e30bd4147"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "shared",
+    "coefficient": 0.0,
+    "protocol_sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0",
+    "seed": 2231,
+    "source_commit": "a44c49293e340d7e3ea0d440f07d64d78126f6d7"
+  },
+  "resolved_config": {
+    "runtime": {
+      "blas_thread_limit": 1,
+      "blas_threadpools": [
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.188.0"
+        },
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.dev"
+        }
+      ],
+      "compiler_threads": 1,
+      "cuda_available": true,
+      "cuda_version": "13.0",
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false,
+      "device_capability": [
+        12,
+        0
+      ],
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "execution_schema_version": 2,
+      "float32_matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "profile": {
+        "blas_threads": 1,
+        "compile": true,
+        "compile_backend": "inductor",
+        "compile_fullgraph": true,
+        "compile_mode": "default",
+        "cpu_threads": 1,
+        "device": "cuda",
+        "require_cuda": true
+      },
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "torch_version": "2.14.0+cu130",
+      "triton_mix_order_reduction": false
+    },
+    "specification": {
+      "architecture": {
+        "activation": "tanh",
+        "backbone": "Unchanged RetroModulRNN equations and checkpoint parameter names",
+        "blank_initial_steps": 2,
+        "hidden_size": 200,
+        "input_extension": "Shared (sG,sL) in both arms; no new learned state or gate.",
+        "input_size": 38,
+        "local_gain": "lambda_L = softplus(rho)",
+        "local_key": "k = vec(c_left c_right^T - c_right c_left^T) / max(norm(vec(...)), 1e-8)",
+        "local_read": "ell_q = dot(L_T, k_q)",
+        "local_write": "L_next = L + s_L*k, exactly once per support trial",
+        "logit_combination": "Subtract half the local correction from logit 0 and add half to logit 1, retaining the original global bias.",
+        "margin": "Both routes: recurrent margin plus the independently addressed local correction.",
+        "query_state": "Read the same terminal P_T and L_T for every query without writeback. During training, retain the gradient path through P_T to support computation.",
+        "query_steps": 2,
+        "state_reset": "Reset hidden and eligibility per support/query trial, preserve P over support trials, reset both P and L for each episode.",
+        "support_query_time": 0.6666666666666666,
+        "support_trial_steps": 4,
+        "target_sign": "y_q = 2*correct_action-1; positive margin means left item higher."
+      },
+      "claim_boundary": [
+        "Development on project-exposed Liu knowledge, no human fitting or main-model promotion.",
+        "Cost is a global fast-connection modification proxy, not ATP or total system energy; P resets per episode.",
+        "Existing stochastic encoding and local writes remain; static routing, dynamic integration and behavior recovery are separate outcomes.",
+        "Frozen isolated models remain a working reference, not the randomized control for this study."
+      ],
+      "cost": {
+        "K": "4 steps per support trial; exclude initial two blank steps, query proposals and resets; blank writes verified zero. Actual post-clipping differences; no detach of alpha or trajectory.",
+        "base_loss": "Unchanged mean query CE + 1e-4 mean(P_T^2). All slow parameters jointly train for all 1500 steps from initialization.",
+        "budget_ratio": 0.5,
+        "formula": "episode C = sum over accepted support neural steps mean_ij(abs(alpha*(P_next-P_previous)))/K; batch loss adds lambda*mean_episode(C)",
+        "kappa_candidates": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "reference": "c_ref is final development shared model mean C on locked generic-development set; lambda=kappa/c_ref, same constant for all later models.",
+        "selection": "After all three cost development checkpoints are locked, evaluate all on generic-development. Eligible if mean C <= .5*c_ref and both learned/nonlearned expected-correct 95% lower bounds > .5. Choose minimum query CE; exact tie chooses smaller kappa. No eligible candidate stops paired training/Liu/transport as not_triggered; no extension of grid."
+      },
+      "decision": {
+        "behavior": "Core gates retained; behavioral and all-panel tau contrasts cost minus shared with same-ID paired bootstrap. No human interval matching in decisions. Report every seed and failed outcome.",
+        "competence": "For generic held-out graphs and N=8 Liu, learned and nonlearned expected-correct-probability 95% lower bounds exceed .5 independently. Failed task competence blocks architecture interpretation for that network.",
+        "core": "At N=8: competence; all-participant intact Hodge gradient fraction lower>.95; among sampled eligible non-correct rankers stable-80 error prevalence lower>0; eligible self-consistent-incorrect minus self-inconsistent fraction lower>0; analysis-group intersubject order tau upper<.8. Report denominators and undefined metrics as failures. No human interval inclusion, minimum bimodal-pair count or correct-ranker prevalence gate.",
+        "resource": "mean support-step effective modification <= .5 matched shared on independent generic test; report paired episode differences/CI, mean and total writes.",
+        "separate_outcomes": "cost reduction, task competence, dynamic allocation, Liu core organization each separate boolean; absence of dynamic selection is not universal model disqualification.",
+        "stop": "Integrity failure stops dependent stage. All registered fits complete despite valid negative/heterogeneous outcomes; no replacement seed, hyperparameter rescue, reward change or extra noise."
+      },
+      "decision_contract": {
+        "behavior": {
+          "reference_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+          "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json"
+        }
+      },
+      "diagnostic": {
+        "construction": "Rejection-sample generic validation episodes having a retained bridge whose removal splits the first-block support graph into two components of at least two items. Choose an eligible target uniformly. Move its block-2 observation to the first slot of block 2, preserving slot times. Redundant history includes an identical target observation in block 1; novel history replaces that earlier bridge by another existing relation. Thus the novel target reconnects two previously disconnected groups, whereas the redundant target repeats direct evidence. Current observation, position, prefix length and suffix match. No diagnostic labels enter model inputs.",
+        "decision": "Dynamic selection supported only when both arms generic competent, cost budget passes, write-fraction interaction lower>0 and remote-influence interaction lower>0; CE benefits and all raw contrasts reported. Otherwise dynamic selectivity unresolved, not automatically static gating. No m-specific mediation claim.",
+        "episodes": 128,
+        "intervention": "At target trial only, zero global evidence channels 34 and 37; preserve local evidence, cues, time and suffix. Compare global-only terminal margins, direct and disjoint remote queries.",
+        "metrics": "Per episode target sum effective writes, target/episode write fraction, mean total support write, global direct and remote absolute margin change, global CE increase on target removal. Average within each network with episode-paired bootstrap. Primary interaction (novel-redundant) cost minus shared in target write fraction; secondary interaction in remote influence and CE benefit.",
+        "question": "Cost-vs-shared interaction in useful-vs-redundant current-evidence allocation and global causal influence.",
+        "rng_seed": 95202,
+        "scope": "Non-Liu bridge-enriched diagnostic, distinct from generic coefficient development and competence sets; identical for all six models. It does not estimate all-task selectivity or m-specific mediation."
+      },
+      "evaluation": {
+        "cohorts": 1,
+        "generic": {
+          "conditions": [
+            "intact"
+          ],
+          "episodes": 256,
+          "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+          "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+          "rng_seed": 95201,
+          "temperature": 1.0
+        },
+        "generic_development": {
+          "episodes": 256,
+          "rng_seed": 95200
+        },
+        "item_counts": [
+          8
+        ],
+        "liu": {
+          "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+          "choice_seed": 95214,
+          "conditions": [
+            "intact",
+            "local_off",
+            "P_off",
+            "query_shuffle",
+            "evidence_shuffle"
+          ],
+          "cue_mode": "permuted_shared",
+          "cue_seed": 95211,
+          "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+          "evidence_shuffle_seed": 95216,
+          "order_seed": 31401,
+          "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+          "protocol_id": "liu_v2",
+          "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+          "query_shuffle_seed": 95215,
+          "subject_encoding_mode": "stable_omission",
+          "subject_encoding_seed": 95213,
+          "subjects": 77,
+          "support_seed": 95212,
+          "temperature": 0.25,
+          "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+        },
+        "transport": "Evaluate N6/10 for all six models only if >=1 cost model has generic competence, mean write <= .5 paired shared, all Liu N8 core gates, and positive nonlearned intact-P_off and intact-evidence_shuffle lower bounds. No re-training or best-seed selection.",
+        "transport_item_counts": [
+          6,
+          10
+        ]
+      },
+      "execution": {
+        "closure": "Archive sufficient arrays, all fitted final states and logs, locks, canonical result, interpretation. Validate affected tests and full engineering suite for runtime entry addition, then scoped commits and origin/dev push.",
+        "command": "direnv exec . python -m fsrl.infra.formal_runtime effective-write-cost <stage>",
+        "freeze": "Commit protocol and qualified sources before source/input lock, commit lock before development training. Scale lock before three cost development fits. All development models locked before generic selection. Selection lock before paired training; all six paired models locked before main generic/mechanism/Liu evaluation. No evaluated-source changes without append-only repair. Phase-specific source witness may add prospective downstream implementation before dependent stage.",
+        "runtime": "Existing bounded CUDA fullgraph/default, one CPU/BLAS/compiler thread, TF32 off; qualification compares lambda0 to old computation and eager/compiled cost gradients/update. Study-specific triton.mix_order_reduction=false in both arms: default compiler qualification hit Inductor scheduler AssertionError 1 v.s. 2 during backward. No task outcome was exposed; eager/compiled numerical parity is required with this frozen workaround.",
+        "stages": [
+          "prepare",
+          "qualify",
+          "lock-source",
+          "develop-baseline",
+          "lock-scale",
+          "develop-cost",
+          "select",
+          "train-pairs",
+          "lock-models",
+          "evaluate",
+          "report"
+        ]
+      },
+      "optimization": {
+        "backbone_learning_rate": 0.0001,
+        "batch_size": 32,
+        "clipping_scope": "Clip backbone parameters and [local.raw_gain] separately, before their Adam updates, in both conditions. Do not use one joint norm across differently sized groups.",
+        "fast_weight_penalty": 0.0001,
+        "gradient_clip": 2.0,
+        "initial_local_gain": 0.1,
+        "local_learning_rate": 0.01,
+        "optimizer": "Adam; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+        "schedule": "All available slow parameters jointly optimized from first to last step with mean generic query CE plus 1e-4 mean(P_T^2); same backbone optimizer group in both arms.",
+        "total_episode_exposures": 48000,
+        "total_steps": 1500,
+        "training_temperature": 1.0
+      },
+      "outputs": [
+        "protocol and source/input locks",
+        "preparation decomposition",
+        "independent cost accounting and lambda0 parity qualification",
+        "development 4 checkpoints and generic cost-ability curve",
+        "scale and selection locks",
+        "conditional six paired checkpoints",
+        "conditional generic matched-history and Liu outputs",
+        "conditional N6/10 outputs",
+        "canonical result and interpretation including not-triggered stages"
+      ],
+      "preparation": {
+        "metrics": "Hodge gradient energy fraction, all-subject Hodge-order tau, expected <=.2 incorrect pair prevalence/density. Undefined local metrics stay undefined. G includes slow backbone/readout; is not P alone.",
+        "scope": "Old N8 seeds 2132/2133/2134, both shared and isolated. Decompose margins into G=local_off, L=intact-local_off, intact; fixed 77 subjects only. No new decoder or cohort.",
+        "source": "studies/weak_evidence_routing/records/results/seed-{seed}.{arm}.evaluation.raw.npz"
+      },
+      "question": "Does a fixed budget on effective global fast-connection modification induce useful learned selection under unchanged shared evidence and single-stage joint training?",
+      "references": {
+        "item_count_protocol": {
+          "path": "studies/item_count_transport/records/benchmarks/liu_item_count_transport_v1.json",
+          "sha256": "0ba9090453bafd28fc1908afdb727747a06ba069838aae994fb90b17dd36646e"
+        },
+        "joint_protocol": {
+          "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+          "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+        },
+        "joint_result": {
+          "path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+          "sha256": "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+        },
+        "memory_protocol": {
+          "path": "studies/matched_memory_structure/records/benchmarks/protocol.json",
+          "sha256": "d68792bf141a7f92ef368789aac24556736b7f1314df21294f571e63c21b6a6d"
+        },
+        "routing_protocol": {
+          "path": "studies/weak_evidence_routing/records/benchmarks/protocol.json",
+          "sha256": "d5c958674b6ca4985ac953cc30afb37dfd93b7b94906498bdfb25940ef400c57"
+        }
+      },
+      "schema_version": 1,
+      "seeds": {
+        "conditions": [
+          "shared",
+          "cost"
+        ],
+        "development": 2231,
+        "mandatory": [
+          2232,
+          2233,
+          2234
+        ],
+        "smoke": 910004,
+        "training_rng_offset": 110000
+      },
+      "statistics": {
+        "interval": 0.95,
+        "samples": 2000,
+        "seed_offset": 106000,
+        "unit": "Participant-paired within each network; no pooling across networks. 2000 descriptive percentile bootstrap draws. Conditional tau differences resample all 77 IDs jointly, then apply each arm eligibility mask. Repeated copies are separate bootstrap observations. Any undefined resample makes the paired interval undefined; report its count without dropping it."
+      },
+      "study_id": "effective_write_cost",
+      "task": {
+        "cue_size": 15,
+        "evidence_boundary": "Only ordinary pair cues and displayed signed support magnitude enter memory writes. No true rank, query answer, learned-pair flag, omitted-pair flag, posterior, or diagnostic residual enters the recurrent input.",
+        "local_evidence": "s_L = signed_magnitude * (z + (1-z) * p)",
+        "max_edges": 10,
+        "min_edges": 7,
+        "n_items": 8,
+        "probability_recovery": "Compute p from the episode's original SubjectEncodingState, observed cue identities, and the distance recoverable from abs(displayed_signed_magnitude)*(n_items-1). Do not mistake binary SupportTrial.encoding_reliability for p.",
+        "query_pairs": "All 28 unordered pairs, with the existing generator's randomized left/right orientation and order; no learned/nonlearned reweighting.",
+        "routing": {
+          "both": "shared: existing channels 34 and 37 receive sG and sL; local writes unchanged"
+        },
+        "subject_encoding_mode": "stable_omission",
+        "subject_encoding_parameters": "Unchanged SubjectEncodingConfig from the implementation witness; retain the sampled SubjectEncodingState and recover its original relation probability p without resampling.",
+        "support_blocks": 4
+      },
+      "tier": "development"
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "effective_write_cost_v1"
+}

@@ -7,23 +7,24 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 954,
+  "entry_count": 1091,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 447,
+    "json": 519,
+    "json_lines": 10,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 77,
-    "numpy_npz": 397,
+    "markdown": 78,
+    "numpy_npz": 431,
     "pdf": 2,
-    "pytorch_state_dict": 21,
+    "pytorch_state_dict": 41,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 879,
+    "already_conformant": 1016,
     "historical_gzip_view": 74,
     "historical_pth_view": 1
   },
@@ -4431,6 +4432,4596 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 78363,
+        "sha256": "e625b7edf28477ab9689fa9eb3d7f51cfd94ad9f5e835a276cd617da2bfb43ae"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2232_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 78363,
+        "sha256": "e625b7edf28477ab9689fa9eb3d7f51cfd94ad9f5e835a276cd617da2bfb43ae",
+        "source_ref": "sha256:e625b7edf28477ab9689fa9eb3d7f51cfd94ad9f5e835a276cd617da2bfb43ae"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 3207,
+        "sha256": "cf0f3e31fe911835edcdca899ddc6727737a03c72f7df2d7d8fc094c86d272bb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2232_cost_result_json",
+      "registered_identity": {
+        "bytes": 3207,
+        "sha256": "cf0f3e31fe911835edcdca899ddc6727737a03c72f7df2d7d8fc094c86d272bb",
+        "source_ref": "sha256:cf0f3e31fe911835edcdca899ddc6727737a03c72f7df2d7d8fc094c86d272bb"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2984,
+        "sha256": "f450a0b3e3b0fb1bab2827b0cc39cd9667f92139540637b5d9bbf2bb61a6ac47"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2232_cost_run_json",
+      "registered_identity": {
+        "bytes": 2984,
+        "sha256": "f450a0b3e3b0fb1bab2827b0cc39cd9667f92139540637b5d9bbf2bb61a6ac47",
+        "source_ref": "sha256:f450a0b3e3b0fb1bab2827b0cc39cd9667f92139540637b5d9bbf2bb61a6ac47"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 77649,
+        "sha256": "7a03136d954e3d9db1b4bd2e32b87d78b450cf92eeaf5559813a6c9162adee45"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2232_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 77649,
+        "sha256": "7a03136d954e3d9db1b4bd2e32b87d78b450cf92eeaf5559813a6c9162adee45",
+        "source_ref": "sha256:7a03136d954e3d9db1b4bd2e32b87d78b450cf92eeaf5559813a6c9162adee45"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 3211,
+        "sha256": "07c747b08de66008ad22c206be691c7345bca33498fe0fd4ed8d40c6f9e27159"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2232_shared_result_json",
+      "registered_identity": {
+        "bytes": 3211,
+        "sha256": "07c747b08de66008ad22c206be691c7345bca33498fe0fd4ed8d40c6f9e27159",
+        "source_ref": "sha256:07c747b08de66008ad22c206be691c7345bca33498fe0fd4ed8d40c6f9e27159"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2232/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2988,
+        "sha256": "4e49e81d7998adb311d89ea4bfab735c3702e1a5694548b4d689badf2be3e94c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2232_shared_run_json",
+      "registered_identity": {
+        "bytes": 2988,
+        "sha256": "4e49e81d7998adb311d89ea4bfab735c3702e1a5694548b4d689badf2be3e94c",
+        "source_ref": "sha256:4e49e81d7998adb311d89ea4bfab735c3702e1a5694548b4d689badf2be3e94c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 78310,
+        "sha256": "dae2a08fee0c5156f6f06d00876c60f17ff6ce060efa77e696e18cde7dcd1175"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2233_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 78310,
+        "sha256": "dae2a08fee0c5156f6f06d00876c60f17ff6ce060efa77e696e18cde7dcd1175",
+        "source_ref": "sha256:dae2a08fee0c5156f6f06d00876c60f17ff6ce060efa77e696e18cde7dcd1175"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 3214,
+        "sha256": "e82a8b1a4877c8bf4b4932123f166670d27de29f1f9ef30a741b931e5f93d5f7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2233_cost_result_json",
+      "registered_identity": {
+        "bytes": 3214,
+        "sha256": "e82a8b1a4877c8bf4b4932123f166670d27de29f1f9ef30a741b931e5f93d5f7",
+        "source_ref": "sha256:e82a8b1a4877c8bf4b4932123f166670d27de29f1f9ef30a741b931e5f93d5f7"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2984,
+        "sha256": "4b6afe01ce84cd9b81966878b1d7b42cd2970f2ea17c4f2f7a657d024efa8686"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2233_cost_run_json",
+      "registered_identity": {
+        "bytes": 2984,
+        "sha256": "4b6afe01ce84cd9b81966878b1d7b42cd2970f2ea17c4f2f7a657d024efa8686",
+        "source_ref": "sha256:4b6afe01ce84cd9b81966878b1d7b42cd2970f2ea17c4f2f7a657d024efa8686"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 77278,
+        "sha256": "34ec1df2720ef97693b7d36da4c1c2e1aa4fdc5fd906d678ced451dbc4b3dbd7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2233_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 77278,
+        "sha256": "34ec1df2720ef97693b7d36da4c1c2e1aa4fdc5fd906d678ced451dbc4b3dbd7",
+        "source_ref": "sha256:34ec1df2720ef97693b7d36da4c1c2e1aa4fdc5fd906d678ced451dbc4b3dbd7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 3201,
+        "sha256": "74ead932cf64b3199ec9e6593bf06d032e7335f74df986e9c272a43933ff37c9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2233_shared_result_json",
+      "registered_identity": {
+        "bytes": 3201,
+        "sha256": "74ead932cf64b3199ec9e6593bf06d032e7335f74df986e9c272a43933ff37c9",
+        "source_ref": "sha256:74ead932cf64b3199ec9e6593bf06d032e7335f74df986e9c272a43933ff37c9"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2233/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2988,
+        "sha256": "2c707b1d2b2336d77dc83f1269f2a521b8c53de9e25237899a6f10249381e052"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2233_shared_run_json",
+      "registered_identity": {
+        "bytes": 2988,
+        "sha256": "2c707b1d2b2336d77dc83f1269f2a521b8c53de9e25237899a6f10249381e052",
+        "source_ref": "sha256:2c707b1d2b2336d77dc83f1269f2a521b8c53de9e25237899a6f10249381e052"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 78310,
+        "sha256": "e4840f3b91b71fb74ab97358fe55e282259fa34a9f8a05cab5f3a9e2f9ebaa2d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2234_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 78310,
+        "sha256": "e4840f3b91b71fb74ab97358fe55e282259fa34a9f8a05cab5f3a9e2f9ebaa2d",
+        "source_ref": "sha256:e4840f3b91b71fb74ab97358fe55e282259fa34a9f8a05cab5f3a9e2f9ebaa2d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 3212,
+        "sha256": "3afd711f64ef0a5292a7bdfa3303dd620715467b14e90c13b4407c26d1bbf27d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2234_cost_result_json",
+      "registered_identity": {
+        "bytes": 3212,
+        "sha256": "3afd711f64ef0a5292a7bdfa3303dd620715467b14e90c13b4407c26d1bbf27d",
+        "source_ref": "sha256:3afd711f64ef0a5292a7bdfa3303dd620715467b14e90c13b4407c26d1bbf27d"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2984,
+        "sha256": "69aef36f9353c116c8b6c836f09ca10a0f72e738dcf17f88a26d18e5cd72330f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2234_cost_run_json",
+      "registered_identity": {
+        "bytes": 2984,
+        "sha256": "69aef36f9353c116c8b6c836f09ca10a0f72e738dcf17f88a26d18e5cd72330f",
+        "source_ref": "sha256:69aef36f9353c116c8b6c836f09ca10a0f72e738dcf17f88a26d18e5cd72330f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 77267,
+        "sha256": "287025b672650c95be915100445628c393c5194ae6216e5aaef4138a4b5d2754"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2234_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 77267,
+        "sha256": "287025b672650c95be915100445628c393c5194ae6216e5aaef4138a4b5d2754",
+        "source_ref": "sha256:287025b672650c95be915100445628c393c5194ae6216e5aaef4138a4b5d2754"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 3199,
+        "sha256": "d7a9771db0cd34f5f33e1a359d0b66b32c02c3689f6efb3d3a2f0cb2d203cc74"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2234_shared_result_json",
+      "registered_identity": {
+        "bytes": 3199,
+        "sha256": "d7a9771db0cd34f5f33e1a359d0b66b32c02c3689f6efb3d3a2f0cb2d203cc74",
+        "source_ref": "sha256:d7a9771db0cd34f5f33e1a359d0b66b32c02c3689f6efb3d3a2f0cb2d203cc74"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/diagnostic/2234/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2988,
+        "sha256": "ce44402ef3943be12f63387b5c3be1f20490ea65d2e73df0b6076faa0df4424c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_diagnostic_2234_shared_run_json",
+      "registered_identity": {
+        "bytes": 2988,
+        "sha256": "ce44402ef3943be12f63387b5c3be1f20490ea65d2e73df0b6076faa0df4424c",
+        "source_ref": "sha256:ce44402ef3943be12f63387b5c3be1f20490ea65d2e73df0b6076faa0df4424c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.01/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.01/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40441,
+        "sha256": "22dd82b0ae231c05c081c67929035f2d5b48f2c53ff93ce73d319e27313823af"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_0_01_raw_npz",
+      "registered_identity": {
+        "bytes": 40441,
+        "sha256": "22dd82b0ae231c05c081c67929035f2d5b48f2c53ff93ce73d319e27313823af",
+        "source_ref": "sha256:22dd82b0ae231c05c081c67929035f2d5b48f2c53ff93ce73d319e27313823af"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.01/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.01/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2064,
+        "sha256": "6fb0336ab204c6684a91d7183fd94daf2db7a7068ec7da8b422ed6c693e16d3e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_0_01_result_json",
+      "registered_identity": {
+        "bytes": 2064,
+        "sha256": "6fb0336ab204c6684a91d7183fd94daf2db7a7068ec7da8b422ed6c693e16d3e",
+        "source_ref": "sha256:6fb0336ab204c6684a91d7183fd94daf2db7a7068ec7da8b422ed6c693e16d3e"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.01/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.01/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2839,
+        "sha256": "fa40c02b87772987323fc3ca55dfaceb34b3e1e0a4b3c828b73f9ed3178bc0a2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_0_01_run_json",
+      "registered_identity": {
+        "bytes": 2839,
+        "sha256": "fa40c02b87772987323fc3ca55dfaceb34b3e1e0a4b3c828b73f9ed3178bc0a2",
+        "source_ref": "sha256:fa40c02b87772987323fc3ca55dfaceb34b3e1e0a4b3c828b73f9ed3178bc0a2"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.1/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.1/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40823,
+        "sha256": "d95569ecfa2d5332e86498ff30cca7d88e45df9d1775f4f61d15affe7114b5b7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_0_1_raw_npz",
+      "registered_identity": {
+        "bytes": 40823,
+        "sha256": "d95569ecfa2d5332e86498ff30cca7d88e45df9d1775f4f61d15affe7114b5b7",
+        "source_ref": "sha256:d95569ecfa2d5332e86498ff30cca7d88e45df9d1775f4f61d15affe7114b5b7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.1/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.1/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2064,
+        "sha256": "0442a20cd31e5910f8d56e9dabc7a72de1045b6a2df7cbb88408a7970b98ff11"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_0_1_result_json",
+      "registered_identity": {
+        "bytes": 2064,
+        "sha256": "0442a20cd31e5910f8d56e9dabc7a72de1045b6a2df7cbb88408a7970b98ff11",
+        "source_ref": "sha256:0442a20cd31e5910f8d56e9dabc7a72de1045b6a2df7cbb88408a7970b98ff11"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.1/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-0.1/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2837,
+        "sha256": "7d625d2503aedfe7077e35c4d655abdde5d040b1ac9868783c2e7c2a7d369fd5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_0_1_run_json",
+      "registered_identity": {
+        "bytes": 2837,
+        "sha256": "7d625d2503aedfe7077e35c4d655abdde5d040b1ac9868783c2e7c2a7d369fd5",
+        "source_ref": "sha256:7d625d2503aedfe7077e35c4d655abdde5d040b1ac9868783c2e7c2a7d369fd5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-1.0/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-1.0/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40834,
+        "sha256": "3584fb5db73158a59cccd62b3974fb03edc47fa603ef1b281cca430d59d14792"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_1_0_raw_npz",
+      "registered_identity": {
+        "bytes": 40834,
+        "sha256": "3584fb5db73158a59cccd62b3974fb03edc47fa603ef1b281cca430d59d14792",
+        "source_ref": "sha256:3584fb5db73158a59cccd62b3974fb03edc47fa603ef1b281cca430d59d14792"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-1.0/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-1.0/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2076,
+        "sha256": "758fd0caec5d32a8ee871bf6faa262e182b9b98975955b7cd2555c214f8bde78"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_1_0_result_json",
+      "registered_identity": {
+        "bytes": 2076,
+        "sha256": "758fd0caec5d32a8ee871bf6faa262e182b9b98975955b7cd2555c214f8bde78",
+        "source_ref": "sha256:758fd0caec5d32a8ee871bf6faa262e182b9b98975955b7cd2555c214f8bde78"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-1.0/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/kappa-1.0/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2837,
+        "sha256": "cc3907978c178be6b388004e16829ef79693a0619e3e9c1cbed4d2c276d827bb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_kappa_1_0_run_json",
+      "registered_identity": {
+        "bytes": 2837,
+        "sha256": "cc3907978c178be6b388004e16829ef79693a0619e3e9c1cbed4d2c276d827bb",
+        "source_ref": "sha256:cc3907978c178be6b388004e16829ef79693a0619e3e9c1cbed4d2c276d827bb"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40376,
+        "sha256": "50d6798b447c14429d5ebf49d7ca5a09a1993e49ac2e5fb3cb07f918b496af16"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 40376,
+        "sha256": "50d6798b447c14429d5ebf49d7ca5a09a1993e49ac2e5fb3cb07f918b496af16",
+        "source_ref": "sha256:50d6798b447c14429d5ebf49d7ca5a09a1993e49ac2e5fb3cb07f918b496af16"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2055,
+        "sha256": "5021d7663a7cb97269324a95dfa39d293f605fed73fac8bb97580174d94f93ee"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_shared_result_json",
+      "registered_identity": {
+        "bytes": 2055,
+        "sha256": "5021d7663a7cb97269324a95dfa39d293f605fed73fac8bb97580174d94f93ee",
+        "source_ref": "sha256:5021d7663a7cb97269324a95dfa39d293f605fed73fac8bb97580174d94f93ee"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/development/2231/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2831,
+        "sha256": "b54570e91160a8c701cca76e3d463ff257f6f146aaeb22ffb2fe89e45f4d6a1d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_development_2231_shared_run_json",
+      "registered_identity": {
+        "bytes": 2831,
+        "sha256": "b54570e91160a8c701cca76e3d463ff257f6f146aaeb22ffb2fe89e45f4d6a1d",
+        "source_ref": "sha256:b54570e91160a8c701cca76e3d463ff257f6f146aaeb22ffb2fe89e45f4d6a1d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40849,
+        "sha256": "ea0764f439a94196e27f7f86d1b1b27805c4302f261227373e3f42334fe4d14d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2232_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 40849,
+        "sha256": "ea0764f439a94196e27f7f86d1b1b27805c4302f261227373e3f42334fe4d14d",
+        "source_ref": "sha256:ea0764f439a94196e27f7f86d1b1b27805c4302f261227373e3f42334fe4d14d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2053,
+        "sha256": "42e2b8bb7b83246a2930e0d22f06e96200ae2290fd72d11d897fc265fa23d639"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2232_cost_result_json",
+      "registered_identity": {
+        "bytes": 2053,
+        "sha256": "42e2b8bb7b83246a2930e0d22f06e96200ae2290fd72d11d897fc265fa23d639",
+        "source_ref": "sha256:42e2b8bb7b83246a2930e0d22f06e96200ae2290fd72d11d897fc265fa23d639"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2757,
+        "sha256": "42e828eac98969ba958a0ebbb2291c812585085e33698b9d2db643e401ff2447"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2232_cost_run_json",
+      "registered_identity": {
+        "bytes": 2757,
+        "sha256": "42e828eac98969ba958a0ebbb2291c812585085e33698b9d2db643e401ff2447",
+        "source_ref": "sha256:42e828eac98969ba958a0ebbb2291c812585085e33698b9d2db643e401ff2447"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40430,
+        "sha256": "7491b38426047b1396be9a2d41f14803c2aecc43bbc2b30219bcc9fcf14ea484"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2232_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 40430,
+        "sha256": "7491b38426047b1396be9a2d41f14803c2aecc43bbc2b30219bcc9fcf14ea484",
+        "source_ref": "sha256:7491b38426047b1396be9a2d41f14803c2aecc43bbc2b30219bcc9fcf14ea484"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2023,
+        "sha256": "03cc231de242d53ac6b9c7ee8d7da1ae8bbb381787ef9e9c1c3c933e6154c940"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2232_shared_result_json",
+      "registered_identity": {
+        "bytes": 2023,
+        "sha256": "03cc231de242d53ac6b9c7ee8d7da1ae8bbb381787ef9e9c1c3c933e6154c940",
+        "source_ref": "sha256:03cc231de242d53ac6b9c7ee8d7da1ae8bbb381787ef9e9c1c3c933e6154c940"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2232/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2761,
+        "sha256": "0fc69d65eb4ecdc0f784100256b848fb9b7e9bd1ff0e1d38821d46ee7b2d60c9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2232_shared_run_json",
+      "registered_identity": {
+        "bytes": 2761,
+        "sha256": "0fc69d65eb4ecdc0f784100256b848fb9b7e9bd1ff0e1d38821d46ee7b2d60c9",
+        "source_ref": "sha256:0fc69d65eb4ecdc0f784100256b848fb9b7e9bd1ff0e1d38821d46ee7b2d60c9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40800,
+        "sha256": "daee233f1e3d6cc6f71de97af0f0c707dd98eabbb9d750ab595dad1a19b611be"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2233_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 40800,
+        "sha256": "daee233f1e3d6cc6f71de97af0f0c707dd98eabbb9d750ab595dad1a19b611be",
+        "source_ref": "sha256:daee233f1e3d6cc6f71de97af0f0c707dd98eabbb9d750ab595dad1a19b611be"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2052,
+        "sha256": "fa34f89aa8a6a94c778b34a6a4d3bf3a51bea6c63722742ec5aad7ba6cad4a47"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2233_cost_result_json",
+      "registered_identity": {
+        "bytes": 2052,
+        "sha256": "fa34f89aa8a6a94c778b34a6a4d3bf3a51bea6c63722742ec5aad7ba6cad4a47",
+        "source_ref": "sha256:fa34f89aa8a6a94c778b34a6a4d3bf3a51bea6c63722742ec5aad7ba6cad4a47"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2757,
+        "sha256": "07368eeab11bcee2a05defeacc16c1c71dcb1f7d303f3dc125e399b94ea6730c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2233_cost_run_json",
+      "registered_identity": {
+        "bytes": 2757,
+        "sha256": "07368eeab11bcee2a05defeacc16c1c71dcb1f7d303f3dc125e399b94ea6730c",
+        "source_ref": "sha256:07368eeab11bcee2a05defeacc16c1c71dcb1f7d303f3dc125e399b94ea6730c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40299,
+        "sha256": "882eeebe3590dc27d81027145886aa2a2970f05acb0b5713323f2f3624770e5c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2233_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 40299,
+        "sha256": "882eeebe3590dc27d81027145886aa2a2970f05acb0b5713323f2f3624770e5c",
+        "source_ref": "sha256:882eeebe3590dc27d81027145886aa2a2970f05acb0b5713323f2f3624770e5c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2036,
+        "sha256": "e4ce06c7ca752e6705b324b77c21e97e19c26f705ad291aff7118274dc5fa985"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2233_shared_result_json",
+      "registered_identity": {
+        "bytes": 2036,
+        "sha256": "e4ce06c7ca752e6705b324b77c21e97e19c26f705ad291aff7118274dc5fa985",
+        "source_ref": "sha256:e4ce06c7ca752e6705b324b77c21e97e19c26f705ad291aff7118274dc5fa985"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2233/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2761,
+        "sha256": "4bbfb0c78943a51aa2f3e2d12a3d5bb0ba2928b550fae33b3444b440c97b4c31"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2233_shared_run_json",
+      "registered_identity": {
+        "bytes": 2761,
+        "sha256": "4bbfb0c78943a51aa2f3e2d12a3d5bb0ba2928b550fae33b3444b440c97b4c31",
+        "source_ref": "sha256:4bbfb0c78943a51aa2f3e2d12a3d5bb0ba2928b550fae33b3444b440c97b4c31"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40852,
+        "sha256": "5c44b315cc91acbffc4a53fe2f3dd386c6f2522efc252b958e20faf7135520d4"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2234_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 40852,
+        "sha256": "5c44b315cc91acbffc4a53fe2f3dd386c6f2522efc252b958e20faf7135520d4",
+        "source_ref": "sha256:5c44b315cc91acbffc4a53fe2f3dd386c6f2522efc252b958e20faf7135520d4"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2052,
+        "sha256": "6044aa062e7a26bd406df2e4a87dcacbb34ff2c28d80e3cad816c951e853a10a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2234_cost_result_json",
+      "registered_identity": {
+        "bytes": 2052,
+        "sha256": "6044aa062e7a26bd406df2e4a87dcacbb34ff2c28d80e3cad816c951e853a10a",
+        "source_ref": "sha256:6044aa062e7a26bd406df2e4a87dcacbb34ff2c28d80e3cad816c951e853a10a"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2757,
+        "sha256": "58610a49c39c7d190e6bb0eacce0c304d8b050c49c9718c80023976be1834b47"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2234_cost_run_json",
+      "registered_identity": {
+        "bytes": 2757,
+        "sha256": "58610a49c39c7d190e6bb0eacce0c304d8b050c49c9718c80023976be1834b47",
+        "source_ref": "sha256:58610a49c39c7d190e6bb0eacce0c304d8b050c49c9718c80023976be1834b47"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 40265,
+        "sha256": "af78cb3251f2c237465b1c7009388ac1bd6c6523eccc8864e99d66420288756b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2234_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 40265,
+        "sha256": "af78cb3251f2c237465b1c7009388ac1bd6c6523eccc8864e99d66420288756b",
+        "source_ref": "sha256:af78cb3251f2c237465b1c7009388ac1bd6c6523eccc8864e99d66420288756b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2019,
+        "sha256": "55a6796b58c46aa3797b1869d361235832f00bad965e7a8461acc40e7f37c3e6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2234_shared_result_json",
+      "registered_identity": {
+        "bytes": 2019,
+        "sha256": "55a6796b58c46aa3797b1869d361235832f00bad965e7a8461acc40e7f37c3e6",
+        "source_ref": "sha256:55a6796b58c46aa3797b1869d361235832f00bad965e7a8461acc40e7f37c3e6"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/generic/test/2234/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 2761,
+        "sha256": "44ddef35aa4ccd47eb42182864a20ae200d6c7ac0902c159a8bc4349d176a9b5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_generic_test_2234_shared_run_json",
+      "registered_identity": {
+        "bytes": 2761,
+        "sha256": "44ddef35aa4ccd47eb42182864a20ae200d6c7ac0902c159a8bc4349d176a9b5",
+        "source_ref": "sha256:44ddef35aa4ccd47eb42182864a20ae200d6c7ac0902c159a8bc4349d176a9b5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/development-28.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/development-28.npz"
+      },
+      "materialized_identity": {
+        "bytes": 83197,
+        "sha256": "a7136bfc3f859bcfc12126215e64e6e39c7bdd60c5a6e9982064642fa930ffdf"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_development_28_npz",
+      "registered_identity": {
+        "bytes": 83197,
+        "sha256": "a7136bfc3f859bcfc12126215e64e6e39c7bdd60c5a6e9982064642fa930ffdf",
+        "source_ref": "sha256:a7136bfc3f859bcfc12126215e64e6e39c7bdd60c5a6e9982064642fa930ffdf"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/development-32.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/development-32.npz"
+      },
+      "materialized_identity": {
+        "bytes": 79538,
+        "sha256": "e78a6ecbec7013e96142aba798b81d9b9dac3eb2301b3ee702b26adbe6044892"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_development_32_npz",
+      "registered_identity": {
+        "bytes": 79538,
+        "sha256": "e78a6ecbec7013e96142aba798b81d9b9dac3eb2301b3ee702b26adbe6044892",
+        "source_ref": "sha256:e78a6ecbec7013e96142aba798b81d9b9dac3eb2301b3ee702b26adbe6044892"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/development-36.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/development-36.npz"
+      },
+      "materialized_identity": {
+        "bytes": 88364,
+        "sha256": "3150c4b411291c713b594b6ad4c1aa4b4e6d492b573ae03da373b1c56bb72e0c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_development_36_npz",
+      "registered_identity": {
+        "bytes": 88364,
+        "sha256": "3150c4b411291c713b594b6ad4c1aa4b4e6d492b573ae03da373b1c56bb72e0c",
+        "source_ref": "sha256:3150c4b411291c713b594b6ad4c1aa4b4e6d492b573ae03da373b1c56bb72e0c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/development-40.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/development-40.npz"
+      },
+      "materialized_identity": {
+        "bytes": 85891,
+        "sha256": "4ef592b7a9e932f0bdba61063b64a568cc27a1da30e9552f506280771d224671"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_development_40_npz",
+      "registered_identity": {
+        "bytes": 85891,
+        "sha256": "4ef592b7a9e932f0bdba61063b64a568cc27a1da30e9552f506280771d224671",
+        "source_ref": "sha256:4ef592b7a9e932f0bdba61063b64a568cc27a1da30e9552f506280771d224671"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/histories.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/histories.npz"
+      },
+      "materialized_identity": {
+        "bytes": 1339457,
+        "sha256": "f3347057f58aebb4466b26603349b109e4b1c06e105bf9a5d91e86bc1beb0f39"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_histories_npz",
+      "registered_identity": {
+        "bytes": 1339457,
+        "sha256": "f3347057f58aebb4466b26603349b109e4b1c06e105bf9a5d91e86bc1beb0f39",
+        "source_ref": "sha256:f3347057f58aebb4466b26603349b109e4b1c06e105bf9a5d91e86bc1beb0f39"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/liu-10.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/liu-10.npz"
+      },
+      "materialized_identity": {
+        "bytes": 127035,
+        "sha256": "a1411e585799e28faf0999fb34833c92f1ea5bbc769d9542457481aee7a5c4e9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_liu_10_npz",
+      "registered_identity": {
+        "bytes": 127035,
+        "sha256": "a1411e585799e28faf0999fb34833c92f1ea5bbc769d9542457481aee7a5c4e9",
+        "source_ref": "sha256:a1411e585799e28faf0999fb34833c92f1ea5bbc769d9542457481aee7a5c4e9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/liu-6.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/liu-6.npz"
+      },
+      "materialized_identity": {
+        "bytes": 53938,
+        "sha256": "234d3a330f845551faf7050b07b4ca5b80b8c5e183f778d3d3bb29e9555c2001"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_liu_6_npz",
+      "registered_identity": {
+        "bytes": 53938,
+        "sha256": "234d3a330f845551faf7050b07b4ca5b80b8c5e183f778d3d3bb29e9555c2001",
+        "source_ref": "sha256:234d3a330f845551faf7050b07b4ca5b80b8c5e183f778d3d3bb29e9555c2001"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/liu-8.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/liu-8.npz"
+      },
+      "materialized_identity": {
+        "bytes": 87086,
+        "sha256": "3dc91fcdc90f6ac467d16f86afb354a14cd64f52afe4288a357baf6736c6e098"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_liu_8_npz",
+      "registered_identity": {
+        "bytes": 87086,
+        "sha256": "3dc91fcdc90f6ac467d16f86afb354a14cd64f52afe4288a357baf6736c6e098",
+        "source_ref": "sha256:3dc91fcdc90f6ac467d16f86afb354a14cd64f52afe4288a357baf6736c6e098"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/test-28.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/test-28.npz"
+      },
+      "materialized_identity": {
+        "bytes": 82822,
+        "sha256": "ec326543d07dbaa7b7d80dd543663e12ad06631f4d3231fa29d11ed7cd466677"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_test_28_npz",
+      "registered_identity": {
+        "bytes": 82822,
+        "sha256": "ec326543d07dbaa7b7d80dd543663e12ad06631f4d3231fa29d11ed7cd466677",
+        "source_ref": "sha256:ec326543d07dbaa7b7d80dd543663e12ad06631f4d3231fa29d11ed7cd466677"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/test-32.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/test-32.npz"
+      },
+      "materialized_identity": {
+        "bytes": 86797,
+        "sha256": "2cda471571b82b10c384f8217ab539dd103a8c6ec44f2684cd1829fa34703144"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_test_32_npz",
+      "registered_identity": {
+        "bytes": 86797,
+        "sha256": "2cda471571b82b10c384f8217ab539dd103a8c6ec44f2684cd1829fa34703144",
+        "source_ref": "sha256:2cda471571b82b10c384f8217ab539dd103a8c6ec44f2684cd1829fa34703144"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/test-36.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/test-36.npz"
+      },
+      "materialized_identity": {
+        "bytes": 72951,
+        "sha256": "d0c6fcb541d9fed3fda68b4ae0efb660ddba007b45fa3711a03480e9902db4e9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_test_36_npz",
+      "registered_identity": {
+        "bytes": 72951,
+        "sha256": "d0c6fcb541d9fed3fda68b4ae0efb660ddba007b45fa3711a03480e9902db4e9",
+        "source_ref": "sha256:d0c6fcb541d9fed3fda68b4ae0efb660ddba007b45fa3711a03480e9902db4e9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/inputs/test-40.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/inputs/test-40.npz"
+      },
+      "materialized_identity": {
+        "bytes": 92058,
+        "sha256": "494e0db8835155658f004bf057ef2910b2ef867e0a9f4cb3a338fe5b6c17dff7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_inputs_test_40_npz",
+      "registered_identity": {
+        "bytes": 92058,
+        "sha256": "494e0db8835155658f004bf057ef2910b2ef867e0a9f4cb3a338fe5b6c17dff7",
+        "source_ref": "sha256:494e0db8835155658f004bf057ef2910b2ef867e0a9f4cb3a338fe5b6c17dff7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/behavior-N8.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/behavior-N8.json"
+      },
+      "materialized_identity": {
+        "bytes": 76274,
+        "sha256": "63cad1769f0aff191fa755bcc7925c0da564a1f8eb896e37b3ccdabad5f3a112"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_cost_behavior_n8_json",
+      "registered_identity": {
+        "bytes": 76274,
+        "sha256": "63cad1769f0aff191fa755bcc7925c0da564a1f8eb896e37b3ccdabad5f3a112",
+        "source_ref": "sha256:63cad1769f0aff191fa755bcc7925c0da564a1f8eb896e37b3ccdabad5f3a112"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 350656,
+        "sha256": "f1aacee8ed8fc58775ade05e024c369c348cf3f96bbe9a6e2c51d4d292795c7b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 350656,
+        "sha256": "f1aacee8ed8fc58775ade05e024c369c348cf3f96bbe9a6e2c51d4d292795c7b",
+        "source_ref": "sha256:f1aacee8ed8fc58775ade05e024c369c348cf3f96bbe9a6e2c51d4d292795c7b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 46503,
+        "sha256": "5320f03353f1c57f4a2a9bc2158fb2d16f0aaaff19bbba33cd96c208939747fd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_cost_result_json",
+      "registered_identity": {
+        "bytes": 46503,
+        "sha256": "5320f03353f1c57f4a2a9bc2158fb2d16f0aaaff19bbba33cd96c208939747fd",
+        "source_ref": "sha256:5320f03353f1c57f4a2a9bc2158fb2d16f0aaaff19bbba33cd96c208939747fd"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 3715,
+        "sha256": "a0810bdead2e2b6922ec8505a436185310f82384e05f9685e45268efbc53b27f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_cost_run_json",
+      "registered_identity": {
+        "bytes": 3715,
+        "sha256": "a0810bdead2e2b6922ec8505a436185310f82384e05f9685e45268efbc53b27f",
+        "source_ref": "sha256:a0810bdead2e2b6922ec8505a436185310f82384e05f9685e45268efbc53b27f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/behavior-N8.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/behavior-N8.json"
+      },
+      "materialized_identity": {
+        "bytes": 75821,
+        "sha256": "c088a3a3480228b09d577cff115cab86998bec1dfd89200347124fb851a040e5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_shared_behavior_n8_json",
+      "registered_identity": {
+        "bytes": 75821,
+        "sha256": "c088a3a3480228b09d577cff115cab86998bec1dfd89200347124fb851a040e5",
+        "source_ref": "sha256:c088a3a3480228b09d577cff115cab86998bec1dfd89200347124fb851a040e5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 344879,
+        "sha256": "fb397a0df5243a4fb4dacfc149d12d958f29ab6b212e789cd24c2fac605cb9d5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 344879,
+        "sha256": "fb397a0df5243a4fb4dacfc149d12d958f29ab6b212e789cd24c2fac605cb9d5",
+        "source_ref": "sha256:fb397a0df5243a4fb4dacfc149d12d958f29ab6b212e789cd24c2fac605cb9d5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 46623,
+        "sha256": "9d83a18deedd04959c18eb7377b31992b41341b87f45f15f6cc44db953344676"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_shared_result_json",
+      "registered_identity": {
+        "bytes": 46623,
+        "sha256": "9d83a18deedd04959c18eb7377b31992b41341b87f45f15f6cc44db953344676",
+        "source_ref": "sha256:9d83a18deedd04959c18eb7377b31992b41341b87f45f15f6cc44db953344676"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2232/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 3719,
+        "sha256": "39ab6a42d65195a624e6741dc69f576a5aa17505b5049039b41940ca10d287ad"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2232_shared_run_json",
+      "registered_identity": {
+        "bytes": 3719,
+        "sha256": "39ab6a42d65195a624e6741dc69f576a5aa17505b5049039b41940ca10d287ad",
+        "source_ref": "sha256:39ab6a42d65195a624e6741dc69f576a5aa17505b5049039b41940ca10d287ad"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/behavior-N8.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/behavior-N8.json"
+      },
+      "materialized_identity": {
+        "bytes": 76233,
+        "sha256": "a1241a30092a09e824fe66898bc7ce5cfb7e8865c11fc1c2e2dd57f2cb5d022d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_cost_behavior_n8_json",
+      "registered_identity": {
+        "bytes": 76233,
+        "sha256": "a1241a30092a09e824fe66898bc7ce5cfb7e8865c11fc1c2e2dd57f2cb5d022d",
+        "source_ref": "sha256:a1241a30092a09e824fe66898bc7ce5cfb7e8865c11fc1c2e2dd57f2cb5d022d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 351054,
+        "sha256": "24a243a3671886ab2e011582afe7220d15cde32352ecf0d12dde311d37a46ef7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 351054,
+        "sha256": "24a243a3671886ab2e011582afe7220d15cde32352ecf0d12dde311d37a46ef7",
+        "source_ref": "sha256:24a243a3671886ab2e011582afe7220d15cde32352ecf0d12dde311d37a46ef7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 46602,
+        "sha256": "bbcccca48b3054e68dcc4cdd9c966a0011821f7ed14354683750c9acc6bb044b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_cost_result_json",
+      "registered_identity": {
+        "bytes": 46602,
+        "sha256": "bbcccca48b3054e68dcc4cdd9c966a0011821f7ed14354683750c9acc6bb044b",
+        "source_ref": "sha256:bbcccca48b3054e68dcc4cdd9c966a0011821f7ed14354683750c9acc6bb044b"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 3715,
+        "sha256": "bbcb4f5f5fc4dac5edb706523480f0304714aec0268d4f76d56de5a8575cb3ef"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_cost_run_json",
+      "registered_identity": {
+        "bytes": 3715,
+        "sha256": "bbcb4f5f5fc4dac5edb706523480f0304714aec0268d4f76d56de5a8575cb3ef",
+        "source_ref": "sha256:bbcb4f5f5fc4dac5edb706523480f0304714aec0268d4f76d56de5a8575cb3ef"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/behavior-N8.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/behavior-N8.json"
+      },
+      "materialized_identity": {
+        "bytes": 75314,
+        "sha256": "b07e639a7c1a14bc20155931065a1273ddfe6b9f2e6b8f7de3ba8d98c16661ae"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_shared_behavior_n8_json",
+      "registered_identity": {
+        "bytes": 75314,
+        "sha256": "b07e639a7c1a14bc20155931065a1273ddfe6b9f2e6b8f7de3ba8d98c16661ae",
+        "source_ref": "sha256:b07e639a7c1a14bc20155931065a1273ddfe6b9f2e6b8f7de3ba8d98c16661ae"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 339911,
+        "sha256": "411a7ddd1e5f4d3b94cfa41119f5f274662e53cbeccc04690f31284c53220eb8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 339911,
+        "sha256": "411a7ddd1e5f4d3b94cfa41119f5f274662e53cbeccc04690f31284c53220eb8",
+        "source_ref": "sha256:411a7ddd1e5f4d3b94cfa41119f5f274662e53cbeccc04690f31284c53220eb8"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 46638,
+        "sha256": "bbf6d80d67ed775ff185a220432ef5d71f81c51a3ba711c342129b5d1667f849"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_shared_result_json",
+      "registered_identity": {
+        "bytes": 46638,
+        "sha256": "bbf6d80d67ed775ff185a220432ef5d71f81c51a3ba711c342129b5d1667f849",
+        "source_ref": "sha256:bbf6d80d67ed775ff185a220432ef5d71f81c51a3ba711c342129b5d1667f849"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2233/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 3719,
+        "sha256": "ed9ac112b86ac7747ae89018ae4f15227655545380f0768d04d58f375d6fa7e8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2233_shared_run_json",
+      "registered_identity": {
+        "bytes": 3719,
+        "sha256": "ed9ac112b86ac7747ae89018ae4f15227655545380f0768d04d58f375d6fa7e8",
+        "source_ref": "sha256:ed9ac112b86ac7747ae89018ae4f15227655545380f0768d04d58f375d6fa7e8"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/behavior-N8.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/behavior-N8.json"
+      },
+      "materialized_identity": {
+        "bytes": 76791,
+        "sha256": "6199fe2d7e53f1e185815241fd364137036317338adc1605e8b0093c09a500ec"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_cost_behavior_n8_json",
+      "registered_identity": {
+        "bytes": 76791,
+        "sha256": "6199fe2d7e53f1e185815241fd364137036317338adc1605e8b0093c09a500ec",
+        "source_ref": "sha256:6199fe2d7e53f1e185815241fd364137036317338adc1605e8b0093c09a500ec"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 351051,
+        "sha256": "1548e2a844c0bc8152bb784bf58eb443af42fc6cf0a513d1cb36d17a6488989b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 351051,
+        "sha256": "1548e2a844c0bc8152bb784bf58eb443af42fc6cf0a513d1cb36d17a6488989b",
+        "source_ref": "sha256:1548e2a844c0bc8152bb784bf58eb443af42fc6cf0a513d1cb36d17a6488989b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 46578,
+        "sha256": "9ddf786578c9861efdfdcc7f66698ac5b4507e0732b9783bfb7aede72f81e6b2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_cost_result_json",
+      "registered_identity": {
+        "bytes": 46578,
+        "sha256": "9ddf786578c9861efdfdcc7f66698ac5b4507e0732b9783bfb7aede72f81e6b2",
+        "source_ref": "sha256:9ddf786578c9861efdfdcc7f66698ac5b4507e0732b9783bfb7aede72f81e6b2"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 3715,
+        "sha256": "fe3197327a50454d83f5897028407a1d2f5061ed3d0f971097f1798a1f0fb006"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_cost_run_json",
+      "registered_identity": {
+        "bytes": 3715,
+        "sha256": "fe3197327a50454d83f5897028407a1d2f5061ed3d0f971097f1798a1f0fb006",
+        "source_ref": "sha256:fe3197327a50454d83f5897028407a1d2f5061ed3d0f971097f1798a1f0fb006"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/behavior-N8.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/behavior-N8.json"
+      },
+      "materialized_identity": {
+        "bytes": 75665,
+        "sha256": "67127e5fb1abbbfe33afcbe6b5d322928c9f261c5e9d3bda86457ce7c4a9da2a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_shared_behavior_n8_json",
+      "registered_identity": {
+        "bytes": 75665,
+        "sha256": "67127e5fb1abbbfe33afcbe6b5d322928c9f261c5e9d3bda86457ce7c4a9da2a",
+        "source_ref": "sha256:67127e5fb1abbbfe33afcbe6b5d322928c9f261c5e9d3bda86457ce7c4a9da2a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/raw.npz",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 344010,
+        "sha256": "614caae476a9f66ebf17683d5ee6b5bff06c232250cbc98e4505d48570b8a92a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 344010,
+        "sha256": "614caae476a9f66ebf17683d5ee6b5bff06c232250cbc98e4505d48570b8a92a",
+        "source_ref": "sha256:614caae476a9f66ebf17683d5ee6b5bff06c232250cbc98e4505d48570b8a92a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 46547,
+        "sha256": "e15f8f3210d68e897814c5e235b7b6dfc62d48d0b861d383eeaa0b37971725fd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_shared_result_json",
+      "registered_identity": {
+        "bytes": 46547,
+        "sha256": "e15f8f3210d68e897814c5e235b7b6dfc62d48d0b861d383eeaa0b37971725fd",
+        "source_ref": "sha256:e15f8f3210d68e897814c5e235b7b6dfc62d48d0b861d383eeaa0b37971725fd"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/liu/2234/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 3719,
+        "sha256": "8ded4700230659b55480c90ae3ff60879e3f8096e5b65e5f8ca49f7c2d69766f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_liu_2234_shared_run_json",
+      "registered_identity": {
+        "bytes": 3719,
+        "sha256": "8ded4700230659b55480c90ae3ff60879e3f8096e5b65e5f8ca49f7c2d69766f",
+        "source_ref": "sha256:8ded4700230659b55480c90ae3ff60879e3f8096e5b65e5f8ca49f7c2d69766f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/primary.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/primary.json"
+      },
+      "materialized_identity": {
+        "bytes": 429542,
+        "sha256": "37057e89463162bfdb679d99ec934a99f9863d707b4f1387ff42bf226db75569"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_primary_json",
+      "registered_identity": {
+        "bytes": 429542,
+        "sha256": "37057e89463162bfdb679d99ec934a99f9863d707b4f1387ff42bf226db75569",
+        "source_ref": "sha256:37057e89463162bfdb679d99ec934a99f9863d707b4f1387ff42bf226db75569"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "507fb88aaf556c05a56b69d44a6f17012a58eab702594359af3a7b0d11f72a0e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_01_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "507fb88aaf556c05a56b69d44a6f17012a58eab702594359af3a7b0d11f72a0e",
+        "source_ref": "sha256:507fb88aaf556c05a56b69d44a6f17012a58eab702594359af3a7b0d11f72a0e"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "643d60a191f8fcadc67a092364085fdc9aed61313a1c28712e6cadca349683d1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_01_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "643d60a191f8fcadc67a092364085fdc9aed61313a1c28712e6cadca349683d1",
+        "source_ref": "sha256:643d60a191f8fcadc67a092364085fdc9aed61313a1c28712e6cadca349683d1"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4501,
+        "sha256": "8319b02d2cc36f14fb287019282f8d85c4e6a72e7d81485e661e34707491e74d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_01_result_json",
+      "registered_identity": {
+        "bytes": 4501,
+        "sha256": "8319b02d2cc36f14fb287019282f8d85c4e6a72e7d81485e661e34707491e74d",
+        "source_ref": "sha256:8319b02d2cc36f14fb287019282f8d85c4e6a72e7d81485e661e34707491e74d"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19687,
+        "sha256": "c94c29e41fcaedcf874a8e264b47b8ffd4d1ccefe320d0ef0d38f472f892725d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_01_run_json",
+      "registered_identity": {
+        "bytes": 19687,
+        "sha256": "c94c29e41fcaedcf874a8e264b47b8ffd4d1ccefe320d0ef0d38f472f892725d",
+        "source_ref": "sha256:c94c29e41fcaedcf874a8e264b47b8ffd4d1ccefe320d0ef0d38f472f892725d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.01/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 418887,
+        "sha256": "bdcc62984bacb3cbf3942685b5cdfe78e89c88d05e39e781db47a9d31e6174c7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_01_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 418887,
+        "sha256": "bdcc62984bacb3cbf3942685b5cdfe78e89c88d05e39e781db47a9d31e6174c7",
+        "source_ref": "sha256:bdcc62984bacb3cbf3942685b5cdfe78e89c88d05e39e781db47a9d31e6174c7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "50c155e8d62b816c6d74a4afdeed06cf1ca88be7e94358e81ce093173081d583"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_1_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "50c155e8d62b816c6d74a4afdeed06cf1ca88be7e94358e81ce093173081d583",
+        "source_ref": "sha256:50c155e8d62b816c6d74a4afdeed06cf1ca88be7e94358e81ce093173081d583"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "b102042f210e22d963f39b8bc704282f5dccc8a583994046234dff84b51694d3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_1_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "b102042f210e22d963f39b8bc704282f5dccc8a583994046234dff84b51694d3",
+        "source_ref": "sha256:b102042f210e22d963f39b8bc704282f5dccc8a583994046234dff84b51694d3"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4500,
+        "sha256": "3873199ca88630761fc9f232d9f4b2b3e0e7f3d8ade341b101781284053e70d1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_1_result_json",
+      "registered_identity": {
+        "bytes": 4500,
+        "sha256": "3873199ca88630761fc9f232d9f4b2b3e0e7f3d8ade341b101781284053e70d1",
+        "source_ref": "sha256:3873199ca88630761fc9f232d9f4b2b3e0e7f3d8ade341b101781284053e70d1"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19685,
+        "sha256": "0b3a4f8bbc0fc7ab2b835e7858c6cbec586e94be222de59d7418e062f2c3e304"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_1_run_json",
+      "registered_identity": {
+        "bytes": 19685,
+        "sha256": "0b3a4f8bbc0fc7ab2b835e7858c6cbec586e94be222de59d7418e062f2c3e304",
+        "source_ref": "sha256:0b3a4f8bbc0fc7ab2b835e7858c6cbec586e94be222de59d7418e062f2c3e304"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-0.1/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 419724,
+        "sha256": "24df93e6cf33507d18f2cbf1a949f6db16d0ebcd2a91efcaca7756cf372450c0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_0_1_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 419724,
+        "sha256": "24df93e6cf33507d18f2cbf1a949f6db16d0ebcd2a91efcaca7756cf372450c0",
+        "source_ref": "sha256:24df93e6cf33507d18f2cbf1a949f6db16d0ebcd2a91efcaca7756cf372450c0"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "3af01897487a83811643c483423cd4c6599fbddcb94eed910a080fe25428e987"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_1_0_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "3af01897487a83811643c483423cd4c6599fbddcb94eed910a080fe25428e987",
+        "source_ref": "sha256:3af01897487a83811643c483423cd4c6599fbddcb94eed910a080fe25428e987"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "b5474c8889b57f14aafb6783333523de6386be850e99131019b1e153a2d886c3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_1_0_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "b5474c8889b57f14aafb6783333523de6386be850e99131019b1e153a2d886c3",
+        "source_ref": "sha256:b5474c8889b57f14aafb6783333523de6386be850e99131019b1e153a2d886c3"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4500,
+        "sha256": "44cccb23daf5294618abcdafa3749f6ad87e302616e182b9418b3900af9b1056"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_1_0_result_json",
+      "registered_identity": {
+        "bytes": 4500,
+        "sha256": "44cccb23daf5294618abcdafa3749f6ad87e302616e182b9418b3900af9b1056",
+        "source_ref": "sha256:44cccb23daf5294618abcdafa3749f6ad87e302616e182b9418b3900af9b1056"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19685,
+        "sha256": "4f1825cf5636122e9fc5ef3f69170afe4d683820476f7ad21b53969fd85fc6d1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_1_0_run_json",
+      "registered_identity": {
+        "bytes": 19685,
+        "sha256": "4f1825cf5636122e9fc5ef3f69170afe4d683820476f7ad21b53969fd85fc6d1",
+        "source_ref": "sha256:4f1825cf5636122e9fc5ef3f69170afe4d683820476f7ad21b53969fd85fc6d1"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/kappa-1.0/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 418151,
+        "sha256": "9268899d6d260330b0f2d1e9cd64b295bcb9ca10e013dd7d0b597bb98a5948f7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_kappa_1_0_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 418151,
+        "sha256": "9268899d6d260330b0f2d1e9cd64b295bcb9ca10e013dd7d0b597bb98a5948f7",
+        "source_ref": "sha256:9268899d6d260330b0f2d1e9cd64b295bcb9ca10e013dd7d0b597bb98a5948f7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "94ac65447a59ffd9e1a25b0576724a0840d6e3f82f3deae5b8c0f69e90f73ad3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_shared_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "94ac65447a59ffd9e1a25b0576724a0840d6e3f82f3deae5b8c0f69e90f73ad3",
+        "source_ref": "sha256:94ac65447a59ffd9e1a25b0576724a0840d6e3f82f3deae5b8c0f69e90f73ad3"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "a0921448bcd6e902cc7f7cd94d586fd55fe2b97c50a1b9556b48b2be63910bcf"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_shared_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "a0921448bcd6e902cc7f7cd94d586fd55fe2b97c50a1b9556b48b2be63910bcf",
+        "source_ref": "sha256:a0921448bcd6e902cc7f7cd94d586fd55fe2b97c50a1b9556b48b2be63910bcf"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4480,
+        "sha256": "d8a1d35e64a9abebadac6015468014c8f5b9a1da99aad0253a0459dc7fa59d61"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_shared_result_json",
+      "registered_identity": {
+        "bytes": 4480,
+        "sha256": "d8a1d35e64a9abebadac6015468014c8f5b9a1da99aad0253a0459dc7fa59d61",
+        "source_ref": "sha256:d8a1d35e64a9abebadac6015468014c8f5b9a1da99aad0253a0459dc7fa59d61"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19664,
+        "sha256": "e99f3811e4ca03f6b64f7c451711603a087de8a8316b519953ee347db797fbda"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_shared_run_json",
+      "registered_identity": {
+        "bytes": 19664,
+        "sha256": "e99f3811e4ca03f6b64f7c451711603a087de8a8316b519953ee347db797fbda",
+        "source_ref": "sha256:e99f3811e4ca03f6b64f7c451711603a087de8a8316b519953ee347db797fbda"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2231/shared/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 418998,
+        "sha256": "3dbe622d828139177700c2304a50aa0f27ca94e684564c1ed13c607e30bd4147"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2231_shared_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 418998,
+        "sha256": "3dbe622d828139177700c2304a50aa0f27ca94e684564c1ed13c607e30bd4147",
+        "source_ref": "sha256:3dbe622d828139177700c2304a50aa0f27ca94e684564c1ed13c607e30bd4147"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "87368130ca3c29b8b3fd089e9cabab4b321a7d5fa5e4206a84f60c9f5c621b56"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_cost_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "87368130ca3c29b8b3fd089e9cabab4b321a7d5fa5e4206a84f60c9f5c621b56",
+        "source_ref": "sha256:87368130ca3c29b8b3fd089e9cabab4b321a7d5fa5e4206a84f60c9f5c621b56"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "3fe1a66601d7659d419fb1cc0695ccae1d51c28e99093d0da7d908ab9384bbe5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_cost_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "3fe1a66601d7659d419fb1cc0695ccae1d51c28e99093d0da7d908ab9384bbe5",
+        "source_ref": "sha256:3fe1a66601d7659d419fb1cc0695ccae1d51c28e99093d0da7d908ab9384bbe5"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4495,
+        "sha256": "cc887a3e98b4277e633648307fcfb9bc1b94407cc3e3930d1dbd9fd1e1a391c6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_cost_result_json",
+      "registered_identity": {
+        "bytes": 4495,
+        "sha256": "cc887a3e98b4277e633648307fcfb9bc1b94407cc3e3930d1dbd9fd1e1a391c6",
+        "source_ref": "sha256:cc887a3e98b4277e633648307fcfb9bc1b94407cc3e3930d1dbd9fd1e1a391c6"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19675,
+        "sha256": "6247640245b7351607b521e6a6c1753ab8cbe2d560a9acaebb9fb52826bf6e49"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_cost_run_json",
+      "registered_identity": {
+        "bytes": 19675,
+        "sha256": "6247640245b7351607b521e6a6c1753ab8cbe2d560a9acaebb9fb52826bf6e49",
+        "source_ref": "sha256:6247640245b7351607b521e6a6c1753ab8cbe2d560a9acaebb9fb52826bf6e49"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/cost/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 419863,
+        "sha256": "384fc149893fc5eaadd1189593103452f2eb4af5426b8e3e51c2bf763a056894"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_cost_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 419863,
+        "sha256": "384fc149893fc5eaadd1189593103452f2eb4af5426b8e3e51c2bf763a056894",
+        "source_ref": "sha256:384fc149893fc5eaadd1189593103452f2eb4af5426b8e3e51c2bf763a056894"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "58797800c714daf28828316a03312d1c8010c2273fc758e8ecf284bc35b8e665"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_shared_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "58797800c714daf28828316a03312d1c8010c2273fc758e8ecf284bc35b8e665",
+        "source_ref": "sha256:58797800c714daf28828316a03312d1c8010c2273fc758e8ecf284bc35b8e665"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "24795879fbfc597177e200aefbbfc34ed662e540837cde8e65b9a4e3d5b5c174"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_shared_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "24795879fbfc597177e200aefbbfc34ed662e540837cde8e65b9a4e3d5b5c174",
+        "source_ref": "sha256:24795879fbfc597177e200aefbbfc34ed662e540837cde8e65b9a4e3d5b5c174"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4481,
+        "sha256": "1da9d19533e0f9560543c3ce3111ac9b6433067c02b7a4b62ec1265ea81c2778"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_shared_result_json",
+      "registered_identity": {
+        "bytes": 4481,
+        "sha256": "1da9d19533e0f9560543c3ce3111ac9b6433067c02b7a4b62ec1265ea81c2778",
+        "source_ref": "sha256:1da9d19533e0f9560543c3ce3111ac9b6433067c02b7a4b62ec1265ea81c2778"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19664,
+        "sha256": "368b7da063018f411c31aa29a31e12edb7a666d904573f51f02b4fbe1c16a3fe"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_shared_run_json",
+      "registered_identity": {
+        "bytes": 19664,
+        "sha256": "368b7da063018f411c31aa29a31e12edb7a666d904573f51f02b4fbe1c16a3fe",
+        "source_ref": "sha256:368b7da063018f411c31aa29a31e12edb7a666d904573f51f02b4fbe1c16a3fe"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2232/shared/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 418886,
+        "sha256": "44f1712db57ff187326d97c435446e3f79425cbf61dcdc101dab5c2c69a2a531"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2232_shared_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 418886,
+        "sha256": "44f1712db57ff187326d97c435446e3f79425cbf61dcdc101dab5c2c69a2a531",
+        "source_ref": "sha256:44f1712db57ff187326d97c435446e3f79425cbf61dcdc101dab5c2c69a2a531"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "7465ec724c2d2d3b47d197f98a4bc7af1c380e4862de639f1b42074c0ee153b1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_cost_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "7465ec724c2d2d3b47d197f98a4bc7af1c380e4862de639f1b42074c0ee153b1",
+        "source_ref": "sha256:7465ec724c2d2d3b47d197f98a4bc7af1c380e4862de639f1b42074c0ee153b1"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "f86ebad165eca5cb486ebe0340efcdedaadca00748724f2c904a41ae671b594d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_cost_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "f86ebad165eca5cb486ebe0340efcdedaadca00748724f2c904a41ae671b594d",
+        "source_ref": "sha256:f86ebad165eca5cb486ebe0340efcdedaadca00748724f2c904a41ae671b594d"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4494,
+        "sha256": "496476ae09b9b8e2ee226b165dd3e41c135d84773856088c5256f2ab2549cf9f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_cost_result_json",
+      "registered_identity": {
+        "bytes": 4494,
+        "sha256": "496476ae09b9b8e2ee226b165dd3e41c135d84773856088c5256f2ab2549cf9f",
+        "source_ref": "sha256:496476ae09b9b8e2ee226b165dd3e41c135d84773856088c5256f2ab2549cf9f"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19675,
+        "sha256": "3985978fef15da9f60bd90143b586f4ce49fcc046ff0de68879a55159711b525"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_cost_run_json",
+      "registered_identity": {
+        "bytes": 19675,
+        "sha256": "3985978fef15da9f60bd90143b586f4ce49fcc046ff0de68879a55159711b525",
+        "source_ref": "sha256:3985978fef15da9f60bd90143b586f4ce49fcc046ff0de68879a55159711b525"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/cost/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 419734,
+        "sha256": "cc027f7e43399add4dd684ab8f1508cbba043b36db3b6b140deab9e2b39e7ad4"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_cost_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 419734,
+        "sha256": "cc027f7e43399add4dd684ab8f1508cbba043b36db3b6b140deab9e2b39e7ad4",
+        "source_ref": "sha256:cc027f7e43399add4dd684ab8f1508cbba043b36db3b6b140deab9e2b39e7ad4"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "fa7a46283379acca420d04ed7841ab37cca0f96ef84b65b1d3036fa36547688e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_shared_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "fa7a46283379acca420d04ed7841ab37cca0f96ef84b65b1d3036fa36547688e",
+        "source_ref": "sha256:fa7a46283379acca420d04ed7841ab37cca0f96ef84b65b1d3036fa36547688e"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "94d8329c3d3ad238b4af3cf50dd9d0513c4ba29d370f6f3378bf3eb3009f7695"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_shared_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "94d8329c3d3ad238b4af3cf50dd9d0513c4ba29d370f6f3378bf3eb3009f7695",
+        "source_ref": "sha256:94d8329c3d3ad238b4af3cf50dd9d0513c4ba29d370f6f3378bf3eb3009f7695"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4481,
+        "sha256": "aa8382e4122168b09d062569f2cf01cdbd01f6c580c8e935967f5205f9d7b919"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_shared_result_json",
+      "registered_identity": {
+        "bytes": 4481,
+        "sha256": "aa8382e4122168b09d062569f2cf01cdbd01f6c580c8e935967f5205f9d7b919",
+        "source_ref": "sha256:aa8382e4122168b09d062569f2cf01cdbd01f6c580c8e935967f5205f9d7b919"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19664,
+        "sha256": "b7216801ff21340c690f2c349ec9d3e9c4479b49060da9a59b8e3a5198bf6124"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_shared_run_json",
+      "registered_identity": {
+        "bytes": 19664,
+        "sha256": "b7216801ff21340c690f2c349ec9d3e9c4479b49060da9a59b8e3a5198bf6124",
+        "source_ref": "sha256:b7216801ff21340c690f2c349ec9d3e9c4479b49060da9a59b8e3a5198bf6124"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2233/shared/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 418927,
+        "sha256": "16dca9339da97ea1e78a5163839d24ce05b547bbf0aecdf33b05ffa028a317de"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2233_shared_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 418927,
+        "sha256": "16dca9339da97ea1e78a5163839d24ce05b547bbf0aecdf33b05ffa028a317de",
+        "source_ref": "sha256:16dca9339da97ea1e78a5163839d24ce05b547bbf0aecdf33b05ffa028a317de"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "954c32a90ca53ed0fb08c77344e2b46fe3d9ee5c34fbdde13579f120e9967d5a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_cost_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "954c32a90ca53ed0fb08c77344e2b46fe3d9ee5c34fbdde13579f120e9967d5a",
+        "source_ref": "sha256:954c32a90ca53ed0fb08c77344e2b46fe3d9ee5c34fbdde13579f120e9967d5a"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "6baca563ae52137a81dfa48e0271b7e010bafe7ee96311e6789fb5cc17be3245"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_cost_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "6baca563ae52137a81dfa48e0271b7e010bafe7ee96311e6789fb5cc17be3245",
+        "source_ref": "sha256:6baca563ae52137a81dfa48e0271b7e010bafe7ee96311e6789fb5cc17be3245"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4495,
+        "sha256": "5764a3d213a033243af82dc6fe7c3121c8dadd26d814b53a6a5388b89ffc5eaf"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_cost_result_json",
+      "registered_identity": {
+        "bytes": 4495,
+        "sha256": "5764a3d213a033243af82dc6fe7c3121c8dadd26d814b53a6a5388b89ffc5eaf",
+        "source_ref": "sha256:5764a3d213a033243af82dc6fe7c3121c8dadd26d814b53a6a5388b89ffc5eaf"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19675,
+        "sha256": "6e7dabbc574c7ee14ff521214f60af87c497c73d22df500b7792a04dddb57ce7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_cost_run_json",
+      "registered_identity": {
+        "bytes": 19675,
+        "sha256": "6e7dabbc574c7ee14ff521214f60af87c497c73d22df500b7792a04dddb57ce7",
+        "source_ref": "sha256:6e7dabbc574c7ee14ff521214f60af87c497c73d22df500b7792a04dddb57ce7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/cost/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 419746,
+        "sha256": "55504fce14dc6583a3df00ee106f5f29709f561d7072347b1f98c6a5a0a36e5a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_cost_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 419746,
+        "sha256": "55504fce14dc6583a3df00ee106f5f29709f561d7072347b1f98c6a5a0a36e5a",
+        "source_ref": "sha256:55504fce14dc6583a3df00ee106f5f29709f561d7072347b1f98c6a5a0a36e5a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/local.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/local.pth"
+      },
+      "materialized_identity": {
+        "bytes": 1641,
+        "sha256": "c994fca6e0ef41dda6d4204b4acf44f89f23e73fdbdd9f05613d42b21feeac10"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_shared_local_pth",
+      "registered_identity": {
+        "bytes": 1641,
+        "sha256": "c994fca6e0ef41dda6d4204b4acf44f89f23e73fdbdd9f05613d42b21feeac10",
+        "source_ref": "sha256:c994fca6e0ef41dda6d4204b4acf44f89f23e73fdbdd9f05613d42b21feeac10"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/net.pth",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 359487,
+        "sha256": "2ccc00941e075b31ff7a3281c664e11d4d7049a13c7ad8678387b4f4a9d9e9b9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_shared_net_pth",
+      "registered_identity": {
+        "bytes": 359487,
+        "sha256": "2ccc00941e075b31ff7a3281c664e11d4d7049a13c7ad8678387b4f4a9d9e9b9",
+        "source_ref": "sha256:2ccc00941e075b31ff7a3281c664e11d4d7049a13c7ad8678387b4f4a9d9e9b9"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/result.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 4482,
+        "sha256": "f6a0b60bfb50df5564bb15e72ddfe8a8ccd53aceab962463984197fbfad6390a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_shared_result_json",
+      "registered_identity": {
+        "bytes": 4482,
+        "sha256": "f6a0b60bfb50df5564bb15e72ddfe8a8ccd53aceab962463984197fbfad6390a",
+        "source_ref": "sha256:f6a0b60bfb50df5564bb15e72ddfe8a8ccd53aceab962463984197fbfad6390a"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/run.json",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 19664,
+        "sha256": "33c0eff20b0399e10fd49769adf178af9bd7aadef0da9c35be9463f8d51a9a92"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_shared_run_json",
+      "registered_identity": {
+        "bytes": 19664,
+        "sha256": "33c0eff20b0399e10fd49769adf178af9bd7aadef0da9c35be9463f8d51a9a92",
+        "source_ref": "sha256:33c0eff20b0399e10fd49769adf178af9bd7aadef0da9c35be9463f8d51a9a92"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/train_log.jsonl",
+        "repository_path": "studies/effective_write_cost/records/artifacts/training/2234/shared/train_log.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 418850,
+        "sha256": "ee85c4685cd6fc87419c4561ebc5c50f4ffa94571e239d06519561a3f5c73ddb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_artifacts_training_2234_shared_train_log_jsonl",
+      "registered_identity": {
+        "bytes": 418850,
+        "sha256": "ee85c4685cd6fc87419c4561ebc5c50f4ffa94571e239d06519561a3f5c73ddb",
+        "source_ref": "sha256:ee85c4685cd6fc87419c4561ebc5c50f4ffa94571e239d06519561a3f5c73ddb"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.artifact_lock",
       "format": {
         "format": "json",
@@ -4737,6 +9328,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/reports/interpretation.md",
+        "repository_path": "studies/effective_write_cost/records/reports/interpretation.md"
+      },
+      "materialized_identity": {
+        "bytes": 9450,
+        "sha256": "7aca5d94e865449410215fd27cb7f77d646694cbd6cc8648a4608f17ba1c4959"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_reports_interpretation_md",
+      "registered_identity": {
+        "bytes": 9450,
+        "sha256": "7aca5d94e865449410215fd27cb7f77d646694cbd6cc8648a4608f17ba1c4959",
+        "source_ref": "sha256:7aca5d94e865449410215fd27cb7f77d646694cbd6cc8648a4608f17ba1c4959"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.supporting_artifact",
       "format": {
         "format": "json",
@@ -4768,6 +9393,40 @@
         "source_ref": "sha256:c24baaea4f5cbe4515961d3397cc70d0c12d0488b7d450e29cd989ef5588f6bb"
       },
       "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/results/result.json",
+        "repository_path": "studies/effective_write_cost/records/results/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 531289,
+        "sha256": "763df49f8f00e335c94788708c0399b74bd8eab0593449a1de0e4b4f60ac166e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_results_result_json",
+      "registered_identity": {
+        "bytes": 531289,
+        "sha256": "763df49f8f00e335c94788708c0399b74bd8eab0593449a1de0e4b4f60ac166e",
+        "source_ref": "sha256:763df49f8f00e335c94788708c0399b74bd8eab0593449a1de0e4b4f60ac166e"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -32780,7 +37439,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 952,
+  "registered_record_count": 1089,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -32793,8 +37452,8 @@
     "environment_contract": 2,
     "execution_lock": 50,
     "freeze_validation": 1,
-    "frozen_parameters": 52,
-    "frozen_result": 96,
+    "frozen_parameters": 72,
+    "frozen_result": 129,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -32804,10 +37463,10 @@
     "registered_contract": 72,
     "repair_contract": 8,
     "repair_lock": 10,
-    "report": 72,
+    "report": 73,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 523,
+    "supporting_artifact": 606,
     "validation_result": 12
   },
   "schema_version": 2,
