@@ -32,9 +32,9 @@ diminishing-plasticity schedule before Liu input lock.
 
 **Claim boundary.** Generic evidence supports declining within-episode plasticity and
 rejects a relation-familiarity interpretation within the tested scheduler family; it is
-not Liu behavioral support. The prospective Liu input lock and evaluation remain
-authorized. Calibration, scientific candidate repair, fresh replication, circuit
-verification and main-model promotion remain closed.
+not Liu behavioral support. All 400 Liu cohorts are now input-locked before model
+rollout, and the registered evaluation is authorized. Calibration, scientific candidate
+repair, fresh replication, circuit verification and main-model promotion remain closed.
 
 ## Frozen records
 
@@ -116,6 +116,72 @@ verification and main-model promotion remain closed.
 - `execution_lock` —
   [studies/experience_dependent_plasticity/records/benchmarks/scheduler_selection_lock.json](records/benchmarks/scheduler_selection_lock.json)
   (`sha256:04abee2f9fa9`)
+- `randomization_record` —
+  [studies/experience_dependent_plasticity/records/benchmarks/liu_inputs.json](records/benchmarks/liu_inputs.json)
+  (`sha256:a63a4f65fb3b`)
+- `execution_lock` —
+  [studies/experience_dependent_plasticity/records/benchmarks/liu_input_lock.json](records/benchmarks/liu_input_lock.json)
+  (`sha256:fd181c4f4b4a`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-000.npz](records/inputs/liu-cohorts-000.npz)
+  (`sha256:2943bee3b2ce`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-020.npz](records/inputs/liu-cohorts-020.npz)
+  (`sha256:d1e4fc3d11df`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-040.npz](records/inputs/liu-cohorts-040.npz)
+  (`sha256:a272defc14e3`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-060.npz](records/inputs/liu-cohorts-060.npz)
+  (`sha256:32bd6565a1fd`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-080.npz](records/inputs/liu-cohorts-080.npz)
+  (`sha256:7caff1eaaf5c`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-100.npz](records/inputs/liu-cohorts-100.npz)
+  (`sha256:9d3482a1afc9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-120.npz](records/inputs/liu-cohorts-120.npz)
+  (`sha256:43aac64fc614`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-140.npz](records/inputs/liu-cohorts-140.npz)
+  (`sha256:42f4ecb0ab3a`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-160.npz](records/inputs/liu-cohorts-160.npz)
+  (`sha256:67afc7a06971`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-180.npz](records/inputs/liu-cohorts-180.npz)
+  (`sha256:5f21d7c10aad`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-200.npz](records/inputs/liu-cohorts-200.npz)
+  (`sha256:bf8cf8830807`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-220.npz](records/inputs/liu-cohorts-220.npz)
+  (`sha256:c8c8f80a4fc9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-240.npz](records/inputs/liu-cohorts-240.npz)
+  (`sha256:57fa91ca34a8`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-260.npz](records/inputs/liu-cohorts-260.npz)
+  (`sha256:46b308ebe6a9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-280.npz](records/inputs/liu-cohorts-280.npz)
+  (`sha256:a94a4016003f`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-300.npz](records/inputs/liu-cohorts-300.npz)
+  (`sha256:5b7ba208ac3a`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-320.npz](records/inputs/liu-cohorts-320.npz)
+  (`sha256:dc4e89eac48c`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-340.npz](records/inputs/liu-cohorts-340.npz)
+  (`sha256:757a6734ca00`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-360.npz](records/inputs/liu-cohorts-360.npz)
+  (`sha256:d44888d94a47`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-380.npz](records/inputs/liu-cohorts-380.npz)
+  (`sha256:500a20a0feab`)
 
 ## Provenance rule
 
