@@ -33,6 +33,9 @@ automatic promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/weak_evidence_routing/records/benchmarks/artifact_lock.json](records/benchmarks/artifact_lock.json)
+  (`sha256:6d9979cb0fc9`)
 - `registered_contract` —
   [studies/weak_evidence_routing/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:d5c958674b6c`)
