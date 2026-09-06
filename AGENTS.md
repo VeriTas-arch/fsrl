@@ -180,6 +180,17 @@ implementation, qualification, training, evaluation, calibration, replication,
 circuit testing or main-model promotion. Each requires later explicit execution
 authorization under the unchanged contract.
 
+The user has now explicitly authorized the fixed
+`experience_dependent_plasticity` pilot execution. This opens implementation,
+non-Liu qualification, the six mandatory paired 2117--2119 fits, the frozen
+generic scheduler decision, prospective paired Liu inputs and the registered
+400-cohort pilot. Commit and push the execution admission before implementation;
+lock all fits before any fitted-model evaluation, then lock the scheduler
+decision and every Liu input before Liu rollout. This authorization does not
+open alternative decay rules, codebooks, temperatures, losses, local branches,
+seed/checkpoint selection, post-result repair, fresh replication, circuit
+testing, human fitting or main-model promotion.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

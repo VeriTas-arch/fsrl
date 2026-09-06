@@ -39,6 +39,9 @@ verification and main-model promotion require later explicit authorization.
 - `registered_contract` —
   [studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.json](records/benchmarks/experience_dependent_plasticity_v1.json)
   (`sha256:c85068338223`)
+- `registered_contract` —
+  [studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.execution_admission.json](records/benchmarks/experience_dependent_plasticity_v1.execution_admission.json)
+  (`sha256:f95c92eb1f7d`)
 
 ## Provenance rule
 
