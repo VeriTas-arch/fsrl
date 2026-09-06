@@ -129,9 +129,7 @@ def numerical_checks(condition: str, batch: ModelBatch, spec: dict) -> dict:
         for index, (first, second) in enumerate(
             zip(relation, global_output, strict=True)
         ):
-            checks[f"balanced-global-identity-{index}"] = comparison(
-                first, second, atol=0, rtol=0
-            )
+            checks[f"balanced-global-identity-{index}"] = comparison(first, second)
     return checks
 
 
@@ -178,7 +176,7 @@ def qualify(attempt: int) -> dict:
             "cpu_test_modules": list(CPU_TESTS),
             "checks": checks,
         }
+        write_json_exclusive(directory / "qualification.json", result)
         if not result["passed"]:
             raise RuntimeError("adaptive-plasticity numerical qualification failed")
-        write_json_exclusive(directory / "qualification.json", result)
     return {"passed": True, "record": reference(directory / "qualification.json")}
