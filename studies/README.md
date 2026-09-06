@@ -250,11 +250,11 @@ trajectories.
     sampling inconsistency as a separate boundary. All arrays, summaries and report
     bytes were independently reconstructed.
 - [Experience-dependent score plasticity design](experience_dependent_plasticity/README.md) — `frozen_contract`
-  - **Finding:** A prospective design is frozen for a paired fixed-eta versus
-    experience-dependent Resampled learner. It preserves the codebook, information
-    boundary, score state, readout and generic objective; adds only a diminishing
-    efficacy state; and requires a nonbalanced schedule control before any
-    relation-specific interpretation. No execution or model promotion is registered.
+  - **Finding:** The prospective paired fixed-eta versus experience-dependent Resampled
+    design is execution-authorized, non-Liu qualified and source-locked. The frozen
+    implementation preserves the codebook, information boundary, score state, readout
+    and generic objective; adds only diminishing efficacy; and retains the nonbalanced
+    scheduler control. No training or Liu result exists yet.
 
 ## One-factor structural transport
 
