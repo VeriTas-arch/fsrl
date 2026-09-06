@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 639,
+  "entry_count": 649,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 316,
+    "json": 326,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 67,
@@ -22,8 +22,8 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 595,
-    "historical_gzip_view": 43,
+    "already_conformant": 596,
+    "historical_gzip_view": 52,
     "historical_pth_view": 1
   },
   "records": [
@@ -447,6 +447,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/benchmarks/artifact_lock.json",
+        "repository_path": "studies/common_encoding_state/records/benchmarks/artifact_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 2704,
+        "sha256": "deaebbd4c28ece1a2697fd1947014045e1625224fda48146dd86c3cde28e0da1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_benchmarks_artifact_lock_json",
+      "registered_identity": {
+        "bytes": 2704,
+        "sha256": "deaebbd4c28ece1a2697fd1947014045e1625224fda48146dd86c3cde28e0da1",
+        "source_ref": "sha256:deaebbd4c28ece1a2697fd1947014045e1625224fda48146dd86c3cde28e0da1"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -784,6 +818,330 @@
         "source_ref": "sha256:74cb64113d726b54ee51afca4c99c54dbe040280ad20e1ca4335064f84f02d61"
       },
       "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2123-episode_common.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2123-episode_common.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249105,
+        "sha256": "721e1f6eb7c941cbe54d2a1115f6c6ce9259fd07954f7986944c68485b93fba3"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2123_episode_common_json",
+      "registered_identity": {
+        "bytes": 1249105,
+        "sha256": "721e1f6eb7c941cbe54d2a1115f6c6ce9259fd07954f7986944c68485b93fba3",
+        "source_ref": "sha256:721e1f6eb7c941cbe54d2a1115f6c6ce9259fd07954f7986944c68485b93fba3"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2123-independent.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2123-independent.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249123,
+        "sha256": "0e55ba701cb7e7234d16d28356d8342f6fad1baaf13f330aef2f79f708bbf408"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2123_independent_json",
+      "registered_identity": {
+        "bytes": 1249123,
+        "sha256": "0e55ba701cb7e7234d16d28356d8342f6fad1baaf13f330aef2f79f708bbf408",
+        "source_ref": "sha256:0e55ba701cb7e7234d16d28356d8342f6fad1baaf13f330aef2f79f708bbf408"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2123-relation_common.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2123-relation_common.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249122,
+        "sha256": "7a45060489edde5e1a7ec70f02c14ac41f9362038e067853a14a21940343d110"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2123_relation_common_json",
+      "registered_identity": {
+        "bytes": 1249122,
+        "sha256": "7a45060489edde5e1a7ec70f02c14ac41f9362038e067853a14a21940343d110",
+        "source_ref": "sha256:7a45060489edde5e1a7ec70f02c14ac41f9362038e067853a14a21940343d110"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2124-episode_common.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2124-episode_common.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249025,
+        "sha256": "958ecdba349a771190e830104542508a90a61610493bf877cf5b72e193ff0ff6"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2124_episode_common_json",
+      "registered_identity": {
+        "bytes": 1249025,
+        "sha256": "958ecdba349a771190e830104542508a90a61610493bf877cf5b72e193ff0ff6",
+        "source_ref": "sha256:958ecdba349a771190e830104542508a90a61610493bf877cf5b72e193ff0ff6"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2124-independent.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2124-independent.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249121,
+        "sha256": "72878143703f7ea03218808c64a4d4276b27a361272b11a57a98227a235804f5"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2124_independent_json",
+      "registered_identity": {
+        "bytes": 1249121,
+        "sha256": "72878143703f7ea03218808c64a4d4276b27a361272b11a57a98227a235804f5",
+        "source_ref": "sha256:72878143703f7ea03218808c64a4d4276b27a361272b11a57a98227a235804f5"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2124-relation_common.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2124-relation_common.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249113,
+        "sha256": "27ae3dcc380458650050dfb159301fe63d27f303656c622b4a423b52fda07068"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2124_relation_common_json",
+      "registered_identity": {
+        "bytes": 1249113,
+        "sha256": "27ae3dcc380458650050dfb159301fe63d27f303656c622b4a423b52fda07068",
+        "source_ref": "sha256:27ae3dcc380458650050dfb159301fe63d27f303656c622b4a423b52fda07068"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2125-episode_common.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2125-episode_common.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249152,
+        "sha256": "5a2a6996fbf7b62e467fdeda0e2ce29f9654b01bcefbaad5a63c6f302346cdc5"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2125_episode_common_json",
+      "registered_identity": {
+        "bytes": 1249152,
+        "sha256": "5a2a6996fbf7b62e467fdeda0e2ce29f9654b01bcefbaad5a63c6f302346cdc5",
+        "source_ref": "sha256:5a2a6996fbf7b62e467fdeda0e2ce29f9654b01bcefbaad5a63c6f302346cdc5"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2125-independent.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2125-independent.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249085,
+        "sha256": "4453f84f73cda2fe92ce30786a59cf9b3c1e531da6e3a7271da92c0884d68ead"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2125_independent_json",
+      "registered_identity": {
+        "bytes": 1249085,
+        "sha256": "4453f84f73cda2fe92ce30786a59cf9b3c1e531da6e3a7271da92c0884d68ead",
+        "source_ref": "sha256:4453f84f73cda2fe92ce30786a59cf9b3c1e531da6e3a7271da92c0884d68ead"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/training-2125-relation_common.json",
+        "repository_path": "studies/common_encoding_state/records/results/training-2125-relation_common.json"
+      },
+      "materialized_identity": {
+        "bytes": 1249102,
+        "sha256": "85fe6ccf250703eaf2f7d519942c7e1fb97cec8c9a5207be4716211ddc323bf7"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_training_2125_relation_common_json",
+      "registered_identity": {
+        "bytes": 1249102,
+        "sha256": "85fe6ccf250703eaf2f7d519942c7e1fb97cec8c9a5207be4716211ddc323bf7",
+        "source_ref": "sha256:85fe6ccf250703eaf2f7d519942c7e1fb97cec8c9a5207be4716211ddc323bf7"
+      },
+      "role": "frozen_parameters"
     },
     {
       "availability": "materialized",
@@ -22007,11 +22365,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 637,
+  "registered_record_count": 647,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 10,
+    "artifact_lock": 11,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
@@ -22020,7 +22378,7 @@
     "environment_contract": 2,
     "execution_lock": 44,
     "freeze_validation": 1,
-    "frozen_parameters": 22,
+    "frozen_parameters": 31,
     "frozen_result": 70,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,

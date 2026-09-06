@@ -66,6 +66,36 @@ main model without fresh replication and a separate biological-boundary test.
 - `execution_lock` —
   [studies/common_encoding_state/records/benchmarks/rho_lock.json](records/benchmarks/rho_lock.json)
   (`sha256:afd50a50863b`)
+- `artifact_lock` —
+  [studies/common_encoding_state/records/benchmarks/artifact_lock.json](records/benchmarks/artifact_lock.json)
+  (`sha256:deaebbd4c28e`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2123-independent.json](records/results/training-2123-independent.json)
+  (`sha256:0e55ba701cb7`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2123-relation_common.json](records/results/training-2123-relation_common.json)
+  (`sha256:7a45060489ed`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2123-episode_common.json](records/results/training-2123-episode_common.json)
+  (`sha256:721e1f6eb7c9`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2124-independent.json](records/results/training-2124-independent.json)
+  (`sha256:72878143703f`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2124-relation_common.json](records/results/training-2124-relation_common.json)
+  (`sha256:27ae3dcc3804`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2124-episode_common.json](records/results/training-2124-episode_common.json)
+  (`sha256:958ecdba349a`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2125-independent.json](records/results/training-2125-independent.json)
+  (`sha256:4453f84f73cd`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2125-relation_common.json](records/results/training-2125-relation_common.json)
+  (`sha256:85fe6ccf2507`)
+- `frozen_parameters` —
+  [studies/common_encoding_state/records/results/training-2125-episode_common.json](records/results/training-2125-episode_common.json)
+  (`sha256:5a2a6996fbf7`)
 
 ## Provenance rule
 
