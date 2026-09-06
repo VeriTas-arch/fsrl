@@ -9,6 +9,7 @@ from fsrl.experiments.training_strategy.locks import (
     verify_reference,
 )
 from fsrl.infra.file_contracts import validate_run_manifest
+from fsrl.infra.git_provenance import git_blob_sha256
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
@@ -19,6 +20,7 @@ SOURCE = RECORDS / "benchmarks/source_lock.json"
 SCALE = RECORDS / "benchmarks/scale_lock.json"
 SELECTION = RECORDS / "benchmarks/selection_lock.json"
 MODELS = RECORDS / "benchmarks/model_lock.json"
+REPAIR = RECORDS / "benchmarks/source_repair_lock.json"
 
 
 def sources():
@@ -58,12 +60,38 @@ def validate_source():
     lock = load_json(SOURCE)
     if lock["protocol_sha256"] != PROTOCOL_SHA256:
         raise RuntimeError("source protocol mismatch")
+    repair = validate_repair(lock, head)
+    replacements = {} if repair is None else repair["replacements"]
     for row in lock["sources"]:
-        verify_reference(row, commit=lock["source_commit"])
+        changed = replacements.get(row["path"])
+        if changed is None:
+            verify_reference(row, commit=lock["source_commit"])
+        else:
+            assert repair is not None
+            verify_reference(changed["replacement"], commit=repair["source_commit"])
     verify_reference(lock["qualification"])
     for row in lock["inputs"].values():
         verify_reference(row["file"])
     return lock
+
+
+def validate_repair(lock, head):
+    if not REPAIR.exists():
+        return None
+    verify_reference(reference(REPAIR), commit=head)
+    repair = load_json(REPAIR)
+    originals = {row["path"]: row for row in lock["sources"]}
+    if repair["original_source_lock"] != reference(SOURCE):
+        raise RuntimeError("repair belongs to another source lock")
+    for path, row in repair["replacements"].items():
+        if row["original"] != originals[path] or row["replacement"]["path"] != path:
+            raise RuntimeError("repair source mapping differs")
+        if (
+            git_blob_sha256(REPO_ROOT, lock["source_commit"], path)
+            != row["original"]["sha256"]
+        ):
+            raise RuntimeError("repair original Git witness differs")
+    return repair
 
 
 def completed(directory):

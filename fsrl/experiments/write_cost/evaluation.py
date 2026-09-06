@@ -129,7 +129,21 @@ def generic_run(seed, arm, split, source):
             workflow_id="effective_write_cost_v1",
             execution_id=f"{split}-{seed}-{arm}",
             producer=identity,
-            resolved_config={"evaluation": spec["evaluation"]["generic"]},
+            resolved_config={
+                "evaluation": {
+                    **spec["evaluation"]["generic"],
+                    **(
+                        spec["evaluation"]["generic_development"]
+                        if split == "development"
+                        else {}
+                    ),
+                },
+                "inputs": {
+                    name: record
+                    for name, record in source["inputs"].items()
+                    if name.startswith(split + "-")
+                },
+            },
         ),
         torch.no_grad(),
     ):
