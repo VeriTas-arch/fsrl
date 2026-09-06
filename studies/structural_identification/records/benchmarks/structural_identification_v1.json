@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "structural_identification_v1",
+  "authorization": "Execute the reviewed minimal sufficient structure identification plan in task 01a075eb-08fa-73c0-b87d-2d75c242af2f.",
+  "question": "Which tested stable-admission, four-valued encoding and learning-schedule components can be removed while retaining the complete Liu behavioral target?",
+  "scope": "One development study with measurement bridging, separately trained structural deletions, observable-choice recovery, two prospective support manipulations and a shared scalar-state diagnostic. Existing studies and human fitting remain closed. Model-level sufficiency and conditional minimality, not human mechanism identification.",
+  "inherit": {
+    "task_and_training": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.json",
+    "codec": "studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json",
+    "scheduler": "studies/global_decay_replication/records/benchmarks/global_decay_replication_v1.json",
+    "admission": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json",
+    "meaning": "Inherit equations, task distribution/holdout partition, physical inputs, fixed codec/admission laws, training objective and optimizer settings only. The following prospective execution and measurement rules replace ancestor execution sequences for this distinct study."
+  },
+  "measurement": {
+    "source_audit": "Inspect the public OSF file inventory and released figure metadata for an executable classification source; archive the inventory. Do not contact authors or collect new human data.",
+    "common_rule": "strict_observed_v1: use observed pair counts only. Strict majority is required for a correct pair; an exact tie is scored as the incorrect direction for tournament classification, matching the existing transparent human trial reconstruction. This is a declared operational rule, not a claim that the unpublished original implementation is recovered.",
+    "common_beta": "Use the maintained fit_beta_distribution with uniform 0.001/0.999 clipping on both human and simulated pair accuracies; no released pair-specific endpoint exception.",
+    "reference": "Recompute all nine human endpoints from the unchanged 77 released trial records with the common rule, matching cohort exclusions, denominators, 80-percent stable errors, Hodge ranks and seven equally weighted distance means. Freeze 10000 whole-participant bootstrap resamples, seed 1300001. Report published Figure 3b classes and Figure 2d coefficients alongside the reconstruction, never overwrite them.",
+    "legacy_bridge": "For identical simulated choices, also reconstruct the historical latent-margin tie rule and original nine-row classifiers/reference intervals. Report both estimands. Changed observation rules never retrospectively turn a failed historical study into a success.",
+    "unknown_source": "If published classes remain unrecoverable from a documented common algorithm, retain source correspondence as unresolved. Common-rule model adequacy may be assessed, but it cannot by itself satisfy the original main-model admission contract.",
+    "freeze": "Commit this protocol before human reanalysis; freeze the common human reference and measurement report before fitted-candidate Liu exposure. Do not choose the rule according to candidate scores."
+  },
+  "design": {
+    "seeds": [2126, 2127, 2128],
+    "structures": ["M00", "M10", "M01", "M11"],
+    "structure_bits": "First bit enables the inherited stable relation admission z; second enables independently resampled four-valued teaching codes. Disabled z is exactly one, disabled Q uses the displayed signed metric. Zero z skips the entire update.",
+    "schedules": ["decay", "fixed"],
+    "execution_order": "Complete all 12 decay fits, then all 12 fixed-rate fits. Rotate structure order by seed index. Lock all 24 final fits before fitted-model evaluation. The complete fixed-rate matrix prevents missing a simpler structure that is sufficient only without decay.",
+    "state": "w in R^15, initially zero; ordinary binary cue difference x. No local trace, shared encoder latent, extra learned representation or query-time state update.",
+    "update": "w_next = w + a_t*z*(e-dot(w,x))*x/(1e-8+dot(x,x)); margin = gamma_G*dot(w,c_left-c_right)",
+    "schedule": "decay: a_t=eta0/(1+floor(t/R)*eta0), where R is the number of scheduled support relations; fixed: a_t=eta0. R and clock semantics remain unchanged under grouped order. No relation-specific efficacy state.",
+    "parameters": ["eta0", "gamma_G"],
+    "optimization": "1500 Adam steps, batch 32, learning rate 0.01, betas=(0.9,0.999), eps=1e-8, no decay, global gradient clip 2; eta0=sigmoid(raw), gamma_G=softplus(raw), physical initialization 0.5 and 1. Mean softplus(-y*M) over generic queries at training temperature 1, final step only. Liu sampling temperature remains 0.25.",
+    "pairing": "Identical physical episodes, cues, support/query sequences and initialization within a seed across all eight recipes. Generate full admission and quantization streams even when unused. No Liu loss, seed replacement, checkpoint selection or post-result optimization extension.",
+    "rng": {"training_offset": 1310000, "encoding_offset": 1320000, "generic": 1330001, "generic_encoding": 1330003, "cohort_base": 7000000, "cohort_stride": 1000, "bootstrap": 7900001},
+    "cohort_offsets": {"cue_seed": 0, "support_seed": 200, "subject_encoding_seed": 400, "encoding_seed": 600, "choice_seed": 800},
+    "generic_episodes": 256,
+    "cohorts": 100,
+    "subjects_per_cohort": 77,
+    "precision": "100 paired independent development cohorts per fit; worst-case Bernoulli Monte Carlo SE 0.05 for descriptive pass rates. Bootstrap 10000 whole cohorts within each fit. This development budget does not replace the 400-cohort confirmation requirement. Do not pool networks or add cohorts after seeing results."
+  },
+  "recovery": {
+    "scope": "Non-Liu synthetic observation recovery only, not human fitting. Decoder inputs are ordinary cues, displayed signed support/order and final query counts. Generating z, teaching codes, w and model identity are unavailable.",
+    "seed": 1340001,
+    "structures": ["M00", "M10", "M01", "M11"],
+    "schedule": "decay",
+    "eta_grid": [0.25, 0.6, 0.99],
+    "gain_grid": [1.0, 4.0, 8.0],
+    "datasets_per_setting": 12,
+    "episodes_per_dataset": 16,
+    "choice_repetitions": 10,
+    "nuisance_draws": [4096, 8192],
+    "comparison": "Independent common prior pools; integrate the product of all choices within each subject over admission/encoding, sum log likelihoods across the dataset, then marginalize the shared eta/gain grid with uniform prior. Never multiply querywise averaged probabilities or fit a different slow parameter per subject.",
+    "designs": ["balanced_K4", "balanced_K2", "balanced_K8", "clustered_K4"],
+    "decision": "Report confusion matrices and per-parameter recovery. Pairwise structural discrimination requires balanced pairwise recovery >=0.8 and its Wilson 95-percent lower bound >0.5 for both directions, with >=0.95 agreement of selected families at the two integration budgets. Otherwise report unresolved; no replacement grid, metric or latent-variable budget. Select no model from this screen."
+  },
+  "manipulations": {
+    "seed": 1350001,
+    "episodes": 256,
+    "graph": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]],
+    "bridge": [3,4],
+    "ranks": "Random item-to-rank and binary cue assignments; exact displayed rank gaps. The bridge is the only path between the two four-item components. No observations from the test set enter model state.",
+    "conditions": ["balanced_K2", "balanced_K4", "balanced_K8", "clustered_K4", "reverse_clustered_K4"],
+    "pairing": "Same base graph/cues/admission, fresh independent codes indexed by relation occurrence, prefix coupling for K, and identical per-relation code values under order permutations. Grouped and reverse-grouped orders balance early/late relation positions. K changes exposure count, not the query count or learning clock definition.",
+    "outcomes": "Bridge and cross-component query accuracy, complete ranking-class vector, joint choice log scores in the recovery screen, and paired order/K contrasts. Report internal correctness separately. No claim that final-state error decays as 1/K or that omitted-edge queries cannot improve indirectly."
+  },
+  "scalar_diagnostic": {
+    "identity": "All fitted recipes must obey M_ij+M_jk+M_ki=0 and frozen query state. This is imposed additive geometry, not an emergent discovery.",
+    "observable": "Use the first five versus last five existing query blocks. A replicated cycle is the same directed triad with strict majority on every edge in each half. Report per-person counts and cohort prevalence for human records and simulated cohorts, without selecting people/triads on full-data effects.",
+    "power": "Use the 100 locked simulated cohorts per fit for the predictive null; evaluate sensitivity with a separate fixed synthetic assay containing one three-edge cycle with probabilities 0.7 and 0.9, ten choices per pair, seed 1360001, 10000 subjects each. This diagnostic does not modify the learner, historical nine-row gate, or human evidence grade. Low detection power means unresolved, never evidence of absent stable cycles."
+  },
+  "decision": {
+    "integrity": "Independent float64 recurrence parity, cue reversal, zero-admission no-op, gradient/one-Adam-step and eager/compiled CUDA parity, matched random streams, source/input/artifact locks and query-no-write. Nonfinite fits or failed integrity are noninterpretable, never replace seeds.",
+    "competence": "For every fit, generic learned and nonlearned deterministic correctness have 95-percent episode-bootstrap lower bounds above 0.5. Permuting teaching values among observed relation addresses must reduce intact correctness with paired 95-percent lower bound above zero; zero admitted evidence gives chance policy.",
+    "sufficiency": "Report all nine common-rule and all nine legacy flags on every cohort. A development-qualified recipe requires all nine common qualitative and quantitative flags on three prospectively fixed witness cohorts (indices 0,1,2), and each continuous cohort-mean 95-percent interval entirely inside its corresponding common human reference, in every mandatory fit. Undefined is unresolved. Report legacy qualification separately and do not waive the inherited original admission requirement.",
+    "minimality": "Among qualified recipes, remove a component only if the simpler recipe remains fully qualified and the paired 95-percent upper bound of its ranking-composition TV cost relative to the fuller recipe is <=0.01 in every seed. State costs, fixed assumptions and unidentifiable alternatives remain explicit; no aggregate PASS-count winner.",
+    "failure": "All failed/partial recipes remain registered. Failure of all recipes closes this fixed eight-recipe family, not all score learners or all precision/admission theories. Report shared deficits and scalar-diagnostic limits; do not add a mechanism or tune a frozen recipe.",
+    "successor": "Only a fully qualified recipe with resolved measurement/admission correspondence may enter an unchanged fresh-training replication with independent witness and 400 precision cohorts, then a selected-parameter finite-time circuit test. Freeze that descendant before execution. If development or correspondence is unresolved, finish this study with that outcome and no promotion."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.structural_identification",
+    "runtime": "Bounded single-thread CPU statistics; CUDA float32 training/rollout, no TF32/autocast, torch.compile fullgraph/default, float64 reference calculations. Warmup does not consume random streams or optimizer steps. Run artifacts under artifacts/runs/structural_identification_v1.",
+    "freeze_points": "Protocol before measurement analysis; qualified committed implementation/source and declared input identities before scientific execution; common human reference before fitted Liu exposure; all final fit artifacts jointly locked before fitted evaluation. Preserve interrupted attempts and resume only validated completed units.",
+    "outputs": "One source/input lock, measurement bridge and common reference, qualification, all fitted parameters and stream hashes, compact reconstructable query counts/margins, recovery inputs/scores, manipulation arrays, canonical result and concise interpretation with component-retention table. Register immutable outputs in the owning study and rebuild navigation."
+  }
+}

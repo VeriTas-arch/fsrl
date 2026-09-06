@@ -265,6 +265,9 @@ trajectories.
     fits all preserve the global-decay learner, but episode-common encoding fails the
     registered specificity contrast against the marginally matched relation-common
     control in every network. The registered outcome is joint_structure_unresolved.
+- [Minimal sufficient structure identification](structural_identification/README.md) — `frozen_contract`
+  - **Finding:** Prospective measurement bridge and matched structural-deletion study;
+    no candidate outcome is available.
 
 ## One-factor structural transport
 
