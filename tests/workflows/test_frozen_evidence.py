@@ -4,6 +4,8 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from fsrl.infra.study_registry import resolve_record
 from fsrl.paths import REPO_ROOT
@@ -242,6 +244,30 @@ class FrozenReportingSnapshotTests(unittest.TestCase):
         self.assertTrue(result["core_ready"])
         self.assertFalse(result["gpu_required"])
         self.assertTrue(result["passed"])
+
+    def test_doctor_accepts_other_torch_versions_but_still_requires_gpu(self):
+        for version in ("2.12.0+cu130", "2.14.0+cu130"):
+            with self.subTest(version=version):
+                torch = SimpleNamespace(
+                    __version__=version,
+                    cuda=SimpleNamespace(is_available=lambda: False),
+                )
+                with patch.dict(sys.modules, {"torch": torch}):
+                    cpu = doctor_mainline()
+                    gpu = doctor_mainline("global_reassembly")
+                self.assertTrue(cpu["passed"])
+                self.assertEqual(cpu["torch"]["observed"], version)
+                self.assertNotEqual(cpu["torch"]["recorded"], version)
+                self.assertTrue(gpu["core_ready"])
+                self.assertTrue(gpu["gpu_required"])
+                self.assertFalse(gpu["passed"])
+
+    def test_doctor_still_requires_torch_to_be_installed(self):
+        with patch.dict(sys.modules, {"torch": None}):
+            result = doctor_mainline()
+        self.assertFalse(result["torch"]["passed"])
+        self.assertFalse(result["core_ready"])
+        self.assertFalse(result["passed"])
 
     def test_presentation_v2_defines_exact_L_and_a_equivalence(self):
         presentation = resolve_record("docs/liu_presentation_package_v2.md").read_text()

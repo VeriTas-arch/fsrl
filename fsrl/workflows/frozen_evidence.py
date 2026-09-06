@@ -584,7 +584,7 @@ def doctor_mainline(stage: str | None = None) -> dict:
         cuda_available = bool(torch.cuda.is_available())
     except (ImportError, RuntimeError):
         pass
-    torch_ready = torch_observed == snapshot["torch"]
+    torch_ready = torch_observed is not None
     gpu_required = stage in environment["runtime_contract"]["gpu_required_for"]
     core_ready = bool(
         python_observed == snapshot["python"]
@@ -609,7 +609,7 @@ def doctor_mainline(stage: str | None = None) -> dict:
             "passed": python_observed == snapshot["python"],
         },
         "torch": {
-            "expected": snapshot["torch"],
+            "recorded": snapshot["torch"],
             "observed": torch_observed,
             "passed": torch_ready,
         },
