@@ -1,0 +1,70 @@
+{
+  "CUDA_max_errors": {
+    "2126-M10-theta_M10": 8.108812350471339e-07,
+    "2126-M10-theta_M11": 6.868407602667048e-07,
+    "2126-M11-theta_M10": 5.190456340287142e-07,
+    "2126-M11-theta_M11": 5.648996346252488e-07,
+    "2127-M10-theta_M10": 8.288417303603524e-07,
+    "2127-M10-theta_M11": 5.324217964286504e-07,
+    "2127-M11-theta_M10": 8.128088540004796e-07,
+    "2127-M11-theta_M11": 9.722338857043322e-07,
+    "2128-M10-theta_M10": 4.893286762452931e-07,
+    "2128-M10-theta_M11": 5.996219254456037e-07,
+    "2128-M11-theta_M10": 5.731479406634321e-07,
+    "2128-M11-theta_M11": 5.381307230933885e-07
+  },
+  "moments_exact_enumeration": true,
+  "passed": true,
+  "runtime": {
+    "blas_thread_limit": 1,
+    "blas_threadpools": [
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.188.0"
+      },
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.dev"
+      }
+    ],
+    "compiler_threads": 1,
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "device_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "execution_schema_version": 2,
+    "float32_matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "profile": {
+      "blas_threads": 1,
+      "compile": true,
+      "compile_backend": "inductor",
+      "compile_fullgraph": true,
+      "compile_mode": "default",
+      "cpu_threads": 1,
+      "device": "cuda",
+      "require_cuda": true
+    },
+    "recompile_limit": 64,
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.13.0+cu130"
+  }
+}
