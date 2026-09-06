@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 953,
+  "entry_count": 954,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 446,
+    "json": 447,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 77,
@@ -23,7 +23,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 878,
+    "already_conformant": 879,
     "historical_gzip_view": 74,
     "historical_pth_view": 1
   },
@@ -4460,6 +4460,40 @@
         "bytes": 19345,
         "sha256": "fb8f21ee5b9616c75cd32c70847135fcc57ec4b48db5be1268f0d99854883e41",
         "source_ref": "sha256:fb8f21ee5b9616c75cd32c70847135fcc57ec4b48db5be1268f0d99854883e41"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/benchmarks/model_lock.json",
+        "repository_path": "studies/effective_write_cost/records/benchmarks/model_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 38352,
+        "sha256": "57e0edb34b553432a420738662193c29cd6285eac702bdb567881fe348129141"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_benchmarks_model_lock_json",
+      "registered_identity": {
+        "bytes": 38352,
+        "sha256": "57e0edb34b553432a420738662193c29cd6285eac702bdb567881fe348129141",
+        "source_ref": "sha256:57e0edb34b553432a420738662193c29cd6285eac702bdb567881fe348129141"
       },
       "role": "artifact_lock"
     },
@@ -32746,11 +32780,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 951,
+  "registered_record_count": 952,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 16,
+    "artifact_lock": 17,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
