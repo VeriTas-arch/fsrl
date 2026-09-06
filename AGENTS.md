@@ -196,19 +196,18 @@ Do not rerun, tune, or use these confirmation seeds to choose a common-state
 encoder. Common encoding state and circuit realization require their own
 prospective authorities.
 
-The user has explicitly opened `common_encoding_state`, a marginally matched
-test of whether episode-wide encoding quality changes joint ranking composition
-beyond relation-shared repetition dependence. Its prospective authority is
-[`studies/common_encoding_state/`](studies/common_encoding_state/). Preserve the
-replicated four-valued encoder marginals, global decay, readout, temperature and
-task-information boundary. Select the smallest identifiable rho only through
-the registered non-Liu model-recovery screen; stop before training if recovery
-fails. Otherwise lock rho, train and jointly lock all nine 2123--2125 fits, then
-lock every Liu cohort and latent stream before evaluation. The primary contrast
-is episode-common minus relation-common within each fit; do not pool networks or
-use Liu outcomes to tune rho. A positive development result is not main-model
-promotion and still requires unchanged fresh replication and a separate
-biological-boundary test.
+The complete `common_encoding_state` development study is now frozen. Generic
+recovery selected rho=0.125; all fixed 2120--2122 substitutions and trained
+2123--2125 episode-common fits preserve the registered joint-allocation and
+global-decay competence boundaries. Its authority is
+[`studies/common_encoding_state/`](studies/common_encoding_state/). Neither the
+fixed 2120--2122 substitutions nor the trained fits pass the all-network
+episode-common versus relation-common specificity gate; the registered outcome
+is `joint_structure_unresolved`, not support for a common episode state or
+main-model promotion. Do not rerun, tune rho, regroup the latent state, change
+the codebook, decay, readout, temperature, loss, thresholds, seeds or
+checkpoints, or use the completed execution gates as standing authorization for
+a repair. Any successor requires a separately authorized prospective question.
 
 ## Repository invariants
 

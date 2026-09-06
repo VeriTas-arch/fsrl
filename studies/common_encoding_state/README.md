@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `common_encoding_state`
 
@@ -25,14 +25,16 @@
 composition beyond a marginally matched relation-shared control while preserving the
 replicated global-decay learner?
 
-**Finding.** A prospective three-condition development test is registered; rho must
-first be selected by non-Liu model recovery, and no common-state outcome has been
-observed.
+**Finding.** The fixed 2120--2122 substitutions and independently trained 2123--2125
+fits all preserve the global-decay learner, but episode-common encoding fails the
+registered specificity contrast against the marginally matched relation-common control
+in every network. The registered outcome is joint_structure_unresolved.
 
-**Claim boundary.** This study changes only the joint dependence of stochastic
-four-valued encoding. It does not change any single-presentation code distribution, the
-global decay rule, readout, temperature or task information, and it cannot promote a
-main model without fresh replication and a separate biological-boundary test.
+**Claim boundary.** This completed development result does not support episode-wide
+common encoding as the missing joint-error mechanism and does not promote a main model.
+Marginal quantization, global decay, readout, temperature and task information remained
+fixed; no rho, codebook, loss, threshold, seed or checkpoint repair is authorized after
+exposure.
 
 ## Frozen records
 
@@ -171,6 +173,75 @@ main model without fresh replication and a separate biological-boundary test.
 - `supporting_artifact` —
   [studies/common_encoding_state/records/inputs/liu-cohorts-380.npz](records/inputs/liu-cohorts-380.npz)
   (`sha256:f26823b5c7d5`)
+- `report` —
+  [studies/common_encoding_state/records/reports/common_encoding_state_v1.md](records/reports/common_encoding_state_v1.md)
+  (`sha256:fb13cda836ec`)
+- `validation_result` —
+  [studies/common_encoding_state/records/reports/common_encoding_state_v1.verification_note.md](records/reports/common_encoding_state_v1.verification_note.md)
+  (`sha256:63c0b4b1ff0e`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/common_encoding_state_v1.json](records/results/common_encoding_state_v1.json)
+  (`sha256:118cdfe01d51`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-000.json](records/results/liu-cohorts-000.json)
+  (`sha256:3278fa49508c`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-020.json](records/results/liu-cohorts-020.json)
+  (`sha256:236e8dfa194c`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-040.json](records/results/liu-cohorts-040.json)
+  (`sha256:3965bf0c06f3`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-060.json](records/results/liu-cohorts-060.json)
+  (`sha256:da97fe7ca1a4`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-080.json](records/results/liu-cohorts-080.json)
+  (`sha256:bd47f5de5a84`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-100.json](records/results/liu-cohorts-100.json)
+  (`sha256:4534c71d45fd`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-120.json](records/results/liu-cohorts-120.json)
+  (`sha256:53eac1824826`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-140.json](records/results/liu-cohorts-140.json)
+  (`sha256:4bfa44e3f28a`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-160.json](records/results/liu-cohorts-160.json)
+  (`sha256:495367c67702`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-180.json](records/results/liu-cohorts-180.json)
+  (`sha256:e5088766694d`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-200.json](records/results/liu-cohorts-200.json)
+  (`sha256:b5b2c89a33cc`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-220.json](records/results/liu-cohorts-220.json)
+  (`sha256:1cc5ecdec5b7`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-240.json](records/results/liu-cohorts-240.json)
+  (`sha256:cc21d53677c0`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-260.json](records/results/liu-cohorts-260.json)
+  (`sha256:3858346f106c`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-280.json](records/results/liu-cohorts-280.json)
+  (`sha256:43852ff220a9`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-300.json](records/results/liu-cohorts-300.json)
+  (`sha256:7aa769d3cdf7`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-320.json](records/results/liu-cohorts-320.json)
+  (`sha256:73db26ff1bf1`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-340.json](records/results/liu-cohorts-340.json)
+  (`sha256:876df5ffb8ff`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-360.json](records/results/liu-cohorts-360.json)
+  (`sha256:10649689111b`)
+- `frozen_result` —
+  [studies/common_encoding_state/records/results/liu-cohorts-380.json](records/results/liu-cohorts-380.json)
+  (`sha256:7a17c40ae09d`)
 
 ## Provenance rule
 

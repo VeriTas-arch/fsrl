@@ -1,0 +1,70 @@
+# Marginally matched common encoding state
+
+Registered outcome: `joint_structure_unresolved`.
+
+The non-Liu recovery-selected perturbation was rho=`0.125`. All 400 prospectively locked 77-subject cohorts were analyzed within each fit; networks and participants were not pooled.
+
+| Source | Seed | Correct delta | Self-consistent-error delta | Self-inconsistent delta | Composition-TV delta | Internal-correct delta | Inversion delta | Specificity PASS |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| fixed | 2120 | {"interval":{"lower":-0.004113308413078151,"upper":0.0011423359535201634},"mean":-0.0014862554112554116} | {"interval":{"lower":-0.0036598427887901586,"upper":0.00262107997265892},"mean":-0.0004989405331510597} | {"interval":{"lower":0.0003336342276144908,"upper":0.0036125044144452037},"mean":0.0019851959444064705} | {"interval":{"lower":-0.0038136064593301453,"upper":0.002383475734791524},"mean":-0.0006903280929596725} | {"interval":{"lower":-0.0032467532467532465,"upper":0.0023051948051948045},"mean":-0.0005194805194805197} | {"interval":{"lower":-0.026526785714285732,"upper":0.0003579545454545246},"mean":-0.013051948051948058} | False |
+| fixed | 2121 | {"interval":{"lower":-0.004144484221918432,"upper":0.0012016599737981303},"mean":-0.001453787878787879} | {"interval":{"lower":-0.00356983082706767,"upper":0.002805704460013671},"mean":-0.0003686431989063568} | {"interval":{"lower":0.00016104508430166346,"upper":0.0035027523353839117},"mean":0.0018224310776942354} | {"interval":{"lower":-0.0037517878503075873,"upper":0.0026128336466165404},"mean":-0.00056003075871497} | {"interval":{"lower":-0.003344155844155845,"upper":0.0022727272727272717},"mean":-0.0005194805194805197} | {"interval":{"lower":-0.027012987012987003,"upper":0.0003579545454545374},"mean":-0.013311688311688314} | False |
+| fixed | 2122 | {"interval":{"lower":-0.004031529391660971,"upper":0.0012449369161540195},"mean":-0.0014208931419457738} | {"interval":{"lower":-0.0033958330485304162,"upper":0.002763311261107313},"mean":-0.0003370300751879698} | {"interval":{"lower":0.00010122465254044227,"upper":0.003414611244019139},"mean":0.0017579232171337433} | {"interval":{"lower":-0.003606080399863296,"upper":0.0025681395249487356},"mean":-0.0005284176349965829} | {"interval":{"lower":-0.0033441558441558443,"upper":0.00227353896103895},"mean":-0.0005194805194805197} | {"interval":{"lower":-0.027370941558441553,"upper":-9.65909090908962e-05},"mean":-0.013668831168831165} | False |
+| trained | 2123 | {"interval":{"lower":-0.004126948621553885,"upper":0.0012458276372750046},"mean":-0.0014542150831624518} | {"interval":{"lower":-0.0034024483082706765,"upper":0.0028976631920710864},"mean":-0.00024005468215994584} | {"interval":{"lower":-2.8283492822966603e-05,"upper":0.003397490601503754},"mean":0.0016942697653223968} | {"interval":{"lower":-0.003587863123718388,"upper":0.002702294087491456},"mean":-0.00043144224196855883} | {"interval":{"lower":-0.003280032467532468,"upper":0.0022735389610389497},"mean":-0.0005194805194805198} | {"interval":{"lower":-0.026818993506493496,"upper":0.0005852272727272714},"mean":-0.013149350649350647} | False |
+| trained | 2124 | {"interval":{"lower":-0.004081254272043747,"upper":0.0011740419229892905},"mean":-0.0014542150831624518} | {"interval":{"lower":-0.0035741955741626814,"upper":0.0026721150888585113},"mean":-0.0004673274094326729} | {"interval":{"lower":0.00019900034176349938,"upper":0.003643985816814764},"mean":0.001921542492595124} | {"interval":{"lower":-0.003764019138755982,"upper":0.0024773350991114137},"mean":-0.000658714969241286} | {"interval":{"lower":-0.00327922077922078,"upper":0.002272727272727273},"mean":-0.0005194805194805198} | {"interval":{"lower":-0.025844967532467535,"upper":0.0009090909090909072},"mean":-0.012597402597402593} | False |
+| trained | 2125 | {"interval":{"lower":-0.004181922134882662,"upper":0.0011189671622237399},"mean":-0.0015507632718159035} | {"interval":{"lower":-0.0032617241968557775,"upper":0.0030348654306220097},"mean":-0.0001097573479152425} | {"interval":{"lower":1.2703634085213138e-06,"upper":0.003289078804966963},"mean":0.0016605206197311461} | {"interval":{"lower":-0.003449333133971293,"upper":0.002832502563226245},"mean":-0.00030114490772385603} | {"interval":{"lower":-0.003474025974025974,"upper":0.0022402597402597403},"mean":-0.0005844155844155845} | {"interval":{"lower":-0.026688311688311667,"upper":0.0006826298701298574},"mean":-0.012987012987012984} | False |
+
+## Trained seed 2123: episode-common versus relation-common
+
+| Endpoint | Relation mean (95% CI) | Episode mean (95% CI) | Human reference | Episode classification |
+| --- | --- | --- | --- | --- |
+| learned_accuracy | 0.9074338474025972 {"lower":0.906198417207792,"upper":0.9086643770292205} | 0.907452922077922 {"lower":0.9062183441558441,"upper":0.9086704646915584} | {"lower":0.8931818181818183,"upper":0.933766233766234} | mean_within_reference |
+| nonlearned_accuracy | 0.833106168831169 {"lower":0.8316012459415584,"upper":0.834576140422078} | 0.8336258116883118 {"lower":0.8320836850649351,"upper":0.8351108887987012} | {"lower":0.8033100649350651,"upper":0.8501964285714286} | mean_within_reference |
+| symbolic_distance_effect | 0.04485225616220518 {"lower":0.04458214871013343,"upper":0.04512484638660663} | 0.044813566790352546 {"lower":0.044533259370306603,"upper":0.04509947751015994} | {"lower":0.03475439526459938,"upper":0.04489879848043117} | boundary_unresolved |
+| serial_position_effect | 0.07245037105751392 {"lower":0.07104909554730984,"upper":0.07385006570810143} | 0.07252118119975264 {"lower":0.0711518475572047,"upper":0.07388082482993197} | {"lower":0.05373840445269019,"upper":0.11070037105751393} | mean_within_reference |
+| stable_within_subject_errors | 0.9322756720842834 {"lower":0.9292512950862445,"upper":0.935269573196066} | 0.9334818081117965 {"lower":0.9304203354202466,"upper":0.9365028045394908} | {"lower":0.8405797101449275,"upper":0.9714285714285714} | mean_within_reference |
+| self_consistent_incorrect | 0.9396119958988379 {"lower":0.9369341613978129,"upper":0.9423265550239235} | 0.939371941216678 {"lower":0.9368676602016407,"upper":0.9419169348086127} | {"lower":0.7402597402597403,"upper":0.9090909090909091} | sustained_above_reference |
+| self_inconsistent | 0.01589331852358168 {"lower":0.014559530929596717,"upper":0.01726389994873547} | 0.017587588288904082 {"lower":0.016125694634313046,"upper":0.019113594924812023} | {"lower":0.012987012987012988,"upper":0.12987012987012986} | mean_within_reference |
+| correct_ranker | 0.044494685577580316 {"lower":0.042147153110047825,"upper":0.0468892622180451} | 0.043040470494417865 {"lower":0.040754253531556144,"upper":0.04531747123490543} | {"lower":0.03896103896103896,"upper":0.16883116883116883} | mean_within_reference |
+| inter_subject_ranking_diversity | 0.5647115758734849 {"lower":0.5612328077026458,"upper":0.5681211839199897} | 0.56628075331747 {"lower":0.5628031351545933,"upper":0.5696781084432601} | {"lower":0.5071839605407381,"upper":0.6124101814638899} | mean_within_reference |
+
+Episode-common core: `True`; preservation: `True`; all-nine qualitative: {"cohorts":400,"lower":0.96103658423074,"rate":0.98,"successes":392,"upper":0.9898316132083353}; quantitative: {"cohorts":400,"lower":0.03259742983714726,"rate":0.05,"successes":20,"upper":0.07596363506371961}.
+
+## Trained seed 2124: episode-common versus relation-common
+
+| Endpoint | Relation mean (95% CI) | Episode mean (95% CI) | Human reference | Episode classification |
+| --- | --- | --- | --- | --- |
+| learned_accuracy | 0.9074719967532467 {"lower":0.906237002840909,"upper":0.9086960430194803} | 0.9074573863636364 {"lower":0.9062288352272728,"upper":0.9086684760551947} | {"lower":0.8931818181818183,"upper":0.933766233766234} | mean_within_reference |
+| nonlearned_accuracy | 0.8331650974025974 {"lower":0.8316650974025975,"upper":0.8346578043831168} | 0.8336365259740259 {"lower":0.832137617694805,"upper":0.8351401217532466} | {"lower":0.8033100649350651,"upper":0.8501964285714286} | mean_within_reference |
+| symbolic_distance_effect | 0.04484034035692203 {"lower":0.044563638599920526,"upper":0.0451124199907236} | 0.044811122890714775 {"lower":0.044521059998674825,"upper":0.045091742010115766} | {"lower":0.03475439526459938,"upper":0.04489879848043117} | boundary_unresolved |
+| serial_position_effect | 0.07242888064316637 {"lower":0.07100815166975882,"upper":0.07382500386518244} | 0.0725191713048856 {"lower":0.07112702535559678,"upper":0.07388127705627706} | {"lower":0.05373840445269019,"upper":0.11070037105751393} | mean_within_reference |
+| stable_within_subject_errors | 0.9326541009442144 {"lower":0.9296415860103528,"upper":0.9356068975414487} | 0.9335150631978684 {"lower":0.9303800573548089,"upper":0.9365487411535981} | {"lower":0.8405797101449275,"upper":0.9714285714285714} | mean_within_reference |
+| self_consistent_incorrect | 0.939676930963773 {"lower":0.9370031480690364,"upper":0.9423146146616543} | 0.9392096035543404 {"lower":0.9366810363978127,"upper":0.9417583821770336} | {"lower":0.7402597402597403,"upper":0.9090909090909091} | sustained_above_reference |
+| self_inconsistent | 0.015795915926179085 {"lower":0.014434876110731371,"upper":0.01716040755297334} | 0.01771745841877421 {"lower":0.01619101446798815,"upper":0.019272086750968323} | {"lower":0.012987012987012988,"upper":0.12987012987012986} | mean_within_reference |
+| correct_ranker | 0.04452715311004785 {"lower":0.04219837235133287,"upper":0.04692436218386876} | 0.0430729380268854 {"lower":0.040733635224424684,"upper":0.045414445203918866} | {"lower":0.03896103896103896,"upper":0.16883116883116883} | mean_within_reference |
+| inter_subject_ranking_diversity | 0.5647044347306407 {"lower":0.5612179632220362,"upper":0.5681531600116716} | 0.566296094387744 {"lower":0.5628472032589278,"upper":0.5697068314876534} | {"lower":0.5071839605407381,"upper":0.6124101814638899} | mean_within_reference |
+
+Episode-common core: `True`; preservation: `True`; all-nine qualitative: {"cohorts":400,"lower":0.96103658423074,"rate":0.98,"successes":392,"upper":0.9898316132083353}; quantitative: {"cohorts":400,"lower":0.03259742983714726,"rate":0.05,"successes":20,"upper":0.07596363506371961}.
+
+## Trained seed 2125: episode-common versus relation-common
+
+| Endpoint | Relation mean (95% CI) | Episode mean (95% CI) | Human reference | Episode classification |
+| --- | --- | --- | --- | --- |
+| learned_accuracy | 0.907570211038961 {"lower":0.9063392654220778,"upper":0.9087804991883116} | 0.9075965909090908 {"lower":0.9063708806818181,"upper":0.9088226663961041} | {"lower":0.8931818181818183,"upper":0.933766233766234} | mean_within_reference |
+| nonlearned_accuracy | 0.8332900974025975 {"lower":0.8317972321428571,"upper":0.8348068384740259} | 0.8337857142857144 {"lower":0.832270109577922,"upper":0.8352894561688313} | {"lower":0.8033100649350651,"upper":0.8501964285714286} | mean_within_reference |
+| symbolic_distance_effect | 0.04481102350030925 {"lower":0.044529599649924936,"upper":0.045085790374591435} | 0.0447791975881262 {"lower":0.044490212088082036,"upper":0.04506058574078986} | {"lower":0.03475439526459938,"upper":0.04489879848043117} | boundary_unresolved |
+| serial_position_effect | 0.07237847866419295 {"lower":0.07093841991341993,"upper":0.07380287569573282} | 0.07246413110698825 {"lower":0.07108282312925168,"upper":0.07384699288806433} | {"lower":0.05373840445269019,"upper":0.11070037105751393} | mean_within_reference |
+| stable_within_subject_errors | 0.9334573814173892 {"lower":0.9304571210315635,"upper":0.9364820394457584} | 0.9340497724927627 {"lower":0.9310134088512477,"upper":0.9370860815011915} | {"lower":0.8405797101449275,"upper":0.9714285714285714} | mean_within_reference |
+| self_consistent_incorrect | 0.9397726247436773 {"lower":0.9370718198906357,"upper":0.9423744313909777} | 0.9396628673957621 {"lower":0.9371845027341082,"upper":0.9421979079801779} | {"lower":0.7402597402597403,"upper":0.9090909090909091} | sustained_above_reference |
+| self_inconsistent | 0.015601965140123037 {"lower":0.014272451298701297,"upper":0.016934854323308268} | 0.017262485759854184 {"lower":0.015824932644110272,"upper":0.018729089057871944} | {"lower":0.012987012987012988,"upper":0.12987012987012986} | mean_within_reference |
+| correct_ranker | 0.0446254101161996 {"lower":0.042292414986329435,"upper":0.047043443694463415} | 0.04307464684438369 {"lower":0.040765510366826144,"upper":0.04537339940760991} | {"lower":0.03896103896103896,"upper":0.16883116883116883} | mean_within_reference |
+| inter_subject_ranking_diversity | 0.5647213409761445 {"lower":0.5612747700188717,"upper":0.5681211544545866} | 0.5663843944458209 {"lower":0.5629840058072411,"upper":0.5697845795881453} | {"lower":0.5071839605407381,"upper":0.6124101814638899} | mean_within_reference |
+
+Episode-common core: `True`; preservation: `True`; all-nine qualitative: {"cohorts":400,"lower":0.964322927074442,"rate":0.9825,"successes":393,"upper":0.991497708892962}; quantitative: {"cohorts":400,"lower":0.03259742983714726,"rate":0.05,"successes":20,"upper":0.07596363506371961}.
+
+## Claim boundary
+
+The primary contrast is episode-common minus relation-common at matched rho. This isolates cross-relation dependence from within-relation repetition dependence while preserving every presentation's marginal quantization distribution.
+
+Complete nine-endpoint human-distribution equality is reported but is not the registered primary gate. A positive pilot would still require unchanged fresh replication and a separate biological-boundary test before main-model promotion.
+
+Do not tune rho or repair the codebook, temperature, decay, loss, classifier, threshold, seeds or checkpoints after this result.

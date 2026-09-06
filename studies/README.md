@@ -260,10 +260,11 @@ trajectories.
     independently on all three mandatory fresh seeds 2120--2122: internal strict
     correctness increased, inversion count and ranking-composition total variation
     decreased, and the frozen core and preservation gates passed.
-- [Marginally matched common encoding state](common_encoding_state/README.md) — `frozen_contract`
-  - **Finding:** A prospective three-condition development test is registered; rho must
-    first be selected by non-Liu model recovery, and no common-state outcome has been
-    observed.
+- [Marginally matched common encoding state](common_encoding_state/README.md) — `mixed`
+  - **Finding:** The fixed 2120--2122 substitutions and independently trained 2123--2125
+    fits all preserve the global-decay learner, but episode-common encoding fails the
+    registered specificity contrast against the marginally matched relation-common
+    control in every network. The registered outcome is joint_structure_unresolved.
 
 ## One-factor structural transport
 
