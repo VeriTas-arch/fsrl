@@ -61,6 +61,27 @@ promote a main model.
 - `supporting_artifact` —
   [studies/global_decay_replication/records/inputs/generic-40.npz](records/inputs/generic-40.npz)
   (`sha256:3d2a8b07b6a9`)
+- `artifact_lock` —
+  [studies/global_decay_replication/records/benchmarks/artifact_lock.json](records/benchmarks/artifact_lock.json)
+  (`sha256:4c0b5e9d6f16`)
+- `frozen_parameters` —
+  [studies/global_decay_replication/records/results/training-2120-fixed_eta_resampled.json](records/results/training-2120-fixed_eta_resampled.json)
+  (`sha256:340b8c81e7ea`)
+- `frozen_parameters` —
+  [studies/global_decay_replication/records/results/training-2120-adaptive_eta_resampled.json](records/results/training-2120-adaptive_eta_resampled.json)
+  (`sha256:1072fe1ddb7d`)
+- `frozen_parameters` —
+  [studies/global_decay_replication/records/results/training-2121-fixed_eta_resampled.json](records/results/training-2121-fixed_eta_resampled.json)
+  (`sha256:c2f8cacd458b`)
+- `frozen_parameters` —
+  [studies/global_decay_replication/records/results/training-2121-adaptive_eta_resampled.json](records/results/training-2121-adaptive_eta_resampled.json)
+  (`sha256:1daef8c238c7`)
+- `frozen_parameters` —
+  [studies/global_decay_replication/records/results/training-2122-fixed_eta_resampled.json](records/results/training-2122-fixed_eta_resampled.json)
+  (`sha256:11d1d4adf4f2`)
+- `frozen_parameters` —
+  [studies/global_decay_replication/records/results/training-2122-adaptive_eta_resampled.json](records/results/training-2122-adaptive_eta_resampled.json)
+  (`sha256:ac83afe8c36a`)
 
 ## Provenance rule
 

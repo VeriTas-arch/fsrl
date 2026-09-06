@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 552,
+  "entry_count": 559,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 277,
+    "json": 284,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 64,
@@ -22,8 +22,8 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 514,
-    "historical_gzip_view": 37,
+    "already_conformant": 515,
+    "historical_gzip_view": 43,
     "historical_pth_view": 1
   },
   "records": [
@@ -5891,6 +5891,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/benchmarks/artifact_lock.json",
+        "repository_path": "studies/global_decay_replication/records/benchmarks/artifact_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 1872,
+        "sha256": "4c0b5e9d6f16e3afa92aa1d01419239b3c5863ce54d103752f6bd3ab64d800fe"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_benchmarks_artifact_lock_json",
+      "registered_identity": {
+        "bytes": 1872,
+        "sha256": "4c0b5e9d6f16e3afa92aa1d01419239b3c5863ce54d103752f6bd3ab64d800fe",
+        "source_ref": "sha256:4c0b5e9d6f16e3afa92aa1d01419239b3c5863ce54d103752f6bd3ab64d800fe"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.randomization_record",
       "format": {
         "format": "json",
@@ -6194,6 +6228,222 @@
         "source_ref": "sha256:3d2a8b07b6a9ed6bd18d9262f9c90953edc52faf0cf46198866ba5962d5b1bea"
       },
       "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/training-2120-adaptive_eta_resampled.json",
+        "repository_path": "studies/global_decay_replication/records/results/training-2120-adaptive_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251908,
+        "sha256": "1072fe1ddb7dd1e0d14ab7c130798278a845bf1264b5bf07f8ccba48df0ec841"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_training_2120_adaptive_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251908,
+        "sha256": "1072fe1ddb7dd1e0d14ab7c130798278a845bf1264b5bf07f8ccba48df0ec841",
+        "source_ref": "sha256:1072fe1ddb7dd1e0d14ab7c130798278a845bf1264b5bf07f8ccba48df0ec841"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/training-2120-fixed_eta_resampled.json",
+        "repository_path": "studies/global_decay_replication/records/results/training-2120-fixed_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251921,
+        "sha256": "340b8c81e7ea2b95dc46b85526adceeae7c94001ccd49fdb3650efd7284da0ec"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_training_2120_fixed_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251921,
+        "sha256": "340b8c81e7ea2b95dc46b85526adceeae7c94001ccd49fdb3650efd7284da0ec",
+        "source_ref": "sha256:340b8c81e7ea2b95dc46b85526adceeae7c94001ccd49fdb3650efd7284da0ec"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/training-2121-adaptive_eta_resampled.json",
+        "repository_path": "studies/global_decay_replication/records/results/training-2121-adaptive_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251869,
+        "sha256": "1daef8c238c7be07037d4b6c7c8c2172d4290434481aeed6191c7b32fd6635da"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_training_2121_adaptive_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251869,
+        "sha256": "1daef8c238c7be07037d4b6c7c8c2172d4290434481aeed6191c7b32fd6635da",
+        "source_ref": "sha256:1daef8c238c7be07037d4b6c7c8c2172d4290434481aeed6191c7b32fd6635da"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/training-2121-fixed_eta_resampled.json",
+        "repository_path": "studies/global_decay_replication/records/results/training-2121-fixed_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251950,
+        "sha256": "c2f8cacd458bbddf3371d623f4280ed6752ca833d540173eefbd78f53199113f"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_training_2121_fixed_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251950,
+        "sha256": "c2f8cacd458bbddf3371d623f4280ed6752ca833d540173eefbd78f53199113f",
+        "source_ref": "sha256:c2f8cacd458bbddf3371d623f4280ed6752ca833d540173eefbd78f53199113f"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/training-2122-adaptive_eta_resampled.json",
+        "repository_path": "studies/global_decay_replication/records/results/training-2122-adaptive_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251857,
+        "sha256": "ac83afe8c36a089ae15fe71f4d3f703c781b149dbf3a7a9a7b268ec57b0b5b6b"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_training_2122_adaptive_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251857,
+        "sha256": "ac83afe8c36a089ae15fe71f4d3f703c781b149dbf3a7a9a7b268ec57b0b5b6b",
+        "source_ref": "sha256:ac83afe8c36a089ae15fe71f4d3f703c781b149dbf3a7a9a7b268ec57b0b5b6b"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/results/training-2122-fixed_eta_resampled.json",
+        "repository_path": "studies/global_decay_replication/records/results/training-2122-fixed_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251916,
+        "sha256": "11d1d4adf4f24f5732f15c3a3c5947dc466adad6b6ed5bd28bf72775990e9bb1"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_results_training_2122_fixed_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251916,
+        "sha256": "11d1d4adf4f24f5732f15c3a3c5947dc466adad6b6ed5bd28bf72775990e9bb1",
+        "source_ref": "sha256:11d1d4adf4f24f5732f15c3a3c5947dc466adad6b6ed5bd28bf72775990e9bb1"
+      },
+      "role": "frozen_parameters"
     },
     {
       "availability": "materialized",
@@ -19037,11 +19287,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 550,
+  "registered_record_count": 557,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 9,
+    "artifact_lock": 10,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
@@ -19050,7 +19300,7 @@
     "environment_contract": 2,
     "execution_lock": 40,
     "freeze_validation": 1,
-    "frozen_parameters": 16,
+    "frozen_parameters": 22,
     "frozen_result": 49,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,
