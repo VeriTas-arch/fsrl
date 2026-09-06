@@ -197,9 +197,13 @@ fail to close the dynamics.
     benefit is identified under the shared effective-evidence interface. All 18
     size-by-model cells retain task competence; the individualization deficit persists.
     The comparison is frozen, without main-model promotion or automatic repair.
-- [Weak evidence access to a jointly trained plastic RNN](weak_evidence_routing/README.md) — `unresolved`
-  - **Finding:** Prospectively registered paired routing comparison; no scientific
-    outcomes evaluated.
+- [Weak evidence access to a jointly trained plastic RNN](weak_evidence_routing/README.md) — `supporting`
+  - **Finding:** All three paired seeds support the registered routing effect and
+    isolated core behavior; all isolated N=8 models pass nine qualitative rows.
+    Triggered N=6/10 evaluation completed for every model, with all nine isolated size
+    cells passing core checks. Accuracy decreases materially; shared also has
+    core-qualified networks, so isolation is not established as necessary. Frozen
+    development evidence, without main-model promotion.
 
 ## Minimal explanatory models
 
