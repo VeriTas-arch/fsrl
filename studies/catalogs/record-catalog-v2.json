@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 452,
+  "entry_count": 453,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 232,
+    "json": 233,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 62,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 420,
+    "already_conformant": 421,
     "historical_gzip_view": 31,
     "historical_pth_view": 1
   },
@@ -2201,6 +2201,40 @@
         "migration_id": "runtime-locators-v1",
         "replacements": 15
       }
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 19473,
+        "sha256": "c850683382231fff2817d1e4b2dde6c44a36daa15e61b902a01025c87eba758e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_benchmarks_experience_dependent_plasticity_v1_json",
+      "registered_identity": {
+        "bytes": 19473,
+        "sha256": "c850683382231fff2817d1e4b2dde6c44a36daa15e61b902a01025c87eba758e",
+        "source_ref": "sha256:c850683382231fff2817d1e4b2dde6c44a36daa15e61b902a01025c87eba758e"
+      },
+      "role": "registered_contract"
     },
     {
       "availability": "materialized",
@@ -15625,7 +15659,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 450,
+  "registered_record_count": 451,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -15646,7 +15680,7 @@
     "presentation_view": 1,
     "randomization_record": 2,
     "readiness_result": 6,
-    "registered_contract": 62,
+    "registered_contract": 63,
     "repair_contract": 5,
     "repair_lock": 9,
     "report": 61,
@@ -15659,7 +15693,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "21e8d1633b67c11e73367c9e25cceb98b6c073d6a536d424ea41cf3c126ac4b0"
+      "sha256": "6058b3b87d7689f5bec4473c0c83f83dd1d0b782a12ae9365d81793108ec0120"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

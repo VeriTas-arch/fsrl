@@ -167,6 +167,19 @@ calibration, candidate repair or promotion is authorized. A future
 experience-dependent plasticity comparison needs separate execution
 authorization and fresh paired development fits.
 
+The user has opened the design-only `experience_dependent_plasticity`
+successor. Its prospective authority is
+[`studies/experience_dependent_plasticity/`](studies/experience_dependent_plasticity/).
+The Resampled codebook, information boundary, score state, query rule and
+single-stage generic objective stay fixed; the only candidate change is a
+diminishing evidence-update efficacy. The balanced Liu schedule cannot identify
+relation-specific state, so the frozen nonbalanced generic control must select
+between relation-addressed efficacy and the simpler global schedule before any
+Liu input lock. This design registration does not authorize source
+implementation, qualification, training, evaluation, calibration, replication,
+circuit testing or main-model promotion. Each requires later explicit execution
+authorization under the unchanged contract.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,

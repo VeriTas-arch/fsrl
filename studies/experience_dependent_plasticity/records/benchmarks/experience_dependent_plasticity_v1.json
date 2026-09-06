@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "experience_dependent_plasticity_v1",
+  "status": "prospective_model_design_frozen_execution_closed",
+  "authorization": "The user explicitly asked to determine the next-stage model design from the reviewed experience-dependent plasticity proposal. This freezes the candidate, comparisons, estimands and decision route; it does not authorize implementation, training or evaluation.",
+  "parent_commit": "afe97902a4ddcbdc82af9019bf1310162faae96b",
+  "question": "Can a two-scalar single-stage Resampled score learner improve complete internal order formation and the joint ranking-category profile by stabilizing repeated-evidence plasticity, without changing its information, codebook or choice readout?",
+  "scope": "A prospective design descendant of the frozen quantized learner and claim-relative main-model evaluation. Historical results remain immutable. No Liu fitting, temperature or gain calibration, codebook change, local branch, extra loss, execution, candidate promotion or claim about the human neural mechanism is authorized.",
+  "authorities": {
+    "model_neutral_admission": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json",
+    "parent_candidate_contract": "studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json",
+    "parent_candidate_result": "studies/quantized_relational_learner/records/results/quantized_relational_learner_v1.json",
+    "claim_relative_evaluation": "studies/main_model_evaluation_v2/records/benchmarks/main_model_evaluation_v2.json",
+    "localization_result": "studies/main_model_evaluation_v2/records/results/main_model_evaluation_v2.json",
+    "legacy_behavior_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json"
+  },
+  "evidence_basis": {
+    "observed": "The three frozen Resampled fits retain the complete legacy 9/9 qualitative and 8/9 quantitative pilot profile and retrospectively satisfy the claim-relative core layer. Their deterministic internal strict-correct fractions are about 3.4%, while the net sampled-choice shift in correct-ranker prevalence is directionally unresolved and the dominant mass already has multiple internal inversions.",
+    "inference": "The next intervention should target evidence integration before sampled choice. A fixed eta near 0.54 analytically gives a late observation much more weight than an early observation in an isolated four-repeat relation, making repeated-evidence stabilization a targeted low-capacity hypothesis.",
+    "not_established": "Existing outputs do not establish fixed eta as the causal source of the ranking-composition mismatch, do not show that relation-specific state is necessary and do not validate an experience-dependent biological mechanism. The proposed rule changes mean shrinkage as well as stochastic variance propagation."
+  },
+  "candidate": {
+    "name": "experience_dependent_plasticity_stabilization",
+    "preserve": "Retain the four-valued [-1,-1/3,1/3,1] Resampled codebook, independent stochastic rounding at every admitted presentation, stable binary subject admission z, ordinary binary cues, 15-dimensional score state w, epsilon=1e-8 normalization, global score-difference query, inherited fixed temperatures and the single generic query objective. No local trace is present.",
+    "fixed_baseline": "w_next=w+eta*z*(d_tilde-dot(w,x))*x/(epsilon+dot(x,x)), with eta=sigmoid(raw_eta).",
+    "adaptive_rule": "For the current cue-addressed relation r, use eta_r,t=eta0/(1+n_r,t*eta0), then w_next=w+eta_r,t*z*(d_tilde-dot(w,x))*x/(epsilon+dot(x,x)); only after that update set n_r,next=n_r,t+z. eta0=sigmoid(raw_eta0).",
+    "dynamic_efficacy_form": "The implementation should maintain a_r rather than require literal neural integer arithmetic: a_r,0=eta0; use a_r for the current update; after an admitted update set a_r,next=a_r/(1+a_r). This is algebraically identical to eta0/(1+n_r*eta0). The integer count remains an audit witness.",
+    "address": "Derive an orientation-invariant relation key only from the two ordinary cue vectors. Assign dense episode-local slots by first occurrence of the canonical cue key. Neither true rank, graph relation labels, displayed magnitude, learned/omitted labels nor query answers may enter the key. The exact slot map is an explicit algorithmic address assumption and must be costed.",
+    "admission": "z=0 skips the complete score update and leaves relation efficacy unchanged. Counts record admitted evidence, not mere stimulus time. Stable omission remains the inherited encoding hypothesis.",
+    "query": "M_ij=gamma_G*dot(w_T,c_i-c_j), with gamma_G=softplus(raw_global_gain). Query reads w only and cannot read or write an efficacy/count/address state.",
+    "slow_parameters": ["raw_eta0", "raw_global_gain"],
+    "state": "Per subject: 15 continuous score entries plus, only if relation specificity is selected, one continuous efficacy entry and one cue-derived address association per distinct support relation. No code cache, replay buffer, recurrent hidden state, local readout or post-support adaptation.",
+    "reset": "w, efficacy/count state and episode-local address associations reset at episode start. Nothing carries across episodes or simulated participants.",
+    "isolated_identity": "For one isolated relation, w0 prediction zero and epsilon ignored, kappa=(1-eta0)/eta0 gives d_hat_n=sum_{k=1}^n d_tilde_k/(kappa+n). This identity is a qualification target, not a claim that the interacting graph is a Bayesian estimator."
+  },
+  "matched_development": {
+    "execution_authority": "Closed. A later explicit user authorization is required before any source implementation, qualification, fitting or rollout.",
+    "mandatory_seeds": [2117, 2118, 2119],
+    "conditions": ["fixed_eta_resampled", "adaptive_eta_resampled"],
+    "execution_order": {
+      "2117": ["fixed_eta_resampled", "adaptive_eta_resampled"],
+      "2118": ["adaptive_eta_resampled", "fixed_eta_resampled"],
+      "2119": ["fixed_eta_resampled", "adaptive_eta_resampled"]
+    },
+    "pairing": "Within each seed, recreate identical generic episodes, cues, support/query schedules, admission masks and quantization uniforms for the two conditions. Use disjoint declared RNG channels and cumulative stream hashes. No exposed checkpoint initializes either fit.",
+    "optimization": "Inherit 1500 Adam steps, batch size 32, learning rate 0.01, gradient clip 2, initial physical eta/eta0=0.5 and gamma_G=1, final-step-only selection and mean softplus(-y*M) over equally weighted generic queries. Do not optimize correct-ranker prevalence, category counts, Liu summaries or PASS flags.",
+    "information_firewall": "Model development and numerical qualification use only protected generic tasks and synthetic fixtures. Liu behavior is not inspected until the model form, all six fits, scheduler decision and evaluation inputs are jointly locked.",
+    "no_hidden_search": "No optional seed, initialization sweep, checkpoint selection, longer budget, alternative decay curve or loss/readout tuning is part of this design. Optimization instability is reported separately from a competence-qualified scientific failure."
+  },
+  "schedule_identification": {
+    "confound": "In the inherited balanced schedule every relation appears once per block and z is stable, so each admitted relation has n_r equal to the zero-based block index. Relation-addressed and global blockwise efficacy are then exactly identical at every effective update.",
+    "global_control": "At zero-based support trial t with R distinct cue-derived relations, define g_t=floor(t/R) and eta_global,t=eta0/(1+g_t*eta0). This control has no relation-indexed efficacy state and is exactly equal to the relation rule on every admitted update in the balanced schedule.",
+    "nonbalanced_fixture": "Create a protected generic schedule from the same four presentations per relation by drawing one fixed relation order independently of rank or magnitude and placing each relation's four existing occurrences contiguously in that order. Preserve every cue, signed evidence value, admission variable, quantization uniform, query and total presentation count; only trial order changes. Apply the identical stored fixture to both schedulers.",
+    "no_third_fit": "The global control replays each locked adaptive fit with the same eta0 and gamma_G. Because both schedulers are identical during balanced training, it is not a third trained candidate.",
+    "specificity_gate": "For every adaptive fit on the nonbalanced fixture, require the paired episode-bootstrap 95% upper bound of mean(query_log_loss_relation-query_log_loss_global) below zero and the registered late-dominance contrast lower for the relation scheduler, while learned and nonlearned generic competence are preserved.",
+    "selection": "If the specificity gate passes independently in all three fits, retain relation-addressed efficacy and permit only a conditional relation-specific claim. Otherwise select the simpler global blockwise schedule before Liu input lock, remove relation-addressed state from the retained model description, and label any later Liu benefit as declining within-episode plasticity rather than relation familiarity. No seed majority vote or post-Liu reversal is allowed."
+  },
+  "mechanism_diagnostics": {
+    "analytic_recurrence": "Verify the isolated repeated-relation identity, a_r recurrence/count equivalence, z=0 no-op, orientation reversal, episode reset and exact balanced-schedule identity against an independent float64 implementation.",
+    "occurrence_sensitivity": "At fixed cues, z, order, fitted scalars and relation counts, compute the exact derivative J_kq of every terminal correct-signed query margin with respect to the k-th admitted quantized presentation of each retained relation. For k=1..4 define L_k=sqrt(mean(J_kq^2)) over registered episodes, relations and queries, and H_late=L_4/sum_k L_k. Preserve every L_k; do not report H_late alone.",
+    "late_sensitivity_gate": "On both balanced and nonbalanced protected generic fixtures, require the paired episode-bootstrap 95% upper bound of H_late_adaptive-H_late_fixed below zero in each seed. This establishes reduced relative late domination, not behavioral sufficiency.",
+    "mean_variance_decomposition": "Because the recurrence is affine in independently Resampled teaching codes at fixed schedules, independently reconstruct each terminal margin's conditional mean using codebook means and its conditional variance using code variances and exact sensitivities. Report adaptive-minus-fixed changes in mean margin, variance and signal-to-variance summaries separately. Neither component may be inferred from the other.",
+    "functional_controls": "Require evidence-routing shuffle impairment, all-z-off neutral state/chance policy, query no-write, complete ordinary-cue binding, finite gradients and optimizer updates of both slow scalars, and eager versus CUDA fullgraph=True mode=default output/loss/gradient/update parity.",
+    "state_ledger": "Record continuous state entries, address payload, transient slots, update count, trainable scalars, GPU memory and timing for both the relation and selected global form. A compact equation does not erase its addressing or schedule assumptions."
+  },
+  "prospective_evaluation": {
+    "sequence": "After separate execution authorization: commit/push implementation; qualify only on non-Liu fixtures; source-lock; train all six mandatory fits; jointly lock every fit; execute the generic scheduler decision and commit/push its append-only selection lock; freeze all Liu base cohorts and RNG arrays; commit/push the complete artifact/input lock; only then run Liu evaluation. Preserve failed attempts and never overwrite records.",
+    "generic": "Use disjoint protected balanced and nonbalanced episode sets, shared across every fit and scheduler replay. For each fit require participant/episode-bootstrap 95% lower bounds for learned and nonlearned exact correctness above 0.5, plus the mechanism and binding controls. Generic outcomes may choose relation versus global schedule only under the frozen rule; they cannot tune eta0 or gamma_G.",
+    "liu_cohorts": "Use 400 prospectively fixed independent 77-subject cohorts per fit, paired across fixed/adaptive conditions and disjoint from every exposed cohort. Preserve the Liu v2 observation schedule, stable admission, Resampled encoding, original sampled-choice policy and all original exclusions/denominators. Analyze each training fit independently; never pool participants or fits.",
+    "core_behavior": "Apply main_model_evaluation_v2 unchanged. In every adaptive fit require the Wilson 95% lower bound of simultaneous all-nine qualitative cohort pass probability above 0.90, and require the whole-cohort simulation intervals for learned and nonlearned mean accuracy to lie entirely inside their unchanged human reference intervals.",
+    "preservation_profile": "As a targeted no-regression gate, require the whole-cohort simulation intervals for the other currently supported continuous means—serial-position effect, stable within-subject errors, self-inconsistent rankings and inter-subject ranking diversity—to remain inside their unchanged reference intervals in every adaptive fit. Together with learned/nonlearned accuracy these are the six already supported continuous endpoints; this is preservation of prior positive evidence, not equality of full distributions.",
+    "internal_primary": "Within every paired seed, require the whole-cohort bootstrap 95% lower bound of mean(internal_strict_correct_adaptive-internal_strict_correct_fixed) above zero and the 95% upper bound of mean(mean_inversion_count_adaptive-mean_inversion_count_fixed) below zero. Report the fixed 0,1,2-3,4+ inversion bins and all internal-to-sampled transition cells.",
+    "composition_primary": "For p=(correct,self_consistent_incorrect,self_inconsistent) and frozen h=(8,64,5)/77, use D_rank=0.5*sum(abs(p-h)). Within every paired seed require the whole-cohort bootstrap 95% upper bound of mean(D_rank_adaptive-D_rank_fixed) below zero. Report all three fractions jointly. The derived roughly 7.4% correct fraction when inconsistency remains at 1.7% is context, never an absolute fitted target or gate.",
+    "legacy_profile": "Report every unchanged nine-row point estimate, human interval, qualitative flag, quantitative flag, row pass rate and joint 9/9 rate. full_quantitative_fidelity remains the stronger historical label but is not silently substituted for the claim-relative core label.",
+    "sampling_boundary": "Report loss flow, rescue flow and net sampled-choice shift exactly as in main_model_evaluation_v2. No choice-temperature or behavior-generator repair is allowed in this study, even if a stronger internal order is partly masked at sampling.",
+    "uncertainty": "Use 10000 bootstrap resamples of whole paired cohorts within each training fit for behavioral differences and 10000 paired episode resamples within each fit for generic contrasts. Use common resampling counts across paired estimands, fixed seeds declared in an execution lock, pointwise intervals and no fit pooling."
+  },
+  "decision": {
+    "noninterpretable": "Any source/input/artifact-lock failure, recurrence/parity failure, information leakage, nonfinite optimization or failed generic competence blocks mechanistic interpretation but does not permit replacement seeds or quiet repair.",
+    "adaptive_mechanism_supported": "Every adaptive fit passes generic competence, late-sensitivity, internal strict-correct, inversion-count, core-behavior, preservation-profile and paired D_rank gates. This supports this exact diminishing-plasticity computation as a candidate explanation; it does not by itself identify relation-specific state or promote a main model.",
+    "relation_specific_supported": "adaptive_mechanism_supported plus the nonbalanced specificity gate in all three fits. Only this outcome supports retaining relation-addressed efficacy over the global schedule, within the tested schedule family.",
+    "global_schedule_preferred": "adaptive_mechanism_supported with failed or heterogeneous relation-specificity. Retain the simpler global blockwise schedule and the adaptive benefit, but reject a relation-familiarity interpretation.",
+    "internal_only_support": "Late sensitivity and internal organization improve but D_rank, core behavior or preservation fails. Preserve the mechanistic positive result, do not promote, and use transition evidence to choose a separately registered next question.",
+    "behavior_without_targeted_mechanism": "D_rank improves without the late-sensitivity and internal-organization gates. Report a behavioral improvement but do not credit the proposed stabilization mechanism or promote it.",
+    "valid_negative": "A competent adaptive candidate that fails to improve internal organization closes this exact harmonic decay rule. Do not shop alternative decay curves, temperature, codebook, local correction, training length or seeds within this family; the next prospective hypothesis should concern joint encoding-error structure or a precisely defined individual-precision source.",
+    "full_quantitative_fidelity": "If all original 9/9 quantitative requirements also pass, report that stronger pilot result separately. It still cannot substitute for unchanged fresh training replication or biological-boundary verification.",
+    "promotion": "No outcome in this design directly promotes a main model. A frozen pilot success must undergo unchanged fresh paired training replication, prospective simulation stability, information/functional rechecks and a selected-parameter finite-time circuit test that includes the new efficacy state. Only then may main_model_admission assign a main-model label.",
+    "outcomes": ["noninterpretable", "valid_negative", "internal_only_support", "behavior_without_targeted_mechanism", "global_schedule_preferred", "relation_specific_supported"]
+  },
+  "biological_boundary": {
+    "supported_analogy": "A locally evolving efficacy a_r that falls after admitted evidence is compatible with an experience-dependent or uncertainty-related plasticity-stabilization analogy.",
+    "unresolved_implementation": "Exact cue matching, dense slot assignment, stable admission, stochastic quantization, prediction-error computation, divisive normalization and the outer Adam optimizer remain algorithmic assumptions. Literal counts are not asserted as neural variables.",
+    "required_successor_test": "For a selected candidate, qualify a bounded opponent-compartment or equivalent finite-time circuit across the fitted eta0, counts/efficacies 0..3, observed input envelope and both schedules. Existing fixed-eta score-circuit evidence does not automatically cover this state transition.",
+    "claim": "At most conditional circuit implementability of a model-level online rule; never evidence that humans use this rule or that the exact address/count state has been found in tissue."
+  },
+  "execution_boundary": "This record determines the next-stage design only. It creates no standing permission to implement, train, evaluate, inspect Liu outcomes, tune, replicate or promote. Any execution requires a new explicit user authorization and a committed implementation/source-lock sequence under this unchanged scientific contract."
+}
