@@ -7,14 +7,14 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 627,
+  "entry_count": 629,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
     "json": 310,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 65,
+    "markdown": 67,
     "numpy_npz": 240,
     "pdf": 2,
     "svg": 4,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 583,
+    "already_conformant": 585,
     "historical_gzip_view": 43,
     "historical_pth_view": 1
   },
@@ -7047,6 +7047,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/reports/global_decay_replication_v1.md",
+        "repository_path": "studies/global_decay_replication/records/reports/global_decay_replication_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 11288,
+        "sha256": "6b48fca076a575df835b558b89ea177a30487dff6111d65e6f4c2aabe87f66e7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_reports_global_decay_replication_v1_md",
+      "registered_identity": {
+        "bytes": 11288,
+        "sha256": "6b48fca076a575df835b558b89ea177a30487dff6111d65e6f4c2aabe87f66e7",
+        "source_ref": "sha256:6b48fca076a575df835b558b89ea177a30487dff6111d65e6f4c2aabe87f66e7"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.noninterpretable_attempt",
       "format": {
         "format": "markdown",
@@ -7078,6 +7112,40 @@
         "source_ref": "sha256:4afb3ab1e2591d3c6475435275f537122215c87a9438ade324d1432d650902a0"
       },
       "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/global_decay_replication/records/reports/global_decay_replication_v1.verification_note.md",
+        "repository_path": "studies/global_decay_replication/records/reports/global_decay_replication_v1.verification_note.md"
+      },
+      "materialized_identity": {
+        "bytes": 961,
+        "sha256": "d4660b0f8cafaa1ddac4813890979f92d9a209e0c225faf9ec3d0f98556db3da"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "global_decay_replication",
+        "kind": "study"
+      },
+      "record_id": "study.global_decay_replication.studies_global_decay_replication_records_reports_global_decay_replication_v1_verification_note_md",
+      "registered_identity": {
+        "bytes": 961,
+        "sha256": "d4660b0f8cafaa1ddac4813890979f92d9a209e0c225faf9ec3d0f98556db3da",
+        "source_ref": "sha256:d4660b0f8cafaa1ddac4813890979f92d9a209e0c225faf9ec3d0f98556db3da"
+      },
+      "role": "validation_result"
     },
     {
       "availability": "materialized",
@@ -21599,7 +21667,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 625,
+  "registered_record_count": 627,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -21623,11 +21691,11 @@
     "registered_contract": 65,
     "repair_contract": 8,
     "repair_lock": 10,
-    "report": 62,
+    "report": 63,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 293,
-    "validation_result": 6
+    "validation_result": 7
   },
   "schema_version": 2,
   "sources": {

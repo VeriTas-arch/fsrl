@@ -183,16 +183,18 @@ post-result repair, fresh replication, circuit testing, human fitting or main-
 model promotion is authorized. A successor requires a separate prospective
 question and explicit authorization.
 
-The user has explicitly opened `global_decay_replication`, an unchanged fresh
-replication of the selected fixed-versus-global-decay single-stage comparison on
-three mandatory paired seeds. Its prospective authority is
-[`studies/global_decay_replication/`](studies/global_decay_replication/). Freeze
-the protocol before implementation; qualify only on non-Liu fixtures; lock all
-six fits before generic confirmation or Liu evaluation; then lock every Liu
-cohort and RNG array before execution. Keep participants within each network and
-require every registered primary link in every fresh seed. This does not reopen
-relation-addressed efficacy, tune the parent recipe, test common encoding state,
-run the circuit boundary, or promote a main model.
+The complete `global_decay_replication` confirmation is now frozen. Its
+authority is
+[`studies/global_decay_replication/`](studies/global_decay_replication/).
+Across paired fresh 2120--2122 fits and 400 prospectively locked Liu cohorts per
+fit, the unchanged global blockwise diminishing-plasticity rule independently
+replicates the internal strict-correct, inversion-count, ranking-composition,
+core-behavior and preservation effects. The complete quantitative profile
+remains claim-relative: self-consistent incorrect behavior stays above the human
+reference, so this is not full distribution equality or main-model promotion.
+Do not rerun, tune, or use these confirmation seeds to choose a common-state
+encoder. Common encoding state and circuit realization require their own
+prospective authorities.
 
 ## Repository invariants
 

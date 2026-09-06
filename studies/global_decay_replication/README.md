@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `confirmed`
 - **Review state:** `indexed`
 - **Study ID:** `global_decay_replication`
 
@@ -24,13 +24,16 @@
 **Question.** Does the frozen global blockwise diminishing-plasticity effect replicate
 on three fresh paired single-stage training streams?
 
-**Finding.** A prospective unchanged replication is registered on mandatory seeds
-2120--2122; no replication outcome has been observed.
+**Finding.** The unchanged global blockwise diminishing-plasticity effect replicated
+independently on all three mandatory fresh seeds 2120--2122: internal strict correctness
+increased, inversion count and ranking-composition total variation decreased, and the
+frozen core and preservation gates passed.
 
-**Claim boundary.** This confirmation preserves the selected global decay, four-valued
-Resampled encoder, two-scalar single-stage learner and all inherited thresholds. It does
-not test common encoding state, reopen relation familiarity, run a circuit test or
-promote a main model.
+**Claim boundary.** This confirmation supports the global decay rule under the frozen
+four-valued Resampled encoder and two-scalar single-stage learner. Complete
+human-distribution equality remains outside the primary gate, self-consistent incorrect
+behavior remains above the human reference, and this study neither tests common encoding
+state nor promotes a main model.
 
 ## Frozen records
 
@@ -286,6 +289,12 @@ promote a main model.
 - `supporting_artifact` —
   [studies/global_decay_replication/records/results/liu-outputs-380.npz](records/results/liu-outputs-380.npz)
   (`sha256:bd78cd503c3d`)
+- `report` —
+  [studies/global_decay_replication/records/reports/global_decay_replication_v1.md](records/reports/global_decay_replication_v1.md)
+  (`sha256:6b48fca076a5`)
+- `validation_result` —
+  [studies/global_decay_replication/records/reports/global_decay_replication_v1.verification_note.md](records/reports/global_decay_replication_v1.verification_note.md)
+  (`sha256:d4660b0f8caf`)
 
 ## Provenance rule
 

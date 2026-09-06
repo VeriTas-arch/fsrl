@@ -255,9 +255,11 @@ trajectories.
     inversions and moves the joint ranking composition toward the human reference while
     preserving the registered competence/core profile. Relation-addressed efficacy is
     not supported over the simpler global scheduler.
-- [Fresh global-decay replication](global_decay_replication/README.md) — `frozen_contract`
-  - **Finding:** A prospective unchanged replication is registered on mandatory seeds
-    2120--2122; no replication outcome has been observed.
+- [Fresh global-decay replication](global_decay_replication/README.md) — `confirmed`
+  - **Finding:** The unchanged global blockwise diminishing-plasticity effect replicated
+    independently on all three mandatory fresh seeds 2120--2122: internal strict
+    correctness increased, inversion count and ranking-composition total variation
+    decreased, and the frozen core and preservation gates passed.
 
 ## One-factor structural transport
 
