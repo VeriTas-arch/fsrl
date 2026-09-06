@@ -60,6 +60,12 @@ main model without fresh replication and a separate biological-boundary test.
 - `supporting_artifact` —
   [studies/common_encoding_state/records/inputs/generic-40.npz](records/inputs/generic-40.npz)
   (`sha256:5dbb36aa2c62`)
+- `validation_result` —
+  [studies/common_encoding_state/records/results/generic_recovery.json](records/results/generic_recovery.json)
+  (`sha256:74cb64113d72`)
+- `execution_lock` —
+  [studies/common_encoding_state/records/benchmarks/rho_lock.json](records/benchmarks/rho_lock.json)
+  (`sha256:afd50a50863b`)
 
 ## Provenance rule
 

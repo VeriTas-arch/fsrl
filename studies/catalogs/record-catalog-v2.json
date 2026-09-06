@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 637,
+  "entry_count": 639,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 314,
+    "json": 316,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 67,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 593,
+    "already_conformant": 595,
     "historical_gzip_view": 43,
     "historical_pth_view": 1
   },
@@ -557,6 +557,40 @@
         "prospective_suffix": ".json"
       },
       "locator": {
+        "legacy_path": "studies/common_encoding_state/records/benchmarks/rho_lock.json",
+        "repository_path": "studies/common_encoding_state/records/benchmarks/rho_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 435,
+        "sha256": "afd50a50863bc65b07b8e0589db85216b9b4cffacbc20e7298aa2ea2d319a6c0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_benchmarks_rho_lock_json",
+      "registered_identity": {
+        "bytes": 435,
+        "sha256": "afd50a50863bc65b07b8e0589db85216b9b4cffacbc20e7298aa2ea2d319a6c0",
+        "source_ref": "sha256:afd50a50863bc65b07b8e0589db85216b9b4cffacbc20e7298aa2ea2d319a6c0"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
         "legacy_path": "studies/common_encoding_state/records/benchmarks/source_lock.json",
         "repository_path": "studies/common_encoding_state/records/benchmarks/source_lock.json"
       },
@@ -716,6 +750,40 @@
         "source_ref": "sha256:5dbb36aa2c622cddd9de35ed3b39eb1b3bc8358db1847cc8a8370ec1f5f18093"
       },
       "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/generic_recovery.json",
+        "repository_path": "studies/common_encoding_state/records/results/generic_recovery.json"
+      },
+      "materialized_identity": {
+        "bytes": 213283,
+        "sha256": "74cb64113d726b54ee51afca4c99c54dbe040280ad20e1ca4335064f84f02d61"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_generic_recovery_json",
+      "registered_identity": {
+        "bytes": 213283,
+        "sha256": "74cb64113d726b54ee51afca4c99c54dbe040280ad20e1ca4335064f84f02d61",
+        "source_ref": "sha256:74cb64113d726b54ee51afca4c99c54dbe040280ad20e1ca4335064f84f02d61"
+      },
+      "role": "validation_result"
     },
     {
       "availability": "materialized",
@@ -21939,7 +22007,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 635,
+  "registered_record_count": 637,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -21950,7 +22018,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 43,
+    "execution_lock": 44,
     "freeze_validation": 1,
     "frozen_parameters": 22,
     "frozen_result": 70,
@@ -21967,7 +22035,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 297,
-    "validation_result": 7
+    "validation_result": 8
   },
   "schema_version": 2,
   "sources": {
