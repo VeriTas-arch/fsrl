@@ -30,12 +30,12 @@ and moves the joint ranking composition toward the human reference while preserv
 registered competence/core profile. Relation-addressed efficacy is not supported over
 the simpler global scheduler.
 
-**Claim boundary.** Confirmed for this fixed three-seed development pilot: declining
-within-episode plasticity is a supported single-stage candidate mechanism, not relation
-familiarity. The result is claim-relative rather than full-distribution equality:
-self-consistent incorrect rankings remain high and the legacy full-nine quantitative
-profile does not pass. No main-model promotion follows without unchanged fresh
-replication and a separately authorized circuit boundary test.
+**Claim boundary.** Confirmed and independently reconstructed for this fixed three-seed
+development pilot: declining within-episode plasticity is a supported single-stage
+candidate mechanism, not relation familiarity. The result is claim-relative rather than
+full-distribution equality: self-consistent incorrect rankings remain high and the
+legacy full-nine quantitative profile does not pass. No main-model promotion follows
+without unchanged fresh replication and a separately authorized circuit boundary test.
 
 ## Frozen records
 
@@ -309,6 +309,9 @@ replication and a separately authorized circuit boundary test.
 - `supporting_artifact` —
   [studies/experience_dependent_plasticity/records/results/liu-outputs-380.npz](records/results/liu-outputs-380.npz)
   (`sha256:b6f5f4cdfefc`)
+- `validation_result` —
+  [studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.verification_note.md](records/reports/experience_dependent_plasticity_v1.verification_note.md)
+  (`sha256:e9e2a88da218`)
 
 ## Provenance rule
 

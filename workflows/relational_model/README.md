@@ -763,6 +763,10 @@ Exact evidence:
 - `supports` — [experience_dependent_plasticity:records/reports/experience_dependent_plasticity_v1.md](../../studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.md)
   - **Meaning:** Complete seedwise parameter, continuous-endpoint, stability and
     claim-boundary report, including the failed legacy full-nine quantitative profile.
+- `supports` — [experience_dependent_plasticity:records/reports/experience_dependent_plasticity_v1.verification_note.md](../../studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.verification_note.md)
+  - **Meaning:** Independent read-only reconstruction verifies all six fits, 400 cohorts
+    per fit, frozen decision and exact report bytes while preserving the original
+    verifier's display-order boundary.
 
 Verification:
 
@@ -771,6 +775,12 @@ Verification:
 ```bash
 direnv exec . python -m unittest tests.experiments.adaptive_plasticity.test_model \
   tests.experiments.adaptive_plasticity.test_pipeline
+```
+
+**`adaptive_plasticity_publication_audit`** (`cpu`):
+
+```bash
+direnv exec . python -m tools.provenance.verify_experience_dependent_plasticity_v1
 ```
 
 

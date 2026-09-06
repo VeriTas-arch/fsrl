@@ -7,14 +7,14 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 542,
+  "entry_count": 543,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
     "json": 272,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 63,
+    "markdown": 64,
     "numpy_npz": 195,
     "pdf": 2,
     "svg": 4,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 504,
+    "already_conformant": 505,
     "historical_gzip_view": 37,
     "historical_pth_view": 1
   },
@@ -3595,6 +3595,40 @@
         "source_ref": "sha256:9e99557bc5a8efe1ece7c39ca2ba8cd2d77b87cddbd9f99ba179249ce5f921b1"
       },
       "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.verification_note.md",
+        "repository_path": "studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.verification_note.md"
+      },
+      "materialized_identity": {
+        "bytes": 976,
+        "sha256": "e9e2a88da218b05d18dd62955a453bcdb78d06f169cedf55f28f1cd6d0ca3689"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_reports_experience_dependent_plasticity_v1_verification_note_md",
+      "registered_identity": {
+        "bytes": 976,
+        "sha256": "e9e2a88da218b05d18dd62955a453bcdb78d06f169cedf55f28f1cd6d0ca3689",
+        "source_ref": "sha256:e9e2a88da218b05d18dd62955a453bcdb78d06f169cedf55f28f1cd6d0ca3689"
+      },
+      "role": "validation_result"
     },
     {
       "availability": "materialized",
@@ -18697,7 +18731,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 540,
+  "registered_record_count": 541,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -18725,7 +18759,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 248,
-    "validation_result": 4
+    "validation_result": 5
   },
   "schema_version": 2,
   "sources": {
