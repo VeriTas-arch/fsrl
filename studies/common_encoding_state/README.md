@@ -105,6 +105,72 @@ main model without fresh replication and a separate biological-boundary test.
 - `supporting_artifact` —
   [studies/common_encoding_state/records/results/generic_confirmation.npz](records/results/generic_confirmation.npz)
   (`sha256:9b8cae6dfb63`)
+- `randomization_record` —
+  [studies/common_encoding_state/records/benchmarks/liu_inputs.json](records/benchmarks/liu_inputs.json)
+  (`sha256:4a14255bc679`)
+- `execution_lock` —
+  [studies/common_encoding_state/records/benchmarks/liu_input_lock.json](records/benchmarks/liu_input_lock.json)
+  (`sha256:2a9f87a00cb9`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-000.npz](records/inputs/liu-cohorts-000.npz)
+  (`sha256:cdcf2f5b853b`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-020.npz](records/inputs/liu-cohorts-020.npz)
+  (`sha256:80b95d754864`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-040.npz](records/inputs/liu-cohorts-040.npz)
+  (`sha256:0e53a0a25119`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-060.npz](records/inputs/liu-cohorts-060.npz)
+  (`sha256:a5527a3bedc4`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-080.npz](records/inputs/liu-cohorts-080.npz)
+  (`sha256:7e82b3b1bdc6`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-100.npz](records/inputs/liu-cohorts-100.npz)
+  (`sha256:a92b09f1d0d3`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-120.npz](records/inputs/liu-cohorts-120.npz)
+  (`sha256:e0bf045ad2d4`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-140.npz](records/inputs/liu-cohorts-140.npz)
+  (`sha256:b4e42ec2786f`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-160.npz](records/inputs/liu-cohorts-160.npz)
+  (`sha256:bb6097715ac8`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-180.npz](records/inputs/liu-cohorts-180.npz)
+  (`sha256:10f64c55446a`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-200.npz](records/inputs/liu-cohorts-200.npz)
+  (`sha256:309e4f167e37`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-220.npz](records/inputs/liu-cohorts-220.npz)
+  (`sha256:5ed6fad40e0c`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-240.npz](records/inputs/liu-cohorts-240.npz)
+  (`sha256:59bbe4d3dd00`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-260.npz](records/inputs/liu-cohorts-260.npz)
+  (`sha256:e3cc97c90b74`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-280.npz](records/inputs/liu-cohorts-280.npz)
+  (`sha256:62a82400e819`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-300.npz](records/inputs/liu-cohorts-300.npz)
+  (`sha256:abbedbebc500`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-320.npz](records/inputs/liu-cohorts-320.npz)
+  (`sha256:20c5ffc346d6`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-340.npz](records/inputs/liu-cohorts-340.npz)
+  (`sha256:08829911a5e0`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-360.npz](records/inputs/liu-cohorts-360.npz)
+  (`sha256:1e5d6dd0624b`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/liu-cohorts-380.npz](records/inputs/liu-cohorts-380.npz)
+  (`sha256:f26823b5c7d5`)
 
 ## Provenance rule
 
