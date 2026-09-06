@@ -7,22 +7,17 @@ Navigation: [package guide](../AGENTS.md) · [study guide](../../studies/AGENTS.
 
 ## Runtime policy
 
-- Formal training and scientific evaluation run through
-  `python -m fsrl.infra.formal_runtime`. It requires a visible GPU and bounds
-  PyTorch intra-op and inter-op work to one CPU thread.
+- Formal workflows use `python -m fsrl.infra.formal_runtime` as required by
+  their registered execution contracts. Preserve the locked device and thread
+  requirements.
 - Use GPU execution when it materially accelerates neural work. CPU is
   appropriate for lightweight tests, exact enumeration, data checks, and
   bootstrap summaries when more efficient.
-- Formal meta-training uses one contiguous host-to-device transfer per trial
-  and `torch.compile(..., fullgraph=True, mode="default")`. Compiler settings,
-  device identity, and source hashes are part of the execution lock.
-- Prospective schema-v3 CUDA training may compile complete recurrent trial
-  sequences with `mode="reduce-overhead"` and mark one explicit CUDA Graph
-  boundary per outer step. This profile does not replace the formal execution
-  lock. Record the effective compile mode, iteration-boundary policy, and
-  runtime snapshot in provenance; mode changes require a fresh parity and
-  performance audit. Keep `max-autotune` modes explicit opt-ins because kernel
-  selection can change floating-point reduction order.
+- Current training profiles are documented in the [training guide](../training/README.md).
+  Record effective compiler settings, iteration boundaries, device/thread
+  configuration, runtime snapshot, and source identities in existing execution
+  provenance. Profile changes require scoped parity and performance checks;
+  never substitute current defaults for a frozen execution lock.
 - Tests run through `python -m fsrl.infra.test_runtime`, which owns an
   independent process group and cleans it on timeout or interruption.
 - Diagnose repeated failures and orphaned CPU use from the exact command,
@@ -41,6 +36,7 @@ Navigation: [package guide](../AGENTS.md) · [study guide](../../studies/AGENTS.
   and witness commits. Never copy historical source back into the live package
   merely to satisfy a locator.
 
-Runtime, provenance, or process-lifecycle changes require focused infra tests
-plus the complete bounded test suite. Exercise destructive or timeout paths in
-temporary outputs, never on registered artifacts.
+Use the [root validation boundary](../../AGENTS.md#validation-boundary).
+Runtime/process behavior or shared provenance-contract changes require focused
+infra tests and the complete engineering suite. Exercise destructive or timeout
+paths in temporary outputs, never on registered artifacts.

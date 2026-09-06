@@ -18,5 +18,7 @@ Navigation: [repository guide](../AGENTS.md) · [audit commands](README.md) ·
 - Keep each migration tool narrow and rerunnable. Do not add a generic cleanup
   framework or infer scientific ownership from filenames alone.
 
-Run every affected tool in non-mutating check/audit mode, the registry and
-active-document tests, Ruff, and `git diff --check` before committing.
+For tool-code changes, run the affected tool in non-mutating check/audit mode
+and the tests/static checks required by the root validation boundary. Add
+registry validation when evidence ownership or record resolution is affected.
+Documentation-only changes need the corresponding documentation/link checks.

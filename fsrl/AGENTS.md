@@ -49,8 +49,7 @@ Navigation: [repository guide](../AGENTS.md) · [package architecture](README.md
 
 ## Validation
 
-Run Ruff on changed package and test files, the smallest affected test modules,
-and the broader package suite when dependency boundaries or shared APIs change.
-Use the bounded test runtime for the complete suite. A scientific numerical
-change also requires its registered workflow gates; import and unit tests alone
-do not revalidate an estimand.
+Follow the [root validation boundary](../AGENTS.md#validation-boundary) and run
+the smallest affected tests while iterating. A scientific numerical change also
+requires its registered workflow gates; import and unit tests alone do not
+revalidate an estimand.

@@ -77,137 +77,14 @@ for reporting. Organization, figures, packaging, and reproducibility work may
 continue; do not start training, tuning, new evaluation, or a new scientific
 estimand unless the user explicitly opens that program.
 
-The user has opened the narrowly scoped `joint_training_strategy` comparison:
-same final P/L architecture and evidence rules, matched staged versus joint
-optimization on three paired new seeds. Its prospective authority is
-[`studies/joint_training_strategy/`](studies/joint_training_strategy/).
-Follow its protocol, implementation-lock, all-artifact-lock, then evaluation
-sequence. This does not reopen historical experiments, human data collection,
-closed candidate families, or unrestricted model tuning.
-
-The user has also opened `minimal_relational_learner`: an independent compact
-metric-error score learner, with the confirmed local trace and a separately
-trained score-only baseline. Its prospective authority is
-[`studies/minimal_relational_learner/`](studies/minimal_relational_learner/).
-This is not a repair of joint training or a reconstruction of old P trajectories.
-Freeze its own behavior, local-use, history-sensitivity, and complexity criteria;
-do not inherit every historical intervention threshold or reopen human fitting.
-Its fixed three-pair comparison is now complete and frozen for reporting.
-The registered execution gates are not standing permission for another run:
-extra training, evaluation, calibration, or candidate repair requires a new
-explicitly authorized prospective question.
-
-The user has opened `minimal_learner_diagnostics`: a prospective analysis of
-the six already exposed minimal-learner fits, without training or calibration.
-Its authority is [`studies/minimal_learner_diagnostics/`](studies/minimal_learner_diagnostics/).
-Freeze the diagnostic contract and implementation/input witnesses before
-execution. This admission covers encoding/integration references, fixed-readout
-analysis, and exact local cross-address attribution only; it does not authorize
-an encoding-noise candidate, new training, or main-model promotion.
-Its fixed three-stream diagnostic execution is now complete and frozen.
-Further analysis axes or model changes require a new prospective authorization;
-the completed diagnostic controls are not a standing tuning program.
-
-The user has opened `score_circuit` in an independent worktree: a frozen-parameter
-test of a finite-time opponent compartment realization of score-only, not a
-behavioral repair. Its prospective authority is [`studies/score_circuit/`](studies/score_circuit/).
-Freeze the protocol, qualify on non-Liu fixtures, then jointly lock all three
-existing fits, saved inputs and implementation before evaluation. No training,
-calibration or main-model promotion is authorized. Keep the original checkout
-files untouched; the detached dev-descendant worktree may push scoped, validated
-commits directly to `origin/dev` without creating a remote branch.
-The complete fixed matrix is now finished and frozen. This conditional circuit
-result is not permission for another run, biological-parameter tuning, a new
-admission mechanism, human fitting, or main-model promotion. A successor requires
-a separately authorized prospective question.
-
-The user has opened a model-neutral main-model admission program and its first
-`quantized_relational_learner` candidate. The prospective authorities are
-[`studies/main_model_admission/`](studies/main_model_admission/) and
-[`studies/quantized_relational_learner/`](studies/quantized_relational_learner/).
-Freeze the four-valued exact/persistent/resampled comparison before execution;
-qualify and source-lock before the non-Liu recovery screen and all three paired
-training streams, then jointly lock all nine fits before evaluation. This opens
-neither historical retuning nor human fitting. Pilot success alone cannot
-promote a main model: unchanged fresh replication, simulation stability and
-selected-parameter biological-boundary verification remain required. Do not
-reinterpret a partial behavioral match as completion of the user's goal.
-
-The fixed nine-fit `quantized_relational_learner` pilot is complete and frozen.
-Its result and interpretation records govern the outcome; no pilot recipe met
-the unchanged complete-behavior gate. Do not rerun, tune or promote a recipe,
-or treat the completed execution gates as standing permission for additional
-cohorts. A successor or a diagnostic of a failed recipe requires a separately
-authorized prospective question; preserve the original admission target.
-
-The user has explicitly authorized `resampled_cohort_diagnostic`, a separate
-fixed-parameter diagnostic of the completed pilot's three Resampled fits.
-Its authority is [`studies/resampled_cohort_diagnostic/`](studies/resampled_cohort_diagnostic/).
-Freeze its protocol, qualify and jointly lock every input and existing fit
-before new-cohort evaluation. No training, tuning, main-model promotion or
-revision of the failed parent outcome is authorized by this diagnostic.
-
-The complete fixed independent-cohort diagnostic is now finished and frozen.
-Its result and interpretation records govern the cohort-level findings; they
-neither revise the parent pilot nor qualify a main model. No extra cohorts,
-new diagnostic axes, parameter repair or biological-realization run is
-authorized by its completed execution gates. A successor needs a separately
-authorized prospective question.
-
-The complete `main_model_evaluation_v2` claim-relative evaluation and
-internal-to-sampled audit are now frozen. It retains the complete legacy 9/9
-quantitative profile and adds a distinct prospective core-mechanism label. Its
-authority is
-[`studies/main_model_evaluation_v2/`](studies/main_model_evaluation_v2/).
-Applying the new stability threshold to the exposed Resampled cohorts is
-retrospective support, not confirmation or promotion. The result localizes the
-low correct-ranker prevalence primarily before sampled choice while preserving
-sampling inconsistency as a separate boundary. No further analysis, training,
-calibration, candidate repair or promotion is authorized. A future
-experience-dependent plasticity comparison needs separate execution
-authorization and fresh paired development fits.
-
-The complete `experience_dependent_plasticity` development pilot is now frozen.
-Its authority is
-[`studies/experience_dependent_plasticity/`](studies/experience_dependent_plasticity/).
-Across paired 2117--2119 fits and 400 locked Liu cohorts per fit, the selected
-global blockwise diminishing-plasticity form passes the registered late-
-sensitivity, internal-order, ranking-composition, core-behavior and preservation
-gates. The nonbalanced scheduler control rejects a relation-familiarity claim:
-relation-addressed efficacy did not show the required loss specificity over the
-simpler global schedule. Preserve the failed pre-output wrapper attempt and its
-append-only source repair. This result is claim-relative, not complete human-
-distribution equality, and it does not promote a main model. No alternative
-decay rule, codebook, temperature, loss, local branch, seed/checkpoint selection,
-post-result repair, fresh replication, circuit testing, human fitting or main-
-model promotion is authorized. A successor requires a separate prospective
-question and explicit authorization.
-
-The complete `global_decay_replication` confirmation is now frozen. Its
-authority is
-[`studies/global_decay_replication/`](studies/global_decay_replication/).
-Across paired fresh 2120--2122 fits and 400 prospectively locked Liu cohorts per
-fit, the unchanged global blockwise diminishing-plasticity rule independently
-replicates the internal strict-correct, inversion-count, ranking-composition,
-core-behavior and preservation effects. The complete quantitative profile
-remains claim-relative: self-consistent incorrect behavior stays above the human
-reference, so this is not full distribution equality or main-model promotion.
-Do not rerun, tune, or use these confirmation seeds to choose a common-state
-encoder. Common encoding state and circuit realization require their own
-prospective authorities.
-
-The complete `common_encoding_state` development study is now frozen. Generic
-recovery selected rho=0.125; all fixed 2120--2122 substitutions and trained
-2123--2125 episode-common fits preserve the registered joint-allocation and
-global-decay competence boundaries. Its authority is
-[`studies/common_encoding_state/`](studies/common_encoding_state/). Neither the
-fixed 2120--2122 substitutions nor the trained fits pass the all-network
-episode-common versus relation-common specificity gate; the registered outcome
-is `joint_structure_unresolved`, not support for a common episode state or
-main-model promotion. Do not rerun, tune rho, regroup the latent state, change
-the codebook, decay, readout, temperature, loss, thresholds, seeds or
-checkpoints, or use the completed execution gates as standing authorization for
-a repair. Any successor requires a separately authorized prospective question.
+Read the relevant study's `study.toml` and referenced protocol, locks, results,
+and interpretation for its status and scientific boundary. Keep those details
+in their existing authorities rather than repeating them in agent guides.
+Completed execution gates do not authorize reruns, extra cohorts, new analysis
+axes, tuning, human fitting, or main-model promotion. A successor requires a
+separately authorized prospective question. Within an already authorized
+program, complete the registered steps without seeking approval again unless
+the scope changes.
 
 ## Repository invariants
 
@@ -229,20 +106,29 @@ a repair. Any successor requires a separately authorized prospective question.
 
 ## Validation boundary
 
-Run the checks named by every applicable nested guide. The repository-wide
-minimum for a completed structural change is:
+Choose validation by the affected behavior or contract, using the applicable
+rows below and the local guide. Editing documentation inside a source or
+evidence directory does not by itself require code or evidence validation.
+Read-only audits need checks only when they help answer the question.
 
-```bash
-direnv exec . python -m fsrl.infra.study_registry check
-direnv exec . python -m fsrl.workflows check workflows/relational_model/workflow.toml
-direnv exec . python -m fsrl.workflows.paper_figures check
-direnv exec . basedpyright
-direnv exec . python -m tools.quality.complexity_budget
-direnv exec . ruff check fsrl tests tools reproductions
-direnv exec . ruff format --check fsrl tests tools reproductions
-direnv exec . python -m fsrl.infra.test_runtime
-git diff --check
-```
+| Change | Required validation |
+| --- | --- |
+| Hand-maintained documentation and agent guides | Relevant documentation/link tests and `git diff --check`. |
+| Local code or tests | Changed-file Ruff, affected tests, and type checking when typed interfaces or assumptions change. |
+| Study, registry, workflow, or figure contracts and generated views | Owning validator and affected documentation/link tests; rebuild affected views from their authorities. |
+| Shared APIs, dependencies, runtime/process behavior, cross-package layout, validator schemas, or a release | The [complete engineering suite](tests/README.md#complete-bounded-suite) plus affected domain validators. |
+| Historical source, evidence locators, or migration metadata | Affected provenance, migration, and frozen-evidence checks. Physical moves also follow the rule below. |
+| Authorized scientific execution | The owning study's protocol, source/input/artifact locks, and scientific gates. Engineering checks do not revalidate an estimand. |
+
+Run the smallest affected checks while iterating and the required broader
+checks once the change is ready. Reuse successful checks within the task while
+their relevant files, inputs, dependencies, and environment remain unchanged.
+A broader passing suite can cover a standalone check when it verifies the same
+inputs and assertions. Rerun affected checks after changes, failures, or new
+concerns; committing or handing off unchanged work alone does not require a
+rerun. This does not waive a scientific protocol's required locks or gates.
+Summarize validation in the handoff using existing tools; routine maintenance
+does not need additional validation manifests or tracking machinery.
 
 A physical evidence move additionally requires a new append-only migration map,
 source-commit and byte verification, active-locator checks, and a frozen-evidence

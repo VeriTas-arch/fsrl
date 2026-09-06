@@ -53,5 +53,10 @@ historical evidence and retains all existing migration checks.
   new payloads above the hard limit require a registered content-addressed
   bundle, release asset, or Git LFS backend.
 
-Any manifest, registry, migration, or generated-view change must pass the
-registry check, active-link checks, migration audits, and `git diff --check`.
+Manifest, registry, or generated-view changes require
+`direnv exec . python -m fsrl.infra.study_registry check`, affected documentation/
+link tests, and `git diff --check`. Rebuild affected views from their authorities.
+The registry check includes record hashes and migration-chain validation; add
+standalone provenance or migration audits when historical sources, migration
+metadata, or locators change. Guide-only edits follow the root documentation
+checks.

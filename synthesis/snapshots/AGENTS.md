@@ -18,5 +18,7 @@ Navigation: [synthesis guide](../AGENTS.md) · [snapshot portal](README.md) ·
 - Do not treat the historical snapshot's internal namespace as the current
   scientific or package namespace.
 
-Run frozen-evidence status and verification, registry and migration audits,
-and active-link checks after snapshot-index or locator changes.
+Snapshot membership, locator, or provenance changes require frozen-evidence
+verification and affected registry/migration audits. Wording and link edits in
+the current index follow the root documentation checks unless they change a
+registered locator. Frozen snapshot contents remain immutable.

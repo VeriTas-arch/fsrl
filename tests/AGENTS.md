@@ -23,7 +23,6 @@ Navigation: [repository guide](../AGENTS.md) · [test commands](README.md) ·
 - A test that can hang or spawn children must run under the bounded test
   runtime and clean the complete process group on interruption.
 
-Run focused unittest modules while iterating. Before a cross-package or
-repository-structure change is complete, run
-`direnv exec . python -m fsrl.infra.test_runtime` and verify no child process
-remains.
+Run affected modules through the bounded test runtime while iterating. Use the
+[root validation boundary](../AGENTS.md#validation-boundary) to decide when the
+complete engineering suite is required and when earlier checks can be reused.

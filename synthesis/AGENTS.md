@@ -30,6 +30,9 @@ hide diagnostic or negative evidence for narrative neatness.
 The human-mechanism and new-data program remains deferred. Presentation work
 must not imply that the current model establishes human neural implementation.
 
-Rebuild synthesis through the registry builder, then run registry, workflow,
-snapshot, figure, and active-link checks. A reporting snapshot migration also
-requires a byte-preserving versioned migration ledger.
+For synthesis-manifest changes, rebuild the registry-generated view and run
+registry and affected documentation/link checks. Add workflow or figure checks
+when their contracts or references change. Historical source, snapshot-locator,
+or migration changes require the corresponding provenance/frozen-evidence
+audits. Ordinary prose follows the root documentation checks; a snapshot move
+still requires a byte-preserving versioned migration ledger.

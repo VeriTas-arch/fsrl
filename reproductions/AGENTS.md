@@ -21,4 +21,6 @@ Navigation: [repository guide](../AGENTS.md) ·
   upstream source is checked for provenance and concrete defects, not silently
   reformatted or modernized.
 
-Run the capsule verification and focused reproduction tests after changes.
+After capsule-adapter, manifest, or layout changes, run capsule verification
+and focused reproduction tests. Prose-only edits follow the root documentation
+checks.

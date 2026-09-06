@@ -21,5 +21,6 @@ Navigation: [package guide](../AGENTS.md) ·
   manifests, and declared outputs without treating a visually plausible image
   as sufficient provenance.
 
-Schema changes require validator tests for both accepted and rejected inputs,
-regeneration of affected human views, and repository registry/figure checks.
+Schema changes require validator tests for accepted and rejected inputs and the
+complete engineering suite under the root validation boundary. Rebuild affected
+human views and run the validators whose contracts or referenced data changed.
