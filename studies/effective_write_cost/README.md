@@ -42,6 +42,9 @@ modification proxy, no physiological budget or automatic main-model promotion.
 - `supporting_artifact` —
   [studies/effective_write_cost/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:d82cebdd98a1`)
+- `artifact_lock` —
+  [studies/effective_write_cost/records/benchmarks/scale_lock.json](records/benchmarks/scale_lock.json)
+  (`sha256:b3f75d2233b7`)
 - `execution_lock` —
   [studies/effective_write_cost/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:1703a545c12c`)
