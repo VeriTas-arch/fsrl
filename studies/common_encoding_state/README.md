@@ -39,6 +39,27 @@ main model without fresh replication and a separate biological-boundary test.
 - `registered_contract` —
   [studies/common_encoding_state/records/benchmarks/common_encoding_state_v1.json](records/benchmarks/common_encoding_state_v1.json)
   (`sha256:5f55121959a9`)
+- `readiness_result` —
+  [studies/common_encoding_state/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:9ef8a23bc840`)
+- `randomization_record` —
+  [studies/common_encoding_state/records/benchmarks/generic_inputs.json](records/benchmarks/generic_inputs.json)
+  (`sha256:1e390e67c1c0`)
+- `execution_lock` —
+  [studies/common_encoding_state/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:6d2e056f87ef`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/generic-28.npz](records/inputs/generic-28.npz)
+  (`sha256:26d364c9dd1c`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/generic-32.npz](records/inputs/generic-32.npz)
+  (`sha256:922f8a228e1b`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/generic-36.npz](records/inputs/generic-36.npz)
+  (`sha256:28b5bc24f00b`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/inputs/generic-40.npz](records/inputs/generic-40.npz)
+  (`sha256:5dbb36aa2c62`)
 
 ## Provenance rule
 

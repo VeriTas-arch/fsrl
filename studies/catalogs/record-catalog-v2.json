@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 630,
+  "entry_count": 637,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 311,
+    "json": 314,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 67,
-    "numpy_npz": 240,
+    "numpy_npz": 244,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 586,
+    "already_conformant": 593,
     "historical_gzip_view": 43,
     "historical_pth_view": 1
   },
@@ -478,6 +478,244 @@
         "source_ref": "sha256:5f55121959a9de7e396d0be7c87948b8cb071db97889dd7f5677b45e1d4ed10b"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.randomization_record",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/benchmarks/generic_inputs.json",
+        "repository_path": "studies/common_encoding_state/records/benchmarks/generic_inputs.json"
+      },
+      "materialized_identity": {
+        "bytes": 1512,
+        "sha256": "1e390e67c1c0631088ec11e02837d4b4cc28144965b6b17fa980316614e5e79f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_benchmarks_generic_inputs_json",
+      "registered_identity": {
+        "bytes": 1512,
+        "sha256": "1e390e67c1c0631088ec11e02837d4b4cc28144965b6b17fa980316614e5e79f",
+        "source_ref": "sha256:1e390e67c1c0631088ec11e02837d4b4cc28144965b6b17fa980316614e5e79f"
+      },
+      "role": "randomization_record"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.readiness_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/benchmarks/qualification.json",
+        "repository_path": "studies/common_encoding_state/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 53970,
+        "sha256": "9ef8a23bc840083fcb4d15b156bdc7463bd75e7264d4af68d8201f5fcc52bca1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 53970,
+        "sha256": "9ef8a23bc840083fcb4d15b156bdc7463bd75e7264d4af68d8201f5fcc52bca1",
+        "source_ref": "sha256:9ef8a23bc840083fcb4d15b156bdc7463bd75e7264d4af68d8201f5fcc52bca1"
+      },
+      "role": "readiness_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/benchmarks/source_lock.json",
+        "repository_path": "studies/common_encoding_state/records/benchmarks/source_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 47568,
+        "sha256": "6d2e056f87ef8112e453f3ae49521e6e2ed9e4734fa8a6fcf27b7d203d1165cb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_benchmarks_source_lock_json",
+      "registered_identity": {
+        "bytes": 47568,
+        "sha256": "6d2e056f87ef8112e453f3ae49521e6e2ed9e4734fa8a6fcf27b7d203d1165cb",
+        "source_ref": "sha256:6d2e056f87ef8112e453f3ae49521e6e2ed9e4734fa8a6fcf27b7d203d1165cb"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/inputs/generic-28.npz",
+        "repository_path": "studies/common_encoding_state/records/inputs/generic-28.npz"
+      },
+      "materialized_identity": {
+        "bytes": 60918,
+        "sha256": "26d364c9dd1c44a2211655a5f48d735416244771570064f920be1dfa95eb6f5b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_inputs_generic_28_npz",
+      "registered_identity": {
+        "bytes": 60918,
+        "sha256": "26d364c9dd1c44a2211655a5f48d735416244771570064f920be1dfa95eb6f5b",
+        "source_ref": "sha256:26d364c9dd1c44a2211655a5f48d735416244771570064f920be1dfa95eb6f5b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/inputs/generic-32.npz",
+        "repository_path": "studies/common_encoding_state/records/inputs/generic-32.npz"
+      },
+      "materialized_identity": {
+        "bytes": 76708,
+        "sha256": "922f8a228e1b81a7713a6286c89cac24f4c87857bc01d70e6958cb3e9fb19854"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_inputs_generic_32_npz",
+      "registered_identity": {
+        "bytes": 76708,
+        "sha256": "922f8a228e1b81a7713a6286c89cac24f4c87857bc01d70e6958cb3e9fb19854",
+        "source_ref": "sha256:922f8a228e1b81a7713a6286c89cac24f4c87857bc01d70e6958cb3e9fb19854"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/inputs/generic-36.npz",
+        "repository_path": "studies/common_encoding_state/records/inputs/generic-36.npz"
+      },
+      "materialized_identity": {
+        "bytes": 83688,
+        "sha256": "28b5bc24f00b6963905b7d4b9f6b00ab5dd28b36bcb15716410b0df58be79a69"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_inputs_generic_36_npz",
+      "registered_identity": {
+        "bytes": 83688,
+        "sha256": "28b5bc24f00b6963905b7d4b9f6b00ab5dd28b36bcb15716410b0df58be79a69",
+        "source_ref": "sha256:28b5bc24f00b6963905b7d4b9f6b00ab5dd28b36bcb15716410b0df58be79a69"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/inputs/generic-40.npz",
+        "repository_path": "studies/common_encoding_state/records/inputs/generic-40.npz"
+      },
+      "materialized_identity": {
+        "bytes": 82079,
+        "sha256": "5dbb36aa2c622cddd9de35ed3b39eb1b3bc8358db1847cc8a8370ec1f5f18093"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_inputs_generic_40_npz",
+      "registered_identity": {
+        "bytes": 82079,
+        "sha256": "5dbb36aa2c622cddd9de35ed3b39eb1b3bc8358db1847cc8a8370ec1f5f18093",
+        "source_ref": "sha256:5dbb36aa2c622cddd9de35ed3b39eb1b3bc8358db1847cc8a8370ec1f5f18093"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -21701,7 +21939,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 628,
+  "registered_record_count": 635,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -21712,7 +21950,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 42,
+    "execution_lock": 43,
     "freeze_validation": 1,
     "frozen_parameters": 22,
     "frozen_result": 70,
@@ -21720,15 +21958,15 @@
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
     "presentation_view": 1,
-    "randomization_record": 6,
-    "readiness_result": 9,
+    "randomization_record": 7,
+    "readiness_result": 10,
     "registered_contract": 66,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 63,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 293,
+    "supporting_artifact": 297,
     "validation_result": 7
   },
   "schema_version": 2,
