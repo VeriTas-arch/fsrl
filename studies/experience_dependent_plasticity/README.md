@@ -25,15 +25,14 @@
 order formation and ranking composition in the two-scalar Resampled score learner?
 
 **Finding.** The prospective paired fixed-eta versus experience-dependent Resampled
-design is execution-authorized, non-Liu qualified and source-locked. The frozen
-implementation preserves the codebook, information boundary, score state, readout and
-generic objective; adds only diminishing efficacy; and retains the nonbalanced scheduler
-control. No training or Liu result exists yet.
+design is non-Liu qualified, source-locked and trained on all six mandatory 2117--2119
+fits. Their paired streams and artifacts were jointly locked before any scheduler or Liu
+evaluation. No behavioral or scheduler result exists yet.
 
-**Claim boundary.** Qualification and source/input readiness only, not a behavioral or
-mechanism result. Six mandatory fits and the frozen evaluation sequence are authorized.
-Calibration, candidate repair, fresh replication, circuit verification and main-model
-promotion remain closed.
+**Claim boundary.** Qualification, source/input readiness and locked training artifacts
+only, not a behavioral or mechanism result. The frozen scheduler decision and subsequent
+Liu evaluation remain authorized. Calibration, candidate repair, fresh replication,
+circuit verification and main-model promotion remain closed.
 
 ## Frozen records
 
@@ -76,6 +75,27 @@ promotion remain closed.
 - `supporting_artifact` —
   [studies/experience_dependent_plasticity/records/inputs/generic-clustered-40.npz](records/inputs/generic-clustered-40.npz)
   (`sha256:4499a8224a4c`)
+- `artifact_lock` —
+  [studies/experience_dependent_plasticity/records/benchmarks/artifact_lock.json](records/benchmarks/artifact_lock.json)
+  (`sha256:406470a3e32f`)
+- `frozen_parameters` —
+  [studies/experience_dependent_plasticity/records/results/training-2117-fixed_eta_resampled.json](records/results/training-2117-fixed_eta_resampled.json)
+  (`sha256:9a5b843fdb6e`)
+- `frozen_parameters` —
+  [studies/experience_dependent_plasticity/records/results/training-2117-adaptive_eta_resampled.json](records/results/training-2117-adaptive_eta_resampled.json)
+  (`sha256:7536504ed521`)
+- `frozen_parameters` —
+  [studies/experience_dependent_plasticity/records/results/training-2118-fixed_eta_resampled.json](records/results/training-2118-fixed_eta_resampled.json)
+  (`sha256:d93d703315eb`)
+- `frozen_parameters` —
+  [studies/experience_dependent_plasticity/records/results/training-2118-adaptive_eta_resampled.json](records/results/training-2118-adaptive_eta_resampled.json)
+  (`sha256:18f5246a0a90`)
+- `frozen_parameters` —
+  [studies/experience_dependent_plasticity/records/results/training-2119-fixed_eta_resampled.json](records/results/training-2119-fixed_eta_resampled.json)
+  (`sha256:8e551189b471`)
+- `frozen_parameters` —
+  [studies/experience_dependent_plasticity/records/results/training-2119-adaptive_eta_resampled.json](records/results/training-2119-adaptive_eta_resampled.json)
+  (`sha256:4f66c2a87160`)
 
 ## Provenance rule
 

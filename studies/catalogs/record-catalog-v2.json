@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 465,
+  "entry_count": 472,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 237,
+    "json": 244,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 62,
@@ -22,8 +22,8 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 433,
-    "historical_gzip_view": 31,
+    "already_conformant": 434,
+    "historical_gzip_view": 37,
     "historical_pth_view": 1
   },
   "records": [
@@ -2204,6 +2204,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/benchmarks/artifact_lock.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/benchmarks/artifact_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 1921,
+        "sha256": "406470a3e32f690d097979cfe1be9a9425495e10423c46a028d38f6d0f11c552"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_benchmarks_artifact_lock_json",
+      "registered_identity": {
+        "bytes": 1921,
+        "sha256": "406470a3e32f690d097979cfe1be9a9425495e10423c46a028d38f6d0f11c552",
+        "source_ref": "sha256:406470a3e32f690d097979cfe1be9a9425495e10423c46a028d38f6d0f11c552"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -2643,6 +2677,222 @@
         "source_ref": "sha256:4499a8224a4c520c1bb0e85695459e091d4a5e374d8bd922daa0a6292c3d35ad"
       },
       "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/training-2117-adaptive_eta_resampled.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/training-2117-adaptive_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251729,
+        "sha256": "7536504ed521f709bd45da7e7510bd6f125813af7744a7aab50d23cf512d3345"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_training_2117_adaptive_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251729,
+        "sha256": "7536504ed521f709bd45da7e7510bd6f125813af7744a7aab50d23cf512d3345",
+        "source_ref": "sha256:7536504ed521f709bd45da7e7510bd6f125813af7744a7aab50d23cf512d3345"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/training-2117-fixed_eta_resampled.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/training-2117-fixed_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251898,
+        "sha256": "9a5b843fdb6e987a4a00fbe167513936b025113fe23a055f17e6069805387b98"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_training_2117_fixed_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251898,
+        "sha256": "9a5b843fdb6e987a4a00fbe167513936b025113fe23a055f17e6069805387b98",
+        "source_ref": "sha256:9a5b843fdb6e987a4a00fbe167513936b025113fe23a055f17e6069805387b98"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/training-2118-adaptive_eta_resampled.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/training-2118-adaptive_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251820,
+        "sha256": "18f5246a0a9098b4a463955ab95b4a34423d2d45f2e7269944d90898b021c165"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_training_2118_adaptive_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251820,
+        "sha256": "18f5246a0a9098b4a463955ab95b4a34423d2d45f2e7269944d90898b021c165",
+        "source_ref": "sha256:18f5246a0a9098b4a463955ab95b4a34423d2d45f2e7269944d90898b021c165"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/training-2118-fixed_eta_resampled.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/training-2118-fixed_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251964,
+        "sha256": "d93d703315ebff15ae2b4aad2c56dbc9a282fd66ce4ee91a3417cc899296449f"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_training_2118_fixed_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251964,
+        "sha256": "d93d703315ebff15ae2b4aad2c56dbc9a282fd66ce4ee91a3417cc899296449f",
+        "source_ref": "sha256:d93d703315ebff15ae2b4aad2c56dbc9a282fd66ce4ee91a3417cc899296449f"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/training-2119-adaptive_eta_resampled.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/training-2119-adaptive_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251815,
+        "sha256": "4f66c2a87160fa27f79f2ffbda047375a2319fef1e5c1ee8fe4c69812fd5d0c4"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_training_2119_adaptive_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251815,
+        "sha256": "4f66c2a87160fa27f79f2ffbda047375a2319fef1e5c1ee8fe4c69812fd5d0c4",
+        "source_ref": "sha256:4f66c2a87160fa27f79f2ffbda047375a2319fef1e5c1ee8fe4c69812fd5d0c4"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/training-2119-fixed_eta_resampled.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/training-2119-fixed_eta_resampled.json"
+      },
+      "materialized_identity": {
+        "bytes": 1251904,
+        "sha256": "8e551189b4718690799301156155ba40d2e5390c600da65014265edb9e009e2c"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_training_2119_fixed_eta_resampled_json",
+      "registered_identity": {
+        "bytes": 1251904,
+        "sha256": "8e551189b4718690799301156155ba40d2e5390c600da65014265edb9e009e2c",
+        "source_ref": "sha256:8e551189b4718690799301156155ba40d2e5390c600da65014265edb9e009e2c"
+      },
+      "role": "frozen_parameters"
     },
     {
       "availability": "materialized",
@@ -16067,11 +16317,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 463,
+  "registered_record_count": 470,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 8,
+    "artifact_lock": 9,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
@@ -16080,7 +16330,7 @@
     "environment_contract": 2,
     "execution_lock": 37,
     "freeze_validation": 1,
-    "frozen_parameters": 10,
+    "frozen_parameters": 16,
     "frozen_result": 47,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,

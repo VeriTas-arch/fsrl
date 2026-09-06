@@ -251,10 +251,9 @@ trajectories.
     bytes were independently reconstructed.
 - [Experience-dependent score plasticity design](experience_dependent_plasticity/README.md) — `frozen_contract`
   - **Finding:** The prospective paired fixed-eta versus experience-dependent Resampled
-    design is execution-authorized, non-Liu qualified and source-locked. The frozen
-    implementation preserves the codebook, information boundary, score state, readout
-    and generic objective; adds only diminishing efficacy; and retains the nonbalanced
-    scheduler control. No training or Liu result exists yet.
+    design is non-Liu qualified, source-locked and trained on all six mandatory
+    2117--2119 fits. Their paired streams and artifacts were jointly locked before any
+    scheduler or Liu evaluation. No behavioral or scheduler result exists yet.
 
 ## One-factor structural transport
 
