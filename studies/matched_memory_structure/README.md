@@ -38,6 +38,9 @@ hypothesis; no universal necessity, human confirmation, or automatic promotion.
 - `validation_result` —
   [studies/matched_memory_structure/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:ebeb951e6afb`)
+- `execution_lock` —
+  [studies/matched_memory_structure/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:e56273e1b3bf`)
 
 ## Provenance rule
 
