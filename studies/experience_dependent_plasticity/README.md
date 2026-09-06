@@ -24,17 +24,17 @@
 **Question.** Can repeated-evidence plasticity stabilization improve complete internal
 order formation and ranking composition in the two-scalar Resampled score learner?
 
-**Finding.** The prospective paired fixed-eta versus experience-dependent Resampled
-design is trained on all six mandatory 2117--2119 fits with jointly locked paired
-streams and artifacts. After the first generic wrapper failed before output, the
-registered no-scientific-change repair passed the complete non-Liu qualification and was
-append-only source-locked while retaining the original fits. No scheduler or Liu result
-exists yet.
+**Finding.** The paired fixed-eta versus experience-dependent Resampled design completed
+all six mandatory fits and the repaired generic scheduler audit. Generic competence and
+late-sensitivity gates passed in every seed, but relation-specific loss superiority did
+not; the frozen rule therefore selects the simpler global blockwise
+diminishing-plasticity schedule before Liu input lock.
 
-**Claim boundary.** Repaired evaluation readiness and unchanged locked training
-artifacts only, not a behavioral or mechanism result. The frozen scheduler decision and
-subsequent Liu evaluation remain authorized. Calibration, scientific candidate repair,
-fresh replication, circuit verification and main-model promotion remain closed.
+**Claim boundary.** Generic evidence supports declining within-episode plasticity and
+rejects a relation-familiarity interpretation within the tested scheduler family; it is
+not Liu behavioral support. The prospective Liu input lock and evaluation remain
+authorized. Calibration, scientific candidate repair, fresh replication, circuit
+verification and main-model promotion remain closed.
 
 ## Frozen records
 
@@ -107,6 +107,15 @@ fresh replication, circuit verification and main-model promotion remain closed.
 - `repair_lock` —
   [studies/experience_dependent_plasticity/records/benchmarks/source_lock_repair_1.json](records/benchmarks/source_lock_repair_1.json)
   (`sha256:ee5f78a8f6e0`)
+- `frozen_result` —
+  [studies/experience_dependent_plasticity/records/results/generic_scheduler_selection.json](records/results/generic_scheduler_selection.json)
+  (`sha256:4223af4ea090`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/generic_scheduler_selection.npz](records/results/generic_scheduler_selection.npz)
+  (`sha256:938c39346eee`)
+- `execution_lock` —
+  [studies/experience_dependent_plasticity/records/benchmarks/scheduler_selection_lock.json](records/benchmarks/scheduler_selection_lock.json)
+  (`sha256:04abee2f9fa9`)
 
 ## Provenance rule
 
