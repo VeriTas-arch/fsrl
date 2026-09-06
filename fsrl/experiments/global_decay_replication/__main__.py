@@ -8,7 +8,7 @@ from .cohorts import evaluate_cohorts, lock_liu_inputs
 from .evidence import lock_artifacts, lock_source
 from .generic import evaluate_generic, lock_generic
 from .qualification import qualify
-from .reporting import publish, verify_record
+from .reporting import publish, repair_report, verify_record
 from .training import train_all
 
 
@@ -26,6 +26,7 @@ def main(args=None) -> int:
             "lock-liu-inputs",
             "evaluate-liu",
             "publish",
+            "repair-report",
             "verify-record",
         ),
     )
@@ -51,6 +52,7 @@ def main(args=None) -> int:
             "lock-liu-inputs": lock_liu_inputs,
             "evaluate-liu": evaluate_cohorts,
             "publish": publish,
+            "repair-report": repair_report,
             "verify-record": verify_record,
         }[parsed.stage]()
     print(json.dumps(result, indent=2))

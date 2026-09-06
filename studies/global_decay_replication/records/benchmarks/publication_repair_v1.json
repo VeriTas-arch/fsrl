@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment_id": "global_decay_replication_v1",
+  "record_type": "publication_repair",
+  "failed_attempt": {
+    "result": "studies/global_decay_replication/records/results/global_decay_replication_v1.json",
+    "report": "studies/global_decay_replication/records/reports/global_decay_replication_v1.publish_attempt_1.md",
+    "liu_evaluation_complete": true,
+    "registered_outcome": "replicated_global_decay",
+    "failure": "The report was rendered from insertion-ordered in-memory dictionaries, while the canonical JSON writer sorted object keys. Re-rendering from the saved result therefore changed only the textual order of mean and interval keys and failed byte equality."
+  },
+  "invariants": {
+    "result_unchanged": true,
+    "estimands_unchanged": true,
+    "decision_unchanged": true,
+    "thresholds_unchanged": true,
+    "no_new_rollout": true,
+    "no_new_bootstrap": true
+  },
+  "authorized_repair": "Preserve the first report under its attempt-specific name. Render mapping-valued Markdown cells with deterministic sorted JSON keys, then generate only the canonical report from the existing canonical result. Do not rewrite any result, Liu shard, fit, input, lock or scientific value.",
+  "verification": "Require byte-identical report reconstruction from the canonical saved JSON and exact reconstruction of the registered decision before publication is accepted."
+}

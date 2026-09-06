@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 import numpy as np
 
 from fsrl.experiments.adaptive_plasticity.reference import rollout
@@ -37,6 +39,10 @@ from .protocol import (
 
 RESULT = RECORDS / "results/global_decay_replication_v1.json"
 REPORT = RECORDS / "reports/global_decay_replication_v1.md"
+
+
+def _cell(value) -> str:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
 def verify_shard(record: dict, input_ref: dict, start: int, artifacts: dict) -> dict:
@@ -164,7 +170,7 @@ def render_report(result: dict) -> str:
         paired = result["fits"][str(seed)]
         parameters = result["parameters"]
         lines.append(
-            f"| {seed} | {parameters[f'{seed}/fixed_eta_resampled']['eta0']} | {parameters[f'{seed}/adaptive_eta_resampled']['eta0']} | {parameters[f'{seed}/fixed_eta_resampled']['gamma_G']} | {parameters[f'{seed}/adaptive_eta_resampled']['gamma_G']} | {paired['internal_strict_correct']} | {paired['mean_inversion_count']} | {paired['ranking_composition_total_variation']} | {adaptive['core_behavior_passed']} | {adaptive['preservation_profile_passed']} |"
+            f"| {seed} | {parameters[f'{seed}/fixed_eta_resampled']['eta0']} | {parameters[f'{seed}/adaptive_eta_resampled']['eta0']} | {parameters[f'{seed}/fixed_eta_resampled']['gamma_G']} | {parameters[f'{seed}/adaptive_eta_resampled']['gamma_G']} | {_cell(paired['internal_strict_correct'])} | {_cell(paired['mean_inversion_count'])} | {_cell(paired['ranking_composition_total_variation'])} | {adaptive['core_behavior_passed']} | {adaptive['preservation_profile_passed']} |"
         )
         lines.extend(
             [
@@ -176,13 +182,13 @@ def render_report(result: dict) -> str:
             ]
         )
         lines.extend(
-            f"| {name} | {fixed['continuous'][name]['mean']} {fixed['continuous'][name]['interval']} | {adaptive['continuous'][name]['mean']} {adaptive['continuous'][name]['interval']} | {adaptive['continuous'][name]['reference']} | {adaptive['continuous'][name]['classification']} |"
+            f"| {name} | {fixed['continuous'][name]['mean']} {_cell(fixed['continuous'][name]['interval'])} | {adaptive['continuous'][name]['mean']} {_cell(adaptive['continuous'][name]['interval'])} | {_cell(adaptive['continuous'][name]['reference'])} | {adaptive['continuous'][name]['classification']} |"
             for name in ALL_ENDPOINTS
         )
         lines.extend(
             [
                 "",
-                f"Adaptive all-nine qualitative stability: {adaptive['all_nine_qualitative']}; quantitative stability: {adaptive['all_nine_quantitative']}; joint: {adaptive['joint_nine']}.",
+                f"Adaptive all-nine qualitative stability: {_cell(adaptive['all_nine_qualitative'])}; quantitative stability: {_cell(adaptive['all_nine_quantitative'])}; joint: {_cell(adaptive['joint_nine'])}.",
             ]
         )
     lines.extend(
@@ -254,3 +260,10 @@ def verify_record() -> dict:
     if len(result["published_shards"]) * COHORT_SHARD_SIZE != COHORTS:
         raise RuntimeError("replication result omits cohort shards")
     return {"passed": True, "outcome": result["decision"]["outcome"]}
+
+
+def repair_report() -> dict:
+    result = load_json(RESULT)
+    REPORT.parent.mkdir(parents=True, exist_ok=True)
+    REPORT.open("x").write(render_report(result))
+    return verify_record()

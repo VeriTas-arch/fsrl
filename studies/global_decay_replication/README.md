@@ -157,6 +157,135 @@ promote a main model.
 - `supporting_artifact` —
   [studies/global_decay_replication/records/inputs/liu-cohorts-380.npz](records/inputs/liu-cohorts-380.npz)
   (`sha256:c5c645eabea2`)
+- `repair_contract` —
+  [studies/global_decay_replication/records/benchmarks/publication_repair_v1.json](records/benchmarks/publication_repair_v1.json)
+  (`sha256:64faea6a8f0c`)
+- `noninterpretable_attempt` —
+  [studies/global_decay_replication/records/reports/global_decay_replication_v1.publish_attempt_1.md](records/reports/global_decay_replication_v1.publish_attempt_1.md)
+  (`sha256:4afb3ab1e259`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/global_decay_replication_v1.json](records/results/global_decay_replication_v1.json)
+  (`sha256:44b7c274ff3e`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-000.json](records/results/liu-cohorts-000.json)
+  (`sha256:7039c0f61611`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-020.json](records/results/liu-cohorts-020.json)
+  (`sha256:72634e90cb74`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-040.json](records/results/liu-cohorts-040.json)
+  (`sha256:de55939052ad`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-060.json](records/results/liu-cohorts-060.json)
+  (`sha256:d1cf2e92526f`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-080.json](records/results/liu-cohorts-080.json)
+  (`sha256:86c8db7c7541`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-100.json](records/results/liu-cohorts-100.json)
+  (`sha256:7f990958e8ab`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-120.json](records/results/liu-cohorts-120.json)
+  (`sha256:58b23488ea99`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-140.json](records/results/liu-cohorts-140.json)
+  (`sha256:a638076fcdf4`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-160.json](records/results/liu-cohorts-160.json)
+  (`sha256:14a562bab882`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-180.json](records/results/liu-cohorts-180.json)
+  (`sha256:2fe0a3e4e432`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-200.json](records/results/liu-cohorts-200.json)
+  (`sha256:af4affb68281`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-220.json](records/results/liu-cohorts-220.json)
+  (`sha256:782b02d419a2`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-240.json](records/results/liu-cohorts-240.json)
+  (`sha256:a1e91a73fd18`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-260.json](records/results/liu-cohorts-260.json)
+  (`sha256:c70b18666046`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-280.json](records/results/liu-cohorts-280.json)
+  (`sha256:6077fcbd31a5`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-300.json](records/results/liu-cohorts-300.json)
+  (`sha256:ab65eea44fa1`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-320.json](records/results/liu-cohorts-320.json)
+  (`sha256:eb9542e1373c`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-340.json](records/results/liu-cohorts-340.json)
+  (`sha256:7a521cb217b0`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-360.json](records/results/liu-cohorts-360.json)
+  (`sha256:cd3788c420f1`)
+- `frozen_result` —
+  [studies/global_decay_replication/records/results/liu-cohorts-380.json](records/results/liu-cohorts-380.json)
+  (`sha256:793e33374858`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-000.npz](records/results/liu-outputs-000.npz)
+  (`sha256:f8acadc439f0`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-020.npz](records/results/liu-outputs-020.npz)
+  (`sha256:40a9e02025b4`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-040.npz](records/results/liu-outputs-040.npz)
+  (`sha256:6b44661866b8`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-060.npz](records/results/liu-outputs-060.npz)
+  (`sha256:03a5afe487a3`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-080.npz](records/results/liu-outputs-080.npz)
+  (`sha256:0c06fe8efc8b`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-100.npz](records/results/liu-outputs-100.npz)
+  (`sha256:ad41f84cbc83`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-120.npz](records/results/liu-outputs-120.npz)
+  (`sha256:ca6f4e5bd7f1`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-140.npz](records/results/liu-outputs-140.npz)
+  (`sha256:64b3f9bacebb`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-160.npz](records/results/liu-outputs-160.npz)
+  (`sha256:d3416c38c969`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-180.npz](records/results/liu-outputs-180.npz)
+  (`sha256:2a83aa6cdf66`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-200.npz](records/results/liu-outputs-200.npz)
+  (`sha256:ef20d0ed567e`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-220.npz](records/results/liu-outputs-220.npz)
+  (`sha256:fddff6846502`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-240.npz](records/results/liu-outputs-240.npz)
+  (`sha256:ee5473dd2021`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-260.npz](records/results/liu-outputs-260.npz)
+  (`sha256:9e7b6095efdb`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-280.npz](records/results/liu-outputs-280.npz)
+  (`sha256:02caa71df37b`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-300.npz](records/results/liu-outputs-300.npz)
+  (`sha256:121b6b5579f2`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-320.npz](records/results/liu-outputs-320.npz)
+  (`sha256:62fe61b4bc9c`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-340.npz](records/results/liu-outputs-340.npz)
+  (`sha256:6c54c236a146`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-360.npz](records/results/liu-outputs-360.npz)
+  (`sha256:82a93a6c5ba0`)
+- `supporting_artifact` —
+  [studies/global_decay_replication/records/results/liu-outputs-380.npz](records/results/liu-outputs-380.npz)
+  (`sha256:bd78cd503c3d`)
 
 ## Provenance rule
 

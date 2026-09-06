@@ -6,6 +6,7 @@ from fsrl.experiments.global_decay_replication.cohorts import summarize_points
 from fsrl.experiments.global_decay_replication.generic import MODES, summarize
 from fsrl.experiments.global_decay_replication.inputs import cohort_indices
 from fsrl.experiments.global_decay_replication.protocol import COHORTS, SEEDS
+from fsrl.experiments.global_decay_replication.reporting import _cell
 
 
 class GlobalDecayReplicationPipelineTests(unittest.TestCase):
@@ -41,6 +42,11 @@ class GlobalDecayReplicationPipelineTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             summarize_points([])
         self.assertEqual(COHORTS, 400)
+
+    def test_report_cells_ignore_mapping_insertion_order(self):
+        self.assertEqual(
+            _cell({"mean": 1, "interval": 2}), _cell({"interval": 2, "mean": 1})
+        )
 
 
 if __name__ == "__main__":
