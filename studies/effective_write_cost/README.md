@@ -42,6 +42,12 @@ modification proxy, no physiological budget or automatic main-model promotion.
 - `supporting_artifact` —
   [studies/effective_write_cost/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:d82cebdd98a1`)
+- `execution_lock` —
+  [studies/effective_write_cost/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:1703a545c12c`)
+- `supporting_artifact` —
+  [studies/effective_write_cost/records/results/preparation.json](records/results/preparation.json)
+  (`sha256:c24baaea4f5c`)
 
 ## Provenance rule
 

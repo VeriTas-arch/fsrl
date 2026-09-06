@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 947,
+  "entry_count": 949,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 440,
+    "json": 442,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 77,
@@ -23,7 +23,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 872,
+    "already_conformant": 874,
     "historical_gzip_view": 74,
     "historical_pth_view": 1
   },
@@ -4528,6 +4528,74 @@
         "bytes": 61504,
         "sha256": "d82cebdd98a1077232f4d0c8b33d72da0ba463a8cb2ff41b9c6d4373f17306fd",
         "source_ref": "sha256:d82cebdd98a1077232f4d0c8b33d72da0ba463a8cb2ff41b9c6d4373f17306fd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/benchmarks/source_lock.json",
+        "repository_path": "studies/effective_write_cost/records/benchmarks/source_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 63381,
+        "sha256": "1703a545c12c5c19bfcf0f74d3f7c3ecf2c11ae8085e710eebe465409aefa5f9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_benchmarks_source_lock_json",
+      "registered_identity": {
+        "bytes": 63381,
+        "sha256": "1703a545c12c5c19bfcf0f74d3f7c3ecf2c11ae8085e710eebe465409aefa5f9",
+        "source_ref": "sha256:1703a545c12c5c19bfcf0f74d3f7c3ecf2c11ae8085e710eebe465409aefa5f9"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/effective_write_cost/records/results/preparation.json",
+        "repository_path": "studies/effective_write_cost/records/results/preparation.json"
+      },
+      "materialized_identity": {
+        "bytes": 32513,
+        "sha256": "c24baaea4f5cbe4515961d3397cc70d0c12d0488b7d450e29cd989ef5588f6bb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "effective_write_cost",
+        "kind": "study"
+      },
+      "record_id": "study.effective_write_cost.studies_effective_write_cost_records_results_preparation_json",
+      "registered_identity": {
+        "bytes": 32513,
+        "sha256": "c24baaea4f5cbe4515961d3397cc70d0c12d0488b7d450e29cd989ef5588f6bb",
+        "source_ref": "sha256:c24baaea4f5cbe4515961d3397cc70d0c12d0488b7d450e29cd989ef5588f6bb"
       },
       "role": "supporting_artifact"
     },
@@ -32542,7 +32610,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 945,
+  "registered_record_count": 947,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -32553,7 +32621,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 48,
+    "execution_lock": 49,
     "freeze_validation": 1,
     "frozen_parameters": 52,
     "frozen_result": 96,
@@ -32569,7 +32637,7 @@
     "report": 72,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 522,
+    "supporting_artifact": 523,
     "validation_result": 12
   },
   "schema_version": 2,
