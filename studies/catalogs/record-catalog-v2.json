@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 649,
+  "entry_count": 652,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 326,
+    "json": 328,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 67,
-    "numpy_npz": 244,
+    "numpy_npz": 245,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 596,
+    "already_conformant": 599,
     "historical_gzip_view": 52,
     "historical_pth_view": 1
   },
@@ -515,6 +515,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/benchmarks/generic_confirmation_lock.json",
+        "repository_path": "studies/common_encoding_state/records/benchmarks/generic_confirmation_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 1040,
+        "sha256": "5127b2321a32f7592ca79625c02869fc07ac973bd407a0eaadc5c2d7c9f26d1a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_benchmarks_generic_confirmation_lock_json",
+      "registered_identity": {
+        "bytes": 1040,
+        "sha256": "5127b2321a32f7592ca79625c02869fc07ac973bd407a0eaadc5c2d7c9f26d1a",
+        "source_ref": "sha256:5127b2321a32f7592ca79625c02869fc07ac973bd407a0eaadc5c2d7c9f26d1a"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.randomization_record",
       "format": {
         "format": "json",
@@ -782,6 +816,74 @@
         "bytes": 82079,
         "sha256": "5dbb36aa2c622cddd9de35ed3b39eb1b3bc8358db1847cc8a8370ec1f5f18093",
         "source_ref": "sha256:5dbb36aa2c622cddd9de35ed3b39eb1b3bc8358db1847cc8a8370ec1f5f18093"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/generic_confirmation.json",
+        "repository_path": "studies/common_encoding_state/records/results/generic_confirmation.json"
+      },
+      "materialized_identity": {
+        "bytes": 9690,
+        "sha256": "030e3724f5a1fdeb039c060ffa726f57b6e19d83bd28d8334e43670eb46014ab"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_generic_confirmation_json",
+      "registered_identity": {
+        "bytes": 9690,
+        "sha256": "030e3724f5a1fdeb039c060ffa726f57b6e19d83bd28d8334e43670eb46014ab",
+        "source_ref": "sha256:030e3724f5a1fdeb039c060ffa726f57b6e19d83bd28d8334e43670eb46014ab"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/common_encoding_state/records/results/generic_confirmation.npz",
+        "repository_path": "studies/common_encoding_state/records/results/generic_confirmation.npz"
+      },
+      "materialized_identity": {
+        "bytes": 189197,
+        "sha256": "9b8cae6dfb63dcf08b778414c611afa3d9a3cdf281152575a0589182735c06bf"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "common_encoding_state",
+        "kind": "study"
+      },
+      "record_id": "study.common_encoding_state.studies_common_encoding_state_records_results_generic_confirmation_npz",
+      "registered_identity": {
+        "bytes": 189197,
+        "sha256": "9b8cae6dfb63dcf08b778414c611afa3d9a3cdf281152575a0589182735c06bf",
+        "source_ref": "sha256:9b8cae6dfb63dcf08b778414c611afa3d9a3cdf281152575a0589182735c06bf"
       },
       "role": "supporting_artifact"
     },
@@ -22365,7 +22467,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 647,
+  "registered_record_count": 650,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -22376,7 +22478,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 44,
+    "execution_lock": 45,
     "freeze_validation": 1,
     "frozen_parameters": 31,
     "frozen_result": 70,
@@ -22392,8 +22494,8 @@
     "report": 63,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 297,
-    "validation_result": 8
+    "supporting_artifact": 298,
+    "validation_result": 9
   },
   "schema_version": 2,
   "sources": {

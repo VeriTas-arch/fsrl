@@ -96,6 +96,15 @@ main model without fresh replication and a separate biological-boundary test.
 - `frozen_parameters` —
   [studies/common_encoding_state/records/results/training-2125-episode_common.json](records/results/training-2125-episode_common.json)
   (`sha256:5a2a6996fbf7`)
+- `execution_lock` —
+  [studies/common_encoding_state/records/benchmarks/generic_confirmation_lock.json](records/benchmarks/generic_confirmation_lock.json)
+  (`sha256:5127b2321a32`)
+- `validation_result` —
+  [studies/common_encoding_state/records/results/generic_confirmation.json](records/results/generic_confirmation.json)
+  (`sha256:030e3724f5a1`)
+- `supporting_artifact` —
+  [studies/common_encoding_state/records/results/generic_confirmation.npz](records/results/generic_confirmation.npz)
+  (`sha256:9b8cae6dfb63`)
 
 ## Provenance rule
 
