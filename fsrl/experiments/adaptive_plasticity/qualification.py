@@ -39,6 +39,7 @@ CPU_TESTS = (
 
 def comparison(first, second, *, atol=1e-5, rtol=1e-4) -> dict:
     a, b = (torch.as_tensor(value).detach().cpu() for value in (first, second))
+    b = b.to(dtype=a.dtype)
     same = a.shape == b.shape and bool(
         torch.isfinite(a).all() and torch.isfinite(b).all()
     )
