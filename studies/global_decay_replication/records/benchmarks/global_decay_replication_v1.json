@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "global_decay_replication_v1",
+  "question": "Does the frozen global blockwise diminishing-plasticity effect replicate on three fresh paired single-stage training streams while preserving the established Liu competence and behavior boundaries?",
+  "scope": "An unchanged fresh replication of the selected global scheduler from experience_dependent_plasticity_v1. This contract does not alter the codebook, evidence admission, score update, decay equation, readout, loss, optimizer, training budget, Liu task, human references or decision thresholds. It does not test common encoding state and cannot by itself promote a main model or establish a human neural mechanism.",
+  "parent_evidence": {
+    "contract": "studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.json",
+    "result": "studies/experience_dependent_plasticity/records/results/experience_dependent_plasticity_v1.json",
+    "registered_outcome": "global_schedule_preferred",
+    "carried_positive": "Across development seeds 2117--2119, adaptive global blockwise plasticity increased internal strict-correct ordering, reduced inversion count and reduced ranking-composition total variation while preserving the registered core behavior profile.",
+    "carried_boundary": "The relation-familiarity interpretation failed its specificity gate; self-consistent incorrect rankings remained above the human reference and the complete nine-row quantitative profile did not pass."
+  },
+  "candidate": {
+    "conditions": ["fixed_eta_resampled", "adaptive_eta_resampled"],
+    "state": "Fifteen continuous metric-score entries. The retained global scheduler has no relation-addressed efficacy array, count array, local trace, cache, replay buffer or recurrent hidden state.",
+    "fixed_rule": "w_next=w+eta0*z*(d_tilde-dot(w,x))*x/(epsilon+dot(x,x)).",
+    "adaptive_rule": "At zero-based support trial t with R distinct support relations, b(t)=floor(t/R), eta_t=eta0/(1+b(t)*eta0), and w_next=w+eta_t*z*(d_tilde-dot(w,x))*x/(epsilon+dot(x,x)).",
+    "readout": "M_ij=gamma_G*dot(w_T,c_i-c_j).",
+    "slow_parameters": ["raw_eta", "raw_global_gain"],
+    "encoding": "The inherited four-valued Resampled stochastic quantizer and stable subject encoding/admission model are unchanged.",
+    "single_stage": "Each fit starts from the registered initialization and jointly optimizes eta0 and gamma_G for one uninterrupted generic-training stage. No checkpoint transfer, Liu adaptation, local adaptation or second optimizer phase is allowed.",
+    "global_clock_boundary": "The block index is supplied by the known support schedule. It is not claimed to be an autonomously inferred neural uncertainty signal."
+  },
+  "frozen_execution": {
+    "mandatory_seeds": [2120, 2121, 2122],
+    "execution_order": {
+      "2120": ["fixed_eta_resampled", "adaptive_eta_resampled"],
+      "2121": ["adaptive_eta_resampled", "fixed_eta_resampled"],
+      "2122": ["fixed_eta_resampled", "adaptive_eta_resampled"]
+    },
+    "pairing": "Within each seed, both conditions receive identical generic episodes, support order/orientation, admission masks, quantization uniforms, initialization and optimizer budget. All six mandatory fits must finish and be jointly locked before any Liu evaluation.",
+    "training_rng_offset": 1150000,
+    "encoding_rng_offset": 1160000,
+    "optimization": "Inherit exactly 1500 Adam steps, batch size 32, learning rate 0.01, gradient clipping at 2, physical initialization eta0=0.5 and gamma_G=1, final-step-only selection and mean softplus(-y*M) over equally weighted generic queries.",
+    "runtime": "CUDA is mandatory. torch.compile uses fullgraph=True and mode=default; Torch intra-op, inter-op, BLAS and compiler thread pools are each limited to one; TF32 is disabled.",
+    "no_search": "No optional seed, checkpoint selection, longer budget, alternate initialization, decay curve, scheduler, loss, codebook, temperature, gain calibration or post-result repair is permitted."
+  },
+  "qualification": {
+    "seed": 1190001,
+    "data_boundary": "Qualification uses only protected non-Liu fixtures before source locking.",
+    "required": "Verify eager/CUDA-fullgraph output, loss, gradient and Adam-update parity; independent float64 recurrence parity; fixed and adaptive finite gradients; z=0 neutrality; ordinary cue binding; evidence-routing impairment; global balanced-schedule identity with the historical selected rule; and exact preservation of the inherited quantizer and task-information boundary.",
+    "failure": "A failed qualification blocks training. Source repair is append-only and requires complete requalification before a replacement source lock."
+  },
+  "generic_confirmation": {
+    "episodes": 256,
+    "episode_seed": 1170001,
+    "encoding_seed": 1170003,
+    "bootstrap_seed_base": 1171000,
+    "bootstrap_samples": 10000,
+    "requirements": "For each fit independently, learned and nonlearned exact correctness must have participant/episode-bootstrap 95% lower bounds above 0.5. For every seed, the adaptive-minus-fixed 95% interval for H_late must lie below zero. Preserve and report all occurrence sensitivities L1..L4 and the conditional-mean/quantization-variance decomposition.",
+    "role": "This confirms competence and the registered late-sensitivity mechanism. It neither selects a scheduler nor tunes eta0 or gamma_G."
+  },
+  "liu_evaluation": {
+    "cohorts_per_fit": 400,
+    "subjects_per_cohort": 77,
+    "cohort_shard_size": 20,
+    "cohort_seed_base": 5200000,
+    "cohort_seed_stride": 1000,
+    "cohort_offsets": {"cue_seed": 0, "support_seed": 200, "subject_encoding_seed": 400, "encoding_seed": 600, "choice_seed": 800},
+    "bootstrap_samples": 10000,
+    "bootstrap_seed_base": 5800000,
+    "pairing": "Within every seed and cohort, conditions share the complete base cohort, support/query schedule, admission state, quantization uniforms and bootstrap counts. Choice draws use the same registered cohort choice seed. Participants remain nested within a fit and are never pooled across networks.",
+    "reported": "Report all original nine qualitative flags, all original nine quantitative classifications, continuous cohort means and intervals, simultaneous pass rates, internal strict-correct fraction, inversion count and bins, internal-to-sampled transitions and ranking-composition total variation."
+  },
+  "primary_gates": {
+    "prerequisite": "All six fits pass source/artifact/input integrity, generic competence, functional controls and finite optimization checks.",
+    "internal_strict_correct": "For each seed independently, the whole-cohort paired-bootstrap 95% interval for adaptive minus fixed internal strict-correct fraction lies entirely above zero.",
+    "mean_inversion_count": "For each seed independently, the whole-cohort paired-bootstrap 95% interval for adaptive minus fixed mean inversion count lies entirely below zero.",
+    "ranking_composition": "For each seed independently, the whole-cohort paired-bootstrap 95% interval for adaptive minus fixed ranking-composition total variation lies entirely below zero.",
+    "preservation": "For every adaptive fit independently, the inherited core-behavior gate and preservation profile pass unchanged.",
+    "joint_rule": "The registered global-decay mechanism replicates only if every primary link passes in all three fresh seeds. No majority vote, network pooling or rescue by the complete-nine profile is allowed."
+  },
+  "secondary_boundaries": {
+    "complete_profile": "The original qualitative and quantitative nine-row profile and joint pass rate are mandatory reports, not primary replication gates. A high self-consistent-incorrect rate remains a boundary rather than a reason to alter this confirmation.",
+    "relation_specificity": "This replication does not reopen relation-addressed efficacy and cannot reverse the parent study's failed relation-familiarity claim.",
+    "human_latent_state": "Internal strict order and inversion count are model-level diagnostics without a directly observed human latent-state counterpart.",
+    "promotion": "Replication success establishes a stable core model candidate only. Main-model promotion still requires a prospectively frozen admission decision, simulation-stability interpretation and a separately executed finite-time biological-boundary test of the selected global efficacy schedule."
+  },
+  "outcomes": {
+    "replicated_global_decay": "All primary gates pass independently in seeds 2120--2122.",
+    "heterogeneous_replication": "All integrity and competence prerequisites pass, but at least one primary causal link fails in one or more seeds.",
+    "noninterpretable": "A mandatory fit, lock, input, competence or functional prerequisite fails."
+  },
+  "sequence": ["commit_and_push_protocol", "implement_without_changing_the_frozen_equations", "qualify_only_on_non_liu_fixtures", "commit_and_push_implementation_and_qualification", "lock_source", "train_all_six_mandatory_fits", "jointly_lock_all_fits_before_any_liu_evaluation", "run_and_lock_generic_confirmation", "freeze_all_liu_cohorts_and_rng_arrays", "commit_and_push_complete_artifact_and_input_lock", "evaluate_all_mandatory_cohorts", "independently_reconstruct_publish_validate_commit_and_push"],
+  "stop_rule": "After the fixed replication, do not tune or rerun the candidate and do not use these fresh results to choose a common-state encoder. A common-encoding successor, equivalent scalar-state refactor, circuit test or main-model promotion requires its own prospective authority and must preserve this result."
+}

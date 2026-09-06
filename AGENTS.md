@@ -183,6 +183,17 @@ post-result repair, fresh replication, circuit testing, human fitting or main-
 model promotion is authorized. A successor requires a separate prospective
 question and explicit authorization.
 
+The user has explicitly opened `global_decay_replication`, an unchanged fresh
+replication of the selected fixed-versus-global-decay single-stage comparison on
+three mandatory paired seeds. Its prospective authority is
+[`studies/global_decay_replication/`](studies/global_decay_replication/). Freeze
+the protocol before implementation; qualify only on non-Liu fixtures; lock all
+six fits before generic confirmation or Liu evaluation; then lock every Liu
+cohort and RNG array before execution. Keep participants within each network and
+require every registered primary link in every fresh seed. This does not reopen
+relation-addressed efficacy, tune the parent recipe, test common encoding state,
+run the circuit boundary, or promote a main model.
+
 ## Repository invariants
 
 1. Structural changes must not alter equations, parameters, seeds, thresholds,
