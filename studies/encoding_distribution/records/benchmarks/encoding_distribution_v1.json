@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment_id": "encoding_distribution_v1",
+  "question": "Can conditionally moment-matched Gaussian teaching replace the behavioral contribution of four-valued teaching, and does distribution shape change the accuracy-versus-ranking tradeoff?",
+  "authorization": "Execute the reviewed prospective three-condition plan in task 01a075eb-08fa-73c0-b87d-2d75c242af2f.",
+  "parent_commit": "35e0ca9ad14c39ad41f367220da5107caa9f76bd",
+  "scope": "Independent development diagnostic; zero training, parameter fitting, human reference re-estimation or promotion. Preserve encoding_contribution and structural_identification sources and records. Existing exposed data do not become independent confirmation.",
+  "design": {
+    "seeds": [2126, 2127, 2128],
+    "donors": ["M10", "M11"],
+    "conditions": ["E", "Q", "G"],
+    "parameters": "Complete frozen raw parameter vectors transferred within training stream; same global decay, stable admission, zero local evidence and temperature 0.25.",
+    "inputs": "Reuse all 100 parent Liu cohorts of 77 and all 256 generic instances, with their physical cues, order, admission and random uniforms. Read all twelve E/Q cell observations from the encoding_contribution portable archive; only six G cells require new Liu inference.",
+    "gaussian": "For each canonical cue orientation o, c=o*d, variance v=(c-lower)*(upper-c), epsilon=-ndtri(U), and internal teaching o*(c+sqrt(v)*epsilon) on admitted trials; zero otherwise. Each old U is in (0,1), independently drawn per presentation; no clipping or empirical recentering/rescaling. This monotone coupling pairs high Q code with high G teaching. Use the unchanged query choice seeds.",
+    "boundary": "G changes higher distributional properties and support range jointly, and inherits the four-code variance function. It is a mathematical control, not a newly admitted bounded biological model or proof that arbitrary moment-matched laws are equivalent."
+  },
+  "qualification": {
+    "before_outcomes": "Verify six parameter settings on independent synthetic generic inputs. Float32 CUDA against float64 reference at atol 1e-5, rtol 1e-4. Independent dense impulse propagation must reproduce conditional mean, covariance and full cross-query covariance at atol 1e-12, rtol 1e-10; verify a realized G state against that linear map. Test reversed cue direction, zero admission, zero variance, and singular covariance without jitter. No need for finite random sample moments to equal population moments exactly.",
+    "competence": "Each G cell must have whole-instance-bootstrap lower bounds above 0.5 for learned and nonlearned deterministic accuracy, and above zero for intact minus address-shuffled accuracy. Use the inherited competence procedure (10000 draws, 8400000+training_seed). A failed cell is noninterpretable and cannot establish equivalence or improvement.",
+    "integrity": "Source/input hashes and parent Git witnesses before evaluation; stop on any identity/parity failure. Read-only parent baseline observations require complete 100-cohort coverage. Record admitted internal teaching outside the adjacent code interval and outside [-1,1], without filtering those trials."
+  },
+  "analysis": {
+    "primary_contrast": "G minus Q within each parameter donor and training seed. Also report G minus E and inherited Q minus E, all common and legacy continuous endpoints plus separate internal sign correctness and exact latent ranking.",
+    "equivalence_bounds": {"nonlearned_accuracy": 0.005, "correct_ranker": 0.01, "self_consistent_incorrect": 0.01, "self_inconsistent": 0.01},
+    "uncertainty": "10000 paired whole-cohort bootstrap draws, seed 8500000+training_seed. Equivalence requires every corresponding 95-percent interval strictly inside its predeclared bounds; all four primary endpoints under both donors and all three streams must pass for persistent primary equivalence. An interval wholly above +bound or below -bound supports meaningful difference; all other cases are unresolved. No pooling networks, retrospective sample extension or familywise claims about supporting endpoint differences.",
+    "profiles": "Preserve inherited nine common and legacy classifiers, exclusions, Beta morphology and references. Profile seed 7900001+training_seed. Report full failure/cofailure and signed below/inside/above/undefined counts, with pointwise paired changes in all nine joint-row failures and in below/above frequencies for all continuous endpoints. Reuse the existing 1000-cohort human empirical summary as context only; 74.9 percent is not a new admission threshold.",
+    "improvement": "Keep equivalence and behavioral improvement separate. A local tradeoff improvement requires G nonlearned mean interval inside the frozen human range; its paired accuracy interval within +/-0.005 of Q; paired upper bounds below zero for correct-ranker-below-reference and self-consistent-incorrect-above-reference failure changes; and no newly sustained out-of-reference continuous endpoint relative to Q. Report the distance-above-reference failure change as a named diagnostic. Only a result present in all six qualified cells is persistent improvement. This does not waive the original nine gates or establish main-model admission.",
+    "full_scope": "Primary equivalence does not prove full behavioral or distributional equivalence. Any new sustained endpoint mismatch is reported. Continuous means and nonlinear cohort classifications must both be preserved in artifacts."
+  },
+  "conditional_K_check": {
+    "trigger": "Only if all six G cells are competence-qualified and primary-equivalent to Q and no cell acquires a new sustained continuous mismatch relative to Q. Otherwise record not_triggered, without a new manipulation rollout.",
+    "design": "If triggered, use only existing balanced K4 and K8 inputs (256 paired instances), all three encodings and six parameter settings, fixed parameters and original choice seed 1350011. No clustered conditions, new support graphs or tuning.",
+    "estimand": "Compare (G_K8-G_K4)-(Q_K8-Q_K4), and report E/Q/G K8-K4 changes, on original cross-component 16 queries and bridge-only query. Whole-instance paired bootstrap 10000 draws, 8510000+training_seed. Cross-component equivalence requires the 95-percent interval inside +/-0.005; bridge is supporting. The 16 queries include the trained bridge. A failed transport does not retroactively erase Liu primary equivalence."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.encoding_distribution",
+    "freeze": "Qualify synthetic computation, commit source and protocol, and lock source plus parent input identities before new generic or Liu outcomes. Run all mandatory cells and retain failures. Conditional K code and trigger are also frozen before Liu exposure.",
+    "runtime": "Inherited single-thread numerical runtime; float32 CUDA inference with TF32 disabled; float64 probability transform, analytic reference and statistics. Runtime root artifacts/runs/encoding_distribution_v1.",
+    "artifacts": "Protocol, qualification, source/input lock, 100 complete six-cell G cohort records, packed choices/margins/states and tail counts, six competence results, independent-moment qualification errors, eighteen-cell canonical comparison, conditional K result or not_triggered record, concise interpretation, portable byte-reconstructable archives and rebuilt native study registration. Reuse parent arrays/records by locked reference rather than duplicating E/Q or raw human data."
+  }
+}

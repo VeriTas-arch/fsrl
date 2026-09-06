@@ -274,6 +274,9 @@ trajectories.
 - [Encoding contribution and finite-cohort diagnosis](encoding_contribution/README.md) — `supporting`
   - **Finding:** Completed fixed-parameter encoding cross, exact conditional moments,
     1000 empirical cohorts and paired support contrasts; no main-model promotion.
+- [Moment-matched encoding distribution comparison](encoding_distribution/README.md) — `frozen_contract`
+  - **Finding:** Prospective fixed-parameter three-condition distribution comparison; no
+    new outcome available.
 
 ## One-factor structural transport
 

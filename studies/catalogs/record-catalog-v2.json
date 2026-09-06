@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 808,
+  "entry_count": 809,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 376,
+    "json": 377,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 72,
@@ -22,7 +22,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 734,
+    "already_conformant": 735,
     "historical_gzip_view": 73,
     "historical_pth_view": 1
   },
@@ -5857,6 +5857,40 @@
         "source_ref": "sha256:62f11a03e64dbebb61b7151f1c19135a14978663908086f7d38b15c0cabfe7db"
       },
       "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/encoding_distribution/records/benchmarks/encoding_distribution_v1.json",
+        "repository_path": "studies/encoding_distribution/records/benchmarks/encoding_distribution_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 7564,
+        "sha256": "1bb74aaa8b9a215e878de045f75e985b5edf3bf82e54cdf4b886cf30ef9c95a0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "encoding_distribution",
+        "kind": "study"
+      },
+      "record_id": "study.encoding_distribution.studies_encoding_distribution_records_benchmarks_encoding_distribution_v1_json",
+      "registered_identity": {
+        "bytes": 7564,
+        "sha256": "1bb74aaa8b9a215e878de045f75e985b5edf3bf82e54cdf4b886cf30ef9c95a0",
+        "source_ref": "sha256:1bb74aaa8b9a215e878de045f75e985b5edf3bf82e54cdf4b886cf30ef9c95a0"
+      },
+      "role": "registered_contract"
     },
     {
       "availability": "materialized",
@@ -27813,7 +27847,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 806,
+  "registered_record_count": 807,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -27834,7 +27868,7 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 68,
+    "registered_contract": 69,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 67,
@@ -27847,7 +27881,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "f77a9aa3acb33e8103b65cfb1e0a85fae2a7ff15548cf1b289560ee526077263"
+      "sha256": "1da7e386c9e3bef5f52e54060c5b990afc472d7998ba5371b543200d36f27e26"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",
