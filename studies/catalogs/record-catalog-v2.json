@@ -7,22 +7,22 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 500,
+  "entry_count": 542,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 251,
+    "json": 272,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 62,
-    "numpy_npz": 175,
+    "markdown": 63,
+    "numpy_npz": 195,
     "pdf": 2,
     "svg": 4,
     "tar_zstd": 1,
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 462,
+    "already_conformant": 504,
     "historical_gzip_view": 37,
     "historical_pth_view": 1
   },
@@ -3564,6 +3564,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.md",
+        "repository_path": "studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 11937,
+        "sha256": "9e99557bc5a8efe1ece7c39ca2ba8cd2d77b87cddbd9f99ba179249ce5f921b1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_reports_experience_dependent_plasticity_v1_md",
+      "registered_identity": {
+        "bytes": 11937,
+        "sha256": "9e99557bc5a8efe1ece7c39ca2ba8cd2d77b87cddbd9f99ba179249ce5f921b1",
+        "source_ref": "sha256:9e99557bc5a8efe1ece7c39ca2ba8cd2d77b87cddbd9f99ba179249ce5f921b1"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/experience_dependent_plasticity_v1.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/experience_dependent_plasticity_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 67636,
+        "sha256": "5315b68be0654c84a12988331e1f932b47c723f411bf0eddb1d1c42d15df54d2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_experience_dependent_plasticity_v1_json",
+      "registered_identity": {
+        "bytes": 67636,
+        "sha256": "5315b68be0654c84a12988331e1f932b47c723f411bf0eddb1d1c42d15df54d2",
+        "source_ref": "sha256:5315b68be0654c84a12988331e1f932b47c723f411bf0eddb1d1c42d15df54d2"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.frozen_result",
       "format": {
         "format": "json",
@@ -3627,6 +3695,1366 @@
         "bytes": 286558,
         "sha256": "938c39346eee2fd22cc28d4407c59584da8e7338919ff20773ba68263a057f09",
         "source_ref": "sha256:938c39346eee2fd22cc28d4407c59584da8e7338919ff20773ba68263a057f09"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-000.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-000.json"
+      },
+      "materialized_identity": {
+        "bytes": 370791,
+        "sha256": "270b12afec01086d6169e6c0f76a712909051f4c8876092ce27ae6e1e06cafd0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_000_json",
+      "registered_identity": {
+        "bytes": 370791,
+        "sha256": "270b12afec01086d6169e6c0f76a712909051f4c8876092ce27ae6e1e06cafd0",
+        "source_ref": "sha256:270b12afec01086d6169e6c0f76a712909051f4c8876092ce27ae6e1e06cafd0"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-020.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-020.json"
+      },
+      "materialized_identity": {
+        "bytes": 373002,
+        "sha256": "9033d6fb11a4e550c1dae70124e350e3c4c27b610d78dfcdecc4546157b5c956"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_020_json",
+      "registered_identity": {
+        "bytes": 373002,
+        "sha256": "9033d6fb11a4e550c1dae70124e350e3c4c27b610d78dfcdecc4546157b5c956",
+        "source_ref": "sha256:9033d6fb11a4e550c1dae70124e350e3c4c27b610d78dfcdecc4546157b5c956"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-040.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-040.json"
+      },
+      "materialized_identity": {
+        "bytes": 371499,
+        "sha256": "3e46c1ebffe99b684ff72ebd90551149e2748c85040c40834667cb128ca31c0d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_040_json",
+      "registered_identity": {
+        "bytes": 371499,
+        "sha256": "3e46c1ebffe99b684ff72ebd90551149e2748c85040c40834667cb128ca31c0d",
+        "source_ref": "sha256:3e46c1ebffe99b684ff72ebd90551149e2748c85040c40834667cb128ca31c0d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-060.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-060.json"
+      },
+      "materialized_identity": {
+        "bytes": 370705,
+        "sha256": "8b9b4a255e68684b906dd8144d4748f26cd9506c0de579da2fe53e3f1b06638f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_060_json",
+      "registered_identity": {
+        "bytes": 370705,
+        "sha256": "8b9b4a255e68684b906dd8144d4748f26cd9506c0de579da2fe53e3f1b06638f",
+        "source_ref": "sha256:8b9b4a255e68684b906dd8144d4748f26cd9506c0de579da2fe53e3f1b06638f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-080.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-080.json"
+      },
+      "materialized_identity": {
+        "bytes": 371749,
+        "sha256": "f8a612c646cb236b52f3399899f0aa4d6ad6e0a51d918d6e1a63193ac85502de"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_080_json",
+      "registered_identity": {
+        "bytes": 371749,
+        "sha256": "f8a612c646cb236b52f3399899f0aa4d6ad6e0a51d918d6e1a63193ac85502de",
+        "source_ref": "sha256:f8a612c646cb236b52f3399899f0aa4d6ad6e0a51d918d6e1a63193ac85502de"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-100.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-100.json"
+      },
+      "materialized_identity": {
+        "bytes": 371245,
+        "sha256": "30409e9dd27da032b4ad75fdc83b2cb313c2a57d6ef0f098898d9980e2a34de8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_100_json",
+      "registered_identity": {
+        "bytes": 371245,
+        "sha256": "30409e9dd27da032b4ad75fdc83b2cb313c2a57d6ef0f098898d9980e2a34de8",
+        "source_ref": "sha256:30409e9dd27da032b4ad75fdc83b2cb313c2a57d6ef0f098898d9980e2a34de8"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-120.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-120.json"
+      },
+      "materialized_identity": {
+        "bytes": 371093,
+        "sha256": "3041dfcb40cb458cdf247c06c09cdb25dc50277dd29944200cd57984aff5b07d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_120_json",
+      "registered_identity": {
+        "bytes": 371093,
+        "sha256": "3041dfcb40cb458cdf247c06c09cdb25dc50277dd29944200cd57984aff5b07d",
+        "source_ref": "sha256:3041dfcb40cb458cdf247c06c09cdb25dc50277dd29944200cd57984aff5b07d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-140.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-140.json"
+      },
+      "materialized_identity": {
+        "bytes": 372840,
+        "sha256": "d4372ba83ce917c59d2ecae96af967c3f5c913aac477359bd16533eaba97a2ca"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_140_json",
+      "registered_identity": {
+        "bytes": 372840,
+        "sha256": "d4372ba83ce917c59d2ecae96af967c3f5c913aac477359bd16533eaba97a2ca",
+        "source_ref": "sha256:d4372ba83ce917c59d2ecae96af967c3f5c913aac477359bd16533eaba97a2ca"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-160.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-160.json"
+      },
+      "materialized_identity": {
+        "bytes": 370767,
+        "sha256": "6ce083c1ddb4d69688d1cb713830d5c03b690a6ae1f386feedbaa7f6459e6ba7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_160_json",
+      "registered_identity": {
+        "bytes": 370767,
+        "sha256": "6ce083c1ddb4d69688d1cb713830d5c03b690a6ae1f386feedbaa7f6459e6ba7",
+        "source_ref": "sha256:6ce083c1ddb4d69688d1cb713830d5c03b690a6ae1f386feedbaa7f6459e6ba7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-180.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-180.json"
+      },
+      "materialized_identity": {
+        "bytes": 373195,
+        "sha256": "2f5eb3e3f60a7f622efedaea59bb13121cb06cb99f698524c4e7fb001eb68b70"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_180_json",
+      "registered_identity": {
+        "bytes": 373195,
+        "sha256": "2f5eb3e3f60a7f622efedaea59bb13121cb06cb99f698524c4e7fb001eb68b70",
+        "source_ref": "sha256:2f5eb3e3f60a7f622efedaea59bb13121cb06cb99f698524c4e7fb001eb68b70"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-200.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-200.json"
+      },
+      "materialized_identity": {
+        "bytes": 371454,
+        "sha256": "bf84ab784307ce908f6ba624e62ded4d56872d37873d382b978735215ec35a18"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_200_json",
+      "registered_identity": {
+        "bytes": 371454,
+        "sha256": "bf84ab784307ce908f6ba624e62ded4d56872d37873d382b978735215ec35a18",
+        "source_ref": "sha256:bf84ab784307ce908f6ba624e62ded4d56872d37873d382b978735215ec35a18"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-220.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-220.json"
+      },
+      "materialized_identity": {
+        "bytes": 371770,
+        "sha256": "ad1b90e27efab8c6e8d295c685b8dd40500c53534eca4e68acb28a43101d6cd3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_220_json",
+      "registered_identity": {
+        "bytes": 371770,
+        "sha256": "ad1b90e27efab8c6e8d295c685b8dd40500c53534eca4e68acb28a43101d6cd3",
+        "source_ref": "sha256:ad1b90e27efab8c6e8d295c685b8dd40500c53534eca4e68acb28a43101d6cd3"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-240.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-240.json"
+      },
+      "materialized_identity": {
+        "bytes": 372877,
+        "sha256": "d59de03c80e9b8272be9fb3e4143e42bb2fb6cfd3923e1b9122d5d4710649a42"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_240_json",
+      "registered_identity": {
+        "bytes": 372877,
+        "sha256": "d59de03c80e9b8272be9fb3e4143e42bb2fb6cfd3923e1b9122d5d4710649a42",
+        "source_ref": "sha256:d59de03c80e9b8272be9fb3e4143e42bb2fb6cfd3923e1b9122d5d4710649a42"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-260.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-260.json"
+      },
+      "materialized_identity": {
+        "bytes": 372827,
+        "sha256": "c07dd4a66ffeb9499d8aa05b0b10502c316054e6593d12c87b73137984953e21"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_260_json",
+      "registered_identity": {
+        "bytes": 372827,
+        "sha256": "c07dd4a66ffeb9499d8aa05b0b10502c316054e6593d12c87b73137984953e21",
+        "source_ref": "sha256:c07dd4a66ffeb9499d8aa05b0b10502c316054e6593d12c87b73137984953e21"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-280.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-280.json"
+      },
+      "materialized_identity": {
+        "bytes": 371930,
+        "sha256": "1ea6b551a59d617d0c44fb945f2f05afe711fc1a22981350a168999197406c25"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_280_json",
+      "registered_identity": {
+        "bytes": 371930,
+        "sha256": "1ea6b551a59d617d0c44fb945f2f05afe711fc1a22981350a168999197406c25",
+        "source_ref": "sha256:1ea6b551a59d617d0c44fb945f2f05afe711fc1a22981350a168999197406c25"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-300.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-300.json"
+      },
+      "materialized_identity": {
+        "bytes": 371694,
+        "sha256": "9b4671a841750107aa41d82a0017c38e7275b4e6d2fa43f39d723fddc75acca6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_300_json",
+      "registered_identity": {
+        "bytes": 371694,
+        "sha256": "9b4671a841750107aa41d82a0017c38e7275b4e6d2fa43f39d723fddc75acca6",
+        "source_ref": "sha256:9b4671a841750107aa41d82a0017c38e7275b4e6d2fa43f39d723fddc75acca6"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-320.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-320.json"
+      },
+      "materialized_identity": {
+        "bytes": 371930,
+        "sha256": "a9510a517bee02de880fe62404e192c09fd153824e83266137cb6f3f1f0638d4"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_320_json",
+      "registered_identity": {
+        "bytes": 371930,
+        "sha256": "a9510a517bee02de880fe62404e192c09fd153824e83266137cb6f3f1f0638d4",
+        "source_ref": "sha256:a9510a517bee02de880fe62404e192c09fd153824e83266137cb6f3f1f0638d4"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-340.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-340.json"
+      },
+      "materialized_identity": {
+        "bytes": 372951,
+        "sha256": "fe8f341c4fa997f4f0498cdb3a2f6e4ed31d69d57ec5db4e6d0bd15a25a2cccd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_340_json",
+      "registered_identity": {
+        "bytes": 372951,
+        "sha256": "fe8f341c4fa997f4f0498cdb3a2f6e4ed31d69d57ec5db4e6d0bd15a25a2cccd",
+        "source_ref": "sha256:fe8f341c4fa997f4f0498cdb3a2f6e4ed31d69d57ec5db4e6d0bd15a25a2cccd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-360.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-360.json"
+      },
+      "materialized_identity": {
+        "bytes": 371835,
+        "sha256": "0f53ec858513f4f88516bf1f4ae6683fb6eff915af16a35e1aa0538e348e3c34"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_360_json",
+      "registered_identity": {
+        "bytes": 371835,
+        "sha256": "0f53ec858513f4f88516bf1f4ae6683fb6eff915af16a35e1aa0538e348e3c34",
+        "source_ref": "sha256:0f53ec858513f4f88516bf1f4ae6683fb6eff915af16a35e1aa0538e348e3c34"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-380.json",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-cohorts-380.json"
+      },
+      "materialized_identity": {
+        "bytes": 371846,
+        "sha256": "7e25bf434c795321c448f599e278dcacecccdd3af368c6f2a5d734b29af7cbfc"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_cohorts_380_json",
+      "registered_identity": {
+        "bytes": 371846,
+        "sha256": "7e25bf434c795321c448f599e278dcacecccdd3af368c6f2a5d734b29af7cbfc",
+        "source_ref": "sha256:7e25bf434c795321c448f599e278dcacecccdd3af368c6f2a5d734b29af7cbfc"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-000.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-000.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2339891,
+        "sha256": "edca88c3945f3decf55926751cc93bfff6574674d759f765c8b8b01a48e12c59"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_000_npz",
+      "registered_identity": {
+        "bytes": 2339891,
+        "sha256": "edca88c3945f3decf55926751cc93bfff6574674d759f765c8b8b01a48e12c59",
+        "source_ref": "sha256:edca88c3945f3decf55926751cc93bfff6574674d759f765c8b8b01a48e12c59"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-020.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-020.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2343189,
+        "sha256": "914294bfc81147cac165bec71caab545c84561032c9d8bf3abc9458c775fecec"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_020_npz",
+      "registered_identity": {
+        "bytes": 2343189,
+        "sha256": "914294bfc81147cac165bec71caab545c84561032c9d8bf3abc9458c775fecec",
+        "source_ref": "sha256:914294bfc81147cac165bec71caab545c84561032c9d8bf3abc9458c775fecec"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-040.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-040.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2342178,
+        "sha256": "1796ec7c05be7a26d494076fa3d92ccd49608b4f81f6e09f2de6185438b50ede"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_040_npz",
+      "registered_identity": {
+        "bytes": 2342178,
+        "sha256": "1796ec7c05be7a26d494076fa3d92ccd49608b4f81f6e09f2de6185438b50ede",
+        "source_ref": "sha256:1796ec7c05be7a26d494076fa3d92ccd49608b4f81f6e09f2de6185438b50ede"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-060.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-060.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2337682,
+        "sha256": "e49f92819d1a1f523a0cdda748a418bd9e08cbabdecf60fd633edb7ad73a173f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_060_npz",
+      "registered_identity": {
+        "bytes": 2337682,
+        "sha256": "e49f92819d1a1f523a0cdda748a418bd9e08cbabdecf60fd633edb7ad73a173f",
+        "source_ref": "sha256:e49f92819d1a1f523a0cdda748a418bd9e08cbabdecf60fd633edb7ad73a173f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-080.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-080.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2346438,
+        "sha256": "17b641534dac3e614ed808b5465f9a5fd35077712dafaff29ee6cb9c01067a84"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_080_npz",
+      "registered_identity": {
+        "bytes": 2346438,
+        "sha256": "17b641534dac3e614ed808b5465f9a5fd35077712dafaff29ee6cb9c01067a84",
+        "source_ref": "sha256:17b641534dac3e614ed808b5465f9a5fd35077712dafaff29ee6cb9c01067a84"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-100.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-100.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2340449,
+        "sha256": "d2061e5bb6f5027bc9d195fd297c0658fdb4190deed527c8544535e4b2dac050"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_100_npz",
+      "registered_identity": {
+        "bytes": 2340449,
+        "sha256": "d2061e5bb6f5027bc9d195fd297c0658fdb4190deed527c8544535e4b2dac050",
+        "source_ref": "sha256:d2061e5bb6f5027bc9d195fd297c0658fdb4190deed527c8544535e4b2dac050"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-120.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-120.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2345568,
+        "sha256": "e28175fb5c25505aea9a653d961337dc1269ef7768341d5b493a28a3d1948f9c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_120_npz",
+      "registered_identity": {
+        "bytes": 2345568,
+        "sha256": "e28175fb5c25505aea9a653d961337dc1269ef7768341d5b493a28a3d1948f9c",
+        "source_ref": "sha256:e28175fb5c25505aea9a653d961337dc1269ef7768341d5b493a28a3d1948f9c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-140.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-140.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2337976,
+        "sha256": "3895937868e330a778529fb0dd77e403d9d7a0bdc2763a657be1e4a589eaebb5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_140_npz",
+      "registered_identity": {
+        "bytes": 2337976,
+        "sha256": "3895937868e330a778529fb0dd77e403d9d7a0bdc2763a657be1e4a589eaebb5",
+        "source_ref": "sha256:3895937868e330a778529fb0dd77e403d9d7a0bdc2763a657be1e4a589eaebb5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-160.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-160.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2345419,
+        "sha256": "3e46044cc3960a8b33e810be98d8957f4c443bef692290b6d4dde33836daeed2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_160_npz",
+      "registered_identity": {
+        "bytes": 2345419,
+        "sha256": "3e46044cc3960a8b33e810be98d8957f4c443bef692290b6d4dde33836daeed2",
+        "source_ref": "sha256:3e46044cc3960a8b33e810be98d8957f4c443bef692290b6d4dde33836daeed2"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-180.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-180.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2346348,
+        "sha256": "cdfdc479e7be639dae413e148722fc80ccd835873d75936556d1132f356b0dca"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_180_npz",
+      "registered_identity": {
+        "bytes": 2346348,
+        "sha256": "cdfdc479e7be639dae413e148722fc80ccd835873d75936556d1132f356b0dca",
+        "source_ref": "sha256:cdfdc479e7be639dae413e148722fc80ccd835873d75936556d1132f356b0dca"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-200.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-200.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2340658,
+        "sha256": "b3cac1375f4db584f10225069a8074a807010b3545cdc133732e91ff106e08ca"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_200_npz",
+      "registered_identity": {
+        "bytes": 2340658,
+        "sha256": "b3cac1375f4db584f10225069a8074a807010b3545cdc133732e91ff106e08ca",
+        "source_ref": "sha256:b3cac1375f4db584f10225069a8074a807010b3545cdc133732e91ff106e08ca"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-220.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-220.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2341133,
+        "sha256": "541d1bae89731c80b29081f804411feb3d5d5d86a6bfe2fc8590bd44b42d5232"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_220_npz",
+      "registered_identity": {
+        "bytes": 2341133,
+        "sha256": "541d1bae89731c80b29081f804411feb3d5d5d86a6bfe2fc8590bd44b42d5232",
+        "source_ref": "sha256:541d1bae89731c80b29081f804411feb3d5d5d86a6bfe2fc8590bd44b42d5232"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-240.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-240.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2348584,
+        "sha256": "a39220b9b1acf8f016102be18b5b353ca7fb7f3c2dfac6a7021b7597e454d48c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_240_npz",
+      "registered_identity": {
+        "bytes": 2348584,
+        "sha256": "a39220b9b1acf8f016102be18b5b353ca7fb7f3c2dfac6a7021b7597e454d48c",
+        "source_ref": "sha256:a39220b9b1acf8f016102be18b5b353ca7fb7f3c2dfac6a7021b7597e454d48c"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-260.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-260.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2341411,
+        "sha256": "b54d96d71d6b93b1613e9e5086556f7fba260d4dd2e3dc2bcbed464d4b494bbd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_260_npz",
+      "registered_identity": {
+        "bytes": 2341411,
+        "sha256": "b54d96d71d6b93b1613e9e5086556f7fba260d4dd2e3dc2bcbed464d4b494bbd",
+        "source_ref": "sha256:b54d96d71d6b93b1613e9e5086556f7fba260d4dd2e3dc2bcbed464d4b494bbd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-280.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-280.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2342529,
+        "sha256": "e83fdd911877f16e00c5e05ae55970c95be76f13c4d1eb7d95ac6ab41c9e4955"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_280_npz",
+      "registered_identity": {
+        "bytes": 2342529,
+        "sha256": "e83fdd911877f16e00c5e05ae55970c95be76f13c4d1eb7d95ac6ab41c9e4955",
+        "source_ref": "sha256:e83fdd911877f16e00c5e05ae55970c95be76f13c4d1eb7d95ac6ab41c9e4955"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-300.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-300.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2347789,
+        "sha256": "7f951434ef48fc1e2a7ed56fa162fc271c5c9cf1acff756eba827bd7335e3c44"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_300_npz",
+      "registered_identity": {
+        "bytes": 2347789,
+        "sha256": "7f951434ef48fc1e2a7ed56fa162fc271c5c9cf1acff756eba827bd7335e3c44",
+        "source_ref": "sha256:7f951434ef48fc1e2a7ed56fa162fc271c5c9cf1acff756eba827bd7335e3c44"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-320.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-320.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2348709,
+        "sha256": "4f6962d522ea1e8ed582c4a9838d0e86c3b7136f55d813a78ea0b58e5a438b67"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_320_npz",
+      "registered_identity": {
+        "bytes": 2348709,
+        "sha256": "4f6962d522ea1e8ed582c4a9838d0e86c3b7136f55d813a78ea0b58e5a438b67",
+        "source_ref": "sha256:4f6962d522ea1e8ed582c4a9838d0e86c3b7136f55d813a78ea0b58e5a438b67"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-340.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-340.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2341432,
+        "sha256": "edbbdb121010384701349d6976e2a2badf3580e73459f2c5732dc48434fc98b7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_340_npz",
+      "registered_identity": {
+        "bytes": 2341432,
+        "sha256": "edbbdb121010384701349d6976e2a2badf3580e73459f2c5732dc48434fc98b7",
+        "source_ref": "sha256:edbbdb121010384701349d6976e2a2badf3580e73459f2c5732dc48434fc98b7"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-360.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-360.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2341359,
+        "sha256": "d4b55df6306a05a7b7c93e7f070d2e9fb09c2c0333bfb26de78418028969ca8d"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_360_npz",
+      "registered_identity": {
+        "bytes": 2341359,
+        "sha256": "d4b55df6306a05a7b7c93e7f070d2e9fb09c2c0333bfb26de78418028969ca8d",
+        "source_ref": "sha256:d4b55df6306a05a7b7c93e7f070d2e9fb09c2c0333bfb26de78418028969ca8d"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-380.npz",
+        "repository_path": "studies/experience_dependent_plasticity/records/results/liu-outputs-380.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2344438,
+        "sha256": "b6f5f4cdfefcdf9492dc13cc1021a1b13fe4736ad663a107b5eb60edbceff60b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "experience_dependent_plasticity",
+        "kind": "study"
+      },
+      "record_id": "study.experience_dependent_plasticity.studies_experience_dependent_plasticity_records_results_liu_outputs_380_npz",
+      "registered_identity": {
+        "bytes": 2344438,
+        "sha256": "b6f5f4cdfefcdf9492dc13cc1021a1b13fe4736ad663a107b5eb60edbceff60b",
+        "source_ref": "sha256:b6f5f4cdfefcdf9492dc13cc1021a1b13fe4736ad663a107b5eb60edbceff60b"
       },
       "role": "supporting_artifact"
     },
@@ -17269,7 +18697,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 498,
+  "registered_record_count": 540,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -17283,7 +18711,7 @@
     "execution_lock": 39,
     "freeze_validation": 1,
     "frozen_parameters": 16,
-    "frozen_result": 48,
+    "frozen_result": 49,
     "mainline_guide": 1,
     "noninterpretable_attempt": 3,
     "presentation_asset": 6,
@@ -17293,10 +18721,10 @@
     "registered_contract": 64,
     "repair_contract": 6,
     "repair_lock": 10,
-    "report": 61,
+    "report": 62,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 208,
+    "supporting_artifact": 248,
     "validation_result": 4
   },
   "schema_version": 2,

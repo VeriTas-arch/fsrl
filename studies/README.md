@@ -249,12 +249,12 @@ trajectories.
     0.118. This supports targeting the update rule before the readout, while retaining
     sampling inconsistency as a separate boundary. All arrays, summaries and report
     bytes were independently reconstructed.
-- [Experience-dependent score plasticity design](experience_dependent_plasticity/README.md) — `frozen_contract`
-  - **Finding:** The paired fixed-eta versus experience-dependent Resampled design
-    completed all six mandatory fits and the repaired generic scheduler audit. Generic
-    competence and late-sensitivity gates passed in every seed, but relation-specific
-    loss superiority did not; the frozen rule therefore selects the simpler global
-    blockwise diminishing-plasticity schedule before Liu input lock.
+- [Experience-dependent score plasticity](experience_dependent_plasticity/README.md) — `confirmed`
+  - **Finding:** Across paired seeds 2117--2119 and 400 locked Liu cohorts per fit,
+    global blockwise diminishing plasticity improves internal strict ordering, reduces
+    inversions and moves the joint ranking composition toward the human reference while
+    preserving the registered competence/core profile. Relation-addressed efficacy is
+    not supported over the simpler global scheduler.
 
 ## One-factor structural transport
 

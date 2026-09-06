@@ -1,4 +1,4 @@
-# Experience-dependent score plasticity design
+# Experience-dependent score plasticity
 
 <!-- fsrl-doc role=generated-navigation source=studies/experience_dependent_plasticity/study.toml -->
 
@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `confirmed`
 - **Review state:** `indexed`
 - **Study ID:** `experience_dependent_plasticity`
 
@@ -24,17 +24,18 @@
 **Question.** Can repeated-evidence plasticity stabilization improve complete internal
 order formation and ranking composition in the two-scalar Resampled score learner?
 
-**Finding.** The paired fixed-eta versus experience-dependent Resampled design completed
-all six mandatory fits and the repaired generic scheduler audit. Generic competence and
-late-sensitivity gates passed in every seed, but relation-specific loss superiority did
-not; the frozen rule therefore selects the simpler global blockwise
-diminishing-plasticity schedule before Liu input lock.
+**Finding.** Across paired seeds 2117--2119 and 400 locked Liu cohorts per fit, global
+blockwise diminishing plasticity improves internal strict ordering, reduces inversions
+and moves the joint ranking composition toward the human reference while preserving the
+registered competence/core profile. Relation-addressed efficacy is not supported over
+the simpler global scheduler.
 
-**Claim boundary.** Generic evidence supports declining within-episode plasticity and
-rejects a relation-familiarity interpretation within the tested scheduler family; it is
-not Liu behavioral support. All 400 Liu cohorts are now input-locked before model
-rollout, and the registered evaluation is authorized. Calibration, scientific candidate
-repair, fresh replication, circuit verification and main-model promotion remain closed.
+**Claim boundary.** Confirmed for this fixed three-seed development pilot: declining
+within-episode plasticity is a supported single-stage candidate mechanism, not relation
+familiarity. The result is claim-relative rather than full-distribution equality:
+self-consistent incorrect rankings remain high and the legacy full-nine quantitative
+profile does not pass. No main-model promotion follows without unchanged fresh
+replication and a separately authorized circuit boundary test.
 
 ## Frozen records
 
@@ -182,6 +183,132 @@ repair, fresh replication, circuit verification and main-model promotion remain 
 - `supporting_artifact` —
   [studies/experience_dependent_plasticity/records/inputs/liu-cohorts-380.npz](records/inputs/liu-cohorts-380.npz)
   (`sha256:500a20a0feab`)
+- `report` —
+  [studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.md](records/reports/experience_dependent_plasticity_v1.md)
+  (`sha256:9e99557bc5a8`)
+- `frozen_result` —
+  [studies/experience_dependent_plasticity/records/results/experience_dependent_plasticity_v1.json](records/results/experience_dependent_plasticity_v1.json)
+  (`sha256:5315b68be065`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-000.json](records/results/liu-cohorts-000.json)
+  (`sha256:270b12afec01`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-020.json](records/results/liu-cohorts-020.json)
+  (`sha256:9033d6fb11a4`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-040.json](records/results/liu-cohorts-040.json)
+  (`sha256:3e46c1ebffe9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-060.json](records/results/liu-cohorts-060.json)
+  (`sha256:8b9b4a255e68`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-080.json](records/results/liu-cohorts-080.json)
+  (`sha256:f8a612c646cb`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-100.json](records/results/liu-cohorts-100.json)
+  (`sha256:30409e9dd27d`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-120.json](records/results/liu-cohorts-120.json)
+  (`sha256:3041dfcb40cb`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-140.json](records/results/liu-cohorts-140.json)
+  (`sha256:d4372ba83ce9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-160.json](records/results/liu-cohorts-160.json)
+  (`sha256:6ce083c1ddb4`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-180.json](records/results/liu-cohorts-180.json)
+  (`sha256:2f5eb3e3f60a`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-200.json](records/results/liu-cohorts-200.json)
+  (`sha256:bf84ab784307`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-220.json](records/results/liu-cohorts-220.json)
+  (`sha256:ad1b90e27efa`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-240.json](records/results/liu-cohorts-240.json)
+  (`sha256:d59de03c80e9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-260.json](records/results/liu-cohorts-260.json)
+  (`sha256:c07dd4a66ffe`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-280.json](records/results/liu-cohorts-280.json)
+  (`sha256:1ea6b551a59d`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-300.json](records/results/liu-cohorts-300.json)
+  (`sha256:9b4671a84175`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-320.json](records/results/liu-cohorts-320.json)
+  (`sha256:a9510a517bee`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-340.json](records/results/liu-cohorts-340.json)
+  (`sha256:fe8f341c4fa9`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-360.json](records/results/liu-cohorts-360.json)
+  (`sha256:0f53ec858513`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-cohorts-380.json](records/results/liu-cohorts-380.json)
+  (`sha256:7e25bf434c79`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-000.npz](records/results/liu-outputs-000.npz)
+  (`sha256:edca88c3945f`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-020.npz](records/results/liu-outputs-020.npz)
+  (`sha256:914294bfc811`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-040.npz](records/results/liu-outputs-040.npz)
+  (`sha256:1796ec7c05be`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-060.npz](records/results/liu-outputs-060.npz)
+  (`sha256:e49f92819d1a`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-080.npz](records/results/liu-outputs-080.npz)
+  (`sha256:17b641534dac`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-100.npz](records/results/liu-outputs-100.npz)
+  (`sha256:d2061e5bb6f5`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-120.npz](records/results/liu-outputs-120.npz)
+  (`sha256:e28175fb5c25`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-140.npz](records/results/liu-outputs-140.npz)
+  (`sha256:3895937868e3`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-160.npz](records/results/liu-outputs-160.npz)
+  (`sha256:3e46044cc396`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-180.npz](records/results/liu-outputs-180.npz)
+  (`sha256:cdfdc479e7be`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-200.npz](records/results/liu-outputs-200.npz)
+  (`sha256:b3cac1375f4d`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-220.npz](records/results/liu-outputs-220.npz)
+  (`sha256:541d1bae8973`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-240.npz](records/results/liu-outputs-240.npz)
+  (`sha256:a39220b9b1ac`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-260.npz](records/results/liu-outputs-260.npz)
+  (`sha256:b54d96d71d6b`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-280.npz](records/results/liu-outputs-280.npz)
+  (`sha256:e83fdd911877`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-300.npz](records/results/liu-outputs-300.npz)
+  (`sha256:7f951434ef48`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-320.npz](records/results/liu-outputs-320.npz)
+  (`sha256:4f6962d522ea`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-340.npz](records/results/liu-outputs-340.npz)
+  (`sha256:edbbdb121010`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-360.npz](records/results/liu-outputs-360.npz)
+  (`sha256:d4b55df6306a`)
+- `supporting_artifact` —
+  [studies/experience_dependent_plasticity/records/results/liu-outputs-380.npz](records/results/liu-outputs-380.npz)
+  (`sha256:b6f5f4cdfefc`)
 
 ## Provenance rule
 

@@ -86,6 +86,15 @@ studies, or supersede frozen study contracts.
      the frozen references. All-nine qualitative pass rates are 97.25%; descriptive
      joint qualitative/quantitative rates are 2.00%, 2.00% and 2.75%.
 
+10. [Single-stage diminishing-plasticity candidate](#experience-dependent-plasticity)
+   - **Question.** Can experience-dependent stabilization improve complete internal
+     order and ranking composition without changing the Resampled information boundary
+     or readout?
+   - **Current result.** All three paired fits show reduced late sensitivity, higher
+     internal strict-order prevalence, fewer inversions and lower ranking-composition
+     total variation while preserving the registered core profile. Relation-specific
+     loss superiority fails, so the simpler global blockwise schedule is selected.
+
 ## 1. Task and evidence contract
 
 <a id="task-contract"></a>
@@ -698,6 +707,70 @@ direnv exec . python -m unittest tests.experiments.cohort_diagnostic.test_diagno
 
 ```bash
 direnv exec . python -m tools.provenance.verify_resampled_cohort_v1
+```
+
+## 10. Single-stage diminishing-plasticity candidate
+
+<a id="experience-dependent-plasticity"></a>
+
+**Question.** Can experience-dependent stabilization improve complete internal order and
+ranking composition without changing the Resampled information boundary or readout?
+
+**Method.** Compare fixed versus harmonic diminishing update efficacy on three paired
+new training streams; use a frozen nonbalanced generic control to choose
+relation-addressed versus global scheduling before locking 400 prospective Liu cohorts
+per fit.
+
+**Result.** All three paired fits show reduced late sensitivity, higher internal
+strict-order prevalence, fewer inversions and lower ranking-composition total variation
+while preserving the registered core profile. Relation-specific loss superiority fails,
+so the simpler global blockwise schedule is selected.
+
+**Boundary.** Confirmed only for this fixed three-seed development pilot and its
+claim-relative gates. The result rejects relation familiarity within the tested
+scheduler family, does not achieve legacy full-nine quantitative fidelity and does not
+promote a main model. Fresh unchanged replication and circuit verification remain
+separately gated.
+
+Implementation:
+
+- [`fsrl/experiments/adaptive_plasticity/model.py`](../../fsrl/experiments/adaptive_plasticity/model.py)
+- [`fsrl/experiments/adaptive_plasticity/reference.py`](../../fsrl/experiments/adaptive_plasticity/reference.py)
+- [`fsrl/experiments/adaptive_plasticity/training.py`](../../fsrl/experiments/adaptive_plasticity/training.py)
+- [`fsrl/experiments/adaptive_plasticity/generic_selection.py`](../../fsrl/experiments/adaptive_plasticity/generic_selection.py)
+- [`fsrl/experiments/adaptive_plasticity/cohorts.py`](../../fsrl/experiments/adaptive_plasticity/cohorts.py)
+- [`fsrl/experiments/adaptive_plasticity/reporting.py`](../../fsrl/experiments/adaptive_plasticity/reporting.py)
+
+Tests:
+
+- [`tests/experiments/adaptive_plasticity/test_model.py`](../../tests/experiments/adaptive_plasticity/test_model.py)
+- [`tests/experiments/adaptive_plasticity/test_pipeline.py`](../../tests/experiments/adaptive_plasticity/test_pipeline.py)
+
+Exact evidence:
+
+- `defines` — [experience_dependent_plasticity:records/benchmarks/experience_dependent_plasticity_v1.json](../../studies/experience_dependent_plasticity/records/benchmarks/experience_dependent_plasticity_v1.json)
+  - **Meaning:** Prospectively fixed candidate equation, scheduler-identification
+    control, paired development matrix, Liu gates and stop rules.
+- `constrains` — [experience_dependent_plasticity:records/results/generic_scheduler_selection.json](../../studies/experience_dependent_plasticity/records/results/generic_scheduler_selection.json)
+  - **Meaning:** All seeds pass competence and late-sensitivity controls, but
+    relation-specific loss superiority fails; the frozen rule selects global blockwise
+    decay.
+- `supports` — [experience_dependent_plasticity:records/results/experience_dependent_plasticity_v1.json](../../studies/experience_dependent_plasticity/records/results/experience_dependent_plasticity_v1.json)
+  - **JSON pointer:** `/decision`
+  - **Meaning:** Independent reconstruction of all six fits and 400 cohorts per fit
+    supports the global diminishing-plasticity candidate on the registered internal,
+    composition, core and preservation gates.
+- `supports` — [experience_dependent_plasticity:records/reports/experience_dependent_plasticity_v1.md](../../studies/experience_dependent_plasticity/records/reports/experience_dependent_plasticity_v1.md)
+  - **Meaning:** Complete seedwise parameter, continuous-endpoint, stability and
+    claim-boundary report, including the failed legacy full-nine quantitative profile.
+
+Verification:
+
+**`adaptive_plasticity_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m unittest tests.experiments.adaptive_plasticity.test_model \
+  tests.experiments.adaptive_plasticity.test_pipeline
 ```
 
 
