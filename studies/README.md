@@ -197,6 +197,9 @@ fail to close the dynamics.
     benefit is identified under the shared effective-evidence interface. All 18
     size-by-model cells retain task competence; the individualization deficit persists.
     The comparison is frozen, without main-model promotion or automatic repair.
+- [Weak evidence access to a jointly trained plastic RNN](weak_evidence_routing/README.md) — `unresolved`
+  - **Finding:** Prospectively registered paired routing comparison; no scientific
+    outcomes evaluated.
 
 ## Minimal explanatory models
 

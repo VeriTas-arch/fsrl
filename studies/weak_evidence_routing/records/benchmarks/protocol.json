@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "tier": "development",
+  "references": {
+    "joint_protocol": {
+      "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+      "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+    },
+    "joint_result": {
+      "path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+      "sha256": "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+    },
+    "item_count_protocol": {
+      "path": "studies/item_count_transport/records/benchmarks/liu_item_count_transport_v1.json",
+      "sha256": "0ba9090453bafd28fc1908afdb727747a06ba069838aae994fb90b17dd36646e"
+    },
+    "memory_protocol": {
+      "path": "studies/matched_memory_structure/records/benchmarks/protocol.json",
+      "sha256": "d68792bf141a7f92ef368789aac24556736b7f1314df21294f571e63c21b6a6d"
+    }
+  },
+  "architecture": {
+    "backbone": "Unchanged RetroModulRNN equations and checkpoint parameter names",
+    "hidden_size": 200,
+    "input_size": 38,
+    "activation": "tanh",
+    "support_trial_steps": 4,
+    "query_steps": 2,
+    "blank_initial_steps": 2,
+    "support_query_time": 0.6666666666666666,
+    "state_reset": "Reset hidden and eligibility per support/query trial, preserve P over support trials, reset both P and L for each episode.",
+    "query_state": "Read the same terminal P_T and L_T for every query without writeback. During training, retain the gradient path through P_T to support computation.",
+    "local_key": "k = vec(c_left c_right^T - c_right c_left^T) / max(norm(vec(...)), 1e-8)",
+    "local_write": "L_next = L + s_L*k, exactly once per support trial",
+    "local_read": "ell_q = dot(L_T, k_q)",
+    "local_gain": "lambda_L = softplus(rho)",
+    "margin": "Both routes: recurrent margin plus the independently addressed local correction.",
+    "logit_combination": "Subtract half the local correction from logit 0 and add half to logit 1, retaining the original global bias.",
+    "target_sign": "y_q = 2*correct_action-1; positive margin means left item higher.",
+    "input_extension": "Channel 37 is sL for shared and sG for isolated at the first support step; original 0:37 unchanged. Query/blank extra channel stays zero."
+  },
+  "optimization": {
+    "batch_size": 32,
+    "total_steps": 1500,
+    "total_episode_exposures": 48000,
+    "initial_local_gain": 0.1,
+    "backbone_learning_rate": 0.0001,
+    "local_learning_rate": 0.01,
+    "optimizer": "Adam; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+    "gradient_clip": 2.0,
+    "clipping_scope": "Clip backbone parameters and [local.raw_gain] separately, before their Adam updates, in both conditions. Do not use one joint norm across differently sized groups.",
+    "fast_weight_penalty": 0.0001,
+    "training_temperature": 1.0,
+    "schedule": "All available slow parameters jointly optimized from first to last step with mean generic query CE plus 1e-4 mean(P_T^2); same backbone optimizer group in both arms."
+  },
+  "statistics": {
+    "samples": 2000,
+    "interval": 0.95,
+    "seed_offset": 96000,
+    "unit": "Participant-paired within each network; no pooling across networks. 2000 descriptive percentile bootstrap draws. Conditional tau differences resample all 77 IDs jointly, then apply each arm eligibility mask. Repeated copies are separate bootstrap observations. Any undefined resample makes the paired interval undefined; report its count without dropping it."
+  },
+  "study_id": "weak_evidence_routing",
+  "experiment_id": "weak-evidence-routing-v1",
+  "question": "Does withholding only the weak component from global RNN input restore coherent individual variation while direct local evidence remains available?",
+  "claim_boundary": [
+    "Development on existing Liu task knowledge; three paired fits, one fixed virtual cohort per size; no human confirmation or main-model promotion.",
+    "Identifies routing plus adaptation under a fixed joint learning recipe, not acute routing, necessity of L, or emergence of a learned gate.",
+    "Shared and isolated are both dual-state models. Retained evidence is duplicated identically; omitted global evidence differs, local evidence does not.",
+    "Old source and results stay frozen; no temperature, noise, human fitting, replacement seeds or selected checkpoints."
+  ],
+  "seeds": {
+    "mandatory": [
+      2132,
+      2133,
+      2134
+    ],
+    "conditions": [
+      "shared",
+      "isolated"
+    ],
+    "training_rng_offset": 100000,
+    "smoke": 910003,
+    "pairing": "Same backbone/local initialization and base task/encoding/query stream; only extra recurrent input is condition-dependent. Alternate training order. Finish all six final checkpoints before outcomes."
+  },
+  "task": {
+    "n_items": 8,
+    "cue_size": 15,
+    "min_edges": 7,
+    "max_edges": 10,
+    "support_blocks": 4,
+    "query_pairs": "All 28 unordered pairs, with the existing generator's randomized left/right orientation and order; no learned/nonlearned reweighting.",
+    "subject_encoding_mode": "stable_omission",
+    "subject_encoding_parameters": "Unchanged SubjectEncodingConfig from the implementation witness; retain the sampled SubjectEncodingState and recover its original relation probability p without resampling.",
+    "evidence_boundary": "Only ordinary pair cues and displayed signed support magnitude enter memory writes. No true rank, query answer, learned-pair flag, omitted-pair flag, posterior, or diagnostic residual enters the recurrent input.",
+    "local_evidence": "s_L = signed_magnitude * (z + (1-z) * p)",
+    "probability_recovery": "Compute p from the episode's original SubjectEncodingState, observed cue identities, and the distance recoverable from abs(displayed_signed_magnitude)*(n_items-1). Do not mistake binary SupportTrial.encoding_reliability for p.",
+    "routing": {
+      "shared": "(sG,sL)=(d*z,d*(z+(1-z)*p)) at channels (34,37)",
+      "isolated": "(sG,sG)=(d*z,d*z) at channels (34,37)",
+      "local": "Both retain sL in the unchanged local write rule, with positive gain jointly optimized throughout.",
+      "identity": "All other input channels and timing identical. Retained (d,d) in both, omitted (0,p*d) vs (0,0). No new states/learned gates."
+    }
+  },
+  "evaluation": {
+    "generic": {
+      "episodes": 256,
+      "rng_seed": 94201,
+      "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+      "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+      "temperature": 1.0,
+      "conditions": [
+        "intact"
+      ]
+    },
+    "liu": {
+      "protocol_id": "liu_v2",
+      "subjects": 77,
+      "cue_mode": "permuted_shared",
+      "subject_encoding_mode": "stable_omission",
+      "cue_seed": 94211,
+      "support_seed": 94212,
+      "subject_encoding_seed": 94213,
+      "choice_seed": 94214,
+      "order_seed": 31401,
+      "query_shuffle_seed": 94215,
+      "evidence_shuffle_seed": 94216,
+      "temperature": 0.25,
+      "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant.",
+      "conditions": [
+        "intact",
+        "local_off",
+        "P_off",
+        "query_shuffle",
+        "evidence_shuffle"
+      ],
+      "pairing": "Identical base 77 virtual subjects and random numbers within size across all fits and arms; the global extra input follows the routing condition. No participant pairing across sizes.",
+      "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+      "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+      "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence."
+    },
+    "item_counts": [
+      8
+    ],
+    "transport_item_counts": [
+      6,
+      10
+    ],
+    "cohorts": 1,
+    "transport": "Prelocked N6/N10 inputs; evaluate every frozen network at both sizes only if at least one pair meets supported_recovery at N8. Otherwise record not_triggered. No retraining or favorable-network selection."
+  },
+  "decision": {
+    "primary": "delta_tau = isolated minus shared in inherited eligible noncorrect-ranker groups. Report each pair point and interval; upper<0 supports a negative effect, lower>0 supports positive effect, otherwise unresolved. No cross-network pooled CI.",
+    "core": "At N=8: competence; all-participant intact Hodge gradient fraction lower>.95; among sampled eligible non-correct rankers stable-80 error prevalence lower>0; eligible self-consistent-incorrect minus self-inconsistent fraction lower>0; analysis-group intersubject order tau upper<.8. Report denominators and undefined metrics as failures. No human interval inclusion, minimum bimodal-pair count or correct-ranker prevalence gate.",
+    "competence": "For generic held-out graphs and N=8 Liu, learned and nonlearned expected-correct-probability 95% lower bounds exceed .5 independently. Failed task competence blocks architecture interpretation for that network.",
+    "accuracy_tradeoff": "Report paired learned/nonlearned/omitted expected probabilities without importing the prior -2pp architecture noninferiority requirement.",
+    "auxiliary": "All 77 subjects: derive Hodge potentials from antisymmetric intact margins, stable descending argsort with item-index tie break, and compare intersubject tau. This fixed-panel diagnostic does not replace inherited behavioral ordering/selection.",
+    "stable_internal_error": "For every unordered pair, average correctness probabilities AFTER sigmoid across orientations at frozen T=.25. Per subject report density and prevalence of pairs with expected correctness <=.2. This is an internal preference diagnostic, distinct from sampled >=80% error.",
+    "functional_controls": "Inherited intact/local_off/P_off/evidence_shuffle/query_shuffle and single-support-relation removal. Report within-network participant effects and direct/disjoint-remote responses. Local-off weak/direct gain is diagnostic, not mandatory.",
+    "supported_recovery": "Within a pair: both arms competent on generic and Liu; isolated passes all inherited core flags; paired conditional tau upper<0; paired all-subject Hodge-order tau upper<0; isolated internal stable-error prevalence lower>0; isolated intact-minus-P_off and intact-minus-evidence_shuffle nonlearned probability lower>0. Undefined endpoints never pass.",
+    "study_outcome": "Report every pair as supported_recovery, contribution_without_recovery (negative primary CI plus fixed-panel CI and both competent), effect_with_unresolved_structure (negative primary CI but fixed-panel or stability evidence absent), competence_limited, or unresolved/opposite. Report strategy formation count out of three, not population training success probability.",
+    "stop": "Complete all registered pairs despite valid negative/heterogeneous behavior. Integrity failures stop dependent execution; no seed replacement, tuning or gate movement. Transport trigger is evaluated once from all six N8 cells."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime weak-evidence-routing <stage>",
+    "stages": [
+      "qualify",
+      "lock-source",
+      "train",
+      "lock-artifacts",
+      "evaluate",
+      "report"
+    ],
+    "runtime": "Same bounded CUDA fullgraph/default profile as the memory study: one CPU/BLAS/compiler thread, TF32 off, exact current runtime recorded and checked between qualification/training/evaluation.",
+    "freeze": "Commit qualified sources and protocol before creating source/input lock; commit source lock before training; commit all-six artifact lock before evaluation. Push complete validated study to origin/dev on closure.",
+    "checkpoint": "Final step 1500 only; no outcomes before all six final models are locked."
+  },
+  "outputs": [
+    "protocol.json",
+    "qualification.json",
+    "source_lock.json",
+    "artifact_lock.json",
+    "result.json",
+    "report.md",
+    "interpretation.md",
+    "six final backbones and local gains",
+    "raw oriented margins and sampled behavior for every executed cell",
+    "locked base evaluation input arrays and required reconstruction sources"
+  ],
+  "decision_contract": {
+    "behavior": {
+      "reference_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json"
+    }
+  }
+}
