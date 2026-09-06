@@ -27,8 +27,9 @@ from .protocol import (
 )
 from .provenance import implementation_sources, scientific_inputs
 
-SOURCE_LOCK = RECORDS / "benchmarks/source_lock.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification.json"
+ORIGINAL_SOURCE_LOCK = RECORDS / "benchmarks/source_lock.json"
+SOURCE_LOCK = RECORDS / "benchmarks/source_lock_repair_1.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_repair_1.json"
 ARTIFACT_LOCK = RECORDS / "benchmarks/artifact_lock.json"
 
 
@@ -99,6 +100,8 @@ def lock_source(qualification_directory) -> dict:
         "qualification": reference(QUALIFICATION),
         "generic_manifest": reference(GENERIC_MANIFEST),
         "generic_groups": generic["groups"],
+        "repair_of": reference(ORIGINAL_SOURCE_LOCK),
+        "retained_artifact_lock": reference(ARTIFACT_LOCK),
         "training_performed": False,
         "liu_evaluated": False,
     }
@@ -224,9 +227,14 @@ def validate_artifacts() -> dict:
     source = validate_source()
     commit = require_pushed_clean()
     lock = load_json(verify_reference(reference(ARTIFACT_LOCK), commit=commit))
+    original_source = load_json(
+        verify_reference(reference(ORIGINAL_SOURCE_LOCK), commit=commit)
+    )
     if (
-        lock["source_lock"] != reference(SOURCE_LOCK)
-        or lock["source_commit"] != source["source_commit"]
+        lock["source_lock"] != reference(ORIGINAL_SOURCE_LOCK)
+        or lock["source_commit"] != original_source["source_commit"]
+        or source["repair_of"] != reference(ORIGINAL_SOURCE_LOCK)
+        or source["retained_artifact_lock"] != reference(ARTIFACT_LOCK)
     ):
         raise RuntimeError("adaptive-plasticity artifact/source lock differs")
     runs = {

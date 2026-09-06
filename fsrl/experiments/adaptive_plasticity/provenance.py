@@ -4,7 +4,9 @@ from fsrl.experiments.training_strategy.locks import reference
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol_catalog import protocol_path
 
-from .protocol import ADMISSION, DESIGN
+from .protocol import ADMISSION, DESIGN, RECORDS
+
+REPAIR = RECORDS / "benchmarks/generic_selection_repair_v1.json"
 
 
 def implementation_sources() -> list[dict]:
@@ -18,6 +20,7 @@ def scientific_inputs() -> list[dict]:
     paths = {
         DESIGN,
         ADMISSION,
+        REPAIR,
         REPO_ROOT
         / "studies/quantized_relational_learner/records/benchmarks/quantized_relational_learner_v1.json",
         REPO_ROOT

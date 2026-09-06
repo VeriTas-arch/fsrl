@@ -22,7 +22,7 @@ from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.infra.run_manifest import ProspectiveRun
 
 from .data import model_tensors
-from .evidence import ARTIFACT_LOCK, SOURCE_LOCK, validate_artifacts
+from .evidence import ARTIFACT_LOCK, SOURCE_LOCK, validate_artifacts, validate_source
 from .inputs import load_group, read_arrays
 from .model import load_model
 from .protocol import (
@@ -290,9 +290,10 @@ def summarize(arrays: dict[str, np.ndarray]) -> dict:
 
 def evaluate_generic() -> dict:
     artifacts = validate_artifacts()
+    source = validate_source()
     execution = runtime()
     spec = resolved_specification()
-    directory = RUN_ROOT / "generic-selection"
+    directory = RUN_ROOT / "generic-selection-repair-1"
     if directory.exists():
         validate_complete(directory)
         return load_json(directory / "result.json")
@@ -304,7 +305,7 @@ def evaluate_generic() -> dict:
         producer={"module": __name__, "artifact_lock": reference(ARTIFACT_LOCK)},
         resolved_config={"runtime": execution},
     ):
-        arrays = _evaluate_groups(artifacts, models, runners)
+        arrays = _evaluate_groups(source, models, runners)
         path = directory / "arrays.npz"
         write_arrays(path, arrays)
         result = {
