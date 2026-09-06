@@ -4,28 +4,28 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fsrl-relational-model"
-version = "0.1.0"
+version = "0.1.1"
 description = "Plastic recurrent models for relational learning"
 readme = "README.md"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.12"
 dependencies = [
-    "jsonschema>=4.26,<5",
-    "matplotlib>=3.11,<3.12",
-    "numpy>=2.4,<2.5",
-    "scipy>=1.18,<1.19",
-    "threadpoolctl>=3.6,<4",
-    "torch>=2.13,<2.14",
+    "jsonschema>=4.26",
+    "matplotlib>=3.11",
+    "numpy>=2.4",
+    "scipy>=1.18",
+    "threadpoolctl>=3.6",
+    "torch>=2.13",
 ]
 
 [project.optional-dependencies]
 reproduction = [
-    "scikit-learn>=1.9,<2",
-    "tqdm>=4.67,<5",
+    "scikit-learn>=1.9",
+    "tqdm>=4.67",
 ]
 test = [
-    "basedpyright>=1.39,<1.40",
-    "pytest>=9.1,<9.2",
-    "ruff>=0.16,<0.17",
+    "basedpyright>=1.39",
+    "pytest>=9.1",
+    "ruff>=0.16",
 ]
 
 [tool.setuptools.packages.find]
