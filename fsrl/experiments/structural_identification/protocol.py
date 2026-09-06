@@ -9,7 +9,7 @@ from fsrl.paths import RUNS_ROOT, STUDIES_ROOT
 RECORDS = STUDIES_ROOT / "structural_identification/records"
 DESIGN = RECORDS / "benchmarks/structural_identification_v1.json"
 DESIGN_HASH = "5b3b6653f2c3ccb82368c17325c683e43c0aae1ab4f1de4112f2bb7822236040"
-DESIGN_COMMIT = "f2d5af4"
+DESIGN_COMMIT = "f2d5af41b91e635ea2f027f70a48552712af1789"
 RUN_ROOT = RUNS_ROOT / "structural_identification_v1"
 CODEBOOK = (-1.0, -1 / 3, 1 / 3, 1.0)
 STRUCTURES = ("M00", "M10", "M01", "M11")
