@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "study_id": "relational_revision",
+  "tier": "prospective development",
+  "question": "Does the current single-state affine RNN use relational history to change the direction of remote updates, adapt to real changes, and recover from transient observation errors?",
+  "program": {
+    "scope": "Execute the agreed relational-revision plan: frozen diagnosis, information-matched controls including a trained persistent-hidden RNN, conditional same-architecture joint metatraining, functional direction intervention, and prospective dependency-topology transport. Negative outcomes are valid completion; success is not manufactured by repair or human fitting.",
+    "phase_1": "This protocol freezes the existing-model diagnosis and two mathematical controls. All declared cells are evaluated regardless of scientific success. Integrity failure stops execution.",
+    "phase_2": "After phase_1, freeze a separate prospective training/comparator protocol. If every primary C network meets the chain qualification and revision criteria, retain those weights as the candidate; otherwise train one new joint stable/outlier/revision distribution from scratch in the same architecture, with 1-3 development seeds and a persistent-hidden nonplastic recurrent comparator. Preserve old results. Do not tune on Liu behavior or repair evaluated seeds.",
+    "phase_3": "After a competence-qualified revision result, freeze one history-specific directional intervention with realized update-size and within-condition controls, plus a predicted held-out topology response. If no candidate qualifies within the phase_2 fixed budget, close with the observed limitation rather than force noninterpretable mechanism claims.",
+    "optional_not_required": "Reward-objective training, strict MF/MB tasks, non-total-order tasks and large-model transfer are conditional future extensions, not required for this execution."
+  },
+  "design": {
+    "model_seeds": [2531, 2532, 2533],
+    "training_arms": ["clean", "noisy"],
+    "primary_arm": "noisy",
+    "cohort_seeds": [980001, 980002],
+    "episodes_per_cohort": 128,
+    "histories": [0, 1],
+    "topologies": ["chain", "star"],
+    "conditions": ["stable", "outlier", "revision"],
+    "network_units": 144,
+    "baseline_rules": ["adaptive_delta", "covariance_filter"],
+    "information": "8 items with 15-dimensional bipolar sufficiently dissimilar cues; 38-channel native (q,q) input. 24 history trials: six within-group edges repeated three times plus six B/C anchor trials, randomly interleaved. Eight challenge trials with four cross-group and four within-group observations. All 56 ordered queries use native two-step readout with no feedback, no writes. Query probes at prefixes24..32 on state copies.",
+    "world": "Shared initial scores/cues and noise across histories and conditions. History0 groups=(A,B,E,F)/(C,D,G,H); history1=(B,D,F,H)/(A,C,E,G). A/D scores lie near zero; others uniform[-.35,.35]. Revision moves B's group by+.2 and C's by-.2. Outlier changes only the first B/C observation, never the latent world. Stable changes neither. Independent observation noise sigma=.05 is added to every trial in all conditions. No group labels, uncertainty labels, change flags, targets or latent scores enter inputs.",
+    "identifiability": "Revision/outlier prefixes through trial25 must be byte-identical; no selective-response claim is possible before later evidence distinguishes them. H0/H1 share true initial scores and first B/C q. Their learned initial predictions may differ and must be reported; the history manipulation is not proof of matching all hidden beliefs.",
+    "transport": "Chain is primary; star is a prespecified topology stress test on the same task. Both are development evaluations of old frozen weights, not independent human confirmation. Future trained candidates must keep star out of their training stream."
+  },
+  "estimands": {
+    "unit": "Episode within network. Equal weighting of the two cohorts; networks never pooled. Ordered reverse queries are paired, not independent samples.",
+    "CE": "Native logistic CE=logaddexp(0,-margin*true_sign), no human temperature. Changed_remote means latent score difference changes under the group revision and the pair is not shown in any challenge trial. Unchanged means within-group latent difference is exactly preserved, not merely that its binary sign stays the same.",
+    "competence": "Stable final mean correct probability >.5 for post-seen and changed-remote query sets, each lower95>.5, within each history and topology.",
+    "revision_gain": "Mean CE(prefix24,revised labels)-CE(prefix32,revised labels) on changed_remote queries, separately per history; lower95>0. Additionally require revision_specificity=CE(stable-prefix32,revised labels)-CE(revision-prefix32,revised labels), lower95>0, to exclude ordinary continued learning.",
+    "preservation": "Revision-minus-stable unchanged-pair CE at matched prefix32, separately per history; upper95<=.05. Also report revision prefix32-minus-prefix24. This is a prospective practical tolerance, not human equivalence.",
+    "crossover": "Revision-minus-stable antisymmetric AD logit change from prefix24 to25: positive for H0, negative for H1, each 95% interval excludes zero in that direction. The same branch-differenced BC changes must be positive in both histories. Subtract the stable branch to exclude ordinary continued learning. Also report raw revision changes, the H0-H1 interaction and all later prefixes, without substituting a favorable prefix for25.",
+    "outlier_recovery": "Mean absolute probability difference outlier-vs-stable on changed_remote at prefix25 minus the same at prefix32; lower95>0, separately per history. Report both absolute levels so zero initial response cannot be called recovery.",
+    "functional_updates": "Save native all-query margins at every prefix24..32 and endpoint effective Frobenius norms ||alpha*(P_after-P_before)|| per complete experience. This norm is not the earlier sum-of-phase L1 write budget. No low-dimensional state sufficiency or modulation necessity claim follows."
+  },
+  "statistics": {
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 981001,
+    "interval": 0.95,
+    "pairing": "Reuse episode draw IDs across conditions/histories/topologies within each cohort. Resample cohorts separately and combine equally. Fixed percentile95 intervals. Descriptive development contrasts; no familywise confirmatory claim."
+  },
+  "decision": {
+    "candidate_qualification": "Every noisy-arm seed must pass all chain competence, revision_gain, preservation, crossover and outlier_recovery requirements. Clean models and star results remain separate controls/transport evidence. Failure or uncertainty triggers the planned separately frozen same-architecture joint-training comparison, not changes to this protocol.",
+    "integrity": "Stop for nonfinite outputs, input/source/weight hash mismatch, changed slow parameters or revision/outlier mismatch through prefix25. Unit gates do not stop remaining units. No reruns for a scientific failure.",
+    "baseline_boundary": "Phase1 mathematical controls have prespecified parameters: adaptive delta rate .2+.6*min(abs(residual)/.4,1), half-step each endpoint; full-covariance Kalman with initial .25I, isotropic process .0005I and observation variance .05^2, Joseph update. Both use fixed logistic readout temperature .1. They receive pairs and q only. They are diagnostic anchors, not optimized literature baselines or oracle group models; stronger trained comparator work belongs to phase2."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.relational_revision <freeze|evaluate|report>",
+    "runtime": "CUDA eager float32, batch32, one CPU/BLAS thread; no PyTorch version restriction. Record actual environment. Prefix probes cannot modify support state.",
+    "freezes": "Qualify generator/ABI, independent filter equations and GPU rollout against native sequence. Commit source/protocol, then create and commit source/input/frozen-model lock before evaluation. Lock preserves all package Python and pyproject identities; inputs and outputs live under ignored artifacts/runs/relational_revision_v1 with compact registered results. New stage implementation receives its own prospective lock, never edits frozen phase1 sources.",
+    "outputs": ["protocol", "qualification", "source/input/model lock", "144 network units", "48 mathematical-control units", "raw native margins and masks", "canonical paired estimates and decisions", "interpretation with program continuation decision"],
+    "validation": "Changed-file Ruff, affected bounded tests, type check, architecture, registry and documentation/link checks; independently verify critical crossover algebra and native query semantics before scientific exposure."
+  },
+  "claim_boundary": "New synthetic development task; no human fit, new human validation, proven minimality, MF-to-MB transition, final manuscript promotion or successful knowledge revision presumed. Negative results remain evidence."
+}

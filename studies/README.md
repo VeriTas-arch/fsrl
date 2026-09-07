@@ -387,6 +387,8 @@ upgrading them into arbitrary-domain guarantees.
 - [Item-count transport](item_count_transport/README.md) — `transported`
   - **Finding:** All primary links pass at N=6, 8, and 10 across all three development
     backbones, including exact local ledger reconstruction and P/a double dissociation.
+- [History-dependent relational knowledge revision](relational_revision/README.md) — `unresolved`
+  - **Finding:** Prospective history-dependent revision diagnosis.
 
 ## Human validation work, currently deferred
 

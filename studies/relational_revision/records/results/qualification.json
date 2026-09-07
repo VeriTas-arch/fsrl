@@ -1,0 +1,26 @@
+{
+  "architecture_tests": 11,
+  "checks": [
+    "independent crossover algebra",
+    "indistinguishable first observation",
+    "no oracle input channels",
+    "Joseph covariance update versus information form",
+    "native full rollout and immutable prefix queries on CPU and CUDA",
+    "endpoint orientation and cohort weighting"
+  ],
+  "command": "direnv exec . python -m fsrl.infra.test_runtime --timeout 90 --framework unittest -- tests.experiments.test_relational_revision -v",
+  "cuda_available": true,
+  "endpoint_recheck": "Before source freeze, added stable-branch subtraction and checked revision specificity and preservation orientation with the affected analytical endpoint test; passed.",
+  "fixture_seeds": [
+    970001,
+    970002,
+    970003,
+    970004
+  ],
+  "frozen_models_evaluated": false,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "passed": true,
+  "sandbox_note": "CPU-only checks passed in sandbox; scientific tests repeated outside sandbox after CUDA tensor allocation succeeded.",
+  "scientific_tests": 6,
+  "torch": "2.14.0+cu130"
+}
