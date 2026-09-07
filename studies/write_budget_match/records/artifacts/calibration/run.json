@@ -1,0 +1,94 @@
+{
+  "bytes": 1745821,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "budget-only-calibration",
+  "file_count": 7,
+  "files": [
+    {
+      "bytes": 286610,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2531-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "5eb2c077e57304b6fa9da67f7c0d782e20d12b5af965b6732202a6337e179fdf"
+    },
+    {
+      "bytes": 274340,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2531-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "fcf79c679eb5e49f608398a91d812d2e4ab1e6350237edfeb21d5795382f21b8"
+    },
+    {
+      "bytes": 288477,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2532-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "2dbe32d461155d6ff93ad46de26984376f5fa70a8c79ed25193421cc8a90ce3e"
+    },
+    {
+      "bytes": 276472,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2532-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "d1d73ec131a851b36ce601c1c9577133da5e467ced807a739c0aed5cf07852ed"
+    },
+    {
+      "bytes": 285256,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2533-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "abc56c51feb4c82adf6ea0ed4226222950f0e87a41f994b08d16ba748e44850b"
+    },
+    {
+      "bytes": 273812,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2533-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "4431336f19ffccdda00b98601a59d7d0959acd021251b09d623e259a65738ae8"
+    },
+    {
+      "bytes": 60854,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "ee79eac7ac6c72115156f67087bef8b19bda982997a7e6776270f76d069b1ea9"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "source": {
+      "bytes": 160730,
+      "path": "studies/write_budget_match/records/benchmarks/source_lock.json",
+      "sha256": "339f8a8cd1bc6f4f30f3ce4c020790bd0a01a5da1192a033f1bba431085b447f"
+    }
+  },
+  "resolved_config": {
+    "budget_tolerance": 0.05,
+    "call_bound": "At most24 objective evaluations+4 per Jacobian (at most24 Jacobians), plus one final check and one saved replay: <=122 M collections, each8 generic batches. Native target collected once. No post-limit restart or broadened bounds.",
+    "difference_step": 0.02,
+    "gain_limit": 64,
+    "initial_log_gain": [
+      0,
+      0
+    ],
+    "max_nfev": 24,
+    "method": "scipy.optimize.least_squares, trf; residual log(W_M/W_B) flattened observation then phase; central finite differences clipped at bounds. Final solver candidate only, no selection of history entries.",
+    "tolerance": 1e-05
+  },
+  "schema_version": 1,
+  "workflow_id": "write_budget_match_v1"
+}

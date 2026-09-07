@@ -270,7 +270,8 @@ fail to close the dynamics.
     Conditional constant evaluation/training did not trigger. Compact P_T mismatch
     localized without requalification.
 - [Actual stage write budgets versus modulation organization](write_budget_match/README.md) — `unresolved`
-  - **Finding:** Prospective actual-write matching test.
+  - **Finding:** All six generic-only calibrations meet the four phase/observation
+    budget targets; gains and raw calibration records locked before behavior.
 
 ## Minimal explanatory models
 

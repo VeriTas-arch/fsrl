@@ -6,8 +6,89 @@ order = 1140
 status = "unresolved"
 review_state = "indexed"
 question = "After matching actual closed-loop L1 writes in each active phase, do stage constants recover the frozen affine RNN prediction loss?"
-finding = "Prospective actual-write matching test."
+finding = "All six generic-only calibrations meet the four phase/observation budget targets; gains and raw calibration records locked before behavior."
 boundary = "Frozen affine networks and exposed panels; budget-only calibration. No from-scratch training, reliability-gate necessity, main-model promotion or compact requalification."
+
+[[records]]
+path = "records/artifacts/calibration/2531-clean.npz"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/2531-clean.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5eb2c077e57304b6fa9da67f7c0d782e20d12b5af965b6732202a6337e179fdf"
+bytes = 286610
+source_ref = "sha256:5eb2c077e57304b6fa9da67f7c0d782e20d12b5af965b6732202a6337e179fdf"
+
+[[records]]
+path = "records/artifacts/calibration/2531-noisy.npz"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/2531-noisy.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fcf79c679eb5e49f608398a91d812d2e4ab1e6350237edfeb21d5795382f21b8"
+bytes = 274340
+source_ref = "sha256:fcf79c679eb5e49f608398a91d812d2e4ab1e6350237edfeb21d5795382f21b8"
+
+[[records]]
+path = "records/artifacts/calibration/2532-clean.npz"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/2532-clean.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2dbe32d461155d6ff93ad46de26984376f5fa70a8c79ed25193421cc8a90ce3e"
+bytes = 288477
+source_ref = "sha256:2dbe32d461155d6ff93ad46de26984376f5fa70a8c79ed25193421cc8a90ce3e"
+
+[[records]]
+path = "records/artifacts/calibration/2532-noisy.npz"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/2532-noisy.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d1d73ec131a851b36ce601c1c9577133da5e467ced807a739c0aed5cf07852ed"
+bytes = 276472
+source_ref = "sha256:d1d73ec131a851b36ce601c1c9577133da5e467ced807a739c0aed5cf07852ed"
+
+[[records]]
+path = "records/artifacts/calibration/2533-clean.npz"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/2533-clean.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "abc56c51feb4c82adf6ea0ed4226222950f0e87a41f994b08d16ba748e44850b"
+bytes = 285256
+source_ref = "sha256:abc56c51feb4c82adf6ea0ed4226222950f0e87a41f994b08d16ba748e44850b"
+
+[[records]]
+path = "records/artifacts/calibration/2533-noisy.npz"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/2533-noisy.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4431336f19ffccdda00b98601a59d7d0959acd021251b09d623e259a65738ae8"
+bytes = 273812
+source_ref = "sha256:4431336f19ffccdda00b98601a59d7d0959acd021251b09d623e259a65738ae8"
+
+[[records]]
+path = "records/artifacts/calibration/result.json"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "ee79eac7ac6c72115156f67087bef8b19bda982997a7e6776270f76d069b1ea9"
+bytes = 60854
+source_ref = "sha256:ee79eac7ac6c72115156f67087bef8b19bda982997a7e6776270f76d069b1ea9"
+
+[[records]]
+path = "records/artifacts/calibration/run.json"
+legacy_path = "studies/write_budget_match/records/artifacts/calibration/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bc20667bdc7e1c4844c60fdd59b7e72a19f68bd8e3c5dcc8b6622a405ec64a64"
+bytes = 3188
+source_ref = "sha256:bc20667bdc7e1c4844c60fdd59b7e72a19f68bd8e3c5dcc8b6622a405ec64a64"
+
+[[records]]
+path = "records/benchmarks/calibration_lock.json"
+legacy_path = "studies/write_budget_match/records/benchmarks/calibration_lock.json"
+origin = "native"
+role = "artifact_lock"
+sha256 = "8c2a8938600f378e7b17718cfc0f8628420cd9a47915d7001971083e37cea335"
+bytes = 61249
+source_ref = "sha256:8c2a8938600f378e7b17718cfc0f8628420cd9a47915d7001971083e37cea335"
 
 [[records]]
 path = "records/benchmarks/protocol.json"
