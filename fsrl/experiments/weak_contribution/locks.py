@@ -4,6 +4,7 @@ import tomllib
 
 from fsrl.experiments.evidence_routing.locks import require_clean
 from fsrl.experiments.training_strategy.locks import reference, verify_reference
+from fsrl.infra.git_provenance import git_blob_sha256
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 from fsrl.tasks.protocol_catalog import protocol_path
@@ -72,6 +73,31 @@ def validate():
     head = require_clean()
     verify_reference(reference(LOCK), commit=head)
     result = load_json(LOCK)
+    repair_path = LOCK.with_name("source_repair_lock.json")
+    replacements = {}
+    repair_commit = None
+    if repair_path.exists():
+        verify_reference(reference(repair_path), commit=head)
+        repair = load_json(repair_path)
+        if repair["original_source_lock"] != reference(LOCK):
+            raise RuntimeError("repair belongs to another source lock")
+        originals = {row["path"]: row for row in result["files"]}
+        for row in repair["replacements"]:
+            path = row["original"]["path"]
+            if row["original"] != originals[path] or row["replacement"]["path"] != path:
+                raise RuntimeError("invalid source replacement mapping")
+            if (
+                git_blob_sha256(REPO_ROOT, result["source_commit"], path)
+                != row["original"]["sha256"]
+            ):
+                raise RuntimeError("original source witness differs")
+            replacements[path] = row["replacement"]
+        repair_commit = repair["source_commit"]
+        result["source_repair"] = reference(repair_path)
     for row in result["files"]:
-        verify_reference(row, commit=result["source_commit"])
+        replacement = replacements.get(row["path"])
+        if replacement is None:
+            verify_reference(row, commit=result["source_commit"])
+        else:
+            verify_reference(replacement, commit=repair_commit)
     return result

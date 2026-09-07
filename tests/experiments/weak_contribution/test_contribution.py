@@ -1,3 +1,4 @@
+import copy
 import unittest
 
 import numpy as np
@@ -7,11 +8,29 @@ from fsrl.experiments.weak_contribution.computation import (
     relation_mask,
     remove_all_weak,
 )
+from fsrl.experiments.weak_contribution.execution import check_runtime
 from fsrl.experiments.weak_contribution.measurement import effects, single_endpoints
+from fsrl.experiments.weak_contribution.protocol import QUALIFICATION
 from fsrl.experiments.weak_contribution.qualification import qualify, synthetic
+from fsrl.infra.provenance import load_json
 
 
 class WeakContributionTests(unittest.TestCase):
+    def test_runtime_uses_nested_profile_without_version_admission(self):
+        recorded = load_json(QUALIFICATION)["runtime"]
+        current = copy.deepcopy(recorded)
+        current["torch_version"] = "different-installed-version"
+        check_runtime(current, recorded)
+        for key, value in (
+            ("cuda_available", False),
+            ("torch_intraop_threads", 2),
+            ("profile", {**recorded["profile"], "compile_fullgraph": False}),
+        ):
+            with self.subTest(key=key):
+                changed = {**current, key: value}
+                with self.assertRaisesRegex(RuntimeError, "runtime contract changed"):
+                    check_runtime(changed, recorded)
+
     def test_reconstruction_independent_local_and_global_only_removal(self):
         self.assertTrue(all(row["passed"] for row in qualify().values()))
 

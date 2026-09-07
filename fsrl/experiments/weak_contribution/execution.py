@@ -115,6 +115,7 @@ def run_cell(seed, arm, cpu, protocol, lock):
         "arm": arm,
         "protocol_sha256": PROTOCOL_SHA256,
         "source_commit": lock["source_commit"],
+        "source_repair": lock.get("source_repair"),
     }
     with (
         ProspectiveRun.start(
@@ -158,20 +159,26 @@ def run_cell(seed, arm, cpu, protocol, lock):
     return {"seed": seed, "arm": arm, "passed": True}
 
 
-def evaluate():
-    lock = locks.validate()
-    runtime = configure_execution()
+def check_runtime(runtime, expected):
     # Version metadata is descriptive; actual numerical compatibility is checked per cell.
     for key in (
-        "device",
-        "cpu_threads",
-        "blas_threads",
+        "profile",
+        "torch_intraop_threads",
+        "torch_interop_threads",
+        "blas_thread_limit",
+        "cuda_available",
         "compiler_threads",
         "matmul_allow_tf32",
         "triton_mix_order_reduction",
     ):
-        if runtime[key] != lock["runtime"][key]:
+        if runtime[key] != expected[key]:
             raise RuntimeError(f"runtime contract changed: {key}")
+
+
+def evaluate():
+    lock = locks.validate()
+    runtime = configure_execution()
+    check_runtime(runtime, lock["runtime"])
     cpu = EpisodeBatch(arrays_at(parent() / "artifacts/inputs/liu-8.npz"))
     protocol = size_protocol(parent_spec(), 8)
     for seed in specification()["design"]["seeds"]:

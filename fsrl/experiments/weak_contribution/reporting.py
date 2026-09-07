@@ -80,6 +80,7 @@ def report():
         "tier": spec["tier"],
         "protocol_sha256": PROTOCOL_SHA256,
         "source_lock": reference(LOCK),
+        "source_repair": lock.get("source_repair"),
         "parent_result": reference(parent() / "results/result.json"),
         "cells": cells,
         "pairs": pairs,
