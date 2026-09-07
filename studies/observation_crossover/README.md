@@ -25,13 +25,17 @@
 error-induced population differentiation, and within-subject order displacement in the
 frozen A/C networks?
 
-**Finding.** Prospective crossover; missing cell not evaluated.
+**Finding.** Protocol, inherited models/inputs and source locked; known A0 replay passed
+120 exact array checks before any C0 evaluation.
 
 **Claim boundary.** Three previously trained paired networks; three exposed cells and
 one prospectively frozen cross-evaluation; no training, human calibration or promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/observation_crossover/records/benchmarks/execution_lock.json](records/benchmarks/execution_lock.json)
+  (`sha256:e64b0e3aa519`)
 - `registered_contract` —
   [studies/observation_crossover/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:5aa39260e419`)

@@ -229,7 +229,8 @@ fail to close the dynamics.
     registered added-history-discrimination contrast with negative intervals in all
     three. One fixed sigma; no promotion.
 - [Training by observation crossover](observation_crossover/README.md) — `unresolved`
-  - **Finding:** Prospective crossover; missing cell not evaluated.
+  - **Finding:** Protocol, inherited models/inputs and source locked; known A0 replay
+    passed 120 exact array checks before any C0 evaluation.
 
 ## Minimal explanatory models
 
