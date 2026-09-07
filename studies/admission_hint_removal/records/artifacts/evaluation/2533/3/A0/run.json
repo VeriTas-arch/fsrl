@@ -1,0 +1,94 @@
+{
+  "bytes": 750324,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "2533-3-A0",
+  "file_count": 3,
+  "files": [
+    {
+      "bytes": 166295,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "behavior.json",
+      "prospective_suffix": ".json",
+      "sha256": "65ec69554c14a50343f247f780efb51a1c7212e43042dc63d688d7818185dc42"
+    },
+    {
+      "bytes": 532860,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "abda76259cdad6903d618aadc4133792010c29cb882aa493858218dd1f8fda4f"
+    },
+    {
+      "bytes": 51169,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "24a9b090021f00fa0d0cce9e449b9f2168b910495d7fe616313cb0ed1a51c9ff"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "cell": "A0",
+    "model_lock": {
+      "bytes": 36676,
+      "path": "studies/admission_hint_removal/records/benchmarks/model_lock.json",
+      "sha256": "fb0ea047d67d531be1ffe659fb2749b36ad411037e2680f5713d9e0e3d871270"
+    },
+    "panel": 3,
+    "seed": 2533
+  },
+  "resolved_config": {
+    "cohorts": 1,
+    "generic": {
+      "conditions": [
+        "intact"
+      ],
+      "episodes": 256,
+      "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+      "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+      "rng_seed": 706300,
+      "temperature": 1.0
+    },
+    "generic_development": {
+      "episodes": 256,
+      "rng_seed": 106200
+    },
+    "item_counts": [
+      8
+    ],
+    "liu": {
+      "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+      "choice_seed": 706314,
+      "conditions": [
+        "intact",
+        "local_off",
+        "P_off",
+        "query_shuffle",
+        "evidence_shuffle"
+      ],
+      "cue_mode": "permuted_shared",
+      "cue_seed": 706311,
+      "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+      "evidence_shuffle_seed": 706317,
+      "order_seed": 706315,
+      "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+      "protocol_id": "liu_v2",
+      "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+      "query_shuffle_seed": 706316,
+      "subject_encoding_mode": "stable_omission",
+      "subject_encoding_seed": 706313,
+      "subjects": 77,
+      "support_seed": 706312,
+      "temperature": 0.25,
+      "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "admission_hint_removal_v1"
+}

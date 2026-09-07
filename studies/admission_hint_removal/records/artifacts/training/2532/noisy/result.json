@@ -1,0 +1,108 @@
+{
+  "arm": "noisy",
+  "final_backbone": {
+    "DAmult": "da0ffff9cc2617474d4b6bfa1308fa02f7c89bb294790cd3685ae8a9560c128c",
+    "alpha": "47ea26315c8b58b58e984dcd283a57c633bc1646b08cc64189997594ab21579f",
+    "etaet": "5459a7634fd5c445121664e2fa025990cfd38492e96622ae839d653b54bad5b6",
+    "h2DA.bias": "3a89dacefad03846dbf92c343846b537007992f952bc1c24058199ac7ebc3997",
+    "h2DA.weight": "dc673bea9bdcedf3f0c096c481d914b59bb69e0455f6588a2b9aed75b2f792eb",
+    "h2o.bias": "526d9b82bd0a688605a91ab8bdfcbe07d4e1b15e35d2eb3e1e634720e726ac3b",
+    "h2o.weight": "63debff89ffc5555038d4007579f51378704d472b80b2e559bfed445937aab57",
+    "h2v.bias": "d22067c631c5683dc1bae37a4943e7672aa56df0a8cc48e6245a5fdf6a0de71b",
+    "h2v.weight": "ba4bfce11f3ae0e124d72999a5523dd00e6d9628c60564462190398267b40607",
+    "i2h.bias": "d9300df4ca5d53da80bfd5678d6b7540352955c1484c416831b28ddbf075d3c1",
+    "i2h.weight": "7f7a4b038ca6142193a2b6025a257ffad301ccb5579366b691b3269cf640b4e1",
+    "w": "8bcfb48c8ce60d07958f662b85bfc1faae68e20479aba33583e61465bd3780a4"
+  },
+  "final_local": null,
+  "initial_backbone": {
+    "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+    "alpha": "e18530a0da96e0a7ba7c2c080d9d4955b37e0dfd618ad1dc48e5c84b630c4f9c",
+    "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+    "h2DA.bias": "e1294956fc9cecf1729590c4880c7e9a52eb97c1f10abeaa395532a93fc26864",
+    "h2DA.weight": "1dd282c22d33d0b9b77bcb8c98715e96509f4d0632ca950543b645e0b296fa1e",
+    "h2o.bias": "a4a64c1274a2b7f3368bc752ceb9fac3edc8054d3a489095b8ac30e1270ca216",
+    "h2o.weight": "eb460b0bbd119b19b22299ba1ac0e451b50db7e87cf2fa82173a4633fcf74702",
+    "h2v.bias": "d22067c631c5683dc1bae37a4943e7672aa56df0a8cc48e6245a5fdf6a0de71b",
+    "h2v.weight": "ba4bfce11f3ae0e124d72999a5523dd00e6d9628c60564462190398267b40607",
+    "i2h.bias": "700d11eba06b94dcfbbc49cafd2ed9d6d293d1e7b2157916ac04542ad4c41115",
+    "i2h.weight": "f5c87869a27293b92308f070cd1ec16d7b89cae8f900effe4a7d9bb2fa5f897f",
+    "w": "8f2dfb9d91c3355e1bfa484cc523166e08ab8a1a1fb47951061048593d1c0b1e"
+  },
+  "initial_local": null,
+  "optimizer_steps": {
+    "backbone.DAmult": 1500,
+    "backbone.alpha": 1500,
+    "backbone.etaet": 1500,
+    "backbone.h2DA.bias": 1500,
+    "backbone.h2DA.weight": 1500,
+    "backbone.h2o.bias": 1500,
+    "backbone.h2o.weight": 1500,
+    "backbone.h2v.bias": 1500,
+    "backbone.h2v.weight": 1500,
+    "backbone.i2h.bias": 1500,
+    "backbone.i2h.weight": 1500,
+    "backbone.w": 1500
+  },
+  "protocol_sha256": "bec0b74bc04e6713d0efdd9f8b2d24c6c2d29cebd23bd3fed07fe9f229177d82",
+  "runtime": {
+    "blas_thread_limit": 1,
+    "blas_threadpools": [
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.188.0"
+      },
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.dev"
+      }
+    ],
+    "compiler_threads": 1,
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "device_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "execution_schema_version": 2,
+    "float32_matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "profile": {
+      "blas_threads": 1,
+      "compile": true,
+      "compile_backend": "inductor",
+      "compile_fullgraph": true,
+      "compile_mode": "default",
+      "cpu_threads": 1,
+      "device": "cuda",
+      "require_cuda": true
+    },
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.14.0+cu130",
+    "triton_mix_order_reduction": false
+  },
+  "seed": 2532,
+  "source_lock": {
+    "bytes": 213870,
+    "path": "studies/admission_hint_removal/records/benchmarks/source_lock.json",
+    "sha256": "938b76d927a6df35b96e7349e22d624368b4a5a3fa547946ddac52297e275082"
+  },
+  "stream_fingerprint": "3e3d1145d74ca4ed36220bdf51479a89ed22906cd8db1fd763d60ab4f63c0a88",
+  "training_seconds": 52.493405776971485
+}

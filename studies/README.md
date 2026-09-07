@@ -246,10 +246,12 @@ fail to close the dynamics.
     intact competence/binding, Ae9/9 and Ce6/9 core with identical panelwise pattern to
     dual, and retained compensation. Small direct-experience losses remain; no interface
     simplification or independent confirmation.
-- [Explicit admission-hint removal in a single-memory RNN](admission_hint_removal/README.md) — `unresolved`
-  - **Finding:** All six no-hint A/C models locked before evaluation; initial backbone
-    and all9000 pre-mask task/observation fingerprints match hint-present references.
-    Original q retained; no new behavior evaluated.
+- [Explicit admission-hint removal in a single-memory RNN](admission_hint_removal/README.md) — `mixed`
+  - **Finding:** No-hint single-memory RNNs retain competence/binding, Ae9/9 and Ce8/9
+    core and all three network-level compensation summaries. Two of three pairs pass Ce
+    five-endpoint noninferiority;2531 has clear generic learned/nonlearned losses
+    beyond2pp. Overall removal not supported; conditional compact export not triggered.
+    No tuning or independent confirmation.
 
 ## Minimal explanatory models
 
