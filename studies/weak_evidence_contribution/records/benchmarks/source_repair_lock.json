@@ -1,0 +1,81 @@
+{
+  "failed_attempt": {
+    "error": "KeyError: 'device'",
+    "new_outcomes_exposed": false,
+    "run_directory_created": false,
+    "trained_models_loaded": false
+  },
+  "original_source_lock": {
+    "bytes": 66199,
+    "path": "studies/weak_evidence_contribution/records/benchmarks/source_lock.json",
+    "sha256": "d17a350836e9114c931f68b3cbff36f5ef5a454161a26c7c10b6ca8b2cc01226"
+  },
+  "qualification": {
+    "bytes": 60377,
+    "path": "studies/weak_evidence_contribution/records/benchmarks/qualification.json",
+    "sha256": "171225d5365d23aae765bd47d1f8c6ef04c0125c303f473924b61c36f727c7cf"
+  },
+  "reason": "Pre-outcome runtime metadata lookup used top-level device/cpu_threads/blas_threads although the recorded schema nests them in profile. Repair lookup and validate actual runtime thread/CUDA fields; add append-only replacement checking, provenance reporting and regression coverage.",
+  "replacements": [
+    {
+      "original": {
+        "bytes": 7257,
+        "path": "fsrl/experiments/weak_contribution/execution.py",
+        "sha256": "dcf92141ddb007f4edd6cd069bb64b2fbe1db592d2aa90076b5d46da5fa53436"
+      },
+      "replacement": {
+        "bytes": 7461,
+        "path": "fsrl/experiments/weak_contribution/execution.py",
+        "sha256": "52b53c97a9963e41ec7e775415d07926576e8cd9b408defc1b97e33679022955"
+      }
+    },
+    {
+      "original": {
+        "bytes": 2935,
+        "path": "fsrl/experiments/weak_contribution/locks.py",
+        "sha256": "6465334cbbb9c39663cd5868335f0b77772ac5f35595709311791089720e93a3"
+      },
+      "replacement": {
+        "bytes": 4219,
+        "path": "fsrl/experiments/weak_contribution/locks.py",
+        "sha256": "6785f8929be4c3abbd69214193b6bbc87133cf3b5dccd9dccd24a6fb8ecc4ebf"
+      }
+    },
+    {
+      "original": {
+        "bytes": 3572,
+        "path": "fsrl/experiments/weak_contribution/reporting.py",
+        "sha256": "677213e6da62b480355979de0b0a4fef4014d6eb7aec6a7b9b90cf32e2d8b4b5"
+      },
+      "replacement": {
+        "bytes": 3624,
+        "path": "fsrl/experiments/weak_contribution/reporting.py",
+        "sha256": "9f0c94e67441677fdb310e93d079a1526ebaa214836e5aa67ea65b318dfd7c00"
+      }
+    },
+    {
+      "original": {
+        "bytes": 2463,
+        "path": "tests/experiments/weak_contribution/test_contribution.py",
+        "sha256": "9b62afc4c286ed64651c7fb54b56b476c5cf269ce977667f2ffa48747417fd76"
+      },
+      "replacement": {
+        "bytes": 3366,
+        "path": "tests/experiments/weak_contribution/test_contribution.py",
+        "sha256": "6805111e024bff3b58c9dc41532151b1fd5a1069ff9e596b69412e44b99f08c7"
+      }
+    }
+  ],
+  "source_commit": "3f56fdf497e1a9b775d14efa75e7c14b71a4a28a",
+  "unchanged": [
+    "protocol",
+    "model equations",
+    "interventions",
+    "local reconstruction",
+    "metrics",
+    "statistics",
+    "inputs",
+    "trained weights",
+    "numerical qualification"
+  ]
+}

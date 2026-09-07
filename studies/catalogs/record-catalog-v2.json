@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 1094,
+  "entry_count": 1095,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 522,
+    "json": 523,
     "json_lines": 10,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 1019,
+    "already_conformant": 1020,
     "historical_gzip_view": 74,
     "historical_pth_view": 1
   },
@@ -34971,6 +34971,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/benchmarks/source_repair_lock.json",
+        "repository_path": "studies/weak_evidence_contribution/records/benchmarks/source_repair_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 2901,
+        "sha256": "2f5eb00ec942c7d8f322431be87c14bb5fd8bb804f554f2d949a7493143278dd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_benchmarks_source_repair_lock_json",
+      "registered_identity": {
+        "bytes": 2901,
+        "sha256": "2f5eb00ec942c7d8f322431be87c14bb5fd8bb804f554f2d949a7493143278dd",
+        "source_ref": "sha256:2f5eb00ec942c7d8f322431be87c14bb5fd8bb804f554f2d949a7493143278dd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.artifact_lock",
       "format": {
         "format": "json",
@@ -37541,7 +37575,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 1092,
+  "registered_record_count": 1093,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -37568,7 +37602,7 @@
     "report": 73,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 606,
+    "supporting_artifact": 607,
     "validation_result": 13
   },
   "schema_version": 2,
