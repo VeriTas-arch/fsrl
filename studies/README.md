@@ -258,6 +258,9 @@ fail to close the dynamics.
     endpoints improve over zero-hint Z, Ae9/9 and Ce8/9 core, compensation retained. Six
     trained weights map numerically to a single-observation37-channel interface. Exposed
     development; small Liu and compensation costs remain.
+- [Single affine modulation in a single-memory RNN](linear_modulation/README.md) — `unresolved`
+  - **Finding:** Prospective matched affine-modulation comparison; new outcomes not
+    evaluated.
 
 ## Minimal explanatory models
 
