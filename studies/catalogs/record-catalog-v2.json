@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 2606,
+  "entry_count": 2608,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 1520,
+    "json": 1522,
     "json_lines": 68,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 2513,
+    "already_conformant": 2515,
     "historical_gzip_view": 92,
     "historical_pth_view": 1
   },
@@ -59310,6 +59310,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/modulation_schedule/records/benchmarks/calibration_lock.json",
+        "repository_path": "studies/modulation_schedule/records/benchmarks/calibration_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 4996,
+        "sha256": "e1abd375b6aa856f698d0521f051481ee81d231d2f5bc361dbc2b3a411c91c62"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "modulation_schedule",
+        "kind": "study"
+      },
+      "record_id": "study.modulation_schedule.studies_modulation_schedule_records_benchmarks_calibration_lock_json",
+      "registered_identity": {
+        "bytes": 4996,
+        "sha256": "e1abd375b6aa856f698d0521f051481ee81d231d2f5bc361dbc2b3a411c91c62",
+        "source_ref": "sha256:e1abd375b6aa856f698d0521f051481ee81d231d2f5bc361dbc2b3a411c91c62"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -59409,6 +59443,40 @@
         "source_ref": "sha256:be6352a0f9baa76c637047786d357011222b1b46d5f60640e88b1f315eafed39"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/modulation_schedule/records/results/audit.json",
+        "repository_path": "studies/modulation_schedule/records/results/audit.json"
+      },
+      "materialized_identity": {
+        "bytes": 157753,
+        "sha256": "d160ea322e137a5559a9265b20647781c4a3e6109e71fa56b4cf016c4793b89a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "modulation_schedule",
+        "kind": "study"
+      },
+      "record_id": "study.modulation_schedule.studies_modulation_schedule_records_results_audit_json",
+      "registered_identity": {
+        "bytes": 157753,
+        "sha256": "d160ea322e137a5559a9265b20647781c4a3e6109e71fa56b4cf016c4793b89a",
+        "source_ref": "sha256:d160ea322e137a5559a9265b20647781c4a3e6109e71fa56b4cf016c4793b89a"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -88985,11 +89053,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 2604,
+  "registered_record_count": 2606,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 29,
+    "artifact_lock": 30,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
@@ -89012,7 +89080,7 @@
     "report": 82,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 1606,
+    "supporting_artifact": 1607,
     "validation_result": 13
   },
   "schema_version": 2,

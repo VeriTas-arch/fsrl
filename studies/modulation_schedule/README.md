@@ -33,6 +33,9 @@ promotion. Compact diagnosis is separate.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/modulation_schedule/records/benchmarks/calibration_lock.json](records/benchmarks/calibration_lock.json)
+  (`sha256:e1abd375b6aa`)
 - `registered_contract` —
   [studies/modulation_schedule/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:8e95cd67f513`)
@@ -42,6 +45,9 @@ promotion. Compact diagnosis is separate.
 - `execution_lock` —
   [studies/modulation_schedule/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:be6352a0f9ba`)
+- `supporting_artifact` —
+  [studies/modulation_schedule/records/results/audit.json](records/results/audit.json)
+  (`sha256:d160ea322e13`)
 
 ## Provenance rule
 
