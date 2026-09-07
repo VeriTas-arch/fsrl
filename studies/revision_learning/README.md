@@ -112,6 +112,60 @@ promotion presumed.
 - `supporting_artifact` —
   [studies/revision_learning/records/artifacts/inputs/generic-990102.npz](records/artifacts/inputs/generic-990102.npz)
   (`sha256:59b32a1e938c`)
+- `frozen_parameters` —
+  [studies/revision_learning/records/artifacts/training/2711-gru/net.pth](records/artifacts/training/2711-gru/net.pth)
+  (`sha256:f4a3a5a9377a`)
+- `frozen_result` —
+  [studies/revision_learning/records/artifacts/training/2711-gru/result.json](records/artifacts/training/2711-gru/result.json)
+  (`sha256:07409c4b5234`)
+- `supporting_artifact` —
+  [studies/revision_learning/records/artifacts/training/2711-gru/train.jsonl](records/artifacts/training/2711-gru/train.jsonl)
+  (`sha256:e187b1392734`)
+- `frozen_parameters` —
+  [studies/revision_learning/records/artifacts/training/2711-plastic/net.pth](records/artifacts/training/2711-plastic/net.pth)
+  (`sha256:27facb5d5eb8`)
+- `frozen_result` —
+  [studies/revision_learning/records/artifacts/training/2711-plastic/result.json](records/artifacts/training/2711-plastic/result.json)
+  (`sha256:e68825671b48`)
+- `supporting_artifact` —
+  [studies/revision_learning/records/artifacts/training/2711-plastic/train.jsonl](records/artifacts/training/2711-plastic/train.jsonl)
+  (`sha256:605c338fd693`)
+- `frozen_parameters` —
+  [studies/revision_learning/records/artifacts/training/2712-gru/net.pth](records/artifacts/training/2712-gru/net.pth)
+  (`sha256:bb839cea707e`)
+- `frozen_result` —
+  [studies/revision_learning/records/artifacts/training/2712-gru/result.json](records/artifacts/training/2712-gru/result.json)
+  (`sha256:5f9a6cdd795e`)
+- `supporting_artifact` —
+  [studies/revision_learning/records/artifacts/training/2712-gru/train.jsonl](records/artifacts/training/2712-gru/train.jsonl)
+  (`sha256:3ff4df497848`)
+- `frozen_parameters` —
+  [studies/revision_learning/records/artifacts/training/2712-plastic/net.pth](records/artifacts/training/2712-plastic/net.pth)
+  (`sha256:9cbad19c6382`)
+- `frozen_result` —
+  [studies/revision_learning/records/artifacts/training/2712-plastic/result.json](records/artifacts/training/2712-plastic/result.json)
+  (`sha256:43e3e12d5525`)
+- `supporting_artifact` —
+  [studies/revision_learning/records/artifacts/training/2712-plastic/train.jsonl](records/artifacts/training/2712-plastic/train.jsonl)
+  (`sha256:1f31f512b50e`)
+- `frozen_parameters` —
+  [studies/revision_learning/records/artifacts/training/2713-gru/net.pth](records/artifacts/training/2713-gru/net.pth)
+  (`sha256:be33e6a43543`)
+- `frozen_result` —
+  [studies/revision_learning/records/artifacts/training/2713-gru/result.json](records/artifacts/training/2713-gru/result.json)
+  (`sha256:82ee18aa654a`)
+- `supporting_artifact` —
+  [studies/revision_learning/records/artifacts/training/2713-gru/train.jsonl](records/artifacts/training/2713-gru/train.jsonl)
+  (`sha256:35cd4dbd393a`)
+- `frozen_parameters` —
+  [studies/revision_learning/records/artifacts/training/2713-plastic/net.pth](records/artifacts/training/2713-plastic/net.pth)
+  (`sha256:aca72122385c`)
+- `frozen_result` —
+  [studies/revision_learning/records/artifacts/training/2713-plastic/result.json](records/artifacts/training/2713-plastic/result.json)
+  (`sha256:34541b454ec2`)
+- `supporting_artifact` —
+  [studies/revision_learning/records/artifacts/training/2713-plastic/train.jsonl](records/artifacts/training/2713-plastic/train.jsonl)
+  (`sha256:6e6b866b8931`)
 - `registered_contract` —
   [studies/revision_learning/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:9ee40c99300d`)

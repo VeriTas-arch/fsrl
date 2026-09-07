@@ -7,24 +7,24 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3478,
+  "entry_count": 3496,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 1910,
-    "json_lines": 68,
+    "json": 1916,
+    "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
     "markdown": 90,
     "numpy_npz": 1252,
     "pdf": 2,
-    "pytorch_state_dict": 143,
+    "pytorch_state_dict": 149,
     "svg": 4,
     "tar_zstd": 1,
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3382,
+    "already_conformant": 3400,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -102371,6 +102371,618 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2711-gru/net.pth",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2711-gru/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 580437,
+        "sha256": "f4a3a5a9377a4a151c9e78b815a9945696476b020d415769aabac21ac6fb7baf"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2711_gru_net_pth",
+      "registered_identity": {
+        "bytes": 580437,
+        "sha256": "f4a3a5a9377a4a151c9e78b815a9945696476b020d415769aabac21ac6fb7baf",
+        "source_ref": "sha256:f4a3a5a9377a4a151c9e78b815a9945696476b020d415769aabac21ac6fb7baf"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2711-gru/result.json",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2711-gru/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2001,
+        "sha256": "07409c4b52349061ce66de9ca70be72f7d010f882e9b6c738b10a93c7413a550"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2711_gru_result_json",
+      "registered_identity": {
+        "bytes": 2001,
+        "sha256": "07409c4b52349061ce66de9ca70be72f7d010f882e9b6c738b10a93c7413a550",
+        "source_ref": "sha256:07409c4b52349061ce66de9ca70be72f7d010f882e9b6c738b10a93c7413a550"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2711-gru/train.jsonl",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2711-gru/train.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 768482,
+        "sha256": "e187b139273442a6a65fc4c7726a5ec0afd9bc9bcbc7b1a6d213e945ac17e196"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2711_gru_train_jsonl",
+      "registered_identity": {
+        "bytes": 768482,
+        "sha256": "e187b139273442a6a65fc4c7726a5ec0afd9bc9bcbc7b1a6d213e945ac17e196",
+        "source_ref": "sha256:e187b139273442a6a65fc4c7726a5ec0afd9bc9bcbc7b1a6d213e945ac17e196"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2711-plastic/net.pth",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2711-plastic/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 358466,
+        "sha256": "27facb5d5eb87701aec836d6b76e72d8d15fc0cd4331b29ef332f0e633ee7a0e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2711_plastic_net_pth",
+      "registered_identity": {
+        "bytes": 358466,
+        "sha256": "27facb5d5eb87701aec836d6b76e72d8d15fc0cd4331b29ef332f0e633ee7a0e",
+        "source_ref": "sha256:27facb5d5eb87701aec836d6b76e72d8d15fc0cd4331b29ef332f0e633ee7a0e"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2711-plastic/result.json",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2711-plastic/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2786,
+        "sha256": "e68825671b484a467ce99d2d47d1c60a26a4f66e5aa86cd84963850664ccfa51"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2711_plastic_result_json",
+      "registered_identity": {
+        "bytes": 2786,
+        "sha256": "e68825671b484a467ce99d2d47d1c60a26a4f66e5aa86cd84963850664ccfa51",
+        "source_ref": "sha256:e68825671b484a467ce99d2d47d1c60a26a4f66e5aa86cd84963850664ccfa51"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2711-plastic/train.jsonl",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2711-plastic/train.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 768310,
+        "sha256": "605c338fd693d214dd0a53d5073d53950326bde2276d0893c403b15ad94dcf06"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2711_plastic_train_jsonl",
+      "registered_identity": {
+        "bytes": 768310,
+        "sha256": "605c338fd693d214dd0a53d5073d53950326bde2276d0893c403b15ad94dcf06",
+        "source_ref": "sha256:605c338fd693d214dd0a53d5073d53950326bde2276d0893c403b15ad94dcf06"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2712-gru/net.pth",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2712-gru/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 580437,
+        "sha256": "bb839cea707e57469f6442650ccd923791d033e0f28a5fcfa830e29ad7919eb9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2712_gru_net_pth",
+      "registered_identity": {
+        "bytes": 580437,
+        "sha256": "bb839cea707e57469f6442650ccd923791d033e0f28a5fcfa830e29ad7919eb9",
+        "source_ref": "sha256:bb839cea707e57469f6442650ccd923791d033e0f28a5fcfa830e29ad7919eb9"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2712-gru/result.json",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2712-gru/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2001,
+        "sha256": "5f9a6cdd795eab124531e320189604d89680e1f0e5f7677a35277f8f8caff4ad"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2712_gru_result_json",
+      "registered_identity": {
+        "bytes": 2001,
+        "sha256": "5f9a6cdd795eab124531e320189604d89680e1f0e5f7677a35277f8f8caff4ad",
+        "source_ref": "sha256:5f9a6cdd795eab124531e320189604d89680e1f0e5f7677a35277f8f8caff4ad"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2712-gru/train.jsonl",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2712-gru/train.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 768499,
+        "sha256": "3ff4df4978486f27eb59ff7d5b51014302bdef5ff75c2d51afebed47e835d703"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2712_gru_train_jsonl",
+      "registered_identity": {
+        "bytes": 768499,
+        "sha256": "3ff4df4978486f27eb59ff7d5b51014302bdef5ff75c2d51afebed47e835d703",
+        "source_ref": "sha256:3ff4df4978486f27eb59ff7d5b51014302bdef5ff75c2d51afebed47e835d703"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2712-plastic/net.pth",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2712-plastic/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 358466,
+        "sha256": "9cbad19c63827d286d8f3ca9f1aa7f660007a1d3395c26254ccec47c8f5a53ce"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2712_plastic_net_pth",
+      "registered_identity": {
+        "bytes": 358466,
+        "sha256": "9cbad19c63827d286d8f3ca9f1aa7f660007a1d3395c26254ccec47c8f5a53ce",
+        "source_ref": "sha256:9cbad19c63827d286d8f3ca9f1aa7f660007a1d3395c26254ccec47c8f5a53ce"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2712-plastic/result.json",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2712-plastic/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2787,
+        "sha256": "43e3e12d552597ecffaa59eb274401fc931ac5fbbcc580e780e9d787552cedb2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2712_plastic_result_json",
+      "registered_identity": {
+        "bytes": 2787,
+        "sha256": "43e3e12d552597ecffaa59eb274401fc931ac5fbbcc580e780e9d787552cedb2",
+        "source_ref": "sha256:43e3e12d552597ecffaa59eb274401fc931ac5fbbcc580e780e9d787552cedb2"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2712-plastic/train.jsonl",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2712-plastic/train.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 768425,
+        "sha256": "1f31f512b50e9f86d64d938ed3c3141ef0131b6e6e2a55603b6b0a5c55fcf33b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2712_plastic_train_jsonl",
+      "registered_identity": {
+        "bytes": 768425,
+        "sha256": "1f31f512b50e9f86d64d938ed3c3141ef0131b6e6e2a55603b6b0a5c55fcf33b",
+        "source_ref": "sha256:1f31f512b50e9f86d64d938ed3c3141ef0131b6e6e2a55603b6b0a5c55fcf33b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2713-gru/net.pth",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2713-gru/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 580437,
+        "sha256": "be33e6a4354386834b5a103be0bb0ba71874114d96981f3c22fcb292347edb31"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2713_gru_net_pth",
+      "registered_identity": {
+        "bytes": 580437,
+        "sha256": "be33e6a4354386834b5a103be0bb0ba71874114d96981f3c22fcb292347edb31",
+        "source_ref": "sha256:be33e6a4354386834b5a103be0bb0ba71874114d96981f3c22fcb292347edb31"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2713-gru/result.json",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2713-gru/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2001,
+        "sha256": "82ee18aa654ab93a7f3c4d3b21aa4d1d16b83d515d5a7cc426b4e5f84cb12e94"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2713_gru_result_json",
+      "registered_identity": {
+        "bytes": 2001,
+        "sha256": "82ee18aa654ab93a7f3c4d3b21aa4d1d16b83d515d5a7cc426b4e5f84cb12e94",
+        "source_ref": "sha256:82ee18aa654ab93a7f3c4d3b21aa4d1d16b83d515d5a7cc426b4e5f84cb12e94"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2713-gru/train.jsonl",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2713-gru/train.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 768403,
+        "sha256": "35cd4dbd393a49881f02aae868ac5f367f9f31f919ef8d3ee3192a9a0931a4a9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2713_gru_train_jsonl",
+      "registered_identity": {
+        "bytes": 768403,
+        "sha256": "35cd4dbd393a49881f02aae868ac5f367f9f31f919ef8d3ee3192a9a0931a4a9",
+        "source_ref": "sha256:35cd4dbd393a49881f02aae868ac5f367f9f31f919ef8d3ee3192a9a0931a4a9"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_parameters",
+      "format": {
+        "format": "pytorch_state_dict",
+        "legacy_format": false,
+        "media_type": "application/x-pytorch",
+        "prospective_suffix": ".pth"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2713-plastic/net.pth",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2713-plastic/net.pth"
+      },
+      "materialized_identity": {
+        "bytes": 358466,
+        "sha256": "aca72122385cb8436267cec6f6d5baf5309c3f6920e214372e08657ab426b019"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "pytorch_state_dict"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2713_plastic_net_pth",
+      "registered_identity": {
+        "bytes": 358466,
+        "sha256": "aca72122385cb8436267cec6f6d5baf5309c3f6920e214372e08657ab426b019",
+        "source_ref": "sha256:aca72122385cb8436267cec6f6d5baf5309c3f6920e214372e08657ab426b019"
+      },
+      "role": "frozen_parameters"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2713-plastic/result.json",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2713-plastic/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 2787,
+        "sha256": "34541b454ec2830eb386b91eb23d0a074989c6b5dd2e6db3fe9e146524101bef"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2713_plastic_result_json",
+      "registered_identity": {
+        "bytes": 2787,
+        "sha256": "34541b454ec2830eb386b91eb23d0a074989c6b5dd2e6db3fe9e146524101bef",
+        "source_ref": "sha256:34541b454ec2830eb386b91eb23d0a074989c6b5dd2e6db3fe9e146524101bef"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json_lines",
+        "legacy_format": false,
+        "media_type": "application/x-ndjson",
+        "prospective_suffix": ".jsonl"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/artifacts/training/2713-plastic/train.jsonl",
+        "repository_path": "studies/revision_learning/records/artifacts/training/2713-plastic/train.jsonl"
+      },
+      "materialized_identity": {
+        "bytes": 768156,
+        "sha256": "6e6b866b893101e252579a48eb3790397747c136fe0ddedb709d1f8aeaaa9f73"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json_lines"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_artifacts_training_2713_plastic_train_jsonl",
+      "registered_identity": {
+        "bytes": 768156,
+        "sha256": "6e6b866b893101e252579a48eb3790397747c136fe0ddedb709d1f8aeaaa9f73",
+        "source_ref": "sha256:6e6b866b893101e252579a48eb3790397747c136fe0ddedb709d1f8aeaaa9f73"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -118639,7 +119251,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3476,
+  "registered_record_count": 3494,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -118652,8 +119264,8 @@
     "environment_contract": 2,
     "execution_lock": 62,
     "freeze_validation": 1,
-    "frozen_parameters": 174,
-    "frozen_result": 559,
+    "frozen_parameters": 180,
+    "frozen_result": 565,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -118666,7 +119278,7 @@
     "report": 85,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2409,
+    "supporting_artifact": 2415,
     "validation_result": 13
   },
   "schema_version": 2,
