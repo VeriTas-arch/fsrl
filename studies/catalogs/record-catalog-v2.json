@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 1631,
+  "entry_count": 1632,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 845,
+    "json": 846,
     "json_lines": 38,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 1552,
+    "already_conformant": 1553,
     "historical_gzip_view": 78,
     "historical_pth_view": 1
   },
@@ -33858,6 +33858,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/observation_crossover/records/benchmarks/protocol.json",
+        "repository_path": "studies/observation_crossover/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 7959,
+        "sha256": "5aa39260e419c18d364e3c2206b568578a9c81f1b476c36f13c9cc115a73a6d8"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "observation_crossover",
+        "kind": "study"
+      },
+      "record_id": "study.observation_crossover.studies_observation_crossover_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 7959,
+        "sha256": "5aa39260e419c18d364e3c2206b568578a9c81f1b476c36f13c9cc115a73a6d8",
+        "source_ref": "sha256:5aa39260e419c18d364e3c2206b568578a9c81f1b476c36f13c9cc115a73a6d8"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.supporting_artifact",
       "format": {
         "format": "json",
@@ -55807,7 +55841,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 1629,
+  "registered_record_count": 1630,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -55828,7 +55862,7 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 75,
+    "registered_contract": 76,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 76,
@@ -55841,7 +55875,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "09b33723bb5e13fef29bd9b77fb1e51066acaaba42eb8b2670005b99145121c2"
+      "sha256": "79d2112b8e4d4eb8b3ed321794f26d0d00d279177f35cced3082e91db463fb34"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

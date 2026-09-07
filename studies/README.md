@@ -228,6 +228,8 @@ fail to close the dynamics.
     three, retained full core in one seed and global core in none, and failed the
     registered added-history-discrimination contrast with negative intervals in all
     three. One fixed sigma; no promotion.
+- [Training by observation crossover](observation_crossover/README.md) — `unresolved`
+  - **Finding:** Prospective crossover; missing cell not evaluated.
 
 ## Minimal explanatory models
 

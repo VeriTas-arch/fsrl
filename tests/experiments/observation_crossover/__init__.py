@@ -1,0 +1,1 @@
+"""Cross-diagnostic estimand invariants."""

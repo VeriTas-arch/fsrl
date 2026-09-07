@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "study_id": "observation_crossover",
+  "tier": "development_cross_diagnostic",
+  "question": "Does observation-error training change baseline relational organization, error-induced population differentiation, and within-subject order displacement in the frozen A/C networks?",
+  "parent_protocol": {
+    "path": "studies/observation_uncertainty/records/benchmarks/protocol.json",
+    "sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92",
+    "bytes": 16311
+  },
+  "parent_result": {
+    "path": "studies/observation_uncertainty/records/results/result.json",
+    "sha256": "c6ae9204807596b4224f3b203155383ef704621381094ed281b68ff4e7680e9f",
+    "bytes": 1323226
+  },
+  "parent_source_lock": {
+    "path": "studies/observation_uncertainty/records/benchmarks/source_lock.json",
+    "sha256": "b69d060bde91f1484d7fde836adb174c153e581fb596c5b7294dd75882b6a875",
+    "bytes": 69354
+  },
+  "parent_model_lock": {
+    "path": "studies/observation_uncertainty/records/benchmarks/model_lock.json",
+    "sha256": "80bb1448250b8531f16913b3da24bcf60aec3bcae232e9610f5572af94b29862",
+    "bytes": 57696
+  },
+  "parent_witness_commit": "c82540283d7e100b890378d70f9df7f12ae53d44",
+  "design": {
+    "seeds": [
+      2432,
+      2433,
+      2434
+    ],
+    "cells": {
+      "A0": {
+        "training": "clean",
+        "observation": "clean",
+        "reuse": "clean"
+      },
+      "Ae": {
+        "training": "clean",
+        "observation": "noisy",
+        "reuse": "acute_noisy"
+      },
+      "C0": {
+        "training": "noisy",
+        "observation": "clean",
+        "reuse": null
+      },
+      "Ce": {
+        "training": "noisy",
+        "observation": "noisy",
+        "reuse": "noisy"
+      }
+    },
+    "new_execution": "Only C0 for each seed: 256 generic episodes and the original 77 Liu participants. A0/Ae/Ce reuse committed raw arrays and canonical summaries. No training or new participants.",
+    "matching": "Archived physical inputs including original p/z, cues, order, query targets and noise draws; C0 uses the exact original input arrays. Each model keeps its own slow parameters, local gain and readout. Reset P/L per episode, construct memories online, freeze terminal state during queries.",
+    "observation": "Inherited sigma=1/7, replay0 only. No new observation draws, no replay averaging. Original input retains the p/z scaffold.",
+    "primary": "Global native Hodge orders of all 77 subjects; inherited orientation and stable tie ordering. Full and conditional sampled routes are fixed secondary reports."
+  },
+  "estimands": {
+    "contrasts": {
+      "baseline": {
+        "C0": 1,
+        "A0": -1
+      },
+      "error_A": {
+        "Ae": 1,
+        "A0": -1
+      },
+      "error_C": {
+        "Ce": 1,
+        "C0": -1
+      },
+      "interaction": {
+        "Ce": 1,
+        "C0": -1,
+        "Ae": -1,
+        "A0": 1
+      },
+      "training_under_error": {
+        "Ce": 1,
+        "Ae": -1
+      }
+    },
+    "tau": "For each contrast, recompute the weighted pairwise Kendall tau of each cell in shared-ID bootstrap samples. Primary global_all77; also full_all77, full_conditional and global_conditional. Report each cell and simple effects, not interaction alone.",
+    "CE": "Per-episode CE=mean(logaddexp(0,-margin*true_sign/T)). Generic T=1, full/global separately; global CE interaction aligns with primary structure and full CE retains task-output context. Liu T=0.25, full/global separately as secondary; never pool tasks or temperatures. All four simple/cross contrasts for each endpoint.",
+    "order_shift": "Global S_R=mean_i[(1-KendallTau(order_R0_i,order_Re_i))/2], equivalently fraction of the 28 item pairs reversed within each subject. Report S_A,S_C and participant-paired S_C-S_A using replay0, deterministic internal orders, unchanged tie ordering. No sampled choices enter this endpoint.",
+    "absolute_behavior": "Retain inherited full/global competence and five core flags for each cell, plus P_off/evidence-shuffle evidence binding. Full-policy historical profiles remain descriptive; no promotion or human-distribution matching."
+  },
+  "statistics": {
+    "samples": 2000,
+    "interval": 0.95,
+    "seed_offset": 126000,
+    "unit": "Joint resampling of the original participant IDs across four cells within each network; generic episodes and Liu participants separate. Never treat participant pairs as independent or pool networks. Duplicate sampled IDs are separate bootstrap observations as in the parent contract. Conditional masks applied after resampling, no common-mask restriction. Any undefined conditional draw makes its interval undefined; retain its count. Scalar CE and shifts must be finite for all subjects or stop."
+  },
+  "decision": {
+    "competence": "All four cells must pass inherited generic and Liu full/global competence for joint functional interpretation; preserve numerical outputs if competence fails, no rescue.",
+    "positive_interaction": "I_tau global_all77 lower95CI>0. Report negative simple error effects separately; if these are not both supported, call this an interaction in organization rather than uniformly reduced error-induced differentiation.",
+    "prediction_compensation": "Generic global I_CE upper95CI<0; report full CE separately and absolute CE in all cells.",
+    "individual_attenuation": "Global S_C-S_A upper95CI<0.",
+    "joint": "Competent four cells AND positive global I_tau AND negative generic-global I_CE AND negative paired order shift. This is output-level compensation under one fixed perturbation, not a gate, latent denoising circuit or human training-history identification.",
+    "opposite_or_uncertain": "Retain negative interactions, baseline shifts, coexistence and inconclusive intervals separately. A crossing interval is not equivalence. Report decisions by seed; no success-rate population claim, no seed filtering.",
+    "stop": "Integrity/parity failure stops collection. Core behavioral failure does not stop completion of other registered seeds. No new models, noise levels, gates, storage restrictions, training checkpoints, history panels, comparator conditions or transport."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.observation_crossover <freeze|evaluate|report>",
+    "freeze": "Commit protocol and qualified CPU estimators/source first. freeze records committed source and inherited archive identities, replays A0 seed2432 on the original generic-then-Liu order for exact margin/raw parity, then writes the qualification and execution lock. Commit lock before collecting any C0 output.",
+    "runtime": "Unchanged bounded formal CUDA and write_cost execution profile; continuous finite_state rollout states=None. Use existing generic/primary Liu collectors, including original full/global outputs and interventions, without changing frozen parent code.",
+    "validation": "Independent small-array enumeration for Kendall interactions, duplicate-ID bootstrap and within-subject inversions; identity/zero-noise observation checks; affected Ruff, types, tests and registry/docs. GPU A0 numerical replay before C0. At closure check raw-to-summary identities, paired contrasts and hash-complete archives."
+  },
+  "outputs": [
+    "benchmarks/protocol.json",
+    "benchmarks/execution_lock.json",
+    "qualification run record",
+    "three C0 generic/Liu raw and summary records",
+    "four-cell estimates and per-subject shift arrays",
+    "results/result.json",
+    "reports/interpretation.md"
+  ],
+  "claim_boundary": [
+    "Three existing paired network seeds, three cells previously exposed; prospective missing-cell diagnostic, not independent confirmation.",
+    "Global and full outputs distinguished; no local-path necessity claim.",
+    "sigma and p/z inherited computational assumptions; no new human data/calibration.",
+    "Parent results and failed history mechanism remain unchanged; no main-model promotion."
+  ]
+}
