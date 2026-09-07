@@ -166,6 +166,9 @@ promotion presumed.
 - `supporting_artifact` —
   [studies/revision_learning/records/artifacts/training/2713-plastic/train.jsonl](records/artifacts/training/2713-plastic/train.jsonl)
   (`sha256:6e6b866b8931`)
+- `artifact_lock` —
+  [studies/revision_learning/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:d1a0ff0740cc`)
 - `registered_contract` —
   [studies/revision_learning/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:9ee40c99300d`)
