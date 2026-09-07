@@ -39,6 +39,9 @@ promotion. Acute joint deletion may be outside the trained distribution.
 - `validation_result` —
   [studies/weak_evidence_contribution/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:171225d5365d`)
+- `execution_lock` —
+  [studies/weak_evidence_contribution/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:d17a350836e9`)
 
 ## Provenance rule
 
