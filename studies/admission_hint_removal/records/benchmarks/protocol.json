@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "study_id": "admission_hint_removal",
+  "tier": "development on exposed matched references",
+  "question": "Can the single-memory RNN dispense with the explicit admission hint zq while retaining exactly the same realized q, relational competence, organized individuality and observation-training compensation?",
+  "parent_witness_commit": "3d17d7137616a87c0f1d374747fc58525bd17736",
+  "parents": {
+    "protocol": {
+      "path": "studies/local_memory_removal/records/benchmarks/protocol.json",
+      "sha256": "bda917f0c28be7e9bf6c0a3be321d81399d838fd425a5feed236d924ea249ffd",
+      "bytes": 9440
+    },
+    "source": {
+      "path": "studies/local_memory_removal/records/benchmarks/source_lock.json",
+      "sha256": "005054a139dab9178c2db0a285ae45bd57241abdb22ce31ad6870eadd3d3e332",
+      "bytes": 177338
+    },
+    "models": {
+      "path": "studies/local_memory_removal/records/benchmarks/model_lock.json",
+      "sha256": "6544f425c9e97aecb94cda43a035362628fc7410ce9c8342c26fd5e794eece59",
+      "bytes": 36612
+    },
+    "result": {
+      "path": "studies/local_memory_removal/records/results/result.json",
+      "sha256": "3fbf3d156affeef2697f471b2d81d4e9dac573d86dafd0c430f2092b966d6b1b",
+      "bytes": 3858845
+    }
+  },
+  "design": {
+    "seeds": [
+      2531,
+      2532,
+      2533
+    ],
+    "panels": [
+      1,
+      2,
+      3
+    ],
+    "cells": {
+      "A0": {
+        "training": "clean",
+        "observation": "clean"
+      },
+      "Ae": {
+        "training": "clean",
+        "observation": "noisy"
+      },
+      "C0": {
+        "training": "noisy",
+        "observation": "clean"
+      },
+      "Ce": {
+        "training": "noisy",
+        "observation": "noisy"
+      }
+    },
+    "training_conditions": [
+      "clean",
+      "noisy"
+    ],
+    "networks": 6,
+    "evaluation_units": 36,
+    "generic_episodes_per_panel": 256,
+    "liu_subjects_per_panel": 77,
+    "crossing": "All three training pairs crossed with all three panels. Only three independent training pairs. Identical initialization and base task stream within A/C pair. Identical physical input, observation draw, choice RNG and interventions across four cells within panel."
+  },
+  "statistics": {
+    "samples": 2000,
+    "interval": 0.95,
+    "seed_offset": 126000,
+    "unit": "Joint resampling of the original participant IDs across four cells within each network; generic episodes and Liu participants separate. Never treat participant pairs as independent or pool networks. Duplicate sampled IDs are separate bootstrap observations as in the parent contract. Conditional masks applied after resampling, no common-mask restriction. Any undefined conditional draw makes its interval undefined; retain its count. Scalar CE and shifts must be finite for all subjects or stop."
+  },
+  "estimands": {
+    "contrasts": {
+      "baseline": {
+        "C0": 1,
+        "A0": -1
+      },
+      "error_A": {
+        "Ae": 1,
+        "A0": -1
+      },
+      "error_C": {
+        "Ce": 1,
+        "C0": -1
+      },
+      "interaction": {
+        "Ce": 1,
+        "C0": -1,
+        "Ae": -1,
+        "A0": 1
+      },
+      "training_under_error": {
+        "Ce": 1,
+        "Ae": -1
+      }
+    },
+    "tau": "For each contrast, recompute the weighted pairwise Kendall tau of each cell in shared-ID bootstrap samples. Primary global_all77; also full_all77, full_conditional and global_conditional. Report each cell and simple effects, not interaction alone.",
+    "CE": "Per-episode CE=mean(logaddexp(0,-margin*true_sign/T)). Generic T=1, full/global separately; global CE interaction aligns with primary structure and full CE retains task-output context. Liu T=0.25, full/global separately as secondary; never pool tasks or temperatures. All four simple/cross contrasts for each endpoint.",
+    "order_shift": "Global S_R=mean_i[(1-KendallTau(order_R0_i,order_Re_i))/2], equivalently fraction of the 28 item pairs reversed within each subject. Report S_A,S_C and participant-paired S_C-S_A using replay0, deterministic internal orders, unchanged tie ordering. No sampled choices enter this endpoint.",
+    "absolute_behavior": "Retain inherited full/global competence and five core flags for each cell, plus P_off/evidence-shuffle evidence binding. Full-policy historical profiles remain descriptive; no promotion or human-distribution matching."
+  },
+  "change": "After unchanged clean/noisy encoding, set support channel34 to zero throughout training and evaluation; leave every other array and realized q exactly unchanged. Keep 38-dimensional input and identical backbone initialization, local=None, original 1500x32 training, all optimization, temperatures and noise. Retain p/z observation generation. No new gate or q,q control.",
+  "references": "Reuse six hint-present single-memory models and36 cells, with the original15 input archives by reference. Train six matched no-hint models with seeds2531/2532/2533;36 new units on the same three panels. Exposed development, not independent confirmation.",
+  "noninferiority": {
+    "margin": 0.02,
+    "orientation": "no hint minus hint-present single-memory full-policy mean correct probability",
+    "groups": [
+      "generic_learned",
+      "generic_nonlearned",
+      "liu_learned",
+      "liu_nonlearned",
+      "liu_omitted"
+    ],
+    "primary_cell": "Ce",
+    "secondary_cells": [
+      "A0",
+      "Ae",
+      "C0"
+    ],
+    "statistics": "Paired complete-case participant bootstrap within panel and endpoint. Missing omitted subjects are excluded before resampling in both models, with counts/IDs reported. Equal average of three panel differences within network, independent panel resampling; no network pooling. Lower95>=-.02 supports practical noninferiority; upper95<-.02 supports material inferiority; otherwise unresolved. CE is reported separately, no new CE tolerance."
+  },
+  "decision": {
+    "competence": "Retain unchanged full/global generic and Liu learned/nonlearned lower95>.5 gates per cell. Invalid units do not support structure claims. Complete all models and all36 units unless integrity/nonfinite failure.",
+    "core": "Retain all five flags and historical nine descriptive rows, with conditional sampled diversity distinct from primary global all77 tau. Report all cells, failures and per-network core counts; do not require exact parent pass counts.",
+    "compensation": "Repeat the parent four-cell estimates and equal-panel summaries for no-hint models. Report candidate-minus-hint-present differences of all equal-panel contrast effects with shared panel draw IDs. Main I_tau>0,I_CE<0,S_C-S_A<0 with both noise tau effects negative; do not require effect magnitudes equal to reference.",
+    "preference": "Development hint-removal support requires all six trained models competent in their tested cells, all three Ce equal-panel five-endpoint noninferiority comparisons supported, core Ae and Ce each present on at least one panel in each of three networks, and all three network equal-panel main compensation intervals oriented as expected with negative noise simple effects. Evidence binding must be retained in every Ae/Ce cell. This bounded sufficiency rule is not a population success-rate claim; retain exact heterogeneous core counts and uncertain intervals.",
+    "otherwise": "Decompose competence, core, performance and compensation outcomes without seed, threshold, scale or checkpoint repair. Broad intervals are unresolved. Failure under this recipe does not establish universal need for z information: input drive and optimization also change. Do not run q,q or new mechanisms in this study."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.admission_hint_removal <stage>",
+    "stages": [
+      "qualify",
+      "freeze",
+      "train",
+      "lock-models",
+      "evaluate",
+      "report"
+    ],
+    "freezes": "Commit qualified source and protocol, then lock source, physical inputs and both archived references before training. Complete and commit all six final model locks before any new evaluation. Compare all9000 pre-mask observed fingerprints and initial backbone hashes against immediate references. Evaluate36 units, summarize once, conditionally validate compact export, then archive results.",
+    "qualification": "Check removal after clean/noisy encoding, exact preservation of q and all other arrays, no metadata path into the network; CPU and GPU zero-hint forward/fast-state/gradient/Adam parity against independent eager rollout. Qualify unchanged hint-present collector against archived single A0/2531/panel1 before new outcomes. Fixed non-Liu compact-column numerical mapping check.",
+    "validation": "Changed-file Ruff/format/type checks, affected numerical/statistical tests, architecture and documentation/registry checks. Focused independent checks of masks, paired probabilities and registered decision from saved summaries. No new estimands or repeated scientific evaluation beyond the frozen compact equivalence check."
+  },
+  "outputs": [
+    "protocol",
+    "qualification",
+    "source_lock",
+    "model_lock",
+    "canonical result with all four cells, paired no-hint minus single effects and secondary cumulative Ce probability costs",
+    "interpretation",
+    "six new weights/logs,36 raw/behavior/results,comparison resampling draws and manifests; references retain ownership",
+    "conditional compact six checkpoints and equivalence record; no compact export if deletion gate fails"
+  ],
+  "claim_boundary": [
+    "Three paired training instances, three already-exposed panels; no pooled networks or independent confirmation.",
+    "Only explicit zq hint is removed; p,z and fixed sigma still generate q. Single-memory backbone equations and single-stage training remain.",
+    "Success supports dispensing with the hint under this recipe, not absence of local information, universal minimality or human mechanism.",
+    "Failure cannot uniquely attribute loss to missing z information rather than input parameterization/optimization. No q,q rescue or new mechanism experiments."
+  ],
+  "anchor": {
+    "path": "studies/observation_replication/records/results/result.json",
+    "sha256": "e1ab0133eeb9ebaf60be721019ddcf355504bf9b72aa3cff376ae5497ea63df9",
+    "bytes": 3288324
+  },
+  "cumulative_cost": "Secondary descriptive Ce no-hint minus original dual probability for the same five groups, paired participant bootstrap and equal-panel means separately per network. Report intervals directly; do not infer cumulative noninferiority from successive deletion gates or add a new selection threshold.",
+  "compact_export": {
+    "trigger": "Only if all three paired instances support hint removal.",
+    "mapping": "Remove input channel34 and corresponding i2h weight column from trained weights; preserve all other learned parameters, bias and state dimensions. No new training or random reinitialization. Explicit input mapping: original0..33->0..33,35->34,36->35,37(q)->36. This is a study-specific 37-channel interface, not the historical 37-channel ABI.",
+    "validation": "All six models, each original/noisy observation and all three panels: compare padded versus compact intact generic and Liu logits, final P, first P and write costs on the identical encoded sequences. Inherited atol1e-5 rtol1e-4, exact choice argmax and internal complete-graph order. Any mismatch stops equivalence claim; do not change tolerance. Export six mapped checkpoints and one validation record.",
+    "boundary": "Numerical implementation equivalence only; no additional scientific condition, behavioral replication or independent confirmation."
+  }
+}

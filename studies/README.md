@@ -246,6 +246,10 @@ fail to close the dynamics.
     intact competence/binding, Ae9/9 and Ce6/9 core with identical panelwise pattern to
     dual, and retained compensation. Small direct-experience losses remain; no interface
     simplification or independent confirmation.
+- [Explicit admission-hint removal in a single-memory RNN](admission_hint_removal/README.md) — `unresolved`
+  - **Finding:** CPU and GPU qualification passed:105 archived hint-present arrays
+    exact,29 no-hint numerical checks including compact mapping. Prospective six-model
+    comparison, no new scientific outcomes evaluated.
 
 ## Minimal explanatory models
 
