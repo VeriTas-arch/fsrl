@@ -1,0 +1,87 @@
+{
+  "bytes": 2516873,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "compact-equivalence",
+  "file_count": 7,
+  "files": [
+    {
+      "bytes": 358719,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "2531-clean.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "49f34e4bc344433cdc0fe4a4cb11226bf4a94bd88030e212e5cb66f4828046f0"
+    },
+    {
+      "bytes": 358719,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "2531-noisy.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "1b3bbf18754f5cc69bce2e696006c8f314fc81a671f7e1e842bcb1d810bd09dc"
+    },
+    {
+      "bytes": 358719,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "2532-clean.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "89effc315d683363d656223a9208310a27441f91ce10d793d023ea85207d5cc1"
+    },
+    {
+      "bytes": 358719,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "2532-noisy.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "7f7625ad8a143ddb1de43d87b7197140c964139b8d7c12687141c1c75378cca6"
+    },
+    {
+      "bytes": 358719,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "2533-clean.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "7bb5646c8c684a27156004ed902537b56cbf8223ef5a7d6f4d53b6b65a139747"
+    },
+    {
+      "bytes": 358719,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "2533-noisy.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "99ab35af7b80648f8629fd4e66fb57bb431fdfde68dc4c68f000a42dc006084a"
+    },
+    {
+      "bytes": 364559,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "656f1b8747ecde1f1187e03fd922a4d766b6efef6a00fa5e547a6cf80d8b0694"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "model_lock": {
+      "bytes": 36642,
+      "path": "studies/duplicate_observation/records/benchmarks/model_lock.json",
+      "sha256": "b5e2f65eeb9bad2d8e63b340d022ea257d61eb47d6df0454d37ed5b25db35c3c"
+    }
+  },
+  "resolved_config": {
+    "boundary": "Floating-point inference equivalence only. Two trained parameter columns and Adam/clipping need not equal single-column training.",
+    "mapping": "Add trained input weight column34 into column37, then delete column34 in weights and inputs. Preserve bias, all other parameters and state dimensions. Original0..33->0..33,35->34,36->35,37(q)->36. Assert columns34/37 identical before mapping; both query columns zero. Study-specific37-channel ABI, not historical37. No optimizer-state mapping or second training.",
+    "trigger": "Only if all three paired instances pass the unchanged primary replacement rule against H. Direct improvement against Z is reported separately, not an added conjunction.",
+    "validation": "All six models, both observation conditions, three panels and five input archives: compare intact generic/Liu logits, final P, first P, costs and writes; Liu also P_off, evidence-shuffle and each relation-removal control. Inherited atol1e-5 rtol1e-4, exact argmax and internal complete-graph order for intact and support interventions; exact argmax for P_off. Stop on mismatch, no tolerance adjustment. Export only as a numerically qualified representation."
+  },
+  "schema_version": 1,
+  "workflow_id": "duplicate_observation_v1"
+}

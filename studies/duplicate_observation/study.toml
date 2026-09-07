@@ -3,11 +3,1640 @@ id = "duplicate_observation"
 title = "Duplicate-observation parameterization in a single-memory RNN"
 chapter = "algorithmic_compression"
 order = 1110
-status = "unresolved"
+status = "supporting"
 review_state = "indexed"
 question = "Can duplicating the SAME realized q into both evidence columns recover performance without explicit z information, while preserving single-memory RNN competence, individualized structure and observation-training compensation?"
-finding = "Prospective matched duplicate-observation comparison; new outcomes not evaluated."
+finding = "All three matched instances support duplicate-observation replacement: Ce15/15 probability endpoints noninferior to hint-present H, all six generic endpoints improve over zero-hint Z, Ae9/9 and Ce8/9 core, compensation retained. Six trained weights map numerically to a single-observation37-channel interface. Exposed development; small Liu and compensation costs remain."
 boundary = "Three matched A/C instances and exposed panels; same q copied into both columns, no explicit zq hint or local memory. No human confirmation or promotion."
+
+[[records]]
+path = "records/artifacts/compact/2531-clean.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/2531-clean.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "49f34e4bc344433cdc0fe4a4cb11226bf4a94bd88030e212e5cb66f4828046f0"
+bytes = 358719
+source_ref = "sha256:49f34e4bc344433cdc0fe4a4cb11226bf4a94bd88030e212e5cb66f4828046f0"
+
+[[records]]
+path = "records/artifacts/compact/2531-noisy.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/2531-noisy.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "1b3bbf18754f5cc69bce2e696006c8f314fc81a671f7e1e842bcb1d810bd09dc"
+bytes = 358719
+source_ref = "sha256:1b3bbf18754f5cc69bce2e696006c8f314fc81a671f7e1e842bcb1d810bd09dc"
+
+[[records]]
+path = "records/artifacts/compact/2532-clean.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/2532-clean.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "89effc315d683363d656223a9208310a27441f91ce10d793d023ea85207d5cc1"
+bytes = 358719
+source_ref = "sha256:89effc315d683363d656223a9208310a27441f91ce10d793d023ea85207d5cc1"
+
+[[records]]
+path = "records/artifacts/compact/2532-noisy.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/2532-noisy.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "7f7625ad8a143ddb1de43d87b7197140c964139b8d7c12687141c1c75378cca6"
+bytes = 358719
+source_ref = "sha256:7f7625ad8a143ddb1de43d87b7197140c964139b8d7c12687141c1c75378cca6"
+
+[[records]]
+path = "records/artifacts/compact/2533-clean.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/2533-clean.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "7bb5646c8c684a27156004ed902537b56cbf8223ef5a7d6f4d53b6b65a139747"
+bytes = 358719
+source_ref = "sha256:7bb5646c8c684a27156004ed902537b56cbf8223ef5a7d6f4d53b6b65a139747"
+
+[[records]]
+path = "records/artifacts/compact/2533-noisy.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/2533-noisy.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "99ab35af7b80648f8629fd4e66fb57bb431fdfde68dc4c68f000a42dc006084a"
+bytes = 358719
+source_ref = "sha256:99ab35af7b80648f8629fd4e66fb57bb431fdfde68dc4c68f000a42dc006084a"
+
+[[records]]
+path = "records/artifacts/compact/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "656f1b8747ecde1f1187e03fd922a4d766b6efef6a00fa5e547a6cf80d8b0694"
+bytes = 364559
+source_ref = "sha256:656f1b8747ecde1f1187e03fd922a4d766b6efef6a00fa5e547a6cf80d8b0694"
+
+[[records]]
+path = "records/artifacts/compact/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/compact/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e3c501f8a8a9ab701438bec8a5e24118b2f3b45df81e4514b1f19016f6d6d64d"
+bytes = 3777
+source_ref = "sha256:e3c501f8a8a9ab701438bec8a5e24118b2f3b45df81e4514b1f19016f6d6d64d"
+
+[[records]]
+path = "records/artifacts/comparison/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/comparison/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5c2b2a3405f97134edefb0e316244f3dec4cf9d3f90b4c558fa70308f08c0880"
+bytes = 3604512
+source_ref = "sha256:5c2b2a3405f97134edefb0e316244f3dec4cf9d3f90b4c558fa70308f08c0880"
+
+[[records]]
+path = "records/artifacts/comparison/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/comparison/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "38d92bb6d0587bfd8fa9d9efcfb610237c11d8dff3047e185947f893e0c25120"
+bytes = 4162850
+source_ref = "sha256:38d92bb6d0587bfd8fa9d9efcfb610237c11d8dff3047e185947f893e0c25120"
+
+[[records]]
+path = "records/artifacts/comparison/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/comparison/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6a61cb2979ca78e05b99441d8afac0818b17e447761667152b559b162fd7b26e"
+bytes = 1726
+source_ref = "sha256:6a61cb2979ca78e05b99441d8afac0818b17e447761667152b559b162fd7b26e"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9b17b0fcd6fc3cb79e92a9669fba9d8819d8a9980613e4b9840ea76502910435"
+bytes = 166391
+source_ref = "sha256:9b17b0fcd6fc3cb79e92a9669fba9d8819d8a9980613e4b9840ea76502910435"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "16c37f70a105d32a60f4d734ddd3dc8b82814d865e0a72de5bde374863b96f0e"
+bytes = 535442
+source_ref = "sha256:16c37f70a105d32a60f4d734ddd3dc8b82814d865e0a72de5bde374863b96f0e"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "39fc6aa375bebd0b55959374adabcb0325d8737e5676ffae618ff8a613cbdcba"
+bytes = 51225
+source_ref = "sha256:39fc6aa375bebd0b55959374adabcb0325d8737e5676ffae618ff8a613cbdcba"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ca9ec8e3c91d8d835ddfc0e1afd1ccf62dfa9a1d7789752829ccb217e5469cc3"
+bytes = 3403
+source_ref = "sha256:ca9ec8e3c91d8d835ddfc0e1afd1ccf62dfa9a1d7789752829ccb217e5469cc3"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9fa59e0cd99661e4f9881452f7780131873be21cb142be18e9ac917633703af4"
+bytes = 168569
+source_ref = "sha256:9fa59e0cd99661e4f9881452f7780131873be21cb142be18e9ac917633703af4"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d5bcb415330e5ed32311742468c309cde42f44636bef11d98b3c83ab0a11d516"
+bytes = 538295
+source_ref = "sha256:d5bcb415330e5ed32311742468c309cde42f44636bef11d98b3c83ab0a11d516"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "96a97d41bd0acbd27736af18bee6474595432e6444005d9dcb46171f3f66469e"
+bytes = 51464
+source_ref = "sha256:96a97d41bd0acbd27736af18bee6474595432e6444005d9dcb46171f3f66469e"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6f02df7102f86322364eb616a519f02086fdfa695fd052890a488609e4fdbbc0"
+bytes = 3403
+source_ref = "sha256:6f02df7102f86322364eb616a519f02086fdfa695fd052890a488609e4fdbbc0"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "63a512d4775ba1c18b0f5277b8e7a00cc70ce1f3f1cb64c5b26bb856a5edd08b"
+bytes = 166779
+source_ref = "sha256:63a512d4775ba1c18b0f5277b8e7a00cc70ce1f3f1cb64c5b26bb856a5edd08b"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "05a9e0472dac3eb18ceefeb41a0c06b0063a71c1df0e03bfcb211a0fef50ed32"
+bytes = 538982
+source_ref = "sha256:05a9e0472dac3eb18ceefeb41a0c06b0063a71c1df0e03bfcb211a0fef50ed32"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "40ee766a060033698f720a4a704575749b3993d8a56dd1952adc58ca501b4d15"
+bytes = 51123
+source_ref = "sha256:40ee766a060033698f720a4a704575749b3993d8a56dd1952adc58ca501b4d15"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3aea3940ad48a8a4442457bd15ec0a8a695ddc5370f18a9e7c352a7cd963168e"
+bytes = 3403
+source_ref = "sha256:3aea3940ad48a8a4442457bd15ec0a8a695ddc5370f18a9e7c352a7cd963168e"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "12c4d948ae3b2c90fb201ba16719cb8e237f81dc8f3fadb0b09ad7cb8a47f4e5"
+bytes = 168385
+source_ref = "sha256:12c4d948ae3b2c90fb201ba16719cb8e237f81dc8f3fadb0b09ad7cb8a47f4e5"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e8880da18ddf7d5d5aa0192e178a4f7a6872d890a3ecd5be5ae9e3cef15422f8"
+bytes = 541013
+source_ref = "sha256:e8880da18ddf7d5d5aa0192e178a4f7a6872d890a3ecd5be5ae9e3cef15422f8"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "b0e93900e07d0016ec44f9fcd7eb2ec8a27525d57d8b8eb43ebddcf7eb07c185"
+bytes = 51347
+source_ref = "sha256:b0e93900e07d0016ec44f9fcd7eb2ec8a27525d57d8b8eb43ebddcf7eb07c185"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/1/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/1/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0397ad37b2d1424fbe3ea4c5a1faf0e0dadffcff71a2e390af4c8d0356709a0d"
+bytes = 3403
+source_ref = "sha256:0397ad37b2d1424fbe3ea4c5a1faf0e0dadffcff71a2e390af4c8d0356709a0d"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "62b2868dac8bcca52d6185264650475be6af028cb0cfadf5f1e82704632bd043"
+bytes = 165987
+source_ref = "sha256:62b2868dac8bcca52d6185264650475be6af028cb0cfadf5f1e82704632bd043"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d2d9626f2fdd0c03a6481f73bea44539e47f7c60b8868f09f2e255c82d8773ad"
+bytes = 535158
+source_ref = "sha256:d2d9626f2fdd0c03a6481f73bea44539e47f7c60b8868f09f2e255c82d8773ad"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "efeffa38e9c9db9993391db6d5d7bd8b89778ffde2d3ce87a6b8320dfde1c43d"
+bytes = 49351
+source_ref = "sha256:efeffa38e9c9db9993391db6d5d7bd8b89778ffde2d3ce87a6b8320dfde1c43d"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7928b2013ca7fcc10a0ea4110ab4737ac5b1baa963c118fe8d408c3438c3885c"
+bytes = 3403
+source_ref = "sha256:7928b2013ca7fcc10a0ea4110ab4737ac5b1baa963c118fe8d408c3438c3885c"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d8e3daac5dcba0309170b0e59e574c4e92091be4b7878819e6d35ca9b851f31a"
+bytes = 169497
+source_ref = "sha256:d8e3daac5dcba0309170b0e59e574c4e92091be4b7878819e6d35ca9b851f31a"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "263ab40283237acafa65f3c78763bab3457b1c284700daa5dabc4fbd495e52ef"
+bytes = 537936
+source_ref = "sha256:263ab40283237acafa65f3c78763bab3457b1c284700daa5dabc4fbd495e52ef"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "a7faeb750ab142c5f91e947d680b40678d0756654034a7e94980e18bc3965122"
+bytes = 49711
+source_ref = "sha256:a7faeb750ab142c5f91e947d680b40678d0756654034a7e94980e18bc3965122"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6b082cd4332f979000caac5e92e1d8b34946c2807fc75a625810a6543804ce6c"
+bytes = 3403
+source_ref = "sha256:6b082cd4332f979000caac5e92e1d8b34946c2807fc75a625810a6543804ce6c"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e8d2459702a8bb2ce9f5e245ec872ab79fc081fa6988f38a27ec8adc7fe2e760"
+bytes = 166327
+source_ref = "sha256:e8d2459702a8bb2ce9f5e245ec872ab79fc081fa6988f38a27ec8adc7fe2e760"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2cca9831facf552efcd261494bd0e5a00a058700b8a555ffd872cf9cb0d255c0"
+bytes = 539085
+source_ref = "sha256:2cca9831facf552efcd261494bd0e5a00a058700b8a555ffd872cf9cb0d255c0"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "bc36f192beefb63a9cb1cd8778f2b79f5a5aa0690ba5bf615bf25c7e1f332cab"
+bytes = 49409
+source_ref = "sha256:bc36f192beefb63a9cb1cd8778f2b79f5a5aa0690ba5bf615bf25c7e1f332cab"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f480f1d50e20583df624d107c08308482461e533d49fa3124db4e1fc9e0438b8"
+bytes = 3403
+source_ref = "sha256:f480f1d50e20583df624d107c08308482461e533d49fa3124db4e1fc9e0438b8"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7215c2daff7d80cc5bf4e150cbe65ad095f8a6abef27b27a20fb1c6da524905c"
+bytes = 168627
+source_ref = "sha256:7215c2daff7d80cc5bf4e150cbe65ad095f8a6abef27b27a20fb1c6da524905c"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2c50bbdd21fd81a8487e3db22d6d9c7622fe876457a3148394502df3a7f7f4c3"
+bytes = 540829
+source_ref = "sha256:2c50bbdd21fd81a8487e3db22d6d9c7622fe876457a3148394502df3a7f7f4c3"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "29ef51fdb60b6983ff86b572e293afbe80d7814edf5c2feac1ba2c1101bfe934"
+bytes = 49567
+source_ref = "sha256:29ef51fdb60b6983ff86b572e293afbe80d7814edf5c2feac1ba2c1101bfe934"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/2/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/2/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d04bf1c5ac6eb96819fcde8bfb170d10388b7dd7a68d55980c2e510a857d1fa6"
+bytes = 3403
+source_ref = "sha256:d04bf1c5ac6eb96819fcde8bfb170d10388b7dd7a68d55980c2e510a857d1fa6"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4c535f367f821f0ca3e4e8226f364d145dead2ecce2358a7ce6ff90333eef951"
+bytes = 166101
+source_ref = "sha256:4c535f367f821f0ca3e4e8226f364d145dead2ecce2358a7ce6ff90333eef951"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e4e6ffadc3d3a04685a83be88a37ba31e587283fe7d019d74f29b8e8ad1a5d87"
+bytes = 535344
+source_ref = "sha256:e4e6ffadc3d3a04685a83be88a37ba31e587283fe7d019d74f29b8e8ad1a5d87"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "4231da6bb26cba99300d6a47113d9ea9e03c915cee1c6b925babbc81360fded1"
+bytes = 51342
+source_ref = "sha256:4231da6bb26cba99300d6a47113d9ea9e03c915cee1c6b925babbc81360fded1"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1f0929344b91494d45717069507c8e9ba155772606ca91c44b9dca72caa0028c"
+bytes = 3403
+source_ref = "sha256:1f0929344b91494d45717069507c8e9ba155772606ca91c44b9dca72caa0028c"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9248be0b8da7d5ecd732aea45a0f93350fdb6037933f2e982e995b6928f38b81"
+bytes = 169293
+source_ref = "sha256:9248be0b8da7d5ecd732aea45a0f93350fdb6037933f2e982e995b6928f38b81"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a6e4523dc1c8415c2cc2b39a0dcb45a44cda4352a1a58efd15963c50b17cd5f4"
+bytes = 538006
+source_ref = "sha256:a6e4523dc1c8415c2cc2b39a0dcb45a44cda4352a1a58efd15963c50b17cd5f4"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "0bcfd6817a7a5f3e92c694030a33f734e0f9dc6ef1a363fd363c3be11c90ae7d"
+bytes = 51410
+source_ref = "sha256:0bcfd6817a7a5f3e92c694030a33f734e0f9dc6ef1a363fd363c3be11c90ae7d"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d71df198ca7f3e585dfa3da715c6cfb4441d4b99f0162e28a83f91485355bfd4"
+bytes = 3403
+source_ref = "sha256:d71df198ca7f3e585dfa3da715c6cfb4441d4b99f0162e28a83f91485355bfd4"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ac37bf681d162f646de80b4de78bd033e33326be85289ff24301f6f252dbb236"
+bytes = 166429
+source_ref = "sha256:ac37bf681d162f646de80b4de78bd033e33326be85289ff24301f6f252dbb236"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5d84a433114513311701347316a5db55cc360acaf3093693c1f0b8ed6f2ed457"
+bytes = 539219
+source_ref = "sha256:5d84a433114513311701347316a5db55cc360acaf3093693c1f0b8ed6f2ed457"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "48ca606e9382efbac9b2e2b604d58af4d669bde1073a855f6c89189d8e106f4c"
+bytes = 51328
+source_ref = "sha256:48ca606e9382efbac9b2e2b604d58af4d669bde1073a855f6c89189d8e106f4c"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "53a4122a8f20cd2d266d15a19f053c3da989dfa0e5e47bc889056dcf3405d951"
+bytes = 3403
+source_ref = "sha256:53a4122a8f20cd2d266d15a19f053c3da989dfa0e5e47bc889056dcf3405d951"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5153edfeab5b51e92d17e59e11a00381991c1672c4ad5706c3b04744322afe40"
+bytes = 168833
+source_ref = "sha256:5153edfeab5b51e92d17e59e11a00381991c1672c4ad5706c3b04744322afe40"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "87db9773e7021ed4cd5583d639a1eca65faa780f9f97d954e64aebb39befdf82"
+bytes = 541008
+source_ref = "sha256:87db9773e7021ed4cd5583d639a1eca65faa780f9f97d954e64aebb39befdf82"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "d726879574e54d104331461ce3a525104710bb527a3a6c2c542a69a940f8f07c"
+bytes = 51347
+source_ref = "sha256:d726879574e54d104331461ce3a525104710bb527a3a6c2c542a69a940f8f07c"
+
+[[records]]
+path = "records/artifacts/evaluation/2531/3/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2531/3/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ae2b6ec4117d1bbb6a762a762cf906963b8f3719db09ca21c487c7a6b885843f"
+bytes = 3403
+source_ref = "sha256:ae2b6ec4117d1bbb6a762a762cf906963b8f3719db09ca21c487c7a6b885843f"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "aff71cf2c1534da9af9bc8e1b0d978cfdd5708e9d0854369fb67113b1cb7a0a6"
+bytes = 165827
+source_ref = "sha256:aff71cf2c1534da9af9bc8e1b0d978cfdd5708e9d0854369fb67113b1cb7a0a6"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4087e9fd604829e19f9640f0d5bdd380686a0867a2364b66c988c80b2f6410ef"
+bytes = 535277
+source_ref = "sha256:4087e9fd604829e19f9640f0d5bdd380686a0867a2364b66c988c80b2f6410ef"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "76017684bbad52960c53869d8a1ae0b7c8ac00a287e407ec11e136266684d419"
+bytes = 51024
+source_ref = "sha256:76017684bbad52960c53869d8a1ae0b7c8ac00a287e407ec11e136266684d419"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "79836cb54202507934452a703b89146d06bf9ddfd407a2d5adda4866e56e9888"
+bytes = 3403
+source_ref = "sha256:79836cb54202507934452a703b89146d06bf9ddfd407a2d5adda4866e56e9888"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "659b210c0b0db2975402240d7a944b80e04cfdbe79cd7227916b640327aabba2"
+bytes = 168703
+source_ref = "sha256:659b210c0b0db2975402240d7a944b80e04cfdbe79cd7227916b640327aabba2"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1bd39f2c1087d708f8e9b6203d251c86b361223b545da759e47cb3dd4ba041e7"
+bytes = 538421
+source_ref = "sha256:1bd39f2c1087d708f8e9b6203d251c86b361223b545da759e47cb3dd4ba041e7"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "b05f1f84469970d1850ace853c913cb90a3f2c92368620a3ca1f9a1b67d9eec5"
+bytes = 51452
+source_ref = "sha256:b05f1f84469970d1850ace853c913cb90a3f2c92368620a3ca1f9a1b67d9eec5"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f62d8d7a6d4cfa94a00e7afa715d9c025ac8cc8be0498d9dd1e084a73602bb76"
+bytes = 3403
+source_ref = "sha256:f62d8d7a6d4cfa94a00e7afa715d9c025ac8cc8be0498d9dd1e084a73602bb76"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5ff08a001bcc88673303c2fcb0f02738d82f98e87ea5156ea7761cae3f93b84b"
+bytes = 166195
+source_ref = "sha256:5ff08a001bcc88673303c2fcb0f02738d82f98e87ea5156ea7761cae3f93b84b"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "24c5f23e6f839d501b511fdf6a9543ad31d2741052c5a95e02bb32e06bb05ba8"
+bytes = 538766
+source_ref = "sha256:24c5f23e6f839d501b511fdf6a9543ad31d2741052c5a95e02bb32e06bb05ba8"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "861611d938581ea185e5e5d2d3aa051f81e90a9be923603691d7ddbb6e2f2f38"
+bytes = 51162
+source_ref = "sha256:861611d938581ea185e5e5d2d3aa051f81e90a9be923603691d7ddbb6e2f2f38"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "01d055351c9e01b43acd4d47f3c8010b2dcf6408f698cfd6a86ff3e61f8c37e3"
+bytes = 3403
+source_ref = "sha256:01d055351c9e01b43acd4d47f3c8010b2dcf6408f698cfd6a86ff3e61f8c37e3"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "331e4a8d5052b17ada1180bf6d4a6c8435dd43b53ec91c1bb623d2ffb57df245"
+bytes = 168783
+source_ref = "sha256:331e4a8d5052b17ada1180bf6d4a6c8435dd43b53ec91c1bb623d2ffb57df245"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "951af67854747eb43197be1530f21042698c00ea8c991fb9f54a887d752fafd9"
+bytes = 541041
+source_ref = "sha256:951af67854747eb43197be1530f21042698c00ea8c991fb9f54a887d752fafd9"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "c00d921970387bc0db56f03a864c2e9db9be92454a4db62ff8073af65d4dae0f"
+bytes = 51369
+source_ref = "sha256:c00d921970387bc0db56f03a864c2e9db9be92454a4db62ff8073af65d4dae0f"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/1/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/1/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ea4110c5249e5756732d88d19e9f02fa1a08b8f77cf00d615fcbac4667188082"
+bytes = 3403
+source_ref = "sha256:ea4110c5249e5756732d88d19e9f02fa1a08b8f77cf00d615fcbac4667188082"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b895fd29b32b3c06ae8ff8012046724a67d0c3273edba680c64e96529dcdc80c"
+bytes = 166121
+source_ref = "sha256:b895fd29b32b3c06ae8ff8012046724a67d0c3273edba680c64e96529dcdc80c"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "df32871cdb96e23e9057598df58c8f20055ae1fd2ccceec8505380b6d04799b8"
+bytes = 535567
+source_ref = "sha256:df32871cdb96e23e9057598df58c8f20055ae1fd2ccceec8505380b6d04799b8"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "bafc98e98e53b4389f020e3d44869659dcc3f8ad8a04ce0ddce349de141fe502"
+bytes = 49413
+source_ref = "sha256:bafc98e98e53b4389f020e3d44869659dcc3f8ad8a04ce0ddce349de141fe502"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9acb0b772568746979ac7e00a476c5d755fff76fcc69280fc83d3a9ebc453f63"
+bytes = 3403
+source_ref = "sha256:9acb0b772568746979ac7e00a476c5d755fff76fcc69280fc83d3a9ebc453f63"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7d795c6454b7ce40161166cd7a332f02f31ff50bce974bb868920a8ccf6eef60"
+bytes = 169265
+source_ref = "sha256:7d795c6454b7ce40161166cd7a332f02f31ff50bce974bb868920a8ccf6eef60"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4bf1e1e764ab104ded17810caa0088e9b44a0cae48ca2e8ade027479a8e9e644"
+bytes = 538688
+source_ref = "sha256:4bf1e1e764ab104ded17810caa0088e9b44a0cae48ca2e8ade027479a8e9e644"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "b11365dfc22011cc07482d31f79c52109bda2915becc253bd123d7bfd68ac9f2"
+bytes = 49692
+source_ref = "sha256:b11365dfc22011cc07482d31f79c52109bda2915becc253bd123d7bfd68ac9f2"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "053e9691f69290de094e5f69f0618b877011719adf627480e8155d399e23c134"
+bytes = 3403
+source_ref = "sha256:053e9691f69290de094e5f69f0618b877011719adf627480e8155d399e23c134"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0adfbba873b156eb1ae40d52ac127c4caaaf267254571a83f4834ffcdb22bb00"
+bytes = 166493
+source_ref = "sha256:0adfbba873b156eb1ae40d52ac127c4caaaf267254571a83f4834ffcdb22bb00"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bc65013eeabe55f9b0414188a3000a5beafa8ba220f749409b17c8d61cdf114b"
+bytes = 539410
+source_ref = "sha256:bc65013eeabe55f9b0414188a3000a5beafa8ba220f749409b17c8d61cdf114b"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "cba52642433b05f6fcb59b8534278839b2ebc2e3b1a5621f34e8eea5df548a48"
+bytes = 49108
+source_ref = "sha256:cba52642433b05f6fcb59b8534278839b2ebc2e3b1a5621f34e8eea5df548a48"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "01cd77c8a028782be7d40e80afac3e636e8b7236f94e6d95650e6c81f817cbd5"
+bytes = 3403
+source_ref = "sha256:01cd77c8a028782be7d40e80afac3e636e8b7236f94e6d95650e6c81f817cbd5"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "476cd171e6da2a581e9fcdfc535dc9f45fefe73f5b03ab43895ed3e917600e43"
+bytes = 168575
+source_ref = "sha256:476cd171e6da2a581e9fcdfc535dc9f45fefe73f5b03ab43895ed3e917600e43"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9ed97783dcfa291be6c996b5be290c6e4f062ff12243f2e82467cac512626467"
+bytes = 541579
+source_ref = "sha256:9ed97783dcfa291be6c996b5be290c6e4f062ff12243f2e82467cac512626467"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "dc70e0ecef6cf0c6c63f3726beac2d3b381121cbae992f377c1327603f05c161"
+bytes = 49513
+source_ref = "sha256:dc70e0ecef6cf0c6c63f3726beac2d3b381121cbae992f377c1327603f05c161"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/2/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/2/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "473d1ef012f5e7093735ebe149f13c8dfa1d858f65c07fc480f11c1ac9119bae"
+bytes = 3403
+source_ref = "sha256:473d1ef012f5e7093735ebe149f13c8dfa1d858f65c07fc480f11c1ac9119bae"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "74f4f6838256a6473e02f60d221b50921f123777033e69721a7221fd0c60e614"
+bytes = 166733
+source_ref = "sha256:74f4f6838256a6473e02f60d221b50921f123777033e69721a7221fd0c60e614"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7bbf8e6bd0573d08f8a8c68dba3f9492683f95510f6f66983a5830f951e7bcf0"
+bytes = 535912
+source_ref = "sha256:7bbf8e6bd0573d08f8a8c68dba3f9492683f95510f6f66983a5830f951e7bcf0"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "784ab6d5f5affee84493caf9ae7d23310891c1b351624437782fd73b2e6768d5"
+bytes = 51367
+source_ref = "sha256:784ab6d5f5affee84493caf9ae7d23310891c1b351624437782fd73b2e6768d5"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "00f92eaca12ec4fee3a8a9a14d2f065219b130497ee7924ed7f254122e1a8d57"
+bytes = 3403
+source_ref = "sha256:00f92eaca12ec4fee3a8a9a14d2f065219b130497ee7924ed7f254122e1a8d57"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "226a78e8f70087b02b925f490b0c6d1545b7cce5623ded2fa845ffa3ce0aff45"
+bytes = 169511
+source_ref = "sha256:226a78e8f70087b02b925f490b0c6d1545b7cce5623ded2fa845ffa3ce0aff45"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d2103f516bac9a5c5fcfd26cabbcb99642ffb522ec552e4d01f5f1235cd24687"
+bytes = 538802
+source_ref = "sha256:d2103f516bac9a5c5fcfd26cabbcb99642ffb522ec552e4d01f5f1235cd24687"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "65217cc3b54306980dcb702c0ef4a36585833b12c88fb57c268f5bc0ce2e3def"
+bytes = 51399
+source_ref = "sha256:65217cc3b54306980dcb702c0ef4a36585833b12c88fb57c268f5bc0ce2e3def"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eeca38a1c541729d82e71fb5b41d38c6b134ca23dac0b98336f15de558b30f99"
+bytes = 3403
+source_ref = "sha256:eeca38a1c541729d82e71fb5b41d38c6b134ca23dac0b98336f15de558b30f99"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4dcef0dae9b4521d3056a903be4565555c0c3a68f664aaf5db40679fb4969ffe"
+bytes = 166571
+source_ref = "sha256:4dcef0dae9b4521d3056a903be4565555c0c3a68f664aaf5db40679fb4969ffe"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e1c0f5210ce630c7cdb5e633aa9bf05cab64669de2b8dcd01d82a812eedc3681"
+bytes = 539456
+source_ref = "sha256:e1c0f5210ce630c7cdb5e633aa9bf05cab64669de2b8dcd01d82a812eedc3681"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "ae65d7cdfbcd55b4bad5d8caa052fbf2c838a6586eca48f236e1cb63f0935738"
+bytes = 51182
+source_ref = "sha256:ae65d7cdfbcd55b4bad5d8caa052fbf2c838a6586eca48f236e1cb63f0935738"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1e05fe48142938d6055a4a4663b8fd168cc429fdf5ce2e39caf6f6217c88cc01"
+bytes = 3403
+source_ref = "sha256:1e05fe48142938d6055a4a4663b8fd168cc429fdf5ce2e39caf6f6217c88cc01"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1789e3e6d984bcc757842b5ad2cad552f7b90466a86f06ea990bf258e95c61a5"
+bytes = 168955
+source_ref = "sha256:1789e3e6d984bcc757842b5ad2cad552f7b90466a86f06ea990bf258e95c61a5"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9c1becf3a80b8cdd9580827ae5a1e4c532e67a53a6a647edd5aabcdda7a79f72"
+bytes = 541398
+source_ref = "sha256:9c1becf3a80b8cdd9580827ae5a1e4c532e67a53a6a647edd5aabcdda7a79f72"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "f2e71fa88dc8104b52ecb95303742fb6d9b1de5beee7dd4d9f0302b684d96e35"
+bytes = 51320
+source_ref = "sha256:f2e71fa88dc8104b52ecb95303742fb6d9b1de5beee7dd4d9f0302b684d96e35"
+
+[[records]]
+path = "records/artifacts/evaluation/2532/3/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2532/3/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0a488472010a7b207681d17da5d7ffd20984487d6d0bdfc39e76f168654e63fa"
+bytes = 3403
+source_ref = "sha256:0a488472010a7b207681d17da5d7ffd20984487d6d0bdfc39e76f168654e63fa"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2881468f3aa526a114dc9a14fa3618009d0250d719edf8d47ee60ebe7d4624f7"
+bytes = 164773
+source_ref = "sha256:2881468f3aa526a114dc9a14fa3618009d0250d719edf8d47ee60ebe7d4624f7"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2f70fb1b581d2398051fe2687392c1915a42523a3bcae5dedd47f20d8ee98bde"
+bytes = 532181
+source_ref = "sha256:2f70fb1b581d2398051fe2687392c1915a42523a3bcae5dedd47f20d8ee98bde"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "2e903026258357289b4ba2a6f18b29fc3624f01022deec9aa2265fcea5b17113"
+bytes = 51252
+source_ref = "sha256:2e903026258357289b4ba2a6f18b29fc3624f01022deec9aa2265fcea5b17113"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "04b55b945e29efa94291b7eceecef091b7e5ff7f05b6b6574639f228770076d0"
+bytes = 3403
+source_ref = "sha256:04b55b945e29efa94291b7eceecef091b7e5ff7f05b6b6574639f228770076d0"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e90c824ebc0a6d005f4920c8b50b0de33645cda42214cd9caac197136769ab2d"
+bytes = 168793
+source_ref = "sha256:e90c824ebc0a6d005f4920c8b50b0de33645cda42214cd9caac197136769ab2d"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "277c4de966599fea7eea2d269b8e4837eebb79f0960b08a8e8ff0ca21c7cf88e"
+bytes = 536623
+source_ref = "sha256:277c4de966599fea7eea2d269b8e4837eebb79f0960b08a8e8ff0ca21c7cf88e"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "c8042c4e028ea92cc3ff86de1160ddbf9fffcf7d812d82ceef9f432b914544a6"
+bytes = 51430
+source_ref = "sha256:c8042c4e028ea92cc3ff86de1160ddbf9fffcf7d812d82ceef9f432b914544a6"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a4b8a29a0ca723704568364fd30c486cb8245f0e40d5a224e666f224d2e23ddb"
+bytes = 3403
+source_ref = "sha256:a4b8a29a0ca723704568364fd30c486cb8245f0e40d5a224e666f224d2e23ddb"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eb40903f61ee4f65462681ec2808a3328e8eebdeea71fbd1880177defc151798"
+bytes = 165981
+source_ref = "sha256:eb40903f61ee4f65462681ec2808a3328e8eebdeea71fbd1880177defc151798"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5341fbfb13a5f15ac31ffd89833973c04d9d90a7f0816b88ac4b1e043496c341"
+bytes = 538132
+source_ref = "sha256:5341fbfb13a5f15ac31ffd89833973c04d9d90a7f0816b88ac4b1e043496c341"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "39f82cb5f61cff5bacce5716b109e24507aa758a3110421f4b4217faa4d0ca63"
+bytes = 50991
+source_ref = "sha256:39f82cb5f61cff5bacce5716b109e24507aa758a3110421f4b4217faa4d0ca63"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cf3cd72e68d6cd2fc6c4fc4a9dd558014c9c38b15e55bfe6d97c2291ab624bd7"
+bytes = 3403
+source_ref = "sha256:cf3cd72e68d6cd2fc6c4fc4a9dd558014c9c38b15e55bfe6d97c2291ab624bd7"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0d7979a8f62fca70b3b9f512ce4f686fb631d4ec4b573dde98e8827dce421d71"
+bytes = 167665
+source_ref = "sha256:0d7979a8f62fca70b3b9f512ce4f686fb631d4ec4b573dde98e8827dce421d71"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7c817457da4aa8c1480a11defde9e11795b7061f6c65aaeaacd9d2a09efa76d4"
+bytes = 540664
+source_ref = "sha256:7c817457da4aa8c1480a11defde9e11795b7061f6c65aaeaacd9d2a09efa76d4"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "fd66153fc33b0c01a1a598d6ec3ef2e20d53894826d6067c99cd52d1e01e55bc"
+bytes = 51370
+source_ref = "sha256:fd66153fc33b0c01a1a598d6ec3ef2e20d53894826d6067c99cd52d1e01e55bc"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/1/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/1/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c5f59913ec954ad8e4cce908f444bc0f07c18cf76de0604cf5e7b695f034472b"
+bytes = 3403
+source_ref = "sha256:c5f59913ec954ad8e4cce908f444bc0f07c18cf76de0604cf5e7b695f034472b"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b09aa15e0661391133b5b873c8a099eff907ecb45658ff466d0339e7416d6376"
+bytes = 164537
+source_ref = "sha256:b09aa15e0661391133b5b873c8a099eff907ecb45658ff466d0339e7416d6376"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "904a0d1b6fdc100de1dae0dc6789fb4a1f2610017c2264cbcfe2abc1b06cc4ec"
+bytes = 532703
+source_ref = "sha256:904a0d1b6fdc100de1dae0dc6789fb4a1f2610017c2264cbcfe2abc1b06cc4ec"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "4f29384781579eb5157a859ac29136bb1b703e3653b2dbbfc86ca5158268a52d"
+bytes = 49275
+source_ref = "sha256:4f29384781579eb5157a859ac29136bb1b703e3653b2dbbfc86ca5158268a52d"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c9d6cc6b9520ee9002f443b4f963d4f13d919630ebab6a0872e4489da85fb538"
+bytes = 3403
+source_ref = "sha256:c9d6cc6b9520ee9002f443b4f963d4f13d919630ebab6a0872e4489da85fb538"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ace97b8725de8fd46a38ac593d15e76b2ce1ed136843ea2ed3a1433bf8b88d0e"
+bytes = 169011
+source_ref = "sha256:ace97b8725de8fd46a38ac593d15e76b2ce1ed136843ea2ed3a1433bf8b88d0e"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3401af26ff2bf5fddbb78ee86ac2cb156141b13f37ce103a3b9fd87373e8471f"
+bytes = 536744
+source_ref = "sha256:3401af26ff2bf5fddbb78ee86ac2cb156141b13f37ce103a3b9fd87373e8471f"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "5c79e8b783855d2b61e249f5abaafe4ad5d5541065a12af7cecab740e6b3dfb4"
+bytes = 49649
+source_ref = "sha256:5c79e8b783855d2b61e249f5abaafe4ad5d5541065a12af7cecab740e6b3dfb4"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c4d4b07e57f4e40f530d30856300aea84695ec9e1dd130e83fb5bc6f34dcf2b0"
+bytes = 3403
+source_ref = "sha256:c4d4b07e57f4e40f530d30856300aea84695ec9e1dd130e83fb5bc6f34dcf2b0"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9900fa021a4fe83cb52fcae4cec331738b72683207cc2a2defc819e481286bd7"
+bytes = 166275
+source_ref = "sha256:9900fa021a4fe83cb52fcae4cec331738b72683207cc2a2defc819e481286bd7"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fa4761e2605ff7c13b184a8feeb4becbdbea42620c7074a6a4953b9e5a9d30b0"
+bytes = 538655
+source_ref = "sha256:fa4761e2605ff7c13b184a8feeb4becbdbea42620c7074a6a4953b9e5a9d30b0"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "2cbd86e191c3a9c34b9064fb805879172551adc64fb3c4b9ca3392cd94da7a51"
+bytes = 49145
+source_ref = "sha256:2cbd86e191c3a9c34b9064fb805879172551adc64fb3c4b9ca3392cd94da7a51"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eeb9f5e7cf21cc07425610269f02d663dec8b72fa1ab032967f9e03f557d50ad"
+bytes = 3403
+source_ref = "sha256:eeb9f5e7cf21cc07425610269f02d663dec8b72fa1ab032967f9e03f557d50ad"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4f2fc64151d4f3adc09ffddd8026efb69459a779d5f475d30720e911f8cdd449"
+bytes = 168655
+source_ref = "sha256:4f2fc64151d4f3adc09ffddd8026efb69459a779d5f475d30720e911f8cdd449"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c29158f1dc63dd39b133653062d4d8f560fccac9423009cd089d1cb1eadcee4c"
+bytes = 541263
+source_ref = "sha256:c29158f1dc63dd39b133653062d4d8f560fccac9423009cd089d1cb1eadcee4c"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "ab0847cb06cb7b573cca724039de1ef3040fe52c01b655f34a66e8acf260cf90"
+bytes = 49612
+source_ref = "sha256:ab0847cb06cb7b573cca724039de1ef3040fe52c01b655f34a66e8acf260cf90"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/2/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/2/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "174cf80410d6427d33b69d4e442854a0074ca019632a6a93e87d0fe57a250640"
+bytes = 3403
+source_ref = "sha256:174cf80410d6427d33b69d4e442854a0074ca019632a6a93e87d0fe57a250640"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/A0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/A0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d395ece8ab4bb0648f18d717f58a6095bee7d8890d923525e24d77b980e37803"
+bytes = 165525
+source_ref = "sha256:d395ece8ab4bb0648f18d717f58a6095bee7d8890d923525e24d77b980e37803"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/A0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/A0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eaf9f4d849d9e870e381e3113a58ac68b4ee53befab7603aaeced5ba3e4f7cb5"
+bytes = 532444
+source_ref = "sha256:eaf9f4d849d9e870e381e3113a58ac68b4ee53befab7603aaeced5ba3e4f7cb5"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/A0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/A0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "b1dc5309b3ca5b0da551c2aa723146dc9a619999d3f8898294b57ad48349a1f2"
+bytes = 51263
+source_ref = "sha256:b1dc5309b3ca5b0da551c2aa723146dc9a619999d3f8898294b57ad48349a1f2"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/A0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/A0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "10655c987d0002b44047ee9edae757baf92fa8f6b4aed06117752c77c6622754"
+bytes = 3403
+source_ref = "sha256:10655c987d0002b44047ee9edae757baf92fa8f6b4aed06117752c77c6622754"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ae/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ae/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9174a5563e7f95ea3c8e6aff50f57c872e269ab23120ea65bc37357d792a3110"
+bytes = 169153
+source_ref = "sha256:9174a5563e7f95ea3c8e6aff50f57c872e269ab23120ea65bc37357d792a3110"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ae/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ae/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bd1437afdb9f94a8b3437b98df5937bfa97bb020488ae77013e8d912a471bc23"
+bytes = 535932
+source_ref = "sha256:bd1437afdb9f94a8b3437b98df5937bfa97bb020488ae77013e8d912a471bc23"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ae/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ae/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "2ea026635585a135ebf726432332703e12c88582cbfd97b67acf91e7d41316ca"
+bytes = 51432
+source_ref = "sha256:2ea026635585a135ebf726432332703e12c88582cbfd97b67acf91e7d41316ca"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ae/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ae/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "36613f29e7a186de2049ff74ef9bcdcc93064d45ef8fca268c0c432d4bdea038"
+bytes = 3403
+source_ref = "sha256:36613f29e7a186de2049ff74ef9bcdcc93064d45ef8fca268c0c432d4bdea038"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/C0/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/C0/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8a6af7c954ae0973a2a2930b6eef2f17b841686be6c9631104a3db41b04d14de"
+bytes = 166181
+source_ref = "sha256:8a6af7c954ae0973a2a2930b6eef2f17b841686be6c9631104a3db41b04d14de"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/C0/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/C0/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0467aa93ed579e8f60901fd18ca1117027c8010e7be14aa65732cc494b6ba48d"
+bytes = 538346
+source_ref = "sha256:0467aa93ed579e8f60901fd18ca1117027c8010e7be14aa65732cc494b6ba48d"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/C0/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/C0/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "5f6dc4b4ffd09a6ba0b3c7c29a38699edceb3e20b18af0912e3f585131863b2b"
+bytes = 51180
+source_ref = "sha256:5f6dc4b4ffd09a6ba0b3c7c29a38699edceb3e20b18af0912e3f585131863b2b"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/C0/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/C0/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f70e9a48ce0520e6616198d3c5ff1b4e0e2fdf2cf101c83518660fb06fb9849b"
+bytes = 3403
+source_ref = "sha256:f70e9a48ce0520e6616198d3c5ff1b4e0e2fdf2cf101c83518660fb06fb9849b"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ce/behavior.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ce/behavior.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bc5a0a6d583e919fbd173421b9a56ce20931aff04a4927b03cb2d64aa08067bb"
+bytes = 169159
+source_ref = "sha256:bc5a0a6d583e919fbd173421b9a56ce20931aff04a4927b03cb2d64aa08067bb"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ce/raw.npz"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ce/raw.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c2ccec648a4ccdd9461ecac76fabce8f3c15a67cd9f744850b59ae98cdfd01c7"
+bytes = 540836
+source_ref = "sha256:c2ccec648a4ccdd9461ecac76fabce8f3c15a67cd9f744850b59ae98cdfd01c7"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ce/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ce/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "9f7fcb36b7b17f152ad1dfec9cffe3ed6b1419e357cc2656ebcd060ac79933da"
+bytes = 51474
+source_ref = "sha256:9f7fcb36b7b17f152ad1dfec9cffe3ed6b1419e357cc2656ebcd060ac79933da"
+
+[[records]]
+path = "records/artifacts/evaluation/2533/3/Ce/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/evaluation/2533/3/Ce/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "047a3e0d103e80ce24212d93a7446b16a4dd00b633f3a03120d7c700b9d9f9c2"
+bytes = 3403
+source_ref = "sha256:047a3e0d103e80ce24212d93a7446b16a4dd00b633f3a03120d7c700b9d9f9c2"
+
+[[records]]
+path = "records/artifacts/qualification/e0708a6294e8/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/qualification/e0708a6294e8/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "f77c850c44df569b0639213dfa9fc42cba64967e1a007b546ff517797befdf55"
+bytes = 79122
+source_ref = "sha256:f77c850c44df569b0639213dfa9fc42cba64967e1a007b546ff517797befdf55"
+
+[[records]]
+path = "records/artifacts/qualification/e0708a6294e8/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/qualification/e0708a6294e8/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e342afc7fc13cfb4e13e85b3b26498d4b3d74b5a35621c176a4635adb4531e24"
+bytes = 75267
+source_ref = "sha256:e342afc7fc13cfb4e13e85b3b26498d4b3d74b5a35621c176a4635adb4531e24"
+
+[[records]]
+path = "records/artifacts/training/2531/clean/net.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/clean/net.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "276defd91ec81bff8b03d863d73ffb94151aae9ff4536205731833e34d32fb84"
+bytes = 359487
+source_ref = "sha256:276defd91ec81bff8b03d863d73ffb94151aae9ff4536205731833e34d32fb84"
+
+[[records]]
+path = "records/artifacts/training/2531/clean/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/clean/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "5c3d11bf9b28e52045d5d8cdbcbb5b4a560dea4d6da89f9a9b050aed539af620"
+bytes = 4370
+source_ref = "sha256:5c3d11bf9b28e52045d5d8cdbcbb5b4a560dea4d6da89f9a9b050aed539af620"
+
+[[records]]
+path = "records/artifacts/training/2531/clean/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/clean/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "999ad02c3edb3c31c4d943e45e63f0925d90fd7601e6cc18536841b1824c73ed"
+bytes = 20299
+source_ref = "sha256:999ad02c3edb3c31c4d943e45e63f0925d90fd7601e6cc18536841b1824c73ed"
+
+[[records]]
+path = "records/artifacts/training/2531/clean/train_log.jsonl"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/clean/train_log.jsonl"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "56b2e75c3d5c3e73a99c14778ef1def5459533a50a4f4ffdef0ead7e0d7ad362"
+bytes = 862928
+source_ref = "sha256:56b2e75c3d5c3e73a99c14778ef1def5459533a50a4f4ffdef0ead7e0d7ad362"
+
+[[records]]
+path = "records/artifacts/training/2531/noisy/net.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/noisy/net.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "77faaf866d4d757f4c42090b736007dee79ec15e2979688ac6fada1494811f2b"
+bytes = 359487
+source_ref = "sha256:77faaf866d4d757f4c42090b736007dee79ec15e2979688ac6fada1494811f2b"
+
+[[records]]
+path = "records/artifacts/training/2531/noisy/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/noisy/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "83f4e6dcfec206f0477039492e51d33e01972f82363f6653f18e5d5f4a908920"
+bytes = 4370
+source_ref = "sha256:83f4e6dcfec206f0477039492e51d33e01972f82363f6653f18e5d5f4a908920"
+
+[[records]]
+path = "records/artifacts/training/2531/noisy/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/noisy/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "47f9850089842e4d6d3747368f710f7dcf1a9263f2aa0f381aa2d6c1248e095b"
+bytes = 20299
+source_ref = "sha256:47f9850089842e4d6d3747368f710f7dcf1a9263f2aa0f381aa2d6c1248e095b"
+
+[[records]]
+path = "records/artifacts/training/2531/noisy/train_log.jsonl"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2531/noisy/train_log.jsonl"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "332b804585f4ced3653ccbf201e9eac906d39ef94dfeb6df888bd4377ef67ee6"
+bytes = 862611
+source_ref = "sha256:332b804585f4ced3653ccbf201e9eac906d39ef94dfeb6df888bd4377ef67ee6"
+
+[[records]]
+path = "records/artifacts/training/2532/clean/net.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/clean/net.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "3b2bbfa85fe300af5e00ca751802a196eb223d5e1f7cee81c70c727f4216d791"
+bytes = 359487
+source_ref = "sha256:3b2bbfa85fe300af5e00ca751802a196eb223d5e1f7cee81c70c727f4216d791"
+
+[[records]]
+path = "records/artifacts/training/2532/clean/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/clean/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "913f313aad47d7d2109bdd0e90b9eb2233a1e9d3e603ff0e58a36cc3c68fe394"
+bytes = 4371
+source_ref = "sha256:913f313aad47d7d2109bdd0e90b9eb2233a1e9d3e603ff0e58a36cc3c68fe394"
+
+[[records]]
+path = "records/artifacts/training/2532/clean/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/clean/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "534b62600acc314abdaaa80342395f0fbab53859558e6948063ba4a02d7587c5"
+bytes = 20299
+source_ref = "sha256:534b62600acc314abdaaa80342395f0fbab53859558e6948063ba4a02d7587c5"
+
+[[records]]
+path = "records/artifacts/training/2532/clean/train_log.jsonl"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/clean/train_log.jsonl"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "77bf582a8698b389a6bdea7c3711e3a6c5eeb74794017102b95eca57b7300ca8"
+bytes = 862964
+source_ref = "sha256:77bf582a8698b389a6bdea7c3711e3a6c5eeb74794017102b95eca57b7300ca8"
+
+[[records]]
+path = "records/artifacts/training/2532/noisy/net.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/noisy/net.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "703cbed4bbc008a729c95358e449eeefc83ee6c16bf9ccb72253e99f152edc36"
+bytes = 359487
+source_ref = "sha256:703cbed4bbc008a729c95358e449eeefc83ee6c16bf9ccb72253e99f152edc36"
+
+[[records]]
+path = "records/artifacts/training/2532/noisy/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/noisy/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "e4774476a802f719eeb2a0d33dd83674c54eb1152b6e6645100709543d56077b"
+bytes = 4370
+source_ref = "sha256:e4774476a802f719eeb2a0d33dd83674c54eb1152b6e6645100709543d56077b"
+
+[[records]]
+path = "records/artifacts/training/2532/noisy/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/noisy/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e47b394b7b312250c41e5310983820b6951745e2d498bfe15e4178789f532138"
+bytes = 20299
+source_ref = "sha256:e47b394b7b312250c41e5310983820b6951745e2d498bfe15e4178789f532138"
+
+[[records]]
+path = "records/artifacts/training/2532/noisy/train_log.jsonl"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2532/noisy/train_log.jsonl"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4cdca12dd984d79318cbcfcbcf85445ee4c78dc7bf37a6de1490dd19b7c20f39"
+bytes = 862664
+source_ref = "sha256:4cdca12dd984d79318cbcfcbcf85445ee4c78dc7bf37a6de1490dd19b7c20f39"
+
+[[records]]
+path = "records/artifacts/training/2533/clean/net.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/clean/net.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "8e9712a99f6a5b95b7470ac1725999270f09b15818bd3569f709b0358d79df2e"
+bytes = 359487
+source_ref = "sha256:8e9712a99f6a5b95b7470ac1725999270f09b15818bd3569f709b0358d79df2e"
+
+[[records]]
+path = "records/artifacts/training/2533/clean/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/clean/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "7cc1be12e116edba8fd2c5a38f83208b2f9aaff0eaaf196764fa898fd85f7b25"
+bytes = 4370
+source_ref = "sha256:7cc1be12e116edba8fd2c5a38f83208b2f9aaff0eaaf196764fa898fd85f7b25"
+
+[[records]]
+path = "records/artifacts/training/2533/clean/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/clean/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9ef6720f88b9ddf3dd8d93451eadac4e94931890fac8b5c7b2faa28a23a9fe43"
+bytes = 20299
+source_ref = "sha256:9ef6720f88b9ddf3dd8d93451eadac4e94931890fac8b5c7b2faa28a23a9fe43"
+
+[[records]]
+path = "records/artifacts/training/2533/clean/train_log.jsonl"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/clean/train_log.jsonl"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "72e12a9b31994642725a8237e03e6bca3c4e3a4545b9e92a2cceaa8690574126"
+bytes = 862966
+source_ref = "sha256:72e12a9b31994642725a8237e03e6bca3c4e3a4545b9e92a2cceaa8690574126"
+
+[[records]]
+path = "records/artifacts/training/2533/noisy/net.pth"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/noisy/net.pth"
+origin = "native"
+role = "frozen_parameters"
+sha256 = "b7367875908485c2bb7626311f52721e0a4e13d3fb37792b37b2dadb5f323cca"
+bytes = 359487
+source_ref = "sha256:b7367875908485c2bb7626311f52721e0a4e13d3fb37792b37b2dadb5f323cca"
+
+[[records]]
+path = "records/artifacts/training/2533/noisy/result.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/noisy/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "a5191ecc1151cfe5e78fd39fb1de67a0279db8e2e04b4ac6c39a98f151fa0fd8"
+bytes = 4370
+source_ref = "sha256:a5191ecc1151cfe5e78fd39fb1de67a0279db8e2e04b4ac6c39a98f151fa0fd8"
+
+[[records]]
+path = "records/artifacts/training/2533/noisy/run.json"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/noisy/run.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b2a847b107cfea5654717e3fd5185787dc6d2813739278a1a98e0cb36bc4e27f"
+bytes = 20299
+source_ref = "sha256:b2a847b107cfea5654717e3fd5185787dc6d2813739278a1a98e0cb36bc4e27f"
+
+[[records]]
+path = "records/artifacts/training/2533/noisy/train_log.jsonl"
+legacy_path = "studies/duplicate_observation/records/artifacts/training/2533/noisy/train_log.jsonl"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3af5323023406842f79469423f630fea809d1e8620df33ad09405967cbf4f1bf"
+bytes = 862754
+source_ref = "sha256:3af5323023406842f79469423f630fea809d1e8620df33ad09405967cbf4f1bf"
 
 [[records]]
 path = "records/benchmarks/model_lock.json"
@@ -44,3 +1673,21 @@ role = "execution_lock"
 sha256 = "6e6994397fe64684626e0dfac2bca18242a4ddb07001c6a5a93c8d37e38033fa"
 bytes = 258435
 source_ref = "sha256:6e6994397fe64684626e0dfac2bca18242a4ddb07001c6a5a93c8d37e38033fa"
+
+[[records]]
+path = "records/reports/interpretation.md"
+legacy_path = "studies/duplicate_observation/records/reports/interpretation.md"
+origin = "native"
+role = "report"
+sha256 = "9e41b82f20fa3aeb6d836f21e6c2f5f26333e1cac7ac687690f395e0ae4e54c5"
+bytes = 11968
+source_ref = "sha256:9e41b82f20fa3aeb6d836f21e6c2f5f26333e1cac7ac687690f395e0ae4e54c5"
+
+[[records]]
+path = "records/results/result.json"
+legacy_path = "studies/duplicate_observation/records/results/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "f719f33a293d011246c5519c0aec51362ff38027fbd15f7d8cbc72d0bff6bf96"
+bytes = 4207856
+source_ref = "sha256:f719f33a293d011246c5519c0aec51362ff38027fbd15f7d8cbc72d0bff6bf96"
