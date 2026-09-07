@@ -39,6 +39,9 @@ both columns, no explicit zq hint or local memory. No human confirmation or prom
 - `supporting_artifact` —
   [studies/duplicate_observation/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:f77c850c44df`)
+- `execution_lock` —
+  [studies/duplicate_observation/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:6e6994397fe6`)
 
 ## Provenance rule
 
