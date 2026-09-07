@@ -30,7 +30,7 @@ from fsrl.infra.run_manifest import ProspectiveRun
 from fsrl.infra.validation_session import validation_session
 
 from .diagnostic import history_groups
-from .evaluation import loaded_model
+from .evaluation import generic_arrays, loaded_model
 from .locks import MODELS, SOURCE, validate_phase
 from .protocol import PROTOCOL_SHA256, RUNS, specification
 
@@ -41,7 +41,7 @@ def run():
     source_ref = reference(Path(__file__))
     verify_reference(source_ref, commit=commit)
     source, spec = load_json(SOURCE), specification()
-    directory = RUNS / "secondary_history"
+    directory = RUNS / "secondary_history_replay"
     if directory.exists():
         return completed(directory)
     identity = {
@@ -50,6 +50,8 @@ def run():
         "protocol_sha256": PROTOCOL_SHA256,
         "model_lock": reference(MODELS),
         "primary_result": reference(RUNS / "primary.json"),
+        "initial_replay_failure": reference(RUNS / "secondary_history/run.json"),
+        "compilation_order": "Replay the original generic batches before history to preserve compiled shape specialization; require exact saved generic and history margins.",
         "purpose": "Complete protocol diagnostic.secondary full/global CE; no new estimand or changed primary decision.",
     }
     summaries, arrays, checks = {}, {}, 0
@@ -57,7 +59,7 @@ def run():
         ProspectiveRun.start(
             directory,
             workflow_id="observation_uncertainty_v1",
-            execution_id="secondary-history-policy",
+            execution_id="secondary-history-policy-replay",
             producer=identity,
             resolved_config=spec["diagnostic"],
         ),
@@ -69,6 +71,15 @@ def run():
             arrays[str(seed)] = {}
             for arm in spec["seeds"]["conditions"]:
                 backbone, local, seqs = loaded_model(seed, arm, source)
+                # Primary evaluation executes generic batches before histories.
+                # Their shape specializations affect floating-point kernels.
+                generic = generic_arrays(
+                    backbone, local, seqs, source, "test", arm, spec
+                )
+                saved_generic = arrays_at(RUNS / "generic/test" / str(seed) / arm)
+                for key in ("margins", "global_margins"):
+                    if not np.array_equal(generic[key], saved_generic[key]):
+                        raise RuntimeError("secondary generic replay differs")
                 previous = arrays_at(RUNS / "diagnostic" / str(seed) / arm)
                 raw = {}
                 for members in groups.values():
