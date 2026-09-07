@@ -25,8 +25,8 @@
 distortion, allow a jointly trained shared RNN to form stable individualized relations
 and learn history-dependent functional discrimination?
 
-**Finding.** Qualified implementation and ten paired input panels locked before
-development training.
+**Finding.** All three development models completed and locked before generic competence
+screening.
 
 **Claim boundary.** Development; one fixed observation-error scale, sign-restored oracle
 control, three paired network seeds, single-stage joint training; no human calibration
@@ -34,6 +34,9 @@ or promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/observation_uncertainty/records/benchmarks/development_model_lock.json](records/benchmarks/development_model_lock.json)
+  (`sha256:bdd0fbcd8ce5`)
 - `registered_contract` —
   [studies/observation_uncertainty/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:522a6f0eaab3`)

@@ -223,8 +223,8 @@ fail to close the dynamics.
     trained models fail individual diversity and no added functional history selection
     is supported. Close this recipe without promotion.
 - [Observation uncertainty and sign-restored control](observation_uncertainty/README.md) — `unresolved`
-  - **Finding:** Qualified implementation and ten paired input panels locked before
-    development training.
+  - **Finding:** All three development models completed and locked before generic
+    competence screening.
 
 ## Minimal explanatory models
 
