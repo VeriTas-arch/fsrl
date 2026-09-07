@@ -223,8 +223,8 @@ fail to close the dynamics.
     trained models fail individual diversity and no added functional history selection
     is supported. Close this recipe without promotion.
 - [Observation uncertainty and sign-restored control](observation_uncertainty/README.md) — `unresolved`
-  - **Finding:** All three fixed-sigma development conditions pass full/global generic
-    competence; nine paired fits authorized by the frozen gate, before Liu exposure.
+  - **Finding:** All nine paired final models locked before primary evaluation; three
+    development models and the fixed-sigma competence gate preserved.
 
 ## Minimal explanatory models
 
