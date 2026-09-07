@@ -263,8 +263,12 @@ fail to close the dynamics.
     competent cells, 15 Ce endpoints noninferior, Ae core9/9 and Ce7/9, and retained
     compensation. Conditional compact export stopped at an original-tolerance mismatch
     in the fifth model; no six-model compact qualification or promotion.
-- [State dependence versus stage schedules in affine modulation](modulation_schedule/README.md) — `unresolved`
-  - **Finding:** Prospective frozen affine schedule diagnostic.
+- [State dependence versus stage schedules in affine modulation](modulation_schedule/README.md) — `mixed`
+  - **Finding:** Phase constants preserve competence, individualized organization and
+    compensation in all three frozen pairs, but fail Ce probability noninferiority with
+    reduced effective writes; primary CE compensation attenuation is not supported.
+    Conditional constant evaluation/training did not trigger. Compact P_T mismatch
+    localized without requalification.
 
 ## Minimal explanatory models
 
