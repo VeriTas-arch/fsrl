@@ -1,0 +1,83 @@
+{
+  "bytes": 1087033,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "four-cell-comparison",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 76369,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "ba90f70c9ae294c5147cdaf514e7fcaeccc17217cb0e3dbbaa401b03c30d6037"
+    },
+    {
+      "bytes": 1010664,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "0fe278d7b19bee8ff0facd21716728d506202972ee838fe62b52d40822d268a0"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "execution_lock": {
+      "bytes": 87458,
+      "path": "studies/observation_crossover/records/benchmarks/execution_lock.json",
+      "sha256": "e64b0e3aa519ebd1ea34ef12da380b52df5f1889ce0c320d918b3a49c7b15adc"
+    }
+  },
+  "resolved_config": {
+    "decision": {
+      "competence": "All four cells must pass inherited generic and Liu full/global competence for joint functional interpretation; preserve numerical outputs if competence fails, no rescue.",
+      "individual_attenuation": "Global S_C-S_A upper95CI<0.",
+      "joint": "Competent four cells AND positive global I_tau AND negative generic-global I_CE AND negative paired order shift. This is output-level compensation under one fixed perturbation, not a gate, latent denoising circuit or human training-history identification.",
+      "opposite_or_uncertain": "Retain negative interactions, baseline shifts, coexistence and inconclusive intervals separately. A crossing interval is not equivalence. Report decisions by seed; no success-rate population claim, no seed filtering.",
+      "positive_interaction": "I_tau global_all77 lower95CI>0. Report negative simple error effects separately; if these are not both supported, call this an interaction in organization rather than uniformly reduced error-induced differentiation.",
+      "prediction_compensation": "Generic global I_CE upper95CI<0; report full CE separately and absolute CE in all cells.",
+      "stop": "Integrity/parity failure stops collection. Core behavioral failure does not stop completion of other registered seeds. No new models, noise levels, gates, storage restrictions, training checkpoints, history panels, comparator conditions or transport."
+    },
+    "estimands": {
+      "CE": "Per-episode CE=mean(logaddexp(0,-margin*true_sign/T)). Generic T=1, full/global separately; global CE interaction aligns with primary structure and full CE retains task-output context. Liu T=0.25, full/global separately as secondary; never pool tasks or temperatures. All four simple/cross contrasts for each endpoint.",
+      "absolute_behavior": "Retain inherited full/global competence and five core flags for each cell, plus P_off/evidence-shuffle evidence binding. Full-policy historical profiles remain descriptive; no promotion or human-distribution matching.",
+      "contrasts": {
+        "baseline": {
+          "A0": -1,
+          "C0": 1
+        },
+        "error_A": {
+          "A0": -1,
+          "Ae": 1
+        },
+        "error_C": {
+          "C0": -1,
+          "Ce": 1
+        },
+        "interaction": {
+          "A0": 1,
+          "Ae": -1,
+          "C0": -1,
+          "Ce": 1
+        },
+        "training_under_error": {
+          "Ae": -1,
+          "Ce": 1
+        }
+      },
+      "order_shift": "Global S_R=mean_i[(1-KendallTau(order_R0_i,order_Re_i))/2], equivalently fraction of the 28 item pairs reversed within each subject. Report S_A,S_C and participant-paired S_C-S_A using replay0, deterministic internal orders, unchanged tie ordering. No sampled choices enter this endpoint.",
+      "tau": "For each contrast, recompute the weighted pairwise Kendall tau of each cell in shared-ID bootstrap samples. Primary global_all77; also full_all77, full_conditional and global_conditional. Report each cell and simple effects, not interaction alone."
+    },
+    "statistics": {
+      "interval": 0.95,
+      "samples": 2000,
+      "seed_offset": 126000,
+      "unit": "Joint resampling of the original participant IDs across four cells within each network; generic episodes and Liu participants separate. Never treat participant pairs as independent or pool networks. Duplicate sampled IDs are separate bootstrap observations as in the parent contract. Conditional masks applied after resampling, no common-mask restriction. Any undefined conditional draw makes its interval undefined; retain its count. Scalar CE and shifts must be finite for all subjects or stop."
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_crossover_v1"
+}

@@ -1,0 +1,82 @@
+{
+  "bytes": 806922,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "2432-C0",
+  "file_count": 3,
+  "files": [
+    {
+      "bytes": 166207,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "behavior.json",
+      "prospective_suffix": ".json",
+      "sha256": "664af12ae7d14cfae8b85c5ae4f014153a420190fbbcde8cf9eacc2746cf4ac5"
+    },
+    {
+      "bytes": 584100,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "0af2617760f2b2474861bdba7f3081f39ab31d1a504bd735cbf545f55b796a71"
+    },
+    {
+      "bytes": 56615,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "168112b65097dfddaa292600388b9591aa69f732ead00ec3d47c9e83416b6f5a"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "execution_lock": {
+      "bytes": 87458,
+      "path": "studies/observation_crossover/records/benchmarks/execution_lock.json",
+      "sha256": "e64b0e3aa519ebd1ea34ef12da380b52df5f1889ce0c320d918b3a49c7b15adc"
+    },
+    "observation": "clean",
+    "reuse": null,
+    "seed": 2432,
+    "training": "noisy"
+  },
+  "resolved_config": {
+    "cells": {
+      "A0": {
+        "observation": "clean",
+        "reuse": "clean",
+        "training": "clean"
+      },
+      "Ae": {
+        "observation": "noisy",
+        "reuse": "acute_noisy",
+        "training": "clean"
+      },
+      "C0": {
+        "observation": "clean",
+        "reuse": null,
+        "training": "noisy"
+      },
+      "Ce": {
+        "observation": "noisy",
+        "reuse": "noisy",
+        "training": "noisy"
+      }
+    },
+    "matching": "Archived physical inputs including original p/z, cues, order, query targets and noise draws; C0 uses the exact original input arrays. Each model keeps its own slow parameters, local gain and readout. Reset P/L per episode, construct memories online, freeze terminal state during queries.",
+    "new_execution": "Only C0 for each seed: 256 generic episodes and the original 77 Liu participants. A0/Ae/Ce reuse committed raw arrays and canonical summaries. No training or new participants.",
+    "observation": "Inherited sigma=1/7, replay0 only. No new observation draws, no replay averaging. Original input retains the p/z scaffold.",
+    "primary": "Global native Hodge orders of all 77 subjects; inherited orientation and stable tie ordering. Full and conditional sampled routes are fixed secondary reports.",
+    "seeds": [
+      2432,
+      2433,
+      2434
+    ]
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_crossover_v1"
+}

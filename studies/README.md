@@ -228,9 +228,13 @@ fail to close the dynamics.
     three, retained full core in one seed and global core in none, and failed the
     registered added-history-discrimination contrast with negative intervals in all
     three. One fixed sigma; no promotion.
-- [Training by observation crossover](observation_crossover/README.md) — `unresolved`
-  - **Finding:** Protocol, inherited models/inputs and source locked; known A0 replay
-    passed 120 exact array checks before any C0 evaluation.
+- [Training by observation crossover](observation_crossover/README.md) — `supporting`
+  - **Finding:** All three frozen A/C pairs support output-level compensation: positive
+    population-tau interaction, negative generic-global CE interaction and reduced
+    within-subject order displacement, with all four cells competent and evidence-bound.
+    C is less accurate on clean generic inputs; behavioral core allocation remains A0
+    0/3, Ae 3/3, C0 0/3, Ce 1/3 full and 0/3 global. Diagnostic development, no
+    promotion.
 
 ## Minimal explanatory models
 
