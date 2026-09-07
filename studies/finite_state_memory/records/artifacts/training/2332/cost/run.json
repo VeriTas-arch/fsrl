@@ -1,0 +1,358 @@
+{
+  "bytes": 827383,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "train-2332-cost",
+  "file_count": 4,
+  "files": [
+    {
+      "bytes": 1641,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "local.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "6cdd5fb9d432029870f7cd53df367222deb73eb5c665e38edf426fb71f2ef16f"
+    },
+    {
+      "bytes": 359487,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "net.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "016672522ae8e16628b342ffd7972042e34b0c8f66c281997d181b753fc702fe"
+    },
+    {
+      "bytes": 4514,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "b42b5ef47d72f09b370a2bcf0fbeda75916302c9e1f405570044b458f546a14c"
+    },
+    {
+      "bytes": 461741,
+      "format": "json_lines",
+      "legacy_format": false,
+      "media_type": "application/x-ndjson",
+      "path": "train_log.jsonl",
+      "prospective_suffix": ".jsonl",
+      "sha256": "71c2b2bdc6be8e5baa3f58ae766ff47e89f0f07fd66ffca172082bd60b739d82"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "cost",
+    "coefficient": 100.23260880257861,
+    "protocol_sha256": "7199a7c2ca0282d78ca92c15000576b617f75560a6e5ff835b1308210e551475",
+    "seed": 2332,
+    "source_commit": "f063458e02b18a5fc5150c7a8f7bc0a06eea715d",
+    "states": null
+  },
+  "resolved_config": {
+    "runtime": {
+      "blas_thread_limit": 1,
+      "blas_threadpools": [
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.188.0"
+        },
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.dev"
+        }
+      ],
+      "compiler_threads": 1,
+      "cuda_available": true,
+      "cuda_version": "13.0",
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false,
+      "device_capability": [
+        12,
+        0
+      ],
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "execution_schema_version": 2,
+      "float32_matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "profile": {
+        "blas_threads": 1,
+        "compile": true,
+        "compile_backend": "inductor",
+        "compile_fullgraph": true,
+        "compile_mode": "default",
+        "cpu_threads": 1,
+        "device": "cuda",
+        "require_cuda": true
+      },
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "torch_version": "2.14.0+cu130",
+      "triton_mix_order_reduction": false
+    },
+    "specification": {
+      "architecture": {
+        "activation": "tanh",
+        "backbone": "Original cell followed by finite-state support storage in precision arms; checkpoint parameter names preserved.",
+        "blank_initial_steps": 2,
+        "hidden_size": 200,
+        "input_extension": "Shared (sG,sL) in every condition; no new learned gate or persistent state.",
+        "input_size": 38,
+        "local_gain": "lambda_L = softplus(rho)",
+        "local_key": "k = vec(c_left c_right^T - c_right c_left^T) / max(norm(vec(...)), 1e-8)",
+        "local_read": "ell_q = dot(L_T, k_q)",
+        "local_write": "L_next = L + s_L*k, exactly once per support trial",
+        "logit_combination": "Subtract half the local correction from logit 0 and add half to logit 1, retaining the original global bias.",
+        "margin": "Both routes: recurrent margin plus the independently addressed local correction.",
+        "query_state": "Read the same terminal P_T and L_T for every query without writeback. During training, retain the gradient path through P_T to support computation.",
+        "query_steps": 2,
+        "state_reset": "Reset hidden and eligibility per support/query trial, preserve P over support trials, reset both P and L for each episode.",
+        "support_query_time": 0.6666666666666666,
+        "support_trial_steps": 4,
+        "target_sign": "y_q = 2*correct_action-1; positive margin means left item higher."
+      },
+      "claim_boundary": [
+        "Per-connection state cardinality K, not uniform effective A resolution or a demonstrated total capacity bottleneck.",
+        "Alpha remains learned but fixed within an episode; local L remains continuous.",
+        "Single-stage joint supervised meta-learning, project-exposed Liu knowledge, no human fitting or promotion.",
+        "Finite-state forward with identity STE; expected-cost gradient is a declared surrogate, not exact stochastic recurrent-loss differentiation."
+      ],
+      "cost": {
+        "coefficient": 100.23260880257861,
+        "formula": "Mean over accepted support neural steps and connections of abs(alpha*(P_next-P_previous)); exclude initial blanks, queries, episode reset. Same fixed coefficient for cost and cost_precision.",
+        "gradient": "Continuous uses original gradient. Finite forward logs actual realized cost; backward uses conditional expectation abs(alpha*(clipped_proposal-P_previous)), equal to expected actual L1 jump for a grid-valued previous state. Recurrent state gradients still use identity STE.",
+        "no_rescaling": "No new c_ref, budget fitting or cost grid."
+      },
+      "decision": {
+        "behavior": "Core definitions inherited, no human interval inclusion or all-nine-rows requirement. Full and global policies separately; all77 and conditional tau separately; expected and sampled outputs separate.",
+        "competence": "For generic held-out graphs and N=8 Liu, learned and nonlearned expected-correct-probability 95% lower bounds exceed .5 independently. Failed task competence blocks architecture interpretation for that network.",
+        "core": "At N=8: competence; all-participant intact Hodge gradient fraction lower>.95; among sampled eligible non-correct rankers stable-80 error prevalence lower>0; eligible self-consistent-incorrect minus self-inconsistent fraction lower>0; analysis-group intersubject order tau upper<.8. Report denominators and undefined metrics as failures. No human interval inclusion, minimum bimodal-pair count or correct-ranker prevalence gate.",
+        "factorial": "Report P-S, CP-C, C-S, CP-P and (CP-C)-(P-S) on participant/episode outcomes. Threshold-crossing alone is not interaction; nonsignificance is not equivalence.",
+        "formation": "Compare trained precision vs acute rounding of its paired continuous Shared, and cost_precision vs acute rounding of Cost. Acute controls are identical K applied at all support writes, no retraining. Superior adaptation is not by itself learned selective retention.",
+        "selection": "Precision core-qualified supports simpler candidate; CP-only core requires matched functional benefit before a complementarity claim. Positive encoding-organization result can stand without stronger selection.",
+        "stop": "Integrity failure stops dependent work. Complete all registered paired fits before outcome exposure; retain every seed and valid negative. No new size transport, local-store removal, observation noise or gate. Independent stability/promotion outside this execution."
+      },
+      "decision_contract": {
+        "behavior": {
+          "reference_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+          "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json"
+        }
+      },
+      "diagnostic": {
+        "construction": "Rejection-sample generic validation episodes having a retained bridge whose removal splits the first-block support graph into two components of at least two items. Choose an eligible target uniformly. Move its block-2 observation to the first slot of block 2, preserving slot times. Redundant history includes an identical target observation in block 1; novel history replaces that earlier bridge by another existing relation. Thus the novel target reconnects two previously disconnected groups, whereas the redundant target repeats direct evidence. Current observation, position, prefix length and suffix match. No diagnostic labels enter model inputs.",
+        "decision": "Primary functional allocation contrast is the history interaction in global CE benefit; remote influence and write amounts/fractions supporting. Competence gates first. A within-arm novelty effect alone does not identify a new mechanism.",
+        "episodes": 128,
+        "intervention": "At target trial only, zero global evidence channels 34 and 37; preserve local evidence, cues, time and suffix. Compare global-only terminal margins, direct and disjoint remote queries.",
+        "metrics": "Per episode target sum effective writes, target/episode write fraction, mean total support write, global direct and remote absolute margin change, global CE increase on target removal. Average within each network with episode-paired bootstrap. Primary interaction (novel-redundant) cost minus shared in target write fraction; secondary interaction in remote influence and CE benefit.",
+        "question": "Precision-vs-shared and cost_precision-vs-cost differences in novel-minus-redundant terminal global CE benefit; 2x2 cost-by-precision interaction.",
+        "rng_seed": 96202,
+        "scope": "Non-Liu bridge-enriched diagnostic, distinct from generic coefficient development and competence sets; identical for all six models. It does not estimate all-task selectivity or m-specific mediation."
+      },
+      "evaluation": {
+        "cohorts": 1,
+        "generic": {
+          "conditions": [
+            "intact"
+          ],
+          "episodes": 256,
+          "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+          "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+          "rng_seed": 96201,
+          "temperature": 1.0
+        },
+        "generic_development": {
+          "episodes": 256,
+          "rng_seed": 96200
+        },
+        "item_counts": [
+          8
+        ],
+        "liu": {
+          "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+          "choice_seed": 96214,
+          "conditions": [
+            "intact",
+            "local_off",
+            "P_off",
+            "query_shuffle",
+            "evidence_shuffle"
+          ],
+          "cue_mode": "permuted_shared",
+          "cue_seed": 96211,
+          "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+          "evidence_shuffle_seed": 96216,
+          "order_seed": 31401,
+          "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+          "protocol_id": "liu_v2",
+          "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+          "query_shuffle_seed": 96215,
+          "subject_encoding_mode": "stable_omission",
+          "subject_encoding_seed": 96213,
+          "subjects": 77,
+          "support_seed": 96212,
+          "temperature": 0.25,
+          "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+        }
+      },
+      "execution": {
+        "closure": "Validate scoped scientific invariants, registry/docs, full engineering suite for runtime addition; archive compact sufficient artifacts, commit intended paths, clean-check and push origin/dev.",
+        "command": "direnv exec . python -m fsrl.infra.formal_runtime finite-state-memory <stage>",
+        "freeze": "Commit protocol and qualified sources; lock source/config/inputs before training. Lock all four development models before validation; commit selected K before twelve fits; lock twelve final models before all primary outcomes. Phase-specific prospective source locks may add downstream analysis before corresponding outcome exposure.",
+        "outputs": [
+          "protocol, qualification, source/input lock",
+          "four development checkpoints and generic selection curve",
+          "conditional twelve paired checkpoints and model lock",
+          "generic competence/resource arrays, history paired functional arrays, Liu full/global core and interventions",
+          "two acute controls per seed and three fixed-input rounding replays per finite/acute model",
+          "canonical result, sufficient raw arrays, interpretation, registered generated views"
+        ],
+        "runtime": "Bounded CUDA fullgraph/default, CPU/BLAS/compiler threads 1, TF32 off, inherited mix_order_reduction=false. Explicit externally generated rounding tensors; no PyTorch version admission gate.",
+        "stages": [
+          "qualify",
+          "lock-source",
+          "develop",
+          "lock-development",
+          "select",
+          "train-pairs",
+          "lock-models",
+          "evaluate",
+          "report"
+        ]
+      },
+      "optimization": {
+        "backbone_learning_rate": 0.0001,
+        "batch_size": 32,
+        "clipping_scope": "Clip backbone parameters and [local.raw_gain] separately, before their Adam updates, in both conditions. Do not use one joint norm across differently sized groups.",
+        "fast_weight_penalty": 0.0001,
+        "gradient_clip": 2.0,
+        "initial_local_gain": 0.1,
+        "local_learning_rate": 0.01,
+        "optimizer": "Adam; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+        "schedule": "All available slow parameters jointly optimized from first to last step with mean generic query CE plus 1e-4 mean(P_T^2); same backbone optimizer group in both arms.",
+        "total_episode_exposures": 48000,
+        "total_steps": 1500,
+        "training_temperature": 1.0
+      },
+      "question": "Can fixed finite-state fast memory preserve organized individualized relational behavior under complete shared inputs, and does effective write cost add useful functional selection?",
+      "references": {
+        "item_count_protocol": {
+          "path": "studies/item_count_transport/records/benchmarks/liu_item_count_transport_v1.json",
+          "sha256": "0ba9090453bafd28fc1908afdb727747a06ba069838aae994fb90b17dd36646e"
+        },
+        "joint_protocol": {
+          "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+          "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+        },
+        "joint_result": {
+          "path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+          "sha256": "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+        },
+        "memory_protocol": {
+          "path": "studies/matched_memory_structure/records/benchmarks/protocol.json",
+          "sha256": "d68792bf141a7f92ef368789aac24556736b7f1314df21294f571e63c21b6a6d"
+        },
+        "routing_protocol": {
+          "path": "studies/weak_evidence_routing/records/benchmarks/protocol.json",
+          "sha256": "d5c958674b6ca4985ac953cc30afb37dfd93b7b94906498bdfb25940ef400c57"
+        },
+        "write_cost_protocol": {
+          "path": "studies/effective_write_cost/records/benchmarks/protocol.json",
+          "sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0"
+        },
+        "write_cost_selection": {
+          "path": "studies/effective_write_cost/records/benchmarks/selection_lock.json",
+          "sha256": "45519ea1c0f5f6bc9e34ab1497b71423f2dcadb13389536e6b2e2c5c122130a2"
+        }
+      },
+      "rounding": {
+        "algorithm": "Independent torch.Generator on CUDA; torch.rand float32 outside compiled support graph. Uniforms allocated for every trial x neural step x batch subject x connection, including no-write steps. No conditional skipping.",
+        "evaluation_seed": "300000000 + panel_id*100000 + replay*10000 + batch_id. Panel ids: dev=1, test=2, history=3, Liu=4. Same uniforms across all models, paired histories and counterfactuals of identical shape.",
+        "liu_replays": [
+          0,
+          1,
+          2
+        ],
+        "primary_replay": 0,
+        "replay_interpretation": "Replays 1 and 2 diagnostic only, no selection or averaging to construct a new main policy; subjects and networks not pooled. Conditional variability given the same inputs and original latent state, not independent human participants.",
+        "training_seed": "200000000 + seed*10000 + optimizer_step; same seed across matched arms and K candidates. Separate from numpy task RNG and global initialization RNG."
+      },
+      "schema_version": 1,
+      "seeds": {
+        "conditions": [
+          "shared",
+          "cost",
+          "precision",
+          "cost_precision"
+        ],
+        "development": 2331,
+        "mandatory": [
+          2332,
+          2333,
+          2334
+        ],
+        "smoke": 910005,
+        "training_rng_offset": 120000
+      },
+      "selection": {
+        "fits": "One fresh shared baseline and all three no-cost precision candidates, all final parameters locked before development validation.",
+        "generic_ce_allowance_nats": 0.1,
+        "interpretation": "0.10 nats is an engineering utility allowance fixed before outcomes, not human-fitted or physiological.",
+        "rule": "Baseline must be generic competent. A K is eligible when learned and nonlearned expected-correct 95% lower bounds exceed .5 and paired generic CE increase 95% upper bound <= .10 nats per query versus baseline. Choose smallest eligible K; full curve retained.",
+        "stop": "No eligible K closes finite-state recipe; twelve paired fits and primary evaluation not triggered. No larger grid or replacement seed."
+      },
+      "statistics": {
+        "interval": 0.95,
+        "samples": 2000,
+        "seed_offset": 116000,
+        "unit": "Participant-paired within each network; no pooling across networks. 2000 descriptive percentile bootstrap draws. Conditional tau differences resample all 77 IDs jointly, then apply each arm eligibility mask. Repeated copies are separate bootstrap observations. Any undefined resample makes the paired interval undefined; report its count without dropping it."
+      },
+      "storage": {
+        "backward": "Identity STE at stored state using rounded.detach() + (proposal-proposal.detach()); clipping derivative inherited.",
+        "bound": 50.0,
+        "continuous": null,
+        "grid": "K odd equally spaced states including -50, zero, +50; step=100/(K-1). Candidates have exactly representable binary spacings.",
+        "limit": "K=None exactly recovers continuous forward/loss/gradient/update; finite K has explicit grid invariants.",
+        "scope": "Global P only, all support observations unchanged. Reset hidden/e per trial; initial blank writes zero. Queries use original continuous cell with writeback false and draw no random numbers.",
+        "state_candidates": [
+          65,
+          257,
+          1025
+        ],
+        "update": "Existing cell clipped proposal, followed by adjacent stochastic rounding after EACH support neural step; carry only rounded P. No shadow/compensation cache."
+      },
+      "study_id": "finite_state_memory",
+      "task": {
+        "cue_size": 15,
+        "evidence_boundary": "Only ordinary pair cues and displayed signed support magnitude enter memory writes. No true rank, query answer, learned-pair flag, omitted-pair flag, posterior, or diagnostic residual enters the recurrent input.",
+        "local_evidence": "s_L = signed_magnitude * (z + (1-z) * p)",
+        "max_edges": 10,
+        "min_edges": 7,
+        "n_items": 8,
+        "probability_recovery": "Compute p from the episode's original SubjectEncodingState, observed cue identities, and the distance recoverable from abs(displayed_signed_magnitude)*(n_items-1). Do not mistake binary SupportTrial.encoding_reliability for p.",
+        "query_pairs": "All 28 unordered pairs, with the existing generator's randomized left/right orientation and order; no learned/nonlearned reweighting.",
+        "routing": {
+          "both": "shared: existing channels 34 and 37 receive sG and sL; local writes unchanged"
+        },
+        "subject_encoding_mode": "stable_omission",
+        "subject_encoding_parameters": "Unchanged SubjectEncodingConfig from the implementation witness; retain the sampled SubjectEncodingState and recover its original relation probability p without resampling.",
+        "support_blocks": 4
+      },
+      "tier": "development"
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "finite_state_memory_v1"
+}

@@ -217,9 +217,11 @@ fail to close the dynamics.
     global weak deletion reduces all-subject Cost order tau from 0.865-0.893 to
     0.496-0.512 while preserving registered competence and coherence, at an accuracy
     cost. Acute routing evidence; no learned routing or main-model promotion.
-- [Finite-state fast memory and effective write cost](finite_state_memory/README.md) — `unresolved`
-  - **Finding:** Generic-only selection fixed K=65; all twelve paired final models
-    locked before primary evaluation.
+- [Finite-state fast memory and effective write cost](finite_state_memory/README.md) — `mixed`
+  - **Finding:** K65 models preserve competence and organized errors; cost-trained
+    storage adaptation improves performance versus acute rounding, but all twelve
+    trained models fail individual diversity and no added functional history selection
+    is supported. Close this recipe without promotion.
 
 ## Minimal explanatory models
 

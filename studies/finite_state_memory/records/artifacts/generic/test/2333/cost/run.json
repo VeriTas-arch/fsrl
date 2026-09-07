@@ -1,0 +1,96 @@
+{
+  "bytes": 83941,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "test-2333-cost",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 79517,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "e0e60a1a2e2a6a6db14c909f4ec510aa3d4eeb4d40babe0551ea1f472023d4c1"
+    },
+    {
+      "bytes": 4424,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "5765a6b34221cdfdf1fb6c973fa24b2569b58e92fffbce32a2f9e9f76925ed1e"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "cost",
+    "protocol_sha256": "7199a7c2ca0282d78ca92c15000576b617f75560a6e5ff835b1308210e551475",
+    "seed": 2333,
+    "split": "test",
+    "states": null
+  },
+  "resolved_config": {
+    "evaluation": {
+      "cohorts": 1,
+      "generic": {
+        "conditions": [
+          "intact"
+        ],
+        "episodes": 256,
+        "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+        "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+        "rng_seed": 96201,
+        "temperature": 1.0
+      },
+      "generic_development": {
+        "episodes": 256,
+        "rng_seed": 96200
+      },
+      "item_counts": [
+        8
+      ],
+      "liu": {
+        "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+        "choice_seed": 96214,
+        "conditions": [
+          "intact",
+          "local_off",
+          "P_off",
+          "query_shuffle",
+          "evidence_shuffle"
+        ],
+        "cue_mode": "permuted_shared",
+        "cue_seed": 96211,
+        "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+        "evidence_shuffle_seed": 96216,
+        "order_seed": 31401,
+        "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+        "protocol_id": "liu_v2",
+        "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+        "query_shuffle_seed": 96215,
+        "subject_encoding_mode": "stable_omission",
+        "subject_encoding_seed": 96213,
+        "subjects": 77,
+        "support_seed": 96212,
+        "temperature": 0.25,
+        "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+      }
+    },
+    "rounding": {
+      "algorithm": "Independent torch.Generator on CUDA; torch.rand float32 outside compiled support graph. Uniforms allocated for every trial x neural step x batch subject x connection, including no-write steps. No conditional skipping.",
+      "evaluation_seed": "300000000 + panel_id*100000 + replay*10000 + batch_id. Panel ids: dev=1, test=2, history=3, Liu=4. Same uniforms across all models, paired histories and counterfactuals of identical shape.",
+      "liu_replays": [
+        0,
+        1,
+        2
+      ],
+      "primary_replay": 0,
+      "replay_interpretation": "Replays 1 and 2 diagnostic only, no selection or averaging to construct a new main policy; subjects and networks not pooled. Conditional variability given the same inputs and original latent state, not independent human participants.",
+      "training_seed": "200000000 + seed*10000 + optimizer_step; same seed across matched arms and K candidates. Separate from numpy task RNG and global initialization RNG."
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "finite_state_memory_v1"
+}

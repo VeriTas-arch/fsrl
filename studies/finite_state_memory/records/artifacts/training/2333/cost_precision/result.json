@@ -1,0 +1,112 @@
+{
+  "arm": "cost_precision",
+  "coefficient": 100.23260880257861,
+  "final_backbone": {
+    "DAmult": "8e2ec0593c96f1a39ed53b0310a7a88e571c56e48e41faeef5e71f920c511884",
+    "alpha": "330f53ad5ecdeef37721ee2e2daff6b5385d0c62c11644fa3a9ff7479f3b285e",
+    "etaet": "15bb6876c96f6b17ad0dc47b504253bc3db60acddbd985bc84fd22c77e3b2e67",
+    "h2DA.bias": "8e93d5145d1dddcb016e2debd97fbc83a77516235a98d121bceade54af9145ee",
+    "h2DA.weight": "820a3100e4ad7cc4e026d6bd89303e52633bafcf36a3601392ef9fcb446c5091",
+    "h2o.bias": "19b1eaa9f59c641510a15d31d7b3e17599616d373ace55ffe5511e9182fca852",
+    "h2o.weight": "a96e70b377f244cf4b87b14e7bd4d3ef9b5efcf11c0acd57231f53db89eda706",
+    "h2v.bias": "c4a8add2696899f0b8d4ef2f8db1a886b690337178a3745202e7dc3b162f33fd",
+    "h2v.weight": "f6f7221ce92af7f43b950b9fef41a4096fedd4ac8c844088ceae8cc84e0b503d",
+    "i2h.bias": "d20d6b1034aa251cc80cd2ddfe0fcf008325fa19062c828dfef08495cdbdf562",
+    "i2h.weight": "0f4809eceb691aa9843edfeaed20ee79f4e85664477008708acb387a8f10fe96",
+    "w": "eca32203fcf159dc79e74e875f5131c75d91500c93ce88789a4639978079c70a"
+  },
+  "final_local": {
+    "raw_gain": "3a6764b3f71888be2166b4bab08493afc2543953ef057bbc69935e716534b320"
+  },
+  "initial_backbone": {
+    "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+    "alpha": "29c8b7ed08d0b116154e8aa59fa6b51188383f02872a7c824d588786fdab93dc",
+    "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+    "h2DA.bias": "69561708efc68edcf99e420db3aa3fb3ee89aa540d2423dbb3bc7d1ce71721ec",
+    "h2DA.weight": "bd592d980788023aaa6c581513947b4b6bc38a3b95a9664d77ba7512ea630dc4",
+    "h2o.bias": "53afb5631358a592b3e1db995adfd5f081366bab2949f032a1709470866f39cd",
+    "h2o.weight": "db43378841ed6667db442f5a837bd724fe4400f9d30b0ef37abf5f52690f218d",
+    "h2v.bias": "c4a8add2696899f0b8d4ef2f8db1a886b690337178a3745202e7dc3b162f33fd",
+    "h2v.weight": "f6f7221ce92af7f43b950b9fef41a4096fedd4ac8c844088ceae8cc84e0b503d",
+    "i2h.bias": "5dc0b8276f6d12534e92d348f7db8025ee8f2d0ad196f3db1f255c91b99ffb62",
+    "i2h.weight": "bd7e5af30252ed6824543a7bb9526e3621fa94d87b62c3cef64cdb26a3461486",
+    "w": "e8803c7a7802d5eb6aa0323be0120368b99a6297cf71ed00f20f0fb9b295c663"
+  },
+  "initial_local": {
+    "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+  },
+  "local_gain": 0.14703971147537231,
+  "optimizer_steps": {
+    "backbone.DAmult": 1500,
+    "backbone.alpha": 1500,
+    "backbone.etaet": 1500,
+    "backbone.h2DA.bias": 1500,
+    "backbone.h2DA.weight": 1500,
+    "backbone.h2o.bias": 1500,
+    "backbone.h2o.weight": 1500,
+    "backbone.h2v.bias": 1500,
+    "backbone.h2v.weight": 1500,
+    "backbone.i2h.bias": 1500,
+    "backbone.i2h.weight": 1500,
+    "backbone.w": 1500,
+    "local.raw_gain": 1500
+  },
+  "protocol_sha256": "7199a7c2ca0282d78ca92c15000576b617f75560a6e5ff835b1308210e551475",
+  "runtime": {
+    "blas_thread_limit": 1,
+    "blas_threadpools": [
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.188.0"
+      },
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.dev"
+      }
+    ],
+    "compiler_threads": 1,
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "device_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "execution_schema_version": 2,
+    "float32_matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "profile": {
+      "blas_threads": 1,
+      "compile": true,
+      "compile_backend": "inductor",
+      "compile_fullgraph": true,
+      "compile_mode": "default",
+      "cpu_threads": 1,
+      "device": "cuda",
+      "require_cuda": true
+    },
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.14.0+cu130",
+    "triton_mix_order_reduction": false
+  },
+  "seed": 2333,
+  "source_commit": "f063458e02b18a5fc5150c7a8f7bc0a06eea715d",
+  "states": 65,
+  "stream_fingerprint": "78ea03ce9fcf57f265791b1d12a3f5f1cfa5c00cd8987260d4b5555e32741cbb",
+  "training_seconds": 51.297761855006684
+}
