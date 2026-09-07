@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "study_id": "observation_replication",
+  "tier": "prospective independent simulation replication",
+  "question": "Do acute observation-induced organized individuality and training-dependent output compensation replicate jointly in new paired networks crossed with new simulated panels?",
+  "parent_protocol": {
+    "path": "studies/observation_uncertainty/records/benchmarks/protocol.json",
+    "sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92",
+    "bytes": 16311
+  },
+  "parent_witness_commit": "8eb66e90d351a715ab215d5031b0a9f6875bf2a2",
+  "design": {
+    "seeds": [
+      2531,
+      2532,
+      2533
+    ],
+    "panels": [
+      1,
+      2,
+      3
+    ],
+    "cells": {
+      "A0": {
+        "training": "clean",
+        "observation": "clean"
+      },
+      "Ae": {
+        "training": "clean",
+        "observation": "noisy"
+      },
+      "C0": {
+        "training": "noisy",
+        "observation": "clean"
+      },
+      "Ce": {
+        "training": "noisy",
+        "observation": "noisy"
+      }
+    },
+    "training_conditions": [
+      "clean",
+      "noisy"
+    ],
+    "networks": 6,
+    "evaluation_units": 36,
+    "generic_episodes_per_panel": 256,
+    "liu_subjects_per_panel": 77,
+    "crossing": "All three training pairs crossed with all three panels. Only three independent training pairs. Identical initialization and base task stream within A/C pair. Identical physical input, observation draw, choice RNG and interventions across four cells within panel."
+  },
+  "recipe": "Exact parent architecture, task law, optimization, observation sigma=1/7, metric definitions and runtime. Six models x1500 updates x32 episodes =288000 exposures. No new development fits or screen; old archived models only for engineering qualification.",
+  "rng": {
+    "training": "Parent training_rng_offset=136000 + new network seed; observation=400000000+seed*10000+step. No overlap with parent 2431..2434.",
+    "panel_base": 706000,
+    "panel_stride": 100,
+    "generic_offset": 0,
+    "liu_offsets": {
+      "cue_seed": 11,
+      "support_seed": 12,
+      "subject_encoding_seed": 13,
+      "choice_seed": 14,
+      "order_seed": 15,
+      "query_shuffle_seed": 16,
+      "evidence_shuffle_seed": 17
+    },
+    "generic_noise_panel_offset": 100,
+    "liu_noise_panel_offset": 200,
+    "noise": "Parent attach_noise formula; generic panel=100+p,batch_id=support length; Liu panel=200+p,batch_id=0; replay0 only. Independent new draws and unchanged laws.",
+    "bootstrap": "Parent seed_offset 126000 plus network seed plus panel*1000000. Independent within-panel resampling; common IDs across four cells. Generic and Liu are distinct populations."
+  },
+  "statistics": {
+    "samples": 2000,
+    "interval": 0.95,
+    "seed_offset": 126000,
+    "unit": "Joint resampling of the original participant IDs across four cells within each network; generic episodes and Liu participants separate. Never treat participant pairs as independent or pool networks. Duplicate sampled IDs are separate bootstrap observations as in the parent contract. Conditional masks applied after resampling, no common-mask restriction. Any undefined conditional draw makes its interval undefined; retain its count. Scalar CE and shifts must be finite for all subjects or stop."
+  },
+  "estimands": {
+    "contrasts": {
+      "baseline": {
+        "C0": 1,
+        "A0": -1
+      },
+      "error_A": {
+        "Ae": 1,
+        "A0": -1
+      },
+      "error_C": {
+        "Ce": 1,
+        "C0": -1
+      },
+      "interaction": {
+        "Ce": 1,
+        "C0": -1,
+        "Ae": -1,
+        "A0": 1
+      },
+      "training_under_error": {
+        "Ce": 1,
+        "Ae": -1
+      }
+    },
+    "tau": "For each contrast, recompute the weighted pairwise Kendall tau of each cell in shared-ID bootstrap samples. Primary global_all77; also full_all77, full_conditional and global_conditional. Report each cell and simple effects, not interaction alone.",
+    "CE": "Per-episode CE=mean(logaddexp(0,-margin*true_sign/T)). Generic T=1, full/global separately; global CE interaction aligns with primary structure and full CE retains task-output context. Liu T=0.25, full/global separately as secondary; never pool tasks or temperatures. All four simple/cross contrasts for each endpoint.",
+    "order_shift": "Global S_R=mean_i[(1-KendallTau(order_R0_i,order_Re_i))/2], equivalently fraction of the 28 item pairs reversed within each subject. Report S_A,S_C and participant-paired S_C-S_A using replay0, deterministic internal orders, unchanged tie ordering. No sampled choices enter this endpoint.",
+    "absolute_behavior": "Retain inherited full/global competence and five core flags for each cell, plus P_off/evidence-shuffle evidence binding. Full-policy historical profiles remain descriptive; no promotion or human-distribution matching."
+  },
+  "summary": "For each training pair, equal mean of its three panel effects. Independently bootstrap participants inside each fixed panel, share counts across its four cells, then average panel effects; no pooled tau and no network pooling. Report all per-panel absolute full/global and all77/conditional tau, CE, five contrasts, S_A,S_C,S_C-S_A. Main summary: global all77 I_tau, generic global I_CE, S_C-S_A, both error tau effects, original-input and noisy-input generic CE differences. Full/global CE and Liu CE remain separate.",
+  "decision": {
+    "primary": "Acute Ae core/competence/binding per panel and network, jointly with I_tau>0, I_CE<0, S_C-S_A<0. Require both noise tau simple effects negative for partial-compensation interpretation. Report point signs and 95% intervals, retain uncertain/opposite cases. Existing crossover diagnostic booleans descriptive, not a newly fitted universal all-pass gate.",
+    "cost": "Original-input generic CE cost is separate, not necessary for compensation. Report full/global separately. No implication of optimality or unavoidable tradeoff.",
+    "failure": "Competence failure makes that unit uninterpretable for structural mechanism. Complete all 36 registered units and preserve valid failures; integrity/nonfinite/execution failure stops affected execution for diagnosis, with no replacement seed or recipe repair. No dropping panels or adding networks after outcomes.",
+    "outcomes": "Both acute core and compensation replicate -> fixed-RNN evidence; compensation only -> retain adaptation, bound functional candidate; acute only -> retain functional result, bound training claim; neither -> bound original evidence before localization."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.observation_replication <stage>",
+    "stages": [
+      "qualify",
+      "freeze",
+      "train",
+      "lock-models",
+      "evaluate",
+      "report"
+    ],
+    "freezes": "Commit qualified implementation and protocol before source/input freeze; commit source/input lock before training; train all six models, verify paired initialization/task logs and optimizer coverage, lock and commit all weights before any new generic or Liu outcomes; complete evaluations and archive once. No checkpoint or seed selection.",
+    "qualification": "New collector exact replay of archived A0/2432 all raw arrays; old four-cell estimator parity; independent brute-force panel bootstrap tests. Reuse byte-verified parent training/encoding equations and their qualification, no changed equation.",
+    "validation": "Changed-source Ruff/format/types, affected estimator/encoding tests, architecture checks, registry/docs checks. Independent post-run reconstruction of primary summaries and all-cell CE/native orders from archived sufficient arrays; complete run manifests and byte checks."
+  },
+  "outputs": [
+    "benchmarks/protocol.json",
+    "benchmarks/qualification.json",
+    "benchmarks/source_lock.json",
+    "benchmarks/model_lock.json",
+    "results/result.json",
+    "reports/interpretation.md",
+    "artifacts: inputs, all six final weights and train logs, all36 raw arrays and behavior/summary files, run manifests, comparison draws"
+  ],
+  "claim_boundary": [
+    "Independent network and simulated-panel replication within project-exposed Liu task structure; no new human evidence or human-confirmation claim.",
+    "No population success rate from three training pairs; three crossed panels do not create nine independent networks.",
+    "Keep parent p/z scaffold, calibrated descriptive temperature and local route; no necessity or biological localization.",
+    "No folded B, history panel, new noise scale, gates, costs, checkpoint selection, human fitting, item transport or promotion.",
+    "A/C are separately trained paired systems, not longitudinal adaptation of one person. Output compensation does not localize to output weights."
+  ]
+}
