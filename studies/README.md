@@ -387,8 +387,10 @@ upgrading them into arbitrary-domain guarantees.
 - [Item-count transport](item_count_transport/README.md) — `transported`
   - **Finding:** All primary links pass at N=6, 8, and 10 across all three development
     backbones, including exact local ledger reconstruction and P/a double dissociation.
-- [History-dependent relational knowledge revision](relational_revision/README.md) — `unresolved`
-  - **Finding:** Prospective history-dependent revision diagnosis.
+- [History-dependent relational knowledge revision](relational_revision/README.md) — `mixed`
+  - **Finding:** All six frozen RNNs adapt and recover from outliers, but none passes
+    history-dependent crossover or preservation; covariance filter passes primary gates.
+    Proceed to the planned joint-training comparison.
 
 ## Human validation work, currently deferred
 

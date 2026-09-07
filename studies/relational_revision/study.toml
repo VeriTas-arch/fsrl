@@ -3,11 +3,3683 @@ id = "relational_revision"
 title = "History-dependent relational knowledge revision"
 chapter = "structural_transport"
 order = 1150
-status = "unresolved"
+status = "mixed"
 review_state = "indexed"
 question = "Does the current single-state affine RNN use relational history to change the direction of remote updates, adapt to real changes, and recover from transient observation errors?"
-finding = "Prospective history-dependent revision diagnosis."
+finding = "All six frozen RNNs adapt and recover from outliers, but none passes history-dependent crossover or preservation; covariance filter passes primary gates. Proceed to the planned joint-training comparison."
 boundary = "New synthetic development task; no human fit, new human validation, proven minimality, MF-to-MB transition, final manuscript promotion or successful knowledge revision presumed. Negative results remain evidence."
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3f17a477cec39ce6f90034648af05f3f0ea0a421751883448187a8c267180904"
+bytes = 667
+source_ref = "sha256:3f17a477cec39ce6f90034648af05f3f0ea0a421751883448187a8c267180904"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "beec864bdb8a22fce338ca84770f7490df71a423921ad7dac42b0dff50d6f142"
+bytes = 251800
+source_ref = "sha256:beec864bdb8a22fce338ca84770f7490df71a423921ad7dac42b0dff50d6f142"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "750db57b3cf4a8b160d83ad051d1dc18de0dcae534bc8e09ff8bf49f6e9f46b9"
+bytes = 669
+source_ref = "sha256:750db57b3cf4a8b160d83ad051d1dc18de0dcae534bc8e09ff8bf49f6e9f46b9"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a07b176f71c7627f0148d507748196f0ea6c65087ff115771e41787338a72d7b"
+bytes = 251726
+source_ref = "sha256:a07b176f71c7627f0148d507748196f0ea6c65087ff115771e41787338a72d7b"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ae7776d6317c7965b6e7d3df76283b320440f557ec074535e6ef5a00f897dcf3"
+bytes = 665
+source_ref = "sha256:ae7776d6317c7965b6e7d3df76283b320440f557ec074535e6ef5a00f897dcf3"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e38d3e71ff9c9bfd152601659ac6504c661b1d9931052513f393de4c44076292"
+bytes = 251778
+source_ref = "sha256:e38d3e71ff9c9bfd152601659ac6504c661b1d9931052513f393de4c44076292"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5e111b27b4db0e24cbafa3efd30aeacd7eacc9a6544f15756583edd7b00d6f9d"
+bytes = 665
+source_ref = "sha256:5e111b27b4db0e24cbafa3efd30aeacd7eacc9a6544f15756583edd7b00d6f9d"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8c546fb22f75a5a1e4e2ebe04afbafa879e9d490b2bbe54057511a64f0d08fde"
+bytes = 251843
+source_ref = "sha256:8c546fb22f75a5a1e4e2ebe04afbafa879e9d490b2bbe54057511a64f0d08fde"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a38adb4cad15ba396118a38c9219dfe6a76f98265a997b007bb7822964f90603"
+bytes = 667
+source_ref = "sha256:a38adb4cad15ba396118a38c9219dfe6a76f98265a997b007bb7822964f90603"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ff95897328eb0944db7f63c8142db41f0e1743f3997e4e059645da856423c0c5"
+bytes = 251735
+source_ref = "sha256:ff95897328eb0944db7f63c8142db41f0e1743f3997e4e059645da856423c0c5"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "faab49439959454ba93ad67e0312bcb3a7798c2d42b8e9fed256736aa7dbb7fe"
+bytes = 663
+source_ref = "sha256:faab49439959454ba93ad67e0312bcb3a7798c2d42b8e9fed256736aa7dbb7fe"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "81eec5c375e3292471f27a951149abf570ccb6401371a58f6217c7b8fcc1f9a0"
+bytes = 251668
+source_ref = "sha256:81eec5c375e3292471f27a951149abf570ccb6401371a58f6217c7b8fcc1f9a0"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "508bfef25b61329a64011b0f42807375c700aa2a1c66c423bf061814c99494c4"
+bytes = 667
+source_ref = "sha256:508bfef25b61329a64011b0f42807375c700aa2a1c66c423bf061814c99494c4"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c8d1a66912662be8209727dff628589abfada3085f2a64fa162af5211f80d7a3"
+bytes = 251812
+source_ref = "sha256:c8d1a66912662be8209727dff628589abfada3085f2a64fa162af5211f80d7a3"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7ddecfb6e9abb42baf00a272b5f1db0c9c9c68c7353b768e1408c1625fbd9420"
+bytes = 669
+source_ref = "sha256:7ddecfb6e9abb42baf00a272b5f1db0c9c9c68c7353b768e1408c1625fbd9420"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "13a490f68676619da2c40049937ea77d855952adfd24c5db20b45932a6a8ef35"
+bytes = 251916
+source_ref = "sha256:13a490f68676619da2c40049937ea77d855952adfd24c5db20b45932a6a8ef35"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2d242bfda8a80d1121d51a0447134e398aabcca9eb51bbc5f98fd803782e11af"
+bytes = 665
+source_ref = "sha256:2d242bfda8a80d1121d51a0447134e398aabcca9eb51bbc5f98fd803782e11af"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f998596122ddf7f822cb112e65f4f66e5939695177e005489e5788ab2d9d1b20"
+bytes = 251705
+source_ref = "sha256:f998596122ddf7f822cb112e65f4f66e5939695177e005489e5788ab2d9d1b20"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fd06402bcdce110bfa629311be403283eb05b89efe61943c559db48fe5f0d07e"
+bytes = 665
+source_ref = "sha256:fd06402bcdce110bfa629311be403283eb05b89efe61943c559db48fe5f0d07e"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0748ecb5bbbbdacff00afe64a978d2b97f536a3f96fd209f3ed940b3dfff9f2f"
+bytes = 251762
+source_ref = "sha256:0748ecb5bbbbdacff00afe64a978d2b97f536a3f96fd209f3ed940b3dfff9f2f"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b92b4ae8d4ca0d6c7c7cbdf8171e7d9a20955cf2185fb0a6d7e06a485a51bda5"
+bytes = 667
+source_ref = "sha256:b92b4ae8d4ca0d6c7c7cbdf8171e7d9a20955cf2185fb0a6d7e06a485a51bda5"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "feaa5875d7d4a777b7b700f3d36644a3d0c78dce7b9372a33b0cb99c4fccd602"
+bytes = 251968
+source_ref = "sha256:feaa5875d7d4a777b7b700f3d36644a3d0c78dce7b9372a33b0cb99c4fccd602"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9ffe1d36d12abaf2cc693d1e86dfd571792ce48044a34dc29e097786a3559c64"
+bytes = 663
+source_ref = "sha256:9ffe1d36d12abaf2cc693d1e86dfd571792ce48044a34dc29e097786a3559c64"
+
+[[records]]
+path = "records/artifacts/2531-clean/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2a5effd03d413160de4927fee74d5b043e9b411720d2af01e223b3931a65a241"
+bytes = 251642
+source_ref = "sha256:2a5effd03d413160de4927fee74d5b043e9b411720d2af01e223b3931a65a241"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "77c0d225671fbd492e6526d2f6dadb4b1a453d851bc90baa525625b654af27d5"
+bytes = 667
+source_ref = "sha256:77c0d225671fbd492e6526d2f6dadb4b1a453d851bc90baa525625b654af27d5"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d5a1c71ea9f831b4f8324dbeb300f6b32ecc0fdedde129e39dc63c3197aaea84"
+bytes = 251792
+source_ref = "sha256:d5a1c71ea9f831b4f8324dbeb300f6b32ecc0fdedde129e39dc63c3197aaea84"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "df6c251594203161403d52c0841864e97434cae6f58595063b0de6a04e7f033e"
+bytes = 669
+source_ref = "sha256:df6c251594203161403d52c0841864e97434cae6f58595063b0de6a04e7f033e"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eae10455b63e1cb3837ead9e8319922dbd8f0ad85a65e113d6aef6825846b1bf"
+bytes = 251700
+source_ref = "sha256:eae10455b63e1cb3837ead9e8319922dbd8f0ad85a65e113d6aef6825846b1bf"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "21740c492451fc0ae5ead9fe725f15b90ace552a09f187b299b090b53a01d7b1"
+bytes = 665
+source_ref = "sha256:21740c492451fc0ae5ead9fe725f15b90ace552a09f187b299b090b53a01d7b1"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "793c383de76a71be6827e525595cc05d3a9b930ec2babe30a4fd480f3e29a44e"
+bytes = 251731
+source_ref = "sha256:793c383de76a71be6827e525595cc05d3a9b930ec2babe30a4fd480f3e29a44e"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c5875958233ad778b2d54dd5a3f9a1cc16c30c238fc8cbb774ffab9e34526f07"
+bytes = 665
+source_ref = "sha256:c5875958233ad778b2d54dd5a3f9a1cc16c30c238fc8cbb774ffab9e34526f07"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "10c9ee1707775b74b5ca2bf57c5b942020c8c85711c33b38fea018dc8c040541"
+bytes = 251581
+source_ref = "sha256:10c9ee1707775b74b5ca2bf57c5b942020c8c85711c33b38fea018dc8c040541"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d0f5ac11a8f425db6228b91db6627d6261f15002bf592f20dc87a3551fe9a304"
+bytes = 667
+source_ref = "sha256:d0f5ac11a8f425db6228b91db6627d6261f15002bf592f20dc87a3551fe9a304"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b9a7ca0ad49c275311f3dfe5e963cef1417d254ade0cda103a2c490e475146d1"
+bytes = 251698
+source_ref = "sha256:b9a7ca0ad49c275311f3dfe5e963cef1417d254ade0cda103a2c490e475146d1"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "554d377c142024b850df88edafca6e56dc25ca905cb47153a667b6c590d608f7"
+bytes = 663
+source_ref = "sha256:554d377c142024b850df88edafca6e56dc25ca905cb47153a667b6c590d608f7"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "689d1fdf561b5be7a7d54d36fdaddad7cc3bb9db3f85e16a249b07eebe86f6e7"
+bytes = 251516
+source_ref = "sha256:689d1fdf561b5be7a7d54d36fdaddad7cc3bb9db3f85e16a249b07eebe86f6e7"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b365451317bf391e077af84fcc10d956267422d664704c86ccaa2315288b96a1"
+bytes = 667
+source_ref = "sha256:b365451317bf391e077af84fcc10d956267422d664704c86ccaa2315288b96a1"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dc6a2141bf0ba6e2a26e4fe897b827b3671eeb1eb936eea716530d9d0e42f8a3"
+bytes = 251836
+source_ref = "sha256:dc6a2141bf0ba6e2a26e4fe897b827b3671eeb1eb936eea716530d9d0e42f8a3"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7c1c353ba9a716459712d9fb4be8a100d16d0c191d5b1df834b192c2183fc348"
+bytes = 669
+source_ref = "sha256:7c1c353ba9a716459712d9fb4be8a100d16d0c191d5b1df834b192c2183fc348"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ab7ac8742162cbacc9c38bbf87d41359cd8ef4019426a56c0ee8377dd325ffc2"
+bytes = 251825
+source_ref = "sha256:ab7ac8742162cbacc9c38bbf87d41359cd8ef4019426a56c0ee8377dd325ffc2"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fd0cc0221fc8c684640f1e12ffde343ce1ca8be918bcc2c7a4d4386da7bb0a7a"
+bytes = 665
+source_ref = "sha256:fd0cc0221fc8c684640f1e12ffde343ce1ca8be918bcc2c7a4d4386da7bb0a7a"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cf185d306a5041e658c8ad41c60cf93ffc22cd93b9f3f64f2d4902e1cddf6742"
+bytes = 251863
+source_ref = "sha256:cf185d306a5041e658c8ad41c60cf93ffc22cd93b9f3f64f2d4902e1cddf6742"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7d7286ad10800385d984b099cb2e476e9a180b5d4d23e04f2c79d21df766364f"
+bytes = 665
+source_ref = "sha256:7d7286ad10800385d984b099cb2e476e9a180b5d4d23e04f2c79d21df766364f"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eb9d8cc5e1d0b45b794e5870a113e5d5674edda1a0cfb00297c9aac2364e58e0"
+bytes = 251780
+source_ref = "sha256:eb9d8cc5e1d0b45b794e5870a113e5d5674edda1a0cfb00297c9aac2364e58e0"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4c8b5069ca941fa5946ac0cab5fc41ffe26c405ec4036df476f5a09368401430"
+bytes = 667
+source_ref = "sha256:4c8b5069ca941fa5946ac0cab5fc41ffe26c405ec4036df476f5a09368401430"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5193786f7a43b4b9467287f52ad2e5b8f159a1917374ca6d2439bdc857e31b58"
+bytes = 251850
+source_ref = "sha256:5193786f7a43b4b9467287f52ad2e5b8f159a1917374ca6d2439bdc857e31b58"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "042187d7a55751dcf34b4c6750babaf5dd3767eaef9a0b8e36e3650216ff4241"
+bytes = 663
+source_ref = "sha256:042187d7a55751dcf34b4c6750babaf5dd3767eaef9a0b8e36e3650216ff4241"
+
+[[records]]
+path = "records/artifacts/2531-clean/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-clean/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fd02157de7f42e90ac43b01cbd4683f868037d5d94430661866da4784c053966"
+bytes = 251787
+source_ref = "sha256:fd02157de7f42e90ac43b01cbd4683f868037d5d94430661866da4784c053966"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "962a481144c2da75a4cf0c701fd74a8c8a39f417653c0e8174ab136c26537916"
+bytes = 667
+source_ref = "sha256:962a481144c2da75a4cf0c701fd74a8c8a39f417653c0e8174ab136c26537916"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8fe6d4c4fb31ca9a5ce3d9d5ca2c71d30ad9cefa29735994b46d7e635523477a"
+bytes = 252493
+source_ref = "sha256:8fe6d4c4fb31ca9a5ce3d9d5ca2c71d30ad9cefa29735994b46d7e635523477a"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6748f216e8ab38a634f66be7483f34af0964ccb5f209f543fcae50e0f184e8b9"
+bytes = 669
+source_ref = "sha256:6748f216e8ab38a634f66be7483f34af0964ccb5f209f543fcae50e0f184e8b9"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5f31a71569c0411a006e0ff28015c7ec6d072356e2f5665fbbe0173ea4ac7e4d"
+bytes = 252164
+source_ref = "sha256:5f31a71569c0411a006e0ff28015c7ec6d072356e2f5665fbbe0173ea4ac7e4d"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2b6c76e40de58b884fdf064c535bc6fa30b69b345dd6fffa2a4d38d755fa8888"
+bytes = 665
+source_ref = "sha256:2b6c76e40de58b884fdf064c535bc6fa30b69b345dd6fffa2a4d38d755fa8888"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "29f6d541e1c710424808b5ebc19347d0eadfc4e099189a36d6164e05c9faafe6"
+bytes = 252479
+source_ref = "sha256:29f6d541e1c710424808b5ebc19347d0eadfc4e099189a36d6164e05c9faafe6"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "aa2ae12c0f6a0df0b26f240b6cbcaf04807e2026df76030b7567bfbb86fea862"
+bytes = 665
+source_ref = "sha256:aa2ae12c0f6a0df0b26f240b6cbcaf04807e2026df76030b7567bfbb86fea862"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2fb4c4449871c92cedbda8628e293d63a8bcc0d9816d4b596a7d6927664f2b5f"
+bytes = 252535
+source_ref = "sha256:2fb4c4449871c92cedbda8628e293d63a8bcc0d9816d4b596a7d6927664f2b5f"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f38107168fad1016a0ee061bbf065406f932cc6de1a479c35f00f85b10e933b8"
+bytes = 667
+source_ref = "sha256:f38107168fad1016a0ee061bbf065406f932cc6de1a479c35f00f85b10e933b8"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1ecc1fd1838e08b3bc8a9aea7dd51607dfc6cfa3677b4160e95ac2de8a8cd9f4"
+bytes = 252161
+source_ref = "sha256:1ecc1fd1838e08b3bc8a9aea7dd51607dfc6cfa3677b4160e95ac2de8a8cd9f4"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "26f62a7a122a3329351a066ac194ed8427ff9bbdd36238573a362dddd3f85046"
+bytes = 663
+source_ref = "sha256:26f62a7a122a3329351a066ac194ed8427ff9bbdd36238573a362dddd3f85046"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "efa65dd048a98a9a1487c0beff4eadfb1e7508371730154855ef7b111e8d0002"
+bytes = 252544
+source_ref = "sha256:efa65dd048a98a9a1487c0beff4eadfb1e7508371730154855ef7b111e8d0002"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0ae1d532dfee8a8db615b0e727ff3932174667ae6bc0c93ce779b1a22fd0233c"
+bytes = 667
+source_ref = "sha256:0ae1d532dfee8a8db615b0e727ff3932174667ae6bc0c93ce779b1a22fd0233c"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9a779166b25b1fe46e32a75a0a47009b5107957cbb2f49f71e0189cb62d9fe3c"
+bytes = 252516
+source_ref = "sha256:9a779166b25b1fe46e32a75a0a47009b5107957cbb2f49f71e0189cb62d9fe3c"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9da06d22171d8a479dd9b30cc62f7a0cd1a8d0d6d5380984ed4479e423893efb"
+bytes = 669
+source_ref = "sha256:9da06d22171d8a479dd9b30cc62f7a0cd1a8d0d6d5380984ed4479e423893efb"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "80f0ec087387607d07d06ea76b0376a4bbeef06b738e6f08c04e82aaabdb35f2"
+bytes = 252436
+source_ref = "sha256:80f0ec087387607d07d06ea76b0376a4bbeef06b738e6f08c04e82aaabdb35f2"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "400ab3552a3c5a69b260a25059ea5d5ff3cd8931b7d7a8365bbd655326647210"
+bytes = 665
+source_ref = "sha256:400ab3552a3c5a69b260a25059ea5d5ff3cd8931b7d7a8365bbd655326647210"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b32e909f87faee0ee568aa9535439beb4d2a2706df2c02a06a38eeec1cd0d932"
+bytes = 252449
+source_ref = "sha256:b32e909f87faee0ee568aa9535439beb4d2a2706df2c02a06a38eeec1cd0d932"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2bad99cbd448c84a462a053efdf3215ccf1fec3b0c6ca750db348e1194efcf83"
+bytes = 665
+source_ref = "sha256:2bad99cbd448c84a462a053efdf3215ccf1fec3b0c6ca750db348e1194efcf83"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dfcf228c0c5938b4841fa5b228e9b97bbbaf644323f20cd07b166efc2afd8506"
+bytes = 252424
+source_ref = "sha256:dfcf228c0c5938b4841fa5b228e9b97bbbaf644323f20cd07b166efc2afd8506"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "51da53e65f2167fcbcfdc907f8b63845bddcf5ab639cfdb83e2d11d0fdf4c116"
+bytes = 667
+source_ref = "sha256:51da53e65f2167fcbcfdc907f8b63845bddcf5ab639cfdb83e2d11d0fdf4c116"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "04a30c3e9eb4d37a0b93ff78b15d0b83d2fd26a9f5224519ad186fde63043017"
+bytes = 252289
+source_ref = "sha256:04a30c3e9eb4d37a0b93ff78b15d0b83d2fd26a9f5224519ad186fde63043017"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5ba27d02077ae6165b0fd0858ee4259b12ac9eb56daf52d203a39477ed955271"
+bytes = 663
+source_ref = "sha256:5ba27d02077ae6165b0fd0858ee4259b12ac9eb56daf52d203a39477ed955271"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3d3727c7493af40d5bc42c7028ab374242a61a554ae6e983299169cd9cb4cec4"
+bytes = 252421
+source_ref = "sha256:3d3727c7493af40d5bc42c7028ab374242a61a554ae6e983299169cd9cb4cec4"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a841ca979e4c60925b5d76411248aa460d9a34ba4f2a52a9e689bd4574becfd3"
+bytes = 667
+source_ref = "sha256:a841ca979e4c60925b5d76411248aa460d9a34ba4f2a52a9e689bd4574becfd3"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e6051e9789aaf44c788d9dd0ef3f2a6708aac1c1063008496770f7c341e7f467"
+bytes = 252441
+source_ref = "sha256:e6051e9789aaf44c788d9dd0ef3f2a6708aac1c1063008496770f7c341e7f467"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "96c69f511ceea82c36dc2f1b59df0dc2c87f8cf37fdbd3effb3c7efc658581bc"
+bytes = 669
+source_ref = "sha256:96c69f511ceea82c36dc2f1b59df0dc2c87f8cf37fdbd3effb3c7efc658581bc"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1f60374270d26501c11380af9b537ba8a43aaed6b7d262fc0bc4a3e018f58354"
+bytes = 252181
+source_ref = "sha256:1f60374270d26501c11380af9b537ba8a43aaed6b7d262fc0bc4a3e018f58354"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "afe25d460d54941c12e43099e78048f375498537d9c2ef3d629686bd6c6d16e4"
+bytes = 665
+source_ref = "sha256:afe25d460d54941c12e43099e78048f375498537d9c2ef3d629686bd6c6d16e4"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "10542c4735f8c1efd044d3314beac7e6a4217215f1ef382cc02ed95648a146d4"
+bytes = 252497
+source_ref = "sha256:10542c4735f8c1efd044d3314beac7e6a4217215f1ef382cc02ed95648a146d4"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "481126f8f7fbc7ca71aa22044091b4584aff9137e9cdfb61489e6f8b2de9806f"
+bytes = 665
+source_ref = "sha256:481126f8f7fbc7ca71aa22044091b4584aff9137e9cdfb61489e6f8b2de9806f"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e46b601267645c0e652ab405aa81d8ff2fdcb94f0c195596cfa0759adf2e3e4b"
+bytes = 252500
+source_ref = "sha256:e46b601267645c0e652ab405aa81d8ff2fdcb94f0c195596cfa0759adf2e3e4b"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0d3b968795c48cbf2aae04500fa9d5d977765d10cc189ab6791e545204f5d73a"
+bytes = 667
+source_ref = "sha256:0d3b968795c48cbf2aae04500fa9d5d977765d10cc189ab6791e545204f5d73a"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8cab0158d8a2de516849ea5365ab1cccbde4cb98fd742d317d95d78e06188583"
+bytes = 252116
+source_ref = "sha256:8cab0158d8a2de516849ea5365ab1cccbde4cb98fd742d317d95d78e06188583"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "001efbd1a0a290b732c98e6934e2ea80d53fa98e7ebd38b792800f3789c66fe1"
+bytes = 663
+source_ref = "sha256:001efbd1a0a290b732c98e6934e2ea80d53fa98e7ebd38b792800f3789c66fe1"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "548e22ca74ed583118fc5739eb59195b1e4d92ccb498f0a1c2177af1f6624394"
+bytes = 252622
+source_ref = "sha256:548e22ca74ed583118fc5739eb59195b1e4d92ccb498f0a1c2177af1f6624394"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "939802830f535b505c49c8bc6d5584e337a7550ac08534cab6c8de250d8b7180"
+bytes = 667
+source_ref = "sha256:939802830f535b505c49c8bc6d5584e337a7550ac08534cab6c8de250d8b7180"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0dff378ee545e18a4b491cd33101928f72ef554a8ea34f323dae64bc473f9585"
+bytes = 252646
+source_ref = "sha256:0dff378ee545e18a4b491cd33101928f72ef554a8ea34f323dae64bc473f9585"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1d4fc2c512d2bce3e2754d7b356ac0c01eb13dfa2875fbc8a319016f7f7215b3"
+bytes = 669
+source_ref = "sha256:1d4fc2c512d2bce3e2754d7b356ac0c01eb13dfa2875fbc8a319016f7f7215b3"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "47c5f65a0ebe42076df60f8c36188e5951b9331544550a225e2e06ec6dd1bb12"
+bytes = 252402
+source_ref = "sha256:47c5f65a0ebe42076df60f8c36188e5951b9331544550a225e2e06ec6dd1bb12"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d10d0d9a4cd9e705fba5bbb51b0ed8e3b022d1f014deeabba3b00803c24cacbc"
+bytes = 665
+source_ref = "sha256:d10d0d9a4cd9e705fba5bbb51b0ed8e3b022d1f014deeabba3b00803c24cacbc"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7ae80312f0ee704cdb946caa0ba35014c13ceee49f7fd9273ff931bba31f958f"
+bytes = 252707
+source_ref = "sha256:7ae80312f0ee704cdb946caa0ba35014c13ceee49f7fd9273ff931bba31f958f"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b9e7e44d28dd28f62e1d12131d1e404be7f43f43605b8faffd1e3addd9175835"
+bytes = 665
+source_ref = "sha256:b9e7e44d28dd28f62e1d12131d1e404be7f43f43605b8faffd1e3addd9175835"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e5f550f6d7c460d91498233f006e954a1c0c8005c18bbaf397b48cb4d2ac80a9"
+bytes = 252541
+source_ref = "sha256:e5f550f6d7c460d91498233f006e954a1c0c8005c18bbaf397b48cb4d2ac80a9"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2f12a4b27e92684496b986420c644399ce9bf13382effa70d2f684616307a162"
+bytes = 667
+source_ref = "sha256:2f12a4b27e92684496b986420c644399ce9bf13382effa70d2f684616307a162"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a5b090a02d23540dccacad7a14594558ebbc3f392d45ddc862d4db1f0c46235d"
+bytes = 252387
+source_ref = "sha256:a5b090a02d23540dccacad7a14594558ebbc3f392d45ddc862d4db1f0c46235d"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7224b4485b8387fa699708ccf976d1538dc2024fea8263e1e014ca15054419fb"
+bytes = 663
+source_ref = "sha256:7224b4485b8387fa699708ccf976d1538dc2024fea8263e1e014ca15054419fb"
+
+[[records]]
+path = "records/artifacts/2531-noisy/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2531-noisy/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1796e47bae742bd530e56e60533ddead65e31f6989c0438e1e2e3607b35a543a"
+bytes = 252643
+source_ref = "sha256:1796e47bae742bd530e56e60533ddead65e31f6989c0438e1e2e3607b35a543a"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "72d377964ecbe046ba6be76a4c57d88217d3d8de0ae895f0c31ba996779f51a3"
+bytes = 667
+source_ref = "sha256:72d377964ecbe046ba6be76a4c57d88217d3d8de0ae895f0c31ba996779f51a3"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e4b7ef8479db77596bcde6d09b679823d909abcc0da5c942a21c50d28de32be4"
+bytes = 252097
+source_ref = "sha256:e4b7ef8479db77596bcde6d09b679823d909abcc0da5c942a21c50d28de32be4"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "417394c1c5c59c6dd5c777c9bd0f7a460b5eacf19d04b07d74f6d564ef9b9e9d"
+bytes = 669
+source_ref = "sha256:417394c1c5c59c6dd5c777c9bd0f7a460b5eacf19d04b07d74f6d564ef9b9e9d"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "582b2d907dba2a055c91bd8944b955dd0119c602bc1c0bc1574a2d998cb1b29e"
+bytes = 252183
+source_ref = "sha256:582b2d907dba2a055c91bd8944b955dd0119c602bc1c0bc1574a2d998cb1b29e"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5b2443e6af2c77c60e81a1094460923815c505bbfb42bb2a81c5afff41631ca8"
+bytes = 665
+source_ref = "sha256:5b2443e6af2c77c60e81a1094460923815c505bbfb42bb2a81c5afff41631ca8"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "58253dc8cb0097c82dddbdc390dc48f4b67cfba60acd1d6657c5b1bec2ea57ce"
+bytes = 251950
+source_ref = "sha256:58253dc8cb0097c82dddbdc390dc48f4b67cfba60acd1d6657c5b1bec2ea57ce"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "75eeec485b53b45af7755af761896f866e637f2ce47dcac668535c124fabb7a2"
+bytes = 665
+source_ref = "sha256:75eeec485b53b45af7755af761896f866e637f2ce47dcac668535c124fabb7a2"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "db90c8cbf51c603e5a0ec84e50b67e402f7a7399161916137443f2aceda6ae71"
+bytes = 252167
+source_ref = "sha256:db90c8cbf51c603e5a0ec84e50b67e402f7a7399161916137443f2aceda6ae71"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4d7785ed470b733df9dcbae6e00bdfb4904c8d94a9216bc98b63b471f8d58ab0"
+bytes = 667
+source_ref = "sha256:4d7785ed470b733df9dcbae6e00bdfb4904c8d94a9216bc98b63b471f8d58ab0"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "28c7dd6ae0ed847769a9adf59133015db61a570661ffea5e3d6094b6c5d98fc6"
+bytes = 252196
+source_ref = "sha256:28c7dd6ae0ed847769a9adf59133015db61a570661ffea5e3d6094b6c5d98fc6"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ca4392077fffb732b429d93a9e4cba068c04ea44a1168c6c0c18c0f8d37e4fe1"
+bytes = 663
+source_ref = "sha256:ca4392077fffb732b429d93a9e4cba068c04ea44a1168c6c0c18c0f8d37e4fe1"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "22aa70ae2acf47a84f3a38f03ab0e10b53f36082cfa2f94b2a0bf26d5f2e471f"
+bytes = 251886
+source_ref = "sha256:22aa70ae2acf47a84f3a38f03ab0e10b53f36082cfa2f94b2a0bf26d5f2e471f"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b4d0e4754da4d9f920cba0bee6a3ca8cb91caf733665200d175f8020f8250537"
+bytes = 667
+source_ref = "sha256:b4d0e4754da4d9f920cba0bee6a3ca8cb91caf733665200d175f8020f8250537"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4415a96d967620357e4781fbf6d1ed140d479c556e2e1f35a4cb589eaee51c8c"
+bytes = 252163
+source_ref = "sha256:4415a96d967620357e4781fbf6d1ed140d479c556e2e1f35a4cb589eaee51c8c"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "59480c315d6aa818a3d0f64aabac0a32e064baaa73fc4d58560728b94b0fa33e"
+bytes = 669
+source_ref = "sha256:59480c315d6aa818a3d0f64aabac0a32e064baaa73fc4d58560728b94b0fa33e"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0689fd7efb31f980819081c777c10238e4bca2f0981379a63e8294c12dd67409"
+bytes = 252473
+source_ref = "sha256:0689fd7efb31f980819081c777c10238e4bca2f0981379a63e8294c12dd67409"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5b99f3aabbfee8b9de23541dc825dd18c701928d0cb03e958120146cc9fc1d6b"
+bytes = 665
+source_ref = "sha256:5b99f3aabbfee8b9de23541dc825dd18c701928d0cb03e958120146cc9fc1d6b"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "45f4851d92759cc7bb0e4f070fe2cae0a0154953904b286ffc1f323992abce19"
+bytes = 252113
+source_ref = "sha256:45f4851d92759cc7bb0e4f070fe2cae0a0154953904b286ffc1f323992abce19"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "86c2205d61fbe83687284a0063260a68cd3fa3ed2948ad77facc3ace8a9a158a"
+bytes = 665
+source_ref = "sha256:86c2205d61fbe83687284a0063260a68cd3fa3ed2948ad77facc3ace8a9a158a"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "64648a232a9243761d035846c12cb9fce86108a3f899da93c0293eaab93cc21d"
+bytes = 252097
+source_ref = "sha256:64648a232a9243761d035846c12cb9fce86108a3f899da93c0293eaab93cc21d"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b8c9d7ea9fcf71dca5b36f7fd50d0468ddb7e25422132adabb0c5daba2dee993"
+bytes = 667
+source_ref = "sha256:b8c9d7ea9fcf71dca5b36f7fd50d0468ddb7e25422132adabb0c5daba2dee993"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c506c1421a9b7c685940450772157e84dd8810a981fc4785c1b679be941f3f72"
+bytes = 252421
+source_ref = "sha256:c506c1421a9b7c685940450772157e84dd8810a981fc4785c1b679be941f3f72"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7369b7d94576d03e7a3d0d3ffa1f6a496bf9e1788790c0904c07c1d1e957880f"
+bytes = 663
+source_ref = "sha256:7369b7d94576d03e7a3d0d3ffa1f6a496bf9e1788790c0904c07c1d1e957880f"
+
+[[records]]
+path = "records/artifacts/2532-clean/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dfde0e4580c719eda5956a693452cfe01266d6dfb767edffba28d077038fc808"
+bytes = 251979
+source_ref = "sha256:dfde0e4580c719eda5956a693452cfe01266d6dfb767edffba28d077038fc808"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bea9aeaa7e71a2438b8ce992bd0d1cd4223d389d4b8983a8eee49b4b1b504245"
+bytes = 667
+source_ref = "sha256:bea9aeaa7e71a2438b8ce992bd0d1cd4223d389d4b8983a8eee49b4b1b504245"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b8d04c3a5fcea6d9840e0ba22ac949211b15ceab5c9828555b0ca993f5adcaed"
+bytes = 252034
+source_ref = "sha256:b8d04c3a5fcea6d9840e0ba22ac949211b15ceab5c9828555b0ca993f5adcaed"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2fe9cf19efc9b267723314f2cc792260cf17bb6c81031e1261c6b7217873afcc"
+bytes = 669
+source_ref = "sha256:2fe9cf19efc9b267723314f2cc792260cf17bb6c81031e1261c6b7217873afcc"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2cb9798bdac6b1fdfcbac07191066ee4b7c56ce2544ffe827cfefbcc006cf2bd"
+bytes = 252068
+source_ref = "sha256:2cb9798bdac6b1fdfcbac07191066ee4b7c56ce2544ffe827cfefbcc006cf2bd"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "91e6524702417edab4865ee92419d06c3afc3b4d15169e041a3331e675891b44"
+bytes = 665
+source_ref = "sha256:91e6524702417edab4865ee92419d06c3afc3b4d15169e041a3331e675891b44"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "77eb05c923efc711ab1273837fddbc065448371b078b8be3169a27d8185eaceb"
+bytes = 251883
+source_ref = "sha256:77eb05c923efc711ab1273837fddbc065448371b078b8be3169a27d8185eaceb"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "57bffab6cb63e5c0590e0aed69ec68a7e85fdcc03704a82dc68ad9e2b6c72893"
+bytes = 665
+source_ref = "sha256:57bffab6cb63e5c0590e0aed69ec68a7e85fdcc03704a82dc68ad9e2b6c72893"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "01df0cfc1840aba9fc01793ddd056bb7e7e39c68f43706db08144d83b546fcba"
+bytes = 251843
+source_ref = "sha256:01df0cfc1840aba9fc01793ddd056bb7e7e39c68f43706db08144d83b546fcba"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2026a32c8399acfe309fa4bc917bb553d9e3d168b6c89b3089af0ffd65ea6a99"
+bytes = 667
+source_ref = "sha256:2026a32c8399acfe309fa4bc917bb553d9e3d168b6c89b3089af0ffd65ea6a99"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e925c8a17fee9be93811f9ec320a9d2ebbb8df2f3605f6b67aee0ec27008362f"
+bytes = 252229
+source_ref = "sha256:e925c8a17fee9be93811f9ec320a9d2ebbb8df2f3605f6b67aee0ec27008362f"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "201de5199ec871aea372d84441ef80bada51a6ea9122fc38828292fedd3f2c13"
+bytes = 663
+source_ref = "sha256:201de5199ec871aea372d84441ef80bada51a6ea9122fc38828292fedd3f2c13"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4be001db89a7bf2ddd5fcb9283ee2e07e604104508afceeb23b8e30ecb200814"
+bytes = 251742
+source_ref = "sha256:4be001db89a7bf2ddd5fcb9283ee2e07e604104508afceeb23b8e30ecb200814"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cacec0ed6ffdf9095718903c571249f5f7edf875da489f24cc48c5cdd076712e"
+bytes = 667
+source_ref = "sha256:cacec0ed6ffdf9095718903c571249f5f7edf875da489f24cc48c5cdd076712e"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f320b41696f61eedf014b04cda99c69c7c9537ec75ea3fc3bb1fdf86e1957b82"
+bytes = 252068
+source_ref = "sha256:f320b41696f61eedf014b04cda99c69c7c9537ec75ea3fc3bb1fdf86e1957b82"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9733004ea1c6ae80fc4e19d1bab41eb7802f4091823c3dfc28d76d67c0094eec"
+bytes = 669
+source_ref = "sha256:9733004ea1c6ae80fc4e19d1bab41eb7802f4091823c3dfc28d76d67c0094eec"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4b47d8a30ba7e930521f779fb346df6ca6b73846717a5d034bd1ada586f40bdc"
+bytes = 252279
+source_ref = "sha256:4b47d8a30ba7e930521f779fb346df6ca6b73846717a5d034bd1ada586f40bdc"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "82f0d1a7d08bdcafcccf25e1c0db7e84be6448c0e5a8acb79a77a5f30efd9950"
+bytes = 665
+source_ref = "sha256:82f0d1a7d08bdcafcccf25e1c0db7e84be6448c0e5a8acb79a77a5f30efd9950"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "50112a376929537694d9a56ef7a21e725d33b2f07b49f075e1fee3a38c65bbbd"
+bytes = 251887
+source_ref = "sha256:50112a376929537694d9a56ef7a21e725d33b2f07b49f075e1fee3a38c65bbbd"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c6b11300d350d0fe3321a7c376c0e116434fbd241596da82859c5467527def3e"
+bytes = 665
+source_ref = "sha256:c6b11300d350d0fe3321a7c376c0e116434fbd241596da82859c5467527def3e"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1c985e7c2bbdb3a7682a008f4797b291e0935223a55036cb1605528cb8540d0b"
+bytes = 252066
+source_ref = "sha256:1c985e7c2bbdb3a7682a008f4797b291e0935223a55036cb1605528cb8540d0b"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "48388c9fdaf034be6f6540b5d6b74668f9eedc85f6194871e79861f264fe02b0"
+bytes = 667
+source_ref = "sha256:48388c9fdaf034be6f6540b5d6b74668f9eedc85f6194871e79861f264fe02b0"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4652b6dac3db3114102ab7f94596bcf37aacc6acc34bba5ac665c76b15a71500"
+bytes = 252282
+source_ref = "sha256:4652b6dac3db3114102ab7f94596bcf37aacc6acc34bba5ac665c76b15a71500"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1425914d82a7fa6fa9299df799c85baa319b5185d6e7f154c3853d35b451c26b"
+bytes = 663
+source_ref = "sha256:1425914d82a7fa6fa9299df799c85baa319b5185d6e7f154c3853d35b451c26b"
+
+[[records]]
+path = "records/artifacts/2532-clean/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-clean/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5da0903e9ebdade82e8a3b3ed973cc347d79c5dfd4a9f20b8c1be45719c6c89e"
+bytes = 251963
+source_ref = "sha256:5da0903e9ebdade82e8a3b3ed973cc347d79c5dfd4a9f20b8c1be45719c6c89e"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e8db0f3e58ebce64dc048a7f2f7f7f611b03b5505047557954403fdd588a30bb"
+bytes = 667
+source_ref = "sha256:e8db0f3e58ebce64dc048a7f2f7f7f611b03b5505047557954403fdd588a30bb"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bd7ed34543a2db9b4b0ecf161e25f3111dfb1009cf86320f9d44bd5ba921f78a"
+bytes = 252501
+source_ref = "sha256:bd7ed34543a2db9b4b0ecf161e25f3111dfb1009cf86320f9d44bd5ba921f78a"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "496a764a7ad59170fe1cdcaee8bae542ed82f77c818540f85282d5d62e210c9a"
+bytes = 669
+source_ref = "sha256:496a764a7ad59170fe1cdcaee8bae542ed82f77c818540f85282d5d62e210c9a"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f92cd9ed019bcae402f1dfe5142663432c3edfe5dd4f7bab233355e91f964a45"
+bytes = 252221
+source_ref = "sha256:f92cd9ed019bcae402f1dfe5142663432c3edfe5dd4f7bab233355e91f964a45"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "123049420a14684f03602611d3395fc7b9d7a8b306ffe4168afdc91e6f50000e"
+bytes = 665
+source_ref = "sha256:123049420a14684f03602611d3395fc7b9d7a8b306ffe4168afdc91e6f50000e"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ec35e628b8f6ee62e40642c3ec770e574a0aa9ece349888a93d3ef5a02c20db6"
+bytes = 252580
+source_ref = "sha256:ec35e628b8f6ee62e40642c3ec770e574a0aa9ece349888a93d3ef5a02c20db6"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "70c6a42c585438ff0cf38542c228cc283feabe3792e85331e22d48bf7ab8fde1"
+bytes = 665
+source_ref = "sha256:70c6a42c585438ff0cf38542c228cc283feabe3792e85331e22d48bf7ab8fde1"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "37ba619c02871bf2c8926f8d1ab838fcf87b65ab7fe5db1b53eaeeaffd8694db"
+bytes = 252583
+source_ref = "sha256:37ba619c02871bf2c8926f8d1ab838fcf87b65ab7fe5db1b53eaeeaffd8694db"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f93ed717e960f9d7f2266bb41939393a7915a1a1a6f6c652a9cb16efa20982fb"
+bytes = 667
+source_ref = "sha256:f93ed717e960f9d7f2266bb41939393a7915a1a1a6f6c652a9cb16efa20982fb"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f6aedc2558f8e9bcc2b87290e94f50888e19efadb3431f1c120f6030d1fd6851"
+bytes = 252285
+source_ref = "sha256:f6aedc2558f8e9bcc2b87290e94f50888e19efadb3431f1c120f6030d1fd6851"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0999d60c087d3bbf8a51f368d5a3ef4f147b8f4e9dea00561b68116751e85fd4"
+bytes = 663
+source_ref = "sha256:0999d60c087d3bbf8a51f368d5a3ef4f147b8f4e9dea00561b68116751e85fd4"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6d50c1fdc5a9e53c798aedd0af9aeda02851fa62ca609b2f7cfb558e5945ea9e"
+bytes = 252531
+source_ref = "sha256:6d50c1fdc5a9e53c798aedd0af9aeda02851fa62ca609b2f7cfb558e5945ea9e"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "396e52b00b5f304bbfdfd93422ada69dccc499d33906684f370b2189b3ffdf19"
+bytes = 667
+source_ref = "sha256:396e52b00b5f304bbfdfd93422ada69dccc499d33906684f370b2189b3ffdf19"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3e91b4c429db63193e7cc5c8f30817aec9c0a49d05370fcdb3eaaed10307b7f9"
+bytes = 252553
+source_ref = "sha256:3e91b4c429db63193e7cc5c8f30817aec9c0a49d05370fcdb3eaaed10307b7f9"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3860c20ac47e6592c77eba8fe1c9321f10a717eb4b93924ad2c0f399e6b10f4d"
+bytes = 669
+source_ref = "sha256:3860c20ac47e6592c77eba8fe1c9321f10a717eb4b93924ad2c0f399e6b10f4d"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "13706433d1f3942c8e968c4aaea48e6ff6a4d4cb16c9240fe0a332f133ff25c7"
+bytes = 252517
+source_ref = "sha256:13706433d1f3942c8e968c4aaea48e6ff6a4d4cb16c9240fe0a332f133ff25c7"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dab47e8b921302c3c92f5c630f715188aec3d6c4b852abed8795af1b2a1af5ad"
+bytes = 665
+source_ref = "sha256:dab47e8b921302c3c92f5c630f715188aec3d6c4b852abed8795af1b2a1af5ad"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cb5d88d2fec7a7a7017caede7d0d2e912807642a524f2a04c7f92fd4e1bb36be"
+bytes = 252611
+source_ref = "sha256:cb5d88d2fec7a7a7017caede7d0d2e912807642a524f2a04c7f92fd4e1bb36be"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5a31d9e8dd06cc5a561cfb106c1cb6021d084534d1403c4e68cdfba3d9cc0fd1"
+bytes = 665
+source_ref = "sha256:5a31d9e8dd06cc5a561cfb106c1cb6021d084534d1403c4e68cdfba3d9cc0fd1"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8adbed83108ac519666c1b51f5d34bdbee62f2cb74cba22d8ab77a2c34ca00bd"
+bytes = 252488
+source_ref = "sha256:8adbed83108ac519666c1b51f5d34bdbee62f2cb74cba22d8ab77a2c34ca00bd"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "259ef178da395f18c9f0ecde40aefa9a7091be67a097671ed4fb62ae41036bae"
+bytes = 667
+source_ref = "sha256:259ef178da395f18c9f0ecde40aefa9a7091be67a097671ed4fb62ae41036bae"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f159b1f90795a6314c14b6b72b80c19d1a286d91407d00b79d3b3d2903ed364f"
+bytes = 252457
+source_ref = "sha256:f159b1f90795a6314c14b6b72b80c19d1a286d91407d00b79d3b3d2903ed364f"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "31be19d9b18a0215f5109e7c00765430cf9a589a5466d3a501306d1bab9b1359"
+bytes = 663
+source_ref = "sha256:31be19d9b18a0215f5109e7c00765430cf9a589a5466d3a501306d1bab9b1359"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "32340aeb9f392a9b1472e144ace9811e4e2306990c0e01617b8fd0894ad566ab"
+bytes = 252571
+source_ref = "sha256:32340aeb9f392a9b1472e144ace9811e4e2306990c0e01617b8fd0894ad566ab"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d895cf5cbad779c46d8f2ab6144b25e4b361204635b53eae1cbae2b87f209d04"
+bytes = 667
+source_ref = "sha256:d895cf5cbad779c46d8f2ab6144b25e4b361204635b53eae1cbae2b87f209d04"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0a31cd4e413cfb7030d0d2a129bf7c2298385ddf42ffc58ebb3bae2fc524d817"
+bytes = 252584
+source_ref = "sha256:0a31cd4e413cfb7030d0d2a129bf7c2298385ddf42ffc58ebb3bae2fc524d817"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c5d7fb9e6b616004439942da472accebdda00ca5836d15b574c7746fe4b919c8"
+bytes = 669
+source_ref = "sha256:c5d7fb9e6b616004439942da472accebdda00ca5836d15b574c7746fe4b919c8"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3357c0e9671499edac9ebfe0a5e5df080567d00510be6d0680afb5532a25a2bb"
+bytes = 252301
+source_ref = "sha256:3357c0e9671499edac9ebfe0a5e5df080567d00510be6d0680afb5532a25a2bb"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4e0383ca731e7788d09d6e5809893176590aeb47ce8bab980269fd02f1ed41c6"
+bytes = 665
+source_ref = "sha256:4e0383ca731e7788d09d6e5809893176590aeb47ce8bab980269fd02f1ed41c6"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8f0c989d0f5b0a7e1fda48857dd135707282fd249d16ee23b419e3c002833ef6"
+bytes = 252701
+source_ref = "sha256:8f0c989d0f5b0a7e1fda48857dd135707282fd249d16ee23b419e3c002833ef6"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "340e042a9473c71d345718e38adcbb6084569b58fec798c0cbbe0e64abff589f"
+bytes = 665
+source_ref = "sha256:340e042a9473c71d345718e38adcbb6084569b58fec798c0cbbe0e64abff589f"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e2bce5dc972887ef423fe922527ad773ec5bedd66294961551c530107ce55066"
+bytes = 252616
+source_ref = "sha256:e2bce5dc972887ef423fe922527ad773ec5bedd66294961551c530107ce55066"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2066070a2284d39fe9e43f9162c20818b0bebb81d081125143241924bfba5e60"
+bytes = 667
+source_ref = "sha256:2066070a2284d39fe9e43f9162c20818b0bebb81d081125143241924bfba5e60"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "94fbd1959cd4d8fd9e7ac9df5cbce851b19af3fa43d8f6d5aa8172fe56e625df"
+bytes = 252419
+source_ref = "sha256:94fbd1959cd4d8fd9e7ac9df5cbce851b19af3fa43d8f6d5aa8172fe56e625df"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "44051ad62b504f526daccfaa4b4952c5af71a4dcfd24cd27dc6349364bb295fe"
+bytes = 663
+source_ref = "sha256:44051ad62b504f526daccfaa4b4952c5af71a4dcfd24cd27dc6349364bb295fe"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eae0ac56ad10acd412a3fb1c987d487f35504bbb64dd594891499ac490751d0d"
+bytes = 252679
+source_ref = "sha256:eae0ac56ad10acd412a3fb1c987d487f35504bbb64dd594891499ac490751d0d"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f1c70e18aa487c681fd54efd9531bf6521f1cb9520e2f42cdba4f3e5e1a371f1"
+bytes = 667
+source_ref = "sha256:f1c70e18aa487c681fd54efd9531bf6521f1cb9520e2f42cdba4f3e5e1a371f1"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "50e568d3664a76502f242d46227567583c644ad6dc834887b0d1dd3c32cd74ea"
+bytes = 252583
+source_ref = "sha256:50e568d3664a76502f242d46227567583c644ad6dc834887b0d1dd3c32cd74ea"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e48e77f2c4738611cc7903bd795e0ec49a30fb61a3eefb2f49bd4cae17dd6de2"
+bytes = 669
+source_ref = "sha256:e48e77f2c4738611cc7903bd795e0ec49a30fb61a3eefb2f49bd4cae17dd6de2"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "67ee92c8c270b1d89623ca7616f2987eef5d159709ada462a821726537b5a6e3"
+bytes = 252440
+source_ref = "sha256:67ee92c8c270b1d89623ca7616f2987eef5d159709ada462a821726537b5a6e3"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b83ba88a97cf941746fe1b186ed34e0d28e373aac17c1d144833cc7f1fbc9627"
+bytes = 665
+source_ref = "sha256:b83ba88a97cf941746fe1b186ed34e0d28e373aac17c1d144833cc7f1fbc9627"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "55677d8f7e71a85f9438eb9a2381693c1484c5963a8d083c4ff8155a1d091d67"
+bytes = 252731
+source_ref = "sha256:55677d8f7e71a85f9438eb9a2381693c1484c5963a8d083c4ff8155a1d091d67"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "500251c3dfd787163c67184c0b2ab66e17203631e452bf4da3608b9d02636518"
+bytes = 665
+source_ref = "sha256:500251c3dfd787163c67184c0b2ab66e17203631e452bf4da3608b9d02636518"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "266fe8c097a95c5907c1b22f4a3f4a8c3d2c4fd947afb8b8cebb5318a1abe6e0"
+bytes = 252582
+source_ref = "sha256:266fe8c097a95c5907c1b22f4a3f4a8c3d2c4fd947afb8b8cebb5318a1abe6e0"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2a800f852e9b8d7dd194d268cc77b123000395338d6b1bf71b2c7a51f623cb51"
+bytes = 667
+source_ref = "sha256:2a800f852e9b8d7dd194d268cc77b123000395338d6b1bf71b2c7a51f623cb51"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3dd4dbfd9a59a9e3311ab863d1c10bc303ddb8c6e3846f45e60750f60e381707"
+bytes = 252498
+source_ref = "sha256:3dd4dbfd9a59a9e3311ab863d1c10bc303ddb8c6e3846f45e60750f60e381707"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4d2bb0ec447c6466e5b09d0cdccfa5fb9e3e1ab57e6a9c1ac9babf1c8c3b1be5"
+bytes = 663
+source_ref = "sha256:4d2bb0ec447c6466e5b09d0cdccfa5fb9e3e1ab57e6a9c1ac9babf1c8c3b1be5"
+
+[[records]]
+path = "records/artifacts/2532-noisy/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2532-noisy/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dbf6563d44055fa422a8044208af525f957952ce9beb4c80449b65f9d51d88ef"
+bytes = 252689
+source_ref = "sha256:dbf6563d44055fa422a8044208af525f957952ce9beb4c80449b65f9d51d88ef"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d677bfaed3ad1d442ebd5c495f0eb75f05d22a5457d1188820a89514b135cd6d"
+bytes = 667
+source_ref = "sha256:d677bfaed3ad1d442ebd5c495f0eb75f05d22a5457d1188820a89514b135cd6d"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c77d98220206eeb2715b9d8eae8b99ee5bdbe369c540a1d72e66a3b8a58797bb"
+bytes = 252169
+source_ref = "sha256:c77d98220206eeb2715b9d8eae8b99ee5bdbe369c540a1d72e66a3b8a58797bb"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "299161df3135b8ada3e4e8648b8318cf2d4938ffcd58ddcb286cb824309c82ef"
+bytes = 669
+source_ref = "sha256:299161df3135b8ada3e4e8648b8318cf2d4938ffcd58ddcb286cb824309c82ef"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fe5bd4b987a2b1cabe91190c71198a9913294fe784c33043833d56790e4ed05d"
+bytes = 252289
+source_ref = "sha256:fe5bd4b987a2b1cabe91190c71198a9913294fe784c33043833d56790e4ed05d"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6bbe1a3d1a6582baeaca1a15ebbe387369b64864a31da00262eaf91dd1e55462"
+bytes = 665
+source_ref = "sha256:6bbe1a3d1a6582baeaca1a15ebbe387369b64864a31da00262eaf91dd1e55462"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "81bf8a06fa1a9e8db3794ff979a2fa54d34ce20c2fa5698d6fbb6110118b50e9"
+bytes = 251978
+source_ref = "sha256:81bf8a06fa1a9e8db3794ff979a2fa54d34ce20c2fa5698d6fbb6110118b50e9"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "69b4ee79b23f381b4a9435787830468af4015986cc0877fda1c211d371fc62dd"
+bytes = 665
+source_ref = "sha256:69b4ee79b23f381b4a9435787830468af4015986cc0877fda1c211d371fc62dd"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "64642c30301b8bce1a9b02d4bc6c3d802a1ebab53a8db70c8b61cc143663d13a"
+bytes = 252092
+source_ref = "sha256:64642c30301b8bce1a9b02d4bc6c3d802a1ebab53a8db70c8b61cc143663d13a"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5313c96cd5857f59b97acd88298a01efdd896940f152aef29a3aa9352404d1ab"
+bytes = 667
+source_ref = "sha256:5313c96cd5857f59b97acd88298a01efdd896940f152aef29a3aa9352404d1ab"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "41d1c5eada265b75d42833fea722461aa07a24069eee87a01bb77606a31d81de"
+bytes = 252247
+source_ref = "sha256:41d1c5eada265b75d42833fea722461aa07a24069eee87a01bb77606a31d81de"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c13f51a818e09fa7d3abc758ba1ccd86d87ceb50ef7ba9456e7c3ee6546b880b"
+bytes = 663
+source_ref = "sha256:c13f51a818e09fa7d3abc758ba1ccd86d87ceb50ef7ba9456e7c3ee6546b880b"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "03311983d8f0e0a5fd6830e4dd1dc2876456c4cb62e65a5ccecaa8245afb6f0b"
+bytes = 251826
+source_ref = "sha256:03311983d8f0e0a5fd6830e4dd1dc2876456c4cb62e65a5ccecaa8245afb6f0b"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "04cebf4dc0c568b04b8ad1acd60c532b6bf390fb3475e23e1defe616a86d31e3"
+bytes = 667
+source_ref = "sha256:04cebf4dc0c568b04b8ad1acd60c532b6bf390fb3475e23e1defe616a86d31e3"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f0ca3b3b69bf6703209870ac7a4aa702898c1f412e985d955472431bcabe2dfb"
+bytes = 252091
+source_ref = "sha256:f0ca3b3b69bf6703209870ac7a4aa702898c1f412e985d955472431bcabe2dfb"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "debb435f684b174fae1f1475c38079c025cd49c73d09406c5457465f7fc1e8be"
+bytes = 669
+source_ref = "sha256:debb435f684b174fae1f1475c38079c025cd49c73d09406c5457465f7fc1e8be"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6a526ddc29fa13d11e525d31f0d44a41e9610d1f6fc77cdb113813566983085a"
+bytes = 252422
+source_ref = "sha256:6a526ddc29fa13d11e525d31f0d44a41e9610d1f6fc77cdb113813566983085a"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "accfbaa08dea4525366e98c51b2cecba4f8ae84c901b6711d62996fd1d355487"
+bytes = 665
+source_ref = "sha256:accfbaa08dea4525366e98c51b2cecba4f8ae84c901b6711d62996fd1d355487"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ad401791738dc71922f25f726c5212d3d1fc60270f09a28d230419ef1910aece"
+bytes = 252054
+source_ref = "sha256:ad401791738dc71922f25f726c5212d3d1fc60270f09a28d230419ef1910aece"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8df3db6afd375f2598aee95fddebcaca6ec29da74bbdcf676c7a5d3ee8f70d3a"
+bytes = 665
+source_ref = "sha256:8df3db6afd375f2598aee95fddebcaca6ec29da74bbdcf676c7a5d3ee8f70d3a"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "83b0da47f4609534307666b4434ce84f37247a43fcde55521e01aecb34379b13"
+bytes = 252043
+source_ref = "sha256:83b0da47f4609534307666b4434ce84f37247a43fcde55521e01aecb34379b13"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5bf1069fd3cbfa90d0c3ee075c68463723686416ff7cfca124ead7c1f70ab152"
+bytes = 667
+source_ref = "sha256:5bf1069fd3cbfa90d0c3ee075c68463723686416ff7cfca124ead7c1f70ab152"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fea0d4423f85977ac983b5c96f513868dc5f57b8ec17db7ed47d87ef5989f9ec"
+bytes = 252287
+source_ref = "sha256:fea0d4423f85977ac983b5c96f513868dc5f57b8ec17db7ed47d87ef5989f9ec"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8e0be16e767df47b3f184d6cf46e16fbd806a28ae4e3d46be401c3a17167108d"
+bytes = 663
+source_ref = "sha256:8e0be16e767df47b3f184d6cf46e16fbd806a28ae4e3d46be401c3a17167108d"
+
+[[records]]
+path = "records/artifacts/2533-clean/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e8b7de62de7fe12335f7787f2d9dd7883bdd46689ba44905b000026371c2fde2"
+bytes = 251965
+source_ref = "sha256:e8b7de62de7fe12335f7787f2d9dd7883bdd46689ba44905b000026371c2fde2"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3f813a4816e6da65dd8d87c1a0afea1f2335fba1e91f70670dbcc7475f1c0101"
+bytes = 667
+source_ref = "sha256:3f813a4816e6da65dd8d87c1a0afea1f2335fba1e91f70670dbcc7475f1c0101"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2ddf37f28c7f0056b5e47b21b8a8acf493ad095771290591e1d3fe73a83e33da"
+bytes = 252034
+source_ref = "sha256:2ddf37f28c7f0056b5e47b21b8a8acf493ad095771290591e1d3fe73a83e33da"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a5459013bdee52e2e7a393976de3fdbfddb5ef00e299d091b24fe7a9c706ee09"
+bytes = 669
+source_ref = "sha256:a5459013bdee52e2e7a393976de3fdbfddb5ef00e299d091b24fe7a9c706ee09"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c2481523f7aeb375e3b34fa5c04dec4e6514f78db08257e8a508eb36d8a1cead"
+bytes = 252159
+source_ref = "sha256:c2481523f7aeb375e3b34fa5c04dec4e6514f78db08257e8a508eb36d8a1cead"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e8a194fa26bf5fcf5ee8c5b8944a85fa672781896104b5d07f41d39dd3172034"
+bytes = 665
+source_ref = "sha256:e8a194fa26bf5fcf5ee8c5b8944a85fa672781896104b5d07f41d39dd3172034"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ed76e92f814abcc4dc3726d1ece84ff2e82c6176aa9374eea6a63c6b276d3ea2"
+bytes = 251937
+source_ref = "sha256:ed76e92f814abcc4dc3726d1ece84ff2e82c6176aa9374eea6a63c6b276d3ea2"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ba83b132448b9837bb60933baf9df917eabc28f81848cd645f216ad30a3f2225"
+bytes = 665
+source_ref = "sha256:ba83b132448b9837bb60933baf9df917eabc28f81848cd645f216ad30a3f2225"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b9f46cf8b70bac6a4a41add9a6c3eb1cb4063852c8c52626ee89f363a04e463b"
+bytes = 251916
+source_ref = "sha256:b9f46cf8b70bac6a4a41add9a6c3eb1cb4063852c8c52626ee89f363a04e463b"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "de8bae29c369e12d6caa2de4261356b1f7e24db2459177b8d2348c5ab9131f54"
+bytes = 667
+source_ref = "sha256:de8bae29c369e12d6caa2de4261356b1f7e24db2459177b8d2348c5ab9131f54"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7416ad6099f18767acd793bb9d04c1cea9eb01a9c6bbe5d0dd0ac57113b2655a"
+bytes = 252237
+source_ref = "sha256:7416ad6099f18767acd793bb9d04c1cea9eb01a9c6bbe5d0dd0ac57113b2655a"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6a4605169ff9598e8a15dc39649cb633e32efb489b074dfa7e7ae5c6d001d74c"
+bytes = 663
+source_ref = "sha256:6a4605169ff9598e8a15dc39649cb633e32efb489b074dfa7e7ae5c6d001d74c"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c842bf3a1d5cc401d36dae07374dc5c828527da7cd6337fec0308c5d7fe6e4f8"
+bytes = 251689
+source_ref = "sha256:c842bf3a1d5cc401d36dae07374dc5c828527da7cd6337fec0308c5d7fe6e4f8"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f450f6bc7cd9759292b642d35a3673a185d2fc1c88fb004504aeb88aeea4d4cc"
+bytes = 667
+source_ref = "sha256:f450f6bc7cd9759292b642d35a3673a185d2fc1c88fb004504aeb88aeea4d4cc"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e0a8b92f4cbd27bd0b131f509d8c8dc6b354061127c66f77ae533509d828ce4d"
+bytes = 252094
+source_ref = "sha256:e0a8b92f4cbd27bd0b131f509d8c8dc6b354061127c66f77ae533509d828ce4d"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "531082d0691e13b40a9242aa41a9c5f55aa4f4ff1881a1cdc70e277cb87ef193"
+bytes = 669
+source_ref = "sha256:531082d0691e13b40a9242aa41a9c5f55aa4f4ff1881a1cdc70e277cb87ef193"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bee812981ceafdb36eaac9fad8c83e7376013325efb8ca6d8d0a5d639fd76604"
+bytes = 252253
+source_ref = "sha256:bee812981ceafdb36eaac9fad8c83e7376013325efb8ca6d8d0a5d639fd76604"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "32d52d9f43acd07e3a518896e058882c23c90c8c7fe86753059dd6ca0b9339b0"
+bytes = 665
+source_ref = "sha256:32d52d9f43acd07e3a518896e058882c23c90c8c7fe86753059dd6ca0b9339b0"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "61696454286605e2a3507d11784ff81d15d2bdc8e2482595399617b8e4316451"
+bytes = 251880
+source_ref = "sha256:61696454286605e2a3507d11784ff81d15d2bdc8e2482595399617b8e4316451"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "572bba75bc5c7bbd34e287143e725a224aad5840124870bb50eb1f9686f396e2"
+bytes = 665
+source_ref = "sha256:572bba75bc5c7bbd34e287143e725a224aad5840124870bb50eb1f9686f396e2"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8e01b6bdcdd0704c7296fde850d1dfa56733669cf82ba574c72b6a3c23a4fd6c"
+bytes = 251986
+source_ref = "sha256:8e01b6bdcdd0704c7296fde850d1dfa56733669cf82ba574c72b6a3c23a4fd6c"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5a5eca4f5128f1c6a1d25bb8b0e182de6c01f599776644778702b1afdcca1582"
+bytes = 667
+source_ref = "sha256:5a5eca4f5128f1c6a1d25bb8b0e182de6c01f599776644778702b1afdcca1582"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "750c4d6141f643d4088a153f63e4903133c93510f07e447016421490ee77b250"
+bytes = 252248
+source_ref = "sha256:750c4d6141f643d4088a153f63e4903133c93510f07e447016421490ee77b250"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "27dfa573c1f38ac4ab6cc022965c5bd09b6dbd1a91725f381403ee27e71016d9"
+bytes = 663
+source_ref = "sha256:27dfa573c1f38ac4ab6cc022965c5bd09b6dbd1a91725f381403ee27e71016d9"
+
+[[records]]
+path = "records/artifacts/2533-clean/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-clean/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d6de7d12098830fb77373e544ae346c5f550f74a6f462c4e972477ee28070c7c"
+bytes = 251990
+source_ref = "sha256:d6de7d12098830fb77373e544ae346c5f550f74a6f462c4e972477ee28070c7c"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c6d7b10ce38693d2e22f4e6368c5bc151edb399b4952d70004e3c3317e28e31d"
+bytes = 667
+source_ref = "sha256:c6d7b10ce38693d2e22f4e6368c5bc151edb399b4952d70004e3c3317e28e31d"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5fde067a3d01def974ba6d2dee3de24f9110ecaa5d2545b9752b8c562bdcdf62"
+bytes = 252551
+source_ref = "sha256:5fde067a3d01def974ba6d2dee3de24f9110ecaa5d2545b9752b8c562bdcdf62"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e95aef589f505978fa4f32d0612fe9dc19753af48c37e03730379399a341b576"
+bytes = 669
+source_ref = "sha256:e95aef589f505978fa4f32d0612fe9dc19753af48c37e03730379399a341b576"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8724974d3264fb6f35235db96fa4417b9f56b8146e0c3e0fdb91eac7dc5fc91d"
+bytes = 252248
+source_ref = "sha256:8724974d3264fb6f35235db96fa4417b9f56b8146e0c3e0fdb91eac7dc5fc91d"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "afbe6317cef6b6f23c86f0bcebf25d06c424ba3d6ba6de8cafa79d22c099e64e"
+bytes = 665
+source_ref = "sha256:afbe6317cef6b6f23c86f0bcebf25d06c424ba3d6ba6de8cafa79d22c099e64e"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3fc27c47ea0d5aea73f9813d9292bd175e3c1c7dc41740297a848968060d8a42"
+bytes = 252569
+source_ref = "sha256:3fc27c47ea0d5aea73f9813d9292bd175e3c1c7dc41740297a848968060d8a42"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ed0a64718f89b1ca1b8dcffe431191cf6324b5a350a2d5240f201011745e83c4"
+bytes = 665
+source_ref = "sha256:ed0a64718f89b1ca1b8dcffe431191cf6324b5a350a2d5240f201011745e83c4"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a35e48b792f7e727691c275cf37da07cd30f11247f37754df83b59c530d02ce9"
+bytes = 252589
+source_ref = "sha256:a35e48b792f7e727691c275cf37da07cd30f11247f37754df83b59c530d02ce9"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0d804c5fb1dbd8da5496159451eb5b1793a1eef2b849a76f26ba5565c298c101"
+bytes = 667
+source_ref = "sha256:0d804c5fb1dbd8da5496159451eb5b1793a1eef2b849a76f26ba5565c298c101"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "699ea14974c56f6a99c0db9a71dcb530d73b8d506195bfee63d93a0e6506136b"
+bytes = 252323
+source_ref = "sha256:699ea14974c56f6a99c0db9a71dcb530d73b8d506195bfee63d93a0e6506136b"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "13fbc5027f8d31f1fcd68c650dbc586f080cb8618a65bb04479f23e0a0b47b88"
+bytes = 663
+source_ref = "sha256:13fbc5027f8d31f1fcd68c650dbc586f080cb8618a65bb04479f23e0a0b47b88"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c7dc9ac80589b484ca6d41cfe2717aaa123df6565b6009f1197a16f9eaa08371"
+bytes = 252544
+source_ref = "sha256:c7dc9ac80589b484ca6d41cfe2717aaa123df6565b6009f1197a16f9eaa08371"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ff377e36a34f0b9acf96856700ea4199b10eab7a9b84a5f64a80a0ba415bdb1f"
+bytes = 667
+source_ref = "sha256:ff377e36a34f0b9acf96856700ea4199b10eab7a9b84a5f64a80a0ba415bdb1f"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "04cd04557fb1f0eb4ea7c98e09fa46b9cec2fc67220c9c44eddc848e47cbf7c3"
+bytes = 252635
+source_ref = "sha256:04cd04557fb1f0eb4ea7c98e09fa46b9cec2fc67220c9c44eddc848e47cbf7c3"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b08e686a4c28b8adc4b70609fd9ecfe5ab57f147f55a38f4ae3e28942e155221"
+bytes = 669
+source_ref = "sha256:b08e686a4c28b8adc4b70609fd9ecfe5ab57f147f55a38f4ae3e28942e155221"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5b41b799dd8c8000a6dbac719fe2b0ddc50a2a76abe7a1f30f1706d500cd85aa"
+bytes = 252629
+source_ref = "sha256:5b41b799dd8c8000a6dbac719fe2b0ddc50a2a76abe7a1f30f1706d500cd85aa"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d3314e8b9dd72daf77486d2746c42585fedfe13d0901e9b59bd22c105787bbc6"
+bytes = 665
+source_ref = "sha256:d3314e8b9dd72daf77486d2746c42585fedfe13d0901e9b59bd22c105787bbc6"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c376036f2170def1c4c6e6b7213d513fb19174e963540af3e29f4334e1158462"
+bytes = 252735
+source_ref = "sha256:c376036f2170def1c4c6e6b7213d513fb19174e963540af3e29f4334e1158462"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8fe46363b3f254de66963013307784d2c698370ce197b87241a65b94144704b0"
+bytes = 665
+source_ref = "sha256:8fe46363b3f254de66963013307784d2c698370ce197b87241a65b94144704b0"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "63c94a5362837bdbb5564c30cb5bb09607b4de5bcd755d0c3b444229813c02b6"
+bytes = 252641
+source_ref = "sha256:63c94a5362837bdbb5564c30cb5bb09607b4de5bcd755d0c3b444229813c02b6"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "38e5f594e97b8ad08ed6abfa8dc1c0ff52041fdafdf7d1295c13c3cbee26b401"
+bytes = 667
+source_ref = "sha256:38e5f594e97b8ad08ed6abfa8dc1c0ff52041fdafdf7d1295c13c3cbee26b401"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ca4057b03c934a79508bb179c04243c79736abb8bfb3989a2d53521bf6b9fea4"
+bytes = 252588
+source_ref = "sha256:ca4057b03c934a79508bb179c04243c79736abb8bfb3989a2d53521bf6b9fea4"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4b8097c41ea79f41b23626bf5be0450e768494d7c71beb99b557b2a24b93026b"
+bytes = 663
+source_ref = "sha256:4b8097c41ea79f41b23626bf5be0450e768494d7c71beb99b557b2a24b93026b"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ab765d2ad98f92c1a5a002d59d9fd7e2cf442023beb80f366d012609c0e444d9"
+bytes = 252739
+source_ref = "sha256:ab765d2ad98f92c1a5a002d59d9fd7e2cf442023beb80f366d012609c0e444d9"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6115b0de2cc7a8eb6c151ae6ebcb0d02db5f757dad72ae506ab3039f6232e7f5"
+bytes = 667
+source_ref = "sha256:6115b0de2cc7a8eb6c151ae6ebcb0d02db5f757dad72ae506ab3039f6232e7f5"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "66cb6bb0c87a63770d0302a81704a0209db855686b30063ea48073b8d46c9d6f"
+bytes = 252558
+source_ref = "sha256:66cb6bb0c87a63770d0302a81704a0209db855686b30063ea48073b8d46c9d6f"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "05ea2231571218a4afe5139620d7eff35be123bf50aa944d53e480c337966eb6"
+bytes = 669
+source_ref = "sha256:05ea2231571218a4afe5139620d7eff35be123bf50aa944d53e480c337966eb6"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "82d097a1901d36a2ee22f71038b25487047d99dd45a1ea7dac85f3f69781f1c1"
+bytes = 252284
+source_ref = "sha256:82d097a1901d36a2ee22f71038b25487047d99dd45a1ea7dac85f3f69781f1c1"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6489c3e575cd9c40333deb0be11b17004e73abd2ee5bff12570558c2a3e0e8e2"
+bytes = 665
+source_ref = "sha256:6489c3e575cd9c40333deb0be11b17004e73abd2ee5bff12570558c2a3e0e8e2"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "181d308d668ea39b03ec411e748668d49e4a2fde432b041d568b1a0f5e93aa25"
+bytes = 252721
+source_ref = "sha256:181d308d668ea39b03ec411e748668d49e4a2fde432b041d568b1a0f5e93aa25"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "dee00c10a0435f8a3bf9750c0d1f62395d4e696367086cdcb9ecae85463da9f6"
+bytes = 665
+source_ref = "sha256:dee00c10a0435f8a3bf9750c0d1f62395d4e696367086cdcb9ecae85463da9f6"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "70efc7217d03d2e0619ec4ed285550c77324441d75dbcd9c1f8abe4511f8981d"
+bytes = 252627
+source_ref = "sha256:70efc7217d03d2e0619ec4ed285550c77324441d75dbcd9c1f8abe4511f8981d"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bf6457bd73d8b8b8a30443a8426e58a031f3e08619a7a83d8f2368c6aa376749"
+bytes = 667
+source_ref = "sha256:bf6457bd73d8b8b8a30443a8426e58a031f3e08619a7a83d8f2368c6aa376749"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1fb37062c32e42612f78777351ce1a909bcdab9274cfc931246737225c550e87"
+bytes = 252430
+source_ref = "sha256:1fb37062c32e42612f78777351ce1a909bcdab9274cfc931246737225c550e87"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cb13d658f00672f71226e7cd50e5661798bd4fd442bf50a676934d8af426e5eb"
+bytes = 663
+source_ref = "sha256:cb13d658f00672f71226e7cd50e5661798bd4fd442bf50a676934d8af426e5eb"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bfdf98e02deda9856946925694f4fadbcb1c079af4286184454e08a6ae46b9b2"
+bytes = 252704
+source_ref = "sha256:bfdf98e02deda9856946925694f4fadbcb1c079af4286184454e08a6ae46b9b2"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7b2ebc2d4b1d933d6cb5b3473af0cf47ee264b51db862845f5960e387286ca7e"
+bytes = 667
+source_ref = "sha256:7b2ebc2d4b1d933d6cb5b3473af0cf47ee264b51db862845f5960e387286ca7e"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "111dc8ca97e44f8fe4d20886b5837879f83942e20a2ce73dd2fc326c7071246d"
+bytes = 252618
+source_ref = "sha256:111dc8ca97e44f8fe4d20886b5837879f83942e20a2ce73dd2fc326c7071246d"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "8ed3ca56c109ae099a37908b97b2203dd5259215acef19dec6677052952dc190"
+bytes = 669
+source_ref = "sha256:8ed3ca56c109ae099a37908b97b2203dd5259215acef19dec6677052952dc190"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "85fbcb4aae7dc54aceaafa7b78b8125f28778eb4c4ebf654b83a33b79081c07f"
+bytes = 252582
+source_ref = "sha256:85fbcb4aae7dc54aceaafa7b78b8125f28778eb4c4ebf654b83a33b79081c07f"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4781e14c36cc1f856d97807b6cd77dd4119f0f24603f44ca7930e32ce347263e"
+bytes = 665
+source_ref = "sha256:4781e14c36cc1f856d97807b6cd77dd4119f0f24603f44ca7930e32ce347263e"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a2ecf06849535eafb291171756628948ab6c21f69aeba3a191817d5534728e0d"
+bytes = 252758
+source_ref = "sha256:a2ecf06849535eafb291171756628948ab6c21f69aeba3a191817d5534728e0d"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "544deaaa9a31ce23912490c69fe28fc6cb9669f646b8cf92c2217d0dedc1a91e"
+bytes = 665
+source_ref = "sha256:544deaaa9a31ce23912490c69fe28fc6cb9669f646b8cf92c2217d0dedc1a91e"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6949db73361f9c144d9cb608b734b6ae2ff4531637fa3bc25eb87b1cb67c7fac"
+bytes = 252606
+source_ref = "sha256:6949db73361f9c144d9cb608b734b6ae2ff4531637fa3bc25eb87b1cb67c7fac"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b0395295fa6619ed8bd34177847d1c603f4ef7ec4d85d4d5bd8f34f063c640dc"
+bytes = 667
+source_ref = "sha256:b0395295fa6619ed8bd34177847d1c603f4ef7ec4d85d4d5bd8f34f063c640dc"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "92512f9fe57053f6d0ba4fd8ff0404678fc137da6fc632dbd0d61f11349d420d"
+bytes = 252539
+source_ref = "sha256:92512f9fe57053f6d0ba4fd8ff0404678fc137da6fc632dbd0d61f11349d420d"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1f8d3560a0b027c236d5395f1b3be1ecf7bc8b52ba9f40d640affd9163c2e49b"
+bytes = 663
+source_ref = "sha256:1f8d3560a0b027c236d5395f1b3be1ecf7bc8b52ba9f40d640affd9163c2e49b"
+
+[[records]]
+path = "records/artifacts/2533-noisy/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/2533-noisy/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d8e13012b9c37d159d4e6c5d1ac3e8e08406d247f39970c936b09ea7aef1f671"
+bytes = 252802
+source_ref = "sha256:d8e13012b9c37d159d4e6c5d1ac3e8e08406d247f39970c936b09ea7aef1f671"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "0ea2f9ec51152eb858fecc6350585c63207b0aa3167b301be3504c32b78001ca"
+bytes = 481
+source_ref = "sha256:0ea2f9ec51152eb858fecc6350585c63207b0aa3167b301be3504c32b78001ca"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e217c6055606d2e525ecb1912f5d8447fedf1dc88caec05eb3f894f51a6300be"
+bytes = 182523
+source_ref = "sha256:e217c6055606d2e525ecb1912f5d8447fedf1dc88caec05eb3f894f51a6300be"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6fdf1e610aec19abf062328b84fac56398f95916ed34888e74ff955643f3c5cb"
+bytes = 483
+source_ref = "sha256:6fdf1e610aec19abf062328b84fac56398f95916ed34888e74ff955643f3c5cb"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "110c91cfbcea96bdab4c4339a15b571a5234683ab914d6d7ed4bbf0cb5f699db"
+bytes = 183344
+source_ref = "sha256:110c91cfbcea96bdab4c4339a15b571a5234683ab914d6d7ed4bbf0cb5f699db"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5f3b5d9f11425e6dd6f7954316f60e8f21d69a96abfe87630704d24be9aca556"
+bytes = 479
+source_ref = "sha256:5f3b5d9f11425e6dd6f7954316f60e8f21d69a96abfe87630704d24be9aca556"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2a6d41a7b0627a47af046522b1a2e1651de2b8f6a59ca9f0cdcbf758bac9f8fd"
+bytes = 181854
+source_ref = "sha256:2a6d41a7b0627a47af046522b1a2e1651de2b8f6a59ca9f0cdcbf758bac9f8fd"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "07f6e25566eca197edcff8f0d03811398b95b290f087d28753b0862f75a3da38"
+bytes = 479
+source_ref = "sha256:07f6e25566eca197edcff8f0d03811398b95b290f087d28753b0862f75a3da38"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "10d86e6b615de84970778f593a434dea6ad2857569fa2e3e57f802f575eb8615"
+bytes = 185694
+source_ref = "sha256:10d86e6b615de84970778f593a434dea6ad2857569fa2e3e57f802f575eb8615"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "eae7229aefc5b771284d0e11b7cbb1c063f63d4d94af6cfa82f74a93e6a9644f"
+bytes = 481
+source_ref = "sha256:eae7229aefc5b771284d0e11b7cbb1c063f63d4d94af6cfa82f74a93e6a9644f"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "62f103742976e24ef4a5f297df88a7fd8eaeab33e944ea67bb4ccee336c31994"
+bytes = 186166
+source_ref = "sha256:62f103742976e24ef4a5f297df88a7fd8eaeab33e944ea67bb4ccee336c31994"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c5cf19f737d38c4bf23db8b72982913e9e5cb1d40d2d5bb71a005c313739d79b"
+bytes = 477
+source_ref = "sha256:c5cf19f737d38c4bf23db8b72982913e9e5cb1d40d2d5bb71a005c313739d79b"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5dd4291b302086c8b37fad5c76cd0410ffcd8dfa602d295e0dc08bbe691a9841"
+bytes = 184692
+source_ref = "sha256:5dd4291b302086c8b37fad5c76cd0410ffcd8dfa602d295e0dc08bbe691a9841"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c394e57e6699922fe55440579ec39d9a8f0984404637c1c1aa30c42f54028d83"
+bytes = 481
+source_ref = "sha256:c394e57e6699922fe55440579ec39d9a8f0984404637c1c1aa30c42f54028d83"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a9c539e00cfed86905d26604661491ae8b64134ca5b79b032774ceb805b6f335"
+bytes = 185708
+source_ref = "sha256:a9c539e00cfed86905d26604661491ae8b64134ca5b79b032774ceb805b6f335"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5db26fc7f35127ae8dda626cfe60f3d3cc41d51bd651be7d0a2897e3f340fae0"
+bytes = 483
+source_ref = "sha256:5db26fc7f35127ae8dda626cfe60f3d3cc41d51bd651be7d0a2897e3f340fae0"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "562de6eb1234b78c27b01147754e33f297e8d0932cde388052f23d25fe752b5d"
+bytes = 186119
+source_ref = "sha256:562de6eb1234b78c27b01147754e33f297e8d0932cde388052f23d25fe752b5d"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "feddd52c3764d7ad631b0b5a501c560896fe8ab604ba290fd73c35b7edb818b2"
+bytes = 479
+source_ref = "sha256:feddd52c3764d7ad631b0b5a501c560896fe8ab604ba290fd73c35b7edb818b2"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a652c91e0347ebe313aa091af5a5307262b3c97cf33d7b82be40d5cff1845ba1"
+bytes = 184895
+source_ref = "sha256:a652c91e0347ebe313aa091af5a5307262b3c97cf33d7b82be40d5cff1845ba1"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "006ed584a8b9f4f9eff3e315e4c5520c03297913e97a69b2377c3f6337b50c06"
+bytes = 479
+source_ref = "sha256:006ed584a8b9f4f9eff3e315e4c5520c03297913e97a69b2377c3f6337b50c06"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1f89b55f4ea2b8adbe3d2934bfdabdefcd78c59b6b77e794caae59d9c54f00e6"
+bytes = 186879
+source_ref = "sha256:1f89b55f4ea2b8adbe3d2934bfdabdefcd78c59b6b77e794caae59d9c54f00e6"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "44ef48209a3c63e39c07ef3a673c723aaf8790cfd48a97ec0f87509c4265dcba"
+bytes = 481
+source_ref = "sha256:44ef48209a3c63e39c07ef3a673c723aaf8790cfd48a97ec0f87509c4265dcba"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4c846096b51c9c519de46587fa288297e486e8adb235775eddfefc52ca12c855"
+bytes = 186840
+source_ref = "sha256:4c846096b51c9c519de46587fa288297e486e8adb235775eddfefc52ca12c855"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7cbdf9e1f1e16b609fa36a54e141a32812200b5cb4e19ec1b20e5ce31b2d1af1"
+bytes = 477
+source_ref = "sha256:7cbdf9e1f1e16b609fa36a54e141a32812200b5cb4e19ec1b20e5ce31b2d1af1"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ee9a0dd54ff5196da39b0b20646eebf466f96eddf41d80db2b562a3d233e6629"
+bytes = 185766
+source_ref = "sha256:ee9a0dd54ff5196da39b0b20646eebf466f96eddf41d80db2b562a3d233e6629"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "abbbb7c71622edfc7f7bf57717b4d00ce54d48476b27bf14e8864052182c30a0"
+bytes = 481
+source_ref = "sha256:abbbb7c71622edfc7f7bf57717b4d00ce54d48476b27bf14e8864052182c30a0"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "97f80f4a37909e04396ebb68d09a55e46703c555f7ec90f7b77e846289cd6132"
+bytes = 182503
+source_ref = "sha256:97f80f4a37909e04396ebb68d09a55e46703c555f7ec90f7b77e846289cd6132"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4c3d2cc5ae205f7c803a822b4b71244547e5a46d16aefb0da12dc183a4587d75"
+bytes = 483
+source_ref = "sha256:4c3d2cc5ae205f7c803a822b4b71244547e5a46d16aefb0da12dc183a4587d75"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "703edcdee0c806a5b47ff578d70968116567c459bde24bf58f96a17ca96318af"
+bytes = 183268
+source_ref = "sha256:703edcdee0c806a5b47ff578d70968116567c459bde24bf58f96a17ca96318af"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cdffecb779c60ece4adde1ae1ff0526ecc1247badee1f29bc5aabf5b64879c1e"
+bytes = 479
+source_ref = "sha256:cdffecb779c60ece4adde1ae1ff0526ecc1247badee1f29bc5aabf5b64879c1e"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4176f1cdb0097d2a0a7810c38d76a7868455ebaa8f8d7e91744a09217a538bbe"
+bytes = 181732
+source_ref = "sha256:4176f1cdb0097d2a0a7810c38d76a7868455ebaa8f8d7e91744a09217a538bbe"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "523d2ae5bd66008f628df694f90682ad1c798a9d0929c582008d5e18fbcdda3a"
+bytes = 479
+source_ref = "sha256:523d2ae5bd66008f628df694f90682ad1c798a9d0929c582008d5e18fbcdda3a"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "27724b240838284f6fca6d0e3ca4a2f0e4a656b62d5da3a9c13ee5db24e8f360"
+bytes = 185848
+source_ref = "sha256:27724b240838284f6fca6d0e3ca4a2f0e4a656b62d5da3a9c13ee5db24e8f360"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cea1cc1d65811d7792e3bb7a1b656bddc01e8257c7af919977cf1a3c772b102d"
+bytes = 481
+source_ref = "sha256:cea1cc1d65811d7792e3bb7a1b656bddc01e8257c7af919977cf1a3c772b102d"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "16af4ff94ff6a863e0ee8fd19405d0db4802bbec57fbe9a2e053f463798440fb"
+bytes = 186186
+source_ref = "sha256:16af4ff94ff6a863e0ee8fd19405d0db4802bbec57fbe9a2e053f463798440fb"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "339d2133ebf1a6ae4360d157c5e8fe1fd35f67ea2de49e8500ecdf630d7074dd"
+bytes = 477
+source_ref = "sha256:339d2133ebf1a6ae4360d157c5e8fe1fd35f67ea2de49e8500ecdf630d7074dd"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5de63422c9a948078860f1ad60343b3602f75bc6594f05b6d9292a887ff3f1da"
+bytes = 184750
+source_ref = "sha256:5de63422c9a948078860f1ad60343b3602f75bc6594f05b6d9292a887ff3f1da"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3bbb673bc10ada7f048528eb2d9127da35b6185438bdc5a55453b2dc4d626653"
+bytes = 481
+source_ref = "sha256:3bbb673bc10ada7f048528eb2d9127da35b6185438bdc5a55453b2dc4d626653"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4b6e120eab73928181885ce9c20790c28fe36ca4e04bd0fc21815a07e1675db7"
+bytes = 185789
+source_ref = "sha256:4b6e120eab73928181885ce9c20790c28fe36ca4e04bd0fc21815a07e1675db7"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1f3a0393d0ef7995a1c47f61b38b0c6179fcaeaa4fd1f0647581206bb50662db"
+bytes = 483
+source_ref = "sha256:1f3a0393d0ef7995a1c47f61b38b0c6179fcaeaa4fd1f0647581206bb50662db"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "fe3d0752ebe95e842a26f7cd11ed731ea798fc15691ce878a1d6ee0d3b72a551"
+bytes = 186195
+source_ref = "sha256:fe3d0752ebe95e842a26f7cd11ed731ea798fc15691ce878a1d6ee0d3b72a551"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c78ad339e3e0a19f0ebe4f0f41c3e4fe7b602bd6aba4517a0a98c9d5fcd92b87"
+bytes = 479
+source_ref = "sha256:c78ad339e3e0a19f0ebe4f0f41c3e4fe7b602bd6aba4517a0a98c9d5fcd92b87"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f3c3e4be19e8dacda4df4f11d217673801229fb282e9b8ddc54c4b42d08c6d9f"
+bytes = 184849
+source_ref = "sha256:f3c3e4be19e8dacda4df4f11d217673801229fb282e9b8ddc54c4b42d08c6d9f"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "30ff555d6c3bae84d2a4f57546f47e2a8ff550acc46f5f975db6bcbd3acb6ab5"
+bytes = 479
+source_ref = "sha256:30ff555d6c3bae84d2a4f57546f47e2a8ff550acc46f5f975db6bcbd3acb6ab5"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c1abb5aabfd322333a9b27d2b0c926abaacfc3ce7665d1e56f715d934ae1d532"
+bytes = 186879
+source_ref = "sha256:c1abb5aabfd322333a9b27d2b0c926abaacfc3ce7665d1e56f715d934ae1d532"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f58ec50fcaf49007167eb234944e8165ad3787e53a64719ea2166348d92eca5b"
+bytes = 481
+source_ref = "sha256:f58ec50fcaf49007167eb234944e8165ad3787e53a64719ea2166348d92eca5b"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4f575221553428660dbd478cdeb33b211c825878acca93d88d80516a3658b485"
+bytes = 186918
+source_ref = "sha256:4f575221553428660dbd478cdeb33b211c825878acca93d88d80516a3658b485"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6a9ef0eb8062d381a6645377d108cf2058495ae6d42fcd61d65c34dda4eed255"
+bytes = 477
+source_ref = "sha256:6a9ef0eb8062d381a6645377d108cf2058495ae6d42fcd61d65c34dda4eed255"
+
+[[records]]
+path = "records/artifacts/adaptive_delta/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/adaptive_delta/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6e4b567b8bbcdd71744e938b64c978591b6edf223dc4443fce4cffcaac509f2d"
+bytes = 185690
+source_ref = "sha256:6e4b567b8bbcdd71744e938b64c978591b6edf223dc4443fce4cffcaac509f2d"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "763405fdc6f334bfaa7762a0d4bdd580e77b0ee8b9c79c2d7c2ebfb536e819cc"
+bytes = 484
+source_ref = "sha256:763405fdc6f334bfaa7762a0d4bdd580e77b0ee8b9c79c2d7c2ebfb536e819cc"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "179276fd6adbf73d4b869a0e6af7bd5b400707a7064b0993fb564c46cdaad50c"
+bytes = 318988
+source_ref = "sha256:179276fd6adbf73d4b869a0e6af7bd5b400707a7064b0993fb564c46cdaad50c"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "6417497f1086c5cb2606aa278ea30983e98fe9bf70f61412ee274534d2915348"
+bytes = 486
+source_ref = "sha256:6417497f1086c5cb2606aa278ea30983e98fe9bf70f61412ee274534d2915348"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "88c0792ef15c57b9ab695eedc6045e33c2fd1ca83ee927d88d93dd4f0eae6497"
+bytes = 318869
+source_ref = "sha256:88c0792ef15c57b9ab695eedc6045e33c2fd1ca83ee927d88d93dd4f0eae6497"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3cb7eccd4d65a6584a21b8a32b8f134539bfad34ece7c41cf667a2e9f5610983"
+bytes = 482
+source_ref = "sha256:3cb7eccd4d65a6584a21b8a32b8f134539bfad34ece7c41cf667a2e9f5610983"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "62b01835111bcdc2715d5a38a37439d9e9baefa97d82610f432549e274bf6cf3"
+bytes = 318941
+source_ref = "sha256:62b01835111bcdc2715d5a38a37439d9e9baefa97d82610f432549e274bf6cf3"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e404c4c5bfce811bbe986c358eed51167a1b0cea946a77d33cedbda2a3710ea5"
+bytes = 482
+source_ref = "sha256:e404c4c5bfce811bbe986c358eed51167a1b0cea946a77d33cedbda2a3710ea5"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e16a45c620172b997119a31090c5e227282d32972275ff05b9ba54bc00156abf"
+bytes = 319084
+source_ref = "sha256:e16a45c620172b997119a31090c5e227282d32972275ff05b9ba54bc00156abf"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7c4f221b599ff3718e93b1db4eab4a46f517e2db7071b25036d13e6a76c6439d"
+bytes = 484
+source_ref = "sha256:7c4f221b599ff3718e93b1db4eab4a46f517e2db7071b25036d13e6a76c6439d"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c7f6bf59058689ddd1d9de6d5816a291a9148768ce1589d90360e8cfc9511ea8"
+bytes = 318967
+source_ref = "sha256:c7f6bf59058689ddd1d9de6d5816a291a9148768ce1589d90360e8cfc9511ea8"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f0b7e2bdee37055d1b354a1a65f7963d9ad5e11ef36575556da37bd6b32dacf1"
+bytes = 480
+source_ref = "sha256:f0b7e2bdee37055d1b354a1a65f7963d9ad5e11ef36575556da37bd6b32dacf1"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "24a2f93dcde736394608b11e445cce6be40de2016bb19efc7e392e1436701d0e"
+bytes = 319186
+source_ref = "sha256:24a2f93dcde736394608b11e445cce6be40de2016bb19efc7e392e1436701d0e"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c35c42df6f3154304b5d552a3b421f938159f51132e202bf8169be6f99b70ab4"
+bytes = 484
+source_ref = "sha256:c35c42df6f3154304b5d552a3b421f938159f51132e202bf8169be6f99b70ab4"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "456925f1e849215f7ad7b58b0576ae94d76a195ba2cdc17b856eb61d420715f6"
+bytes = 318875
+source_ref = "sha256:456925f1e849215f7ad7b58b0576ae94d76a195ba2cdc17b856eb61d420715f6"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "234b4f2144ffa757f7752fb7933984d291334c403ef3c3179fb5e0d11f21e9ed"
+bytes = 486
+source_ref = "sha256:234b4f2144ffa757f7752fb7933984d291334c403ef3c3179fb5e0d11f21e9ed"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3ff7192f87f92d69cc150b4e52d82b53342992ad6b1924792df1c0025f95c37f"
+bytes = 318454
+source_ref = "sha256:3ff7192f87f92d69cc150b4e52d82b53342992ad6b1924792df1c0025f95c37f"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c4162b36b014d9a4807ffb41a4e1b157006cca043d2f98127bf2e8108d6b7879"
+bytes = 482
+source_ref = "sha256:c4162b36b014d9a4807ffb41a4e1b157006cca043d2f98127bf2e8108d6b7879"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f9d883e4ad16c9313f1e506613ffb10af98af725162a7be32bd501d0ff505d43"
+bytes = 318926
+source_ref = "sha256:f9d883e4ad16c9313f1e506613ffb10af98af725162a7be32bd501d0ff505d43"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "113e2a53314178250ff9f1d18c7267d647919d4ff7ba9d8b47e9ef1838925121"
+bytes = 482
+source_ref = "sha256:113e2a53314178250ff9f1d18c7267d647919d4ff7ba9d8b47e9ef1838925121"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a30473f31f52f879fba93f39aed705331e6b0f19a9c1c34ba6d78a67f5ae27d4"
+bytes = 319052
+source_ref = "sha256:a30473f31f52f879fba93f39aed705331e6b0f19a9c1c34ba6d78a67f5ae27d4"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "72c56a211aa56cf2b6b2f5d124bb9bf35e87d5b4d768f5332f6baf803dd5a46b"
+bytes = 484
+source_ref = "sha256:72c56a211aa56cf2b6b2f5d124bb9bf35e87d5b4d768f5332f6baf803dd5a46b"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b70c6a2bec17a05e3ddf6a0bf4bd0432e467b68834b72c9b0f643b021a9ea4b0"
+bytes = 318555
+source_ref = "sha256:b70c6a2bec17a05e3ddf6a0bf4bd0432e467b68834b72c9b0f643b021a9ea4b0"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c30b9d6e6a598a0da7cbf92b6b8b76158c2487924914e098f7daec1568892fd5"
+bytes = 480
+source_ref = "sha256:c30b9d6e6a598a0da7cbf92b6b8b76158c2487924914e098f7daec1568892fd5"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7d0f5333346a74de69f68c5493cec373b58712f56e15b157394392e529ea9eff"
+bytes = 319119
+source_ref = "sha256:7d0f5333346a74de69f68c5493cec373b58712f56e15b157394392e529ea9eff"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2cee2da6bf986638daedd64bd6a4d728291c24657ca159d7ae6fdb667d0985e9"
+bytes = 484
+source_ref = "sha256:2cee2da6bf986638daedd64bd6a4d728291c24657ca159d7ae6fdb667d0985e9"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f1c4dbbcc849b3ed14291b21717db05ce8871965635f0f7ca91c439ed68e1e17"
+bytes = 318806
+source_ref = "sha256:f1c4dbbcc849b3ed14291b21717db05ce8871965635f0f7ca91c439ed68e1e17"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "38ec2341a33bb42d92873bb993eabf47b3d442cd75ec3ad4ec38fabbd912135b"
+bytes = 486
+source_ref = "sha256:38ec2341a33bb42d92873bb993eabf47b3d442cd75ec3ad4ec38fabbd912135b"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3f5f66adf374b58a77ee7bae980e14b79e9b0534e03fa07378b625a3f074bedd"
+bytes = 318851
+source_ref = "sha256:3f5f66adf374b58a77ee7bae980e14b79e9b0534e03fa07378b625a3f074bedd"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5e6f1732bca5684641dd9f99c15785896ac8f46d7da173c09fb9c1302b099f69"
+bytes = 482
+source_ref = "sha256:5e6f1732bca5684641dd9f99c15785896ac8f46d7da173c09fb9c1302b099f69"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "717d6417b65444fc8c1edada62c53a88d911655d12c3afe811dd764a2dbf7395"
+bytes = 318743
+source_ref = "sha256:717d6417b65444fc8c1edada62c53a88d911655d12c3afe811dd764a2dbf7395"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e9a4782f0ad6c927bdeb1b7aa5ab8f6b7a78afcc0378a94227752988c3a7d7de"
+bytes = 482
+source_ref = "sha256:e9a4782f0ad6c927bdeb1b7aa5ab8f6b7a78afcc0378a94227752988c3a7d7de"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f24dcef2324540a6f86b241fc923461311449fcc3990fac1e94c9dbcdddf8766"
+bytes = 318923
+source_ref = "sha256:f24dcef2324540a6f86b241fc923461311449fcc3990fac1e94c9dbcdddf8766"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b7ea11c6f8deca9f97a175a8ffa6709c70570d2ca8055c119e0caaa72c537122"
+bytes = 484
+source_ref = "sha256:b7ea11c6f8deca9f97a175a8ffa6709c70570d2ca8055c119e0caaa72c537122"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a612cec1cbc5b92ff29898075c1e1e5e5f31d6f7e0b6ee14442270682e421567"
+bytes = 319048
+source_ref = "sha256:a612cec1cbc5b92ff29898075c1e1e5e5f31d6f7e0b6ee14442270682e421567"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "33bdd8d5394e37361b33f57fca2e5cd9a77fc5a5b75f4c0b770e5974237d901d"
+bytes = 480
+source_ref = "sha256:33bdd8d5394e37361b33f57fca2e5cd9a77fc5a5b75f4c0b770e5974237d901d"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c03a3a99ad34202cc82052969754efbf75eff136944ca7541fa4bfb76aa94b1b"
+bytes = 318914
+source_ref = "sha256:c03a3a99ad34202cc82052969754efbf75eff136944ca7541fa4bfb76aa94b1b"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-chain-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-chain-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4fd3f828d682ffa499058a30bab776daf835084e8f61576c6353073beee4c0ee"
+bytes = 484
+source_ref = "sha256:4fd3f828d682ffa499058a30bab776daf835084e8f61576c6353073beee4c0ee"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "f714dff54578f9364a81bd51cc1fa5c87b029f113777a3bcd8611093ffba705c"
+bytes = 318801
+source_ref = "sha256:f714dff54578f9364a81bd51cc1fa5c87b029f113777a3bcd8611093ffba705c"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-chain-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-chain-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "1155a08504c6cb24226379f2a084af64e53f69f378ee7bb629e0cc501a31048f"
+bytes = 486
+source_ref = "sha256:1155a08504c6cb24226379f2a084af64e53f69f378ee7bb629e0cc501a31048f"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "12743d4df635da967aced5c66ec066456c8788abda664530dcd9237c9329c884"
+bytes = 318312
+source_ref = "sha256:12743d4df635da967aced5c66ec066456c8788abda664530dcd9237c9329c884"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-chain-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-chain-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "22e3d123895301ffca73eb0ae3ac12adf746a6b59cad73db1bd0c488a1313bad"
+bytes = 482
+source_ref = "sha256:22e3d123895301ffca73eb0ae3ac12adf746a6b59cad73db1bd0c488a1313bad"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7f0736a7108ce0f83e5e9cad33b5f628bb2844d653e9792bff47a1a416cbb2a6"
+bytes = 318796
+source_ref = "sha256:7f0736a7108ce0f83e5e9cad33b5f628bb2844d653e9792bff47a1a416cbb2a6"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-star-outlier.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-star-outlier.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "89c1b3079a5d4b47833581b5cb863769bd2ad8cce7654bc440862be30c155140"
+bytes = 482
+source_ref = "sha256:89c1b3079a5d4b47833581b5cb863769bd2ad8cce7654bc440862be30c155140"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "2e9ed9b87389fc2d6a55f9cdc882cb7abc6f9a2f074c0c65e1eba022fba97a95"
+bytes = 319007
+source_ref = "sha256:2e9ed9b87389fc2d6a55f9cdc882cb7abc6f9a2f074c0c65e1eba022fba97a95"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-star-revision.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-star-revision.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "35df66e05f3dca0923de1d19e9d12426b660c29f111b1860cd933220c49321dd"
+bytes = 484
+source_ref = "sha256:35df66e05f3dca0923de1d19e9d12426b660c29f111b1860cd933220c49321dd"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "981bacaab45b34aaedfbf47536b263b1601e9f259896783fb732ae1bf8cbe337"
+bytes = 318476
+source_ref = "sha256:981bacaab45b34aaedfbf47536b263b1601e9f259896783fb732ae1bf8cbe337"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-star-stable.json"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-star-stable.json"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3619bdab205a1cacd4fc8ff6f4aacdc11e1d512e626a7986f83a88a9fed1f13e"
+bytes = 480
+source_ref = "sha256:3619bdab205a1cacd4fc8ff6f4aacdc11e1d512e626a7986f83a88a9fed1f13e"
+
+[[records]]
+path = "records/artifacts/covariance_filter/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/covariance_filter/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d1aa13b6a73627e5e6320e61d53c8098d47ab4ac133d5bb7b0efad6f4c7daf7c"
+bytes = 319110
+source_ref = "sha256:d1aa13b6a73627e5e6320e61d53c8098d47ab4ac133d5bb7b0efad6f4c7daf7c"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5db738ca63dcea5f42709bb89c68c21cd87fcd8ad5e2e1f8472f63a842a7e02f"
+bytes = 212149
+source_ref = "sha256:5db738ca63dcea5f42709bb89c68c21cd87fcd8ad5e2e1f8472f63a842a7e02f"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "67027c55339a6220839875ed9d0b2520c36f332173cd5f22754f502493318aa5"
+bytes = 211733
+source_ref = "sha256:67027c55339a6220839875ed9d0b2520c36f332173cd5f22754f502493318aa5"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "26194d4d0c15bd1c7145f4b20449bb2bcb15b898a93ef78639d57fc3e2e8142e"
+bytes = 212147
+source_ref = "sha256:26194d4d0c15bd1c7145f4b20449bb2bcb15b898a93ef78639d57fc3e2e8142e"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3e464a09435ea07cb2e6bbf6ce62bf17d68da803dfb6863ad04542e9d0f1538f"
+bytes = 212285
+source_ref = "sha256:3e464a09435ea07cb2e6bbf6ce62bf17d68da803dfb6863ad04542e9d0f1538f"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d46c8edf7dba3481bc519e5877b39423a525c5c0b85caec1071ba3901962d1c9"
+bytes = 211857
+source_ref = "sha256:d46c8edf7dba3481bc519e5877b39423a525c5c0b85caec1071ba3901962d1c9"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4fc7b8930665c4fd7cc1e2618fcae1d1976d605c6bc5dc6d6c17df5ba671cda2"
+bytes = 212283
+source_ref = "sha256:4fc7b8930665c4fd7cc1e2618fcae1d1976d605c6bc5dc6d6c17df5ba671cda2"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b7b3cdc4d4bf0da36adcad85122afde742a599198b23f57c6ad3b451896954a9"
+bytes = 212292
+source_ref = "sha256:b7b3cdc4d4bf0da36adcad85122afde742a599198b23f57c6ad3b451896954a9"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "d6f00590ed098912b4684abfd549338ab5368952edf2bbd10b3a9979b0948deb"
+bytes = 211913
+source_ref = "sha256:d6f00590ed098912b4684abfd549338ab5368952edf2bbd10b3a9979b0948deb"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c964ed6b19ab83539240f03267e2bb42008534cd7eb2744e0ee9cbe8f7dc7b3f"
+bytes = 212291
+source_ref = "sha256:c964ed6b19ab83539240f03267e2bb42008534cd7eb2744e0ee9cbe8f7dc7b3f"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "88498e0a161c0fb8d69085a6ef1340fbe951aac63a1bbab602c8f43d129d659b"
+bytes = 212415
+source_ref = "sha256:88498e0a161c0fb8d69085a6ef1340fbe951aac63a1bbab602c8f43d129d659b"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cb3d073705954d7f495e3bc2e327e48214a6c99da6a424c797ab57846e7e8fd9"
+bytes = 212042
+source_ref = "sha256:cb3d073705954d7f495e3bc2e327e48214a6c99da6a424c797ab57846e7e8fd9"
+
+[[records]]
+path = "records/artifacts/inputs/980001-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980001-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "b7aa0564d2fc69f0da91f28c45817b78c62621e624c971a83a149a9b3012ac51"
+bytes = 212414
+source_ref = "sha256:b7aa0564d2fc69f0da91f28c45817b78c62621e624c971a83a149a9b3012ac51"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H0-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H0-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "bbd306ffc279ef9c1db5348c66e96612858df9ade97b403291f11664eb1b4c45"
+bytes = 212280
+source_ref = "sha256:bbd306ffc279ef9c1db5348c66e96612858df9ade97b403291f11664eb1b4c45"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H0-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H0-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "268f3a34dd48b1b1774844df46f81b6f6fa48255b50bc61b801440bc5f5fd1b7"
+bytes = 211854
+source_ref = "sha256:268f3a34dd48b1b1774844df46f81b6f6fa48255b50bc61b801440bc5f5fd1b7"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H0-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H0-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9a249de5b85c04b765cefb31e58b608c095e39d755b877054deff162a60ddc16"
+bytes = 212272
+source_ref = "sha256:9a249de5b85c04b765cefb31e58b608c095e39d755b877054deff162a60ddc16"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H0-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H0-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "c860e47075096387afb02d1ae26a964fdb1afe76b5aa53e52963660a990b38fc"
+bytes = 212404
+source_ref = "sha256:c860e47075096387afb02d1ae26a964fdb1afe76b5aa53e52963660a990b38fc"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H0-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H0-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "9088f2433443d175c468cdaad51f7a47df49828a2593c0e55c519ff9f70c02f5"
+bytes = 211972
+source_ref = "sha256:9088f2433443d175c468cdaad51f7a47df49828a2593c0e55c519ff9f70c02f5"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H0-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H0-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "7e1b8c5914b73445e11cf2cef43e24c4c46c6c0aff3e3f85eab645dc147965df"
+bytes = 212394
+source_ref = "sha256:7e1b8c5914b73445e11cf2cef43e24c4c46c6c0aff3e3f85eab645dc147965df"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H1-chain-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H1-chain-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "a9c5f0958b3af0de9cf6d6ab289f3548c4e7858b74d9fb45477b31bb59dc9aec"
+bytes = 212356
+source_ref = "sha256:a9c5f0958b3af0de9cf6d6ab289f3548c4e7858b74d9fb45477b31bb59dc9aec"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H1-chain-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H1-chain-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "e6d3e4ebe2504e586035f8cdc90dafe39703412b2859f709740d7747dd17c588"
+bytes = 211966
+source_ref = "sha256:e6d3e4ebe2504e586035f8cdc90dafe39703412b2859f709740d7747dd17c588"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H1-chain-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H1-chain-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ba4ec5cca8c8bcd17727aee71971fceb9df5d58493a5598d71f4dea77ad2ba1f"
+bytes = 212354
+source_ref = "sha256:ba4ec5cca8c8bcd17727aee71971fceb9df5d58493a5598d71f4dea77ad2ba1f"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H1-star-outlier.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H1-star-outlier.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "cdec437609f949550a80edb7e7cfad3110ae7fe23cda8dbccee483339d6606be"
+bytes = 212257
+source_ref = "sha256:cdec437609f949550a80edb7e7cfad3110ae7fe23cda8dbccee483339d6606be"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H1-star-revision.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H1-star-revision.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "4fd8194b512f3d0a2f91919fe71e8b4e10b70864454358b2ef99a8e306e09f7d"
+bytes = 211864
+source_ref = "sha256:4fd8194b512f3d0a2f91919fe71e8b4e10b70864454358b2ef99a8e306e09f7d"
+
+[[records]]
+path = "records/artifacts/inputs/980002-H1-star-stable.npz"
+legacy_path = "studies/relational_revision/records/artifacts/inputs/980002-H1-star-stable.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "88b739be58aec69b1049be8fd3ca381ef33c0d2de02c3ebcbe0d4c38558eea43"
+bytes = 212250
+source_ref = "sha256:88b739be58aec69b1049be8fd3ca381ef33c0d2de02c3ebcbe0d4c38558eea43"
 
 [[records]]
 path = "records/benchmarks/protocol.json"
@@ -28,6 +3700,15 @@ bytes = 83742
 source_ref = "sha256:01c17e5cc6b723168bb9f540040cf936614f952a6fb634832b304b4b46733e9a"
 
 [[records]]
+path = "records/results/interpretation.md"
+legacy_path = "studies/relational_revision/records/results/interpretation.md"
+origin = "native"
+role = "report"
+sha256 = "b8d815afd056cd07f95a9caa63a258a80e766807d4cb46a3bf2a4f8c58bca9e7"
+bytes = 2462
+source_ref = "sha256:b8d815afd056cd07f95a9caa63a258a80e766807d4cb46a3bf2a4f8c58bca9e7"
+
+[[records]]
 path = "records/results/qualification.json"
 legacy_path = "studies/relational_revision/records/results/qualification.json"
 origin = "native"
@@ -35,3 +3716,12 @@ role = "supporting_artifact"
 sha256 = "8e22ffacdff4f2c9f9bf758aaeff11677186ba4be46e621546d0e8488a740557"
 bytes = 1057
 source_ref = "sha256:8e22ffacdff4f2c9f9bf758aaeff11677186ba4be46e621546d0e8488a740557"
+
+[[records]]
+path = "records/results/result.json"
+legacy_path = "studies/relational_revision/records/results/result.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "7b767710e6af73e496b1238b871f8b01d0e09e125cd0a9d01260d7b9484b8576"
+bytes = 157780
+source_ref = "sha256:7b767710e6af73e496b1238b871f8b01d0e09e125cd0a9d01260d7b9484b8576"
