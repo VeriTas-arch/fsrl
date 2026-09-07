@@ -25,8 +25,8 @@
 distortion, allow a jointly trained shared RNN to form stable individualized relations
 and learn history-dependent functional discrimination?
 
-**Finding.** Fixed sigma=1/7; eighty GPU qualification checks passed. Three-condition
-development pending; no Liu evaluation.
+**Finding.** Qualified implementation and ten paired input panels locked before
+development training.
 
 **Claim boundary.** Development; one fixed observation-error scale, sign-restored oracle
 control, three paired network seeds, single-stage joint training; no human calibration
@@ -40,6 +40,9 @@ or promotion.
 - `supporting_artifact` —
   [studies/observation_uncertainty/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:565afeefc095`)
+- `execution_lock` —
+  [studies/observation_uncertainty/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:b69d060bde91`)
 
 ## Provenance rule
 

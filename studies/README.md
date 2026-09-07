@@ -223,8 +223,8 @@ fail to close the dynamics.
     trained models fail individual diversity and no added functional history selection
     is supported. Close this recipe without promotion.
 - [Observation uncertainty and sign-restored control](observation_uncertainty/README.md) — `unresolved`
-  - **Finding:** Fixed sigma=1/7; eighty GPU qualification checks passed.
-    Three-condition development pending; no Liu evaluation.
+  - **Finding:** Qualified implementation and ten paired input panels locked before
+    development training.
 
 ## Minimal explanatory models
 
