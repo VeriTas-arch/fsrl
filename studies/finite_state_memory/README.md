@@ -34,6 +34,9 @@ estimate.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/finite_state_memory/records/benchmarks/development_model_lock.json](records/benchmarks/development_model_lock.json)
+  (`sha256:d39913f21b67`)
 - `registered_contract` —
   [studies/finite_state_memory/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:7199a7c2ca02`)
