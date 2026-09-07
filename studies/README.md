@@ -263,6 +263,8 @@ fail to close the dynamics.
     competent cells, 15 Ce endpoints noninferior, Ae core9/9 and Ce7/9, and retained
     compensation. Conditional compact export stopped at an original-tolerance mismatch
     in the fifth model; no six-model compact qualification or promotion.
+- [State dependence versus stage schedules in affine modulation](modulation_schedule/README.md) — `unresolved`
+  - **Finding:** Prospective frozen affine schedule diagnostic.
 
 ## Minimal explanatory models
 

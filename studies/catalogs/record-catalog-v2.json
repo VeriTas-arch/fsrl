@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 2603,
+  "entry_count": 2605,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 1517,
+    "json": 1519,
     "json_lines": 68,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 2510,
+    "already_conformant": 2512,
     "historical_gzip_view": 92,
     "historical_pth_view": 1
   },
@@ -59310,6 +59310,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/modulation_schedule/records/benchmarks/protocol.json",
+        "repository_path": "studies/modulation_schedule/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 9484,
+        "sha256": "8e95cd67f513374cd6f3099febf1374f60c3298acc21e6f86a84fabd6f729057"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "modulation_schedule",
+        "kind": "study"
+      },
+      "record_id": "study.modulation_schedule.studies_modulation_schedule_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 9484,
+        "sha256": "8e95cd67f513374cd6f3099febf1374f60c3298acc21e6f86a84fabd6f729057",
+        "source_ref": "sha256:8e95cd67f513374cd6f3099febf1374f60c3298acc21e6f86a84fabd6f729057"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/modulation_schedule/records/benchmarks/qualification.json",
+        "repository_path": "studies/modulation_schedule/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 80203,
+        "sha256": "7d74f7b00607d6468f6e7126c31126a977410f1a629eae166568c5537473578e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "modulation_schedule",
+        "kind": "study"
+      },
+      "record_id": "study.modulation_schedule.studies_modulation_schedule_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 80203,
+        "sha256": "7d74f7b00607d6468f6e7126c31126a977410f1a629eae166568c5537473578e",
+        "source_ref": "sha256:7d74f7b00607d6468f6e7126c31126a977410f1a629eae166568c5537473578e"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.supporting_artifact",
       "format": {
         "format": "json",
@@ -88883,7 +88951,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 2601,
+  "registered_record_count": 2603,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -88904,20 +88972,20 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 81,
+    "registered_contract": 82,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 82,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 1605,
+    "supporting_artifact": 1606,
     "validation_result": 13
   },
   "schema_version": 2,
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "dafeaaba5b75958614ab0dd2d881e36f0bac5c68c24f6a99acf42634b4d9ba20"
+      "sha256": "7bab620b6d8016f24cfefd34a0a12d99e04b7057d7b198a239652f4ad177238d"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

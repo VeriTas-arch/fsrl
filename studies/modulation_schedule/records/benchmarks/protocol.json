@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "study_id": "modulation_schedule",
+  "question": "Do frozen affine RNNs require within-stage modulation variation, or do fixed stage/global schedules preserve competence, individualized organization and A/C compensation? Independently locate the compact-export numerical mismatch.",
+  "tier": "Development on exposed references and panels",
+  "parent_commit": "4153eee47da2b6269e59ebf6235dc1d61b48bb30",
+  "parents": {
+    "protocol": {
+      "path": "studies/linear_modulation/records/benchmarks/protocol.json",
+      "sha256": "ea99033d86f6122a63ed46992135091568a223246348b8cd7f16b83aff79fc01",
+      "bytes": 14264
+    },
+    "source": {
+      "path": "studies/linear_modulation/records/benchmarks/source_lock.json",
+      "sha256": "d77bba4f34dd974b8ba23952e58b94f50def5295925cccd7c82788aba7904f02",
+      "bytes": 217883
+    },
+    "models": {
+      "path": "studies/linear_modulation/records/benchmarks/model_lock.json",
+      "sha256": "4fb497ece6ef162c5568b618cb227c200603a9ce2ff21f79179b09bccc175a8d",
+      "bytes": 35250
+    },
+    "result": {
+      "path": "studies/linear_modulation/records/results/result.json",
+      "sha256": "f3d229f1a7a192c9b98f30ee45a81381c67c032a1c5b065b380d70f3dbb23b08",
+      "bytes": 4039780
+    }
+  },
+  "seeds": [
+    2531,
+    2532,
+    2533
+  ],
+  "calibration_panel": 1,
+  "evaluation_panels": [
+    2,
+    3
+  ],
+  "audit": {
+    "models": 6,
+    "observations": [
+      "clean",
+      "noisy"
+    ],
+    "batches": 60,
+    "inputs": "Panel1 four generic archives and Liu8. No slow updates. Reset h/E per experience, retain only P. Include initial blank and all four phases; first two support phases must have exactly zero eligibility opportunity.",
+    "records": [
+      "m",
+      "m_minus_bias",
+      "potential Frobenius norm of alpha*old E",
+      "actual Frobenius norm of alpha*(Pnew-P)",
+      "clipped entry fraction",
+      "trial",
+      "phase",
+      "q",
+      "time",
+      "prior repetition count",
+      "absolute discrepancy with mean preceding observed relation evidence"
+    ],
+    "history": "Canonicalize q by unordered item pair orientation using only preceding observations. First occurrence count/discrepancy zero. No true order, retention indicator or reliability label enters a predictor or replacement.",
+    "descriptive": "Separate four phases within each frozen model/observation/input. m quantiles1/5/50/95/99; potential RMS, actual mean, clipping fraction, opportunity-squared-weighted m mean/RMS/sign fractions. No cross-network pooling or variance/fit selection threshold.",
+    "prediction": "Generic-only leave-one-archive-out WLS, holding both observations of each archive out together. Separately in phases3/4: intercept; intercept+normalized time+signed q+abs(q); preceding terms+repeat count+has previous observation+observed discrepancy. Report weighted prediction errors, not causal effects; Liu is not used."
+  },
+  "calibration": {
+    "source": "All eight generic panel1 archive/observation combinations per model. Never Liu. Same constants in both observation conditions for that model.",
+    "phase": "Weighted least-squares mean m for each of phases3/4 with weights ||alpha*Eold||_F^2. Each archive/observation weighted equally by normalizing sums by row count. Values for ineffective phases1/2 are0.",
+    "constant": "Same weighted mean pooled across both active phases; identical scalar at all support phases. Fitted concurrently with phase constants before any intervention, locked but exposed only if phase gate passes.",
+    "boundary": "These are frozen-solution interventions, not trained alternative architectures; weighted mean does not preserve modulation variance or exact actual write budget."
+  },
+  "intervention": {
+    "phase": "Replace only m in support P update with fixed phase value; compute h/E with original cell and evolving intervened P. Preserve old E timing, clip[-50,50], alpha, observation and(q,q), all query calculations.",
+    "units": 24,
+    "inputs": "Same physical inputs, realized q, choices and intervention identities as affine reference; three seeds x four A0/Ae/C0/Ce cells x panels2/3. Baselines reused by reference.",
+    "constant_trigger": "Only if phase passes the all-three-pair preservation gate; then another24units, with previously locked constants and no changes."
+  },
+  "decision": {
+    "primary": "Paired intervention-minus-affine generic-global CE interaction. Positive95 lower bound means compensation attenuated by this joint schedule intervention; interpret selective effects only if task competence remains. Do not infer a difference from two separate significance labels.",
+    "secondary": "Paired changes in tau interaction, S_C-S_A, both noise tau simple effects; complete four-cell competence, core flags, P_off and evidence-shuffle binding. Per-cell paired total-write difference and ratio for generic and Liu, same bootstrap IDs.",
+    "statistics": "Inherit parent2000 shared-ID bootstrap draws,95% intervals, seed126000+seed+panel*1000000. Equal mean of two fixed panels within each network. No cross-network pooling. Paired complete-case omitted probability preserves included/excluded IDs.",
+    "preservation": "Unchanged parent eight flags, evaluated on panels2/3: all24cells competent, Ce five correct-probability endpoints lower95>=-.02 for every network, Ae/Ce core each present on at least one of two panels per network, binding all Ae/Ce cells, I_tau lower>0,I_CE upper<0,S_C-S_A upper<0,both noise tau upper<0. All three pairs must pass to trigger constant.",
+    "otherwise": "Preserve all failures/uncertainty and write changes; stop the next intervention branch. No gain repair, altered tolerance, seed repair or extra panels. Failure does not prove state-dependent architecture necessary; changing marginal write budgets limits attribution to experience alignment.",
+    "training_trigger": "If global constant also preserves all three pairs, prepare and freeze a separate from-scratch constant-head successor with one trainable signed scalar initialized from each untrained affine bias c0, unchanged common initial tensors/RNG and1500x32 recipe; six A/C models locked before36 evaluations. Do not distill trained-head means into its initialization. If global branch is not triggered or fails, training remains a distinct future necessity test rather than being declared impossible."
+  },
+  "compact_diagnostic": {
+    "scope": "Only frozen2533/clean, inferred fifth failing model. Original38D versus pure column merge37D; original input order panels1..3,clean/noisy, sorted archives, intact then Liu shuffle then eight removals. Stop locator at first mismatch; persist case/tensor/indices/values, all five tensor errors and exact choice/order checks for that case. If none reproduces, report nonreproduction without tolerance changes.",
+    "tolerance": {
+      "atol": 1e-05,
+      "rtol": 0.0001
+    },
+    "propagation": "At located case record per-step input projection,h,m,E,P maximum absolute difference and maximum ratio to original tolerance. Three eager diagnostics: float32; float64 after float32 merging; float64 before merging. Preserve reset/update timing. Float64 is diagnosis, never original qualification; standalone compiler warmup may differ from previous stopped export.",
+    "boundary": "No new checkpoint export, human statistics or original-study rewriting. No six-model qualification or claim that numerical difference is harmless."
+  },
+  "execution": {
+    "stages": [
+      "qualify",
+      "freeze",
+      "audit",
+      "lock-calibration",
+      "evaluate --mode phase",
+      "report --mode phase",
+      "conditional evaluate/report --mode constant",
+      "compact-diagnose",
+      "finalize"
+    ],
+    "freezes": "Commit qualified source/protocol, write/commit source and immutable input/model locks before audit. Finish all six calibrations and commit their common lock before any intervention. Do not edit frozen implementation after outcome exposure; source fixes require an explicit successor.",
+    "qualification": "CPU/GPU independent schedule update, zero-opportunity first two steps, clipping fixture, intact support parity; unchanged2531/A0/panel1 collector105array exact replay; traceP parity on generic test28. No new intervention outcomes in qualification.",
+    "checks": "Changed-file Ruff/format/types, affected numeric tests and architecture checks; registry/docs/diff. Scoped saved-data verification of paired CE interaction and reported gates, no automatic independent reconstruction of every estimator.",
+    "command": "direnv exec . python -m fsrl.experiments.modulation_schedule <stage>"
+  },
+  "outputs": [
+    "protocol",
+    "qualification",
+    "source lock",
+    "panel1 scalar audit and generic-only calibration lock",
+    "24 phase units and conditional24 constant units with raw arrays and fixed summaries",
+    "paired comparison draws/results",
+    "separate compact failure localization and propagation",
+    "canonical result and interpretation"
+  ],
+  "claim_boundary": [
+    "Frozen-solution dependence is distinct from from-scratch architecture necessity.",
+    "Three A/C training pairs; panels already exposed; no independent confirmation or model promotion.",
+    "A/E traces are state-dependent even with constant m; constant success would not remove state dependence from learning.",
+    "No claim of biological dopamine identity, inferred reliability access, or human distribution fitting."
+  ]
+}
