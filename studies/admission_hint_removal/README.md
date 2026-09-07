@@ -25,14 +25,18 @@
 while retaining exactly the same realized q, relational competence, organized
 individuality and observation-training compensation?
 
-**Finding.** Qualified source, original observations, six hint-present models and dual
-anchor locked before six no-hint fits; new scientific outcomes not evaluated.
+**Finding.** All six no-hint A/C models locked before evaluation; initial backbone and
+all9000 pre-mask task/observation fingerprints match hint-present references. Original q
+retained; no new behavior evaluated.
 
 **Claim boundary.** Three matched A/C instances and exposed panels; zq hint removed with
 unchanged q and no local memory. No human confirmation or promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/admission_hint_removal/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:fb0ea047d67d`)
 - `registered_contract` —
   [studies/admission_hint_removal/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:bec0b74bc04e`)

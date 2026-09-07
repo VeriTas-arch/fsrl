@@ -247,8 +247,9 @@ fail to close the dynamics.
     dual, and retained compensation. Small direct-experience losses remain; no interface
     simplification or independent confirmation.
 - [Explicit admission-hint removal in a single-memory RNN](admission_hint_removal/README.md) — `unresolved`
-  - **Finding:** Qualified source, original observations, six hint-present models and
-    dual anchor locked before six no-hint fits; new scientific outcomes not evaluated.
+  - **Finding:** All six no-hint A/C models locked before evaluation; initial backbone
+    and all9000 pre-mask task/observation fingerprints match hint-present references.
+    Original q retained; no new behavior evaluated.
 
 ## Minimal explanatory models
 
