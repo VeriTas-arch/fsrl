@@ -252,6 +252,9 @@ fail to close the dynamics.
     five-endpoint noninferiority;2531 has clear generic learned/nonlearned losses
     beyond2pp. Overall removal not supported; conditional compact export not triggered.
     No tuning or independent confirmation.
+- [Duplicate-observation parameterization in a single-memory RNN](duplicate_observation/README.md) — `unresolved`
+  - **Finding:** Prospective matched duplicate-observation comparison; new outcomes not
+    evaluated.
 
 ## Minimal explanatory models
 
