@@ -40,6 +40,9 @@ estimate.
 - `supporting_artifact` —
   [studies/finite_state_memory/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:f2feb0122b23`)
+- `execution_lock` —
+  [studies/finite_state_memory/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:bc5f89c018e7`)
 
 ## Provenance rule
 
