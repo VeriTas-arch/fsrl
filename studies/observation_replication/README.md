@@ -25,13 +25,16 @@
 training-dependent output compensation replicate jointly in new paired networks crossed
 with new simulated panels?
 
-**Finding.** Prospective independent replication; outcomes not evaluated.
+**Finding.** All six paired networks trained and locked before any new evaluation.
 
 **Claim boundary.** Three new paired training instances crossed with three new simulated
 panels; no network pooling, human confirmation or promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/observation_replication/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:04f9a582378b`)
 - `registered_contract` —
   [studies/observation_replication/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:e614380a3148`)

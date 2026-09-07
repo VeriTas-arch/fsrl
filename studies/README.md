@@ -236,7 +236,7 @@ fail to close the dynamics.
     0/3, Ae 3/3, C0 0/3, Ce 1/3 full and 0/3 global. Diagnostic development, no
     promotion.
 - [Independent observation replication](observation_replication/README.md) — `unresolved`
-  - **Finding:** Prospective independent replication; outcomes not evaluated.
+  - **Finding:** All six paired networks trained and locked before any new evaluation.
 
 ## Minimal explanatory models
 
