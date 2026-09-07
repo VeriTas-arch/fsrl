@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 2799,
+  "entry_count": 2801,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 1627,
+    "json": 1629,
     "json_lines": 68,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 2704,
+    "already_conformant": 2706,
     "historical_gzip_view": 94,
     "historical_pth_view": 1
   },
@@ -94895,6 +94895,74 @@
         "prospective_suffix": ".json"
       },
       "locator": {
+        "legacy_path": "studies/write_budget_match/records/benchmarks/protocol.json",
+        "repository_path": "studies/write_budget_match/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 7053,
+        "sha256": "9dc0bacebc5b110a7885a2ed6c55f0a93dd0507cfe6ea5ff4b1d47983e6c2132"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "write_budget_match",
+        "kind": "study"
+      },
+      "record_id": "study.write_budget_match.studies_write_budget_match_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 7053,
+        "sha256": "9dc0bacebc5b110a7885a2ed6c55f0a93dd0507cfe6ea5ff4b1d47983e6c2132",
+        "source_ref": "sha256:9dc0bacebc5b110a7885a2ed6c55f0a93dd0507cfe6ea5ff4b1d47983e6c2132"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/write_budget_match/records/benchmarks/qualification.json",
+        "repository_path": "studies/write_budget_match/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 76728,
+        "sha256": "5d00b2873a05af938b9e082ab50b53a6b5b3704f856f5794d9607624c7e21546"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "write_budget_match",
+        "kind": "study"
+      },
+      "record_id": "study.write_budget_match.studies_write_budget_match_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 76728,
+        "sha256": "5d00b2873a05af938b9e082ab50b53a6b5b3704f856f5794d9607624c7e21546",
+        "source_ref": "sha256:5d00b2873a05af938b9e082ab50b53a6b5b3704f856f5794d9607624c7e21546"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
         "legacy_path": "benchmarks/liu_mainline_evidence_manifest_v1.json",
         "repository_path": "synthesis/snapshots/reporting_v1/records/benchmarks/liu_mainline_evidence_manifest_v1.json"
       },
@@ -95551,7 +95619,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 2797,
+  "registered_record_count": 2799,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -95572,20 +95640,20 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 82,
+    "registered_contract": 83,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 83,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 1768,
+    "supporting_artifact": 1769,
     "validation_result": 13
   },
   "schema_version": 2,
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "7bab620b6d8016f24cfefd34a0a12d99e04b7057d7b198a239652f4ad177238d"
+      "sha256": "f4266a37b66da9b6ee8283191d8ba08e4a301181922a43318d9967819933dc4f"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

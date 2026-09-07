@@ -269,6 +269,8 @@ fail to close the dynamics.
     reduced effective writes; primary CE compensation attenuation is not supported.
     Conditional constant evaluation/training did not trigger. Compact P_T mismatch
     localized without requalification.
+- [Actual stage write budgets versus modulation organization](write_budget_match/README.md) — `unresolved`
+  - **Finding:** Prospective actual-write matching test.
 
 ## Minimal explanatory models
 

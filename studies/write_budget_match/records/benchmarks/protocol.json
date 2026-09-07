@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "study_id": "write_budget_match",
+  "question": "After matching actual closed-loop L1 writes in each active phase, do stage constants recover the frozen affine RNN prediction loss?",
+  "parent_commit": "16d76b3d67bd25be42c78041fb9c5c126f660ed0",
+  "parents": {
+    "schedule_result": {
+      "path": "studies/modulation_schedule/records/results/result.json",
+      "sha256": "c769c6b261492317483f8c8497ed306961db8bc73676d81f05777da94163bbb5",
+      "bytes": 1969948
+    },
+    "schedule_calibration": {
+      "path": "studies/modulation_schedule/records/benchmarks/calibration_lock.json",
+      "sha256": "e1abd375b6aa856f698d0521f051481ee81d231d2f5bc361dbc2b3a411c91c62",
+      "bytes": 4996
+    }
+  },
+  "tier": "Development on exposed frozen networks and panels; not independent confirmation",
+  "seeds": [
+    2531,
+    2532,
+    2533
+  ],
+  "calibration_panel": 1,
+  "evaluation_panels": [
+    2,
+    3
+  ],
+  "design": {
+    "B": "Native affine; reuse archived behavior.",
+    "S": "Previously frozen stage constants; reuse archived behavior.",
+    "M": "[0,0,gamma3*kappa3,gamma4*kappa4]. Two positive gains per network, shared across clean/noisy observations. Native h/E/P recurrence, old E write, clipping and query preserved; no slow parameter updates.",
+    "phase_budget": "Per episode and phase: sum over experiences of mean(abs(alpha*(Pnew-Pold))), after clipping. Initial blank excluded; phases1/2 exactly zero.",
+    "identity": "Generic uses frozen episode_indices; Liu uses original physical subject column indices0..76.",
+    "calibration": "Only panel1 four generic archives in each observation. Equal archive weight within observation; four separate clean/noisy x phase3/4 targets. No query readout or labels enter calibration objective. Initial blank query sequence is unchanged state initialization.",
+    "evaluation": "If six calibration gates pass:24 M units (3seeds x4cells x2panels) with the unchanged full behavior, P_off, shuffle and eight removal protocol. Separately360 intact support-only B/S/M budget replay batches across6models x2panels x2observations x5archives x3conditions; budget total must agree with archived behavior at original tolerances."
+  },
+  "solver": {
+    "method": "scipy.optimize.least_squares, trf; residual log(W_M/W_B) flattened observation then phase; central finite differences clipped at bounds. Final solver candidate only, no selection of history entries.",
+    "gain_limit": 64,
+    "difference_step": 0.02,
+    "max_nfev": 24,
+    "tolerance": 1e-05,
+    "budget_tolerance": 0.05,
+    "initial_log_gain": [
+      0,
+      0
+    ],
+    "call_bound": "At most24 objective evaluations+4 per Jacobian (at most24 Jacobians), plus one final check and one saved replay: <=122 M collections, each8 generic batches. Native target collected once. No post-limit restart or broadened bounds."
+  },
+  "decision": {
+    "calibration_gate": "All four point ratios in[.95,1.05] per network. First2531 A/C pair first; if either fails, stop remaining calibration and all behavior. If first pair passes, finish other four calibrations regardless of failures, lock all results; behavior requires all6 pass. Solver failure is control infeasibility under fixed recipe, not proof no matching solution exists.",
+    "budget_gate": "Equal two-panel average of phase3/4 M/B ratios;95% paired interval must lie wholly within[.95,1.05]. Per network, observation and domain separately. Generic point ratios weight archives equally using fixed inverse archive sample-size weights; bootstrap uses shared episode draws and those weights. Liu uniform weights. Do not infer all-cell or cross-domain matching from Ce generic matching.",
+    "primary": "Ce generic-global CE residual M-B; positive95 lower bound means remaining loss, interpretable beyond matched mean phase budget only when Ce generic budget gate and task competence pass.",
+    "secondary": "Ce generic-global CE recovery S-M; same paired draws. Report both contrasts in all4cells; raw candidate four-cell absolute performance, noise simple effects and training interactions; retain inherited competence, core and binding flags. Do not require compensation attenuation.",
+    "performance": "Unchanged Ce five probability NI margins-.02 and inherited eight preservation flags are descriptive qualification, not substitutes for budget matching. No claim residual loss eliminated from nonsignificance or NI alone; report recovery/residual continuously, no new CE equivalence threshold.",
+    "statistics": "2000 paired subject-ID bootstrap, seed126000+seed+panel*1000000; average the two fixed panels within each network; no pooling networks. Generic CE uses native raw signed margins; omitted probability uses original paired complete-case IDs.",
+    "stop": "No retuning on panels2/3 or Liu. Failed evaluation budget check restricts interpretation but all prelocked24 outcomes are reported. No global constant, retraining, shuffled modulation or compact export branch."
+  },
+  "execution": {
+    "stages": [
+      "qualify",
+      "freeze",
+      "calibrate",
+      "lock-calibration",
+      "conditional evaluate",
+      "conditional budgets",
+      "report"
+    ],
+    "freezes": "Qualified source/protocol committed; source and input/model lock committed before calibration. Calibration lock committed before any new behavior. Source fixes after outcome exposure require a successor; do not rewrite old studies.",
+    "runtime": "Same formal CUDA compilation profile and float32 task computation as parent; observed runtime locked after qualification. CPU scipy solver only fits two gains against frozen support budget responses.",
+    "qualification": "Independent small-cell native/constant per-phase L1 equations and clipping; GPU P and summed L1 agreement against original B/S rollout on panel1 generic test28 of2531/A; no new M behavior.",
+    "validation": "Changed-file Ruff, types, five focused tests plus architecture; study registry and docs. Saved calibration ratios and any primary CE residual/recovery/gates independently reconstruct from saved arrays; byte/hash and prior-evidence closure checks.",
+    "command": "direnv exec . python -m fsrl.experiments.write_budget_match <stage>",
+    "solver_versions": {
+      "scipy": "1.18.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "outputs": [
+    "protocol",
+    "GPU qualification",
+    "source/input/model lock",
+    "budget-only solver histories and per-episode phase L1/calibration lock",
+    "conditional24behavior units and360budget replay batches",
+    "paired statistics and raw draws when evaluated",
+    "canonical result and interpretation including failed-control scope"
+  ],
+  "claim_boundary": [
+    "Matching means does not match per-subject budgets, signs, modulation variance, eligibility alignment or final stored information.",
+    "Failure after matching supports additional modulation features, not reliability gating or universal architecture necessity.",
+    "No training, biological dopamine identity, human fitting or main-model promotion."
+  ]
+}
