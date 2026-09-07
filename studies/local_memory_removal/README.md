@@ -38,6 +38,9 @@ local memory removed during training, no human confirmation or promotion.
 - `supporting_artifact` —
   [studies/local_memory_removal/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:e2b68efaf144`)
+- `execution_lock` —
+  [studies/local_memory_removal/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:005054a139da`)
 
 ## Provenance rule
 
