@@ -240,6 +240,9 @@ fail to close the dynamics.
     all three equal-panel summaries support output compensation, with 8/9 panelwise
     joint intervals and one uncertain order-shift contrast. Noisy-trained core 6/9
     full/global; original-input CE cost and noisy-input benefit persist.
+- [Local-memory removal under observation uncertainty](local_memory_removal/README.md) — `unresolved`
+  - **Finding:** Prospective matched local-memory removal; single outcomes not
+    evaluated.
 
 ## Minimal explanatory models
 

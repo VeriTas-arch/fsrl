@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "study_id": "local_memory_removal",
+  "tier": "development on exposed matched references",
+  "question": "Can the independent local memory be removed during joint training while preserving direct experience, relational competence, organized individuality and observation-training compensation?",
+  "parent_witness_commit": "3cd91a374122c686a985715dc82264e17b3f50c3",
+  "parents": {
+    "protocol": {
+      "path": "studies/observation_replication/records/benchmarks/protocol.json",
+      "sha256": "e614380a31485c6748ea626c90f89233d8d3465748e5635ef15e38d4ff6cbe16",
+      "bytes": 8805
+    },
+    "source": {
+      "path": "studies/observation_replication/records/benchmarks/source_lock.json",
+      "sha256": "0db7b50ff707df3c66eb9308e6c04c4d9565ac3cc19c4f30087138e78d9e3e28",
+      "bytes": 127371
+    },
+    "models": {
+      "path": "studies/observation_replication/records/benchmarks/model_lock.json",
+      "sha256": "04f9a582378bf281e438b9e6a64ba90af069289c4c05abaf0b4394c7be208f62",
+      "bytes": 39495
+    },
+    "result": {
+      "path": "studies/observation_replication/records/results/result.json",
+      "sha256": "e1ab0133eeb9ebaf60be721019ddcf355504bf9b72aa3cff376ae5497ea63df9",
+      "bytes": 3288324
+    }
+  },
+  "design": {
+    "seeds": [
+      2531,
+      2532,
+      2533
+    ],
+    "panels": [
+      1,
+      2,
+      3
+    ],
+    "cells": {
+      "A0": {
+        "training": "clean",
+        "observation": "clean"
+      },
+      "Ae": {
+        "training": "clean",
+        "observation": "noisy"
+      },
+      "C0": {
+        "training": "noisy",
+        "observation": "clean"
+      },
+      "Ce": {
+        "training": "noisy",
+        "observation": "noisy"
+      }
+    },
+    "training_conditions": [
+      "clean",
+      "noisy"
+    ],
+    "networks": 6,
+    "evaluation_units": 36,
+    "generic_episodes_per_panel": 256,
+    "liu_subjects_per_panel": 77,
+    "crossing": "All three training pairs crossed with all three panels. Only three independent training pairs. Identical initialization and base task stream within A/C pair. Identical physical input, observation draw, choice RNG and interventions across four cells within panel."
+  },
+  "statistics": {
+    "samples": 2000,
+    "interval": 0.95,
+    "seed_offset": 126000,
+    "unit": "Joint resampling of the original participant IDs across four cells within each network; generic episodes and Liu participants separate. Never treat participant pairs as independent or pool networks. Duplicate sampled IDs are separate bootstrap observations as in the parent contract. Conditional masks applied after resampling, no common-mask restriction. Any undefined conditional draw makes its interval undefined; retain its count. Scalar CE and shifts must be finite for all subjects or stop."
+  },
+  "estimands": {
+    "contrasts": {
+      "baseline": {
+        "C0": 1,
+        "A0": -1
+      },
+      "error_A": {
+        "Ae": 1,
+        "A0": -1
+      },
+      "error_C": {
+        "Ce": 1,
+        "C0": -1
+      },
+      "interaction": {
+        "Ce": 1,
+        "C0": -1,
+        "Ae": -1,
+        "A0": 1
+      },
+      "training_under_error": {
+        "Ce": 1,
+        "Ae": -1
+      }
+    },
+    "tau": "For each contrast, recompute the weighted pairwise Kendall tau of each cell in shared-ID bootstrap samples. Primary global_all77; also full_all77, full_conditional and global_conditional. Report each cell and simple effects, not interaction alone.",
+    "CE": "Per-episode CE=mean(logaddexp(0,-margin*true_sign/T)). Generic T=1, full/global separately; global CE interaction aligns with primary structure and full CE retains task-output context. Liu T=0.25, full/global separately as secondary; never pool tasks or temperatures. All four simple/cross contrasts for each endpoint.",
+    "order_shift": "Global S_R=mean_i[(1-KendallTau(order_R0_i,order_Re_i))/2], equivalently fraction of the 28 item pairs reversed within each subject. Report S_A,S_C and participant-paired S_C-S_A using replay0, deterministic internal orders, unchanged tie ordering. No sampled choices enter this endpoint.",
+    "absolute_behavior": "Retain inherited full/global competence and five core flags for each cell, plus P_off/evidence-shuffle evidence binding. Full-policy historical profiles remain descriptive; no promotion or human-distribution matching."
+  },
+  "change": "Only remove local module, persistent L, local readout and its optimizer group. local=None, not a zero-gain store. Retain global cell, input ABI (zq,q), p/z, sigma, initial backbone, task/noise streams, all1500x32 exposures and original regularization. No new observation interface or mechanism perturbation.",
+  "references": "Reuse all six dual models and36 evaluation cells from the parent archives; train six single-memory A/C matched to2531/2532/2533 and evaluate36 cells. No reference retraining. Same three panels and all stochastic choices/interventions. This is not independent confirmation.",
+  "noninferiority": {
+    "margin": 0.02,
+    "orientation": "single minus dual full-policy mean correct probability",
+    "groups": [
+      "generic_learned",
+      "generic_nonlearned",
+      "liu_learned",
+      "liu_nonlearned",
+      "liu_omitted"
+    ],
+    "primary_cell": "Ce",
+    "secondary_cells": [
+      "A0",
+      "Ae",
+      "C0"
+    ],
+    "statistics": "Paired complete-case participant bootstrap within panel and endpoint. Missing omitted subjects are excluded before resampling in both models, with counts/IDs reported. Equal average of three panel differences within network, independent panel resampling; no network pooling. Lower95>=-.02 supports practical noninferiority; upper95<-.02 supports material inferiority; otherwise unresolved. CE is reported separately, no new CE tolerance."
+  },
+  "decision": {
+    "competence": "Retain unchanged full/global generic and Liu learned/nonlearned lower95>.5 gates per cell. Invalid units do not support structure claims. Complete all models and all36 units unless integrity/nonfinite failure.",
+    "core": "Retain all five flags and historical nine descriptive rows, with conditional sampled diversity distinct from primary global all77 tau. Report all cells, failures and per-network core counts; do not require exact parent pass counts.",
+    "compensation": "Repeat parent within-single four-cell estimates and equal-panel summaries. Report single-minus-dual differences of all equal-panel contrast effects using the same panel draw IDs. Main I_tau>0,I_CE<0,S_C-S_A<0 with both noise tau effects negative; do not require effect magnitudes equal to parent.",
+    "preference": "Development removal support requires all six trained models competent in their tested cells, all three Ce equal-panel five-endpoint noninferiority comparisons supported, core Ae and Ce each present on at least one panel in each of three networks, and all three network equal-panel main compensation intervals oriented as expected with negative noise simple effects. Evidence binding must be retained in every Ae/Ce cell. This bounded sufficiency rule is not a population success-rate claim; retain exact heterogeneous core counts and uncertain intervals.",
+    "otherwise": "Decompose failure. Inferiority supports a local contribution only for tested endpoints/recipe, not universal necessity. A broad interval is unresolved, not equivalence. No seed/threshold/scale/checkpoint repair, no automatic new interface experiment or main-model promotion."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.experiments.local_memory_removal <stage>",
+    "stages": [
+      "qualify",
+      "freeze",
+      "train",
+      "lock-models",
+      "evaluate",
+      "report"
+    ],
+    "freezes": "Commit qualified source+protocol before source/archive lock, commit lock before six fits; lock all six final weights and compare initial hashes and every training task fingerprint with archived dual before any new evaluation; commit model lock; evaluate36 cells then archive once.",
+    "qualification": "Independent single-memory reference forward, state, gradient and Adam update on fixed non-Liu fixtures; eager/compiled single parity; new optional-local collector reproduces old dual A0/2531/panel1 raw arrays exactly. No scientific outcomes used for qualification.",
+    "validation": "Changed-file Ruff/format/types, affected tests, architecture checks; source/archive provenance, full trained-model barrier, scoped estimator reconstruction and all required artifacts/registry/docs. No shared API or runtime edits."
+  },
+  "outputs": [
+    "protocol",
+    "qualification",
+    "source_lock",
+    "model_lock",
+    "canonical result",
+    "interpretation",
+    "single weights and logs,36 new evaluation raw/behavior/results, comparison estimates/draws, manifests; existing dual inputs/models/results referenced without duplicate ownership"
+  ],
+  "claim_boundary": [
+    "Only an L deletion under current noisy observation and training recipe; p/z, double evidence channel and sigma remain assumptions.",
+    "Exposed parent networks, task streams and panels reused for a prospective development comparison; no independent confirmation or human mechanism.",
+    "Three trained paired instances crossed with three panels, no network pooling.",
+    "If deletion is supported, the observation-interface and mechanism questions need subsequent prospective specifications; neither runs in this study."
+  ]
+}
