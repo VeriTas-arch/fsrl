@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 1407,
+  "entry_count": 1409,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 711,
+    "json": 713,
     "json_lines": 26,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 1330,
+    "already_conformant": 1332,
     "historical_gzip_view": 76,
     "historical_pth_view": 1
   },
@@ -33866,6 +33866,74 @@
         "prospective_suffix": ".json"
       },
       "locator": {
+        "legacy_path": "studies/observation_uncertainty/records/benchmarks/protocol.json",
+        "repository_path": "studies/observation_uncertainty/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 16311,
+        "sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "observation_uncertainty",
+        "kind": "study"
+      },
+      "record_id": "study.observation_uncertainty.studies_observation_uncertainty_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 16311,
+        "sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92",
+        "source_ref": "sha256:522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/observation_uncertainty/records/benchmarks/qualification.json",
+        "repository_path": "studies/observation_uncertainty/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 70474,
+        "sha256": "565afeefc095712417abb444995cdd47c54b1bed9c3460e8fd842217fc1014c3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "observation_uncertainty",
+        "kind": "study"
+      },
+      "record_id": "study.observation_uncertainty.studies_observation_uncertainty_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 70474,
+        "sha256": "565afeefc095712417abb444995cdd47c54b1bed9c3460e8fd842217fc1014c3",
+        "source_ref": "sha256:565afeefc095712417abb444995cdd47c54b1bed9c3460e8fd842217fc1014c3"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
         "legacy_path": "benchmarks/operator_amplitude_path_v1.json",
         "repository_path": "studies/operator_amplitude_path/records/benchmarks/operator_amplitude_path_v1.json"
       },
@@ -48187,7 +48255,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 1405,
+  "registered_record_count": 1407,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -48208,20 +48276,20 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 74,
+    "registered_contract": 75,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 75,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 798,
+    "supporting_artifact": 799,
     "validation_result": 13
   },
   "schema_version": 2,
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "ab37e5224441315511d651debd4df628592c47a9b1c95ca9bf3f449b688ab1ab"
+      "sha256": "09b33723bb5e13fef29bd9b77fb1e51066acaaba42eb8b2670005b99145121c2"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",
