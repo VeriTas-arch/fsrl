@@ -25,13 +25,17 @@
 preserving direct experience, relational competence, organized individuality and
 observation-training compensation?
 
-**Finding.** Prospective matched local-memory removal; single outcomes not evaluated.
+**Finding.** All six matched single-memory A/C models locked before new evaluation;
+original input and observed training fingerprints match archived dual counterparts.
 
 **Claim boundary.** Three matched A/C instances, exposed dual references and panels;
 local memory removed during training, no human confirmation or promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/local_memory_removal/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:6544f425c9e9`)
 - `registered_contract` —
   [studies/local_memory_removal/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:bda917f0c28b`)

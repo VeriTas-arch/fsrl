@@ -241,8 +241,8 @@ fail to close the dynamics.
     joint intervals and one uncertain order-shift contrast. Noisy-trained core 6/9
     full/global; original-input CE cost and noisy-input benefit persist.
 - [Local-memory removal under observation uncertainty](local_memory_removal/README.md) — `unresolved`
-  - **Finding:** Prospective matched local-memory removal; single outcomes not
-    evaluated.
+  - **Finding:** All six matched single-memory A/C models locked before new evaluation;
+    original input and observed training fingerprints match archived dual counterparts.
 
 ## Minimal explanatory models
 
