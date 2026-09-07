@@ -391,6 +391,8 @@ upgrading them into arbitrary-domain guarantees.
   - **Finding:** All six frozen RNNs adapt and recover from outliers, but none passes
     history-dependent crossover or preservation; covariance filter passes primary gates.
     Proceed to the planned joint-training comparison.
+- [Joint learning of relational revision](revision_learning/README.md) — `unresolved`
+  - **Finding:** Prospective fixed-budget joint learning comparison.
 
 ## Human validation work, currently deferred
 

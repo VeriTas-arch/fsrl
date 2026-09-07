@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3449,
+  "entry_count": 3451,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 1907,
+    "json": 1909,
     "json_lines": 68,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3353,
+    "already_conformant": 3355,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -101487,6 +101487,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/benchmarks/protocol.json",
+        "repository_path": "studies/revision_learning/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 22727,
+        "sha256": "9ee40c99300d5d2192d452b995020e5c9017160b7ff0f90f0bb7abf3702778a9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 22727,
+        "sha256": "9ee40c99300d5d2192d452b995020e5c9017160b7ff0f90f0bb7abf3702778a9",
+        "source_ref": "sha256:9ee40c99300d5d2192d452b995020e5c9017160b7ff0f90f0bb7abf3702778a9"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/revision_learning/records/results/qualification.json",
+        "repository_path": "studies/revision_learning/records/results/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 1093,
+        "sha256": "8d564f0443bc0e5abf5114f3e812f734bcdabc6f3f668571496db12405d5b303"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "revision_learning",
+        "kind": "study"
+      },
+      "record_id": "study.revision_learning.studies_revision_learning_records_results_qualification_json",
+      "registered_identity": {
+        "bytes": 1093,
+        "sha256": "8d564f0443bc0e5abf5114f3e812f734bcdabc6f3f668571496db12405d5b303",
+        "source_ref": "sha256:8d564f0443bc0e5abf5114f3e812f734bcdabc6f3f668571496db12405d5b303"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -117653,7 +117721,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3447,
+  "registered_record_count": 3449,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -117674,20 +117742,20 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 84,
+    "registered_contract": 85,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 85,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2382,
+    "supporting_artifact": 2383,
     "validation_result": 13
   },
   "schema_version": 2,
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "0adb96c94b08cae340558e613ec1d1c476e4decdecd2b492820d47e731f8a13c"
+      "sha256": "2b9d33672407bd2f21c704faa098b6298a1af10d7c6010d0da409f5eb8d2d9f8"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

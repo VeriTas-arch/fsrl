@@ -1,0 +1,50 @@
+{
+  "benchmark": [
+    {
+      "finite": true,
+      "fixture_step": 0,
+      "model": "plastic",
+      "seconds": 0.5918169079814106
+    },
+    {
+      "finite": true,
+      "fixture_step": 1,
+      "model": "plastic",
+      "seconds": 0.05856756598223001
+    },
+    {
+      "finite": true,
+      "fixture_step": 0,
+      "model": "gru",
+      "seconds": 0.01911562099121511
+    },
+    {
+      "finite": true,
+      "fixture_step": 1,
+      "model": "gru",
+      "seconds": 0.011854558950290084
+    }
+  ],
+  "checks": [
+    "CPU/GPU native affine prefix rollout parity",
+    "independent GRU gate equation",
+    "persistent hidden and copy-only probes",
+    "nonzero finite native slow gradients",
+    "deterministic shared stream and no target/hint input",
+    "one full-size fixture Adam step on each task and architecture",
+    "11 architecture tests"
+  ],
+  "fixture_seeds": [
+    975001,
+    975002,
+    975003,
+    975004,
+    975005,
+    975006
+  ],
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "passed": true,
+  "scientific_models_trained": false,
+  "tests": 14,
+  "torch": "2.14.0+cu130"
+}
