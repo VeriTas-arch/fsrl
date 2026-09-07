@@ -41,6 +41,9 @@ confirmation or promotion.
 - `supporting_artifact` —
   [studies/linear_modulation/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:2d4f83514570`)
+- `execution_lock` —
+  [studies/linear_modulation/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:d77bba4f34dd`)
 
 ## Provenance rule
 
