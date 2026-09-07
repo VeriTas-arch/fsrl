@@ -218,7 +218,8 @@ fail to close the dynamics.
     0.496-0.512 while preserving registered competence and coherence, at an accuracy
     cost. Acute routing evidence; no learned routing or main-model promotion.
 - [Finite-state fast memory and effective write cost](finite_state_memory/README.md) — `unresolved`
-  - **Finding:** Prospectively registered; execution pending.
+  - **Finding:** Generic-only development selected K=65; twelve paired fits pending. No
+    Liu outcome exposed.
 
 ## Minimal explanatory models
 

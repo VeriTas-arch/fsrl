@@ -25,7 +25,8 @@
 relational behavior under complete shared inputs, and does effective write cost add
 useful functional selection?
 
-**Finding.** Prospectively registered; execution pending.
+**Finding.** Generic-only development selected K=65; twelve paired fits pending. No Liu
+outcome exposed.
 
 **Claim boundary.** Development; one generic initialization and conditional three new
 four-condition fits. Fixed per-connection states, single-stage joint training,
@@ -43,6 +44,9 @@ estimate.
 - `supporting_artifact` —
   [studies/finite_state_memory/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:f2feb0122b23`)
+- `artifact_lock` —
+  [studies/finite_state_memory/records/benchmarks/selection_lock.json](records/benchmarks/selection_lock.json)
+  (`sha256:f1b4ac93b84c`)
 - `execution_lock` —
   [studies/finite_state_memory/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:bc5f89c018e7`)
