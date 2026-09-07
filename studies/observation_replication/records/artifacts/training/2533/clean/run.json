@@ -1,0 +1,355 @@
+{
+  "bytes": 969150,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "train-2533-clean",
+  "file_count": 4,
+  "files": [
+    {
+      "bytes": 1641,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "local.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "92c483b4689abcb3e46a2cda04844f6b9e8f6a9fbeed3bbfd4d13cfb708c8cf0"
+    },
+    {
+      "bytes": 359487,
+      "format": "pytorch_state_dict",
+      "legacy_format": false,
+      "media_type": "application/x-pytorch",
+      "path": "net.pth",
+      "prospective_suffix": ".pth",
+      "sha256": "cd3dca5ab9578c47dbf22f66e7a2896bcbd7caba40cd6c40d64caac18a5ce38d"
+    },
+    {
+      "bytes": 4568,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "dc1b65660424ec37d205698bfe73c6413640ce050ff6ddfc0c8bb436cb3d8438"
+    },
+    {
+      "bytes": 603454,
+      "format": "json_lines",
+      "legacy_format": false,
+      "media_type": "application/x-ndjson",
+      "path": "train_log.jsonl",
+      "prospective_suffix": ".jsonl",
+      "sha256": "ebf52f0cf5d26fb1838520aea117dbb8d1079a672e8afeca05ac3904cf5283a5"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "clean",
+    "protocol_sha256": "e614380a31485c6748ea626c90f89233d8d3465748e5635ef15e38d4ff6cbe16",
+    "seed": 2533,
+    "source_lock": {
+      "bytes": 127371,
+      "path": "studies/observation_replication/records/benchmarks/source_lock.json",
+      "sha256": "0db7b50ff707df3c66eb9308e6c04c4d9565ac3cc19c4f30087138e78d9e3e28"
+    }
+  },
+  "resolved_config": {
+    "recipe": {
+      "architecture": {
+        "activation": "tanh",
+        "backbone": "Unchanged continuous shared RNN; no finite-state storage and no added write-cost penalty.",
+        "blank_initial_steps": 2,
+        "hidden_size": 200,
+        "input_extension": "Shared (sG,sL) in every condition; no new learned gate or persistent state.",
+        "input_size": 38,
+        "local_gain": "lambda_L = softplus(rho)",
+        "local_key": "k = vec(c_left c_right^T - c_right c_left^T) / max(norm(vec(...)), 1e-8)",
+        "local_read": "ell_q = dot(L_T, k_q)",
+        "local_write": "L_next = L + s_L*k, exactly once per support trial",
+        "logit_combination": "Subtract half the local correction from logit 0 and add half to logit 1, retaining the original global bias.",
+        "margin": "Both routes: recurrent margin plus the independently addressed local correction.",
+        "query_state": "Read the same terminal P_T and L_T for every query without writeback. During training, retain the gradient path through P_T to support computation.",
+        "query_steps": 2,
+        "state_reset": "Reset hidden and eligibility per support/query trial, preserve P over support trials, reset both P and L for each episode.",
+        "support_query_time": 0.6666666666666666,
+        "support_trial_steps": 4,
+        "target_sign": "y_q = 2*correct_action-1; positive margin means left item higher."
+      },
+      "claim_boundary": [
+        "One computational observation-error scale; not calibrated human sensory error.",
+        "B is a correct-sign oracle control, not a human mechanism candidate.",
+        "Original p/z encoding scaffold retained; success does not establish its necessity or origin.",
+        "Single-stage supervised joint training, fixed readout, project-exposed Liu knowledge; no automatic promotion.",
+        "Three paired network seeds, participants analyzed within network, no population success-rate estimate."
+      ],
+      "comparator": {
+        "calibration": "Fixed scale 1/sigma, no human or condition-specific fitting. Not a Bayesian optimum. Disconnected scores use minimum-norm component centering; report rank deficiency.",
+        "equation": "Fit centered item scores to all support q_t with unweighted least squares using ordinary item identities; minimum-norm np.linalg.lstsq(rcond=None). Query margin=(score_left-score_right)/sigma. No p,z,true d,rank,or query labels used for inference. Duplicate channels are not counted as independent observations. Exactly zero scalar observations are treated as blank and omitted, including evidence-removal interventions.",
+        "evaluation": "Generic development/test and Liu clean/folded/noisy observations, plus fixed controlled history panel. Apply existing policy/core metrics; full/global identical by construction. Compare information integration sufficiency, not RNN necessity from a comparator failure. There is one comparator result per observation condition (not one new observer per training seed); bootstrap seed is the fixed development seed. History panel is identical across these comparator conditions.",
+        "name": "least_squares"
+      },
+      "decision": {
+        "interpretation": "Folded succeeds -> direction corruption unnecessary for that recipe; only noisy succeeds with competence/binding/adaptation -> conditional direction-uncertainty support; acute differentiation disappears after retraining -> robust compensation; loss of competence/organization -> damage. Zero core successes closes this scale/recipe. Partial seed success remains partial, no seed filtering or automatic promotion.",
+        "main": "Report clean/folded/noisy joint core by network for full/global separately. Primary causal contrast noisy-minus-folded paired tau/behavior, and noisy training-minus-acute(clean->noisy) generic CE with same observation draws. Do not treat lower tau alone as success.",
+        "mechanism": "Functional history criterion uses diagnostic primary; evidence-binding requires positive lower95CI intact-minus-Poff nonlearned probability and intact-minus-evidence-shuffle nonlearned probability for candidate.",
+        "no_search": "No noise grid, extra costs, gates, correlated biases, human fitting, local-path removal, or N6/10 transfer in this study."
+      },
+      "decision_contract": {
+        "behavior": {
+          "reference_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+          "reference_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json"
+        }
+      },
+      "development": {
+        "fits": "Three conditions, one development initialization, all parameters locked before generic exposure.",
+        "gate": "All three full AND global generic learned/nonlearned mean probability lower95CI >0.5. No accuracy-matching, no sigma rescue, no CE allowance selected after exposure.",
+        "stop": "If any condition fails, archive the development result and stop; no formal fits or Liu evaluation."
+      },
+      "diagnostic": {
+        "construction": "Generic validation graphs; select a retained one-displayed-unit target edge with an alternative undirected path after removing that edge. Move one target observation last; replace every earlier target presentation with a non-target existing observation, preserving each slot time. Encode once with noisy rule. Force final target magnitude positive in its higher-to-lower orientation. Supported prefix remains as sampled; conflicting prefix swaps target item identities everywhere before the final target and swaps their latent ranks in query labels. Current inputs/local evidence, all scalar magnitudes, total presentation counts, lengths and graph topology up to permutation match. Both histories contain no prior direct target evidence. All trained arms read this SAME already-encoded controlled panel, no condition-specific re-encoding. This is a counterfactual consistency challenge, not a sample of Liu exposure or pure sensory-noise likelihood.",
+        "episodes": 128,
+        "intervention": "Remove final target globally only, channels34/37 zero, preserve local and all prefix inputs.",
+        "primary": "Difference between trained noisy and clean of supported-minus-conflicting global CE benefit B=CE(remove)-CE(intact). Positive lower95CI with competent models supports added functional history discrimination, not a gate or uniquely identified learning rule.",
+        "rng_seed": 97202,
+        "secondary": "Within-history full/global CE; direct/remote absolute margin effects; write measures. Simple least-squares observer on identical panel supplies a structural comparison. CE benefit alone does not establish suppression of an erroneous write."
+      },
+      "evaluation": {
+        "cohorts": 1,
+        "generic": {
+          "conditions": [
+            "intact"
+          ],
+          "episodes": 256,
+          "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+          "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+          "rng_seed": 106201,
+          "temperature": 1.0
+        },
+        "generic_development": {
+          "episodes": 256,
+          "rng_seed": 106200
+        },
+        "item_counts": [
+          8
+        ],
+        "liu": {
+          "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+          "choice_seed": 96214,
+          "conditions": [
+            "intact",
+            "local_off",
+            "P_off",
+            "query_shuffle",
+            "evidence_shuffle"
+          ],
+          "cue_mode": "permuted_shared",
+          "cue_seed": 106211,
+          "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+          "evidence_shuffle_seed": 96216,
+          "order_seed": 31401,
+          "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+          "protocol_id": "liu_v2",
+          "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+          "query_shuffle_seed": 96215,
+          "subject_encoding_mode": "stable_omission",
+          "subject_encoding_seed": 106213,
+          "subjects": 77,
+          "support_seed": 106212,
+          "temperature": 0.25,
+          "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+        }
+      },
+      "execution": {
+        "command": "direnv exec . python -m fsrl.infra.formal_runtime observation-uncertainty <stage>",
+        "freezes": "Commit protocol+qualified source before source/input lock; commit lock before development; commit complete development model lock before generic screen; commit screen before mandatory training; commit all mandatory model locks before primary evaluation. Archive canonical result and interpretation once.",
+        "runtime": "Unchanged write_cost configure_execution and finite_state continuous sequences/update (states=None, coefficient=0); fixed CUDA bounded profile.",
+        "stages": [
+          "qualify",
+          "lock-source",
+          "develop",
+          "lock-development",
+          "screen",
+          "train-pairs",
+          "lock-models",
+          "evaluate",
+          "report"
+        ],
+        "validation": "Independent encoding reference, common-state/no-bypass invariants, zero-noise exact arrays and forward/gradient/Adam-update parity, eager/compiled numerical check, controlled-history and comparator invariants; affected checks and complete engineering suite before training."
+      },
+      "observation": {
+        "conditions": [
+          "clean",
+          "folded",
+          "noisy"
+        ],
+        "equation": "u=float32(d*(z+(1-z)*p)); v=float64(u)+sigma*epsilon. clean returns original arrays; folded q=float32(sign(d)*abs(v)); noisy q=float32(v). Channels 34=z*q and 37=q, local=q, at support step zero only.",
+        "noise": "Independent standard normal per actual support presentation and subject, numpy default_rng; not conditional on weak labels. Same draw used for B/C and both memory routes. No query noise.",
+        "preflight": "Fixed-seed non-Liu observation panel, report amplitude equality, z/q coupling, sign errors per presentation and after relation-wise averaging four repeats. No scale selection and no training gate based on Liu.",
+        "replay_role": "Only replay0 is main behavior; other fixed physical-input re-encodings diagnose margin variation, never averaged into main policy.",
+        "replays": [
+          0,
+          1,
+          2
+        ],
+        "seed": "training: 400000000+seed*10000+step; evaluation: 500000000+panel*100000+replay*10000+batch_id. Panels: 1 development,2 generic test,3 history,4 Liu. Task RNG independent.",
+        "sigma": 0.14285714285714285,
+        "units": "One displayed rank-difference unit divided by n_items-1=7; computational assumption, not estimated from Liu choices.",
+        "zero_limit": "sigma=0 returns original clean arrays exactly for all conditions."
+      },
+      "optimization": {
+        "backbone_learning_rate": 0.0001,
+        "batch_size": 32,
+        "clipping_scope": "Clip backbone parameters and [local.raw_gain] separately, before their Adam updates, in both conditions. Do not use one joint norm across differently sized groups.",
+        "fast_weight_penalty": 0.0001,
+        "gradient_clip": 2.0,
+        "initial_local_gain": 0.1,
+        "local_learning_rate": 0.01,
+        "optimizer": "Adam; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+        "schedule": "All available slow parameters jointly optimized from first to last step with mean generic query CE plus 1e-4 mean(P_T^2); same backbone optimizer group in both arms.",
+        "total_episode_exposures": 48000,
+        "total_steps": 1500,
+        "training_temperature": 1.0
+      },
+      "outputs": {
+        "artifacts": "Input panels with exact observation draws, model weights and training logs, generic/history/Liu raw arrays and summaries, comparator policies, replay arrays, run manifests. No new human-data analysis.",
+        "required": [
+          "protocol.json",
+          "qualification.json",
+          "source_lock.json",
+          "development_model_lock.json",
+          "screen_lock.json",
+          "model_lock.json if triggered",
+          "results/result.json",
+          "reports/interpretation.md"
+        ]
+      },
+      "question": "Does uncertainty in relation direction, beyond paired absolute-amplitude distortion, allow a jointly trained shared RNN to form stable individualized relations and learn history-dependent functional discrimination?",
+      "references": {
+        "finite_state_protocol": {
+          "path": "studies/finite_state_memory/records/benchmarks/protocol.json",
+          "sha256": "7199a7c2ca0282d78ca92c15000576b617f75560a6e5ff835b1308210e551475"
+        },
+        "item_count_protocol": {
+          "path": "studies/item_count_transport/records/benchmarks/liu_item_count_transport_v1.json",
+          "sha256": "0ba9090453bafd28fc1908afdb727747a06ba069838aae994fb90b17dd36646e"
+        },
+        "joint_protocol": {
+          "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+          "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+        },
+        "joint_result": {
+          "path": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+          "sha256": "08a6509f246a382abb0b8c160649b33a71976e310348313841972ed9cb6b2f3c"
+        },
+        "memory_protocol": {
+          "path": "studies/matched_memory_structure/records/benchmarks/protocol.json",
+          "sha256": "d68792bf141a7f92ef368789aac24556736b7f1314df21294f571e63c21b6a6d"
+        },
+        "routing_protocol": {
+          "path": "studies/weak_evidence_routing/records/benchmarks/protocol.json",
+          "sha256": "d5c958674b6ca4985ac953cc30afb37dfd93b7b94906498bdfb25940ef400c57"
+        },
+        "write_cost_protocol": {
+          "path": "studies/effective_write_cost/records/benchmarks/protocol.json",
+          "sha256": "e1234f0afd67efd5fc3e55aa4e7ec06f7722a26052411eb73199f84d0308d7a0"
+        },
+        "write_cost_selection": {
+          "path": "studies/effective_write_cost/records/benchmarks/selection_lock.json",
+          "sha256": "45519ea1c0f5f6bc9e34ab1497b71423f2dcadb13389536e6b2e2c5c122130a2"
+        }
+      },
+      "schema_version": 1,
+      "seeds": {
+        "conditions": [
+          "clean",
+          "folded",
+          "noisy"
+        ],
+        "development": 2431,
+        "mandatory": [
+          2432,
+          2433,
+          2434
+        ],
+        "training_rng_offset": 136000
+      },
+      "statistics": {
+        "interval": 0.95,
+        "samples": 2000,
+        "seed_offset": 126000,
+        "unit": "Participant-paired within each network; no pooling across networks. 2000 descriptive percentile bootstrap draws. Conditional tau differences resample all 77 IDs jointly, then apply each arm eligibility mask. Repeated copies are separate bootstrap observations. Any undefined resample makes the paired interval undefined; report its count without dropping it."
+      },
+      "study_id": "observation_uncertainty",
+      "task": {
+        "cue_size": 15,
+        "evidence_boundary": "Only ordinary pair cues and displayed signed support magnitude enter memory writes. No true rank, query answer, learned-pair flag, omitted-pair flag, posterior, or diagnostic residual enters the recurrent input.",
+        "local_evidence": "q after one common encoding error; shared recurrent channels (z*q,q) and local write q. Metadata never enters model tensors.",
+        "max_edges": 10,
+        "min_edges": 7,
+        "n_items": 8,
+        "probability_recovery": "Compute p from the episode's original SubjectEncodingState, observed cue identities, and the distance recoverable from abs(displayed_signed_magnitude)*(n_items-1). Do not mistake binary SupportTrial.encoding_reliability for p.",
+        "query_pairs": "All 28 unordered pairs, with the existing generator's randomized left/right orientation and order; no learned/nonlearned reweighting.",
+        "routing": {
+          "all": "shared recurrent access to both channels; one observed q shared with local path"
+        },
+        "subject_encoding_mode": "stable_omission",
+        "subject_encoding_parameters": "Unchanged SubjectEncodingConfig from the implementation witness; retain the sampled SubjectEncodingState and recover its original relation probability p without resampling.",
+        "support_blocks": 4
+      },
+      "tier": "development"
+    },
+    "runtime": {
+      "blas_thread_limit": 1,
+      "blas_threadpools": [
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.188.0"
+        },
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.dev"
+        }
+      ],
+      "compiler_threads": 1,
+      "cuda_available": true,
+      "cuda_version": "13.0",
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false,
+      "device_capability": [
+        12,
+        0
+      ],
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "execution_schema_version": 2,
+      "float32_matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "profile": {
+        "blas_threads": 1,
+        "compile": true,
+        "compile_backend": "inductor",
+        "compile_fullgraph": true,
+        "compile_mode": "default",
+        "cpu_threads": 1,
+        "device": "cuda",
+        "require_cuda": true
+      },
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "torch_version": "2.14.0+cu130",
+      "triton_mix_order_reduction": false
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_replication_v1"
+}

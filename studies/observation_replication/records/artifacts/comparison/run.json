@@ -1,0 +1,38 @@
+{
+  "bytes": 4346550,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "all-pairs-panels",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 1107110,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "dfeb70012ca0d0384e019639fcf70247265a7486cf084bf83b6d2d2cf6384acd"
+    },
+    {
+      "bytes": 3239440,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "add95e19427e5e7f5f32957a8c117ae7856ab8e912cf8d61f6b92565ea41c363"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "source": "2ea92389d671c382c688a0e5a4ae8b9bfa5e5358"
+  },
+  "resolved_config": {
+    "interval": 0.95,
+    "samples": 2000,
+    "seed_offset": 126000,
+    "unit": "Joint resampling of the original participant IDs across four cells within each network; generic episodes and Liu participants separate. Never treat participant pairs as independent or pool networks. Duplicate sampled IDs are separate bootstrap observations as in the parent contract. Conditional masks applied after resampling, no common-mask restriction. Any undefined conditional draw makes its interval undefined; retain its count. Scalar CE and shifts must be finite for all subjects or stop."
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_replication_v1"
+}

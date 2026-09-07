@@ -235,8 +235,11 @@ fail to close the dynamics.
     C is less accurate on clean generic inputs; behavioral core allocation remains A0
     0/3, Ae 3/3, C0 0/3, Ce 1/3 full and 0/3 global. Diagnostic development, no
     promotion.
-- [Independent observation replication](observation_replication/README.md) — `unresolved`
-  - **Finding:** All six paired networks trained and locked before any new evaluation.
+- [Independent observation replication](observation_replication/README.md) — `supporting`
+  - **Finding:** Independent 3-pair x 3-panel replication: acute core 9/9 full/global;
+    all three equal-panel summaries support output compensation, with 8/9 panelwise
+    joint intervals and one uncertain order-shift contrast. Noisy-trained core 6/9
+    full/global; original-input CE cost and noisy-input benefit persist.
 
 ## Minimal explanatory models
 
