@@ -25,8 +25,8 @@
 distortion, allow a jointly trained shared RNN to form stable individualized relations
 and learn history-dependent functional discrimination?
 
-**Finding.** All three development models completed and locked before generic competence
-screening.
+**Finding.** All three fixed-sigma development conditions pass full/global generic
+competence; nine paired fits authorized by the frozen gate, before Liu exposure.
 
 **Claim boundary.** Development; one fixed observation-error scale, sign-restored oracle
 control, three paired network seeds, single-stage joint training; no human calibration
@@ -43,6 +43,9 @@ or promotion.
 - `supporting_artifact` —
   [studies/observation_uncertainty/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:565afeefc095`)
+- `artifact_lock` —
+  [studies/observation_uncertainty/records/benchmarks/screen_lock.json](records/benchmarks/screen_lock.json)
+  (`sha256:272ff156e7e9`)
 - `execution_lock` —
   [studies/observation_uncertainty/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:b69d060bde91`)
