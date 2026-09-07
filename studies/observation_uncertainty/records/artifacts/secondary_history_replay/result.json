@@ -1,0 +1,771 @@
+{
+  "acute_history_reuse": "clean and acute_noisy are the same fitted network on the identical controlled history input; no new execution needed.",
+  "collector": {
+    "bytes": 8128,
+    "path": "fsrl/experiments/observation_uncertainty/history_policy.py",
+    "sha256": "4a1b1517c614c18d8228cef3d7cfbd8c961f03cc55a013fcde4421b064b895b6"
+  },
+  "compilation_order": "Replay the original generic batches before history to preserve compiled shape specialization; require exact saved generic and history margins.",
+  "exact_global_replay_checks": 54,
+  "initial_replay_failure": {
+    "bytes": 2975,
+    "path": "artifacts/runs/observation_uncertainty_v1/secondary_history/run.json",
+    "sha256": "e72fd1a198590a1341f4920957c0df74fc6d28bef391899e358fc07df2d3c390"
+  },
+  "least_squares_full_equals_global": {
+    "conflicting": {
+      "bootstrap": {
+        "lower": 0.1676457049867909,
+        "mean": 0.17796228140828302,
+        "upper": 0.1888100877387316
+      },
+      "excluded_subject_indices": [],
+      "lower_quartile": 0.13823836049049695,
+      "mean": 0.17775250584397426,
+      "median": 0.15972998668526772,
+      "subjects": 128,
+      "total_subjects": 128,
+      "upper_quartile": 0.18913212224006237
+    },
+    "supported": {
+      "bootstrap": {
+        "lower": 0.16274167177404367,
+        "mean": 0.17419517930133527,
+        "upper": 0.18767726957663886
+      },
+      "excluded_subject_indices": [],
+      "lower_quartile": 0.13458590979917684,
+      "mean": 0.17399201927731334,
+      "median": 0.15330529546360755,
+      "subjects": 128,
+      "total_subjects": 128,
+      "upper_quartile": 0.184972747784719
+    }
+  },
+  "model_lock": {
+    "bytes": 57696,
+    "path": "studies/observation_uncertainty/records/benchmarks/model_lock.json",
+    "sha256": "80bb1448250b8531f16913b3da24bcf60aec3bcae232e9610f5572af94b29862"
+  },
+  "pairs": {
+    "2432": {
+      "acute_noisy": {
+        "identical_model_and_input_as": "clean",
+        "values": {
+          "conflicting__full_ce": {
+            "bootstrap": {
+              "lower": 0.2447430334303455,
+              "mean": 0.27369631753731066,
+              "upper": 0.3060762440046413
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.15747972189013462,
+            "mean": 0.27352319823144683,
+            "median": 0.2195761303666799,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.36809976312429876
+          },
+          "conflicting__global_ce": {
+            "bootstrap": {
+              "lower": 0.24420867789101813,
+              "mean": 0.2730774835957405,
+              "upper": 0.3049828659482968
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.15557646335515746,
+            "mean": 0.2729176322761028,
+            "median": 0.21655331139346493,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.36551740427436397
+          },
+          "supported__full_ce": {
+            "bootstrap": {
+              "lower": 0.20658708348280463,
+              "mean": 0.23306367531370886,
+              "upper": 0.26039328072586515
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.1219031669431754,
+            "mean": 0.2326561693168803,
+            "median": 0.1869708490073917,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.3157260060467232
+          },
+          "supported__global_ce": {
+            "bootstrap": {
+              "lower": 0.20630805364567906,
+              "mean": 0.23288345843662017,
+              "upper": 0.25989148854215255
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.12486114072876472,
+            "mean": 0.23247497631008096,
+            "median": 0.18993771519075406,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.30942697788941903
+          }
+        }
+      },
+      "clean": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.2447430334303455,
+            "mean": 0.27369631753731066,
+            "upper": 0.3060762440046413
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.15747972189013462,
+          "mean": 0.27352319823144683,
+          "median": 0.2195761303666799,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.36809976312429876
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.24420867789101813,
+            "mean": 0.2730774835957405,
+            "upper": 0.3049828659482968
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.15557646335515746,
+          "mean": 0.2729176322761028,
+          "median": 0.21655331139346493,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.36551740427436397
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.20658708348280463,
+            "mean": 0.23306367531370886,
+            "upper": 0.26039328072586515
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1219031669431754,
+          "mean": 0.2326561693168803,
+          "median": 0.1869708490073917,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.3157260060467232
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.20630805364567906,
+            "mean": 0.23288345843662017,
+            "upper": 0.25989148854215255
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12486114072876472,
+          "mean": 0.23247497631008096,
+          "median": 0.18993771519075406,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.30942697788941903
+        }
+      },
+      "folded": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.19494555763970062,
+            "mean": 0.2170279501767298,
+            "upper": 0.2409424402637683
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12387395803967438,
+          "mean": 0.21690845968853048,
+          "median": 0.17854996502390535,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2635395471941005
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.1944367592403962,
+            "mean": 0.21614499460765607,
+            "upper": 0.23944012735824635
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12468044318752668,
+          "mean": 0.21603798074971897,
+          "median": 0.18168799610337416,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.26627507092823965
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.18722081002737764,
+            "mean": 0.20863468039367417,
+            "upper": 0.23198027726311343
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1186639243825843,
+          "mean": 0.2085453666226185,
+          "median": 0.1702997156919191,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2658998751015215
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.18721264754205566,
+            "mean": 0.20812979766297895,
+            "upper": 0.23103877611423326
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.11775615745167328,
+          "mean": 0.20804017982586637,
+          "median": 0.17111327685026567,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2698081296929621
+        }
+      },
+      "noisy": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.19452682817680117,
+            "mean": 0.2162691397443721,
+            "upper": 0.2397726222450028
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12360777924470526,
+          "mean": 0.21617027565010705,
+          "median": 0.17550887222507033,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.26173884179508733
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.19404376770568332,
+            "mean": 0.21564118874990976,
+            "upper": 0.2388896250584449
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12435151899665059,
+          "mean": 0.21555203523970823,
+          "median": 0.17612574197360484,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.26574882311523734
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.18806923516117344,
+            "mean": 0.20950945176979094,
+            "upper": 0.23278065393557892
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12214765138333301,
+          "mean": 0.20943293760423398,
+          "median": 0.16927953457979827,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2628203335648301
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.1881708050476521,
+            "mean": 0.20920838351156665,
+            "upper": 0.23227313759793575
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12123008173120892,
+          "mean": 0.20913223297863703,
+          "median": 0.1715171373903763,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2648930907568724
+        }
+      }
+    },
+    "2433": {
+      "acute_noisy": {
+        "identical_model_and_input_as": "clean",
+        "values": {
+          "conflicting__full_ce": {
+            "bootstrap": {
+              "lower": 0.2304609192733025,
+              "mean": 0.25691053829762645,
+              "upper": 0.2839478903621484
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.14900909265093285,
+            "mean": 0.2566243689631212,
+            "median": 0.2381742832953198,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.3274388711722057
+          },
+          "conflicting__global_ce": {
+            "bootstrap": {
+              "lower": 0.23042738188782044,
+              "mean": 0.25657518643801747,
+              "upper": 0.28380147488470536
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.1467324551182098,
+            "mean": 0.25630663488804006,
+            "median": 0.23754327061153988,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.3254674544143685
+          },
+          "supported__full_ce": {
+            "bootstrap": {
+              "lower": 0.18715292953343518,
+              "mean": 0.21173028571522678,
+              "upper": 0.23699170209737377
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.1074131966726527,
+            "mean": 0.2111235501087686,
+            "median": 0.17773602201716854,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.2817854699027751
+          },
+          "supported__global_ce": {
+            "bootstrap": {
+              "lower": 0.18707159065559426,
+              "mean": 0.21151214553941822,
+              "upper": 0.2366692473757225
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.10954429441822375,
+            "mean": 0.2109116058586526,
+            "median": 0.18136476556205228,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.28100452210418514
+          }
+        }
+      },
+      "clean": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.2304609192733025,
+            "mean": 0.25691053829762645,
+            "upper": 0.2839478903621484
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.14900909265093285,
+          "mean": 0.2566243689631212,
+          "median": 0.2381742832953198,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.3274388711722057
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.23042738188782044,
+            "mean": 0.25657518643801747,
+            "upper": 0.28380147488470536
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1467324551182098,
+          "mean": 0.25630663488804006,
+          "median": 0.23754327061153988,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.3254674544143685
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.18715292953343518,
+            "mean": 0.21173028571522678,
+            "upper": 0.23699170209737377
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1074131966726527,
+          "mean": 0.2111235501087686,
+          "median": 0.17773602201716854,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2817854699027751
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.18707159065559426,
+            "mean": 0.21151214553941822,
+            "upper": 0.2366692473757225
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.10954429441822375,
+          "mean": 0.2109116058586526,
+          "median": 0.18136476556205228,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.28100452210418514
+        }
+      },
+      "folded": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.16824755241767403,
+            "mean": 0.18781271571129357,
+            "upper": 0.20923217702783006
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.10491920932310213,
+          "mean": 0.18739231335678708,
+          "median": 0.15276446026633125,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2273648446171119
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.16802032016869742,
+            "mean": 0.18713966390749712,
+            "upper": 0.20819235034739975
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1076148642537756,
+          "mean": 0.18674067914467718,
+          "median": 0.155082087456007,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.22267255882413708
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.16036512559974164,
+            "mean": 0.17926344961258622,
+            "upper": 0.19886717002441384
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.10175560132907296,
+          "mean": 0.17875515007072038,
+          "median": 0.13727972685532364,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.21433246637132558
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.16017844808813386,
+            "mean": 0.17874184250245434,
+            "upper": 0.19818266311077665
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.10194122118986565,
+          "mean": 0.178246748984908,
+          "median": 0.13923864893824733,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.21730445925389397
+        }
+      },
+      "noisy": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.16853803666076847,
+            "mean": 0.18812515210297173,
+            "upper": 0.21013971159093875
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.10751452178889684,
+          "mean": 0.18768504164876548,
+          "median": 0.14956117524143483,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.23277279567000086
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.1684535888066387,
+            "mean": 0.1876018352695749,
+            "upper": 0.20897044537627402
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.10749233095387072,
+          "mean": 0.18718020022338827,
+          "median": 0.15011158310935194,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.22802258579762089
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.16228940240469347,
+            "mean": 0.1814862533747358,
+            "upper": 0.20138664314630134
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1049586094022551,
+          "mean": 0.18098333275091755,
+          "median": 0.13999561882285289,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.21598614446931258
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.1621403910105378,
+            "mean": 0.18113457542865743,
+            "upper": 0.20069369891482003
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1046877650780098,
+          "mean": 0.18064259778646086,
+          "median": 0.13993697221400547,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.21637425059365117
+        }
+      }
+    },
+    "2434": {
+      "acute_noisy": {
+        "identical_model_and_input_as": "clean",
+        "values": {
+          "conflicting__full_ce": {
+            "bootstrap": {
+              "lower": 0.23789841792711827,
+              "mean": 0.268683244585161,
+              "upper": 0.3010617011391273
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.1515601542189275,
+            "mean": 0.2686706372883002,
+            "median": 0.20943472410212882,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.3710343768670319
+          },
+          "conflicting__global_ce": {
+            "bootstrap": {
+              "lower": 0.2379578499647534,
+              "mean": 0.2682362261030142,
+              "upper": 0.2999652257756639
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.15061776886023057,
+            "mean": 0.2682065973064318,
+            "median": 0.2135941552136947,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.36743976767751085
+          },
+          "supported__full_ce": {
+            "bootstrap": {
+              "lower": 0.20682233041010492,
+              "mean": 0.23634817303723973,
+              "upper": 0.26865252188963185
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.1120711893299289,
+            "mean": 0.2361945592247626,
+            "median": 0.17517638692628287,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.28997300926803915
+          },
+          "supported__global_ce": {
+            "bootstrap": {
+              "lower": 0.20685570504672832,
+              "mean": 0.23620863315487475,
+              "upper": 0.26818197205213173
+            },
+            "excluded_subject_indices": [],
+            "lower_quartile": 0.1128787044604928,
+            "mean": 0.23604506956171362,
+            "median": 0.1732544308337916,
+            "subjects": 128,
+            "total_subjects": 128,
+            "upper_quartile": 0.2918413223805645
+          }
+        }
+      },
+      "clean": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.23789841792711827,
+            "mean": 0.268683244585161,
+            "upper": 0.3010617011391273
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1515601542189275,
+          "mean": 0.2686706372883002,
+          "median": 0.20943472410212882,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.3710343768670319
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.2379578499647534,
+            "mean": 0.2682362261030142,
+            "upper": 0.2999652257756639
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.15061776886023057,
+          "mean": 0.2682065973064318,
+          "median": 0.2135941552136947,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.36743976767751085
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.20682233041010492,
+            "mean": 0.23634817303723973,
+            "upper": 0.26865252188963185
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1120711893299289,
+          "mean": 0.2361945592247626,
+          "median": 0.17517638692628287,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.28997300926803915
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.20685570504672832,
+            "mean": 0.23620863315487475,
+            "upper": 0.26818197205213173
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1128787044604928,
+          "mean": 0.23604506956171362,
+          "median": 0.1732544308337916,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2918413223805645
+        }
+      },
+      "folded": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.19871864793123412,
+            "mean": 0.2228504469114984,
+            "upper": 0.24788495873679905
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12050189357116989,
+          "mean": 0.22279002133131748,
+          "median": 0.18877334349382613,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2718282039863942
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.19847133220641497,
+            "mean": 0.22213534440536875,
+            "upper": 0.24658368646709927
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12080281833115286,
+          "mean": 0.2220599473557779,
+          "median": 0.18708493198220744,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2665667597547834
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.18865483424074278,
+            "mean": 0.21174066929172783,
+            "upper": 0.23745683999868283
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.11554960627678881,
+          "mean": 0.211617268481392,
+          "median": 0.1618971088798416,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2819140302351829
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.18866551052114866,
+            "mean": 0.21135707024960276,
+            "upper": 0.23651208087665473
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.11318445237253309,
+          "mean": 0.21122487439194204,
+          "median": 0.16241563324759462,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2797835158877555
+        }
+      },
+      "noisy": {
+        "conflicting__full_ce": {
+          "bootstrap": {
+            "lower": 0.19775397397742725,
+            "mean": 0.2210298826972686,
+            "upper": 0.24543247731168535
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.12165520822409535,
+          "mean": 0.22096431717567333,
+          "median": 0.18134988903658583,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2678898277778805
+        },
+        "conflicting__global_ce": {
+          "bootstrap": {
+            "lower": 0.197581898287444,
+            "mean": 0.2205473239116829,
+            "upper": 0.24455385609715813
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1206953274731744,
+          "mean": 0.22046955400731388,
+          "median": 0.1787004374033562,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.26669361761656274
+        },
+        "supported__full_ce": {
+          "bootstrap": {
+            "lower": 0.18930242564351704,
+            "mean": 0.21212927386367939,
+            "upper": 0.23772835899518227
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.1153231287493773,
+          "mean": 0.21201102486930973,
+          "median": 0.16365637722827364,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.2847925963833545
+        },
+        "supported__global_ce": {
+          "bootstrap": {
+            "lower": 0.1894160841413541,
+            "mean": 0.21190593120046344,
+            "upper": 0.23712058280285964
+          },
+          "excluded_subject_indices": [],
+          "lower_quartile": 0.11458851055813729,
+          "mean": 0.2117806218610891,
+          "median": 0.16100395358379183,
+          "subjects": 128,
+          "total_subjects": 128,
+          "upper_quartile": 0.28159029164310057
+        }
+      }
+    }
+  },
+  "primary_result": {
+    "bytes": 1232991,
+    "path": "artifacts/runs/observation_uncertainty_v1/primary.json",
+    "sha256": "dca753cb2f4a982d24ef581d92361c64d61d3abf015ed4110d23c0645abf294a"
+  },
+  "protocol_sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92",
+  "purpose": "Complete protocol diagnostic.secondary full/global CE; no new estimand or changed primary decision.",
+  "source_commit": "a22ad49345d187c912b2d4485e6eb0a37a2abe18"
+}

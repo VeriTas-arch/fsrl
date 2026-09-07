@@ -1,0 +1,49 @@
+{
+  "bytes": 916513,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "comparator-clean",
+  "file_count": 3,
+  "files": [
+    {
+      "bytes": 165765,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "behavior.json",
+      "prospective_suffix": ".json",
+      "sha256": "5c650ca0edede8fcbfbbd870db6e6f6c551db23633969ff36442ec72a95ef183"
+    },
+    {
+      "bytes": 690368,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "543f5cbd6ce2788ac8a8e126a8dabb5b492faccdcb3378a1f41fff739b0f1077"
+    },
+    {
+      "bytes": 60380,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "ea1d426b2f2b1c2e2c4d5d9e955752fe635bc8fe17fbb4f5f23184c137d026a3"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "clean",
+    "observer": "least_squares",
+    "protocol_sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92"
+  },
+  "resolved_config": {
+    "calibration": "Fixed scale 1/sigma, no human or condition-specific fitting. Not a Bayesian optimum. Disconnected scores use minimum-norm component centering; report rank deficiency.",
+    "equation": "Fit centered item scores to all support q_t with unweighted least squares using ordinary item identities; minimum-norm np.linalg.lstsq(rcond=None). Query margin=(score_left-score_right)/sigma. No p,z,true d,rank,or query labels used for inference. Duplicate channels are not counted as independent observations. Exactly zero scalar observations are treated as blank and omitted, including evidence-removal interventions.",
+    "evaluation": "Generic development/test and Liu clean/folded/noisy observations, plus fixed controlled history panel. Apply existing policy/core metrics; full/global identical by construction. Compare information integration sufficiency, not RNN necessity from a comparator failure. There is one comparator result per observation condition (not one new observer per training seed); bootstrap seed is the fixed development seed. History panel is identical across these comparator conditions.",
+    "name": "least_squares"
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_uncertainty_v1"
+}

@@ -222,9 +222,12 @@ fail to close the dynamics.
     storage adaptation improves performance versus acute rounding, but all twelve
     trained models fail individual diversity and no added functional history selection
     is supported. Close this recipe without promotion.
-- [Observation uncertainty and sign-restored control](observation_uncertainty/README.md) — `unresolved`
-  - **Finding:** All nine paired final models locked before primary evaluation; three
-    development models and the fixed-sigma competence gate preserved.
+- [Observation uncertainty and sign-restored control](observation_uncertainty/README.md) — `mixed`
+  - **Finding:** Acute observation noise passed full/global behavioral core and evidence
+    binding in all three paired seeds. Noise-adapted training improved generic CE in all
+    three, retained full core in one seed and global core in none, and failed the
+    registered added-history-discrimination contrast with negative intervals in all
+    three. One fixed sigma; no promotion.
 
 ## Minimal explanatory models
 

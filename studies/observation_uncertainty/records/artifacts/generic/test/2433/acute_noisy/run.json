@@ -1,0 +1,103 @@
+{
+  "bytes": 82901,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "test-2433-acute_noisy",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 78652,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "30ab4146927452b07285e16a2213de02d642014d6552c96e2165d1fb06c00176"
+    },
+    {
+      "bytes": 4249,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "3c42ec01a31da38f1b024ecc20de61a0e1ef7e37c4a60242cced74080e111f2e"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "acute_noisy",
+    "protocol_sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92",
+    "seed": 2433,
+    "split": "test"
+  },
+  "resolved_config": {
+    "evaluation": {
+      "cohorts": 1,
+      "generic": {
+        "conditions": [
+          "intact"
+        ],
+        "episodes": 256,
+        "matching": "Exactly the same validation episodes for all conditions and seeds, with all 28 queries and existing evidence generation.",
+        "partition": "Only generic graph bucket zero; protected Liu signatures remain excluded.",
+        "rng_seed": 106201,
+        "temperature": 1.0
+      },
+      "generic_development": {
+        "episodes": 256,
+        "rng_seed": 106200
+      },
+      "item_counts": [
+        8
+      ],
+      "liu": {
+        "LOO": "For each support relation, zero s_G and s_L on every occurrence; L writes use that same zero s_L. Preserve cues, times, original encoding and all other evidence.",
+        "choice_seed": 96214,
+        "conditions": [
+          "intact",
+          "local_off",
+          "P_off",
+          "query_shuffle",
+          "evidence_shuffle"
+        ],
+        "cue_mode": "permuted_shared",
+        "cue_seed": 106211,
+        "evidence_shuffle": "Within each subject/block jointly derange the paired (s_G,s_L) observations across fixed cue/time slots, applying routed s_L to L when present; preserve the observed evidence-pair multiset.",
+        "evidence_shuffle_seed": 96216,
+        "order_seed": 31401,
+        "pairing": "Identical shared inputs and random numbers across all fresh models within each size; no cross-size participant pairing.",
+        "protocol_id": "liu_v2",
+        "query_shuffle": "Within subject, derange the 28 canonical local query addresses, preserving their multiset and orientation reversal; do not shuffle global readout or refit gain.",
+        "query_shuffle_seed": 96215,
+        "subject_encoding_mode": "stable_omission",
+        "subject_encoding_seed": 106213,
+        "subjects": 77,
+        "support_seed": 106212,
+        "temperature": 0.25,
+        "temperature_provenance": "Inherited descriptive calibration from earlier development informed by approximate human overall accuracy. It is not fitted again and is not a wholly a-priori biological constant."
+      }
+    },
+    "observation": {
+      "conditions": [
+        "clean",
+        "folded",
+        "noisy"
+      ],
+      "equation": "u=float32(d*(z+(1-z)*p)); v=float64(u)+sigma*epsilon. clean returns original arrays; folded q=float32(sign(d)*abs(v)); noisy q=float32(v). Channels 34=z*q and 37=q, local=q, at support step zero only.",
+      "noise": "Independent standard normal per actual support presentation and subject, numpy default_rng; not conditional on weak labels. Same draw used for B/C and both memory routes. No query noise.",
+      "preflight": "Fixed-seed non-Liu observation panel, report amplitude equality, z/q coupling, sign errors per presentation and after relation-wise averaging four repeats. No scale selection and no training gate based on Liu.",
+      "replay_role": "Only replay0 is main behavior; other fixed physical-input re-encodings diagnose margin variation, never averaged into main policy.",
+      "replays": [
+        0,
+        1,
+        2
+      ],
+      "seed": "training: 400000000+seed*10000+step; evaluation: 500000000+panel*100000+replay*10000+batch_id. Panels: 1 development,2 generic test,3 history,4 Liu. Task RNG independent.",
+      "sigma": 0.14285714285714285,
+      "units": "One displayed rank-difference unit divided by n_items-1=7; computational assumption, not estimated from Liu choices.",
+      "zero_limit": "sigma=0 returns original clean arrays exactly for all conditions."
+    }
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_uncertainty_v1"
+}

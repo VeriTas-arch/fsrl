@@ -1,0 +1,63 @@
+{
+  "bytes": 675399,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "secondary-history-policy-replay",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 648901,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "e13433bb5bf8b7f33b442f75406e205eebc5fccb96d3c4960a34b9e713496f0a"
+    },
+    {
+      "bytes": 26498,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "a749f3a08849be553e5437ef1bd58262528c62f9e7dd92e4cd4d372879457aa4"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "collector": {
+      "bytes": 8128,
+      "path": "fsrl/experiments/observation_uncertainty/history_policy.py",
+      "sha256": "4a1b1517c614c18d8228cef3d7cfbd8c961f03cc55a013fcde4421b064b895b6"
+    },
+    "compilation_order": "Replay the original generic batches before history to preserve compiled shape specialization; require exact saved generic and history margins.",
+    "initial_replay_failure": {
+      "bytes": 2975,
+      "path": "artifacts/runs/observation_uncertainty_v1/secondary_history/run.json",
+      "sha256": "e72fd1a198590a1341f4920957c0df74fc6d28bef391899e358fc07df2d3c390"
+    },
+    "model_lock": {
+      "bytes": 57696,
+      "path": "studies/observation_uncertainty/records/benchmarks/model_lock.json",
+      "sha256": "80bb1448250b8531f16913b3da24bcf60aec3bcae232e9610f5572af94b29862"
+    },
+    "primary_result": {
+      "bytes": 1232991,
+      "path": "artifacts/runs/observation_uncertainty_v1/primary.json",
+      "sha256": "dca753cb2f4a982d24ef581d92361c64d61d3abf015ed4110d23c0645abf294a"
+    },
+    "protocol_sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92",
+    "purpose": "Complete protocol diagnostic.secondary full/global CE; no new estimand or changed primary decision.",
+    "source_commit": "a22ad49345d187c912b2d4485e6eb0a37a2abe18"
+  },
+  "resolved_config": {
+    "construction": "Generic validation graphs; select a retained one-displayed-unit target edge with an alternative undirected path after removing that edge. Move one target observation last; replace every earlier target presentation with a non-target existing observation, preserving each slot time. Encode once with noisy rule. Force final target magnitude positive in its higher-to-lower orientation. Supported prefix remains as sampled; conflicting prefix swaps target item identities everywhere before the final target and swaps their latent ranks in query labels. Current inputs/local evidence, all scalar magnitudes, total presentation counts, lengths and graph topology up to permutation match. Both histories contain no prior direct target evidence. All trained arms read this SAME already-encoded controlled panel, no condition-specific re-encoding. This is a counterfactual consistency challenge, not a sample of Liu exposure or pure sensory-noise likelihood.",
+    "episodes": 128,
+    "intervention": "Remove final target globally only, channels34/37 zero, preserve local and all prefix inputs.",
+    "primary": "Difference between trained noisy and clean of supported-minus-conflicting global CE benefit B=CE(remove)-CE(intact). Positive lower95CI with competent models supports added functional history discrimination, not a gate or uniquely identified learning rule.",
+    "rng_seed": 97202,
+    "secondary": "Within-history full/global CE; direct/remote absolute margin effects; write measures. Simple least-squares observer on identical panel supplies a structural comparison. CE benefit alone does not establish suppression of an erroneous write."
+  },
+  "schema_version": 1,
+  "workflow_id": "observation_uncertainty_v1"
+}
