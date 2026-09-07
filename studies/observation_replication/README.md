@@ -41,6 +41,9 @@ panels; no network pooling, human confirmation or promotion.
 - `supporting_artifact` —
   [studies/observation_replication/records/benchmarks/qualification_initial.json](records/benchmarks/qualification_initial.json)
   (`sha256:0e1c0ee6d0e3`)
+- `execution_lock` —
+  [studies/observation_replication/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:0db7b50ff707`)
 
 ## Provenance rule
 
