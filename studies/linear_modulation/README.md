@@ -35,6 +35,9 @@ confirmation or promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/linear_modulation/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:4fb497ece6ef`)
 - `registered_contract` —
   [studies/linear_modulation/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:ea99033d86f6`)
