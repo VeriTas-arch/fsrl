@@ -33,6 +33,9 @@ both columns, no explicit zq hint or local memory. No human confirmation or prom
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/duplicate_observation/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:b5e2f65eeb9b`)
 - `registered_contract` —
   [studies/duplicate_observation/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:5722e54a0f56`)
