@@ -25,8 +25,8 @@
 relational behavior under complete shared inputs, and does effective write cost add
 useful functional selection?
 
-**Finding.** Generic-only development selected K=65; twelve paired fits pending. No Liu
-outcome exposed.
+**Finding.** Generic-only selection fixed K=65; all twelve paired final models locked
+before primary evaluation.
 
 **Claim boundary.** Development; one generic initialization and conditional three new
 four-condition fits. Fixed per-connection states, single-stage joint training,
@@ -38,6 +38,9 @@ estimate.
 - `artifact_lock` —
   [studies/finite_state_memory/records/benchmarks/development_model_lock.json](records/benchmarks/development_model_lock.json)
   (`sha256:d39913f21b67`)
+- `artifact_lock` —
+  [studies/finite_state_memory/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:3038916942c0`)
 - `registered_contract` —
   [studies/finite_state_memory/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:7199a7c2ca02`)
