@@ -269,9 +269,12 @@ fail to close the dynamics.
     reduced effective writes; primary CE compensation attenuation is not supported.
     Conditional constant evaluation/training did not trigger. Compact P_T mismatch
     localized without requalification.
-- [Actual stage write budgets versus modulation organization](write_budget_match/README.md) — `unresolved`
-  - **Finding:** All six generic-only calibrations meet the four phase/observation
-    budget targets; gains and raw calibration records locked before behavior.
+- [Actual stage write budgets versus modulation organization](write_budget_match/README.md) — `mixed`
+  - **Finding:** All six calibrations match; evaluation Ce generic phase budgets are
+    equivalent in all three seeds, yet CE residuals stay positive and recovery is
+    negative. Mean correct probability improves versus stage constants; competence/core
+    remain. Liu budget equivalence fails, restricting causal interpretation to generic
+    conditions.
 
 ## Minimal explanatory models
 

@@ -1,0 +1,45 @@
+{
+  "bytes": 10314417,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "budget-and-prediction-comparison",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 3733341,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "73fc6ed69855942aaf399b30e0af31aa63d7ce0e497748e4578ac2dac4aaf984"
+    },
+    {
+      "bytes": 6581076,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "ed38d5e2b61baf34f9f373f3ebda9a3a99f6518c65a8c5552d144d27a12562ce"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "calibration": {
+      "bytes": 61249,
+      "path": "studies/write_budget_match/records/benchmarks/calibration_lock.json",
+      "sha256": "8c2a8938600f378e7b17718cfc0f8628420cd9a47915d7001971083e37cea335"
+    }
+  },
+  "resolved_config": {
+    "budget_gate": "Equal two-panel average of phase3/4 M/B ratios;95% paired interval must lie wholly within[.95,1.05]. Per network, observation and domain separately. Generic point ratios weight archives equally using fixed inverse archive sample-size weights; bootstrap uses shared episode draws and those weights. Liu uniform weights. Do not infer all-cell or cross-domain matching from Ce generic matching.",
+    "calibration_gate": "All four point ratios in[.95,1.05] per network. First2531 A/C pair first; if either fails, stop remaining calibration and all behavior. If first pair passes, finish other four calibrations regardless of failures, lock all results; behavior requires all6 pass. Solver failure is control infeasibility under fixed recipe, not proof no matching solution exists.",
+    "performance": "Unchanged Ce five probability NI margins-.02 and inherited eight preservation flags are descriptive qualification, not substitutes for budget matching. No claim residual loss eliminated from nonsignificance or NI alone; report recovery/residual continuously, no new CE equivalence threshold.",
+    "primary": "Ce generic-global CE residual M-B; positive95 lower bound means remaining loss, interpretable beyond matched mean phase budget only when Ce generic budget gate and task competence pass.",
+    "secondary": "Ce generic-global CE recovery S-M; same paired draws. Report both contrasts in all4cells; raw candidate four-cell absolute performance, noise simple effects and training interactions; retain inherited competence, core and binding flags. Do not require compensation attenuation.",
+    "statistics": "2000 paired subject-ID bootstrap, seed126000+seed+panel*1000000; average the two fixed panels within each network; no pooling networks. Generic CE uses native raw signed margins; omitted probability uses original paired complete-case IDs.",
+    "stop": "No retuning on panels2/3 or Liu. Failed evaluation budget check restricts interpretation but all prelocked24 outcomes are reported. No global constant, retraining, shuffled modulation or compact export branch."
+  },
+  "schema_version": 1,
+  "workflow_id": "write_budget_match_v1"
+}
