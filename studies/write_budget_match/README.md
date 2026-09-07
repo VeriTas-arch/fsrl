@@ -38,6 +38,9 @@ requalification.
 - `supporting_artifact` —
   [studies/write_budget_match/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:5d00b2873a05`)
+- `execution_lock` —
+  [studies/write_budget_match/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:339f8a8cd1bc`)
 
 ## Provenance rule
 
