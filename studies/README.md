@@ -391,8 +391,11 @@ upgrading them into arbitrary-domain guarantees.
   - **Finding:** All six frozen RNNs adapt and recover from outliers, but none passes
     history-dependent crossover or preservation; covariance filter passes primary gates.
     Proceed to the planned joint-training comparison.
-- [Joint learning of relational revision](revision_learning/README.md) — `unresolved`
-  - **Finding:** Prospective fixed-budget joint learning comparison.
+- [Joint learning of relational revision](revision_learning/README.md) — `mixed`
+  - **Finding:** Three joint-trained plastic RNNs retain competence, adaptation and
+    partial outlier recovery but fail history-dependent crossover and preservation; all
+    GRUs fail competence. Fixed-budget candidate closed; conditional directional
+    intervention not launched.
 
 ## Human validation work, currently deferred
 
