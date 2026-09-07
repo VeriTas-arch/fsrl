@@ -36,6 +36,9 @@ knowledge revision presumed. Negative results remain evidence.
 - `registered_contract` —
   [studies/relational_revision/records/benchmarks/protocol.json](records/benchmarks/protocol.json)
   (`sha256:e8d768d8ba83`)
+- `execution_lock` —
+  [studies/relational_revision/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:01c17e5cc6b7`)
 - `supporting_artifact` —
   [studies/relational_revision/records/results/qualification.json](records/results/qualification.json)
   (`sha256:8e22ffacdff4`)
