@@ -240,9 +240,12 @@ fail to close the dynamics.
     all three equal-panel summaries support output compensation, with 8/9 panelwise
     joint intervals and one uncertain order-shift contrast. Noisy-trained core 6/9
     full/global; original-input CE cost and noisy-input benefit persist.
-- [Local-memory removal under observation uncertainty](local_memory_removal/README.md) — `unresolved`
-  - **Finding:** All six matched single-memory A/C models locked before new evaluation;
-    original input and observed training fingerprints match archived dual counterparts.
+- [Local-memory removal under observation uncertainty](local_memory_removal/README.md) — `supporting`
+  - **Finding:** All three paired single-memory A/C instances support local-state
+    removal under the frozen developmental criterion: Ce five-endpoint noninferiority,
+    intact competence/binding, Ae9/9 and Ce6/9 core with identical panelwise pattern to
+    dual, and retained compensation. Small direct-experience losses remain; no interface
+    simplification or independent confirmation.
 
 ## Minimal explanatory models
 

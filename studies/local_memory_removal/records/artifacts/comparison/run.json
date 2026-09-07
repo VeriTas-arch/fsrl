@@ -1,0 +1,50 @@
+{
+  "bytes": 6894996,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "matched-memory-comparison",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 3079397,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "2c657556e97de78535e2a13e0c7f479024a4b922212f1379d9ad4ffe581a8d8a"
+    },
+    {
+      "bytes": 3815599,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "b5e1fc48bad3e93fe28fee90e46ff75acc0ebdcf646d8365eaf8bf4b8da92211"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "source_commit": "88b63873d9dbac0baa77dd5af4b2fb9d792d84fc"
+  },
+  "resolved_config": {
+    "groups": [
+      "generic_learned",
+      "generic_nonlearned",
+      "liu_learned",
+      "liu_nonlearned",
+      "liu_omitted"
+    ],
+    "margin": 0.02,
+    "orientation": "single minus dual full-policy mean correct probability",
+    "primary_cell": "Ce",
+    "secondary_cells": [
+      "A0",
+      "Ae",
+      "C0"
+    ],
+    "statistics": "Paired complete-case participant bootstrap within panel and endpoint. Missing omitted subjects are excluded before resampling in both models, with counts/IDs reported. Equal average of three panel differences within network, independent panel resampling; no network pooling. Lower95>=-.02 supports practical noninferiority; upper95<-.02 supports material inferiority; otherwise unresolved. CE is reported separately, no new CE tolerance."
+  },
+  "schema_version": 1,
+  "workflow_id": "local_memory_removal_v1"
+}
