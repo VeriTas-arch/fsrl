@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 2404,
+  "entry_count": 2405,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 1386,
+    "json": 1387,
     "json_lines": 62,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -25,7 +25,7 @@
   },
   "normalization_counts": {
     "already_conformant": 2315,
-    "historical_gzip_view": 88,
+    "historical_gzip_view": 89,
     "historical_pth_view": 1
   },
   "records": [
@@ -43522,6 +43522,42 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/linear_modulation/records/results/reference_audit.json",
+        "repository_path": "studies/linear_modulation/records/results/reference_audit.json"
+      },
+      "materialized_identity": {
+        "bytes": 1118627,
+        "sha256": "2ba2ea4b40b68885415e8757c66ee70dfc6384bfa2eed463231eaf9d8ab3945e"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "linear_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.linear_modulation.studies_linear_modulation_records_results_reference_audit_json",
+      "registered_identity": {
+        "bytes": 1118627,
+        "sha256": "2ba2ea4b40b68885415e8757c66ee70dfc6384bfa2eed463231eaf9d8ab3945e",
+        "source_ref": "sha256:2ba2ea4b40b68885415e8757c66ee70dfc6384bfa2eed463231eaf9d8ab3945e"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -82109,7 +82145,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 2402,
+  "registered_record_count": 2403,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -82136,7 +82172,7 @@
     "report": 81,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 1464,
+    "supporting_artifact": 1465,
     "validation_result": 13
   },
   "schema_version": 2,
