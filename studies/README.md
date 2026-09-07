@@ -211,6 +211,8 @@ fail to close the dynamics.
     limited ranking diversification is retained as positive evidence. N6/10 transport
     not triggered; isolated remains the working model. Frozen development evidence
     without main-model promotion.
+- [Weak evidence contribution in frozen shared and cost RNNs](weak_evidence_contribution/README.md) — `unresolved`
+  - **Finding:** Prospectively registered; execution pending.
 
 ## Minimal explanatory models
 

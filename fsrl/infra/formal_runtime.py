@@ -23,6 +23,7 @@ WORKFLOW_MODULES = {
     "joint-training-strategy": "fsrl.experiments.training_strategy.__main__",
     "matched-memory-structure": "fsrl.experiments.memory_structure.__main__",
     "effective-write-cost": "fsrl.experiments.write_cost.__main__",
+    "weak-evidence-contribution": "fsrl.experiments.weak_contribution.__main__",
     "weak-evidence-routing": "fsrl.experiments.evidence_routing.__main__",
     "minimal-relational-learner": "fsrl.experiments.minimal_learner.__main__",
     "quantized-relational-learner": "fsrl.experiments.quantized_learner.__main__",
