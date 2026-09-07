@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 1652,
+  "entry_count": 1655,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 861,
+    "json": 864,
     "json_lines": 38,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 1571,
+    "already_conformant": 1574,
     "historical_gzip_view": 80,
     "historical_pth_view": 1
   },
@@ -34576,6 +34576,108 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/observation_replication/records/benchmarks/protocol.json",
+        "repository_path": "studies/observation_replication/records/benchmarks/protocol.json"
+      },
+      "materialized_identity": {
+        "bytes": 8805,
+        "sha256": "e614380a31485c6748ea626c90f89233d8d3465748e5635ef15e38d4ff6cbe16"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "observation_replication",
+        "kind": "study"
+      },
+      "record_id": "study.observation_replication.studies_observation_replication_records_benchmarks_protocol_json",
+      "registered_identity": {
+        "bytes": 8805,
+        "sha256": "e614380a31485c6748ea626c90f89233d8d3465748e5635ef15e38d4ff6cbe16",
+        "source_ref": "sha256:e614380a31485c6748ea626c90f89233d8d3465748e5635ef15e38d4ff6cbe16"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/observation_replication/records/benchmarks/qualification_initial.json",
+        "repository_path": "studies/observation_replication/records/benchmarks/qualification_initial.json"
+      },
+      "materialized_identity": {
+        "bytes": 70480,
+        "sha256": "0e1c0ee6d0e3f25ff1e65064be0bebba09bd9f426a8895476029149bcbad8c56"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "observation_replication",
+        "kind": "study"
+      },
+      "record_id": "study.observation_replication.studies_observation_replication_records_benchmarks_qualification_initial_json",
+      "registered_identity": {
+        "bytes": 70480,
+        "sha256": "0e1c0ee6d0e3f25ff1e65064be0bebba09bd9f426a8895476029149bcbad8c56",
+        "source_ref": "sha256:0e1c0ee6d0e3f25ff1e65064be0bebba09bd9f426a8895476029149bcbad8c56"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/observation_replication/records/benchmarks/qualification.json",
+        "repository_path": "studies/observation_replication/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 70480,
+        "sha256": "a8553fbcc1d034099dab17c718486f1bbca275bfd5bc9d504738a26dac52a135"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "observation_replication",
+        "kind": "study"
+      },
+      "record_id": "study.observation_replication.studies_observation_replication_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 70480,
+        "sha256": "a8553fbcc1d034099dab17c718486f1bbca275bfd5bc9d504738a26dac52a135",
+        "source_ref": "sha256:a8553fbcc1d034099dab17c718486f1bbca275bfd5bc9d504738a26dac52a135"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.supporting_artifact",
       "format": {
         "format": "json",
@@ -56525,7 +56627,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 1650,
+  "registered_record_count": 1653,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -56546,20 +56648,20 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 76,
+    "registered_contract": 77,
     "repair_contract": 8,
     "repair_lock": 10,
     "report": 77,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 948,
+    "supporting_artifact": 950,
     "validation_result": 13
   },
   "schema_version": 2,
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "79d2112b8e4d4eb8b3ed321794f26d0d00d279177f35cced3082e91db463fb34"
+      "sha256": "44ece90f7a8dafd9492bb3b25f907dcfbe7c7829a6eb82ebcf4aa10821c9bad9"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",
