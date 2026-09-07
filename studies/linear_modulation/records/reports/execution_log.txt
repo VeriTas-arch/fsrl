@@ -1,0 +1,40 @@
+{'linear_replacement_supported': True, 'pairs': {'2531': {'all_candidate_cells_competent': True, 'Ce_five_endpoints_noninferior': True, 'Ae_and_Ce_core_present': True, 'Ae_Ce_binding_retained': True, 'positive_I_tau': True, 'negative_I_CE': True, 'negative_shift_difference': True, 'both_error_tau_negative': True, 'removal_supported_for_pair': True}, '2532': {'all_candidate_cells_competent': True, 'Ce_five_endpoints_noninferior': True, 'Ae_and_Ce_core_present': True, 'Ae_Ce_binding_retained': True, 'positive_I_tau': True, 'negative_I_CE': True, 'negative_shift_difference': True, 'both_error_tau_negative': True, 'removal_supported_for_pair': True}, '2533': {'all_candidate_cells_competent': True, 'Ce_five_endpoints_noninferior': True, 'Ae_and_Ce_core_present': True, 'Ae_Ce_binding_retained': True, 'positive_I_tau': True, 'negative_I_CE': True, 'negative_shift_difference': True, 'both_error_tau_negative': True, 'removal_supported_for_pair': True}}}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/linear_modulation/__main__.py", line 45, in <module>
+    main()
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/linear_modulation/__main__.py", line 32, in main
+    result = {
+             ^
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/linear_modulation/reporting.py", line 166, in report
+    export(source, models)
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/linear_modulation/compact.py", line 56, in export
+    checks[f"{panel}/{arm}/{name}/controls"] = control_checks(
+                                               ^^^^^^^^^^^^^^^
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/duplicate_observation/compact.py", line 65, in control_checks
+    checks[label] = compare_rollouts(
+                    ^^^^^^^^^^^^^^^^^
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/admission_hint_removal/compact.py", line 65, in compare_rollouts
+    name: compare(x, y)
+          ^^^^^^^^^^^^^
+  File "/home/veritas/Documents/fsrl/fsrl/experiments/evidence_routing/qualification.py", line 28, in compare
+    np.testing.assert_allclose(
+  File "/home/veritas/Programs/miniconda3/envs/ipex/lib/python3.12/site-packages/numpy/testing/_private/utils.py", line 1768, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+  File "/home/veritas/Programs/miniconda3/envs/ipex/lib/python3.12/site-packages/numpy/testing/_private/utils.py", line 983, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0.0001, atol=1e-05
+
+Mismatched elements: 1 / 3080000 (3.25e-05%)
+Mismatch at index:
+ [31, 27, 49]: -0.003059804905205965 (ACTUAL), -0.0030464250594377518 (DESIRED)
+Max absolute difference among violations: 1.3379846e-05
+Max relative difference among violations: 0.00439198
+ ACTUAL: array([[[  0.156197,   3.686532,   2.580291, ...,   1.515195,
+          -2.213203,   1.030747],
+        [ -8.14105 ,  -4.649201,   2.456505, ...,  -4.173742,...
+ DESIRED: array([[[  0.156197,   3.686531,   2.580291, ...,   1.515194,
+          -2.213203,   1.030747],
+        [ -8.14105 ,  -4.6492  ,   2.456504, ...,  -4.173741,...

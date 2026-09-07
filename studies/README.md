@@ -258,9 +258,11 @@ fail to close the dynamics.
     endpoints improve over zero-hint Z, Ae9/9 and Ce8/9 core, compensation retained. Six
     trained weights map numerically to a single-observation37-channel interface. Exposed
     development; small Liu and compensation costs remain.
-- [Single affine modulation in a single-memory RNN](linear_modulation/README.md) — `unresolved`
-  - **Finding:** Prospective matched affine-modulation comparison; new outcomes not
-    evaluated.
+- [Single affine modulation in a single-memory RNN](linear_modulation/README.md) — `mixed`
+  - **Finding:** All three matched pairs support affine-head behavioral replacement: 36
+    competent cells, 15 Ce endpoints noninferior, Ae core9/9 and Ce7/9, and retained
+    compensation. Conditional compact export stopped at an original-tolerance mismatch
+    in the fifth model; no six-model compact qualification or promotion.
 
 ## Minimal explanatory models
 

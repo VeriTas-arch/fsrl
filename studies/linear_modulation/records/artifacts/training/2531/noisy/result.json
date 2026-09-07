@@ -1,0 +1,105 @@
+{
+  "arm": "noisy",
+  "final_backbone": {
+    "alpha": "30d222ee16048c05530f3f513ead9f2acb6ac0b8b1e2524d96837656374f2de7",
+    "etaet": "38da3b7849ebb426cc3c202c92406b28d3edcd6c92d3bbacef59b947a2eb4ce1",
+    "h2DA.bias": "f39b81cf3eb501038e33255dd1add18f828f58f28a3914ddabc4cacccad4e38e",
+    "h2DA.weight": "0b80f5a88723aee346d5e20c39bcba9c4f41181dfa9d5a5c4a6901e72503bf7d",
+    "h2o.bias": "714d749f375cdfcb78c9c47425aca8742944c939205749036948b7e249e1b33f",
+    "h2o.weight": "5b7f7b102bcea5e4080965056ac50ecd6ad681c7b7f421a25bb79bcc47ff0bcf",
+    "h2v.bias": "7d9fae29e0bc7aa69052556f50a4d1553bab887fff880355c77807426ae773db",
+    "h2v.weight": "56c93c89282c7b3e95e04f327a81c8b606577e8df901bbd871dd820e7101c228",
+    "i2h.bias": "f87988b73b1a90f1bafe455a3af8db09bc1165d7d50e33e09fe840424aeee60b",
+    "i2h.weight": "fd783d58a9d466e0e907e2e2856c55b215e14a33568b020523451cccf16bf859",
+    "w": "ad592e61a252df43e1f83b4f5adaa83f116e6063a152cc964b6b03e15b858a3b"
+  },
+  "final_local": null,
+  "initial_backbone": {
+    "alpha": "2d23222a5d2b9d0ba74598c4521dca1fb1b1ded44a66c0f669e752f8ba8213a7",
+    "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+    "h2DA.bias": "6c75cb3aa664af56c49a4348a09eaad9c29ed351d1f5a55b15aec514365d5413",
+    "h2DA.weight": "1fbef30e2173a750fd9ec7f5c292d0132cd8150adb5f7b89b4f4701e8a81ebee",
+    "h2o.bias": "c520aa22172064ebb22539e49c9eeea104b1c946446c1a669f1c03450025c3ab",
+    "h2o.weight": "d366de970958e293aa243e23b9fba6de23e0c9f957dfc365e4035f9a50402d39",
+    "h2v.bias": "7d9fae29e0bc7aa69052556f50a4d1553bab887fff880355c77807426ae773db",
+    "h2v.weight": "56c93c89282c7b3e95e04f327a81c8b606577e8df901bbd871dd820e7101c228",
+    "i2h.bias": "a12aaecbdf0539a08ffb8f6216460405dbd8e89bf710a314144fcdcd7bbb840b",
+    "i2h.weight": "128646fbfbfa24e717e1058d70c44dc3c44d4ab33318e5fa13cce09e93cb82af",
+    "w": "3ac76a1d374b36712522b81c8154f08f3df74b62816f030b8d3404c3171c6ac2"
+  },
+  "initial_local": null,
+  "optimizer_steps": {
+    "backbone.alpha": 1500,
+    "backbone.etaet": 1500,
+    "backbone.h2DA.bias": 1500,
+    "backbone.h2DA.weight": 1500,
+    "backbone.h2o.bias": 1500,
+    "backbone.h2o.weight": 1500,
+    "backbone.h2v.bias": 1500,
+    "backbone.h2v.weight": 1500,
+    "backbone.i2h.bias": 1500,
+    "backbone.i2h.weight": 1500,
+    "backbone.w": 1500
+  },
+  "protocol_sha256": "ea99033d86f6122a63ed46992135091568a223246348b8cd7f16b83aff79fc01",
+  "runtime": {
+    "blas_thread_limit": 1,
+    "blas_threadpools": [
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.188.0"
+      },
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.dev"
+      }
+    ],
+    "compiler_threads": 1,
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "device_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "execution_schema_version": 2,
+    "float32_matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "profile": {
+      "blas_threads": 1,
+      "compile": true,
+      "compile_backend": "inductor",
+      "compile_fullgraph": true,
+      "compile_mode": "default",
+      "cpu_threads": 1,
+      "device": "cuda",
+      "require_cuda": true
+    },
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.14.0+cu130",
+    "triton_mix_order_reduction": false
+  },
+  "seed": 2531,
+  "source_lock": {
+    "bytes": 217883,
+    "path": "studies/linear_modulation/records/benchmarks/source_lock.json",
+    "sha256": "d77bba4f34dd974b8ba23952e58b94f50def5295925cccd7c82788aba7904f02"
+  },
+  "stream_fingerprint": "de65e8f6540fc4fe113c9e31e9c0cda3f33403ea6ee869a56853fdc5300121b8",
+  "training_seconds": 44.96135023899842
+}

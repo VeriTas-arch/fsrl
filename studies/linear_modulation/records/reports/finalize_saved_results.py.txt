@@ -1,0 +1,73 @@
+"""Archive fixed saved-data estimates after the mandatory compact stop.
+
+No model loading, training, rollout, new estimand, or tolerance change.
+The two original failed manifests remain byte-preserved.
+"""
+
+from fsrl.experiments.linear_modulation.protocol import (
+    PROTOCOL, RECORDS, RUNS, SOURCE, parents, specification,
+)
+from fsrl.experiments.linear_modulation.reporting import pair_result
+from fsrl.experiments.training_strategy.evaluation import flatten_arrays, json_ready, write_arrays
+from fsrl.experiments.training_strategy.locks import reference, verify_reference
+from fsrl.experiments.write_cost.reporting import copy_artifact
+from fsrl.infra.provenance import load_json, write_json_exclusive
+from fsrl.infra.run_manifest import ProspectiveRun
+
+source, spec = load_json(SOURCE), specification()
+for ref in source['sources']:
+    verify_reference(ref, commit=source['source_commit'])
+failure_path = RUNS / 'compact/run.json'
+failure = load_json(failure_path)
+assert failure['lifecycle_state'] == 'failed'
+assert failure['error']['type'] == 'AssertionError'
+assert load_json(RUNS / 'comparison/run.json')['lifecycle_state'] == 'failed'
+prior = parents()['result']
+helper = RECORDS / 'reports/finalize_saved_results.py.txt'
+directory = RUNS / 'saved_comparison'
+with ProspectiveRun.start(
+    directory,
+    workflow_id='linear_modulation_v1',
+    execution_id='saved-comparison-after-compact-stop',
+    producer={'source_commit': source['source_commit'], 'finalization_source': reference(helper)},
+    resolved_config=spec['noninferiority'],
+):
+    pairs, raw = {}, {}
+    for seed in spec['design']['seeds']:
+        pairs[str(seed)], raw[str(seed)] = pair_result(seed, source, prior)
+        print({'seed': seed, 'decision': pairs[str(seed)]['decision']}, flush=True)
+    compact = {
+        'executed': True,
+        'passed': False,
+        'status': 'stopped_on_first_mismatch',
+        'failed_run': reference(failure_path),
+        'error': failure['error'],
+        'partial_weights': [reference(p) for p in sorted((RUNS / 'compact').glob('*.pth'))],
+        'qualified_six_model_export': False,
+        'boundary': 'Four partial checkpoints retained as failure artifacts. No complete export result or per-check record survived; no six-model compact qualification, no retry or tolerance adjustment.',
+    }
+    result = {
+        'protocol': reference(PROTOCOL),
+        'opponent_reference': spec['parents']['result'],
+        'dual_anchor': spec['anchor'],
+        'pairs': pairs,
+        'reference_audit': reference(RECORDS / 'results/reference_audit.json'),
+        'removal_supported': all(p['decision']['removal_supported_for_pair'] for p in pairs.values()),
+        'compact_export': compact,
+        'claim_boundary': spec['claim_boundary'],
+        'finalization': {
+            'source': reference(helper),
+            'failed_comparison': reference(RUNS / 'comparison/run.json'),
+            'execution_log': reference(RECORDS / 'reports/execution_log.txt'),
+            'scope': 'Deterministic recomputation with unchanged pair_result and saved 36 cells; no new scientific execution. Original failed manifests preserved.',
+        },
+    }
+    write_arrays(directory / 'raw.npz', flatten_arrays(raw))
+    write_json_exclusive(directory / 'result.json', json_ready(result))
+archived = {
+    str(p.relative_to(RUNS)): copy_artifact(p, RECORDS / 'artifacts' / p.relative_to(RUNS))
+    for p in sorted(RUNS.rglob('*'))
+    if p.is_file() and p.suffix in ('.json', '.jsonl', '.npz', '.pth')
+}
+write_json_exclusive(RECORDS / 'results/result.json', json_ready({**result, 'artifacts': archived}))
+print({'removal_supported': result['removal_supported'], 'compact_export_passed': False, 'artifacts': len(archived)}, flush=True)

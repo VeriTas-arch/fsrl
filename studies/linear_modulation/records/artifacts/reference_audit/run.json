@@ -1,0 +1,149 @@
+{
+  "bytes": 8852490,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "frozen-reference-write-audit",
+  "file_count": 13,
+  "files": [
+    {
+      "bytes": 645049,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2531-clean-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "4733c6f9aa184f7490e387be9ff94ee4643f7bd7da061903aff132b4a4d395e5"
+    },
+    {
+      "bytes": 646012,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2531-clean-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "2d294c7fe040b3efebf2900d66a336cc29ae6b45ec755ef0a9f3f27025e21538"
+    },
+    {
+      "bytes": 644997,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2531-noisy-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "950a45a8f321511764d2d35a4d20de7366899cd6f9f8a11f28b57ced524bdd26"
+    },
+    {
+      "bytes": 646034,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2531-noisy-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "8804f3287f6451d5e27965c36961b049343ea3a35dfa735f1757c9e89db4e48f"
+    },
+    {
+      "bytes": 643589,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2532-clean-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "ab12c4b98728915796acca64dd2a2db21382d45d28040fb4d36ffd75847f8eed"
+    },
+    {
+      "bytes": 644447,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2532-clean-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "4a9a4d55a04e7b80e10815802e1c750e8c41f4483cae0248591b8b6e064d4b46"
+    },
+    {
+      "bytes": 643373,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2532-noisy-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "f590e264e6960c17d7f2a9863c52ff30f445ec4ca8d452eb9c8922cdf57ddeec"
+    },
+    {
+      "bytes": 644109,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2532-noisy-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "49aab3664b2fb41d2c8e1c916e7e0464aadd00553be929e3c7474d35838a696f"
+    },
+    {
+      "bytes": 645306,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2533-clean-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "e5d678bfca8f53fc084cd04fb73be5cbb97e71c5a9285923cee7066b28506892"
+    },
+    {
+      "bytes": 645293,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2533-clean-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "aa1c800a97204698d71dc8caaaff4e6274b6bdc911c15aacf0bd70d065afb5a2"
+    },
+    {
+      "bytes": 642447,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2533-noisy-clean.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "0008241c3b7a9a1de888aea6a52247c75267264464e406918caa2e05e3086448"
+    },
+    {
+      "bytes": 643207,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "2533-noisy-noisy.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "7159fc16d44d3412fc5a7d748d830cc709fb83eb118bfee4177c926c512b9066"
+    },
+    {
+      "bytes": 1118627,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "2ba2ea4b40b68885415e8757c66ee70dfc6384bfa2eed463231eaf9d8ab3945e"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "source_lock": {
+      "bytes": 217883,
+      "path": "studies/linear_modulation/records/benchmarks/source_lock.json",
+      "sha256": "d77bba4f34dd974b8ba23952e58b94f50def5295925cccd7c82788aba7904f02"
+    }
+  },
+  "resolved_config": {
+    "descriptive_thresholds": "Report both |a|,|b|<=0.25; both |tanh|>=0.95 with same sign; near-zero |m|/(2*abs(DAmult))<=0.05; eligibility-active norm>1e-12. These are descriptive bins fixed before audit, never replacement gates. Report continuous quantiles/correlation and RMS(a+b)/RMS(a-b) as well.",
+    "integrity": "No slow parameter changes. Compare eager observed support P_T and query logits against the unchanged compiled reference rollout at original atol1e-5 rtol1e-4. Preserve compact scalar arrays by model/cell; no full hidden/P histories required.",
+    "observables": [
+      "a,b,m",
+      "common c=(a+b)/2 and difference d=(a-b)/2",
+      "Frobenius norm of alpha*old eligibility before write",
+      "actual norm of alpha*(Pnew-Pold)",
+      "fraction of proposed entries exceeding original P clip",
+      "trial and within-trial phase including initial blank sequence"
+    ],
+    "scope": "Frozen reference six models, both observation conditions, original panel1 only, all four generic test archives and Liu; no parameter updates or outcome-based candidate changes. Replay support with actual old eligibility and P clipping; preserve scalar per-step evidence and existing ownership.",
+    "weighting": "In addition to unweighted fractions, weight indicators by ||alpha*Eold||_F^2, exposing when modulation suppresses a potential effective connection update. Compute analytic open-loop relative squared write error for m_linear=DAmult*(a-b), with fixed original states, before clipping. This is not fitted surrogate R2 or a closed-loop causal claim."
+  },
+  "schema_version": 1,
+  "workflow_id": "linear_modulation_v1"
+}

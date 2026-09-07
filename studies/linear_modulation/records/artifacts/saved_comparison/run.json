@@ -1,0 +1,55 @@
+{
+  "bytes": 7368291,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "saved-comparison-after-compact-stop",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 3375924,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "a0ca150ab45c70bcf41997341ccba0e1cdc207fea16ba958154ce748213e2836"
+    },
+    {
+      "bytes": 3992367,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "836e56aa111a65e6f6b5381938587e8640389ed14b3793bd515d73511469e089"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "finalization_source": {
+      "bytes": 3752,
+      "path": "studies/linear_modulation/records/reports/finalize_saved_results.py.txt",
+      "sha256": "db8c540e82d0b6f3f70d2f2a7889c2d09187c9f588fa8dfd6b4cab561d29a9ce"
+    },
+    "source_commit": "caab51df12d0c87ebfcc655e0bee00b55a1f3821"
+  },
+  "resolved_config": {
+    "groups": [
+      "generic_learned",
+      "generic_nonlearned",
+      "liu_learned",
+      "liu_nonlearned",
+      "liu_omitted"
+    ],
+    "margin": 0.02,
+    "orientation": "single affine modulation minus frozen two-tanh duplicate-observation reference, full-policy mean correct probability",
+    "primary_cell": "Ce",
+    "secondary_cells": [
+      "A0",
+      "Ae",
+      "C0"
+    ],
+    "statistics": "Paired complete-case participant bootstrap within panel and endpoint. Missing omitted subjects are excluded before resampling in both models, with counts/IDs reported. Equal average of three panel differences within network, independent panel resampling; no network pooling. Lower95>=-.02 supports practical noninferiority; upper95<-.02 supports material inferiority; otherwise unresolved. CE is reported separately, no new CE tolerance."
+  },
+  "schema_version": 1,
+  "workflow_id": "linear_modulation_v1"
+}

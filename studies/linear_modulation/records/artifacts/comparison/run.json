@@ -1,0 +1,35 @@
+{
+  "bytes": 0,
+  "document_type": "fsrl.run_manifest",
+  "error": {
+    "message": "\nNot equal to tolerance rtol=0.0001, atol=1e-05\n\nMismatched elements: 1 / 3080000 (3.25e-05%)\nMismatch at index:\n [31, 27, 49]: -0.003059804905205965 (ACTUAL), -0.0030464250594377518 (DESIRED)\nMax absolute difference among violations: 1.3379846e-05\nMax relative difference among violations: 0.00439198\n ACTUAL: array([[[  0.156197,   3.686532,   2.580291, ...,   1.515195,\n          -2.213203,   1.030747],\n        [ -8.14105 ,  -4.649201,   2.456505, ...,  -4.173742,...\n DESIRED: array([[[  0.156197,   3.686531,   2.580291, ...,   1.515194,\n          -2.213203,   1.030747],\n        [ -8.14105 ,  -4.6492  ,   2.456504, ...,  -4.173741,...",
+    "type": "AssertionError"
+  },
+  "execution_id": "matched-linear-modulation-comparison",
+  "file_count": 0,
+  "files": [],
+  "lifecycle_state": "failed",
+  "producer": {
+    "source_commit": "caab51df12d0c87ebfcc655e0bee00b55a1f3821"
+  },
+  "resolved_config": {
+    "groups": [
+      "generic_learned",
+      "generic_nonlearned",
+      "liu_learned",
+      "liu_nonlearned",
+      "liu_omitted"
+    ],
+    "margin": 0.02,
+    "orientation": "single affine modulation minus frozen two-tanh duplicate-observation reference, full-policy mean correct probability",
+    "primary_cell": "Ce",
+    "secondary_cells": [
+      "A0",
+      "Ae",
+      "C0"
+    ],
+    "statistics": "Paired complete-case participant bootstrap within panel and endpoint. Missing omitted subjects are excluded before resampling in both models, with counts/IDs reported. Equal average of three panel differences within network, independent panel resampling; no network pooling. Lower95>=-.02 supports practical noninferiority; upper95<-.02 supports material inferiority; otherwise unresolved. CE is reported separately, no new CE tolerance."
+  },
+  "schema_version": 1,
+  "workflow_id": "linear_modulation_v1"
+}
