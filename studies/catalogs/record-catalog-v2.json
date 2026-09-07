@@ -7,16 +7,16 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 1095,
+  "entry_count": 1115,
   "format_counts": {
     "csv": 1,
     "gzip_json": 1,
-    "json": 523,
+    "json": 536,
     "json_lines": 10,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 78,
-    "numpy_npz": 431,
+    "markdown": 79,
+    "numpy_npz": 437,
     "pdf": 2,
     "pytorch_state_dict": 41,
     "svg": 4,
@@ -24,7 +24,7 @@
     "text": 1
   },
   "normalization_counts": {
-    "already_conformant": 1020,
+    "already_conformant": 1040,
     "historical_gzip_view": 74,
     "historical_pth_view": 1
   },
@@ -34869,6 +34869,618 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2232/cost/raw.npz",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2232/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 481026,
+        "sha256": "1060685f2b21092e4d4475b8738be971708663e0a1a100c07beefe04c34748f1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2232_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 481026,
+        "sha256": "1060685f2b21092e4d4475b8738be971708663e0a1a100c07beefe04c34748f1",
+        "source_ref": "sha256:1060685f2b21092e4d4475b8738be971708663e0a1a100c07beefe04c34748f1"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2232/cost/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2232/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 16730,
+        "sha256": "ab80f48d3fd4bb3a722089fc62511fbe34f6b0a65be2c157c9d6b4953503cdf3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2232_cost_result_json",
+      "registered_identity": {
+        "bytes": 16730,
+        "sha256": "ab80f48d3fd4bb3a722089fc62511fbe34f6b0a65be2c157c9d6b4953503cdf3",
+        "source_ref": "sha256:ab80f48d3fd4bb3a722089fc62511fbe34f6b0a65be2c157c9d6b4953503cdf3"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2232/cost/run.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2232/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 13387,
+        "sha256": "192486f98dc2a2af227c26fc3aeb7b0e03a0cd0b6021befd74a5754257e2e385"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2232_cost_run_json",
+      "registered_identity": {
+        "bytes": 13387,
+        "sha256": "192486f98dc2a2af227c26fc3aeb7b0e03a0cd0b6021befd74a5754257e2e385",
+        "source_ref": "sha256:192486f98dc2a2af227c26fc3aeb7b0e03a0cd0b6021befd74a5754257e2e385"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2232/shared/raw.npz",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2232/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 481577,
+        "sha256": "e80e1bbc8fddc78be0177d08ea4dd6b223955bd85ef90e3cdddbe77c3eab26dd"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2232_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 481577,
+        "sha256": "e80e1bbc8fddc78be0177d08ea4dd6b223955bd85ef90e3cdddbe77c3eab26dd",
+        "source_ref": "sha256:e80e1bbc8fddc78be0177d08ea4dd6b223955bd85ef90e3cdddbe77c3eab26dd"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2232/shared/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2232/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 16731,
+        "sha256": "9f3e16f08d79221f6d4a9d3a53e3c7b77649e546560bc8b6003ee03002ba0c65"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2232_shared_result_json",
+      "registered_identity": {
+        "bytes": 16731,
+        "sha256": "9f3e16f08d79221f6d4a9d3a53e3c7b77649e546560bc8b6003ee03002ba0c65",
+        "source_ref": "sha256:9f3e16f08d79221f6d4a9d3a53e3c7b77649e546560bc8b6003ee03002ba0c65"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2232/shared/run.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2232/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 13391,
+        "sha256": "bda7b491df4157fc149c324dc4f16f37a0b76a7ccdebe18d763e12a90c320fb4"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2232_shared_run_json",
+      "registered_identity": {
+        "bytes": 13391,
+        "sha256": "bda7b491df4157fc149c324dc4f16f37a0b76a7ccdebe18d763e12a90c320fb4",
+        "source_ref": "sha256:bda7b491df4157fc149c324dc4f16f37a0b76a7ccdebe18d763e12a90c320fb4"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2233/cost/raw.npz",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2233/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 480465,
+        "sha256": "8bcfa8b361e18e1ee1141bbecfc75b4c9d38f529efc7056aa595068478c7092a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2233_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 480465,
+        "sha256": "8bcfa8b361e18e1ee1141bbecfc75b4c9d38f529efc7056aa595068478c7092a",
+        "source_ref": "sha256:8bcfa8b361e18e1ee1141bbecfc75b4c9d38f529efc7056aa595068478c7092a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2233/cost/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2233/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 16769,
+        "sha256": "8e4524021c06eed2df0e3239258d730626042ff97750895c6f4d765291a4a5b2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2233_cost_result_json",
+      "registered_identity": {
+        "bytes": 16769,
+        "sha256": "8e4524021c06eed2df0e3239258d730626042ff97750895c6f4d765291a4a5b2",
+        "source_ref": "sha256:8e4524021c06eed2df0e3239258d730626042ff97750895c6f4d765291a4a5b2"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2233/cost/run.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2233/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 13387,
+        "sha256": "b65c8935433e67392ec818e34934e8a253b4e13ad215b36cedaedc7025b228fc"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2233_cost_run_json",
+      "registered_identity": {
+        "bytes": 13387,
+        "sha256": "b65c8935433e67392ec818e34934e8a253b4e13ad215b36cedaedc7025b228fc",
+        "source_ref": "sha256:b65c8935433e67392ec818e34934e8a253b4e13ad215b36cedaedc7025b228fc"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2233/shared/raw.npz",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2233/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 481502,
+        "sha256": "5e8d6217fdc58441b048d20fb8524fd0cf5e0e0043b59887620a051f5abca914"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2233_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 481502,
+        "sha256": "5e8d6217fdc58441b048d20fb8524fd0cf5e0e0043b59887620a051f5abca914",
+        "source_ref": "sha256:5e8d6217fdc58441b048d20fb8524fd0cf5e0e0043b59887620a051f5abca914"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2233/shared/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2233/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 16725,
+        "sha256": "503b92c9cc02ab15cf069b76e391e425c41fd58127218c96b132397e2f86ea68"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2233_shared_result_json",
+      "registered_identity": {
+        "bytes": 16725,
+        "sha256": "503b92c9cc02ab15cf069b76e391e425c41fd58127218c96b132397e2f86ea68",
+        "source_ref": "sha256:503b92c9cc02ab15cf069b76e391e425c41fd58127218c96b132397e2f86ea68"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2233/shared/run.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2233/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 13391,
+        "sha256": "cf2a60b909e9cce18995cc7c5258f49c7bdafc1edf8ba78f97d01a7bc2f757b5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2233_shared_run_json",
+      "registered_identity": {
+        "bytes": 13391,
+        "sha256": "cf2a60b909e9cce18995cc7c5258f49c7bdafc1edf8ba78f97d01a7bc2f757b5",
+        "source_ref": "sha256:cf2a60b909e9cce18995cc7c5258f49c7bdafc1edf8ba78f97d01a7bc2f757b5"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2234/cost/raw.npz",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2234/cost/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 480889,
+        "sha256": "8f8aa0596110be7007cb07af3ae7019c09bf76817e7c0e0b4899dc77167a5911"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2234_cost_raw_npz",
+      "registered_identity": {
+        "bytes": 480889,
+        "sha256": "8f8aa0596110be7007cb07af3ae7019c09bf76817e7c0e0b4899dc77167a5911",
+        "source_ref": "sha256:8f8aa0596110be7007cb07af3ae7019c09bf76817e7c0e0b4899dc77167a5911"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2234/cost/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2234/cost/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 16745,
+        "sha256": "eb5602298be4c1e1ba53e13297645e14fa458536248465249c78210ad581faa3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2234_cost_result_json",
+      "registered_identity": {
+        "bytes": 16745,
+        "sha256": "eb5602298be4c1e1ba53e13297645e14fa458536248465249c78210ad581faa3",
+        "source_ref": "sha256:eb5602298be4c1e1ba53e13297645e14fa458536248465249c78210ad581faa3"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2234/cost/run.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2234/cost/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 13387,
+        "sha256": "82ecc4f50f8afb936f551c082da16e0c3037ad7eac22a1245c3df171021d5604"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2234_cost_run_json",
+      "registered_identity": {
+        "bytes": 13387,
+        "sha256": "82ecc4f50f8afb936f551c082da16e0c3037ad7eac22a1245c3df171021d5604",
+        "source_ref": "sha256:82ecc4f50f8afb936f551c082da16e0c3037ad7eac22a1245c3df171021d5604"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2234/shared/raw.npz",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2234/shared/raw.npz"
+      },
+      "materialized_identity": {
+        "bytes": 480303,
+        "sha256": "cb5f73f3b443effae7040bde8429f5a46d4224d1e8fa8afc6162e4f36b0a681f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2234_shared_raw_npz",
+      "registered_identity": {
+        "bytes": 480303,
+        "sha256": "cb5f73f3b443effae7040bde8429f5a46d4224d1e8fa8afc6162e4f36b0a681f",
+        "source_ref": "sha256:cb5f73f3b443effae7040bde8429f5a46d4224d1e8fa8afc6162e4f36b0a681f"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2234/shared/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2234/shared/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 16707,
+        "sha256": "a65128427a076d0d02e7eea69172f2a5e7cff64d28c2743181a7abb9e44668e9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2234_shared_result_json",
+      "registered_identity": {
+        "bytes": 16707,
+        "sha256": "a65128427a076d0d02e7eea69172f2a5e7cff64d28c2743181a7abb9e44668e9",
+        "source_ref": "sha256:a65128427a076d0d02e7eea69172f2a5e7cff64d28c2743181a7abb9e44668e9"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/artifacts/2234/shared/run.json",
+        "repository_path": "studies/weak_evidence_contribution/records/artifacts/2234/shared/run.json"
+      },
+      "materialized_identity": {
+        "bytes": 13391,
+        "sha256": "12b918060365181ee8ff2eae3374cc5dfc9186c4f4cc4db3ef82b7c9d750f202"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_artifacts_2234_shared_run_json",
+      "registered_identity": {
+        "bytes": 13391,
+        "sha256": "12b918060365181ee8ff2eae3374cc5dfc9186c4f4cc4db3ef82b7c9d750f202",
+        "source_ref": "sha256:12b918060365181ee8ff2eae3374cc5dfc9186c4f4cc4db3ef82b7c9d750f202"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -35002,6 +35614,74 @@
         "source_ref": "sha256:2f5eb00ec942c7d8f322431be87c14bb5fd8bb804f554f2d949a7493143278dd"
       },
       "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/reports/interpretation.md",
+        "repository_path": "studies/weak_evidence_contribution/records/reports/interpretation.md"
+      },
+      "materialized_identity": {
+        "bytes": 9426,
+        "sha256": "f506eb03765c92be749d961fe94619e93998e34658ff6f68276fb5eb10b86eb6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_reports_interpretation_md",
+      "registered_identity": {
+        "bytes": 9426,
+        "sha256": "f506eb03765c92be749d961fe94619e93998e34658ff6f68276fb5eb10b86eb6",
+        "source_ref": "sha256:f506eb03765c92be749d961fe94619e93998e34658ff6f68276fb5eb10b86eb6"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/weak_evidence_contribution/records/results/result.json",
+        "repository_path": "studies/weak_evidence_contribution/records/results/result.json"
+      },
+      "materialized_identity": {
+        "bytes": 171641,
+        "sha256": "5b42809c5157d43271508355c6c6a95ac08367b24312401b8f5681a0387b8b53"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "weak_evidence_contribution",
+        "kind": "study"
+      },
+      "record_id": "study.weak_evidence_contribution.studies_weak_evidence_contribution_records_results_result_json",
+      "registered_identity": {
+        "bytes": 171641,
+        "sha256": "5b42809c5157d43271508355c6c6a95ac08367b24312401b8f5681a0387b8b53",
+        "source_ref": "sha256:5b42809c5157d43271508355c6c6a95ac08367b24312401b8f5681a0387b8b53"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -37575,7 +38255,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 1093,
+  "registered_record_count": 1113,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -37589,7 +38269,7 @@
     "execution_lock": 51,
     "freeze_validation": 1,
     "frozen_parameters": 72,
-    "frozen_result": 129,
+    "frozen_result": 136,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -37599,10 +38279,10 @@
     "registered_contract": 73,
     "repair_contract": 8,
     "repair_lock": 10,
-    "report": 73,
+    "report": 74,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 607,
+    "supporting_artifact": 619,
     "validation_result": 13
   },
   "schema_version": 2,

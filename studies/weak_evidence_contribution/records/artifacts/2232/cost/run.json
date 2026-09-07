@@ -1,0 +1,188 @@
+{
+  "bytes": 497756,
+  "document_type": "fsrl.run_manifest",
+  "execution_id": "2232-cost",
+  "file_count": 2,
+  "files": [
+    {
+      "bytes": 481026,
+      "format": "numpy_npz",
+      "legacy_format": false,
+      "media_type": "application/vnd.numpy.npz",
+      "path": "raw.npz",
+      "prospective_suffix": ".npz",
+      "sha256": "1060685f2b21092e4d4475b8738be971708663e0a1a100c07beefe04c34748f1"
+    },
+    {
+      "bytes": 16730,
+      "format": "json",
+      "legacy_format": false,
+      "media_type": "application/json",
+      "path": "result.json",
+      "prospective_suffix": ".json",
+      "sha256": "ab80f48d3fd4bb3a722089fc62511fbe34f6b0a65be2c157c9d6b4953503cdf3"
+    }
+  ],
+  "lifecycle_state": "complete",
+  "producer": {
+    "arm": "cost",
+    "protocol_sha256": "df597a2260102b31c403095bef50b36683641b6a3e37071d437ab821b2c7f742",
+    "seed": 2232,
+    "source_commit": "a6de5e38d7dc1aea70cf25c97b1f984fe9f77f18",
+    "source_repair": {
+      "bytes": 2901,
+      "path": "studies/weak_evidence_contribution/records/benchmarks/source_repair_lock.json",
+      "sha256": "2f5eb00ec942c7d8f322431be87c14bb5fd8bb804f554f2d949a7493143278dd"
+    }
+  },
+  "resolved_config": {
+    "protocol": {
+      "decision": {
+        "attenuation": "Upper bound below zero for Cost-minus-Shared CE benefit supports attenuation on that endpoint; zero-crossing differences remain unresolved. A smaller effect does not by itself prove selective storage, information loss, or lower information capacity.",
+        "beneficial_weak_use": "Positive lower bound of deletion-induced nonlearned global CE increase supports beneficial dependence under this input distribution. Positive absolute-margin influence alone establishes an effect, not its benefit.",
+        "claim_boundary": "Functional causal contribution to terminal readout of frozen networks, on an already project-exposed synthetic Liu cohort. Not a measurement of stored bits, absence of coding, a human confirmation, physiological cost or main-model promotion. Acute joint deletion may be outside the trained distribution.",
+        "joint_and_single": "Small single effects alongside clear joint effects are consistent with redundant or nonlinear joint use; do not add single effects to predict the joint effect or declare a unique redundancy mechanism.",
+        "organization": "A decrease in joint-deletion all-subject tau with preserved competence and coherence supports an acute role of weak access in homogenization. It neither makes the intervened network an independently trained isolated model nor identifies how a learner acquires routing.",
+        "stop": "Integrity or reconstruction failure stops dependent analysis. Valid negative or heterogeneous results still complete all six mandatory cells. No new bridge panel, training, architecture, cost grid, precision/noise change or threshold rescue in this study."
+      },
+      "design": {
+        "arms": [
+          "shared",
+          "cost"
+        ],
+        "inputs": "Unmodified archived inputs/liu-8.npz, including original cues, evidence signs, p, stable z, schedule, queries and labels; no resampling or task regeneration.",
+        "joint_intervention": "On every original trial with z=0 set the RNN evidence channel 37 equal to channel 34 (zero). Leave channel 37 unchanged for z=1. Preserve local_evidence and every other array/channel, all four neural steps, cues, original clock, and queries. Equivalent input transformation to the inherited isolated route, applied acutely without retraining.",
+        "n_items": 8,
+        "readout": "Use terminal global-only margins for functional attribution and global order. Also report complete output with the unchanged local correction for competence; G is the global readout pathway, not P in isolation.",
+        "references": "Frozen isolated results remain historical working-model context, not a paired experimental arm. The old retained-bridge novelty diagnostic remains a different estimand.",
+        "seeds": [
+          2232,
+          2233,
+          2234
+        ],
+        "single_relation": "Use the archived eight whole-relation removals, each deleting all four occurrences in both global inputs and local writes. Reconstruct G_minus_r = archived_combined_minus_r - local_margin_minus_r. The local trace is independent of the RNN; recompute it in the original sequential float32 order. This gives the same global function as global-only removal with local writes preserved.",
+        "subjects": 77,
+        "training": "None. Load all six archived final checkpoints, keep all parameters frozen. No coefficient selection, gain/temperature fitting, new decoder or item-count transport.",
+        "weak_group": "Participant-relation cells with original retention=false and trial_retention=0 at every occurrence. Global channel 34 is already zero; channel 37 contains p*d. Retained cells are not mixed into the primary single-weak endpoint."
+      },
+      "execution": {
+        "closure": "Archive sufficient per-relation/global/joint arrays, participant endpoint vectors, qualification and execution locks, all-six results and Chinese interpretation. Validate registry, affected checks and full engineering suite for the new runtime entry; scoped commit and push origin/dev.",
+        "command": "direnv exec . python -m fsrl.infra.formal_runtime weak-evidence-contribution <qualify|lock|evaluate|report>",
+        "freeze": "Commit protocol, qualified computation and tests first; then create and commit a source/input/model lock before any new contribution outcome. All six cells complete before paired reporting; failures are not overwritten. Frozen parent evidence remains unchanged.",
+        "integrity": "Verify original parent study hashes and Git witnesses for the fixed inputs, six checkpoints, old raw margins, training metadata and parent contracts. Verify parameters unchanged after execution. Validate input-only manipulation and reconstructed local baseline against archived intact-minus-global margins in every cell.",
+        "numerics": "Reconstruction qualification tests include independent NumPy local keys and sums. During execution intact frozen replay is checked against archive. Single effects use archived intact margins; joint effects and their structure use same-run intact replay margins, preventing floating replay discrepancies from becoming intervention effects. Both baselines are archived. Reconstruct all eight removed global fields using local-only replay; no routine rerun of old eight RNN removals. Joint deletion requires one new support rollout per network; intact replay is its parity reference.",
+        "qualification": "Before outcome analysis use synthetic non-Liu batches and an untrained seed 910005. Check both deletion masks including reversed pair orientations and a zero-weak subject, independent local reconstruction, local preservation, global-only versus two-route removal, and eager/compiled parity at H200. No trained model used for qualification.",
+        "runtime": "Inherited bounded CUDA, one CPU/BLAS/compiler thread, fullgraph/default, TF32 disabled and mix_order_reduction=false. Actual versions recorded; no version-number admission gate. Require qualification and archived-intact parity in the current runtime.",
+        "tolerance": {
+          "atol": 1e-05,
+          "rtol": 0.0001
+        }
+      },
+      "metrics": {
+        "competence": "Intact and joint-deletion global and complete-output learned/nonlearned expected correct probabilities. Mark retained competence only if both lower 95% bounds exceed .5, and retained global coherence only if its lower bound exceeds .95. These are interpretability checks, not main-model admission.",
+        "direct": "Both orientations of the removed unordered relation.",
+        "joint_effects": "Same signed CE/probability and absolute-margin effects on global output, averaged within participant. Include all 77, including zero-weak participants with exact zero intervention effect.",
+        "joint_groups": [
+          "all",
+          "learned",
+          "nonlearned"
+        ],
+        "nonlearned": "Queries whose unordered relation is absent from the displayed support graph, fixed before all interventions.",
+        "primary_contrasts": [
+          "Cost single-weak nonlearned CE benefit",
+          "Cost-minus-Shared single-weak nonlearned CE benefit",
+          "Cost joint-weak nonlearned CE benefit",
+          "Cost-minus-Shared joint-weak nonlearned CE benefit"
+        ],
+        "remote": "Queries sharing neither item with the removed relation, inherited disjoint-remote definition; it includes learned and nonlearned queries and does not assert topological mediation.",
+        "secondary": "Report all direct/remote/probability/margin endpoints and paired structural changes to interpret primary functional contributions. Do not reinterpret one favorable secondary endpoint as a passed original mechanism gate.",
+        "single_effects": "Per participant-relation, average query CE_removed-CE_intact, correct_probability_intact-correct_probability_removed, and abs(global_margin_removed-global_margin_intact) within each group; then average equally over that participant's weak relations. CE uses logaddexp(0,-sign*margin/0.25). No cost-normalized ratios or strong-versus-weak selectivity claim.",
+        "single_groups": [
+          "direct",
+          "remote",
+          "nonlearned"
+        ],
+        "structure": "Intact and joint-deletion global antisymmetric Hodge field, gradient-energy fraction, fixed-all-77 Hodge order and intersubject Kendall tau. Order construction is inherited; no sampled choice, accuracy filter or non-correct-ranker filter.",
+        "temperature": 0.25
+      },
+      "outputs": [
+        "protocol",
+        "qualification",
+        "source_input_model_lock",
+        "six_cell_raw_and_results",
+        "canonical_paired_result",
+        "interpretation"
+      ],
+      "parent": "studies/effective_write_cost/records",
+      "question": "Does the frozen cost-constrained RNN still use weakly admitted evidence for global inference, despite substantially lower connection modification?",
+      "schema_version": 1,
+      "statistics": {
+        "interpretation": "Descriptive within-network intervals; no population claim over network initializations. No equivalence boundary is justified here: intervals containing zero mean unresolved difference, never equality or absence. No pooling, optional stopping or extra cohort.",
+        "interval": 0.95,
+        "pairing": "For scalar differences bootstrap participant-level Cost-minus-Shared values; for joint-minus-intact tau use identical all-77 bootstrap counts on each order matrix. Also report the Cost-minus-Shared difference of the two tau changes with the same counts.",
+        "samples": 2000,
+        "seed_offset": 128000,
+        "single_missing": "A participant without any weak relation has undefined single-weak contribution. Exclude that fixed input-defined subset before a paired mean bootstrap and report every excluded ID. No outcome-based exclusion. No-weak participants remain in all joint and structural endpoints.",
+        "undefined": "No dropping undefined tau bootstrap draws; any undefined draw makes the interval undefined. Scalar nonfinite values allowed only for predeclared zero-weak cells; otherwise stop.",
+        "unit": "One participant within one network; query orientations then relations averaged before inference. Networks never pooled. Shared and Cost always use identical participant cells and input-derived masks."
+      },
+      "study_id": "weak_evidence_contribution",
+      "tier": "development"
+    },
+    "runtime": {
+      "blas_thread_limit": 1,
+      "blas_threadpools": [
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.188.0"
+        },
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.dev"
+        }
+      ],
+      "compiler_threads": 1,
+      "cuda_available": true,
+      "cuda_version": "13.0",
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false,
+      "device_capability": [
+        12,
+        0
+      ],
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "execution_schema_version": 2,
+      "float32_matmul_precision": "highest",
+      "matmul_allow_tf32": false,
+      "profile": {
+        "blas_threads": 1,
+        "compile": true,
+        "compile_backend": "inductor",
+        "compile_fullgraph": true,
+        "compile_mode": "default",
+        "cpu_threads": 1,
+        "device": "cuda",
+        "require_cuda": true
+      },
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "torch_version": "2.14.0+cu130",
+      "triton_mix_order_reduction": false
+    },
+    "source_lock": "/home/veritas/Documents/fsrl/studies/weak_evidence_contribution/records/benchmarks/source_lock.json"
+  },
+  "schema_version": 1,
+  "workflow_id": "weak_evidence_contribution_v1"
+}

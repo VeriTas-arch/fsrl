@@ -211,8 +211,12 @@ fail to close the dynamics.
     limited ranking diversification is retained as positive evidence. N6/10 transport
     not triggered; isolated remains the working model. Frozen development evidence
     without main-model promotion.
-- [Weak evidence contribution in frozen shared and cost RNNs](weak_evidence_contribution/README.md) — `unresolved`
-  - **Finding:** Prospectively registered; execution pending.
+- [Weak evidence contribution in frozen shared and cost RNNs](weak_evidence_contribution/README.md) — `supporting`
+  - **Finding:** All three frozen Cost networks retain beneficial single and joint
+    weak-evidence contributions, with smaller nonlearned CE effects than Shared. Joint
+    global weak deletion reduces all-subject Cost order tau from 0.865-0.893 to
+    0.496-0.512 while preserving registered competence and coherence, at an accuracy
+    cost. Acute routing evidence; no learned routing or main-model promotion.
 
 ## Minimal explanatory models
 
