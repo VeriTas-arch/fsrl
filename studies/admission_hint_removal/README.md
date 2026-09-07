@@ -25,9 +25,8 @@
 while retaining exactly the same realized q, relational competence, organized
 individuality and observation-training compensation?
 
-**Finding.** CPU and GPU qualification passed:105 archived hint-present arrays exact,29
-no-hint numerical checks including compact mapping. Prospective six-model comparison, no
-new scientific outcomes evaluated.
+**Finding.** Qualified source, original observations, six hint-present models and dual
+anchor locked before six no-hint fits; new scientific outcomes not evaluated.
 
 **Claim boundary.** Three matched A/C instances and exposed panels; zq hint removed with
 unchanged q and no local memory. No human confirmation or promotion.
@@ -40,6 +39,9 @@ unchanged q and no local memory. No human confirmation or promotion.
 - `supporting_artifact` —
   [studies/admission_hint_removal/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:419ab20e4d66`)
+- `execution_lock` —
+  [studies/admission_hint_removal/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:938b76d927a6`)
 
 ## Provenance rule
 
