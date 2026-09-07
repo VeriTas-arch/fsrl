@@ -39,6 +39,9 @@ promotion. Compact diagnosis is separate.
 - `supporting_artifact` —
   [studies/modulation_schedule/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:7d74f7b00607`)
+- `execution_lock` —
+  [studies/modulation_schedule/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:be6352a0f9ba`)
 
 ## Provenance rule
 
