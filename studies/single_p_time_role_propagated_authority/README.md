@@ -108,6 +108,9 @@ authority and locked 24.9 GB runtime artifact set.
 - `validation_result` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v6.json](records/benchmarks/qualification_v6.json)
   (`sha256:e7c102c6b7a1`)
+- `repair_lock` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/mechanism_source_lock.json](records/benchmarks/mechanism_source_lock.json)
+  (`sha256:88d1f474cd12`)
 
 ## Provenance rule
 
