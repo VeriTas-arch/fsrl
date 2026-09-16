@@ -39,6 +39,9 @@ and assigns no time-role label before its registered gates execute.
 - `registered_contract` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.json](records/benchmarks/single_p_time_role_propagated_authority_v1.json)
   (`sha256:4efac3637474`)
+- `validation_result` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:30f4d6b3e4d4`)
 
 ## Provenance rule
 
