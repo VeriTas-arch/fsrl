@@ -33,9 +33,13 @@ def _metadata(left: np.ndarray, right: np.ndarray, name: str) -> np.ndarray:
 def bounded_error(
     observed: np.ndarray, reference: np.ndarray, budget: np.ndarray, name: str
 ) -> float:
-    finite = _metadata(observed, reference, name)
-    allowed = np.broadcast_to(np.asarray(budget, dtype=np.float64), reference.shape)
-    error = np.abs(np.asarray(observed) - np.asarray(reference))
+    observed_array = np.asarray(observed)
+    reference_array = np.asarray(reference)
+    finite = _metadata(observed_array, reference_array, name)
+    allowed = np.broadcast_to(
+        np.asarray(budget, dtype=np.float64), reference_array.shape
+    )
+    error = np.abs(observed_array - reference_array)
     if np.any(error[finite] > allowed[finite]):
         excess = np.full(error.shape, -np.inf, dtype=np.float64)
         excess[finite] = error[finite] - allowed[finite]

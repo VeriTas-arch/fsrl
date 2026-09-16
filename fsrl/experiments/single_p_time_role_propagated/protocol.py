@@ -11,12 +11,17 @@ PROTOCOL = RECORDS / "benchmarks/single_p_time_role_propagated_authority_v1.json
 REPAIRS = (
     PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair1.json"),
     PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair2.json"),
+    PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair3.json"),
 )
 QUALIFICATION_V1 = RECORDS / "benchmarks/qualification.json"
 QUALIFICATION_V2 = RECORDS / "benchmarks/qualification_v2.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification_v3.json"
+QUALIFICATION_V3 = RECORDS / "benchmarks/qualification_v3.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_v4.json"
 SOURCE_LOCK_V1 = RECORDS / "benchmarks/baseline_source_lock.json"
-SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock_v3.json"
+EXECUTION_SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock_v3.json"
+SOURCE_LOCK = RECORDS / "benchmarks/baseline_finalize_source_lock.json"
+ATTEMPT2 = RECORDS / "results/baseline_attempt2.json"
+ATTEMPT2_ARTIFACT_LOCK = RECORDS / "benchmarks/baseline_attempt2_artifact_lock.json"
 BASELINE_RESULT = RECORDS / "results/propagated_authority_baseline_v1.json"
 BASELINE_ARTIFACT_LOCK = (
     RECORDS / "benchmarks/propagated_authority_baseline_artifact_lock.json"
@@ -31,6 +36,7 @@ PROTOCOL_SHA256 = "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca
 REPAIR_SHA256S = (
     "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce",
     "5a6af0e05ca3ad0b520df303aad4877ba1bb893277c62fed2ced2afa87d5c66b",
+    "40752a85fdf553b6a0d5de71ff4cbe581b8f1e17d4aec0cd746e307c97c52178",
 )
 
 
@@ -46,15 +52,19 @@ def specification() -> dict:
 
 __all__ = [
     "ARRAYS",
+    "ATTEMPT2",
+    "ATTEMPT2_ARTIFACT_LOCK",
     "BASELINE_ARTIFACT_LOCK",
     "BASELINE_RESULT",
     "BASELINE_RUNS",
+    "EXECUTION_SOURCE_LOCK",
     "MECHANISM_RUNS",
     "PROTOCOL",
     "PROTOCOL_SHA256",
     "QUALIFICATION",
     "QUALIFICATION_V1",
     "QUALIFICATION_V2",
+    "QUALIFICATION_V3",
     "RECORDS",
     "REPAIRS",
     "REPAIR_SHA256S",

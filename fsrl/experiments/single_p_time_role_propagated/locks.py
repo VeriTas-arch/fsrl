@@ -9,6 +9,8 @@ from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    ATTEMPT2,
+    ATTEMPT2_ARTIFACT_LOCK,
     BASELINE_ARTIFACT_LOCK,
     BASELINE_RESULT,
     BASELINE_RUNS,
@@ -146,7 +148,8 @@ def write_source_lock(runtime: dict) -> dict:
         "qualification": reference(QUALIFICATION),
         "runtime": runtime,
         "parents": parents,
-        "baseline_or_mechanism_outcomes_exposed": False,
+        "attempt2_artifact_lock": reference(ATTEMPT2_ARTIFACT_LOCK),
+        "canonical_baseline_or_mechanism_outcomes_exposed": False,
     }
     write_json_exclusive(SOURCE_LOCK, payload)
     return {
@@ -165,6 +168,7 @@ def validate_source_lock(runtime: dict) -> dict:
     for row in lock["sources"]:
         verify_reference(row, commit=lock["source_commit"])
     verify_reference(lock["qualification"])
+    verify_reference(lock["attempt2_artifact_lock"])
     for name, row in lock["parents"].items():
         if name in {"checkpoints", "inputs", "parent_evaluation_raw"}:
             for member in row.values():
@@ -181,6 +185,24 @@ def _runtime_artifacts() -> list[Path]:
 def require_exact_inventory(observed: set[str], expected: set[str]) -> None:
     if observed != expected:
         raise RuntimeError("baseline runtime artifact inventory differs")
+
+
+def validate_attempt2_artifact_lock() -> dict:
+    lock = load_json(ATTEMPT2_ARTIFACT_LOCK)
+    if lock["protocol_sha256"] != PROTOCOL_SHA256:
+        raise RuntimeError("attempt2 artifact lock protocol differs")
+    verify_reference(lock["source_lock"])
+    attempt = load_json(verify_reference(lock["failed_attempt"]))
+    if attempt["completed_units"] != 72 or attempt["mechanism_estimates_exposed"]:
+        raise RuntimeError("attempt2 execution boundary differs")
+    expected = {row["path"] for row in lock["artifacts"]}
+    observed = {path.relative_to(REPO_ROOT).as_posix() for path in _runtime_artifacts()}
+    require_exact_inventory(observed, expected)
+    for row in lock["artifacts"]:
+        verify_reference(row)
+    if reference(ATTEMPT2) != lock["failed_attempt"]:
+        raise RuntimeError("attempt2 failure record differs")
+    return lock
 
 
 def write_baseline_artifact_lock() -> dict:
@@ -225,6 +247,7 @@ __all__ = [
     "reference",
     "require_exact_inventory",
     "sources",
+    "validate_attempt2_artifact_lock",
     "validate_baseline_artifact_lock",
     "validate_source_lock",
     "verify_reference",

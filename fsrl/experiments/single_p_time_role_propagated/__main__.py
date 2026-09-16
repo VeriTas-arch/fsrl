@@ -16,6 +16,7 @@ def main(args=None) -> int:
             "qualify",
             "lock-baseline-source",
             "baseline",
+            "finalize-baseline",
             "lock-baseline",
             "mechanism",
             "report",
@@ -33,6 +34,10 @@ def main(args=None) -> int:
         result = write_source_lock(runtime)
     elif stage == "baseline":
         from .baseline import run
+
+        result = run(runtime)
+    elif stage == "finalize-baseline":
+        from .finalize import run
 
         result = run(runtime)
     elif stage == "lock-baseline":

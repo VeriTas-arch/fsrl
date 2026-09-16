@@ -226,6 +226,9 @@ def _budget_checks() -> dict:
         ) or "(1,)" in str(error)
     else:
         results["missing_value_diagnostic_uses_finite_index"] = False
+    results["scalar_bounded_error"] = (
+        bounded_error(1.0 + 5e-6, 1.0, 1e-5, "scalar") < 1e-5
+    )
     return results
 
 
@@ -274,6 +277,7 @@ def run_qualification() -> dict:
     package = REPO_ROOT / "fsrl/experiments/single_p_time_role_propagated"
     direct_imports = _imports(package / "direct.py")
     baseline_imports = _imports(package / "baseline.py")
+    finalizer_source = (package / "finalize.py").read_text(encoding="utf-8")
     checks = {
         "canonical_max_abs_error": float(np.max(np.abs(canonical - forward))),
         "hodge_reconstruction_max_abs_error": float(
@@ -308,6 +312,10 @@ def run_qualification() -> dict:
         "baseline_has_no_mechanism_import": not any(
             name.endswith("mechanism") for name in baseline_imports
         ),
+        "finalizer_has_no_model_loader_or_evaluator_call": all(
+            token not in finalizer_source
+            for token in ("load_model(", "evaluate_unit(", "support_trajectory(")
+        ),
         "synthetic_rollout": _rollout_checks(),
         "propagated_budget": _budget_checks(),
         "no_scientific_model_input_or_outcome_loaded": True,
@@ -327,11 +335,13 @@ def run_qualification() -> dict:
         and checks["artifact_inventory_is_exact"]
         and checks["direct_module_has_no_adapter_import"]
         and checks["baseline_has_no_mechanism_import"]
+        and checks["finalizer_has_no_model_loader_or_evaluator_call"]
         and all(rollout.values())
         and checks["propagated_budget"]["maximum_implementation_error"] <= 1e-13
         and all(checks["propagated_budget"]["aggregation"].values())
         and checks["propagated_budget"]["source_liu_endpoint_authority"]
         and checks["propagated_budget"]["missing_value_diagnostic_uses_finite_index"]
+        and checks["propagated_budget"]["scalar_bounded_error"]
     )
     payload = {
         "schema_version": 1,
@@ -340,7 +350,7 @@ def run_qualification() -> dict:
         "sources": sources(),
         "checks": checks,
         "passed": passed,
-        "scientific_seeds_inputs_or_outcomes_exposed": False,
+        "qualification_loaded_scientific_seed_input_or_outcome": False,
     }
     QUALIFICATION.parent.mkdir(parents=True, exist_ok=True)
     write_json_exclusive(QUALIFICATION, payload)
