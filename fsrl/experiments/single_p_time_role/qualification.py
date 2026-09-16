@@ -16,7 +16,7 @@ from fsrl.experiments.clean_single_p.model import (
 from fsrl.experiments.linear_modulation.model import LinearModulationRNN
 from fsrl.infra.provenance import write_json_exclusive
 
-from .analysis import generic_endpoints
+from .analysis import generic_endpoints, paired_interval
 from .estimands import (
     canonical_field,
     derangement,
@@ -159,6 +159,11 @@ def run_qualification() -> dict:
             for name, values in reconstructed.items()
         )
     )
+    complete_case = paired_interval(
+        [np.asarray([np.nan, 1.0]), np.asarray([3.0, np.nan])],
+        seed=941004,
+        draws=20,
+    )
     rollout = _synthetic_rollout_checks()
     checks = {
         "canonical_max_abs_error": float(np.max(np.abs(canonical - forward))),
@@ -170,6 +175,10 @@ def run_qualification() -> dict:
         "effective_distance_finite": bool(np.all(np.isfinite(distance))),
         "fixed_effect_slope": slope,
         "endpoint_reconstruction_max_abs_error": endpoint_error,
+        "paired_complete_case_point": complete_case["point"],
+        "paired_complete_case_interval_finite": bool(
+            np.all(np.isfinite(tuple(complete_case["interval"].values())))
+        ),
         "synthetic_rollout": rollout,
         "label_free_estimands": True,
         "no_scientific_model_or_parent_outcome_loaded": True,
@@ -182,6 +191,8 @@ def run_qualification() -> dict:
         and checks["effective_distance_finite"]
         and abs(slope + 2.0) < 0.05
         and endpoint_error < 1e-12
+        and complete_case["point"] == 2.0
+        and checks["paired_complete_case_interval_finite"]
         and rollout["legacy_blank_P_max_abs"] == 0.0
         and rollout["direct_adapter_margin_max_abs_error"] < 1e-6
         and rollout["direct_adapter_P_max_abs_error"] < 1e-6

@@ -87,10 +87,17 @@ def liu_endpoints(
     for query, relation in enumerate(indices):
         if relation >= 0:
             omitted[:, query] = ~np.asarray(retention[:, relation], dtype=bool)
+    omitted_count = np.sum(omitted, axis=1)
+    omitted_probability = np.divide(
+        np.sum(probability * omitted, axis=1),
+        omitted_count,
+        out=np.full(subjects, np.nan, dtype=np.float64),
+        where=omitted_count > 0,
+    )
     return {
         "liu_learned": probability[:, learned].mean(1),
         "liu_nonlearned": probability[:, ~learned].mean(1),
-        "liu_omitted": np.sum(probability * omitted, axis=1) / np.sum(omitted, axis=1),
+        "liu_omitted": omitted_probability,
     }
 
 
@@ -99,10 +106,15 @@ def paired_interval(panels: list[np.ndarray], *, seed: int, draws: int = 2000) -
     bootstrap = []
     for values in panels:
         array = np.asarray(values, dtype=np.float64)
+        array = array[np.isfinite(array)]
+        if not len(array):
+            raise ValueError("paired interval has no complete cases in a panel")
         indices = rng.integers(0, len(array), size=(draws, len(array)))
         bootstrap.append(array[indices].mean(1))
     distribution = np.mean(np.stack(bootstrap), axis=0)
-    point = float(np.mean([np.mean(values) for values in panels]))
+    point = float(
+        np.mean([np.mean(np.asarray(values)[np.isfinite(values)]) for values in panels])
+    )
     return {
         "point": point,
         "interval": {

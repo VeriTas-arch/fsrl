@@ -2,7 +2,10 @@ import unittest
 
 import numpy as np
 
-from fsrl.experiments.single_p_time_role.analysis import generic_endpoints
+from fsrl.experiments.single_p_time_role.analysis import (
+    generic_endpoints,
+    paired_interval,
+)
 from fsrl.experiments.single_p_time_role.estimands import (
     canonical_field,
     derangement,
@@ -68,6 +71,15 @@ class TimeRoleEstimandTests(unittest.TestCase):
         np.testing.assert_array_equal(
             _canonical_correct_signs(batch), canonical_signs[None, :]
         )
+
+    def test_paired_interval_uses_complete_cases_within_panel(self):
+        result = paired_interval(
+            [np.asarray([np.nan, 1.0]), np.asarray([3.0, np.nan])],
+            seed=1,
+            draws=20,
+        )
+        self.assertEqual(result["point"], 2.0)
+        self.assertTrue(np.all(np.isfinite(tuple(result["interval"].values()))))
 
 
 if __name__ == "__main__":

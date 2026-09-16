@@ -146,13 +146,13 @@ def _collect_baseline(
         )
         for name in ("liu_learned", "liu_nonlearned", "liu_omitted"):
             parent_name = name.removeprefix("liu_")
+            observed = liu_values[name]
+            expected = raw[f"liu__endpoints__intact__probability__{parent_name}"]
+            if not np.array_equal(np.isnan(observed), np.isnan(expected)):
+                raise RuntimeError(f"parent {name} missingness mask differs")
+            finite = np.isfinite(expected)
             endpoint_errors[name] = float(
-                np.max(
-                    np.abs(
-                        liu_values[name]
-                        - raw[f"liu__endpoints__intact__probability__{parent_name}"]
-                    )
-                )
+                np.max(np.abs(observed[finite] - expected[finite]))
             )
     return {
         "model": model,
@@ -258,7 +258,7 @@ def _stage2_unit(payload: dict, no_time: dict, seed: int, panel: int) -> dict:
                     np.sqrt(np.mean((field - no_time_field) ** 2))
                 ),
                 "endpoint_means": {
-                    key: float(np.mean(value)) for key, value in endpoints.items()
+                    key: float(np.nanmean(value)) for key, value in endpoints.items()
                 },
             }
             summaries["support"][domain][name]["moves_toward_no_time"] = (
@@ -300,7 +300,7 @@ def _stage2_unit(payload: dict, no_time: dict, seed: int, panel: int) -> dict:
             summaries["query"][domain][key] = {
                 "D_M_rms": float(np.sqrt(np.mean((field - base_query) ** 2))),
                 "endpoint_means": {
-                    name: float(np.mean(value)) for name, value in endpoints.items()
+                    name: float(np.nanmean(value)) for name, value in endpoints.items()
                 },
             }
     return summaries

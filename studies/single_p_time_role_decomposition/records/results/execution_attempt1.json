@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "source_lock": "studies/single_p_time_role_decomposition/records/benchmarks/source_lock.json",
+  "source_commit": "c8dcd056ad7deaf936f8cff9216b56ad3d7f8b1c",
+  "execution_commit": "9e91dec",
+  "command": "direnv exec . python -m fsrl.infra.formal_runtime single-p-time-role run",
+  "status": "interrupted_noninterpretable",
+  "failure": "The Liu omitted endpoint emitted an invalid-divide warning for subjects with no omitted learned relation. The frozen paired-complete-case resampling rule had not yet been implemented in paired_interval, so allowing execution to continue could have propagated NaN intervals.",
+  "action": "Execution was interrupted immediately after the warning. No runtime result.json or arrays.npz was written, no diagnostic estimate was printed or inspected, and no classification was produced.",
+  "scientific_outcomes_exposed": false,
+  "runtime_outputs_written": false
+}

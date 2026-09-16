@@ -9,6 +9,7 @@ from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    EXECUTION_REPAIR,
     IMPLEMENTATION_REPAIR,
     PROTOCOL,
     PROTOCOL_SHA256,
@@ -34,6 +35,7 @@ def sources() -> list[dict]:
         PROTOCOL,
         REPAIR,
         IMPLEMENTATION_REPAIR,
+        EXECUTION_REPAIR,
         QUALIFICATION_FIX,
         QUALIFICATION_REPAIR,
         REPO_ROOT / "pyproject.toml",

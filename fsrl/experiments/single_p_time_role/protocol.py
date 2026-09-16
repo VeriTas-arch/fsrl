@@ -18,8 +18,11 @@ QUALIFICATION_REPAIR = PROTOCOL.with_name(
 QUALIFICATION_FIX = PROTOCOL.with_name(
     "single_p_time_role_decomposition_v1.repair4.json"
 )
-QUALIFICATION = RECORDS / "benchmarks/qualification_v3.json"
-SOURCE_LOCK = RECORDS / "benchmarks/source_lock.json"
+EXECUTION_REPAIR = PROTOCOL.with_name(
+    "single_p_time_role_decomposition_v1.repair5.json"
+)
+QUALIFICATION = RECORDS / "benchmarks/qualification_v4.json"
+SOURCE_LOCK = RECORDS / "benchmarks/source_lock_v2.json"
 RESULT = RECORDS / "results/single_p_time_role_decomposition_v1.json"
 ARRAYS = RECORDS / "artifacts/single_p_time_role_decomposition_v1.npz"
 REPORT = RECORDS / "reports/single_p_time_role_decomposition_v1.md"
@@ -35,6 +38,9 @@ QUALIFICATION_REPAIR_SHA256 = (
 QUALIFICATION_FIX_SHA256 = (
     "81ae1a1bc1f23cab1f9c70794544ac3d6a0daf1dfb5e21565154c6e638bfbf61"
 )
+EXECUTION_REPAIR_SHA256 = (
+    "cdbf6bcf64eeaf6c339f67a50f6dd3f263520e84b58a014f5611a79963c3c9b0"
+)
 
 
 def specification() -> dict:
@@ -48,16 +54,21 @@ def specification() -> dict:
         raise RuntimeError("single-P time-role qualification repair changed")
     if file_sha256(QUALIFICATION_FIX) != QUALIFICATION_FIX_SHA256:
         raise RuntimeError("single-P time-role qualification fixture repair changed")
+    if file_sha256(EXECUTION_REPAIR) != EXECUTION_REPAIR_SHA256:
+        raise RuntimeError("single-P time-role execution repair changed")
     result = load_json(PROTOCOL)
     result["active_repair"] = load_json(REPAIR)
     result["active_implementation_repair"] = load_json(IMPLEMENTATION_REPAIR)
     result["active_qualification_repair"] = load_json(QUALIFICATION_REPAIR)
     result["active_qualification_fix"] = load_json(QUALIFICATION_FIX)
+    result["active_execution_repair"] = load_json(EXECUTION_REPAIR)
     return result
 
 
 __all__ = [
     "ARRAYS",
+    "EXECUTION_REPAIR",
+    "EXECUTION_REPAIR_SHA256",
     "IMPLEMENTATION_REPAIR",
     "IMPLEMENTATION_REPAIR_SHA256",
     "PROTOCOL",

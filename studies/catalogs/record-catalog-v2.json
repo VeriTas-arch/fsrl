@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3877,
+  "entry_count": 3880,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2130,
+    "json": 2133,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3780,
+    "already_conformant": 3783,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -117333,6 +117333,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/benchmarks/qualification_v4.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/benchmarks/qualification_v4.json"
+      },
+      "materialized_identity": {
+        "bytes": 6497,
+        "sha256": "c6ca5aa4734263c15a758b4b0a192d38fa283e7ba87175a6903979f0d100f665"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_benchmarks_qualification_v4_json",
+      "registered_identity": {
+        "bytes": 6497,
+        "sha256": "c6ca5aa4734263c15a758b4b0a192d38fa283e7ba87175a6903979f0d100f665",
+        "source_ref": "sha256:c6ca5aa4734263c15a758b4b0a192d38fa283e7ba87175a6903979f0d100f665"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -117503,6 +117537,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair5.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair5.json"
+      },
+      "materialized_identity": {
+        "bytes": 1683,
+        "sha256": "cdbf6bcf64eeaf6c339f67a50f6dd3f263520e84b58a014f5611a79963c3c9b0"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_benchmarks_single_p_time_role_decomposition_v1_repair5_json",
+      "registered_identity": {
+        "bytes": 1683,
+        "sha256": "cdbf6bcf64eeaf6c339f67a50f6dd3f263520e84b58a014f5611a79963c3c9b0",
+        "source_ref": "sha256:cdbf6bcf64eeaf6c339f67a50f6dd3f263520e84b58a014f5611a79963c3c9b0"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -117534,6 +117602,40 @@
         "source_ref": "sha256:cd14e3e263a5f6ec6a1cc801952af3fd034caab453a21c4eb3337cbaaeca0e1a"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.noninterpretable_attempt",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/results/execution_attempt1.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/results/execution_attempt1.json"
+      },
+      "materialized_identity": {
+        "bytes": 981,
+        "sha256": "ccc2d906db88830d2d4c90ea696b9a633cc3392053960759c57f7bc7c34520e6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_results_execution_attempt1_json",
+      "registered_identity": {
+        "bytes": 981,
+        "sha256": "ccc2d906db88830d2d4c90ea696b9a633cc3392053960759c57f7bc7c34520e6",
+        "source_ref": "sha256:ccc2d906db88830d2d4c90ea696b9a633cc3392053960759c57f7bc7c34520e6"
+      },
+      "role": "noninterpretable_attempt"
     },
     {
       "availability": "materialized",
@@ -132207,7 +132309,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3875,
+  "registered_record_count": 3878,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -132223,19 +132325,19 @@
     "frozen_parameters": 180,
     "frozen_result": 572,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 11,
+    "noninterpretable_attempt": 12,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 92,
-    "repair_contract": 23,
+    "repair_contract": 24,
     "repair_lock": 13,
     "report": 94,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2729,
-    "validation_result": 19
+    "validation_result": 20
   },
   "schema_version": 2,
   "sources": {

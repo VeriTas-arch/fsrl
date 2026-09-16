@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "timing": "After interrupted execution_attempt1 and before any completed registered-seed diagnostic or exposure of a new diagnostic estimate.",
+  "reason": "The first locked execution exposed only a RuntimeWarning showing that undefined Liu omitted endpoints were reaching the interval implementation without the prospectively registered paired-complete-case filter. No output artifact or estimate was produced or inspected.",
+  "repair": {
+    "qualification_authority": "records/benchmarks/qualification_v4.json",
+    "source_lock_authority": "records/benchmarks/source_lock_v2.json",
+    "missing_endpoint_representation": "Construct Liu omitted subject endpoints with explicit finite-mask division, retaining NaN only for subjects with no omitted relation and emitting no runtime warning.",
+    "paired_complete_case": "Within each panel, remove a subject when either paired endpoint is undefined before bootstrap resampling; reject an empty complete-case panel.",
+    "parent_replay": "Require exact agreement of the parent's missingness mask and compare endpoint values only on the shared finite subset.",
+    "descriptive_means": "Use finite-subject means for condition-specific Liu endpoint summaries."
+  },
+  "unchanged": [
+    "all scientific seeds, panels, cells, checkpoints, frozen inputs, and interventions",
+    "all scientific estimands, thresholds, bootstrap draw counts, labels, and stop rules",
+    "the frozen paired-complete-case resampling rule",
+    "the prohibition on retraining and outcome-dependent modification"
+  ],
+  "scientific_outcomes_exposed_before_repair": false
+}
