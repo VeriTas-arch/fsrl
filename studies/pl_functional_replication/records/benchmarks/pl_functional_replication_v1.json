@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_functional_replication",
+  "experiment_id": "pl-functional-replication-v1",
+  "registration_status": "prospective_after_historical_development_outcome_and_before_new_implementation_training_or_outcome_exposure",
+  "registration_parent_commit": "003cf928b686657029dc3587f01fe2cbf53047e0",
+  "scientific_question": "Can the already-fixed, directly trained clean no-time P/L candidate reproduce the historically confirmed v2.4 functional division on three fresh networks, while retaining generic and Liu competence and the frozen qualitative behavior phenomena?",
+  "historical_claim_provenance": {
+    "claim": "Selective effective evidence enters P for coherent remote/global relational assembly, whereas broader reliability-weighted weak evidence enters query-addressed L for direct-experience fidelity.",
+    "source_contract": {
+      "path": "studies/dual_evidence_access_confirmation/records/benchmarks/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09"
+    },
+    "source_result": {
+      "path": "studies/dual_evidence_access_confirmation/records/results/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "619e4bdcc57fefe1c3a5c4f53c259a06fbe8fe498eaa05e28e381749d6f040d6"
+    },
+    "old_direct_training_result": {
+      "path": "studies/pl_direct_training/records/results/pl_direct_training_v1.development.json",
+      "sha256": "386beeb82e302db4cc14e339db56dca4fd47dbc57a1ab56395901e07766abcd2",
+      "role": "Observed motivation only. Seeds 3001--3003 and their effect sizes do not supply thresholds, do not pass under a revised rule, and remain the valid training_parameterization_failure of their frozen study."
+    },
+    "study_separation": "This is a new prospective confirmation with a new estimand and decision tree. It is not the blocked continuation of pl_direct_training and does not reinterpret, relabel, pool with, or repair seeds 3001--3003."
+  },
+  "candidate_identity": {
+    "candidate": "The no_time_candidate already fixed before seeds 3001--3003, reused without a scientific change.",
+    "parent_contract": {
+      "path": "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.json",
+      "sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad"
+    },
+    "parent_repair": {
+      "path": "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.repair1.json",
+      "sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261"
+    },
+    "exact_structure_result": {
+      "path": "studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.json",
+      "sha256": "de022880bd2fdd5a6933e928197a2c1ffc6779c021af9049c4210932f6c7e4db"
+    },
+    "architecture": {
+      "task_input_size": 32,
+      "task_layout": {
+        "0:15": "left ordinary item cue",
+        "15:30": "right ordinary item cue",
+        "30": "response-phase pulse",
+        "31": "signed globally admitted support evidence; zero on queries"
+      },
+      "removed": [
+        "normalized episode time",
+        "explicit constant channel",
+        "legacy reward",
+        "two previous-action channels",
+        "value head",
+        "common two-logit mode",
+        "legacy checkpoint-compatibility buffers"
+      ],
+      "hidden_size": 200,
+      "activation": "tanh",
+      "persistent_state_sizes": {
+        "P": 40000,
+        "L": 105
+      },
+      "global_branch": "Retain W, alpha, eta_E, P-before-E update order, P clipping to [-50,50], two opposed tanh modulation units, learned scalar modulation scale, and one binary margin readout.",
+      "local_branch": "Packed antisymmetric 105-scalar conjunctive ledger with gain g_L=softplus(raw_gain)>0.",
+      "combined_margin": "M=M_P+g_L*ell.",
+      "state_policy": "Reset h and E per trial; retain P over support trials; retain L over the episode; discard every query proposal; reset P and L between episodes.",
+      "parameter_counts": {
+        "backbone": 87205,
+        "local_gain": 1
+      }
+    },
+    "forbidden_changes": "No extra channel, time proxy, auxiliary loss, gradient routing, frozen phase, local-gain postfit, temperature refit, added step, changed step horizon, early stopping, intermediate checkpoint selection, checkpoint warm start, or result-conditioned repair."
+  },
+  "fresh_seed_contract": {
+    "mandatory_seeds": [3004, 3005, 3006],
+    "selection_history": "These identifiers were reserved before outcomes from seeds 3001--3003, but the present decision criterion was written afterward. Their prior reservation does not make this a continuation of the failed old decision tree; their absence from training artifacts makes them available for this separately frozen prospective study.",
+    "freshness_audit_at_registration": {
+      "artifact_and_study_filename_search": "No path under artifacts/ or studies/ matches a seed-3004, seed-3005, seed-3006, 3004, 3005, or 3006 seed component.",
+      "semantic_seed_search": "No registered runtime or trained result uses seed 3004, 3005, or 3006. Their only semantic occurrence is reservation in the historical pl_direct_training contract.",
+      "status": "fresh_and_unexecuted"
+    },
+    "model_initialization": "For each seed, torch.manual_seed(seed) initializes one fresh legacy-shaped shadow module. Map b_active=b_i2h+w_constant and binary margin w_margin=w_1-w_0, b_margin=b_1-b_0; copy W, alpha, eta_E, modulation scale, both modulation units, and active task weights; then discard the shadow and every removed parameter before optimization.",
+    "training_rng": "numpy.default_rng(100000+seed).",
+    "mandatory_execution": "Train and jointly artifact-lock all three final-step candidates before any generic or Liu outcome is computed. One seed cannot determine whether another seed is trained, locked, or evaluated.",
+    "filtering_replacement_pooling_or_optional_extension": "forbidden"
+  },
+  "training_freeze": {
+    "task": {
+      "n_items": 8,
+      "cue_size": 15,
+      "min_edges": 7,
+      "max_edges": 10,
+      "support_blocks": 4,
+      "query_trials": 28,
+      "subject_encoding_mode": "stable_omission",
+      "global_evidence": "s_G=signed_magnitude*z",
+      "local_evidence_during_training": "s_L=signed_magnitude*[z+(1-z)*p]",
+      "holdout": "Exclude Liu v1/v2 graph signatures and reflections; generic validation uses reflection-canonical graph bucket zero."
+    },
+    "timestep_accounting": {
+      "support_trial_steps": 4,
+      "query_trial_steps": 2,
+      "blank_initial_steps": 0,
+      "generic_support_trials": "28--40",
+      "generic_support_microsteps": "112--160",
+      "generic_query_microsteps": 56,
+      "generic_total_active_microsteps": "168--216",
+      "generic_effective_P_writes": "56--80",
+      "liu_v2_literal_active_microsteps": 688,
+      "freeze": "The complete step counts are part of the candidate and may not be shortened, padded, normalized by a time input, or changed after registration."
+    },
+    "optimization": {
+      "schedule": "joint from initialization; P and L active on every counted update",
+      "batch_size": 32,
+      "total_steps": 1500,
+      "total_episode_exposures": 48000,
+      "initial_local_gain": 0.1,
+      "local_gain_parameterization": "raw_gain=inverse_softplus(0.1), gain=softplus(raw_gain)",
+      "base_backbone_learning_rate": 0.0001,
+      "folded_parameter_learning_rate": 0.0002,
+      "local_gain_learning_rate": 0.01,
+      "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+      "gradient_clip": 2.0,
+      "clipping": "Use the inherited weighted backbone norm that counts folded input bias and margin weight/bias twice; clip local raw_gain separately.",
+      "fast_weight_penalty": 0.0001,
+      "training_temperature": 1.0,
+      "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), y=2*correct_action-1",
+      "selection": "Final registered step only."
+    }
+  },
+  "evaluation_conditions": {
+    "generic": {
+      "episodes": 256,
+      "rng_seed": 95001,
+      "temperature": 1.0,
+      "conditions": ["intact", "local_off", "P_off"]
+    },
+    "liu": {
+      "protocol_id": "liu_v2",
+      "subjects": 77,
+      "cue_mode": "permuted_shared",
+      "subject_encoding_mode": "stable_omission",
+      "cue_seed": 31001,
+      "support_seed": 31101,
+      "subject_encoding_seed": 31201,
+      "choice_seed": 31301,
+      "order_seed": 31401,
+      "query_shuffle_seed": 31801,
+      "evidence_shuffle_seed": 32301,
+      "temperature": 0.25,
+      "conditions": [
+        "dual_access",
+        "shared_access",
+        "dual_evidence_shuffle",
+        "dual_query_shuffle",
+        "local_off",
+        "P_off_dual",
+        "P_off_shared"
+      ],
+      "access_rules": {
+        "dual_access": "s_L=signed_magnitude*[z+(1-z)*p]",
+        "shared_access": "s_L=signed_magnitude*z"
+      },
+      "matching": "Reuse identical virtual participants, cues, support order, p, z, query orientation, choice uniforms, and all global computations across matched conditions.",
+      "leave_one_relation_out": "Replay all eight source-relation removals under each required condition; remove both source orientations while preserving schedules, p, z, addresses, and matched maps."
+    }
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "interval": 0.95,
+    "bootstrap_seed": "89000+network_seed for Liu and 90000+network_seed for generic",
+    "unit": "Virtual participant within one Liu network or generic episode within one network.",
+    "network_pooling": "forbidden",
+    "interval_rule": "Percentile participant bootstrap with 0.025 and 0.975 quantiles. Reuse resampling indices for paired effects.",
+    "probability": "Compute sigmoid(y*oriented_margin/T) before averaging the two orientations of a canonical pair.",
+    "exact_decision": "Mean sign correctness of oriented raw margins, with ties assigned 0.5.",
+    "canonical_margin": "For Hodge and LOO only, field(i,j)=[margin(i,j)-margin(j,i)]/2 for i<j.",
+    "groups": "Learned/nonlearned follow presented support relations and their complement; retained/omitted use original stable z=1/0, never behavior or posterior labels.",
+    "empty_group_rule": "Omit a participant only from an endpoint whose retained or omitted group is empty, report its denominator, and never omit a participant from competence."
+  },
+  "competence_and_global_path_prerequisites": {
+    "threshold_provenance": {
+      "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+      "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2",
+      "timing": "Frozen before seeds 3001--3003; no threshold below is derived from their observed effects."
+    },
+    "generic_competence": "In every seed, intact learned exact-decision mean >=0.75 and intact nonlearned exact-decision mean >=0.70.",
+    "liu_competence": "In every seed, dual-access intact overall exact-decision mean >=0.75, nonlearned exact-decision mean >=0.70, and transitive-triplet mean >=0.95.",
+    "P_global_necessity": "In every seed, dual-access intact minus P_off_dual nonlearned correct-probability lower bound >=0.10 and P_off_dual nonlearned correct-probability upper bound <=0.55.",
+    "P_remote_reassembly": "In every seed, dual-access global-branch relation-LOO remote_absolute lower bound >0.01 raw margin units and third_party_relational lower bound >0.05.",
+    "interpretation": "These are prerequisites for interpreting local/global division, not additional historical v2.4 primary links."
+  },
+  "four_v2_4_primary_links": {
+    "threshold_provenance": {
+      "path": "studies/dual_evidence_access_confirmation/records/benchmarks/dual_evidence_access_confirmation_v2_4.json",
+      "sha256": "2e24e5509304376b6c9053f166e257990152e1e0f32b24f7ddb31891ea4c3c09",
+      "timing": "Frozen before seeds 3001--3003; exact historical directions and margins are restored without using their observed effect sizes."
+    },
+    "omitted_direct_fidelity_rescue": "Within every seed, participant-bootstrap lower bounds for dual_access minus shared_access omitted exact correct probability and omitted direct causal correctness both exceed zero.",
+    "retained_fidelity_preservation": "Within every seed, the participant-bootstrap lower bound for dual_access minus shared_access retained exact correct probability is at least -0.005 and retained own-write identity is <=1e-7.",
+    "evidence_and_query_specificity": "Within every seed, dual_access beats dual_evidence_shuffle on omitted exact correct probability and omitted direct causal correctness and beats dual_query_shuffle on omitted direct causal correctness; all three paired lower bounds exceed zero.",
+    "local_only_nontransitive_access": "Within every seed under P-off, P_off_dual omitted exact correct-probability lower bound exceeds 0.50, P_off_dual minus P_off_shared omitted exact lower bound exceeds zero, P_off_dual sampled nonlearned accuracy upper bound is <=0.55, and the upper bound of P_off_dual all-source remote minus 0.25 times dual-access intact all-source remote is below zero. The global-path prerequisites must also pass."
+  },
+  "omitted_local_materiality_secondary_gate": {
+    "threshold_provenance": {
+      "path": "studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json",
+      "sha256": "af6fe7ccd0785cf5ec09437cd958f5652a36596066aec28a77793dad28133ea2"
+    },
+    "rule": "Within every seed, the participant-bootstrap lower bound for dual_access intact minus local_off omitted learned correct probability is >=0.01.",
+    "role": "Mandatory secondary causal gate for within-model L materiality. It is not a fifth historical v2.4 link. The retained counterpart is reported diagnostically but is not substituted as a gate."
+  },
+  "behavior_reproduction_contract": {
+    "reference_contract": {
+      "path": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432"
+    },
+    "reference_result": {
+      "path": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json",
+      "sha256": "6c60964435199bef4390a41974ea536832cfbddf68cf41e498462d99c29781b6"
+    },
+    "qualitative_gate": "All nine frozen qualitative row rules must pass independently in every seed under intact dual access.",
+    "quantitative_reporting": "Report every frozen human-calibration interval membership and all nine quantitative classifications independently per seed, including the historical distance, serial-position, and self-inconsistency mismatches. No count, named subset, or interval membership is a primary failure gate.",
+    "interpretation": "This layer describes reproduction of human-inspired phenomena; it is not a human-mechanism confirmation or a training target."
+  },
+  "integrity_gates": {
+    "source_and_artifact_identity": "Every protocol, source, test, configuration, checkpoint, log, initialization, stream chain, runtime manifest, and lock matches its registered hash and Git witness.",
+    "candidate_identity": "No-time API has exactly 32 task channels, no time state or parameter, the fixed parameter counts, fixed microsteps, and the registered initialization/optimizer geometry.",
+    "local_algebra": "Packed and full L writes, reads, reversal, gain gradients, and local-off identity agree on deterministic fixtures within atol=1e-6.",
+    "access_identity": "Shared-access agrees with its same-process reference; P and global logits are bit-identical across local access conditions; retained dual/shared writes agree <=1e-7; omitted dual scalar equals signed_magnitude*p <=1e-7.",
+    "routing_identity": "Evidence and query maps are true derangements, preserve their registered multisets, and are reused in intact and every LOO replay.",
+    "presentation_invariance": "Support reversal leaves s_L*k unchanged and query reversal negates ell within 1e-7.",
+    "gradient_and_optimizer": "Query loss has finite nonzero gradients through terminal P to support-time writes and through L to raw_gain; inherited clean-versus-shadow effective optimizer trajectory gates pass.",
+    "cuda_parity": "Using only synthetic seed 930001, eager and fullgraph CUDA margins, P, loss, gradients, and one optimizer update agree with atol=1e-5, rtol=1e-4.",
+    "failure": "Any integrity failure makes the affected attempt noninterpretable. Only an append-only implementation repair under unchanged scientific content may precede a complete rerun."
+  },
+  "triggered_item_count_transport": {
+    "trigger": "Run only after all three seeds pass competence/global prerequisites, all four v2.4 links, and the omitted-local-materiality gate. The 9/9 qualitative behavior outcome does not control this mechanistic transport trigger.",
+    "sizes": [6, 8, 10],
+    "reference_contract": {
+      "path": "studies/item_count_transport/records/benchmarks/liu_item_count_transport_v1.json",
+      "sha256": "0ba9090453bafd28fc1908afdb727747a06ba069838aae994fb90b17dd36646e"
+    },
+    "design": "Evaluate the same three locked no-time backbones at N=6,8,10 under the inherited size-matched cycle/exposure contract and functional estimands, with no retraining, gain adaptation, temperature change, or size-specific parameter.",
+    "role": "Triggered secondary transport reported separately. It cannot repair, average over, or change the N=8 primary decision. If the trigger fails, record not_triggered rather than evaluating it."
+  },
+  "cross_seed_decision": {
+    "per_seed": "Every prerequisite, link, secondary causal gate, and behavior row is decided independently within seed.",
+    "primary_functional_replication": "Passes only if competence/global prerequisites, all four v2.4 links, and omitted-local-materiality pass in every seed 3004--3006.",
+    "heterogeneity": "No participant pooling, network bootstrap, mean across networks, majority vote, seed replacement, relation filtering, or successful seed repairs a failure in another seed."
+  },
+  "outcome_tree": {
+    "precedence": [
+      "noninterpretable",
+      "competence_failure",
+      "competent_alternative_organization",
+      "mechanism_replication_behavior_incomplete",
+      "clean_no_time_pl_functional_replication"
+    ],
+    "clean_no_time_pl_functional_replication": "All integrity gates, competence/global prerequisites, four v2.4 links, omitted-local-materiality, and all nine qualitative behavior rules pass independently in all three seeds. Quantitative human calibration remains report-only.",
+    "mechanism_replication_behavior_incomplete": "Primary functional replication passes in all three seeds but one or more frozen qualitative behavior rules fail in at least one seed.",
+    "competent_alternative_organization": "All three seeds pass generic and Liu competence, but a global-path prerequisite, v2.4 primary link, or omitted-local-materiality gate fails in one or more seeds. Report the per-link matrix; do not assign the historical division.",
+    "competence_failure": "One or more integrity-valid seeds fail generic or Liu competence. Mechanism failure in that seed is not interpreted.",
+    "noninterpretable": "Source, protocol, artifact, runtime, numerical, mandatory execution, mapping, routing, or estimator integrity fails."
+  },
+  "claim_boundary": {
+    "supported_if_passed": "Functional replication of the imposed P/global-assembly and L/query-addressed direct-fidelity division for the frozen eight-item task, training recipe, and three network seeds.",
+    "not_supported": [
+      "biological dual stores",
+      "structural necessity or minimality of P and L",
+      "necessity of L for every direct relation",
+      "a complete quantitative model of human behavior",
+      "spontaneous emergence without architectural and evidence-admission priors",
+      "network-population prevalence",
+      "arbitrary task-size or domain generalization"
+    ],
+    "human": "The Liu cohort, temperature, row definitions, and historical mechanism informed this protocol; fresh networks are not fresh human confirmation.",
+    "old_study": "Nothing in this study changes the status, thresholds, result, or training_parameterization_failure interpretation of pl_direct_training."
+  },
+  "execution_sequence": [
+    "Commit this protocol, study registration, and generated navigation before successor implementation or seed execution.",
+    "Implement only the source-locked runner, historical estimand parity, access conditions, integrity qualification, and focused tests; do not execute scientific seeds.",
+    "Pass CPU gates and the non-scientific CUDA qualification, then commit implementation and one execution lock covering protocol, source, configuration, inputs, tests, and Git witness.",
+    "Train all three mandatory seeds through step 1500 without generic or Liu evaluation.",
+    "Write and commit one joint artifact lock over all three complete final-step runs before outcome exposure.",
+    "Evaluate all three seeds completely under the frozen generic and Liu contracts, then decide and report every per-seed link and behavior row.",
+    "If and only if primary functional replication passes, execute and separately report the triggered N=6,8,10 transport without using it to alter the primary outcome.",
+    "Register one canonical machine-readable result and concise report, update generated study views, validate, and stop."
+  ],
+  "runtime_and_artifacts": {
+    "runtime_root": "artifacts/runs/pl_functional_replication_v1",
+    "device": "Visible CUDA GPU required for registered training and neural evaluation.",
+    "precision": "float32 neural computation without autocast or TF32; float64 summaries",
+    "compile": {
+      "enabled": true,
+      "backend": "inductor",
+      "fullgraph": true,
+      "mode": "default"
+    },
+    "condition_order": [3004, 3005, 3006],
+    "artifact_policy": "Exclusive run directories with complete configuration, identities, initialization hashes, stream hash chain, every counted update log, final checkpoint, optimizer counters, runtime manifest, and cost record. Never overwrite or resume an unverified partial run.",
+    "source_lock": "records/benchmarks/pl_functional_replication_v1.execution_lock.json",
+    "artifact_lock": "records/benchmarks/pl_functional_replication_v1.artifact_lock.json",
+    "result": "records/results/pl_functional_replication_v1.json",
+    "report": "records/reports/pl_functional_replication_v1.md"
+  },
+  "stop_rule": "After the complete three-seed primary evaluation and any prospectively triggered transport, freeze and report the outcome. Do not tune learning rates, clipping, losses, gain, temperature, budget, channel set, step counts, evidence rules, controls, thresholds, behavior definitions, seeds, or checkpoint choice using exposed outcomes. A changed candidate or protocol is a separately authorized prospective study. Historical checkpoint cleanup remains unauthorized and requires a separate retention migration after any promotion decision."
+}

@@ -294,6 +294,9 @@ fail to close the dynamics.
     registered 0.01 threshold) and failed the frozen quantitative behavior gate. The
     registered outcome is training_parameterization_failure, so confirmation stops
     without tuning.
+- [Clean no-time P/L functional replication](pl_functional_replication/README.md) — `frozen_contract`
+  - **Finding:** Prospective protocol frozen before successor implementation, training
+    of seeds 3004--3006, or exposure of their generic or Liu outcomes.
 
 ## Minimal explanatory models
 
