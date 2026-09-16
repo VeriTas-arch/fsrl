@@ -60,6 +60,9 @@ and assigns no time-role label before its registered gates execute.
 - `validation_result` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v3.json](records/benchmarks/qualification_v3.json)
   (`sha256:a9431f7ebbf9`)
+- `repair_lock` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/baseline_source_lock_v3.json](records/benchmarks/baseline_source_lock_v3.json)
+  (`sha256:2824c4550cdb`)
 
 ## Provenance rule
 
