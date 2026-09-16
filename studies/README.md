@@ -303,6 +303,9 @@ fail to close the dynamics.
     with zero own-write identity error. The all-seed outcome is
     competent_alternative_organization, so item-count transport was not triggered;
     quantitative calibration remained report-only at 5/9, 4/9, and 3/9.
+- [Exact P/L retained cross-talk decomposition](pl_crosstalk_decomposition/README.md) — `frozen_contract`
+  - **Finding:** The read-only diagnostic is prospectively frozen. No decomposition
+    result has been exposed.
 
 ## Minimal explanatory models
 

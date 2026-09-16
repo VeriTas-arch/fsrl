@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_crosstalk_decomposition",
+  "experiment_id": "pl-crosstalk-decomposition-v1",
+  "registration_status": "prospective_read_only_diagnostic_after_parent_outcome_and_before_new_decomposition_implementation_or_outcome_exposure",
+  "registration_parent_commit": "a95648553dafba6d4b56377cc19a55fbb32b1efd",
+  "question": "For the frozen clean no-time P/L networks 3004--3006, can the retained dual-minus-shared probability cost be reconstructed exactly from omitted-source address overlap, scalar L gain, and each network's fixed probability operating point, and which of gain versus operating point accounts for seed 3006 crossing the pre-existing -0.005 lower-bound gate?",
+  "claim_boundary": "This is a deterministic read-only decomposition of already-frozen evaluation outputs. It may identify the algebraic source of the observed retained contrast and evaluate registered component-swap counterfactuals. It cannot establish why training learned a gain or operating point, infer a biological dual store, promote the failed parent replication, revise its threshold, authorize retraining, optimize human behavior, or trigger item-count transport.",
+  "design": {
+    "tier": "post_result_mechanism_diagnostic",
+    "mandatory_network_seeds": [3004, 3005, 3006],
+    "network_pooling": "forbidden",
+    "new_training_or_adaptation": "forbidden",
+    "new_model_queries": "forbidden; analyze the frozen attempt2 arrays only",
+    "cohort": "The same 77 Liu-v2 virtual participants, cues, support schedules, retention states, evidence probabilities, query orientations, and temperature already used in the parent evaluation.",
+    "conditions": ["shared_access", "dual_access"],
+    "source_relations": "The eight registered higher-to-lower Liu-v2 support relations. Contributions are summed over that relation's four frozen support-block presentations before reading a query.",
+    "query_cells": "Both ordered orientations of each of the eight learned relations. Primary summaries include only cells whose canonical relation has z=1 for that participant; omitted-query cells are not part of the retained-cost estimand.",
+    "frozen_inputs": {
+      "parent_contract": {
+        "path": "studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.json",
+        "sha256": "dc146c7723ad147a5fd964f8af5c66cad4b182c034fa20fc3c5391bb4a2e16d0"
+      },
+      "parent_result": {
+        "path": "studies/pl_functional_replication/records/results/pl_functional_replication_v1.json",
+        "sha256": "386247da944d075ea362fb23dba39106f6f175bbb2440acba76c41770c01a9a6"
+      },
+      "raw_arrays": {
+        "3004": {
+          "path": "artifacts/runs/pl_functional_replication_v1/evaluation-attempt2/seed-3004/raw.npz",
+          "sha256": "92fd9ef22aec84bfee45f60d90f10413133f53230f13c3ed190f9e10054a1471",
+          "bytes": 1626432
+        },
+        "3005": {
+          "path": "artifacts/runs/pl_functional_replication_v1/evaluation-attempt2/seed-3005/raw.npz",
+          "sha256": "601e42b6381d4a57f3a1f7acbe786773e7c5859e8744203902e0df81d44ec72a",
+          "bytes": 1628171
+        },
+        "3006": {
+          "path": "artifacts/runs/pl_functional_replication_v1/evaluation-attempt2/seed-3006/raw.npz",
+          "sha256": "f2b2ad8edf346f66a1fb12395d6038b86c8c75ea4210925ef49d9a637c16b3ee",
+          "bytes": 1629645
+        }
+      }
+    }
+  },
+  "estimands": {
+    "notation": {
+      "i": "virtual participant",
+      "r": "canonical source relation",
+      "t": "one of the 32 frozen support presentations",
+      "e": "one ordered learned-relation query",
+      "z_ir": "frozen retention indicator",
+      "y_e": "+1 for the registered higher-to-lower orientation and -1 for its reverse",
+      "T": 0.25
+    },
+    "source_write_difference": "Delta_s_it = dual_local_evidence_it - shared_local_evidence_it. Under the frozen access rules this must be zero for retained sources and signed_magnitude_it*p_ir for omitted sources.",
+    "address_key": "Recreate the frozen normalized 105-entry packed antisymmetric conjunctive key in float32 from deterministic cue codes. The source key uses the presented left/right orientation; the query key uses the ordered query orientation.",
+    "source_relation_contribution": "C_i,r->e = sum over support presentations t of relation r of Delta_s_it * dot(k_it, k_ie).",
+    "gain_free_raw_crosstalk": "C_ie = sum_r C_i,r->e.",
+    "gain_scaled_local_perturbation": "delta_i,s,e = g_s*C_ie, where g_s is the frozen scalar local gain read from the seed-s local_gains array after verifying it is constant across participant, condition, and query.",
+    "exact_baseline_operating_point": "B_i,s,e = y_e*M_shared_i,s,e. This shared total correct-signed margin, not P alone, is the exact baseline for the dual-minus-shared probability contrast because the retained/shared local contribution is already present in both conditions.",
+    "global_component_diagnostic": "G_i,s,e = y_e*M_P_i,s,e from shared_access global_logits. Also report the correct-signed shared local component B-G and P-only sigmoid sensitivity, but do not substitute either for B in the exact reconstruction.",
+    "sensitivity": "S_i,s,e = sigmoid(B_i,s,e/T)*(1-sigmoid(B_i,s,e/T))/T. Also compute S_P at G for the explicitly labeled P-only diagnostic.",
+    "exact_probability_effect": "D_i,s,e = sigmoid((B_i,s,e + y_e*g_s*C_ie)/T)-sigmoid(B_i,s,e/T).",
+    "first_order_effect": "F_i,s,e = S_i,s,e*y_e*g_s*C_ie; report D-F as the nonlinear remainder without using the approximation for any decision.",
+    "retained_subject_effect": "For each seed and participant, average D over the two orientations and all relations with z=1, exactly matching the parent retained endpoint's order of averaging and empty-group rule.",
+    "source_concentration": {
+      "absolute_mass": "A_ie=sum_r abs(y_e*C_i,r->e)",
+      "top_one_share": "max_r abs(C_i,r->e)/A_ie",
+      "top_two_share": "sum of the two largest abs(C_i,r->e)/A_ie",
+      "effective_source_count": "A_ie^2/sum_r C_i,r->e^2",
+      "cancellation_ratio": "abs(C_ie)/A_ie",
+      "zero_mass_rule": "A zero-mass cell is reported as undefined for shares/effective count and is excluded only from that descriptive endpoint.",
+      "interpretation": "These are continuous report-only diagnostics; no post-result concentrated-versus-diffuse cutoff is permitted. Report participant-weighted median, interquartile range, and the distribution of the minimum source count needed to reach 80 percent of absolute mass."
+    },
+    "gain_by_operating_point_factorial": {
+      "cells": "For every operating-point seed o and every registered gain seed g, evaluate D_i,o,g,e = sigmoid((B_i,o,e+y_e*g_g*C_ie)/T)-sigmoid(B_i,o,e/T).",
+      "retention": "Use the common frozen participant relation-retention mask and do not pool participants or operating-point seeds.",
+      "uncertainty": "For each operating seed o, use the parent participant-bootstrap indices from numpy.default_rng(89000+o), 10000 draws, and the 0.025/0.975 percentile interval for every gain column.",
+      "gate_reference": "Report whether each cell's lower bound is at least -0.005. This reproduces a pre-existing parent boundary and does not relabel the parent outcome.",
+      "mean_shapley_split": "For each passing parent seed p in {3004,3005} versus 3006, exactly split the observed retained-mean difference between gain and operating point by the two-factor Shapley average over the four factorial cells. The two contributions must sum to the total difference; this is deterministic component attribution, not a claim about the training cause."
+    }
+  },
+  "statistics": {
+    "unit": "Virtual participant within one fixed network operating point.",
+    "bootstrap_samples": 10000,
+    "interval": 0.95,
+    "bootstrap_seed": "89000+operating_point_network_seed",
+    "network_pooling": "forbidden",
+    "source_summary_weighting": "First average eligible retained query cells within participant, then summarize participants so subjects with more retained relations do not receive greater weight.",
+    "exact_probability": "Stable sigmoid of the correct-signed oriented margin divided by T=0.25."
+  },
+  "integrity_and_decision": {
+    "required_input_checks": [
+      "Every frozen path, byte count, and SHA-256 matches both this contract and the parent result reference.",
+      "All required arrays have the registered dimensions, dtypes are numeric or boolean, and required values are finite.",
+      "Retention, shared local evidence, and dual local evidence are exactly identical across the three network files; shared and dual global logits are exactly identical within each seed.",
+      "Each seed's shared and dual local-gain arrays are constant and identical within seed."
+    ],
+    "algebra_checks": {
+      "retained_source_write_max_abs": 1e-07,
+      "source_sum_to_raw_margin_difference_max_abs": 1e-06,
+      "gain_scaled_sum_to_logit_difference_max_abs": 1e-06,
+      "computed_crosstalk_probability_to_raw_probability_max_abs": 1e-06,
+      "raw_probability_reconstruction_max_abs": 1e-12,
+      "canonical_retained_subject_and_summary_max_abs": 1e-12,
+      "shapley_additivity_max_abs": 1e-12
+    },
+    "primary_outcome": {
+      "exact_cross_talk_decomposed": "All input and algebra checks pass for all three mandatory seeds.",
+      "noninterpretable_input_or_algebra_failure": "Any required input or algebra check fails. Preserve the failed attempt and do not interpret component magnitudes."
+    },
+    "registered_component_statements": {
+      "address_geometry": "Because cohort, cues, evidence, and L address construction are fixed, C must be common across seeds. Passing the equality and reconstruction checks identifies omitted-source address overlap as the complete raw-L route for the retained dual-minus-shared perturbation, but not as a training cause.",
+      "gain_sufficiency_for_3006_gate": "Report whether substituting each of the two lower registered gains into seed 3006's fixed B changes its frozen-reference lower-bound status.",
+      "operating_point_requirement": "Report whether seed 3006's gain crosses the frozen-reference gate at either passing seed's B. If it does not, the 3006 boundary crossing requires its operating-point distribution in this registered factorial.",
+      "joint_boundary": "If at least one lower gain rescues seed 3006 while seed 3006's gain does not fail either passing operating point, classify the observed gate crossing as a joint gain-by-operating-point boundary, not a gain-only or geometry-across-seed failure.",
+      "source_pattern": "Describe source concentration continuously and list the largest aggregate relation-to-relation absolute contributions. Do not infer a new key architecture or intervention from these data alone."
+    }
+  },
+  "execution": {
+    "required_order": [
+      "Commit this protocol before implementing or executing the decomposition.",
+      "Implement and qualify the equations on synthetic fixtures without loading the frozen 3004--3006 arrays.",
+      "Commit the implementation, then write and commit a source/input/qualification lock.",
+      "Run the decomposition once over all three mandatory frozen inputs.",
+      "Freeze one canonical result, one compact typed NPZ sufficient artifact, and one concise report; update the study registry and generated views."
+    ],
+    "runtime": "Use the repository environment and registered formal runtime. No stochastic model operation, training, checkpoint loading, or CUDA numerical dependence is required; deterministic NumPy float32 key construction and float64 analysis are authoritative.",
+    "stop_rules": [
+      "Do not run new training, tuning, checkpoint selection, temperature fitting, human-metric optimization, or item-count transport.",
+      "Do not alter the parent threshold or reinterpret seed 3006 as passing.",
+      "If the inputs or exact algebra fail, stop with a noninterpretable result rather than repairing an estimand after outcome exposure.",
+      "A successful decomposition closes this diagnostic. Any subsequent training or architecture question requires a separately authorized prospective study."
+    ]
+  },
+  "outputs": {
+    "source_lock": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.execution_lock.json",
+    "canonical_result": "studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.json",
+    "supporting_arrays": "studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.npz",
+    "report": "studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.md",
+    "required_interpretation": "State the exact reconstruction result, fixed-geometry finding, gain x operating-point factorial, Shapley mean attribution, source concentration, parent-outcome immutability, causal limits, and whether evidence supports stopping P/L repair and returning to the single-P mainline."
+  }
+}
