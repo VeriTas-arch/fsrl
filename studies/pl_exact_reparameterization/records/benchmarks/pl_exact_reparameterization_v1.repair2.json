@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_exact_reparameterization",
+  "repair_id": "pl_exact_reparameterization_v1_repair2",
+  "registration_status": "prospective_before_repair_implementation_or_requalification",
+  "parent_contract": {
+    "path": "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.json",
+    "sha256": "799fd9a4ca1814e8ad5b4662c5e0a481182cfa26969802547a949e5af46f8773"
+  },
+  "failed_attempt": {
+    "path": "studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.attempt1.json",
+    "status": "failed_registered_float32_equivalence_threshold",
+    "terminal_P_max_absolute_error": 9.5367431640625e-6,
+    "final_margin_max_absolute_error": 1.430511474609375e-6,
+    "categorical_mismatch_count": 0
+  },
+  "diagnosis": "The first mapping was exact over real arithmetic but changed float32 accumulation order at the folded input bias and one-margin output. Recurrent accumulation amplified the projection difference in P.",
+  "repair": {
+    "public_interface": "Retain 32 task channels plus the separate deterministic time scalar and return one binary margin.",
+    "trainable_architecture": "Do not restore reward, previous-action, explicit constant, value, or common-logit trainable parameters.",
+    "converted_checkpoint_adapter": "Only models created from a legacy checkpoint retain the legacy input base bias, constant-column weight, and two output heads as non-trainable compatibility buffers. The adapter reconstructs the active 37-wide numerical operand internally, with reward and previous-action entries fixed to zero, so PyTorch executes the frozen float32 projection and output subtraction in their original order.",
+    "fresh_model_boundary": "Fresh models used by later direct training do not contain or execute the compatibility buffers. They use the clean 32-channel projection, separate time drive, folded active bias, and one-margin head.",
+    "local_trace": "Keep the 105-scalar packed L implementation unchanged because attempt 1 remained within the registered local-state and readout tolerance.",
+    "timestep_accounting": "Keep repair1 unchanged: four support microsteps, two query microsteps, 168--216 generic active microsteps, and 56--80 effective P writes."
+  },
+  "unchanged_gates": {
+    "float32_max_absolute_error": 0.000001,
+    "categorical_mismatch_count": 0,
+    "nonfinite_count": 0,
+    "devices": ["cpu", "cuda"],
+    "seeds": [2104, 2105],
+    "panels": ["liu", "generic"],
+    "conditions": ["intact", "P_off", "L_off"]
+  },
+  "execution_order": "Implement and validate the repair, commit it, create and commit a replacement source lock, then requalify. Preserve attempt 1 regardless of the outcome."
+}

@@ -282,11 +282,11 @@ fail to close the dynamics.
     registered outcome is a competent alternative organization, so confirmation stops
     without tuning.
 - [Exact P/L structural reparameterization](pl_exact_reparameterization/README.md) — `frozen_contract`
-  - **Finding:** A prospective deterministic mapping, timestep-accounting repair, and
-    source lock are frozen for the two confirmed P/L networks. They retain the legacy
-    time drive, four-step support microcircuit, and complete active episode horizon
-    while removing only redundant task-interface and state representation; qualification
-    has not yet run.
+  - **Finding:** Qualification attempt 1 preserved every categorical decision but failed
+    the registered float32 state and margin tolerances because folded projection
+    arithmetic accumulated in P. The negative result is retained, and a second
+    prospective repair adds conversion-only numerical compatibility buffers without
+    restoring removed trainable inputs or outputs.
 
 ## Minimal explanatory models
 

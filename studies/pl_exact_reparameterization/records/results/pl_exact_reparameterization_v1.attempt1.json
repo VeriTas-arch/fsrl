@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_exact_reparameterization",
+  "attempt": 1,
+  "status": "failed_registered_float32_equivalence_threshold",
+  "protocol_sha256": "799fd9a4ca1814e8ad5b4662c5e0a481182cfa26969802547a949e5af46f8773",
+  "timestep_repair_sha256": "fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1",
+  "source_lock_sha256": "3497e685b5a358a0a560932a6150e3503c7f3c9a2212e3153bdd1466d542fb62",
+  "source_commit": "14d1726017fb3f636835a782cfdc4088a57096ef",
+  "runtime_result": {
+    "path": "artifacts/runs/pl_exact_reparameterization_v1/qualification/qualification.json",
+    "sha256": "c23b84136ab27f93de3ba20452d2460253e94acdc9a1e4496c58e29f8ef53e38",
+    "bytes": 18156
+  },
+  "scope": {
+    "devices": ["cpu", "cuda"],
+    "seeds": [2104, 2105],
+    "panels": {
+      "liu": {
+        "support_trials": 32,
+        "support_microsteps": 128,
+        "effective_P_writes": 64
+      },
+      "generic": {
+        "support_trials": 40,
+        "support_microsteps": 160,
+        "effective_P_writes": 80
+      }
+    },
+    "conditions": ["intact", "P_off", "L_off"],
+    "categorical_comparisons": 5376
+  },
+  "registered_thresholds": {
+    "float32_max_absolute_error": 0.000001,
+    "categorical_mismatch_count": 0,
+    "nonfinite_count": 0
+  },
+  "observations": {
+    "parameter_mapping_max_absolute_error": 0.0,
+    "blank_fast_weight_max_absolute_error": 0.0,
+    "packed_local_state_max_absolute_error": 4.172325134277344e-7,
+    "terminal_P_max_absolute_error": 9.5367431640625e-6,
+    "final_margin_max_absolute_error": 1.430511474609375e-6,
+    "categorical_mismatch_count": 0,
+    "nonfinite_count": 0,
+    "per_device_seed_max_absolute_error": {
+      "cpu_2104": 7.62939453125e-6,
+      "cpu_2105": 9.5367431640625e-6,
+      "cuda_2104": 9.5367431640625e-6,
+      "cuda_2105": 9.5367431640625e-6
+    }
+  },
+  "decision": {
+    "passed": false,
+    "mapping_closed": true,
+    "reason": "The factorized float32 projection changed accumulation order. Its small per-step roundoff accumulated in P beyond the registered threshold, and the final margin also exceeded that threshold. The zero categorical mismatch does not override the failed numerical gate.",
+    "next_step": "Preserve this negative result. Register and source-lock a changed implementation that retains the legacy float32 projection and two-logit arithmetic only as non-trainable checkpoint-conversion compatibility state; do not relax the threshold and do not start no-time training."
+  }
+}
