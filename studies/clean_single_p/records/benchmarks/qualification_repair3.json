@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study_id": "clean_single_p",
+  "repair_id": "qualification_repair3",
+  "scope": "implementation-only pre-outcome qualification repair",
+  "attempt": "records/benchmarks/qualification.attempt3.json",
+  "observed_failure": "The qualification passed every registered numerical and structural gate, but its source failed the repository format check and converted three CUDA diagnostic tensors requiring gradients directly to Python scalars, emitting a warning.",
+  "repair": "Apply the repository formatter's single-line layout and detach only the three read-only CUDA diagnostic tensors before scalar conversion, then rerun the complete qualification.",
+  "unchanged": [
+    "scientific equations",
+    "architecture conditions",
+    "input channels",
+    "seeds",
+    "training budget",
+    "optimizer geometry",
+    "evaluation panels",
+    "thresholds",
+    "decision rules",
+    "claim boundary"
+  ],
+  "outcome_exposure": "No scientific training seed, validation panel, Liu endpoint, or behavior outcome was exposed before this repair."
+}

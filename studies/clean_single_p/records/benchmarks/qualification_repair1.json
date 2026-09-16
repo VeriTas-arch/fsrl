@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study_id": "clean_single_p",
+  "repair_id": "qualification_repair1",
+  "scope": "implementation-only pre-outcome qualification repair",
+  "attempt": "records/benchmarks/qualification.attempt1.json",
+  "observed_failure": "The registered H=200 parameter-count gate was evaluated on the deliberately small H=9 algebra fixture, producing 489 and 480 instead of the H=200 counts 87203 and 87003. Every numerical, optimizer, CUDA, isolation, timestep, and gradient-path check otherwise passed.",
+  "repair": "Construct a separate H=200 mapped pair for the parameter-count assertion while retaining H=9 for the bounded numerical fixtures. Detach tensors before scalar diagnostic conversion to remove a qualification-only warning.",
+  "unchanged": [
+    "scientific equations",
+    "architecture conditions",
+    "input channels",
+    "seeds",
+    "training budget",
+    "optimizer geometry",
+    "evaluation panels",
+    "thresholds",
+    "decision rules",
+    "claim boundary"
+  ],
+  "outcome_exposure": "No scientific training seed, validation panel, Liu endpoint, or behavior outcome was exposed before this repair."
+}

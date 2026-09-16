@@ -38,6 +38,27 @@ checkpoint deletion.
 - `registered_contract` —
   [studies/clean_single_p/records/benchmarks/clean_single_p_v1.json](records/benchmarks/clean_single_p_v1.json)
   (`sha256:211ed4f40fa6`)
+- `noninterpretable_attempt` —
+  [studies/clean_single_p/records/benchmarks/qualification.attempt1.json](records/benchmarks/qualification.attempt1.json)
+  (`sha256:520db35e8cb1`)
+- `repair_contract` —
+  [studies/clean_single_p/records/benchmarks/qualification_repair1.json](records/benchmarks/qualification_repair1.json)
+  (`sha256:5708891d878c`)
+- `noninterpretable_attempt` —
+  [studies/clean_single_p/records/benchmarks/qualification.attempt2.json](records/benchmarks/qualification.attempt2.json)
+  (`sha256:ca9dac439c85`)
+- `repair_contract` —
+  [studies/clean_single_p/records/benchmarks/qualification_repair2.json](records/benchmarks/qualification_repair2.json)
+  (`sha256:f22c6aa4968d`)
+- `noninterpretable_attempt` —
+  [studies/clean_single_p/records/benchmarks/qualification.attempt3.json](records/benchmarks/qualification.attempt3.json)
+  (`sha256:00c954738769`)
+- `repair_contract` —
+  [studies/clean_single_p/records/benchmarks/qualification_repair3.json](records/benchmarks/qualification_repair3.json)
+  (`sha256:0684ff158bd8`)
+- `validation_result` —
+  [studies/clean_single_p/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:f13ffffda674`)
 
 ## Provenance rule
 

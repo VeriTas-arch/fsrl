@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study_id": "clean_single_p",
+  "repair_id": "qualification_repair2",
+  "scope": "implementation-only pre-outcome qualification repair",
+  "attempt": "records/benchmarks/qualification.attempt2.json",
+  "observed_failure": "The qualification passed every registered numerical and structural gate, but the qualified source retained an unused local control-model variable and therefore failed the repository's mandatory Ruff check.",
+  "repair": "Remove only the unused local variable from the qualification function and rerun the complete qualification so that the passing record hashes the lint-clean source.",
+  "unchanged": [
+    "scientific equations",
+    "architecture conditions",
+    "input channels",
+    "seeds",
+    "training budget",
+    "optimizer geometry",
+    "evaluation panels",
+    "thresholds",
+    "decision rules",
+    "claim boundary"
+  ],
+  "outcome_exposure": "No scientific training seed, validation panel, Liu endpoint, or behavior outcome was exposed before this repair."
+}
