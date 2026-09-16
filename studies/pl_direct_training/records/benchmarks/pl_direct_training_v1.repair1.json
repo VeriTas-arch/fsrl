@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_direct_training",
+  "experiment_id": "pl-direct-training-v1",
+  "repair_id": "pl-direct-training-v1-repair1",
+  "registration_status": "prospective_before_implementation_training_or_outcome_exposure",
+  "reason": "The parent contract fixed the local-gain optimizer and stated that joint training was copied, but omitted the numerical initial local gain needed to reconstruct the registered recipe.",
+  "resolution": {
+    "initial_local_gain": 0.1,
+    "parameterization": "raw_gain=inverse_softplus(0.1), with gain=softplus(raw_gain)",
+    "provenance": "Inherited unchanged from studies/joint_training_strategy/records/benchmarks/joint_training_strategy_v1.json optimization.initial_local_gain."
+  },
+  "unchanged": [
+    "architecture and equations",
+    "time-retained versus no-time contrast",
+    "initialization seeds and RNG rules",
+    "optimizer learning rates, clipping, and update budget",
+    "training and evaluation cohorts",
+    "decision thresholds and stop rules"
+  ],
+  "outcome_exposure": "No implementation qualification, scientific training, generic evaluation, or Liu outcome existed when this repair was registered."
+}

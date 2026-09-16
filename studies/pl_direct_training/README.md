@@ -41,6 +41,9 @@ authorized.
 - `registered_contract` —
   [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.json](records/benchmarks/pl_direct_training_v1.json)
   (`sha256:49b02c9275cd`)
+- `repair_contract` —
+  [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.repair1.json](records/benchmarks/pl_direct_training_v1.repair1.json)
+  (`sha256:3cbd18ac36ce`)
 
 ## Provenance rule
 

@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3827,
+  "entry_count": 3828,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2087,
+    "json": 2088,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3731,
+    "already_conformant": 3732,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -81680,6 +81680,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.repair1.json",
+        "repository_path": "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.repair1.json"
+      },
+      "materialized_identity": {
+        "bytes": 1186,
+        "sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_direct_training",
+        "kind": "study"
+      },
+      "record_id": "study.pl_direct_training.studies_pl_direct_training_records_benchmarks_pl_direct_training_v1_repair1_json",
+      "registered_identity": {
+        "bytes": 1186,
+        "sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "source_ref": "sha256:3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -130505,7 +130539,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3825,
+  "registered_record_count": 3826,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130527,7 +130561,7 @@
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 88,
-    "repair_contract": 11,
+    "repair_contract": 12,
     "repair_lock": 10,
     "report": 89,
     "source_context": 2,
