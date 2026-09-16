@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3899,
+  "entry_count": 3901,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2151,
+    "json": 2152,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 100,
+    "markdown": 101,
     "numpy_npz": 1410,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3802,
+    "already_conformant": 3804,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -118251,6 +118251,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_direct_authority/records/reports/single_p_time_role_direct_authority_v1.md",
+        "repository_path": "studies/single_p_time_role_direct_authority/records/reports/single_p_time_role_direct_authority_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 1559,
+        "sha256": "865134851a47cbb859cf5b043ba40b5ee6d22289b18d00e641d6734ae3af3edf"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_direct_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_direct_authority.studies_single_p_time_role_direct_authority_records_reports_single_p_time_role_direct_authority_v1_md",
+      "registered_identity": {
+        "bytes": 1559,
+        "sha256": "865134851a47cbb859cf5b043ba40b5ee6d22289b18d00e641d6734ae3af3edf",
+        "source_ref": "sha256:865134851a47cbb859cf5b043ba40b5ee6d22289b18d00e641d6734ae3af3edf"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.noninterpretable_attempt",
       "format": {
         "format": "json",
@@ -118282,6 +118316,40 @@
         "source_ref": "sha256:02f8ce8ee9ee008993ba7f3dc124a83b016525910680c2656ec6709a6a7b2255"
       },
       "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_direct_authority/records/results/direct_authority_baseline_v1.json",
+        "repository_path": "studies/single_p_time_role_direct_authority/records/results/direct_authority_baseline_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 1158,
+        "sha256": "7fa7a333234665be25c000e9dc49f6c504e0a4d11241d5e1806826fb05e8fff7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_direct_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_direct_authority.studies_single_p_time_role_direct_authority_records_results_direct_authority_baseline_v1_json",
+      "registered_identity": {
+        "bytes": 1158,
+        "sha256": "7fa7a333234665be25c000e9dc49f6c504e0a4d11241d5e1806826fb05e8fff7",
+        "source_ref": "sha256:7fa7a333234665be25c000e9dc49f6c504e0a4d11241d5e1806826fb05e8fff7"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -132955,7 +133023,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3897,
+  "registered_record_count": 3899,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -132969,7 +133037,7 @@
     "execution_lock": 74,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 573,
+    "frozen_result": 574,
     "mainline_guide": 1,
     "noninterpretable_attempt": 16,
     "presentation_asset": 6,
@@ -132979,7 +133047,7 @@
     "registered_contract": 93,
     "repair_contract": 27,
     "repair_lock": 14,
-    "report": 95,
+    "report": 96,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2729,

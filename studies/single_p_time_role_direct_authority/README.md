@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `unresolved`
 - **Review state:** `indexed`
 - **Study ID:** `single_p_time_role_direct_authority`
 
@@ -25,14 +25,14 @@
 interpretable by first freezing a self-reproducible 32D direct baseline that preserves
 every parent external classification?
 
-**Finding.** A no-training successor contract is frozen. A zero-unit preflight attempt
-exposed no scientific output and is preserved with a narrow verifier-metadata repair; a
-bitwise direct baseline and exact parent-classification compatibility remain mandatory
-before Stage 1--3.
+**Finding.** The direct baseline is incompatible with its frozen external gate: after
+bitwise direct replay and intact-margin checks passed for the first unit, generic CE
+differed from the parent by 5.29e-08, above the registered 1e-10 tolerance, so execution
+stopped before baseline locking or Stage 1--3.
 
-**Claim boundary.** This protocol is not a mechanism result, does not identify the
-predecessor's numerical cause, does not compare adapter and direct internal P, and
-cannot revise the parent's time_removal_failure.
+**Claim boundary.** This does not establish a changed parent classification or any
+time-role mechanism; those analyses were not reached. It only rejects the registered
+external-identity gate, while the parent remains time_removal_failure.
 
 ## Frozen records
 
@@ -57,6 +57,12 @@ cannot revise the parent's time_removal_failure.
 - `repair_lock` —
   [studies/single_p_time_role_direct_authority/records/benchmarks/baseline_source_lock_v2.json](records/benchmarks/baseline_source_lock_v2.json)
   (`sha256:50fb1bce74c9`)
+- `frozen_result` —
+  [studies/single_p_time_role_direct_authority/records/results/direct_authority_baseline_v1.json](records/results/direct_authority_baseline_v1.json)
+  (`sha256:7fa7a3332346`)
+- `report` —
+  [studies/single_p_time_role_direct_authority/records/reports/single_p_time_role_direct_authority_v1.md](records/reports/single_p_time_role_direct_authority_v1.md)
+  (`sha256:865134851a47`)
 
 ## Provenance rule
 

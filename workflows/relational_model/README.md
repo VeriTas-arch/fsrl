@@ -70,9 +70,11 @@ time; it preserves all negative studies and frozen contracts.
      core-positive and compensatory, showing that these registered endpoints do not
      require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed
      3011 retains the phenotype but fails Ce noninferiority on generic learned, generic
-     nonlearned and Liu omitted probability. The frozen follow-up time-role
-     decomposition is noninterpretable because clean-direct and parent-adapter terminal
-     P failed the registered numerical-integrity criterion.
+     nonlearned and Liu omitted probability. The first time-role decomposition was
+     noninterpretable because direct and adapter terminal P failed its integrity gate.
+     Its one-arithmetic successor achieved bitwise direct replay and intact-margin
+     compatibility on the first unit but stopped because generic CE differed by
+     5.29e-08, above its frozen 1e-10 external-identity tolerance.
 
 7. [Algorithmic form and transport](#algorithm-and-transport)
    - **Question.** Which parts of the working model compress exactly, and where does it
@@ -441,15 +443,19 @@ hidden width, update budget and evaluation panels fixed.
 and compensatory, showing that these registered endpoints do not require a separate L
 store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype
 but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted
-probability. The frozen follow-up time-role decomposition is noninterpretable because
-clean-direct and parent-adapter terminal P failed the registered numerical-integrity
-criterion.
+probability. The first time-role decomposition was noninterpretable because direct and
+adapter terminal P failed its integrity gate. Its one-arithmetic successor achieved
+bitwise direct replay and intact-margin compatibility on the first unit but stopped
+because generic CE differed by 5.29e-08, above its frozen 1e-10 external-identity
+tolerance.
 
 **Boundary.** This is a fixed-H=200 three-seed development result, not universal
 minimality or confirmation of a final no-time recipe. The result supports an active
 single-state successor mainline while leaving time-free optimization robustness and the
-role of normalized time unresolved; the failed diagnostic assigns no scale,
-support-time, query-time, state-dependence or confidence-link label.
+role of normalized time unresolved. Neither failed diagnostic reached Stage 1--3, so
+neither assigns a scale, support-time, query-time, state-dependence or confidence-link
+label; the direct-authority failure also does not establish a changed parent
+classification.
 
 Implementation:
 
@@ -457,11 +463,15 @@ Implementation:
 - [`fsrl/experiments/clean_single_p/training.py`](../../fsrl/experiments/clean_single_p/training.py)
 - [`fsrl/experiments/clean_single_p/evaluation.py`](../../fsrl/experiments/clean_single_p/evaluation.py)
 - [`fsrl/experiments/clean_single_p/reporting.py`](../../fsrl/experiments/clean_single_p/reporting.py)
+- [`fsrl/experiments/single_p_time_role_direct/direct.py`](../../fsrl/experiments/single_p_time_role_direct/direct.py)
+- [`fsrl/experiments/single_p_time_role_direct/baseline.py`](../../fsrl/experiments/single_p_time_role_direct/baseline.py)
 
 Tests:
 
 - [`tests/experiments/clean_single_p/test_model.py`](../../tests/experiments/clean_single_p/test_model.py)
 - [`tests/experiments/clean_single_p/test_training.py`](../../tests/experiments/clean_single_p/test_training.py)
+- [`tests/experiments/single_p_time_role_direct/test_protocol.py`](../../tests/experiments/single_p_time_role_direct/test_protocol.py)
+- [`tests/experiments/single_p_time_role_direct/test_storage_and_estimators.py`](../../tests/experiments/single_p_time_role_direct/test_storage_and_estimators.py)
 
 Exact evidence:
 
@@ -482,6 +492,11 @@ Exact evidence:
   - **Meaning:** The frozen time-role follow-up failed its terminal-P arithmetic
     integrity gate and therefore assigns no mechanism labels or revision to the parent
     result.
+- `constrains` — [single_p_time_role_direct_authority:records/results/direct_authority_baseline_v1.json](../../studies/single_p_time_role_direct_authority/records/results/direct_authority_baseline_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** The one-arithmetic successor stopped at its frozen external CE identity
+    gate before baseline locking or mechanism analysis; it assigns no mechanism labels
+    and does not show a changed parent classification.
 
 Verification:
 
@@ -490,6 +505,12 @@ Verification:
 ```bash
 direnv exec . python -m unittest tests.experiments.clean_single_p.test_model \
   tests.experiments.clean_single_p.test_training
+```
+
+**`single_p_direct_authority_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m pytest tests/experiments/single_p_time_role_direct -q
 ```
 
 ## 7. Algorithmic form and transport

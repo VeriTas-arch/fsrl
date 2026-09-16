@@ -322,11 +322,11 @@ fail to close the dynamics.
     terminal P and the parent's algebraically equivalent evaluation-adapter P differed
     beyond the frozen array tolerance in one 3012 panel-1 Ae generic element, so no
     time-role mechanism label was assigned.
-- [Single-P time-role decomposition under one direct arithmetic authority](single_p_time_role_direct_authority/README.md) — `frozen_contract`
-  - **Finding:** A no-training successor contract is frozen. A zero-unit preflight
-    attempt exposed no scientific output and is preserved with a narrow
-    verifier-metadata repair; a bitwise direct baseline and exact parent-classification
-    compatibility remain mandatory before Stage 1--3.
+- [Single-P time-role decomposition under one direct arithmetic authority](single_p_time_role_direct_authority/README.md) — `unresolved`
+  - **Finding:** The direct baseline is incompatible with its frozen external gate:
+    after bitwise direct replay and intact-margin checks passed for the first unit,
+    generic CE differed from the parent by 5.29e-08, above the registered 1e-10
+    tolerance, so execution stopped before baseline locking or Stage 1--3.
 
 ## Minimal explanatory models
 
