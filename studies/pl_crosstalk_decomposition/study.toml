@@ -3,11 +3,11 @@ id = "pl_crosstalk_decomposition"
 title = "Exact P/L retained cross-talk decomposition"
 chapter = "algorithmic_compression"
 order = 1210
-status = "frozen_contract"
+status = "supporting"
 review_state = "indexed"
 question = "Can the frozen retained dual-minus-shared probability cost in clean P/L seeds 3004--3006 be reconstructed exactly from omitted-source address overlap, scalar L gain, and each network's fixed operating point?"
-finding = "Attempt 1 was non-interpretable because two implementation checks failed; its arrays and result are preserved without scientific use. An append-only repair freezes only keyed summary comparison and the registered trace-then-read arithmetic before attempt 2."
-boundary = "This deterministic analysis may decompose the already-frozen retained contrast and registered gain-by-operating-point swaps. It cannot revise the parent failure, explain why training learned its parameters, authorize retraining or transport, or establish biological stores."
+finding = "The repaired exact decomposition passed every locked integrity check. Gain-free omitted-write cross-talk was identical across seeds; seed 3006's threshold crossing was a joint gain-by-operating-point boundary, with operating point accounting for 84.8% and 97.9% of its retained-mean difference from seeds 3004 and 3005. The 3004 gain rescued the 3006 gate while the 3005 gain did not, and the 3006 gain passed at both other operating points. Cross-talk was concentrated in few source collisions (median top-one share 0.768, top-two share 1.000, effective source count 1.522)."
+boundary = "The result exactly attributes the frozen retained contrast to omitted writes, fixed nonorthogonal addresses, scalar gain, and shared-margin operating point. It does not revise seed 3006 or the parent all-seed failure, explain why joint training learned those parameters, authorize P/L repair or transport, establish biological stores, or turn a deterministic network comparison into population prevalence."
 
 [[records]]
 path = "records/benchmarks/pl_crosstalk_decomposition_v1.json"
@@ -71,3 +71,30 @@ role = "repair_lock"
 sha256 = "b6e456597f256a1012801fd32c90d73d38c24726715ccfefc0dc14ad085a0001"
 bytes = 13533
 source_ref = "sha256:b6e456597f256a1012801fd32c90d73d38c24726715ccfefc0dc14ad085a0001"
+
+[[records]]
+path = "records/results/pl_crosstalk_decomposition_v1.json"
+legacy_path = "studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "2302d9ddacc400e8d8d83c81bb5e04238be2985d51b17e2ec06a08020058cc80"
+bytes = 40457
+source_ref = "sha256:2302d9ddacc400e8d8d83c81bb5e04238be2985d51b17e2ec06a08020058cc80"
+
+[[records]]
+path = "records/artifacts/pl_crosstalk_decomposition_v1.npz"
+legacy_path = "studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "3d9b51c8a8509c19aaf0fa95df3dc2b28e4acf3504ba1322ca1f29b7f796d251"
+bytes = 225986
+source_ref = "sha256:3d9b51c8a8509c19aaf0fa95df3dc2b28e4acf3504ba1322ca1f29b7f796d251"
+
+[[records]]
+path = "records/reports/pl_crosstalk_decomposition_v1.md"
+legacy_path = "studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.md"
+origin = "native"
+role = "report"
+sha256 = "025f8c4619dba9dc0e892d1dcfcf870b21d2f77a2c62a69026361eb17fe65a98"
+bytes = 2934
+source_ref = "sha256:025f8c4619dba9dc0e892d1dcfcf870b21d2f77a2c62a69026361eb17fe65a98"

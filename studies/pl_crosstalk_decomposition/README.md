@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `supporting`
 - **Review state:** `indexed`
 - **Study ID:** `pl_crosstalk_decomposition`
 
@@ -25,15 +25,20 @@
 seeds 3004--3006 be reconstructed exactly from omitted-source address overlap, scalar L
 gain, and each network's fixed operating point?
 
-**Finding.** Attempt 1 was non-interpretable because two implementation checks failed;
-its arrays and result are preserved without scientific use. An append-only repair
-freezes only keyed summary comparison and the registered trace-then-read arithmetic
-before attempt 2.
+**Finding.** The repaired exact decomposition passed every locked integrity check.
+Gain-free omitted-write cross-talk was identical across seeds; seed 3006's threshold
+crossing was a joint gain-by-operating-point boundary, with operating point accounting
+for 84.8% and 97.9% of its retained-mean difference from seeds 3004 and 3005. The 3004
+gain rescued the 3006 gate while the 3005 gain did not, and the 3006 gain passed at both
+other operating points. Cross-talk was concentrated in few source collisions (median
+top-one share 0.768, top-two share 1.000, effective source count 1.522).
 
-**Claim boundary.** This deterministic analysis may decompose the already-frozen
-retained contrast and registered gain-by-operating-point swaps. It cannot revise the
-parent failure, explain why training learned its parameters, authorize retraining or
-transport, or establish biological stores.
+**Claim boundary.** The result exactly attributes the frozen retained contrast to
+omitted writes, fixed nonorthogonal addresses, scalar gain, and shared-margin operating
+point. It does not revise seed 3006 or the parent all-seed failure, explain why joint
+training learned those parameters, authorize P/L repair or transport, establish
+biological stores, or turn a deterministic network comparison into population
+prevalence.
 
 ## Frozen records
 
@@ -58,6 +63,15 @@ transport, or establish biological stores.
 - `repair_lock` —
   [studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.source_repair1.json](records/benchmarks/pl_crosstalk_decomposition_v1.source_repair1.json)
   (`sha256:b6e456597f25`)
+- `frozen_result` —
+  [studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.json](records/results/pl_crosstalk_decomposition_v1.json)
+  (`sha256:2302d9ddacc4`)
+- `supporting_artifact` —
+  [studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.npz](records/artifacts/pl_crosstalk_decomposition_v1.npz)
+  (`sha256:3d9b51c8a850`)
+- `report` —
+  [studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.md](records/reports/pl_crosstalk_decomposition_v1.md)
+  (`sha256:025f8c4619db`)
 
 ## Provenance rule
 

@@ -303,11 +303,15 @@ fail to close the dynamics.
     with zero own-write identity error. The all-seed outcome is
     competent_alternative_organization, so item-count transport was not triggered;
     quantitative calibration remained report-only at 5/9, 4/9, and 3/9.
-- [Exact P/L retained cross-talk decomposition](pl_crosstalk_decomposition/README.md) — `frozen_contract`
-  - **Finding:** Attempt 1 was non-interpretable because two implementation checks
-    failed; its arrays and result are preserved without scientific use. An append-only
-    repair freezes only keyed summary comparison and the registered trace-then-read
-    arithmetic before attempt 2.
+- [Exact P/L retained cross-talk decomposition](pl_crosstalk_decomposition/README.md) — `supporting`
+  - **Finding:** The repaired exact decomposition passed every locked integrity check.
+    Gain-free omitted-write cross-talk was identical across seeds; seed 3006's threshold
+    crossing was a joint gain-by-operating-point boundary, with operating point
+    accounting for 84.8% and 97.9% of its retained-mean difference from seeds 3004 and
+    3005. The 3004 gain rescued the 3006 gate while the 3005 gain did not, and the 3006
+    gain passed at both other operating points. Cross-talk was concentrated in few
+    source collisions (median top-one share 0.768, top-two share 1.000, effective source
+    count 1.522).
 
 ## Minimal explanatory models
 
