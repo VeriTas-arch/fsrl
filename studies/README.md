@@ -327,6 +327,11 @@ fail to close the dynamics.
     after bitwise direct replay and intact-margin checks passed for the first unit,
     generic CE differed from the parent by 5.29e-08, above the registered 1e-10
     tolerance, so execution stopped before baseline locking or Stage 1--3.
+- [Single-P time-role decomposition with propagated numerical authority](single_p_time_role_propagated_authority/README.md) — `frozen_contract`
+  - **Finding:** A no-training successor contract is frozen. It propagates the
+    registered margin tolerance through probability, CE, participant aggregation,
+    contrasts, bootstrap draws and intervals; separately requires exact discrete
+    scientific classifications; and makes batch shape part of the arithmetic authority.
 
 ## Minimal explanatory models
 

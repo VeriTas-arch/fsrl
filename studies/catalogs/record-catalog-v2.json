@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3901,
+  "entry_count": 3902,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2152,
+    "json": 2153,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3804,
+    "already_conformant": 3805,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -118353,6 +118353,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 18932,
+        "sha256": "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_benchmarks_single_p_time_role_propagated_authority_v1_json",
+      "registered_identity": {
+        "bytes": 18932,
+        "sha256": "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959",
+        "source_ref": "sha256:4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959"
+      },
+      "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.source_context",
       "format": {
         "format": "pdf",
@@ -133023,7 +133057,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3899,
+  "registered_record_count": 3900,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -133044,7 +133078,7 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 93,
+    "registered_contract": 94,
     "repair_contract": 27,
     "repair_lock": 14,
     "report": 96,
@@ -133057,7 +133091,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "04906b4b36ac1df2684c2b5fcd8c8d04e597c3625c6d22b36ca9e8ca5a59bdd5"
+      "sha256": "9f607e5b8f5cc2eadc5f221533009ba13d9c0a141189c592c0c5fe2c3b551645"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",
