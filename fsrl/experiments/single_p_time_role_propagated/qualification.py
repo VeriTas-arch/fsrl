@@ -11,6 +11,7 @@ import torch
 
 from fsrl.experiments.clean_single_p.model import AffineSingleP, CleanSinglePConfig
 from fsrl.experiments.clean_single_p.protocol import inherited_recipe
+from fsrl.experiments.memory_structure.inputs import size_protocol
 from fsrl.experiments.single_p_time_role.analysis import generic_endpoints
 from fsrl.experiments.single_p_time_role.estimands import (
     canonical_field,
@@ -21,6 +22,9 @@ from fsrl.experiments.single_p_time_role.estimands import (
     positive_scale,
 )
 from fsrl.experiments.training_strategy.batches import EpisodeBatch
+from fsrl.experiments.training_strategy.summaries import (
+    liu_endpoints as source_liu_endpoints,
+)
 from fsrl.infra.provenance import tensor_hashes, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
@@ -42,7 +46,7 @@ from .locks import require_exact_inventory, sources
 from .protocol import (
     PROTOCOL_SHA256,
     QUALIFICATION,
-    REPAIR_SHA256,
+    REPAIR_SHA256S,
     specification,
 )
 from .storage import deterministic_npz_bytes
@@ -195,9 +199,19 @@ def _budget_checks() -> dict:
     )
     synthetic_raw = {"bundles__intact__logits": np.linspace(-2, 2, 112).reshape(2, 56)}
     rebuilt = liu_reconstruction(synthetic_raw, synthetic_cpu, inherited_recipe(1))
+    expected = source_liu_endpoints(
+        {"intact": {"logits": synthetic_raw["bundles__intact__logits"]}},
+        synthetic_cpu.arrays["retention"],
+        size_protocol(inherited_recipe(1), 8),
+        inherited_recipe(1)["evaluation"]["liu"]["temperature"],
+    )["intact"]["probability"]
     results["source_liu_endpoint_authority"] = bool(
         rebuilt.keys() == {"liu_learned", "liu_nonlearned", "liu_omitted"}
-        and np.array_equal(np.isnan(rebuilt["liu_omitted"]), [False, True])
+        and all(
+            np.array_equal(rebuilt[f"liu_{name}"], expected[name], equal_nan=True)
+            for name in ("learned", "nonlearned", "omitted")
+        )
+        and np.array_equal(np.isnan(rebuilt["liu_omitted"]), [True, False])
     )
     try:
         bounded_error(
@@ -322,7 +336,7 @@ def run_qualification() -> dict:
     payload = {
         "schema_version": 1,
         "protocol_sha256": PROTOCOL_SHA256,
-        "repair_sha256": REPAIR_SHA256,
+        "repair_sha256s": list(REPAIR_SHA256S),
         "sources": sources(),
         "checks": checks,
         "passed": passed,

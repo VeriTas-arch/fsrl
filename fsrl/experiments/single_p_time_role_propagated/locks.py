@@ -15,7 +15,7 @@ from .protocol import (
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
-    REPAIR,
+    REPAIRS,
     SOURCE_LOCK,
     specification,
 )
@@ -78,7 +78,7 @@ def sources() -> list[dict]:
         REPO_ROOT / "fsrl/infra/formal_runtime.py",
         REPO_ROOT / "fsrl/infra/runtime.py",
         PROTOCOL,
-        REPAIR,
+        *REPAIRS,
         REPO_ROOT / "pyproject.toml",
         REPO_ROOT / ".envrc",
     ]

@@ -8,11 +8,15 @@ from fsrl.paths import RUNS_ROOT, STUDIES_ROOT
 STUDY = "single_p_time_role_propagated_authority"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/single_p_time_role_propagated_authority_v1.json"
-REPAIR = PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair1.json")
+REPAIRS = (
+    PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair1.json"),
+    PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair2.json"),
+)
 QUALIFICATION_V1 = RECORDS / "benchmarks/qualification.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification_v2.json"
+QUALIFICATION_V2 = RECORDS / "benchmarks/qualification_v2.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_v3.json"
 SOURCE_LOCK_V1 = RECORDS / "benchmarks/baseline_source_lock.json"
-SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock_v2.json"
+SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock_v3.json"
 BASELINE_RESULT = RECORDS / "results/propagated_authority_baseline_v1.json"
 BASELINE_ARTIFACT_LOCK = (
     RECORDS / "benchmarks/propagated_authority_baseline_artifact_lock.json"
@@ -24,16 +28,19 @@ RUNS = RUNS_ROOT / "single_p_time_role_propagated_authority_v1"
 BASELINE_RUNS = RUNS / "baseline"
 MECHANISM_RUNS = RUNS / "mechanism"
 PROTOCOL_SHA256 = "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959"
-REPAIR_SHA256 = "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce"
+REPAIR_SHA256S = (
+    "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce",
+    "5a6af0e05ca3ad0b520df303aad4877ba1bb893277c62fed2ced2afa87d5c66b",
+)
 
 
 def specification() -> dict:
     if file_sha256(PROTOCOL) != PROTOCOL_SHA256:
         raise RuntimeError("propagated-authority time-role protocol changed")
-    if file_sha256(REPAIR) != REPAIR_SHA256:
-        raise RuntimeError("propagated-authority verifier repair changed")
+    if tuple(file_sha256(path) for path in REPAIRS) != REPAIR_SHA256S:
+        raise RuntimeError("propagated-authority verifier repairs changed")
     result = load_json(PROTOCOL)
-    result["active_repair"] = load_json(REPAIR)
+    result["active_repairs"] = [load_json(path) for path in REPAIRS]
     return result
 
 
@@ -47,9 +54,10 @@ __all__ = [
     "PROTOCOL_SHA256",
     "QUALIFICATION",
     "QUALIFICATION_V1",
+    "QUALIFICATION_V2",
     "RECORDS",
-    "REPAIR",
-    "REPAIR_SHA256",
+    "REPAIRS",
+    "REPAIR_SHA256S",
     "REPORT",
     "RESULT",
     "RUNS",
