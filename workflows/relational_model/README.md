@@ -12,16 +12,21 @@
 > `workflow.toml` is the machine-readable claim, evidence, implementation,
 > verification, and figure contract.
 
-A reproducible route from the task information boundary through the maintained
-global/local computation to registered evidence and report-facing figures.
+A reproducible route from the task information boundary through the historical
+global/local decomposition to the active single-state structural successor and
+report-facing evidence.
 
-**Current working claim.** Sparse signed evidence feeds a meta-learned fast-weight state
-for global assembly and a query-addressed local trace with broader evidence admission
-for direct fidelity.
+**Current working claim.** Sparse signed observations can be integrated in one
+meta-learned fast-weight state that is sufficient, in fixed-H=200 development tests, for
+coherent global inference and Liu-like individualized organization; an explicit local
+trace remains a useful functional decomposition but has not been shown structurally
+necessary for these endpoints.
 
-**Claim boundary.** This workflow organizes the current model and its evidence; it does
-not turn the model into a claim about human neural implementation, erase valid negative
-studies, or supersede frozen study contracts.
+**Claim boundary.** The no-time single-P realization is competent and complete in two of
+three paired development seeds but is not all-seed reliable under the fixed-horizon
+training recipe. This workflow does not claim universal minimality, a human neural
+implementation, absence of local memory in people, or a cognitive role for normalized
+time; it preserves all negative studies and frozen contracts.
 
 ## How to read this mainline
 
@@ -54,25 +59,33 @@ studies, or supersede frozen study contracts.
    - **Current result.** Four historical backbones confirm omitted direct-fidelity
      rescue with evidence and query specificity while global inference remains
      P-dependent. Clean P/L realizes the complete division in two of three fresh
-     networks, with the third miss localized to scalar gain and operating point. Clean
-     single-P remains competent and reproduces the core and compensation phenotype in
-     all three networks, but no-time all-seed admission fails because seed 3011 violates
-     Ce noninferiority on three of five endpoints.
+     networks, with the third miss localized to scalar gain and the shared-margin
+     operating point.
 
-6. [Algorithmic form and transport](#algorithm-and-transport)
+6. [Single-state structural successor](#single-state-successor)
+   - **Question.** Can one affine-modulated fast-weight state replace the explicit local
+     trace while retaining relational competence, evidence binding, individualized
+     organization and observation-training compensation?
+   - **Current result.** All three no-time networks remain competent, evidence-bound,
+     core-positive and compensatory, showing that these registered endpoints do not
+     require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed
+     3011 retains the phenotype but fails Ce noninferiority on generic learned, generic
+     nonlearned and Liu omitted probability.
+
+7. [Algorithmic form and transport](#algorithm-and-transport)
    - **Question.** Which parts of the working model compress exactly, and where does it
      transport?
    - **Current result.** The local computation has an exact reduction and the structural
      mechanism transports broadly; tested low-dimensional global reductions remain
      insufficient.
 
-7. [Evidence synthesis and figures](#reporting)
+8. [Evidence synthesis and figures](#reporting)
    - **Question.** How are frozen estimands converted into a report without rewriting
      diagnostic history?
    - **Current result.** The repository exposes one current claim graph, a complete
      evidence ledger, historical snapshots, and paper-aligned behavioral figures.
 
-8. [Single-stage model-neutral admission](#single-stage-admission)
+9. [Single-stage model-neutral admission](#single-stage-admission)
    - **Question.** Can a single-stage compact learner meet the complete Liu behavior
      target with a defensible biological implementation boundary?
    - **Current result.** The complete three-stream codec pilot passes generic
@@ -81,7 +94,7 @@ studies, or supersede frozen study contracts.
      all three recipes remain partial_behavioral_reproduction. Resampled misses the
      fixed distance-slope interval, while Persistent overproduces incorrect rankings.
 
-9. [Fixed Resampled independent-cohort diagnostic](#cohort-precision-diagnostic)
+10. [Fixed Resampled independent-cohort diagnostic](#cohort-precision-diagnostic)
    - **Question.** Does the pilot's near-match persist across independently generated
      cohorts without training or calibration?
    - **Current result.** All three fits show sustained_above_reference original Liu
@@ -90,7 +103,7 @@ studies, or supersede frozen study contracts.
      the frozen references. All-nine qualitative pass rates are 97.25%; descriptive
      joint qualitative/quantitative rates are 2.00%, 2.00% and 2.75%.
 
-10. [Single-stage diminishing-plasticity candidate](#experience-dependent-plasticity)
+11. [Single-stage diminishing-plasticity candidate](#experience-dependent-plasticity)
    - **Question.** Can experience-dependent stabilization improve complete internal
      order and ranking composition without changing the Resampled information boundary
      or readout?
@@ -331,23 +344,18 @@ direnv exec . python -m unittest \
 global assembly?
 
 **Method.** Keep the P and L update/readout mechanisms fixed, use selective effective
-evidence for P and z + (1-z)p for the local write, test a clean no-time P/L realization
-and its retained cross-talk, then test a paired clean single-P alternative with and
-without normalized time.
+evidence for P and z + (1-z)p for the local write, then test a clean no-time P/L
+realization and decompose its retained cross-talk without retraining.
 
 **Result.** Four historical backbones confirm omitted direct-fidelity rescue with
 evidence and query specificity while global inference remains P-dependent. Clean P/L
 realizes the complete division in two of three fresh networks, with the third miss
-localized to scalar gain and operating point. Clean single-P remains competent and
-reproduces the core and compensation phenotype in all three networks, but no-time
-all-seed admission fails because seed 3011 violates Ce noninferiority on three of five
-endpoints.
+localized to scalar gain and the shared-margin operating point.
 
-**Boundary.** Neither clean recipe is all-seed reliable: P/L seed 3006 retains a narrow
-cross-talk failure, and single-P seed 3011 retains a no-time noninferiority failure.
-These results do not establish that a separate L store is structurally necessary, that
-normalized time is a cognitive variable, or that either failed seed may be repaired post
-hoc.
+**Boundary.** P/L is retained as a functional decomposition rather than the active
+structural mainline. Seed 3006 remains a formal retained-fidelity failure, the broader
+local write has a small cross-talk cost, and the evidence does not establish a
+biologically separate local store.
 
 Implementation:
 
@@ -357,9 +365,6 @@ Implementation:
 - [`fsrl/experiments/local_fidelity/evidence_access_confirmation.py`](../../fsrl/experiments/local_fidelity/evidence_access_confirmation.py)
 - [`fsrl/experiments/pl_crosstalk_decomposition/estimands.py`](../../fsrl/experiments/pl_crosstalk_decomposition/estimands.py)
 - [`fsrl/experiments/pl_crosstalk_decomposition/analysis.py`](../../fsrl/experiments/pl_crosstalk_decomposition/analysis.py)
-- [`fsrl/experiments/clean_single_p/model.py`](../../fsrl/experiments/clean_single_p/model.py)
-- [`fsrl/experiments/clean_single_p/evaluation.py`](../../fsrl/experiments/clean_single_p/evaluation.py)
-- [`fsrl/experiments/clean_single_p/reporting.py`](../../fsrl/experiments/clean_single_p/reporting.py)
 
 Tests:
 
@@ -368,8 +373,6 @@ Tests:
 - [`tests/experiments/local_fidelity/test_evidence_access_confirmation.py`](../../tests/experiments/local_fidelity/test_evidence_access_confirmation.py)
 - [`tests/experiments/pl_crosstalk_decomposition/test_protocol.py`](../../tests/experiments/pl_crosstalk_decomposition/test_protocol.py)
 - [`tests/experiments/pl_crosstalk_decomposition/test_estimands.py`](../../tests/experiments/pl_crosstalk_decomposition/test_estimands.py)
-- [`tests/experiments/clean_single_p/test_model.py`](../../tests/experiments/clean_single_p/test_model.py)
-- [`tests/experiments/clean_single_p/test_training.py`](../../tests/experiments/clean_single_p/test_training.py)
 
 Exact evidence:
 
@@ -400,12 +403,6 @@ Exact evidence:
   - **Meaning:** The seed-3006 gate crossing is a joint gain-by-operating-point boundary
     over common address geometry, with source mass concentrated in few relation
     collisions.
-- `constrains` — [clean_single_p:records/results/clean_single_p_v1.json](../../studies/clean_single_p/records/results/clean_single_p_v1.json)
-  - **JSON pointer:** `/outcome`
-  - **Meaning:** The paired clean single-P alternative is competent, bound,
-    core-positive, and compensatory in all three networks, but no-time all-seed
-    admission fails because seed 3011 misses Ce noninferiority for generic learned,
-    generic nonlearned, and Liu omitted probability.
 
 Verification:
 
@@ -426,6 +423,59 @@ direnv exec . python -m unittest \
   tests.experiments.pl_crosstalk_decomposition.test_estimands
 ```
 
+## 6. Single-state structural successor
+
+<a id="single-state-successor"></a>
+
+**Question.** Can one affine-modulated fast-weight state replace the explicit local
+trace while retaining relational competence, evidence binding, individualized
+organization and observation-training compensation?
+
+**Method.** Directly train paired clean single-P networks with and without the
+normalized-time drive while holding initialization, task streams, realized observations,
+hidden width, update budget and evaluation panels fixed.
+
+**Result.** All three no-time networks remain competent, evidence-bound, core-positive
+and compensatory, showing that these registered endpoints do not require a separate L
+store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype
+but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted
+probability.
+
+**Boundary.** This is a fixed-H=200 three-seed development result, not universal
+minimality or confirmation of a final no-time recipe. The result supports an active
+single-state successor mainline while leaving time-free optimization robustness
+unresolved; it neither proves a cognitive role for time nor permits post-result repair
+of seed 3011.
+
+Implementation:
+
+- [`fsrl/experiments/clean_single_p/model.py`](../../fsrl/experiments/clean_single_p/model.py)
+- [`fsrl/experiments/clean_single_p/training.py`](../../fsrl/experiments/clean_single_p/training.py)
+- [`fsrl/experiments/clean_single_p/evaluation.py`](../../fsrl/experiments/clean_single_p/evaluation.py)
+- [`fsrl/experiments/clean_single_p/reporting.py`](../../fsrl/experiments/clean_single_p/reporting.py)
+
+Tests:
+
+- [`tests/experiments/clean_single_p/test_model.py`](../../tests/experiments/clean_single_p/test_model.py)
+- [`tests/experiments/clean_single_p/test_training.py`](../../tests/experiments/clean_single_p/test_training.py)
+
+Exact evidence:
+
+- `defines` — [clean_single_p:records/benchmarks/clean_single_p_v1.json](../../studies/clean_single_p/records/benchmarks/clean_single_p_v1.json)
+  - **Meaning:** The prospective paired protocol fixes the single-P architecture,
+    retained-time control, physical no-time removal, common training streams and
+    all-seed decision gates.
+- `supports` — [clean_single_p:records/results/clean_single_p_v1.json](../../studies/clean_single_p/records/results/clean_single_p_v1.json)
+  - **JSON pointer:** `/pairs`
+  - **Meaning:** All three no-time networks pass competence, evidence binding, the Ae/Ce
+    core phenotype and compensation under the registered evaluations.
+- `constrains` — [clean_single_p:records/results/clean_single_p_v1.json](../../studies/clean_single_p/records/results/clean_single_p_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** The all-seed outcome remains time_removal_failure because seed 3011
+    misses three Ce noninferiority endpoints.
+
+Verification:
+
 **`clean_single_p_tests`** (`cpu`):
 
 ```bash
@@ -433,7 +483,7 @@ direnv exec . python -m unittest tests.experiments.clean_single_p.test_model \
   tests.experiments.clean_single_p.test_training
 ```
 
-## 6. Algorithmic form and transport
+## 7. Algorithmic form and transport
 
 <a id="algorithm-and-transport"></a>
 
@@ -537,7 +587,7 @@ direnv exec . python -m unittest tests.experiments.transport.test_topology \
   tests.experiments.transport.test_item_count
 ```
 
-## 7. Evidence synthesis and figures
+## 8. Evidence synthesis and figures
 
 <a id="reporting"></a>
 
@@ -612,7 +662,7 @@ direnv exec . python -m fsrl.workflows check \
 direnv exec . python -m fsrl.workflows.paper_figures check
 ```
 
-## 8. Single-stage model-neutral admission
+## 9. Single-stage model-neutral admission
 
 <a id="single-stage-admission"></a>
 
@@ -695,7 +745,7 @@ direnv exec . python -m unittest tests.experiments.quantized_learner.test_encodi
   tests.experiments.quantized_learner.test_model
 ```
 
-## 9. Fixed Resampled independent-cohort diagnostic
+## 10. Fixed Resampled independent-cohort diagnostic
 
 <a id="cohort-precision-diagnostic"></a>
 
@@ -768,7 +818,7 @@ direnv exec . python -m unittest tests.experiments.cohort_diagnostic.test_diagno
 direnv exec . python -m tools.provenance.verify_resampled_cohort_v1
 ```
 
-## 10. Single-stage diminishing-plasticity candidate
+## 11. Single-stage diminishing-plasticity candidate
 
 <a id="experience-dependent-plasticity"></a>
 

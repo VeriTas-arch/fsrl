@@ -2,9 +2,9 @@ schema_version = 2
 id = "relational_model"
 status = "working"
 title = "Relational model mainline"
-purpose = "A reproducible route from the task information boundary through the maintained global/local computation to registered evidence and report-facing figures."
-working_claim = "Sparse signed evidence feeds a meta-learned fast-weight state for global assembly and a query-addressed local trace with broader evidence admission for direct fidelity."
-boundary = "This workflow organizes the current model and its evidence; it does not turn the model into a claim about human neural implementation, erase valid negative studies, or supersede frozen study contracts."
+purpose = "A reproducible route from the task information boundary through the historical global/local decomposition to the active single-state structural successor and report-facing evidence."
+working_claim = "Sparse signed observations can be integrated in one meta-learned fast-weight state that is sufficient, in fixed-H=200 development tests, for coherent global inference and Liu-like individualized organization; an explicit local trace remains a useful functional decomposition but has not been shown structurally necessary for these endpoints."
+boundary = "The no-time single-P realization is competent and complete in two of three paired development seeds but is not all-seed reliable under the fixed-horizon training recipe. This workflow does not claim universal minimality, a human neural implementation, absence of local memory in people, or a cognitive role for normalized time; it preserves all negative studies and frozen contracts."
 study_registry = "studies/README.md"
 synthesis = "synthesis/README.md"
 figure_root = "synthesis/figures"
@@ -160,13 +160,13 @@ argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.lo
 id = "differential_admission"
 title = "Differential evidence admission"
 question = "Can weak observed evidence persist locally when it is not admitted to global assembly?"
-method = "Keep the P and L update/readout mechanisms fixed, use selective effective evidence for P and z + (1-z)p for the local write, test a clean no-time P/L realization and its retained cross-talk, then test a paired clean single-P alternative with and without normalized time."
-finding = "Four historical backbones confirm omitted direct-fidelity rescue with evidence and query specificity while global inference remains P-dependent. Clean P/L realizes the complete division in two of three fresh networks, with the third miss localized to scalar gain and operating point. Clean single-P remains competent and reproduces the core and compensation phenotype in all three networks, but no-time all-seed admission fails because seed 3011 violates Ce noninferiority on three of five endpoints."
-boundary = "Neither clean recipe is all-seed reliable: P/L seed 3006 retains a narrow cross-talk failure, and single-P seed 3011 retains a no-time noninferiority failure. These results do not establish that a separate L store is structurally necessary, that normalized time is a cognitive variable, or that either failed seed may be repaired post hoc."
+method = "Keep the P and L update/readout mechanisms fixed, use selective effective evidence for P and z + (1-z)p for the local write, then test a clean no-time P/L realization and decompose its retained cross-talk without retraining."
+finding = "Four historical backbones confirm omitted direct-fidelity rescue with evidence and query specificity while global inference remains P-dependent. Clean P/L realizes the complete division in two of three fresh networks, with the third miss localized to scalar gain and the shared-margin operating point."
+boundary = "P/L is retained as a functional decomposition rather than the active structural mainline. Seed 3006 remains a formal retained-fidelity failure, the broader local write has a small cross-talk cost, and the evidence does not establish a biologically separate local store."
 depends_on = ["global_mechanism", "local_mechanism"]
-implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py", "fsrl/experiments/local_fidelity/evidence_access_pilot.py", "fsrl/experiments/local_fidelity/evidence_access_confirmation.py", "fsrl/experiments/pl_crosstalk_decomposition/estimands.py", "fsrl/experiments/pl_crosstalk_decomposition/analysis.py", "fsrl/experiments/clean_single_p/model.py", "fsrl/experiments/clean_single_p/evaluation.py", "fsrl/experiments/clean_single_p/reporting.py"]
-tests = ["tests/core/test_relational_system.py", "tests/experiments/local_fidelity/test_evidence_access_pilot.py", "tests/experiments/local_fidelity/test_evidence_access_confirmation.py", "tests/experiments/pl_crosstalk_decomposition/test_protocol.py", "tests/experiments/pl_crosstalk_decomposition/test_estimands.py", "tests/experiments/clean_single_p/test_model.py", "tests/experiments/clean_single_p/test_training.py"]
-studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation", "pl_functional_replication", "pl_crosstalk_decomposition", "clean_single_p"]
+implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py", "fsrl/experiments/local_fidelity/evidence_access_pilot.py", "fsrl/experiments/local_fidelity/evidence_access_confirmation.py", "fsrl/experiments/pl_crosstalk_decomposition/estimands.py", "fsrl/experiments/pl_crosstalk_decomposition/analysis.py"]
+tests = ["tests/core/test_relational_system.py", "tests/experiments/local_fidelity/test_evidence_access_pilot.py", "tests/experiments/local_fidelity/test_evidence_access_confirmation.py", "tests/experiments/pl_crosstalk_decomposition/test_protocol.py", "tests/experiments/pl_crosstalk_decomposition/test_estimands.py"]
+studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation", "pl_functional_replication", "pl_crosstalk_decomposition"]
 
 [[stages.evidence]]
 study = "dual_evidence_access_pilot"
@@ -210,13 +210,6 @@ json_pointer = "/factorial_diagnostics/classification"
 use = "constrains"
 description = "The seed-3006 gate crossing is a joint gain-by-operating-point boundary over common address geometry, with source mass concentrated in few relation collisions."
 
-[[stages.evidence]]
-study = "clean_single_p"
-record = "records/results/clean_single_p_v1.json"
-json_pointer = "/outcome"
-use = "constrains"
-description = "The paired clean single-P alternative is competent, bound, core-positive, and compensatory in all three networks, but no-time all-seed admission fails because seed 3011 misses Ce noninferiority for generic learned, generic nonlearned, and Liu omitted probability."
-
 [[stages.verification]]
 id = "differential_admission_tests"
 resource = "cpu"
@@ -226,6 +219,38 @@ argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.lo
 id = "pl_crosstalk_decomposition_tests"
 resource = "cpu"
 argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.pl_crosstalk_decomposition.test_protocol", "tests.experiments.pl_crosstalk_decomposition.test_estimands"]
+
+[[stages]]
+id = "single_state_successor"
+title = "Single-state structural successor"
+question = "Can one affine-modulated fast-weight state replace the explicit local trace while retaining relational competence, evidence binding, individualized organization and observation-training compensation?"
+method = "Directly train paired clean single-P networks with and without the normalized-time drive while holding initialization, task streams, realized observations, hidden width, update budget and evaluation panels fixed."
+finding = "All three no-time networks remain competent, evidence-bound, core-positive and compensatory, showing that these registered endpoints do not require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted probability."
+boundary = "This is a fixed-H=200 three-seed development result, not universal minimality or confirmation of a final no-time recipe. The result supports an active single-state successor mainline while leaving time-free optimization robustness unresolved; it neither proves a cognitive role for time nor permits post-result repair of seed 3011."
+depends_on = ["differential_admission"]
+implementation = ["fsrl/experiments/clean_single_p/model.py", "fsrl/experiments/clean_single_p/training.py", "fsrl/experiments/clean_single_p/evaluation.py", "fsrl/experiments/clean_single_p/reporting.py"]
+tests = ["tests/experiments/clean_single_p/test_model.py", "tests/experiments/clean_single_p/test_training.py"]
+studies = ["clean_single_p"]
+
+[[stages.evidence]]
+study = "clean_single_p"
+record = "records/benchmarks/clean_single_p_v1.json"
+use = "defines"
+description = "The prospective paired protocol fixes the single-P architecture, retained-time control, physical no-time removal, common training streams and all-seed decision gates."
+
+[[stages.evidence]]
+study = "clean_single_p"
+record = "records/results/clean_single_p_v1.json"
+json_pointer = "/pairs"
+use = "supports"
+description = "All three no-time networks pass competence, evidence binding, the Ae/Ce core phenotype and compensation under the registered evaluations."
+
+[[stages.evidence]]
+study = "clean_single_p"
+record = "records/results/clean_single_p_v1.json"
+json_pointer = "/outcome"
+use = "constrains"
+description = "The all-seed outcome remains time_removal_failure because seed 3011 misses three Ce noninferiority endpoints."
 
 [[stages.verification]]
 id = "clean_single_p_tests"
@@ -331,7 +356,7 @@ question = "How are frozen estimands converted into a report without rewriting d
 method = "Keep study records byte-preserved, organize the cross-study claim in the mainline workflow, and require source data plus panel provenance for promoted figures."
 finding = "The repository exposes one current claim graph, a complete evidence ledger, historical snapshots, and paper-aligned behavioral figures."
 boundary = "Presentation may be curated or reordered, but it cannot rewrite frozen records, promote unsupported claims, or extend the model result to human neural implementation."
-depends_on = ["algorithm_and_transport"]
+depends_on = ["algorithm_and_transport", "single_state_successor"]
 implementation = ["fsrl/infra/markdown_rendering.py", "fsrl/infra/study_registry.py", "fsrl/workflows/schema.py", "fsrl/workflows/frozen_evidence.py", "fsrl/workflows/paper_figures.py"]
 tests = ["tests/infra/test_study_registry.py", "tests/workflows/test_schema.py", "tests/workflows/test_frozen_evidence.py", "tests/workflows/test_paper_figures.py"]
 studies = ["behavior_reproduction_map"]

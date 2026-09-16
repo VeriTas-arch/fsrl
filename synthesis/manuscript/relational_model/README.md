@@ -137,7 +137,7 @@ neural mechanisms.
   generalization experiment.
 - **Cannot establish:** arbitrary-graph transport, arbitrary timing or density,
   or scale-invariant performance.
-- **Trace:** [algorithmic form and transport](../../../workflows/relational_model/README.md#6-algorithmic-form-and-transport).
+- **Trace:** [algorithmic form and transport](../../../workflows/relational_model/README.md#7-algorithmic-form-and-transport).
 
 ## Full reporting layer
 

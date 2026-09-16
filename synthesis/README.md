@@ -16,13 +16,17 @@
 A reviewed reader-first interpretation and traceable organization of the frozen model
 evidence, diagnostic lineage, closed candidate families, and remaining claim boundaries.
 
-**Current working claim.** Sparse signed evidence feeds a meta-learned fast-weight state
-for global assembly and a query-addressed local trace with broader evidence admission
-for direct fidelity.
+**Current working claim.** Sparse signed observations can be integrated in one
+meta-learned fast-weight state that is sufficient, in fixed-H=200 development tests, for
+coherent global inference and Liu-like individualized organization; an explicit local
+trace remains a useful functional decomposition but has not been shown structurally
+necessary for these endpoints.
 
-**Boundary.** This workflow organizes the current model and its evidence; it does not
-turn the model into a claim about human neural implementation, erase valid negative
-studies, or supersede frozen study contracts.
+**Boundary.** The no-time single-P realization is competent and complete in two of three
+paired development seeds but is not all-seed reliable under the fixed-horizon training
+recipe. This workflow does not claim universal minimality, a human neural
+implementation, absence of local memory in people, or a cognitive role for normalized
+time; it preserves all negative studies and frozen contracts.
 
 ## Start here
 
