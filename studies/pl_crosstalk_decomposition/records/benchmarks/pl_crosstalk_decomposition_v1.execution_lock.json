@@ -1,0 +1,237 @@
+{
+  "execution_order": "synthetic_qualification_then_source_and_input_lock_then_frozen_read_only_analysis",
+  "protocol": {
+    "bytes": 12996,
+    "commit": "3d9784f1427e7e0961d62acb3d207ec857a1dca2",
+    "path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.json",
+    "sha256": "0a8aa21c8798811817d980c77701193ceedc9c75c7644eb4dd32577c54dd27ba"
+  },
+  "qualification": {
+    "bytes": 5795,
+    "path": "artifacts/runs/pl_crosstalk_decomposition_v1/qualification/qualification.json",
+    "sha256": "83c707097698b39a5f949dab1cdc5db7f47f94e85dab1b6df27fa5bb42f43cc3"
+  },
+  "qualification_summary": {
+    "checks": {
+      "deterministic_npz_roundtrip": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-12
+      },
+      "exact_probability_effect": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-12
+      },
+      "first_order_definition": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-12
+      },
+      "gain_scaled_perturbation": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-12
+      },
+      "packed_key_norm_and_antisymmetry": {
+        "max_abs_error": 5.960464477539063e-08,
+        "passed": true,
+        "tolerance": 1e-07
+      },
+      "retained_subject_weighting": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-12
+      },
+      "source_concentration": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-12
+      },
+      "source_relation_sum": {
+        "max_abs_error": 0.0,
+        "passed": true,
+        "tolerance": 1e-07
+      }
+    },
+    "frozen_inputs_loaded": false,
+    "passed": true,
+    "runtime": {
+      "active": true,
+      "blas_thread_limit": 1,
+      "blas_threadpools": [
+        {
+          "architecture": "Haswell",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "threading_layer": "pthreads",
+          "user_api": "blas",
+          "version": "0.3.31.188.0"
+        }
+      ],
+      "cpu_thread_limit": 1,
+      "cuda_available": true,
+      "cuda_version": "13.0",
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false,
+      "device": "cuda",
+      "device_capability": [
+        12,
+        0
+      ],
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "execution_schema_version": 2,
+      "float32_matmul_precision": "highest",
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "torch_version": "2.14.0+cu130"
+    },
+    "seed": 941001
+  },
+  "remote_state": "not_required; local committed Git objects and exact file hashes are the witnesses",
+  "schema_version": 1,
+  "scientific_inputs": [
+    {
+      "bytes": 1626432,
+      "path": "artifacts/runs/pl_functional_replication_v1/evaluation-attempt2/seed-3004/raw.npz",
+      "sha256": "92fd9ef22aec84bfee45f60d90f10413133f53230f13c3ed190f9e10054a1471"
+    },
+    {
+      "bytes": 1628171,
+      "path": "artifacts/runs/pl_functional_replication_v1/evaluation-attempt2/seed-3005/raw.npz",
+      "sha256": "601e42b6381d4a57f3a1f7acbe786773e7c5859e8744203902e0df81d44ec72a"
+    },
+    {
+      "bytes": 1629645,
+      "path": "artifacts/runs/pl_functional_replication_v1/evaluation-attempt2/seed-3006/raw.npz",
+      "sha256": "f2b2ad8edf346f66a1fb12395d6038b86c8c75ea4210925ef49d9a637c16b3ee"
+    },
+    {
+      "bytes": 12996,
+      "path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.json",
+      "sha256": "0a8aa21c8798811817d980c77701193ceedc9c75c7644eb4dd32577c54dd27ba"
+    },
+    {
+      "bytes": 23119,
+      "path": "studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.json",
+      "sha256": "dc146c7723ad147a5fd964f8af5c66cad4b182c034fa20fc3c5391bb4a2e16d0"
+    },
+    {
+      "bytes": 333139,
+      "path": "studies/pl_functional_replication/records/results/pl_functional_replication_v1.json",
+      "sha256": "386247da944d075ea362fb23dba39106f6f175bbb2440acba76c41770c01a9a6"
+    }
+  ],
+  "source_commit": "f6b9373d0200a56fb51196c5530cb990ebacfe3a",
+  "sources": [
+    {
+      "bytes": 115,
+      "path": ".envrc",
+      "sha256": "65e755769f601b506f60f1f4855eb7c85742f247f7fe8bf8200bd8569e06d006"
+    },
+    {
+      "bytes": 4674,
+      "path": "fsrl/analysis/statistics.py",
+      "sha256": "f7ceb6b480f87acc630cb9c37168dcdeb89880d324171551d15be253a0b762a9"
+    },
+    {
+      "bytes": 2548,
+      "path": "fsrl/evaluation/sampling.py",
+      "sha256": "8573a8ac5bedac0d6457af23eff23747c890b1d42857e36b5553b390379351dc"
+    },
+    {
+      "bytes": 64,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/__init__.py",
+      "sha256": "f2231c3554867503fa81543ce6e7e287be8ace52425f3bbe572a1beb9074e23a"
+    },
+    {
+      "bytes": 938,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/__main__.py",
+      "sha256": "8ee483b0f905dc591e5cc24f8c91f1ee4a4cf363e0f5c2dc24b1da009e900ff2"
+    },
+    {
+      "bytes": 31653,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/analysis.py",
+      "sha256": "d16f0d2715a56ba2bf92bd1975c88927fd89cd4b0921937c783006eaf145ca58"
+    },
+    {
+      "bytes": 6972,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/estimands.py",
+      "sha256": "a0fe390157703ecd9cb1ebc45f1c6f8e002ff2387fd2a90ef718db8c81d21bb6"
+    },
+    {
+      "bytes": 8622,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/locks.py",
+      "sha256": "0adb90cedf3f903c9b2a126b83cf870c18785a73c416cf686f2d851359b92e49"
+    },
+    {
+      "bytes": 1171,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/protocol.py",
+      "sha256": "33d21cd68c06e2bb701182ca40534ffc5db61e7174db6791d409de5a1af8bf1f"
+    },
+    {
+      "bytes": 5929,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/qualification.py",
+      "sha256": "9d14e96e524bbeac9cf89c57114962f15444f6dc9979526b3d75e8b9156f5dd7"
+    },
+    {
+      "bytes": 7515,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/reporting.py",
+      "sha256": "f21f63cf0ff306b9d0957f6382076d6f9cd6ed9eba65c62ec4014aced12f0c86"
+    },
+    {
+      "bytes": 1612,
+      "path": "fsrl/experiments/pl_crosstalk_decomposition/storage.py",
+      "sha256": "b7b91017dfc50d6d7b05a3779f4aa0b8f932ec7266e26b08642e17ac43f6dada"
+    },
+    {
+      "bytes": 6409,
+      "path": "fsrl/infra/formal_runtime.py",
+      "sha256": "82f85df8ef676c31ec6728cb64911ffcbb3f026bf9e0c2244126b07c26076ad8"
+    },
+    {
+      "bytes": 2039,
+      "path": "fsrl/infra/provenance.py",
+      "sha256": "28ff8adfaa7b8db517362859a3d65bbb71cb91d5441269f745c4b44d594f43ab"
+    },
+    {
+      "bytes": 56895,
+      "path": "fsrl/infra/study_registry.py",
+      "sha256": "5ff6b472a355a838bd2810ed1e372ca0c1cb66eb68c2240d06190240a88d507f"
+    },
+    {
+      "bytes": 6245,
+      "path": "fsrl/tasks/protocol.py",
+      "sha256": "bcb8799d1b17f72f8ef9bb57e40e839d9a729f1bf51966a74e2a79bf84d156e5"
+    },
+    {
+      "bytes": 1257,
+      "path": "fsrl/tasks/protocol_catalog.py",
+      "sha256": "088bf327b4b2a4398ffb8b639c8895cd105d9e36452831fcd78ce3116a59a97f"
+    },
+    {
+      "bytes": 1419,
+      "path": "pyproject.toml",
+      "sha256": "9a98d71c78b90c5991d3878abe92338780fb0f2374d79266d24d003329b3c19c"
+    },
+    {
+      "bytes": 52,
+      "path": "tests/experiments/pl_crosstalk_decomposition/__init__.py",
+      "sha256": "3fa587125551cb77d8b8eb62c001037ff179578bf6a7cccf0767b4b9388a8188"
+    },
+    {
+      "bytes": 3540,
+      "path": "tests/experiments/pl_crosstalk_decomposition/test_estimands.py",
+      "sha256": "cc22a91fdcc912c59d2916417186b0d30a86c810271583738fb7594b168b84c3"
+    },
+    {
+      "bytes": 1376,
+      "path": "tests/experiments/pl_crosstalk_decomposition/test_protocol.py",
+      "sha256": "dee285aa0f75624ad12e1514fe2fe4e674057e5f949ed988a4395b322f929934"
+    }
+  ],
+  "study_id": "pl_crosstalk_decomposition"
+}

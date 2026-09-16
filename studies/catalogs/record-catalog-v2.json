@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3841,
+  "entry_count": 3842,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2099,
+    "json": 2100,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3745,
+    "already_conformant": 3746,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -81646,6 +81646,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.execution_lock.json",
+        "repository_path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.execution_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 8022,
+        "sha256": "b9d5c6d62e46314709ebeb9b8b3d0107f3444ddf1f06767f971f2e3e6d9f374e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_crosstalk_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.pl_crosstalk_decomposition.studies_pl_crosstalk_decomposition_records_benchmarks_pl_crosstalk_decomposition_v1_execution_lock_json",
+      "registered_identity": {
+        "bytes": 8022,
+        "sha256": "b9d5c6d62e46314709ebeb9b8b3d0107f3444ddf1f06767f971f2e3e6d9f374e",
+        "source_ref": "sha256:b9d5c6d62e46314709ebeb9b8b3d0107f3444ddf1f06767f971f2e3e6d9f374e"
+      },
+      "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -130981,7 +131015,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3839,
+  "registered_record_count": 3840,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130992,7 +131026,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 67,
+    "execution_lock": 68,
     "freeze_validation": 1,
     "frozen_parameters": 180,
     "frozen_result": 570,
