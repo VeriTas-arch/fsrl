@@ -29,6 +29,10 @@ class TimeRoleProtocolTests(unittest.TestCase):
             spec["active_integrity_repair"]["repair"]["source_lock_authority"],
             "records/benchmarks/source_lock_v3.json",
         )
+        self.assertEqual(
+            spec["active_arithmetic_repair"]["repair"]["source_lock_authority"],
+            "records/benchmarks/source_lock_v4.json",
+        )
 
 
 if __name__ == "__main__":

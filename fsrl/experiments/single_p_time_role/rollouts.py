@@ -7,6 +7,8 @@ from itertools import permutations
 import numpy as np
 import torch
 
+from fsrl.core.sequence import RecurrentSequence
+from fsrl.experiments.clean_single_p.adapter import evaluation_adapter
 from fsrl.experiments.clean_single_p.model import (
     AffineSingleP,
     AffineSinglePSequence,
@@ -114,6 +116,22 @@ def support_trajectory(
     return states, writes, modulations
 
 
+def legacy_support_weights(model: AffineSingleP, cpu: EpisodeBatch) -> torch.Tensor:
+    """Replay only the parent's terminal-P arithmetic for integrity checks."""
+    adapter = evaluation_adapter(model)
+    sequence = RecurrentSequence(adapter)
+    support = torch.from_numpy(cpu.arrays["support_inputs"]).to(model.w.device)
+    count = support.shape[2]
+    hidden = adapter.initial_hidden(count)
+    eligibility = adapter.initial_eligibility(count)
+    weights = adapter.initial_fast_weights(count)
+    blank = weights.new_zeros(2, count, adapter.model_config.input_size)
+    _, _, _, _, _, weights = sequence(blank, hidden, eligibility, weights, True)
+    for trial in support.unbind(0):
+        _, _, _, _, _, weights = sequence(trial, hidden, eligibility, weights, True)
+    return weights
+
+
 def read_ordered(
     model: AffineSingleP,
     weights: torch.Tensor,
@@ -169,6 +187,7 @@ def read_original(
 
 __all__ = [
     "clean_inputs",
+    "legacy_support_weights",
     "load_cpu",
     "load_model",
     "ordered_queries",

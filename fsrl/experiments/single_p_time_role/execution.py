@@ -25,6 +25,7 @@ from .locks import reference, validate_source_lock
 from .protocol import PROTOCOL_SHA256, RUNS, SOURCE_LOCK, specification
 from .rollouts import (
     clean_inputs,
+    legacy_support_weights,
     load_cpu,
     load_model,
     read_ordered,
@@ -71,12 +72,14 @@ def _collect_baseline(
         _checkpoint(lock, seed, condition, settings["training"]), condition
     )
     generic = {"margins": [], "fields": [], "targets": [], "learned": []}
+    generic_legacy_weights = []
     batches = []
     for name, record in sorted(_inputs(lock, panel).items()):
         if not name.startswith("test-"):
             continue
         cpu = load_cpu(record, settings["observation"], recipe)
         states, _, _ = support_trajectory(model, cpu)
+        generic_legacy_weights.append(legacy_support_weights(model, cpu))
         margins = read_original(model, states[-1], cpu)
         ordered, pairs = read_ordered(model, states[-1], cpu.arrays["item_codes"])
         generic["margins"].append(margins)
@@ -92,6 +95,7 @@ def _collect_baseline(
     }
     liu_cpu = load_cpu(_inputs(lock, panel)["liu-8"], settings["observation"], recipe)
     liu_states, _, _ = support_trajectory(model, liu_cpu)
+    liu_legacy_weights = legacy_support_weights(model, liu_cpu)
     liu_margins = read_original(model, liu_states[-1], liu_cpu)
     liu_ordered, liu_pairs = read_ordered(
         model, liu_states[-1], liu_cpu.arrays["item_codes"]
@@ -104,8 +108,10 @@ def _collect_baseline(
         "support_pairs": liu_cpu.arrays["support_pairs"],
         "retention": liu_cpu.arrays["retention"],
     }
-    generic_weights = torch.cat([row[2] for row in batches]).cpu().numpy()
-    liu_weights = liu_states[-1].cpu().numpy()
+    generic_direct_weights = torch.cat([row[2] for row in batches]).cpu().numpy()
+    generic_weights = torch.cat(generic_legacy_weights).cpu().numpy()
+    liu_direct_weights = liu_states[-1].cpu().numpy()
+    liu_weights = liu_legacy_weights.cpu().numpy()
     alpha = model.alpha.detach().cpu().numpy()
 
     def storage(values: np.ndarray) -> dict[str, np.ndarray]:
@@ -128,6 +134,12 @@ def _collect_baseline(
             ),
             "liu_margins": validated_replay_error(
                 liu["margins"], raw["liu__bundles__intact__logits"]
+            ),
+            "generic_direct_adapter_P": validated_replay_error(
+                generic_direct_weights, generic_weights
+            ),
+            "liu_direct_adapter_P": validated_replay_error(
+                liu_direct_weights, liu_weights
             ),
         }
         for domain, values in (

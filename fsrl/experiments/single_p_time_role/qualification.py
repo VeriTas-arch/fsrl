@@ -14,6 +14,7 @@ from fsrl.experiments.clean_single_p.model import (
     map_shadow,
 )
 from fsrl.experiments.linear_modulation.model import LinearModulationRNN
+from fsrl.experiments.training_strategy.batches import EpisodeBatch
 from fsrl.infra.provenance import write_json_exclusive
 
 from .analysis import generic_endpoints, paired_interval, validated_replay_error
@@ -27,6 +28,7 @@ from .estimands import (
 )
 from .locks import sources
 from .protocol import PROTOCOL_SHA256, QUALIFICATION, specification
+from .rollouts import legacy_support_weights
 
 
 def _synthetic_rollout_checks() -> dict:
@@ -67,6 +69,16 @@ def _synthetic_rollout_checks() -> dict:
             True,
         )
         adapter_margin = logits[:, 1] - logits[:, 0]
+        helper_weights = legacy_support_weights(
+            model,
+            EpisodeBatch(
+                {
+                    "support_inputs": expand_shadow_inputs(inputs, times, 15)
+                    .unsqueeze(0)
+                    .numpy()
+                }
+            ),
+        )
         prefix = direct_weights.clone()
         untouched = prefix.clone()
         probe_weights = prefix.clone()
@@ -97,6 +109,9 @@ def _synthetic_rollout_checks() -> dict:
         ),
         "direct_adapter_P_max_abs_error": float(
             (direct_weights - adapter_weights).abs().max()
+        ),
+        "legacy_helper_P_max_abs_error": float(
+            (helper_weights - adapter_weights).abs().max()
         ),
         "prefix_clone_has_independent_storage": prefix.data_ptr()
         != probe_weights.data_ptr(),
@@ -201,6 +216,7 @@ def run_qualification() -> dict:
         and rollout["legacy_blank_P_max_abs"] == 0.0
         and rollout["direct_adapter_margin_max_abs_error"] < 1e-6
         and rollout["direct_adapter_P_max_abs_error"] < 1e-6
+        and rollout["legacy_helper_P_max_abs_error"] == 0.0
         and rollout["prefix_clone_has_independent_storage"]
         and rollout["probe_preserves_natural_prefix_bitwise"]
         and rollout["query_P_bitwise_identical"]

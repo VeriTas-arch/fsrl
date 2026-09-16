@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "source_lock": "studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v3.json",
+  "source_commit": "98bd37ad03517b271cc9a060395cf0577c9cb8fb",
+  "execution_commit": "cbf54a3",
+  "command": "direnv exec . python -m fsrl.infra.formal_runtime single-p-time-role run",
+  "status": "failed_noninterpretable",
+  "failure": "Parent replay failed for 3013/panel1/clean_no_time/Ce Liu zero_fraction. Direct clean replay contained one exactly zero P element while the algebraically equivalent parent adapter value was nonzero, producing a 1/40000 = 2.5e-05 discrete-summary difference despite continuous replay equivalence.",
+  "action": "Execution stopped at the parent integrity gate. A read-only parent-only trace localized the field; no intervention estimate, Stage-3 trajectory, runtime result, arrays, or classification was produced or inspected.",
+  "scientific_outcomes_exposed": false,
+  "runtime_outputs_written": false
+}

@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3885,
+  "entry_count": 3888,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2138,
+    "json": 2141,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3788,
+    "already_conformant": 3791,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -117401,6 +117401,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/benchmarks/qualification_v6.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/benchmarks/qualification_v6.json"
+      },
+      "materialized_identity": {
+        "bytes": 7092,
+        "sha256": "79d5da9022db274da8ff13080ab564833070bfef1f3d3b5d76a5c66d2c4e1dd5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_benchmarks_qualification_v6_json",
+      "registered_identity": {
+        "bytes": 7092,
+        "sha256": "79d5da9022db274da8ff13080ab564833070bfef1f3d3b5d76a5c66d2c4e1dd5",
+        "source_ref": "sha256:79d5da9022db274da8ff13080ab564833070bfef1f3d3b5d76a5c66d2c4e1dd5"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -117639,6 +117673,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair7.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair7.json"
+      },
+      "materialized_identity": {
+        "bytes": 1859,
+        "sha256": "560a4c762dbf1ad18f5aed7673a98b0c1445840a91ea95ebfe78af0ab88e59ab"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_benchmarks_single_p_time_role_decomposition_v1_repair7_json",
+      "registered_identity": {
+        "bytes": 1859,
+        "sha256": "560a4c762dbf1ad18f5aed7673a98b0c1445840a91ea95ebfe78af0ab88e59ab",
+        "source_ref": "sha256:560a4c762dbf1ad18f5aed7673a98b0c1445840a91ea95ebfe78af0ab88e59ab"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -117804,6 +117872,40 @@
         "bytes": 941,
         "sha256": "7ceb5865e89f56e881c141e9514bc53d47927ab5a65d8637d603d4d62ee9d105",
         "source_ref": "sha256:7ceb5865e89f56e881c141e9514bc53d47927ab5a65d8637d603d4d62ee9d105"
+      },
+      "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.noninterpretable_attempt",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/results/execution_attempt3.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/results/execution_attempt3.json"
+      },
+      "materialized_identity": {
+        "bytes": 1023,
+        "sha256": "04f3f2582961e122f710973b915a72788bd834c7c6fead378b602133940aff7b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_results_execution_attempt3_json",
+      "registered_identity": {
+        "bytes": 1023,
+        "sha256": "04f3f2582961e122f710973b915a72788bd834c7c6fead378b602133940aff7b",
+        "source_ref": "sha256:04f3f2582961e122f710973b915a72788bd834c7c6fead378b602133940aff7b"
       },
       "role": "noninterpretable_attempt"
     },
@@ -132479,7 +132581,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3883,
+  "registered_record_count": 3886,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -132495,19 +132597,19 @@
     "frozen_parameters": 180,
     "frozen_result": 572,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 13,
+    "noninterpretable_attempt": 14,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 92,
-    "repair_contract": 25,
+    "repair_contract": 26,
     "repair_lock": 13,
     "report": 94,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2729,
-    "validation_result": 21
+    "validation_result": 22
   },
   "schema_version": 2,
   "sources": {

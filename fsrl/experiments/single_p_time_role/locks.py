@@ -9,6 +9,7 @@ from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    ARITHMETIC_REPAIR,
     EXECUTION_REPAIR,
     IMPLEMENTATION_REPAIR,
     INTEGRITY_REPAIR,
@@ -35,6 +36,7 @@ def sources() -> list[dict]:
         REPO_ROOT / "fsrl/infra/formal_runtime.py",
         PROTOCOL,
         REPAIR,
+        ARITHMETIC_REPAIR,
         IMPLEMENTATION_REPAIR,
         EXECUTION_REPAIR,
         INTEGRITY_REPAIR,

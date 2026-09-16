@@ -24,8 +24,11 @@ EXECUTION_REPAIR = PROTOCOL.with_name(
 INTEGRITY_REPAIR = PROTOCOL.with_name(
     "single_p_time_role_decomposition_v1.repair6.json"
 )
-QUALIFICATION = RECORDS / "benchmarks/qualification_v5.json"
-SOURCE_LOCK = RECORDS / "benchmarks/source_lock_v3.json"
+ARITHMETIC_REPAIR = PROTOCOL.with_name(
+    "single_p_time_role_decomposition_v1.repair7.json"
+)
+QUALIFICATION = RECORDS / "benchmarks/qualification_v6.json"
+SOURCE_LOCK = RECORDS / "benchmarks/source_lock_v4.json"
 RESULT = RECORDS / "results/single_p_time_role_decomposition_v1.json"
 ARRAYS = RECORDS / "artifacts/single_p_time_role_decomposition_v1.npz"
 REPORT = RECORDS / "reports/single_p_time_role_decomposition_v1.md"
@@ -47,6 +50,9 @@ EXECUTION_REPAIR_SHA256 = (
 INTEGRITY_REPAIR_SHA256 = (
     "b8a0e1f29e6edb6bd47ef53932ee8ee1243019f4798e2dc737e7e62683b5d713"
 )
+ARITHMETIC_REPAIR_SHA256 = (
+    "560a4c762dbf1ad18f5aed7673a98b0c1445840a91ea95ebfe78af0ab88e59ab"
+)
 
 
 def specification() -> dict:
@@ -64,6 +70,8 @@ def specification() -> dict:
         raise RuntimeError("single-P time-role execution repair changed")
     if file_sha256(INTEGRITY_REPAIR) != INTEGRITY_REPAIR_SHA256:
         raise RuntimeError("single-P time-role integrity repair changed")
+    if file_sha256(ARITHMETIC_REPAIR) != ARITHMETIC_REPAIR_SHA256:
+        raise RuntimeError("single-P time-role arithmetic repair changed")
     result = load_json(PROTOCOL)
     result["active_repair"] = load_json(REPAIR)
     result["active_implementation_repair"] = load_json(IMPLEMENTATION_REPAIR)
@@ -71,10 +79,13 @@ def specification() -> dict:
     result["active_qualification_fix"] = load_json(QUALIFICATION_FIX)
     result["active_execution_repair"] = load_json(EXECUTION_REPAIR)
     result["active_integrity_repair"] = load_json(INTEGRITY_REPAIR)
+    result["active_arithmetic_repair"] = load_json(ARITHMETIC_REPAIR)
     return result
 
 
 __all__ = [
+    "ARITHMETIC_REPAIR",
+    "ARITHMETIC_REPAIR_SHA256",
     "ARRAYS",
     "EXECUTION_REPAIR",
     "EXECUTION_REPAIR_SHA256",

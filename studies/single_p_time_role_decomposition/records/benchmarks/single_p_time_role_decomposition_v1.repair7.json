@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "timing": "After failed execution_attempt3 and its parent-only localization, before any intervention estimate or completed diagnostic result.",
+  "reason": "The 32-channel direct computation and the parent's 38-channel evaluation adapter are algebraically equivalent but not bitwise identical. One 3013/panel1/clean_no_time/Ce Liu P element landed exactly on zero only in the direct arithmetic, so the discontinuous zero_fraction summary could not reconstruct the parent despite continuous array equivalence.",
+  "repair": {
+    "qualification_authority": "records/benchmarks/qualification_v6.json",
+    "source_lock_authority": "records/benchmarks/source_lock_v4.json",
+    "parent_terminal_P_replay": "Reconstruct parent terminal-P summaries with the frozen parent's evaluation-adapter arithmetic, including its inert two-step blank path.",
+    "direct_path_integrity": "Separately require direct clean terminal P to agree with adapter terminal P under the already frozen atol=1e-5, rtol=1e-5 continuous-array criterion.",
+    "diagnostic_execution": "Retain the 32-channel clean direct path with out-of-band time for every Stage-1 field, Stage-2 intervention, and Stage-3 trajectory or probe.",
+    "discrete_summaries": "Do not waive or loosen parent zero_fraction or boundary_fraction replay; reconstruct them on the exact parent arithmetic path."
+  },
+  "unchanged": [
+    "all scientific seeds, panels, cells, checkpoints, frozen inputs, interventions, and direct diagnostic equations",
+    "all registered replay tolerances and parent summary definitions",
+    "all scientific estimands, resampling, thresholds, labels, and stop rules",
+    "the prohibition on retraining and outcome-dependent modification"
+  ],
+  "scientific_outcomes_exposed_before_repair": false
+}

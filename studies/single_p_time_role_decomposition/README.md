@@ -85,6 +85,15 @@ mechanism labels rather than model admission.
 - `execution_lock` —
   [studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v3.json](records/benchmarks/source_lock_v3.json)
   (`sha256:6ba9726e28a3`)
+- `noninterpretable_attempt` —
+  [studies/single_p_time_role_decomposition/records/results/execution_attempt3.json](records/results/execution_attempt3.json)
+  (`sha256:04f3f2582961`)
+- `repair_contract` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair7.json](records/benchmarks/single_p_time_role_decomposition_v1.repair7.json)
+  (`sha256:560a4c762dbf`)
+- `validation_result` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/qualification_v6.json](records/benchmarks/qualification_v6.json)
+  (`sha256:79d5da9022db`)
 
 ## Provenance rule
 
