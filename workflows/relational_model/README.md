@@ -67,14 +67,15 @@ time; it preserves all negative studies and frozen contracts.
      trace while retaining relational competence, evidence binding, individualized
      organization and observation-training compensation?
    - **Current result.** All three no-time networks remain competent, evidence-bound,
-     core-positive and compensatory, showing that these registered endpoints do not
-     require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed
-     3011 retains the phenotype but fails Ce noninferiority on generic learned, generic
-     nonlearned and Liu omitted probability. The first time-role decomposition was
-     noninterpretable because direct and adapter terminal P failed its integrity gate.
-     Its one-arithmetic successor achieved bitwise direct replay and intact-margin
-     compatibility on the first unit but stopped because generic CE differed by
-     5.29e-08, above its frozen 1e-10 external-identity tolerance.
+     core-positive and compensatory, but seed 3011 still fails the parent Ce admission
+     gate. The propagated-authority baseline preserves every parent classification
+     across all 72 units and admits the time-role diagnostic. One positive margin scale
+     remains insufficient for seed 3011: it rescues generic learned but not generic
+     nonlearned or Liu omitted noninferiority. Support-time and query-time paths are
+     present in all three retained-time controls, whereas state-dependent plasticity is
+     present with and without time in every seed. All six registered confidence-link
+     intervals are positive rather than negative, so that proposed link is not
+     supported; the registered labels show no seed heterogeneity.
 
 7. [Algorithmic form and transport](#algorithm-and-transport)
    - **Question.** Which parts of the working model compress exactly, and where does it
@@ -435,27 +436,28 @@ direnv exec . python -m unittest \
 trace while retaining relational competence, evidence binding, individualized
 organization and observation-training compensation?
 
-**Method.** Directly train paired clean single-P networks with and without the
-normalized-time drive while holding initialization, task streams, realized observations,
-hidden width, update budget and evaluation panels fixed.
+**Method.** Directly train paired clean single-P networks with and without normalized
+time, then diagnose the frozen pairs under one full-shape direct arithmetic authority
+using propagated numerical budgets, a label-free scalar fit, support- and query-time
+interventions, and same-shape prefix probes.
 
 **Result.** All three no-time networks remain competent, evidence-bound, core-positive
-and compensatory, showing that these registered endpoints do not require a separate L
-store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype
-but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted
-probability. The first time-role decomposition was noninterpretable because direct and
-adapter terminal P failed its integrity gate. Its one-arithmetic successor achieved
-bitwise direct replay and intact-margin compatibility on the first unit but stopped
-because generic CE differed by 5.29e-08, above its frozen 1e-10 external-identity
-tolerance.
+and compensatory, but seed 3011 still fails the parent Ce admission gate. The
+propagated-authority baseline preserves every parent classification across all 72 units
+and admits the time-role diagnostic. One positive margin scale remains insufficient for
+seed 3011: it rescues generic learned but not generic nonlearned or Liu omitted
+noninferiority. Support-time and query-time paths are present in all three retained-time
+controls, whereas state-dependent plasticity is present with and without time in every
+seed. All six registered confidence-link intervals are positive rather than negative, so
+that proposed link is not supported; the registered labels show no seed heterogeneity.
 
 **Boundary.** This is a fixed-H=200 three-seed development result, not universal
-minimality or confirmation of a final no-time recipe. The result supports an active
-single-state successor mainline while leaving time-free optimization robustness and the
-role of normalized time unresolved. Neither failed diagnostic reached Stage 1--3, so
-neither assigns a scale, support-time, query-time, state-dependence or confidence-link
-label; the direct-authority failure also does not establish a changed parent
-classification.
+minimality or confirmation of a final no-time training recipe. Normalized time is an
+active input to retained support updates and query reads, but the evidence does not make
+it necessary for state-dependent plasticity or reduce its removal to scalar calibration.
+Acute interventions are not retraining, the rejected confidence link is proxy-specific,
+and none of these model diagnostics establishes a human or biological mechanism. The
+parent remains time_removal_failure.
 
 Implementation:
 
@@ -465,6 +467,9 @@ Implementation:
 - [`fsrl/experiments/clean_single_p/reporting.py`](../../fsrl/experiments/clean_single_p/reporting.py)
 - [`fsrl/experiments/single_p_time_role_direct/direct.py`](../../fsrl/experiments/single_p_time_role_direct/direct.py)
 - [`fsrl/experiments/single_p_time_role_direct/baseline.py`](../../fsrl/experiments/single_p_time_role_direct/baseline.py)
+- [`fsrl/experiments/single_p_time_role_propagated/baseline.py`](../../fsrl/experiments/single_p_time_role_propagated/baseline.py)
+- [`fsrl/experiments/single_p_time_role_propagated/mechanism.py`](../../fsrl/experiments/single_p_time_role_propagated/mechanism.py)
+- [`fsrl/experiments/single_p_time_role_propagated/trajectory.py`](../../fsrl/experiments/single_p_time_role_propagated/trajectory.py)
 
 Tests:
 
@@ -472,6 +477,8 @@ Tests:
 - [`tests/experiments/clean_single_p/test_training.py`](../../tests/experiments/clean_single_p/test_training.py)
 - [`tests/experiments/single_p_time_role_direct/test_protocol.py`](../../tests/experiments/single_p_time_role_direct/test_protocol.py)
 - [`tests/experiments/single_p_time_role_direct/test_storage_and_estimators.py`](../../tests/experiments/single_p_time_role_direct/test_storage_and_estimators.py)
+- [`tests/experiments/single_p_time_role_propagated/test_protocol.py`](../../tests/experiments/single_p_time_role_propagated/test_protocol.py)
+- [`tests/experiments/single_p_time_role_propagated/test_storage_and_estimators.py`](../../tests/experiments/single_p_time_role_propagated/test_storage_and_estimators.py)
 
 Exact evidence:
 
@@ -497,6 +504,17 @@ Exact evidence:
   - **Meaning:** The one-arithmetic successor stopped at its frozen external CE identity
     gate before baseline locking or mechanism analysis; it assigns no mechanism labels
     and does not show a changed parent classification.
+- `defines` — [single_p_time_role_propagated_authority:records/results/propagated_authority_baseline_v1.json](../../studies/single_p_time_role_propagated_authority/records/results/propagated_authority_baseline_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** The full-shape direct baseline is compatible across all 72 units under
+    analytically propagated continuous budgets and exact discrete classification gates,
+    while preserving the parent time_removal_failure.
+- `supports` — [single_p_time_role_propagated_authority:records/results/single_p_time_role_propagated_authority_v1.json](../../studies/single_p_time_role_propagated_authority/records/results/single_p_time_role_propagated_authority_v1.json)
+  - **JSON pointer:** `/classification`
+  - **Meaning:** The admitted diagnostic finds scalar insufficiency, support- and
+    query-time paths in all retained controls, state-dependent plasticity in both
+    architectures, no support for the registered negative confidence link, and no label
+    heterogeneity across the three seeds.
 
 Verification:
 
@@ -511,6 +529,12 @@ direnv exec . python -m unittest tests.experiments.clean_single_p.test_model \
 
 ```bash
 direnv exec . python -m pytest tests/experiments/single_p_time_role_direct -q
+```
+
+**`single_p_propagated_authority_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m pytest tests/experiments/single_p_time_role_propagated -q
 ```
 
 ## 7. Algorithmic form and transport

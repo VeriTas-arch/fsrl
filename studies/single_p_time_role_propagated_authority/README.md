@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `supporting`
 - **Review state:** `indexed`
 - **Study ID:** `single_p_time_role_propagated_authority`
 
@@ -25,17 +25,21 @@
 under analytically propagated numerical error budgets and thereby admit the frozen
 time-role mechanism diagnostic?
 
-**Finding.** The frozen propagated-authority baseline is compatible across all 72
-evaluation units: 18144 summary values and 1824000 bootstrap-draw values remain inside
-their analytic budgets, all 4674 discrete classification leaves match exactly, and the
-parent time_removal_failure is unchanged. The first mechanism attempt exposed no
-estimate and stopped on an invalid bootstrap-count lookup; its inherited-authority-only
-repair has passed synthetic qualification, and the mechanism diagnostic remains pending.
+**Finding.** The full-shape propagated baseline is compatible and the repaired frozen
+mechanism diagnostic is interpretable. One positive margin scale remains insufficient
+for seed 3011 because generic nonlearned and Liu omitted lower bounds remain below
+-0.02. Support-time and query-time paths are present in all three seeds with
+bitwise-identical terminal P under query interventions. Both architectures show
+state-dependent plasticity in every seed, but all six preregistered confidence-link
+intervals are positive rather than negative, so that link is not supported; the
+registered labels are not heterogeneous across seeds.
 
-**Claim boundary.** Baseline compatibility admits the registered mechanism diagnostic
-but does not itself assign a time-role label, revise the parent's time_removal_failure,
-or authorize training. The result is conditional on the frozen full-batch arithmetic
-authority and locked 24.9 GB runtime artifact set.
+**Claim boundary.** This localizes normalized time as an active support-update and
+query-read input in the retained controls, not a sufficient scalar calibration or a
+necessary source of state-dependent plasticity. Acute time interventions are not
+equivalent to retraining without time; the confidence result rejects only the registered
+negative-link proxy. The three fixed-H=200 networks do not establish a human or
+biological mechanism, and the parent remains time_removal_failure.
 
 ## Frozen records
 
@@ -111,6 +115,15 @@ authority and locked 24.9 GB runtime artifact set.
 - `repair_lock` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/mechanism_source_lock.json](records/benchmarks/mechanism_source_lock.json)
   (`sha256:88d1f474cd12`)
+- `frozen_result` —
+  [studies/single_p_time_role_propagated_authority/records/results/single_p_time_role_propagated_authority_v1.json](records/results/single_p_time_role_propagated_authority_v1.json)
+  (`sha256:34c9d3b0432a`)
+- `supporting_artifact` —
+  [studies/single_p_time_role_propagated_authority/records/artifacts/single_p_time_role_propagated_authority_v1.npz](records/artifacts/single_p_time_role_propagated_authority_v1.npz)
+  (`sha256:e872a3a1a993`)
+- `report` —
+  [studies/single_p_time_role_propagated_authority/records/reports/single_p_time_role_propagated_authority_v1.md](records/reports/single_p_time_role_propagated_authority_v1.md)
+  (`sha256:908b9c3eb170`)
 
 ## Provenance rule
 

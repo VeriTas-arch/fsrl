@@ -327,14 +327,15 @@ fail to close the dynamics.
     after bitwise direct replay and intact-margin checks passed for the first unit,
     generic CE differed from the parent by 5.29e-08, above the registered 1e-10
     tolerance, so execution stopped before baseline locking or Stage 1--3.
-- [Single-P time-role decomposition with propagated numerical authority](single_p_time_role_propagated_authority/README.md) — `frozen_contract`
-  - **Finding:** The frozen propagated-authority baseline is compatible across all 72
-    evaluation units: 18144 summary values and 1824000 bootstrap-draw values remain
-    inside their analytic budgets, all 4674 discrete classification leaves match
-    exactly, and the parent time_removal_failure is unchanged. The first mechanism
-    attempt exposed no estimate and stopped on an invalid bootstrap-count lookup; its
-    inherited-authority-only repair has passed synthetic qualification, and the
-    mechanism diagnostic remains pending.
+- [Single-P time-role decomposition with propagated numerical authority](single_p_time_role_propagated_authority/README.md) — `supporting`
+  - **Finding:** The full-shape propagated baseline is compatible and the repaired
+    frozen mechanism diagnostic is interpretable. One positive margin scale remains
+    insufficient for seed 3011 because generic nonlearned and Liu omitted lower bounds
+    remain below -0.02. Support-time and query-time paths are present in all three seeds
+    with bitwise-identical terminal P under query interventions. Both architectures show
+    state-dependent plasticity in every seed, but all six preregistered confidence-link
+    intervals are positive rather than negative, so that link is not supported; the
+    registered labels are not heterogeneous across seeds.
 
 ## Minimal explanatory models
 
