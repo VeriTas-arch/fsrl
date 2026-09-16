@@ -63,6 +63,15 @@ and assigns no time-role label before its registered gates execute.
 - `repair_lock` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/baseline_source_lock_v3.json](records/benchmarks/baseline_source_lock_v3.json)
   (`sha256:2824c4550cdb`)
+- `noninterpretable_attempt` —
+  [studies/single_p_time_role_propagated_authority/records/results/baseline_attempt2.json](records/results/baseline_attempt2.json)
+  (`sha256:e7b8840f6fa1`)
+- `artifact_lock` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/baseline_attempt2_artifact_lock.json](records/benchmarks/baseline_attempt2_artifact_lock.json)
+  (`sha256:7e67193f1461`)
+- `repair_contract` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair3.json](records/benchmarks/single_p_time_role_propagated_authority_v1.repair3.json)
+  (`sha256:40752a85fdf5`)
 
 ## Provenance rule
 
