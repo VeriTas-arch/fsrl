@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `valid_negative`
 - **Review state:** `indexed`
 - **Study ID:** `compact_global_local_model`
 
@@ -25,17 +25,15 @@
 and Liu behavior after removing historical ABI channels and exactly packing the local
 state?
 
-**Finding.** Prospective contract, one pre-execution readiness repair, and the
-implementation/source lock are frozen. CPU and CUDA eager/fullgraph qualification
-passed; the repaired candidate uses three support steps, two query steps, 32 input
-channels, one margin, and a 105-scalar exact packed local trace. All three development
-seeds completed the frozen 1000-step global plus 500-step local schedule, and their
-pre-evaluation artifacts are locked. No Liu or scientific gate result is yet registered.
+**Finding.** The 32-channel compact candidate preserves generic and Liu competence in
+all three development networks, but only one network passes the frozen P/L causal
+organization and none passes all historical quantitative behavior checks. The registered
+outcome is a competent alternative organization, so confirmation stops without tuning.
 
-**Claim boundary.** The immutable parent plus append-only repair opens one fixed
-development candidate and conditional unchanged confirmation. It does not alter frozen
-P/L evidence, promote a model, authorize scalar replacement of P, or authorize
-historical checkpoint deletion before confirmation and a separate retention migration.
+**Claim boundary.** This closes the exact compact candidate as a replacement for the
+current P/L mainline; it does not reject compression generally, alter frozen P/L
+evidence, authorize scalar replacement of P, or authorize historical checkpoint
+deletion.
 
 ## Frozen records
 
@@ -51,6 +49,12 @@ historical checkpoint deletion before confirmation and a separate retention migr
 - `artifact_lock` —
   [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.development_artifact_lock.json](records/benchmarks/compact_global_local_model_v1.development_artifact_lock.json)
   (`sha256:d4a34d20706d`)
+- `frozen_result` —
+  [studies/compact_global_local_model/records/results/compact_global_local_model_v1.development.json](records/results/compact_global_local_model_v1.development.json)
+  (`sha256:891258080f20`)
+- `report` —
+  [studies/compact_global_local_model/records/reports/compact_global_local_model_v1.development.md](records/reports/compact_global_local_model_v1.development.md)
+  (`sha256:b1f6f80374d5`)
 
 ## Provenance rule
 

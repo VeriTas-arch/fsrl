@@ -275,14 +275,12 @@ fail to close the dynamics.
     negative. Mean correct probability improves versus stage constants; competence/core
     remain. Liu budget equivalence fails, restricting causal interpretation to generic
     conditions.
-- [Compact global/local recurrent model](compact_global_local_model/README.md) — `frozen_contract`
-  - **Finding:** Prospective contract, one pre-execution readiness repair, and the
-    implementation/source lock are frozen. CPU and CUDA eager/fullgraph qualification
-    passed; the repaired candidate uses three support steps, two query steps, 32 input
-    channels, one margin, and a 105-scalar exact packed local trace. All three
-    development seeds completed the frozen 1000-step global plus 500-step local
-    schedule, and their pre-evaluation artifacts are locked. No Liu or scientific gate
-    result is yet registered.
+- [Compact global/local recurrent model](compact_global_local_model/README.md) — `valid_negative`
+  - **Finding:** The 32-channel compact candidate preserves generic and Liu competence
+    in all three development networks, but only one network passes the frozen P/L causal
+    organization and none passes all historical quantitative behavior checks. The
+    registered outcome is a competent alternative organization, so confirmation stops
+    without tuning.
 
 ## Minimal explanatory models
 

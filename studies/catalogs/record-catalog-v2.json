@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3815,
+  "entry_count": 3817,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2078,
+    "json": 2079,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 91,
+    "markdown": 92,
     "numpy_npz": 1408,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3719,
+    "already_conformant": 3721,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -9042,6 +9042,74 @@
         "source_ref": "sha256:d48196587245f40049e9297c0f94f238e638f3a66040f40623a66b808a02d49b"
       },
       "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/compact_global_local_model/records/reports/compact_global_local_model_v1.development.md",
+        "repository_path": "studies/compact_global_local_model/records/reports/compact_global_local_model_v1.development.md"
+      },
+      "materialized_identity": {
+        "bytes": 1339,
+        "sha256": "b1f6f80374d56e53c54a8724c79e147ce398fdff54115f423cf67d26c41500f2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "compact_global_local_model",
+        "kind": "study"
+      },
+      "record_id": "study.compact_global_local_model.studies_compact_global_local_model_records_reports_compact_global_local_model_v1_development_md",
+      "registered_identity": {
+        "bytes": 1339,
+        "sha256": "b1f6f80374d56e53c54a8724c79e147ce398fdff54115f423cf67d26c41500f2",
+        "source_ref": "sha256:b1f6f80374d56e53c54a8724c79e147ce398fdff54115f423cf67d26c41500f2"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/compact_global_local_model/records/results/compact_global_local_model_v1.development.json",
+        "repository_path": "studies/compact_global_local_model/records/results/compact_global_local_model_v1.development.json"
+      },
+      "materialized_identity": {
+        "bytes": 181154,
+        "sha256": "891258080f2022de57d9a4c1bf9eec348d10c029d2f10266e382cdf8d8b2a8ae"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "compact_global_local_model",
+        "kind": "study"
+      },
+      "record_id": "study.compact_global_local_model.studies_compact_global_local_model_records_results_compact_global_local_model_v1_development_json",
+      "registered_identity": {
+        "bytes": 181154,
+        "sha256": "891258080f2022de57d9a4c1bf9eec348d10c029d2f10266e382cdf8d8b2a8ae",
+        "source_ref": "sha256:891258080f2022de57d9a4c1bf9eec348d10c029d2f10266e382cdf8d8b2a8ae"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -130097,7 +130165,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3813,
+  "registered_record_count": 3815,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130111,7 +130179,7 @@
     "execution_lock": 63,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 566,
+    "frozen_result": 567,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -130121,7 +130189,7 @@
     "registered_contract": 86,
     "repair_contract": 9,
     "repair_lock": 10,
-    "report": 86,
+    "report": 87,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2727,
