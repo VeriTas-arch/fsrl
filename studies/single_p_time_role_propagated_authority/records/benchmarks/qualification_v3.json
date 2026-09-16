@@ -1,0 +1,252 @@
+{
+  "checks": {
+    "artifact_inventory_is_exact": true,
+    "baseline_has_no_mechanism_import": true,
+    "baseline_reader_does_not_mutate_storage": true,
+    "canonical_max_abs_error": 0.0,
+    "derangement_fixed_points": 0,
+    "deterministic_npz_bytes": true,
+    "direct_module_has_no_adapter_import": true,
+    "effective_distance_finite": true,
+    "endpoint_reconstruction_finite": true,
+    "fixed_effect_slope": -2.0008274212748516,
+    "hodge_reconstruction_max_abs_error": 4.440892098500626e-16,
+    "no_scientific_model_input_or_outcome_loaded": true,
+    "positive_scale": 2.5,
+    "propagated_budget": {
+      "0.25": {
+        "analytic_cross_entropy_bound": true,
+        "analytic_probability_bound": true,
+        "maximum_implementation_error": 2.0556473190325164e-16
+      },
+      "1.0": {
+        "analytic_cross_entropy_bound": true,
+        "analytic_probability_bound": true,
+        "maximum_implementation_error": 1.9168694409543718e-16
+      },
+      "aggregation": {
+        "quantile_max_draw_bound": true,
+        "weighted_bootstrap_bound": true
+      },
+      "maximum_implementation_error": 2.0556473190325164e-16,
+      "missing_value_diagnostic_uses_finite_index": true,
+      "source_liu_endpoint_authority": true
+    },
+    "synthetic_rollout": {
+      "all_parameters_frozen": true,
+      "full_batch_size_preserved": true,
+      "parameters_bitwise_unchanged": true,
+      "prefix_states_have_independent_storage": true,
+      "probe_preserves_natural_prefix_bitwise": true,
+      "probe_uses_independent_state": true,
+      "same_process_direct_replay_bitwise": true,
+      "selected_prefix_is_full_batch_slice": true
+    },
+    "typed_npz_roundtrip": true
+  },
+  "passed": true,
+  "protocol_sha256": "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959",
+  "repair_sha256s": [
+    "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce",
+    "5a6af0e05ca3ad0b520df303aad4877ba1bb893277c62fed2ced2afa87d5c66b"
+  ],
+  "schema_version": 1,
+  "scientific_seeds_inputs_or_outcomes_exposed": false,
+  "sources": [
+    {
+      "bytes": 115,
+      "path": ".envrc",
+      "sha256": "65e755769f601b506f60f1f4855eb7c85742f247f7fe8bf8200bd8569e06d006"
+    },
+    {
+      "bytes": 8871,
+      "path": "fsrl/experiments/clean_single_p/model.py",
+      "sha256": "b2227befda4d8df68fbe885b5fd052c4857e5010a40d1f8371c06fb5e952f934"
+    },
+    {
+      "bytes": 2591,
+      "path": "fsrl/experiments/clean_single_p/protocol.py",
+      "sha256": "51521b0ba6e1c4f6828189208985d2ab9fe744c59ff16c04c25b7eebc68f9c91"
+    },
+    {
+      "bytes": 9245,
+      "path": "fsrl/experiments/finite_state/liu.py",
+      "sha256": "a25b364664599415deb8e3215ada3bbfa1080ad9b1e2bd6b8f6240ce21a9f8fa"
+    },
+    {
+      "bytes": 2646,
+      "path": "fsrl/experiments/local_memory_removal/statistics.py",
+      "sha256": "ca96a275409bbcb966a13430cce0422c44cbe2d979c1e7de0e4a4137d845ad06"
+    },
+    {
+      "bytes": 1342,
+      "path": "fsrl/experiments/memory_structure/interventions.py",
+      "sha256": "7ed50d10f6e816ddfea2223cb5f7d95bc32fed967cabcd36e9554148278e98d7"
+    },
+    {
+      "bytes": 9057,
+      "path": "fsrl/experiments/observation_replication/reporting.py",
+      "sha256": "4a59d89e7b1c806e4ed56dcf0768567ecf6175694030f99270b375521f70acfd"
+    },
+    {
+      "bytes": 2530,
+      "path": "fsrl/experiments/observation_replication/statistics.py",
+      "sha256": "fed2e46bd0358336201a5c91fa054ba99cd5f62feaa099e4faffad7f49cc6dca"
+    },
+    {
+      "bytes": 5428,
+      "path": "fsrl/experiments/single_p_time_role/analysis.py",
+      "sha256": "1d79bb637f16911c7951bda0bb05641bcd4dba2d87f50e64e59c6efad4fc87c9"
+    },
+    {
+      "bytes": 4761,
+      "path": "fsrl/experiments/single_p_time_role/estimands.py",
+      "sha256": "43554947b14f0d782e8df377a3acae0740c50e6a723d0450061e68340bb4c597"
+    },
+    {
+      "bytes": 1742,
+      "path": "fsrl/experiments/single_p_time_role_direct/batches.py",
+      "sha256": "cfd208edfc30c1497db633212ba2d36d26d7a625922fed553bad7dff4914d763"
+    },
+    {
+      "bytes": 7770,
+      "path": "fsrl/experiments/single_p_time_role_direct/direct.py",
+      "sha256": "9528a7c0fca67a0667726ea60e786ce0e46ea1c5ba9358f77975919db91303e3"
+    },
+    {
+      "bytes": 2318,
+      "path": "fsrl/experiments/single_p_time_role_direct/runtime.py",
+      "sha256": "baa903007ca57ab3b774ba02002030b7626d911b6b9ef6034f639a279cbc4786"
+    },
+    {
+      "bytes": 1929,
+      "path": "fsrl/experiments/single_p_time_role_direct/storage.py",
+      "sha256": "e3b32839aa7390059d96c3b3e6d8c42782382cf746fd6eb50e459decfcd91b87"
+    },
+    {
+      "bytes": 74,
+      "path": "fsrl/experiments/single_p_time_role_propagated/__init__.py",
+      "sha256": "f3b0a015d9137355a8b571c6c642e4184357a937a63489d34c7da6dac35d088f"
+    },
+    {
+      "bytes": 1400,
+      "path": "fsrl/experiments/single_p_time_role_propagated/__main__.py",
+      "sha256": "cfaa3c927c3d95591a321a275c6004ebd2babc96f884d9dd4125e4b0c0b40b28"
+    },
+    {
+      "bytes": 21823,
+      "path": "fsrl/experiments/single_p_time_role_propagated/baseline.py",
+      "sha256": "c295a83c0c6aeaa53b45384a0978150fea899bbaeae5c6f2cdc89462276be2c2"
+    },
+    {
+      "bytes": 192,
+      "path": "fsrl/experiments/single_p_time_role_propagated/batches.py",
+      "sha256": "71467c7bfed7d6f9679d30bcace3154ccf5f25a91990cebb591d18b6a3c3e727"
+    },
+    {
+      "bytes": 10374,
+      "path": "fsrl/experiments/single_p_time_role_propagated/budgets.py",
+      "sha256": "d2907880707bfc59b474b8c9d8c39c0fec76a9447c83b9d09f1aa4392c49f0ab"
+    },
+    {
+      "bytes": 542,
+      "path": "fsrl/experiments/single_p_time_role_propagated/direct.py",
+      "sha256": "06a490a7745b43e5ffa124c80355d1ea1ada72f446439633aadaea833b87ff11"
+    },
+    {
+      "bytes": 7854,
+      "path": "fsrl/experiments/single_p_time_role_propagated/external.py",
+      "sha256": "08befc54183e52233050a4acfb16371b7e497012b16417cab99aac07618b18d0"
+    },
+    {
+      "bytes": 8755,
+      "path": "fsrl/experiments/single_p_time_role_propagated/locks.py",
+      "sha256": "ebd9bb606482d163209183a4046eca37613e520b3d88b2869ab21daee8aaa46c"
+    },
+    {
+      "bytes": 23612,
+      "path": "fsrl/experiments/single_p_time_role_propagated/mechanism.py",
+      "sha256": "af5ceeb6f9e22dbc32c0d87ebcb97c99f206446164f04f7b03f777dc902a7e85"
+    },
+    {
+      "bytes": 2492,
+      "path": "fsrl/experiments/single_p_time_role_propagated/protocol.py",
+      "sha256": "a607b42a085fdd0ac0c0488f3e5c204f9bf5794579d3e310dd9261ddd36f2153"
+    },
+    {
+      "bytes": 13997,
+      "path": "fsrl/experiments/single_p_time_role_propagated/qualification.py",
+      "sha256": "50b2a038b3007831fb69b34cd6ebc0e22c75eb4086478c426fa5fc86dd22b4ea"
+    },
+    {
+      "bytes": 3079,
+      "path": "fsrl/experiments/single_p_time_role_propagated/reporting.py",
+      "sha256": "15d4398c0884e3c6bdd9a1d4644cdeab807ffeba18a1e109469b91520fffd146"
+    },
+    {
+      "bytes": 189,
+      "path": "fsrl/experiments/single_p_time_role_propagated/runtime.py",
+      "sha256": "f902d75816fd0e9777a381eeef3fb3da0dd1d31aac896cc454bb5774246418ae"
+    },
+    {
+      "bytes": 266,
+      "path": "fsrl/experiments/single_p_time_role_propagated/storage.py",
+      "sha256": "d4be78468a3ff78d6c3f8821996ec2088b00a461a45ab3b267b370daa5e14c1e"
+    },
+    {
+      "bytes": 7775,
+      "path": "fsrl/experiments/single_p_time_role_propagated/trajectory.py",
+      "sha256": "4df6e3c7c2433f4b6bc136aa07f1225d9e30e2d3f7e409367771466ad1c35d12"
+    },
+    {
+      "bytes": 10247,
+      "path": "fsrl/experiments/write_cost/evaluation.py",
+      "sha256": "1b49906f10380fe622cc3ef6919418c2a8accb102fbf469a6457be9fcd20bee5"
+    },
+    {
+      "bytes": 6765,
+      "path": "fsrl/infra/formal_runtime.py",
+      "sha256": "195592c4d4b35f955b19abad545bb0b827f64d060dc7ec666c4af8ff7498f0f1"
+    },
+    {
+      "bytes": 6288,
+      "path": "fsrl/infra/runtime.py",
+      "sha256": "6946bf6c752a843461c5e4545fd4848640a992bdb6b8db88d431bc1ac3a44f59"
+    },
+    {
+      "bytes": 1419,
+      "path": "pyproject.toml",
+      "sha256": "9a98d71c78b90c5991d3878abe92338780fb0f2374d79266d24d003329b3c19c"
+    },
+    {
+      "bytes": 18932,
+      "path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.json",
+      "sha256": "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959"
+    },
+    {
+      "bytes": 3135,
+      "path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair1.json",
+      "sha256": "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce"
+    },
+    {
+      "bytes": 1858,
+      "path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair2.json",
+      "sha256": "5a6af0e05ca3ad0b520df303aad4877ba1bb893277c62fed2ced2afa87d5c66b"
+    },
+    {
+      "bytes": 58,
+      "path": "tests/experiments/single_p_time_role_propagated/__init__.py",
+      "sha256": "5d513add580169c5d7e45f9673c3f50b3c76e76dc1c0681cffa70b94c102f203"
+    },
+    {
+      "bytes": 1381,
+      "path": "tests/experiments/single_p_time_role_propagated/test_protocol.py",
+      "sha256": "3618efdd4e353fcb3e6a73658ddf878410080e186e4df1661874b537b781d684"
+    },
+    {
+      "bytes": 4336,
+      "path": "tests/experiments/single_p_time_role_propagated/test_storage_and_estimators.py",
+      "sha256": "19bf711c3235ad2f2db11a989088ac2bfe751292c6be514c8e60410a67606aa2"
+    }
+  ]
+}
