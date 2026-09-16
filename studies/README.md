@@ -312,9 +312,11 @@ fail to close the dynamics.
     gain passed at both other operating points. Cross-talk was concentrated in few
     source collisions (median top-one share 0.768, top-two share 1.000, effective source
     count 1.522).
-- [Direct training of the cleaned single-P affine RNN](clean_single_p/README.md) — `frozen_contract`
-  - **Finding:** Prospective paired development contract frozen before implementation,
-    training, or scientific outcome exposure.
+- [Direct training of the cleaned single-P affine RNN](clean_single_p/README.md) — `mixed`
+  - **Finding:** Both structures were competent and evidence-bound in all three paired
+    seeds. Removing normalized time passed every registered gate in seeds 3012 and 3013,
+    but seed 3011 failed Ce noninferiority for generic learned, generic nonlearned, and
+    Liu omitted probability; the registered all-seed outcome is time_removal_failure.
 
 ## Minimal explanatory models
 

@@ -53,10 +53,11 @@ studies, or supersede frozen study contracts.
      global assembly?
    - **Current result.** Four historical backbones confirm omitted direct-fidelity
      rescue with evidence and query specificity while global inference remains
-     P-dependent. The clean no-time architecture realizes the complete division in two
-     of three fresh networks; exact decomposition localizes the third network's narrow
-     retained-fidelity miss to a joint scalar-gain and shared-margin operating-point
-     boundary over fixed omitted-write address cross-talk.
+     P-dependent. Clean P/L realizes the complete division in two of three fresh
+     networks, with the third miss localized to scalar gain and operating point. Clean
+     single-P remains competent and reproduces the core and compensation phenotype in
+     all three networks, but no-time all-seed admission fails because seed 3011 violates
+     Ce noninferiority on three of five endpoints.
 
 6. [Algorithmic form and transport](#algorithm-and-transport)
    - **Question.** Which parts of the working model compress exactly, and where does it
@@ -330,20 +331,23 @@ direnv exec . python -m unittest \
 global assembly?
 
 **Method.** Keep the P and L update/readout mechanisms fixed, use selective effective
-evidence for P and z + (1-z)p for the local write, then test a clean no-time
-direct-training realization and decompose its retained cross-talk without retraining.
+evidence for P and z + (1-z)p for the local write, test a clean no-time P/L realization
+and its retained cross-talk, then test a paired clean single-P alternative with and
+without normalized time.
 
 **Result.** Four historical backbones confirm omitted direct-fidelity rescue with
-evidence and query specificity while global inference remains P-dependent. The clean
-no-time architecture realizes the complete division in two of three fresh networks;
-exact decomposition localizes the third network's narrow retained-fidelity miss to a
-joint scalar-gain and shared-margin operating-point boundary over fixed omitted-write
-address cross-talk.
+evidence and query specificity while global inference remains P-dependent. Clean P/L
+realizes the complete division in two of three fresh networks, with the third miss
+localized to scalar gain and operating point. Clean single-P remains competent and
+reproduces the core and compensation phenotype in all three networks, but no-time
+all-seed admission fails because seed 3011 violates Ce noninferiority on three of five
+endpoints.
 
-**Boundary.** The clean recipe is not all-seed reliable, seed 3006 remains a formal
-failure, and broader local writes carry a small cross-talk cost dominated by few source
-collisions. This functional decomposition does not establish that a separate L store is
-structurally necessary or repair the excessive global distance slope.
+**Boundary.** Neither clean recipe is all-seed reliable: P/L seed 3006 retains a narrow
+cross-talk failure, and single-P seed 3011 retains a no-time noninferiority failure.
+These results do not establish that a separate L store is structurally necessary, that
+normalized time is a cognitive variable, or that either failed seed may be repaired post
+hoc.
 
 Implementation:
 
@@ -353,6 +357,9 @@ Implementation:
 - [`fsrl/experiments/local_fidelity/evidence_access_confirmation.py`](../../fsrl/experiments/local_fidelity/evidence_access_confirmation.py)
 - [`fsrl/experiments/pl_crosstalk_decomposition/estimands.py`](../../fsrl/experiments/pl_crosstalk_decomposition/estimands.py)
 - [`fsrl/experiments/pl_crosstalk_decomposition/analysis.py`](../../fsrl/experiments/pl_crosstalk_decomposition/analysis.py)
+- [`fsrl/experiments/clean_single_p/model.py`](../../fsrl/experiments/clean_single_p/model.py)
+- [`fsrl/experiments/clean_single_p/evaluation.py`](../../fsrl/experiments/clean_single_p/evaluation.py)
+- [`fsrl/experiments/clean_single_p/reporting.py`](../../fsrl/experiments/clean_single_p/reporting.py)
 
 Tests:
 
@@ -361,6 +368,8 @@ Tests:
 - [`tests/experiments/local_fidelity/test_evidence_access_confirmation.py`](../../tests/experiments/local_fidelity/test_evidence_access_confirmation.py)
 - [`tests/experiments/pl_crosstalk_decomposition/test_protocol.py`](../../tests/experiments/pl_crosstalk_decomposition/test_protocol.py)
 - [`tests/experiments/pl_crosstalk_decomposition/test_estimands.py`](../../tests/experiments/pl_crosstalk_decomposition/test_estimands.py)
+- [`tests/experiments/clean_single_p/test_model.py`](../../tests/experiments/clean_single_p/test_model.py)
+- [`tests/experiments/clean_single_p/test_training.py`](../../tests/experiments/clean_single_p/test_training.py)
 
 Exact evidence:
 
@@ -391,6 +400,12 @@ Exact evidence:
   - **Meaning:** The seed-3006 gate crossing is a joint gain-by-operating-point boundary
     over common address geometry, with source mass concentrated in few relation
     collisions.
+- `constrains` — [clean_single_p:records/results/clean_single_p_v1.json](../../studies/clean_single_p/records/results/clean_single_p_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** The paired clean single-P alternative is competent, bound,
+    core-positive, and compensatory in all three networks, but no-time all-seed
+    admission fails because seed 3011 misses Ce noninferiority for generic learned,
+    generic nonlearned, and Liu omitted probability.
 
 Verification:
 
@@ -409,6 +424,13 @@ direnv exec . python -m unittest \
 direnv exec . python -m unittest \
   tests.experiments.pl_crosstalk_decomposition.test_protocol \
   tests.experiments.pl_crosstalk_decomposition.test_estimands
+```
+
+**`clean_single_p_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m unittest tests.experiments.clean_single_p.test_model \
+  tests.experiments.clean_single_p.test_training
 ```
 
 ## 6. Algorithmic form and transport

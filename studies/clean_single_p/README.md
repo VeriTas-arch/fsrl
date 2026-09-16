@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `clean_single_p`
 
@@ -26,12 +26,16 @@ input, output, time, value-head, local-memory, and blank-step scaffolding while
 preserving competence, evidence binding, organized individual behavior, and
 observation-training compensation?
 
-**Finding.** Prospective paired development contract frozen before implementation,
-training, or scientific outcome exposure.
+**Finding.** Both structures were competent and evidence-bound in all three paired
+seeds. Removing normalized time passed every registered gate in seeds 3012 and 3013, but
+seed 3011 failed Ce noninferiority for generic learned, generic nonlearned, and Liu
+omitted probability; the registered all-seed outcome is time_removal_failure.
 
-**Claim boundary.** Three paired H=200 development seeds with fixed clean/noisy training
-arms; no capacity compression, human neural identification, automatic promotion, or
-checkpoint deletion.
+**Claim boundary.** This is a fixed H=200 three-seed development result: it rejects
+all-seed admission of the registered no-time recipe, not single-P competence, the
+possibility of another prospectively registered protocol, or a cognitive role for time.
+It does not authorize seed repair, capacity compression, automatic promotion, checkpoint
+deletion, or human neural identification.
 
 ## Frozen records
 
@@ -83,6 +87,12 @@ checkpoint deletion.
 - `repair_lock` —
   [studies/clean_single_p/records/benchmarks/source_repair1.json](records/benchmarks/source_repair1.json)
   (`sha256:d67730800151`)
+- `frozen_result` —
+  [studies/clean_single_p/records/results/clean_single_p_v1.json](records/results/clean_single_p_v1.json)
+  (`sha256:a0d27a279dee`)
+- `report` —
+  [studies/clean_single_p/records/reports/clean_single_p_v1.md](records/reports/clean_single_p_v1.md)
+  (`sha256:d947b6932af6`)
 
 ## Provenance rule
 
