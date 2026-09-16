@@ -25,14 +25,15 @@
 under analytically propagated numerical error budgets and thereby admit the frozen
 time-role mechanism diagnostic?
 
-**Finding.** A no-training successor contract is frozen. It propagates the registered
-margin tolerance through probability, CE, participant aggregation, contrasts, bootstrap
-draws and intervals; separately requires exact discrete scientific classifications; and
-makes batch shape part of the arithmetic authority.
+**Finding.** The frozen propagated-authority baseline is compatible across all 72
+evaluation units: 18144 summary values and 1824000 bootstrap-draw values remain inside
+their analytic budgets, all 4674 discrete classification leaves match exactly, and the
+parent time_removal_failure is unchanged. The mechanism diagnostic remains pending.
 
-**Claim boundary.** This protocol is not a baseline or mechanism result, cannot revise
-the predecessor's baseline_incompatible outcome or the parent's time_removal_failure,
-and assigns no time-role label before its registered gates execute.
+**Claim boundary.** Baseline compatibility admits the registered mechanism diagnostic
+but does not itself assign a time-role label, revise the parent's time_removal_failure,
+or authorize training. The result is conditional on the frozen full-batch arithmetic
+authority and locked 24.9 GB runtime artifact set.
 
 ## Frozen records
 
@@ -90,6 +91,12 @@ and assigns no time-role label before its registered gates execute.
 - `repair_lock` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/baseline_finalize_source_lock_v2.json](records/benchmarks/baseline_finalize_source_lock_v2.json)
   (`sha256:e0b0b24c7eb5`)
+- `frozen_result` —
+  [studies/single_p_time_role_propagated_authority/records/results/propagated_authority_baseline_v1.json](records/results/propagated_authority_baseline_v1.json)
+  (`sha256:6ce345191e86`)
+- `artifact_lock` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/propagated_authority_baseline_artifact_lock.json](records/benchmarks/propagated_authority_baseline_artifact_lock.json)
+  (`sha256:1d5262fc9f0a`)
 
 ## Provenance rule
 

@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3919,
+  "entry_count": 3921,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2170,
+    "json": 2172,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,8 +24,8 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3822,
-    "historical_gzip_view": 96,
+    "already_conformant": 3823,
+    "historical_gzip_view": 97,
     "historical_pth_view": 1
   },
   "records": [
@@ -118523,6 +118523,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.artifact_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/propagated_authority_baseline_artifact_lock.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/propagated_authority_baseline_artifact_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 22970,
+        "sha256": "1d5262fc9f0acd76c20b18f8ed5d2371a59f9f474d989a2b4bb0ab8d4034d7f5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_benchmarks_propagated_authority_baseline_artifact_lock_json",
+      "registered_identity": {
+        "bytes": 22970,
+        "sha256": "1d5262fc9f0acd76c20b18f8ed5d2371a59f9f474d989a2b4bb0ab8d4034d7f5",
+        "source_ref": "sha256:1d5262fc9f0acd76c20b18f8ed5d2371a59f9f474d989a2b4bb0ab8d4034d7f5"
+      },
+      "role": "artifact_lock"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.validation_result",
       "format": {
         "format": "json",
@@ -118962,6 +118996,42 @@
         "source_ref": "sha256:00943a68425e2530aba776c1bdb3a2bb324d0396a482faecd79533d2733d9f4a"
       },
       "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/results/propagated_authority_baseline_v1.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/results/propagated_authority_baseline_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 6096975,
+        "sha256": "6ce345191e86b8faab66b7275eecd1fe3e240e5f3c0e1a77847442515a6ed389"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_results_propagated_authority_baseline_v1_json",
+      "registered_identity": {
+        "bytes": 6096975,
+        "sha256": "6ce345191e86b8faab66b7275eecd1fe3e240e5f3c0e1a77847442515a6ed389",
+        "source_ref": "sha256:6ce345191e86b8faab66b7275eecd1fe3e240e5f3c0e1a77847442515a6ed389"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -133635,11 +133705,11 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3917,
+  "registered_record_count": 3919,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
-    "artifact_lock": 37,
+    "artifact_lock": 38,
     "artifact_registry": 1,
     "canonical_mainline_manifest": 1,
     "data_schema": 1,
@@ -133649,7 +133719,7 @@
     "execution_lock": 75,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 574,
+    "frozen_result": 575,
     "mainline_guide": 1,
     "noninterpretable_attempt": 19,
     "presentation_asset": 6,
