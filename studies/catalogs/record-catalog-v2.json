@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3915,
+  "entry_count": 3917,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2166,
+    "json": 2168,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3818,
+    "already_conformant": 3820,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -118761,6 +118761,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair4.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair4.json"
+      },
+      "materialized_identity": {
+        "bytes": 3308,
+        "sha256": "7663201646bed7c11c0574f1d29561f65504500331c1197bcf975ed5f22b40d2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_benchmarks_single_p_time_role_propagated_authority_v1_repair4_json",
+      "registered_identity": {
+        "bytes": 3308,
+        "sha256": "7663201646bed7c11c0574f1d29561f65504500331c1197bcf975ed5f22b40d2",
+        "source_ref": "sha256:7663201646bed7c11c0574f1d29561f65504500331c1197bcf975ed5f22b40d2"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.noninterpretable_attempt",
       "format": {
         "format": "json",
@@ -118824,6 +118858,40 @@
         "bytes": 1139,
         "sha256": "e7b8840f6fa11cc8b4872ea4b5826a90faff5dbab3e966979433527c4579e675",
         "source_ref": "sha256:e7b8840f6fa11cc8b4872ea4b5826a90faff5dbab3e966979433527c4579e675"
+      },
+      "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.noninterpretable_attempt",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/results/baseline_attempt3.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/results/baseline_attempt3.json"
+      },
+      "materialized_identity": {
+        "bytes": 1589,
+        "sha256": "00943a68425e2530aba776c1bdb3a2bb324d0396a482faecd79533d2733d9f4a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_results_baseline_attempt3_json",
+      "registered_identity": {
+        "bytes": 1589,
+        "sha256": "00943a68425e2530aba776c1bdb3a2bb324d0396a482faecd79533d2733d9f4a",
+        "source_ref": "sha256:00943a68425e2530aba776c1bdb3a2bb324d0396a482faecd79533d2733d9f4a"
       },
       "role": "noninterpretable_attempt"
     },
@@ -133499,7 +133567,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3913,
+  "registered_record_count": 3915,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -133515,13 +133583,13 @@
     "frozen_parameters": 180,
     "frozen_result": 574,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 18,
+    "noninterpretable_attempt": 19,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 94,
-    "repair_contract": 30,
+    "repair_contract": 31,
     "repair_lock": 16,
     "report": 96,
     "source_context": 2,
