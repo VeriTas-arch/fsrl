@@ -13,8 +13,10 @@ from .locks import (
     validate_artifact_lock,
 )
 from .protocol import (
+    EXECUTION_REPAIR_PATH,
     PROTOCOL_SHA256,
     REPAIR_SHA256,
+    load_execution_repair,
     load_specification,
     registered_seeds,
 )
@@ -110,6 +112,10 @@ def assemble_result() -> dict:
         "repair_sha256": REPAIR_SHA256,
         "artifact_lock": reference(ARTIFACT_LOCK_PATH),
         "source_commit": artifact_lock["source_commit"],
+        "evaluation_source_commit": artifact_lock["active_evaluation_source_commit"],
+        "source_repair": artifact_lock["source_repair"],
+        "execution_repair": reference(EXECUTION_REPAIR_PATH),
+        "noninterpretable_attempt": load_execution_repair()["failure"],
         "seeds": list(registered_seeds(specification)),
         "all_seed_rule": "No pooling, majority vote, filtering, replacement, or successful-seed repair.",
         "primary_functional_replication": primary_replication,
@@ -174,6 +180,8 @@ def report_text(result: dict) -> str:
         f"Registered outcome: **{result['outcome']}**.",
         "",
         "All three candidates used the frozen 32-channel, no-time architecture, four support microsteps, two query microsteps, 40,000-scalar P state, 105-scalar packed L state, and 1,500 joint updates. Seeds 3001--3003 remain the separate historical training-parameterization failure.",
+        "",
+        "The first seed-3004 evaluation attempt stopped before any result write because an integrity diagnostic did not restore serialized nulls to NaN. The failed attempt is retained as noninterpretable; attempt2 replays every seed over the unchanged jointly locked checkpoints under the append-only source repair.",
         "",
         "| Seed | Competence | Global P path | Four v2.4 links | Omitted L materiality | 9/9 qualitative | Quantitative calibration (report only) | Local gain |",
         "| --- | --- | --- | --- | --- | --- | --- | --- |",

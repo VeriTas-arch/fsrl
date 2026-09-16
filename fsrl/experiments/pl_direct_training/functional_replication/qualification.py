@@ -22,6 +22,7 @@ from fsrl.infra.run_manifest import ProspectiveRun
 
 from ..qualification import cpu_qualification, cuda_qualification
 from .estimands import paired_summary, probability_metrics
+from .evaluation import probability_endpoint_parity_error
 from .liu import FunctionalLiuEvaluator, admitted_local_evidence
 from .locks import QUALIFICATION_ATTEMPT, implementation_sources, qualification_path
 from .protocol import (
@@ -109,6 +110,27 @@ def historical_estimand_parity_qualification() -> dict:
     }
 
 
+def nullable_endpoint_parity_qualification() -> dict:
+    probabilities = {
+        "dual_access": {
+            "raw_subject_level": {
+                "retained": [None, 0.75, 0.60],
+                "omitted": [0.55, None, 0.70],
+            }
+        }
+    }
+    endpoints = {
+        "dual_access": {
+            "probability": {
+                "retained": np.asarray([np.nan, 0.75, 0.60]),
+                "omitted": np.asarray([0.55, np.nan, 0.70]),
+            }
+        }
+    }
+    error = probability_endpoint_parity_error(probabilities, endpoints)
+    return _check(error, 0.0, matched_missingness=True)
+
+
 def routing_integrity_qualification() -> dict:
     subjects, blocks, block_size = 5, 4, 8
     maps = blockwise_derangements(subjects, blocks, block_size, QUALIFICATION_SEED)
@@ -152,6 +174,7 @@ def cpu_functional_qualification() -> dict:
             "access_algebra": access_algebra_qualification(),
             "presentation_invariance": presentation_invariance_qualification(),
             "historical_estimand_parity": historical_estimand_parity_qualification(),
+            "nullable_endpoint_parity": nullable_endpoint_parity_qualification(),
             "routing_integrity": routing_integrity_qualification(),
         }
     )

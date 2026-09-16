@@ -15,9 +15,37 @@ from fsrl.experiments.pl_direct_training.functional_replication.estimands import
     probability_metrics,
     seed_outcome,
 )
+from fsrl.experiments.pl_direct_training.functional_replication.evaluation import (
+    probability_endpoint_parity_error,
+)
 
 
 class FunctionalEstimandTests(unittest.TestCase):
+    def test_endpoint_parity_restores_serialized_empty_groups(self):
+        probabilities = {
+            "dual_access": {
+                "raw_subject_level": {
+                    "retained": [None, 0.75, 0.60],
+                    "omitted": [0.55, None, 0.70],
+                }
+            }
+        }
+        endpoints = {
+            "dual_access": {
+                "probability": {
+                    "retained": np.asarray([np.nan, 0.75, 0.60]),
+                    "omitted": np.asarray([0.55, np.nan, 0.70]),
+                }
+            }
+        }
+        self.assertEqual(
+            probability_endpoint_parity_error(probabilities, endpoints), 0.0
+        )
+        endpoints["dual_access"]["probability"]["retained"][0] = 0.5
+        self.assertTrue(
+            np.isinf(probability_endpoint_parity_error(probabilities, endpoints))
+        )
+
     def test_historical_probability_and_pairing_estimands_are_exact(self):
         rng = np.random.default_rng(73)
         probabilities = rng.uniform(0.05, 0.95, size=(7, 8, 2))

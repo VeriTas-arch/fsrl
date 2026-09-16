@@ -44,7 +44,12 @@ from fsrl.tasks.protocol_catalog import load_registered_protocol
 from .evaluation import evaluation_directory, load_model
 from .liu import FunctionalLiuEvaluator, rollout_functional
 from .locks import ARTIFACT_LOCK_PATH, RUN_ROOT, reference
-from .protocol import PROTOCOL_SHA256, REPAIR_SHA256, registered_seeds
+from .protocol import (
+    EXECUTION_REPAIR_PATH,
+    PROTOCOL_SHA256,
+    REPAIR_SHA256,
+    registered_seeds,
+)
 
 
 def _schedule_hash(evaluator: FunctionalLiuEvaluator) -> str:
@@ -464,6 +469,9 @@ def evaluate_transport(artifact_lock: dict, specification: dict, runtime: dict) 
         "repair_sha256": REPAIR_SHA256,
         "artifact_lock": reference(ARTIFACT_LOCK_PATH),
         "source_commit": artifact_lock["source_commit"],
+        "evaluation_source_commit": artifact_lock["active_evaluation_source_commit"],
+        "source_repair": artifact_lock["source_repair"],
+        "execution_repair": reference(EXECUTION_REPAIR_PATH),
     }
     with ProspectiveRun.start(
         directory,
@@ -544,6 +552,10 @@ def validate_transport(artifact_lock: dict) -> dict:
         result["protocol_sha256"] != PROTOCOL_SHA256
         or result["repair_sha256"] != REPAIR_SHA256
         or result["source_commit"] != artifact_lock["source_commit"]
+        or result["evaluation_source_commit"]
+        != artifact_lock["active_evaluation_source_commit"]
+        or result["source_repair"] != artifact_lock["source_repair"]
+        or result["execution_repair"] != reference(EXECUTION_REPAIR_PATH)
     ):
         raise RuntimeError("functional transport provenance differs")
     return result

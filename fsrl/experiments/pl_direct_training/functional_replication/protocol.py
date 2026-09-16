@@ -27,7 +27,19 @@ PROTOCOL_COMMIT = "976fb8ec5a645f532650bafe074790748fc02259"
 REPAIR_PATH = PROTOCOL_PATH.with_name("pl_functional_replication_v1.repair1.json")
 REPAIR_SHA256 = "f8fb383ee947a44ba784195af9f87b380136dcae22dbccac688eff704cc087ee"
 REPAIR_COMMIT = "f91d02252df73eb0e5586787a0cf8841fef9354f"
+EXECUTION_REPAIR_PATH = PROTOCOL_PATH.with_name(
+    "pl_functional_replication_v1.execution_repair1.json"
+)
+EXECUTION_REPAIR_SHA256 = (
+    "5707bcf608434700d12517dcfa75c47a38fe4912f918cb4287b53774a456d4ce"
+)
 CONDITION = "no_time_candidate"
+
+
+def load_execution_repair() -> dict:
+    if file_sha256(EXECUTION_REPAIR_PATH) != EXECUTION_REPAIR_SHA256:
+        raise RuntimeError("the frozen functional execution repair has changed")
+    return load_json(EXECUTION_REPAIR_PATH)
 
 
 def load_specification() -> dict:

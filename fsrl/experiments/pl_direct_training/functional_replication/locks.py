@@ -20,10 +20,14 @@ RECORD_ROOT = STUDIES_ROOT / "pl_functional_replication" / "records"
 SOURCE_LOCK_PATH = (
     RECORD_ROOT / "benchmarks" / "pl_functional_replication_v1.execution_lock.json"
 )
+SOURCE_REPAIR_LOCK_PATH = (
+    RECORD_ROOT / "benchmarks" / "pl_functional_replication_v1.source_repair1.json"
+)
 ARTIFACT_LOCK_PATH = (
     RECORD_ROOT / "benchmarks" / "pl_functional_replication_v1.artifact_lock.json"
 )
-QUALIFICATION_ATTEMPT = 2
+ORIGINAL_QUALIFICATION_ATTEMPT = 2
+QUALIFICATION_ATTEMPT = 3
 
 
 def git_text(*arguments: str) -> str:
@@ -73,12 +77,9 @@ def implementation_sources() -> list[dict]:
     return [reference(path) for path in sorted(set(paths))]
 
 
-def qualification_path() -> Path:
-    return (
-        RUN_ROOT
-        / f"qualification-attempt{QUALIFICATION_ATTEMPT}"
-        / "qualification.json"
-    )
+def qualification_path(attempt: int | None = None) -> Path:
+    selected = QUALIFICATION_ATTEMPT if attempt is None else attempt
+    return RUN_ROOT / f"qualification-attempt{selected}" / "qualification.json"
 
 
 def scientific_inputs() -> list[dict]:
@@ -122,13 +123,18 @@ def scientific_inputs() -> list[dict]:
     return [reference(path) for path in sorted(paths)]
 
 
-def _validate_qualification(record: dict) -> None:
+def _validate_qualification(
+    record: dict,
+    *,
+    expected_attempt: int,
+    expected_sources: list[dict],
+) -> None:
     from .protocol import PROTOCOL_SHA256, REPAIR_SHA256
 
     expected = {
         "passed": True,
         "seed": 930001,
-        "attempt": QUALIFICATION_ATTEMPT,
+        "attempt": expected_attempt,
         "liu_evaluated": False,
         "protocol_sha256": PROTOCOL_SHA256,
         "repair_sha256": REPAIR_SHA256,
@@ -157,12 +163,14 @@ def _validate_qualification(record: dict) -> None:
         "cuda_no_time_candidate_gradients",
         "cuda_no_time_candidate_update",
     }
+    if expected_attempt >= 3:
+        required.add("nullable_endpoint_parity")
     if set(record["checks"]) != required or not all(
         row["passed"] is True for row in record["checks"].values()
     ):
         raise RuntimeError("functional-replication qualification is incomplete")
-    if record["sources"] != implementation_sources():
-        raise RuntimeError("qualification did not exercise the current sources")
+    if record["sources"] != expected_sources:
+        raise RuntimeError("qualification did not exercise the expected sources")
 
 
 def write_source_lock() -> dict:
@@ -177,8 +185,12 @@ def write_source_lock() -> dict:
     specification = load_specification()
     commit = require_clean_commit()
     qualification = load_json(qualification_path())
-    _validate_qualification(qualification)
     sources = implementation_sources()
+    _validate_qualification(
+        qualification,
+        expected_attempt=QUALIFICATION_ATTEMPT,
+        expected_sources=sources,
+    )
     for record in sources:
         verify_reference(record, commit=commit)
     inputs = scientific_inputs()
@@ -213,32 +225,167 @@ def write_source_lock() -> dict:
     return result
 
 
-def validate_source_lock(*, require_clean: bool = True) -> dict:
+def _validate_original_source_lock(lock: dict) -> None:
     from .protocol import PROTOCOL_SHA256, REPAIR_SHA256
 
-    commit = require_clean_commit() if require_clean else git_text("rev-parse", "HEAD")
-    lock = load_json(SOURCE_LOCK_PATH)
     if lock["protocol"]["sha256"] != PROTOCOL_SHA256:
         raise RuntimeError("source lock uses a different functional contract")
     if lock["repair"]["sha256"] != REPAIR_SHA256:
         raise RuntimeError("source lock uses a different functional repair")
-    if lock["sources"] != implementation_sources():
-        raise RuntimeError("functional-replication source changed after lock")
     for record in lock["sources"]:
-        verify_reference(record, commit=lock["source_commit"])
+        if (
+            git_blob_sha256(REPO_ROOT, lock["source_commit"], record["path"])
+            != record["sha256"]
+        ):
+            raise RuntimeError(f"original Git witness differs: {record['path']}")
     if lock["scientific_inputs"] != scientific_inputs():
         raise RuntimeError("functional-replication scientific inputs changed")
     qualification = load_json(verify_reference(lock["qualification"]))
-    _validate_qualification(qualification)
+    _validate_qualification(
+        qualification,
+        expected_attempt=ORIGINAL_QUALIFICATION_ATTEMPT,
+        expected_sources=lock["sources"],
+    )
     expected_summary = {
         key: qualification[key]
         for key in ("passed", "seed", "attempt", "runtime", "checks")
     }
     if lock["qualification_summary"] != expected_summary:
         raise RuntimeError("source lock misstates functional qualification")
+
+
+def _source_replacements(original: list[dict], current: list[dict]) -> list[dict]:
+    original_by_path = {row["path"]: row for row in original}
+    current_by_path = {row["path"]: row for row in current}
+    if set(original_by_path) != set(current_by_path):
+        raise RuntimeError("source repair may not add or remove implementation paths")
+    return [
+        {
+            "original": original_by_path[path],
+            "replacement": current_by_path[path],
+        }
+        for path in sorted(original_by_path)
+        if original_by_path[path] != current_by_path[path]
+    ]
+
+
+def write_source_repair_lock() -> dict:
+    from .protocol import (
+        EXECUTION_REPAIR_PATH,
+        load_execution_repair,
+        load_specification,
+    )
+
+    commit = require_clean_commit()
+    specification = load_specification()
+    original = load_json(SOURCE_LOCK_PATH)
+    _validate_original_source_lock(original)
+    artifact_lock = load_json(ARTIFACT_LOCK_PATH)
+    if (
+        artifact_lock["source_lock"] != reference(SOURCE_LOCK_PATH)
+        or artifact_lock["source_commit"] != original["source_commit"]
+    ):
+        raise RuntimeError("artifact lock does not belong to the original source lock")
+    execution_repair = load_execution_repair()
+    if execution_repair["authorized_repair"]["scientific_change"] is not False:
+        raise RuntimeError("source repair must preserve all scientific content")
+    failed_attempt = execution_repair["failure"]["failed_run_manifest"]
+    verify_reference(failed_attempt)
+    sources = implementation_sources()
+    for record in sources:
+        verify_reference(record, commit=commit)
+    qualification = load_json(qualification_path())
+    _validate_qualification(
+        qualification,
+        expected_attempt=QUALIFICATION_ATTEMPT,
+        expected_sources=sources,
+    )
+    result = {
+        "schema_version": 1,
+        "experiment_id": specification["experiment_id"],
+        "repair_id": execution_repair["repair_id"],
+        "original_source_lock": reference(SOURCE_LOCK_PATH),
+        "artifact_lock": reference(ARTIFACT_LOCK_PATH),
+        "execution_repair": reference(EXECUTION_REPAIR_PATH),
+        "training_source_commit": original["source_commit"],
+        "source_commit": commit,
+        "sources": sources,
+        "replacements": _source_replacements(original["sources"], sources),
+        "scientific_inputs": original["scientific_inputs"],
+        "qualification": reference(qualification_path()),
+        "qualification_summary": {
+            key: qualification[key]
+            for key in ("passed", "seed", "attempt", "runtime", "checks")
+        },
+        "failed_attempt": failed_attempt,
+        "unchanged": execution_repair["unchanged"],
+        "status": "locked_integrity_only_repair_before_complete_evaluation_replay",
+    }
+    write_json_exclusive(SOURCE_REPAIR_LOCK_PATH, result)
+    return result
+
+
+def validate_source_lock(*, require_clean: bool = True) -> dict:
+    from .protocol import EXECUTION_REPAIR_PATH, load_execution_repair
+
+    commit = require_clean_commit() if require_clean else git_text("rev-parse", "HEAD")
+    original = load_json(SOURCE_LOCK_PATH)
+    _validate_original_source_lock(original)
+    current_sources = implementation_sources()
+    if not SOURCE_REPAIR_LOCK_PATH.exists():
+        if original["sources"] != current_sources:
+            raise RuntimeError("functional-replication source changed after lock")
+        for record in original["sources"]:
+            verify_reference(record, commit=original["source_commit"])
+        return {
+            **original,
+            "training_source_commit": original["source_commit"],
+            "active_source_commit": original["source_commit"],
+            "source_repair": None,
+        }
+    verify_reference(reference(SOURCE_REPAIR_LOCK_PATH), commit=commit)
+    repair = load_json(SOURCE_REPAIR_LOCK_PATH)
+    execution_repair = load_execution_repair()
+    expected = {
+        "repair_id": execution_repair["repair_id"],
+        "original_source_lock": reference(SOURCE_LOCK_PATH),
+        "artifact_lock": reference(ARTIFACT_LOCK_PATH),
+        "execution_repair": reference(EXECUTION_REPAIR_PATH),
+        "training_source_commit": original["source_commit"],
+        "scientific_inputs": original["scientific_inputs"],
+        "failed_attempt": execution_repair["failure"]["failed_run_manifest"],
+        "unchanged": execution_repair["unchanged"],
+    }
+    if any(repair.get(key) != value for key, value in expected.items()):
+        raise RuntimeError("functional source-repair provenance differs")
+    if repair["sources"] != current_sources:
+        raise RuntimeError("functional source changed after the repair lock")
+    for record in current_sources:
+        verify_reference(record, commit=repair["source_commit"])
+    if repair["replacements"] != _source_replacements(
+        original["sources"], current_sources
+    ):
+        raise RuntimeError("functional source-repair replacements differ")
+    qualification = load_json(verify_reference(repair["qualification"]))
+    _validate_qualification(
+        qualification,
+        expected_attempt=QUALIFICATION_ATTEMPT,
+        expected_sources=current_sources,
+    )
+    expected_summary = {
+        key: qualification[key]
+        for key in ("passed", "seed", "attempt", "runtime", "checks")
+    }
+    if repair["qualification_summary"] != expected_summary:
+        raise RuntimeError("source repair misstates functional qualification")
+    verify_reference(repair["failed_attempt"])
     if require_clean and commit != git_text("rev-parse", "HEAD"):
         raise RuntimeError("worktree moved during source validation")
-    return lock
+    return {
+        **repair,
+        "active_source_commit": repair["source_commit"],
+        "source_repair": reference(SOURCE_REPAIR_LOCK_PATH),
+    }
 
 
 def run_directory(seed: int) -> Path:
@@ -346,7 +493,7 @@ def write_artifact_lock() -> dict:
         "schema_version": 1,
         "experiment_id": specification["experiment_id"],
         "source_lock": reference(SOURCE_LOCK_PATH),
-        "source_commit": source["source_commit"],
+        "source_commit": source["training_source_commit"],
         "runs": runs,
         "generic_or_liu_evaluation_exposed": False,
     }
@@ -361,7 +508,7 @@ def validate_artifact_lock() -> dict:
     lock = load_json(ARTIFACT_LOCK_PATH)
     if lock["source_lock"] != reference(SOURCE_LOCK_PATH):
         raise RuntimeError("artifact lock cites a different source lock")
-    if lock["source_commit"] != source["source_commit"]:
+    if lock["source_commit"] != source["training_source_commit"]:
         raise RuntimeError("artifact lock cites a different source commit")
     specification = load_specification()
     expected = {str(seed) for seed in registered_seeds(specification)}
@@ -376,4 +523,8 @@ def validate_artifact_lock() -> dict:
         ]
         if record["files"] != files:
             raise RuntimeError("locked functional files changed")
-    return lock
+    return {
+        **lock,
+        "active_evaluation_source_commit": source["active_source_commit"],
+        "source_repair": source["source_repair"],
+    }

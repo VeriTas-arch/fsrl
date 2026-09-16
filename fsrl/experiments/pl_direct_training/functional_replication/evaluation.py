@@ -53,12 +53,15 @@ from .locks import (
 )
 from .protocol import (
     CONDITION,
+    EXECUTION_REPAIR_PATH,
     PROTOCOL_SHA256,
     REPAIR_SHA256,
     candidate_specification,
     load_specification,
     registered_seeds,
 )
+
+EVALUATION_ATTEMPT = 2
 
 
 def analysis_specification(specification: dict) -> dict:
@@ -142,6 +145,34 @@ def _sampled_nonlearned(
     return sampled, summarize_subjects(values, counts, interval=interval)
 
 
+def probability_endpoint_parity_error(probabilities: dict, endpoints: dict) -> float:
+    errors = []
+    for group in ("retained", "omitted"):
+        serialized = np.asarray(
+            probabilities["dual_access"]["raw_subject_level"][group],
+            dtype=np.float64,
+        )
+        historical = np.asarray(
+            endpoints["dual_access"]["probability"][group],
+            dtype=np.float64,
+        )
+        serialized_finite = np.isfinite(serialized)
+        historical_finite = np.isfinite(historical)
+        if not np.array_equal(serialized_finite, historical_finite):
+            return float("inf")
+        errors.append(
+            float(
+                np.max(
+                    np.abs(
+                        serialized[serialized_finite] - historical[historical_finite]
+                    ),
+                    initial=0.0,
+                )
+            )
+        )
+    return max(errors, default=0.0)
+
+
 def _access_integrity(evaluator: FunctionalLiuEvaluator, rollout: dict) -> dict:
     retained_errors = []
     omitted_errors = []
@@ -217,6 +248,9 @@ def evaluate_seed(
         "repair_sha256": REPAIR_SHA256,
         "artifact_lock": reference(ARTIFACT_LOCK_PATH),
         "source_commit": artifact_lock["source_commit"],
+        "evaluation_source_commit": artifact_lock["active_evaluation_source_commit"],
+        "source_repair": artifact_lock["source_repair"],
+        "execution_repair": reference(EXECUTION_REPAIR_PATH),
     }
     analysis = analysis_specification(specification)
     statistics = analysis["statistics"]
@@ -376,18 +410,8 @@ def evaluate_seed(
         }
         global_path_passed = all(row["passed"] for row in global_checks.values())
         access_integrity = _access_integrity(evaluator, rollout)
-        endpoint_parity_error = max(
-            float(
-                np.nanmax(
-                    np.abs(
-                        np.asarray(
-                            probabilities["dual_access"]["raw_subject_level"][group]
-                        )
-                        - endpoints["dual_access"]["probability"][group]
-                    )
-                )
-            )
-            for group in ("retained", "omitted")
+        endpoint_parity_error = probability_endpoint_parity_error(
+            probabilities, endpoints
         )
         integrity = {
             **rollout["integrity"],
@@ -507,7 +531,7 @@ def evaluate_seed(
 
 
 def evaluation_directory(seed: int) -> Path:
-    return RUN_ROOT / "evaluation" / f"seed-{seed}"
+    return RUN_ROOT / f"evaluation-attempt{EVALUATION_ATTEMPT}" / f"seed-{seed}"
 
 
 def validate_evaluation(seed: int, artifact_lock: dict) -> dict:
@@ -525,6 +549,9 @@ def validate_evaluation(seed: int, artifact_lock: dict) -> dict:
         "repair_sha256": REPAIR_SHA256,
         "artifact_lock": reference(ARTIFACT_LOCK_PATH),
         "source_commit": artifact_lock["source_commit"],
+        "evaluation_source_commit": artifact_lock["active_evaluation_source_commit"],
+        "source_repair": artifact_lock["source_repair"],
+        "execution_repair": reference(EXECUTION_REPAIR_PATH),
     }
     if any(result.get(key) != value for key, value in expected.items()):
         raise RuntimeError("functional evaluation provenance differs")
