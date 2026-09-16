@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_propagated_authority_v1",
+  "timing": "After baseline_attempt1 stopped in the first unit's verifier before any unit passed, before any direct runtime artifact was written, and before any mechanism estimate was produced.",
+  "failure_record": {
+    "path": "studies/single_p_time_role_propagated_authority/records/results/baseline_attempt1.json",
+    "sha256": "130461ee487b581814831341d97c3981a2fbefc10493a8059897b189406c8acb"
+  },
+  "diagnosis": "The same-input verifier reconstructed Liu omitted probability with the Stage-1 canonical diagnostic helper. That helper agrees for learned and nonlearned groups but maps omitted relations differently from the parent's registered endpoint implementation. Reconstructing the same frozen parent margin with fsrl.experiments.training_strategy.summaries.liu_endpoints reproduces the stored learned, nonlearned, and omitted endpoints exactly; the attempted helper differs by up to 0.2471910492 on finite omitted values. The failure message also selected a NaN diagnostic index after detecting the real finite mismatch.",
+  "repair": {
+    "endpoint_authority": "Use fsrl.experiments.training_strategy.summaries.liu_endpoints with the frozen size-8 RankingProtocol, retention array, and parent temperature for same-input reconstruction and cross-margin participant endpoint comparison. This is the source implementation that produced the frozen parent endpoints.",
+    "diagnostic_index": "When a finite value exceeds its budget, choose the maximum excess only within the exact finite mask so missing omitted participants cannot be reported as the failing index.",
+    "qualification": "Write qualification_v2.json from non-scientific fixtures that include an omitted-group reconstruction through the source endpoint authority and a missing-value bounded-error diagnostic. Preserve qualification.json unchanged.",
+    "source_lock": "Write baseline_source_lock_v2.json from a clean repair implementation commit. Preserve baseline_source_lock.json as the authority for baseline_attempt1.",
+    "execution_status": "Because attempt1 completed zero baseline units, wrote no direct runtime artifact, and exposed no saved direct endpoint or mechanism result, the repaired command is the first complete Phase-1 execution. Preserve attempt1 as a noninterpretable method attempt."
+  },
+  "unchanged": [
+    "all checkpoints, tensor identities, seeds, panels, conditions, cells, and frozen inputs",
+    "the eager float32 32D direct arithmetic path, full-batch and same-shape call contract, and deterministic runtime",
+    "the elementwise margin budget and every analytic probability, CE, participant, contrast, bootstrap, quantile, and implementation-slack rule",
+    "every exact discrete-input and parent scientific-classification gate",
+    "all Stage 1--3 estimands, interventions, statistics, thresholds, labels, and claim boundaries",
+    "the prohibition on training and mechanism execution before a compatible frozen baseline"
+  ],
+  "scientific_outputs_saved_before_repair": false,
+  "completed_baseline_units_before_repair": 0
+}

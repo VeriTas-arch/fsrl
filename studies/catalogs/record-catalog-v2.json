@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3904,
+  "entry_count": 3906,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2155,
+    "json": 2157,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3807,
+    "already_conformant": 3809,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -118455,6 +118455,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair1.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair1.json"
+      },
+      "materialized_identity": {
+        "bytes": 3135,
+        "sha256": "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_benchmarks_single_p_time_role_propagated_authority_v1_repair1_json",
+      "registered_identity": {
+        "bytes": 3135,
+        "sha256": "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce",
+        "source_ref": "sha256:eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.noninterpretable_attempt",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/results/baseline_attempt1.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/results/baseline_attempt1.json"
+      },
+      "materialized_identity": {
+        "bytes": 1198,
+        "sha256": "130461ee487b581814831341d97c3981a2fbefc10493a8059897b189406c8acb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_results_baseline_attempt1_json",
+      "registered_identity": {
+        "bytes": 1198,
+        "sha256": "130461ee487b581814831341d97c3981a2fbefc10493a8059897b189406c8acb",
+        "source_ref": "sha256:130461ee487b581814831341d97c3981a2fbefc10493a8059897b189406c8acb"
+      },
+      "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.source_context",
       "format": {
         "format": "pdf",
@@ -133125,7 +133193,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3902,
+  "registered_record_count": 3904,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -133141,13 +133209,13 @@
     "frozen_parameters": 180,
     "frozen_result": 574,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 16,
+    "noninterpretable_attempt": 17,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 94,
-    "repair_contract": 27,
+    "repair_contract": 28,
     "repair_lock": 14,
     "report": 96,
     "source_context": 2,
