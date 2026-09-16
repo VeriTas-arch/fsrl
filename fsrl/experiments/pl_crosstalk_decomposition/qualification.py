@@ -55,8 +55,10 @@ def run_qualification() -> dict:
 
     support = np.stack((keys, reversed_keys, keys, reversed_keys), axis=1)
     query = np.stack((keys, reversed_keys), axis=1)
-    evidence = np.asarray([[0.5, -0.25, 0.1, 0.3], [0.2, 0.4, -0.1, 0.6]])
-    source_indices = np.asarray([[0, 1, 0, 1], [1, 0, 1, 0]])
+    evidence = np.asarray(
+        [[0.5, -0.25, 0.1, 0.3], [0.2, 0.4, -0.1, 0.6]], dtype=np.float32
+    )
+    source_indices = np.asarray([[0, 1, 0, 1], [1, 0, 1, 0]], dtype=np.int64)
     contributions = relation_source_contributions(
         evidence,
         support,
