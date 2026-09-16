@@ -312,6 +312,9 @@ fail to close the dynamics.
     gain passed at both other operating points. Cross-talk was concentrated in few
     source collisions (median top-one share 0.768, top-two share 1.000, effective source
     count 1.522).
+- [Direct training of the cleaned single-P affine RNN](clean_single_p/README.md) — `frozen_contract`
+  - **Finding:** Prospective paired development contract frozen before implementation,
+    training, or scientific outcome exposure.
 
 ## Minimal explanatory models
 

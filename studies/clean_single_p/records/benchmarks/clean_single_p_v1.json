@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "study_id": "clean_single_p",
+  "experiment_id": "clean_single_p_v1",
+  "tier": "prospective paired development",
+  "authorization": "The user explicitly authorized execution of the previously reviewed clean single-P plan, including implementation, retraining, and validation.",
+  "question": "Can a directly trained single-P affine plastic RNN remove the legacy duplicate observation, constant, normalized-time, reward/action, two-logit, value-head, and blank-step scaffolding while preserving relational competence, evidence binding, organized individual behavior, and observation-training compensation?",
+  "claim_boundary": [
+    "This study tests one fixed H=200 architecture and training recipe on three paired development seeds; it does not establish universal minimality, a human neural implementation, or a population success rate.",
+    "Both conditions use the same cleaned 32-channel task interface, single binary margin, affine modulation, no value head, no local memory, and no initial blank steps. The only scientific architecture contrast is the retained versus absent normalized-time drive.",
+    "The upstream p/z scaffold may generate the realized observation q, but neither p nor z enters the candidate. Success would establish recipe-level clean single-P sufficiency, not identify p/z or observation noise as a biological mechanism.",
+    "Hidden-width, cue-width, P-rank, alpha structure, support/query microstep count, training budget, and P regularization remain fixed. They require later one-factor studies after this structural cleanup passes.",
+    "No Liu target, human summary, intervention label, relation type, learned/omitted flag, or evaluation outcome enters training. No seed replacement, checkpoint selection, threshold movement, post-result tuning, or automatic historical-checkpoint deletion is allowed."
+  ],
+  "parents": {
+    "affine_protocol": {
+      "path": "studies/linear_modulation/records/benchmarks/protocol.json",
+      "sha256": "ea99033d86f6122a63ed46992135091568a223246348b8cd7f16b83aff79fc01"
+    },
+    "affine_result": {
+      "path": "studies/linear_modulation/records/results/result.json",
+      "sha256": "f3d229f1a7a192c9b98f30ee45a81381c67c032a1c5b065b380d70f3dbb23b08"
+    },
+    "observation_replication_protocol": {
+      "path": "studies/observation_replication/records/benchmarks/protocol.json",
+      "sha256": "e614380a31485c6748ea626c90f89233d8d3465748e5635ef15e38d4ff6cbe16"
+    },
+    "clean_pl_training_protocol": {
+      "path": "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.json",
+      "sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad"
+    }
+  },
+  "design": {
+    "network_seeds": [3011, 3012, 3013],
+    "architecture_conditions": ["time_retained_control", "clean_no_time"],
+    "observation_training_arms": ["clean", "noisy"],
+    "trained_models": 12,
+    "evaluation_panels": [1, 2, 3],
+    "pairing": "Within each seed and observation arm, both architecture conditions use one common 38-channel affine shadow initialization, identical generic task batches, identical q draws, and identical training order. Architecture order alternates by seed and observation-arm order alternates within architecture.",
+    "exposure_barrier": "Train and artifact-lock all 12 final models before computing any generic-validation, Liu, intervention, behavior, or compensation outcome. Training loss is an integrity log only."
+  },
+  "architecture": {
+    "common": {
+      "task_input_size": 32,
+      "channels": {
+        "0:15": "left item cue",
+        "15:30": "right item cue",
+        "30": "response-phase pulse",
+        "31": "one realized signed observation q; zero on queries"
+      },
+      "removed": [
+        "duplicate q column",
+        "explicit constant input",
+        "legacy reward input",
+        "two previous-action inputs",
+        "two-logit common mode",
+        "unused value head",
+        "two initial blank microsteps",
+        "all local-memory tensors and parameters",
+        "legacy checkpoint-compatibility buffers"
+      ],
+      "hidden_size": 200,
+      "activation": "tanh",
+      "plastic_state": "One P in R^(200x200) retained across support trials and reset between episodes; hidden h and eligibility E reset per trial.",
+      "plasticity": "h'=tanh(Wx+b+(W_rec+alpha*P)h); m=u^T h+c; P'=clip(P+mE,-50,50); E'=(1-eta_E)E+eta_E*tanh(h'h^T_old). Preserve the historical P-before-E update order.",
+      "readout": "One learned binary margin M; positive means the left item is ranked higher.",
+      "support_trial_steps": 4,
+      "query_trial_steps": 2,
+      "blank_initial_steps": 0,
+      "query_policy": "Every query reads the same terminal P_T with fresh h/E and no P writeback.",
+      "persistent_P_scalars": 40000,
+      "expected_no_time_parameters": 87003,
+      "expected_time_control_parameters": 87203
+    },
+    "time_retained_control": {
+      "time": "A separate scalar drive with 200 learned weights; support indices are normalized from 0 to 2/3 and all queries use 2/3. Time is not part of the 32 task channels."
+    },
+    "clean_no_time": {
+      "time": "Absent from the public API, parameters, state_dict, forward computation, and batch tensors; not a zero placeholder."
+    },
+    "timestep_accounting": {
+      "generic_support_trials": "28--40",
+      "support_microsteps": "112--160",
+      "query_microsteps": 56,
+      "total_active_microsteps": "168--216",
+      "effective_P_writes": "56--80",
+      "liu_v2_literal_active_microsteps": 688,
+      "constraint": "Both conditions have identical support/query counts. Horizon reduction is outside this study."
+    }
+  },
+  "initialization_and_optimizer_geometry": {
+    "shadow": "Instantiate one LinearModulationRNN(38,200,2) per seed and map both clean conditions from it without loading a trained checkpoint.",
+    "input_mapping": "Copy cue/pulse columns 0:31; fold the constant column into input bias; sum duplicate q columns 34 and 37 into clean column31; omit zero reward/action columns; retain time column32 only in the control.",
+    "output_mapping": "Map the difference of the two legacy logit rows and biases to one margin. Remove the unused value head. Copy W, alpha, eta_E, and the affine modulation head exactly.",
+    "paired_identity": "All mapped tensors shared by the two conditions must be bit-identical at initialization; clean_no_time must have no time parameter or buffer.",
+    "effective_coordinate_adam": "Use learning-rate multiplier2 for the folded input bias, folded q weight, and margin weight/bias; multiplier1 for all other parameters. Count those folded gradients twice in the backbone clipping norm. This matches the summed update of the redundant legacy coordinates without retaining them.",
+    "optimizer": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; one state per clean parameter; global weighted backbone gradient clip2; no scheduler."
+  },
+  "training": {
+    "task": "Generic N=8 connected ranking graphs with 7--10 edges, four support blocks, stable-omission subject encoding, protected Liu graph signatures excluded, and all 28 unordered query pairs equally weighted.",
+    "observation": "clean uses the realized q generated by the inherited p/z scaffold; noisy adds the inherited fixed sigma=1/7 observation error with one deterministic draw per support presentation. The same q is supplied once to each architecture condition.",
+    "steps": 1500,
+    "batch_size": 32,
+    "episode_exposures_per_model": 48000,
+    "base_learning_rate": 0.0001,
+    "fast_weight_penalty": 0.0001,
+    "loss": "mean softplus(-y*M) over all generic queries plus 1e-4*mean(P_T^2)",
+    "selection": "Final step only; no early stopping, intermediate checkpoint selection, budget extension, learning-rate change, temperature fit, or result-dependent continuation.",
+    "rng": "Generic task stream seed=151000+network_seed. Observation draw seed=410000000+network_seed*10000+step. Store batch, q, and cumulative stream fingerprints for every update."
+  },
+  "qualification": {
+    "fixtures": "Use only synthetic non-Liu seeds beginning at 931001; no scientific seed or evaluation panel may be exposed.",
+    "algebra": "Independent eager equations must match each clean condition for margin, modulation, h, E, and P within atol=1e-6 and rtol=1e-5.",
+    "mapping": "The time-retained clean control must match the active duplicate-q affine shadow forward/loss computation within 2e-6 after exact coordinate mapping.",
+    "optimizer": "For eight deterministic updates including P penalty and clipping, transformed effective parameters and Adam moments must remain finite and match the redundant shadow trajectory within 1e-5.",
+    "isolation": "Changing or permuting out-of-band time must not alter clean_no_time output, gradients, or update; no time key may appear in its parameters, buffers, input batch, or checkpoint.",
+    "dead_path": "Assert no local state, local optimizer group, value output, duplicate q, reward/action channel, constant channel, or blank rollout is constructed.",
+    "timestep": "Assert four support steps, two query steps, no blank steps, 168--216 generic active microsteps, and 56--80 effective P writes.",
+    "gradient": "Query loss must have finite nonzero gradients through P_T to support-time input, recurrent, alpha, eta_E, and modulation parameters.",
+    "cuda": "Eager and compiled CUDA margin, P, loss, gradients, and one update must match within atol=1e-5 and rtol=1e-4.",
+    "failure": "Any failed qualification blocks scientific training. Implementation-only repairs must be append-only, must not alter scientific seeds/equations/gates, and must be source-locked before training."
+  },
+  "evaluation": {
+    "panels": "Three fixed fresh panels per network. Panel base=731000, stride=100; generic offset0; Liu cue/support/subject/choice/order/query-shuffle/evidence-shuffle offsets11--17. Paired physical inputs and observation draws across architecture conditions.",
+    "generic": "256 held-out graph-bucket-zero episodes per panel; temperature1; intact and P_off; learned and nonlearned exact-decision probability and CE.",
+    "liu": "Registered liu_v2, 77 participants per panel, temperature0.25; intact, P_off, evidence shuffle, and leave-one-relation-out. Retain learned/nonlearned/omitted probabilities, transitivity, deterministic internal order, five core flags, and historical nine qualitative rows.",
+    "compensation": "For A0,Ae,C0,Ce reproduce global/full Kendall tau, generic and Liu CE, order shift, error_A, error_C, interaction, and training_under_error using participant-paired bootstrap within panel and equal-panel summaries within network.",
+    "statistics": "2000 percentile-bootstrap draws, 95% intervals, shared participant/episode resamples across paired cells and architecture conditions; never pool networks or panels as independent networks."
+  },
+  "decision": {
+    "integrity": "All 12 models complete exactly 1500 optimizer updates with matched paired streams, finite parameters, correct architecture identities, and locked final artifacts before evaluation.",
+    "absolute_competence": "Every architecture/arm/panel cell must have generic learned and nonlearned exact-decision probability lower95>0.5; every Liu cell must retain learned/nonlearned competence and P/evidence binding under the inherited definitions.",
+    "paired_noninferiority": "For clean_no_time minus time_retained_control, require lower95>=-0.02 separately for Ce generic learned/nonlearned and Liu learned/nonlearned/omitted probability in each network after equal-panel aggregation.",
+    "core_behavior": "For clean_no_time, Ae and Ce must each satisfy the inherited five-flag core on at least one of three panels in every network; report all panel failures and all nine historical qualitative rows.",
+    "compensation": "Within each clean_no_time network, equal-panel I_tau lower95>0, I_CE upper95<0, S_C-S_A upper95<0, and both error tau point estimates<0. Report unresolved intervals without replacement or pooling.",
+    "control_validity": "The time-retained control must satisfy the same absolute competence and evidence-binding gates. A failed control makes the no-time comparison noninterpretable rather than evidence against time removal.",
+    "outcomes": {
+      "clean_single_p_admitted": "All integrity, control, candidate competence, paired noninferiority, core behavior, and compensation gates pass independently in all three seeds.",
+      "time_removal_failure": "The control is valid but clean_no_time fails competence or paired noninferiority.",
+      "phenotype_incomplete": "Both conditions are competent and noninferior, but clean_no_time fails core behavior or compensation.",
+      "training_recipe_failure": "The time-retained control fails mandatory competence or binding.",
+      "noninterpretable": "Qualification, source, artifact, stream, runtime, finiteness, or mandatory execution integrity fails."
+    },
+    "stop_rule": "After the complete registered result is exposed, freeze and report it. Do not repair a failed seed, add cohorts, alter thresholds, tune training, or begin width/timestep compression under this protocol. A passing result authorizes a separate one-factor capacity-compression protocol, not automatic promotion or deletion."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime clean-single-p <stage>",
+    "stages": ["qualify", "lock-source", "train", "lock-models", "evaluate", "report"],
+    "runtime": "CUDA float32 without autocast or TF32; compiled fullgraph/default training; one Torch/BLAS/compiler thread; float64 summaries.",
+    "runtime_root": "artifacts/runs/clean_single_p_v1",
+    "freeze_points": [
+      "Commit this protocol and study registration before implementing or exposing scientific outcomes.",
+      "Commit qualified implementation and source/input lock before training seed3011.",
+      "Train all 12 models, jointly artifact-lock and commit them before evaluation.",
+      "Evaluate and publish once, preserve positive and negative results, then stop according to the registered outcome."
+    ],
+    "retention": "Keep the protocol, qualification, locks, compact sufficient arrays, canonical result, and report. Do not delete historical or new checkpoints until a later separately authorized retention migration."
+  }
+}
