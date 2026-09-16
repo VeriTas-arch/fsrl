@@ -55,6 +55,9 @@ transport, or establish biological stores.
 - `repair_contract` —
   [studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.repair1.json](records/benchmarks/pl_crosstalk_decomposition_v1.repair1.json)
   (`sha256:5fbc3dde30e0`)
+- `repair_lock` —
+  [studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.source_repair1.json](records/benchmarks/pl_crosstalk_decomposition_v1.source_repair1.json)
+  (`sha256:b6e456597f25`)
 
 ## Provenance rule
 
