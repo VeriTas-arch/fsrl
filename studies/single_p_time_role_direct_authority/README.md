@@ -25,9 +25,10 @@
 interpretable by first freezing a self-reproducible 32D direct baseline that preserves
 every parent external classification?
 
-**Finding.** A no-training successor contract is frozen. It requires a bitwise
-self-reproducible direct baseline and exact preservation of the parent scientific
-classifications before any unchanged Stage 1--3 mechanism estimator may run.
+**Finding.** A no-training successor contract is frozen. A zero-unit preflight attempt
+exposed no scientific output and is preserved with a narrow verifier-metadata repair; a
+bitwise direct baseline and exact parent-classification compatibility remain mandatory
+before Stage 1--3.
 
 **Claim boundary.** This protocol is not a mechanism result, does not identify the
 predecessor's numerical cause, does not compare adapter and direct internal P, and
@@ -44,6 +45,12 @@ cannot revise the parent's time_removal_failure.
 - `execution_lock` —
   [studies/single_p_time_role_direct_authority/records/benchmarks/baseline_source_lock.json](records/benchmarks/baseline_source_lock.json)
   (`sha256:b422c57e55be`)
+- `noninterpretable_attempt` —
+  [studies/single_p_time_role_direct_authority/records/results/baseline_attempt1.json](records/results/baseline_attempt1.json)
+  (`sha256:02f8ce8ee9ee`)
+- `repair_contract` —
+  [studies/single_p_time_role_direct_authority/records/benchmarks/single_p_time_role_direct_authority_v1.repair1.json](records/benchmarks/single_p_time_role_direct_authority_v1.repair1.json)
+  (`sha256:030e7e0a52e9`)
 
 ## Provenance rule
 

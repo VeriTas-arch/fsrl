@@ -323,9 +323,10 @@ fail to close the dynamics.
     beyond the frozen array tolerance in one 3012 panel-1 Ae generic element, so no
     time-role mechanism label was assigned.
 - [Single-P time-role decomposition under one direct arithmetic authority](single_p_time_role_direct_authority/README.md) — `frozen_contract`
-  - **Finding:** A no-training successor contract is frozen. It requires a bitwise
-    self-reproducible direct baseline and exact preservation of the parent scientific
-    classifications before any unchanged Stage 1--3 mechanism estimator may run.
+  - **Finding:** A no-training successor contract is frozen. A zero-unit preflight
+    attempt exposed no scientific output and is preserved with a narrow
+    verifier-metadata repair; a bitwise direct baseline and exact parent-classification
+    compatibility remain mandatory before Stage 1--3.
 
 ## Minimal explanatory models
 
