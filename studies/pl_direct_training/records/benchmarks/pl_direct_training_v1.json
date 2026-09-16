@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_direct_training",
+  "experiment_id": "pl-direct-training-v1",
+  "registration_status": "prospective_before_implementation_training_or_outcome_exposure",
+  "question": "Can the checkpoint-free cleaned P/L architecture be trained directly under an optimizer-equivalent parameterization, and does removing normalized episode time preserve competence, the registered P/L causal organization, and the inherited Liu behavior profile?",
+  "hypotheses": {
+    "training_reparameterization": "After matching initialization, Adam update geometry, and gradient clipping for the folded bias and binary margin, the clean time-retained control follows the legacy joint-training computation closely enough that structural cleanup is no longer confounded with a changed optimizer trajectory.",
+    "no_time": "With four support microsteps and the complete episode horizon retained, normalized time is not required for the directly trained P/L learner to preserve the registered absolute and paired endpoints."
+  },
+  "claim_boundary": {
+    "development": "Seeds 3001--3003 are a paired development cohort, not a network-population sample and not confirmation.",
+    "time": "A passing paired comparison supports dispensability of normalized time only for this frozen initialization, optimizer, task distribution, and horizon. Failure does not prove that time is necessary under every training protocol.",
+    "direct_training": "The candidate is initialized from a freshly sampled shadow legacy parameterization and trained without loading historical checkpoints. The shadow is an initialization distribution and optimizer-geometry witness, not a pretrained teacher.",
+    "architecture": "P and L, differential evidence admission, two opposed modulation units, and hidden size 200 remain imposed. This does not establish autonomous discovery, minimality, or biological implementation.",
+    "human": "Liu definitions, temperature, and human intervals are inherited project-exposed evidence. New network seeds are not new human confirmation.",
+    "cleanup": "No historical checkpoint deletion is authorized by development or by this contract. A confirmed successor would still require a separate retention migration."
+  },
+  "parent_evidence": {
+    "exact_structure": "studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.json",
+    "exact_structure_finding": "A 32-task-channel interface, separate time drive, one public margin, and packed 105-scalar L reproduce both frozen P/L checkpoints within the registered numerical gates.",
+    "training_strategy": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+    "training_strategy_finding": "Joint optimization was competent in all three registered seeds and preserved the full inherited behavior gate in two of three; matched staged optimization preserved it in zero of three. The fixed direct-training recipe therefore uses joint optimization without claiming it was previously confirmed as noninferior.",
+    "bundled_compaction_negative": "studies/compact_global_local_model/records/results/compact_global_local_model_v1.development.json",
+    "bundled_compaction_boundary": "The earlier compact candidate simultaneously removed time, shortened support from four to three effective-processing steps, and changed modulation/output parameterization. Its valid negative cannot identify normalized time as the cause."
+  },
+  "design": {
+    "tier": "paired development followed by reserved unchanged confirmation only after complete development admission",
+    "conditions": ["time_retained_control", "no_time_candidate"],
+    "primary_contrast": "Within seed, no_time_candidate minus time_retained_control.",
+    "factor_isolation": "The only condition difference is the existence and use of the separate normalized-time scalar and its hidden-size weight. Task channels, initial shared tensors, support/query streams, equations, losses, optimizer geometry, step counts, and evaluation cohorts are paired.",
+    "mandatory_rule": "Train and artifact-lock both conditions for every development seed before any generic validation or Liu outcome is computed."
+  },
+  "seeds": {
+    "development": [3001, 3002, 3003],
+    "reserved_confirmation": [3004, 3005, 3006],
+    "selection": "Six consecutive identifiers with no prior semantic seed registration or seed runtime use at contract freeze. Confirmation seeds remain unexecuted unless every development admission gate passes without scientific repair.",
+    "model_initialization": "For each network seed, torch.manual_seed(seed) initializes one fresh legacy-shaped shadow module. Map its active input bias as b_active=b_i2h+w_constant and its binary margin as w_margin=w_1-w_0, b_margin=b_1-b_0; copy W, alpha, eta_E, DA scale, both DA units, active task weights, and time weight. Discard the shadow, value head, passive input columns, common logit mode, and every compatibility buffer before optimization.",
+    "paired_initialization": "Both conditions receive exactly equal shared tensors. Only the time-retained control receives the mapped time weight; the no-time model has no time parameter.",
+    "training_rng": "numpy.default_rng(100000 + seed), reset to the same state for both conditions.",
+    "filtering_replacement_or_optional_extension": "forbidden"
+  },
+  "task": {
+    "n_items": 8,
+    "cue_size": 15,
+    "min_edges": 7,
+    "max_edges": 10,
+    "support_blocks": 4,
+    "query_trials": 28,
+    "subject_encoding_mode": "stable_omission",
+    "global_evidence": "s_G=signed_magnitude*z",
+    "local_evidence": "s_L=signed_magnitude*[z+(1-z)*p]",
+    "information_boundary": "The recurrent task interface contains only left cue, right cue, response pulse, and globally admitted signed evidence. No rank, relation identity, target, learned/omitted flag, probability p, posterior, reward, previous action, or diagnostic label enters the recurrent task input.",
+    "holdouts": "Exclude Liu v1/v2 graph signatures and reflections from training. Generic validation uses only reflection-canonical graph bucket zero under the existing partition."
+  },
+  "architecture": {
+    "common": {
+      "task_input_size": 32,
+      "task_layout": {
+        "0:15": "left ordinary item cue",
+        "15:30": "right ordinary item cue",
+        "30": "response-phase pulse",
+        "31": "signed globally admitted support evidence; zero on queries"
+      },
+      "removed": ["explicit constant channel", "legacy reward", "two previous-action channels", "value head", "common two-logit mode", "legacy checkpoint-compatibility buffers"],
+      "hidden_size": 200,
+      "activation": "tanh",
+      "modulation": "Retain the two opposed tanh DA units and learned scalar DA scale exactly.",
+      "plasticity": "Retain W, alpha, eta_E, P-before-E update order, and P clipping to [-50,50].",
+      "global_readout": "One learned binary margin; positive means the left item ranks higher.",
+      "local_state": "The exact 105-scalar packed antisymmetric conjunctive trace with one learned positive softplus gain.",
+      "persistent_state_sizes": {"P": 40000, "L": 105},
+      "support_trial_steps": 4,
+      "query_trial_steps": 2,
+      "blank_initial_steps": 0,
+      "state_policy": "Reset h and E per trial; retain P over support trials; retain L over the episode; discard every query proposal; reset P and L between episodes."
+    },
+    "time_retained_control": {
+      "time_scalar": "Support trial index normalized from 0 to 2/3; every query uses 2/3, exactly as the parent training contract.",
+      "time_parameters": 200,
+      "backbone_parameters": 87405
+    },
+    "no_time_candidate": {
+      "time_scalar": "absent from the API and computation; not a zero-valued placeholder",
+      "time_parameters": 0,
+      "backbone_parameters": 87205
+    },
+    "timestep_accounting": {
+      "generic_support_trials": "28--40",
+      "support_microsteps": "112--160",
+      "query_microsteps": 56,
+      "total_active_microsteps": "168--216",
+      "effective_P_writes": "56--80",
+      "liu_v2_literal_active_microsteps": 688,
+      "constraint": "Both conditions must have identical counts. Variable support or query horizons are outside this study."
+    }
+  },
+  "training_reparameterization": {
+    "reason": "Directly folding two equally updated legacy parameters into one changes Adam update magnitude and whole-backbone clipping even when the forward function is algebraically equal.",
+    "base_backbone_learning_rate": 0.0001,
+    "folded_input_bias": "Its gradient equals each of the legacy input-bias and constant-column gradients. Use learning-rate multiplier 2 so one clean Adam update matches the change in their sum.",
+    "binary_margin_weight_and_bias": "Their gradients equal the positive-logit gradients and negate the negative-logit gradients. Use learning-rate multiplier 2 so one clean Adam update matches the change in the legacy logit difference.",
+    "other_backbone_parameters": "Use learning-rate multiplier 1.",
+    "weighted_gradient_norm": "Before clipping, count squared gradients of folded input bias and margin weight/bias twice and every other clean backbone gradient once. Apply the resulting single clip scale to all backbone gradients. This reproduces the redundant legacy gradient norm without restoring redundant parameters.",
+    "adam": "Adam betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false. Maintain one state per clean parameter; the doubled parameter-group learning rates implement the effective-coordinate update.",
+    "local_gain": "Separate Adam group at learning rate 0.01 and separate norm clipping, unchanged from registered joint training."
+  },
+  "optimization": {
+    "schedule": "joint from initialization; P and L are both active on every counted update",
+    "batch_size": 32,
+    "total_steps": 1500,
+    "total_episode_exposures": 48000,
+    "gradient_clip": 2.0,
+    "fast_weight_penalty": 0.0001,
+    "training_temperature": 1.0,
+    "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+    "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+    "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed."
+  },
+  "implementation_gates": {
+    "fresh_boundary": "Both trained conditions must contain zero legacy numerical-compatibility buffers and load no checkpoint.",
+    "initialization_mapping": "Verify every shared mapped tensor, removed tensor list, parameter count, paired equality, and absence of time state in the no-time condition.",
+    "optimizer_geometry": "On deterministic non-scientific fixtures, compare the clean time-retained model with its shadow legacy model for eight complete joint Adam updates including the P penalty and registered clipping. At every step require global margin, terminal P, loss, transformed effective parameters, and mapped Adam moments to be finite; forward/loss max absolute error <=2e-6 and transformed parameter/update max absolute error <=1e-5.",
+    "packed_local": "Full and packed L writes, reads, corrections, reversal, and raw-gain gradients must agree within atol=1e-6 on deterministic fixtures.",
+    "time_isolation": "For paired fixtures, task tensors and all shared initial tensors are exactly equal. Permuting or changing trial-index metadata cannot change no-time inputs or outputs because no time argument or parameter exists.",
+    "timestep_identity": "Assert 4 support steps, 2 query steps, 168--216 generic active microsteps, 56--80 effective P writes, and discarded query writes for every generated episode.",
+    "gradient_paths": "Query loss must have finite nonzero gradients through P_T to support-time recurrent/plastic parameters and through packed L to raw_gain in both conditions.",
+    "cuda_parity": "Using only seed 930001 synthetic fixtures, compare eager and fullgraph CUDA margin, P, loss, gradients, and one optimizer update with atol=1e-5 and rtol=1e-4.",
+    "failure": "Any gate failure blocks scientific training. An implementation-only repair is append-only and must be qualified and source-locked before seed execution; it cannot change the scientific equations, thresholds, seeds, or budget."
+  },
+  "execution": {
+    "runtime_root": "artifacts/runs/pl_direct_training_v1",
+    "device": "CUDA required for registered training and neural evaluation",
+    "precision": "float32 neural computation without autocast or TF32; float64 summaries",
+    "compile": {"enabled": true, "backend": "inductor", "fullgraph": true, "mode": "default"},
+    "condition_order": {"3001": ["time_retained_control", "no_time_candidate"], "3002": ["no_time_candidate", "time_retained_control"], "3003": ["time_retained_control", "no_time_candidate"]},
+    "artifact_policy": "Exclusive run directories with complete configuration, source/protocol identity, initialization hashes, stream hash chain, every update log, final checkpoint, optimizer counters, runtime manifest, and cost record. Never overwrite or resume an unverified partial run.",
+    "freeze_point": "Jointly lock all six development artifacts and commit the lock before computing generic validation or any Liu endpoint. Training loss may be logged for integrity but cannot authorize a protocol change."
+  },
+  "evaluation": {
+    "generic": {
+      "episodes": 256,
+      "rng_seed": 95001,
+      "temperature": 1.0,
+      "conditions": ["intact", "local_off", "P_off"],
+      "absolute_competence": "Within every model, learned exact-decision mean >=0.75 and nonlearned exact-decision mean >=0.70."
+    },
+    "liu": {
+      "protocol_id": "liu_v2",
+      "subjects": 77,
+      "cue_mode": "permuted_shared",
+      "subject_encoding_mode": "stable_omission",
+      "cue_seed": 31001,
+      "support_seed": 31101,
+      "subject_encoding_seed": 31201,
+      "choice_seed": 31301,
+      "order_seed": 31401,
+      "query_shuffle_seed": 31801,
+      "evidence_shuffle_seed": 32301,
+      "temperature": 0.25,
+      "conditions": ["intact", "local_off", "P_off", "query_shuffle", "evidence_shuffle"],
+      "required": "Reuse the registered joint-training cohort, intervention, leave-one-relation-out, Hodge, transitivity, query-order, and nine behavior-row definitions without refitting."
+    }
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "interval": 0.95,
+    "bootstrap_seed": "87000+network_seed for Liu and 88000+network_seed for generic",
+    "unit": "Participant within one Liu network or episode within one generic network; never pool networks.",
+    "paired_noninferiority": "For no_time minus time_retained correct probability, require the 95% lower bound >=-0.02 separately for generic learned/nonlearned and Liu learned/nonlearned/retained/omitted within every seed.",
+    "absolute_liu_competence": "Within every model, overall exact-decision mean >=0.75, nonlearned mean >=0.70, and transitive-triplet mean >=0.95.",
+    "causal_organization": "Apply the inherited joint-training gates independently to every model: global necessity, remote reassembly, retained/omitted direct-local fidelity, query/evidence address specificity, and local-only partition.",
+    "behavior": "Apply all nine inherited qualitative rules and require all six historically quantitative rows to retain their reproduced classification independently in every model. Report the three historical mismatches completely; do not optimize them.",
+    "heterogeneity": "All gates are per seed and per condition. No pooling, majority vote, replacement, or successful network repairs a failed mandatory network."
+  },
+  "decision": {
+    "development_admission": "All implementation/integrity gates, both conditions' absolute competence and causal organization, all paired noninferiority endpoints, and both conditions' behavior preservation pass independently in all three development seeds.",
+    "confirmation": "Only complete development admission authorizes unchanged execution on reserved seeds 3004--3006. Promotion requires the same complete rule independently in all three confirmation seeds.",
+    "outcomes": {
+      "training_parameterization_failure": "The time-retained control fails competence or inherited organization, so this direct-training recipe does not reproduce the reference reliably and no time-removal inference is admitted.",
+      "no_time_recipe_failure": "The time-retained control passes but the no-time condition fails absolute competence.",
+      "competent_but_time_noninferior_failure": "Both conditions are competent but one or more paired -0.02 bounds fail.",
+      "alternative_no_time_organization": "Competence and paired performance pass but the no-time condition changes one or more registered causal links.",
+      "behavior_incomplete": "Competence, paired performance, and causal organization pass but inherited behavior preservation fails.",
+      "development_admitted": "Every development rule passes; execute reserved confirmation without change.",
+      "direct_no_time_model_confirmed": "Every development and confirmation rule passes. This supports promotion as the cleaned mainline, subject to a separate retention migration.",
+      "noninterpretable": "Source, artifact, initialization, optimizer-geometry, runtime, finiteness, or mandatory-execution integrity fails."
+    },
+    "stop_rule": "After complete development evaluation, freeze and report the outcome. Do not tune learning rates, multipliers, clipping, budget, time encoding, step count, equations, thresholds, seeds, temperature, or behavior definitions using exposed outcomes. Any changed recipe is a new prospective study."
+  },
+  "outputs": {
+    "source_lock": "records/benchmarks/pl_direct_training_v1.execution_lock.json",
+    "development_artifact_lock": "records/benchmarks/pl_direct_training_v1.development_artifact_lock.json",
+    "development_result": "records/results/pl_direct_training_v1.development.json",
+    "development_report": "records/reports/pl_direct_training_v1.development.md",
+    "retention": "Keep compact canonical results, locks, reports, and sufficient reconstruction identities. Keep all historical checkpoints until direct_no_time_model_confirmed and a separate append-only retention migration."
+  },
+  "lifecycle": [
+    "Commit this contract and generated study registration before implementation or seed execution.",
+    "Implement no-time model support, shadow initialization, reparameterization-aware Adam/clipping, paired batches, and focused gates without scientific-seed outcomes.",
+    "Pass CPU algebra/training-trajectory qualification and non-scientific CUDA parity; commit implementation and then commit its source lock.",
+    "Train all six development runs, jointly artifact-lock them, and commit the lock before outcome evaluation.",
+    "Evaluate generic and Liu endpoints once, publish the complete per-seed paired result and report, and stop on any failed development admission gate.",
+    "Only after complete admission, execute and lock reserved confirmation seeds under the identical contract and source.",
+    "Never delete historical checkpoints within this study; confirmed promotion only opens a separately reviewed retention migration."
+  ]
+}

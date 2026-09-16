@@ -286,6 +286,12 @@ fail to close the dynamics.
     CPU/CUDA, Liu and generic support horizons, and intact/P-off/L-off conditions.
     Global state and output were exact; overall error was at most 9.5367431640625e-7
     with zero categorical mismatches. The failed first mapping remains registered.
+- [Direct training of the cleaned no-time P/L model](pl_direct_training/README.md) — `frozen_contract`
+  - **Finding:** A paired prospective design is frozen for a freshly initialized
+    time-retained control and a no-time candidate. It preserves four support steps, two
+    query steps, 168--216 active generic timesteps, and 56--80 effective P writes while
+    explicitly matching the optimizer geometry of folded bias and margin parameters. No
+    model has been trained.
 
 ## Minimal explanatory models
 
