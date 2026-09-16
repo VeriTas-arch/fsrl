@@ -1,0 +1,19 @@
+schema_version = 1
+id = "pl_exact_reparameterization"
+title = "Exact P/L structural reparameterization"
+chapter = "algorithmic_compression"
+order = 1180
+status = "frozen_contract"
+review_state = "indexed"
+question = "Can the confirmed P/L computation be expressed through a clean 32-channel task interface and exact packed state without changing its supported computation?"
+finding = "A prospective deterministic mapping is frozen for the two confirmed P/L networks. It retains the legacy time drive and four-step support microcircuit while removing only redundant task-interface and state representation; qualification has not yet run."
+boundary = "This study can establish checkpoint-preserving structural equivalence only. It does not establish that episode time is unnecessary, authorize historical checkpoint deletion, or expose a no-time training outcome."
+
+[[records]]
+path = "records/benchmarks/pl_exact_reparameterization_v1.json"
+legacy_path = "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.json"
+origin = "native"
+role = "registered_contract"
+sha256 = "799fd9a4ca1814e8ad5b4662c5e0a481182cfa26969802547a949e5af46f8773"
+bytes = 8208
+source_ref = "sha256:799fd9a4ca1814e8ad5b4662c5e0a481182cfa26969802547a949e5af46f8773"

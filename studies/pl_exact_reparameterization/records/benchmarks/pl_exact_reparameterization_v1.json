@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_exact_reparameterization",
+  "registration_status": "prospective_before_implementation_or_equivalence_execution",
+  "question": "Can the frozen confirmed P/L computation be expressed through a 32-channel task interface, a separate deterministic time drive, one binary margin, and a 105-scalar packed local trace without changing any supported output or state transition?",
+  "claim_boundary": "This is a checkpoint-preserving structural reparameterization, not evidence that episode time is unnecessary and not authorization to delete the historical checkpoints. A separately registered successor must test direct no-time training with the parent four-step support microcircuit.",
+  "parent_evidence": {
+    "workflow": "workflows/relational_model/workflow.toml",
+    "mechanism_result": "studies/dual_evidence_access_confirmation/records/results/dual_evidence_access_confirmation_v2_4.json",
+    "behavior_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json",
+    "training_strategy_result": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+    "failed_bundled_compaction": "studies/compact_global_local_model/records/results/compact_global_local_model_v1.development.json"
+  },
+  "frozen_sources": {
+    "2104": {
+      "checkpoint": "artifacts/runs/dual-evidence-access-confirmation-v2-4/seed-2104/backbone/net.dat",
+      "checkpoint_sha256": "cf62bd2488e18fc7d6b776ef63dcbe549d90722183fede66f95d07be7559e92a",
+      "checkpoint_bytes": 358519,
+      "gain": "artifacts/runs/dual-evidence-access-confirmation-v2-4/seed-2104/local/gain.json",
+      "gain_sha256": "73f1a287d83e717094b2e139c79986d9a240e7d665595cac62da6155530ea115",
+      "raw_local_gain": -1.805924892425537
+    },
+    "2105": {
+      "checkpoint": "artifacts/runs/dual-evidence-access-confirmation-v2-4/seed-2105/backbone/net.dat",
+      "checkpoint_sha256": "10931fa7e11e6af04a20e93562dbf5f808204c1d037e3b9609c13d099553bf92",
+      "checkpoint_bytes": 358519,
+      "gain": "artifacts/runs/dual-evidence-access-confirmation-v2-4/seed-2105/local/gain.json",
+      "gain_sha256": "28230d318c5be0d2e0e0b151512b106604b8fa252e0c695b190e0aa3fc5d04cb",
+      "raw_local_gain": -1.7298469543457031
+    }
+  },
+  "legacy_task_abi": {
+    "input_size": 37,
+    "layout": {
+      "0:15": "left ordinary item cue",
+      "15:30": "right ordinary item cue",
+      "30": "response-phase pulse",
+      "31": "constant one on every active support/query microstep",
+      "32": "normalized support-trial time",
+      "33": "legacy reward; zero in the maintained passive task",
+      "34": "signed globally admitted support evidence; zero on queries",
+      "35:37": "legacy previous action; zero in the maintained passive task"
+    }
+  },
+  "exact_target": {
+    "external_input_size": 32,
+    "external_layout": {
+      "0:15": "left ordinary item cue",
+      "15:30": "right ordinary item cue",
+      "30": "response-phase pulse",
+      "31": "signed globally admitted support evidence; zero on queries"
+    },
+    "time_drive": "Keep the legacy normalized time as a separate scalar multiplied by the converted legacy time-column weight. This proves structural equivalence only; the no-time successor sets this drive absent and must retrain.",
+    "input_mapping": {
+      "external_weight": "Concatenate legacy i2h columns 0:31 and column 34.",
+      "active_bias": "legacy i2h.bias + legacy i2h.weight[:,31]",
+      "time_weight": "legacy i2h.weight[:,32]",
+      "discarded_columns": "Legacy columns 33, 35, and 36 are removed only after every maintained active input builder is shown to keep them exactly zero."
+    },
+    "global_dynamics": "Retain W, alpha, eta_E, DA scale, both DA units, tanh activations, clipping, and the exact P-before-E update order.",
+    "global_margin": "margin=(h2o.weight[1]-h2o.weight[0]) h + (h2o.bias[1]-h2o.bias[0]). The common logit mode and unused value output are outside the maintained binary policy claim.",
+    "local_trace": "Pack the strict upper triangle of the normalized antisymmetric conjunctive key into 105 scalars. Its normalized pairwise inner products and accumulated readout are exactly equal to the 225-scalar representation.",
+    "rollout": "Retain four recurrent support microsteps, two query microsteps, per-trial hidden/eligibility reset, persistent P across support trials, persistent L across the episode, and discarded query writes. The legacy two-step initial blank produces no P write under zero hidden and eligibility and may be removed only after its exact P identity is verified."
+  },
+  "timestep_accounting": {
+    "support_relations": "7--10",
+    "support_blocks": 4,
+    "support_trials_per_episode": "28--40",
+    "microsteps_per_support_trial": 4,
+    "support_microsteps_per_episode": "112--160",
+    "effective_P_writes_per_support_trial": 2,
+    "effective_P_writes_per_episode": "56--80",
+    "query_pairs": 28,
+    "microsteps_per_query": 2,
+    "query_writeback": false,
+    "successor_constraint": "The first direct no-time training candidate must retain these support microstep and effective-write counts. Variable support horizons require a later separately registered successor."
+  },
+  "implementation": {
+    "core_model": "fsrl/core/factorized_plastic_rnn.py",
+    "packed_local_trace": "fsrl/core/local_trace.py",
+    "experiment_package": "fsrl/experiments/pl_exact_reparameterization",
+    "core_tests": [
+      "tests/core/test_factorized_plastic_rnn.py",
+      "tests/core/test_local_trace.py"
+    ],
+    "experiment_tests": "tests/experiments/pl_exact_reparameterization"
+  },
+  "qualification": {
+    "seeds": [2104, 2105],
+    "active_input_contract": "All maintained support and query input builders must set legacy constant to one and reward/previous-action columns to zero; blank handling is checked separately.",
+    "parameter_mapping": "Every retained tensor must equal its declared source transform and every discarded tensor must be named.",
+    "single_step": "For deterministic active inputs and frozen states, margin, modulation, hidden, eligibility, and P must agree with the legacy model.",
+    "episode": "For maintained generic and frozen Liu-shaped support/query panels, terminal P, global margin, local raw margin, local correction, and final margin must agree.",
+    "interventions": "Intact, P-off, and L-off outputs must agree and every exact decision must be identical.",
+    "blank_identity": "The legacy two blank microsteps must leave P exactly unchanged when hidden and eligibility start at zero.",
+    "tolerances": {
+      "float32_max_absolute_error": 0.000001,
+      "packed_local_max_absolute_error": 0.000001,
+      "categorical_mismatch_count": 0,
+      "nonfinite_count": 0
+    }
+  },
+  "decision": {
+    "passed": "Every qualification gate passes independently for seeds 2104 and 2105. The exact target may then become the reference implementation for a separately registered no-time training study.",
+    "failed": "Any mismatch closes this mapping. Repair the implementation or register a changed mapping before scientific no-time training; do not relax tolerances or omit the failing state/output.",
+    "historical_retention": "No historical checkpoint, gain, frozen result, or report may be deleted by this study."
+  },
+  "execution": {
+    "runtime": "CPU float32 qualification first, followed by CUDA eager qualification on both frozen networks before promotion.",
+    "source_lock": "Freeze the implementation and test hashes after engineering validation and before executing the two frozen-network qualification.",
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime pl-exact-reparameterization qualify"
+  },
+  "outputs": {
+    "runtime_root": "artifacts/runs/pl_exact_reparameterization_v1",
+    "qualification": "records/results/pl_exact_reparameterization_v1.json",
+    "report": "records/reports/pl_exact_reparameterization_v1.md",
+    "retention": "Promote the compact result and report plus source/artifact hashes. Converted checkpoint bytes remain runtime artifacts until a later confirmed no-time model and a separate retention migration authorize cleanup."
+  }
+}
