@@ -25,11 +25,9 @@
 organization, and does removing normalized episode time preserve its competence, causal
 links, and inherited behavior profile?
 
-**Finding.** A paired prospective design is frozen for a freshly initialized
-time-retained control and a no-time candidate. It preserves four support steps, two
-query steps, 168--216 active generic timesteps, and 56--80 effective P writes while
-explicitly matching the optimizer geometry of folded bias and margin parameters. No
-model has been trained.
+**Finding.** The paired direct-training implementation is source-locked after passing
+optimizer-trajectory, packed-L, timestep, gradient-path, and CUDA fullgraph
+qualification. No scientific model has been trained or evaluated.
 
 **Claim boundary.** This design isolates normalized time within one fixed
 direct-training recipe. Development cannot establish network-population confirmation,
@@ -44,6 +42,9 @@ authorized.
 - `repair_contract` —
   [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.repair1.json](records/benchmarks/pl_direct_training_v1.repair1.json)
   (`sha256:3cbd18ac36ce`)
+- `execution_lock` —
+  [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.execution_lock.json](records/benchmarks/pl_direct_training_v1.execution_lock.json)
+  (`sha256:afc4db445acb`)
 
 ## Provenance rule
 
