@@ -18,6 +18,20 @@ from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_crosstalk_decomposition_dispatch_uses_registered_entry_point(self):
+        module_name = "fsrl.experiments.pl_crosstalk_decomposition.__main__"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=61)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(["pl-crosstalk-decomposition", "--sentinel"])
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 61)
+
     def test_functional_replication_dispatch_uses_registered_entry_point(self):
         module_name = (
             "fsrl.experiments.pl_direct_training.functional_replication.__main__"

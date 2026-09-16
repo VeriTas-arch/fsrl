@@ -41,6 +41,9 @@ WORKFLOW_MODULES = {
     "pl-functional-replication": (
         "fsrl.experiments.pl_direct_training.functional_replication.__main__"
     ),
+    "pl-crosstalk-decomposition": (
+        "fsrl.experiments.pl_crosstalk_decomposition.__main__"
+    ),
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",
