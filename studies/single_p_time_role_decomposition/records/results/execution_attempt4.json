@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "source_lock": "studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v4.json",
+  "source_commit": "8ca2c4b6e7e11446bc6b16988d6d38321d505ea9",
+  "execution_commit": "69e48f4",
+  "command": "direnv exec . python -m fsrl.infra.formal_runtime single-p-time-role run",
+  "status": "failed_noninterpretable",
+  "failure": "After constructing the exact-parent replay state, clean direct terminal P was not continuously equivalent to the parent adapter for 3012/panel1/clean_no_time/Ae generic episodes. One P element exceeded the frozen atol=1e-5, rtol=1e-5 tolerance: max absolute error 2.670288e-05, 1.1840417 times its allowed tolerance.",
+  "action": "Execution stopped at the integrity gate. No Stage-1 scale estimate, Stage-2 intervention estimate, Stage-3 trajectory, runtime result, arrays, or mechanism classification was produced or inspected.",
+  "scientific_outcomes_exposed": false,
+  "runtime_outputs_written": false
+}

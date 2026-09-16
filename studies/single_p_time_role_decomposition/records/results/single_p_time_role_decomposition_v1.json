@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "protocol_sha256": "0d48ff52d0cdafbeb3ded6cddb5228b01b27db4bddca3481fc8c0957b38004fa",
+  "source_lock": {
+    "path": "studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v4.json",
+    "sha256": "03ec001c4830f197b2f55908b4f3397cc7bcce4a7568033935498a0c2145cdff",
+    "bytes": 32949
+  },
+  "status": "noninterpretable",
+  "parent_outcome_unchanged": "time_removal_failure",
+  "integrity": {
+    "passed": false,
+    "failed_check": "clean direct terminal P versus frozen parent-adapter terminal P",
+    "first_failing_unit": {
+      "seed": 3012,
+      "panel": 1,
+      "condition": "clean_no_time",
+      "cell": "Ae",
+      "cohort": "generic",
+      "failing_elements": 1,
+      "maximum_absolute_error": 0.00002670288,
+      "maximum_ratio_to_frozen_tolerance": 1.1840417,
+      "atol": 0.00001,
+      "rtol": 0.00001
+    },
+    "interpretation": "The 32-channel clean direct arithmetic and the parent's algebraically equivalent evaluation-adapter arithmetic are not numerically interchangeable at the registered fast-state tolerance. Because Stage 2 and Stage 3 make claims about P and its trajectory, the diagnostic cannot assign mechanistic labels from this execution."
+  },
+  "execution_attempts": [
+    {
+      "path": "studies/single_p_time_role_decomposition/records/results/execution_attempt1.json",
+      "sha256": "ccc2d906db88830d2d4c90ea696b9a633cc3392053960759c57f7bc7c34520e6",
+      "bytes": 981
+    },
+    {
+      "path": "studies/single_p_time_role_decomposition/records/results/execution_attempt2.json",
+      "sha256": "7ceb5865e89f56e881c141e9514bc53d47927ab5a65d8637d603d4d62ee9d105",
+      "bytes": 941
+    },
+    {
+      "path": "studies/single_p_time_role_decomposition/records/results/execution_attempt3.json",
+      "sha256": "04f3f2582961e122f710973b915a72788bd834c7c6fead378b602133940aff7b",
+      "bytes": 1023
+    },
+    {
+      "path": "studies/single_p_time_role_decomposition/records/results/execution_attempt4.json",
+      "sha256": "b102061051b8ba7e1b5022e6812953ca8fff7cc9819b11bf4bab5a41f270acfe",
+      "bytes": 1028
+    }
+  ],
+  "stages": {
+    "stage_1_final_margin_decomposition": "not_interpreted_due_to_integrity_failure",
+    "stage_2_frozen_time_intervention": "not_executed_due_to_integrity_failure",
+    "stage_3_state_dependent_plasticity": "not_executed_due_to_integrity_failure"
+  },
+  "classification": {
+    "noninterpretable": true,
+    "scale_sufficient": null,
+    "support_time_path_present": null,
+    "query_time_path_present": null,
+    "state_dependent_plasticity_present": null,
+    "confidence_link_supported": null,
+    "mechanism_heterogeneous": null
+  },
+  "claim_boundary": "This result does not diagnose why seed 3011 is sensitive to normalized-time removal, does not revise the parent all-seed failure, and does not support or reject any registered time-role mechanism. A successor must prospectively choose and freeze one arithmetic authority for both parent comparison and P-trajectory intervention before inspecting mechanism outcomes."
+}

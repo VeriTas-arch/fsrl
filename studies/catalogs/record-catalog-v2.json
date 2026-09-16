@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3889,
+  "entry_count": 3892,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2142,
+    "json": 2144,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 99,
+    "markdown": 100,
     "numpy_npz": 1410,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3792,
+    "already_conformant": 3795,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -117843,6 +117843,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/reports/single_p_time_role_decomposition_v1.md",
+        "repository_path": "studies/single_p_time_role_decomposition/records/reports/single_p_time_role_decomposition_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 1493,
+        "sha256": "989ef075c1aff80f49d64650a3e11568135fc833530c353b4802ffcb54a0f68b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_reports_single_p_time_role_decomposition_v1_md",
+      "registered_identity": {
+        "bytes": 1493,
+        "sha256": "989ef075c1aff80f49d64650a3e11568135fc833530c353b4802ffcb54a0f68b",
+        "source_ref": "sha256:989ef075c1aff80f49d64650a3e11568135fc833530c353b4802ffcb54a0f68b"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.noninterpretable_attempt",
       "format": {
         "format": "json",
@@ -117942,6 +117976,74 @@
         "source_ref": "sha256:04f3f2582961e122f710973b915a72788bd834c7c6fead378b602133940aff7b"
       },
       "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.noninterpretable_attempt",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/results/execution_attempt4.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/results/execution_attempt4.json"
+      },
+      "materialized_identity": {
+        "bytes": 1028,
+        "sha256": "b102061051b8ba7e1b5022e6812953ca8fff7cc9819b11bf4bab5a41f270acfe"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_results_execution_attempt4_json",
+      "registered_identity": {
+        "bytes": 1028,
+        "sha256": "b102061051b8ba7e1b5022e6812953ca8fff7cc9819b11bf4bab5a41f270acfe",
+        "source_ref": "sha256:b102061051b8ba7e1b5022e6812953ca8fff7cc9819b11bf4bab5a41f270acfe"
+      },
+      "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_decomposition/records/results/single_p_time_role_decomposition_v1.json",
+        "repository_path": "studies/single_p_time_role_decomposition/records/results/single_p_time_role_decomposition_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 3117,
+        "sha256": "bda5d7e6a99e44029be5ea93073763903d2279e0f60e7c512263c3e68711f22f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_decomposition.studies_single_p_time_role_decomposition_records_results_single_p_time_role_decomposition_v1_json",
+      "registered_identity": {
+        "bytes": 3117,
+        "sha256": "bda5d7e6a99e44029be5ea93073763903d2279e0f60e7c512263c3e68711f22f",
+        "source_ref": "sha256:bda5d7e6a99e44029be5ea93073763903d2279e0f60e7c512263c3e68711f22f"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -132615,7 +132717,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3887,
+  "registered_record_count": 3890,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -132629,9 +132731,9 @@
     "execution_lock": 73,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 572,
+    "frozen_result": 573,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 14,
+    "noninterpretable_attempt": 15,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,
@@ -132639,7 +132741,7 @@
     "registered_contract": 92,
     "repair_contract": 26,
     "repair_lock": 13,
-    "report": 94,
+    "report": 95,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2729,

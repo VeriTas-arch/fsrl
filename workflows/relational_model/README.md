@@ -70,7 +70,9 @@ time; it preserves all negative studies and frozen contracts.
      core-positive and compensatory, showing that these registered endpoints do not
      require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed
      3011 retains the phenotype but fails Ce noninferiority on generic learned, generic
-     nonlearned and Liu omitted probability.
+     nonlearned and Liu omitted probability. The frozen follow-up time-role
+     decomposition is noninterpretable because clean-direct and parent-adapter terminal
+     P failed the registered numerical-integrity criterion.
 
 7. [Algorithmic form and transport](#algorithm-and-transport)
    - **Question.** Which parts of the working model compress exactly, and where does it
@@ -439,13 +441,15 @@ hidden width, update budget and evaluation panels fixed.
 and compensatory, showing that these registered endpoints do not require a separate L
 store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype
 but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted
-probability.
+probability. The frozen follow-up time-role decomposition is noninterpretable because
+clean-direct and parent-adapter terminal P failed the registered numerical-integrity
+criterion.
 
 **Boundary.** This is a fixed-H=200 three-seed development result, not universal
 minimality or confirmation of a final no-time recipe. The result supports an active
-single-state successor mainline while leaving time-free optimization robustness
-unresolved; it neither proves a cognitive role for time nor permits post-result repair
-of seed 3011.
+single-state successor mainline while leaving time-free optimization robustness and the
+role of normalized time unresolved; the failed diagnostic assigns no scale,
+support-time, query-time, state-dependence or confidence-link label.
 
 Implementation:
 
@@ -473,6 +477,11 @@ Exact evidence:
   - **JSON pointer:** `/outcome`
   - **Meaning:** The all-seed outcome remains time_removal_failure because seed 3011
     misses three Ce noninferiority endpoints.
+- `constrains` — [single_p_time_role_decomposition:records/results/single_p_time_role_decomposition_v1.json](../../studies/single_p_time_role_decomposition/records/results/single_p_time_role_decomposition_v1.json)
+  - **JSON pointer:** `/classification/noninterpretable`
+  - **Meaning:** The frozen time-role follow-up failed its terminal-P arithmetic
+    integrity gate and therefore assigns no mechanism labels or revision to the parent
+    result.
 
 Verification:
 

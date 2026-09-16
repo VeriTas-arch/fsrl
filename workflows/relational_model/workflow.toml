@@ -225,12 +225,12 @@ id = "single_state_successor"
 title = "Single-state structural successor"
 question = "Can one affine-modulated fast-weight state replace the explicit local trace while retaining relational competence, evidence binding, individualized organization and observation-training compensation?"
 method = "Directly train paired clean single-P networks with and without the normalized-time drive while holding initialization, task streams, realized observations, hidden width, update budget and evaluation panels fixed."
-finding = "All three no-time networks remain competent, evidence-bound, core-positive and compensatory, showing that these registered endpoints do not require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted probability."
-boundary = "This is a fixed-H=200 three-seed development result, not universal minimality or confirmation of a final no-time recipe. The result supports an active single-state successor mainline while leaving time-free optimization robustness unresolved; it neither proves a cognitive role for time nor permits post-result repair of seed 3011."
+finding = "All three no-time networks remain competent, evidence-bound, core-positive and compensatory, showing that these registered endpoints do not require a separate L store. Seeds 3012 and 3013 pass every admission gate; seed 3011 retains the phenotype but fails Ce noninferiority on generic learned, generic nonlearned and Liu omitted probability. The frozen follow-up time-role decomposition is noninterpretable because clean-direct and parent-adapter terminal P failed the registered numerical-integrity criterion."
+boundary = "This is a fixed-H=200 three-seed development result, not universal minimality or confirmation of a final no-time recipe. The result supports an active single-state successor mainline while leaving time-free optimization robustness and the role of normalized time unresolved; the failed diagnostic assigns no scale, support-time, query-time, state-dependence or confidence-link label."
 depends_on = ["differential_admission"]
 implementation = ["fsrl/experiments/clean_single_p/model.py", "fsrl/experiments/clean_single_p/training.py", "fsrl/experiments/clean_single_p/evaluation.py", "fsrl/experiments/clean_single_p/reporting.py"]
 tests = ["tests/experiments/clean_single_p/test_model.py", "tests/experiments/clean_single_p/test_training.py"]
-studies = ["clean_single_p"]
+studies = ["clean_single_p", "single_p_time_role_decomposition"]
 
 [[stages.evidence]]
 study = "clean_single_p"
@@ -251,6 +251,13 @@ record = "records/results/clean_single_p_v1.json"
 json_pointer = "/outcome"
 use = "constrains"
 description = "The all-seed outcome remains time_removal_failure because seed 3011 misses three Ce noninferiority endpoints."
+
+[[stages.evidence]]
+study = "single_p_time_role_decomposition"
+record = "records/results/single_p_time_role_decomposition_v1.json"
+json_pointer = "/classification/noninterpretable"
+use = "constrains"
+description = "The frozen time-role follow-up failed its terminal-P arithmetic integrity gate and therefore assigns no mechanism labels or revision to the parent result."
 
 [[stages.verification]]
 id = "clean_single_p_tests"

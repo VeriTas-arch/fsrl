@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `unresolved`
 - **Review state:** `indexed`
 - **Study ID:** `single_p_time_role_decomposition`
 
@@ -25,12 +25,14 @@
 time enter the frozen control, and do no-time networks express state-dependent
 plasticity beyond support position?
 
-**Finding.** Prospective frozen-model diagnostic approved and locked before
-implementation or new diagnostic exposure.
+**Finding.** The diagnostic is noninterpretable: the 32-channel clean direct terminal P
+and the parent's algebraically equivalent evaluation-adapter P differed beyond the
+frozen array tolerance in one 3012 panel-1 Ae generic element, so no time-role mechanism
+label was assigned.
 
-**Claim boundary.** The study diagnoses all three frozen clean single-P seeds without
-retraining, cannot revise the parent time_removal_failure, and yields simultaneous
-mechanism labels rather than model admission.
+**Claim boundary.** This integrity failure does not diagnose seed 3011, revise the
+parent time_removal_failure, or support or reject scale, support-time, query-time,
+state-dependence, confidence-link, or heterogeneity mechanisms.
 
 ## Frozen records
 
@@ -97,6 +99,15 @@ mechanism labels rather than model admission.
 - `execution_lock` —
   [studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v4.json](records/benchmarks/source_lock_v4.json)
   (`sha256:03ec001c4830`)
+- `noninterpretable_attempt` —
+  [studies/single_p_time_role_decomposition/records/results/execution_attempt4.json](records/results/execution_attempt4.json)
+  (`sha256:b102061051b8`)
+- `frozen_result` —
+  [studies/single_p_time_role_decomposition/records/results/single_p_time_role_decomposition_v1.json](records/results/single_p_time_role_decomposition_v1.json)
+  (`sha256:bda5d7e6a99e`)
+- `report` —
+  [studies/single_p_time_role_decomposition/records/reports/single_p_time_role_decomposition_v1.md](records/reports/single_p_time_role_decomposition_v1.md)
+  (`sha256:989ef075c1af`)
 
 ## Provenance rule
 
