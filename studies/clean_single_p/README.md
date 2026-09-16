@@ -59,6 +59,9 @@ checkpoint deletion.
 - `validation_result` —
   [studies/clean_single_p/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:f13ffffda674`)
+- `execution_lock` —
+  [studies/clean_single_p/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:c02774640427`)
 
 ## Provenance rule
 
