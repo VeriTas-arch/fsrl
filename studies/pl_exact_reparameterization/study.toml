@@ -6,7 +6,7 @@ order = 1180
 status = "frozen_contract"
 review_state = "indexed"
 question = "Can the confirmed P/L computation be expressed through a clean 32-channel task interface and exact packed state without changing its supported computation?"
-finding = "A prospective deterministic mapping and timestep-accounting repair are frozen for the two confirmed P/L networks. They retain the legacy time drive, four-step support microcircuit, and complete active episode horizon while removing only redundant task-interface and state representation; qualification has not yet run."
+finding = "A prospective deterministic mapping, timestep-accounting repair, and source lock are frozen for the two confirmed P/L networks. They retain the legacy time drive, four-step support microcircuit, and complete active episode horizon while removing only redundant task-interface and state representation; qualification has not yet run."
 boundary = "This study can establish checkpoint-preserving structural equivalence only. It does not establish that episode time is unnecessary, authorize historical checkpoint deletion, or expose a no-time training outcome."
 
 [[records]]
@@ -26,3 +26,12 @@ role = "repair_contract"
 sha256 = "fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1"
 bytes = 2527
 source_ref = "sha256:fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1"
+
+[[records]]
+path = "records/benchmarks/pl_exact_reparameterization_v1.execution_lock.json"
+legacy_path = "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.execution_lock.json"
+origin = "native"
+role = "execution_lock"
+sha256 = "3497e685b5a358a0a560932a6150e3503c7f3c9a2212e3153bdd1466d542fb62"
+bytes = 5222
+source_ref = "sha256:3497e685b5a358a0a560932a6150e3503c7f3c9a2212e3153bdd1466d542fb62"

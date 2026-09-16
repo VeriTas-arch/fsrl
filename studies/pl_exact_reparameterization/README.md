@@ -24,10 +24,10 @@
 **Question.** Can the confirmed P/L computation be expressed through a clean 32-channel
 task interface and exact packed state without changing its supported computation?
 
-**Finding.** A prospective deterministic mapping and timestep-accounting repair are
-frozen for the two confirmed P/L networks. They retain the legacy time drive, four-step
-support microcircuit, and complete active episode horizon while removing only redundant
-task-interface and state representation; qualification has not yet run.
+**Finding.** A prospective deterministic mapping, timestep-accounting repair, and source
+lock are frozen for the two confirmed P/L networks. They retain the legacy time drive,
+four-step support microcircuit, and complete active episode horizon while removing only
+redundant task-interface and state representation; qualification has not yet run.
 
 **Claim boundary.** This study can establish checkpoint-preserving structural
 equivalence only. It does not establish that episode time is unnecessary, authorize
@@ -41,6 +41,9 @@ historical checkpoint deletion, or expose a no-time training outcome.
 - `repair_contract` —
   [studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair1.json](records/benchmarks/pl_exact_reparameterization_v1.repair1.json)
   (`sha256:fbf85c720119`)
+- `execution_lock` —
+  [studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.execution_lock.json](records/benchmarks/pl_exact_reparameterization_v1.execution_lock.json)
+  (`sha256:3497e685b5a3`)
 
 ## Provenance rule
 
