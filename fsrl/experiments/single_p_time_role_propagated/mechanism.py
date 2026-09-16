@@ -21,7 +21,7 @@ from fsrl.experiments.single_p_time_role.estimands import (
     positive_scale,
 )
 from fsrl.experiments.training_strategy.evaluation import json_ready
-from fsrl.infra.provenance import write_json_exclusive
+from fsrl.infra.provenance import load_json, write_json_exclusive
 
 from .batches import subset_batch
 from .direct import (
@@ -33,13 +33,18 @@ from .direct import (
     support_trajectory,
 )
 from .external import CELLS
-from .locks import reference, validate_baseline_artifact_lock, validate_source_lock
+from .locks import (
+    reference,
+    validate_baseline_artifact_lock,
+    validate_mechanism_source_lock,
+    verify_reference,
+)
 from .protocol import (
     BASELINE_ARTIFACT_LOCK,
     MECHANISM_RUNS,
+    MECHANISM_SOURCE_LOCK,
     PROTOCOL_SHA256,
     RESULT,
-    SOURCE_LOCK,
     specification,
 )
 from .storage import load_npz, write_npz_exclusive
@@ -78,6 +83,14 @@ def _group(flat: dict, prefix: str) -> dict:
         for key, value in flat.items()
         if key.startswith(marker)
     }
+
+
+def _bootstrap_draws(lock: dict) -> int:
+    authority = load_json(verify_reference(lock["parents"]["scientific_estimands"]))
+    draws = authority["statistics"]["bootstrap_draws"]
+    if draws != 2000:
+        raise RuntimeError("inherited Stage-3 bootstrap count differs")
+    return draws
 
 
 def _validate_batch_metadata(flat: dict, prefix: str, cpu) -> None:
@@ -481,7 +494,7 @@ def _stage3(lock: dict, spec: dict, arrays: dict) -> dict:
                 for key, value in combined.items():
                     arrays[f"stage3__{seed}__{condition}__{panel}__{key}"] = value
             regression = regression_summary(
-                panels, seed=961000 + seed, draws=spec["statistics"]["bootstrap_draws"]
+                panels, seed=961000 + seed, draws=_bootstrap_draws(lock)
             )
             row = summaries[str(seed)][condition]
             row["regression"] = regression
@@ -528,7 +541,7 @@ def _classify(scale: dict, stage2: dict, stage3: dict) -> dict:
 
 def run(runtime: dict) -> dict:
     spec = specification()
-    lock = validate_source_lock(runtime)
+    lock = validate_mechanism_source_lock(runtime)
     validate_baseline_artifact_lock()
     if RESULT.exists() or MECHANISM_RUNS.exists():
         raise RuntimeError("direct-authority mechanism execution is write-once")
@@ -542,7 +555,7 @@ def run(runtime: dict) -> dict:
         result = {
             "schema_version": 1,
             "protocol_sha256": PROTOCOL_SHA256,
-            "source_lock": reference(SOURCE_LOCK),
+            "source_lock": reference(MECHANISM_SOURCE_LOCK),
             "baseline_artifact_lock": reference(BASELINE_ARTIFACT_LOCK),
             "runtime": runtime,
             "outcome": "interpretable",
@@ -571,7 +584,7 @@ def run(runtime: dict) -> dict:
         failure = {
             "schema_version": 1,
             "protocol_sha256": PROTOCOL_SHA256,
-            "source_lock": reference(SOURCE_LOCK),
+            "source_lock": reference(MECHANISM_SOURCE_LOCK),
             "baseline_artifact_lock": reference(BASELINE_ARTIFACT_LOCK),
             "runtime": runtime,
             "outcome": "noninterpretable",

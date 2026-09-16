@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_propagated_authority_v1",
+  "timing": "After mechanism_attempt1 stopped and before any mechanism result or classification was written.",
+  "reason": "The first mechanism execution reached the registered Stage-3 regression after computing Stage 1 and Stage 2 only in memory, then raised KeyError('statistics') because the implementation looked for bootstrap_draws in the successor wrapper instead of the locked inherited scientific-estimand authority. No mechanism runtime artifact, estimate, classification, or report was written.",
+  "repair": {
+    "failed_attempt": "records/results/mechanism_attempt1.json",
+    "bootstrap_authority": "Read bootstrap_draws from the content-locked scientific_estimands parent record at statistics.bootstrap_draws; require the inherited value 2000.",
+    "implementation": "Replace only the invalid successor-wrapper lookup used by Stage-3 regression. Preserve the registered regression seed, shared draws, equal-panel aggregation, inputs, cohort shapes, and all Stage 1--3 computations.",
+    "execution": "Qualify and content-lock the repaired source before one fresh write-once mechanism execution. The compatible baseline and its artifact lock remain immutable and are not replayed."
+  },
+  "unchanged": [
+    "all scientific seeds, panels, checkpoints, frozen inputs, baseline arrays, interventions, probes, and batch shapes",
+    "all scientific estimands, thresholds, bootstrap count and seeds, classifications, and claim boundaries",
+    "the no-training rule and the parent time_removal_failure",
+    "the compatible propagated-authority baseline and its 91-member artifact lock"
+  ],
+  "mechanism_outcomes_exposed_before_repair": false
+}

@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import ast
 
+from fsrl.experiments.single_p_time_role_propagated.locks import reference
+from fsrl.experiments.single_p_time_role_propagated.mechanism import _bootstrap_draws
 from fsrl.experiments.single_p_time_role_propagated.protocol import (
     PROTOCOL,
     PROTOCOL_SHA256,
     specification,
 )
 from fsrl.infra.provenance import file_sha256
+from fsrl.paths import STUDIES_ROOT
 
 
 def test_frozen_protocol_identity_and_two_phase_gate():
@@ -38,3 +41,13 @@ def test_direct_internal_module_has_no_adapter_import():
         elif isinstance(node, ast.ImportFrom) and node.module:
             imports.append(node.module)
     assert not any("adapter" in name for name in imports)
+
+
+def test_stage3_draw_count_comes_from_inherited_scientific_authority():
+    inherited = (
+        STUDIES_ROOT
+        / "single_p_time_role_decomposition/records/benchmarks"
+        / "single_p_time_role_decomposition_v1.json"
+    )
+    lock = {"parents": {"scientific_estimands": reference(inherited)}}
+    assert _bootstrap_draws(lock) == 2000

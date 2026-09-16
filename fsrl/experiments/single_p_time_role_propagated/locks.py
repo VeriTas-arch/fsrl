@@ -14,6 +14,8 @@ from .protocol import (
     BASELINE_ARTIFACT_LOCK,
     BASELINE_RESULT,
     BASELINE_RUNS,
+    MECHANISM_ATTEMPT1,
+    MECHANISM_SOURCE_LOCK,
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
@@ -178,6 +180,58 @@ def validate_source_lock(runtime: dict) -> dict:
     return lock
 
 
+def write_mechanism_source_lock(runtime: dict) -> dict:
+    commit = _clean_commit()
+    qualification = load_json(QUALIFICATION)
+    if not qualification["passed"] or qualification["sources"] != sources():
+        raise RuntimeError("qualification does not cover committed mechanism source")
+    parents = parent_references()
+    for group in ("checkpoints", "inputs", "parent_evaluation_raw"):
+        for row in parents[group].values():
+            verify_reference(row)
+    attempt = load_json(MECHANISM_ATTEMPT1)
+    if attempt["outcome"] != "noninterpretable" or attempt["failure"] != "'statistics'":
+        raise RuntimeError("mechanism repair attempt differs")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "source_commit": commit,
+        "sources": sources(),
+        "qualification": reference(QUALIFICATION),
+        "runtime": runtime,
+        "parents": parents,
+        "baseline_artifact_lock": reference(BASELINE_ARTIFACT_LOCK),
+        "failed_mechanism_attempt": reference(MECHANISM_ATTEMPT1),
+        "mechanism_outcomes_exposed": False,
+    }
+    write_json_exclusive(MECHANISM_SOURCE_LOCK, payload)
+    return {
+        "source_commit": commit,
+        "sources": len(payload["sources"]),
+        "checkpoints": len(parents["checkpoints"]),
+        "inputs": len(parents["inputs"]),
+        "parent_evaluation_raw": len(parents["parent_evaluation_raw"]),
+    }
+
+
+def validate_mechanism_source_lock(runtime: dict) -> dict:
+    lock = load_json(MECHANISM_SOURCE_LOCK)
+    if lock["protocol_sha256"] != PROTOCOL_SHA256 or lock["runtime"] != runtime:
+        raise RuntimeError("propagated mechanism source lock differs")
+    for row in lock["sources"]:
+        verify_reference(row, commit=lock["source_commit"])
+    verify_reference(lock["qualification"])
+    verify_reference(lock["baseline_artifact_lock"])
+    verify_reference(lock["failed_mechanism_attempt"])
+    for name, row in lock["parents"].items():
+        if name in {"checkpoints", "inputs", "parent_evaluation_raw"}:
+            for member in row.values():
+                verify_reference(member)
+        else:
+            verify_reference(row)
+    return lock
+
+
 def _runtime_artifacts() -> list[Path]:
     return sorted(path for path in BASELINE_RUNS.rglob("*") if path.is_file())
 
@@ -249,8 +303,10 @@ __all__ = [
     "sources",
     "validate_attempt2_artifact_lock",
     "validate_baseline_artifact_lock",
+    "validate_mechanism_source_lock",
     "validate_source_lock",
     "verify_reference",
     "write_baseline_artifact_lock",
+    "write_mechanism_source_lock",
     "write_source_lock",
 ]

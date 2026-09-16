@@ -28,7 +28,9 @@ time-role mechanism diagnostic?
 **Finding.** The frozen propagated-authority baseline is compatible across all 72
 evaluation units: 18144 summary values and 1824000 bootstrap-draw values remain inside
 their analytic budgets, all 4674 discrete classification leaves match exactly, and the
-parent time_removal_failure is unchanged. The mechanism diagnostic remains pending.
+parent time_removal_failure is unchanged. The first mechanism attempt exposed no
+estimate and stopped on an invalid bootstrap-count lookup; its inherited-authority-only
+repair has passed synthetic qualification, and the mechanism diagnostic remains pending.
 
 **Claim boundary.** Baseline compatibility admits the registered mechanism diagnostic
 but does not itself assign a time-role label, revise the parent's time_removal_failure,
@@ -97,6 +99,15 @@ authority and locked 24.9 GB runtime artifact set.
 - `artifact_lock` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/propagated_authority_baseline_artifact_lock.json](records/benchmarks/propagated_authority_baseline_artifact_lock.json)
   (`sha256:1d5262fc9f0a`)
+- `noninterpretable_attempt` —
+  [studies/single_p_time_role_propagated_authority/records/results/mechanism_attempt1.json](records/results/mechanism_attempt1.json)
+  (`sha256:ee3928a15154`)
+- `repair_contract` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair5.json](records/benchmarks/single_p_time_role_propagated_authority_v1.repair5.json)
+  (`sha256:1c83bffb6be5`)
+- `validation_result` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v6.json](records/benchmarks/qualification_v6.json)
+  (`sha256:e7c102c6b7a1`)
 
 ## Provenance rule
 

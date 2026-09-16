@@ -18,6 +18,7 @@ def main(args=None) -> int:
             "baseline",
             "finalize-baseline",
             "lock-baseline",
+            "lock-mechanism-source",
             "mechanism",
             "report",
         ),
@@ -44,6 +45,10 @@ def main(args=None) -> int:
         from .locks import write_baseline_artifact_lock
 
         result = write_baseline_artifact_lock()
+    elif stage == "lock-mechanism-source":
+        from .locks import write_mechanism_source_lock
+
+        result = write_mechanism_source_lock(runtime)
     elif stage == "mechanism":
         from .mechanism import run
 

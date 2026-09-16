@@ -331,8 +331,10 @@ fail to close the dynamics.
   - **Finding:** The frozen propagated-authority baseline is compatible across all 72
     evaluation units: 18144 summary values and 1824000 bootstrap-draw values remain
     inside their analytic budgets, all 4674 discrete classification leaves match
-    exactly, and the parent time_removal_failure is unchanged. The mechanism diagnostic
-    remains pending.
+    exactly, and the parent time_removal_failure is unchanged. The first mechanism
+    attempt exposed no estimate and stopped on an invalid bootstrap-count lookup; its
+    inherited-authority-only repair has passed synthetic qualification, and the
+    mechanism diagnostic remains pending.
 
 ## Minimal explanatory models
 
