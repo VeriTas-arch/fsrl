@@ -38,6 +38,9 @@ emergence without priors.
 - `registered_contract` —
   [studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.json](records/benchmarks/pl_functional_replication_v1.json)
   (`sha256:dc146c7723ad`)
+- `repair_contract` —
+  [studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.repair1.json](records/benchmarks/pl_functional_replication_v1.repair1.json)
+  (`sha256:f8fb383ee947`)
 
 ## Provenance rule
 
