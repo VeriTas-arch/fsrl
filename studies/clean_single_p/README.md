@@ -80,6 +80,9 @@ checkpoint deletion.
 - `validation_result` —
   [studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.json](records/benchmarks/evaluation_repair1_qualification.json)
   (`sha256:dc38095e255a`)
+- `repair_lock` —
+  [studies/clean_single_p/records/benchmarks/source_repair1.json](records/benchmarks/source_repair1.json)
+  (`sha256:d67730800151`)
 
 ## Provenance rule
 
