@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `valid_negative`
 - **Review state:** `indexed`
 - **Study ID:** `pl_direct_training`
 
@@ -25,14 +25,18 @@
 organization, and does removing normalized episode time preserve its competence, causal
 links, and inherited behavior profile?
 
-**Finding.** All six paired development runs completed under the source-locked protocol
-and their checkpoints, logs, optimizer counters, and stream fingerprints are
-artifact-locked before evaluation. No scientific evaluation has been exposed.
+**Finding.** Fresh direct training made both conditions competent in all three
+development seeds, and the no-time candidate passed paired noninferiority on all six
+registered endpoints. Both conditions nevertheless failed retained direct-local fidelity
+in every seed (bootstrap lower bounds 0.00383--0.00505 versus the registered 0.01
+threshold) and failed the frozen quantitative behavior gate. The registered outcome is
+training_parameterization_failure, so confirmation stops without tuning.
 
-**Claim boundary.** This design isolates normalized time within one fixed
-direct-training recipe. Development cannot establish network-population confirmation,
-failure cannot prove universal time necessity, and no historical checkpoint deletion is
-authorized.
+**Claim boundary.** This rejects the fixed direct-training recipe as a route to a
+reportable P/L mainline. It does not identify normalized time as the cause because the
+no-time candidate was noninferior and both conditions failed the same mandatory
+mechanism link; it does not reject the no-time architecture generally, authorize
+protocol tuning, or authorize historical checkpoint deletion.
 
 ## Frozen records
 
@@ -48,6 +52,12 @@ authorized.
 - `artifact_lock` —
   [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.development_artifact_lock.json](records/benchmarks/pl_direct_training_v1.development_artifact_lock.json)
   (`sha256:6cf9d0e2d61d`)
+- `frozen_result` —
+  [studies/pl_direct_training/records/results/pl_direct_training_v1.development.json](records/results/pl_direct_training_v1.development.json)
+  (`sha256:386beeb82e30`)
+- `report` —
+  [studies/pl_direct_training/records/reports/pl_direct_training_v1.development.md](records/reports/pl_direct_training_v1.development.md)
+  (`sha256:5048c359bd49`)
 
 ## Provenance rule
 

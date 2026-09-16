@@ -286,10 +286,14 @@ fail to close the dynamics.
     CPU/CUDA, Liu and generic support horizons, and intact/P-off/L-off conditions.
     Global state and output were exact; overall error was at most 9.5367431640625e-7
     with zero categorical mismatches. The failed first mapping remains registered.
-- [Direct training of the cleaned no-time P/L model](pl_direct_training/README.md) — `frozen_contract`
-  - **Finding:** All six paired development runs completed under the source-locked
-    protocol and their checkpoints, logs, optimizer counters, and stream fingerprints
-    are artifact-locked before evaluation. No scientific evaluation has been exposed.
+- [Direct training of the cleaned no-time P/L model](pl_direct_training/README.md) — `valid_negative`
+  - **Finding:** Fresh direct training made both conditions competent in all three
+    development seeds, and the no-time candidate passed paired noninferiority on all six
+    registered endpoints. Both conditions nevertheless failed retained direct-local
+    fidelity in every seed (bootstrap lower bounds 0.00383--0.00505 versus the
+    registered 0.01 threshold) and failed the frozen quantitative behavior gate. The
+    registered outcome is training_parameterization_failure, so confirmation stops
+    without tuning.
 
 ## Minimal explanatory models
 

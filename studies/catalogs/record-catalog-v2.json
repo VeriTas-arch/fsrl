@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3830,
+  "entry_count": 3832,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2090,
+    "json": 2091,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 94,
+    "markdown": 95,
     "numpy_npz": 1408,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3734,
+    "already_conformant": 3736,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -81782,6 +81782,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_direct_training/records/reports/pl_direct_training_v1.development.md",
+        "repository_path": "studies/pl_direct_training/records/reports/pl_direct_training_v1.development.md"
+      },
+      "materialized_identity": {
+        "bytes": 1603,
+        "sha256": "5048c359bd49472994e24b236dd8b4533e9c0cb4bd4e06bdc44b7d978c7a1581"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_direct_training",
+        "kind": "study"
+      },
+      "record_id": "study.pl_direct_training.studies_pl_direct_training_records_reports_pl_direct_training_v1_development_md",
+      "registered_identity": {
+        "bytes": 1603,
+        "sha256": "5048c359bd49472994e24b236dd8b4533e9c0cb4bd4e06bdc44b7d978c7a1581",
+        "source_ref": "sha256:5048c359bd49472994e24b236dd8b4533e9c0cb4bd4e06bdc44b7d978c7a1581"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_direct_training/records/results/pl_direct_training_v1.development.json",
+        "repository_path": "studies/pl_direct_training/records/results/pl_direct_training_v1.development.json"
+      },
+      "materialized_identity": {
+        "bytes": 427750,
+        "sha256": "386beeb82e302db4cc14e339db56dca4fd47dbc57a1ab56395901e07766abcd2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_direct_training",
+        "kind": "study"
+      },
+      "record_id": "study.pl_direct_training.studies_pl_direct_training_records_results_pl_direct_training_v1_development_json",
+      "registered_identity": {
+        "bytes": 427750,
+        "sha256": "386beeb82e302db4cc14e339db56dca4fd47dbc57a1ab56395901e07766abcd2",
+        "source_ref": "sha256:386beeb82e302db4cc14e339db56dca4fd47dbc57a1ab56395901e07766abcd2"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -130607,7 +130675,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3828,
+  "registered_record_count": 3830,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130621,7 +130689,7 @@
     "execution_lock": 66,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 568,
+    "frozen_result": 569,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -130631,7 +130699,7 @@
     "registered_contract": 88,
     "repair_contract": 12,
     "repair_lock": 10,
-    "report": 89,
+    "report": 90,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2727,
