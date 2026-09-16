@@ -46,6 +46,9 @@ WORKFLOW_MODULES = {
     ),
     "clean-single-p": "fsrl.experiments.clean_single_p.__main__",
     "single-p-time-role": "fsrl.experiments.single_p_time_role.__main__",
+    "single-p-time-role-direct": (
+        "fsrl.experiments.single_p_time_role_direct.__main__"
+    ),
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",
