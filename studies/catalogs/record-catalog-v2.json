@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3864,
+  "entry_count": 3865,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2118,
+    "json": 2119,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3768,
+    "already_conformant": 3769,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -6641,7 +6641,7 @@
     },
     {
       "availability": "materialized",
-      "document_type": "fsrl.record.validation_result",
+      "document_type": "fsrl.record.noninterpretable_attempt",
       "format": {
         "format": "json",
         "legacy_format": false,
@@ -6649,8 +6649,8 @@
         "prospective_suffix": ".json"
       },
       "locator": {
-        "legacy_path": "studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.json",
-        "repository_path": "studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.json"
+        "legacy_path": "studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.attempt2.json",
+        "repository_path": "studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.attempt2.json"
       },
       "materialized_identity": {
         "bytes": 91634,
@@ -6665,11 +6665,45 @@
         "id": "clean_single_p",
         "kind": "study"
       },
-      "record_id": "study.clean_single_p.studies_clean_single_p_records_benchmarks_evaluation_repair1_qualification_json",
+      "record_id": "study.clean_single_p.studies_clean_single_p_records_benchmarks_evaluation_repair1_qualification_attempt2_json",
       "registered_identity": {
         "bytes": 91634,
         "sha256": "f9c54d5803bef1536589d48bf6e0165d3a2ea70ac68e36972fe2b196070a2097",
         "source_ref": "sha256:f9c54d5803bef1536589d48bf6e0165d3a2ea70ac68e36972fe2b196070a2097"
+      },
+      "role": "noninterpretable_attempt"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.json",
+        "repository_path": "studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 91634,
+        "sha256": "dc38095e255aadcaad2150276679ebb41b801517046a7652d47793f3a87e84e9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "clean_single_p",
+        "kind": "study"
+      },
+      "record_id": "study.clean_single_p.studies_clean_single_p_records_benchmarks_evaluation_repair1_qualification_json",
+      "registered_identity": {
+        "bytes": 91634,
+        "sha256": "dc38095e255aadcaad2150276679ebb41b801517046a7652d47793f3a87e84e9",
+        "source_ref": "sha256:dc38095e255aadcaad2150276679ebb41b801517046a7652d47793f3a87e84e9"
       },
       "role": "validation_result"
     },
@@ -131763,7 +131797,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3862,
+  "registered_record_count": 3863,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -131779,7 +131813,7 @@
     "frozen_parameters": 180,
     "frozen_result": 571,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 10,
+    "noninterpretable_attempt": 11,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,

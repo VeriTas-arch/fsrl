@@ -84,7 +84,7 @@ def freeze_inputs() -> dict:
 
 def write_source_lock() -> dict:
     commit = clean_commit()
-    qualification = load_json(QUALIFICATION_REPAIR)
+    qualification = load_json(QUALIFICATION)
     if not qualification["passed"] or qualification["sources"] != sources():
         raise RuntimeError("qualification does not cover the committed source")
     panels = freeze_inputs()
@@ -93,7 +93,7 @@ def write_source_lock() -> dict:
         "protocol_sha256": PROTOCOL_SHA256,
         "source_commit": commit,
         "sources": sources(),
-        "qualification": reference(QUALIFICATION_REPAIR),
+        "qualification": reference(QUALIFICATION),
         "task": inherited_recipe()["task"],
         "panels": panels,
     }
@@ -136,7 +136,7 @@ def write_source_repair_lock() -> dict:
     if reference(EVALUATION_REPAIR)["sha256"] != EVALUATION_REPAIR_SHA256:
         raise RuntimeError("clean single-P evaluation repair changed")
     current = sources()
-    qualification = load_json(QUALIFICATION)
+    qualification = load_json(QUALIFICATION_REPAIR)
     if not qualification["passed"] or qualification["sources"] != current:
         raise RuntimeError("qualification does not cover the repaired source")
     replacements = _source_replacements(original["sources"], current)
@@ -150,7 +150,7 @@ def write_source_repair_lock() -> dict:
         "source_replacements": replacements,
         "original_source_lock": reference(SOURCE_LOCK),
         "repair": reference(EVALUATION_REPAIR),
-        "qualification": reference(QUALIFICATION),
+        "qualification": reference(QUALIFICATION_REPAIR),
         "task": original["task"],
         "panels": original["panels"],
         "scientific_outcomes_exposed_before_repair": False,
