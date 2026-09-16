@@ -37,6 +37,7 @@ WORKFLOW_MODULES = {
     "pl-exact-reparameterization": (
         "fsrl.experiments.pl_exact_reparameterization.__main__"
     ),
+    "pl-direct-training": "fsrl.experiments.pl_direct_training.__main__",
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",

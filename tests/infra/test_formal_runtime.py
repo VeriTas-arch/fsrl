@@ -18,6 +18,20 @@ from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_direct_training_dispatch_uses_registered_entry_point(self):
+        module_name = "fsrl.experiments.pl_direct_training.__main__"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=53)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(["pl-direct-training", "--sentinel"])
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 53)
+
     def test_exact_reparameterization_dispatch_uses_registered_entry_point(self):
         module_name = "fsrl.experiments.pl_exact_reparameterization.__main__"
         module = ModuleType(module_name)
