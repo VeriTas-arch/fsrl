@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "repair_id": "pl-functional-replication-v1-execution-repair1",
+  "experiment_id": "pl-functional-replication-v1",
+  "registered_after_failure_before_replay": true,
+  "failure": {
+    "stage": "evaluation-seed-3004-before-result-write",
+    "exception_type": "TypeError",
+    "exception_message": "unsupported operand type(s) for -: 'NoneType' and 'float'",
+    "implementation_commit": "d25001a5d688f18716f258457172cd1745b6ca5a",
+    "artifact_lock_commit": "9c7d7e2b1fdabf228a5f613eab2c77f115cf0888",
+    "failed_run_manifest": {
+      "path": "artifacts/runs/pl_functional_replication_v1/evaluation/seed-3004/run.json",
+      "sha256": "e6939875ad59d6d9c1a5c2bb12395a34d05788be8a130b153dc3be28c6c553d7",
+      "bytes": 5007
+    },
+    "scientific_result_written": false,
+    "transport_evaluated": false,
+    "scope": "The locked seed-3004 model completed generic and Liu rollout computations in memory, then stopped in an integrity-only endpoint-parity diagnostic before link decisions, seed outcome composition, raw arrays, sampled behavior, or result JSON were written. The failed attempt is noninterpretable and remains immutable."
+  },
+  "cause": "probability_metrics intentionally serializes a participant with an empty retained or omitted group as JSON null, while liu_endpoints retains the same value as floating NaN. The integrity-only parity diagnostic constructed the serialized side without dtype=float64, producing an object array and attempting None minus float. This is a representation mismatch in a diagnostic, not a difference between the registered probability estimands.",
+  "authorized_repair": {
+    "numeric_change": "Coerce both parity-diagnostic vectors to float64, so JSON null is restored to NaN, and compare the same finite paired entries with the existing NaN-omission rule.",
+    "lifecycle_change": "Retain the failed evaluation directory unchanged and route the complete three-seed replay through evaluation-attempt2. Add append-only source-repair provenance that verifies every unchanged original source and each exact replacement against its Git witness.",
+    "qualification_change": "Add a regression check containing an empty retained and an empty omitted participant, rerun the complete non-Liu CPU/CUDA qualification in attempt3, and lock that qualification with the repaired sources before replay.",
+    "scientific_change": false
+  },
+  "unchanged": [
+    "trained checkpoints and all training artifacts",
+    "architecture, model equations, access equations, and interventions",
+    "seeds, participants, task inputs, schedules, maps, and randomization",
+    "probability, causal-field, behavior, competence, and transport estimands",
+    "bootstrap rules, thresholds, four-link logic, nine behavior rules, and outcome tree",
+    "all-seed rule, transport trigger, claim boundary, and retention policy"
+  ],
+  "replay_rule": "After repaired-source qualification and an append-only source-repair lock are committed, evaluate all three locked seeds under attempt2 regardless of seed-3004 values. Do not retrain, replace, filter, extend, refit, or selectively continue any seed.",
+  "forbidden": [
+    "overwriting or deleting the failed attempt",
+    "changing a scientific value, threshold, condition, or outcome rule",
+    "using the technical failure to inspect or tune a candidate",
+    "retraining or modifying the jointly locked artifacts",
+    "triggering item-count transport unless all three primary attempt2 replications pass"
+  ],
+  "claim_boundary": "This repair can only restore the registered evaluation path over the unchanged locked cohort. It cannot improve, reinterpret, rescue, or promote a scientific result."
+}
