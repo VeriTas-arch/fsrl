@@ -25,11 +25,11 @@
 and Liu behavior after removing historical ABI channels and exactly packing the local
 state?
 
-**Finding.** Prospective contract and one pre-execution readiness repair are frozen.
-Equation qualification showed that the preserved update order requires three support
-steps to produce a P write; the repaired candidate uses three support steps, two query
-steps, 32 input channels, one margin, and a 105-scalar exact packed local trace. No
-scientific seed result is yet registered.
+**Finding.** Prospective contract, one pre-execution readiness repair, and the
+implementation/source lock are frozen. CPU and CUDA eager/fullgraph qualification
+passed; the repaired candidate uses three support steps, two query steps, 32 input
+channels, one margin, and a 105-scalar exact packed local trace. No scientific seed
+result is yet registered.
 
 **Claim boundary.** The immutable parent plus append-only repair opens one fixed
 development candidate and conditional unchanged confirmation. It does not alter frozen
@@ -44,6 +44,9 @@ historical checkpoint deletion before confirmation and a separate retention migr
 - `repair_contract` —
   [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.repair1.json](records/benchmarks/compact_global_local_model_v1.repair1.json)
   (`sha256:d48196587245`)
+- `execution_lock` —
+  [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.execution_lock.json](records/benchmarks/compact_global_local_model_v1.execution_lock.json)
+  (`sha256:0a5e6833d081`)
 
 ## Provenance rule
 
