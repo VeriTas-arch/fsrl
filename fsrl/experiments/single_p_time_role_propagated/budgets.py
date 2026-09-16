@@ -149,6 +149,7 @@ class BudgetCaps:
     liu_probability: float
     generic_ce: float
     liu_ce: float
+    coherence: float
 
     @classmethod
     def from_parent_raw(cls, raw: dict) -> BudgetCaps:
@@ -161,11 +162,16 @@ class BudgetCaps:
             ]
         )
         liu_margin = margin_budget(liu)
+        coherence = max(
+            coherence_budget(raw["liu"][f"bundles__{name}__logits"])
+            for name in ("intact", "local_off")
+        )
         return cls(
             generic_probability=float(generic.max() / 4.0 + 2 * EDGE_SLACK),
             liu_probability=float(liu_margin.max() + 2 * EDGE_SLACK),
             generic_ce=float(generic.max() + 2 * EDGE_SLACK),
             liu_ce=float(4.0 * liu_margin.max() + 2 * EDGE_SLACK),
+            coherence=coherence,
         )
 
     def merged(self, other: BudgetCaps) -> BudgetCaps:
@@ -180,6 +186,7 @@ class BudgetCaps:
 def audit_unit(
     direct: dict, parent: dict, liu_cpu, recipe: dict
 ) -> tuple[dict, BudgetCaps]:
+    discrete_arrays = assert_discrete_equal(direct, parent)
     direct_margins, parent_margins = _margin_arrays(direct), _margin_arrays(parent)
     if direct_margins.keys() != parent_margins.keys():
         raise RuntimeError("margin inventory differs")
@@ -239,6 +246,7 @@ def audit_unit(
         "maximum_endpoint_error": max(endpoint_errors.values()),
         "margin_arrays": len(errors),
         "probability_endpoints": len(endpoint_errors),
+        "discrete_arrays": discrete_arrays,
     }, BudgetCaps.from_parent_raw(parent)
 
 
@@ -251,7 +259,42 @@ def merge_caps(values: list[BudgetCaps]) -> BudgetCaps:
     return result
 
 
+def coherence_budget(reference_margin: np.ndarray) -> float:
+    margins = np.asarray(reference_margin, dtype=np.float64)
+    budget = margin_budget(margins)
+    field = (margins[:, ::2] - margins[:, 1::2]) / 2.0
+    field_budget = (budget[:, ::2] + budget[:, 1::2]) / 2.0
+    delta = np.linalg.vector_norm(field_budget, axis=1)
+    norm = np.linalg.vector_norm(field, axis=1)
+    if np.any(norm <= delta):
+        raise RuntimeError("coherence parent field is too small for perturbation bound")
+    return float(np.minimum(1.0, 4.0 * delta / (norm - delta)).max() + 3 * EDGE_SLACK)
+
+
+def assert_discrete_equal(direct: dict, parent: dict) -> int:
+    names = (
+        "generic/signs",
+        "generic/learned",
+        "generic/episode_indices",
+        "liu/evidence_route",
+        "liu/routes__full__sampled_orders",
+        "liu/routes__full__sampled_mask",
+        "liu/routes__full__internal__orders",
+        "liu/routes__global__sampled_orders",
+        "liu/routes__global__sampled_mask",
+        "liu/routes__global__internal__orders",
+    )
+    for name in names:
+        phase, key = name.split("/", 1)
+        if key not in direct[phase] or key not in parent[phase]:
+            raise RuntimeError(f"discrete external array is missing: {name}")
+        if not np.array_equal(direct[phase][key], parent[phase][key]):
+            raise RuntimeError(f"discrete external array differs: {name}")
+    return len(names)
+
+
 def summary_budget(path: str, caps: BudgetCaps) -> float:
+    segments = set(path.split("/"))
     factor = (
         4.0
         if "/interaction/" in path
@@ -265,18 +308,20 @@ def summary_budget(path: str, caps: BudgetCaps) -> float:
     if "/noninferiority_equal_panel_mean/" in path:
         base = caps.liu_probability if "/liu_" in path else caps.generic_probability
         return 2.0 * base + 6.0 * EDGE_SLACK
-    if any(
-        token in path
-        for token in (
-            "/CE/",
-            "/cross_entropy/",
-            "/generic_full/",
-            "/generic_global/",
-            "/liu_full/",
-            "/liu_global/",
+    if "coherence" in segments and "behavior" in segments:
+        return caps.coherence + 6.0 * EDGE_SLACK
+    if (
+        "CE" in segments
+        or "cross_entropy" in segments
+        or segments.intersection(
+            {"generic_full", "generic_global", "liu_full", "liu_global"}
         )
     ):
-        base = caps.liu_ce if "/liu_" in path else caps.generic_ce
+        base = (
+            caps.liu_ce
+            if segments.intersection({"liu_full", "liu_global"})
+            else caps.generic_ce
+        )
         return factor * base + 6.0 * EDGE_SLACK
     if "/effects/" in path or "/summaries/" in path:
         return 2.0 * caps.liu_probability + 6.0 * EDGE_SLACK
@@ -289,8 +334,10 @@ __all__ = [
     "RECONSTRUCTION",
     "RELATIVE",
     "BudgetCaps",
+    "assert_discrete_equal",
     "audit_unit",
     "bounded_error",
+    "coherence_budget",
     "cross_entropy_budget",
     "margin_budget",
     "merge_caps",

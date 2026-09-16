@@ -12,14 +12,16 @@ REPAIRS = (
     PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair1.json"),
     PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair2.json"),
     PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair3.json"),
+    PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair4.json"),
 )
 QUALIFICATION_V1 = RECORDS / "benchmarks/qualification.json"
 QUALIFICATION_V2 = RECORDS / "benchmarks/qualification_v2.json"
 QUALIFICATION_V3 = RECORDS / "benchmarks/qualification_v3.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification_v4.json"
+QUALIFICATION_V4 = RECORDS / "benchmarks/qualification_v4.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_v5.json"
 SOURCE_LOCK_V1 = RECORDS / "benchmarks/baseline_source_lock.json"
 EXECUTION_SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock_v3.json"
-SOURCE_LOCK = RECORDS / "benchmarks/baseline_finalize_source_lock.json"
+SOURCE_LOCK = RECORDS / "benchmarks/baseline_finalize_source_lock_v2.json"
 ATTEMPT2 = RECORDS / "results/baseline_attempt2.json"
 ATTEMPT2_ARTIFACT_LOCK = RECORDS / "benchmarks/baseline_attempt2_artifact_lock.json"
 BASELINE_RESULT = RECORDS / "results/propagated_authority_baseline_v1.json"
@@ -37,6 +39,7 @@ REPAIR_SHA256S = (
     "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce",
     "5a6af0e05ca3ad0b520df303aad4877ba1bb893277c62fed2ced2afa87d5c66b",
     "40752a85fdf553b6a0d5de71ff4cbe581b8f1e17d4aec0cd746e307c97c52178",
+    "7663201646bed7c11c0574f1d29561f65504500331c1197bcf975ed5f22b40d2",
 )
 
 
@@ -65,6 +68,7 @@ __all__ = [
     "QUALIFICATION_V1",
     "QUALIFICATION_V2",
     "QUALIFICATION_V3",
+    "QUALIFICATION_V4",
     "RECORDS",
     "REPAIRS",
     "REPAIR_SHA256S",

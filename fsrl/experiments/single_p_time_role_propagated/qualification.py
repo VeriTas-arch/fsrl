@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from fsrl.analysis.hodge import build_complete_graph_geometry, gradient_energy_fraction
 from fsrl.experiments.clean_single_p.model import AffineSingleP, CleanSinglePConfig
 from fsrl.experiments.clean_single_p.protocol import inherited_recipe
 from fsrl.experiments.memory_structure.inputs import size_protocol
@@ -30,11 +31,15 @@ from fsrl.paths import REPO_ROOT
 
 from .budgets import (
     EDGE_SLACK,
+    BudgetCaps,
+    assert_discrete_equal,
     bounded_error,
+    coherence_budget,
     cross_entropy_budget,
     liu_reconstruction,
     margin_budget,
     probability_budget,
+    summary_budget,
 )
 from .direct import (
     apply_support_probe,
@@ -229,6 +234,52 @@ def _budget_checks() -> dict:
     results["scalar_bounded_error"] = (
         bounded_error(1.0 + 5e-6, 1.0, 1e-5, "scalar") < 1e-5
     )
+    rng = np.random.default_rng(991104)
+    coherence_margin = rng.normal(size=(4, 56))
+    changed_margin = coherence_margin + 0.7 * margin_budget(coherence_margin)
+    geometry = build_complete_graph_geometry(size_protocol(inherited_recipe(1), 8))
+    parent_field = (coherence_margin[:, ::2] - coherence_margin[:, 1::2]) / 2
+    changed_field = (changed_margin[:, ::2] - changed_margin[:, 1::2]) / 2
+    coherence_error = np.abs(
+        gradient_energy_fraction(changed_field, geometry)
+        - gradient_energy_fraction(parent_field, geometry)
+    )
+    results["analytic_coherence_bound"] = bool(
+        np.all(coherence_error <= coherence_budget(coherence_margin))
+    )
+    fixture_arrays = {
+        "generic": {
+            "signs": np.asarray([[-1, 1]]),
+            "learned": np.asarray([[True, False]]),
+            "episode_indices": np.asarray([7]),
+        },
+        "liu": {
+            "evidence_route": np.asarray([[0, 1]]),
+            **{
+                f"routes__{route}__{name}": np.asarray([[0, 1]])
+                for route in ("full", "global")
+                for name in ("sampled_orders", "sampled_mask", "internal__orders")
+            },
+        },
+    }
+    exact_count = assert_discrete_equal(fixture_arrays, fixture_arrays)
+    changed_arrays = {
+        phase: {name: value.copy() for name, value in arrays.items()}
+        for phase, arrays in fixture_arrays.items()
+    }
+    changed_arrays["liu"]["routes__full__sampled_orders"][0, 0] = 9
+    try:
+        assert_discrete_equal(changed_arrays, fixture_arrays)
+    except RuntimeError:
+        mismatch_rejected = True
+    else:
+        mismatch_rejected = False
+    results["exact_discrete_array_gate"] = exact_count == 10 and mismatch_rejected
+    caps = BudgetCaps(1e-5, 2e-5, 3e-5, 4e-5, 5e-5)
+    results["terminal_ce_draw_path_coverage"] = (
+        summary_budget("panel/interaction/liu_full", caps) > caps.liu_ce
+        and summary_budget("panel/error_A/generic_global", caps) > caps.generic_ce
+    )
     return results
 
 
@@ -342,6 +393,9 @@ def run_qualification() -> dict:
         and checks["propagated_budget"]["source_liu_endpoint_authority"]
         and checks["propagated_budget"]["missing_value_diagnostic_uses_finite_index"]
         and checks["propagated_budget"]["scalar_bounded_error"]
+        and checks["propagated_budget"]["analytic_coherence_bound"]
+        and checks["propagated_budget"]["exact_discrete_array_gate"]
+        and checks["propagated_budget"]["terminal_ce_draw_path_coverage"]
     )
     payload = {
         "schema_version": 1,
