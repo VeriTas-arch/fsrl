@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3838,
+  "entry_count": 3840,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2097,
+    "json": 2098,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 95,
+    "markdown": 96,
     "numpy_npz": 1408,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3742,
+    "already_conformant": 3744,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -82360,6 +82360,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_functional_replication/records/reports/pl_functional_replication_v1.md",
+        "repository_path": "studies/pl_functional_replication/records/reports/pl_functional_replication_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 1746,
+        "sha256": "7cc76df6b686a33dee4ffa7dcf3a579b69e29393432581bce7066891bf7b3413"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_functional_replication",
+        "kind": "study"
+      },
+      "record_id": "study.pl_functional_replication.studies_pl_functional_replication_records_reports_pl_functional_replication_v1_md",
+      "registered_identity": {
+        "bytes": 1746,
+        "sha256": "7cc76df6b686a33dee4ffa7dcf3a579b69e29393432581bce7066891bf7b3413",
+        "source_ref": "sha256:7cc76df6b686a33dee4ffa7dcf3a579b69e29393432581bce7066891bf7b3413"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_functional_replication/records/results/pl_functional_replication_v1.json",
+        "repository_path": "studies/pl_functional_replication/records/results/pl_functional_replication_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 333139,
+        "sha256": "386247da944d075ea362fb23dba39106f6f175bbb2440acba76c41770c01a9a6"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_functional_replication",
+        "kind": "study"
+      },
+      "record_id": "study.pl_functional_replication.studies_pl_functional_replication_records_results_pl_functional_replication_v1_json",
+      "registered_identity": {
+        "bytes": 333139,
+        "sha256": "386247da944d075ea362fb23dba39106f6f175bbb2440acba76c41770c01a9a6",
+        "source_ref": "sha256:386247da944d075ea362fb23dba39106f6f175bbb2440acba76c41770c01a9a6"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -130879,7 +130947,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3836,
+  "registered_record_count": 3838,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130893,7 +130961,7 @@
     "execution_lock": 67,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 569,
+    "frozen_result": 570,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -130903,7 +130971,7 @@
     "registered_contract": 89,
     "repair_contract": 14,
     "repair_lock": 11,
-    "report": 90,
+    "report": 91,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2727,

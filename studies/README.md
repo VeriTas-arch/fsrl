@@ -294,9 +294,15 @@ fail to close the dynamics.
     registered 0.01 threshold) and failed the frozen quantitative behavior gate. The
     registered outcome is training_parameterization_failure, so confirmation stops
     without tuning.
-- [Clean no-time P/L functional replication](pl_functional_replication/README.md) — `frozen_contract`
-  - **Finding:** Prospective protocol frozen before successor implementation, training
-    of seeds 3004--3006, or exposure of their generic or Liu outcomes.
+- [Clean no-time P/L functional replication](pl_functional_replication/README.md) — `mixed`
+  - **Finding:** All three fresh networks passed competence, the global P path, omitted
+    L materiality, and all nine qualitative behavior rules. Seeds 3004 and 3005 passed
+    all four historical v2.4 functional links; seed 3006 passed three links but missed
+    retained-fidelity preservation because the dual-minus-shared retained
+    exact-probability lower bound was -0.00505074 versus the frozen -0.005 threshold,
+    with zero own-write identity error. The all-seed outcome is
+    competent_alternative_organization, so item-count transport was not triggered;
+    quantitative calibration remained report-only at 5/9, 4/9, and 3/9.
 
 ## Minimal explanatory models
 

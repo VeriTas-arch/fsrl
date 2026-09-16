@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `pl_functional_replication`
 
@@ -25,13 +25,22 @@
 reproduce the historical v2.4 functional division on fresh networks while retaining task
 competence and the frozen qualitative behavior phenomena?
 
-**Finding.** Prospective protocol frozen before successor implementation, training of
-seeds 3004--3006, or exposure of their generic or Liu outcomes.
+**Finding.** All three fresh networks passed competence, the global P path, omitted L
+materiality, and all nine qualitative behavior rules. Seeds 3004 and 3005 passed all
+four historical v2.4 functional links; seed 3006 passed three links but missed
+retained-fidelity preservation because the dual-minus-shared retained exact-probability
+lower bound was -0.00505074 versus the frozen -0.005 threshold, with zero own-write
+identity error. The all-seed outcome is competent_alternative_organization, so
+item-count transport was not triggered; quantitative calibration remained report-only at
+5/9, 4/9, and 3/9.
 
-**Claim boundary.** This is a new confirmation of an imposed functional decomposition,
-not a reinterpretation of seeds 3001--3003, proof of biological dual stores, proof of
-architectural necessity, a complete quantitative human model, or evidence of spontaneous
-emergence without priors.
+**Claim boundary.** The clean no-time architecture can realize the intended functional
+division, but this frozen recipe did not replicate it in all three fresh networks and is
+not promoted as a reliable clean P/L mainline. Seed 3006 is retained as valid competent
+variation rather than a tuning target, and seeds 3001--3003 remain the separate
+training-parameterization failure. The result does not establish biological dual stores,
+architectural necessity, L necessity for every direct relation, quantitative human
+equivalence, spontaneous emergence without priors, or network-population prevalence.
 
 ## Frozen records
 
@@ -53,6 +62,12 @@ emergence without priors.
 - `repair_lock` —
   [studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.source_repair1.json](records/benchmarks/pl_functional_replication_v1.source_repair1.json)
   (`sha256:518bbc37d043`)
+- `frozen_result` —
+  [studies/pl_functional_replication/records/results/pl_functional_replication_v1.json](records/results/pl_functional_replication_v1.json)
+  (`sha256:386247da944d`)
+- `report` —
+  [studies/pl_functional_replication/records/reports/pl_functional_replication_v1.md](records/reports/pl_functional_replication_v1.md)
+  (`sha256:7cc76df6b686`)
 
 ## Provenance rule
 
