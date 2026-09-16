@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "repair_id": "single_p_time_role_decomposition_v1_repair1",
+  "timing": "Before implementation qualification, source lock, or any registered-seed diagnostic execution.",
+  "reason": "The original protocol fixed the probe evidence and query time but did not explicitly fix the time supplied to the time-retained control during the counterfactual support probe. Allowing probe time to track prefix would confound explicit position with P-state dependence.",
+  "original_protocol": {
+    "path": "studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.json",
+    "sha256": "0d48ff52d0cdafbeb3ded6cddb5228b01b27db4bddca3481fc8c0957b38004fa"
+  },
+  "repair": {
+    "time_retained_control_probe_time": 0.3333333333333333,
+    "clean_no_time_probe_time": null,
+    "post_probe_query_time": 0.6666666666666666,
+    "rule": "Use the fixed in-distribution midpoint for every control probe at every prefix, so only the cloned P state varies with prefix. Never infer the natural support time from the prefix for this probe battery."
+  },
+  "unchanged": [
+    "all parent models, inputs, seeds, panels, cells, cohorts, and observations",
+    "Ce-primary and four-cell-secondary scope",
+    "all Stage-1 scalar estimands and inherited noninferiority gates",
+    "all Stage-2 support and query interventions",
+    "all Stage-3 episode-selection, pair, evidence, query, regression, and classification rules",
+    "unconditional execution and no-training boundary"
+  ],
+  "new_diagnostic_outcomes_exposed": false
+}

@@ -37,6 +37,12 @@ mechanism labels rather than model admission.
 - `registered_contract` —
   [studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.json](records/benchmarks/single_p_time_role_decomposition_v1.json)
   (`sha256:0d48ff52d0cd`)
+- `repair_contract` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair1.json](records/benchmarks/single_p_time_role_decomposition_v1.repair1.json)
+  (`sha256:66d6a6eb6e6a`)
+- `validation_result` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:bb11ab8f458d`)
 
 ## Provenance rule
 
