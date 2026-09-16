@@ -275,6 +275,10 @@ fail to close the dynamics.
     negative. Mean correct probability improves versus stage constants; competence/core
     remain. Liu budget equivalence fails, restricting causal interpretation to generic
     conditions.
+- [Compact global/local recurrent model](compact_global_local_model/README.md) — `frozen_contract`
+  - **Finding:** Prospective contract frozen before implementation or seed execution.
+    The candidate uses a 32-channel, two-step, single-margin recurrent backbone with a
+    105-scalar exact packed local trace; no result is yet registered.
 
 ## Minimal explanatory models
 

@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "study_id": "compact_global_local_model",
+  "experiment_id": "compact-global-local-model-v1",
+  "registration_status": "prospective_before_experiment_implementation_training_or_evaluation",
+  "scientific_question": "Can the supported global P and direct-local L organization retain generic competence, the registered causal links, and the frozen Liu behavior profile after removing historical input/output ABI channels, shortening every trial, and exactly packing the antisymmetric local state?",
+  "hypothesis": "Bias, normalized time, legacy reward, previous-action channels, a value head, two choice logits, two opposed modulation units, blank pre-roll, and the redundant half of the antisymmetric local tensor are not required for the supported P/L computation.",
+  "claim_boundary": {
+    "candidate": "This is a new development candidate. It does not rewrite or supersede any frozen checkpoint, study, result, or reporting claim unless it later passes the complete registered development and confirmation program.",
+    "retained_theory": "The candidate retains a cue-addressed recurrent fast-weight state P for global relational assembly, a direct cue-pair trace L for experienced-relation fidelity, differential global/local evidence admission, and staged outer-loop fitting.",
+    "not_tested": "The study does not test a scalar replacement for P, autonomous emergence of two stores, arbitrary-domain transport, human neural implementation, or the separate diminishing-plasticity learner.",
+    "development_scope": "Seeds 2801--2803 are development networks. They are not a network-population sample and cannot establish confirmation by themselves.",
+    "confirmation_scope": "Seeds 2804--2806 are prospectively reserved unchanged confirmation networks and are executed only if every development admission gate passes without repair or tuning.",
+    "human_scope": "The Liu task, temperature, human reference intervals, and behavior definitions are inherited project-exposed evidence; fresh network seeds are not fresh human confirmation."
+  },
+  "parent_evidence": {
+    "workflow": "workflows/relational_model/workflow.toml",
+    "global_local_confirmation": "studies/dual_evidence_access_confirmation/records/results/dual_evidence_access_confirmation_v2_4.json",
+    "behavior_contract": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+    "behavior_result": "studies/behavior_reproduction_map/records/results/model_behavior_reproduction_map_v1.json",
+    "training_strategy_result": "studies/joint_training_strategy/records/results/joint_training_strategy_v1.json",
+    "carried_positive": "The maintained P/L model is competent; P supports remote/global assembly, L supports direct experienced-relation fidelity, and differential evidence admission rescues omitted direct evidence. Six of nine frozen behavior rows are quantitative matches and all nine have registered qualitative classifications.",
+    "carried_negative": "Registered scalar/global reductions do not close P dynamics, and matched joint training failed the registered noninferiority rule. The candidate therefore preserves the recurrent P state and the global-then-local optimization schedule."
+  },
+  "seeds": {
+    "development": [2801, 2802, 2803],
+    "confirmation": [2804, 2805, 2806],
+    "selection": "Six consecutive unused seeds selected before implementation. Exact seed-label search found no registered or runtime training use before registration.",
+    "model_initialization": "torch.manual_seed(network_seed)",
+    "training_rng": "numpy.default_rng(100000 + network_seed)",
+    "filtering_replacement_or_optional_extension": "forbidden"
+  },
+  "task": {
+    "n_items": 8,
+    "cue_size": 15,
+    "min_edges": 7,
+    "max_edges": 10,
+    "support_blocks": 4,
+    "query_pairs": "All 28 unordered pairs with randomized left/right orientation and order.",
+    "subject_encoding_mode": "stable_omission",
+    "global_evidence": "s_G = signed_magnitude * z",
+    "local_evidence": "s_L = signed_magnitude * (z + (1-z) * p)",
+    "information_boundary": "Only ordinary left/right item cues, the displayed support magnitude after global admission, and a response-phase pulse enter the recurrent model. No relation identity, true rank, target, learned/omitted flag, posterior, diagnostic label, or evaluation outcome enters training rollout.",
+    "holdouts": "Exclude the registered Liu v1/v2 graph signatures and reflections from generic training and use the existing reflection-canonical graph bucket zero only for generic validation."
+  },
+  "architecture": {
+    "name": "compact P/L recurrent learner",
+    "input_size": 32,
+    "input_layout": {
+      "0:15": "left ordinary item cue",
+      "15:30": "right ordinary item cue",
+      "30": "response-phase pulse",
+      "31": "signed globally admitted support evidence; zero on queries"
+    },
+    "removed_inputs": [
+      "explicit constant-bias channel; the input linear layer retains its learned bias",
+      "normalized trial-time channel",
+      "legacy reward channel",
+      "two previous-action channels"
+    ],
+    "hidden_size": 200,
+    "activation": "tanh",
+    "trial_steps": 2,
+    "blank_initial_steps": 0,
+    "state_reset": "Reset hidden and eligibility at the start of every support and query trial; preserve P across support trials; reset P and L between episodes.",
+    "step_zero": "Present both cues and support evidence. Queries use zero evidence.",
+    "step_one": "Present only the response-phase pulse. Read the query margin here. On support trials this step applies the modulation computed from the step-one hidden state to the eligibility formed at step zero.",
+    "global_recurrence": "h_t=tanh(W_in x_t+b_in + [W + alpha elementwise P_t] h_(t-1)).",
+    "global_modulation": "m_t=scale*tanh(w_m h_t+b_m), with one scalar modulation unit and one learned scalar scale.",
+    "global_update": "P_(t+1)=clip(P_t + m_t E_t,-50,50); E_(t+1)=(1-eta_E)E_t+eta_E*tanh(h_t h_(t-1)^T). Preserve this numerical update order.",
+    "global_readout": "One learned scalar margin g_q=w_o h_response+b_o; positive means the left item ranks higher. There is no value head and no two-logit choice head.",
+    "local_key": "Let A=c_left c_right^T-c_right c_left^T. Pack the 105 strict upper-triangle entries and divide by their Euclidean norm. This packed key has exactly the same pairwise inner products as the normalized 225-entry antisymmetric key.",
+    "local_write": "L_(t+1)=L_t+s_L*k_t, one write per support presentation.",
+    "local_read": "ell_q=dot(L_T,k_q), lambda_L=softplus(raw_gain), and final margin M_q=g_q+lambda_L*ell_q.",
+    "persistent_state_sizes": {"P": 40000, "L": 105},
+    "query_policy": "Every query reads the same terminal P_T and L_T. Proposed query updates are discarded."
+  },
+  "optimization": {
+    "batch_size": 32,
+    "total_steps": 1500,
+    "global_only_steps": 1000,
+    "local_only_steps": 500,
+    "total_episode_exposures": 48000,
+    "initial_local_gain": 0.1,
+    "backbone_learning_rate": 0.0001,
+    "local_learning_rate": 0.01,
+    "optimizer": "Adam; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler",
+    "gradient_clip": 2.0,
+    "fast_weight_penalty": 0.0001,
+    "global_phase": "Steps 0--999 disable the local correction exactly and optimize the complete compact recurrent backbone using mean softplus(-y*g) plus 1e-4*mean(P_T^2).",
+    "local_phase": "Steps 1000--1499 freeze every backbone tensor, activate the final differential-admission local trace, and optimize only raw_gain using mean softplus(-y*M).",
+    "target_sign": "y=2*correct_action-1",
+    "selection": "Use the final step only. No intermediate checkpoint selection, early stopping, learning-rate change, extra step, gain refit, temperature refit, or seed replacement."
+  },
+  "implementation_gates": {
+    "input": "Verify exact width and channel isolation; changing removed channels is impossible because they are absent.",
+    "packed_local_equivalence": "For deterministic forward/reverse/random cue fixtures, packed writes and reads must match the existing full antisymmetric trace within atol=1e-6 and reversal must negate the key.",
+    "margin_equivalence": "For deterministic fixtures, binary cross-entropy from symmetric logits [-M/2,M/2] must equal softplus(-y*M) within atol=1e-7.",
+    "state_integrity": "Verify no blank pre-roll, exactly two recurrent steps per trial, support-only P/L retention, discarded query writes, and exact reset between episodes.",
+    "gradients": "Generic query loss must yield finite nonzero gradients through terminal P to support-time parameters and through lambda_L in the local phase. Verify exact backbone freeze in the local phase.",
+    "eager_compile_parity": "On seed 920001 non-Liu fixtures, compare eager and fullgraph CUDA margins, loss, gradients, and one Adam update using atol=1e-5 and rtol=1e-4.",
+    "failure": "Any failed correctness, gradient, source, or runtime gate blocks scientific training. An implementation-only correction is append-only and requires complete requalification before a replacement source lock."
+  },
+  "execution": {
+    "runtime_root": "artifacts/runs/compact_global_local_model_v1",
+    "device": "CUDA required for registered training and neural evaluation; CPU is sufficient for algebraic qualification.",
+    "precision": "float32 neural computation without autocast or TF32; float64 summaries",
+    "compile": {"enabled": true, "backend": "inductor", "fullgraph": true, "mode": "default"},
+    "artifact_policy": "Training checkpoints and dense replay arrays are transient ignored runtime artifacts. Keep them until their source/configuration/RNG identities, hashes, qualification, evaluation, and canonical JSON/Markdown reports are independently verified. Then remove the transient binaries; reproducibility is by locked recipe and retraining, not by retaining every checkpoint.",
+    "interruption": "Never resume an unverified partial artifact. A technical replay restarts from initialization under the same seed and locked contract in a separately identified attempt."
+  },
+  "generic_evaluation": {
+    "episodes": 256,
+    "rng_seed": 94001,
+    "temperature": 1.0,
+    "conditions": ["intact", "local_off", "P_off"],
+    "competence": "For every network independently, intact learned exact-decision mean must be at least 0.75 and intact nonlearned exact-decision mean at least 0.70.",
+    "local_partition": "P_off learned exact-decision mean must exceed 0.50 and P_off nonlearned exact-decision mean must not exceed 0.55."
+  },
+  "liu_evaluation": {
+    "protocol_id": "liu_v2",
+    "subjects": 77,
+    "cue_mode": "permuted_shared",
+    "subject_encoding_mode": "stable_omission",
+    "temperature": 0.25,
+    "cohort_identity": "Reuse the frozen v2.4 Liu cohort construction and seeds so architecture is the only changed scientific factor; do not refit temperature or human references.",
+    "conditions": ["intact", "local_off", "P_off", "query_shuffle", "evidence_shuffle"],
+    "required_diagnostics": "Retain write_off, alpha_zero, reset, shuffle, query-order invariance, all-relation leave-one-out remote influence, Hodge field metrics, and every frozen nine-row behavior endpoint."
+  },
+  "decision_contract": {
+    "prerequisites": "Source/artifact/input integrity, implementation gates, finite optimization, and generic competence pass for every mandatory network.",
+    "liu_competence": "For every network, intact overall exact-decision mean must be at least 0.75, intact nonlearned mean at least 0.70, and transitive-triplet mean at least 0.95.",
+    "global_necessity": "Intact-minus-P_off nonlearned correct-probability lower bound is at least 0.10 and P_off nonlearned upper bound is at most 0.55.",
+    "remote_reassembly": "Own-global all-relation remote-absolute lower bound exceeds 0.01 raw-margin units and third-party-relational lower bound exceeds 0.05.",
+    "direct_local_fidelity": "Intact-minus-local_off correct-probability lower bound is at least 0.01 separately for retained and omitted learned pairs.",
+    "address_specificity": "Intact-minus-query_shuffle and intact-minus-evidence_shuffle learned correct-probability lower bounds are each at least 0.01.",
+    "local_only_partition": "P_off learned correct-probability lower bound exceeds 0.50, P_off nonlearned upper bound is at most 0.55, and the upper bound of local-only remote minus 0.25 times intact combined remote is at most zero.",
+    "behavior": "All nine inherited qualitative rules pass and the six historically quantitative rows retain their reproduced classification independently in every network. Distance slope, serial endpoints, and self-inconsistency remain mandatory reports and may improve; no mismatch is hidden.",
+    "development_admission": "All prerequisites, competence, five causal-link families, local-only partition, and behavior preservation pass independently in all three development seeds.",
+    "confirmation": "If and only if development admission passes, execute the unchanged implementation on seeds 2804--2806. Promotion requires every development gate to pass independently again in all three confirmation seeds.",
+    "heterogeneity": "No pooling, majority vote, seed filtering, or successful network repairs a failed all-seed gate.",
+    "outcomes": {
+      "compact_model_confirmed": "Every gate passes in development and unchanged confirmation seeds.",
+      "development_candidate_only": "Every development gate passes but one or more confirmation gates fail.",
+      "competent_alternative_organization": "Competence passes but one or more causal-organization gates fail.",
+      "behavior_incomplete": "Competence and causal organization pass but behavior preservation fails.",
+      "compact_model_rejected": "Integrity-valid development training fails competence or multiple mandatory preservation gates.",
+      "noninterpretable": "A source, artifact, input, implementation, optimization-finiteness, or mandatory execution gate fails."
+    }
+  },
+  "cleanup_gate": {
+    "new_runtime": "After confirmed canonical reports pass independent reconstruction, delete transient compact-model checkpoints and dense replay arrays while retaining the immutable protocol, locks, source/config/RNG identities, hashes, canonical JSON result, and concise Markdown report.",
+    "historical_checkpoints": "Do not delete historical tracked checkpoints during development. Only compact_model_confirmed authorizes a separate exact retention migration that inventories each old binary, verifies its frozen study/report coverage and Git recoverability, updates active locators append-only, and removes only binaries whose unique scientific content is represented in canonical reports.",
+    "failure": "Any non-confirmed outcome preserves the historical P/L checkpoint set unchanged."
+  },
+  "lifecycle": [
+    "Commit this native contract and registry entry before implementation or seed execution.",
+    "Implement the compact model and focused tests without scientific-seed outcomes; pass CPU qualification and CUDA eager/compile parity.",
+    "Commit the implementation and qualification, then write and commit a source lock over the exact protocol and implementation before development training.",
+    "Train all three development seeds to the final step and jointly lock checkpoints, configurations, logs, stream identities, and tensor hashes before any Liu evaluation.",
+    "Evaluate generic and Liu gates, publish the complete per-seed development report, and stop without tuning if development admission fails.",
+    "Only after complete development admission, train and jointly lock confirmation seeds 2804--2806 under the unchanged source and protocol, then evaluate the same gates.",
+    "Publish canonical machine-readable and human reports with positive, negative, and unresolved findings; validate the registered study and workflow boundary.",
+    "Only after compact_model_confirmed, execute a separately reviewed append-only checkpoint-retention migration and leave the active tree report-oriented."
+  ],
+  "stop_rule": "Do not repair an exposed scientific result by changing channels, hidden size, trial steps, modulation equation, P/L state, evidence admission, optimizer, budget, thresholds, temperature, seeds, cohorts, or behavior definitions. A failed candidate remains registered evidence; a different simplification is a new prospectively registered study."
+}
