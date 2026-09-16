@@ -51,9 +51,12 @@ studies, or supersede frozen study contracts.
 5. [Differential evidence admission](#differential-admission)
    - **Question.** Can weak observed evidence persist locally when it is not admitted to
      global assembly?
-   - **Current result.** Four independent backbones confirm omitted direct-fidelity
+   - **Current result.** Four historical backbones confirm omitted direct-fidelity
      rescue with evidence and query specificity while global inference remains
-     P-dependent.
+     P-dependent. The clean no-time architecture realizes the complete division in two
+     of three fresh networks; exact decomposition localizes the third network's narrow
+     retained-fidelity miss to a joint scalar-gain and shared-margin operating-point
+     boundary over fixed omitted-write address cross-talk.
 
 6. [Algorithmic form and transport](#algorithm-and-transport)
    - **Question.** Which parts of the working model compress exactly, and where does it
@@ -327,13 +330,20 @@ direnv exec . python -m unittest \
 global assembly?
 
 **Method.** Keep the P and L update/readout mechanisms fixed, use selective effective
-evidence for P, and use z + (1-z)p for the local write.
+evidence for P and z + (1-z)p for the local write, then test a clean no-time
+direct-training realization and decompose its retained cross-talk without retraining.
 
-**Result.** Four independent backbones confirm omitted direct-fidelity rescue with
-evidence and query specificity while global inference remains P-dependent.
+**Result.** Four historical backbones confirm omitted direct-fidelity rescue with
+evidence and query specificity while global inference remains P-dependent. The clean
+no-time architecture realizes the complete division in two of three fresh networks;
+exact decomposition localizes the third network's narrow retained-fidelity miss to a
+joint scalar-gain and shared-margin operating-point boundary over fixed omitted-write
+address cross-talk.
 
-**Boundary.** The broader local writes have a small replicated retained cross-talk cost
-and do not repair the excessive global distance slope.
+**Boundary.** The clean recipe is not all-seed reliable, seed 3006 remains a formal
+failure, and broader local writes carry a small cross-talk cost dominated by few source
+collisions. This functional decomposition does not establish that a separate L store is
+structurally necessary or repair the excessive global distance slope.
 
 Implementation:
 
@@ -341,12 +351,16 @@ Implementation:
 - [`fsrl/core/relational_system.py`](../../fsrl/core/relational_system.py)
 - [`fsrl/experiments/local_fidelity/evidence_access_pilot.py`](../../fsrl/experiments/local_fidelity/evidence_access_pilot.py)
 - [`fsrl/experiments/local_fidelity/evidence_access_confirmation.py`](../../fsrl/experiments/local_fidelity/evidence_access_confirmation.py)
+- [`fsrl/experiments/pl_crosstalk_decomposition/estimands.py`](../../fsrl/experiments/pl_crosstalk_decomposition/estimands.py)
+- [`fsrl/experiments/pl_crosstalk_decomposition/analysis.py`](../../fsrl/experiments/pl_crosstalk_decomposition/analysis.py)
 
 Tests:
 
 - [`tests/core/test_relational_system.py`](../../tests/core/test_relational_system.py)
 - [`tests/experiments/local_fidelity/test_evidence_access_pilot.py`](../../tests/experiments/local_fidelity/test_evidence_access_pilot.py)
 - [`tests/experiments/local_fidelity/test_evidence_access_confirmation.py`](../../tests/experiments/local_fidelity/test_evidence_access_confirmation.py)
+- [`tests/experiments/pl_crosstalk_decomposition/test_protocol.py`](../../tests/experiments/pl_crosstalk_decomposition/test_protocol.py)
+- [`tests/experiments/pl_crosstalk_decomposition/test_estimands.py`](../../tests/experiments/pl_crosstalk_decomposition/test_estimands.py)
 
 Exact evidence:
 
@@ -362,6 +376,21 @@ Exact evidence:
   - **JSON pointer:** `/claim_boundary`
   - **Meaning:** The result preserves the retained cross-talk cost, slope mismatch, and
     non-population claim boundary.
+- `constrains` — [pl_functional_replication:records/results/pl_functional_replication_v1.json](../../studies/pl_functional_replication/records/results/pl_functional_replication_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** The clean no-time architecture passes the full functional division in
+    two of three fresh networks; seed 3006 remains a formal retained-fidelity failure
+    and the all-seed outcome is competent_alternative_organization.
+- `supports` — [pl_crosstalk_decomposition:records/results/pl_crosstalk_decomposition_v1.json](../../studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.json)
+  - **JSON pointer:** `/outcome`
+  - **Meaning:** The locked exact diagnostic reconstructs the retained dual-minus-shared
+    effect completely from omitted-write address overlap, scalar L gain, and the shared
+    total-margin operating point.
+- `constrains` — [pl_crosstalk_decomposition:records/results/pl_crosstalk_decomposition_v1.json](../../studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.json)
+  - **JSON pointer:** `/factorial_diagnostics/classification`
+  - **Meaning:** The seed-3006 gate crossing is a joint gain-by-operating-point boundary
+    over common address geometry, with source mass concentrated in few relation
+    collisions.
 
 Verification:
 
@@ -372,6 +401,14 @@ direnv exec . python -m unittest \
   tests.experiments.local_fidelity.test_evidence_access_pilot \
   tests.experiments.local_fidelity.test_evidence_access_confirmation \
   tests.core.test_relational_system
+```
+
+**`pl_crosstalk_decomposition_tests`** (`cpu`):
+
+```bash
+direnv exec . python -m unittest \
+  tests.experiments.pl_crosstalk_decomposition.test_protocol \
+  tests.experiments.pl_crosstalk_decomposition.test_estimands
 ```
 
 ## 6. Algorithmic form and transport

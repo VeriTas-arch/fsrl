@@ -160,13 +160,13 @@ argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.lo
 id = "differential_admission"
 title = "Differential evidence admission"
 question = "Can weak observed evidence persist locally when it is not admitted to global assembly?"
-method = "Keep the P and L update/readout mechanisms fixed, use selective effective evidence for P, and use z + (1-z)p for the local write."
-finding = "Four independent backbones confirm omitted direct-fidelity rescue with evidence and query specificity while global inference remains P-dependent."
-boundary = "The broader local writes have a small replicated retained cross-talk cost and do not repair the excessive global distance slope."
+method = "Keep the P and L update/readout mechanisms fixed, use selective effective evidence for P and z + (1-z)p for the local write, then test a clean no-time direct-training realization and decompose its retained cross-talk without retraining."
+finding = "Four historical backbones confirm omitted direct-fidelity rescue with evidence and query specificity while global inference remains P-dependent. The clean no-time architecture realizes the complete division in two of three fresh networks; exact decomposition localizes the third network's narrow retained-fidelity miss to a joint scalar-gain and shared-margin operating-point boundary over fixed omitted-write address cross-talk."
+boundary = "The clean recipe is not all-seed reliable, seed 3006 remains a formal failure, and broader local writes carry a small cross-talk cost dominated by few source collisions. This functional decomposition does not establish that a separate L store is structurally necessary or repair the excessive global distance slope."
 depends_on = ["global_mechanism", "local_mechanism"]
-implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py", "fsrl/experiments/local_fidelity/evidence_access_pilot.py", "fsrl/experiments/local_fidelity/evidence_access_confirmation.py"]
-tests = ["tests/core/test_relational_system.py", "tests/experiments/local_fidelity/test_evidence_access_pilot.py", "tests/experiments/local_fidelity/test_evidence_access_confirmation.py"]
-studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation"]
+implementation = ["fsrl/tasks/evidence.py", "fsrl/core/relational_system.py", "fsrl/experiments/local_fidelity/evidence_access_pilot.py", "fsrl/experiments/local_fidelity/evidence_access_confirmation.py", "fsrl/experiments/pl_crosstalk_decomposition/estimands.py", "fsrl/experiments/pl_crosstalk_decomposition/analysis.py"]
+tests = ["tests/core/test_relational_system.py", "tests/experiments/local_fidelity/test_evidence_access_pilot.py", "tests/experiments/local_fidelity/test_evidence_access_confirmation.py", "tests/experiments/pl_crosstalk_decomposition/test_protocol.py", "tests/experiments/pl_crosstalk_decomposition/test_estimands.py"]
+studies = ["dual_evidence_access_pilot", "dual_evidence_access_confirmation", "pl_functional_replication", "pl_crosstalk_decomposition"]
 
 [[stages.evidence]]
 study = "dual_evidence_access_pilot"
@@ -189,10 +189,36 @@ json_pointer = "/claim_boundary"
 use = "constrains"
 description = "The result preserves the retained cross-talk cost, slope mismatch, and non-population claim boundary."
 
+[[stages.evidence]]
+study = "pl_functional_replication"
+record = "records/results/pl_functional_replication_v1.json"
+json_pointer = "/outcome"
+use = "constrains"
+description = "The clean no-time architecture passes the full functional division in two of three fresh networks; seed 3006 remains a formal retained-fidelity failure and the all-seed outcome is competent_alternative_organization."
+
+[[stages.evidence]]
+study = "pl_crosstalk_decomposition"
+record = "records/results/pl_crosstalk_decomposition_v1.json"
+json_pointer = "/outcome"
+use = "supports"
+description = "The locked exact diagnostic reconstructs the retained dual-minus-shared effect completely from omitted-write address overlap, scalar L gain, and the shared total-margin operating point."
+
+[[stages.evidence]]
+study = "pl_crosstalk_decomposition"
+record = "records/results/pl_crosstalk_decomposition_v1.json"
+json_pointer = "/factorial_diagnostics/classification"
+use = "constrains"
+description = "The seed-3006 gate crossing is a joint gain-by-operating-point boundary over common address geometry, with source mass concentrated in few relation collisions."
+
 [[stages.verification]]
 id = "differential_admission_tests"
 resource = "cpu"
 argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.local_fidelity.test_evidence_access_pilot", "tests.experiments.local_fidelity.test_evidence_access_confirmation", "tests.core.test_relational_system"]
+
+[[stages.verification]]
+id = "pl_crosstalk_decomposition_tests"
+resource = "cpu"
+argv = ["direnv", "exec", ".", "python", "-m", "unittest", "tests.experiments.pl_crosstalk_decomposition.test_protocol", "tests.experiments.pl_crosstalk_decomposition.test_estimands"]
 
 [[stages]]
 id = "algorithm_and_transport"
