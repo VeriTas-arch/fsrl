@@ -44,6 +44,9 @@ emergence without priors.
 - `execution_lock` —
   [studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.execution_lock.json](records/benchmarks/pl_functional_replication_v1.execution_lock.json)
   (`sha256:af5f2ccc1dd4`)
+- `artifact_lock` —
+  [studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.artifact_lock.json](records/benchmarks/pl_functional_replication_v1.artifact_lock.json)
+  (`sha256:1e1fb51513ed`)
 
 ## Provenance rule
 

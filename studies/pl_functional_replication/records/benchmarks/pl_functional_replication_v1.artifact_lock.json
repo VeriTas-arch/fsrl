@@ -1,0 +1,550 @@
+{
+  "experiment_id": "pl-functional-replication-v1",
+  "generic_or_liu_evaluation_exposed": false,
+  "runs": {
+    "3004": {
+      "files": [
+        {
+          "bytes": 7215,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3004/no_time_candidate/config.json",
+          "sha256": "3a94409850e222498801c2e8176abf1ee208587840d964e854242ff2c81b877e"
+        },
+        {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3004/no_time_candidate/model.pth",
+          "sha256": "e4ff722eefdcd4f175e73692a11c56453151a1ff0be4aa3c500a8ee041babd15"
+        },
+        {
+          "bytes": 4003,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3004/no_time_candidate/run.json",
+          "sha256": "88ead42bc7f2bd58f3e1f7e9c8482336869c5977eb31b7419b0ad2118bcd159d"
+        },
+        {
+          "bytes": 605149,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3004/no_time_candidate/train_log.jsonl",
+          "sha256": "1f18e8e9ac4287f11e340481ba6c98c1653249ae634592cde59b5feee2425950"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87205,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 0
+        },
+        "checkpoint": {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3004/no_time_candidate/model.pth",
+          "sha256": "e4ff722eefdcd4f175e73692a11c56453151a1ff0be4aa3c500a8ee041babd15"
+        },
+        "condition": "no_time_candidate",
+        "cost": {
+          "backbone_parameters": 87205,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 110.32730231597088
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "ef04ca38980b6c8e3d7f2fd8d3e12bdd117c9da92b2ba0020b8bcc70c742af0a",
+          "etaet": "67b541a3c01fb9c5467cd06fb74a735b6b1938eb41ab4541b5fe0c9bcc5219cc",
+          "h2margin.bias": "668237230fd7975b39fefa06cc3d67126dba0143ffb35f012f9c94025aac2507",
+          "h2margin.weight": "3068aec405c39a13d5aaf321216dd012d7dbe0074da0ee3aa190a60590146f76",
+          "h2modulation.bias": "cb480ffd247a7227bf961a1b816a5cdd03ea4349c53c9d98901a2bb21dcf6f3e",
+          "h2modulation.weight": "fb3ba10253142f9985c0cbe47b42c8bcab39d72223c1d000ae1f903010d90ec2",
+          "input_projection.bias": "81bd1e2eaf4273bcc160ddd21382741e424bb27407d3c9f1df684a75b03ff937",
+          "input_projection.weight": "714980fc609a680eb529d01e8c02a1821c9da41c1b854b5c974fb66df969fddd",
+          "modulation_scale": "aebfc05e31d3305005241c5c5b3ec55f82e800a1b019967c2f2e3083b4a3367e",
+          "w": "b3299d42e2a1f1bf2ddae687b18e1cf52fb729bf317e7625c18c8e825fe3b1d0"
+        },
+        "final_local": {
+          "raw_gain": "941890bd9da583c5de2b1c1461b067d6f231951909583b69c905c52eee2c534f"
+        },
+        "initial_backbone": {
+          "alpha": "1e7d907f3c022ebcf028fc84d3c5e3c9b5fe3178b277a693a8eca36e68d2b44d",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "172dac5af5e8bb95efbe9a4b1aad14f1dc9b9973f7d6d859b654c37100168970",
+          "h2margin.weight": "6c1f0bdd9f2fec9ac7be2ca922ea1267816872bb8aa2c286fec54d0a850b2d9e",
+          "h2modulation.bias": "f2c7288793ddd2f5f27267ac3d3be14264dfc098a893b188bf6b85900baf3ce3",
+          "h2modulation.weight": "b796ffba0abf9933fbe0d73d0d54654232e6cafbfdefb4a3ba34f8001001d24b",
+          "input_projection.bias": "0daf688c11740b155de92208aafaaff470d861bdb0d87c2d8be95b9a497e0638",
+          "input_projection.weight": "671c4eeff2385773fdce6ed472b3eb1a282ca833dacf9c3966d84a6703081034",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "9809ee1c563df651e1ae1a23f8379c41b984ba0c7be08dd7b3dd23ec9dfa1c2a"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "1e7d907f3c022ebcf028fc84d3c5e3c9b5fe3178b277a693a8eca36e68d2b44d",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "f2c7288793ddd2f5f27267ac3d3be14264dfc098a893b188bf6b85900baf3ce3",
+          "h2DA.weight": "b796ffba0abf9933fbe0d73d0d54654232e6cafbfdefb4a3ba34f8001001d24b",
+          "h2o.bias": "c5a076887e2c49231c8e9ba38479a3c3680da9b5e7005c668c1ea7d23a241768",
+          "h2o.weight": "db02cebf996a7e4953a9aaa50b88c60b10915857eb0af088398fef7a0abafe0c",
+          "h2v.bias": "30698bc3173c16e2bc58c71604a73a8de51c20a8d9f549c0e394b583e2b7d44c",
+          "h2v.weight": "e5af084f9024d7b383b3a06a0f1844b2f760ed29305d24731f8763d732522498",
+          "i2h.bias": "e90de31675794553683fb1d5a7ba017d167a7594510064a4970a9a76ce1a6c50",
+          "i2h.weight": "1e2de6ffe624fbd1512030a310fbb5b8b6b9d0bf8a0abd9c1b6f89b0e0ee5d9d",
+          "w": "9809ee1c563df651e1ae1a23f8379c41b984ba0c7be08dd7b3dd23ec9dfa1c2a"
+        },
+        "local_gain": 0.280310720205307,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "parent_protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "parent_repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "peak_allocated_bytes": 2526863872,
+        "peak_reserved_bytes": 2610954240,
+        "protocol_sha256": "dc146c7723ad147a5fd964f8af5c66cad4b182c034fa20fc3c5391bb4a2e16d0",
+        "raw_gain": -1.1284295320510864,
+        "repair_sha256": "f8fb383ee947a44ba784195af9f87b380136dcae22dbccac688eff704cc087ee",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3004,
+        "source_commit": "d25001a5d688f18716f258457172cd1745b6ca5a",
+        "stream_fingerprint": "2decbfe571264e3bc838c564982a24cdc0e0ec67f10b44cc69844012ec66e3bf",
+        "training_seconds": 108.75603435497032,
+        "warmup_seconds": 1.4480298350099474
+      }
+    },
+    "3005": {
+      "files": [
+        {
+          "bytes": 7214,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3005/no_time_candidate/config.json",
+          "sha256": "dd6cb49586d5059300a7dff7fa66554c2d04f3b2c4ca8b54efcaf3c6af3a8f4c"
+        },
+        {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3005/no_time_candidate/model.pth",
+          "sha256": "d666dd8b1eb1ae53634234edff1f97437d5ebc14b7d8020df9006035328380b2"
+        },
+        {
+          "bytes": 4003,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3005/no_time_candidate/run.json",
+          "sha256": "d719fbf3f14148fb57abaaaeeac55923500b61f328ade4e642620a1787e62eef"
+        },
+        {
+          "bytes": 605251,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3005/no_time_candidate/train_log.jsonl",
+          "sha256": "e0e816663d99c146e0e1ac1cd949eef72f5b8aaab41b6da7c4192e531e14da5a"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87205,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 0
+        },
+        "checkpoint": {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3005/no_time_candidate/model.pth",
+          "sha256": "d666dd8b1eb1ae53634234edff1f97437d5ebc14b7d8020df9006035328380b2"
+        },
+        "condition": "no_time_candidate",
+        "cost": {
+          "backbone_parameters": 87205,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 82.86992004199419
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "29ffd27219235ff6b96fb4b2a6c47bbc8ead2415130251bc59494ee0e7ac31f6",
+          "etaet": "557c546398f54ebb70f5d39b51fdd844fd2477ec87e9e60fd9e78783ea9d31f4",
+          "h2margin.bias": "729799cc198322d05be4689f8d67aa1edeb8a074da6104189276c1c3067080b1",
+          "h2margin.weight": "427b6b68b2c236613c279c2444e4eafd8a0d7527454ce60463ea5e1b59075048",
+          "h2modulation.bias": "fe5a521b0b8ac73d840f5a6296887d3d7b51120b78df525177ec71256582214f",
+          "h2modulation.weight": "a388c0bf4c644a405c84bcf8c5bd9c1b5d0614b7c17bad93d0e763b48cd640cd",
+          "input_projection.bias": "08fc98501fca3795ed19b72ab9093276d1a543ee5a077629573e366c4c970b20",
+          "input_projection.weight": "cc28aa01e4befc963c70b49a552c9604766046fa6a978c3373b043ee45eb4e37",
+          "modulation_scale": "2407b99088a251a205a66e20aa368da5b19736e7cb626d25eb9d1a477c4f1d38",
+          "w": "342ceefa5fce73d8722f1117fe93ccaaf8a42ba53939d0bc50390103c5eb600c"
+        },
+        "final_local": {
+          "raw_gain": "9c379caed967b268a54dca3cb014a17daab280a991d68c4a546fa47863eadb5b"
+        },
+        "initial_backbone": {
+          "alpha": "5cb18fb740e0f33c0c3f3bae3b321a69e96bd165550f60e4170a6201822f414c",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "de91832a6786862161e120da37e0bf621a8a6df3dfa1b92a27ce14e58ab5d820",
+          "h2margin.weight": "87ef66b42a934a6deb80b4d95de37edc253dceec30a0fa309a08809809f32868",
+          "h2modulation.bias": "cce04b84781d877cbb6f98efa37799ca60bdf30482194ebcb508d873e56978e6",
+          "h2modulation.weight": "a4cec392d043f6d62fb4279e635feca38e90541b9ccef6e182c84054919e7b1a",
+          "input_projection.bias": "6843b2820077d56dd8abc6665a2f63393fd33afdae881973893f54869862b7f7",
+          "input_projection.weight": "a0591f95ce297d8ecbd44822637f23c1fc124fc71e89dcf893784519799fa4d3",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "72699fd44f8ac6e3e8b1b5a78b7d9ca00ed10649fa505dc095a0e46f0b017368"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "5cb18fb740e0f33c0c3f3bae3b321a69e96bd165550f60e4170a6201822f414c",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "cce04b84781d877cbb6f98efa37799ca60bdf30482194ebcb508d873e56978e6",
+          "h2DA.weight": "a4cec392d043f6d62fb4279e635feca38e90541b9ccef6e182c84054919e7b1a",
+          "h2o.bias": "f161b6855c6a6f5c0f17d5bd6d366e73165d10d97d7e6c9d788ecb75803a6eb0",
+          "h2o.weight": "ad6e2190336d71a1ff001d25d62803268995c360a4c8334833c667cfd3b4f395",
+          "h2v.bias": "040df3bcb5467581be9a5cff0c273cf1aedf88a6d0dd146d2b477ffee8e5357f",
+          "h2v.weight": "d09eb0a6eb55818816c033f80f839b8fe80f4e6a2929b0cd836f5d9e799377dd",
+          "i2h.bias": "f042afc4a96128ece82a539f70efc8fd7f36f7e57c4d23a151eb638fda175870",
+          "i2h.weight": "f8bf5a383960d6d3e30d9a3ec9080852f07a151fcc28d22610a4a2cf40d9734e",
+          "w": "72699fd44f8ac6e3e8b1b5a78b7d9ca00ed10649fa505dc095a0e46f0b017368"
+        },
+        "local_gain": 0.287230521440506,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "parent_protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "parent_repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "peak_allocated_bytes": 2528338432,
+        "peak_reserved_bytes": 2673868800,
+        "protocol_sha256": "dc146c7723ad147a5fd964f8af5c66cad4b182c034fa20fc3c5391bb4a2e16d0",
+        "raw_gain": -1.1004196405410767,
+        "repair_sha256": "f8fb383ee947a44ba784195af9f87b380136dcae22dbccac688eff704cc087ee",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3005,
+        "source_commit": "d25001a5d688f18716f258457172cd1745b6ca5a",
+        "stream_fingerprint": "50509a79a43c96c3fe6840fe1e1d305ce598643847103e91d76eef494e4e27c1",
+        "training_seconds": 82.71738412458217,
+        "warmup_seconds": 0.03509538300568238
+      }
+    },
+    "3006": {
+      "files": [
+        {
+          "bytes": 7216,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3006/no_time_candidate/config.json",
+          "sha256": "3367bc79cf29d621fa89a463c7ecee6d154bda55185777dc6d5a39f09ddd0a32"
+        },
+        {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3006/no_time_candidate/model.pth",
+          "sha256": "280aa9f0fffde424da60b7fcf9b91853c72bce32f84dc0c6545d472f8058a985"
+        },
+        {
+          "bytes": 4003,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3006/no_time_candidate/run.json",
+          "sha256": "f6916504b6a865f19745f0e3b3a2d57068d6384a9538d24d42094f83d3ffc3fa"
+        },
+        {
+          "bytes": 606202,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3006/no_time_candidate/train_log.jsonl",
+          "sha256": "d60b8a871dc59cce781736ce702603fee74443a287588e19bb2f1b2d1969dff2"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87205,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 0
+        },
+        "checkpoint": {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_functional_replication_v1/training/seed-3006/no_time_candidate/model.pth",
+          "sha256": "280aa9f0fffde424da60b7fcf9b91853c72bce32f84dc0c6545d472f8058a985"
+        },
+        "condition": "no_time_candidate",
+        "cost": {
+          "backbone_parameters": 87205,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 57.785150818002876
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "534ea9699929c55cef3c155d8e23ea3c60a958d3519ca65d6912717a9c83404c",
+          "etaet": "d8c0fc30afe79f798bbfc99203071b19d9656ec781c66fce1dd2d05e4e9d1d98",
+          "h2margin.bias": "45367ba59700093ffb3efafe14334f1ac7a1f834d17775f456b7b28dc83311b2",
+          "h2margin.weight": "93d8c835ca58f154c000e9ee0a383b1b67eefeac44e4e5173ef38f0ce329b778",
+          "h2modulation.bias": "16f4722b6d7eceed68090d664e16d452f7f88b514acce82c2aa3fccc7d8ea7a9",
+          "h2modulation.weight": "2e227172ca56aeb14f1c8d5311b71cc9a4a9a7ec231cccfb11f290e5ae546040",
+          "input_projection.bias": "563ce51481ee5f27ac069746c215e6f2d74b447374e3afc559ccbe1bc46889bd",
+          "input_projection.weight": "462d5c5db855894de946426356921c1dde8a14a4024c538279b2c3e65b386e7f",
+          "modulation_scale": "33058135c8bbdbefe862a55a0bb9cf22126610f5a6288b6bee740d66de92f54e",
+          "w": "3d31b9688de19626b5d05b5596a1d728a820d82542ffb3d5a89f070ebf5a614c"
+        },
+        "final_local": {
+          "raw_gain": "ed12ff7cbe550e3c7dccbbeb4ca331f4ab20f6b86bd558f0fa4f43d0cecf15eb"
+        },
+        "initial_backbone": {
+          "alpha": "68a56d18b8cf42dd9b10cefdfe38cd5fb646c64e100f0962439144f4dd4727fe",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "8aa47fbd65fa2b6ab639977ea3dcdbd6ca9a493abe392ea0d191c3d4e5f19b97",
+          "h2margin.weight": "719dc2e0b9c12641f369156a85faf565a32e15f5c50abb2b0b8cbfff52602b55",
+          "h2modulation.bias": "164198447e52adf393e3ade93cb69774646ca801d216a057ad15598ed2bb5d1c",
+          "h2modulation.weight": "2e2eaa3af533504ec4149f0f06c23703ef2e8acc746f43542f2c09fda2b8a0e3",
+          "input_projection.bias": "f72f02e64c6c7919bc809caae0842bcb2d2fd3283157757b5ecfcba5b7873c6a",
+          "input_projection.weight": "60be1c48ad495b747200bf2bcf47205720945e6a63c63d93b00f89c84e43b581",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "011fe83874720e5199392a381158e6ae435fa63310bcce4be9782393dcfaf793"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "68a56d18b8cf42dd9b10cefdfe38cd5fb646c64e100f0962439144f4dd4727fe",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "164198447e52adf393e3ade93cb69774646ca801d216a057ad15598ed2bb5d1c",
+          "h2DA.weight": "2e2eaa3af533504ec4149f0f06c23703ef2e8acc746f43542f2c09fda2b8a0e3",
+          "h2o.bias": "ca2f792821af68d195935c15ebbaf7ca52eac21a6c38958a6f87901e1d58f78f",
+          "h2o.weight": "f68a82ec760b77df3f5e82f6c99478b8c6a7e882294a13a6ffbc2eca1994b52a",
+          "h2v.bias": "4d4f409ac34e73e4792382861009472430325d2f1da82214bb6ec1c0cecb0333",
+          "h2v.weight": "9e1699d6e4414669298c3d5dd26132e96ce92eb1c4bbdbb65dfeb4fcd626e691",
+          "i2h.bias": "a0888f34562c5b7c9a6fed6131582b80e871f553454cdac5bc92e62790540d60",
+          "i2h.weight": "2061f86063c01917e4a89d27aac3db9c5b849a9d575977e5e9675f89c82ff0a3",
+          "w": "011fe83874720e5199392a381158e6ae435fa63310bcce4be9782393dcfaf793"
+        },
+        "local_gain": 0.2891134023666382,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "parent_protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "parent_repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "peak_allocated_bytes": 2520543744,
+        "peak_reserved_bytes": 2627731456,
+        "protocol_sha256": "dc146c7723ad147a5fd964f8af5c66cad4b182c034fa20fc3c5391bb4a2e16d0",
+        "raw_gain": -1.092899203300476,
+        "repair_sha256": "f8fb383ee947a44ba784195af9f87b380136dcae22dbccac688eff704cc087ee",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3006,
+        "source_commit": "d25001a5d688f18716f258457172cd1745b6ca5a",
+        "stream_fingerprint": "f2da157c0651ab945777623113b3592cf3b9d8c5d313e02869802808cca1a4a9",
+        "training_seconds": 57.64824780088384,
+        "warmup_seconds": 0.027979634993243963
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_commit": "d25001a5d688f18716f258457172cd1745b6ca5a",
+  "source_lock": {
+    "bytes": 96367,
+    "path": "studies/pl_functional_replication/records/benchmarks/pl_functional_replication_v1.execution_lock.json",
+    "sha256": "af5f2ccc1dd4283212c6661bacc6221ef5d8c85402e8398aea2139538259d1ca"
+  }
+}
