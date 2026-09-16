@@ -18,6 +18,20 @@ from fsrl.training.backbone import COMPILED_TRAINING_EXECUTION
 
 
 class FormalRuntimeTests(unittest.TestCase):
+    def test_exact_reparameterization_dispatch_uses_registered_entry_point(self):
+        module_name = "fsrl.experiments.pl_exact_reparameterization.__main__"
+        module = ModuleType(module_name)
+        workflow = Mock(return_value=47)
+        module.main = workflow
+        with (
+            patch.object(formal_runtime, "configure_formal_runtime") as configure,
+            patch.dict(sys.modules, {module_name: module}),
+        ):
+            result = formal_runtime.main(["pl-exact-reparameterization", "--sentinel"])
+        configure.assert_called_once_with()
+        workflow.assert_called_once_with(["--sentinel"])
+        self.assertEqual(result, 47)
+
     def test_each_dispatch_owns_one_validation_session(self):
         module_name = "fsrl.experiments.transport.topology"
         module = ModuleType(module_name)

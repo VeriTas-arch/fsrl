@@ -5,6 +5,7 @@ import torch
 
 from fsrl.core.local_trace import (
     ConjunctiveLocalTrace,
+    PackedConjunctiveLocalTrace,
     antisymmetric_conjunctive_key,
     inverse_softplus,
 )
@@ -91,3 +92,23 @@ class ConjunctiveLocalTraceTests(unittest.TestCase):
         corrected.sum().backward()
         self.assertIsNotNone(self.trace.raw_gain.grad)
         self.assertTrue(np.isfinite(float(self.trace.raw_gain.grad)))
+
+    def test_packed_trace_preserves_writes_and_reads_exactly(self):
+        packed = PackedConjunctiveLocalTrace(self.cue_size, initial_gain=0.3)
+        packed.raw_gain.data.copy_(self.trace.raw_gain.data)
+        full_state = self.trace.initial_state(3)
+        packed_state = packed.initial_state(3)
+        values = torch.tensor([0.2, -0.4, 0.7], device=full_state.device)
+        for pair_cues, signed in (
+            (self.forward, values),
+            (self.reverse.roll(1, dims=0), values.roll(1)),
+        ):
+            full_state = self.trace.write(full_state, pair_cues, signed)
+            packed_state = packed.write(packed_state, pair_cues, signed)
+        full_raw, full_correction = self.trace.read(full_state, self.reverse)
+        packed_raw, packed_correction = packed.read(packed_state, self.reverse)
+        torch.testing.assert_close(packed_raw, full_raw, atol=1e-6, rtol=0.0)
+        torch.testing.assert_close(
+            packed_correction, full_correction, atol=1e-6, rtol=0.0
+        )
+        self.assertEqual(packed.state_size, self.cue_size * (self.cue_size - 1) // 2)

@@ -34,6 +34,9 @@ WORKFLOW_MODULES = {
     "global-decay-replication": ("fsrl.experiments.global_decay_replication.__main__"),
     "common-encoding-state": "fsrl.experiments.common_encoding_state.__main__",
     "compact-global-local-model": ("fsrl.experiments.compact_global_local.__main__"),
+    "pl-exact-reparameterization": (
+        "fsrl.experiments.pl_exact_reparameterization.__main__"
+    ),
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",
