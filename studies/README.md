@@ -317,6 +317,9 @@ fail to close the dynamics.
     seeds. Removing normalized time passed every registered gate in seeds 3012 and 3013,
     but seed 3011 failed Ce noninferiority for generic learned, generic nonlearned, and
     Liu omitted probability; the registered all-seed outcome is time_removal_failure.
+- [Frozen decomposition of normalized time in clean single-P](single_p_time_role_decomposition/README.md) — `frozen_contract`
+  - **Finding:** Prospective frozen-model diagnostic approved and locked before
+    implementation or new diagnostic exposure.
 
 ## Minimal explanatory models
 

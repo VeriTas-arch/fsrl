@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "study_id": "single_p_time_role_decomposition",
+  "experiment_id": "single_p_time_role_decomposition_v1",
+  "tier": "prospective frozen-model development diagnostic",
+  "authorization": "The user approved the frozen time-role decomposition after reviewing its estimands and required held-out scalar, mean-clamp, prefix-fixed-effect, exhaustive-probe, and unconditional-execution refinements.",
+  "question": "Why is clean single-P seed 3011 sensitive to removing normalized time: is its registered Ce probability deficit removable by one label-free margin scale, where does explicit time causally enter the frozen control, and do no-time networks express state-dependent plasticity beyond absolute support position?",
+  "claim_boundary": [
+    "This study diagnoses the already frozen clean_single_p models and cannot revise the parent time_removal_failure, repair seed 3011, select a checkpoint, tune training, or admit a new main model.",
+    "The primary scope is Ce. Final-margin geometry for A0, Ae, and C0 is mandatory secondary context and cannot replace or modify a Ce classification.",
+    "A positive held-out scalar result supports scale sufficiency for the registered deficit, not parameter equivalence, causal mediation, or proof that no directional differences exist.",
+    "Acute time interventions in a time-trained control identify paths within that frozen model; they are not equivalent to training without time and cannot recreate the no-time model.",
+    "State-dependent plasticity and its association with an endogenous field-strength proxy are model-level mechanism candidates. Three development networks do not support population prevalence or a human confidence mechanism.",
+    "All three stages execute regardless of earlier results. Only the interpretation tree, never execution or endpoint choice, may depend on their joint pattern."
+  ],
+  "parents": {
+    "clean_single_p_protocol": {
+      "path": "studies/clean_single_p/records/benchmarks/clean_single_p_v1.json",
+      "sha256": "211ed4f40fa685f250d364e215c00865175534dc7693d98aa25922f2e19f06bc"
+    },
+    "clean_single_p_model_lock": {
+      "path": "studies/clean_single_p/records/benchmarks/model_lock.json",
+      "sha256": "1489cf74747aa2cc7da66abe53d55f328027a1ad71b2d032686d95bec39a2bbf"
+    },
+    "clean_single_p_source_repair": {
+      "path": "studies/clean_single_p/records/benchmarks/source_repair1.json",
+      "sha256": "d677308001514d7da021d9084e6ca8d95ec8629bcd4ada3903abdfc5b8139bff"
+    },
+    "clean_single_p_result": {
+      "path": "studies/clean_single_p/records/results/clean_single_p_v1.json",
+      "sha256": "a0d27a279deeab6980670072673a3e8cbf4de7f22b55485d5dfe0abc7250ecae"
+    }
+  },
+  "design": {
+    "network_seeds": [3011, 3012, 3013],
+    "evaluation_panels": [1, 2, 3],
+    "primary_cell": "Ce",
+    "secondary_cells": ["A0", "Ae", "C0"],
+    "conditions": ["time_retained_control", "clean_no_time"],
+    "primary_models": "The noisy-trained model under noisy observations in each seed and panel.",
+    "secondary_scope": "Stage-1 final-margin geometry is computed for every frozen A0, Ae, C0, and Ce unit. Stages 2 and 3 are Ce-only.",
+    "execution_rule": "Integrity replay and Stages 1--3 are mandatory and unconditional for every registered seed and panel.",
+    "no_training": "All parameters, inputs, task streams, observations, panels, and parent outcomes are frozen; no optimizer or parameter update is permitted."
+  },
+  "canonical_field": {
+    "items": 8,
+    "edges": 28,
+    "definition": "For each unordered pair i<j, m_ij=(M(i,j)-M(j,i))/2. Both query orientations are evaluated from the same terminal P with fresh hidden and eligibility state and no P writeback.",
+    "incidence": "Use the complete-graph incidence matrix with +1 at i, -1 at j for i<j and the minimum-norm zero-sum potential s=pinv(B)m.",
+    "decomposition": "m=B s+r, with potential norm, paired potential cosine, raw sign-flip fraction, and residual-energy fraction ||r||^2/||m||^2.",
+    "primary_reference": "The paired time-retained control potential and field, not the true rank. True-rank alignment is secondary only.",
+    "tie_tolerance": 1e-05,
+    "tie_rule": "Values with absolute magnitude at or below the inherited numerical validation tolerance are ties; report them separately and never tune a low-confidence exclusion threshold."
+  },
+  "stage_1_final_margin_decomposition": {
+    "scope": "All seeds, all panels, and all four cells; Ce supplies the mechanism classification and other cells are secondary context.",
+    "scalar_fit": "For each seed, concatenate all panel-1 Ce generic episodes and Liu subjects after canonical antisymmetrization. Fit exactly one positive scalar a*=max(0,<m_NT,m_T>/<m_NT,m_NT>) across all fields. No intercept, labels, endpoint-specific values, participant-specific values, relation-specific values, or panel-2/3 values may enter the fit.",
+    "held_out_test": "Freeze a* and multiply every no-time margin by it on panels 2 and 3. Recompute the inherited Ce generic learned/nonlearned and Liu learned/nonlearned/omitted correct-probability contrasts with the parent temperature, masks, paired resampling, equal-panel aggregation, 2000 draws, and lower95>=-0.02 rule.",
+    "scale_sufficient": "For seed 3011, all three parent-failing endpoints must satisfy lower95>=-0.02 on held-out panels 2--3 after scaling, and neither originally passing Liu endpoint may become lower95<-0.02.",
+    "scale_insufficient": "The complement of scale_sufficient after integrity passes.",
+    "reported_not_gated": [
+      "raw and rescaled field cosine",
+      "raw sign flips and ties",
+      "time-control versus no-time Hodge-potential cosine",
+      "potential norm ratio",
+      "residual-energy fraction",
+      "true-rank alignment",
+      "all five held-out endpoint estimates and intervals for every seed",
+      "the same geometry summaries for A0, Ae, and C0"
+    ]
+  },
+  "stage_2_frozen_time_intervention": {
+    "scope": "Ce only, using the full frozen generic and Liu cohorts in every seed and panel.",
+    "support_conditions": {
+      "original": "The frozen monotone support-time schedule.",
+      "reverse": "Reverse the time values across support trials while preserving every cue, q, microstep, and query time.",
+      "deranged": "Apply the registered deterministic no-fixed-point permutation to support-trial time values, separately for each support length; seed=913711+1000*panel+network_seed. Preserve the exact time multiset.",
+      "mean_clamp": "Set every support-trial time to the arithmetic mean of its original schedule, preserving mean drive while removing position and progression information."
+    },
+    "support_readout": "Keep query time fixed at 2/3. Record terminal P, effective terminal alpha*P, canonical query fields, parent probability endpoints, D_P=||alpha*(P'_T-P_T)||_F/(||alpha*P_T||_F+1e-12), and D_M=RMS(m'-m).",
+    "support_time_path_present": "For each seed, every panel must retain baseline replay integrity and at least one non-original support condition must exceed the qualified 1e-5 numerical tolerance for both D_P and D_M in generic and Liu cohorts. Report all condition-specific effects regardless of the label.",
+    "query_conditions": [0.0, 0.3333333333333333, 0.6666666666666666],
+    "query_readout": "Replay original support once, hold terminal P fixed, alter only query time, and record canonical margin and endpoint changes. Query evaluation never writes P.",
+    "query_time_path_present": "For each seed, terminal P must be bitwise identical across query conditions and, in every panel, at least one nonbaseline query time must change generic and Liu canonical margins by RMS greater than 1e-5.",
+    "consistency_only": "Report whether reverse, deranged, or mean-clamp control fields move closer to the paired no-time fields. This cannot classify equivalence between acute intervention and no-time training."
+  },
+  "stage_3_state_dependent_plasticity": {
+    "scope": "Ce only for both architecture conditions. Use a deterministic generic diagnostic subset: within each panel and each support length 28,32,36,40, select the two smallest frozen episode_indices, yielding eight episodes per panel before any new result is exposed.",
+    "prefix_trajectory": "Save P_0 through P_T after every real support trial. At every prefix, read both orientations of all 28 unordered queries with fresh hidden/eligibility and no writeback. Record potential alignment to final state, potential norm, residual-energy fraction, mean absolute margin, mean correct-signed margin, modulation magnitude, ||Delta P||_F, and ||alpha*Delta P||_F for the natural next write.",
+    "probe_battery": {
+      "pairs": "All 28 unordered item pairs in both cue orders through signed evidence, without adding relation labels.",
+      "evidence_values": [-0.5714285714285714, -0.14285714285714285, 0.14285714285714285, 0.5714285714285714],
+      "procedure": "From a clone of each prefix P, reset hidden and eligibility, apply one four-microstep support probe, do not alter the natural trajectory, then read all 28 canonical queries.",
+      "write_susceptibility": "Mean over the exhaustive pair-by-evidence battery of ||alpha*Delta P_probe||_F.",
+      "functional_susceptibility": "Mean over the same battery of RMS change in the 28D canonical query field."
+    },
+    "state_dependent_plasticity_present": "For each seed and condition, integrity must pass and both write and functional susceptibility must vary across prefixes by more than 1e-5 in every panel. This label establishes state dependence only; effect sizes and trajectories remain mandatory.",
+    "confidence_proxy": "Primary C_e,t is the zero-sum Hodge-potential norm ||s_e,t|| from the pre-probe canonical field. Mean absolute margin is secondary.",
+    "regression": "Within each seed and condition, regress episode-prefix functional susceptibility on centered primary C plus categorical prefix fixed effects. Estimate beta_C with an episode-cluster bootstrap within panel, 2000 shared draws, and equal-panel aggregation; do not pool networks.",
+    "confidence_link_supported": "Within a seed and condition, the 95% interval upper bound for beta_C is below zero. Otherwise report not_supported or unresolved without substituting the secondary proxy.",
+    "heterogeneity": "mechanism_heterogeneous is descriptive when the registered labels or beta_C interval signs distinguish seed 3011 from either admitted seed. It is not a population inference."
+  },
+  "statistics": {
+    "bootstrap_draws": 2000,
+    "interval": 0.95,
+    "resampling": "Resample episodes or Liu subjects within panel with shared paired indices, then average panel estimates equally within network. Stage-3 regression resamples complete episode trajectories as clusters.",
+    "network_scope": "Report each seed separately. Never treat three trained networks as exchangeable population samples or pool their participants.",
+    "precision": "Use float64 analysis summaries and inherited task temperatures; preserve float32 model execution."
+  },
+  "integrity_and_qualification": {
+    "parent_identity": "Verify hashes for the parent protocol, repaired source lock, model lock, canonical result, raw bundle, every selected checkpoint, and every selected frozen input.",
+    "baseline_replay": "Reconstruct all 72 parent seed/panel/condition/cell baseline margin arrays, terminal-P summaries, and registered endpoints. Require array agreement within atol=1e-5, rtol=1e-5 and endpoint agreement within 1e-10 before interpreting interventions.",
+    "equations": "On synthetic non-scientific fixtures, independently verify canonical antisymmetrization, Hodge decomposition, positive-scalar fit, derangements, effective-P distance, prefix cloning, probe nonmutation, endpoint reconstruction, and prefix-fixed-effect regression.",
+    "isolation": "Assert that support interventions change only support time, query interventions change only query time, probes cannot mutate the natural trajectory, no labels enter scalar fitting or probes, and no model parameter receives a gradient or update.",
+    "runtime": "CUDA float32 without autocast or TF32 for model execution; one Torch/BLAS/compiler thread; float64 CPU statistics.",
+    "failure": "Any source, artifact, replay, shape, finiteness, intervention-isolation, or numerical-integrity failure yields noninterpretable and blocks mechanistic classification."
+  },
+  "classification": {
+    "labels": [
+      "scale_sufficient",
+      "scale_insufficient",
+      "support_time_path_present",
+      "support_time_path_absent",
+      "query_time_path_present",
+      "query_time_path_absent",
+      "state_dependent_plasticity_present",
+      "state_dependent_plasticity_absent",
+      "confidence_link_supported",
+      "confidence_link_not_supported",
+      "mechanism_heterogeneous",
+      "noninterpretable"
+    ],
+    "no_global_pass": "The result is a set of simultaneous mechanistic labels, not a model-admission PASS/FAIL or time_mechanism_confirmed conjunction.",
+    "interpretation": "Jointly state what differs in final computation, where explicit time enters the frozen control, and what state-dependent learning dynamics occur without time. Preserve unresolved and mixed patterns."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime single-p-time-role <stage>",
+    "stages": ["qualify", "lock-source", "run", "report"],
+    "runtime_root": "artifacts/runs/single_p_time_role_decomposition_v1",
+    "freeze_points": [
+      "Commit this protocol and study registration before implementing estimators or exposing any new diagnostic output.",
+      "Qualify the implementation on synthetic non-scientific fixtures, then commit it and a source/parent/input lock before running any registered seed.",
+      "Execute integrity replay and Stages 1--3 unconditionally, publish one canonical result and concise report, preserve all mechanism labels, and stop without retraining."
+    ],
+    "outputs": [
+      "records/benchmarks/single_p_time_role_decomposition_v1.json",
+      "records/benchmarks/qualification.json",
+      "records/benchmarks/source_lock.json",
+      "records/results/single_p_time_role_decomposition_v1.json",
+      "records/artifacts/single_p_time_role_decomposition_v1.npz",
+      "records/reports/single_p_time_role_decomposition_v1.md"
+    ],
+    "retention": "Track the compact protocol, qualification, lock, sufficient numerical artifact, canonical result, and report. Parent checkpoints and runtime files remain governed by the parent retention boundary."
+  }
+}
