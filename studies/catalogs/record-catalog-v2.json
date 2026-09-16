@@ -7,16 +7,16 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3842,
+  "entry_count": 3846,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2100,
+    "json": 2102,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 96,
-    "numpy_npz": 1408,
+    "markdown": 97,
+    "numpy_npz": 1409,
     "pdf": 2,
     "pytorch_state_dict": 149,
     "svg": 4,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3746,
+    "already_conformant": 3750,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -81646,6 +81646,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.attempt1.npz",
+        "repository_path": "studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.attempt1.npz"
+      },
+      "materialized_identity": {
+        "bytes": 222217,
+        "sha256": "4f1d36aad5e98ce4c250407c09719b3c56edf820d486ecd2f03d102fb32e916b"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_crosstalk_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.pl_crosstalk_decomposition.studies_pl_crosstalk_decomposition_records_artifacts_pl_crosstalk_decomposition_v1_attempt1_npz",
+      "registered_identity": {
+        "bytes": 222217,
+        "sha256": "4f1d36aad5e98ce4c250407c09719b3c56edf820d486ecd2f03d102fb32e916b",
+        "source_ref": "sha256:4f1d36aad5e98ce4c250407c09719b3c56edf820d486ecd2f03d102fb32e916b"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.execution_lock",
       "format": {
         "format": "json",
@@ -81711,6 +81745,108 @@
         "source_ref": "sha256:0a8aa21c8798811817d980c77701193ceedc9c75c7644eb4dd32577c54dd27ba"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.repair1.json",
+        "repository_path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.repair1.json"
+      },
+      "materialized_identity": {
+        "bytes": 4733,
+        "sha256": "5fbc3dde30e0aea87a01b377ef42cfe85d9608f794f8a02fbc9c63448de38282"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_crosstalk_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.pl_crosstalk_decomposition.studies_pl_crosstalk_decomposition_records_benchmarks_pl_crosstalk_decomposition_v1_repair1_json",
+      "registered_identity": {
+        "bytes": 4733,
+        "sha256": "5fbc3dde30e0aea87a01b377ef42cfe85d9608f794f8a02fbc9c63448de38282",
+        "source_ref": "sha256:5fbc3dde30e0aea87a01b377ef42cfe85d9608f794f8a02fbc9c63448de38282"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.attempt1.md",
+        "repository_path": "studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.attempt1.md"
+      },
+      "materialized_identity": {
+        "bytes": 955,
+        "sha256": "f2cfc273bc0d19ae988b29907c4a2753bf1bb3b62b7a447a3f9e50326fea6522"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_crosstalk_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.pl_crosstalk_decomposition.studies_pl_crosstalk_decomposition_records_reports_pl_crosstalk_decomposition_v1_attempt1_md",
+      "registered_identity": {
+        "bytes": 955,
+        "sha256": "f2cfc273bc0d19ae988b29907c4a2753bf1bb3b62b7a447a3f9e50326fea6522",
+        "source_ref": "sha256:f2cfc273bc0d19ae988b29907c4a2753bf1bb3b62b7a447a3f9e50326fea6522"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.noninterpretable_attempt",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.attempt1.json",
+        "repository_path": "studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.attempt1.json"
+      },
+      "materialized_identity": {
+        "bytes": 40162,
+        "sha256": "c6515344b1bb1a7e3b0d4db831fe6c886f778f1bc2761c473efa84577715ba4a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_crosstalk_decomposition",
+        "kind": "study"
+      },
+      "record_id": "study.pl_crosstalk_decomposition.studies_pl_crosstalk_decomposition_records_results_pl_crosstalk_decomposition_v1_attempt1_json",
+      "registered_identity": {
+        "bytes": 40162,
+        "sha256": "c6515344b1bb1a7e3b0d4db831fe6c886f778f1bc2761c473efa84577715ba4a",
+        "source_ref": "sha256:c6515344b1bb1a7e3b0d4db831fe6c886f778f1bc2761c473efa84577715ba4a"
+      },
+      "role": "noninterpretable_attempt"
     },
     {
       "availability": "materialized",
@@ -131015,7 +131151,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3840,
+  "registered_record_count": 3844,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -131031,18 +131167,18 @@
     "frozen_parameters": 180,
     "frozen_result": 570,
     "mainline_guide": 1,
-    "noninterpretable_attempt": 4,
+    "noninterpretable_attempt": 5,
     "presentation_asset": 6,
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 90,
-    "repair_contract": 14,
+    "repair_contract": 15,
     "repair_lock": 11,
-    "report": 91,
+    "report": 92,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2727,
+    "supporting_artifact": 2728,
     "validation_result": 14
   },
   "schema_version": 2,

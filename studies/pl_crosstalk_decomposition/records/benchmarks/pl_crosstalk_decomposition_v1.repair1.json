@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_crosstalk_decomposition",
+  "experiment_id": "pl-crosstalk-decomposition-v1",
+  "repair_id": "pl-crosstalk-decomposition-v1-implementation-repair1",
+  "registration_status": "append_only_implementation_repair_after_noninterpretable_attempt1_and_before_attempt2_implementation_or_execution",
+  "original_protocol": {
+    "path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.json",
+    "sha256": "0a8aa21c8798811817d980c77701193ceedc9c75c7644eb4dd32577c54dd27ba",
+    "commit": "3d9784f1427e7e0961d62acb3d207ec857a1dca2"
+  },
+  "original_source_lock": {
+    "path": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.execution_lock.json",
+    "sha256": "b9d5c6d62e46314709ebeb9b8b3d0107f3444ddf1f06767f971f2e3e6d9f374e"
+  },
+  "noninterpretable_attempt": {
+    "result": {
+      "path": "studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.attempt1.json",
+      "sha256": "c6515344b1bb1a7e3b0d4db831fe6c886f778f1bc2761c473efa84577715ba4a",
+      "bytes": 40162
+    },
+    "supporting_arrays": {
+      "path": "studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.attempt1.npz",
+      "sha256": "4f1d36aad5e98ce4c250407c09719b3c56edf820d486ecd2f03d102fb32e916b",
+      "bytes": 222217
+    },
+    "outcome": "noninterpretable_input_or_algebra_failure",
+    "scientific_use": "none"
+  },
+  "observed_implementation_failures": {
+    "summary_comparison": {
+      "observed_error": 77.00505074038783,
+      "cause": "The checker flattened JSON numeric leaves in insertion order. The parent contrast serializes bootstrap before point fields, whereas the recomputed summary serializes point fields first, so unrelated fields such as subjects=77 and a bootstrap bound were subtracted.",
+      "repair": "Compare recursively by identical dictionary keys and list indices, require identical structure, and compare only corresponding numeric leaves. This changes no summary or threshold."
+    },
+    "source_read_arithmetic": {
+      "observed_max_abs_error": 1.6987323760986328e-06,
+      "frozen_maximum": 1e-06,
+      "cause": "The implementation formed a float32 dot product for every support trial and then accumulated those scalar products in float64. The registered ledger equation and the model instead accumulate support writes into a trace before reading the query.",
+      "repair": "For each participant and source relation, accumulate Delta_s*k into one float32 source trace in original trial order, then cast the completed source trace and query key to float64 for one analysis dot product. Sum the eight source reads in float64. This is the frozen float32-key/float64-analysis equation and does not change evidence, keys, cells, averaging, or tolerance.",
+      "pre_registration_arithmetic_check": "A read-only calculation using the already-exposed attempt1 inputs gave 7.473652186007484e-7 maximum source-sum error under the repaired operation order; no scientific decision or component conclusion was admitted."
+    }
+  },
+  "protected_invariants": [
+    "The original protocol, question, seeds, 77-person cohort, raw input hashes, source-relation definition, key equation, gain values, temperature, probability equation, participant bootstrap, -0.005 reference, factorial, Shapley estimand, source summaries, claim boundary, and stop rules are unchanged.",
+    "Attempt1 remains registered and non-interpretable; none of its component magnitudes may motivate a changed estimand or threshold.",
+    "No training, model query, checkpoint loading, human fitting, or item-count transport is permitted.",
+    "Attempt2 must use a new runtime directory, pass a fresh synthetic qualification, and receive a new source-repair lock before execution."
+  ],
+  "attempt2": {
+    "qualification": "artifacts/runs/pl_crosstalk_decomposition_v1/qualification-attempt2/qualification.json",
+    "analysis_root": "artifacts/runs/pl_crosstalk_decomposition_v1/analysis-attempt2",
+    "source_repair_lock": "studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.source_repair1.json",
+    "canonical_result": "studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.json",
+    "supporting_arrays": "studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.npz",
+    "report": "studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.md"
+  },
+  "decision_rule": "Attempt2 is interpretable only under the original protocol's unchanged input and algebra checks. Any further failure stops the diagnostic; no second implementation repair is authorized by this record."
+}

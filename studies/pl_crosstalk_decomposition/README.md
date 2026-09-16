@@ -25,8 +25,10 @@
 seeds 3004--3006 be reconstructed exactly from omitted-source address overlap, scalar L
 gain, and each network's fixed operating point?
 
-**Finding.** The read-only diagnostic is prospectively frozen. No decomposition result
-has been exposed.
+**Finding.** Attempt 1 was non-interpretable because two implementation checks failed;
+its arrays and result are preserved without scientific use. An append-only repair
+freezes only keyed summary comparison and the registered trace-then-read arithmetic
+before attempt 2.
 
 **Claim boundary.** This deterministic analysis may decompose the already-frozen
 retained contrast and registered gain-by-operating-point swaps. It cannot revise the
@@ -41,6 +43,18 @@ transport, or establish biological stores.
 - `execution_lock` —
   [studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.execution_lock.json](records/benchmarks/pl_crosstalk_decomposition_v1.execution_lock.json)
   (`sha256:b9d5c6d62e46`)
+- `noninterpretable_attempt` —
+  [studies/pl_crosstalk_decomposition/records/results/pl_crosstalk_decomposition_v1.attempt1.json](records/results/pl_crosstalk_decomposition_v1.attempt1.json)
+  (`sha256:c6515344b1bb`)
+- `supporting_artifact` —
+  [studies/pl_crosstalk_decomposition/records/artifacts/pl_crosstalk_decomposition_v1.attempt1.npz](records/artifacts/pl_crosstalk_decomposition_v1.attempt1.npz)
+  (`sha256:4f1d36aad5e9`)
+- `report` —
+  [studies/pl_crosstalk_decomposition/records/reports/pl_crosstalk_decomposition_v1.attempt1.md](records/reports/pl_crosstalk_decomposition_v1.attempt1.md)
+  (`sha256:f2cfc273bc0d`)
+- `repair_contract` —
+  [studies/pl_crosstalk_decomposition/records/benchmarks/pl_crosstalk_decomposition_v1.repair1.json](records/benchmarks/pl_crosstalk_decomposition_v1.repair1.json)
+  (`sha256:5fbc3dde30e0`)
 
 ## Provenance rule
 

@@ -304,8 +304,10 @@ fail to close the dynamics.
     competent_alternative_organization, so item-count transport was not triggered;
     quantitative calibration remained report-only at 5/9, 4/9, and 3/9.
 - [Exact P/L retained cross-talk decomposition](pl_crosstalk_decomposition/README.md) — `frozen_contract`
-  - **Finding:** The read-only diagnostic is prospectively frozen. No decomposition
-    result has been exposed.
+  - **Finding:** Attempt 1 was non-interpretable because two implementation checks
+    failed; its arrays and result are preserved without scientific use. An append-only
+    repair freezes only keyed summary comparison and the registered trace-then-read
+    arithmetic before attempt 2.
 
 ## Minimal explanatory models
 
