@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_propagated_authority_v1",
+  "supersedes_repair": "single_p_time_role_propagated_authority_v1.repair1.json",
+  "timing": "After qualification_v2 returned passed=false on a synthetic omitted-group expectation, before a repaired source lock or any further baseline execution.",
+  "failed_qualification": {
+    "path": "studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v2.json",
+    "sha256": "113fec53c25eb50ec02b9172389d6bd691546b4121100e3ddd4c0f9e88be224f"
+  },
+  "diagnosis": "The synthetic fixture correctly reconstructed two subjects but the qualification hard-coded the omitted missingness vector in reverse order. The all-retained subject has no omitted learned relation and is NaN; the all-omitted subject has a finite omitted endpoint. The source endpoint authority and repaired real-data reconstruction were not contradicted.",
+  "repair": {
+    "fixture": "Compute the expected synthetic endpoint independently through fsrl.experiments.training_strategy.summaries.liu_endpoints, compare every learned, nonlearned, and omitted value and missingness mask with the verifier wrapper, and explicitly require the correct omitted missingness vector [true, false].",
+    "qualification": "Write qualification_v3.json and preserve both earlier qualification records.",
+    "source_lock": "Only qualification_v3 may authorize baseline_source_lock_v3.json. No v2 source lock exists."
+  },
+  "unchanged": [
+    "repair1's source Liu endpoint authority and finite-only diagnostic rule",
+    "all scientific inputs, checkpoints, arithmetic, propagated budgets, exact classification gates, and stop rules",
+    "all Stage 1--3 estimands and the prohibition on training"
+  ],
+  "scientific_outputs_exposed_since_repair1": false,
+  "baseline_executions_since_repair1": 0
+}
