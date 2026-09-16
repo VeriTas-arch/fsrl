@@ -62,6 +62,9 @@ checkpoint deletion.
 - `execution_lock` —
   [studies/clean_single_p/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:c02774640427`)
+- `artifact_lock` —
+  [studies/clean_single_p/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:1489cf74747a`)
 
 ## Provenance rule
 
