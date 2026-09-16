@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3913,
+  "entry_count": 3914,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2164,
+    "json": 2165,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3816,
+    "already_conformant": 3817,
     "historical_gzip_view": 96,
     "historical_pth_view": 1
   },
@@ -118557,6 +118557,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v4.json",
+        "repository_path": "studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v4.json"
+      },
+      "materialized_identity": {
+        "bytes": 10143,
+        "sha256": "f0f0bfc879b1c44eff7d66ca36cdd5fab3a74b7f63e04441df649c014aa45947"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_time_role_propagated_authority",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_time_role_propagated_authority.studies_single_p_time_role_propagated_authority_records_benchmarks_qualification_v4_json",
+      "registered_identity": {
+        "bytes": 10143,
+        "sha256": "f0f0bfc879b1c44eff7d66ca36cdd5fab3a74b7f63e04441df649c014aa45947",
+        "source_ref": "sha256:f0f0bfc879b1c44eff7d66ca36cdd5fab3a74b7f63e04441df649c014aa45947"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -133431,7 +133465,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3911,
+  "registered_record_count": 3912,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -133459,7 +133493,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2729,
-    "validation_result": 27
+    "validation_result": 28
   },
   "schema_version": 2,
   "sources": {
