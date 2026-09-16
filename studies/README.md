@@ -276,9 +276,11 @@ fail to close the dynamics.
     remain. Liu budget equivalence fails, restricting causal interpretation to generic
     conditions.
 - [Compact global/local recurrent model](compact_global_local_model/README.md) — `frozen_contract`
-  - **Finding:** Prospective contract frozen before implementation or seed execution.
-    The candidate uses a 32-channel, two-step, single-margin recurrent backbone with a
-    105-scalar exact packed local trace; no result is yet registered.
+  - **Finding:** Prospective contract and one pre-execution readiness repair are frozen.
+    Equation qualification showed that the preserved update order requires three support
+    steps to produce a P write; the repaired candidate uses three support steps, two
+    query steps, 32 input channels, one margin, and a 105-scalar exact packed local
+    trace. No scientific seed result is yet registered.
 
 ## Minimal explanatory models
 

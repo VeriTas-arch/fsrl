@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "study_id": "compact_global_local_model",
+  "experiment_id": "compact-global-local-model-v1",
+  "repair_id": "compact-global-local-model-v1-repair1",
+  "status": "prospective_implementation_repair_before_scientific_seed_execution",
+  "parent_contract": {
+    "path": "studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.json",
+    "sha256": "fd4b61bcd55b4487b7017bbfbb8fb1bebbdcefdcccbc9976a7c07167b69300e0",
+    "commit": "a15e4b34869887b4da37ce3dfacad42b0cf86dda"
+  },
+  "qualification_failure": {
+    "scope": "CPU equation qualification before any development or confirmation seed execution.",
+    "observation": "With hidden and eligibility reset at trial start, step zero computes E_1 from h_1 times h_0^T with h_0=0, so E_1 is exactly zero. Step one therefore proposes P_2=P_1+m_2 E_1=P_1. A two-step support trial cannot write P under the frozen update order.",
+    "reproduction": "The deterministic hidden-size-5 non-Liu fixture in tests/experiments/compact_global_local/test_model.py observes an exactly zero P change after one and two steps.",
+    "interpretation": "This is an implementation-readiness failure in the prospectively written step schedule, not an exposed model outcome and not evidence about the candidate's scientific performance."
+  },
+  "repair": {
+    "support_trial_steps": 3,
+    "query_steps": 2,
+    "blank_initial_steps": 0,
+    "support_step_zero": "Present both cues and globally admitted evidence. The previous hidden state is zero, so this step constructs a cue-dependent hidden state but no nonzero eligibility.",
+    "support_step_one": "Present only the response-phase pulse. This step constructs the first nonzero eligibility from the step-one hidden state and the cue-dependent preceding hidden state.",
+    "support_step_two": "Present the all-zero external input. The learned input bias remains active. This step applies its scalar modulation to the eligibility constructed at step one and therefore performs the single effective P write for the trial.",
+    "query_schedule": "Queries retain two steps, cues at step zero and response pulse at step one. Read the scalar margin at step one and discard every proposed query P update.",
+    "unchanged": [
+      "32-channel input layout and removed historical channels",
+      "200-unit tanh recurrent state",
+      "single scalar modulation unit and scale",
+      "P and E equations and their numerical update order",
+      "single scalar global margin",
+      "105-entry exact packed local trace",
+      "global/local evidence admission",
+      "staged optimization, seeds, task, budgets, thresholds, cohorts, decision tree, stop rule, and cleanup gate"
+    ]
+  },
+  "replacement_gates": {
+    "write_timing": "A one- or two-step support fixture must leave zero-initialized P unchanged, while the registered three-step support fixture must produce a finite nonzero P change.",
+    "query_integrity": "The two-step query margin must be invariant to whether the discarded proposed query P update is materialized outside the readout path.",
+    "gradient": "Generic query loss must carry a finite nonzero gradient through the terminal P written at support step two.",
+    "parity": "CUDA eager/fullgraph qualification uses three-step support and two-step query tensors."
+  },
+  "execution_boundary": "The repaired combined authority is the immutable parent contract plus this repair. No scientific seed may execute until the implementation and all parent plus replacement gates pass and a source lock cites both records.",
+  "stop_rule": "No other architecture, optimization, seed, threshold, cohort, or cleanup change is authorized by this repair. Another qualification failure requires a new append-only repair or closure of the candidate."
+}

@@ -25,20 +25,25 @@
 and Liu behavior after removing historical ABI channels and exactly packing the local
 state?
 
-**Finding.** Prospective contract frozen before implementation or seed execution. The
-candidate uses a 32-channel, two-step, single-margin recurrent backbone with a
-105-scalar exact packed local trace; no result is yet registered.
+**Finding.** Prospective contract and one pre-execution readiness repair are frozen.
+Equation qualification showed that the preserved update order requires three support
+steps to produce a P write; the repaired candidate uses three support steps, two query
+steps, 32 input channels, one margin, and a 105-scalar exact packed local trace. No
+scientific seed result is yet registered.
 
-**Claim boundary.** This contract opens one fixed development candidate and conditional
-unchanged confirmation. It does not alter frozen P/L evidence, promote a model,
-authorize scalar replacement of P, or authorize historical checkpoint deletion before
-confirmation and a separate retention migration.
+**Claim boundary.** The immutable parent plus append-only repair opens one fixed
+development candidate and conditional unchanged confirmation. It does not alter frozen
+P/L evidence, promote a model, authorize scalar replacement of P, or authorize
+historical checkpoint deletion before confirmation and a separate retention migration.
 
 ## Frozen records
 
 - `registered_contract` —
   [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.json](records/benchmarks/compact_global_local_model_v1.json)
   (`sha256:fd4b61bcd55b`)
+- `repair_contract` —
+  [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.repair1.json](records/benchmarks/compact_global_local_model_v1.repair1.json)
+  (`sha256:d48196587245`)
 
 ## Provenance rule
 
