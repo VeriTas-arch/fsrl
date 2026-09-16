@@ -44,7 +44,7 @@ class ExactReparameterizationContractTests(unittest.TestCase):
                 self.assertEqual(result["effective_P_writes"], trials * 2)
                 self.assertEqual(result["query_unordered_pairs"], 28)
                 self.assertEqual(result["query_orientations"], 56)
-                self.assertLessEqual(max(result["max_absolute_errors"].values()), 2e-6)
+                self.assertLessEqual(max(result["max_absolute_errors"].values()), 1e-6)
                 self.assertEqual(sum(result["categorical_mismatches"].values()), 0)
 
     def test_timestep_accounting_preserves_parent_support_horizon(self):

@@ -27,7 +27,7 @@ from .locks import SOURCE_LOCK_PATH, validate_source_lock
 from .protocol import PROTOCOL_SHA256, load_specification
 
 RUN_ROOT = RUNS_ROOT / "pl_exact_reparameterization_v1"
-RESULT_PATH = RUN_ROOT / "qualification" / "qualification.json"
+RESULT_PATH = RUN_ROOT / "qualification-attempt2" / "qualification.json"
 
 
 def active_input_sequence(
@@ -333,6 +333,12 @@ def _single_step_and_blank_checks(legacy, factorized, device: torch.device) -> d
 
 
 def _parameter_mapping_errors(legacy, factorized) -> dict[str, float]:
+    if not factorized.uses_legacy_numerics:
+        raise RuntimeError("converted checkpoints require numerical compatibility")
+    assert factorized.legacy_constant_weight is not None
+    assert factorized.legacy_input_bias is not None
+    assert factorized.legacy_output_weight is not None
+    assert factorized.legacy_output_bias is not None
     return {
         "external_cues_and_response": _max_error(
             factorized.input_projection.weight[:, :31], legacy.i2h.weight[:, :31]
@@ -360,6 +366,16 @@ def _parameter_mapping_errors(legacy, factorized) -> dict[str, float]:
         "margin_bias": _max_error(
             factorized.h2margin.bias,
             legacy.h2o.bias[1:2] - legacy.h2o.bias[0:1],
+        ),
+        "legacy_constant_weight": _max_error(
+            factorized.legacy_constant_weight, legacy.i2h.weight[:, 31]
+        ),
+        "legacy_input_bias": _max_error(factorized.legacy_input_bias, legacy.i2h.bias),
+        "legacy_output_weight": _max_error(
+            factorized.legacy_output_weight, legacy.h2o.weight
+        ),
+        "legacy_output_bias": _max_error(
+            factorized.legacy_output_bias, legacy.h2o.bias
         ),
     }
 
@@ -434,6 +450,7 @@ def run_qualification() -> dict:
     results = [qualify_device(device, specification) for device in devices]
     result = {
         "schema_version": 1,
+        "attempt": 2,
         "study_id": specification["study_id"],
         "protocol_sha256": PROTOCOL_SHA256,
         "source_lock": {

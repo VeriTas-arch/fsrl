@@ -42,6 +42,30 @@ class FactorizedPlasticRNNTests(unittest.TestCase):
         self.assertEqual(config.input_size, 32)
         self.assertEqual(config.response_index, 30)
         self.assertEqual(config.evidence_index, 31)
+        fresh = FactorizedPlasticRNN(config, device="cpu")
+        self.assertFalse(fresh.uses_legacy_numerics)
+        self.assertNotIn("legacy_input_bias", fresh.state_dict())
+
+    def test_checkpoint_conversion_enables_nontrainable_numerical_adapter(self):
+        self.assertTrue(self.factorized.uses_legacy_numerics)
+        parameters = dict(self.factorized.named_parameters())
+        buffers = dict(self.factorized.named_buffers())
+        for name in (
+            "legacy_constant_weight",
+            "legacy_input_bias",
+            "legacy_output_weight",
+            "legacy_output_bias",
+        ):
+            self.assertNotIn(name, parameters)
+            self.assertIn(name, buffers)
+
+        restored = FactorizedPlasticRNN(
+            self.factorized.model_config,
+            device="cpu",
+            legacy_numerical_compatibility=True,
+        )
+        restored.load_state_dict(self.factorized.state_dict())
+        self.assertTrue(restored.uses_legacy_numerics)
 
     def test_active_input_factorization_is_lossless(self):
         legacy = self.active_inputs(4)

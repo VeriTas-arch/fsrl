@@ -12,6 +12,9 @@ from fsrl.paths import REPO_ROOT, STUDIES_ROOT
 from fsrl.tasks.protocol_catalog import protocol_path
 
 from .protocol import (
+    NUMERICAL_REPAIR_COMMIT,
+    NUMERICAL_REPAIR_PATH,
+    NUMERICAL_REPAIR_SHA256,
     PROTOCOL_COMMIT,
     PROTOCOL_PATH,
     PROTOCOL_SHA256,
@@ -23,8 +26,11 @@ from .protocol import (
 
 RECORD_ROOT = STUDIES_ROOT / "pl_exact_reparameterization" / "records"
 SOURCE_LOCK_PATH = (
-    RECORD_ROOT / "benchmarks" / "pl_exact_reparameterization_v1.execution_lock.json"
+    RECORD_ROOT
+    / "benchmarks"
+    / ("pl_exact_reparameterization_v1.repair2.execution_lock.json")
 )
+ATTEMPT1_PATH = RECORD_ROOT / "results" / "pl_exact_reparameterization_v1.attempt1.json"
 
 
 def git_text(*arguments: str) -> str:
@@ -85,7 +91,13 @@ def implementation_sources() -> list[dict]:
 
 def scientific_inputs() -> list[dict]:
     specification = load_specification()
-    paths = {PROTOCOL_PATH, REPAIR_PATH, protocol_path("liu_v2")}
+    paths = {
+        PROTOCOL_PATH,
+        REPAIR_PATH,
+        NUMERICAL_REPAIR_PATH,
+        ATTEMPT1_PATH,
+        protocol_path("liu_v2"),
+    }
     for source in specification["frozen_sources"].values():
         paths.add(REPO_ROOT / source["checkpoint"])
         paths.add(REPO_ROOT / source["gain"])
@@ -125,6 +137,8 @@ def write_source_lock() -> dict:
             if record["path"] == reference(PROTOCOL_PATH)["path"]
             else REPAIR_COMMIT
             if record["path"] == reference(REPAIR_PATH)["path"]
+            else NUMERICAL_REPAIR_COMMIT
+            if record["path"] == reference(NUMERICAL_REPAIR_PATH)["path"]
             else None
         )
         verify_reference(record, commit=witness)
@@ -134,6 +148,10 @@ def write_source_lock() -> dict:
         "source_commit": commit,
         "protocol": {**reference(PROTOCOL_PATH), "commit": PROTOCOL_COMMIT},
         "repair": {**reference(REPAIR_PATH), "commit": REPAIR_COMMIT},
+        "numerical_repair": {
+            **reference(NUMERICAL_REPAIR_PATH),
+            "commit": NUMERICAL_REPAIR_COMMIT,
+        },
         "sources": sources,
         "scientific_inputs": inputs,
         "execution_order": "source_locked_before_frozen_checkpoint_qualification",
@@ -151,8 +169,11 @@ def validate_source_lock(*, require_clean: bool = True) -> dict:
         raise RuntimeError("source lock uses a different contract")
     if lock["repair"]["sha256"] != REPAIR_SHA256:
         raise RuntimeError("source lock uses a different timestep repair")
+    if lock["numerical_repair"]["sha256"] != NUMERICAL_REPAIR_SHA256:
+        raise RuntimeError("source lock uses a different numerical repair")
     verify_reference(lock["protocol"], commit=PROTOCOL_COMMIT)
     verify_reference(lock["repair"], commit=REPAIR_COMMIT)
+    verify_reference(lock["numerical_repair"], commit=NUMERICAL_REPAIR_COMMIT)
     if lock["sources"] != implementation_sources():
         raise RuntimeError("implementation changed after the source lock")
     for record in lock["sources"]:
