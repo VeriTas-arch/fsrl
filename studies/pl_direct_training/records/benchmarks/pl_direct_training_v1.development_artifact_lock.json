@@ -1,0 +1,1163 @@
+{
+  "cohort": "development",
+  "evaluation_exposed": false,
+  "experiment_id": "pl-direct-training-v1",
+  "runs": {
+    "3001/no_time_candidate": {
+      "files": [
+        {
+          "bytes": 7966,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/no_time_candidate/config.json",
+          "sha256": "c4093263112b200a9ccff326e1ed92f275feb2047f773bf8e63ae9fcad455ead"
+        },
+        {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/no_time_candidate/model.pth",
+          "sha256": "cd5c609fa22bd641329cd2958d1582a0a8c0bf142d5193ee7fce34764341fc3a"
+        },
+        {
+          "bytes": 3811,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/no_time_candidate/run.json",
+          "sha256": "cee466baac392f0886eda71205153e57bae60e87ee69d3af7e6a661d7da6b634"
+        },
+        {
+          "bytes": 605629,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/no_time_candidate/train_log.jsonl",
+          "sha256": "56b79140248e0dcabcadb0086c9834c7d7768149bbf0fcbbb90d451f47a8187f"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87205,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 0
+        },
+        "checkpoint": {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/no_time_candidate/model.pth",
+          "sha256": "cd5c609fa22bd641329cd2958d1582a0a8c0bf142d5193ee7fce34764341fc3a"
+        },
+        "cohort": "development",
+        "condition": "no_time_candidate",
+        "cost": {
+          "backbone_parameters": 87205,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 64.7437214620295
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "1a218e514d0b6f51c3e6c3ec94efb941b0268bd1a36fa5ab839c84fdf33f4135",
+          "etaet": "5540ea0b9255d63aecc8319b9940e93ac01ae88752935bf515d355e7fc1057c7",
+          "h2margin.bias": "e955dfc3c24056568a4659e960a446e15f5f4632f146dd8f3282b0068ca5ba9b",
+          "h2margin.weight": "9636dc95776ed481d70b3334af775005bd0c8c722a9f2fff2444e3e90c3f17e4",
+          "h2modulation.bias": "6c7b1c63a8129c72452033374f18e3c95f943bffba2604483f187a201a3ccfe5",
+          "h2modulation.weight": "208118ad091764a2470dc5ed43181fd15e3b0b9a7bf225787afa9d6ac5bc99a3",
+          "input_projection.bias": "47249b89e8190fecb45726bacecd33390ec793e5e849a0bb2284d486d42dcc8a",
+          "input_projection.weight": "058afcd766c666a9aec6b101654f07b48eb7fabc6bbaf3353edc3580d5bebf4f",
+          "modulation_scale": "df426f22255cd672f7b36494474ef6566652945b8e2565bff3016fb72b6b7023",
+          "w": "82c22d89751e6d13c8d8f3cd8a2dc49e0b8cfdea80822e64c35749384e8c9bab"
+        },
+        "final_local": {
+          "raw_gain": "221517eb51d9214c3cdaa3340571de8fcfd2fe406c575968c6848a6ecfd2f6eb"
+        },
+        "initial_backbone": {
+          "alpha": "018750c4f0530e4d3c3c18ca0832b6cf3cda4c9f85439f867a7968d3172a181a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "33bdaa2d1796a8871f318db6ab86ad5e5c144c88bb16bcd9936b63f601867965",
+          "h2margin.weight": "1ac6c281e6e7d99eea5efb877642c281ac39393299faa9f48e3b2e1edbdff237",
+          "h2modulation.bias": "ea5987eaa8543c0c5ecaf03295f75e0c8a1f6d0c402310db3bef4806cea81e06",
+          "h2modulation.weight": "8480e59bed84978c57327a6fca893a3b792751ed1568f52e2d49443cc7d58e02",
+          "input_projection.bias": "943a6cf202c99574efd3a1952bf3e3bcca58db45a143a0a761dcb6539b149d6a",
+          "input_projection.weight": "6435486480f27f7e1ecacda9255a0314d8b03005ff33afe5b0e5d3a470a0e03a",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "5cf2e3bcbdfed2683038924ce796f836d1b08e935d6c1f6d0acc062de0f67b25"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "018750c4f0530e4d3c3c18ca0832b6cf3cda4c9f85439f867a7968d3172a181a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "ea5987eaa8543c0c5ecaf03295f75e0c8a1f6d0c402310db3bef4806cea81e06",
+          "h2DA.weight": "8480e59bed84978c57327a6fca893a3b792751ed1568f52e2d49443cc7d58e02",
+          "h2o.bias": "1e073ff1522e2d2bd521c5ba0d9d46b0abeb2ee4f6359e8329e9649e5639f0e3",
+          "h2o.weight": "5835499009f0fd90fb65830077df3dca0d13f7cbad71456abc28396975cdda5e",
+          "h2v.bias": "3c6034edbc4522346e87cec8b0a6f9bd66ae9aafe022687ee420208eb04c7381",
+          "h2v.weight": "39f38b84dc5f9f602cacee00bb631d1e58e99fcab7feab879102e8af862b3bad",
+          "i2h.bias": "16ddff882c719be62b322bfff3ba3c2e5bc1368b62bd8fc6eaf8ffb5769a2320",
+          "i2h.weight": "f0b0be8b6b98f193062d7d859c07f7cdacb8246f5135c5e7e6f97291b0d397e6",
+          "w": "5cf2e3bcbdfed2683038924ce796f836d1b08e935d6c1f6d0acc062de0f67b25"
+        },
+        "initial_shared": {
+          "alpha": "018750c4f0530e4d3c3c18ca0832b6cf3cda4c9f85439f867a7968d3172a181a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "33bdaa2d1796a8871f318db6ab86ad5e5c144c88bb16bcd9936b63f601867965",
+          "h2margin.weight": "1ac6c281e6e7d99eea5efb877642c281ac39393299faa9f48e3b2e1edbdff237",
+          "h2modulation.bias": "ea5987eaa8543c0c5ecaf03295f75e0c8a1f6d0c402310db3bef4806cea81e06",
+          "h2modulation.weight": "8480e59bed84978c57327a6fca893a3b792751ed1568f52e2d49443cc7d58e02",
+          "input_projection.bias": "943a6cf202c99574efd3a1952bf3e3bcca58db45a143a0a761dcb6539b149d6a",
+          "input_projection.weight": "6435486480f27f7e1ecacda9255a0314d8b03005ff33afe5b0e5d3a470a0e03a",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "5cf2e3bcbdfed2683038924ce796f836d1b08e935d6c1f6d0acc062de0f67b25"
+        },
+        "local_gain": 0.2771872282028198,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "peak_allocated_bytes": 2531766784,
+        "peak_reserved_bytes": 2667577344,
+        "protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "raw_gain": -1.1412692070007324,
+        "repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3001,
+        "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+        "stream_fingerprint": "8e9b179d9b18050b4ef0e1e2b474bfb3820c0320997c2880921c0381ee64e350",
+        "training_seconds": 58.50372190074995,
+        "warmup_seconds": 6.124675835017115
+      }
+    },
+    "3001/time_retained_control": {
+      "files": [
+        {
+          "bytes": 8184,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/time_retained_control/config.json",
+          "sha256": "75b6b9c05e2a53e0b9e6f36acf510cb1f90a11dc380b18b997b852c27b7f94fb"
+        },
+        {
+          "bytes": 354111,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/time_retained_control/model.pth",
+          "sha256": "ba40b1f8b97bfa75b0a83e29d07429e9a005e3cc732c8c9ea59f4b566c6d2f54"
+        },
+        {
+          "bytes": 3819,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/time_retained_control/run.json",
+          "sha256": "d8e72d6a052b860550482a8d49afb4278860429fe0ea9066cf990e2b5f41a67c"
+        },
+        {
+          "bytes": 605586,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/time_retained_control/train_log.jsonl",
+          "sha256": "9dc07306ee2dd67d0e015fd311a6ef8cac6a8e43929cd3c1f8cf4d63892e0fe3"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87405,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 200
+        },
+        "checkpoint": {
+          "bytes": 354111,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3001/time_retained_control/model.pth",
+          "sha256": "ba40b1f8b97bfa75b0a83e29d07429e9a005e3cc732c8c9ea59f4b566c6d2f54"
+        },
+        "cohort": "development",
+        "condition": "time_retained_control",
+        "cost": {
+          "backbone_parameters": 87405,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 72.99630014400464
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "4f96a56eeb672225f61550fd96304099f12cf3803344b6c21b72481b8fdd6abf",
+          "etaet": "85f0e5006f1dd7eb9680c08078332d55dcb52fedb0f491bad0aa491fc3457fd0",
+          "h2margin.bias": "758e49c9670015a44b6d2911edb9f297706df0493895910ee16cd371eea87daa",
+          "h2margin.weight": "224d687ef77787c6f8b24a7e58d488c63a621a22956f719889ec471cbcb9c330",
+          "h2modulation.bias": "25b9a56a51daff5474906d4bea53235b46b43dba47a207ec0cda43e0ec166209",
+          "h2modulation.weight": "62340e38e16e2713367628b0958f9af452a1bc540bb3d592898826bce95216d2",
+          "input_projection.bias": "cab60a0e3ed4090d1ce71be9ca7ccd08089a82f32deb91fdbcc7439231abff55",
+          "input_projection.weight": "f6127d113ccd5c21abc2b9731b2976070d10b05ff8c26011eb5a52e086309dc3",
+          "modulation_scale": "b8558d342f95caca9f30cb2239747c40b1a28dcf56de6d6cbcdd75b8e3868a64",
+          "time_weight": "aa11462321d8ca54ef6a872582775bd2dfd59c8d7ea60a7d35d7ee925f3e70f7",
+          "w": "0df8d276980f1dc4da6aea904ea14d364bc6f33e44344b340e436623e2dc6930"
+        },
+        "final_local": {
+          "raw_gain": "5a7f0e378e0dfbcc59d49713ac93963e49428d39166ceeed29b37c1fbea14ef8"
+        },
+        "initial_backbone": {
+          "alpha": "018750c4f0530e4d3c3c18ca0832b6cf3cda4c9f85439f867a7968d3172a181a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "33bdaa2d1796a8871f318db6ab86ad5e5c144c88bb16bcd9936b63f601867965",
+          "h2margin.weight": "1ac6c281e6e7d99eea5efb877642c281ac39393299faa9f48e3b2e1edbdff237",
+          "h2modulation.bias": "ea5987eaa8543c0c5ecaf03295f75e0c8a1f6d0c402310db3bef4806cea81e06",
+          "h2modulation.weight": "8480e59bed84978c57327a6fca893a3b792751ed1568f52e2d49443cc7d58e02",
+          "input_projection.bias": "943a6cf202c99574efd3a1952bf3e3bcca58db45a143a0a761dcb6539b149d6a",
+          "input_projection.weight": "6435486480f27f7e1ecacda9255a0314d8b03005ff33afe5b0e5d3a470a0e03a",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "time_weight": "21260d5b545182a016badf1903da51b0a1358c6205b0e0d172861c53f031e2be",
+          "w": "5cf2e3bcbdfed2683038924ce796f836d1b08e935d6c1f6d0acc062de0f67b25"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "018750c4f0530e4d3c3c18ca0832b6cf3cda4c9f85439f867a7968d3172a181a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "ea5987eaa8543c0c5ecaf03295f75e0c8a1f6d0c402310db3bef4806cea81e06",
+          "h2DA.weight": "8480e59bed84978c57327a6fca893a3b792751ed1568f52e2d49443cc7d58e02",
+          "h2o.bias": "1e073ff1522e2d2bd521c5ba0d9d46b0abeb2ee4f6359e8329e9649e5639f0e3",
+          "h2o.weight": "5835499009f0fd90fb65830077df3dca0d13f7cbad71456abc28396975cdda5e",
+          "h2v.bias": "3c6034edbc4522346e87cec8b0a6f9bd66ae9aafe022687ee420208eb04c7381",
+          "h2v.weight": "39f38b84dc5f9f602cacee00bb631d1e58e99fcab7feab879102e8af862b3bad",
+          "i2h.bias": "16ddff882c719be62b322bfff3ba3c2e5bc1368b62bd8fc6eaf8ffb5769a2320",
+          "i2h.weight": "f0b0be8b6b98f193062d7d859c07f7cdacb8246f5135c5e7e6f97291b0d397e6",
+          "w": "5cf2e3bcbdfed2683038924ce796f836d1b08e935d6c1f6d0acc062de0f67b25"
+        },
+        "initial_shared": {
+          "alpha": "018750c4f0530e4d3c3c18ca0832b6cf3cda4c9f85439f867a7968d3172a181a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "33bdaa2d1796a8871f318db6ab86ad5e5c144c88bb16bcd9936b63f601867965",
+          "h2margin.weight": "1ac6c281e6e7d99eea5efb877642c281ac39393299faa9f48e3b2e1edbdff237",
+          "h2modulation.bias": "ea5987eaa8543c0c5ecaf03295f75e0c8a1f6d0c402310db3bef4806cea81e06",
+          "h2modulation.weight": "8480e59bed84978c57327a6fca893a3b792751ed1568f52e2d49443cc7d58e02",
+          "input_projection.bias": "943a6cf202c99574efd3a1952bf3e3bcca58db45a143a0a761dcb6539b149d6a",
+          "input_projection.weight": "6435486480f27f7e1ecacda9255a0314d8b03005ff33afe5b0e5d3a470a0e03a",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "5cf2e3bcbdfed2683038924ce796f836d1b08e935d6c1f6d0acc062de0f67b25"
+        },
+        "local_gain": 0.2758037745952606,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.time_weight": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "peak_allocated_bytes": 2631840256,
+        "peak_reserved_bytes": 2726297600,
+        "protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "raw_gain": -1.146996259689331,
+        "repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3001,
+        "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+        "stream_fingerprint": "8e9b179d9b18050b4ef0e1e2b474bfb3820c0320997c2880921c0381ee64e350",
+        "training_seconds": 58.4150825170218,
+        "warmup_seconds": 14.462160155002493
+      }
+    },
+    "3002/no_time_candidate": {
+      "files": [
+        {
+          "bytes": 7971,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/no_time_candidate/config.json",
+          "sha256": "63335954ac8ab0edb71934749489aa7bc702c4ebe3bf69a0c80899b1ce573bb3"
+        },
+        {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/no_time_candidate/model.pth",
+          "sha256": "78c9e68ed4b758ecac6d8e8b48d225e56587f00bb238bff63cc34a54abdf726a"
+        },
+        {
+          "bytes": 3811,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/no_time_candidate/run.json",
+          "sha256": "c91e8bb592e8557a1bd89acb34d250efdd9a9182c3d8bd3bccdf97d027e05294"
+        },
+        {
+          "bytes": 605612,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/no_time_candidate/train_log.jsonl",
+          "sha256": "fa378d7c0a5a68acbe179c9a2e274453e712012c0d8175ba037dd695290616ff"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87205,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 0
+        },
+        "checkpoint": {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/no_time_candidate/model.pth",
+          "sha256": "78c9e68ed4b758ecac6d8e8b48d225e56587f00bb238bff63cc34a54abdf726a"
+        },
+        "cohort": "development",
+        "condition": "no_time_candidate",
+        "cost": {
+          "backbone_parameters": 87205,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 58.594870647008065
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "39fff873e00d3cd1b9fcb4c4ed048c2a158a08705ba08dc9721b5e15aae9ca83",
+          "etaet": "102a229286d8ddb25bb8ef2790475452ed8a860fa2446f186e0dbb9ed9b0dc4c",
+          "h2margin.bias": "683eb6b7e3eabb61c00c62a4c4d27800d4a2e51db7f27e0cadc38c770da3f9f4",
+          "h2margin.weight": "08d597d2448ab9cbf64e8324d905dbc1a0f166cd9f46d332d9a8069a0a74107f",
+          "h2modulation.bias": "e70b95229577f8c61307e054927ce259629d8593843ca876bf929e210a29b82b",
+          "h2modulation.weight": "234c479a4684d9607dd6f2322c351398f006114d0850d77dc0e2a475e52c109d",
+          "input_projection.bias": "c815903d2491dcfa0bfd5980a6320c53f2ef2b02f99ee6ec0d68a35de94fe6ea",
+          "input_projection.weight": "32e821a507533cd7ae64701d768fd5be74d65a3290aad0f71af0f8da8bdc47b8",
+          "modulation_scale": "e02beb733243bc68b7af62f658844947bd44a125ee783d0b17226afa59ae1ffb",
+          "w": "e81ff79614651bfa2d7c193f66a03a9fb7de5a243fb02170831cad41f2c84b5f"
+        },
+        "final_local": {
+          "raw_gain": "e08a0e11c3cb5854e8b63c9ba3efccc4409a6339cd78c4e4071fc3abc4f9c72a"
+        },
+        "initial_backbone": {
+          "alpha": "cbb2590002680b0f6993a7c393449786335bdb5caaa9619ff093db408cf3d9d2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "086e5b20a5d036d6a77b40c37c3e8f8d365203a458f8416167b377f2b16231d4",
+          "h2margin.weight": "a969b6fa115c0d99dc0c9acca03f96e771b3a3cb4f914f4aabe77ab36ad31953",
+          "h2modulation.bias": "cf94a8cfa6be83dd090525b4b334a17a001efe1048b5e733d7f084bae82f661b",
+          "h2modulation.weight": "f34b7844df81eccbc108dead7279172611adc89bbc4138c245e2ef92ae888664",
+          "input_projection.bias": "aa708c654fc43cc9d7d39da0865e220e89f5f8886b8e49c14231c8c404813bb9",
+          "input_projection.weight": "728be5e9cfcfcdb4ba8899e3e6f06a4bddc82817b04a02b78ff17ff6b1174972",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "d530ff1d3d0b884e8bd5a2e3d9b235e5b8c9b7a6d790c094ecc2a1639c95db5c"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "cbb2590002680b0f6993a7c393449786335bdb5caaa9619ff093db408cf3d9d2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "cf94a8cfa6be83dd090525b4b334a17a001efe1048b5e733d7f084bae82f661b",
+          "h2DA.weight": "f34b7844df81eccbc108dead7279172611adc89bbc4138c245e2ef92ae888664",
+          "h2o.bias": "e6c88cd600d60250cd14c6395ef38b864a7211465c60b3c54967359578416462",
+          "h2o.weight": "a622b6f64971f4fc5175f231f4207c2b8010f02f6751cabafb4377db454a7cd5",
+          "h2v.bias": "017ff91cb18c758f83218c3cf4fdd3c03987fceefec4eceaab0682f141e91a6e",
+          "h2v.weight": "ca9c2b07312ec8f2f17d23d727904828150b8eb9495fe9f5d1929e234a88f13d",
+          "i2h.bias": "36db8c44eb5e46add8854f09d91b02a304f6ac61e8e090f1e7e5f1b1df6c40f3",
+          "i2h.weight": "156b32426404e29d07ed8c2559ce2b2584ea6de77d2b31541de31a25b972e2ef",
+          "w": "d530ff1d3d0b884e8bd5a2e3d9b235e5b8c9b7a6d790c094ecc2a1639c95db5c"
+        },
+        "initial_shared": {
+          "alpha": "cbb2590002680b0f6993a7c393449786335bdb5caaa9619ff093db408cf3d9d2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "086e5b20a5d036d6a77b40c37c3e8f8d365203a458f8416167b377f2b16231d4",
+          "h2margin.weight": "a969b6fa115c0d99dc0c9acca03f96e771b3a3cb4f914f4aabe77ab36ad31953",
+          "h2modulation.bias": "cf94a8cfa6be83dd090525b4b334a17a001efe1048b5e733d7f084bae82f661b",
+          "h2modulation.weight": "f34b7844df81eccbc108dead7279172611adc89bbc4138c245e2ef92ae888664",
+          "input_projection.bias": "aa708c654fc43cc9d7d39da0865e220e89f5f8886b8e49c14231c8c404813bb9",
+          "input_projection.weight": "728be5e9cfcfcdb4ba8899e3e6f06a4bddc82817b04a02b78ff17ff6b1174972",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "d530ff1d3d0b884e8bd5a2e3d9b235e5b8c9b7a6d790c094ecc2a1639c95db5c"
+        },
+        "local_gain": 0.2860776484012604,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "peak_allocated_bytes": 2529808896,
+        "peak_reserved_bytes": 2671771648,
+        "protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "raw_gain": -1.1050455570220947,
+        "repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3002,
+        "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+        "stream_fingerprint": "f2e7f0a4f1fc3eb58ca39c2eb913f41960422962b00b0725e8d4fe677f4b4ce1",
+        "training_seconds": 58.450719573069364,
+        "warmup_seconds": 0.03684492298634723
+      }
+    },
+    "3002/time_retained_control": {
+      "files": [
+        {
+          "bytes": 8188,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/time_retained_control/config.json",
+          "sha256": "9d7897a5d1bf0771db6ba985f5f254fe9232a6d8b9284a4ebda7a20805d9ed63"
+        },
+        {
+          "bytes": 354111,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/time_retained_control/model.pth",
+          "sha256": "9f3ad1b3ee7b5fdeab7d55c8df59a26be9b0c7b6d2c3d9956ceed1bb252175b7"
+        },
+        {
+          "bytes": 3819,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/time_retained_control/run.json",
+          "sha256": "91c5d76d26ee9a6923fcc3c02520ee8569253b6e493f68d54d4edffefd768bb6"
+        },
+        {
+          "bytes": 605556,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/time_retained_control/train_log.jsonl",
+          "sha256": "ffd652daf18987fdea4fa6a85ca40d11534f5561f4172a8a309db2ac0ac5e4b0"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87405,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 200
+        },
+        "checkpoint": {
+          "bytes": 354111,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3002/time_retained_control/model.pth",
+          "sha256": "9f3ad1b3ee7b5fdeab7d55c8df59a26be9b0c7b6d2c3d9956ceed1bb252175b7"
+        },
+        "cohort": "development",
+        "condition": "time_retained_control",
+        "cost": {
+          "backbone_parameters": 87405,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 59.17463963199407
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "fb358547e1d0fe0eec22f67e45a2aa0888f2c1ce3716210c69495ebc68ba3b9a",
+          "etaet": "29e07e87737ab1f97788a32393290506a303de0b158824941fc1fc62b8da4af1",
+          "h2margin.bias": "dfba386a049ba9b741b964644a581052a90e6a444ec29d6b26cb3035c28df92e",
+          "h2margin.weight": "b45e0fabc78dbd6951cfb9816d840d6515724f8d7f2a2c3fbe74bcfd446c6dc6",
+          "h2modulation.bias": "724bfe9fcb4c6684d1ad498057fd64cd1374da0ade912ba28ea6204cc7ac049a",
+          "h2modulation.weight": "853ed2cb59564d8106a9176cf8b75e6ff79b69a365d4c12f1737aa85504c696e",
+          "input_projection.bias": "e1112af33126aeef2865111caf28d95d319a2ebe9f55e2d2dd084ff794d9b2e1",
+          "input_projection.weight": "28f4350abcc5416181a47555425c6939a985da1770ac84918e6d4c7409100c22",
+          "modulation_scale": "dc4d005a3d443096a47a8c2e7dab07fc084303c4cb9a66e366155ae9f12c46fe",
+          "time_weight": "4a469e8ecd4186527557b80299f746438696f30190c92a8af36d0ff348d43061",
+          "w": "8c4251f233f58b9eb0b561365f766c8a51bfeedd9fd4b32a2f2bd8b3a5534af0"
+        },
+        "final_local": {
+          "raw_gain": "fdc53ac93dbdf848001c48bd6a8b409b3641e2de045851c1e79537685f46ca4f"
+        },
+        "initial_backbone": {
+          "alpha": "cbb2590002680b0f6993a7c393449786335bdb5caaa9619ff093db408cf3d9d2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "086e5b20a5d036d6a77b40c37c3e8f8d365203a458f8416167b377f2b16231d4",
+          "h2margin.weight": "a969b6fa115c0d99dc0c9acca03f96e771b3a3cb4f914f4aabe77ab36ad31953",
+          "h2modulation.bias": "cf94a8cfa6be83dd090525b4b334a17a001efe1048b5e733d7f084bae82f661b",
+          "h2modulation.weight": "f34b7844df81eccbc108dead7279172611adc89bbc4138c245e2ef92ae888664",
+          "input_projection.bias": "aa708c654fc43cc9d7d39da0865e220e89f5f8886b8e49c14231c8c404813bb9",
+          "input_projection.weight": "728be5e9cfcfcdb4ba8899e3e6f06a4bddc82817b04a02b78ff17ff6b1174972",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "time_weight": "24f39139daddbdb7ae129567395e3994abdfa2f455a6b2b5801c41d088535e37",
+          "w": "d530ff1d3d0b884e8bd5a2e3d9b235e5b8c9b7a6d790c094ecc2a1639c95db5c"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "cbb2590002680b0f6993a7c393449786335bdb5caaa9619ff093db408cf3d9d2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "cf94a8cfa6be83dd090525b4b334a17a001efe1048b5e733d7f084bae82f661b",
+          "h2DA.weight": "f34b7844df81eccbc108dead7279172611adc89bbc4138c245e2ef92ae888664",
+          "h2o.bias": "e6c88cd600d60250cd14c6395ef38b864a7211465c60b3c54967359578416462",
+          "h2o.weight": "a622b6f64971f4fc5175f231f4207c2b8010f02f6751cabafb4377db454a7cd5",
+          "h2v.bias": "017ff91cb18c758f83218c3cf4fdd3c03987fceefec4eceaab0682f141e91a6e",
+          "h2v.weight": "ca9c2b07312ec8f2f17d23d727904828150b8eb9495fe9f5d1929e234a88f13d",
+          "i2h.bias": "36db8c44eb5e46add8854f09d91b02a304f6ac61e8e090f1e7e5f1b1df6c40f3",
+          "i2h.weight": "156b32426404e29d07ed8c2559ce2b2584ea6de77d2b31541de31a25b972e2ef",
+          "w": "d530ff1d3d0b884e8bd5a2e3d9b235e5b8c9b7a6d790c094ecc2a1639c95db5c"
+        },
+        "initial_shared": {
+          "alpha": "cbb2590002680b0f6993a7c393449786335bdb5caaa9619ff093db408cf3d9d2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "086e5b20a5d036d6a77b40c37c3e8f8d365203a458f8416167b377f2b16231d4",
+          "h2margin.weight": "a969b6fa115c0d99dc0c9acca03f96e771b3a3cb4f914f4aabe77ab36ad31953",
+          "h2modulation.bias": "cf94a8cfa6be83dd090525b4b334a17a001efe1048b5e733d7f084bae82f661b",
+          "h2modulation.weight": "f34b7844df81eccbc108dead7279172611adc89bbc4138c245e2ef92ae888664",
+          "input_projection.bias": "aa708c654fc43cc9d7d39da0865e220e89f5f8886b8e49c14231c8c404813bb9",
+          "input_projection.weight": "728be5e9cfcfcdb4ba8899e3e6f06a4bddc82817b04a02b78ff17ff6b1174972",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "d530ff1d3d0b884e8bd5a2e3d9b235e5b8c9b7a6d790c094ecc2a1639c95db5c"
+        },
+        "local_gain": 0.28434237837791443,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.time_weight": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "peak_allocated_bytes": 2529811968,
+        "peak_reserved_bytes": 2671771648,
+        "protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "raw_gain": -1.112038493156433,
+        "repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3002,
+        "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+        "stream_fingerprint": "f2e7f0a4f1fc3eb58ca39c2eb913f41960422962b00b0725e8d4fe677f4b4ce1",
+        "training_seconds": 59.026497102109715,
+        "warmup_seconds": 0.03747938998276368
+      }
+    },
+    "3003/no_time_candidate": {
+      "files": [
+        {
+          "bytes": 7968,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/no_time_candidate/config.json",
+          "sha256": "093a7550a048ae22d4ca67a341bf69df8068ce8350e748e62bdb95407c74ccc4"
+        },
+        {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/no_time_candidate/model.pth",
+          "sha256": "3585e2592822f81e3b2f48d79119b3474e89225674b8e450930cf675f0be300b"
+        },
+        {
+          "bytes": 3811,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/no_time_candidate/run.json",
+          "sha256": "d654429bb5b3b3f7f2b05df5019cea1e5b901c16c8eb27a6422dab915ba02e0e"
+        },
+        {
+          "bytes": 605455,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/no_time_candidate/train_log.jsonl",
+          "sha256": "c2aeb2e8ac47b8aca28fa09223a8e0c0576efc1128fa3423b0a4dc1f88759dbf"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87205,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 0
+        },
+        "checkpoint": {
+          "bytes": 353090,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/no_time_candidate/model.pth",
+          "sha256": "3585e2592822f81e3b2f48d79119b3474e89225674b8e450930cf675f0be300b"
+        },
+        "cohort": "development",
+        "condition": "no_time_candidate",
+        "cost": {
+          "backbone_parameters": 87205,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 63.37157201196533
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "6a41c92f116268777020c409c9c693af94945a4377bfb4e741cac6cba31acabf",
+          "etaet": "d31b66271bbb214237108416ca9de56e1dde1250cbb9bcd29f35deba4f4a71d0",
+          "h2margin.bias": "b2ed3f02a3c2dbe1c94bdca991df08765bc9551792f60a48d2512b929bf8ef6f",
+          "h2margin.weight": "ced1e6ef5827c72b6e2b882908acc6a34e978b6d6e2561fb31153c2d6ab4ed76",
+          "h2modulation.bias": "15e004d12730f4523d792d04894f107258c3773a63e25f530988647507d6ceec",
+          "h2modulation.weight": "ba3a4a35f5c7af06c8a30df9ec9c5339869eb44a8043ff90ea42ccefa69d4fec",
+          "input_projection.bias": "1022e944eeffd0248aeece206acabb83c83aaa1e34402028b800e9aec148a9e4",
+          "input_projection.weight": "816c211b480751ad109b3c25ed135b34183501b99dbef98b4bd6f6bf44df3c73",
+          "modulation_scale": "8657d5eb2ede54538258218fccc18060be5d46532efaa73bb4446ffde06849aa",
+          "w": "d43b2e76106689d8e26b487edb89a20fde6e5cb9e91d0aa0b175d6773ecf28cc"
+        },
+        "final_local": {
+          "raw_gain": "bb7c7c378d9f1b84f8adcd534712d1d72c8c55a4bf4eb7a1243bf45650c1e9f5"
+        },
+        "initial_backbone": {
+          "alpha": "93d4ce71922d862f72cd30440132b973e7674b18bfb37ec20bb59e776eb27eb2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "ad7d6f48818dfad2d00250bf01ad274c023e76229767ddb8c32fa818fd418eae",
+          "h2margin.weight": "2a94748fd6d65aad652f1900db6cbc422970164418374960adbd7811cc84591d",
+          "h2modulation.bias": "2fc38dd20cb0bfe272872ac3df9241e04120cbd8601586f998b6ac05394f4e91",
+          "h2modulation.weight": "6e93eb624be5f6a07d614c79b9962d89bcdec1802a1d03a89c1be9502bea6e5c",
+          "input_projection.bias": "a03ac83aefca4babf368b935f9cfd71d98dbd06061e3f14eb8b0f1a04c0d6323",
+          "input_projection.weight": "dc7ba50c1dc2fed1f3e6b7ba74d984927c32fc12baf936af2c6ff861d22d1491",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "713e5e6f678b43ab65c192b2850d73cd3caac8158b498a6962de9d95d43ec1c1"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "93d4ce71922d862f72cd30440132b973e7674b18bfb37ec20bb59e776eb27eb2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "2fc38dd20cb0bfe272872ac3df9241e04120cbd8601586f998b6ac05394f4e91",
+          "h2DA.weight": "6e93eb624be5f6a07d614c79b9962d89bcdec1802a1d03a89c1be9502bea6e5c",
+          "h2o.bias": "a3024a9baa16a76d7a471a1dd3a97d6dac07552c7ddde0e6e863b75953256ea8",
+          "h2o.weight": "ec817ffff0a5886aae679bb95045ed55dd368352f3a4c613d57cdf2297931d58",
+          "h2v.bias": "e92ffd20d7283b9864d33b8358639ef41f819b008632765e219c8a4dfbc0f16d",
+          "h2v.weight": "26f8b9fe666fee08a0898774d7af7284cbca15fb68eb51caac61956405f0543a",
+          "i2h.bias": "390a1eac46253ff810af63a7499454f65083f5986f5e303bc1840a323d2746c1",
+          "i2h.weight": "6eedb6781fdeb9ae8778305b73e797036c7c14a61d7b4787d6329b9a503f64a3",
+          "w": "713e5e6f678b43ab65c192b2850d73cd3caac8158b498a6962de9d95d43ec1c1"
+        },
+        "initial_shared": {
+          "alpha": "93d4ce71922d862f72cd30440132b973e7674b18bfb37ec20bb59e776eb27eb2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "ad7d6f48818dfad2d00250bf01ad274c023e76229767ddb8c32fa818fd418eae",
+          "h2margin.weight": "2a94748fd6d65aad652f1900db6cbc422970164418374960adbd7811cc84591d",
+          "h2modulation.bias": "2fc38dd20cb0bfe272872ac3df9241e04120cbd8601586f998b6ac05394f4e91",
+          "h2modulation.weight": "6e93eb624be5f6a07d614c79b9962d89bcdec1802a1d03a89c1be9502bea6e5c",
+          "input_projection.bias": "a03ac83aefca4babf368b935f9cfd71d98dbd06061e3f14eb8b0f1a04c0d6323",
+          "input_projection.weight": "dc7ba50c1dc2fed1f3e6b7ba74d984927c32fc12baf936af2c6ff861d22d1491",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "713e5e6f678b43ab65c192b2850d73cd3caac8158b498a6962de9d95d43ec1c1"
+        },
+        "local_gain": 0.280444860458374,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "peak_allocated_bytes": 2522128896,
+        "peak_reserved_bytes": 2625634304,
+        "protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "raw_gain": -1.1278808116912842,
+        "repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3003,
+        "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+        "stream_fingerprint": "9f6838c8f7cf5387a36a7599ab2f76c7377c03c7c9b5570c73355909b0d268a0",
+        "training_seconds": 63.18116574716987,
+        "warmup_seconds": 0.02908548101549968
+      }
+    },
+    "3003/time_retained_control": {
+      "files": [
+        {
+          "bytes": 8188,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/time_retained_control/config.json",
+          "sha256": "448b5e135c22815f1292cd88cdad69f42d98169a49c41def5f383f092583bf99"
+        },
+        {
+          "bytes": 354111,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/time_retained_control/model.pth",
+          "sha256": "e38220908b272eb896df81f4d1fb4c68b21b667f144dc35d3c14bbe43854e5e7"
+        },
+        {
+          "bytes": 3819,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/time_retained_control/run.json",
+          "sha256": "0d277fd8d6941cec154fecd65a45d197801db41bfc6eb322bdc2d73ee35d4296"
+        },
+        {
+          "bytes": 605497,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/time_retained_control/train_log.jsonl",
+          "sha256": "fbfb487d41091116465410036016220f46e7afa200a8ede3ddace12a74370a26"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "backbone_parameters": 87405,
+          "compatibility_buffers": 0,
+          "hidden_size": 200,
+          "query_steps": 2,
+          "support_steps": 4,
+          "task_input_size": 32,
+          "time_parameters": 200
+        },
+        "checkpoint": {
+          "bytes": 354111,
+          "path": "artifacts/runs/pl_direct_training_v1/development/seed-3003/time_retained_control/model.pth",
+          "sha256": "e38220908b272eb896df81f4d1fb4c68b21b667f144dc35d3c14bbe43854e5e7"
+        },
+        "cohort": "development",
+        "condition": "time_retained_control",
+        "cost": {
+          "backbone_parameters": 87405,
+          "local_parameters": 1,
+          "persistent_L_scalars_per_episode": 105,
+          "persistent_P_scalars_per_episode": 40000,
+          "total_seconds": 59.45092939597089
+        },
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "a1f6dea0cb90cc397c331d7d9b89144754c097b9e2a6aeeca309a1f90019e939",
+          "etaet": "e1afe76131a397feaa0bb75433030cb0be4bb410f263f0662c2e0b5192df16b5",
+          "h2margin.bias": "0ab33f4d30f6b4d071538dde6e7419b7f15f369dd13716ec7e71c4ae5d7d5227",
+          "h2margin.weight": "730e2340007fe278267795e38652fecca920527fb13bfe281fd265c56d71fd4f",
+          "h2modulation.bias": "3ad9d43c2664caaf6f8fc44791fe95a36c198a47395e7e383cd79332bb69034c",
+          "h2modulation.weight": "722bdad7d09253db10888d8510966481b87759c571562e63f1c285b19c47794e",
+          "input_projection.bias": "ca5afb8efb0210b9bb4dcf372b92fa7bd886248d15dbb1ae7196d762a0770493",
+          "input_projection.weight": "5ff8ac8666ec907e670f8a0e198bda3bcfe075c9522e24e769aa632178b755c3",
+          "modulation_scale": "6ee2d14007fc5a10138f8f805454e99a5741d0a643df554a78d27cdcf6b2b284",
+          "time_weight": "94479477e7abdad278125d913bf5d6ab3e936e37980b0c42b978e3562843a00f",
+          "w": "6a2cab8a6f2d0a3bc1745a25916ea7a7d04d9b92cde5eb35d26a31b4cc213d7b"
+        },
+        "final_local": {
+          "raw_gain": "97e0d1ef50dcc2c8b98bfd17d8479a7d25839fa8b6af042e668887ab3eaef3fe"
+        },
+        "initial_backbone": {
+          "alpha": "93d4ce71922d862f72cd30440132b973e7674b18bfb37ec20bb59e776eb27eb2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "ad7d6f48818dfad2d00250bf01ad274c023e76229767ddb8c32fa818fd418eae",
+          "h2margin.weight": "2a94748fd6d65aad652f1900db6cbc422970164418374960adbd7811cc84591d",
+          "h2modulation.bias": "2fc38dd20cb0bfe272872ac3df9241e04120cbd8601586f998b6ac05394f4e91",
+          "h2modulation.weight": "6e93eb624be5f6a07d614c79b9962d89bcdec1802a1d03a89c1be9502bea6e5c",
+          "input_projection.bias": "a03ac83aefca4babf368b935f9cfd71d98dbd06061e3f14eb8b0f1a04c0d6323",
+          "input_projection.weight": "dc7ba50c1dc2fed1f3e6b7ba74d984927c32fc12baf936af2c6ff861d22d1491",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "time_weight": "d6a2b6bdd517806d03dfcdf28915bb300d74af0a21cc739a8ed732facf322812",
+          "w": "713e5e6f678b43ab65c192b2850d73cd3caac8158b498a6962de9d95d43ec1c1"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "initial_shadow": {
+          "DAmult": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "alpha": "93d4ce71922d862f72cd30440132b973e7674b18bfb37ec20bb59e776eb27eb2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2DA.bias": "2fc38dd20cb0bfe272872ac3df9241e04120cbd8601586f998b6ac05394f4e91",
+          "h2DA.weight": "6e93eb624be5f6a07d614c79b9962d89bcdec1802a1d03a89c1be9502bea6e5c",
+          "h2o.bias": "a3024a9baa16a76d7a471a1dd3a97d6dac07552c7ddde0e6e863b75953256ea8",
+          "h2o.weight": "ec817ffff0a5886aae679bb95045ed55dd368352f3a4c613d57cdf2297931d58",
+          "h2v.bias": "e92ffd20d7283b9864d33b8358639ef41f819b008632765e219c8a4dfbc0f16d",
+          "h2v.weight": "26f8b9fe666fee08a0898774d7af7284cbca15fb68eb51caac61956405f0543a",
+          "i2h.bias": "390a1eac46253ff810af63a7499454f65083f5986f5e303bc1840a323d2746c1",
+          "i2h.weight": "6eedb6781fdeb9ae8778305b73e797036c7c14a61d7b4787d6329b9a503f64a3",
+          "w": "713e5e6f678b43ab65c192b2850d73cd3caac8158b498a6962de9d95d43ec1c1"
+        },
+        "initial_shared": {
+          "alpha": "93d4ce71922d862f72cd30440132b973e7674b18bfb37ec20bb59e776eb27eb2",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "ad7d6f48818dfad2d00250bf01ad274c023e76229767ddb8c32fa818fd418eae",
+          "h2margin.weight": "2a94748fd6d65aad652f1900db6cbc422970164418374960adbd7811cc84591d",
+          "h2modulation.bias": "2fc38dd20cb0bfe272872ac3df9241e04120cbd8601586f998b6ac05394f4e91",
+          "h2modulation.weight": "6e93eb624be5f6a07d614c79b9962d89bcdec1802a1d03a89c1be9502bea6e5c",
+          "input_projection.bias": "a03ac83aefca4babf368b935f9cfd71d98dbd06061e3f14eb8b0f1a04c0d6323",
+          "input_projection.weight": "dc7ba50c1dc2fed1f3e6b7ba74d984927c32fc12baf936af2c6ff861d22d1491",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "713e5e6f678b43ab65c192b2850d73cd3caac8158b498a6962de9d95d43ec1c1"
+        },
+        "local_gain": 0.2802327871322632,
+        "optimization": {
+          "base_backbone_learning_rate": 0.0001,
+          "batch_size": 32,
+          "fast_weight_penalty": 0.0001,
+          "gradient_clip": 2.0,
+          "initial_local_gain": 0.1,
+          "local_learning_rate": 0.01,
+          "loss": "mean softplus(-y*M) over all queries plus 1e-4*mean(P_T^2), where y=2*correct_action-1",
+          "rationale": "This copies the registered joint condition because it was competent in all three prior seeds and preserved the full behavior gate more often than matched staged training. It is evidence-based recipe selection before new outcomes, not a claim that joint training was previously confirmed.",
+          "schedule": "joint from initialization; P and L are both active on every counted update",
+          "selection": "Final registered step only. No early stopping, intermediate checkpoint selection, learning-rate or budget change, gain refit, temperature refit, seed replacement, or result-dependent continuation.",
+          "total_episode_exposures": 48000,
+          "total_steps": 1500,
+          "training_temperature": 1.0
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1500,
+          "backbone.etaet": 1500,
+          "backbone.h2margin.bias": 1500,
+          "backbone.h2margin.weight": 1500,
+          "backbone.h2modulation.bias": 1500,
+          "backbone.h2modulation.weight": 1500,
+          "backbone.input_projection.bias": 1500,
+          "backbone.input_projection.weight": 1500,
+          "backbone.modulation_scale": 1500,
+          "backbone.time_weight": 1500,
+          "backbone.w": 1500,
+          "local.raw_gain": 1500
+        },
+        "peak_allocated_bytes": 2522131968,
+        "peak_reserved_bytes": 2625634304,
+        "protocol_sha256": "49b02c9275cdf3707a3fa7508f75ea0ec2c8daa257150e2e671c1baa940ff2ad",
+        "raw_gain": -1.1287482976913452,
+        "repair_sha256": "3cbd18ac36ce40b190c7759ef9ef7d3b7f951d26dfb42ae7f1c0da139d75d261",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 3003,
+        "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+        "stream_fingerprint": "9f6838c8f7cf5387a36a7599ab2f76c7377c03c7c9b5570c73355909b0d268a0",
+        "training_seconds": 59.30943454557564,
+        "warmup_seconds": 0.029469205997884274
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_commit": "b973ae19284f3b9826fe9302815174d706f29eaf",
+  "source_lock": {
+    "bytes": 90778,
+    "path": "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.execution_lock.json",
+    "sha256": "afc4db445acb10cace813c1211a40556be8adfbd0cdbe5026ab90484486a4942"
+  }
+}

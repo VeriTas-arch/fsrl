@@ -6,7 +6,7 @@ order = 1190
 status = "frozen_contract"
 review_state = "indexed"
 question = "Can optimizer-equivalent direct training recover the cleaned P/L organization, and does removing normalized episode time preserve its competence, causal links, and inherited behavior profile?"
-finding = "The paired direct-training implementation is source-locked after passing optimizer-trajectory, packed-L, timestep, gradient-path, and CUDA fullgraph qualification. No scientific model has been trained or evaluated."
+finding = "All six paired development runs completed under the source-locked protocol and their checkpoints, logs, optimizer counters, and stream fingerprints are artifact-locked before evaluation. No scientific evaluation has been exposed."
 boundary = "This design isolates normalized time within one fixed direct-training recipe. Development cannot establish network-population confirmation, failure cannot prove universal time necessity, and no historical checkpoint deletion is authorized."
 
 [[records]]
@@ -35,3 +35,12 @@ role = "execution_lock"
 sha256 = "afc4db445acb10cace813c1211a40556be8adfbd0cdbe5026ab90484486a4942"
 bytes = 90778
 source_ref = "sha256:afc4db445acb10cace813c1211a40556be8adfbd0cdbe5026ab90484486a4942"
+
+[[records]]
+path = "records/benchmarks/pl_direct_training_v1.development_artifact_lock.json"
+legacy_path = "studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.development_artifact_lock.json"
+origin = "native"
+role = "artifact_lock"
+sha256 = "6cf9d0e2d61dd9520620a03004d0644753e4169e3b042b51cba0a0e4fd482a1b"
+bytes = 61296
+source_ref = "sha256:6cf9d0e2d61dd9520620a03004d0644753e4169e3b042b51cba0a0e4fd482a1b"

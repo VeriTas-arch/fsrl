@@ -287,9 +287,9 @@ fail to close the dynamics.
     Global state and output were exact; overall error was at most 9.5367431640625e-7
     with zero categorical mismatches. The failed first mapping remains registered.
 - [Direct training of the cleaned no-time P/L model](pl_direct_training/README.md) — `frozen_contract`
-  - **Finding:** The paired direct-training implementation is source-locked after
-    passing optimizer-trajectory, packed-L, timestep, gradient-path, and CUDA fullgraph
-    qualification. No scientific model has been trained or evaluated.
+  - **Finding:** All six paired development runs completed under the source-locked
+    protocol and their checkpoints, logs, optimizer counters, and stream fingerprints
+    are artifact-locked before evaluation. No scientific evaluation has been exposed.
 
 ## Minimal explanatory models
 

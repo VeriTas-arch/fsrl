@@ -25,9 +25,9 @@
 organization, and does removing normalized episode time preserve its competence, causal
 links, and inherited behavior profile?
 
-**Finding.** The paired direct-training implementation is source-locked after passing
-optimizer-trajectory, packed-L, timestep, gradient-path, and CUDA fullgraph
-qualification. No scientific model has been trained or evaluated.
+**Finding.** All six paired development runs completed under the source-locked protocol
+and their checkpoints, logs, optimizer counters, and stream fingerprints are
+artifact-locked before evaluation. No scientific evaluation has been exposed.
 
 **Claim boundary.** This design isolates normalized time within one fixed
 direct-training recipe. Development cannot establish network-population confirmation,
@@ -45,6 +45,9 @@ authorized.
 - `execution_lock` —
   [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.execution_lock.json](records/benchmarks/pl_direct_training_v1.execution_lock.json)
   (`sha256:afc4db445acb`)
+- `artifact_lock` —
+  [studies/pl_direct_training/records/benchmarks/pl_direct_training_v1.development_artifact_lock.json](records/benchmarks/pl_direct_training_v1.development_artifact_lock.json)
+  (`sha256:6cf9d0e2d61d`)
 
 ## Provenance rule
 
