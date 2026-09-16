@@ -54,6 +54,9 @@ cannot revise the parent's time_removal_failure.
 - `validation_result` —
   [studies/single_p_time_role_direct_authority/records/benchmarks/qualification_v2.json](records/benchmarks/qualification_v2.json)
   (`sha256:48be77398a94`)
+- `repair_lock` —
+  [studies/single_p_time_role_direct_authority/records/benchmarks/baseline_source_lock_v2.json](records/benchmarks/baseline_source_lock_v2.json)
+  (`sha256:50fb1bce74c9`)
 
 ## Provenance rule
 
