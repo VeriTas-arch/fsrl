@@ -11,6 +11,7 @@ from fsrl.paths import REPO_ROOT
 from .protocol import (
     EXECUTION_REPAIR,
     IMPLEMENTATION_REPAIR,
+    INTEGRITY_REPAIR,
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
@@ -36,6 +37,7 @@ def sources() -> list[dict]:
         REPAIR,
         IMPLEMENTATION_REPAIR,
         EXECUTION_REPAIR,
+        INTEGRITY_REPAIR,
         QUALIFICATION_FIX,
         QUALIFICATION_REPAIR,
         REPO_ROOT / "pyproject.toml",

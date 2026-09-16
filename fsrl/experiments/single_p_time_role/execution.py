@@ -13,7 +13,13 @@ from fsrl.experiments.training_strategy.evaluation import json_ready, write_arra
 from fsrl.infra.formal_runtime import require_formal_runtime
 from fsrl.infra.provenance import write_json_exclusive
 
-from .analysis import generic_endpoints, geometry, liu_endpoints, paired_interval
+from .analysis import (
+    generic_endpoints,
+    geometry,
+    liu_endpoints,
+    paired_interval,
+    validated_replay_error,
+)
 from .estimands import canonical_field, derangement, effective_distance, positive_scale
 from .locks import reference, validate_source_lock
 from .protocol import PROTOCOL_SHA256, RUNS, SOURCE_LOCK, specification
@@ -117,11 +123,11 @@ def _collect_baseline(
         _parent_raw(lock, seed, panel, condition, cell), allow_pickle=False
     ) as raw:
         replay_errors = {
-            "generic_margins": float(
-                np.max(np.abs(generic["margins"] - raw["generic__margins"]))
+            "generic_margins": validated_replay_error(
+                generic["margins"], raw["generic__margins"]
             ),
-            "liu_margins": float(
-                np.max(np.abs(liu["margins"] - raw["liu__bundles__intact__logits"]))
+            "liu_margins": validated_replay_error(
+                liu["margins"], raw["liu__bundles__intact__logits"]
             ),
         }
         for domain, values in (
@@ -129,8 +135,8 @@ def _collect_baseline(
             ("liu__storage", liu_weights),
         ):
             for name, observed in storage(values).items():
-                replay_errors[f"{domain}_{name}"] = float(
-                    np.max(np.abs(observed - raw[f"{domain}__{name}"]))
+                replay_errors[f"{domain}_{name}"] = validated_replay_error(
+                    observed, raw[f"{domain}__{name}"]
                 )
         signs = raw["generic__signs"]
         generic_ce = np.logaddexp(0.0, -signs * generic["margins"]).mean(1)
@@ -612,8 +618,6 @@ def run() -> dict:
     stage1, stage2, max_replay_error, max_endpoint_replay_error = _baseline_stages(
         lock, spec, arrays
     )
-    if max_replay_error > 1e-5:
-        raise RuntimeError(f"parent baseline replay differs: {max_replay_error}")
     if max_endpoint_replay_error > 1e-10:
         raise RuntimeError(
             f"parent endpoint replay differs: {max_endpoint_replay_error}"

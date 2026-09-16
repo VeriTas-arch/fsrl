@@ -49,6 +49,25 @@ def geometry(candidate: np.ndarray, control: np.ndarray, tolerance: float) -> di
     }
 
 
+def validated_replay_error(
+    observed: np.ndarray,
+    expected: np.ndarray,
+    *,
+    atol: float = 1e-5,
+    rtol: float = 1e-5,
+) -> float:
+    left = np.asarray(observed)
+    right = np.asarray(expected)
+    if left.shape != right.shape:
+        raise RuntimeError("parent replay shape differs")
+    if not np.array_equal(np.isfinite(left), np.isfinite(right)):
+        raise RuntimeError("parent replay finiteness mask differs")
+    if not np.allclose(left, right, atol=atol, rtol=rtol, equal_nan=True):
+        raise RuntimeError("parent replay exceeds frozen array tolerances")
+    finite = np.isfinite(right)
+    return float(np.max(np.abs(left[finite] - right[finite])))
+
+
 def generic_endpoints(
     margins: np.ndarray,
     targets: np.ndarray,
@@ -130,4 +149,5 @@ __all__ = [
     "liu_endpoints",
     "paired_interval",
     "stable_sigmoid",
+    "validated_replay_error",
 ]

@@ -5,6 +5,7 @@ import numpy as np
 from fsrl.experiments.single_p_time_role.analysis import (
     generic_endpoints,
     paired_interval,
+    validated_replay_error,
 )
 from fsrl.experiments.single_p_time_role.estimands import (
     canonical_field,
@@ -80,6 +81,12 @@ class TimeRoleEstimandTests(unittest.TestCase):
         )
         self.assertEqual(result["point"], 2.0)
         self.assertTrue(np.all(np.isfinite(tuple(result["interval"].values()))))
+
+    def test_replay_integrity_uses_frozen_absolute_and_relative_tolerance(self):
+        error = validated_replay_error(np.asarray([2.000025]), np.asarray([2.0]))
+        self.assertGreater(error, 1e-5)
+        with self.assertRaises(RuntimeError):
+            validated_replay_error(np.asarray([0.000025]), np.asarray([0.0]))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "source_lock": "studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v2.json",
+  "source_commit": "bad82dc17eda213bd83b63d0d9bdd28475da81bf",
+  "execution_commit": "e279c29",
+  "command": "direnv exec . python -m fsrl.infra.formal_runtime single-p-time-role run",
+  "status": "failed_noninterpretable",
+  "failure": "Parent baseline replay reached a maximum absolute difference of 2.5e-05 and was rejected because the implementation compared only to atol=1e-5 instead of applying the frozen atol=1e-5, rtol=1e-5 array criterion.",
+  "action": "Execution stopped at the parent integrity gate before Stage-1 inference or result serialization. No runtime result.json or arrays.npz was written and no mechanism estimate or classification was printed or inspected.",
+  "scientific_outcomes_exposed": false,
+  "runtime_outputs_written": false
+}

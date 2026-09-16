@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "timing": "After failed execution_attempt2 and before any completed diagnostic result or exposure of a new mechanism estimate.",
+  "reason": "The second locked execution showed that the implementation reduced the registered parent array replay criterion atol=1e-5, rtol=1e-5 to a pure max-absolute-error threshold. A maximum absolute difference of 2.5e-05 therefore failed without testing the registered relative tolerance.",
+  "repair": {
+    "qualification_authority": "records/benchmarks/qualification_v5.json",
+    "source_lock_authority": "records/benchmarks/source_lock_v3.json",
+    "array_integrity": "Validate each parent margin and terminal-P summary array with np.allclose using the already frozen atol=1e-5 and rtol=1e-5, rejecting shape, finiteness-mask, or tolerance failures at the individual array.",
+    "reported_diagnostic": "Continue to report the maximum absolute parent replay difference as a descriptive integrity diagnostic; do not use it as a replacement decision rule.",
+    "endpoint_integrity": "Retain the separately frozen maximum absolute endpoint tolerance of 1e-10."
+  },
+  "unchanged": [
+    "all scientific seeds, panels, cells, checkpoints, frozen inputs, and interventions",
+    "the registered parent replay tolerances",
+    "all scientific estimands, thresholds, resampling, labels, and stop rules",
+    "the prohibition on retraining and outcome-dependent modification"
+  ],
+  "scientific_outcomes_exposed_before_repair": false
+}
