@@ -26,9 +26,9 @@ task interface and exact packed state without changing its supported computation
 
 **Finding.** Qualification attempt 1 preserved every categorical decision but failed the
 registered float32 state and margin tolerances because folded projection arithmetic
-accumulated in P. The negative result is retained, and a second prospective repair adds
+accumulated in P. The negative result is retained; the source-locked second repair adds
 conversion-only numerical compatibility buffers without restoring removed trainable
-inputs or outputs.
+inputs or outputs and awaits requalification.
 
 **Claim boundary.** This study can establish checkpoint-preserving structural
 equivalence only. It does not establish that episode time is unnecessary, authorize
@@ -54,6 +54,9 @@ historical checkpoint deletion, or expose a no-time training outcome.
 - `repair_contract` —
   [studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair2.json](records/benchmarks/pl_exact_reparameterization_v1.repair2.json)
   (`sha256:3d8af0d10f31`)
+- `execution_lock` —
+  [studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair2.execution_lock.json](records/benchmarks/pl_exact_reparameterization_v1.repair2.execution_lock.json)
+  (`sha256:f26e7f751638`)
 
 ## Provenance rule
 

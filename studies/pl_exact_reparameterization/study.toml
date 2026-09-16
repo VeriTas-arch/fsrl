@@ -6,7 +6,7 @@ order = 1180
 status = "frozen_contract"
 review_state = "indexed"
 question = "Can the confirmed P/L computation be expressed through a clean 32-channel task interface and exact packed state without changing its supported computation?"
-finding = "Qualification attempt 1 preserved every categorical decision but failed the registered float32 state and margin tolerances because folded projection arithmetic accumulated in P. The negative result is retained, and a second prospective repair adds conversion-only numerical compatibility buffers without restoring removed trainable inputs or outputs."
+finding = "Qualification attempt 1 preserved every categorical decision but failed the registered float32 state and margin tolerances because folded projection arithmetic accumulated in P. The negative result is retained; the source-locked second repair adds conversion-only numerical compatibility buffers without restoring removed trainable inputs or outputs and awaits requalification."
 boundary = "This study can establish checkpoint-preserving structural equivalence only. It does not establish that episode time is unnecessary, authorize historical checkpoint deletion, or expose a no-time training outcome."
 
 [[records]]
@@ -62,3 +62,12 @@ role = "repair_contract"
 sha256 = "3d8af0d10f31c5129b333a3501838e11c36be9a23ca9c6e9ae8f27649bb0161e"
 bytes = 2730
 source_ref = "sha256:3d8af0d10f31c5129b333a3501838e11c36be9a23ca9c6e9ae8f27649bb0161e"
+
+[[records]]
+path = "records/benchmarks/pl_exact_reparameterization_v1.repair2.execution_lock.json"
+legacy_path = "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair2.execution_lock.json"
+origin = "native"
+role = "execution_lock"
+sha256 = "f26e7f7516382db23eff39735dc55a2f46164eb358997688d58a19ddff1a9cc1"
+bytes = 5988
+source_ref = "sha256:f26e7f7516382db23eff39735dc55a2f46164eb358997688d58a19ddff1a9cc1"

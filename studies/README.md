@@ -284,9 +284,9 @@ fail to close the dynamics.
 - [Exact P/L structural reparameterization](pl_exact_reparameterization/README.md) — `frozen_contract`
   - **Finding:** Qualification attempt 1 preserved every categorical decision but failed
     the registered float32 state and margin tolerances because folded projection
-    arithmetic accumulated in P. The negative result is retained, and a second
-    prospective repair adds conversion-only numerical compatibility buffers without
-    restoring removed trainable inputs or outputs.
+    arithmetic accumulated in P. The negative result is retained; the source-locked
+    second repair adds conversion-only numerical compatibility buffers without restoring
+    removed trainable inputs or outputs and awaits requalification.
 
 ## Minimal explanatory models
 
