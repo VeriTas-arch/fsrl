@@ -65,6 +65,18 @@ checkpoint deletion.
 - `artifact_lock` —
   [studies/clean_single_p/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
   (`sha256:1489cf74747a`)
+- `noninterpretable_attempt` —
+  [studies/clean_single_p/records/results/evaluation_attempt1.json](records/results/evaluation_attempt1.json)
+  (`sha256:764ab4a51bb7`)
+- `repair_contract` —
+  [studies/clean_single_p/records/benchmarks/evaluation_repair1.json](records/benchmarks/evaluation_repair1.json)
+  (`sha256:186cc9635175`)
+- `noninterpretable_attempt` —
+  [studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.attempt1.json](records/benchmarks/evaluation_repair1_qualification.attempt1.json)
+  (`sha256:6d22cfbb0364`)
+- `validation_result` —
+  [studies/clean_single_p/records/benchmarks/evaluation_repair1_qualification.json](records/benchmarks/evaluation_repair1_qualification.json)
+  (`sha256:f9c54d5803be`)
 
 ## Provenance rule
 

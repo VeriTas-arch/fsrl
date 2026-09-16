@@ -5,6 +5,7 @@ import torch
 
 from fsrl.core.model_config import RetroModelConfig
 from fsrl.experiments.clean_single_p.batches import prepare_single_p
+from fsrl.experiments.clean_single_p.evaluation import legacy_input_record
 from fsrl.experiments.clean_single_p.model import (
     AffineSinglePSequence,
     map_shadow,
@@ -17,7 +18,7 @@ from fsrl.experiments.clean_single_p.optimization import (
 from fsrl.experiments.linear_modulation.model import LinearModulationRNN
 from fsrl.experiments.memory_structure.inputs import generator
 from fsrl.experiments.pl_direct_training.protocol import load_specification
-from fsrl.experiments.training_strategy.batches import sample_episodes
+from fsrl.experiments.training_strategy.batches import EpisodeBatch, sample_episodes
 from fsrl.infra.provenance import load_json
 from fsrl.paths import STUDIES_ROOT
 
@@ -75,6 +76,25 @@ class CleanSinglePTrainingTests(unittest.TestCase):
                     self.protocol,
                 )
                 self.assertFalse(torch.equal(before, model.w))
+
+    def test_direct_input_reference_is_adapted_for_legacy_loader(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        arrays = {"values": np.arange(6, dtype=np.float32).reshape(2, 3)}
+        direct = {"path": "ignored.npz", "sha256": "0" * 64, "bytes": 0}
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "input.npz"
+            np.savez(path, **arrays)
+            with patch(
+                "fsrl.experiments.clean_single_p.evaluation.verify_reference",
+                return_value=path,
+            ):
+                adapted = legacy_input_record(direct)
+
+        self.assertIs(adapted["file"], direct)
+        self.assertEqual(adapted["fingerprint"], EpisodeBatch(arrays).fingerprint())
 
 
 if __name__ == "__main__":

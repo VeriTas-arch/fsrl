@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "study_id": "clean_single_p",
+  "repair_id": "evaluation_repair1",
+  "scope": "implementation-only pre-outcome input-adapter repair",
+  "attempt": "records/results/evaluation_attempt1.json",
+  "observed_failure": "Evaluation stopped before the first rollout because the clean input lock's direct reference shape was passed to a legacy loader that requires a nested file reference and fingerprint.",
+  "repair": "At evaluation time, verify each already-frozen direct reference, reconstruct its EpisodeBatch fingerprint without changing arrays, and wrap the same reference and fingerprint for the legacy loader. Route attempt2 to a new evaluation directory and update reporting to that directory. Requalify and source-lock only these implementation changes before evaluation.",
+  "protected_invariants": [
+    "protocol and scientific question",
+    "all 12 locked checkpoints and model hashes",
+    "all three frozen input panels and their file hashes",
+    "architecture conditions and input channels",
+    "training seeds, streams, budgets, optimizer, and checkpoints",
+    "evaluation cells, estimands, resamples, thresholds, and decision rules",
+    "claim boundary and stop rule"
+  ],
+  "outcome_exposure": "No generic or Liu rollout, prediction, sampled behavior, endpoint, bootstrap draw, or decision was produced before the failure.",
+  "attempt2_root": "artifacts/runs/clean_single_p_v1/evaluation-attempt2"
+}

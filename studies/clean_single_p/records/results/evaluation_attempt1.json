@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study_id": "clean_single_p",
+  "attempt_id": "evaluation_attempt1",
+  "status": "noninterpretable_implementation_failure",
+  "scientific_outcomes_exposed": false,
+  "failed_unit": "3011/1/time_retained_control/A0",
+  "error": {
+    "type": "KeyError",
+    "message": "file"
+  },
+  "cause": "The frozen clean single-P input lock stores a direct file reference with path, sha256, and bytes. The reused legacy rollout loader expects that reference under a file key together with an EpisodeBatch fingerprint. Evaluation stopped while resolving the first generic input, before loading a model input into a rollout or producing a prediction.",
+  "original_source_lock": {
+    "path": "studies/clean_single_p/records/benchmarks/source_lock.json",
+    "sha256": "c027746404277beea6f3b41151711dcdfebad920b6402f3a236db92e7610f690"
+  },
+  "model_lock": {
+    "path": "studies/clean_single_p/records/benchmarks/model_lock.json",
+    "sha256": "1489cf74747aa2cc7da66abe53d55f328027a1ad71b2d032686d95bec39a2bbf"
+  },
+  "preservation": "The failed runtime manifest remains at artifacts/runs/clean_single_p_v1/evaluation/3011/1/time_retained_control/A0/run.json; attempt2 must use a distinct evaluation root."
+}

@@ -13,6 +13,7 @@ def main(args=None) -> int:
         choices=(
             "qualify",
             "lock-source",
+            "lock-repair-source",
             "train",
             "lock-models",
             "evaluate",
@@ -28,6 +29,10 @@ def main(args=None) -> int:
         from .locks import write_source_lock
 
         result = write_source_lock()
+    elif stage == "lock-repair-source":
+        from .locks import write_source_repair_lock
+
+        result = write_source_repair_lock()
     elif stage == "train":
         from .training import train_all
 

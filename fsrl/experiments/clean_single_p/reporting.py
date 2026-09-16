@@ -22,9 +22,10 @@ from fsrl.experiments.write_cost.locks import completed
 from fsrl.infra.provenance import write_json_exclusive
 from fsrl.infra.run_manifest import ProspectiveRun
 
-from .evaluation import CELLS
+from .evaluation import CELLS, legacy_input_record
 from .locks import reference, validate_model_lock
 from .protocol import (
+    EVALUATION_RUNS,
     MODEL_LOCK,
     PROTOCOL,
     REPORT,
@@ -38,7 +39,7 @@ from .protocol import (
 def _cell_data(seed, panel, condition):
     rows, raw = {}, {}
     for cell in CELLS:
-        directory = RUNS / "evaluation" / str(seed) / str(panel) / condition / cell
+        directory = EVALUATION_RUNS / str(seed) / str(panel) / condition / cell
         rows[cell] = completed(directory)
         raw[cell] = read_raw(reference(directory / "raw.npz"))
     return rows, raw
@@ -51,7 +52,9 @@ def _panel(seed, panel, condition, source):
     result, endpoints = summarize(
         raw,
         rows,
-        load_input(source["panels"][str(panel)]["inputs"]["liu-8"]),
+        load_input(
+            legacy_input_record(source["panels"][str(panel)]["inputs"]["liu-8"])
+        ),
         sample_seed,
         inherited_recipe(panel),
         analysis_spec,

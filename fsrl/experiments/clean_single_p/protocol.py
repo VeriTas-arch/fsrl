@@ -9,12 +9,19 @@ STUDY = "clean_single_p"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/clean_single_p_v1.json"
 QUALIFICATION = RECORDS / "benchmarks/qualification.json"
+QUALIFICATION_REPAIR = RECORDS / "benchmarks/evaluation_repair1_qualification.json"
 SOURCE_LOCK = RECORDS / "benchmarks/source_lock.json"
+SOURCE_REPAIR_LOCK = RECORDS / "benchmarks/source_repair1.json"
+EVALUATION_REPAIR = RECORDS / "benchmarks/evaluation_repair1.json"
 MODEL_LOCK = RECORDS / "benchmarks/model_lock.json"
 RESULT = RECORDS / "results/clean_single_p_v1.json"
 REPORT = RECORDS / "reports/clean_single_p_v1.md"
 RUNS = RUNS_ROOT / "clean_single_p_v1"
+EVALUATION_RUNS = RUNS / "evaluation-attempt2"
 PROTOCOL_SHA256 = "211ed4f40fa685f250d364e215c00865175534dc7693d98aa25922f2e19f06bc"
+EVALUATION_REPAIR_SHA256 = (
+    "186cc9635175f1c37430e7402566f0ea9673338b290d4d202eca80c6b78cf870"
+)
 
 
 def specification() -> dict:
@@ -55,15 +62,20 @@ def training_directory(seed: int, condition: str, arm: str):
 
 
 __all__ = [
+    "EVALUATION_REPAIR",
+    "EVALUATION_REPAIR_SHA256",
+    "EVALUATION_RUNS",
     "MODEL_LOCK",
     "PROTOCOL",
     "PROTOCOL_SHA256",
     "QUALIFICATION",
+    "QUALIFICATION_REPAIR",
     "RECORDS",
     "REPORT",
     "RESULT",
     "RUNS",
     "SOURCE_LOCK",
+    "SOURCE_REPAIR_LOCK",
     "inherited_recipe",
     "specification",
     "training_directory",

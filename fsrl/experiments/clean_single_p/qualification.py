@@ -26,7 +26,12 @@ from .optimization import (
     make_optimizer,
     training_step,
 )
-from .protocol import PROTOCOL_SHA256, QUALIFICATION, inherited_recipe, specification
+from .protocol import (
+    PROTOCOL_SHA256,
+    QUALIFICATION_REPAIR,
+    inherited_recipe,
+    specification,
+)
 
 
 def _shadow_forward(shadow, batch, times, penalty):
@@ -273,7 +278,7 @@ def run_qualification() -> dict:
         and not result["time_isolation"]["candidate_has_time_parameter"]
         and not result["time_isolation"]["candidate_has_buffers"]
     )
-    write_json_exclusive(QUALIFICATION, result)
+    write_json_exclusive(QUALIFICATION_REPAIR, result)
     return result
 
 

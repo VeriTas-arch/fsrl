@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import gc
 
+import numpy as np
 import torch
 
 from fsrl.experiments.duplicate_observation.inputs import observed
@@ -12,6 +13,7 @@ from fsrl.experiments.finite_state.liu import primary_analysis
 from fsrl.experiments.finite_state.model import sequences
 from fsrl.experiments.local_memory_removal.rollouts import primary_rollouts
 from fsrl.experiments.memory_structure.inputs import size_protocol
+from fsrl.experiments.training_strategy.batches import EpisodeBatch
 from fsrl.experiments.training_strategy.evaluation import (
     flatten_arrays,
     json_ready,
@@ -27,7 +29,7 @@ from fsrl.infra.run_manifest import ProspectiveRun
 from .adapter import evaluation_adapter
 from .locks import reference, validate_model_lock
 from .model import AffineSingleP, CleanSinglePConfig
-from .protocol import MODEL_LOCK, RUNS, inherited_recipe, specification
+from .protocol import EVALUATION_RUNS, MODEL_LOCK, inherited_recipe, specification
 
 CELLS = {
     "A0": {"training": "clean", "observation": "clean"},
@@ -35,6 +37,13 @@ CELLS = {
     "C0": {"training": "noisy", "observation": "clean"},
     "Ce": {"training": "noisy", "observation": "noisy"},
 }
+
+
+def legacy_input_record(record: dict) -> dict:
+    """Wrap one verified direct input reference for the inherited loader."""
+    with np.load(verify_reference(record), allow_pickle=False) as raw:
+        batch = EpisodeBatch({key: raw[key] for key in raw.files})
+    return {"file": record, "fingerprint": batch.fingerprint()}
 
 
 def load_model(seed: int, condition: str, arm: str, models: dict):
@@ -56,7 +65,7 @@ def load_model(seed: int, condition: str, arm: str, models: dict):
 
 
 def evaluate_one(seed, panel, condition, cell, settings, source, models):
-    directory = RUNS / "evaluation" / str(seed) / str(panel) / condition / cell
+    directory = EVALUATION_RUNS / str(seed) / str(panel) / condition / cell
     if directory.exists():
         return completed(directory)
     spec = inherited_recipe(panel)
@@ -79,11 +88,17 @@ def evaluate_one(seed, panel, condition, cell, settings, source, models):
         resolved_config=spec["evaluation"],
     ):
         with torch.no_grad():
+            panel_inputs = {
+                "inputs": {
+                    name: legacy_input_record(record)
+                    for name, record in source["panels"][str(panel)]["inputs"].items()
+                }
+            }
             generic_raw = generic_arrays(
                 adapter,
                 None,
                 seqs,
-                source["panels"][str(panel)],
+                panel_inputs,
                 "test",
                 settings["observation"],
                 spec,
@@ -96,7 +111,9 @@ def evaluate_one(seed, panel, condition, cell, settings, source, models):
             )
             generic_raw["global_ce"] = global_raw["ce"]
             cpu = observed(
-                load_input(source["panels"][str(panel)]["inputs"]["liu-8"]),
+                load_input(
+                    legacy_input_record(source["panels"][str(panel)]["inputs"]["liu-8"])
+                ),
                 settings["observation"],
                 spec,
             )
@@ -137,4 +154,10 @@ def evaluate_all() -> dict:
     return {"completed_evaluation_units": len(completed_units)}
 
 
-__all__ = ["CELLS", "evaluate_all", "evaluate_one", "load_model"]
+__all__ = [
+    "CELLS",
+    "evaluate_all",
+    "evaluate_one",
+    "legacy_input_record",
+    "load_model",
+]

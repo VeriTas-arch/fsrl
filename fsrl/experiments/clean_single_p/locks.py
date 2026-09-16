@@ -17,16 +17,21 @@ from fsrl.experiments.training_strategy.generic_validation import (
 from fsrl.experiments.training_strategy.locks import reference, verify_reference
 from fsrl.experiments.write_cost.inputs import with_learned
 from fsrl.infra.file_contracts import validate_run_manifest
+from fsrl.infra.git_provenance import git_blob_sha256
 from fsrl.infra.provenance import load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    EVALUATION_REPAIR,
+    EVALUATION_REPAIR_SHA256,
     MODEL_LOCK,
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
+    QUALIFICATION_REPAIR,
     RUNS,
     SOURCE_LOCK,
+    SOURCE_REPAIR_LOCK,
     inherited_recipe,
     specification,
     training_directory,
@@ -79,7 +84,7 @@ def freeze_inputs() -> dict:
 
 def write_source_lock() -> dict:
     commit = clean_commit()
-    qualification = load_json(QUALIFICATION)
+    qualification = load_json(QUALIFICATION_REPAIR)
     if not qualification["passed"] or qualification["sources"] != sources():
         raise RuntimeError("qualification does not cover the committed source")
     panels = freeze_inputs()
@@ -88,7 +93,7 @@ def write_source_lock() -> dict:
         "protocol_sha256": PROTOCOL_SHA256,
         "source_commit": commit,
         "sources": sources(),
-        "qualification": reference(QUALIFICATION),
+        "qualification": reference(QUALIFICATION_REPAIR),
         "task": inherited_recipe()["task"],
         "panels": panels,
     }
@@ -96,13 +101,87 @@ def write_source_lock() -> dict:
     return {"source_commit": commit, "panels": len(panels)}
 
 
-def validate_source_lock() -> dict:
+def _validate_original_source_lock() -> dict:
     lock = load_json(SOURCE_LOCK)
     if lock["protocol_sha256"] != PROTOCOL_SHA256:
         raise RuntimeError("clean single-P source protocol differs")
     for row in lock["sources"]:
-        verify_reference(row, commit=lock["source_commit"])
+        if (
+            git_blob_sha256(REPO_ROOT, lock["source_commit"], row["path"])
+            != row["sha256"]
+        ):
+            raise RuntimeError(f"original Git witness differs: {row['path']}")
     verify_reference(lock["qualification"])
+    for panel in lock["panels"].values():
+        for row in panel["inputs"].values():
+            verify_reference(row)
+    return lock
+
+
+def _source_replacements(original: list[dict], current: list[dict]) -> list[dict]:
+    original_by_path = {row["path"]: row for row in original}
+    current_by_path = {row["path"]: row for row in current}
+    if set(original_by_path) != set(current_by_path):
+        raise RuntimeError("clean single-P source repair changed the source inventory")
+    return [
+        {"original": original_by_path[path], "replacement": current_by_path[path]}
+        for path in sorted(original_by_path)
+        if original_by_path[path] != current_by_path[path]
+    ]
+
+
+def write_source_repair_lock() -> dict:
+    commit = clean_commit()
+    original = _validate_original_source_lock()
+    if reference(EVALUATION_REPAIR)["sha256"] != EVALUATION_REPAIR_SHA256:
+        raise RuntimeError("clean single-P evaluation repair changed")
+    current = sources()
+    qualification = load_json(QUALIFICATION)
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("qualification does not cover the repaired source")
+    replacements = _source_replacements(original["sources"], current)
+    if not replacements:
+        raise RuntimeError("clean single-P repair changed no locked source")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "source_commit": commit,
+        "sources": current,
+        "source_replacements": replacements,
+        "original_source_lock": reference(SOURCE_LOCK),
+        "repair": reference(EVALUATION_REPAIR),
+        "qualification": reference(QUALIFICATION),
+        "task": original["task"],
+        "panels": original["panels"],
+        "scientific_outcomes_exposed_before_repair": False,
+    }
+    write_json_exclusive(SOURCE_REPAIR_LOCK, payload)
+    return {"source_commit": commit, "source_replacements": len(replacements)}
+
+
+def validate_source_lock() -> dict:
+    original = _validate_original_source_lock()
+    lock = load_json(SOURCE_REPAIR_LOCK)
+    if lock["protocol_sha256"] != PROTOCOL_SHA256:
+        raise RuntimeError("clean single-P repair protocol differs")
+    if lock["original_source_lock"] != reference(SOURCE_LOCK):
+        raise RuntimeError("clean single-P repair cites a different source lock")
+    if lock["repair"] != reference(EVALUATION_REPAIR):
+        raise RuntimeError("clean single-P repair contract differs")
+    current = sources()
+    if lock["sources"] != current:
+        raise RuntimeError("clean single-P implementation changed after repair lock")
+    if lock["source_replacements"] != _source_replacements(
+        original["sources"], current
+    ):
+        raise RuntimeError("clean single-P source replacement map differs")
+    for row in current:
+        verify_reference(row, commit=lock["source_commit"])
+    qualification = load_json(verify_reference(lock["qualification"]))
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("repaired source qualification differs")
+    if lock["task"] != original["task"] or lock["panels"] != original["panels"]:
+        raise RuntimeError("clean single-P repair changed frozen inputs")
     for panel in lock["panels"].values():
         for row in panel["inputs"].values():
             verify_reference(row)
@@ -199,4 +278,5 @@ __all__ = [
     "validate_training_run",
     "write_model_lock",
     "write_source_lock",
+    "write_source_repair_lock",
 ]
