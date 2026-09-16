@@ -6,7 +6,9 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from fsrl.experiments.single_p_time_role.analysis import liu_endpoints
+from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.experiments.memory_structure.inputs import size_protocol
+from fsrl.experiments.training_strategy.summaries import liu_endpoints
 
 ABSOLUTE = 1e-5
 RELATIVE = 1e-5
@@ -35,7 +37,9 @@ def bounded_error(
     allowed = np.broadcast_to(np.asarray(budget, dtype=np.float64), reference.shape)
     error = np.abs(np.asarray(observed) - np.asarray(reference))
     if np.any(error[finite] > allowed[finite]):
-        index = np.unravel_index(np.argmax(error - allowed), error.shape)
+        excess = np.full(error.shape, -np.inf, dtype=np.float64)
+        excess[finite] = error[finite] - allowed[finite]
+        index = np.unravel_index(np.argmax(excess), error.shape)
         raise RuntimeError(
             f"{name} exceeds propagated budget at {index}: "
             f"error={error[index]}, budget={allowed[index]}"
@@ -83,22 +87,22 @@ def generic_probability_budgets(raw: dict) -> dict[str, np.ndarray]:
     }
 
 
-def liu_probability_budgets(margins: np.ndarray, cpu) -> dict[str, np.ndarray]:
+def liu_probability_budgets(
+    margins: np.ndarray, cpu, recipe: dict
+) -> dict[str, np.ndarray]:
+    protocol = size_protocol(recipe, 8)
+    geometry = build_complete_graph_geometry(protocol)
     subjects = margins.shape[0]
-    query_pairs = np.asarray(cpu.arrays["query_pairs"])
-    support_pairs = np.asarray(cpu.arrays["support_pairs"])
     retention = np.asarray(cpu.arrays["retention"], dtype=bool)
-    support = [tuple(sorted(map(int, pair))) for pair in support_pairs[:8, 0]]
-    relation_index = {pair: index for index, pair in enumerate(support)}
-    indices = np.asarray(
-        [relation_index.get(tuple(sorted(map(int, pair))), -1) for pair in query_pairs]
-    )
-    learned = np.broadcast_to(indices >= 0, (subjects, len(indices)))
-    omitted = np.zeros_like(learned)
-    for query, relation in enumerate(indices):
-        if relation >= 0:
-            omitted[:, query] = ~retention[:, relation]
-    budget = probability_budget(margins, 0.25)
+    learned_28 = np.asarray([pair in protocol.learned_pairs for pair in geometry.pairs])
+    retained_28 = np.zeros((subjects, len(geometry.pairs)), dtype=bool)
+    for index, relation in enumerate(protocol.support_pairs_higher_lower):
+        retained_28[:, geometry.pairs.index(tuple(sorted(relation)))] = retention[
+            :, index
+        ]
+    learned = np.repeat(learned_28, 2)[None].repeat(subjects, axis=0)
+    omitted = np.repeat(learned_28[None] & ~retained_28, 2, axis=1)
+    budget = probability_budget(margins, recipe["evaluation"]["liu"]["temperature"])
     return {
         "liu_learned": masked_mean_budget(budget, learned),
         "liu_nonlearned": masked_mean_budget(budget, ~learned),
@@ -106,14 +110,18 @@ def liu_probability_budgets(margins: np.ndarray, cpu) -> dict[str, np.ndarray]:
     }
 
 
-def liu_reconstruction(raw: dict, cpu) -> dict[str, np.ndarray]:
-    return liu_endpoints(
-        raw["bundles__intact__logits"],
-        cpu.arrays["targets"],
-        cpu.arrays["query_pairs"],
-        cpu.arrays["support_pairs"],
+def liu_reconstruction(raw: dict, cpu, recipe: dict) -> dict[str, np.ndarray]:
+    endpoints = liu_endpoints(
+        {"intact": {"logits": raw["bundles__intact__logits"]}},
         cpu.arrays["retention"],
+        size_protocol(recipe, 8),
+        recipe["evaluation"]["liu"]["temperature"],
     )
+    return {
+        f"liu_{name}": value
+        for name, value in endpoints["intact"]["probability"].items()
+        if name in {"learned", "nonlearned", "omitted"}
+    }
 
 
 def _margin_arrays(raw: dict) -> dict[str, np.ndarray]:
@@ -165,7 +173,9 @@ class BudgetCaps:
         )
 
 
-def audit_unit(direct: dict, parent: dict, liu_cpu) -> tuple[dict, BudgetCaps]:
+def audit_unit(
+    direct: dict, parent: dict, liu_cpu, recipe: dict
+) -> tuple[dict, BudgetCaps]:
     direct_margins, parent_margins = _margin_arrays(direct), _margin_arrays(parent)
     if direct_margins.keys() != parent_margins.keys():
         raise RuntimeError("margin inventory differs")
@@ -182,7 +192,7 @@ def audit_unit(direct: dict, parent: dict, liu_cpu) -> tuple[dict, BudgetCaps]:
         generic = raw["generic"]
         ce = np.logaddexp(0.0, -generic["margins"] * generic["signs"]).mean(1)
         reconstructed_error(generic["ce"], ce, f"{label} generic CE reconstruction")
-        rebuilt = liu_reconstruction(raw["liu"], liu_cpu)
+        rebuilt = liu_reconstruction(raw["liu"], liu_cpu, recipe)
         for name, value in rebuilt.items():
             reconstructed_error(
                 raw["liu"][
@@ -193,11 +203,11 @@ def audit_unit(direct: dict, parent: dict, liu_cpu) -> tuple[dict, BudgetCaps]:
             )
     generic_budgets = generic_probability_budgets(parent["generic"])
     liu_budgets = liu_probability_budgets(
-        parent["liu"]["bundles__intact__logits"], liu_cpu
+        parent["liu"]["bundles__intact__logits"], liu_cpu, recipe
     )
     endpoint_errors = {}
-    direct_liu = liu_reconstruction(direct["liu"], liu_cpu)
-    parent_liu = liu_reconstruction(parent["liu"], liu_cpu)
+    direct_liu = liu_reconstruction(direct["liu"], liu_cpu, recipe)
+    parent_liu = liu_reconstruction(parent["liu"], liu_cpu, recipe)
     for name, budget in {**generic_budgets, **liu_budgets}.items():
         if name.startswith("generic_"):
             learned = parent["generic"]["learned"]

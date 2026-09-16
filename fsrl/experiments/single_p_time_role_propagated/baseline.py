@@ -413,6 +413,7 @@ def run(runtime: dict) -> dict:
                                 first_external,
                                 parent_raw,
                                 _raw_cpu(inputs["liu-8"]),
+                                inherited_recipe(panel),
                             )
                             budget_caps.append(caps)
                             replay_errors[identity] = errors

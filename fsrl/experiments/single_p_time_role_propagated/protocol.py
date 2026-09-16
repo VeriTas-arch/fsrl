@@ -8,8 +8,11 @@ from fsrl.paths import RUNS_ROOT, STUDIES_ROOT
 STUDY = "single_p_time_role_propagated_authority"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/single_p_time_role_propagated_authority_v1.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification.json"
-SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock.json"
+REPAIR = PROTOCOL.with_name("single_p_time_role_propagated_authority_v1.repair1.json")
+QUALIFICATION_V1 = RECORDS / "benchmarks/qualification.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_v2.json"
+SOURCE_LOCK_V1 = RECORDS / "benchmarks/baseline_source_lock.json"
+SOURCE_LOCK = RECORDS / "benchmarks/baseline_source_lock_v2.json"
 BASELINE_RESULT = RECORDS / "results/propagated_authority_baseline_v1.json"
 BASELINE_ARTIFACT_LOCK = (
     RECORDS / "benchmarks/propagated_authority_baseline_artifact_lock.json"
@@ -21,12 +24,17 @@ RUNS = RUNS_ROOT / "single_p_time_role_propagated_authority_v1"
 BASELINE_RUNS = RUNS / "baseline"
 MECHANISM_RUNS = RUNS / "mechanism"
 PROTOCOL_SHA256 = "4efac363747416ff79cdb93bedbe107ef4780bf5f4825da117d148f5dd1ca959"
+REPAIR_SHA256 = "eca37de2c133926fee96d2ac1c387b3b59de7878415e22d03608149d3eaa05ce"
 
 
 def specification() -> dict:
     if file_sha256(PROTOCOL) != PROTOCOL_SHA256:
         raise RuntimeError("propagated-authority time-role protocol changed")
-    return load_json(PROTOCOL)
+    if file_sha256(REPAIR) != REPAIR_SHA256:
+        raise RuntimeError("propagated-authority verifier repair changed")
+    result = load_json(PROTOCOL)
+    result["active_repair"] = load_json(REPAIR)
+    return result
 
 
 __all__ = [
@@ -38,10 +46,14 @@ __all__ = [
     "PROTOCOL",
     "PROTOCOL_SHA256",
     "QUALIFICATION",
+    "QUALIFICATION_V1",
     "RECORDS",
+    "REPAIR",
+    "REPAIR_SHA256",
     "REPORT",
     "RESULT",
     "RUNS",
     "SOURCE_LOCK",
+    "SOURCE_LOCK_V1",
     "specification",
 ]

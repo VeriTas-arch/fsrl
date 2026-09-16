@@ -10,6 +10,7 @@ import numpy as np
 import torch
 
 from fsrl.experiments.clean_single_p.model import AffineSingleP, CleanSinglePConfig
+from fsrl.experiments.clean_single_p.protocol import inherited_recipe
 from fsrl.experiments.single_p_time_role.analysis import generic_endpoints
 from fsrl.experiments.single_p_time_role.estimands import (
     canonical_field,
@@ -25,7 +26,9 @@ from fsrl.paths import REPO_ROOT
 
 from .budgets import (
     EDGE_SLACK,
+    bounded_error,
     cross_entropy_budget,
+    liu_reconstruction,
     margin_budget,
     probability_budget,
 )
@@ -39,6 +42,7 @@ from .locks import require_exact_inventory, sources
 from .protocol import (
     PROTOCOL_SHA256,
     QUALIFICATION,
+    REPAIR_SHA256,
     specification,
 )
 from .storage import deterministic_npz_bytes
@@ -186,6 +190,28 @@ def _budget_checks() -> dict:
         for row in results.values()
         if "maximum_implementation_error" in row
     )
+    synthetic_cpu = EpisodeBatch(
+        {"retention": np.asarray([[True] * 8, [False] * 8], dtype=bool)}
+    )
+    synthetic_raw = {"bundles__intact__logits": np.linspace(-2, 2, 112).reshape(2, 56)}
+    rebuilt = liu_reconstruction(synthetic_raw, synthetic_cpu, inherited_recipe(1))
+    results["source_liu_endpoint_authority"] = bool(
+        rebuilt.keys() == {"liu_learned", "liu_nonlearned", "liu_omitted"}
+        and np.array_equal(np.isnan(rebuilt["liu_omitted"]), [False, True])
+    )
+    try:
+        bounded_error(
+            np.asarray([np.nan, 0.2]),
+            np.asarray([np.nan, 0.0]),
+            np.asarray([1e-5, 1e-5]),
+            "finite-diagnostic",
+        )
+    except RuntimeError as error:
+        results["missing_value_diagnostic_uses_finite_index"] = "(np.int64(1),)" in str(
+            error
+        ) or "(1,)" in str(error)
+    else:
+        results["missing_value_diagnostic_uses_finite_index"] = False
     return results
 
 
@@ -290,10 +316,13 @@ def run_qualification() -> dict:
         and all(rollout.values())
         and checks["propagated_budget"]["maximum_implementation_error"] <= 1e-13
         and all(checks["propagated_budget"]["aggregation"].values())
+        and checks["propagated_budget"]["source_liu_endpoint_authority"]
+        and checks["propagated_budget"]["missing_value_diagnostic_uses_finite_index"]
     )
     payload = {
         "schema_version": 1,
         "protocol_sha256": PROTOCOL_SHA256,
+        "repair_sha256": REPAIR_SHA256,
         "sources": sources(),
         "checks": checks,
         "passed": passed,
