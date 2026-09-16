@@ -99,8 +99,30 @@ def _probe_susceptibility(
     return float(write.cpu()), float(np.mean(functional))
 
 
+def _canonical_correct_signs(cpu: EpisodeBatch) -> np.ndarray:
+    subjects = cpu.arrays["item_codes"].shape[0]
+    targets = cpu.arrays["targets"].reshape(-1, subjects).T
+    pairs = np.asarray(cpu.arrays["query_pairs"]).transpose(1, 0, 2)
+    signs = np.empty((subjects, 28), dtype=np.float64)
+    canonical_pairs = tuple(combinations(range(8), 2))
+    for episode in range(subjects):
+        lookup = {
+            tuple(map(int, pair)): 2.0 * float(target) - 1.0
+            for pair, target in zip(pairs[episode], targets[episode], strict=True)
+        }
+        for index, (left, right) in enumerate(canonical_pairs):
+            if (left, right) in lookup:
+                signs[episode, index] = lookup[(left, right)]
+            elif (right, left) in lookup:
+                signs[episode, index] = -lookup[(right, left)]
+            else:
+                raise ValueError("generic query set omits a canonical item pair")
+    return signs
+
+
 def trajectory_rows(model: AffineSingleP, cpu: EpisodeBatch) -> dict[str, np.ndarray]:
-    states, writes = support_trajectory(model, cpu)
+    states, writes, modulations = support_trajectory(model, cpu)
+    correct_signs = _canonical_correct_signs(cpu)
     rows = {
         "episode": [],
         "prefix": [],
@@ -111,6 +133,9 @@ def trajectory_rows(model: AffineSingleP, cpu: EpisodeBatch) -> dict[str, np.nda
         "potential_norm": [],
         "residual_fraction": [],
         "mean_absolute_margin": [],
+        "mean_correct_signed_margin": [],
+        "natural_modulation_magnitude": [],
+        "natural_write_norm": [],
         "natural_effective_write": [],
     }
     fields, potentials = [], []
@@ -143,6 +168,19 @@ def trajectory_rows(model: AffineSingleP, cpu: EpisodeBatch) -> dict[str, np.nda
             rows["potential_norm"].append(float(np.linalg.norm(potential[episode])))
             rows["residual_fraction"].append(float(residual[episode]))
             rows["mean_absolute_margin"].append(float(np.mean(np.abs(field[episode]))))
+            rows["mean_correct_signed_margin"].append(
+                float(np.mean(correct_signs[episode] * field[episode]))
+            )
+            rows["natural_modulation_magnitude"].append(
+                np.nan
+                if prefix == len(states) - 1
+                else float(torch.abs(modulations[prefix][episode]).cpu())
+            )
+            rows["natural_write_norm"].append(
+                np.nan
+                if prefix == len(states) - 1
+                else float(torch.linalg.vector_norm(writes[prefix][episode]).cpu())
+            )
             rows["natural_effective_write"].append(
                 np.nan
                 if prefix == len(states) - 1

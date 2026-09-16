@@ -70,7 +70,7 @@ def _collect_baseline(
         if not name.startswith("test-"):
             continue
         cpu = load_cpu(record, settings["observation"], recipe)
-        states, _ = support_trajectory(model, cpu)
+        states, _, _ = support_trajectory(model, cpu)
         margins = read_original(model, states[-1], cpu)
         ordered, pairs = read_ordered(model, states[-1], cpu.arrays["item_codes"])
         generic["margins"].append(margins)
@@ -85,7 +85,7 @@ def _collect_baseline(
         "learned": np.concatenate(generic["learned"]),
     }
     liu_cpu = load_cpu(_inputs(lock, panel)["liu-8"], settings["observation"], recipe)
-    liu_states, _ = support_trajectory(model, liu_cpu)
+    liu_states, _, _ = support_trajectory(model, liu_cpu)
     liu_margins = read_original(model, liu_states[-1], liu_cpu)
     liu_ordered, liu_pairs = read_ordered(
         model, liu_states[-1], liu_cpu.arrays["item_codes"]
@@ -98,22 +98,70 @@ def _collect_baseline(
         "support_pairs": liu_cpu.arrays["support_pairs"],
         "retention": liu_cpu.arrays["retention"],
     }
+    generic_weights = torch.cat([row[2] for row in batches]).cpu().numpy()
+    liu_weights = liu_states[-1].cpu().numpy()
+    alpha = model.alpha.detach().cpu().numpy()
+
+    def storage(values: np.ndarray) -> dict[str, np.ndarray]:
+        effective = values * alpha
+        return {
+            "P_abs_mean": np.abs(values).mean((1, 2)),
+            "P_abs_max": np.abs(values).max((1, 2)),
+            "A_abs_mean": np.abs(effective).mean((1, 2)),
+            "A_abs_max": np.abs(effective).max((1, 2)),
+            "zero_fraction": (values == 0).mean((1, 2)),
+            "boundary_fraction": (np.abs(values) == 50).mean((1, 2)),
+        }
+
     with np.load(
         _parent_raw(lock, seed, panel, condition, cell), allow_pickle=False
     ) as raw:
-        generic_error = float(
-            np.max(np.abs(generic["margins"] - raw["generic__margins"]))
+        replay_errors = {
+            "generic_margins": float(
+                np.max(np.abs(generic["margins"] - raw["generic__margins"]))
+            ),
+            "liu_margins": float(
+                np.max(np.abs(liu["margins"] - raw["liu__bundles__intact__logits"]))
+            ),
+        }
+        for domain, values in (
+            ("generic", generic_weights),
+            ("liu__storage", liu_weights),
+        ):
+            for name, observed in storage(values).items():
+                replay_errors[f"{domain}_{name}"] = float(
+                    np.max(np.abs(observed - raw[f"{domain}__{name}"]))
+                )
+        signs = raw["generic__signs"]
+        generic_ce = np.logaddexp(0.0, -signs * generic["margins"]).mean(1)
+        endpoint_errors = {
+            "generic_ce": float(np.max(np.abs(generic_ce - raw["generic__ce"])))
+        }
+        liu_values = liu_endpoints(
+            liu["margins"],
+            liu["targets"],
+            liu["query_pairs"],
+            liu["support_pairs"],
+            liu["retention"],
         )
-        liu_error = float(
-            np.max(np.abs(liu["margins"] - raw["liu__bundles__intact__logits"]))
-        )
+        for name in ("liu_learned", "liu_nonlearned", "liu_omitted"):
+            parent_name = name.removeprefix("liu_")
+            endpoint_errors[name] = float(
+                np.max(
+                    np.abs(
+                        liu_values[name]
+                        - raw[f"liu__endpoints__intact__probability__{parent_name}"]
+                    )
+                )
+            )
     return {
         "model": model,
         "generic": generic,
         "liu": liu,
         "generic_batches": batches,
         "liu_batch": (liu_cpu, liu_states[-1]),
-        "replay_errors": {"generic": generic_error, "liu": liu_error},
+        "replay_errors": replay_errors,
+        "endpoint_replay_errors": endpoint_errors,
     }
 
 
@@ -147,7 +195,7 @@ def _schedule(times: np.ndarray, name: str, seed: int) -> np.ndarray:
     return result
 
 
-def _stage2_unit(payload: dict, seed: int, panel: int) -> dict:
+def _stage2_unit(payload: dict, no_time: dict, seed: int, panel: int) -> dict:
     model = payload["model"]
     summaries = {"support": {}, "query": {}}
     for domain, batches in (
@@ -169,7 +217,7 @@ def _stage2_unit(payload: dict, seed: int, panel: int) -> dict:
             _, times = clean_inputs(cpu.arrays["support_inputs"])
             for name in changed:
                 schedule = _schedule(times, name, 913711 + 1000 * panel + seed + index)
-                states, _ = support_trajectory(model, cpu, support_times=schedule)
+                states, _, _ = support_trajectory(model, cpu, support_times=schedule)
                 ordered, pairs = read_ordered(
                     model, states[-1], cpu.arrays["item_codes"]
                 )
@@ -178,6 +226,8 @@ def _stage2_unit(payload: dict, seed: int, panel: int) -> dict:
                 changed[name]["margins"].append(read_original(model, states[-1], cpu))
         base_field = np.concatenate(baseline_fields)
         base_weights = np.concatenate(baseline_weights)
+        no_time_field = no_time[domain]["fields"]
+        baseline_to_no_time = float(np.sqrt(np.mean((base_field - no_time_field) ** 2)))
         alpha = model.alpha.detach().cpu().numpy()
         summaries["support"][domain] = {}
         for name, values in changed.items():
@@ -204,10 +254,20 @@ def _stage2_unit(payload: dict, seed: int, panel: int) -> dict:
                     np.mean(effective_distance(base_weights, weights, alpha))
                 ),
                 "D_M_rms": float(np.sqrt(np.mean((field - base_field) ** 2))),
+                "to_no_time_D_M_rms": float(
+                    np.sqrt(np.mean((field - no_time_field) ** 2))
+                ),
                 "endpoint_means": {
                     key: float(np.mean(value)) for key, value in endpoints.items()
                 },
             }
+            summaries["support"][domain][name]["moves_toward_no_time"] = (
+                summaries["support"][domain][name]["to_no_time_D_M_rms"]
+                < baseline_to_no_time
+            )
+        summaries["support"][domain]["baseline_to_no_time_D_M_rms"] = (
+            baseline_to_no_time
+        )
         query = {}
         for value in (0.0, 1.0 / 3.0, 2.0 / 3.0):
             fields, margins = [], []
@@ -317,13 +377,13 @@ def _stage3(lock: dict, spec: dict, arrays: dict[str, np.ndarray]) -> tuple[dict
     return summaries, arrays
 
 
-def run() -> dict:
-    require_formal_runtime()
-    spec, lock = specification(), validate_source_lock()
+def _baseline_stages(
+    lock: dict, spec: dict, arrays: dict[str, np.ndarray]
+) -> tuple[dict, dict, float, float]:
     stage1: dict[str, dict] = {}
     stage2: dict[str, dict] = {}
-    arrays: dict[str, np.ndarray] = {}
     max_replay_error = 0.0
+    max_endpoint_replay_error = 0.0
     for seed in spec["design"]["network_seeds"]:
         stage1[str(seed)], stage2[str(seed)] = {}, {}
         for panel in spec["design"]["evaluation_panels"]:
@@ -332,48 +392,70 @@ def run() -> dict:
                 *spec["design"]["secondary_cells"],
                 spec["design"]["primary_cell"],
             ):
-                rows = {
-                    condition: _collect_baseline(lock, seed, panel, condition, cell)
-                    for condition in spec["design"]["conditions"]
-                }
-                for row in rows.values():
-                    max_replay_error = max(
-                        max_replay_error, *row["replay_errors"].values()
-                    )
-                nt, control = rows["clean_no_time"], rows["time_retained_control"]
-                stage1[str(seed)][str(panel)][cell] = {
-                    domain: geometry(
-                        nt[domain]["fields"], control[domain]["fields"], 1e-5
-                    )
-                    for domain in ("generic", "liu")
-                }
-                for condition, row in rows.items():
-                    for domain in ("generic", "liu"):
-                        arrays[f"{seed}/{panel}/{cell}/{condition}/{domain}/fields"] = (
-                            row[domain]["fields"]
-                        )
-                        arrays[
-                            f"{seed}/{panel}/{cell}/{condition}/{domain}/margins"
-                        ] = row[domain]["margins"]
-                if cell == "Ce":
-                    stage2[str(seed)][str(panel)] = _stage2_unit(control, seed, panel)
-                    for name in ("targets", "learned"):
-                        arrays[f"{seed}/{panel}/Ce/generic/{name}"] = nt["generic"][
-                            name
-                        ]
-                    for name in (
-                        "targets",
-                        "query_pairs",
-                        "support_pairs",
-                        "retention",
-                    ):
-                        arrays[f"{seed}/{panel}/Ce/liu/{name}"] = nt["liu"][name]
-                for row in rows.values():
-                    del row["model"]
-                gc.collect()
-                torch.cuda.empty_cache()
-    if max_replay_error > 1e-5:
-        raise RuntimeError(f"parent baseline replay differs: {max_replay_error}")
+                cell_result = _baseline_cell(lock, spec, arrays, seed, panel, cell)
+                stage1[str(seed)][str(panel)][cell] = cell_result["geometry"]
+                if cell_result["stage2"] is not None:
+                    stage2[str(seed)][str(panel)] = cell_result["stage2"]
+                max_replay_error = max(
+                    max_replay_error, cell_result["max_replay_error"]
+                )
+                max_endpoint_replay_error = max(
+                    max_endpoint_replay_error,
+                    cell_result["max_endpoint_replay_error"],
+                )
+    return stage1, stage2, max_replay_error, max_endpoint_replay_error
+
+
+def _baseline_cell(
+    lock: dict,
+    spec: dict,
+    arrays: dict[str, np.ndarray],
+    seed: int,
+    panel: int,
+    cell: str,
+) -> dict:
+    rows = {
+        condition: _collect_baseline(lock, seed, panel, condition, cell)
+        for condition in spec["design"]["conditions"]
+    }
+    nt, control = rows["clean_no_time"], rows["time_retained_control"]
+    summary = {
+        "geometry": {
+            domain: geometry(nt[domain]["fields"], control[domain]["fields"], 1e-5)
+            for domain in ("generic", "liu")
+        },
+        "stage2": None,
+        "max_replay_error": max(
+            value for row in rows.values() for value in row["replay_errors"].values()
+        ),
+        "max_endpoint_replay_error": max(
+            value
+            for row in rows.values()
+            for value in row["endpoint_replay_errors"].values()
+        ),
+    }
+    for condition, row in rows.items():
+        for domain in ("generic", "liu"):
+            arrays[f"{seed}/{panel}/{cell}/{condition}/{domain}/fields"] = row[domain][
+                "fields"
+            ]
+            arrays[f"{seed}/{panel}/{cell}/{condition}/{domain}/margins"] = row[domain][
+                "margins"
+            ]
+    if cell == "Ce":
+        summary["stage2"] = _stage2_unit(control, nt, seed, panel)
+        for name in ("targets", "learned"):
+            arrays[f"{seed}/{panel}/Ce/generic/{name}"] = nt["generic"][name]
+        for name in ("targets", "query_pairs", "support_pairs", "retention"):
+            arrays[f"{seed}/{panel}/Ce/liu/{name}"] = nt["liu"][name]
+    for row in rows.values():
+        del row["model"]
+    gc.collect()
+    torch.cuda.empty_cache()
+    return summary
+
+
+def _scale_stage(spec: dict, arrays: dict[str, np.ndarray]) -> tuple[dict, dict, dict]:
     scales, held_out, scale_labels = {}, {}, {}
     endpoint_names = (
         "generic_learned",
@@ -396,51 +478,69 @@ def run() -> dict:
             ]
         )
         scales[str(seed)] = positive_scale(candidate, control)
-        held_out[str(seed)] = {}
-        for endpoint_index, endpoint in enumerate(endpoint_names):
-            panels = []
-            for panel in (2, 3):
-                generic_metadata = {
-                    name: arrays[f"{seed}/{panel}/Ce/generic/{name}"]
-                    for name in ("targets", "learned")
-                }
-                liu_metadata = {
-                    name: arrays[f"{seed}/{panel}/Ce/liu/{name}"]
-                    for name in ("targets", "query_pairs", "support_pairs", "retention")
-                }
-                values = {}
-                for condition, scale in (
-                    ("clean_no_time", scales[str(seed)]),
-                    ("time_retained_control", 1.0),
-                ):
-                    values[condition] = {
-                        **generic_endpoints(
-                            scale
-                            * arrays[f"{seed}/{panel}/Ce/{condition}/generic/margins"],
-                            generic_metadata["targets"],
-                            generic_metadata["learned"],
-                        ),
-                        **liu_endpoints(
-                            scale
-                            * arrays[f"{seed}/{panel}/Ce/{condition}/liu/margins"],
-                            liu_metadata["targets"],
-                            liu_metadata["query_pairs"],
-                            liu_metadata["support_pairs"],
-                            liu_metadata["retention"],
-                        ),
-                    }
-                panels.append(
-                    values["clean_no_time"][endpoint]
-                    - values["time_retained_control"][endpoint]
-                )
-            held_out[str(seed)][endpoint] = paired_interval(
-                panels, seed=951000 + seed * 10 + endpoint_index
+        held_out[str(seed)] = {
+            endpoint: _held_out_endpoint(
+                arrays,
+                seed,
+                endpoint,
+                scales[str(seed)],
+                endpoint_index,
             )
+            for endpoint_index, endpoint in enumerate(endpoint_names)
+        }
         scale_labels[str(seed)] = all(
             held_out[str(seed)][endpoint]["interval"]["lower"] >= -0.02
             for endpoint in endpoint_names
         )
-    stage2_labels = {}
+    return scales, held_out, scale_labels
+
+
+def _held_out_endpoint(
+    arrays: dict[str, np.ndarray],
+    seed: int,
+    endpoint: str,
+    scale: float,
+    endpoint_index: int,
+) -> dict:
+    panels = []
+    for panel in (2, 3):
+        generic_metadata = {
+            name: arrays[f"{seed}/{panel}/Ce/generic/{name}"]
+            for name in ("targets", "learned")
+        }
+        liu_metadata = {
+            name: arrays[f"{seed}/{panel}/Ce/liu/{name}"]
+            for name in ("targets", "query_pairs", "support_pairs", "retention")
+        }
+        values = {}
+        for condition, multiplier in (
+            ("clean_no_time", scale),
+            ("time_retained_control", 1.0),
+        ):
+            values[condition] = {
+                **generic_endpoints(
+                    multiplier
+                    * arrays[f"{seed}/{panel}/Ce/{condition}/generic/margins"],
+                    generic_metadata["targets"],
+                    generic_metadata["learned"],
+                ),
+                **liu_endpoints(
+                    multiplier * arrays[f"{seed}/{panel}/Ce/{condition}/liu/margins"],
+                    liu_metadata["targets"],
+                    liu_metadata["query_pairs"],
+                    liu_metadata["support_pairs"],
+                    liu_metadata["retention"],
+                ),
+            }
+        panels.append(
+            values["clean_no_time"][endpoint]
+            - values["time_retained_control"][endpoint]
+        )
+    return paired_interval(panels, seed=951000 + seed * 10 + endpoint_index)
+
+
+def _time_path_labels(spec: dict, stage2: dict) -> dict:
+    labels = {}
     for seed in spec["design"]["network_seeds"]:
         panels = stage2[str(seed)].values()
         support_present = all(
@@ -465,12 +565,15 @@ def run() -> dict:
             )
             for row in panels
         )
-        stage2_labels[str(seed)] = {
+        labels[str(seed)] = {
             "support_time_path_present": support_present,
             "query_time_path_present": query_present,
             "query_terminal_P_bitwise_identical": True,
         }
-    stage3, arrays = _stage3(lock, spec, arrays)
+    return labels
+
+
+def _classify(scale_labels: dict, stage2_labels: dict, stage3: dict) -> dict:
     labels = {
         "scale_sufficient": scale_labels["3011"],
         "scale_insufficient": not scale_labels["3011"],
@@ -499,12 +602,33 @@ def run() -> dict:
     labels["mechanism_heterogeneous"] = any(
         signatures[seed] != signatures["3011"] for seed in ("3012", "3013")
     )
+    return labels
+
+
+def run() -> dict:
+    require_formal_runtime()
+    spec, lock = specification(), validate_source_lock()
+    arrays: dict[str, np.ndarray] = {}
+    stage1, stage2, max_replay_error, max_endpoint_replay_error = _baseline_stages(
+        lock, spec, arrays
+    )
+    if max_replay_error > 1e-5:
+        raise RuntimeError(f"parent baseline replay differs: {max_replay_error}")
+    if max_endpoint_replay_error > 1e-10:
+        raise RuntimeError(
+            f"parent endpoint replay differs: {max_endpoint_replay_error}"
+        )
+    scales, held_out, scale_labels = _scale_stage(spec, arrays)
+    stage2_labels = _time_path_labels(spec, stage2)
+    stage3, arrays = _stage3(lock, spec, arrays)
+    labels = _classify(scale_labels, stage2_labels, stage3)
     result = {
         "schema_version": 1,
         "protocol_sha256": PROTOCOL_SHA256,
         "source_lock": reference(SOURCE_LOCK),
         "parent_outcome_unchanged": "time_removal_failure",
         "maximum_parent_replay_error": max_replay_error,
+        "maximum_parent_endpoint_replay_error": max_endpoint_replay_error,
         "stage_1": {
             "geometry": stage1,
             "scales": scales,
@@ -522,7 +646,11 @@ def run() -> dict:
     RUNS.mkdir(parents=True, exist_ok=True)
     write_arrays(RUNS / "arrays.npz", arrays)
     write_json_exclusive(RUNS / "result.json", json_ready(result))
-    return {"maximum_parent_replay_error": max_replay_error, "labels": labels}
+    return {
+        "maximum_parent_replay_error": max_replay_error,
+        "maximum_parent_endpoint_replay_error": max_endpoint_replay_error,
+        "labels": labels,
+    }
 
 
 __all__ = ["run"]

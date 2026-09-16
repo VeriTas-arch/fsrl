@@ -5,13 +5,16 @@ from __future__ import annotations
 import subprocess
 
 from fsrl.experiments.training_strategy.locks import reference, verify_reference
-from fsrl.infra.provenance import load_json, write_json_exclusive
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    IMPLEMENTATION_REPAIR,
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
+    QUALIFICATION_FIX,
+    QUALIFICATION_REPAIR,
     REPAIR,
     SOURCE_LOCK,
     specification,
@@ -30,6 +33,9 @@ def sources() -> list[dict]:
         REPO_ROOT / "fsrl/infra/formal_runtime.py",
         PROTOCOL,
         REPAIR,
+        IMPLEMENTATION_REPAIR,
+        QUALIFICATION_FIX,
+        QUALIFICATION_REPAIR,
         REPO_ROOT / "pyproject.toml",
         REPO_ROOT / ".envrc",
     ]
@@ -46,7 +52,12 @@ def _clean_commit() -> str:
 
 def parent_references() -> dict:
     spec = specification()
-    parents = {name: value for name, value in spec["parents"].items()}
+    parents = {}
+    for name, value in spec["parents"].items():
+        path = REPO_ROOT / value["path"]
+        if file_sha256(path) != value["sha256"]:
+            raise RuntimeError(f"frozen parent differs: {name}")
+        parents[name] = reference(path)
     parent_result = load_json(verify_reference(parents["clean_single_p_result"]))
     parents["parent_raw"] = parent_result["raw"]
     model_lock = load_json(verify_reference(parents["clean_single_p_model_lock"]))

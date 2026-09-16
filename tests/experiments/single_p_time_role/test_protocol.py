@@ -17,6 +17,10 @@ class TimeRoleProtocolTests(unittest.TestCase):
             spec["active_repair"]["repair"]["time_retained_control_probe_time"],
             1 / 3,
         )
+        self.assertEqual(
+            spec["active_qualification_fix"]["repair"]["qualification_authority"],
+            "records/benchmarks/qualification_v3.json",
+        )
 
 
 if __name__ == "__main__":

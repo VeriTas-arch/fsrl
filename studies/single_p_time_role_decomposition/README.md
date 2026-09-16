@@ -43,6 +43,21 @@ mechanism labels rather than model admission.
 - `validation_result` —
   [studies/single_p_time_role_decomposition/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:bb11ab8f458d`)
+- `repair_contract` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair2.json](records/benchmarks/single_p_time_role_decomposition_v1.repair2.json)
+  (`sha256:ad736bc5ed66`)
+- `repair_contract` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair3.json](records/benchmarks/single_p_time_role_decomposition_v1.repair3.json)
+  (`sha256:d35b60c590d6`)
+- `validation_result` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/qualification_v2.json](records/benchmarks/qualification_v2.json)
+  (`sha256:4e77f326ea8f`)
+- `repair_contract` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/single_p_time_role_decomposition_v1.repair4.json](records/benchmarks/single_p_time_role_decomposition_v1.repair4.json)
+  (`sha256:81ae1a1bc1f2`)
+- `validation_result` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/qualification_v3.json](records/benchmarks/qualification_v3.json)
+  (`sha256:69e6d4c0cb89`)
 
 ## Provenance rule
 

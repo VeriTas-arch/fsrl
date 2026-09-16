@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "repair_id": "single_p_time_role_decomposition_v1_repair2",
+  "timing": "After a fail-closed source-lock attempt and before any source lock or registered-seed diagnostic execution.",
+  "failure": "The protocol parent entries intentionally contained path and sha256 only, while the shared runtime verifier requires the exact full reference schema path, sha256, and bytes. The first lock-source attempt stopped before writing a lock.",
+  "repair": "Resolve each minimal protocol parent identity to its current path, require its sha256 to equal the frozen protocol value, then construct the full path/sha256/bytes reference used by the shared verifier. Do not alter any parent file or accept a hash mismatch.",
+  "unchanged": [
+    "all scientific models, inputs, arrays, seeds, panels, cells, estimands, interventions, probes, statistics, and classifications",
+    "the protocol and probe-time repair hashes",
+    "the requirement that every parent byte identity pass before diagnostic execution"
+  ],
+  "source_lock_written_before_repair": false,
+  "registered_seed_diagnostic_outcomes_exposed": false
+}

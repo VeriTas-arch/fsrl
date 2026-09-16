@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "timing": "After the failed synthetic qualification_v2 fixture and before source lock, registered-seed execution, or exposure of any new diagnostic outcome.",
+  "reason": "qualification_v2 correctly failed because its independent endpoint fixture compared both learned and nonlearned groups with sigmoid(2), although the frozen synthetic margins imply sigmoid(2) for learned and sigmoid(1) for nonlearned. This was a qualification-fixture expectation error, not a scientific computation or outcome.",
+  "repair": {
+    "qualification_authority": "records/benchmarks/qualification_v3.json",
+    "preserved_failed_qualification": "records/benchmarks/qualification_v2.json",
+    "fixture_correction": "Compare each reconstructed group against the independently specified correct-signed margin for that group."
+  },
+  "unchanged": [
+    "all scientific seeds, panels, cells, checkpoints, and frozen inputs",
+    "all scientific estimands, thresholds, bootstrap rules, decision labels, and stop rules",
+    "all runtime implementation equations and interventions",
+    "the prohibition on retraining and outcome-dependent modification"
+  ],
+  "scientific_outcomes_exposed_before_repair": false
+}

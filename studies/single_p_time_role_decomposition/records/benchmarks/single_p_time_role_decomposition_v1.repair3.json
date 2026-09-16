@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "protocol_id": "single_p_time_role_decomposition_v1",
+  "timing": "Before source lock, registered-seed execution, or exposure of any new diagnostic outcome.",
+  "reason": "The pre-lock implementation audit found that the first synthetic qualification covered the pure estimands but did not exercise the protocol-required prefix-clone, probe-nonmutation, read-only-query, or inert legacy-blank invariants. The same audit found that the Stage-2 consistency-only comparison and several registered Stage-3 trajectory readouts had not yet been emitted.",
+  "repair": {
+    "qualification_authority": "records/benchmarks/qualification_v2.json",
+    "preserved_earlier_qualification": "records/benchmarks/qualification.json",
+    "required_pre_lock_completion": [
+      "synthetic direct-versus-adapter replay and inert legacy-blank check",
+      "synthetic prefix cloning, probe nonmutation, read-only query-P, frozen-parameter, and endpoint reconstruction checks",
+      "Stage-2 distance-to-no-time consistency summaries",
+      "Stage-3 correct-signed margin, modulation magnitude, raw write norm, and effective write norm trajectories",
+      "parent terminal-P summary and endpoint replay checks"
+    ]
+  },
+  "unchanged": [
+    "all scientific seeds, panels, cells, checkpoints, and frozen inputs",
+    "all estimands, thresholds, bootstrap rules, decision labels, and stop rules",
+    "the unconditional execution of all three stages",
+    "the prohibition on retraining and outcome-dependent modification"
+  ],
+  "scientific_outcomes_exposed_before_repair": false
+}

@@ -10,6 +10,8 @@ from fsrl.experiments.single_p_time_role.estimands import (
     hodge,
     positive_scale,
 )
+from fsrl.experiments.single_p_time_role.trajectory import _canonical_correct_signs
+from fsrl.experiments.training_strategy.batches import EpisodeBatch
 
 
 class TimeRoleEstimandTests(unittest.TestCase):
@@ -47,6 +49,25 @@ class TimeRoleEstimandTests(unittest.TestCase):
         result = generic_endpoints(margins, targets, learned)
         self.assertTrue(np.all(result["generic_learned"] > 0.5))
         self.assertTrue(np.all(result["generic_nonlearned"] > 0.5))
+
+    def test_generic_correct_signs_follow_random_query_orientations(self):
+        canonical = [(i, j) for i in range(8) for j in range(i + 1, 8)]
+        pairs = np.asarray(canonical, dtype=np.int64)[:, None, :]
+        pairs[::2] = pairs[::2, :, ::-1]
+        canonical_signs = np.where(np.arange(28) % 3 == 0, -1.0, 1.0)
+        oriented_signs = canonical_signs.copy()
+        oriented_signs[::2] *= -1.0
+        targets = ((oriented_signs + 1.0) / 2.0).astype(np.int64)
+        batch = EpisodeBatch(
+            {
+                "item_codes": np.zeros((1, 8, 15), dtype=np.float32),
+                "query_pairs": pairs,
+                "targets": targets,
+            }
+        )
+        np.testing.assert_array_equal(
+            _canonical_correct_signs(batch), canonical_signs[None, :]
+        )
 
 
 if __name__ == "__main__":

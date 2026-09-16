@@ -3,9 +3,20 @@
 from __future__ import annotations
 
 import numpy as np
+import torch
 
+from fsrl.core.model_config import RetroModelConfig
+from fsrl.core.sequence import RecurrentSequence
+from fsrl.experiments.clean_single_p.adapter import evaluation_adapter
+from fsrl.experiments.clean_single_p.model import (
+    AffineSinglePSequence,
+    expand_shadow_inputs,
+    map_shadow,
+)
+from fsrl.experiments.linear_modulation.model import LinearModulationRNN
 from fsrl.infra.provenance import write_json_exclusive
 
+from .analysis import generic_endpoints
 from .estimands import (
     canonical_field,
     derangement,
@@ -16,6 +27,91 @@ from .estimands import (
 )
 from .locks import sources
 from .protocol import PROTOCOL_SHA256, QUALIFICATION, specification
+
+
+def _synthetic_rollout_checks() -> dict:
+    torch.manual_seed(941002)
+    shadow = LinearModulationRNN(RetroModelConfig(38, 7, 2, 3), device="cpu")
+    model = map_shadow(shadow, "time_retained_control").requires_grad_(False).eval()
+    adapter = evaluation_adapter(model)
+    parameters = {
+        name: value.detach().clone() for name, value in model.named_parameters()
+    }
+    generator = torch.Generator().manual_seed(941003)
+    inputs = torch.randn(4, 3, 32, generator=generator)
+    times = torch.rand(4, 3, 1, generator=generator)
+    sequence = AffineSinglePSequence(model)
+    with torch.no_grad():
+        direct_margin, _, _, _, direct_weights = sequence(
+            inputs,
+            model.initial_hidden(3),
+            model.initial_eligibility(3),
+            model.initial_fast_weights(3),
+            True,
+            time_values=times,
+        )
+        legacy_sequence = RecurrentSequence(adapter)
+        blank = torch.zeros(2, 3, 38)
+        _, _, _, _, _, blank_weights = legacy_sequence(
+            blank,
+            adapter.initial_hidden(3),
+            adapter.initial_eligibility(3),
+            adapter.initial_fast_weights(3),
+            True,
+        )
+        logits, _, _, _, _, adapter_weights = legacy_sequence(
+            expand_shadow_inputs(inputs, times, 15),
+            adapter.initial_hidden(3),
+            adapter.initial_eligibility(3),
+            blank_weights,
+            True,
+        )
+        adapter_margin = logits[:, 1] - logits[:, 0]
+        prefix = direct_weights.clone()
+        untouched = prefix.clone()
+        probe_weights = prefix.clone()
+        _, _, _, _, probe_weights = sequence(
+            inputs,
+            model.initial_hidden(3),
+            model.initial_eligibility(3),
+            probe_weights,
+            True,
+            time_values=times,
+        )
+        query_results = []
+        for query_time in (0.0, 2.0 / 3.0):
+            query_times = torch.full((4, 3, 1), query_time)
+            _, _, _, _, query_weights = sequence(
+                inputs,
+                model.initial_hidden(3),
+                model.initial_eligibility(3),
+                prefix,
+                False,
+                time_values=query_times,
+            )
+            query_results.append(query_weights)
+    return {
+        "legacy_blank_P_max_abs": float(blank_weights.abs().max()),
+        "direct_adapter_margin_max_abs_error": float(
+            (direct_margin[:, 0] - adapter_margin).abs().max()
+        ),
+        "direct_adapter_P_max_abs_error": float(
+            (direct_weights - adapter_weights).abs().max()
+        ),
+        "prefix_clone_has_independent_storage": prefix.data_ptr()
+        != probe_weights.data_ptr(),
+        "probe_preserves_natural_prefix_bitwise": torch.equal(prefix, untouched),
+        "query_P_bitwise_identical": all(
+            torch.equal(prefix, value) for value in query_results
+        ),
+        "parameters_bitwise_unchanged": all(
+            torch.equal(parameters[name], value)
+            for name, value in model.named_parameters()
+        ),
+        "all_parameters_frozen": not any(
+            value.requires_grad for value in model.parameters()
+        ),
+    }
 
 
 def run_qualification() -> dict:
@@ -47,6 +143,23 @@ def run_qualification() -> dict:
         -2.0 * maturity + 3.0 * prefix + 0.01 * rng.normal(size=len(prefix))
     )
     slope = fixed_effect_slope(susceptibility, maturity, prefix)
+    endpoint_margins = np.asarray([[2.0, -1.0], [-2.0, 1.0]])
+    endpoint_targets = np.asarray([[1, 0], [0, 1]])
+    endpoint_learned = np.asarray([[True, False], [True, False]])
+    reconstructed = generic_endpoints(
+        endpoint_margins, endpoint_targets, endpoint_learned
+    )
+    expected_probability = {
+        "generic_learned": 1.0 / (1.0 + np.exp(-2.0)),
+        "generic_nonlearned": 1.0 / (1.0 + np.exp(-1.0)),
+    }
+    endpoint_error = float(
+        max(
+            np.max(np.abs(values - expected_probability[name]))
+            for name, values in reconstructed.items()
+        )
+    )
+    rollout = _synthetic_rollout_checks()
     checks = {
         "canonical_max_abs_error": float(np.max(np.abs(canonical - forward))),
         "hodge_reconstruction_max_abs_error": float(
@@ -56,16 +169,27 @@ def run_qualification() -> dict:
         "derangement_fixed_points": int(np.sum(permutation == np.arange(32))),
         "effective_distance_finite": bool(np.all(np.isfinite(distance))),
         "fixed_effect_slope": slope,
+        "endpoint_reconstruction_max_abs_error": endpoint_error,
+        "synthetic_rollout": rollout,
         "label_free_estimands": True,
-        "no_model_or_parent_outcome_loaded": True,
+        "no_scientific_model_or_parent_outcome_loaded": True,
     }
-    passed = (
+    passed = bool(
         checks["canonical_max_abs_error"] < 1e-12
         and checks["hodge_reconstruction_max_abs_error"] < 1e-12
         and abs(scale - 2.5) < 1e-12
         and checks["derangement_fixed_points"] == 0
         and checks["effective_distance_finite"]
         and abs(slope + 2.0) < 0.05
+        and endpoint_error < 1e-12
+        and rollout["legacy_blank_P_max_abs"] == 0.0
+        and rollout["direct_adapter_margin_max_abs_error"] < 1e-6
+        and rollout["direct_adapter_P_max_abs_error"] < 1e-6
+        and rollout["prefix_clone_has_independent_storage"]
+        and rollout["probe_preserves_natural_prefix_bitwise"]
+        and rollout["query_P_bitwise_identical"]
+        and rollout["parameters_bitwise_unchanged"]
+        and rollout["all_parameters_frozen"]
     )
     payload = {
         "schema_version": 1,

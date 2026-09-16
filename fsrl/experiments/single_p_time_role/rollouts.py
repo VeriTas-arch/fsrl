@@ -71,10 +71,10 @@ def _sequence(
     weights: torch.Tensor,
     *,
     update: bool,
-) -> tuple[torch.Tensor, torch.Tensor]:
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     count = inputs.shape[1]
     kwargs = {"time_values": times} if model.retains_time else {}
-    margins, _, _, _, result = sequence(
+    margins, modulation, _, _, result = sequence(
         inputs,
         model.initial_hidden(count),
         model.initial_eligibility(count),
@@ -82,7 +82,9 @@ def _sequence(
         update,
         **kwargs,
     )
-    return margins[:, 0], result
+    if not update and not torch.equal(result, weights):
+        raise RuntimeError("read-only query changed terminal P")
+    return margins[:, 0], result, modulation[:, 0]
 
 
 def support_trajectory(
@@ -90,7 +92,7 @@ def support_trajectory(
     cpu: EpisodeBatch,
     *,
     support_times: np.ndarray | None = None,
-) -> tuple[list[torch.Tensor], list[torch.Tensor]]:
+) -> tuple[list[torch.Tensor], list[torch.Tensor], list[torch.Tensor]]:
     clean, original_times = clean_inputs(cpu.arrays["support_inputs"])
     times = original_times if support_times is None else support_times
     inputs = torch.from_numpy(clean).to("cuda")
@@ -100,14 +102,16 @@ def support_trajectory(
     sequence = AffineSinglePSequence(model)
     states = [weights.clone()]
     writes = []
+    modulations = []
     for trial, trial_times in zip(inputs.unbind(0), time_tensor.unbind(0), strict=True):
         before = weights
-        _, weights = _sequence(
+        _, weights, modulation = _sequence(
             model, sequence, trial, trial_times, weights, update=True
         )
         writes.append(weights - before)
+        modulations.append(modulation)
         states.append(weights.clone())
-    return states, writes
+    return states, writes, modulations
 
 
 def read_ordered(
@@ -124,7 +128,7 @@ def read_ordered(
         .expand(queries, -1, -1, -1)
         .reshape(queries * subjects, weights.shape[-2], weights.shape[-1])
     )
-    margins, _ = _sequence(
+    margins, _, _ = _sequence(
         model,
         AffineSinglePSequence(model),
         torch.from_numpy(inputs).to("cuda"),
@@ -152,7 +156,7 @@ def read_original(
         .expand(queries, -1, -1, -1)
         .reshape(queries * subjects, weights.shape[-2], weights.shape[-1])
     )
-    margins, _ = _sequence(
+    margins, _, _ = _sequence(
         model,
         AffineSinglePSequence(model),
         torch.from_numpy(clean).to("cuda"),
