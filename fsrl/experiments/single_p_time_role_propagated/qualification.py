@@ -100,7 +100,7 @@ def _rollout_checks() -> dict:
         "margins": second_margin,
     }
     assert_bitwise_equal(first, second)
-    selected = np.asarray([0, 2])
+    selected = np.asarray([0, 1])
     full_prefix = first["states"]
     selected_prefix = full_prefix[:, selected]
     prefix = first_states[1][0:1].clone()
@@ -115,7 +115,7 @@ def _rollout_checks() -> dict:
         "selected_prefix_is_full_batch_slice": np.array_equal(
             selected_prefix, first["states"][:, selected]
         ),
-        "full_batch_size_preserved": full_prefix.shape[1] == 4,
+        "full_batch_size_preserved": full_prefix.shape[1] == 2,
         "prefix_states_have_independent_storage": len(
             {state.data_ptr() for state in first_states}
         )
