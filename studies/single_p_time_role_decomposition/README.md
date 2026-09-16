@@ -94,6 +94,9 @@ mechanism labels rather than model admission.
 - `validation_result` —
   [studies/single_p_time_role_decomposition/records/benchmarks/qualification_v6.json](records/benchmarks/qualification_v6.json)
   (`sha256:79d5da9022db`)
+- `execution_lock` —
+  [studies/single_p_time_role_decomposition/records/benchmarks/source_lock_v4.json](records/benchmarks/source_lock_v4.json)
+  (`sha256:03ec001c4830`)
 
 ## Provenance rule
 
