@@ -281,12 +281,11 @@ fail to close the dynamics.
     organization and none passes all historical quantitative behavior checks. The
     registered outcome is a competent alternative organization, so confirmation stops
     without tuning.
-- [Exact P/L structural reparameterization](pl_exact_reparameterization/README.md) — `frozen_contract`
-  - **Finding:** Qualification attempt 1 preserved every categorical decision but failed
-    the registered float32 state and margin tolerances because folded projection
-    arithmetic accumulated in P. The negative result is retained; the source-locked
-    second repair adds conversion-only numerical compatibility buffers without restoring
-    removed trainable inputs or outputs and awaits requalification.
+- [Exact P/L structural reparameterization](pl_exact_reparameterization/README.md) — `confirmed`
+  - **Finding:** The repaired checkpoint mapping passed on seeds 2104 and 2105 across
+    CPU/CUDA, Liu and generic support horizons, and intact/P-off/L-off conditions.
+    Global state and output were exact; overall error was at most 9.5367431640625e-7
+    with zero categorical mismatches. The failed first mapping remains registered.
 
 ## Minimal explanatory models
 

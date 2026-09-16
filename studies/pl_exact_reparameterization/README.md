@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `confirmed`
 - **Review state:** `indexed`
 - **Study ID:** `pl_exact_reparameterization`
 
@@ -24,11 +24,10 @@
 **Question.** Can the confirmed P/L computation be expressed through a clean 32-channel
 task interface and exact packed state without changing its supported computation?
 
-**Finding.** Qualification attempt 1 preserved every categorical decision but failed the
-registered float32 state and margin tolerances because folded projection arithmetic
-accumulated in P. The negative result is retained; the source-locked second repair adds
-conversion-only numerical compatibility buffers without restoring removed trainable
-inputs or outputs and awaits requalification.
+**Finding.** The repaired checkpoint mapping passed on seeds 2104 and 2105 across
+CPU/CUDA, Liu and generic support horizons, and intact/P-off/L-off conditions. Global
+state and output were exact; overall error was at most 9.5367431640625e-7 with zero
+categorical mismatches. The failed first mapping remains registered.
 
 **Claim boundary.** This study can establish checkpoint-preserving structural
 equivalence only. It does not establish that episode time is unnecessary, authorize
@@ -57,6 +56,12 @@ historical checkpoint deletion, or expose a no-time training outcome.
 - `execution_lock` —
   [studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair2.execution_lock.json](records/benchmarks/pl_exact_reparameterization_v1.repair2.execution_lock.json)
   (`sha256:f26e7f751638`)
+- `frozen_result` —
+  [studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.json](records/results/pl_exact_reparameterization_v1.json)
+  (`sha256:de022880bd2f`)
+- `report` —
+  [studies/pl_exact_reparameterization/records/reports/pl_exact_reparameterization_v1.md](records/reports/pl_exact_reparameterization_v1.md)
+  (`sha256:b6bbba17f805`)
 
 ## Provenance rule
 

@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3824,
+  "entry_count": 3826,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2085,
+    "json": 2086,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 93,
+    "markdown": 94,
     "numpy_npz": 1408,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3728,
+    "already_conformant": 3730,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -81850,6 +81850,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_exact_reparameterization/records/reports/pl_exact_reparameterization_v1.md",
+        "repository_path": "studies/pl_exact_reparameterization/records/reports/pl_exact_reparameterization_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 1653,
+        "sha256": "b6bbba17f80584d22ecc18393e2a11569193438f99824fa35834f5b564f9804c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_exact_reparameterization",
+        "kind": "study"
+      },
+      "record_id": "study.pl_exact_reparameterization.studies_pl_exact_reparameterization_records_reports_pl_exact_reparameterization_v1_md",
+      "registered_identity": {
+        "bytes": 1653,
+        "sha256": "b6bbba17f80584d22ecc18393e2a11569193438f99824fa35834f5b564f9804c",
+        "source_ref": "sha256:b6bbba17f80584d22ecc18393e2a11569193438f99824fa35834f5b564f9804c"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.validation_result",
       "format": {
         "format": "json",
@@ -81881,6 +81915,40 @@
         "source_ref": "sha256:ed92075cf4a5a159703e8b7a26f179e8262c52f3b5992250cf336878c4384551"
       },
       "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.json",
+        "repository_path": "studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 3797,
+        "sha256": "de022880bd2fdd5a6933e928197a2c1ffc6779c021af9049c4210932f6c7e4db"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_exact_reparameterization",
+        "kind": "study"
+      },
+      "record_id": "study.pl_exact_reparameterization.studies_pl_exact_reparameterization_records_results_pl_exact_reparameterization_v1_json",
+      "registered_identity": {
+        "bytes": 3797,
+        "sha256": "de022880bd2fdd5a6933e928197a2c1ffc6779c021af9049c4210932f6c7e4db",
+        "source_ref": "sha256:de022880bd2fdd5a6933e928197a2c1ffc6779c021af9049c4210932f6c7e4db"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -130403,7 +130471,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3822,
+  "registered_record_count": 3824,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130417,7 +130485,7 @@
     "execution_lock": 65,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 567,
+    "frozen_result": 568,
     "mainline_guide": 1,
     "noninterpretable_attempt": 4,
     "presentation_asset": 6,
@@ -130427,7 +130495,7 @@
     "registered_contract": 87,
     "repair_contract": 11,
     "repair_lock": 10,
-    "report": 88,
+    "report": 89,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2727,

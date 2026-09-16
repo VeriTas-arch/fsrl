@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_exact_reparameterization",
+  "status": "confirmed_exact_checkpoint_preserving_reparameterization",
+  "protocol_sha256": "799fd9a4ca1814e8ad5b4662c5e0a481182cfa26969802547a949e5af46f8773",
+  "timestep_repair_sha256": "fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1",
+  "numerical_repair_sha256": "3d8af0d10f31c5129b333a3501838e11c36be9a23ca9c6e9ae8f27649bb0161e",
+  "source_lock_sha256": "f26e7f7516382db23eff39735dc55a2f46164eb358997688d58a19ddff1a9cc1",
+  "source_commit": "4eab3612d956c4eb14235d65f2ac2617b11dc4b0",
+  "runtime_result": {
+    "path": "artifacts/runs/pl_exact_reparameterization_v1/qualification-attempt2/qualification.json",
+    "sha256": "30bc9274f865f58d934412250d6a3878876553323b72b58bb2d3dbcc54350955",
+    "bytes": 17183
+  },
+  "architecture": {
+    "public_task_channels": 32,
+    "separate_time_scalars": 1,
+    "clean_trainable_parameters": 87405,
+    "legacy_trainable_parameters": 88607,
+    "trainable_parameter_reduction": 1202,
+    "persistent_P_scalars": 40000,
+    "legacy_persistent_L_scalars": 225,
+    "packed_persistent_L_scalars": 105,
+    "converted_checkpoint_compatibility_buffers": 802,
+    "fresh_model_compatibility_buffers": 0,
+    "compatibility_buffers_trainable": false
+  },
+  "timestep_accounting": {
+    "generic_training": {
+      "support_trials": "28--40",
+      "support_microsteps": "112--160",
+      "query_trials": 28,
+      "query_microsteps": 56,
+      "total_active_microsteps": "168--216",
+      "effective_P_writes": "56--80"
+    },
+    "liu_v2_literal": {
+      "support_microsteps": 128,
+      "query_microsteps": 560,
+      "total_active_microsteps": 688
+    },
+    "legacy_blank_microsteps_removed": 2,
+    "legacy_blank_P_max_absolute_error": 0.0
+  },
+  "qualification": {
+    "devices": ["cpu", "cuda"],
+    "seeds": [2104, 2105],
+    "panels": {
+      "liu": {
+        "support_trials": 32,
+        "support_microsteps": 128,
+        "effective_P_writes": 64
+      },
+      "generic": {
+        "support_trials": 40,
+        "support_microsteps": 160,
+        "effective_P_writes": 80
+      }
+    },
+    "conditions": ["intact", "P_off", "L_off"],
+    "categorical_comparisons": 5376,
+    "registered_float32_max_absolute_error": 0.000001,
+    "parameter_mapping_max_absolute_error": 0.0,
+    "global_state_and_output_max_absolute_error": 0.0,
+    "packed_local_state_max_absolute_error": 4.172325134277344e-7,
+    "local_raw_margin_max_absolute_error": 9.5367431640625e-7,
+    "final_margin_max_absolute_error": 9.5367431640625e-7,
+    "overall_max_absolute_error": 9.5367431640625e-7,
+    "categorical_mismatch_count": 0,
+    "nonfinite_count": 0,
+    "per_device_seed_max_absolute_error": {
+      "cpu_2104": 7.152557373046875e-7,
+      "cpu_2105": 9.5367431640625e-7,
+      "cuda_2104": 7.152557373046875e-7,
+      "cuda_2105": 9.5367431640625e-7
+    },
+    "passed": true
+  },
+  "preserved_negative": {
+    "path": "studies/pl_exact_reparameterization/records/results/pl_exact_reparameterization_v1.attempt1.json",
+    "finding": "The first mathematically factorized implementation failed the registered float32 threshold because it changed accumulation order; zero categorical mismatches did not override that failure."
+  },
+  "claim": "The two frozen confirmed P/L checkpoints can be exposed through the cleaned 32-channel task interface, separate retained time drive, one-margin public output, and 105-scalar packed local state while satisfying the registered numerical and categorical equivalence gates.",
+  "boundary": "This confirms checkpoint-preserving structural cleanup only. It does not show that normalized time is unnecessary, that a fresh clean model can be trained to the same behavioral metrics, or that historical checkpoints may be deleted."
+}
