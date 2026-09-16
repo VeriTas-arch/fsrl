@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "study_id": "pl_exact_reparameterization",
+  "repair_id": "pl_exact_reparameterization_v1_repair1",
+  "registration_status": "prospective_before_source_lock_or_frozen_checkpoint_qualification",
+  "parent_contract": {
+    "path": "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.json",
+    "sha256": "799fd9a4ca1814e8ad5b4662c5e0a481182cfa26969802547a949e5af46f8773",
+    "commit": "36ece9a00fba9df2df8dfa21b77f4518182fdc7f"
+  },
+  "reason": "The parent contract counted support and query horizons separately but did not distinguish total active training-episode length, literal Liu-v2 presentation length, and the bidirectional query field used only for equivalence qualification.",
+  "repair": {
+    "generic_training_episode": {
+      "support_trials": "28--40",
+      "support_microsteps_per_trial": 4,
+      "support_microsteps": "112--160",
+      "query_trials": 28,
+      "query_microsteps_per_trial": 2,
+      "query_microsteps": 56,
+      "total_active_microsteps": "168--216",
+      "effective_P_writes": "56--80",
+      "query_writeback": false
+    },
+    "liu_v2_literal_episode": {
+      "support_relations": 8,
+      "support_blocks": 4,
+      "support_trials": 32,
+      "support_microsteps": 128,
+      "query_pairs_per_block": 28,
+      "query_blocks": 10,
+      "query_trials": 280,
+      "query_microsteps": 560,
+      "total_active_microsteps": 688
+    },
+    "qualification_query_field": {
+      "unordered_pairs": 28,
+      "orientations": 56,
+      "microsteps_per_orientation": 2,
+      "microsteps": 112,
+      "role": "A deterministic bidirectional readout field for exact output and intervention comparison; it is not an episode-length claim."
+    },
+    "legacy_initial_blank": {
+      "microsteps": 2,
+      "active_task_inputs": false,
+      "counted_in_active_totals": false,
+      "removal_gate": "Both steps must leave P exactly unchanged from zero hidden and eligibility; their hidden and eligibility states are discarded before the first active trial."
+    }
+  },
+  "successor_constraint": "The first no-time direct-training candidate must preserve four support microsteps, two query microsteps, 168--216 active generic-training microsteps, and 56--80 effective P writes per episode. A variable horizon is a separate prospective successor.",
+  "unchanged": [
+    "architecture mapping",
+    "frozen checkpoints and gains",
+    "float32 tolerance",
+    "categorical mismatch threshold",
+    "historical retention boundary"
+  ]
+}

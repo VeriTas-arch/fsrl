@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3818,
+  "entry_count": 3819,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2080,
+    "json": 2081,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3722,
+    "already_conformant": 3723,
     "historical_gzip_view": 95,
     "historical_pth_view": 1
   },
@@ -81680,6 +81680,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair1.json",
+        "repository_path": "studies/pl_exact_reparameterization/records/benchmarks/pl_exact_reparameterization_v1.repair1.json"
+      },
+      "materialized_identity": {
+        "bytes": 2527,
+        "sha256": "fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "pl_exact_reparameterization",
+        "kind": "study"
+      },
+      "record_id": "study.pl_exact_reparameterization.studies_pl_exact_reparameterization_records_benchmarks_pl_exact_reparameterization_v1_repair1_json",
+      "registered_identity": {
+        "bytes": 2527,
+        "sha256": "fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1",
+        "source_ref": "sha256:fbf85c72011959c76cf7c62ab8fca7f1f5cc59a907c88787edb01e33464c60d1"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.registered_contract",
       "format": {
         "format": "json",
@@ -130199,7 +130233,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3816,
+  "registered_record_count": 3817,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -130221,7 +130255,7 @@
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 87,
-    "repair_contract": 9,
+    "repair_contract": 10,
     "repair_lock": 10,
     "report": 87,
     "source_context": 2,

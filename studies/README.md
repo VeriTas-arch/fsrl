@@ -282,10 +282,11 @@ fail to close the dynamics.
     registered outcome is a competent alternative organization, so confirmation stops
     without tuning.
 - [Exact P/L structural reparameterization](pl_exact_reparameterization/README.md) — `frozen_contract`
-  - **Finding:** A prospective deterministic mapping is frozen for the two confirmed P/L
-    networks. It retains the legacy time drive and four-step support microcircuit while
-    removing only redundant task-interface and state representation; qualification has
-    not yet run.
+  - **Finding:** A prospective deterministic mapping and timestep-accounting repair are
+    frozen for the two confirmed P/L networks. They retain the legacy time drive,
+    four-step support microcircuit, and complete active episode horizon while removing
+    only redundant task-interface and state representation; qualification has not yet
+    run.
 
 ## Minimal explanatory models
 
