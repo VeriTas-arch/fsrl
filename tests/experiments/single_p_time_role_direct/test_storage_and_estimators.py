@@ -9,6 +9,11 @@ from fsrl.experiments.single_p_time_role_direct.direct import (
     assert_bitwise_equal,
     clean_inputs,
 )
+from fsrl.experiments.single_p_time_role_direct.locks import (
+    reference,
+    verify_reference,
+)
+from fsrl.experiments.single_p_time_role_direct.protocol import PROTOCOL
 from fsrl.experiments.single_p_time_role_direct.storage import deterministic_npz_bytes
 from fsrl.experiments.single_p_time_role_direct.trajectory import regression_summary
 from fsrl.infra.provenance import load_json
@@ -49,6 +54,11 @@ def test_deterministic_typed_npz_round_trip():
         assert payload.files == ["a", "b"]
         for name, value in arrays.items():
             np.testing.assert_array_equal(payload[name], value)
+
+
+def test_materialized_verifier_allows_separately_locked_tensor_metadata():
+    row = {**reference(PROTOCOL), "tensor_hashes": {"weight": "frozen"}}
+    assert verify_reference(row) == PROTOCOL
 
 
 def test_copied_parent_decision_rule_reconstructs_frozen_outcomes():

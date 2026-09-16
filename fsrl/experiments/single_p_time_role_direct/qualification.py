@@ -30,7 +30,12 @@ from .direct import (
     support_trajectory,
 )
 from .locks import require_exact_inventory, sources
-from .protocol import PROTOCOL_SHA256, QUALIFICATION, specification
+from .protocol import (
+    PROTOCOL_SHA256,
+    QUALIFICATION,
+    REPAIR_SHA256,
+    specification,
+)
 from .storage import deterministic_npz_bytes
 
 
@@ -214,6 +219,7 @@ def run_qualification() -> dict:
     payload = {
         "schema_version": 1,
         "protocol_sha256": PROTOCOL_SHA256,
+        "repair_sha256": REPAIR_SHA256,
         "sources": sources(),
         "checks": checks,
         "passed": passed,

@@ -10,8 +10,9 @@ import torch
 from fsrl.experiments.clean_single_p.model import AffineSingleP, CleanSinglePConfig
 from fsrl.experiments.duplicate_observation.inputs import observed
 from fsrl.experiments.training_strategy.batches import EpisodeBatch
-from fsrl.experiments.training_strategy.locks import verify_reference
 from fsrl.infra.provenance import tensor_hashes
+
+from .locks import verify_reference
 
 
 def load_cpu(record: dict, arm: str, recipe: dict) -> EpisodeBatch:
