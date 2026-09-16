@@ -84,6 +84,9 @@ and assigns no time-role label before its registered gates execute.
 - `repair_contract` —
   [studies/single_p_time_role_propagated_authority/records/benchmarks/single_p_time_role_propagated_authority_v1.repair4.json](records/benchmarks/single_p_time_role_propagated_authority_v1.repair4.json)
   (`sha256:7663201646be`)
+- `validation_result` —
+  [studies/single_p_time_role_propagated_authority/records/benchmarks/qualification_v5.json](records/benchmarks/qualification_v5.json)
+  (`sha256:bbb98ed5f7d9`)
 
 ## Provenance rule
 
