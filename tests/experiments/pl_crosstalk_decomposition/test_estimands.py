@@ -4,6 +4,7 @@ import unittest
 import numpy as np
 
 from fsrl.experiments.pl_crosstalk_decomposition.estimands import (
+    keyed_numeric_max_error,
     packed_keys,
     probability_components,
     relation_source_contributions,
@@ -16,6 +17,13 @@ from fsrl.experiments.pl_crosstalk_decomposition.storage import (
 
 
 class CrossTalkEstimandTests(unittest.TestCase):
+    def test_nested_summary_comparison_is_keyed(self):
+        observed = {"bootstrap": {"lower": -0.1}, "subjects": 77}
+        expected = {"subjects": 77, "bootstrap": {"lower": -0.1}}
+        self.assertEqual(keyed_numeric_max_error(observed, expected), 0.0)
+        expected["bootstrap"]["lower"] = -0.2
+        self.assertAlmostEqual(keyed_numeric_max_error(observed, expected), 0.1)
+
     def test_packed_key_is_normalized_and_antisymmetric(self):
         left = np.asarray([[1.0, -1.0, 1.0]], dtype=np.float32)
         right = np.asarray([[-1.0, 1.0, 1.0]], dtype=np.float32)

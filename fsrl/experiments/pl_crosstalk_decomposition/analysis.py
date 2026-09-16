@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
 from functools import partial
 from pathlib import Path
 
@@ -21,6 +20,7 @@ from fsrl.tasks.protocol import ordered_pairs
 from fsrl.tasks.protocol_catalog import load_registered_protocol
 
 from .estimands import (
+    keyed_numeric_max_error,
     packed_keys,
     probability_components,
     relation_source_contributions,
@@ -28,10 +28,10 @@ from .estimands import (
     source_concentration,
 )
 from .locks import (
+    ACTIVE_SOURCE_LOCK_PATH,
     ARRAY_PATH,
     RUNTIME_ARRAY_PATH,
     RUNTIME_RESULT_PATH,
-    SOURCE_LOCK_PATH,
     reference,
     validate_source_lock,
 )
@@ -241,28 +241,6 @@ def _distribution(values: np.ndarray) -> dict:
         "minimum": float(np.min(finite)),
         "maximum": float(np.max(finite)),
     }
-
-
-def _numeric_leaves(value) -> Iterable[float]:
-    if isinstance(value, dict):
-        for nested in value.values():
-            yield from _numeric_leaves(nested)
-    elif isinstance(value, list):
-        for nested in value:
-            yield from _numeric_leaves(nested)
-    elif isinstance(value, (int, float)) and not isinstance(value, bool):
-        yield float(value)
-
-
-def _summary_error(observed: dict, expected: dict) -> float:
-    observed_values = tuple(_numeric_leaves(observed))
-    expected_values = tuple(_numeric_leaves(expected))
-    if len(observed_values) != len(expected_values):
-        return float("inf")
-    return max(
-        (abs(left - right) for left, right in zip(observed_values, expected_values)),
-        default=0.0,
-    )
 
 
 def _summary(
@@ -526,7 +504,7 @@ def run_analysis() -> dict:
                         )
                     )
                 ),
-                _summary_error(raw_summary, canonical_summary),
+                keyed_numeric_max_error(raw_summary, canonical_summary),
             ),
         }
         integrity_by_seed[str(seed)] = errors
@@ -776,8 +754,9 @@ def run_analysis() -> dict:
         "study_id": specification["study_id"],
         "experiment_id": specification["experiment_id"],
         "protocol_sha256": PROTOCOL_SHA256,
-        "source_lock": reference(SOURCE_LOCK_PATH),
+        "source_lock": reference(ACTIVE_SOURCE_LOCK_PATH),
         "source_commit": source_lock["source_commit"],
+        "implementation_repair": source_lock["repair"],
         "runtime": runtime,
         "parent_outcome_unchanged": {
             "outcome": parent_result["outcome"],

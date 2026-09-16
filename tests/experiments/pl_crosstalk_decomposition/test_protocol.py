@@ -16,6 +16,10 @@ class CrossTalkProtocolTests(unittest.TestCase):
         )
         self.assertEqual(registered_seeds(specification), (3004, 3005, 3006))
         self.assertEqual(
+            specification["active_repair"]["repair_id"],
+            "pl-crosstalk-decomposition-v1-implementation-repair1",
+        )
+        self.assertEqual(
             specification["design"]["new_training_or_adaptation"], "forbidden"
         )
         self.assertIn(

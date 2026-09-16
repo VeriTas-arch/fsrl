@@ -7,6 +7,36 @@ import numpy as np
 from fsrl.analysis.statistics import stable_sigmoid
 
 
+def keyed_numeric_max_error(observed, expected) -> float:
+    """Compare nested summaries by keys and indices rather than insertion order."""
+
+    if isinstance(observed, dict) and isinstance(expected, dict):
+        if set(observed) != set(expected):
+            return float("inf")
+        return max(
+            (keyed_numeric_max_error(observed[key], expected[key]) for key in observed),
+            default=0.0,
+        )
+    if isinstance(observed, list) and isinstance(expected, list):
+        if len(observed) != len(expected):
+            return float("inf")
+        return max(
+            (
+                keyed_numeric_max_error(left, right)
+                for left, right in zip(observed, expected)
+            ),
+            default=0.0,
+        )
+    if (
+        isinstance(observed, (int, float))
+        and not isinstance(observed, bool)
+        and isinstance(expected, (int, float))
+        and not isinstance(expected, bool)
+    ):
+        return abs(float(observed) - float(expected))
+    return 0.0 if observed == expected else float("inf")
+
+
 def packed_keys(
     left: np.ndarray,
     right: np.ndarray,
@@ -59,19 +89,20 @@ def relation_source_contributions(
     if np.any(source_indices < 0) or np.any(source_indices >= relation_count):
         raise ValueError("source relation index is outside the registered range")
 
-    overlaps = np.einsum(
-        "itk,iek->ite", support, queries, dtype=np.float32, optimize=False
-    )
-    trial_contributions = evidence[:, :, None] * overlaps
-    result = np.zeros(
-        (evidence.shape[0], relation_count, queries.shape[1]), dtype=np.float64
+    source_traces = np.zeros(
+        (evidence.shape[0], relation_count, support.shape[2]), dtype=np.float32
     )
     for trial_index in range(evidence.shape[1]):
         for subject in range(evidence.shape[0]):
-            result[subject, source_indices[subject, trial_index]] += (
-                trial_contributions[subject, trial_index]
+            source_traces[subject, source_indices[subject, trial_index]] += (
+                evidence[subject, trial_index] * support[subject, trial_index]
             )
-    return result
+    return np.einsum(
+        "irk,iek->ire",
+        source_traces.astype(np.float64),
+        queries.astype(np.float64),
+        optimize=False,
+    )
 
 
 def retained_subject_mean(values: np.ndarray, retention: np.ndarray) -> np.ndarray:

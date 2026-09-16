@@ -7,12 +7,12 @@ from pathlib import Path
 from fsrl.infra.provenance import file_sha256, load_json
 
 from .locks import (
+    ACTIVE_SOURCE_LOCK_PATH,
     ARRAY_PATH,
     REPORT_PATH,
     RESULT_PATH,
     RUNTIME_ARRAY_PATH,
     RUNTIME_RESULT_PATH,
-    SOURCE_LOCK_PATH,
     reference,
     validate_source_lock,
 )
@@ -141,7 +141,7 @@ def render_report(result: dict) -> str:
 def freeze_outputs() -> dict:
     validate_source_lock()
     result = load_json(RUNTIME_RESULT_PATH)
-    if result["source_lock"] != reference(SOURCE_LOCK_PATH):
+    if result["source_lock"] != reference(ACTIVE_SOURCE_LOCK_PATH):
         raise RuntimeError("runtime result cites a different source lock")
     runtime_arrays = reference(RUNTIME_ARRAY_PATH)
     expected_arrays = result["supporting_arrays"]["runtime_source"]

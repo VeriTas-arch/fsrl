@@ -9,7 +9,14 @@ import json
 def main(args=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "stage", choices=("qualify", "lock-source", "analyze", "freeze")
+        "stage",
+        choices=(
+            "qualify",
+            "lock-source",
+            "lock-repair-source",
+            "analyze",
+            "freeze",
+        ),
     )
     parsed = parser.parse_args(args)
     if parsed.stage == "qualify":
@@ -20,6 +27,10 @@ def main(args=None) -> int:
         from .locks import write_source_lock
 
         result = write_source_lock()
+    elif parsed.stage == "lock-repair-source":
+        from .locks import write_source_repair_lock
+
+        result = write_source_repair_lock()
     elif parsed.stage == "analyze":
         from .analysis import run_analysis
 

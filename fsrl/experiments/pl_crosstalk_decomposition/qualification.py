@@ -10,6 +10,7 @@ from fsrl.infra.formal_runtime import formal_runtime_snapshot
 from fsrl.infra.provenance import write_json_exclusive
 
 from .estimands import (
+    keyed_numeric_max_error,
     packed_keys,
     probability_components,
     relation_source_contributions,
@@ -63,8 +64,22 @@ def run_qualification() -> dict:
         query,
         relation_count=2,
     )
-    overlaps = np.einsum("itk,iek->ite", support, query, dtype=np.float32)
-    expected_total = np.sum(evidence[:, :, None] * overlaps, axis=1)
+    expected_traces = np.zeros((2, 2, keys.shape[1]), dtype=np.float32)
+    for trial_index in range(evidence.shape[1]):
+        for subject in range(evidence.shape[0]):
+            expected_traces[subject, source_indices[subject, trial_index]] += (
+                evidence[subject, trial_index] * support[subject, trial_index]
+            )
+    expected_contributions = np.einsum(
+        "irk,iek->ire",
+        expected_traces.astype(np.float64),
+        query.astype(np.float64),
+        optimize=False,
+    )
+    trace_then_read_error = float(
+        np.max(np.abs(contributions - expected_contributions))
+    )
+    expected_total = np.sum(expected_contributions, axis=1)
     source_error = float(np.max(np.abs(np.sum(contributions, axis=1) - expected_total)))
 
     oriented = np.sum(contributions, axis=1).reshape(2, 1, 2)
@@ -132,20 +147,36 @@ def run_qualification() -> dict:
             for name in fixture
         )
     storage_error = max(float(first_bytes != second_bytes), roundtrip_error)
+    keyed_summary_error = max(
+        keyed_numeric_max_error(
+            {"bootstrap": {"lower": -0.1}, "subjects": 77},
+            {"subjects": 77, "bootstrap": {"lower": -0.1}},
+        ),
+        abs(
+            keyed_numeric_max_error(
+                {"subjects": 77, "bootstrap": {"lower": -0.2}},
+                {"bootstrap": {"lower": -0.1}, "subjects": 77},
+            )
+            - 0.1
+        ),
+    )
 
     checks = {
         "packed_key_norm_and_antisymmetry": _check(key_error, 1e-7),
         "source_relation_sum": _check(source_error, 1e-7),
+        "trace_then_read_order": _check(trace_then_read_error),
         "gain_scaled_perturbation": _check(gain_error),
         "exact_probability_effect": _check(probability_error),
         "first_order_definition": _check(first_order_error),
         "retained_subject_weighting": _check(weighting_error),
         "source_concentration": _check(concentration_error),
         "deterministic_npz_roundtrip": _check(storage_error),
+        "keyed_summary_comparison": _check(keyed_summary_error),
     }
     result = {
         "schema_version": 1,
         "study_id": "pl_crosstalk_decomposition",
+        "attempt": 2,
         "seed": 941001,
         "protocol_sha256": PROTOCOL_SHA256,
         "frozen_inputs_loaded": False,
