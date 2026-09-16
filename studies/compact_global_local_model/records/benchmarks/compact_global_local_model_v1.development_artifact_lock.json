@@ -1,0 +1,506 @@
+{
+  "cohort": "development",
+  "evaluation_exposed": false,
+  "experiment_id": "compact-global-local-model-v1",
+  "runs": {
+    "2801": {
+      "files": [
+        {
+          "bytes": 5716,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2801/config.json",
+          "sha256": "83d49be23595ccb8f601456884f0c9b1c738b3ddfbfd722e9e84093fc1141334"
+        },
+        {
+          "bytes": 352258,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2801/model.pth",
+          "sha256": "f58fa426d15626972d5c2375eaccab493211309a62cbbad558e787b984ee27be"
+        },
+        {
+          "bytes": 3819,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2801/run.json",
+          "sha256": "902d7a7f3104614ce204461cfb5a5b1ce274105f4cc6f9611d45e16ffa6f8dc0"
+        },
+        {
+          "bytes": 636009,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2801/train_log.jsonl",
+          "sha256": "037686ce557e076b36da295225e57f2879c36a6e3f02ee64fc6352ea92828c4e"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "input_size": 32,
+          "parameters": 87005,
+          "query_steps": 2,
+          "support_steps": 3
+        },
+        "checkpoint": {
+          "bytes": 352258,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2801/model.pth",
+          "sha256": "f58fa426d15626972d5c2375eaccab493211309a62cbbad558e787b984ee27be"
+        },
+        "cohort": "development",
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "738057e094114c0b9f7142eccf586194809b32c12e222ba3fcd749e11fcbc3f4",
+          "etaet": "6172a3a227d8a0f23c86955bb39b2ff0a7acbfb5703f4039b9f250b441fe2208",
+          "h2margin.bias": "bcac4c59cff147a8be64f2429d2b4d6966c2b555b830aff4a31769748b60c009",
+          "h2margin.weight": "32ba158aca6538b86e3ba2848b7c72e40e8809f97eb9c4ed7a5abf3bb1d6f5ea",
+          "h2modulation.bias": "8c75a56bc290558ac7bf093fb7dab0f90650e647f140b54a5cd2b96536de68c0",
+          "h2modulation.weight": "3af2091a3eb109a76ac7273bd13c9475824e103f676e876e4cb8593c22c1bf11",
+          "i2h.bias": "18209d522648f3106882a91c5eb4c973db3285f0657c296d10ddb27f80269b56",
+          "i2h.weight": "1fe277b02f776bd1bbff50ec897920e935bf3b5183dc19fed74573f86eb330b4",
+          "modulation_scale": "2663c1dd6c5e93ba48733a3affa8a2e6a90da4b9980ecf462e343aa4cbbba704",
+          "w": "d7e8dc3265596099692dab1d35719905dcbb608176fa8a0c7e3c33c828aaf775"
+        },
+        "final_local": {
+          "raw_gain": "90686159d3b41bf9ebb496fb80bb78662980f5c18b3bd4a2fd2028a584f10acd"
+        },
+        "initial_backbone": {
+          "alpha": "79a71ca62fc984ec79b953c1e858e145954d45bb6fa722735ee69c084fcfed4f",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "7866109a1cfbdb92d194c7596e85eea61b81b147af6ebe0165c305a80749e1f7",
+          "h2margin.weight": "752df6b7f251762a7ba0b34cd4e45a578b9c74f9d41d237bbbd2def6c497732d",
+          "h2modulation.bias": "1a60426d773ef8cc22827e0cf017eced6c2f0b2bcc67b0cb0cfe71c956066c9a",
+          "h2modulation.weight": "160cb26e30ddf5942c0b640ec916d006ca316aaa5a737b8af525e3663451db9e",
+          "i2h.bias": "80fad8bd45c3c44a13cbd07b2b63cbb75cb3c41be7326cf75ffb0a19556a7d13",
+          "i2h.weight": "f595a8885be15c87900c8d3660e944cfd4ae3f9a63308b6b56d57146791464a4",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "e3786786364e2c5894ef4dd2b6d48b3a3159490d2fc576bdbc8af3e5c306909e"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.28582602739334106,
+        "model": {
+          "cue_size": 15,
+          "hidden_size": 200
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1000,
+          "backbone.etaet": 1000,
+          "backbone.h2margin.bias": 1000,
+          "backbone.h2margin.weight": 1000,
+          "backbone.h2modulation.bias": 1000,
+          "backbone.h2modulation.weight": 1000,
+          "backbone.i2h.bias": 1000,
+          "backbone.i2h.weight": 1000,
+          "backbone.modulation_scale": 1000,
+          "backbone.w": 1000,
+          "local.raw_gain": 500
+        },
+        "phase_stats": {
+          "global": {
+            "peak_allocated_bytes": 1692526080,
+            "peak_reserved_bytes": 1862270976,
+            "seconds": 42.75096617179224,
+            "steps": 1000
+          },
+          "local": {
+            "peak_allocated_bytes": 766064128,
+            "peak_reserved_bytes": 1862270976,
+            "seconds": 11.876162481086794,
+            "steps": 500
+          }
+        },
+        "protocol_sha256": "fd4b61bcd55b4487b7017bbfbb8fb1bebbdcefdcccbc9976a7c07167b69300e0",
+        "repair_sha256": "d48196587245f40049e9297c0f94f238e638f3a66040f40623a66b808a02d49b",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2801,
+        "source_commit": "eedd80abf05deb6bef2abd2eeb5adc60b5f3b6bc",
+        "stage_boundary_backbone": {
+          "alpha": "738057e094114c0b9f7142eccf586194809b32c12e222ba3fcd749e11fcbc3f4",
+          "etaet": "6172a3a227d8a0f23c86955bb39b2ff0a7acbfb5703f4039b9f250b441fe2208",
+          "h2margin.bias": "bcac4c59cff147a8be64f2429d2b4d6966c2b555b830aff4a31769748b60c009",
+          "h2margin.weight": "32ba158aca6538b86e3ba2848b7c72e40e8809f97eb9c4ed7a5abf3bb1d6f5ea",
+          "h2modulation.bias": "8c75a56bc290558ac7bf093fb7dab0f90650e647f140b54a5cd2b96536de68c0",
+          "h2modulation.weight": "3af2091a3eb109a76ac7273bd13c9475824e103f676e876e4cb8593c22c1bf11",
+          "i2h.bias": "18209d522648f3106882a91c5eb4c973db3285f0657c296d10ddb27f80269b56",
+          "i2h.weight": "1fe277b02f776bd1bbff50ec897920e935bf3b5183dc19fed74573f86eb330b4",
+          "modulation_scale": "2663c1dd6c5e93ba48733a3affa8a2e6a90da4b9980ecf462e343aa4cbbba704",
+          "w": "d7e8dc3265596099692dab1d35719905dcbb608176fa8a0c7e3c33c828aaf775"
+        },
+        "stream_fingerprint": "6a2ebd90ecc4e23c9b58d6c4c770c58181695bb8110428df7b6196a2574a5ccb",
+        "total_seconds": 55.109237008029595
+      }
+    },
+    "2802": {
+      "files": [
+        {
+          "bytes": 5715,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2802/config.json",
+          "sha256": "788d51be964a3bce00adfeb7b78815480a31dc641f3c5b78ea9f1de628e69582"
+        },
+        {
+          "bytes": 352258,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2802/model.pth",
+          "sha256": "6d920cb1906d05ca9a6c312e7cdab576a7c9933ed51000b848b0b6c556f411b7"
+        },
+        {
+          "bytes": 3819,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2802/run.json",
+          "sha256": "43a2b7d534896dcb7ac7fe30cfb58d797c5adafb4d09c3a14685aa6f9308ab11"
+        },
+        {
+          "bytes": 635831,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2802/train_log.jsonl",
+          "sha256": "4d66a4fbff6f3b9b6352398cb458db7aa124e47e92fe1dc0d1f390dfbca64ee3"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "input_size": 32,
+          "parameters": 87005,
+          "query_steps": 2,
+          "support_steps": 3
+        },
+        "checkpoint": {
+          "bytes": 352258,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2802/model.pth",
+          "sha256": "6d920cb1906d05ca9a6c312e7cdab576a7c9933ed51000b848b0b6c556f411b7"
+        },
+        "cohort": "development",
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "10f5b907f33b99cd9e80c232f46129c39c7f77025e3f3b94df981ce2b4b45fd6",
+          "etaet": "64b33d8c7ebfd7944c141f122c86a7a94c1e0ee91cbc507de9e8dffbc0538a35",
+          "h2margin.bias": "a5a7863f36a48b5ce4a84806dbba05897344da15bf2d052bd04bcbb622da9aef",
+          "h2margin.weight": "6f35f77fa3e338d44bb65ca2db7c7c4a868badf1a4264a1f7813d519407b5c6f",
+          "h2modulation.bias": "2acb495831a43381653e5c7b35eb9b2eb76dea36f8db2473cef7e84762c4f7bc",
+          "h2modulation.weight": "e83f7ae2edc818a4e354670349eddfa521804a3f77820f9c51c80487ecde8eed",
+          "i2h.bias": "736afe93c3d4ccf1d09e1739c3ce1597c0fe7dd87d7910a2d86a851c61e3bfea",
+          "i2h.weight": "71d41ce6533588cd24cb35ad8b2e9cba888200a67cd3d09d2edf3b1882a261c7",
+          "modulation_scale": "563bdccd042c13e6b5c49f8baee7e9f5c76c96d14d2fb7440cf4196069a57ae0",
+          "w": "5d060d67fa4061fb6cb33b4523b11c33fcdef8658b3ab567575b25d08ba27fc7"
+        },
+        "final_local": {
+          "raw_gain": "dae870da40d2e9355ff76b6ea20cd9d0b16e5c30fd87fc824f64fc693eacc060"
+        },
+        "initial_backbone": {
+          "alpha": "d397a9ec7df9a956d1a012a891fb22ef127efc9409d5b3269dee0d20b495c09a",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "076a954d354688c526c56f34667cab51cd7deb5b80da1652f9a6bcf0c4aa30db",
+          "h2margin.weight": "85391da3feef0cb9e80d4778c9bc20bde42daff4d31444f54e4bac6ae0dc5a51",
+          "h2modulation.bias": "7acea6a0653c00a64a7e6fbfb5ff211abd6b2463f84b2c22cd430e99f7fe9adb",
+          "h2modulation.weight": "4254209fa6328937ebdec48ebc19f8b8c138617b823c35f2edbc867adcd17f31",
+          "i2h.bias": "4bccaf51a7e37242a1f7688133f1863d7b3084a0eb67f641d2a6ddb15c3b7767",
+          "i2h.weight": "6177cdfba10609b7dba9a3ead46fe2327fda5979c58831491cc2e007c104f242",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "ab19353c680b9f2ec57c1f4a604f14a6bb3b8fbddc9b4a809c167b2cf79119b2"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.29674196243286133,
+        "model": {
+          "cue_size": 15,
+          "hidden_size": 200
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1000,
+          "backbone.etaet": 1000,
+          "backbone.h2margin.bias": 1000,
+          "backbone.h2margin.weight": 1000,
+          "backbone.h2modulation.bias": 1000,
+          "backbone.h2modulation.weight": 1000,
+          "backbone.i2h.bias": 1000,
+          "backbone.i2h.weight": 1000,
+          "backbone.modulation_scale": 1000,
+          "backbone.w": 1000,
+          "local.raw_gain": 500
+        },
+        "phase_stats": {
+          "global": {
+            "peak_allocated_bytes": 1691923968,
+            "peak_reserved_bytes": 1746927616,
+            "seconds": 31.511583562474698,
+            "steps": 1000
+          },
+          "local": {
+            "peak_allocated_bytes": 666217984,
+            "peak_reserved_bytes": 1746927616,
+            "seconds": 9.466626975452527,
+            "steps": 500
+          }
+        },
+        "protocol_sha256": "fd4b61bcd55b4487b7017bbfbb8fb1bebbdcefdcccbc9976a7c07167b69300e0",
+        "repair_sha256": "d48196587245f40049e9297c0f94f238e638f3a66040f40623a66b808a02d49b",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2802,
+        "source_commit": "eedd80abf05deb6bef2abd2eeb5adc60b5f3b6bc",
+        "stage_boundary_backbone": {
+          "alpha": "10f5b907f33b99cd9e80c232f46129c39c7f77025e3f3b94df981ce2b4b45fd6",
+          "etaet": "64b33d8c7ebfd7944c141f122c86a7a94c1e0ee91cbc507de9e8dffbc0538a35",
+          "h2margin.bias": "a5a7863f36a48b5ce4a84806dbba05897344da15bf2d052bd04bcbb622da9aef",
+          "h2margin.weight": "6f35f77fa3e338d44bb65ca2db7c7c4a868badf1a4264a1f7813d519407b5c6f",
+          "h2modulation.bias": "2acb495831a43381653e5c7b35eb9b2eb76dea36f8db2473cef7e84762c4f7bc",
+          "h2modulation.weight": "e83f7ae2edc818a4e354670349eddfa521804a3f77820f9c51c80487ecde8eed",
+          "i2h.bias": "736afe93c3d4ccf1d09e1739c3ce1597c0fe7dd87d7910a2d86a851c61e3bfea",
+          "i2h.weight": "71d41ce6533588cd24cb35ad8b2e9cba888200a67cd3d09d2edf3b1882a261c7",
+          "modulation_scale": "563bdccd042c13e6b5c49f8baee7e9f5c76c96d14d2fb7440cf4196069a57ae0",
+          "w": "5d060d67fa4061fb6cb33b4523b11c33fcdef8658b3ab567575b25d08ba27fc7"
+        },
+        "stream_fingerprint": "9a320d0acb3671a45b830fbed05fd93f40e4748a37358b9824b477090ba57291",
+        "total_seconds": 41.46141604101285
+      }
+    },
+    "2803": {
+      "files": [
+        {
+          "bytes": 5715,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2803/config.json",
+          "sha256": "6e6d8a1fbe8af948bb10bb64b05b379264d10d8317a61ad8148692d14a7039ba"
+        },
+        {
+          "bytes": 352258,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2803/model.pth",
+          "sha256": "13b509c2b1bbe9980ac0129ce7a90309ea2533ee522193872c924e23f4fc6642"
+        },
+        {
+          "bytes": 3819,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2803/run.json",
+          "sha256": "b532ab759c7037ca73f9db07c8b2cab261c3d096674813a0f2dd1f3e751623f4"
+        },
+        {
+          "bytes": 634870,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2803/train_log.jsonl",
+          "sha256": "7019f0945d1a0e2eb1fe44ad648e292421b87d871b3fd8c0a45c9c60f5ef6e13"
+        }
+      ],
+      "metadata": {
+        "architecture": {
+          "L_scalars": 105,
+          "P_scalars": 40000,
+          "input_size": 32,
+          "parameters": 87005,
+          "query_steps": 2,
+          "support_steps": 3
+        },
+        "checkpoint": {
+          "bytes": 352258,
+          "path": "artifacts/runs/compact_global_local_model_v1/development/seed-2803/model.pth",
+          "sha256": "13b509c2b1bbe9980ac0129ce7a90309ea2533ee522193872c924e23f4fc6642"
+        },
+        "cohort": "development",
+        "episode_exposures": 48000,
+        "final_backbone": {
+          "alpha": "1a1c3a8785d1777daca834cdacbd55f8a6bcb1b157c9f91401c0b4067f16f0e1",
+          "etaet": "b01e3c66afbace970ed84de3f8e364502b2dbcefccfbf46fbe8213c50f51cbbf",
+          "h2margin.bias": "be7291aed5ab1557ad9d54f844cfd9a6a7ef8ce05f0e8c6b613de1eeb7bf9fa9",
+          "h2margin.weight": "7ee3e30d943c9eb7b25756621895e866a731261ef1aa0c464fe867d14851170c",
+          "h2modulation.bias": "d3146bd85e845117310e3be0b12780ae7c50ba844e56c4f8f7a3bc5ef73f5741",
+          "h2modulation.weight": "0ccf54277efbed5b972cd8b63b695838056e2562cd9fe2085d2baecf74e894f3",
+          "i2h.bias": "dbd4ada6ca8cc497851a979ea731fefbc2615c6a241ecf0303a875bddc793be8",
+          "i2h.weight": "5c3a5e3c3503aaec05a565f007bbe8fc67b02c00df230197f48d864e096483cc",
+          "modulation_scale": "0717abeaa06628cac219957d1713c074c0e47e2d852b4434ec3baec429f7a3ea",
+          "w": "f56d9230f8a0b8f0709f423a991da757d403d50eb906a74660b12b2710820c8d"
+        },
+        "final_local": {
+          "raw_gain": "d7bff20aee3e61a839398fe7cb35401cba248e309f8fc97c922a4ff41fa4e7f0"
+        },
+        "initial_backbone": {
+          "alpha": "a947f0b2e94b260c259449dd562921600c765c87428e420753acb5b882c9cebd",
+          "etaet": "2f0d6f3d65a7e28c4223e4389106e46f1e9010a2bd724d35f9794cb8a86d7c68",
+          "h2margin.bias": "f83ff7ad3989aa0f74d5a10eddd4349951b57af9374932abafe820fbb762a3ec",
+          "h2margin.weight": "ac79889ee166a7ccb1bad96da156758e4ac29ab04b5998e5ec1734c259e6323e",
+          "h2modulation.bias": "a94679df8b5dbc5d4e680f9a63d631171bd98706383ae018d9b96246083235db",
+          "h2modulation.weight": "c070d65a5b910360716b9f7a025ce94d5c358cffdd1b7673a8e9a132ac81b3f6",
+          "i2h.bias": "d4640035cba6ac67eb26d7cbd68e395e3ab9d5b8455fb14848011b1e5d942f7f",
+          "i2h.weight": "9a369c14b414a032f2e653a531aef8e064221b97c22f62f52e5dd607f0fa6873",
+          "modulation_scale": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+          "w": "16950328827f2821f96a975ec5c0911da1660df7c43f3f85bd58d51aaa6e7699"
+        },
+        "initial_local": {
+          "raw_gain": "9cd9f8ecd98103bb6ed1f411014592a7e952e99931c21448690ff389c3127fdf"
+        },
+        "local_gain": 0.2866297960281372,
+        "model": {
+          "cue_size": 15,
+          "hidden_size": 200
+        },
+        "optimizer_parameter_steps": {
+          "backbone.alpha": 1000,
+          "backbone.etaet": 1000,
+          "backbone.h2margin.bias": 1000,
+          "backbone.h2margin.weight": 1000,
+          "backbone.h2modulation.bias": 1000,
+          "backbone.h2modulation.weight": 1000,
+          "backbone.i2h.bias": 1000,
+          "backbone.i2h.weight": 1000,
+          "backbone.modulation_scale": 1000,
+          "backbone.w": 1000,
+          "local.raw_gain": 500
+        },
+        "phase_stats": {
+          "global": {
+            "peak_allocated_bytes": 1696286208,
+            "peak_reserved_bytes": 1790967808,
+            "seconds": 31.569642650603782,
+            "steps": 1000
+          },
+          "local": {
+            "peak_allocated_bytes": 666217984,
+            "peak_reserved_bytes": 1790967808,
+            "seconds": 9.474273099272978,
+            "steps": 500
+          }
+        },
+        "protocol_sha256": "fd4b61bcd55b4487b7017bbfbb8fb1bebbdcefdcccbc9976a7c07167b69300e0",
+        "repair_sha256": "d48196587245f40049e9297c0f94f238e638f3a66040f40623a66b808a02d49b",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "schema_version": 1,
+        "seed": 2803,
+        "source_commit": "eedd80abf05deb6bef2abd2eeb5adc60b5f3b6bc",
+        "stage_boundary_backbone": {
+          "alpha": "1a1c3a8785d1777daca834cdacbd55f8a6bcb1b157c9f91401c0b4067f16f0e1",
+          "etaet": "b01e3c66afbace970ed84de3f8e364502b2dbcefccfbf46fbe8213c50f51cbbf",
+          "h2margin.bias": "be7291aed5ab1557ad9d54f844cfd9a6a7ef8ce05f0e8c6b613de1eeb7bf9fa9",
+          "h2margin.weight": "7ee3e30d943c9eb7b25756621895e866a731261ef1aa0c464fe867d14851170c",
+          "h2modulation.bias": "d3146bd85e845117310e3be0b12780ae7c50ba844e56c4f8f7a3bc5ef73f5741",
+          "h2modulation.weight": "0ccf54277efbed5b972cd8b63b695838056e2562cd9fe2085d2baecf74e894f3",
+          "i2h.bias": "dbd4ada6ca8cc497851a979ea731fefbc2615c6a241ecf0303a875bddc793be8",
+          "i2h.weight": "5c3a5e3c3503aaec05a565f007bbe8fc67b02c00df230197f48d864e096483cc",
+          "modulation_scale": "0717abeaa06628cac219957d1713c074c0e47e2d852b4434ec3baec429f7a3ea",
+          "w": "f56d9230f8a0b8f0709f423a991da757d403d50eb906a74660b12b2710820c8d"
+        },
+        "stream_fingerprint": "adf1c27d663c76e1bb58a87369452a235e5371253a70e947bb61b4dbf3656521",
+        "total_seconds": 41.524097086978145
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_commit": "eedd80abf05deb6bef2abd2eeb5adc60b5f3b6bc",
+  "source_lock": {
+    "bytes": 84693,
+    "path": "studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.execution_lock.json",
+    "sha256": "0a5e6833d08169504279c55e28eb025faa41991c5afbccf84cd6120425426da5"
+  }
+}

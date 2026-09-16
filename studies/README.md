@@ -279,7 +279,9 @@ fail to close the dynamics.
   - **Finding:** Prospective contract, one pre-execution readiness repair, and the
     implementation/source lock are frozen. CPU and CUDA eager/fullgraph qualification
     passed; the repaired candidate uses three support steps, two query steps, 32 input
-    channels, one margin, and a 105-scalar exact packed local trace. No scientific seed
+    channels, one margin, and a 105-scalar exact packed local trace. All three
+    development seeds completed the frozen 1000-step global plus 500-step local
+    schedule, and their pre-evaluation artifacts are locked. No Liu or scientific gate
     result is yet registered.
 
 ## Minimal explanatory models

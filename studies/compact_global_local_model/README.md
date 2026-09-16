@@ -28,8 +28,9 @@ state?
 **Finding.** Prospective contract, one pre-execution readiness repair, and the
 implementation/source lock are frozen. CPU and CUDA eager/fullgraph qualification
 passed; the repaired candidate uses three support steps, two query steps, 32 input
-channels, one margin, and a 105-scalar exact packed local trace. No scientific seed
-result is yet registered.
+channels, one margin, and a 105-scalar exact packed local trace. All three development
+seeds completed the frozen 1000-step global plus 500-step local schedule, and their
+pre-evaluation artifacts are locked. No Liu or scientific gate result is yet registered.
 
 **Claim boundary.** The immutable parent plus append-only repair opens one fixed
 development candidate and conditional unchanged confirmation. It does not alter frozen
@@ -47,6 +48,9 @@ historical checkpoint deletion before confirmation and a separate retention migr
 - `execution_lock` —
   [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.execution_lock.json](records/benchmarks/compact_global_local_model_v1.execution_lock.json)
   (`sha256:0a5e6833d081`)
+- `artifact_lock` —
+  [studies/compact_global_local_model/records/benchmarks/compact_global_local_model_v1.development_artifact_lock.json](records/benchmarks/compact_global_local_model_v1.development_artifact_lock.json)
+  (`sha256:d4a34d20706d`)
 
 ## Provenance rule
 
