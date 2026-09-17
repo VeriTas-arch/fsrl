@@ -379,6 +379,9 @@ fail to close the dynamics.
   - **Finding:** Frozen M2-alpha result: 19/20 networks were stable_constructive, but
     0/60 noisy units met constrained morphology and 0/60 passed all nine qualitative
     rows; registered outcome no_constrained_rescue.
+- [Current-standard morphology re-audit of historical alpha single-P](historical_single_p_morphology_reaudit/README.md) — `unresolved`
+  - **Finding:** Prospectively registered read-only historical morphology re-audit;
+    analysis pending.
 
 ## Minimal explanatory models
 
