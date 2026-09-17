@@ -7,16 +7,16 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 4026,
+  "entry_count": 4030,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2254,
+    "json": 2255,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 117,
-    "numpy_npz": 1417,
+    "markdown": 118,
+    "numpy_npz": 1419,
     "pdf": 2,
     "pytorch_state_dict": 149,
     "svg": 4,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3926,
+    "already_conformant": 3930,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -62578,6 +62578,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.md",
+        "repository_path": "studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 586,
+        "sha256": "b1412e73ce2a4f01a340987dbd4bb45c36b868e6bde684c47b3bdc121d89861f"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_vector_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_vector_modulation.studies_minimal_single_p_vector_modulation_records_reports_minimal_single_p_vector_modulation_v1_md",
+      "registered_identity": {
+        "bytes": 586,
+        "sha256": "b1412e73ce2a4f01a340987dbd4bb45c36b868e6bde684c47b3bdc121d89861f",
+        "source_ref": "sha256:b1412e73ce2a4f01a340987dbd4bb45c36b868e6bde684c47b3bdc121d89861f"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.frozen_result",
       "format": {
         "format": "json",
@@ -62609,6 +62643,108 @@
         "source_ref": "sha256:9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a"
       },
       "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.json",
+        "repository_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 113004,
+        "sha256": "d3c964a400e48c1b9049a1d034748145dc73dd6ec76e4306b9bab39ee6d1b750"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_vector_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_vector_modulation.studies_minimal_single_p_vector_modulation_records_results_minimal_single_p_vector_modulation_v1_json",
+      "registered_identity": {
+        "bytes": 113004,
+        "sha256": "d3c964a400e48c1b9049a1d034748145dc73dd6ec76e4306b9bab39ee6d1b750",
+        "source_ref": "sha256:d3c964a400e48c1b9049a1d034748145dc73dd6ec76e4306b9bab39ee6d1b750"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.pairs.npz",
+        "repository_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.pairs.npz"
+      },
+      "materialized_identity": {
+        "bytes": 13683,
+        "sha256": "302f3160e62dbc6565de79dfdcb66d603925ca811ce28f7d109e97783f4ae70a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_vector_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_vector_modulation.studies_minimal_single_p_vector_modulation_records_results_minimal_single_p_vector_modulation_v1_pairs_npz",
+      "registered_identity": {
+        "bytes": 13683,
+        "sha256": "302f3160e62dbc6565de79dfdcb66d603925ca811ce28f7d109e97783f4ae70a",
+        "source_ref": "sha256:302f3160e62dbc6565de79dfdcb66d603925ca811ce28f7d109e97783f4ae70a"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.writes.npz",
+        "repository_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.writes.npz"
+      },
+      "materialized_identity": {
+        "bytes": 2147,
+        "sha256": "ed3e60ce7a90fd39abc6f4dcd340160c5f6f59441ad708973c7a50c18d535736"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_vector_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_vector_modulation.studies_minimal_single_p_vector_modulation_records_results_minimal_single_p_vector_modulation_v1_writes_npz",
+      "registered_identity": {
+        "bytes": 2147,
+        "sha256": "ed3e60ce7a90fd39abc6f4dcd340160c5f6f59441ad708973c7a50c18d535736",
+        "source_ref": "sha256:ed3e60ce7a90fd39abc6f4dcd340160c5f6f59441ad708973c7a50c18d535736"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -137279,7 +137415,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 4024,
+  "registered_record_count": 4028,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -137293,7 +137429,7 @@
     "execution_lock": 88,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 591,
+    "frozen_result": 592,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -137303,10 +137439,10 @@
     "registered_contract": 103,
     "repair_contract": 41,
     "repair_lock": 20,
-    "report": 112,
+    "report": 113,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2736,
+    "supporting_artifact": 2738,
     "validation_result": 48
   },
   "schema_version": 2,

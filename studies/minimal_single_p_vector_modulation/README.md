@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `unresolved`
+- **Status:** `valid_negative`
 - **Review state:** `indexed`
 - **Study ID:** `minimal_single_p_vector_modulation`
 
@@ -26,8 +26,10 @@ observation process, and evaluation arrays fixed, does replacing the shared scal
 modulator with a postsynaptic-neuron-specific instantaneous vector recover constrained
 Liu morphology without damaging competence?
 
-**Finding.** Generic vector-modulation development freeze: 3/3 stable_constructive; Liu
-pending.
+**Finding.** Frozen development result: all 3 networks were stable_constructive and used
+strongly non-scalar writes without competence damage, but 0/9 noisy units passed all
+nine rows or constrained morphology. Difficult-pair bimodality failed in 9/9 and stable
+within-subject errors failed in 6/9; outcome used_without_rescue.
 
 **Claim boundary.** P remains the only episode-persistent plastic state. This exposed
 three-seed development study tests heterogeneous write allocation, not confirmation,
@@ -50,9 +52,21 @@ biological implementation, or main-model promotion.
 - `report` —
   [studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.generic.md](records/reports/minimal_single_p_vector_modulation_v1.generic.md)
   (`sha256:60bb7be5af86`)
+- `report` —
+  [studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.md](records/reports/minimal_single_p_vector_modulation_v1.md)
+  (`sha256:b1412e73ce2a`)
 - `frozen_result` —
   [studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.generic.json](records/results/minimal_single_p_vector_modulation_v1.generic.json)
   (`sha256:9caca316f72c`)
+- `frozen_result` —
+  [studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.json](records/results/minimal_single_p_vector_modulation_v1.json)
+  (`sha256:d3c964a400e4`)
+- `supporting_artifact` —
+  [studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.pairs.npz](records/results/minimal_single_p_vector_modulation_v1.pairs.npz)
+  (`sha256:302f3160e62d`)
+- `supporting_artifact` —
+  [studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.writes.npz](records/results/minimal_single_p_vector_modulation_v1.writes.npz)
+  (`sha256:ed3e60ce7a90`)
 
 ## Provenance rule
 

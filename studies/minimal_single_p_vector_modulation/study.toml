@@ -3,10 +3,10 @@ id = "minimal_single_p_vector_modulation"
 title = "Postsynaptic vector modulation in minimal single-P M2"
 chapter = "algorithmic_compression"
 order = 1320
-status = "unresolved"
+status = "valid_negative"
 review_state = "indexed"
 question = "Holding M2 inputs, persistent state, readout, task streams, optimization, observation process, and evaluation arrays fixed, does replacing the shared scalar write modulator with a postsynaptic-neuron-specific instantaneous vector recover constrained Liu morphology without damaging competence?"
-finding = "Generic vector-modulation development freeze: 3/3 stable_constructive; Liu pending."
+finding = "Frozen development result: all 3 networks were stable_constructive and used strongly non-scalar writes without competence damage, but 0/9 noisy units passed all nine rows or constrained morphology. Difficult-pair bimodality failed in 9/9 and stable within-subject errors failed in 6/9; outcome used_without_rescue."
 boundary = "P remains the only episode-persistent plastic state. This exposed three-seed development study tests heterogeneous write allocation, not confirmation, biological implementation, or main-model promotion."
 
 [[records]]
@@ -55,6 +55,15 @@ bytes = 320
 source_ref = "sha256:60bb7be5af8664a75330c5a160786e55a7a712691cfb6a2e88be3093c2bd8710"
 
 [[records]]
+path = "records/reports/minimal_single_p_vector_modulation_v1.md"
+legacy_path = "studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.md"
+origin = "native"
+role = "report"
+sha256 = "b1412e73ce2a4f01a340987dbd4bb45c36b868e6bde684c47b3bdc121d89861f"
+bytes = 586
+source_ref = "sha256:b1412e73ce2a4f01a340987dbd4bb45c36b868e6bde684c47b3bdc121d89861f"
+
+[[records]]
 path = "records/results/minimal_single_p_vector_modulation_v1.generic.json"
 legacy_path = "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.generic.json"
 origin = "native"
@@ -62,3 +71,30 @@ role = "frozen_result"
 sha256 = "9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a"
 bytes = 43377
 source_ref = "sha256:9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a"
+
+[[records]]
+path = "records/results/minimal_single_p_vector_modulation_v1.json"
+legacy_path = "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "d3c964a400e48c1b9049a1d034748145dc73dd6ec76e4306b9bab39ee6d1b750"
+bytes = 113004
+source_ref = "sha256:d3c964a400e48c1b9049a1d034748145dc73dd6ec76e4306b9bab39ee6d1b750"
+
+[[records]]
+path = "records/results/minimal_single_p_vector_modulation_v1.pairs.npz"
+legacy_path = "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.pairs.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "302f3160e62dbc6565de79dfdcb66d603925ca811ce28f7d109e97783f4ae70a"
+bytes = 13683
+source_ref = "sha256:302f3160e62dbc6565de79dfdcb66d603925ca811ce28f7d109e97783f4ae70a"
+
+[[records]]
+path = "records/results/minimal_single_p_vector_modulation_v1.writes.npz"
+legacy_path = "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.writes.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "ed3e60ce7a90fd39abc6f4dcd340160c5f6f59441ad708973c7a50c18d535736"
+bytes = 2147
+source_ref = "sha256:ed3e60ce7a90fd39abc6f4dcd340160c5f6f59441ad708973c7a50c18d535736"

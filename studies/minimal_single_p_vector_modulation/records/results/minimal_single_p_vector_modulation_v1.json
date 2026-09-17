@@ -1,0 +1,3546 @@
+{
+  "aggregate": {
+    "all_nine_noisy_units": 0,
+    "constrained_noisy_units": 0,
+    "damaging_rescue_networks": 0,
+    "generic_categories": {
+      "stable_constructive": 3
+    },
+    "noisy_stage_counts": {
+      "direction_absent": 1,
+      "latent_shape": 3,
+      "weak_margin": 5
+    },
+    "rescued_networks": 0,
+    "stable_constructive_networks": 3,
+    "vector_used_networks": 3
+  },
+  "fresh_confirmation_authorized": false,
+  "generic_result": {
+    "bytes": 43377,
+    "path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.generic.json",
+    "sha256": "9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a"
+  },
+  "main_model_promoted": false,
+  "mechanism_control_authorized": false,
+  "model_lock": {
+    "bytes": 14105,
+    "path": "studies/minimal_single_p_vector_modulation/records/benchmarks/model_lock.json",
+    "sha256": "ee9474a99daf5fb539da1de38acf66f22c5bf6d7691411cf6c278c2adc9b6b68"
+  },
+  "networks": {
+    "3041": {
+      "damaging_rescue": false,
+      "has_constrained_noisy_panel": false,
+      "preserved": true,
+      "rescued": false,
+      "stable_constructive": true,
+      "vector_used": true
+    },
+    "3042": {
+      "damaging_rescue": false,
+      "has_constrained_noisy_panel": false,
+      "preserved": true,
+      "rescued": false,
+      "stable_constructive": true,
+      "vector_used": true
+    },
+    "3043": {
+      "damaging_rescue": false,
+      "has_constrained_noisy_panel": false,
+      "preserved": true,
+      "rescued": false,
+      "stable_constructive": true,
+      "vector_used": true
+    }
+  },
+  "outcome": "used_without_rescue",
+  "protocol_sha256": "11c11848906d9e4532f19d0cb223245b84c517e9ef16ef352ec13cbdef5d3bb9",
+  "schema_version": 1,
+  "selection_performed": false,
+  "units": [
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 0,
+        "strong_error_pair_prevalence_max": 0.0,
+        "strong_error_pair_prevalence_mean": 0.0,
+        "strong_error_subject_prevalence": 0.0,
+        "strong_error_top5_share": null,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6883116883116883,
+          "fraction_strong_error": 0.1012987012987013,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.893939393939394,
+          "fraction_strong_error": 0.012121212121212121,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.16666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9854545454545456,
+          "fraction_strong_error": 0.0036363636363636364,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_subject_prevalence": 0.6,
+        "strong_error_top5_share": 0.7727272727272727,
+        "strong_two_sided_pairs": 12
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.49350649350649356,
+        "nonlearned": 0.4308441558441557,
+        "overall": 0.4487476808905376
+      },
+      "panel": 1,
+      "seed": 3041,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.17145347595215,
+          "mean": 8.029735565185547,
+          "median": 2.6583449840545654
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8623831868171692,
+          "median": 0.9122911691665649
+        },
+        "U_norm": {
+          "maximum": 1.5681043863296509,
+          "mean": 0.17767490446567535,
+          "median": 0.03160453215241432
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.5681043863296509,
+          "mean": 0.17767490446567535,
+          "median": 0.03160453215241432
+        },
+        "c_star": {
+          "maximum": 0.02188437432050705,
+          "mean": -0.005315763410180807,
+          "median": -0.004785110242664814
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.004043754655867815,
+          "mean": -0.012016670778393745,
+          "median": -0.012355305254459381
+        },
+        "modulation_variance": {
+          "maximum": 0.002825457602739334,
+          "mean": 0.00020936226064804941,
+          "median": 2.0764036889886484e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9300000071525574,
+          "mean": 0.7027130722999573,
+          "median": 0.7049999833106995
+        },
+        "positive_fraction": {
+          "maximum": 0.5949999690055847,
+          "mean": 0.2972869277000427,
+          "median": 0.29499998688697815
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 1,
+        "strong_error_pair_prevalence_max": 0.024390243902439025,
+        "strong_error_pair_prevalence_mean": 0.0008710801393728223,
+        "strong_error_subject_prevalence": 0.024390243902439025,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6237424547283702,
+          "fraction_strong_error": 0.11468812877263582,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8450704225352114,
+          "fraction_strong_error": 0.035211267605633804,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9633802816901408,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9985915492957746,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.6056338028169014,
+        "strong_error_top5_share": 0.6805555555555556,
+        "strong_two_sided_pairs": 13
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.49350649350649345,
+        "nonlearned": 0.4058441558441559,
+        "overall": 0.4308905380333952
+      },
+      "panel": 1,
+      "seed": 3041,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.775760650634766,
+          "mean": 8.267975807189941,
+          "median": 2.3681108951568604
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8422057628631592,
+          "median": 0.8993045091629028
+        },
+        "U_norm": {
+          "maximum": 1.8075469732284546,
+          "mean": 0.1975291669368744,
+          "median": 0.02979404851794243
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.8075469732284546,
+          "mean": 0.1975291669368744,
+          "median": 0.02979404851794243
+        },
+        "c_star": {
+          "maximum": 0.027157502248883247,
+          "mean": -0.006466629449278116,
+          "median": -0.005575166083872318
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.004204533528536558,
+          "mean": -0.01206603180617094,
+          "median": -0.012403850443661213
+        },
+        "modulation_variance": {
+          "maximum": 0.0031393738463521004,
+          "mean": 0.0002349100395804271,
+          "median": 2.172214226447977e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9350000023841858,
+          "mean": 0.7008832097053528,
+          "median": 0.699999988079071
+        },
+        "positive_fraction": {
+          "maximum": 0.6449999809265137,
+          "mean": 0.29911676049232483,
+          "median": 0.29999998211860657
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 1,
+        "strong_error_pair_prevalence_max": 0.024390243902439025,
+        "strong_error_pair_prevalence_mean": 0.0008710801393728223,
+        "strong_error_subject_prevalence": 0.024390243902439025,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6164383561643836,
+          "fraction_strong_error": 0.11350293542074365,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8470319634703195,
+          "fraction_strong_error": 0.0319634703196347,
+          "latent_bimodal_fraction": 0.3333333333333333,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9616438356164384,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9972602739726029,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.6164383561643836,
+        "strong_error_top5_share": 0.6805555555555556,
+        "strong_two_sided_pairs": 13
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.4837662337662338,
+        "nonlearned": 0.4012987012987012,
+        "overall": 0.4248608534322821
+      },
+      "panel": 1,
+      "seed": 3041,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.775760650634766,
+          "mean": 8.273542404174805,
+          "median": 2.333847761154175
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8417608141899109,
+          "median": 0.8981277942657471
+        },
+        "U_norm": {
+          "maximum": 1.8075469732284546,
+          "mean": 0.19844605028629303,
+          "median": 0.02979404851794243
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.8075469732284546,
+          "mean": 0.19844606518745422,
+          "median": 0.02979404851794243
+        },
+        "c_star": {
+          "maximum": 0.027157502248883247,
+          "mean": -0.006546090357005596,
+          "median": -0.0056175049394369125
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.004204533528536558,
+          "mean": -0.012068159878253937,
+          "median": -0.012411108240485191
+        },
+        "modulation_variance": {
+          "maximum": 0.0031393738463521004,
+          "mean": 0.00023634957324247807,
+          "median": 2.172214226447977e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9300000071525574,
+          "mean": 0.7005879282951355,
+          "median": 0.699999988079071
+        },
+        "positive_fraction": {
+          "maximum": 0.6299999952316284,
+          "mean": 0.2994120121002197,
+          "median": 0.29999998211860657
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 3,
+        "strong_error_pair_prevalence_max": 0.027777777777777776,
+        "strong_error_pair_prevalence_mean": 0.002976190476190476,
+        "strong_error_subject_prevalence": 0.08333333333333333,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.673015873015873,
+          "fraction_strong_error": 0.08253968253968254,
+          "latent_bimodal_fraction": 0.5714285714285714,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.8962962962962964,
+          "fraction_strong_error": 0.011111111111111112,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.16666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9777777777777779,
+          "fraction_strong_error": 0.0044444444444444444,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9977777777777778,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 13,
+        "latent_bimodal_pairs": 5,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_subject_prevalence": 0.4444444444444444,
+        "strong_error_top5_share": 0.8,
+        "strong_two_sided_pairs": 9
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.4983766233766233,
+        "nonlearned": 0.4506493506493504,
+        "overall": 0.46428571428571414
+      },
+      "panel": 2,
+      "seed": 3041,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 30.715364456176758,
+          "mean": 7.874652862548828,
+          "median": 2.678968667984009
+        },
+        "R": {
+          "maximum": 1.0000001192092896,
+          "mean": 0.8584598898887634,
+          "median": 0.9050421118736267
+        },
+        "U_norm": {
+          "maximum": 1.55679452419281,
+          "mean": 0.16635270416736603,
+          "median": 0.028605587780475616
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.55679452419281,
+          "mean": 0.16635270416736603,
+          "median": 0.028605587780475616
+        },
+        "c_star": {
+          "maximum": 0.021328739821910858,
+          "mean": -0.005248002242296934,
+          "median": -0.0047837202437222
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.008092139847576618,
+          "mean": -0.010926994495093822,
+          "median": -0.011540483683347702
+        },
+        "modulation_variance": {
+          "maximum": 0.002569042146205902,
+          "mean": 0.00019218023226130754,
+          "median": 1.7731881598592736e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.949999988079071,
+          "mean": 0.6955859065055847,
+          "median": 0.6949999928474426
+        },
+        "positive_fraction": {
+          "maximum": 0.7149999737739563,
+          "mean": 0.3044140338897705,
+          "median": 0.3050000071525574
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 3,
+        "strong_error_pair_prevalence_max": 0.06451612903225806,
+        "strong_error_pair_prevalence_mean": 0.003456221198156682,
+        "strong_error_subject_prevalence": 0.06451612903225806,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6128364389233953,
+          "fraction_strong_error": 0.09316770186335402,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.8550724637681159,
+          "fraction_strong_error": 0.028985507246376812,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9681159420289855,
+          "fraction_strong_error": 0.002898550724637681,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9956521739130435,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 9,
+        "strong_error_subject_prevalence": 0.6376811594202898,
+        "strong_error_top5_share": 0.6896551724137931,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.4772727272727273,
+        "nonlearned": 0.42597402597402617,
+        "overall": 0.44063079777365494
+      },
+      "panel": 2,
+      "seed": 3041,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.39470100402832,
+          "mean": 8.145679473876953,
+          "median": 2.578521728515625
+        },
+        "R": {
+          "maximum": 1.0000001192092896,
+          "mean": 0.8386070132255554,
+          "median": 0.8978217244148254
+        },
+        "U_norm": {
+          "maximum": 1.6951797008514404,
+          "mean": 0.18861627578735352,
+          "median": 0.029229123145341873
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.6951797008514404,
+          "mean": 0.18861627578735352,
+          "median": 0.029229123145341873
+        },
+        "c_star": {
+          "maximum": 0.0249189306050539,
+          "mean": -0.006333446595817804,
+          "median": -0.005465510301291943
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.008116387762129307,
+          "mean": -0.010999911464750767,
+          "median": -0.011660934425890446
+        },
+        "modulation_variance": {
+          "maximum": 0.002923950320109725,
+          "mean": 0.00021997641306370497,
+          "median": 2.4325800040969625e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9549999833106995,
+          "mean": 0.6920403838157654,
+          "median": 0.6899999976158142
+        },
+        "positive_fraction": {
+          "maximum": 0.7199999690055847,
+          "mean": 0.3079596161842346,
+          "median": 0.3100000023841858
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 2,
+        "strong_error_pair_prevalence_max": 0.03225806451612903,
+        "strong_error_pair_prevalence_mean": 0.002304147465437788,
+        "strong_error_subject_prevalence": 0.03225806451612903,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.5938775510204082,
+          "fraction_strong_error": 0.10612244897959182,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8214285714285715,
+          "fraction_strong_error": 0.02857142857142857,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9571428571428571,
+          "fraction_strong_error": 0.008571428571428572,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9928571428571429,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 16,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.6571428571428571,
+        "strong_error_top5_share": 0.6567164179104478,
+        "strong_two_sided_pairs": 16
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.4602272727272727,
+        "nonlearned": 0.42662337662337674,
+        "overall": 0.43622448979591816
+      },
+      "panel": 2,
+      "seed": 3041,
+      "stage": "latent_shape",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.39470100402832,
+          "mean": 8.154478073120117,
+          "median": 2.5946903228759766
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8387186527252197,
+          "median": 0.897855281829834
+        },
+        "U_norm": {
+          "maximum": 1.6951797008514404,
+          "mean": 0.1897187978029251,
+          "median": 0.030710740014910698
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.6951797008514404,
+          "mean": 0.18971878290176392,
+          "median": 0.030710740014910698
+        },
+        "c_star": {
+          "maximum": 0.0249189306050539,
+          "mean": -0.006418412551283836,
+          "median": -0.0054865689016878605
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.008116387762129307,
+          "mean": -0.011006333865225315,
+          "median": -0.011675329878926277
+        },
+        "modulation_variance": {
+          "maximum": 0.002923950320109725,
+          "mean": 0.00022157185594551265,
+          "median": 2.4960256268968806e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9549999833106995,
+          "mean": 0.6917166709899902,
+          "median": 0.6899999976158142
+        },
+        "positive_fraction": {
+          "maximum": 0.7199999690055847,
+          "mean": 0.308283269405365,
+          "median": 0.3100000023841858
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 3,
+        "strong_error_pair_prevalence_max": 0.022727272727272728,
+        "strong_error_pair_prevalence_mean": 0.002435064935064935,
+        "strong_error_subject_prevalence": 0.06818181818181818,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6811224489795917,
+          "fraction_strong_error": 0.09948979591836733,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.9166666666666666,
+          "fraction_strong_error": 0.008928571428571428,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "3": {
+          "fraction_strong_correct": 0.9964285714285716,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 12,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 6,
+        "strong_error_subject_prevalence": 0.5714285714285714,
+        "strong_error_top5_share": 0.8095238095238095,
+        "strong_two_sided_pairs": 10
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.463474025974026,
+        "nonlearned": 0.42467532467532454,
+        "overall": 0.43576066790352475
+      },
+      "panel": 3,
+      "seed": 3041,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 30.479785919189453,
+          "mean": 8.133007049560547,
+          "median": 2.5125582218170166
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8562560677528381,
+          "median": 0.9048974514007568
+        },
+        "U_norm": {
+          "maximum": 1.5862507820129395,
+          "mean": 0.1777442991733551,
+          "median": 0.03260480612516403
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.5862507820129395,
+          "mean": 0.1777442991733551,
+          "median": 0.03260480985045433
+        },
+        "c_star": {
+          "maximum": 0.020707102492451668,
+          "mean": -0.005442736204713583,
+          "median": -0.004938772413879633
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.003146929433569312,
+          "mean": -0.011631186120212078,
+          "median": -0.011609921231865883
+        },
+        "modulation_variance": {
+          "maximum": 0.0028651596512645483,
+          "mean": 0.00020211942319292575,
+          "median": 2.005117858061567e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9249999523162842,
+          "mean": 0.701179027557373,
+          "median": 0.6949999928474426
+        },
+        "positive_fraction": {
+          "maximum": 0.5899999737739563,
+          "mean": 0.29882100224494934,
+          "median": 0.3050000071525574
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 4,
+        "strong_error_pair_prevalence_max": 0.024390243902439025,
+        "strong_error_pair_prevalence_mean": 0.003484320557491289,
+        "strong_error_subject_prevalence": 0.0975609756097561,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 1
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6087912087912087,
+          "fraction_strong_error": 0.12967032967032968,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8076923076923076,
+          "fraction_strong_error": 0.020512820512820513,
+          "latent_bimodal_fraction": 0.3333333333333333,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9569230769230769,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9953846153846154,
+          "fraction_strong_error": 0.0015384615384615385,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.7230769230769231,
+        "strong_error_top5_share": 0.6764705882352942,
+        "strong_two_sided_pairs": 11
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.42613636363636365,
+        "nonlearned": 0.4048701298701298,
+        "overall": 0.41094619666048204
+      },
+      "panel": 3,
+      "seed": 3041,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 33.37221145629883,
+          "mean": 8.343591690063477,
+          "median": 2.467998504638672
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8329828381538391,
+          "median": 0.8945658206939697
+        },
+        "U_norm": {
+          "maximum": 1.871544599533081,
+          "mean": 0.19774170219898224,
+          "median": 0.03686531260609627
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.871544599533081,
+          "mean": 0.19774170219898224,
+          "median": 0.03686531260609627
+        },
+        "c_star": {
+          "maximum": 0.026136081665754318,
+          "mean": -0.006666434463113546,
+          "median": -0.005668753292411566
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.002704544924199581,
+          "mean": -0.011685061268508434,
+          "median": -0.011660740710794926
+        },
+        "modulation_variance": {
+          "maximum": 0.0031370874494314194,
+          "mean": 0.00022674560023006052,
+          "median": 2.7599266104516573e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9399999976158142,
+          "mean": 0.698754072189331,
+          "median": 0.6949999928474426
+        },
+        "positive_fraction": {
+          "maximum": 0.5600000023841858,
+          "mean": 0.30124592781066895,
+          "median": 0.3050000071525574
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 28,
+        "latent_bimodal_pairs": 0,
+        "sampled_bimodal_pairs": 0,
+        "strong_error_cases": 2,
+        "strong_error_pair_prevalence_max": 0.02564102564102564,
+        "strong_error_pair_prevalence_mean": 0.0018315018315018315,
+        "strong_error_subject_prevalence": 0.05128205128205128,
+        "strong_error_top5_share": 1.0,
+        "strong_two_sided_pairs": 0
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6008403361344538,
+          "fraction_strong_error": 0.1323529411764706,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.7990196078431372,
+          "fraction_strong_error": 0.02696078431372549,
+          "latent_bimodal_fraction": 0.3333333333333333,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9558823529411764,
+          "fraction_strong_error": 0.0029411764705882353,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9955882352941178,
+          "fraction_strong_error": 0.0014705882352941176,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.7205882352941176,
+        "strong_error_top5_share": 0.6710526315789473,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.40827922077922085,
+        "nonlearned": 0.40389610389610386,
+        "overall": 0.40514842300556564
+      },
+      "panel": 3,
+      "seed": 3041,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 33.37221145629883,
+          "mean": 8.355777740478516,
+          "median": 2.455793619155884
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8321725130081177,
+          "median": 0.8942137956619263
+        },
+        "U_norm": {
+          "maximum": 1.871544599533081,
+          "mean": 0.19901961088180542,
+          "median": 0.03686531260609627
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.871544599533081,
+          "mean": 0.19901961088180542,
+          "median": 0.03686531260609627
+        },
+        "c_star": {
+          "maximum": 0.02607758715748787,
+          "mean": -0.006775116082280874,
+          "median": -0.0056936051696538925
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.002704544924199581,
+          "mean": -0.011692401021718979,
+          "median": -0.011671052314341068
+        },
+        "modulation_variance": {
+          "maximum": 0.0031370874494314194,
+          "mean": 0.00022837176220491529,
+          "median": 2.7599266104516573e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9399999976158142,
+          "mean": 0.6983553171157837,
+          "median": 0.6949999928474426
+        },
+        "positive_fraction": {
+          "maximum": 0.5699999928474426,
+          "mean": 0.3016446530818939,
+          "median": 0.3050000071525574
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_cases": 44,
+        "strong_error_pair_prevalence_max": 0.1509433962264151,
+        "strong_error_pair_prevalence_mean": 0.029649595687331533,
+        "strong_error_subject_prevalence": 0.6037735849056604,
+        "strong_error_top5_share": 0.75,
+        "strong_two_sided_pairs": 9
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6649350649350649,
+          "fraction_strong_error": 0.10649350649350649,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8848484848484848,
+          "fraction_strong_error": 0.012121212121212121,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.16666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9745454545454546,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9981818181818183,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_subject_prevalence": 0.6181818181818182,
+        "strong_error_top5_share": 0.7555555555555555,
+        "strong_two_sided_pairs": 10
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0,
+        "nonlearned": -0.0035714285714286698,
+        "overall": -0.0025510204081632404
+      },
+      "panel": 1,
+      "seed": 3042,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.44119644165039,
+          "mean": 7.900278091430664,
+          "median": 1.9786791801452637
+        },
+        "R": {
+          "maximum": 0.9999999403953552,
+          "mean": 0.8246024250984192,
+          "median": 0.8579077124595642
+        },
+        "U_norm": {
+          "maximum": 1.4369664192199707,
+          "mean": 0.17001786828041077,
+          "median": 0.024674920365214348
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.4369664192199707,
+          "mean": 0.17001786828041077,
+          "median": 0.024674920365214348
+        },
+        "c_star": {
+          "maximum": 0.016185026615858078,
+          "mean": -0.006763601675629616,
+          "median": -0.006143008358776569
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.002604032400995493,
+          "mean": -0.012031261809170246,
+          "median": -0.012463037855923176
+        },
+        "modulation_variance": {
+          "maximum": 0.0028249970637261868,
+          "mean": 0.00018607877427712083,
+          "median": 2.0693167243734933e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9649999737739563,
+          "mean": 0.7151476144790649,
+          "median": 0.7149999737739563
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.28485235571861267,
+          "median": 0.2849999964237213
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 17,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 12,
+        "strong_error_cases": 108,
+        "strong_error_pair_prevalence_max": 0.3142857142857143,
+        "strong_error_pair_prevalence_mean": 0.055102040816326525,
+        "strong_error_subject_prevalence": 0.8428571428571429,
+        "strong_error_top5_share": 0.6481481481481481,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6211180124223602,
+          "fraction_strong_error": 0.13250517598343686,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.8188405797101449,
+          "fraction_strong_error": 0.03140096618357488,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.9565217391304348,
+          "fraction_strong_error": 0.005797101449275362,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9942028985507246,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 9,
+        "strong_error_subject_prevalence": 0.6811594202898551,
+        "strong_error_top5_share": 0.7215189873417721,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0040584415584415945,
+        "nonlearned": 0.011688311688311637,
+        "overall": 0.009508348794063148
+      },
+      "panel": 1,
+      "seed": 3042,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.627300262451172,
+          "mean": 8.154749870300293,
+          "median": 2.526578664779663
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8000433444976807,
+          "median": 0.8379954099655151
+        },
+        "U_norm": {
+          "maximum": 1.5443475246429443,
+          "mean": 0.18946820497512817,
+          "median": 0.02900799922645092
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.5443475246429443,
+          "mean": 0.18946820497512817,
+          "median": 0.02900800108909607
+        },
+        "c_star": {
+          "maximum": 0.024051474407315254,
+          "mean": -0.007975945249199867,
+          "median": -0.007166069000959396
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0026535983197391033,
+          "mean": -0.012119878083467484,
+          "median": -0.012563791126012802
+        },
+        "modulation_variance": {
+          "maximum": 0.0028179155196994543,
+          "mean": 0.00020880014926660806,
+          "median": 2.6074516426888295e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9599999785423279,
+          "mean": 0.7125750184059143,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.28742489218711853,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 17,
+        "latent_bimodal_pairs": 11,
+        "sampled_bimodal_pairs": 12,
+        "strong_error_cases": 103,
+        "strong_error_pair_prevalence_max": 0.2857142857142857,
+        "strong_error_pair_prevalence_mean": 0.05255102040816327,
+        "strong_error_subject_prevalence": 0.8285714285714286,
+        "strong_error_top5_share": 0.6504854368932039,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6237424547283703,
+          "fraction_strong_error": 0.13078470824949698,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.807511737089202,
+          "fraction_strong_error": 0.03286384976525821,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.5
+        },
+        "3": {
+          "fraction_strong_correct": 0.952112676056338,
+          "fraction_strong_error": 0.005633802816901409,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.995774647887324,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.6901408450704225,
+        "strong_error_top5_share": 0.7037037037037037,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.005681818181818121,
+        "nonlearned": 0.008116883116882967,
+        "overall": 0.007421150278292932
+      },
+      "panel": 1,
+      "seed": 3042,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.24455642700195,
+          "mean": 8.16015338897705,
+          "median": 2.5267045497894287
+        },
+        "R": {
+          "maximum": 0.9999998211860657,
+          "mean": 0.7993155717849731,
+          "median": 0.8379840850830078
+        },
+        "U_norm": {
+          "maximum": 1.5937234163284302,
+          "mean": 0.19014684855937958,
+          "median": 0.029007378965616226
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.5937234163284302,
+          "mean": 0.19014684855937958,
+          "median": 0.029007378965616226
+        },
+        "c_star": {
+          "maximum": 0.024051474407315254,
+          "mean": -0.008044718764722347,
+          "median": -0.007203776855021715
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0026535983197391033,
+          "mean": -0.01212288811802864,
+          "median": -0.01257113367319107
+        },
+        "modulation_variance": {
+          "maximum": 0.002813924802467227,
+          "mean": 0.00020976441737730056,
+          "median": 2.4806990040815435e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9599999785423279,
+          "mean": 0.7124188542366028,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.2875811457633972,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 12,
+        "latent_bimodal_pairs": 5,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_cases": 32,
+        "strong_error_pair_prevalence_max": 0.1702127659574468,
+        "strong_error_pair_prevalence_mean": 0.0243161094224924,
+        "strong_error_subject_prevalence": 0.46808510638297873,
+        "strong_error_top5_share": 0.78125,
+        "strong_two_sided_pairs": 10
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6763848396501457,
+          "fraction_strong_error": 0.08454810495626822,
+          "latent_bimodal_fraction": 0.42857142857142855,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8877551020408164,
+          "fraction_strong_error": 0.006802721088435374,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "3": {
+          "fraction_strong_correct": 0.9795918367346939,
+          "fraction_strong_error": 0.004081632653061224,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9979591836734695,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 12,
+        "latent_bimodal_pairs": 3,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_subject_prevalence": 0.46938775510204084,
+        "strong_error_top5_share": 0.8125,
+        "strong_two_sided_pairs": 10
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": -0.0032467532467532756,
+        "nonlearned": -0.002272727272727204,
+        "overall": -0.0025510204081632404
+      },
+      "panel": 2,
+      "seed": 3042,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 30.681529998779297,
+          "mean": 7.764381408691406,
+          "median": 2.4452593326568604
+        },
+        "R": {
+          "maximum": 0.9999998807907104,
+          "mean": 0.8311333656311035,
+          "median": 0.8660905361175537
+        },
+        "U_norm": {
+          "maximum": 1.419538974761963,
+          "mean": 0.1637633740901947,
+          "median": 0.02337285503745079
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.419538974761963,
+          "mean": 0.1637633740901947,
+          "median": 0.02337285503745079
+        },
+        "c_star": {
+          "maximum": 0.021129442378878593,
+          "mean": -0.006149836350232363,
+          "median": -0.0058382535353302956
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.004863849375396967,
+          "mean": -0.011986634694039822,
+          "median": -0.01248379610478878
+        },
+        "modulation_variance": {
+          "maximum": 0.0024925386533141136,
+          "mean": 0.0001814092101994902,
+          "median": 1.1236693353566807e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.949999988079071,
+          "mean": 0.7119622826576233,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5899999737739563,
+          "mean": 0.2880377471446991,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_cases": 73,
+        "strong_error_pair_prevalence_max": 0.19402985074626866,
+        "strong_error_pair_prevalence_mean": 0.03891257995735608,
+        "strong_error_subject_prevalence": 0.7164179104477612,
+        "strong_error_top5_share": 0.6986301369863014,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.619047619047619,
+          "fraction_strong_error": 0.10606060606060605,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8257575757575757,
+          "fraction_strong_error": 0.022727272727272724,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.3333333333333333
+        },
+        "3": {
+          "fraction_strong_correct": 0.9787878787878789,
+          "fraction_strong_error": 0.0030303030303030303,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9969696969696968,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 9,
+        "strong_error_subject_prevalence": 0.6515151515151515,
+        "strong_error_top5_share": 0.711864406779661,
+        "strong_two_sided_pairs": 13
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.004870129870129802,
+        "nonlearned": 0.0025974025974025983,
+        "overall": 0.0032467532467534976
+      },
+      "panel": 2,
+      "seed": 3042,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.38520812988281,
+          "mean": 8.05561637878418,
+          "median": 2.210442543029785
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8087065815925598,
+          "median": 0.8541653156280518
+        },
+        "U_norm": {
+          "maximum": 1.5380350351333618,
+          "mean": 0.18537473678588867,
+          "median": 0.03046608902513981
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.5380350351333618,
+          "mean": 0.18537473678588867,
+          "median": 0.03046608902513981
+        },
+        "c_star": {
+          "maximum": 0.02115298993885517,
+          "mean": -0.007369987200945616,
+          "median": -0.006696399301290512
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.004223464522510767,
+          "mean": -0.012089203111827374,
+          "median": -0.012603306211531162
+        },
+        "modulation_variance": {
+          "maximum": 0.0027225916273891926,
+          "mean": 0.0002080264239339158,
+          "median": 2.4893095542211086e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.949999988079071,
+          "mean": 0.7092532515525818,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.2907467484474182,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 11,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 79,
+        "strong_error_pair_prevalence_max": 0.19117647058823528,
+        "strong_error_pair_prevalence_mean": 0.04149159663865546,
+        "strong_error_subject_prevalence": 0.6911764705882353,
+        "strong_error_top5_share": 0.620253164556962,
+        "strong_two_sided_pairs": 15
+      },
+      "M2_stage": "latent_shape",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6071428571428571,
+          "fraction_strong_error": 0.10504201680672269,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8112745098039215,
+          "fraction_strong_error": 0.03186274509803922,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.6666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9676470588235293,
+          "fraction_strong_error": 0.0058823529411764705,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9955882352941178,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 16,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_subject_prevalence": 0.6323529411764706,
+        "strong_error_top5_share": 0.6307692307692307,
+        "strong_two_sided_pairs": 15
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0032467532467531646,
+        "nonlearned": 0.0012987012987011326,
+        "overall": 0.0018552875695732052
+      },
+      "panel": 2,
+      "seed": 3042,
+      "stage": "latent_shape",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.38520812988281,
+          "mean": 8.0676908493042,
+          "median": 2.184816598892212
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8086177110671997,
+          "median": 0.8534799218177795
+        },
+        "U_norm": {
+          "maximum": 1.5380350351333618,
+          "mean": 0.18651525676250458,
+          "median": 0.029827168211340904
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.5380350351333618,
+          "mean": 0.18651525676250458,
+          "median": 0.029827166348695755
+        },
+        "c_star": {
+          "maximum": 0.02115298993885517,
+          "mean": -0.007457418832927942,
+          "median": -0.006736256182193756
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.004344827029854059,
+          "mean": -0.012093808501958847,
+          "median": -0.012612888589501381
+        },
+        "modulation_variance": {
+          "maximum": 0.0027225916273891926,
+          "mean": 0.00020962956477887928,
+          "median": 2.4893095542211086e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.949999988079071,
+          "mean": 0.7089169025421143,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.29108309745788574,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 11,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_cases": 46,
+        "strong_error_pair_prevalence_max": 0.1724137931034483,
+        "strong_error_pair_prevalence_mean": 0.02832512315270936,
+        "strong_error_subject_prevalence": 0.5689655172413793,
+        "strong_error_top5_share": 0.782608695652174,
+        "strong_two_sided_pairs": 9
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6758241758241758,
+          "fraction_strong_error": 0.11538461538461539,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8974358974358975,
+          "fraction_strong_error": 0.019230769230769232,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.16666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9961538461538462,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 13,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_subject_prevalence": 0.6346153846153846,
+        "strong_error_top5_share": 0.7291666666666666,
+        "strong_two_sided_pairs": 11
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0008116883116883189,
+        "nonlearned": -0.0032467532467531646,
+        "overall": -0.0020871985157698836
+      },
+      "panel": 3,
+      "seed": 3042,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 30.275033950805664,
+          "mean": 7.8599853515625,
+          "median": 2.4590566158294678
+        },
+        "R": {
+          "maximum": 1.0000001192092896,
+          "mean": 0.8246585130691528,
+          "median": 0.8634887933731079
+        },
+        "U_norm": {
+          "maximum": 1.4203625917434692,
+          "mean": 0.16949942708015442,
+          "median": 0.02448960766196251
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.4203625917434692,
+          "mean": 0.16949942708015442,
+          "median": 0.02448960766196251
+        },
+        "c_star": {
+          "maximum": 0.019763190299272537,
+          "mean": -0.006802301853895187,
+          "median": -0.006180590949952602
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0034842276945710182,
+          "mean": -0.011973325163125992,
+          "median": -0.01227445900440216
+        },
+        "modulation_variance": {
+          "maximum": 0.002446803729981184,
+          "mean": 0.00018526129133533686,
+          "median": 2.34508315770654e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9449999928474426,
+          "mean": 0.7134029865264893,
+          "median": 0.7149999737739563
+        },
+        "positive_fraction": {
+          "maximum": 0.5899999737739563,
+          "mean": 0.28659698367118835,
+          "median": 0.2849999964237213
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 16,
+        "latent_bimodal_pairs": 10,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 87,
+        "strong_error_pair_prevalence_max": 0.2,
+        "strong_error_pair_prevalence_mean": 0.04438775510204081,
+        "strong_error_subject_prevalence": 0.7,
+        "strong_error_top5_share": 0.6206896551724138,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6092436974789918,
+          "fraction_strong_error": 0.11764705882352941,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8137254901960783,
+          "fraction_strong_error": 0.03431372549019608,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.6666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9529411764705882,
+          "fraction_strong_error": 0.008823529411764706,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9955882352941178,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 16,
+        "latent_bimodal_pairs": 8,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_subject_prevalence": 0.6911764705882353,
+        "strong_error_top5_share": 0.6438356164383562,
+        "strong_two_sided_pairs": 15
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.00730519480519487,
+        "nonlearned": 0.009740259740259716,
+        "overall": 0.009044526901669903
+      },
+      "panel": 3,
+      "seed": 3042,
+      "stage": "latent_shape",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.36819839477539,
+          "mean": 8.090079307556152,
+          "median": 2.4835100173950195
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8005613684654236,
+          "median": 0.8476324081420898
+        },
+        "U_norm": {
+          "maximum": 1.6298468112945557,
+          "mean": 0.18824805319309235,
+          "median": 0.0328894704580307
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.6298468112945557,
+          "mean": 0.18824805319309235,
+          "median": 0.0328894704580307
+        },
+        "c_star": {
+          "maximum": 0.02618367224931717,
+          "mean": -0.008098050020635128,
+          "median": -0.007019388489425182
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0021720232907682657,
+          "mean": -0.012057390064001083,
+          "median": -0.012366492301225662
+        },
+        "modulation_variance": {
+          "maximum": 0.0026461395900696516,
+          "mean": 0.0002066918823402375,
+          "median": 3.184419256285764e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9649999737739563,
+          "mean": 0.7106330990791321,
+          "median": 0.7149999737739563
+        },
+        "positive_fraction": {
+          "maximum": 0.5949999690055847,
+          "mean": 0.28936687111854553,
+          "median": 0.2849999964237213
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 16,
+        "latent_bimodal_pairs": 10,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 95,
+        "strong_error_pair_prevalence_max": 0.18055555555555555,
+        "strong_error_pair_prevalence_mean": 0.04712301587301587,
+        "strong_error_subject_prevalence": 0.7222222222222222,
+        "strong_error_top5_share": 0.5789473684210527,
+        "strong_two_sided_pairs": 15
+      },
+      "M2_stage": "latent_shape",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6071428571428571,
+          "fraction_strong_error": 0.11706349206349206,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8032407407407406,
+          "fraction_strong_error": 0.0462962962962963,
+          "latent_bimodal_fraction": 0.3333333333333333,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.6666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.95,
+          "fraction_strong_error": 0.008333333333333333,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9944444444444445,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 17,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_subject_prevalence": 0.6944444444444444,
+        "strong_error_top5_share": 0.6097560975609756,
+        "strong_two_sided_pairs": 15
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.005681818181818232,
+        "nonlearned": 0.011038961038960737,
+        "overall": 0.009508348794063148
+      },
+      "panel": 3,
+      "seed": 3042,
+      "stage": "latent_shape",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.36819839477539,
+          "mean": 8.106531143188477,
+          "median": 2.5969014167785645
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.7994965314865112,
+          "median": 0.8468372821807861
+        },
+        "U_norm": {
+          "maximum": 1.6298468112945557,
+          "mean": 0.18960560858249664,
+          "median": 0.0328894704580307
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.6298468112945557,
+          "mean": 0.18960560858249664,
+          "median": 0.0328894704580307
+        },
+        "c_star": {
+          "maximum": 0.02618367224931717,
+          "mean": -0.008202753029763699,
+          "median": -0.007092839106917381
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0021720232907682657,
+          "mean": -0.012064266949892044,
+          "median": -0.012371022254228592
+        },
+        "modulation_variance": {
+          "maximum": 0.0026461395900696516,
+          "mean": 0.00020826772379223257,
+          "median": 3.184419256285764e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9649999737739563,
+          "mean": 0.7102460265159607,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5949999690055847,
+          "mean": 0.2897539436817169,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 12,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_cases": 46,
+        "strong_error_pair_prevalence_max": 0.16071428571428573,
+        "strong_error_pair_prevalence_mean": 0.02933673469387755,
+        "strong_error_subject_prevalence": 0.6071428571428571,
+        "strong_error_top5_share": 0.7608695652173914,
+        "strong_two_sided_pairs": 11
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6693121693121693,
+          "fraction_strong_error": 0.09259259259259259,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8858024691358025,
+          "fraction_strong_error": 0.012345679012345678,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "3": {
+          "fraction_strong_correct": 0.9851851851851852,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 13,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_subject_prevalence": 0.5555555555555556,
+        "strong_error_top5_share": 0.8205128205128205,
+        "strong_two_sided_pairs": 9
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0032467532467532756,
+        "nonlearned": -0.004220779220779236,
+        "overall": -0.0020871985157698836
+      },
+      "panel": 1,
+      "seed": 3043,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 30.661420822143555,
+          "mean": 8.16186237335205,
+          "median": 2.292496919631958
+        },
+        "R": {
+          "maximum": 0.9999999403953552,
+          "mean": 0.8340238332748413,
+          "median": 0.8728650808334351
+        },
+        "U_norm": {
+          "maximum": 1.4366189241409302,
+          "mean": 0.17294274270534515,
+          "median": 0.026750747114419937
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.4366188049316406,
+          "mean": 0.17294274270534515,
+          "median": 0.026750747114419937
+        },
+        "c_star": {
+          "maximum": 0.01636091060936451,
+          "mean": -0.0060125854797661304,
+          "median": -0.005975222215056419
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.000647609937004745,
+          "mean": -0.012309848330914974,
+          "median": -0.012523958459496498
+        },
+        "modulation_variance": {
+          "maximum": 0.0026379732880741358,
+          "mean": 0.00019055031589232385,
+          "median": 1.5206533134914935e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9549999833106995,
+          "mean": 0.7164082527160645,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5349999666213989,
+          "mean": 0.28359171748161316,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 10,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 98,
+        "strong_error_pair_prevalence_max": 0.28169014084507044,
+        "strong_error_pair_prevalence_mean": 0.04929577464788732,
+        "strong_error_subject_prevalence": 0.7323943661971831,
+        "strong_error_top5_share": 0.6428571428571429,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6285714285714287,
+          "fraction_strong_error": 0.11836734693877551,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.8190476190476189,
+          "fraction_strong_error": 0.02380952380952381,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.6666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9628571428571429,
+          "fraction_strong_error": 0.002857142857142857,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_subject_prevalence": 0.6142857142857143,
+        "strong_error_top5_share": 0.7246376811594203,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0008116883116883189,
+        "nonlearned": 0.0032467532467532756,
+        "overall": 0.0025510204081635734
+      },
+      "panel": 1,
+      "seed": 3043,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.60246467590332,
+          "mean": 8.391512870788574,
+          "median": 2.0391745567321777
+        },
+        "R": {
+          "maximum": 0.9999999403953552,
+          "mean": 0.8146532773971558,
+          "median": 0.8549976348876953
+        },
+        "U_norm": {
+          "maximum": 1.7273703813552856,
+          "mean": 0.1920120120048523,
+          "median": 0.03423836827278137
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.7273703813552856,
+          "mean": 0.1920120120048523,
+          "median": 0.03423836827278137
+        },
+        "c_star": {
+          "maximum": 0.022145334631204605,
+          "mean": -0.007115415297448635,
+          "median": -0.006942282896488905
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0021911596413701773,
+          "mean": -0.012345926836133003,
+          "median": -0.012569956481456757
+        },
+        "modulation_variance": {
+          "maximum": 0.002893574768677354,
+          "mean": 0.0002138573763659224,
+          "median": 2.40613408095669e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9449999928474426,
+          "mean": 0.7132467031478882,
+          "median": 0.7049999833106995
+        },
+        "positive_fraction": {
+          "maximum": 0.5349999666213989,
+          "mean": 0.28675320744514465,
+          "median": 0.29499998688697815
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 11,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 102,
+        "strong_error_pair_prevalence_max": 0.2777777777777778,
+        "strong_error_pair_prevalence_mean": 0.050595238095238096,
+        "strong_error_subject_prevalence": 0.7361111111111112,
+        "strong_error_top5_share": 0.6274509803921569,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6204081632653062,
+          "fraction_strong_error": 0.12244897959183673,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8142857142857142,
+          "fraction_strong_error": 0.03333333333333333,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.6666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9628571428571429,
+          "fraction_strong_error": 0.002857142857142857,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_subject_prevalence": 0.6285714285714286,
+        "strong_error_top5_share": 0.68,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0024350649350649567,
+        "nonlearned": 0.0016233766233765268,
+        "overall": 0.0018552875695734272
+      },
+      "panel": 1,
+      "seed": 3043,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.60246467590332,
+          "mean": 8.397669792175293,
+          "median": 2.075230121612549
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8142191171646118,
+          "median": 0.8547220230102539
+        },
+        "U_norm": {
+          "maximum": 1.7273703813552856,
+          "mean": 0.19283145666122437,
+          "median": 0.03420347347855568
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.7273703813552856,
+          "mean": 0.19283145666122437,
+          "median": 0.03420347347855568
+        },
+        "c_star": {
+          "maximum": 0.022010352462530136,
+          "mean": -0.007193043828010559,
+          "median": -0.006979689002037048
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.002395592164248228,
+          "mean": -0.012345299124717712,
+          "median": -0.01256334874778986
+        },
+        "modulation_variance": {
+          "maximum": 0.002893574768677354,
+          "mean": 0.00021497895068023354,
+          "median": 2.40613408095669e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9399999976158142,
+          "mean": 0.7128871083259583,
+          "median": 0.7049999833106995
+        },
+        "positive_fraction": {
+          "maximum": 0.550000011920929,
+          "mean": 0.28711292147636414,
+          "median": 0.29499998688697815
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 12,
+        "latent_bimodal_pairs": 5,
+        "sampled_bimodal_pairs": 6,
+        "strong_error_cases": 33,
+        "strong_error_pair_prevalence_max": 0.14893617021276595,
+        "strong_error_pair_prevalence_mean": 0.02507598784194529,
+        "strong_error_subject_prevalence": 0.5319148936170213,
+        "strong_error_top5_share": 0.7575757575757576,
+        "strong_two_sided_pairs": 10
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6997084548104955,
+          "fraction_strong_error": 0.06413994169096209,
+          "latent_bimodal_fraction": 0.42857142857142855,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.8945578231292517,
+          "fraction_strong_error": 0.01020408163265306,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "3": {
+          "fraction_strong_correct": 0.9795918367346939,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 13,
+        "latent_bimodal_pairs": 3,
+        "sampled_bimodal_pairs": 6,
+        "strong_error_subject_prevalence": 0.3877551020408163,
+        "strong_error_top5_share": 0.84,
+        "strong_two_sided_pairs": 8
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": -0.0016233766233765268,
+        "nonlearned": -0.0006493506493505663,
+        "overall": -0.0009276437847863805
+      },
+      "panel": 2,
+      "seed": 3043,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 30.463329315185547,
+          "mean": 8.256460189819336,
+          "median": 2.5548512935638428
+        },
+        "R": {
+          "maximum": 1.0000001192092896,
+          "mean": 0.8323280811309814,
+          "median": 0.869536280632019
+        },
+        "U_norm": {
+          "maximum": 1.4504159688949585,
+          "mean": 0.17748843133449554,
+          "median": 0.030149245634675026
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.4504159688949585,
+          "mean": 0.17748843133449554,
+          "median": 0.030149243772029877
+        },
+        "c_star": {
+          "maximum": 0.02336580865085125,
+          "mean": -0.006015474908053875,
+          "median": -0.006208537146449089
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.00010038151958724484,
+          "mean": -0.012170204892754555,
+          "median": -0.012683873996138573
+        },
+        "modulation_variance": {
+          "maximum": 0.002956107957288623,
+          "mean": 0.00019671743211802095,
+          "median": 1.8733579054242e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9350000023841858,
+          "mean": 0.7102038860321045,
+          "median": 0.7049999833106995
+        },
+        "positive_fraction": {
+          "maximum": 0.5049999952316284,
+          "mean": 0.28979602456092834,
+          "median": 0.29499998688697815
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 10,
+        "strong_error_cases": 76,
+        "strong_error_pair_prevalence_max": 0.23529411764705882,
+        "strong_error_pair_prevalence_mean": 0.039915966386554626,
+        "strong_error_subject_prevalence": 0.6617647058823529,
+        "strong_error_top5_share": 0.7236842105263158,
+        "strong_two_sided_pairs": 14
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6341991341991342,
+          "fraction_strong_error": 0.10822510822510824,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8333333333333334,
+          "fraction_strong_error": 0.017676767676767676,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.16666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9666666666666668,
+          "fraction_strong_error": 0.0030303030303030303,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9984848484848484,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 14,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_subject_prevalence": 0.6363636363636364,
+        "strong_error_top5_share": 0.7241379310344828,
+        "strong_two_sided_pairs": 13
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0008116883116883189,
+        "nonlearned": 0.006168831168831268,
+        "overall": 0.004638218923933124
+      },
+      "panel": 2,
+      "seed": 3043,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.25572204589844,
+          "mean": 8.520959854125977,
+          "median": 2.348463535308838
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8137043714523315,
+          "median": 0.860260009765625
+        },
+        "U_norm": {
+          "maximum": 1.643933892250061,
+          "mean": 0.198909193277359,
+          "median": 0.02454085648059845
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.643933892250061,
+          "mean": 0.198909193277359,
+          "median": 0.02454085648059845
+        },
+        "c_star": {
+          "maximum": 0.0236805509775877,
+          "mean": -0.007100585848093033,
+          "median": -0.006970500573515892
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0009468277567066252,
+          "mean": -0.012188362888991833,
+          "median": -0.012707861140370369
+        },
+        "modulation_variance": {
+          "maximum": 0.0028847563080489635,
+          "mean": 0.00022289258777163923,
+          "median": 2.451597356412094e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.949999988079071,
+          "mean": 0.7061073780059814,
+          "median": 0.699999988079071
+        },
+        "positive_fraction": {
+          "maximum": 0.5149999856948853,
+          "mean": 0.2938925623893738,
+          "median": 0.29999998211860657
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 12,
+        "strong_error_cases": 82,
+        "strong_error_pair_prevalence_max": 0.2318840579710145,
+        "strong_error_pair_prevalence_mean": 0.04244306418219461,
+        "strong_error_subject_prevalence": 0.6666666666666666,
+        "strong_error_top5_share": 0.6829268292682927,
+        "strong_two_sided_pairs": 15
+      },
+      "M2_stage": "latent_shape",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6162046908315565,
+          "fraction_strong_error": 0.11300639658848613,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8109452736318407,
+          "fraction_strong_error": 0.01990049751243781,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.16666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9552238805970148,
+          "fraction_strong_error": 0.005970149253731343,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9955223880597014,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 15,
+        "latent_bimodal_pairs": 7,
+        "sampled_bimodal_pairs": 8,
+        "strong_error_subject_prevalence": 0.6716417910447762,
+        "strong_error_top5_share": 0.6984126984126984,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": 0.0032467532467532756,
+        "nonlearned": 0.004870129870129802,
+        "overall": 0.004406307977736668
+      },
+      "panel": 2,
+      "seed": 3043,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 32.25572204589844,
+          "mean": 8.530509948730469,
+          "median": 2.519062042236328
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.812977135181427,
+          "median": 0.8602735996246338
+        },
+        "U_norm": {
+          "maximum": 1.643933892250061,
+          "mean": 0.20000198483467102,
+          "median": 0.0371067114174366
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.643933892250061,
+          "mean": 0.20000198483467102,
+          "median": 0.0371067114174366
+        },
+        "c_star": {
+          "maximum": 0.0236805509775877,
+          "mean": -0.007192234043031931,
+          "median": -0.007024639286100864
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0012819677358493209,
+          "mean": -0.012187999673187733,
+          "median": -0.012708844617009163
+        },
+        "modulation_variance": {
+          "maximum": 0.0028847563080489635,
+          "mean": 0.00022437592269852757,
+          "median": 2.451597356412094e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9399999976158142,
+          "mean": 0.7057406902313232,
+          "median": 0.699999988079071
+        },
+        "positive_fraction": {
+          "maximum": 0.5450000166893005,
+          "mean": 0.29425933957099915,
+          "median": 0.29999998211860657
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 11,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 7,
+        "strong_error_cases": 44,
+        "strong_error_pair_prevalence_max": 0.19230769230769232,
+        "strong_error_pair_prevalence_mean": 0.03021978021978022,
+        "strong_error_subject_prevalence": 0.5769230769230769,
+        "strong_error_top5_share": 0.7954545454545454,
+        "strong_two_sided_pairs": 8
+      },
+      "M2_stage": "direction_absent",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6878306878306878,
+          "fraction_strong_error": 0.09523809523809523,
+          "latent_bimodal_fraction": 0.8571428571428571,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 0.8571428571428571
+        },
+        "2": {
+          "fraction_strong_correct": 0.9012345679012345,
+          "fraction_strong_error": 0.012345679012345678,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "3": {
+          "fraction_strong_correct": 0.9925925925925926,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 1.0,
+          "fraction_strong_error": 0.0,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "clean",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 12,
+        "latent_bimodal_pairs": 6,
+        "sampled_bimodal_pairs": 6,
+        "strong_error_subject_prevalence": 0.5,
+        "strong_error_top5_share": 0.825,
+        "strong_two_sided_pairs": 10
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": -0.004870129870129913,
+        "nonlearned": -0.003896103896104175,
+        "overall": -0.004174397031539656
+      },
+      "panel": 3,
+      "seed": 3043,
+      "stage": "direction_absent",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 29.546850204467773,
+          "mean": 8.176107406616211,
+          "median": 2.297211170196533
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8317117094993591,
+          "median": 0.8743288516998291
+        },
+        "U_norm": {
+          "maximum": 1.440585970878601,
+          "mean": 0.17099244892597198,
+          "median": 0.029618525877594948
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.440585970878601,
+          "mean": 0.17099244892597198,
+          "median": 0.029618525877594948
+        },
+        "c_star": {
+          "maximum": 0.017027946189045906,
+          "mean": -0.005987218581140041,
+          "median": -0.005782141350209713
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0018272012239322066,
+          "mean": -0.01172073744237423,
+          "median": -0.01233078632503748
+        },
+        "modulation_variance": {
+          "maximum": 0.0028433522675186396,
+          "mean": 0.00018463967717252672,
+          "median": 1.7260454114875756e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.949999988079071,
+          "mean": 0.7121012210845947,
+          "median": 0.7099999785423279
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.2878987193107605,
+          "median": 0.28999999165534973
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 18,
+        "latent_bimodal_pairs": 10,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 81,
+        "strong_error_pair_prevalence_max": 0.23809523809523808,
+        "strong_error_pair_prevalence_mean": 0.04591836734693877,
+        "strong_error_subject_prevalence": 0.746031746031746,
+        "strong_error_top5_share": 0.6790123456790124,
+        "strong_two_sided_pairs": 13
+      },
+      "M2_stage": "weak_margin",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.5941043083900226,
+          "fraction_strong_error": 0.1360544217687075,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.828042328042328,
+          "fraction_strong_error": 0.037037037037037035,
+          "latent_bimodal_fraction": 0.16666666666666666,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.6666666666666666
+        },
+        "3": {
+          "fraction_strong_correct": 0.9396825396825397,
+          "fraction_strong_error": 0.0031746031746031746,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9936507936507937,
+          "fraction_strong_error": 0.0015873015873015873,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "folded",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 17,
+        "latent_bimodal_pairs": 8,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_subject_prevalence": 0.7142857142857143,
+        "strong_error_top5_share": 0.6447368421052632,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": -0.0040584415584415945,
+        "nonlearned": 0.0032467532467530535,
+        "overall": 0.00115955473098317
+      },
+      "panel": 3,
+      "seed": 3043,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.88445472717285,
+          "mean": 8.386617660522461,
+          "median": 2.367377996444702
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8109804391860962,
+          "median": 0.8598271608352661
+        },
+        "U_norm": {
+          "maximum": 1.6090402603149414,
+          "mean": 0.1908138245344162,
+          "median": 0.0346948616206646
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.6090402603149414,
+          "mean": 0.1908138245344162,
+          "median": 0.0346948616206646
+        },
+        "c_star": {
+          "maximum": 0.027591770514845848,
+          "mean": -0.007193046621978283,
+          "median": -0.006705242209136486
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0018290990265086293,
+          "mean": -0.011759425513446331,
+          "median": -0.01236509345471859
+        },
+        "modulation_variance": {
+          "maximum": 0.003045960795134306,
+          "mean": 0.00020810020214412361,
+          "median": 2.6937603252008557e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9599999785423279,
+          "mean": 0.7081549763679504,
+          "median": 0.7049999833106995
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.29184505343437195,
+          "median": 0.29499998688697815
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    },
+    {
+      "M2_counts": {
+        "direction_present_pairs": 18,
+        "latent_bimodal_pairs": 10,
+        "sampled_bimodal_pairs": 11,
+        "strong_error_cases": 91,
+        "strong_error_pair_prevalence_max": 0.22388059701492538,
+        "strong_error_pair_prevalence_mean": 0.04850746268656716,
+        "strong_error_subject_prevalence": 0.746268656716418,
+        "strong_error_top5_share": 0.6813186813186813,
+        "strong_two_sided_pairs": 15
+      },
+      "M2_stage": "latent_shape",
+      "all_nine_qualitative": false,
+      "bad_sampled_pair": false,
+      "by_distance": {
+        "1": {
+          "fraction_strong_correct": 0.6060606060606061,
+          "fraction_strong_error": 0.14718614718614717,
+          "latent_bimodal_fraction": 1.0,
+          "pairs": 7,
+          "sampled_bimodal_fraction": 1.0
+        },
+        "2": {
+          "fraction_strong_correct": 0.8106060606060606,
+          "fraction_strong_error": 0.04040404040404041,
+          "latent_bimodal_fraction": 0.3333333333333333,
+          "pairs": 6,
+          "sampled_bimodal_fraction": 0.8333333333333334
+        },
+        "3": {
+          "fraction_strong_correct": 0.9363636363636363,
+          "fraction_strong_error": 0.0030303030303030303,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 5,
+          "sampled_bimodal_fraction": 0.0
+        },
+        "4+": {
+          "fraction_strong_correct": 0.9893939393939395,
+          "fraction_strong_error": 0.0015151515151515152,
+          "latent_bimodal_fraction": 0.0,
+          "pairs": 10,
+          "sampled_bimodal_fraction": 0.0
+        }
+      },
+      "condition": "noisy",
+      "constrained_morphology": false,
+      "counts": {
+        "direction_present_pairs": 18,
+        "latent_bimodal_pairs": 9,
+        "sampled_bimodal_pairs": 12,
+        "strong_error_subject_prevalence": 0.7727272727272727,
+        "strong_error_top5_share": 0.6511627906976745,
+        "strong_two_sided_pairs": 14
+      },
+      "damage_guard_failed": false,
+      "evidence_binding": true,
+      "generic_category": "stable_constructive",
+      "paired_M2_exact_delta": {
+        "learned": -0.0040584415584415945,
+        "nonlearned": 0.0035714285714286698,
+        "overall": 0.0013914656771802925
+      },
+      "panel": 3,
+      "seed": 3043,
+      "stage": "weak_margin",
+      "vector_used": true,
+      "write_geometry": {
+        "E_norm": {
+          "maximum": 31.88445472717285,
+          "mean": 8.396868705749512,
+          "median": 2.3951919078826904
+        },
+        "R": {
+          "maximum": 1.0,
+          "mean": 0.8103107213973999,
+          "median": 0.8596891164779663
+        },
+        "U_norm": {
+          "maximum": 1.6090402603149414,
+          "mean": 0.19206586480140686,
+          "median": 0.03590860590338707
+        },
+        "active_fraction": 0.5,
+        "active_records": 4928,
+        "actual_delta_norm": {
+          "maximum": 1.6090402603149414,
+          "mean": 0.19206586480140686,
+          "median": 0.03590860590338707
+        },
+        "c_star": {
+          "maximum": 0.027591770514845848,
+          "mean": -0.0073018670082092285,
+          "median": -0.006741849705576897
+        },
+        "clamp_fraction": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "clipping_residual_ratio": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0
+        },
+        "modulation_mean": {
+          "maximum": 0.0018290990265086293,
+          "mean": -0.011764444410800934,
+          "median": -0.012365825474262238
+        },
+        "modulation_variance": {
+          "maximum": 0.003045960795134306,
+          "mean": 0.00020979852706659585,
+          "median": 2.70356576947961e-05
+        },
+        "negative_fraction": {
+          "maximum": 0.9599999785423279,
+          "mean": 0.7077115774154663,
+          "median": 0.7049999833106995
+        },
+        "positive_fraction": {
+          "maximum": 0.5799999833106995,
+          "mean": 0.2922884523868561,
+          "median": 0.29499998688697815
+        },
+        "records": 9856,
+        "vector_used": true
+      }
+    }
+  ]
+}

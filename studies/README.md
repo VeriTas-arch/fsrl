@@ -383,9 +383,11 @@ fail to close the dynamics.
   - **Finding:** Read-only historical re-audit outcome no_current_standard_precedent:
     0/18 acute-noisy Ae units met constrained morphology and 0/18 passed all nine rows;
     no training or model execution was performed.
-- [Postsynaptic vector modulation in minimal single-P M2](minimal_single_p_vector_modulation/README.md) — `unresolved`
-  - **Finding:** Generic vector-modulation development freeze: 3/3 stable_constructive;
-    Liu pending.
+- [Postsynaptic vector modulation in minimal single-P M2](minimal_single_p_vector_modulation/README.md) — `valid_negative`
+  - **Finding:** Frozen development result: all 3 networks were stable_constructive and
+    used strongly non-scalar writes without competence damage, but 0/9 noisy units
+    passed all nine rows or constrained morphology. Difficult-pair bimodality failed in
+    9/9 and stable within-subject errors failed in 6/9; outcome used_without_rescue.
 
 ## Minimal explanatory models
 
