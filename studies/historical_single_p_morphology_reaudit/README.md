@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `unresolved`
+- **Status:** `valid_negative`
 - **Review state:** `indexed`
 - **Study ID:** `historical_single_p_morphology_reaudit`
 
@@ -25,7 +25,9 @@
 the later constrained Liu morphology standard, or did the historical success claims
 concern only the earlier core-behavior and compensation gates?
 
-**Finding.** Sources and all mandatory historical artifacts locked; analysis pending.
+**Finding.** Read-only historical re-audit outcome no_current_standard_precedent: 0/18
+acute-noisy Ae units met constrained morphology and 0/18 passed all nine rows; no
+training or model execution was performed.
 
 **Claim boundary.** All 36 archived A0/Ae units from the two specified historical
 families are mandatory. The study replays existing choices and analyzes archived output
@@ -70,6 +72,15 @@ search, selection, historical-record mutation, or main-model promotion.
 - `execution_lock` —
   [studies/historical_single_p_morphology_reaudit/records/benchmarks/source_input_lock_repair3.json](records/benchmarks/source_input_lock_repair3.json)
   (`sha256:1fd10681c5f1`)
+- `report` —
+  [studies/historical_single_p_morphology_reaudit/records/reports/historical_single_p_morphology_reaudit_v1.md](records/reports/historical_single_p_morphology_reaudit_v1.md)
+  (`sha256:193b521f9468`)
+- `frozen_result` —
+  [studies/historical_single_p_morphology_reaudit/records/results/historical_single_p_morphology_reaudit_v1.json](records/results/historical_single_p_morphology_reaudit_v1.json)
+  (`sha256:dbf0b7bdeadf`)
+- `supporting_artifact` —
+  [studies/historical_single_p_morphology_reaudit/records/results/historical_single_p_morphology_reaudit_v1.pairs.npz](records/results/historical_single_p_morphology_reaudit_v1.pairs.npz)
+  (`sha256:310060c77af9`)
 
 ## Provenance rule
 

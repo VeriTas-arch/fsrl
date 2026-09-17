@@ -7,16 +7,16 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 4017,
+  "entry_count": 4020,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2248,
+    "json": 2249,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 115,
-    "numpy_npz": 1416,
+    "markdown": 116,
+    "numpy_npz": 1417,
     "pdf": 2,
     "pytorch_state_dict": 149,
     "svg": 4,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3917,
+    "already_conformant": 3920,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -43679,6 +43679,108 @@
         "source_ref": "sha256:1fd10681c5f1e832221754350dde5b510b33d69baa202ac0f332beb8286b32ab"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/historical_single_p_morphology_reaudit/records/reports/historical_single_p_morphology_reaudit_v1.md",
+        "repository_path": "studies/historical_single_p_morphology_reaudit/records/reports/historical_single_p_morphology_reaudit_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 2022,
+        "sha256": "193b521f946871e6d251d42935f613fe4bd3be81a6979a3052e33aaf754e1d99"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "historical_single_p_morphology_reaudit",
+        "kind": "study"
+      },
+      "record_id": "study.historical_single_p_morphology_reaudit.studies_historical_single_p_morphology_reaudit_records_reports_historical_single_p_morphology_reaudit_v1_md",
+      "registered_identity": {
+        "bytes": 2022,
+        "sha256": "193b521f946871e6d251d42935f613fe4bd3be81a6979a3052e33aaf754e1d99",
+        "source_ref": "sha256:193b521f946871e6d251d42935f613fe4bd3be81a6979a3052e33aaf754e1d99"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/historical_single_p_morphology_reaudit/records/results/historical_single_p_morphology_reaudit_v1.json",
+        "repository_path": "studies/historical_single_p_morphology_reaudit/records/results/historical_single_p_morphology_reaudit_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 99130,
+        "sha256": "dbf0b7bdeadf61254b401e7aaf9bedb0670fb809f225a9ab527d1fef2fa3e4aa"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "historical_single_p_morphology_reaudit",
+        "kind": "study"
+      },
+      "record_id": "study.historical_single_p_morphology_reaudit.studies_historical_single_p_morphology_reaudit_records_results_historical_single_p_morphology_reaudit_v1_json",
+      "registered_identity": {
+        "bytes": 99130,
+        "sha256": "dbf0b7bdeadf61254b401e7aaf9bedb0670fb809f225a9ab527d1fef2fa3e4aa",
+        "source_ref": "sha256:dbf0b7bdeadf61254b401e7aaf9bedb0670fb809f225a9ab527d1fef2fa3e4aa"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/historical_single_p_morphology_reaudit/records/results/historical_single_p_morphology_reaudit_v1.pairs.npz",
+        "repository_path": "studies/historical_single_p_morphology_reaudit/records/results/historical_single_p_morphology_reaudit_v1.pairs.npz"
+      },
+      "materialized_identity": {
+        "bytes": 47381,
+        "sha256": "310060c77af9e8d9bf18d9d7ccbd6f159b7c389c4aecfe3bdd0a422523f47bd9"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "historical_single_p_morphology_reaudit",
+        "kind": "study"
+      },
+      "record_id": "study.historical_single_p_morphology_reaudit.studies_historical_single_p_morphology_reaudit_records_results_historical_single_p_morphology_reaudit_v1_pairs_npz",
+      "registered_identity": {
+        "bytes": 47381,
+        "sha256": "310060c77af9e8d9bf18d9d7ccbd6f159b7c389c4aecfe3bdd0a422523f47bd9",
+        "source_ref": "sha256:310060c77af9e8d9bf18d9d7ccbd6f159b7c389c4aecfe3bdd0a422523f47bd9"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -136973,7 +137075,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 4015,
+  "registered_record_count": 4018,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -136987,7 +137089,7 @@
     "execution_lock": 87,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 589,
+    "frozen_result": 590,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -136997,10 +137099,10 @@
     "registered_contract": 102,
     "repair_contract": 41,
     "repair_lock": 20,
-    "report": 110,
+    "report": 111,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2735,
+    "supporting_artifact": 2736,
     "validation_result": 47
   },
   "schema_version": 2,
