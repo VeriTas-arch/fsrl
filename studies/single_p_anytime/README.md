@@ -25,8 +25,9 @@
 presentation-horizon training improve held-out short- and long-horizon predictive
 quality while preserving the clean no-time single-P model's historical B=4 phenotype?
 
-**Finding.** A prospective paired three-seed development contract is frozen. No model
-has yet been trained or evaluated under this protocol.
+**Finding.** All twelve prospectively registered development models completed training
+and passed the pre-evaluation model lock. No scientific outcome has yet been evaluated
+under this protocol.
 
 **Claim boundary.** This tests presentation-horizon robustness under a fixed inherited
 regularizer, not accumulation of new relation information, explicit time or
@@ -44,6 +45,9 @@ or a human/biological mechanism.
 - `execution_lock` —
   [studies/single_p_anytime/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:a4e16a009525`)
+- `execution_lock` —
+  [studies/single_p_anytime/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:1924fb8d95a4`)
 
 ## Provenance rule
 
