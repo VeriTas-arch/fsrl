@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3958,
+  "entry_count": 3960,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2201,
+    "json": 2202,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 108,
+    "markdown": 109,
     "numpy_npz": 1411,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,8 +24,8 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3859,
-    "historical_gzip_view": 98,
+    "already_conformant": 3860,
+    "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
   "records": [
@@ -60910,6 +60910,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_promotion/records/reports/minimal_single_p_promotion_v1.md",
+        "repository_path": "studies/minimal_single_p_promotion/records/reports/minimal_single_p_promotion_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 1026,
+        "sha256": "da92cc37b84f3ed431908f420f61df72c3d599e206b5aba867d5341b02bb93b3"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_promotion",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_promotion.studies_minimal_single_p_promotion_records_reports_minimal_single_p_promotion_v1_md",
+      "registered_identity": {
+        "bytes": 1026,
+        "sha256": "da92cc37b84f3ed431908f420f61df72c3d599e206b5aba867d5341b02bb93b3",
+        "source_ref": "sha256:da92cc37b84f3ed431908f420f61df72c3d599e206b5aba867d5341b02bb93b3"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.frozen_result",
       "format": {
         "format": "json",
@@ -60939,6 +60973,42 @@
         "bytes": 151016,
         "sha256": "7d9bbdd07e774b8ecc7d20910b5aa0fb46c3590db4c51ddb4aa15db2d2019c97",
         "source_ref": "sha256:7d9bbdd07e774b8ecc7d20910b5aa0fb46c3590db4c51ddb4aa15db2d2019c97"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.json",
+        "repository_path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 3784565,
+        "sha256": "8a1666ac2158cff41f8b94291289a5b3c51b8f4187bbcb44689d2945a7c25ff7"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_promotion",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_promotion.studies_minimal_single_p_promotion_records_results_minimal_single_p_promotion_v1_json",
+      "registered_identity": {
+        "bytes": 3784565,
+        "sha256": "8a1666ac2158cff41f8b94291289a5b3c51b8f4187bbcb44689d2945a7c25ff7",
+        "source_ref": "sha256:8a1666ac2158cff41f8b94291289a5b3c51b8f4187bbcb44689d2945a7c25ff7"
       },
       "role": "frozen_result"
     },
@@ -134965,7 +135035,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3956,
+  "registered_record_count": 3958,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -134979,7 +135049,7 @@
     "execution_lock": 79,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 582,
+    "frozen_result": 583,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -134989,7 +135059,7 @@
     "registered_contract": 97,
     "repair_contract": 33,
     "repair_lock": 19,
-    "report": 103,
+    "report": 104,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,

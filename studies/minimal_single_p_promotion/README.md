@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `minimal_single_p_promotion`
 
@@ -25,15 +25,19 @@
 across 20 unfiltered fresh networks trained with the selected minimal single-P M2
 recipe?
 
-**Finding.** All 20 fresh M2 networks were trained and jointly locked before evaluation.
-Human-blind generic evaluation found 18/20 stable_constructive networks, no
-panel-variable network, and two nonconstructive networks (3041 and 3060); Liu outcomes
-remain unopened.
+**Finding.** The unfiltered fresh cohort produced 18/20 stable_constructive generic
+networks, no panel-variable network, and two nonconstructive networks (3041 and 3060).
+No network met the strict all-panel Liu pilot-compatibility gate: six qualitative rows
+were broadly stable, but difficult-pair bimodality and stable within-subject errors were
+absent across all networks, all-panel ranking diversity occurred in only 3/20, and no
+historical quantitative row passed across all three panels in any network.
 
-**Claim boundary.** This study can characterize M2's fresh-network generic and Liu
-solution distribution without seed filtering. It cannot establish new human
-confirmation, biological identification, global architectural minimality, or final
-main-model promotion; width reduction and fixed-eta tests are outside scope.
+**Claim boundary.** M2 is a robust but not universal generator of coherent generic
+relational solutions, and its frozen generic-only training does not naturally reproduce
+the complete Liu individual-error phenotype. The result cannot justify seed filtering,
+post-result recipe repair, new human confirmation, biological identification, global
+architectural minimality, or final main-model promotion; width reduction and fixed-eta
+tests remain outside scope.
 
 ## Frozen records
 
@@ -64,6 +68,12 @@ main-model promotion; width reduction and fixed-eta tests are outside scope.
 - `repair_lock` —
   [studies/minimal_single_p_promotion/records/benchmarks/source_repair1.json](records/benchmarks/source_repair1.json)
   (`sha256:593c2eaeebc8`)
+- `frozen_result` —
+  [studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.json](records/results/minimal_single_p_promotion_v1.json)
+  (`sha256:8a1666ac2158`)
+- `report` —
+  [studies/minimal_single_p_promotion/records/reports/minimal_single_p_promotion_v1.md](records/reports/minimal_single_p_promotion_v1.md)
+  (`sha256:da92cc37b84f`)
 
 ## Provenance rule
 

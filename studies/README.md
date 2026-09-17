@@ -348,11 +348,14 @@ fail to close the dynamics.
     are unnecessary for these gates. M3 passed seeds 3031 and 3033 but seed 3032 failed
     coherence in all three panels, so the registered outcome is mixed_boundary and the
     ladder stops before either width reduction.
-- [Fresh-cohort promotion test of the minimal single-P M2 recipe](minimal_single_p_promotion/README.md) — `frozen_contract`
-  - **Finding:** All 20 fresh M2 networks were trained and jointly locked before
-    evaluation. Human-blind generic evaluation found 18/20 stable_constructive networks,
-    no panel-variable network, and two nonconstructive networks (3041 and 3060); Liu
-    outcomes remain unopened.
+- [Fresh-cohort promotion test of the minimal single-P M2 recipe](minimal_single_p_promotion/README.md) — `mixed`
+  - **Finding:** The unfiltered fresh cohort produced 18/20 stable_constructive generic
+    networks, no panel-variable network, and two nonconstructive networks (3041 and
+    3060). No network met the strict all-panel Liu pilot-compatibility gate: six
+    qualitative rows were broadly stable, but difficult-pair bimodality and stable
+    within-subject errors were absent across all networks, all-panel ranking diversity
+    occurred in only 3/20, and no historical quantitative row passed across all three
+    panels in any network.
 
 ## Minimal explanatory models
 
