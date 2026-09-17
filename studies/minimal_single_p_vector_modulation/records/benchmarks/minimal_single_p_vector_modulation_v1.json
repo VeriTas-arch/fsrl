@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p_vector_modulation",
+  "experiment_id": "minimal_single_p_vector_modulation_v1",
+  "tier": "prospective three-seed paired development study",
+  "authorization": "The user explicitly authorized execution after reviewing the frozen M2 vector-modulation proposal.",
+  "question": "Holding M2 inputs, persistent state, readout, task streams, optimization, observation process, and evaluation arrays fixed, does replacing the shared scalar write modulator with a postsynaptic-neuron-specific instantaneous vector recover constrained Liu morphology without damaging competence?",
+  "claim_boundary": [
+    "The candidate differs from M2 only in the instantaneous modulation head and write equation: m=W_m*h+b_m is length 200 and P'=clip(P+m[:,None]*E,-50,50). Rows index postsynaptic neurons.",
+    "P remains the only episode-persistent plastic state. Hidden state h and eligibility E remain trial-local transient states, and every query reads the same terminal P without writeback.",
+    "This is an exposed development study using the prospectively fixed first three numeric parent seeds 3041 through 3043. It cannot provide confirmation or immediate main-model promotion.",
+    "Shared initial tensors and all 1500 generic training batches must be bit-identical to paired frozen M2. The new vector head is initialized exactly to zero; no evaluation or human information enters training.",
+    "No alpha, L, normalized time, duplicate q, value head, blank training rollout, terminal-P penalty, noise training, auxiliary loss, curriculum, restart, checkpoint selection, or vector-specific optimizer setting is added.",
+    "The vector-use residual is a descriptive computation diagnostic. It does not establish causal benefit, reliability coding, confidence, or a biological implementation.",
+    "The fixed recipe stops after three seeds. Only the registered candidate_rescue outcome authorizes a separately frozen fresh twenty-seed confirmation; no outcome authorizes tuning this cohort."
+  ],
+  "parents": {
+    "M2_protocol": {"path": "studies/minimal_single_p_promotion/records/benchmarks/minimal_single_p_promotion_v1.json", "sha256": "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"},
+    "M2_source_lock": {"path": "studies/minimal_single_p_promotion/records/benchmarks/source_lock.json", "sha256": "f5f021b928dd95da9fd604297ee12cabf6886eb533f19f2cc1cfb1d6d78c74aa"},
+    "M2_model_lock": {"path": "studies/minimal_single_p_promotion/records/benchmarks/model_lock.json", "sha256": "485f0e941e552bff3f7c4548d3925e8075cd70ad71076aea62e65082e55c4a10"},
+    "M2_generic_result": {"path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.generic.json", "sha256": "7d9bbdd07e774b8ecc7d20910b5aa0fb46c3590db4c51ddb4aa15db2d2019c97"},
+    "M2_final_result": {"path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.json", "sha256": "8a1666ac2158cff41f8b94291289a5b3c51b8f4187bbcb44689d2945a7c25ff7"},
+    "observation_input_lock": {"path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/source_input_lock.json", "sha256": "fafb0baba3b458d93692fd53854730d0a240c35ac79297971565e7fb42dc7137"},
+    "pair_morphology_result": {"path": "studies/minimal_single_p_pair_morphology_attribution/records/results/minimal_single_p_pair_morphology_attribution_v1.json", "sha256": "db0a50cd69fd1329ea918c9efe0a5a9348d9b704895b412a3c3b5b9c3ecdbc23"},
+    "alpha_result": {"path": "studies/minimal_single_p_alpha/records/results/minimal_single_p_alpha_v1.json", "sha256": "9cd55f19d5e1faea1ba7a353d0598d7c3eae978cc00d9cd538f3bc2de6002202"}
+  },
+  "design": {
+    "network_seeds": [3041, 3042, 3043],
+    "generic_panels": [1, 2, 3],
+    "liu_panels": [1, 2, 3],
+    "liu_conditions": ["clean", "folded", "noisy"],
+    "sampling_unit": "Network is the development sampling unit; panels remain nested and participants are never pooled across networks.",
+    "exposure_barrier": "Train and jointly lock all three final models before generic evaluation; freeze and commit all nine generic units before any Liu evaluation; evaluate all 27 Liu units without selection."
+  },
+  "model": {
+    "name": "M2-vector-modulation",
+    "input_size": 32,
+    "hidden_size": 200,
+    "parameter_count": 87002,
+    "equations": [
+      "h'=tanh(W_x*x+b+(W_rec+P)*h)",
+      "m=W_m*h+b_m, with m in R^200",
+      "P'=clip(P+m[:,:,None]*E,-50,50)",
+      "E'=(1-eta_E)*E+eta_E*tanh(h'*h_old^T)",
+      "M=v^T*h_query+b_o"
+    ],
+    "vector_orientation": "m_i gates row i of P and therefore the incoming plastic synapses of postsynaptic neuron i.",
+    "dynamic_state": "P is the only episode-persistent plastic state; h and E reset per trial and P resets per episode; queries do not write back.",
+    "eta_E": "One learned scalar initialized at 0.7.",
+    "modulation_initialization": "All vector-head weights and biases are exactly zero after canonical parent initialization.",
+    "support_microsteps": 4,
+    "query_microsteps": 2,
+    "P_clip": [-50.0, 50.0]
+  },
+  "training": {
+    "task": "Exact frozen M2 clean generic task and realized-q streams.",
+    "updates": 1500,
+    "batch_size": 32,
+    "learning_rate": 0.0001,
+    "optimizer": "One Adam group for all trainable tensors; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler or gradient clipping.",
+    "loss": "Mean softplus(-y*M) over all 28 generic queries.",
+    "selection": "Final checkpoint only; no early stopping, intermediate selection, restarts, continuation, or result-conditioned change.",
+    "diagnostic_boundary": "Training diagnostics are integrity checks only and cannot select, stop, repair, or tune a run."
+  },
+  "generic_evaluation": {
+    "inputs": "Exact three frozen M2 generic panels.",
+    "conditions": ["intact", "P_off"],
+    "panel_gate": "All competence lower95>0.5, both P-dependence lower95>0, and coherence lower95>0.95.",
+    "network_categories": {"stable_constructive": "three panels pass", "panel_variable": "one or two panels pass", "nonconstructive": "zero panels pass"},
+    "paired_preservation": "For rescued networks, candidate-minus-M2 mean learned and nonlearned competence must each be at least -0.02 in every generic panel. This descriptive development bound supplements, but does not replace, the absolute panel gate."
+  },
+  "liu_evaluation": {
+    "inputs": "Exact frozen clean, folded, and noisy arrays from the M2 observation study; sigma remains 1/7 where applicable.",
+    "behavior": "Reuse all nine qualitative rows, evidence binding, continuous summaries, and the complete subject-level behavior.",
+    "constrained_unit": "A noisy unit is constrained only when its network is stable_constructive, evidence binding passes, all nine qualitative rows pass, latent_bimodal_pairs>=15, sampled_bimodal_pairs>=15, and no ordinary-unimodal or low-accuracy pair is introduced by the unchanged classifier.",
+    "damage_guard": "A rescued network fails preservation if any noisy panel introduces a low-accuracy or ordinary-unimodal pair, or if learned, nonlearned, or overall mean exact correctness is more than 0.02 below paired M2.",
+    "morphology_reporting": ["direction-present pairs", "strong two-sided pairs", "latent and sampled bimodal pairs", "top-5 strong-error share", "morphology by symbolic distance"]
+  },
+  "write_geometry": {
+    "proposal": "U=m[:,:,None]*E before clipping, measured only during support microsteps.",
+    "projection": "c*=<U,E>/||E||_F^2 and R=||U-c*E||_F^2/||U||_F^2.",
+    "inactive": "If ||E||_F or ||U||_F is at or below 1e-12, mark the subject-step inactive and do not zero-fill R.",
+    "summaries": ["active fraction", "R", "c*", "||U||_F", "||E||_F", "weighted modulation mean and variance", "modulation sign fractions", "postclip actual-delta norm", "clipping residual ratio", "clamp fraction"],
+    "use_rule": "vector_used is true for a network when at least one evaluated support subject-step is active and its maximum R exceeds 1e-10. R magnitude is descriptive and is not a behavioral success threshold."
+  },
+  "decision": {
+    "outcomes": {
+      "generic_inadequate": "Fewer than two of three networks are stable_constructive.",
+      "mixed_or_damaging": "At least two networks are stable_constructive, but any otherwise rescued network fails a registered generic or Liu preservation guard.",
+      "candidate_rescue": "At least two networks are stable_constructive, vector_used, pass all preservation guards, and each has at least one constrained noisy panel.",
+      "used_without_rescue": "At least one network is vector_used but candidate_rescue does not apply and no preceding outcome applies.",
+      "vector_not_used": "No network is vector_used and no preceding outcome applies."
+    },
+    "precedence": ["generic_inadequate", "mixed_or_damaging", "candidate_rescue", "used_without_rescue", "vector_not_used"],
+    "confirmation": "Only candidate_rescue authorizes a separately frozen, unchanged, fresh twenty-seed paired confirmation.",
+    "mechanism_control": "Only a confirmed rescue may authorize separately frozen scalar projection and amplitude-matched controls; c*E and c_amp*E are distinct controls.",
+    "promotion": "Main-model promotion is always false in this development study."
+  },
+  "qualification": {
+    "pairing": "Shared initial tensor hashes must equal M2 for all three seeds. Replicating the scalar parent head across rows must recover the parent forward computation exactly, without claiming optimizer equivalence.",
+    "equations": "An independent eager reference must match margin, vector modulation, h, E, P, loss, gradients, and one Adam update; verify row orientation, P-before-E, clipping, resets, query no-write, and exact parameter count.",
+    "symmetry_break": "On a fixed multi-support synthetic batch, zero-initialized vector-head rows must receive finite, nonzero, non-identical gradients.",
+    "runtime": "Actual-shape eager/compiled CUDA forward, gradients, and one Adam step must agree at atol=1e-5 and rtol=1e-4.",
+    "evaluation": "Synthetic fixtures cover vector-use inactivity, scalar-subspace R=0, heterogeneous R>0, generic categories, evidence binding, morphology gates, preservation guards, and all outcome labels before execution.",
+    "failure": "Any failed qualification blocks training. Repairs are append-only and cannot alter candidate, seeds, streams, objective, inputs, thresholds, or exposure order."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime minimal-single-p-vector-modulation <stage>",
+    "stages": ["qualify", "lock-source-inputs", "train", "lock-models", "evaluate-generic", "report-generic", "evaluate-liu", "report"],
+    "runtime": "CUDA float32 without autocast or TF32; compiled fullgraph/default training and evaluation; one Torch/BLAS/compiler thread; float64 summaries.",
+    "runtime_root": "artifacts/runs/minimal_single_p_vector_modulation_v1",
+    "freeze_points": [
+      "Commit the protocol before candidate implementation or outcome exposure.",
+      "Commit qualified implementation plus source/input/replay lock before seed 3041 training.",
+      "Train all three models and commit one joint model lock before generic evaluation.",
+      "Evaluate all nine generic units and commit their canonical result before Liu evaluation.",
+      "Evaluate all 27 Liu units, freeze one canonical result and concise report, commit, and stop."
+    ],
+    "retention": "Keep protocol, qualification, locks, canonical results, reports, compact diagnostic tables, and three final checkpoints until a separately authorized retention migration; reference parent artifacts without duplication."
+  }
+}
