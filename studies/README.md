@@ -336,6 +336,9 @@ fail to close the dynamics.
     state-dependent plasticity in every seed, but all six preregistered confidence-link
     intervals are positive rather than negative, so that link is not supported; the
     registered labels are not heterogeneous across seeds.
+- [Anytime presentation-horizon training for clean single-P](single_p_anytime/README.md) — `frozen_contract`
+  - **Finding:** A prospective paired three-seed development contract is frozen. No
+    model has yet been trained or evaluated under this protocol.
 
 ## Minimal explanatory models
 

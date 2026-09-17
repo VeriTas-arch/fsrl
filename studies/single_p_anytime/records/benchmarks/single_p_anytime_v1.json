@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "study_id": "single_p_anytime",
+  "experiment_id": "single_p_anytime_v1",
+  "tier": "prospective paired development",
+  "authorization": "The user explicitly approved the reviewed V1 presentation-horizon design and authorized execution after freezing the training chronology, RNG, nested-prefix evaluation, and hierarchical outcome rules.",
+  "scientific_question": "Under the inherited terminal-P regularizer, does variable presentation-horizon training make the clean no-time single-P model a more competent anytime learner than fresh fixed-horizon training, while preserving its historical B=4 phenotype?",
+  "claim_boundary": [
+    "B changes how many times a fixed relation graph is presented. This is a presentation-horizon robustness study, not an information-horizon or new-edge accumulation study.",
+    "The scientific contrast is the training horizon schedule: fresh fixed horizon FH always uses B=4 and variable horizon VH uses B in {2,3,4,5,6}. Architecture, optimizer, edge-count chronology, upstream episode randomness, observation arm, update budget, and terminal-P regularization are held fixed within each pair.",
+    "A VH advantage is attributable to the registered variable-horizon recipe under the inherited terminal-P regularizer. Because the terminal penalty is not normalized by B, the study does not identify pure horizon variability independently of that known treatment interaction.",
+    "Every block re-presents the same episode graph with a fresh order and observation realization under one stable omission. Neither B nor sigma enters the model, so success does not establish explicit time estimation, evidence-count access, or online uncertainty inference.",
+    "Three fixed development seeds test continuation of this recipe. A 3/3 result permits a separately registered fresh confirmation; it is not an across-network reliability claim. A 2/3 result cannot be repaired by adding seed 3024.",
+    "No scientific seed, cohort, threshold, schedule, regularizer, prefix loss, curriculum, or budget may change after outcome exposure. V2 mixed-reliability training and V3 bridge diagnostics are outside this study."
+  ],
+  "parents": {
+    "clean_single_p_protocol": {
+      "path": "studies/clean_single_p/records/benchmarks/clean_single_p_v1.json",
+      "sha256": "211ed4f40fa685f250d364e215c00865175534dc7693d98aa25922f2e19f06bc"
+    },
+    "clean_single_p_result": {
+      "path": "studies/clean_single_p/records/results/clean_single_p_v1.json",
+      "sha256": "a0d27a279deeab6980670072673a3e8cbf4de7f22b55485d5dfe0abc7250ecae"
+    },
+    "propagated_time_role_result": {
+      "path": "studies/single_p_time_role_propagated_authority/records/results/single_p_time_role_propagated_authority_v1.json",
+      "sha256": "34c9d3b0432a51de8d000718a380370f06f35acef6793f0f36501706adfac1df"
+    }
+  },
+  "design": {
+    "network_seeds": [3021, 3022, 3023],
+    "training_recipes": ["fixed_horizon", "variable_horizon"],
+    "observation_training_arms": ["clean", "noisy"],
+    "trained_models": 12,
+    "evaluation_panels": [1, 2, 3],
+    "primary_deployment_cells": {
+      "A0": "clean-trained model evaluated with clean observations",
+      "Ce": "noisy-trained model evaluated with inherited sigma=1/7 observations"
+    },
+    "mandatory_secondary_cells": {
+      "Ae": "clean-trained model evaluated with inherited sigma=1/7 observations",
+      "C0": "noisy-trained model evaluated with clean observations"
+    },
+    "pairing": "Within seed and training arm, FH and VH begin from bit-identical clean-no-time initialization and use the same E_t, graph, cue, subject p/z scaffold, stable omission, six block orders, clean observations, and all noisy draws at update t. Only the retained prefix differs.",
+    "exposure_barrier": "Complete and jointly artifact-lock all 12 final-step models before any registered historical or anytime evaluation is computed. Training losses and registered diagnostics are integrity logs and cannot select a model or alter the recipe."
+  },
+  "architecture": {
+    "authority": "Inherit clean_single_p clean_no_time exactly.",
+    "input_size": 32,
+    "hidden_size": 200,
+    "input_channels": {
+      "0:15": "left item cue",
+      "15:30": "right item cue",
+      "30": "response-phase pulse",
+      "31": "one realized signed observation q; zero on queries"
+    },
+    "state": "One dense P in R^(200x200), reset between episodes and retained across support trials; h and eligibility E reset per trial.",
+    "readout": "One binary margin; no L, confidence head, value head, duplicate q, constant channel, reward/action channel, blank step, normalized time input, time parameter, or time buffer.",
+    "parameter_count": 87003,
+    "support_trial_steps": 4,
+    "query_trial_steps": 2,
+    "query_policy": "All 28 unordered queries read clones of a selected P_B with fresh h/E and no P writeback."
+  },
+  "training_schedule": {
+    "updates": 1500,
+    "batch_size": 32,
+    "macro_cycles": 75,
+    "updates_per_cycle": 20,
+    "horizons": [2, 3, 4, 5, 6],
+    "edge_counts": [7, 8, 9, 10],
+    "construction": "Each macro-cycle contains every one of the 20 ordered (B,E) cells exactly once. A fixed recipe-independent RNG pre-generates one permutation per cycle before training.",
+    "chronology_gate": "For every contiguous registered 20-update macro-cycle, all 20 (B,E) cells occur exactly once. Across 1500 updates every cell occurs 75 times; no implicit short-to-long or long-to-short curriculum is permitted.",
+    "recipe_use": {
+      "fixed_horizon": "Use B=4 on every update while retaining the common E_t chronology.",
+      "variable_horizon": "Use the registered B_t from the common cycle schedule."
+    },
+    "exposure_match": "Because mean scheduled B is exactly 4 and FH shares E_t, aggregate support presentations sum_t(B_t*E_t) are exactly matched between recipes.",
+    "schedule_rng": "Use a separately seeded NumPy Generator for each network seed, fully materialize all 1500 (B,E) entries before training, and store the array plus SHA-256 in the source/input lock. No model or observation RNG may affect it."
+  },
+  "episode_stream": {
+    "task": "Generic N=8 connected ranking graphs with E_t in {7,8,9,10}, protected Liu graph signatures excluded, one stable omission per episode, and all 28 unordered queries.",
+    "max_six_first": "At every update, first generate a complete six-block episode stream for all 32 episodes, including graph, cue, p/z, stable omission, six presentation orders, all clean q values, and all sigma=1/7 noisy draws, including unused blocks 5 and 6.",
+    "truncation": {
+      "fixed_horizon": "Retain blocks 1:4 only after the max-six stream is complete.",
+      "variable_horizon": "Retain blocks 1:B_t only after the same max-six stream is complete."
+    },
+    "deterministic_seeding": "Derive task and observation seeds from immutable (network_seed, update_index) identities rather than persistent recipe-local RNG state. Regenerating FH and VH must therefore produce byte-identical max-six task and observation arrays before truncation.",
+    "fingerprints": [
+      "max-six task fingerprint",
+      "max-six clean-observation fingerprint",
+      "max-six noisy-observation fingerprint",
+      "prefix fingerprint for every retained B",
+      "cumulative full-stream fingerprint"
+    ],
+    "pairing_gate": "Within each seed/arm/update, FH and VH max-six fingerprints must match exactly. Any mismatch is noninterpretable, not a performance result."
+  },
+  "optimization": {
+    "initialization": "For each network seed, instantiate one inherited LinearModulationRNN shadow and map every arm/recipe to the same clean-no-time state. Shared initialization tensors must be bit-identical.",
+    "optimizer": "Inherited effective-coordinate Adam: base learning rate 1e-4, betas=(0.9,0.999), eps=1e-8, no weight decay, no AMSGrad, multiplier2 on folded bias/q/readout coordinates, weighted backbone global gradient clip2, no scheduler.",
+    "loss": "mean softplus(-y*M) over all 28 queries plus 1e-4*mean(P_T^2)",
+    "terminal_regularizer": "Keep the inherited terminal-P penalty unchanged and do not divide by B. This is a fixed treatment interaction and part of the recipe-level claim boundary.",
+    "selection": "Final update only; no checkpoint selection, early stopping, restart selection, learning-rate change, budget extension, or result-dependent continuation.",
+    "training_diagnostics_by_B": [
+      "query loss",
+      "terminal P penalty",
+      "Frobenius norm of P_T",
+      "Frobenius norm of alpha elementwise-multiplied by P_T",
+      "P clamp fraction",
+      "weighted backbone gradient norm"
+    ],
+    "diagnostic_boundary": "Diagnostics are mandatory descriptive outputs, not decision gates and not tuning signals."
+  },
+  "qualification": {
+    "fixtures": "Use synthetic non-Liu seeds outside 3021--3023 and outside evaluation panels. Qualification cannot load scientific checkpoints or outcomes.",
+    "schedule": "Assert 75 exact 20-cell permutations, 75 occurrences per (B,E), identical E chronology for FH/VH, exact aggregate B*E exposure equality, deterministic regeneration, and schedule-hash sensitivity to any entry change.",
+    "stream": "Assert max-six generation precedes truncation; FH/VH full task and observation fingerprints match; prefixes equal direct slices; unused noisy block5--6 draws exist; changing retained B cannot change the next update stream.",
+    "architecture": "Assert inherited 32D, H=200, 87003-parameter no-time single-P architecture with no forbidden paths and no recipe-specific parameter or optimizer difference.",
+    "optimization": "For B=2,4,6, compare eager equations, loss, terminal penalty, P, gradients, weighted clipping norm, and one Adam update against an independent reference within inherited tolerances.",
+    "nested_evaluation": "Assert one seven-block support rollout yields P_1...P_7 identical to independent prefix replays; every 28-query read uses a clone and leaves P_B bit-identical; block7 preserves stable omission while adding a fresh order/observation realization.",
+    "statistics": "Synthetic fixtures must cover every hierarchical outcome, strict CE superiority UB95<0, probability non-harm LB95>=-0.02, equal-panel aggregation, arm heterogeneity, and 3/3 continuation without seed replacement.",
+    "cuda": "Eager and compiled CUDA outputs, P, loss, gradients, and one update at short and long horizons must match within atol=1e-5 and rtol=1e-4.",
+    "failure": "Any failed qualification blocks scientific training. Implementation-only repairs must be append-only and may not alter seeds, equations, schedules, estimands, thresholds, or outcome rules."
+  },
+  "evaluation": {
+    "anytime_stream": "For each episode generate one common seven-block stream under one stable omission. Run support once, save P after blocks B=1...7, and query all 28 pairs from clones without writeback.",
+    "horizon_roles": {
+      "B1": "held-out short presentation horizon",
+      "B2_to_B6": "training-support horizons",
+      "B4": "historical center",
+      "B7": "held-out long presentation horizon"
+    },
+    "block7": "Use the same graph and stable omission as blocks1--6, with a fresh presentation order and fresh clean/noisy observation realization.",
+    "panels": "Three fixed fresh panels per network. Freeze all task, order, subject, observation, and query identities in the source/input lock; share physical episodes and resamples across paired recipes.",
+    "generic_anytime": "For each panel use 256 held-out graph-bucket-zero episodes, balanced as 64 episodes for each E in {7,8,9,10}. Evaluate temperature1 exact-decision probability and query CE for learned and nonlearned pairs at every B.",
+    "historical_B4": "Using fresh frozen inputs under the inherited clean-single-P definitions, evaluate generic competence, Liu_v2 competence and P/evidence binding, Ae/Ce five-flag core, all nine qualitative rows, and A/C compensation at B=4 for both recipes.",
+    "primary_cells": ["A0", "Ce"],
+    "secondary_cells": ["Ae", "C0"],
+    "compensation_scope": "Compensation is evaluated only on the historical B=4 task and is not multiplied across anytime horizons.",
+    "statistics": "Use 2000 percentile-bootstrap draws and 95% intervals. Share episode/participant resamples across recipes, horizons, and matched observation cells; aggregate panels equally within each network; never pool network seeds as participants or replace a failed seed."
+  },
+  "decision": {
+    "integrity": "All 12 models complete exactly 1500 updates with finite parameters, correct recipe/arm identities, schedule and max-stream pairing, and a joint artifact lock before evaluation.",
+    "fresh_FH_qualification": "In every seed, the fresh FH pair must pass inherited B=4 generic and Liu competence and binding gates; its Ae/Ce cells must satisfy the inherited five-flag core on at least one of three panels; and its inherited compensation gates must pass. Failure is training_recipe_failure.",
+    "VH_historical_absolute": "In every seed, VH must independently pass the same B=4 generic/Liu competence, binding, Ae/Ce core, and compensation gates.",
+    "VH_historical_continuity": "For VH minus paired fresh FH at B=4, require lower95>=-0.02 separately for Ce generic learned/nonlearned and Liu learned/nonlearned/omitted correct probability in every seed. The -0.02 margin is inherited from the previous clean-single-P structural comparison and is not estimated from V1.",
+    "anytime_absolute": "In every seed and both primary matched cells A0 and Ce, VH generic learned and nonlearned correct-probability lower95 must exceed 0.5 independently at every B=1...7. This is above-chance competence, not equivalence to B=4; monotonicity is not required.",
+    "held_out_primary": "At each held-out horizon B in {1,7}, every seed and its matched A0 and Ce cell must have paired delta_CE=CE_VH-CE_FH upper95<0.",
+    "held_out_safety": "At each held-out horizon B in {1,7}, every seed and its matched A0 and Ce cell must have paired delta_p=p_VH-p_FH lower95>=-0.02. Probability is a non-harm endpoint, not a required positive-superiority endpoint.",
+    "horizon_improvement": "A held-out horizon meets the improvement criterion only when both primary cells satisfy CE superiority and probability non-harm in all three seeds.",
+    "secondary_reporting": "Report Ae/C0 full horizon curves, learned/nonlearned components, all diagnostics, and all failed cells. Secondary cells cannot rescue a failed primary gate.",
+    "arm_heterogeneity": "Set descriptive arm_heterogeneity=true when the clean and noisy matched primary cells disagree on a held-out horizon criterion or any registered gate; it does not create or replace the main outcome.",
+    "outcome_precedence": [
+      "noninterpretable",
+      "training_recipe_failure",
+      "historical_task_degradation",
+      "anytime_competence_failure",
+      "no_horizon_benefit",
+      "horizon_tradeoff",
+      "anytime_admitted"
+    ],
+    "outcomes": {
+      "noninterpretable": "Source, runtime, qualification, schedule, pairing, finiteness, model identity, artifact, or mandatory execution integrity fails.",
+      "training_recipe_failure": "Integrity passes, but fresh FH fails any necessary inherited B=4 historical qualification.",
+      "historical_task_degradation": "Fresh FH is valid, but VH fails B=4 absolute preservation or paired historical continuity.",
+      "anytime_competence_failure": "B=4 historical preservation passes, but VH fails absolute competence at any B=1...7 in any seed or primary cell.",
+      "no_horizon_benefit": "Historical preservation and all anytime competence gates pass, but neither B1 nor B7 meets the registered improvement criterion.",
+      "horizon_tradeoff": "Historical preservation and all anytime competence gates pass, but exactly one of B1 and B7 meets the registered improvement criterion.",
+      "anytime_admitted": "Historical preservation and all anytime competence gates pass, and both B1 and B7 meet the registered improvement criterion."
+    },
+    "continuation": "Only anytime_admitted with every required gate passing 3/3 seeds permits a separately registered fresh confirmation. No outcome under this development cohort alone promotes a new main model.",
+    "stop_rule": "Freeze and report the complete result once. If B=4 is preserved but B1/B7 show no registered advantage, close V1 as no_horizon_benefit. Do not change the B distribution, penalty, steps, prefix loss, curriculum, thresholds, cohorts, or seeds inside V1."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime single-p-anytime <stage>",
+    "stages": ["qualify", "lock-source", "train", "lock-models", "evaluate", "report"],
+    "runtime": "CUDA float32 without autocast or TF32; compiled fullgraph/default training; one Torch/BLAS/compiler thread; float64 summaries.",
+    "runtime_root": "artifacts/runs/single_p_anytime_v1",
+    "freeze_points": [
+      "Commit this protocol and study registration before implementing qualification or exposing scientific outcomes.",
+      "Commit the qualified implementation and source/input/schedule lock before training seed3021.",
+      "Train all 12 models and jointly artifact-lock them before any historical or anytime evaluation.",
+      "Evaluate once, freeze the canonical result and report, preserve positive and negative findings, and stop according to the registered outcome."
+    ],
+    "outputs": [
+      "immutable protocol",
+      "qualification record",
+      "source/input/schedule lock",
+      "joint 12-model artifact lock",
+      "compact sufficient statistics and diagnostic tables",
+      "canonical result",
+      "concise report"
+    ],
+    "retention": "Keep the protocol, qualification, locks, compact sufficient artifacts, canonical result, and report. Do not delete parent or new checkpoints without a later separately authorized retention migration."
+  }
+}
