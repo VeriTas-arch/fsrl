@@ -384,8 +384,8 @@ fail to close the dynamics.
     0/18 acute-noisy Ae units met constrained morphology and 0/18 passed all nine rows;
     no training or model execution was performed.
 - [Postsynaptic vector modulation in minimal single-P M2](minimal_single_p_vector_modulation/README.md) — `unresolved`
-  - **Finding:** All three final vector-modulation checkpoints are jointly hash-locked;
-    generic and Liu outcomes have not been exposed.
+  - **Finding:** Generic vector-modulation development freeze: 3/3 stable_constructive;
+    Liu pending.
 
 ## Minimal explanatory models
 

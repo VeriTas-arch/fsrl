@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 4024,
+  "entry_count": 4026,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2253,
+    "json": 2254,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 116,
+    "markdown": 117,
     "numpy_npz": 1417,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3924,
+    "already_conformant": 3926,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -62541,6 +62541,74 @@
         "source_ref": "sha256:ac053207f1107db64654397b87908aee7c04fe90078f0aed4b042c07a8285ef0"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.generic.md",
+        "repository_path": "studies/minimal_single_p_vector_modulation/records/reports/minimal_single_p_vector_modulation_v1.generic.md"
+      },
+      "materialized_identity": {
+        "bytes": 320,
+        "sha256": "60bb7be5af8664a75330c5a160786e55a7a712691cfb6a2e88be3093c2bd8710"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_vector_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_vector_modulation.studies_minimal_single_p_vector_modulation_records_reports_minimal_single_p_vector_modulation_v1_generic_md",
+      "registered_identity": {
+        "bytes": 320,
+        "sha256": "60bb7be5af8664a75330c5a160786e55a7a712691cfb6a2e88be3093c2bd8710",
+        "source_ref": "sha256:60bb7be5af8664a75330c5a160786e55a7a712691cfb6a2e88be3093c2bd8710"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.generic.json",
+        "repository_path": "studies/minimal_single_p_vector_modulation/records/results/minimal_single_p_vector_modulation_v1.generic.json"
+      },
+      "materialized_identity": {
+        "bytes": 43377,
+        "sha256": "9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_vector_modulation",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_vector_modulation.studies_minimal_single_p_vector_modulation_records_results_minimal_single_p_vector_modulation_v1_generic_json",
+      "registered_identity": {
+        "bytes": 43377,
+        "sha256": "9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a",
+        "source_ref": "sha256:9caca316f72cd273f8af172376dc48070951e4077296ec5f70305a79ab96d99a"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -137211,7 +137279,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 4022,
+  "registered_record_count": 4024,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -137225,7 +137293,7 @@
     "execution_lock": 88,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 590,
+    "frozen_result": 591,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -137235,7 +137303,7 @@
     "registered_contract": 103,
     "repair_contract": 41,
     "repair_lock": 20,
-    "report": 111,
+    "report": 112,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2736,
