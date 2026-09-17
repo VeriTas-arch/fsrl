@@ -38,6 +38,9 @@ or a human/biological mechanism.
 - `registered_contract` —
   [studies/single_p_anytime/records/benchmarks/single_p_anytime_v1.json](records/benchmarks/single_p_anytime_v1.json)
   (`sha256:3d70b51bc076`)
+- `validation_result` —
+  [studies/single_p_anytime/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:8b24bfff5e7f`)
 
 ## Provenance rule
 
