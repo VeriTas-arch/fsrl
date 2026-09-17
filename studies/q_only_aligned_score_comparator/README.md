@@ -41,6 +41,9 @@ ablation or main-model promotion.
 - `validation_result` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:b75aa32e25ce`)
+- `execution_lock` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
+  (`sha256:646e7840d343`)
 
 ## Provenance rule
 
