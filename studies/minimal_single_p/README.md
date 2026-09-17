@@ -45,6 +45,9 @@ prevalence.
 - `execution_lock` —
   [studies/minimal_single_p/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:0dd061343504`)
+- `artifact_lock` —
+  [studies/minimal_single_p/records/benchmarks/model_lock.C0.json](records/benchmarks/model_lock.C0.json)
+  (`sha256:8d7c1fe08f76`)
 
 ## Provenance rule
 
