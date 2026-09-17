@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p",
+  "experiment_id": "minimal_single_p_v1",
+  "tier": "prospective sequential development",
+  "authorization": "The user explicitly authorized execution of the reviewed subtractive single-P program and removed the proposed no-clipping and support-microstep-reduction levels from scope.",
+  "scientific_question": "How far can the clean no-time single-P recurrent learner be simplified in architecture and optimization while retaining generic relational competence, causal dependence on P, and globally coherent query structure without human-target fitting?",
+  "claim_boundary": [
+    "This is a fixed three-seed development ladder. It identifies a simplification boundary along one prospectively ordered deletion path, not a globally minimal architecture or a population success rate.",
+    "The ladder is C0, M1, M2, M3, M5_H100, and M5_H50. Runtime P clipping at [-50,50], four support microsteps, and two query microsteps remain fixed by explicit user decision; no no-clipping M4 or microstep-reduction M6 result is estimated.",
+    "Only clean fixed-four-block generic relational training is used. No noisy-training arm, variable-horizon curriculum, prefix loss, human target, Liu summary, relation-type label, intervention label, or evaluation outcome enters optimization.",
+    "All 28 query labels supervise generic episodic relational competence. Competence is therefore learned under supervision; only organization not explicitly represented in the objective may be described as emergent under the registered task and observation prior.",
+    "The upstream p/z stable-omission scaffold generates realized q but neither p nor z enters the model. Any individualized behavior later observed is conditional on this structured observation process.",
+    "Human/Liu evaluation is prohibited in this development study. A separately frozen fresh cohort is required to estimate the selected recipe's solution distribution or human-facing phenotype.",
+    "No seed replacement, checkpoint selection, learning-rate scan, budget extension, result-dependent initialization, compensatory auxiliary loss, or continuation after a registered stop is permitted."
+  ],
+  "parents": {
+    "clean_single_p_protocol": {
+      "path": "studies/clean_single_p/records/benchmarks/clean_single_p_v1.json",
+      "sha256": "211ed4f40fa685f250d364e215c00865175534dc7693d98aa25922f2e19f06bc"
+    },
+    "single_p_anytime_result": {
+      "path": "studies/single_p_anytime/records/results/single_p_anytime_v1.json",
+      "sha256": "bcfac478425b9ccd87feeb33f39508aa855cc4000f76058cb254c77e0bd3ca2c"
+    }
+  },
+  "design": {
+    "network_seeds": [3031, 3032, 3033],
+    "ordered_levels": ["C0", "M1", "M2", "M3", "M5_H100", "M5_H50"],
+    "evaluation_panels": [1, 2, 3],
+    "training_arm": "clean only",
+    "pairing": "Within a network seed, every executed level receives the same generic episodes, presentation order, stable omission, realized clean q, and update chronology. C0 and M1 begin from bit-identical parameters. At H=200, later levels preserve the same direct draws for every shared tensor; M2 and later intentionally zero-initialize the scalar modulation head.",
+    "exposure_barrier": "For an executed level, train and artifact-lock all three final checkpoints before computing registered generic outcomes. A level outcome is then frozen before the stop rule is applied to any successor. Training diagnostics are integrity records and cannot alter the recipe."
+  },
+  "architecture": {
+    "common": {
+      "input_size": 32,
+      "input_channels": {
+        "0:15": "left item cue",
+        "15:30": "right item cue",
+        "30": "response-phase pulse",
+        "31": "one realized signed observation q; zero on queries"
+      },
+      "state_policy": "P persists across support trials and resets between episodes; h and E reset per trial; every query reads the same terminal P with fresh h/E and no P writeback.",
+      "equations": "h'=tanh(W_x x+b+(W_rec+A(P))h); m=u^T h+c; P'=clip(P+mE,-50,50); E'=(1-eta_E)E+eta_E*tanh(h'h_old^T). Preserve P-before-E update order.",
+      "support_trial_steps": 4,
+      "query_trial_steps": 2,
+      "readout": "one affine binary margin",
+      "forbidden": [
+        "L or another episode memory",
+        "normalized time",
+        "constant input channel",
+        "duplicate q",
+        "reward/action compatibility channels",
+        "value or confidence head",
+        "blank initial rollout"
+      ]
+    },
+    "levels": {
+      "C0": {
+        "hidden_size": 200,
+        "alpha": "learned dense 200x200 alpha with initialization Uniform[-0.01,0.01]",
+        "eta_E": "learned scalar initialized at 0.7",
+        "modulation_initialization": "standard affine fan-in initialization",
+        "parameter_count": 87003,
+        "scientific_change": "canonical direct 32-channel initialization and single-rate optimization replace the legacy shadow-coordinate training geometry; architecture and terminal-P penalty otherwise remain inherited"
+      },
+      "M1": {
+        "hidden_size": 200,
+        "alpha": "learned dense 200x200 alpha",
+        "eta_E": "learned scalar",
+        "modulation_initialization": "bit-identical to C0",
+        "parameter_count": 87003,
+        "scientific_change": "remove terminal-P squared penalty"
+      },
+      "M2": {
+        "hidden_size": 200,
+        "alpha": "absent; A(P)=P so P is the effective recurrent increment",
+        "eta_E": "learned scalar",
+        "modulation_initialization": "exactly zero weights and bias so the write scale is learned without a fixed alpha replacement scale",
+        "parameter_count": 47003,
+        "scientific_change": "remove 40000 synapse-specific plastic-expression coefficients"
+      },
+      "M3": {
+        "hidden_size": 200,
+        "alpha": "absent",
+        "eta_E": "fixed exactly at 1 and absent from parameters and buffers",
+        "modulation_initialization": "exactly zero weights and bias",
+        "parameter_count": 47002,
+        "scientific_change": "remove learned eligibility timescale while preserving the historical one-step P-before-E chronology"
+      },
+      "M5_H100": {
+        "hidden_size": 100,
+        "alpha": "absent",
+        "eta_E": "fixed exactly at 1",
+        "modulation_initialization": "exactly zero weights and bias",
+        "parameter_count": 13502,
+        "scientific_change": "halve hidden width and reduce P from 40000 to 10000 episode-state scalars"
+      },
+      "M5_H50": {
+        "hidden_size": 50,
+        "alpha": "absent",
+        "eta_E": "fixed exactly at 1",
+        "modulation_initialization": "exactly zero weights and bias",
+        "parameter_count": 4252,
+        "scientific_change": "halve hidden width again and reduce P to 2500 episode-state scalars"
+      }
+    }
+  },
+  "initialization": {
+    "direct_only": "Instantiate the maintained 32-channel candidate directly. No legacy shadow network, checkpoint, mapped duplicate coordinate, or transformed optimizer state is constructed.",
+    "input_and_heads": "Use PyTorch Linear.reset_parameters fan-in initialization for cue projection and the two affine heads, except that M2 and later set modulation weight and bias exactly to zero after the common draw.",
+    "evidence_weight": "Uniform[-1/sqrt(31),1/sqrt(31)].",
+    "recurrent_weight": "Uniform[-1/sqrt(H),1/sqrt(H)].",
+    "alpha": "When present, Uniform[-0.01,0.01].",
+    "pairing": "Construct the same full canonical parameter order under one torch seed before deleting alpha or eta_E, so removal cannot change shared H=200 initialization draws."
+  },
+  "training": {
+    "task": "Generic N=8 graph-bucket-one connected ranking episodes with 7--10 support edges, four presentation blocks, stable omission, protected Liu graph signatures excluded, and all 28 unordered query pairs equally weighted.",
+    "observation": "Use one clean realized q from the inherited p/z scaffold; no added observation noise.",
+    "updates": 1500,
+    "batch_size": 32,
+    "episode_exposures_per_model": 48000,
+    "learning_rate": 0.0001,
+    "optimizer": "One Adam parameter group for every trainable tensor; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler and no gradient clipping.",
+    "loss": {
+      "C0": "mean softplus(-y*M) over all generic queries plus 1e-4*mean(P_T^2)",
+      "M1_and_later": "mean softplus(-y*M) over all generic queries"
+    },
+    "selection": "Final update only; no early stopping, intermediate checkpoint selection, restart selection, result-conditioned continuation, or optimizer change.",
+    "diagnostics": [
+      "query loss and accuracy",
+      "terminal penalty contribution",
+      "P Frobenius norm",
+      "effective recurrent P Frobenius norm",
+      "P clamp fraction",
+      "unclipped global gradient norm"
+    ],
+    "diagnostic_boundary": "Diagnostics establish integrity and describe dynamics; they are not tuning signals or scientific gates."
+  },
+  "qualification": {
+    "fixtures": "Use synthetic non-Liu seeds outside 3031--3033 and outside evaluation panels. Qualification may not load prior or prospective scientific checkpoints.",
+    "algebra": "For every level, an independent eager reference must match margin, modulation, h, E, P, loss, gradients, and one Adam update within atol=1e-6 and rtol=1e-5.",
+    "structure": "Assert exact public input width, hidden width, parameter count, alpha/eta presence, modulation initialization, P clipping, P-before-E order, four support steps, two query steps, and absence of every forbidden path.",
+    "initialization": "Assert deterministic direct regeneration, bit-identical C0/M1 initialization, identical shared H=200 tensors where specified, no shadow construction, and zero modulation only for M2 and later.",
+    "stream": "Assert byte-identical task and q streams across levels for each network seed and sensitivity to seed/update changes.",
+    "evaluation": "Synthetic fixtures must verify canonical pair orientation, exact P_off construction, learned/nonlearned grouping, Hodge coherence, percentile intervals, level outcome precedence, and stop transitions.",
+    "cuda": "Eager and compiled CUDA outputs, P, loss, gradients, and one Adam update must match within atol=1e-5 and rtol=1e-4.",
+    "failure": "Any failed qualification blocks scientific training. An implementation-only repair must be append-only and may not alter seeds, equations, levels, thresholds, or stop rules."
+  },
+  "evaluation": {
+    "inputs": "Three frozen panels per network seed; each panel contains 256 fresh graph-bucket-zero generic episodes under the same clean four-block task, grouped only by support length for execution.",
+    "conditions": ["intact", "P_off"],
+    "temperature": 1.0,
+    "statistics": "Use 2000 percentile-bootstrap draws and 95% intervals within each panel. Episodes are the resampling unit; networks are never pooled as participants.",
+    "endpoints": {
+      "competence": "Intact exact correct probability for learned and nonlearned pairs.",
+      "P_dependence": "Paired intact-minus-P_off exact correct probability for learned and nonlearned pairs.",
+      "coherence": "Gradient-energy fraction of the intact canonical complete-graph margin field."
+    },
+    "human_blind": "Do not construct, load, or evaluate Liu/human inputs, human intervals, noisy-training compensation, or historical nine-row flags in this study."
+  },
+  "decision": {
+    "integrity": "Every executed level has exactly three finite final models, 1500 optimizer steps for every trainable parameter, complete paired training streams, correct identities and parameter counts, and a committed artifact lock before evaluation.",
+    "per_seed_core": "A network passes only if every panel has intact learned and nonlearned probability lower95>0.5, intact-minus-P_off learned and nonlearned probability lower95>0, and coherence lower95>0.95.",
+    "level_outcomes": {
+      "clear_continue": "All three seeds pass the per-seed core.",
+      "mixed_boundary": "One or two of three seeds pass. Stop deletion without recipe repair; characterize this instability in a separately frozen larger cohort if pursued.",
+      "structural_collapse": "Zero of three seeds pass. Stop and retain the latest predecessor with clear_continue; if C0 collapses, close the simple-training route as failed."
+    },
+    "progression": {
+      "C0": "Only clear_continue authorizes M1.",
+      "M1": "Only clear_continue authorizes M2.",
+      "M2": "Only clear_continue authorizes M3.",
+      "M3": "Only clear_continue authorizes M5_H100.",
+      "M5_H100": "Only clear_continue authorizes M5_H50.",
+      "M5_H50": "Terminal ladder level; report its outcome and stop."
+    },
+    "selection_boundary": "The selected recipe is the last clear_continue level before a structural_collapse. A mixed_boundary is not silently promoted or repaired; it identifies the level requiring the separately registered 20-network solution-distribution cohort.",
+    "forbidden_rescue": "Human phenotype, later-level success, training diagnostics, a hand-picked seed, or an unregistered rerun cannot rescue a failed or mixed level."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime minimal-single-p <stage> [level]",
+    "stages": ["qualify", "lock-source", "train", "lock-models", "evaluate", "report"],
+    "runtime": "CUDA float32 without autocast or TF32; compiled fullgraph/default training; one Torch/BLAS/compiler thread; float64 summaries.",
+    "runtime_root": "artifacts/runs/minimal_single_p_v1",
+    "freeze_points": [
+      "Commit this protocol and study registration before implementation or scientific outcome exposure.",
+      "Commit qualified implementation and source/input lock before training C0 seed3031.",
+      "For each authorized level, train all three models and commit their joint artifact lock before evaluation.",
+      "Freeze and commit that level's result before applying the registered stop rule or beginning its successor.",
+      "After the ladder stops, register any 20-network solution-distribution cohort separately before training it."
+    ],
+    "outputs": [
+      "immutable protocol",
+      "qualification record",
+      "source and frozen-generic-input lock",
+      "one joint artifact lock for each executed level",
+      "one canonical result and concise report for each executed level",
+      "final ladder interpretation"
+    ],
+    "retention": "Keep protocols, locks, canonical level results, reports, and final checkpoints until a separately authorized retention migration. Preserve the frozen anytime tradeoff and all negative ladder levels."
+  }
+}

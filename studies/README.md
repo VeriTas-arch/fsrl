@@ -342,6 +342,9 @@ fail to close the dynamics.
     competence at B=1..7, and improved the registered B=1 CE endpoint without
     probability harm, but failed the B=7 CE-superiority gate. The frozen V1 outcome is
     horizon_tradeoff and is not admitted to confirmation.
+- [Subtractive simplification of the clean single-P learner](minimal_single_p/README.md) — `frozen_contract`
+  - **Finding:** The prospective C0 to M5 subtraction ladder is frozen; no scientific
+    model or evaluation outcome has yet been exposed under this protocol.
 
 ## Minimal explanatory models
 
