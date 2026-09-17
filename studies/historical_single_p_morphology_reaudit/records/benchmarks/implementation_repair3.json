@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "study_id": "historical_single_p_morphology_reaudit",
+  "repair_id": "historical_single_p_morphology_reaudit_implementation_repair3",
+  "trigger": "After repair2 removed the study's new complexity violation and reproduced the scientific result, the full static gate found five newly added Python files were Ruff-equivalent but not Ruff-formatted.",
+  "known_outcome": {
+    "outcome": "no_current_standard_precedent",
+    "constrained_Ae_units": 0,
+    "all_nine_Ae_units": 0,
+    "error_inflation_Ae_units": 18,
+    "qualitative_failure_identity": "difficult_pair_bimodality only in every Ae unit"
+  },
+  "permitted_change": "Apply the repository Ruff formatter only to the five reported new files. No manual or semantic edit is permitted.",
+  "forbidden_change": "No scientific code, artifact, unit, replay, threshold, decision, result field, source-validation check, or report content may change.",
+  "acceptance": "Before locking, Ruff lint and format checks must pass for all maintained trees, the study must add no complexity violation or type error, and the affected tests must pass. Then freeze repair3 qualification and source/input lock and require exact reproduction of the known scientific outcome.",
+  "retention": "Keep all prior qualifications and source/input locks as immutable witnesses."
+}

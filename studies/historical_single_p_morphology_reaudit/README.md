@@ -25,7 +25,7 @@
 the later constrained Liu morphology standard, or did the historical success claims
 concern only the earlier core-behavior and compensation gates?
 
-**Finding.** Sources and all mandatory historical artifacts locked; analysis pending.
+**Finding.** Outcome-known format-only repair3 registered; qualification pending.
 
 **Claim boundary.** All 36 archived A0/Ae units from the two specified historical
 families are mandatory. The study replays existing choices and analyzes archived output
@@ -43,6 +43,9 @@ search, selection, historical-record mutation, or main-model promotion.
 - `repair_contract` —
   [studies/historical_single_p_morphology_reaudit/records/benchmarks/implementation_repair2.json](records/benchmarks/implementation_repair2.json)
   (`sha256:7f996a479214`)
+- `repair_contract` —
+  [studies/historical_single_p_morphology_reaudit/records/benchmarks/implementation_repair3.json](records/benchmarks/implementation_repair3.json)
+  (`sha256:672c2037aa39`)
 - `validation_result` —
   [studies/historical_single_p_morphology_reaudit/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:1ff62f78d9ec`)
