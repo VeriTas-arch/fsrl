@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 4011,
+  "entry_count": 4012,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2242,
+    "json": 2243,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3911,
+    "already_conformant": 3912,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -43337,6 +43337,40 @@
         "bytes": 1993,
         "sha256": "ce96dc7ce224e40eed7845130e5330011592b99e0209afdefc2c39c763835ebd",
         "source_ref": "sha256:ce96dc7ce224e40eed7845130e5330011592b99e0209afdefc2c39c763835ebd"
+      },
+      "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/historical_single_p_morphology_reaudit/records/benchmarks/implementation_repair2.json",
+        "repository_path": "studies/historical_single_p_morphology_reaudit/records/benchmarks/implementation_repair2.json"
+      },
+      "materialized_identity": {
+        "bytes": 1477,
+        "sha256": "7f996a479214425e21efd9af305575f8b2584e045fb9dabe65a961263d69ca66"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "historical_single_p_morphology_reaudit",
+        "kind": "study"
+      },
+      "record_id": "study.historical_single_p_morphology_reaudit.studies_historical_single_p_morphology_reaudit_records_benchmarks_implementation_repair2_json",
+      "registered_identity": {
+        "bytes": 1477,
+        "sha256": "7f996a479214425e21efd9af305575f8b2584e045fb9dabe65a961263d69ca66",
+        "source_ref": "sha256:7f996a479214425e21efd9af305575f8b2584e045fb9dabe65a961263d69ca66"
       },
       "role": "repair_contract"
     },
@@ -136769,7 +136803,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 4009,
+  "registered_record_count": 4010,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -136791,7 +136825,7 @@
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 102,
-    "repair_contract": 39,
+    "repair_contract": 40,
     "repair_lock": 20,
     "report": 110,
     "source_context": 2,
