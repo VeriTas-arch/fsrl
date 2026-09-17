@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3983,
+  "entry_count": 3985,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2222,
+    "json": 2223,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 111,
+    "markdown": 112,
     "numpy_npz": 1412,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3883,
+    "already_conformant": 3885,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -85616,6 +85616,74 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.generic.md",
+        "repository_path": "studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.generic.md"
+      },
+      "materialized_identity": {
+        "bytes": 458,
+        "sha256": "b89b4cb49d41a0a0cd755282cca704a9f024832a94c6333802b5804d366d4b8a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "q_only_aligned_score_comparator",
+        "kind": "study"
+      },
+      "record_id": "study.q_only_aligned_score_comparator.studies_q_only_aligned_score_comparator_records_reports_q_only_aligned_score_comparator_v1_generic_md",
+      "registered_identity": {
+        "bytes": 458,
+        "sha256": "b89b4cb49d41a0a0cd755282cca704a9f024832a94c6333802b5804d366d4b8a",
+        "source_ref": "sha256:b89b4cb49d41a0a0cd755282cca704a9f024832a94c6333802b5804d366d4b8a"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.generic.json",
+        "repository_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.generic.json"
+      },
+      "materialized_identity": {
+        "bytes": 207325,
+        "sha256": "c3705f9c579b91e704cb114a77fe45111adaa354ed58cc1fac09564cbef05745"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "q_only_aligned_score_comparator",
+        "kind": "study"
+      },
+      "record_id": "study.q_only_aligned_score_comparator.studies_q_only_aligned_score_comparator_records_results_q_only_aligned_score_comparator_v1_generic_json",
+      "registered_identity": {
+        "bytes": 207325,
+        "sha256": "c3705f9c579b91e704cb114a77fe45111adaa354ed58cc1fac09564cbef05745",
+        "source_ref": "sha256:c3705f9c579b91e704cb114a77fe45111adaa354ed58cc1fac09564cbef05745"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.artifact_lock",
       "format": {
         "format": "json",
@@ -135817,7 +135885,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3981,
+  "registered_record_count": 3983,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -135831,7 +135899,7 @@
     "execution_lock": 82,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 585,
+    "frozen_result": 586,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -135841,7 +135909,7 @@
     "registered_contract": 100,
     "repair_contract": 36,
     "repair_lock": 20,
-    "report": 106,
+    "report": 107,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2731,

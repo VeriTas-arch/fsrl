@@ -372,8 +372,8 @@ fail to close the dynamics.
     interface outcome was complete_recipe_only; no training or model execution was
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
-  - **Finding:** Generic evaluation paused before result write; implementation repair1
-    qualified and source-locked; evaluation ready to resume.
+  - **Finding:** Generic evaluation frozen: 20/20 stable_competent, 0/20 panel_variable,
+    and 0/20 noncompetent; Liu evaluation pending.
 
 ## Minimal explanatory models
 
