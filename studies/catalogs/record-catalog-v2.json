@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3950,
+  "entry_count": 3952,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2194,
+    "json": 2196,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3851,
+    "already_conformant": 3853,
     "historical_gzip_view": 98,
     "historical_pth_view": 1
   },
@@ -60669,6 +60669,74 @@
         "source_ref": "sha256:4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_promotion/records/benchmarks/qualification.json",
+        "repository_path": "studies/minimal_single_p_promotion/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 105831,
+        "sha256": "dc3e1f0678e337851bb1a0660ba9581c4ed240a3b01e215f4d0b66f5b5fb8978"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_promotion",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_promotion.studies_minimal_single_p_promotion_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 105831,
+        "sha256": "dc3e1f0678e337851bb1a0660ba9581c4ed240a3b01e215f4d0b66f5b5fb8978",
+        "source_ref": "sha256:dc3e1f0678e337851bb1a0660ba9581c4ed240a3b01e215f4d0b66f5b5fb8978"
+      },
+      "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_promotion/records/benchmarks/source_lock.json",
+        "repository_path": "studies/minimal_single_p_promotion/records/benchmarks/source_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 109062,
+        "sha256": "f5f021b928dd95da9fd604297ee12cabf6886eb533f19f2cc1cfb1d6d78c74aa"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_promotion",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_promotion.studies_minimal_single_p_promotion_records_benchmarks_source_lock_json",
+      "registered_identity": {
+        "bytes": 109062,
+        "sha256": "f5f021b928dd95da9fd604297ee12cabf6886eb533f19f2cc1cfb1d6d78c74aa",
+        "source_ref": "sha256:f5f021b928dd95da9fd604297ee12cabf6886eb533f19f2cc1cfb1d6d78c74aa"
+      },
+      "role": "execution_lock"
     },
     {
       "availability": "materialized",
@@ -134693,7 +134761,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3948,
+  "registered_record_count": 3950,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -134704,7 +134772,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 78,
+    "execution_lock": 79,
     "freeze_validation": 1,
     "frozen_parameters": 180,
     "frozen_result": 581,
@@ -134721,7 +134789,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,
-    "validation_result": 32
+    "validation_result": 33
   },
   "schema_version": 2,
   "sources": {

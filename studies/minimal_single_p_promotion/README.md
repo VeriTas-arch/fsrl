@@ -38,6 +38,12 @@ main-model promotion; width reduction and fixed-eta tests are outside scope.
 - `registered_contract` —
   [studies/minimal_single_p_promotion/records/benchmarks/minimal_single_p_promotion_v1.json](records/benchmarks/minimal_single_p_promotion_v1.json)
   (`sha256:4ed6486f3e1c`)
+- `validation_result` —
+  [studies/minimal_single_p_promotion/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:dc3e1f0678e3`)
+- `execution_lock` —
+  [studies/minimal_single_p_promotion/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:f5f021b928dd`)
 
 ## Provenance rule
 
