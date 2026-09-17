@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3960,
+  "entry_count": 3961,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2202,
+    "json": 2203,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3860,
+    "already_conformant": 3861,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -60635,6 +60635,40 @@
         "source_ref": "sha256:f5696a05b1f207435edee0458d8425f87d5d556d58be694bbc3ccc201083ac92"
       },
       "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.repair_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_promotion/records/benchmarks/engineering_repair2.json",
+        "repository_path": "studies/minimal_single_p_promotion/records/benchmarks/engineering_repair2.json"
+      },
+      "materialized_identity": {
+        "bytes": 1415,
+        "sha256": "c9ad15f09046a74fd4c7824a119bf0f0abde2902f131cbe772a2115c1b8298e5"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_promotion",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_promotion.studies_minimal_single_p_promotion_records_benchmarks_engineering_repair2_json",
+      "registered_identity": {
+        "bytes": 1415,
+        "sha256": "c9ad15f09046a74fd4c7824a119bf0f0abde2902f131cbe772a2115c1b8298e5",
+        "source_ref": "sha256:c9ad15f09046a74fd4c7824a119bf0f0abde2902f131cbe772a2115c1b8298e5"
+      },
+      "role": "repair_contract"
     },
     {
       "availability": "materialized",
@@ -135035,7 +135069,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3958,
+  "registered_record_count": 3959,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -135057,7 +135091,7 @@
     "randomization_record": 8,
     "readiness_result": 10,
     "registered_contract": 97,
-    "repair_contract": 33,
+    "repair_contract": 34,
     "repair_lock": 19,
     "report": 104,
     "source_context": 2,

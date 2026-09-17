@@ -74,6 +74,9 @@ tests remain outside scope.
 - `report` —
   [studies/minimal_single_p_promotion/records/reports/minimal_single_p_promotion_v1.md](records/reports/minimal_single_p_promotion_v1.md)
   (`sha256:da92cc37b84f`)
+- `repair_contract` —
+  [studies/minimal_single_p_promotion/records/benchmarks/engineering_repair2.json](records/benchmarks/engineering_repair2.json)
+  (`sha256:c9ad15f09046`)
 
 ## Provenance rule
 

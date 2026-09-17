@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repair_id": "minimal_single_p_promotion_engineering_repair2",
+  "parent_repair": {
+    "path": "studies/minimal_single_p_promotion/records/benchmarks/reporting_repair1.json",
+    "sha256": "b02260daf98fd13f5133dd13bd830a3c5315e6568ca47480913c9eb525ae9455"
+  },
+  "trigger": "After the final scientific result was written, the complete engineering suite reported that the lifecycle CLI main function had McCabe complexity 11, above the repository maximum of 10.",
+  "authorized_change": "Replace the lifecycle CLI if/elif dispatch with a static stage-to-module/function table and dynamic import. Preserve every stage name and target callable exactly.",
+  "forbidden_changes": [
+    "No change to model, training, evaluation, decision, reporting, protocol, checkpoint, input, artifact, result, or report content",
+    "No scientific rerun",
+    "No complexity-budget exception"
+  ],
+  "qualification": "The registered stage table must contain exactly the ten lifecycle and repair stages with their existing target callables; focused CLI tests, Ruff, and the complexity audit must pass for the promotion package.",
+  "execution": "Commit this contract before editing source, then qualify and commit the table dispatch and append a second source-repair lock. The existing final result remains the canonical scientific output and is not regenerated.",
+  "scientific_outcomes_exposed": true
+}
