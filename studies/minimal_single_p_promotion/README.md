@@ -77,6 +77,12 @@ tests remain outside scope.
 - `repair_contract` —
   [studies/minimal_single_p_promotion/records/benchmarks/engineering_repair2.json](records/benchmarks/engineering_repair2.json)
   (`sha256:c9ad15f09046`)
+- `validation_result` —
+  [studies/minimal_single_p_promotion/records/benchmarks/engineering_repair2_qualification.json](records/benchmarks/engineering_repair2_qualification.json)
+  (`sha256:d15298d2b380`)
+- `repair_lock` —
+  [studies/minimal_single_p_promotion/records/benchmarks/source_repair2.json](records/benchmarks/source_repair2.json)
+  (`sha256:76c89b457b06`)
 
 ## Provenance rule
 
