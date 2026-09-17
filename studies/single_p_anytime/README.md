@@ -41,6 +41,9 @@ or a human/biological mechanism.
 - `validation_result` —
   [studies/single_p_anytime/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:8b24bfff5e7f`)
+- `execution_lock` —
+  [studies/single_p_anytime/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:a4e16a009525`)
 
 ## Provenance rule
 
