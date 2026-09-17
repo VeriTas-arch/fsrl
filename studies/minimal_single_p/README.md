@@ -39,6 +39,9 @@ prevalence.
 - `registered_contract` —
   [studies/minimal_single_p/records/benchmarks/minimal_single_p_v1.json](records/benchmarks/minimal_single_p_v1.json)
   (`sha256:9136e5f877bc`)
+- `validation_result` —
+  [studies/minimal_single_p/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:905403d383f3`)
 
 ## Provenance rule
 
