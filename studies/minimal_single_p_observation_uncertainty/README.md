@@ -25,8 +25,9 @@
 stable individualized Liu phenotype while the frozen minimal single-P M2 computation
 preserves coherent relational organization?
 
-**Finding.** Implementation and synthetic CPU/CUDA qualification passed; source/input
-lock and scientific evaluation pending.
+**Finding.** Implementation and synthetic qualification passed; twenty parent M2
+checkpoints and three paired clean/folded/noisy input panels are source/input locked
+before evaluation.
 
 **Claim boundary.** Frozen-checkpoint development intervention across all twenty M2
 networks and three inherited Liu panels, with clean, amplitude-matched sign-restored
@@ -41,6 +42,9 @@ fitting, checkpoint selection, or main-model promotion.
 - `validation_result` —
   [studies/minimal_single_p_observation_uncertainty/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:3a5ce95d9860`)
+- `execution_lock` —
+  [studies/minimal_single_p_observation_uncertainty/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
+  (`sha256:fafb0baba3b4`)
 
 ## Provenance rule
 
