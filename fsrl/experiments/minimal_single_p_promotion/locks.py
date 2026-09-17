@@ -33,7 +33,11 @@ from .protocol import (
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
+    REPAIR,
+    REPAIR_QUALIFICATION,
+    REPAIR_SHA256,
     SOURCE_LOCK,
+    SOURCE_REPAIR_LOCK,
     inherited_recipe,
     specification,
     training_directory,
@@ -67,7 +71,7 @@ def sources() -> list[dict]:
     paths += list(
         (REPO_ROOT / "tests/experiments/minimal_single_p_promotion").rglob("*.py")
     )
-    paths += [PROTOCOL, REPO_ROOT / "pyproject.toml", REPO_ROOT / ".envrc"]
+    paths += [PROTOCOL, REPAIR, REPO_ROOT / "pyproject.toml", REPO_ROOT / ".envrc"]
     return [reference(path) for path in sorted(set(paths))]
 
 
@@ -142,11 +146,11 @@ def write_source_lock() -> dict:
     return {"source_commit": commit, "panels": len(payload["panels"])}
 
 
-def validate_source_lock() -> dict:
+def _historical_source_lock() -> dict:
     require_committed(SOURCE_LOCK)
     lock = load_json(SOURCE_LOCK)
-    if lock["protocol_sha256"] != PROTOCOL_SHA256 or lock["sources"] != sources():
-        raise RuntimeError("promotion source lock differs")
+    if lock["protocol_sha256"] != PROTOCOL_SHA256:
+        raise RuntimeError("promotion source protocol differs")
     for row in lock["sources"]:
         if (
             git_blob_sha256(REPO_ROOT, lock["source_commit"], row["path"])
@@ -161,6 +165,59 @@ def validate_source_lock() -> dict:
             verify_reference(row)
         verify_reference(panel["liu"])
     return lock
+
+
+def validate_source_lock() -> dict:
+    lock = _historical_source_lock()
+    current = sources()
+    if not SOURCE_REPAIR_LOCK.exists():
+        if lock["sources"] != current:
+            raise RuntimeError("promotion source changed without a repair lock")
+        return lock
+    require_committed(SOURCE_REPAIR_LOCK)
+    repair = load_json(SOURCE_REPAIR_LOCK)
+    if (
+        repair["parent_source_lock"] != reference(SOURCE_LOCK)
+        or repair["repair"] != reference(REPAIR)
+        or file_sha256(REPAIR) != REPAIR_SHA256
+        or repair["sources"] != current
+    ):
+        raise RuntimeError("promotion reporting repair lock differs")
+    for row in current:
+        if (
+            git_blob_sha256(REPO_ROOT, repair["source_commit"], row["path"])
+            != row["sha256"]
+        ):
+            raise RuntimeError(f"promotion repair Git witness differs: {row['path']}")
+    qualification = load_json(verify_reference(repair["qualification"]))
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("promotion repair qualification differs")
+    return lock
+
+
+def write_source_repair_lock() -> dict:
+    parent = _historical_source_lock()
+    commit = clean_commit()
+    current = sources()
+    qualification = load_json(REPAIR_QUALIFICATION)
+    if file_sha256(REPAIR) != REPAIR_SHA256:
+        raise RuntimeError("promotion repair contract changed")
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("repair qualification does not cover committed source")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "parent_source_lock": reference(SOURCE_LOCK),
+        "repair": reference(REPAIR),
+        "source_commit": commit,
+        "sources": current,
+        "qualification": reference(REPAIR_QUALIFICATION),
+        "locked_evaluation_artifacts_unchanged": True,
+        "scientific_outcomes_exposed": True,
+        "parent_source_commit": parent["source_commit"],
+    }
+    write_json_exclusive(SOURCE_REPAIR_LOCK, payload)
+    return {"source_commit": commit, "repair": REPAIR.name}
 
 
 def load_generic(source: dict, panel: int, name: str) -> SinglePEpisodeBatch:
@@ -272,4 +329,5 @@ __all__ = [
     "validate_training_run",
     "write_model_lock",
     "write_source_lock",
+    "write_source_repair_lock",
 ]

@@ -14,6 +14,9 @@ RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/minimal_single_p_promotion_v1.json"
 QUALIFICATION = RECORDS / "benchmarks/qualification.json"
 SOURCE_LOCK = RECORDS / "benchmarks/source_lock.json"
+REPAIR = RECORDS / "benchmarks/reporting_repair1.json"
+REPAIR_QUALIFICATION = RECORDS / "benchmarks/reporting_repair1_qualification.json"
+SOURCE_REPAIR_LOCK = RECORDS / "benchmarks/source_repair1.json"
 MODEL_LOCK = RECORDS / "benchmarks/model_lock.json"
 GENERIC_RESULT = RECORDS / "results/minimal_single_p_promotion_v1.generic.json"
 GENERIC_REPORT = RECORDS / "reports/minimal_single_p_promotion_v1.generic.md"
@@ -22,6 +25,7 @@ REPORT = RECORDS / "reports/minimal_single_p_promotion_v1.md"
 RUNS = RUNS_ROOT / "minimal_single_p_promotion_v1"
 INPUTS = RUNS / "inputs"
 PROTOCOL_SHA256 = "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"
+REPAIR_SHA256 = "b02260daf98fd13f5133dd13bd830a3c5315e6568ca47480913c9eb525ae9455"
 
 
 def specification() -> dict:
@@ -72,10 +76,14 @@ __all__ = [
     "PROTOCOL",
     "PROTOCOL_SHA256",
     "QUALIFICATION",
+    "REPAIR",
+    "REPAIR_QUALIFICATION",
+    "REPAIR_SHA256",
     "REPORT",
     "RESULT",
     "RUNS",
     "SOURCE_LOCK",
+    "SOURCE_REPAIR_LOCK",
     "generic_directory",
     "inherited_recipe",
     "liu_directory",

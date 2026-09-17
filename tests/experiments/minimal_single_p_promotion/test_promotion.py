@@ -8,7 +8,9 @@ from fsrl.core.sequence import RecurrentSequence
 from fsrl.experiments.minimal_single_p.model import MinimalSinglePSequence, make_model
 from fsrl.experiments.minimal_single_p_promotion.adapter import evaluation_adapter
 from fsrl.experiments.minimal_single_p_promotion.decisions import (
+    ROWS,
     generic_category,
+    row_flags,
     study_outcome,
     wilson,
 )
@@ -95,3 +97,28 @@ def test_wilson_interval() -> None:
     row = wilson(10, 20)
     assert row["proportion"] == 0.5
     assert row["wilson95"]["lower"] < 0.5 < row["wilson95"]["upper"]
+
+
+def test_row_identity_ignores_mapping_order_but_remains_exact() -> None:
+    flags = {
+        name: {"qualitative": True, "calibration": True} for name in reversed(ROWS)
+    }
+
+    def fixture(values: dict) -> dict:
+        return {
+            "routes": {
+                "full": {"behavior": {"historical_nine_rows": {"flags": values}}}
+            }
+        }
+
+    assert row_flags(fixture(flags)) == flags
+    for changed in (
+        {key: value for key, value in flags.items() if key != ROWS[0]},
+        {**flags, "extra": {"qualitative": True, "calibration": True}},
+    ):
+        try:
+            row_flags(fixture(changed))
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("inexact behavior row identity was accepted")

@@ -12,7 +12,9 @@ def main(args=None) -> int:
         "stage",
         choices=(
             "qualify",
+            "qualify-repair",
             "lock-source",
+            "lock-repair",
             "train",
             "lock-models",
             "evaluate-generic",
@@ -26,10 +28,18 @@ def main(args=None) -> int:
         from .qualification import run_qualification
 
         result = run_qualification()
+    elif stage == "qualify-repair":
+        from .qualification import run_repair_qualification
+
+        result = run_repair_qualification()
     elif stage == "lock-source":
         from .locks import write_source_lock
 
         result = write_source_lock()
+    elif stage == "lock-repair":
+        from .locks import write_source_repair_lock
+
+        result = write_source_repair_lock()
     elif stage == "train":
         from .training import train_all
 

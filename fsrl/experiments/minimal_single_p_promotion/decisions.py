@@ -58,7 +58,7 @@ def wilson(successes: int, total: int) -> dict:
 
 def row_flags(liu: dict) -> dict:
     flags = liu["routes"]["full"]["behavior"]["historical_nine_rows"]["flags"]
-    if tuple(flags) != ROWS:
+    if set(flags) != set(ROWS) or len(flags) != len(ROWS):
         raise RuntimeError("historical behavior row identity differs")
     return flags
 

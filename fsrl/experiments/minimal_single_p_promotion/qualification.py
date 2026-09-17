@@ -9,13 +9,20 @@ import torch
 from fsrl.core.sequence import RecurrentSequence
 from fsrl.experiments.minimal_single_p.model import MinimalSinglePSequence, make_model
 from fsrl.experiments.pl_direct_training.execution import PROFILE, configure_execution
-from fsrl.infra.provenance import write_json_exclusive
+from fsrl.infra.provenance import file_sha256, write_json_exclusive
 from fsrl.infra.runtime import compile_module
 
 from .adapter import evaluation_adapter
-from .decisions import generic_category, study_outcome, wilson
+from .decisions import ROWS, generic_category, row_flags, study_outcome, wilson
 from .locks import sources
-from .protocol import PROTOCOL_SHA256, QUALIFICATION, specification
+from .protocol import (
+    PROTOCOL_SHA256,
+    QUALIFICATION,
+    REPAIR,
+    REPAIR_QUALIFICATION,
+    REPAIR_SHA256,
+    specification,
+)
 
 
 def _max_error(first: torch.Tensor, second: torch.Tensor) -> float:
@@ -156,4 +163,43 @@ def run_qualification() -> dict:
     return result
 
 
-__all__ = ["run_qualification"]
+def run_repair_qualification() -> dict:
+    if file_sha256(REPAIR) != REPAIR_SHA256:
+        raise RuntimeError("promotion reporting repair contract changed")
+    exact = {
+        name: {"qualitative": True, "calibration": True} for name in reversed(ROWS)
+    }
+
+    def fixture(flags: dict) -> dict:
+        return {
+            "routes": {"full": {"behavior": {"historical_nine_rows": {"flags": flags}}}}
+        }
+
+    accepted = row_flags(fixture(exact)) == exact
+    rejected = []
+    for changed in (
+        {key: value for key, value in exact.items() if key != ROWS[0]},
+        {**exact, "extra": {"qualitative": True, "calibration": True}},
+    ):
+        try:
+            row_flags(fixture(changed))
+        except RuntimeError:
+            rejected.append(True)
+        else:
+            rejected.append(False)
+    result = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "repair_sha256": REPAIR_SHA256,
+        "sources": sources(),
+        "order_independent_exact_identity": accepted,
+        "missing_and_extra_rejected": all(rejected),
+        "scientific_computation_changed": False,
+        "human_outcomes_exposed": True,
+        "passed": accepted and all(rejected),
+    }
+    write_json_exclusive(REPAIR_QUALIFICATION, result)
+    return result
+
+
+__all__ = ["run_qualification", "run_repair_qualification"]
