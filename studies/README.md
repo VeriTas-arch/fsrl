@@ -372,8 +372,8 @@ fail to close the dynamics.
     interface outcome was complete_recipe_only; no training or model execution was
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
-  - **Finding:** Generic result frozen; Liu reporter schema repair2 qualified in code
-    and awaiting append-only provenance locks.
+  - **Finding:** Generic result frozen; Liu reporter schema repair2 qualified and
+    awaiting append-only source lock.
 
 ## Minimal explanatory models
 
