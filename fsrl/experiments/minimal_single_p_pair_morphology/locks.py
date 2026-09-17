@@ -11,9 +11,11 @@ from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    ACTIVE_QUALIFICATION,
     PROTOCOL,
     PROTOCOL_SHA256,
-    QUALIFICATION,
+    REPAIR,
+    REPAIR_SHA256,
     SOURCE_INPUT_LOCK,
     m2_directory,
     m2_input,
@@ -56,7 +58,7 @@ def sources() -> list[dict]:
     paths += list(
         (REPO_ROOT / "tests/experiments/minimal_single_p_pair_morphology").rglob("*.py")
     )
-    paths += [PROTOCOL, REPO_ROOT / "pyproject.toml", REPO_ROOT / ".envrc"]
+    paths += [PROTOCOL, REPAIR, REPO_ROOT / "pyproject.toml", REPO_ROOT / ".envrc"]
     return [reference(path) for path in sorted(set(paths))]
 
 
@@ -75,7 +77,7 @@ def _m2_artifacts() -> dict:
         for panel in spec["panels"]:
             for condition in spec["conditions"]:
                 directory = m2_directory(seed, panel, condition)
-                manifest = validate_run_manifest(directory)
+                manifest = validate_run_manifest(directory / "run.json")
                 if not manifest["passed"]:
                     raise RuntimeError(
                         f"incomplete M2 unit: {seed}/{panel}/{condition}"
@@ -89,8 +91,10 @@ def _m2_artifacts() -> dict:
 
 def write_source_input_lock() -> dict:
     commit = clean_pushed_commit()
-    require_committed(QUALIFICATION)
-    qualification = load_json(QUALIFICATION)
+    require_committed(ACTIVE_QUALIFICATION)
+    if file_sha256(REPAIR) != REPAIR_SHA256:
+        raise RuntimeError("pair-morphology implementation repair changed")
+    qualification = load_json(ACTIVE_QUALIFICATION)
     current = sources()
     if not qualification["passed"] or qualification["sources"] != current:
         raise RuntimeError("pair-morphology qualification did not pass")
@@ -99,7 +103,7 @@ def write_source_input_lock() -> dict:
         "protocol_sha256": PROTOCOL_SHA256,
         "source_commit": commit,
         "sources": current,
-        "qualification": reference(QUALIFICATION),
+        "qualification": reference(ACTIVE_QUALIFICATION),
         "parents": {
             name: reference(_parent(name)) for name in specification()["parents"]
         },

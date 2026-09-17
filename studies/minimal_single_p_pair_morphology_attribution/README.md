@@ -35,12 +35,18 @@ equivalence is established.
 
 ## Frozen records
 
+- `repair_contract` —
+  [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/implementation_repair1.json](records/benchmarks/implementation_repair1.json)
+  (`sha256:46d0304b8af0`)
 - `registered_contract` —
   [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/minimal_single_p_pair_morphology_attribution_v1.json](records/benchmarks/minimal_single_p_pair_morphology_attribution_v1.json)
   (`sha256:d2c2c3240655`)
 - `validation_result` —
   [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:48d929edfd47`)
+- `validation_result` —
+  [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/qualification_repair1.json](records/benchmarks/qualification_repair1.json)
+  (`sha256:5e56b7e18f6f`)
 
 ## Provenance rule
 

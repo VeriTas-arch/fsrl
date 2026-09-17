@@ -8,6 +8,7 @@ from itertools import permutations
 import numpy as np
 
 from fsrl.analysis.hodge import build_complete_graph_geometry
+from fsrl.experiments.training_strategy.locks import reference
 from fsrl.infra.provenance import write_json_exclusive
 from fsrl.tasks.protocol import RankingProtocol
 
@@ -18,7 +19,7 @@ from .methods import (
     sample_pair_accuracies,
     study_outcome,
 )
-from .protocol import QUALIFICATION, register
+from .protocol import ACTIVE_QUALIFICATION, REPAIR, REPAIR_SHA256, register
 
 
 def _protocol() -> RankingProtocol:
@@ -137,13 +138,16 @@ def run_qualification() -> dict:
     }
     payload = {
         "schema_version": 1,
+        "repair": reference(REPAIR),
         "checks": checks,
         "sources": sources(),
         "passed": all(checks.values()),
     }
     if not payload["passed"]:
         raise RuntimeError(f"pair-morphology qualification failed: {checks}")
-    write_json_exclusive(QUALIFICATION, payload)
+    if payload["repair"]["sha256"] != REPAIR_SHA256:
+        raise RuntimeError("implementation repair identity differs")
+    write_json_exclusive(ACTIVE_QUALIFICATION, payload)
     register(finding="Synthetic qualification passed; source/input locking pending.")
     return payload
 

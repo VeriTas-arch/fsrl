@@ -13,12 +13,16 @@ STUDY = "minimal_single_p_pair_morphology_attribution"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/minimal_single_p_pair_morphology_attribution_v1.json"
 QUALIFICATION = RECORDS / "benchmarks/qualification.json"
+REPAIR = RECORDS / "benchmarks/implementation_repair1.json"
+REPAIR_QUALIFICATION = RECORDS / "benchmarks/qualification_repair1.json"
+ACTIVE_QUALIFICATION = REPAIR_QUALIFICATION
 SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock.json"
 RESULT = RECORDS / "results/minimal_single_p_pair_morphology_attribution_v1.json"
 PAIR_TABLE = RECORDS / "results/minimal_single_p_pair_morphology_attribution_v1.npz"
 REPORT = RECORDS / "reports/minimal_single_p_pair_morphology_attribution_v1.md"
 RUNS = RUNS_ROOT / "minimal_single_p_pair_morphology_attribution_v1"
 PROTOCOL_SHA256 = "d2c2c3240655cdb644e04c2240c97d4c2cb2c578491241cec56bf9a83d6da58a"
+REPAIR_SHA256 = "46d0304b8af01413893a7d5e6dcecb3f072d034e2ea2fa88aef66e8b2c798cf2"
 
 
 def specification() -> dict:
@@ -57,8 +61,10 @@ def score_path(seed: int) -> Path:
 def _role(path: Path) -> str:
     if path == PROTOCOL:
         return "registered_contract"
-    if path == QUALIFICATION:
+    if path in {QUALIFICATION, REPAIR_QUALIFICATION}:
         return "validation_result"
+    if path == REPAIR:
+        return "repair_contract"
     if path == SOURCE_INPUT_LOCK:
         return "execution_lock"
     if path == RESULT:
@@ -113,11 +119,15 @@ def register(
 
 
 __all__ = [
+    "ACTIVE_QUALIFICATION",
     "PAIR_TABLE",
     "PROTOCOL",
     "PROTOCOL_SHA256",
     "QUALIFICATION",
     "RECORDS",
+    "REPAIR",
+    "REPAIR_QUALIFICATION",
+    "REPAIR_SHA256",
     "REPORT",
     "RESULT",
     "RUNS",

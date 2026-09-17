@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p_pair_morphology_attribution",
+  "repair_id": "implementation_repair1",
+  "trigger": "The pre-analysis lock stage passed the evaluation directory rather than its run.json file to validate_run_manifest, so the first mandatory unit was rejected with Errno 21 before any lock or pair-level result was written.",
+  "change": "Pass directory / run.json to the unchanged manifest validator and direct the post-repair qualification and execution lock to a new append-only qualification record.",
+  "invariants": [
+    "No scientific artifact was loaded by the failed lock attempt beyond structural path resolution.",
+    "No source/input lock, analysis artifact, pair-level summary, or scientific outcome was written.",
+    "The protocol, cohort, estimands, thresholds, stage hierarchy, score-interface rules, and stop boundary are unchanged.",
+    "The original qualification record remains immutable and is superseded only for source-identity purposes by qualification_repair1.json."
+  ]
+}
