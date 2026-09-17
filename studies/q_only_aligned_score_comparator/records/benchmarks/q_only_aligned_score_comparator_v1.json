@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "study_id": "q_only_aligned_score_comparator",
+  "experiment_id": "q_only_aligned_score_comparator_v1",
+  "tier": "prospective information-aligned development comparator",
+  "authorization": "The user explicitly authorized execution of the reviewed q-only aligned score-comparator study after the frozen M2 pair-morphology attribution.",
+  "question": "Under the task and realized-q information available to frozen M2, can the simplest normalized linear error updater preserve generic competence while producing a less distance-restricted relation-level phenotype?",
+  "claim_boundary": [
+    "M2 checkpoints, training records, generic results, observation inputs, and pair-morphology results remain frozen references. M2 is not retrained, selected, rescaled, or mutated.",
+    "S_q receives no model-visible information beyond the actual left cue, right cue, realized q, support order, episode boundary, and query cues available in the parent M2 streams. Item identities, support-pair indices, p, z, retention, displayed labels, true ranks, distances, relation types, participant reliability, choice draws, and evaluation labels are forbidden runtime inputs.",
+    "Training batches are not archived byte payloads. Exact alignment means deterministic regeneration whose complete parent batch fingerprint matches at every one of 1500 steps and whose cumulative stream fingerprint matches for each of all twenty streams.",
+    "The frozen generic and Liu evaluation NPZ files are reused directly by verified reference. Choice random numbers are evaluator-only measurement randomness and never enter S_q.",
+    "S_q and M2 differ in representation, update rule, parameterization, and optimizer geometry. Their paired comparison is a complete-recipe comparison under aligned exogenous information, not a single-factor causal ablation of recurrent P.",
+    "The score-difference field is additive by construction. Exact antisymmetry and unit gradient-energy fraction are integrity properties, not emergent relational organization.",
+    "Human intervals, nine-row classifiers, pair morphology, symbolic distance, and Liu outcomes never enter training or parameter selection. Existing Liu references are exposed development targets, not new human confirmation.",
+    "Twenty runs are paired training-stream repeats with identical scalar initialization, not twenty independently initialized recurrent backbones. Networks or panels are never selected or pooled as participants.",
+    "A failure applies only to this fixed q-only normalized delta rule, including its registered q=0 error-correction semantics. It cannot establish that q-only information is generally insufficient or that richer historical state is necessary.",
+    "The study freezes one canonical result and then stops. It does not authorize M3, temperature fitting, rule search, or main-model promotion."
+  ],
+  "parents": {
+    "M2_protocol": {
+      "path": "studies/minimal_single_p_promotion/records/benchmarks/minimal_single_p_promotion_v1.json",
+      "sha256": "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"
+    },
+    "M2_model_lock": {
+      "path": "studies/minimal_single_p_promotion/records/benchmarks/model_lock.json",
+      "sha256": "485f0e941e552bff3f7c4548d3925e8075cd70ad71076aea62e65082e55c4a10"
+    },
+    "M2_observation_protocol": {
+      "path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/minimal_single_p_observation_uncertainty_v1.json",
+      "sha256": "a85c5aed1c7b9e0bab453322a0f5677e23f0d94a0359f9723ddf66c789eaea96"
+    },
+    "M2_observation_lock": {
+      "path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/source_input_lock.json",
+      "sha256": "fafb0baba3b458d93692fd53854730d0a240c35ac79297971565e7fb42dc7137"
+    },
+    "M2_pair_morphology_result": {
+      "path": "studies/minimal_single_p_pair_morphology_attribution/records/results/minimal_single_p_pair_morphology_attribution_v1.json",
+      "sha256": "db0a50cd69fd1329ea918c9efe0a5a9348d9b704895b412a3c3b5b9c3ecdbc23"
+    },
+    "historical_score_protocol": {
+      "path": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.json",
+      "sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2"
+    },
+    "behavior_contract": {
+      "path": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432"
+    }
+  },
+  "design": {
+    "training_streams": [3041, 3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050, 3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060],
+    "generic_panels": [1, 2, 3],
+    "liu_panels": [1, 2, 3],
+    "liu_conditions": ["clean", "folded", "noisy"],
+    "subjects_per_liu_panel": 77,
+    "exposure_barrier": "Qualify and lock implementation plus parent references before training. Train and jointly lock all twenty final scalar fits before any generic evaluation. Freeze the complete generic result before any Liu evaluation. Evaluate all 180 stream-panel-condition units before exposing a scientific summary.",
+    "pairing": "Training stream seed s replays the complete parent M2 stream s. At evaluation, S_q stream s is paired descriptively with frozen M2 seed s on the exact same panel-condition input and behavior-sampling seed; this does not turn the comparison into an operator-only intervention."
+  },
+  "model": {
+    "state": "w in R^15, initialized exactly to zero at each episode; no other persistent or recurrent state",
+    "support_feature": "d_t=c_left,t-c_right,t read directly from actual cue channels",
+    "update": "w_next=w+eta*(q-dot(w,d))*d/(epsilon+dot(d,d))",
+    "query": "M_ij=gamma*dot(w_T,c_i-c_j); queries are read-only and all queries share one terminal w",
+    "epsilon": 1e-8,
+    "eta": "sigmoid(raw_eta), initialized to 0.5 and constrained strictly between zero and one",
+    "gamma": "softplus(raw_gamma), initialized to 1 and constrained positive",
+    "trainable_parameters": 2,
+    "q_zero_semantics": "q=0 is a numerical observation and corrects a nonzero current prediction toward zero; it is not a no-op or missingness marker.",
+    "timing": "One update is applied at each parent support cue/q event. Deterministic blank microsteps and response-phase markers carry no additional task evidence and are not model inputs. Episode and query boundaries are supplied by the fixed execution interface.",
+    "forbidden": ["z or p", "retention or probability metadata", "displayed signed magnitude except through realized q", "item or pair indices", "true rank or symbolic distance", "relation labels", "participant reliability", "choice RNG", "query target", "local trace", "learned cue projection", "additional gate or threshold"]
+  },
+  "training": {
+    "source": "Deterministically regenerate the parent M2 clean generic training batch for the same stream seed, task RNG, observation seed, support/query schedule, cues, realized q, and labels; accept a step only when its complete SinglePEpisodeBatch fingerprint equals the frozen parent log.",
+    "updates": 1500,
+    "batch_size": 32,
+    "episode_exposures_per_run": 48000,
+    "objective": "Mean softplus(-y*M) over all 28 generic unordered query pairs and episodes; y=2*correct_action-1; no auxiliary loss or regularization.",
+    "optimizer": "Adam over raw_eta and raw_gamma only; learning_rate=0.01, betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; one global gradient norm clip at 2; no scheduler.",
+    "selection": "Final update only; no early stopping, checkpoint selection, restart selection, continuation, learning-rate change, parameter rescue, or outcome-conditioned repair.",
+    "information_boundary": "True generic query answers enter only the outer supervised loss. Liu arrays, M2 outputs, pair morphology, human metrics, distances, and historical score parameters are not optimization inputs or targets."
+  },
+  "generic_evaluation": {
+    "inputs": "Directly reuse the three parent promotion generic panels by verified NPZ reference.",
+    "conditions": ["intact", "w_off", "evidence_shuffle"],
+    "temperature": 1.0,
+    "statistics": "Use the inherited 2000-draw participant/episode bootstrap and panel-specific seeds; never pool panels or streams.",
+    "per_panel_core": "Intact learned and nonlearned exact-correct-probability lower95>0.5; intact-minus-w_off learned and nonlearned lower95>0; intact-minus-evidence_shuffle learned lower95>0.",
+    "coherence": "Require antisymmetry, exact score-difference reconstruction, and gradient-energy fraction numerically equal to one as integrity checks only.",
+    "categories": {
+      "stable_competent": "All three generic panels pass the core.",
+      "panel_variable": "One or two panels pass.",
+      "noncompetent": "No panel passes."
+    },
+    "selection_boundary": "Every stream proceeds to Liu regardless of category."
+  },
+  "liu_evaluation": {
+    "inputs": "Directly reuse all clean, folded, and noisy condition NPZs from the frozen M2 observation lock; temperature=0.25 and the panel recipe's query schedule and choice seed remain unchanged.",
+    "conditions": ["intact", "w_off", "evidence_shuffle", "query_shuffle_structural_noop", "single_relation_removal"],
+    "behavior_rows": ["learned_accuracy", "nonlearned_accuracy", "symbolic_distance_effect", "serial_position_effect", "difficult_pair_bimodality", "stable_within_subject_errors", "self_consistent_vs_inconsistent_errors", "hodge_reconstructed_subjective_ranking", "inter_subject_ranking_diversity"],
+    "preservation": "Report every qualitative and quantitative historical row, continuous endpoint, generic category, intact-minus-evidence_shuffle learned lower bound, and low-accuracy/ordinary-unimodal pair counts. No row is used to refit eta, gamma, or temperature.",
+    "pair_morphology": ["direction_present_pairs", "strong_two_sided_pairs", "latent_bimodal_pairs", "sampled_bimodal_pairs", "fraction_wrong_direction", "fraction_strong_error", "fraction_strong_correct", "strong-error subject prevalence", "strong-error top-five-pair share", "counts and tail masses by symbolic distance 1, 2, 3, and 4+"],
+    "analysis_cohort": "Reuse the frozen definition: sampled overall accuracy at least 0.5 and sampled ranking class not correct; also report all-77-subject sensitivity summaries.",
+    "comparison": "Report S_q and the already frozen M2 summaries side by side and as paired stream-panel descriptors. Do not refit, rerun, or resample M2."
+  },
+  "analytic_audit": {
+    "kernel": "For a_t=eta/(epsilon+||d_t||^2) and A_t=I-a_t*d_t*d_t^T, compute K_pt=gamma*d_p^T*A_(T-1)...A_(t+1)*a_t*d_t and require M_p=sum_t K_pt*q_t.",
+    "numerics": "Independent float64 recurrence and kernel reconstruction must match the registered float32 rollout at atol=1e-5 and rtol=1e-5; float64 recurrence and float64 kernel must match at atol=1e-10 and rtol=1e-10.",
+    "covariance": "The conditional formula E[M]=K*q0 and Cov(M)=sigma^2*K*K^T is reported only for the unfurled noisy Gaussian proposal with fixed subject cues, order, and fitted parameters. Folded inputs use realized K*q only; no Gaussian covariance claim is made.",
+    "interpretation": "K is subject- and stream-conditional evidence propagation, not a cross-participant population covariance or biological influence matrix."
+  },
+  "qualification": {
+    "stream_replay": "For every one of twenty streams, regenerate all 1500 parent batches, require every batch fingerprint and cumulative stream fingerprint to equal the frozen parent training logs, and prove the extracted cue/q/label arrays are the only training values consumed.",
+    "information_blindness": "Holding actual cue/q tensors fixed while changing item/pair indices, p, z, retention, probabilities, displayed magnitudes, true labels, distances, source metadata, and choice seeds must leave terminal state and margins bit-identical at inference.",
+    "equations": "Independent eager and compiled implementations must match terminal w, all margins, loss, gradients, and one Adam update; verify orientation reversal, episode reset, query no-write, q=0 correction, positive gamma, bounded eta, and exact parameter count.",
+    "analytic": "Check kernel identity, float64 recurrence, noisy covariance algebra on synthetic fixtures, and exclusion of the Gaussian formula for folded inputs.",
+    "inputs": "Verify every generic and Liu parent reference, direct cue/q extraction, no hidden metadata reads, clean/folded/noisy identity, and unchanged query/choice contracts.",
+    "decisions": "Synthetic fixtures cover all generic categories and all final outcome labels before scientific execution.",
+    "failure": "Any failed qualification blocks training. An implementation-only repair must be append-only and may not alter equations, seeds, streams, initialization, optimizer, budgets, inputs, thresholds, estimands, or outcome rules."
+  },
+  "decision": {
+    "competence_gate": "A stream is interpretable only when stable_competent and all three Liu panels have positive intact-minus-evidence_shuffle learned lower bounds in the relevant condition; all noninterpretable units remain reported.",
+    "constrained_phenotype": "A unit has constrained morphology only when all nine qualitative rows pass, evidence binding passes, at least 15 latent and 15 sampled bimodal pairs are present, and no ordinary-unimodal or low-accuracy pair is introduced by the unchanged historical classifier.",
+    "outcomes": {
+      "aligned_distance_restriction": "At least 40 of 60 noisy units are interpretable and have the same registered pre-target stage as frozen M2, while no alternative stage reaches 40.",
+      "broader_constrained_morphology": "At least one stream is stable competent and constrained in all three noisy panels, with no registered competence or preservation failure; report the full distribution without claiming recurrent-P causality.",
+      "error_inflation": "Additional bimodality is accompanied by a registered competence/preservation failure or ordinary-unimodal/low-accuracy pairs in at least 40 of 60 noisy units.",
+      "comparator_inadequate": "Fewer than 40 of 60 noisy units are interpretable or no unique preceding label applies.",
+      "mixed_or_unidentified": "More than one mutually exclusive descriptive pattern remains substantial without meeting another exact outcome rule."
+    },
+    "precedence": ["broader_constrained_morphology", "error_inflation", "aligned_distance_restriction", "comparator_inadequate", "mixed_or_unidentified"],
+    "stop": "Freeze one canonical result, compact parameter/kernel/pair table artifacts, and one concise report, then stop. Do not tune S_q or initiate M3."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime q-only-aligned-score-comparator <stage>",
+    "stages": ["qualify", "lock-source-inputs", "train", "lock-models", "evaluate-generic", "report-generic", "evaluate-liu", "report"],
+    "runtime": "CUDA float32 without autocast or TF32 for fitted rollout; bounded CPU float64 for independent algebra and summaries; one Torch/BLAS/compiler thread.",
+    "runtime_root": "artifacts/runs/q_only_aligned_score_comparator_v1",
+    "freeze_points": [
+      "Commit and push this protocol and initial study registration before candidate implementation or scientific execution.",
+      "Commit and push qualified implementation plus source/input/replay lock before training stream3041.",
+      "Train all twenty scalar fits and commit/push one joint model lock before any generic evaluation.",
+      "Evaluate all sixty generic units and commit/push the canonical generic result before any Liu evaluation.",
+      "Evaluate all 180 Liu units, freeze the canonical result and report, commit/push, and stop."
+    ],
+    "retention": "Keep protocol, qualification, locks, canonical results, concise reports, twenty two-scalar checkpoints, and compact reconstruction artifacts. Reuse parent arrays and M2 evidence by verified reference; do not duplicate or delete parent checkpoints."
+  }
+}

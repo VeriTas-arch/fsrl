@@ -371,6 +371,9 @@ fail to close the dynamics.
     were {'direction_absent': 1, 'latent_shape': 31, 'weak_margin': 28}. The score-only
     interface outcome was complete_recipe_only; no training or model execution was
     performed.
+- [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
+  - **Finding:** Prospectively registered information-aligned comparator; implementation
+    and execution pending.
 
 ## Minimal explanatory models
 
