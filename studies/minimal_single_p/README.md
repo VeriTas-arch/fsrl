@@ -42,6 +42,9 @@ prevalence.
 - `validation_result` —
   [studies/minimal_single_p/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:905403d383f3`)
+- `execution_lock` —
+  [studies/minimal_single_p/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
+  (`sha256:0dd061343504`)
 
 ## Provenance rule
 

@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3936,
+  "entry_count": 3937,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2184,
+    "json": 2185,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3837,
+    "already_conformant": 3838,
     "historical_gzip_view": 98,
     "historical_pth_view": 1
   },
@@ -60193,6 +60193,40 @@
         "source_ref": "sha256:905403d383f3776df272b0bcc637183014f6ceeac69adf877e73edfd505cc3b1"
       },
       "role": "validation_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.execution_lock",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p/records/benchmarks/source_lock.json",
+        "repository_path": "studies/minimal_single_p/records/benchmarks/source_lock.json"
+      },
+      "materialized_identity": {
+        "bytes": 106023,
+        "sha256": "0dd06134350411f9e80b943b8bd743a1bceadce8e9ff14b7ff0df1ee58685356"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p.studies_minimal_single_p_records_benchmarks_source_lock_json",
+      "registered_identity": {
+        "bytes": 106023,
+        "sha256": "0dd06134350411f9e80b943b8bd743a1bceadce8e9ff14b7ff0df1ee58685356",
+        "source_ref": "sha256:0dd06134350411f9e80b943b8bd743a1bceadce8e9ff14b7ff0df1ee58685356"
+      },
+      "role": "execution_lock"
     },
     {
       "availability": "materialized",
@@ -134217,7 +134251,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3934,
+  "registered_record_count": 3935,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -134228,7 +134262,7 @@
     "development_checkpoint": 1,
     "development_checkpoint_config": 1,
     "environment_contract": 2,
-    "execution_lock": 77,
+    "execution_lock": 78,
     "freeze_validation": 1,
     "frozen_parameters": 180,
     "frozen_result": 577,
