@@ -371,9 +371,8 @@ fail to close the dynamics.
     were {'direction_absent': 1, 'latent_shape': 31, 'weak_margin': 28}. The score-only
     interface outcome was complete_recipe_only; no training or model execution was
     performed.
-- [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
-  - **Finding:** Generic result frozen; Liu reporter schema repair2 qualified and
-    source-locked; Liu evaluation pending.
+- [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `mixed`
+  - **Finding:** Frozen aligned q-only comparator outcome: mixed_or_unidentified.
 
 ## Minimal explanatory models
 

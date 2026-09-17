@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `unresolved`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `q_only_aligned_score_comparator`
 
@@ -25,8 +25,7 @@
 simplest normalized linear error updater preserve generic competence while producing a
 less distance-restricted relation-level phenotype?
 
-**Finding.** Generic result frozen; Liu reporter schema repair2 qualified and
-source-locked; Liu evaluation pending.
+**Finding.** Frozen aligned q-only comparator outcome: mixed_or_unidentified.
 
 **Claim boundary.** All twenty parent M2 training streams are replayed by frozen batch
 fingerprints, and all parent generic and Liu arrays are reused directly. S_q has only a
@@ -69,9 +68,21 @@ ablation or main-model promotion.
 - `report` —
   [studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.generic.md](records/reports/q_only_aligned_score_comparator_v1.generic.md)
   (`sha256:b89b4cb49d41`)
+- `report` —
+  [studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.md](records/reports/q_only_aligned_score_comparator_v1.md)
+  (`sha256:fc5869ae7dad`)
 - `frozen_result` —
   [studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.generic.json](records/results/q_only_aligned_score_comparator_v1.generic.json)
   (`sha256:c3705f9c579b`)
+- `frozen_result` —
+  [studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.json](records/results/q_only_aligned_score_comparator_v1.json)
+  (`sha256:ad93c4a3e0b2`)
+- `supporting_artifact` —
+  [studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.pairs.npz](records/results/q_only_aligned_score_comparator_v1.pairs.npz)
+  (`sha256:a9230a9225dc`)
+- `supporting_artifact` —
+  [studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.parameters.npz](records/results/q_only_aligned_score_comparator_v1.parameters.npz)
+  (`sha256:567808fc4d62`)
 
 ## Provenance rule
 

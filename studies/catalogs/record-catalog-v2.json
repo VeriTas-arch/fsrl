@@ -7,16 +7,16 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3988,
+  "entry_count": 3992,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2226,
+    "json": 2227,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 112,
-    "numpy_npz": 1412,
+    "markdown": 113,
+    "numpy_npz": 1414,
     "pdf": 2,
     "pytorch_state_dict": 149,
     "svg": 4,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3888,
+    "already_conformant": 3892,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -85752,6 +85752,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.md",
+        "repository_path": "studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 663,
+        "sha256": "fc5869ae7dadbe250b7abaafdcfd7f2bab7d4424773ee227b2c9b9d33003297e"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "q_only_aligned_score_comparator",
+        "kind": "study"
+      },
+      "record_id": "study.q_only_aligned_score_comparator.studies_q_only_aligned_score_comparator_records_reports_q_only_aligned_score_comparator_v1_md",
+      "registered_identity": {
+        "bytes": 663,
+        "sha256": "fc5869ae7dadbe250b7abaafdcfd7f2bab7d4424773ee227b2c9b9d33003297e",
+        "source_ref": "sha256:fc5869ae7dadbe250b7abaafdcfd7f2bab7d4424773ee227b2c9b9d33003297e"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.frozen_result",
       "format": {
         "format": "json",
@@ -85783,6 +85817,108 @@
         "source_ref": "sha256:c3705f9c579b91e704cb114a77fe45111adaa354ed58cc1fac09564cbef05745"
       },
       "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.json",
+        "repository_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 343464,
+        "sha256": "ad93c4a3e0b2526daae44e1cdcbe1c512b715d40b5881d34ba6c67827a928636"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "q_only_aligned_score_comparator",
+        "kind": "study"
+      },
+      "record_id": "study.q_only_aligned_score_comparator.studies_q_only_aligned_score_comparator_records_results_q_only_aligned_score_comparator_v1_json",
+      "registered_identity": {
+        "bytes": 343464,
+        "sha256": "ad93c4a3e0b2526daae44e1cdcbe1c512b715d40b5881d34ba6c67827a928636",
+        "source_ref": "sha256:ad93c4a3e0b2526daae44e1cdcbe1c512b715d40b5881d34ba6c67827a928636"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.pairs.npz",
+        "repository_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.pairs.npz"
+      },
+      "materialized_identity": {
+        "bytes": 42712,
+        "sha256": "a9230a9225dcb599a18d426943128a62dbbec0b12ad6db77dab8b491c27cc5db"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "q_only_aligned_score_comparator",
+        "kind": "study"
+      },
+      "record_id": "study.q_only_aligned_score_comparator.studies_q_only_aligned_score_comparator_records_results_q_only_aligned_score_comparator_v1_pairs_npz",
+      "registered_identity": {
+        "bytes": 42712,
+        "sha256": "a9230a9225dcb599a18d426943128a62dbbec0b12ad6db77dab8b491c27cc5db",
+        "source_ref": "sha256:a9230a9225dcb599a18d426943128a62dbbec0b12ad6db77dab8b491c27cc5db"
+      },
+      "role": "supporting_artifact"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.parameters.npz",
+        "repository_path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.parameters.npz"
+      },
+      "materialized_identity": {
+        "bytes": 792,
+        "sha256": "567808fc4d6295d03db7924cc6b7d38a3af9f2f1ad7ce8529166a8d70c7a6622"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "q_only_aligned_score_comparator",
+        "kind": "study"
+      },
+      "record_id": "study.q_only_aligned_score_comparator.studies_q_only_aligned_score_comparator_records_results_q_only_aligned_score_comparator_v1_parameters_npz",
+      "registered_identity": {
+        "bytes": 792,
+        "sha256": "567808fc4d6295d03db7924cc6b7d38a3af9f2f1ad7ce8529166a8d70c7a6622",
+        "source_ref": "sha256:567808fc4d6295d03db7924cc6b7d38a3af9f2f1ad7ce8529166a8d70c7a6622"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -135987,7 +136123,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3986,
+  "registered_record_count": 3990,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -136001,7 +136137,7 @@
     "execution_lock": 82,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 586,
+    "frozen_result": 587,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -136011,10 +136147,10 @@
     "registered_contract": 100,
     "repair_contract": 37,
     "repair_lock": 20,
-    "report": 107,
+    "report": 108,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2731,
+    "supporting_artifact": 2733,
     "validation_result": 41
   },
   "schema_version": 2,
