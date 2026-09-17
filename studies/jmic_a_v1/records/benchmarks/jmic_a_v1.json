@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "study_id": "jmic_a_v1",
+  "title": "Analytic joint metric inference and stable commitment",
+  "question": "What relation-level distributions and identifiable predictions follow from a continuous joint Gaussian metric posterior with one persistent subject-level commitment, before any neural implementation or renewed comparison with exposed human responses?",
+  "claim_boundary": "This is a theory-qualification and prediction-registration study. It uses no neural network, reads no Liu participant response file, performs no human-phenotype parameter fit, authorizes no human collection, and cannot promote JMIC-A or JMIC-P as a human or biological mechanism.",
+  "design": {
+    "tier": "prospective_computational_qualification",
+    "n_items": 8,
+    "zero_sum_state_dimension": 7,
+    "prior_variance_tau0_squared": 0.12244897959183673,
+    "prior_scale_rule": "Match E[||v||^2]=7*tau0^2 to the squared norm 6/7 of the centered normalized reference ranks (k-3.5)/7.",
+    "parameter_cells": {
+      "sigma_eff_over_tau0": [0.25, 0.5, 1.0],
+      "theta_dec_over_tau0": [0.125, 0.25, 0.5]
+    },
+    "readouts": [
+      "posterior_mean",
+      "trialwise_marginal",
+      "persistent_continuous",
+      "persistent_equal_spacing"
+    ],
+    "candidate_readout": "persistent_continuous",
+    "pair_marginal_control": "trialwise_marginal",
+    "equal_spacing_rule": "Rank one persistent continuous draw, center ranks as rank-4.5, and rescale the rank vector to the original draw's L2 norm.",
+    "support_repetitions": 4,
+    "sigma_definition": "Effective uncertainty of one relation mean after the fixed four presentations; v1 defines no repetition-count learning law.",
+    "fixed_task_inputs": {
+      "source": "studies/magnitude_placement_human_program/records/benchmarks/magnitude_placement_behavior_v1_1.json",
+      "support_relation_order": ["F>A", "C>B", "E>B", "G>C", "F>D", "G>D", "H>E", "H>A"],
+      "assignment_A_gaps": [5, 1, 3, 4, 2, 3, 3, 7],
+      "assignment_B_gaps": [2, 3, 1, 3, 5, 7, 4, 3],
+      "magnitude_unit": "seven raw gap units equal one model unit",
+      "cycle_order": ["A", "F", "D", "G", "C", "B", "E", "H"],
+      "A_to_B_role_permutation": {"A": "D", "B": "B", "C": "E", "D": "A", "E": "C", "F": "F", "G": "H", "H": "G"}
+    }
+  },
+  "model": {
+    "prior": "v ~ N on 1-perp with covariance tau0^2 I",
+    "likelihood": "dbar | v ~ N(A v, sigma_eff^2 I)",
+    "posterior_precision": "tau0^-2 I + sigma_eff^-2 U^T A^T A U",
+    "posterior_mean": "sigma_eff^-2 Sigma_z U^T A^T dbar",
+    "persistent_choice": "Draw v_s once from the posterior; retain it for all query pairs and repetitions; p_s(i>j)=sigmoid((v_si-v_sj)/theta_dec).",
+    "forbidden_parameters": [
+      "item_specific_effect",
+      "pair_specific_variance",
+      "subject_specific_parameter",
+      "posterior_temperature",
+      "sample_multiplier",
+      "readout_gain",
+      "lapse"
+    ]
+  },
+  "stage_0": {
+    "required_exact_checks": [
+      "centered_7d_and_constrained_8d_posterior_agree",
+      "posterior_mean_and_covariance_are_permutation_equivariant",
+      "cycle_pair_variances_have_exactly_four_graph_distance_classes",
+      "A_B_means_follow_the_frozen_role_permutation",
+      "A_B_covariances_are_equal_and_permutation_invariant",
+      "cycle_null_perturbations_leave_the_posterior_unchanged",
+      "one_new_relation_produces_the_registered_rank_one_covariance_update",
+      "trialwise_marginal_and_persistent_continuous_share_pair_marginals"
+    ],
+    "algebra_tolerance": 1e-10,
+    "quadrature_absolute_tolerance": 1e-8
+  },
+  "stage_1": {
+    "master_seed": 2026091801,
+    "gauss_hermite_nodes": 48,
+    "model_matched_episodes_per_parameter_cell": 1024,
+    "graph_edge_counts": [7, 8, 9, 10],
+    "episodes_per_edge_count": 256,
+    "graph_rule": "For each episode, draw a random permutation path as a spanning tree, then add uniformly selected unused undirected edges until E is reached; orient every edge from lower to higher integer item id.",
+    "sbc_coverage_levels": [0.5, 0.8, 0.95],
+    "cohort_recovery": {
+      "small": {"cohorts": 100, "subjects": 77},
+      "large": {"cohorts": 20, "subjects": 2048},
+      "query_repetitions": 10,
+      "estimator": "Deterministic bounded nonlinear least squares on the 28 pair means a_e and factorial second moments b_e, with equal residual weight and one fixed start (sigma/tau0=0.5, theta/tau0=0.25).",
+      "bounds": {"sigma_eff_over_tau0": [0.0625, 4.0], "theta_dec_over_tau0": [0.03125, 2.0]}
+    },
+    "jacobian_log_step": 1e-5,
+    "weak_condition_number": 1000.0,
+    "large_cohort_recovery_thresholds": {
+      "median_absolute_log_ratio_max": 0.2,
+      "p90_absolute_log_ratio_max": 0.5
+    },
+    "fixed_prediction_subjects": 2048,
+    "equal_spacing_draws": 262144
+  },
+  "outputs": {
+    "qualification": "studies/jmic_a_v1/records/benchmarks/qualification.json",
+    "source_input_lock": "studies/jmic_a_v1/records/benchmarks/source_input_lock.json",
+    "result": "studies/jmic_a_v1/records/results/jmic_a_v1.json",
+    "prediction_arrays": "studies/jmic_a_v1/records/results/jmic_a_v1_predictions.npz",
+    "report": "studies/jmic_a_v1/records/reports/jmic_a_v1.md"
+  },
+  "decisions": {
+    "implementation_status": "noninterpretable if any exact equation, task-input identity, numerical accuracy, completeness, or forbidden-input check fails; otherwise qualified",
+    "identification_status": "qualified_for_prediction_registration only if every fixed cell has numerical Jacobian rank two, no cell exceeds the weak-condition threshold, and both large-cohort recovery thresholds pass; otherwise qualified_but_weakly_identified",
+    "prediction_status": "Report exact identities, directions shared by all nine fixed cells, and parameter-dependent effects separately. No prediction result is human rescue.",
+    "no_selection": "Run and report all nine fixed parameter cells. Do not select a cell by bimodality, morphology, or similarity to existing human results."
+  },
+  "execution": {
+    "qualify": "direnv exec . python -m fsrl.experiments.jmic_a qualify",
+    "lock_source_inputs": "direnv exec . python -m fsrl.experiments.jmic_a lock-source-inputs",
+    "run": "direnv exec . python -m fsrl.experiments.jmic_a run",
+    "report": "direnv exec . python -m fsrl.experiments.jmic_a report",
+    "forbidden_inputs": [
+      "participant response CSV or trial table",
+      "human-derived fitted parameter",
+      "neural checkpoint",
+      "JMIC-P training",
+      "new participant data"
+    ]
+  }
+}

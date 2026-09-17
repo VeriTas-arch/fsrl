@@ -388,6 +388,9 @@ fail to close the dynamics.
     used strongly non-scalar writes without competence damage, but 0/9 noisy units
     passed all nine rows or constrained morphology. Difficult-pair bimodality failed in
     9/9 and stable within-subject errors failed in 6/9; outcome used_without_rescue.
+- [Analytic joint metric inference and stable commitment](jmic_a_v1/README.md) — `unresolved`
+  - **Finding:** Prospectively registered computational qualification study; execution
+    pending.
 
 ## Minimal explanatory models
 
