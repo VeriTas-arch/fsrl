@@ -373,7 +373,7 @@ fail to close the dynamics.
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
   - **Finding:** Generic evaluation paused before result write; implementation repair1
-    qualified, source repair lock pending.
+    qualified and source-locked; evaluation ready to resume.
 
 ## Minimal explanatory models
 
