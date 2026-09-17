@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "repair_id": "jmic_a_v1_quadrature_repair1",
+  "parent_protocol": {
+    "path": "studies/jmic_a_v1/records/benchmarks/jmic_a_v1.json",
+    "sha256": "2a2724e835dd4c67bf1f98d71b76382361a4e990cf7e1f2b1c887115850080cd"
+  },
+  "qualification_failure": {
+    "stage": "pre_execution_implementation_qualification",
+    "check": "quadrature_crosscheck",
+    "observed_48_vs_96_max_abs_error": 5.6396920911083726e-08,
+    "registered_absolute_tolerance": 1e-08,
+    "scientific_outputs_exposed": false
+  },
+  "repair": {
+    "field": "stage_1.gauss_hermite_nodes",
+    "old": 48,
+    "new": 96,
+    "qualification_crosscheck": "Compare 96 nodes against 192 nodes under the unchanged 1e-8 absolute tolerance."
+  },
+  "unchanged": "All equations, task inputs, parameter cells, RNG identities, simulation budgets, controls, estimands, thresholds, claim boundaries, and stop rules remain unchanged.",
+  "boundary": "This repair increases deterministic quadrature resolution before any SBC, parameter recovery, fixed-task prediction, human-response access, or neural execution. It cannot change a scientific outcome."
+}

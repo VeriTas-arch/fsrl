@@ -37,6 +37,9 @@ fit, human collection, or JMIC-P promotion is authorized.
 - `registered_contract` —
   [studies/jmic_a_v1/records/benchmarks/jmic_a_v1.json](records/benchmarks/jmic_a_v1.json)
   (`sha256:2a2724e835dd`)
+- `repair_contract` —
+  [studies/jmic_a_v1/records/benchmarks/jmic_a_v1_quadrature_repair1.json](records/benchmarks/jmic_a_v1_quadrature_repair1.json)
+  (`sha256:a5ff0ce79ae6`)
 
 ## Provenance rule
 
