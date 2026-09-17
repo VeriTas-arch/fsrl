@@ -13,16 +13,19 @@ STUDY = "historical_single_p_morphology_reaudit"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/historical_single_p_morphology_reaudit_v1.json"
 ORIGINAL_QUALIFICATION = RECORDS / "benchmarks/qualification.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification_repair1.json"
-REPAIR = RECORDS / "benchmarks/implementation_repair1.json"
+REPAIR1_QUALIFICATION = RECORDS / "benchmarks/qualification_repair1.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_repair2.json"
+REPAIR1 = RECORDS / "benchmarks/implementation_repair1.json"
+REPAIR = RECORDS / "benchmarks/implementation_repair2.json"
 ORIGINAL_SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock.json"
-SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock_repair1.json"
+REPAIR1_SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock_repair1.json"
+SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock_repair2.json"
 RESULT = RECORDS / "results/historical_single_p_morphology_reaudit_v1.json"
 PAIR_TABLE = RECORDS / "results/historical_single_p_morphology_reaudit_v1.pairs.npz"
 REPORT = RECORDS / "reports/historical_single_p_morphology_reaudit_v1.md"
 RUNS = RUNS_ROOT / "historical_single_p_morphology_reaudit_v1"
 PROTOCOL_SHA256 = "bc99e6e55a6ec2800f74bb0cc932a988c9d371f05e6c26c9e4e2f0afe9c3d826"
-REPAIR_SHA256 = "ce96dc7ce224e40eed7845130e5330011592b99e0209afdefc2c39c763835ebd"
+REPAIR_SHA256 = "7f996a479214425e21efd9af305575f8b2584e045fb9dabe65a961263d69ca66"
 
 
 def specification() -> dict:
@@ -56,11 +59,15 @@ def unit_directory(family: str, seed: int, panel: int, condition: str) -> Path:
 def _role(path: Path) -> str:
     if path == PROTOCOL:
         return "registered_contract"
-    if path in {ORIGINAL_QUALIFICATION, QUALIFICATION}:
+    if path in {ORIGINAL_QUALIFICATION, REPAIR1_QUALIFICATION, QUALIFICATION}:
         return "validation_result"
-    if path == REPAIR:
+    if path in {REPAIR1, REPAIR}:
         return "repair_contract"
-    if path in {ORIGINAL_SOURCE_INPUT_LOCK, SOURCE_INPUT_LOCK}:
+    if path in {
+        ORIGINAL_SOURCE_INPUT_LOCK,
+        REPAIR1_SOURCE_INPUT_LOCK,
+        SOURCE_INPUT_LOCK,
+    }:
         return "execution_lock"
     if path == RESULT:
         return "frozen_result"
@@ -122,6 +129,9 @@ __all__ = [
     "QUALIFICATION",
     "RECORDS",
     "REPAIR",
+    "REPAIR1",
+    "REPAIR1_QUALIFICATION",
+    "REPAIR1_SOURCE_INPUT_LOCK",
     "REPAIR_SHA256",
     "REPORT",
     "RESULT",

@@ -15,6 +15,7 @@ from .protocol import (
     PROTOCOL_SHA256,
     QUALIFICATION,
     REPAIR,
+    REPAIR1,
     REPAIR_SHA256,
     SOURCE_INPUT_LOCK,
     register,
@@ -65,6 +66,7 @@ def sources() -> list[dict]:
         REPO_ROOT / "fsrl/experiments/minimal_single_p_pair_morphology/methods.py",
         REPO_ROOT / "fsrl/infra/formal_runtime.py",
         PROTOCOL,
+        REPAIR1,
         REPAIR,
         REPO_ROOT / "pyproject.toml",
         REPO_ROOT / ".envrc",
@@ -129,17 +131,16 @@ def write_source_input_lock() -> dict:
     return {"source_commit": commit, "units": len(payload["units"])}
 
 
-def validate_source_input_lock() -> dict:
-    require_committed(SOURCE_INPUT_LOCK)
-    lock = load_json(SOURCE_INPUT_LOCK)
-    if lock["protocol_sha256"] != PROTOCOL_SHA256:
-        raise RuntimeError("historical morphology protocol lock differs")
+def _validate_sources(lock: dict) -> None:
     if lock["sources"] != sources():
         raise RuntimeError("historical morphology source inventory differs")
     for row in lock["sources"]:
         observed = git_blob_sha256(REPO_ROOT, lock["source_commit"], row["path"])
         if observed != row["sha256"]:
             raise RuntimeError(f"source Git witness differs: {row['path']}")
+
+
+def _validate_artifacts(lock: dict) -> None:
     qualification = load_json(verify_reference(lock["qualification"]))
     if not qualification["passed"] or qualification["sources"] != lock["sources"]:
         raise RuntimeError("locked qualification differs")
@@ -153,6 +154,15 @@ def validate_source_input_lock() -> dict:
             verify_reference(row)
     if len(lock["units"]) != specification()["design"]["mandatory_units"]:
         raise RuntimeError("locked historical unit count differs")
+
+
+def validate_source_input_lock() -> dict:
+    require_committed(SOURCE_INPUT_LOCK)
+    lock = load_json(SOURCE_INPUT_LOCK)
+    if lock["protocol_sha256"] != PROTOCOL_SHA256:
+        raise RuntimeError("historical morphology protocol lock differs")
+    _validate_sources(lock)
+    _validate_artifacts(lock)
     return lock
 
 

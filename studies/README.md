@@ -380,8 +380,7 @@ fail to close the dynamics.
     0/60 noisy units met constrained morphology and 0/60 passed all nine qualitative
     rows; registered outcome no_constrained_rescue.
 - [Current-standard morphology re-audit of historical alpha single-P](historical_single_p_morphology_reaudit/README.md) — `unresolved`
-  - **Finding:** Outcome-known complexity-only repair2 registered; qualification
-    pending.
+  - **Finding:** Synthetic qualification passed; source/input locking pending.
 
 ## Minimal explanatory models
 
