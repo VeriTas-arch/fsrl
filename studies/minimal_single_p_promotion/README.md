@@ -44,6 +44,9 @@ main-model promotion; width reduction and fixed-eta tests are outside scope.
 - `execution_lock` —
   [studies/minimal_single_p_promotion/records/benchmarks/source_lock.json](records/benchmarks/source_lock.json)
   (`sha256:f5f021b928dd`)
+- `artifact_lock` —
+  [studies/minimal_single_p_promotion/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:485f0e941e55`)
 
 ## Provenance rule
 
