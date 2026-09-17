@@ -5,6 +5,7 @@ from fsrl.experiments.q_only_aligned_score.algebra import recurrence_and_kernel
 from fsrl.experiments.q_only_aligned_score.decisions import (
     generic_category,
     generic_panel_passed,
+    liu_evidence_binding,
 )
 from fsrl.experiments.q_only_aligned_score.model import QOnlyScore
 
@@ -49,3 +50,19 @@ def test_generic_decision_reads_summarize_subjects_schema():
         },
     }
     assert generic_panel_passed(result)
+
+
+def test_liu_binding_reads_primary_analysis_schema():
+    def result(lower):
+        return {
+            "liu": {
+                "effects": {
+                    "intact_minus_evidence_shuffle_learned": {
+                        "bootstrap": {"lower": lower}
+                    }
+                }
+            }
+        }
+
+    assert liu_evidence_binding(result(0.1))
+    assert not liu_evidence_binding(result(0.0))

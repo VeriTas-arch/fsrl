@@ -13,8 +13,10 @@ def main(args=None) -> int:
         choices=(
             "qualify",
             "qualify-repair1",
+            "qualify-repair2",
             "lock-source-inputs",
             "lock-source-repair1",
+            "lock-source-repair2",
             "train",
             "lock-models",
             "evaluate-generic",
@@ -32,6 +34,10 @@ def main(args=None) -> int:
         from .qualification import qualify_repair
 
         result = qualify_repair()
+    elif stage == "qualify-repair2":
+        from .qualification import qualify_repair2
+
+        result = qualify_repair2()
     elif stage == "lock-source-inputs":
         from .locks import write_source_input_lock
 
@@ -40,6 +46,10 @@ def main(args=None) -> int:
         from .locks import write_source_repair_lock
 
         result = write_source_repair_lock()
+    elif stage == "lock-source-repair2":
+        from .locks import write_source_repair2_lock
+
+        result = write_source_repair2_lock()
     elif stage == "train":
         from .training import train_all
 

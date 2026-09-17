@@ -25,8 +25,8 @@
 simplest normalized linear error updater preserve generic competence while producing a
 less distance-restricted relation-level phenotype?
 
-**Finding.** Generic evaluation frozen: 20/20 stable_competent, 0/20 panel_variable, and
-0/20 noncompetent; Liu evaluation pending.
+**Finding.** Generic result frozen; Liu reporter schema repair2 qualified in code and
+awaiting append-only provenance locks.
 
 **Claim boundary.** All twenty parent M2 training streams are replayed by frozen batch
 fingerprints, and all parent generic and Liu arrays are reused directly. S_q has only a
@@ -39,6 +39,9 @@ ablation or main-model promotion.
 - `repair_contract` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/implementation_repair1.json](records/benchmarks/implementation_repair1.json)
   (`sha256:24c5ad60a74e`)
+- `repair_contract` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/implementation_repair2.json](records/benchmarks/implementation_repair2.json)
+  (`sha256:8c1c0ccd7b11`)
 - `artifact_lock` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
   (`sha256:0ad97951155a`)

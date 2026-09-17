@@ -11,7 +11,7 @@ from fsrl.experiments.training_strategy.evaluation import json_ready, write_arra
 from fsrl.experiments.write_cost.locks import completed
 from fsrl.infra.provenance import load_json, write_json_exclusive
 
-from .decisions import generic_category
+from .decisions import generic_category, liu_evidence_binding
 from .locks import reference, validate_model_lock, verify_reference
 from .protocol import (
     GENERIC_REPORT,
@@ -84,13 +84,6 @@ def _all_qualitative(result: dict) -> bool:
     return all(row["qualitative"] for row in flags.values())
 
 
-def _binding(result: dict) -> bool:
-    lower = result["liu"]["effects"]["intact_minus_evidence_shuffle_learned"][
-        "interval"
-    ]["lower"]
-    return lower is not None and lower > 0.0
-
-
 def report_final() -> dict:
     source, lock = validate_model_lock()
     generic = load_json(GENERIC_RESULT)
@@ -128,7 +121,7 @@ def report_final() -> dict:
                     (liu_directory(seed, panel, condition) / "pairs.json").read_text()
                 )
                 all_nine = _all_qualitative(result)
-                binding = _binding(result)
+                binding = liu_evidence_binding(result)
                 bad_pair = any(row["sampled_class"] in {0, 2} for row in pairs)
                 morphology = result["morphology"]
                 constrained = (

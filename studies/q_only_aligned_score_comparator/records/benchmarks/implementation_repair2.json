@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "study_id": "q_only_aligned_score_comparator",
+  "repair_id": "q_only_aligned_score_comparator_implementation_repair2",
+  "authorization": "Append-only implementation repair identified by schema preflight after the generic freeze and before any Liu evaluation.",
+  "failure": "The final Liu decision reader requested effect.interval.lower, but the unchanged primary_analysis API returns effect.bootstrap.lower. The defect was identified by read-only inspection before any Liu unit ran or any Liu outcome was exposed.",
+  "allowed_change": "Read the already computed Liu evidence-binding lower bound from bootstrap.lower, add an exact schema regression test, qualify the repaired reader, and append a new source provenance lock.",
+  "forbidden_change": "No equation, scalar fit, checkpoint, training stream, input, RNG seed, bootstrap draw, endpoint, threshold, panel, condition, generic result, outcome rule, or exposure order may change. The joint model lock remains byte-identical.",
+  "generic_outcomes_exposed": true,
+  "liu_outcomes_exposed": false,
+  "model_lock_unchanged": true
+}

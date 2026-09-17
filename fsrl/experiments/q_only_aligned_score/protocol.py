@@ -15,8 +15,11 @@ PROTOCOL = RECORDS / "benchmarks/q_only_aligned_score_comparator_v1.json"
 QUALIFICATION = RECORDS / "benchmarks/qualification.json"
 REPAIR = RECORDS / "benchmarks/implementation_repair1.json"
 REPAIR_QUALIFICATION = RECORDS / "benchmarks/qualification_repair1.json"
+REPAIR2 = RECORDS / "benchmarks/implementation_repair2.json"
+REPAIR2_QUALIFICATION = RECORDS / "benchmarks/qualification_repair2.json"
 SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock.json"
 SOURCE_REPAIR_LOCK = RECORDS / "benchmarks/source_repair1.json"
+SOURCE_REPAIR2_LOCK = RECORDS / "benchmarks/source_repair2.json"
 MODEL_LOCK = RECORDS / "benchmarks/model_lock.json"
 GENERIC_RESULT = RECORDS / "results/q_only_aligned_score_comparator_v1.generic.json"
 RESULT = RECORDS / "results/q_only_aligned_score_comparator_v1.json"
@@ -27,6 +30,7 @@ GENERIC_REPORT = RECORDS / "reports/q_only_aligned_score_comparator_v1.generic.m
 RUNS = RUNS_ROOT / "q_only_aligned_score_comparator_v1"
 PROTOCOL_SHA256 = "0971de6e4812cf4f21fd5e94ae119a96697fb8810ff77f5620d1c78de44104ab"
 REPAIR_SHA256 = "24c5ad60a74e01fd68253109fa9f0097351ac5a906f300a429f8e261058bd31f"
+REPAIR2_SHA256 = "8c1c0ccd7b11b23192fa8f79d836acc5d5f7493ab62f766d829156d97987d630"
 
 
 def specification() -> dict:
@@ -52,11 +56,16 @@ def liu_directory(seed: int, panel: int, condition: str) -> Path:
 def _role(path: Path) -> str:
     if path == PROTOCOL:
         return "registered_contract"
-    if path in {QUALIFICATION, REPAIR_QUALIFICATION}:
+    if path in {QUALIFICATION, REPAIR_QUALIFICATION, REPAIR2_QUALIFICATION}:
         return "validation_result"
-    if path == REPAIR:
+    if path in {REPAIR, REPAIR2}:
         return "repair_contract"
-    if path in {SOURCE_INPUT_LOCK, SOURCE_REPAIR_LOCK, MODEL_LOCK}:
+    if path in {
+        SOURCE_INPUT_LOCK,
+        SOURCE_REPAIR_LOCK,
+        SOURCE_REPAIR2_LOCK,
+        MODEL_LOCK,
+    }:
         return "execution_lock" if path == SOURCE_INPUT_LOCK else "artifact_lock"
     if path in {GENERIC_RESULT, RESULT}:
         return "frozen_result"
@@ -118,12 +127,16 @@ __all__ = [
     "QUALIFICATION",
     "RECORDS",
     "REPAIR",
+    "REPAIR2",
+    "REPAIR2_QUALIFICATION",
+    "REPAIR2_SHA256",
     "REPAIR_QUALIFICATION",
     "REPAIR_SHA256",
     "REPORT",
     "RESULT",
     "RUNS",
     "SOURCE_INPUT_LOCK",
+    "SOURCE_REPAIR2_LOCK",
     "SOURCE_REPAIR_LOCK",
     "generic_directory",
     "liu_directory",

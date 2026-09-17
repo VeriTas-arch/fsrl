@@ -29,4 +29,11 @@ def generic_category(passed_panels: int) -> str:
     return "noncompetent"
 
 
-__all__ = ["generic_category", "generic_panel_passed"]
+def liu_evidence_binding(result: dict) -> bool:
+    lower = result["liu"]["effects"]["intact_minus_evidence_shuffle_learned"][
+        "bootstrap"
+    ]["lower"]
+    return lower is not None and lower > 0.0
+
+
+__all__ = ["generic_category", "generic_panel_passed", "liu_evidence_binding"]

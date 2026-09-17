@@ -13,14 +13,19 @@ from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    GENERIC_RESULT,
     MODEL_LOCK,
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
     REPAIR,
+    REPAIR2,
+    REPAIR2_QUALIFICATION,
+    REPAIR2_SHA256,
     REPAIR_QUALIFICATION,
     REPAIR_SHA256,
     SOURCE_INPUT_LOCK,
+    SOURCE_REPAIR2_LOCK,
     SOURCE_REPAIR_LOCK,
     specification,
     training_directory,
@@ -83,7 +88,7 @@ def sources() -> list[dict]:
     package = REPO_ROOT / "fsrl/experiments/q_only_aligned_score"
     paths = list(package.rglob("*.py"))
     paths += list((REPO_ROOT / "tests/experiments/q_only_aligned_score").rglob("*.py"))
-    paths += [REPO_ROOT / "fsrl/infra/formal_runtime.py", PROTOCOL, REPAIR]
+    paths += [REPO_ROOT / "fsrl/infra/formal_runtime.py", PROTOCOL, REPAIR, REPAIR2]
     return [reference(path) for path in sorted(set(paths))]
 
 
@@ -148,23 +153,41 @@ def validate_source_input_lock() -> dict:
     active_sources = lock["sources"]
     active_commit = lock["source_commit"]
     if lock["sources"] != current:
-        if not SOURCE_REPAIR_LOCK.exists():
+        if SOURCE_REPAIR2_LOCK.exists():
+            repair = load_json(SOURCE_REPAIR2_LOCK)
+            if (
+                repair["parent_source_repair_lock"] != reference(SOURCE_REPAIR_LOCK)
+                or repair["repair"] != reference(REPAIR2)
+                or file_sha256(REPAIR2) != REPAIR2_SHA256
+                or repair["sources"] != current
+                or repair["model_lock"] != reference(MODEL_LOCK)
+                or repair["generic_result"] != reference(GENERIC_RESULT)
+            ):
+                raise RuntimeError("aligned comparator source repair2 lock differs")
+            repair_qualification = load_json(verify_reference(repair["qualification"]))
+            if (
+                not repair_qualification["passed"]
+                or repair_qualification["sources"] != current
+            ):
+                raise RuntimeError("aligned comparator repair2 qualification differs")
+        elif SOURCE_REPAIR_LOCK.exists():
+            repair = load_json(SOURCE_REPAIR_LOCK)
+            if (
+                repair["parent_source_input_lock"] != reference(SOURCE_INPUT_LOCK)
+                or repair["repair"] != reference(REPAIR)
+                or file_sha256(REPAIR) != REPAIR_SHA256
+                or repair["sources"] != current
+                or repair["model_lock"] != reference(MODEL_LOCK)
+            ):
+                raise RuntimeError("aligned comparator source repair lock differs")
+            repair_qualification = load_json(verify_reference(repair["qualification"]))
+            if (
+                not repair_qualification["passed"]
+                or repair_qualification["sources"] != current
+            ):
+                raise RuntimeError("aligned comparator repair qualification differs")
+        else:
             raise RuntimeError("aligned comparator source changed after locking")
-        repair = load_json(SOURCE_REPAIR_LOCK)
-        if (
-            repair["parent_source_input_lock"] != reference(SOURCE_INPUT_LOCK)
-            or repair["repair"] != reference(REPAIR)
-            or file_sha256(REPAIR) != REPAIR_SHA256
-            or repair["sources"] != current
-            or repair["model_lock"] != reference(MODEL_LOCK)
-        ):
-            raise RuntimeError("aligned comparator source repair lock differs")
-        repair_qualification = load_json(verify_reference(repair["qualification"]))
-        if (
-            not repair_qualification["passed"]
-            or repair_qualification["sources"] != current
-        ):
-            raise RuntimeError("aligned comparator repair qualification differs")
         active_sources = repair["sources"]
         active_commit = repair["source_commit"]
     for row in active_sources:
@@ -212,6 +235,33 @@ def write_source_repair_lock() -> dict:
     }
     write_json_exclusive(SOURCE_REPAIR_LOCK, payload)
     return {"source_commit": commit, "repair": REPAIR.name}
+
+
+def write_source_repair2_lock() -> dict:
+    if file_sha256(REPAIR2) != REPAIR2_SHA256:
+        raise RuntimeError("aligned comparator repair2 contract changed")
+    require_committed(GENERIC_RESULT)
+    commit = clean_commit()
+    current = sources()
+    qualification = load_json(REPAIR2_QUALIFICATION)
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("repair2 qualification does not cover committed source")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "parent_source_repair_lock": reference(SOURCE_REPAIR_LOCK),
+        "repair": reference(REPAIR2),
+        "qualification": reference(REPAIR2_QUALIFICATION),
+        "model_lock": reference(MODEL_LOCK),
+        "generic_result": reference(GENERIC_RESULT),
+        "source_commit": commit,
+        "sources": current,
+        "generic_outcomes_exposed": True,
+        "liu_outcomes_exposed": False,
+        "model_lock_unchanged": True,
+    }
+    write_json_exclusive(SOURCE_REPAIR2_LOCK, payload)
+    return {"source_commit": commit, "repair": REPAIR2.name}
 
 
 def validate_training(seed: int) -> dict:
@@ -289,5 +339,6 @@ __all__ = [
     "verify_reference",
     "write_model_lock",
     "write_source_input_lock",
+    "write_source_repair2_lock",
     "write_source_repair_lock",
 ]

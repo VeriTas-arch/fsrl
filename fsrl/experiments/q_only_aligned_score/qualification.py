@@ -16,12 +16,13 @@ from fsrl.infra.provenance import load_json, write_json_exclusive
 
 from .algebra import recurrence_and_kernel
 from .data import visible_batch
-from .decisions import generic_category, generic_panel_passed
+from .decisions import generic_category, generic_panel_passed, liu_evidence_binding
 from .locks import PARENT_PROMOTION_LOCK, sources
 from .model import QOnlyScore, physical_parameters
 from .protocol import (
     PROTOCOL_SHA256,
     QUALIFICATION,
+    REPAIR2_QUALIFICATION,
     REPAIR_QUALIFICATION,
     specification,
 )
@@ -247,4 +248,39 @@ def qualify_repair() -> dict:
     return {"passed": True, "source_files": len(payload["sources"])}
 
 
-__all__ = ["qualify", "qualify_repair"]
+def qualify_repair2() -> dict:
+    if REPAIR2_QUALIFICATION.exists():
+        raise RuntimeError("repair2 qualification record already exists")
+
+    def result(lower):
+        return {
+            "liu": {
+                "effects": {
+                    "intact_minus_evidence_shuffle_learned": {
+                        "bootstrap": {"lower": lower}
+                    }
+                }
+            }
+        }
+
+    if not liu_evidence_binding(result(0.1)) or liu_evidence_binding(result(0.0)):
+        raise RuntimeError("repaired Liu binding schema fixtures failed")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "passed": True,
+        "sources": sources(),
+        "repair_scope": "effect.bootstrap.lower schema access only",
+        "passing_fixture": True,
+        "threshold_failure_fixture": True,
+        "parent_stream_replay_reused": True,
+        "generic_result_unchanged": True,
+        "model_lock_unchanged": True,
+        "generic_outcomes_exposed": True,
+        "liu_outcomes_exposed": False,
+    }
+    write_json_exclusive(REPAIR2_QUALIFICATION, payload)
+    return {"passed": True, "source_files": len(payload["sources"])}
+
+
+__all__ = ["qualify", "qualify_repair", "qualify_repair2"]
