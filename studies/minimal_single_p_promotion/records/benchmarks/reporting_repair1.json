@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "repair_id": "minimal_single_p_promotion_reporting_repair1",
+  "parent_protocol": {
+    "path": "studies/minimal_single_p_promotion/records/benchmarks/minimal_single_p_promotion_v1.json",
+    "sha256": "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"
+  },
+  "trigger": "All 60 Liu evaluation units completed under the locked source. Final reporting stopped before writing a canonical result because write_json_exclusive sorts mapping keys alphabetically while row_flags required tuple(flags) to equal the presentation-order ROWS tuple.",
+  "diagnosis": "The observed mapping contains exactly the nine registered row names, with no missing or extra row. Mapping iteration order is serialization metadata and is not an estimand, threshold, classifier, value, or scientific outcome.",
+  "authorized_change": "Replace the order-sensitive tuple(flags) identity check with exact set equality against ROWS. Preserve subsequent reporting iteration in the registered ROWS presentation order.",
+  "forbidden_changes": [
+    "No training or evaluation rerun",
+    "No edit to a checkpoint, input, raw artifact, panel result, behavior flag, endpoint, threshold, seed, or outcome rule",
+    "No missing or extra row may pass",
+    "No change to pilot compatibility or study-outcome precedence"
+  ],
+  "qualification": "Unit fixtures must prove that every permutation of the exact nine-row mapping is accepted and that a missing or extra row is rejected. The existing qualification and all locked evaluation artifacts remain unchanged.",
+  "execution": "Commit this repair contract before changing source. Then qualify and commit the narrow repair, write and commit an append-only source repair lock, and resume final reporting from the existing completed Liu artifacts.",
+  "scientific_outcomes_exposed": true
+}

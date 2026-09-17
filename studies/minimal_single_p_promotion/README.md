@@ -55,6 +55,9 @@ main-model promotion; width reduction and fixed-eta tests are outside scope.
 - `report` —
   [studies/minimal_single_p_promotion/records/reports/minimal_single_p_promotion_v1.generic.md](records/reports/minimal_single_p_promotion_v1.generic.md)
   (`sha256:c967d006894c`)
+- `repair_contract` —
+  [studies/minimal_single_p_promotion/records/benchmarks/reporting_repair1.json](records/benchmarks/reporting_repair1.json)
+  (`sha256:b02260daf98f`)
 
 ## Provenance rule
 
