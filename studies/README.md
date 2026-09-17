@@ -373,7 +373,7 @@ fail to close the dynamics.
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
   - **Finding:** Generic result frozen; Liu reporter schema repair2 qualified and
-    awaiting append-only source lock.
+    source-locked; Liu evaluation pending.
 
 ## Minimal explanatory models
 
