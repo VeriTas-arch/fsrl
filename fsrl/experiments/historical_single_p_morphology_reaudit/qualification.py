@@ -57,10 +57,7 @@ def _hodge_check() -> bool:
 
 
 def _decision_check() -> bool:
-    units = [
-        {"seed": seed, "constrained_morphology": seed != 2}
-        for seed in (1, 2, 3)
-    ]
+    units = [{"seed": seed, "constrained_morphology": seed != 2} for seed in (1, 2, 3)]
     units.append({"seed": 2, "constrained_morphology": True})
     return all(
         (

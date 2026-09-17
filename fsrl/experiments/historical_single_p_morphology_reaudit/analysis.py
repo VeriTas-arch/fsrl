@@ -88,9 +88,7 @@ def _morphology(logits, removed, behavior, task, settings):
         positions[item] = position
     for row, pair in zip(pairs, geometry.pairs, strict=True):
         row["pair"] = list(pair)
-        row["symbolic_distance"] = abs(
-            int(positions[pair[0]] - positions[pair[1]])
-        )
+        row["symbolic_distance"] = abs(int(positions[pair[0]] - positions[pair[1]]))
     by_distance = {}
     for label, selected in (
         ("1", [row for row in pairs if row["symbolic_distance"] == 1]),
@@ -172,13 +170,9 @@ def _unit(family, seed, panel, condition, lock, task, geometry):
             )
         ),
         "potential_max_abs_error": float(
-            np.max(
-                np.abs(potentials - raw["liu__routes__full__internal__potentials"])
-            )
+            np.max(np.abs(potentials - raw["liu__routes__full__internal__potentials"]))
         ),
-        "full_pair_mean_max_abs_error": morphology[
-            "choice_replay_max_abs_error"
-        ],
+        "full_pair_mean_max_abs_error": morphology["choice_replay_max_abs_error"],
         "global_pair_mean_max_abs_error": global_replay_error,
         "hodge_reconstruction_max_abs_error": float(
             np.max(np.abs(field - gradient - residual))
@@ -190,14 +184,18 @@ def _unit(family, seed, panel, condition, lock, task, geometry):
             )
         ),
     }
-    if max(
-        parity["field_max_abs_error"],
-        parity["probability_max_abs_error"],
-        parity["potential_max_abs_error"],
-        parity["full_pair_mean_max_abs_error"],
-        parity["global_pair_mean_max_abs_error"],
-        parity["hodge_reconstruction_max_abs_error"],
-    ) > 1e-12 or parity["hodge_relative_orthogonality_max"] > 1e-10:
+    if (
+        max(
+            parity["field_max_abs_error"],
+            parity["probability_max_abs_error"],
+            parity["potential_max_abs_error"],
+            parity["full_pair_mean_max_abs_error"],
+            parity["global_pair_mean_max_abs_error"],
+            parity["hodge_reconstruction_max_abs_error"],
+        )
+        > 1e-12
+        or parity["hodge_relative_orthogonality_max"] > 1e-10
+    ):
         raise RuntimeError(f"historical numerical parity failed: {identity}")
     nine = all_nine(archived)
     qualitative_rows = {
@@ -347,7 +345,9 @@ def _aggregate(units, spec):
                 )
                 for seed in family_spec["seeds"]
             ),
-            "stage_counts": dict(sorted(Counter(row["stage"] for row in selected).items())),
+            "stage_counts": dict(
+                sorted(Counter(row["stage"] for row in selected).items())
+            ),
             "qualitative_failure_counts": dict(
                 sorted(
                     Counter(

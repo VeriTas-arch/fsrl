@@ -52,9 +52,7 @@ class DecisionTests(unittest.TestCase):
         )
 
     def test_family_replication_and_outcomes(self):
-        units = [
-            {"seed": seed, "constrained_morphology": True} for seed in (1, 2, 3)
-        ]
+        units = [{"seed": seed, "constrained_morphology": True} for seed in (1, 2, 3)]
         self.assertTrue(family_replicated(units, [1, 2, 3]))
         self.assertEqual(outcome(0, 0), "no_current_standard_precedent")
         self.assertEqual(outcome(1, 0), "isolated_current_standard_precedent")

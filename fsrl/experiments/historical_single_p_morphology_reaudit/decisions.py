@@ -8,12 +8,8 @@ from fsrl.experiments.minimal_single_p_promotion.decisions import ROWS
 
 
 def all_nine(result: Mapping) -> bool:
-    flags = result["liu"]["routes"]["full"]["behavior"]["historical_nine_rows"][
-        "flags"
-    ]
-    return set(flags) == set(ROWS) and all(
-        row["qualitative"] for row in flags.values()
-    )
+    flags = result["liu"]["routes"]["full"]["behavior"]["historical_nine_rows"]["flags"]
+    return set(flags) == set(ROWS) and all(row["qualitative"] for row in flags.values())
 
 
 def evidence_binding(result: Mapping) -> bool:

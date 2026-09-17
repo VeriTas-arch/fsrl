@@ -16,6 +16,7 @@ from .protocol import (
     QUALIFICATION,
     REPAIR,
     REPAIR1,
+    REPAIR2,
     REPAIR_SHA256,
     SOURCE_INPUT_LOCK,
     register,
@@ -56,10 +57,9 @@ def sources() -> list[dict]:
     package = REPO_ROOT / "fsrl/experiments/historical_single_p_morphology_reaudit"
     paths = list(package.rglob("*.py"))
     paths += list(
-        (
-            REPO_ROOT
-            / "tests/experiments/historical_single_p_morphology_reaudit"
-        ).rglob("*.py")
+        (REPO_ROOT / "tests/experiments/historical_single_p_morphology_reaudit").rglob(
+            "*.py"
+        )
     )
     paths += [
         REPO_ROOT / "fsrl/experiments/minimal_single_p_pair_morphology/analysis.py",
@@ -67,6 +67,7 @@ def sources() -> list[dict]:
         REPO_ROOT / "fsrl/infra/formal_runtime.py",
         PROTOCOL,
         REPAIR1,
+        REPAIR2,
         REPAIR,
         REPO_ROOT / "pyproject.toml",
         REPO_ROOT / ".envrc",
@@ -97,7 +98,12 @@ def _units() -> dict:
                         )
                     units[f"{family}/{seed}/{panel}/{condition}"] = {
                         name: reference(directory / name)
-                        for name in ("raw.npz", "behavior.json", "result.json", "run.json")
+                        for name in (
+                            "raw.npz",
+                            "behavior.json",
+                            "result.json",
+                            "run.json",
+                        )
                     }
     return units
 
@@ -127,7 +133,9 @@ def write_source_input_lock() -> dict:
     if len(payload["units"]) != specification()["design"]["mandatory_units"]:
         raise RuntimeError("historical unit count differs")
     write_json_exclusive(SOURCE_INPUT_LOCK, payload)
-    register(finding="Sources and all mandatory historical artifacts locked; analysis pending.")
+    register(
+        finding="Sources and all mandatory historical artifacts locked; analysis pending."
+    )
     return {"source_commit": commit, "units": len(payload["units"])}
 
 
