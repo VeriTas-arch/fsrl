@@ -12,10 +12,14 @@ from fsrl.experiments.pl_direct_training.execution import PROFILE, configure_exe
 from fsrl.infra.provenance import file_sha256, write_json_exclusive
 from fsrl.infra.runtime import compile_module
 
+from .__main__ import STAGES
 from .adapter import evaluation_adapter
 from .decisions import ROWS, generic_category, row_flags, study_outcome, wilson
 from .locks import sources
 from .protocol import (
+    ENGINEERING_QUALIFICATION,
+    ENGINEERING_REPAIR,
+    ENGINEERING_REPAIR_SHA256,
     PROTOCOL_SHA256,
     QUALIFICATION,
     REPAIR,
@@ -202,4 +206,38 @@ def run_repair_qualification() -> dict:
     return result
 
 
-__all__ = ["run_qualification", "run_repair_qualification"]
+def run_engineering_qualification() -> dict:
+    if file_sha256(ENGINEERING_REPAIR) != ENGINEERING_REPAIR_SHA256:
+        raise RuntimeError("promotion engineering repair contract changed")
+    expected = {
+        "qualify": ("qualification", "run_qualification"),
+        "qualify-repair": ("qualification", "run_repair_qualification"),
+        "lock-source": ("locks", "write_source_lock"),
+        "lock-repair": ("locks", "write_source_repair_lock"),
+        "train": ("training", "train_all"),
+        "lock-models": ("locks", "write_model_lock"),
+        "evaluate-generic": ("evaluation", "evaluate_generic_all"),
+        "report-generic": ("reporting", "write_generic_report"),
+        "evaluate-liu": ("evaluation", "evaluate_liu_all"),
+        "report": ("reporting", "write_final_report"),
+    }
+    result = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "repair_sha256": ENGINEERING_REPAIR_SHA256,
+        "sources": sources(),
+        "stage_table_exact": STAGES == expected,
+        "scientific_computation_changed": False,
+        "scientific_artifacts_regenerated": False,
+        "human_outcomes_exposed": True,
+        "passed": STAGES == expected,
+    }
+    write_json_exclusive(ENGINEERING_QUALIFICATION, result)
+    return result
+
+
+__all__ = [
+    "run_engineering_qualification",
+    "run_qualification",
+    "run_repair_qualification",
+]

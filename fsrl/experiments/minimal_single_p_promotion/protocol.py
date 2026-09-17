@@ -26,6 +26,14 @@ RUNS = RUNS_ROOT / "minimal_single_p_promotion_v1"
 INPUTS = RUNS / "inputs"
 PROTOCOL_SHA256 = "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"
 REPAIR_SHA256 = "b02260daf98fd13f5133dd13bd830a3c5315e6568ca47480913c9eb525ae9455"
+ENGINEERING_REPAIR = RECORDS / "benchmarks/engineering_repair2.json"
+ENGINEERING_REPAIR_SHA256 = (
+    "c9ad15f09046a74fd4c7824a119bf0f0abde2902f131cbe772a2115c1b8298e5"
+)
+ENGINEERING_QUALIFICATION = (
+    RECORDS / "benchmarks/engineering_repair2_qualification.json"
+)
+SOURCE_ENGINEERING_LOCK = RECORDS / "benchmarks/source_repair2.json"
 
 
 def specification() -> dict:
@@ -69,6 +77,9 @@ def liu_directory(seed: int, panel: int) -> Path:
 
 
 __all__ = [
+    "ENGINEERING_QUALIFICATION",
+    "ENGINEERING_REPAIR",
+    "ENGINEERING_REPAIR_SHA256",
     "GENERIC_REPORT",
     "GENERIC_RESULT",
     "INPUTS",
@@ -82,6 +93,7 @@ __all__ = [
     "REPORT",
     "RESULT",
     "RUNS",
+    "SOURCE_ENGINEERING_LOCK",
     "SOURCE_LOCK",
     "SOURCE_REPAIR_LOCK",
     "generic_directory",

@@ -27,6 +27,9 @@ from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 from fsrl.paths import REPO_ROOT
 
 from .protocol import (
+    ENGINEERING_QUALIFICATION,
+    ENGINEERING_REPAIR,
+    ENGINEERING_REPAIR_SHA256,
     GENERIC_RESULT,
     INPUTS,
     MODEL_LOCK,
@@ -36,6 +39,7 @@ from .protocol import (
     REPAIR,
     REPAIR_QUALIFICATION,
     REPAIR_SHA256,
+    SOURCE_ENGINEERING_LOCK,
     SOURCE_LOCK,
     SOURCE_REPAIR_LOCK,
     inherited_recipe,
@@ -71,7 +75,13 @@ def sources() -> list[dict]:
     paths += list(
         (REPO_ROOT / "tests/experiments/minimal_single_p_promotion").rglob("*.py")
     )
-    paths += [PROTOCOL, REPAIR, REPO_ROOT / "pyproject.toml", REPO_ROOT / ".envrc"]
+    paths += [
+        PROTOCOL,
+        REPAIR,
+        ENGINEERING_REPAIR,
+        REPO_ROOT / "pyproject.toml",
+        REPO_ROOT / ".envrc",
+    ]
     return [reference(path) for path in sorted(set(paths))]
 
 
@@ -174,25 +184,49 @@ def validate_source_lock() -> dict:
         if lock["sources"] != current:
             raise RuntimeError("promotion source changed without a repair lock")
         return lock
+    repair = _validated_repair1()
+    if SOURCE_ENGINEERING_LOCK.exists():
+        require_committed(SOURCE_ENGINEERING_LOCK)
+        engineering = load_json(SOURCE_ENGINEERING_LOCK)
+        if (
+            engineering["parent_source_repair_lock"] != reference(SOURCE_REPAIR_LOCK)
+            or engineering["repair"] != reference(ENGINEERING_REPAIR)
+            or file_sha256(ENGINEERING_REPAIR) != ENGINEERING_REPAIR_SHA256
+            or engineering["sources"] != current
+        ):
+            raise RuntimeError("promotion engineering repair lock differs")
+        _validate_repair_sources(engineering, current, "engineering repair")
+        return lock
+    if repair["sources"] != current:
+        raise RuntimeError("promotion source changed after reporting repair")
+    return lock
+
+
+def _validate_repair_sources(repair: dict, expected: list[dict], label: str) -> None:
+    if repair["sources"] != expected:
+        raise RuntimeError(f"promotion {label} source inventory differs")
+    for row in expected:
+        if (
+            git_blob_sha256(REPO_ROOT, repair["source_commit"], row["path"])
+            != row["sha256"]
+        ):
+            raise RuntimeError(f"promotion {label} Git witness differs: {row['path']}")
+    qualification = load_json(verify_reference(repair["qualification"]))
+    if not qualification["passed"] or qualification["sources"] != expected:
+        raise RuntimeError(f"promotion {label} qualification differs")
+
+
+def _validated_repair1() -> dict:
     require_committed(SOURCE_REPAIR_LOCK)
     repair = load_json(SOURCE_REPAIR_LOCK)
     if (
         repair["parent_source_lock"] != reference(SOURCE_LOCK)
         or repair["repair"] != reference(REPAIR)
         or file_sha256(REPAIR) != REPAIR_SHA256
-        or repair["sources"] != current
     ):
         raise RuntimeError("promotion reporting repair lock differs")
-    for row in current:
-        if (
-            git_blob_sha256(REPO_ROOT, repair["source_commit"], row["path"])
-            != row["sha256"]
-        ):
-            raise RuntimeError(f"promotion repair Git witness differs: {row['path']}")
-    qualification = load_json(verify_reference(repair["qualification"]))
-    if not qualification["passed"] or qualification["sources"] != current:
-        raise RuntimeError("promotion repair qualification differs")
-    return lock
+    _validate_repair_sources(repair, repair["sources"], "reporting repair")
+    return repair
 
 
 def write_source_repair_lock() -> dict:
@@ -218,6 +252,32 @@ def write_source_repair_lock() -> dict:
     }
     write_json_exclusive(SOURCE_REPAIR_LOCK, payload)
     return {"source_commit": commit, "repair": REPAIR.name}
+
+
+def write_source_engineering_lock() -> dict:
+    _historical_source_lock()
+    parent = _validated_repair1()
+    commit = clean_commit()
+    current = sources()
+    qualification = load_json(ENGINEERING_QUALIFICATION)
+    if file_sha256(ENGINEERING_REPAIR) != ENGINEERING_REPAIR_SHA256:
+        raise RuntimeError("promotion engineering repair contract changed")
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("engineering qualification does not cover committed source")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "parent_source_repair_lock": reference(SOURCE_REPAIR_LOCK),
+        "repair": reference(ENGINEERING_REPAIR),
+        "source_commit": commit,
+        "sources": current,
+        "qualification": reference(ENGINEERING_QUALIFICATION),
+        "scientific_artifacts_unchanged": True,
+        "scientific_outcomes_exposed": True,
+        "parent_source_commit": parent["source_commit"],
+    }
+    write_json_exclusive(SOURCE_ENGINEERING_LOCK, payload)
+    return {"source_commit": commit, "repair": ENGINEERING_REPAIR.name}
 
 
 def load_generic(source: dict, panel: int, name: str) -> SinglePEpisodeBatch:
@@ -328,6 +388,7 @@ __all__ = [
     "validate_source_lock",
     "validate_training_run",
     "write_model_lock",
+    "write_source_engineering_lock",
     "write_source_lock",
     "write_source_repair_lock",
 ]

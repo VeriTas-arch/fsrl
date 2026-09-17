@@ -4,68 +4,35 @@ from __future__ import annotations
 
 import argparse
 import json
+from importlib import import_module
+
+STAGES = {
+    "qualify": ("qualification", "run_qualification"),
+    "qualify-repair": ("qualification", "run_repair_qualification"),
+    "lock-source": ("locks", "write_source_lock"),
+    "lock-repair": ("locks", "write_source_repair_lock"),
+    "train": ("training", "train_all"),
+    "lock-models": ("locks", "write_model_lock"),
+    "evaluate-generic": ("evaluation", "evaluate_generic_all"),
+    "report-generic": ("reporting", "write_generic_report"),
+    "evaluate-liu": ("evaluation", "evaluate_liu_all"),
+    "report": ("reporting", "write_final_report"),
+}
 
 
 def main(args=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "stage",
-        choices=(
-            "qualify",
-            "qualify-repair",
-            "lock-source",
-            "lock-repair",
-            "train",
-            "lock-models",
-            "evaluate-generic",
-            "report-generic",
-            "evaluate-liu",
-            "report",
-        ),
+        choices=tuple(STAGES),
     )
     stage = parser.parse_args(args).stage
-    if stage == "qualify":
-        from .qualification import run_qualification
-
-        result = run_qualification()
-    elif stage == "qualify-repair":
-        from .qualification import run_repair_qualification
-
-        result = run_repair_qualification()
-    elif stage == "lock-source":
-        from .locks import write_source_lock
-
-        result = write_source_lock()
-    elif stage == "lock-repair":
-        from .locks import write_source_repair_lock
-
-        result = write_source_repair_lock()
-    elif stage == "train":
-        from .training import train_all
-
-        result = train_all()
-    elif stage == "lock-models":
-        from .locks import write_model_lock
-
-        result = write_model_lock()
-    elif stage == "evaluate-generic":
-        from .evaluation import evaluate_generic_all
-
-        result = evaluate_generic_all()
-    elif stage == "report-generic":
-        from .reporting import write_generic_report
-
-        result = write_generic_report()
-    elif stage == "evaluate-liu":
-        from .evaluation import evaluate_liu_all
-
-        result = evaluate_liu_all()
-    elif stage == "report":
-        from .reporting import write_final_report
-
-        result = write_final_report()
-    else:
-        raise ValueError(stage)
+    module_name, function_name = STAGES[stage]
+    function = getattr(
+        import_module(f"fsrl.experiments.minimal_single_p_promotion.{module_name}"),
+        function_name,
+    )
+    result = function()
     print(json.dumps(result, indent=2, allow_nan=False))
     return 0
 

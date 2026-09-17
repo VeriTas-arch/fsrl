@@ -6,6 +6,7 @@ import torch
 
 from fsrl.core.sequence import RecurrentSequence
 from fsrl.experiments.minimal_single_p.model import MinimalSinglePSequence, make_model
+from fsrl.experiments.minimal_single_p_promotion.__main__ import STAGES
 from fsrl.experiments.minimal_single_p_promotion.adapter import evaluation_adapter
 from fsrl.experiments.minimal_single_p_promotion.decisions import (
     ROWS,
@@ -41,6 +42,21 @@ def test_frozen_design_identity() -> None:
     assert spec["design"]["network_seeds"] == list(range(3041, 3061))
     assert spec["design"]["evaluation_panels"] == [1, 2, 3]
     assert inherited_recipe(2)["evaluation"]["generic"]["rng_seed"] == 961200
+
+
+def test_lifecycle_dispatch_is_exact() -> None:
+    assert STAGES == {
+        "qualify": ("qualification", "run_qualification"),
+        "qualify-repair": ("qualification", "run_repair_qualification"),
+        "lock-source": ("locks", "write_source_lock"),
+        "lock-repair": ("locks", "write_source_repair_lock"),
+        "train": ("training", "train_all"),
+        "lock-models": ("locks", "write_model_lock"),
+        "evaluate-generic": ("evaluation", "evaluate_generic_all"),
+        "report-generic": ("reporting", "write_generic_report"),
+        "evaluate-liu": ("evaluation", "evaluate_liu_all"),
+        "report": ("reporting", "write_final_report"),
+    }
 
 
 def test_adapter_matches_native_m2() -> None:
