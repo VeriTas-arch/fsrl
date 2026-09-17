@@ -67,6 +67,9 @@ WORKFLOW_MODULES = {
         "fsrl.experiments.q_only_aligned_score.__main__"
     ),
     "minimal-single-p-alpha": ("fsrl.experiments.minimal_single_p_alpha.__main__"),
+    "historical-single-p-morphology-reaudit": (
+        "fsrl.experiments.historical_single_p_morphology_reaudit.__main__"
+    ),
     "global-policy-allocation-audit": "fsrl.experiments.global_policy.allocation_audit",
     "global-policy-amplitude-provenance": "fsrl.experiments.global_policy.amplitude_provenance",
     "global-policy-comparator-adequacy": "fsrl.experiments.global_policy.comparator_adequacy",
