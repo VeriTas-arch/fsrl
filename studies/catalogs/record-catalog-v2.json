@@ -7,16 +7,16 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 4034,
+  "entry_count": 4037,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2259,
+    "json": 2260,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 118,
-    "numpy_npz": 1419,
+    "markdown": 119,
+    "numpy_npz": 1420,
     "pdf": 2,
     "pytorch_state_dict": 149,
     "svg": 4,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3934,
+    "already_conformant": 3937,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -44471,6 +44471,108 @@
         "source_ref": "sha256:5f425a265d4a668839cc039c1e76586d3d6141fe36fb64a58d1f99c841538380"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/jmic_a_v1/records/reports/jmic_a_v1.md",
+        "repository_path": "studies/jmic_a_v1/records/reports/jmic_a_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 3370,
+        "sha256": "6d54e93b1865fb68841553f6ee4fc6c478edd4c37ae09e75145379202f9401b4"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "jmic_a_v1",
+        "kind": "study"
+      },
+      "record_id": "study.jmic_a_v1.studies_jmic_a_v1_records_reports_jmic_a_v1_md",
+      "registered_identity": {
+        "bytes": 3370,
+        "sha256": "6d54e93b1865fb68841553f6ee4fc6c478edd4c37ae09e75145379202f9401b4",
+        "source_ref": "sha256:6d54e93b1865fb68841553f6ee4fc6c478edd4c37ae09e75145379202f9401b4"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/jmic_a_v1/records/results/jmic_a_v1.json",
+        "repository_path": "studies/jmic_a_v1/records/results/jmic_a_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 119270,
+        "sha256": "e8bb76ab4a55dc86a96ce4a85f4ffe1ef937447f0f7ec5a2297ff891ae5dbd3c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "jmic_a_v1",
+        "kind": "study"
+      },
+      "record_id": "study.jmic_a_v1.studies_jmic_a_v1_records_results_jmic_a_v1_json",
+      "registered_identity": {
+        "bytes": 119270,
+        "sha256": "e8bb76ab4a55dc86a96ce4a85f4ffe1ef937447f0f7ec5a2297ff891ae5dbd3c",
+        "source_ref": "sha256:e8bb76ab4a55dc86a96ce4a85f4ffe1ef937447f0f7ec5a2297ff891ae5dbd3c"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.supporting_artifact",
+      "format": {
+        "format": "numpy_npz",
+        "legacy_format": false,
+        "media_type": "application/vnd.numpy.npz",
+        "prospective_suffix": ".npz"
+      },
+      "locator": {
+        "legacy_path": "studies/jmic_a_v1/records/results/jmic_a_v1_predictions.npz",
+        "repository_path": "studies/jmic_a_v1/records/results/jmic_a_v1_predictions.npz"
+      },
+      "materialized_identity": {
+        "bytes": 187542,
+        "sha256": "768664d997518f26ac38d1ef4b7cefc1c57a698d6017cf7555f0f0ff93ff8e39"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "numpy_npz"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "jmic_a_v1",
+        "kind": "study"
+      },
+      "record_id": "study.jmic_a_v1.studies_jmic_a_v1_records_results_jmic_a_v1_predictions_npz",
+      "registered_identity": {
+        "bytes": 187542,
+        "sha256": "768664d997518f26ac38d1ef4b7cefc1c57a698d6017cf7555f0f0ff93ff8e39",
+        "source_ref": "sha256:768664d997518f26ac38d1ef4b7cefc1c57a698d6017cf7555f0f0ff93ff8e39"
+      },
+      "role": "supporting_artifact"
     },
     {
       "availability": "materialized",
@@ -137551,7 +137653,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 4032,
+  "registered_record_count": 4035,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -137565,7 +137667,7 @@
     "execution_lock": 89,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 592,
+    "frozen_result": 593,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -137575,10 +137677,10 @@
     "registered_contract": 104,
     "repair_contract": 42,
     "repair_lock": 20,
-    "report": 113,
+    "report": 114,
     "source_context": 2,
     "superseded_repair_source": 1,
-    "supporting_artifact": 2738,
+    "supporting_artifact": 2739,
     "validation_result": 49
   },
   "schema_version": 2,

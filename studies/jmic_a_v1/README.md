@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `unresolved`
+- **Status:** `supporting`
 - **Review state:** `indexed`
 - **Study ID:** `jmic_a_v1`
 
@@ -26,8 +26,9 @@ a continuous joint Gaussian metric posterior with one persistent subject-level
 commitment, before any neural implementation or renewed comparison with exposed human
 responses?
 
-**Finding.** JMIC-A source, qualification, and allowed task input locked; execution
-pending.
+**Finding.** Frozen analytic qualification: qualified;
+qualified_for_prediction_registration; descriptive morphology rows {'not_all_nine': 33,
+'all_nine': 3}. No human responses or neural models were used.
 
 **Claim boundary.** No neural network, Liu participant response file, human-phenotype
 fit, human collection, or JMIC-P promotion is authorized.
@@ -46,6 +47,15 @@ fit, human collection, or JMIC-P promotion is authorized.
 - `execution_lock` —
   [studies/jmic_a_v1/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
   (`sha256:5f425a265d4a`)
+- `report` —
+  [studies/jmic_a_v1/records/reports/jmic_a_v1.md](records/reports/jmic_a_v1.md)
+  (`sha256:6d54e93b1865`)
+- `frozen_result` —
+  [studies/jmic_a_v1/records/results/jmic_a_v1.json](records/results/jmic_a_v1.json)
+  (`sha256:e8bb76ab4a55`)
+- `supporting_artifact` —
+  [studies/jmic_a_v1/records/results/jmic_a_v1_predictions.npz](records/results/jmic_a_v1_predictions.npz)
+  (`sha256:768664d99751`)
 
 ## Provenance rule
 

@@ -388,9 +388,10 @@ fail to close the dynamics.
     used strongly non-scalar writes without competence damage, but 0/9 noisy units
     passed all nine rows or constrained morphology. Difficult-pair bimodality failed in
     9/9 and stable within-subject errors failed in 6/9; outcome used_without_rescue.
-- [Analytic joint metric inference and stable commitment](jmic_a_v1/README.md) — `unresolved`
-  - **Finding:** JMIC-A source, qualification, and allowed task input locked; execution
-    pending.
+- [Analytic joint metric inference and stable commitment](jmic_a_v1/README.md) — `supporting`
+  - **Finding:** Frozen analytic qualification: qualified;
+    qualified_for_prediction_registration; descriptive morphology rows {'not_all_nine':
+    33, 'all_nine': 3}. No human responses or neural models were used.
 
 ## Minimal explanatory models
 
