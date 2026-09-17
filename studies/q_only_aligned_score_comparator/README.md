@@ -35,6 +35,9 @@ ablation or main-model promotion.
 
 ## Frozen records
 
+- `artifact_lock` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
+  (`sha256:0ad97951155a`)
 - `registered_contract` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/q_only_aligned_score_comparator_v1.json](records/benchmarks/q_only_aligned_score_comparator_v1.json)
   (`sha256:0971de6e4812`)
