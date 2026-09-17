@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `single_p_anytime`
 
@@ -25,14 +25,17 @@
 presentation-horizon training improve held-out short- and long-horizon predictive
 quality while preserving the clean no-time single-P model's historical B=4 phenotype?
 
-**Finding.** All twelve prospectively registered development models completed training
-and passed the pre-evaluation model lock. No scientific outcome has yet been evaluated
-under this protocol.
+**Finding.** Across all three development seeds and both clean/noisy arms,
+variable-horizon training preserved the historical B=4 phenotype and absolute competence
+at B=1..7, and improved the registered B=1 CE endpoint without probability harm, but
+failed the B=7 CE-superiority gate. The frozen V1 outcome is horizon_tradeoff and is not
+admitted to confirmation.
 
-**Claim boundary.** This tests presentation-horizon robustness under a fixed inherited
-regularizer, not accumulation of new relation information, explicit time or
-evidence-count inference, online uncertainty inference, confirmation-level reliability,
-or a human/biological mechanism.
+**Claim boundary.** This rejects admission of the frozen V1 presentation-horizon recipe
+under the inherited terminal-P regularizer; it does not reject variable-horizon training
+in general. The study does not test accumulation of new relation information, explicit
+time or evidence-count inference, online uncertainty inference, confirmation-level
+reliability, or a human/biological mechanism.
 
 ## Frozen records
 
@@ -48,6 +51,12 @@ or a human/biological mechanism.
 - `execution_lock` —
   [studies/single_p_anytime/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
   (`sha256:1924fb8d95a4`)
+- `frozen_result` —
+  [studies/single_p_anytime/records/results/single_p_anytime_v1.json](records/results/single_p_anytime_v1.json)
+  (`sha256:bcfac478425b`)
+- `report` —
+  [studies/single_p_anytime/records/reports/single_p_anytime_v1.md](records/reports/single_p_anytime_v1.md)
+  (`sha256:4cdfe7026c8a`)
 
 ## Provenance rule
 

@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3932,
+  "entry_count": 3934,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2181,
+    "json": 2182,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 102,
+    "markdown": 103,
     "numpy_npz": 1411,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,8 +24,8 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3834,
-    "historical_gzip_view": 97,
+    "already_conformant": 3835,
+    "historical_gzip_view": 98,
     "historical_pth_view": 1
   },
   "records": [
@@ -117367,6 +117367,76 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_anytime/records/reports/single_p_anytime_v1.md",
+        "repository_path": "studies/single_p_anytime/records/reports/single_p_anytime_v1.md"
+      },
+      "materialized_identity": {
+        "bytes": 753,
+        "sha256": "4cdfe7026c8a96174cb96295892e047d1aa7a3731a0476eaa4efc72a7f924ad2"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_anytime",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_anytime.studies_single_p_anytime_records_reports_single_p_anytime_v1_md",
+      "registered_identity": {
+        "bytes": 753,
+        "sha256": "4cdfe7026c8a96174cb96295892e047d1aa7a3731a0476eaa4efc72a7f924ad2",
+        "source_ref": "sha256:4cdfe7026c8a96174cb96295892e047d1aa7a3731a0476eaa4efc72a7f924ad2"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/single_p_anytime/records/results/single_p_anytime_v1.json",
+        "repository_path": "studies/single_p_anytime/records/results/single_p_anytime_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 6343340,
+        "sha256": "bcfac478425b9ccd87feeb33f39508aa855cc4000f76058cb254c77e0bd3ca2c"
+      },
+      "normalization": {
+        "status": "historical_gzip_view",
+        "target_format": "gzip_json",
+        "target_suffix": ".json.gz",
+        "transformation": "deterministic_gzip_mirror"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "single_p_anytime",
+        "kind": "study"
+      },
+      "record_id": "study.single_p_anytime.studies_single_p_anytime_records_results_single_p_anytime_v1_json",
+      "registered_identity": {
+        "bytes": 6343340,
+        "sha256": "bcfac478425b9ccd87feeb33f39508aa855cc4000f76058cb254c77e0bd3ca2c",
+        "source_ref": "sha256:bcfac478425b9ccd87feeb33f39508aa855cc4000f76058cb254c77e0bd3ca2c"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.validation_result",
       "format": {
         "format": "json",
@@ -134079,7 +134149,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3930,
+  "registered_record_count": 3932,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -134093,7 +134163,7 @@
     "execution_lock": 77,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 576,
+    "frozen_result": 577,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -134103,7 +134173,7 @@
     "registered_contract": 95,
     "repair_contract": 32,
     "repair_lock": 18,
-    "report": 97,
+    "report": 98,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,

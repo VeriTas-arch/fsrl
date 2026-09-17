@@ -336,10 +336,12 @@ fail to close the dynamics.
     state-dependent plasticity in every seed, but all six preregistered confidence-link
     intervals are positive rather than negative, so that link is not supported; the
     registered labels are not heterogeneous across seeds.
-- [Anytime presentation-horizon training for clean single-P](single_p_anytime/README.md) — `frozen_contract`
-  - **Finding:** All twelve prospectively registered development models completed
-    training and passed the pre-evaluation model lock. No scientific outcome has yet
-    been evaluated under this protocol.
+- [Anytime presentation-horizon training for clean single-P](single_p_anytime/README.md) — `mixed`
+  - **Finding:** Across all three development seeds and both clean/noisy arms,
+    variable-horizon training preserved the historical B=4 phenotype and absolute
+    competence at B=1..7, and improved the registered B=1 CE endpoint without
+    probability harm, but failed the B=7 CE-superiority gate. The frozen V1 outcome is
+    horizon_tradeoff and is not admitted to confirmation.
 
 ## Minimal explanatory models
 
