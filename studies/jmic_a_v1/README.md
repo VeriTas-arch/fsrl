@@ -26,8 +26,8 @@ a continuous joint Gaussian metric posterior with one persistent subject-level
 commitment, before any neural implementation or renewed comparison with exposed human
 responses?
 
-**Finding.** Prospective JMIC-A protocol and implementation qualification frozen;
-execution pending.
+**Finding.** JMIC-A source, qualification, and allowed task input locked; execution
+pending.
 
 **Claim boundary.** No neural network, Liu participant response file, human-phenotype
 fit, human collection, or JMIC-P promotion is authorized.
@@ -43,6 +43,9 @@ fit, human collection, or JMIC-P promotion is authorized.
 - `validation_result` —
   [studies/jmic_a_v1/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:413eb32cb6ab`)
+- `execution_lock` —
+  [studies/jmic_a_v1/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
+  (`sha256:5f425a265d4a`)
 
 ## Provenance rule
 

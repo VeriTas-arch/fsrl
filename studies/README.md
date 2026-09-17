@@ -389,8 +389,8 @@ fail to close the dynamics.
     passed all nine rows or constrained morphology. Difficult-pair bimodality failed in
     9/9 and stable within-subject errors failed in 6/9; outcome used_without_rescue.
 - [Analytic joint metric inference and stable commitment](jmic_a_v1/README.md) — `unresolved`
-  - **Finding:** Prospective JMIC-A protocol and implementation qualification frozen;
-    execution pending.
+  - **Finding:** JMIC-A source, qualification, and allowed task input locked; execution
+    pending.
 
 ## Minimal explanatory models
 
