@@ -375,8 +375,10 @@ fail to close the dynamics.
   - **Finding:** Frozen aligned q-only comparator outcome: mixed_or_unidentified;
     post-result engineering repair3 qualified and source-locked with scientific
     artifacts byte-identical.
-- [Paired dense-alpha add-back to minimal single-P M2](minimal_single_p_alpha/README.md) — `unresolved`
-  - **Finding:** Generic M2-alpha freeze: 19/20 stable_constructive; Liu pending.
+- [Paired dense-alpha add-back to minimal single-P M2](minimal_single_p_alpha/README.md) — `valid_negative`
+  - **Finding:** Frozen M2-alpha result: 19/20 networks were stable_constructive, but
+    0/60 noisy units met constrained morphology and 0/60 passed all nine qualitative
+    rows; registered outcome no_constrained_rescue.
 
 ## Minimal explanatory models
 

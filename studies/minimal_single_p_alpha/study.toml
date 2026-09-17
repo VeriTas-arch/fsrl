@@ -3,10 +3,10 @@ id = "minimal_single_p_alpha"
 title = "Paired dense-alpha add-back to minimal single-P M2"
 chapter = "algorithmic_compression"
 order = 1310
-status = "unresolved"
+status = "valid_negative"
 review_state = "indexed"
 question = "Holding the frozen M2 architecture, generic training streams, optimization, observation process, and evaluation arrays fixed, does adding one trainable dense expression-gain matrix alpha recover constrained Liu morphology without error inflation?"
-finding = "Generic M2-alpha freeze: 19/20 stable_constructive; Liu pending."
+finding = "Frozen M2-alpha result: 19/20 networks were stable_constructive, but 0/60 noisy units met constrained morphology and 0/60 passed all nine qualitative rows; registered outcome no_constrained_rescue."
 boundary = "Alpha is a slow trainable expression gain initialized exactly to one; P remains the only episode-persistent plastic state. The paired complete-recipe result cannot identify alpha and P separately or establish a biological mechanism."
 
 [[records]]
@@ -55,6 +55,15 @@ bytes = 320
 source_ref = "sha256:17264b30f56054cd2fca731cab2c50e04692c60e8b549d4a670b15e2953b6954"
 
 [[records]]
+path = "records/reports/minimal_single_p_alpha_v1.md"
+legacy_path = "studies/minimal_single_p_alpha/records/reports/minimal_single_p_alpha_v1.md"
+origin = "native"
+role = "report"
+sha256 = "5d865096378c6ff167b044d78adc6a140e300915bcba3cad0cfbc3494d95dfa9"
+bytes = 578
+source_ref = "sha256:5d865096378c6ff167b044d78adc6a140e300915bcba3cad0cfbc3494d95dfa9"
+
+[[records]]
 path = "records/results/minimal_single_p_alpha_v1.generic.json"
 legacy_path = "studies/minimal_single_p_alpha/records/results/minimal_single_p_alpha_v1.generic.json"
 origin = "native"
@@ -62,3 +71,30 @@ role = "frozen_result"
 sha256 = "4f8ca7fd408b5650b4e18aaa3965613a04829768d50eff963d0f29b82a90ccbe"
 bytes = 152099
 source_ref = "sha256:4f8ca7fd408b5650b4e18aaa3965613a04829768d50eff963d0f29b82a90ccbe"
+
+[[records]]
+path = "records/results/minimal_single_p_alpha_v1.json"
+legacy_path = "studies/minimal_single_p_alpha/records/results/minimal_single_p_alpha_v1.json"
+origin = "native"
+role = "frozen_result"
+sha256 = "9cd55f19d5e1faea1ba7a353d0598d7c3eae978cc00d9cd538f3bc2de6002202"
+bytes = 384802
+source_ref = "sha256:9cd55f19d5e1faea1ba7a353d0598d7c3eae978cc00d9cd538f3bc2de6002202"
+
+[[records]]
+path = "records/results/minimal_single_p_alpha_v1.pairs.npz"
+legacy_path = "studies/minimal_single_p_alpha/records/results/minimal_single_p_alpha_v1.pairs.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "288afe5c113c692dc72e84702859bb8543d2d8e4f299322fa5f7864fb16cdde2"
+bytes = 64187
+source_ref = "sha256:288afe5c113c692dc72e84702859bb8543d2d8e4f299322fa5f7864fb16cdde2"
+
+[[records]]
+path = "records/results/minimal_single_p_alpha_v1.parameters.npz"
+legacy_path = "studies/minimal_single_p_alpha/records/results/minimal_single_p_alpha_v1.parameters.npz"
+origin = "native"
+role = "supporting_artifact"
+sha256 = "5201218648a2bb9e9797df1a12d468ac81f01fe68d9bc2be13accf2124c1eb8d"
+bytes = 1099
+source_ref = "sha256:5201218648a2bb9e9797df1a12d468ac81f01fe68d9bc2be13accf2124c1eb8d"
