@@ -25,7 +25,10 @@
 rankings into enough difficult-pair bimodality: direction formation, strong-margin
 formation, latent distribution shape, or finite ten-choice realization?
 
-**Finding.** Sources and all mandatory frozen artifacts locked; analysis pending.
+**Finding.** Read-only attribution outcome mixed_or_unidentified: noisy stage counts
+were {'direction_absent': 1, 'latent_shape': 31, 'weak_margin': 28}. The score-only
+interface outcome was complete_recipe_only; no training or model execution was
+performed.
 
 **Claim boundary.** All 180 frozen M2 observation units are mandatory. The study replays
 existing choices and decomposes archived output geometry without training, model
@@ -50,6 +53,15 @@ equivalence is established.
 - `execution_lock` —
   [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
   (`sha256:87e745a1b884`)
+- `report` —
+  [studies/minimal_single_p_pair_morphology_attribution/records/reports/minimal_single_p_pair_morphology_attribution_v1.md](records/reports/minimal_single_p_pair_morphology_attribution_v1.md)
+  (`sha256:232025e713e9`)
+- `frozen_result` —
+  [studies/minimal_single_p_pair_morphology_attribution/records/results/minimal_single_p_pair_morphology_attribution_v1.json](records/results/minimal_single_p_pair_morphology_attribution_v1.json)
+  (`sha256:db0a50cd69fd`)
+- `supporting_artifact` —
+  [studies/minimal_single_p_pair_morphology_attribution/records/results/minimal_single_p_pair_morphology_attribution_v1.npz](records/results/minimal_single_p_pair_morphology_attribution_v1.npz)
+  (`sha256:e0c0dc7698c2`)
 
 ## Provenance rule
 
