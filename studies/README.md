@@ -356,10 +356,16 @@ fail to close the dynamics.
     within-subject errors were absent across all networks, all-panel ranking diversity
     occurred in only 3/20, and no historical quantitative row passed across all three
     panels in any network.
-- [Acute observation uncertainty in frozen minimal single-P M2](minimal_single_p_observation_uncertainty/README.md) — `unresolved`
-  - **Finding:** Implementation and synthetic qualification passed; twenty parent M2
-    checkpoints and three paired clean/folded/noisy input panels are source/input locked
-    before evaluation.
+- [Acute observation uncertainty in frozen minimal single-P M2](minimal_single_p_observation_uncertainty/README.md) — `valid_negative`
+  - **Finding:** Registered no_acute_completion: no condition produced an
+    all-three-panel structured-complete network (clean=0/20, folded=0/20, noisy=0/20).
+    Nevertheless, every noisy-minus-clean and noisy-minus-folded primary continuous
+    contrast had a 95% interval in the expected direction. No noisy panel passed
+    difficult-pair bimodality (0/60; mean 10.53 and maximum 13 bimodal pairs versus the
+    fixed threshold 15); stable-error prevalence passed 27/60 noisy panels and all three
+    panels in 1/20 networks, while ranking diversity passed all 60 noisy panels. Fixed
+    sigma=1/7 uncertainty therefore increased structured individualization but was
+    insufficient to complete the frozen Liu phenotype.
 
 ## Minimal explanatory models
 

@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `unresolved`
+- **Status:** `valid_negative`
 - **Review state:** `indexed`
 - **Study ID:** `minimal_single_p_observation_uncertainty`
 
@@ -25,9 +25,15 @@
 stable individualized Liu phenotype while the frozen minimal single-P M2 computation
 preserves coherent relational organization?
 
-**Finding.** Implementation and synthetic qualification passed; twenty parent M2
-checkpoints and three paired clean/folded/noisy input panels are source/input locked
-before evaluation.
+**Finding.** Registered no_acute_completion: no condition produced an all-three-panel
+structured-complete network (clean=0/20, folded=0/20, noisy=0/20). Nevertheless, every
+noisy-minus-clean and noisy-minus-folded primary continuous contrast had a 95% interval
+in the expected direction. No noisy panel passed difficult-pair bimodality (0/60; mean
+10.53 and maximum 13 bimodal pairs versus the fixed threshold 15); stable-error
+prevalence passed 27/60 noisy panels and all three panels in 1/20 networks, while
+ranking diversity passed all 60 noisy panels. Fixed sigma=1/7 uncertainty therefore
+increased structured individualization but was insufficient to complete the frozen Liu
+phenotype.
 
 **Claim boundary.** Frozen-checkpoint development intervention across all twenty M2
 networks and three inherited Liu panels, with clean, amplitude-matched sign-restored
@@ -45,6 +51,12 @@ fitting, checkpoint selection, or main-model promotion.
 - `execution_lock` —
   [studies/minimal_single_p_observation_uncertainty/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
   (`sha256:fafb0baba3b4`)
+- `report` —
+  [studies/minimal_single_p_observation_uncertainty/records/reports/minimal_single_p_observation_uncertainty_v1.md](records/reports/minimal_single_p_observation_uncertainty_v1.md)
+  (`sha256:2ee241599829`)
+- `frozen_result` —
+  [studies/minimal_single_p_observation_uncertainty/records/results/minimal_single_p_observation_uncertainty_v1.json](records/results/minimal_single_p_observation_uncertainty_v1.json)
+  (`sha256:8683e8c78fb2`)
 
 ## Provenance rule
 
