@@ -25,7 +25,7 @@
 the later constrained Liu morphology standard, or did the historical success claims
 concern only the earlier core-behavior and compensation gates?
 
-**Finding.** Synthetic qualification passed; source/input locking pending.
+**Finding.** Sources and all mandatory historical artifacts locked; analysis pending.
 
 **Claim boundary.** All 36 archived A0/Ae units from the two specified historical
 families are mandatory. The study replays existing choices and analyzes archived output
@@ -49,6 +49,9 @@ search, selection, historical-record mutation, or main-model promotion.
 - `execution_lock` —
   [studies/historical_single_p_morphology_reaudit/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
   (`sha256:c833eff36ee7`)
+- `execution_lock` —
+  [studies/historical_single_p_morphology_reaudit/records/benchmarks/source_input_lock_repair1.json](records/benchmarks/source_input_lock_repair1.json)
+  (`sha256:4bf88e52ee2b`)
 
 ## Provenance rule
 
