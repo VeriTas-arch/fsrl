@@ -25,9 +25,9 @@
 architecture and optimization while retaining generic relational competence, causal
 dependence on P, and globally coherent query structure without human-target fitting?
 
-**Finding.** C0 passed all three human-blind generic panels in all three development
-seeds, so the registered ladder authorizes M1. Later subtraction levels remain
-unexposed.
+**Finding.** C0 and M1 each passed all three human-blind generic panels in all three
+development seeds. The terminal-P penalty is therefore unnecessary for the registered
+functional gates, and M2 is authorized; later levels remain unexposed.
 
 **Claim boundary.** This protocol omits no-clipping M4 and microstep-reduction M6 by
 explicit user decision, retains P clipping and four-support/two-query microsteps, and
@@ -58,6 +58,12 @@ prevalence.
 - `artifact_lock` —
   [studies/minimal_single_p/records/benchmarks/model_lock.M1.json](records/benchmarks/model_lock.M1.json)
   (`sha256:dc64ae4c4801`)
+- `frozen_result` —
+  [studies/minimal_single_p/records/results/minimal_single_p_v1.M1.json](records/results/minimal_single_p_v1.M1.json)
+  (`sha256:03eac30f56b5`)
+- `report` —
+  [studies/minimal_single_p/records/reports/minimal_single_p_v1.M1.md](records/reports/minimal_single_p_v1.M1.md)
+  (`sha256:a06d525a1952`)
 
 ## Provenance rule
 

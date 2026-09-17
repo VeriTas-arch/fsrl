@@ -343,9 +343,9 @@ fail to close the dynamics.
     probability harm, but failed the B=7 CE-superiority gate. The frozen V1 outcome is
     horizon_tradeoff and is not admitted to confirmation.
 - [Subtractive simplification of the clean single-P learner](minimal_single_p/README.md) — `supporting`
-  - **Finding:** C0 passed all three human-blind generic panels in all three development
-    seeds, so the registered ladder authorizes M1. Later subtraction levels remain
-    unexposed.
+  - **Finding:** C0 and M1 each passed all three human-blind generic panels in all three
+    development seeds. The terminal-P penalty is therefore unnecessary for the
+    registered functional gates, and M2 is authorized; later levels remain unexposed.
 
 ## Minimal explanatory models
 

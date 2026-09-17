@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3941,
+  "entry_count": 3943,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2188,
+    "json": 2189,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 104,
+    "markdown": 105,
     "numpy_npz": 1411,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3842,
+    "already_conformant": 3844,
     "historical_gzip_view": 98,
     "historical_pth_view": 1
   },
@@ -60332,6 +60332,40 @@
     },
     {
       "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p/records/reports/minimal_single_p_v1.M1.md",
+        "repository_path": "studies/minimal_single_p/records/reports/minimal_single_p_v1.M1.md"
+      },
+      "materialized_identity": {
+        "bytes": 663,
+        "sha256": "a06d525a19524d240b07cdbf45c4373c71942b97da915d624d280fbd23d165e7"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p.studies_minimal_single_p_records_reports_minimal_single_p_v1_m1_md",
+      "registered_identity": {
+        "bytes": 663,
+        "sha256": "a06d525a19524d240b07cdbf45c4373c71942b97da915d624d280fbd23d165e7",
+        "source_ref": "sha256:a06d525a19524d240b07cdbf45c4373c71942b97da915d624d280fbd23d165e7"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
       "document_type": "fsrl.record.frozen_result",
       "format": {
         "format": "json",
@@ -60361,6 +60395,40 @@
         "bytes": 24692,
         "sha256": "816cd160fe519a5cde8560d96fd9fb91bce1000f702bcbf2a347474041e06900",
         "source_ref": "sha256:816cd160fe519a5cde8560d96fd9fb91bce1000f702bcbf2a347474041e06900"
+      },
+      "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p/records/results/minimal_single_p_v1.M1.json",
+        "repository_path": "studies/minimal_single_p/records/results/minimal_single_p_v1.M1.json"
+      },
+      "materialized_identity": {
+        "bytes": 24692,
+        "sha256": "03eac30f56b57caaaa30330b7c3b1f699ded6d615cbbed49b7036de22900d3f1"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p.studies_minimal_single_p_records_results_minimal_single_p_v1_m1_json",
+      "registered_identity": {
+        "bytes": 24692,
+        "sha256": "03eac30f56b57caaaa30330b7c3b1f699ded6d615cbbed49b7036de22900d3f1",
+        "source_ref": "sha256:03eac30f56b57caaaa30330b7c3b1f699ded6d615cbbed49b7036de22900d3f1"
       },
       "role": "frozen_result"
     },
@@ -134387,7 +134455,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3939,
+  "registered_record_count": 3941,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -134401,7 +134469,7 @@
     "execution_lock": 78,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 578,
+    "frozen_result": 579,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -134411,7 +134479,7 @@
     "registered_contract": 96,
     "repair_contract": 32,
     "repair_lock": 18,
-    "report": 99,
+    "report": 100,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,
