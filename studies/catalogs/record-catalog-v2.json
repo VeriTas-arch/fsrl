@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3969,
+  "entry_count": 3970,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2210,
+    "json": 2211,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3869,
+    "already_conformant": 3870,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -60839,6 +60839,40 @@
         "source_ref": "sha256:d2c2c3240655cdb644e04c2240c97d4c2cb2c578491241cec56bf9a83d6da58a"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/qualification.json",
+        "repository_path": "studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 106580,
+        "sha256": "48d929edfd472641e3d5e0b3097afc263e6e0f9811ac1e255208b364751a9263"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_pair_morphology_attribution",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_pair_morphology_attribution.studies_minimal_single_p_pair_morphology_attribution_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 106580,
+        "sha256": "48d929edfd472641e3d5e0b3097afc263e6e0f9811ac1e255208b364751a9263",
+        "source_ref": "sha256:48d929edfd472641e3d5e0b3097afc263e6e0f9811ac1e255208b364751a9263"
+      },
+      "role": "validation_result"
     },
     {
       "availability": "materialized",
@@ -135341,7 +135375,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3967,
+  "registered_record_count": 3968,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -135369,7 +135403,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,
-    "validation_result": 36
+    "validation_result": 37
   },
   "schema_version": 2,
   "sources": {

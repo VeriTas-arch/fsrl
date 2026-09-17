@@ -1,0 +1,169 @@
+"""Fail-closed source and frozen-artifact lock for read-only attribution."""
+
+from __future__ import annotations
+
+import subprocess
+
+from fsrl.experiments.training_strategy.locks import reference, verify_reference
+from fsrl.infra.file_contracts import validate_run_manifest
+from fsrl.infra.git_provenance import git_blob_sha256
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
+from fsrl.paths import REPO_ROOT
+
+from .protocol import (
+    PROTOCOL,
+    PROTOCOL_SHA256,
+    QUALIFICATION,
+    SOURCE_INPUT_LOCK,
+    m2_directory,
+    m2_input,
+    register,
+    score_path,
+    specification,
+)
+
+
+def _git_text(*arguments: str) -> str:
+    return subprocess.run(
+        ["git", *arguments], cwd=REPO_ROOT, check=True, capture_output=True, text=True
+    ).stdout.strip()
+
+
+def clean_pushed_commit() -> str:
+    if _git_text("branch", "--show-current") != "dev":
+        raise RuntimeError("pair-morphology attribution requires dev")
+    if _git_text("status", "--porcelain=v1", "--untracked-files=all"):
+        raise RuntimeError("commit qualified attribution source before locking")
+    commit = _git_text("rev-parse", "HEAD")
+    remote = _git_text("ls-remote", "--exit-code", "origin", "refs/heads/dev").split()[
+        0
+    ]
+    if commit != remote:
+        raise RuntimeError("qualified attribution source must be pushed to origin/dev")
+    return commit
+
+
+def require_committed(path) -> str:
+    relative = path.relative_to(REPO_ROOT).as_posix()
+    commit = _git_text("rev-parse", "HEAD")
+    if git_blob_sha256(REPO_ROOT, commit, relative) != file_sha256(path):
+        raise RuntimeError(f"registered freeze point is not committed: {relative}")
+    return commit
+
+
+def sources() -> list[dict]:
+    paths = list((REPO_ROOT / "fsrl").rglob("*.py"))
+    paths += list(
+        (REPO_ROOT / "tests/experiments/minimal_single_p_pair_morphology").rglob("*.py")
+    )
+    paths += [PROTOCOL, REPO_ROOT / "pyproject.toml", REPO_ROOT / ".envrc"]
+    return [reference(path) for path in sorted(set(paths))]
+
+
+def _parent(name: str):
+    row = specification()["parents"][name]
+    path = REPO_ROOT / row["path"]
+    if file_sha256(path) != row["sha256"]:
+        raise RuntimeError(f"parent record changed: {name}")
+    return path
+
+
+def _m2_artifacts() -> dict:
+    units = {}
+    spec = specification()["design"]
+    for seed in spec["M2_network_seeds"]:
+        for panel in spec["panels"]:
+            for condition in spec["conditions"]:
+                directory = m2_directory(seed, panel, condition)
+                manifest = validate_run_manifest(directory)
+                if not manifest["passed"]:
+                    raise RuntimeError(
+                        f"incomplete M2 unit: {seed}/{panel}/{condition}"
+                    )
+                units[f"{seed}/{panel}/{condition}"] = {
+                    name: reference(directory / name)
+                    for name in ("raw.npz", "behavior.json", "result.json", "run.json")
+                }
+    return units
+
+
+def write_source_input_lock() -> dict:
+    commit = clean_pushed_commit()
+    require_committed(QUALIFICATION)
+    qualification = load_json(QUALIFICATION)
+    current = sources()
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("pair-morphology qualification did not pass")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "source_commit": commit,
+        "sources": current,
+        "qualification": reference(QUALIFICATION),
+        "parents": {
+            name: reference(_parent(name)) for name in specification()["parents"]
+        },
+        "m2_units": _m2_artifacts(),
+        "m2_inputs": {
+            f"{panel}/{condition}": reference(m2_input(panel, condition))
+            for panel in specification()["design"]["panels"]
+            for condition in specification()["design"]["conditions"]
+        },
+        "score_only": {
+            str(seed): reference(score_path(seed))
+            for seed in specification()["design"]["score_only_seeds"]
+        },
+        "scientific_outcomes_exposed": False,
+    }
+    write_json_exclusive(SOURCE_INPUT_LOCK, payload)
+    register(
+        finding="Sources and all mandatory frozen artifacts locked; analysis pending."
+    )
+    return {"source_commit": commit, "m2_units": len(payload["m2_units"])}
+
+
+def _validate_sources(lock: dict) -> None:
+    if lock["sources"] != sources():
+        raise RuntimeError("pair-morphology source inventory differs")
+    for row in lock["sources"]:
+        observed = git_blob_sha256(REPO_ROOT, lock["source_commit"], row["path"])
+        if observed != row["sha256"]:
+            raise RuntimeError(f"source Git witness differs: {row['path']}")
+
+
+def _validate_artifacts(lock: dict) -> None:
+    qualification = load_json(verify_reference(lock["qualification"]))
+    if (
+        qualification["passed"] is not True
+        or qualification["sources"] != lock["sources"]
+    ):
+        raise RuntimeError("locked qualification differs")
+    for name, row in lock["parents"].items():
+        if reference(_parent(name)) != row:
+            raise RuntimeError(f"locked parent differs: {name}")
+    for files in lock["m2_units"].values():
+        for row in files.values():
+            verify_reference(row)
+    for rows in (lock["m2_inputs"], lock["score_only"]):
+        for row in rows.values():
+            verify_reference(row)
+    if len(lock["m2_units"]) != specification()["design"]["M2_units"]:
+        raise RuntimeError("locked M2 unit count differs")
+
+
+def validate_source_input_lock() -> dict:
+    require_committed(SOURCE_INPUT_LOCK)
+    lock = load_json(SOURCE_INPUT_LOCK)
+    if lock["protocol_sha256"] != PROTOCOL_SHA256:
+        raise RuntimeError("pair-morphology protocol lock differs")
+    _validate_sources(lock)
+    _validate_artifacts(lock)
+    return lock
+
+
+__all__ = [
+    "reference",
+    "sources",
+    "validate_source_input_lock",
+    "write_source_input_lock",
+]
