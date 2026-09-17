@@ -376,8 +376,8 @@ fail to close the dynamics.
     post-result engineering repair3 qualified and source-locked with scientific
     artifacts byte-identical.
 - [Paired dense-alpha add-back to minimal single-P M2](minimal_single_p_alpha/README.md) — `unresolved`
-  - **Finding:** Qualified M2-alpha implementation and frozen source/input/replay lock;
-    20-seed paired training pending.
+  - **Finding:** All 20 paired M2-alpha final checkpoints are jointly locked; generic
+    evaluation pending.
 
 ## Minimal explanatory models
 
