@@ -21,22 +21,26 @@
 
 ## Scientific role
 
-**Question.** Holding frozen M2 training and evaluation fixed, does adding one learned
-dense expression-gain matrix recover constrained Liu morphology without error inflation?
+**Question.** Holding the frozen M2 architecture, generic training streams,
+optimization, observation process, and evaluation arrays fixed, does adding one
+trainable dense expression-gain matrix alpha recover constrained Liu morphology without
+error inflation?
 
-**Finding.** Prospectively registered M2-alpha one-factor study; implementation and
-execution pending.
+**Finding.** Qualified M2-alpha implementation: exact M2 initial computation,
+adapter/update parity, and 20/20 paired stream replay; execution lock pending.
 
 **Claim boundary.** Alpha is a slow trainable expression gain initialized exactly to
-one; P remains the only episode-persistent plastic state. The twenty-seed
-complete-recipe comparison is paired to frozen M2 and cannot identify alpha and P
-separately or establish a biological mechanism.
+one; P remains the only episode-persistent plastic state. The paired complete-recipe
+result cannot identify alpha and P separately or establish a biological mechanism.
 
 ## Frozen records
 
 - `registered_contract` —
   [studies/minimal_single_p_alpha/records/benchmarks/minimal_single_p_alpha_v1.json](records/benchmarks/minimal_single_p_alpha_v1.json)
   (`sha256:1b8fd50b3e7a`)
+- `validation_result` —
+  [studies/minimal_single_p_alpha/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:aa406095814f`)
 
 ## Provenance rule
 
