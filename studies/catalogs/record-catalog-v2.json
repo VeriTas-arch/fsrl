@@ -7,15 +7,15 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3938,
+  "entry_count": 3940,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2186,
+    "json": 2187,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
-    "markdown": 103,
+    "markdown": 104,
     "numpy_npz": 1411,
     "pdf": 2,
     "pytorch_state_dict": 149,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3839,
+    "already_conformant": 3841,
     "historical_gzip_view": 98,
     "historical_pth_view": 1
   },
@@ -60261,6 +60261,74 @@
         "source_ref": "sha256:0dd06134350411f9e80b943b8bd743a1bceadce8e9ff14b7ff0df1ee58685356"
       },
       "role": "execution_lock"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.report",
+      "format": {
+        "format": "markdown",
+        "legacy_format": false,
+        "media_type": "text/markdown",
+        "prospective_suffix": ".md"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p/records/reports/minimal_single_p_v1.C0.md",
+        "repository_path": "studies/minimal_single_p/records/reports/minimal_single_p_v1.C0.md"
+      },
+      "materialized_identity": {
+        "bytes": 663,
+        "sha256": "3deb25eb233b0057315e92e9bc1a3a3b43a4003cf3fc1e8e6c44f253478a2ecb"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "markdown"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p.studies_minimal_single_p_records_reports_minimal_single_p_v1_c0_md",
+      "registered_identity": {
+        "bytes": 663,
+        "sha256": "3deb25eb233b0057315e92e9bc1a3a3b43a4003cf3fc1e8e6c44f253478a2ecb",
+        "source_ref": "sha256:3deb25eb233b0057315e92e9bc1a3a3b43a4003cf3fc1e8e6c44f253478a2ecb"
+      },
+      "role": "report"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.frozen_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p/records/results/minimal_single_p_v1.C0.json",
+        "repository_path": "studies/minimal_single_p/records/results/minimal_single_p_v1.C0.json"
+      },
+      "materialized_identity": {
+        "bytes": 24692,
+        "sha256": "816cd160fe519a5cde8560d96fd9fb91bce1000f702bcbf2a347474041e06900"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p.studies_minimal_single_p_records_results_minimal_single_p_v1_c0_json",
+      "registered_identity": {
+        "bytes": 24692,
+        "sha256": "816cd160fe519a5cde8560d96fd9fb91bce1000f702bcbf2a347474041e06900",
+        "source_ref": "sha256:816cd160fe519a5cde8560d96fd9fb91bce1000f702bcbf2a347474041e06900"
+      },
+      "role": "frozen_result"
     },
     {
       "availability": "materialized",
@@ -134285,7 +134353,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3936,
+  "registered_record_count": 3938,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -134299,7 +134367,7 @@
     "execution_lock": 78,
     "freeze_validation": 1,
     "frozen_parameters": 180,
-    "frozen_result": 577,
+    "frozen_result": 578,
     "mainline_guide": 1,
     "noninterpretable_attempt": 20,
     "presentation_asset": 6,
@@ -134309,7 +134377,7 @@
     "registered_contract": 96,
     "repair_contract": 32,
     "repair_lock": 18,
-    "report": 98,
+    "report": 99,
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,

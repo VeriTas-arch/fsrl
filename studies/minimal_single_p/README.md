@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `frozen_contract`
+- **Status:** `supporting`
 - **Review state:** `indexed`
 - **Study ID:** `minimal_single_p`
 
@@ -25,8 +25,9 @@
 architecture and optimization while retaining generic relational competence, causal
 dependence on P, and globally coherent query structure without human-target fitting?
 
-**Finding.** The prospective C0 to M5 subtraction ladder is frozen; no scientific model
-or evaluation outcome has yet been exposed under this protocol.
+**Finding.** C0 passed all three human-blind generic panels in all three development
+seeds, so the registered ladder authorizes M1. Later subtraction levels remain
+unexposed.
 
 **Claim boundary.** This protocol omits no-clipping M4 and microstep-reduction M6 by
 explicit user decision, retains P clipping and four-support/two-query microsteps, and
@@ -48,6 +49,12 @@ prevalence.
 - `artifact_lock` —
   [studies/minimal_single_p/records/benchmarks/model_lock.C0.json](records/benchmarks/model_lock.C0.json)
   (`sha256:8d7c1fe08f76`)
+- `frozen_result` —
+  [studies/minimal_single_p/records/results/minimal_single_p_v1.C0.json](records/results/minimal_single_p_v1.C0.json)
+  (`sha256:816cd160fe51`)
+- `report` —
+  [studies/minimal_single_p/records/reports/minimal_single_p_v1.C0.md](records/reports/minimal_single_p_v1.C0.md)
+  (`sha256:3deb25eb233b`)
 
 ## Provenance rule
 
