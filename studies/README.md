@@ -372,7 +372,8 @@ fail to close the dynamics.
     interface outcome was complete_recipe_only; no training or model execution was
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `mixed`
-  - **Finding:** Frozen aligned q-only comparator outcome: mixed_or_unidentified.
+  - **Finding:** Frozen aligned q-only comparator outcome: mixed_or_unidentified;
+    post-result engineering repair3 qualified with scientific artifacts byte-identical.
 
 ## Minimal explanatory models
 
