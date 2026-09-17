@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p_pair_morphology_attribution",
+  "experiment_id": "minimal_single_p_pair_morphology_attribution_v1",
+  "tier": "prospective read-only secondary analysis of frozen development artifacts",
+  "authorization": "The user explicitly authorized the proposed closed pair-morphology analysis after the frozen M2 observation study.",
+  "question": "At which observable stage does frozen M2 fail to turn individualized Liu rankings into enough difficult-pair bimodality: direction formation, strong-margin formation, latent distribution shape, or finite ten-choice realization?",
+  "claim_boundary": [
+    "This study reads existing frozen artifacts only. It performs no training, model inference, observation resampling, temperature or margin rescaling, threshold search, model selection, checkpoint mutation, or main-model promotion.",
+    "The pair-level estimands are prospectively fixed before their values are inspected. The parent study's already reported aggregate outcomes are known rationale, not new confirmation data.",
+    "All twenty M2 networks, all three inherited panels, and clean, folded, and noisy conditions are mandatory. Participants remain nested within network-panel units and are never pooled as independent networks.",
+    "Hodge and relation-removal summaries localize output geometry. They do not identify individual P entries, learning trajectories, causal mediation, a human observation process, or a neural mechanism because full terminal P matrices and update histories were not archived.",
+    "The existing score-only learner is first subjected to an information-interface audit. Unless the frozen recipes are exactly information-equivalent after axis normalization, it is a complete-recipe comparator and cannot isolate the recurrent integration operator.",
+    "The existing human thresholds and Beta classifier are reused without modification. Applying that classifier to exact latent probabilities is explicitly diagnostic and is not a new human-calibration claim."
+  ],
+  "parents": {
+    "M2_observation_protocol": {
+      "path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/minimal_single_p_observation_uncertainty_v1.json",
+      "sha256": "a85c5aed1c7b9e0bab453322a0f5677e23f0d94a0359f9723ddf66c789eaea96"
+    },
+    "M2_observation_lock": {
+      "path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/source_input_lock.json",
+      "sha256": "fafb0baba3b458d93692fd53854730d0a240c35ac79297971565e7fb42dc7137"
+    },
+    "M2_observation_result": {
+      "path": "studies/minimal_single_p_observation_uncertainty/records/results/minimal_single_p_observation_uncertainty_v1.json",
+      "sha256": "8683e8c78fb28b03e936b28b268961f9e4ec3b387d1ab9da7847f0f030f82d61"
+    },
+    "score_only_protocol": {
+      "path": "studies/minimal_relational_learner/records/benchmarks/minimal_relational_learner_v1.json",
+      "sha256": "6586f2e51eef80446c3b109cce386914178dd01efbf8df6a8fda69cfb4d6f7c2"
+    },
+    "score_only_result": {
+      "path": "studies/minimal_relational_learner/records/results/minimal_relational_learner_v1.json",
+      "sha256": "35530ca80c95546884d1b848c6c0aa44a5109aa9a9c70cfca82484f2c334a01d"
+    },
+    "behavior_contract": {
+      "path": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432"
+    }
+  },
+  "design": {
+    "M2_network_seeds": [3041, 3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050, 3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060],
+    "panels": [1, 2, 3],
+    "conditions": ["clean", "folded", "noisy"],
+    "M2_units": 180,
+    "score_only_seeds": [2111, 2112, 2113],
+    "primary_condition": "noisy",
+    "paired_controls": ["clean", "folded"],
+    "analysis_cohort": "Reuse each frozen sampled-behavior analysis cohort: overall accuracy at least 0.5 and sampled ranking class not correct. Also report all-77-subject sensitivity summaries.",
+    "unit": "One network-panel-condition. Cross-unit summaries first average panels within network when a network-level scalar is needed; participant axes are never pooled across networks."
+  },
+  "qualification": {
+    "artifact_completeness": "Require raw.npz, behavior.json, result.json, and completed run manifests for all 180 M2 units; require all three tracked score-only NPZ files and both parent results.",
+    "choice_replay": "Deterministically reconstruct every subject-by-pair ten-choice accuracy from frozen intact logits, original query schedules, choice seed, and temperature. The complete reconstructed sampled behavior must equal behavior.json for both full and global routes, and reconstructed pair means must match every stored pair mean within 1e-12.",
+    "latent_parity": "Recompute canonical fields, Hodge potentials, and exact correct probabilities from frozen logits; require maximum absolute error at most 1e-12 against archived route arrays.",
+    "hodge_identity": "Require field equals gradient plus residual within 1e-12 and gradient-residual inner products within 1e-10 times total field energy.",
+    "no_model_execution": "Qualification and analysis may load NPZ and JSON only. Importing Torch or loading a checkpoint is forbidden in the analysis implementation.",
+    "synthetic_tests": "Synthetic fixtures must cover all four stage labels, score-interface equality and mismatch, replay determinism, threshold inclusivity, and Hodge reconstruction before artifact analysis."
+  },
+  "estimands": {
+    "pair_table": [
+      "sampled pair accuracy and frozen sampled Beta class",
+      "exact correct probability and diagnostic latent Beta class",
+      "fractions below 0.5, at or below 0.2, and at or above 0.8",
+      "canonical margin, correct-signed gradient margin, and correct-signed residual margin",
+      "clean-to-folded and clean-to-noisy direction flips and 0.2/0.8 threshold crossings",
+      "absolute and sign-changing query effects of each of the eight registered support-relation removals"
+    ],
+    "panel_stage_counts": {
+      "direction_present_pairs": "Number of pairs having at least one analysis subject below 0.5 and at least one above 0.5 exact correct probability.",
+      "strong_two_sided_pairs": "Number of pairs having at least one analysis subject at or below 0.2 and at least one at or above 0.8 exact correct probability.",
+      "latent_bimodal_pairs": "Number of pairs classified bimodal when the unchanged frozen Beta classifier is applied to exact correct probabilities in the frozen analysis cohort.",
+      "sampled_bimodal_pairs": "Existing frozen number of sampled-behavior bimodal pairs."
+    },
+    "geometry": "For every subject, decompose the canonical complete-graph field into its orthogonal gradient projection and residual. Report gradient and residual RMS, energy fractions, and condition-paired changes without mediation language.",
+    "removal": "For every query pair, report mean absolute margin change, sign-flip prevalence, direct-support status, and the support relation with the largest mean absolute effect.",
+    "finite_sampling": "Compare diagnostic latent versus frozen sampled Beta classes and stable-error thresholds while preserving the original ten-choice realization; do not create extra Monte Carlo samples.",
+    "score_comparator": "Compare frozen Liu margin geometry only after an exact task-and-information interface audit. Retain each model's original readout and temperature; perform no scale matching."
+  },
+  "decision": {
+    "target_pairs": 15,
+    "panel_stage": [
+      "direction_absent when direction_present_pairs is below 15",
+      "weak_margin when direction_present_pairs is at least 15 but strong_two_sided_pairs is below 15",
+      "latent_shape when strong_two_sided_pairs is at least 15 but latent_bimodal_pairs is below 15",
+      "finite_sampling when latent_bimodal_pairs is at least 15 but sampled_bimodal_pairs is below 15",
+      "already_latent_and_sampled when both latent_bimodal_pairs and sampled_bimodal_pairs are at least 15"
+    ],
+    "study_outcome": "The noisy-condition stage occurring in at least 40 of 60 mandatory network-panel units is the primary attribution. Otherwise the outcome is mixed_or_unidentified. This label summarizes the frozen cohort and is not a population estimate.",
+    "comparator_outcomes": {
+      "operator_comparison_qualified": "All prespecified task, cue, support identity, displayed evidence, admission/retention, query, participant, timing, and choice/readout information checks are exactly equivalent after documented axis normalization.",
+      "complete_recipe_only": "Any information-interface check differs or cannot be established from archived arrays. Report the mismatches and do not attribute margin differences specifically to recurrent P."
+    },
+    "stop": "Write one canonical result, one compact pair table NPZ, and one interpretation report, then stop. Do not train, propose an M3 equation as a result, rerun a score learner, rescale margins, or trigger a successor study."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime minimal-single-p-pair-morphology <stage>",
+    "stages": ["qualify", "lock-inputs", "analyze", "report"],
+    "runtime": "CPU-only typed NumPy/JSON analysis of frozen artifacts; one BLAS thread; no checkpoint or Torch import.",
+    "runtime_root": "artifacts/runs/minimal_single_p_pair_morphology_attribution_v1",
+    "freeze_points": [
+      "Commit this protocol and initial native study registration before implementing or exposing pair-level estimands.",
+      "Commit qualified source and a content lock covering every mandatory M2 and score-only artifact before analysis.",
+      "Run all mandatory units without inspecting partial summaries, freeze the canonical result, pair table, and report, then stop."
+    ],
+    "retention": "Track the protocol, qualification, source/input lock, compact NPZ table, canonical JSON result, and concise report. Reuse parent runtime artifacts by verified reference; do not duplicate raw unit artifacts or checkpoints."
+  }
+}

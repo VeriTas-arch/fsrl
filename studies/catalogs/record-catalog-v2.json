@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3968,
+  "entry_count": 3969,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2209,
+    "json": 2210,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3868,
+    "already_conformant": 3869,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -60805,6 +60805,40 @@
         "source_ref": "sha256:8683e8c78fb28b03e936b28b268961f9e4ec3b387d1ab9da7847f0f030f82d61"
       },
       "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/minimal_single_p_pair_morphology_attribution_v1.json",
+        "repository_path": "studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/minimal_single_p_pair_morphology_attribution_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 10177,
+        "sha256": "d2c2c3240655cdb644e04c2240c97d4c2cb2c578491241cec56bf9a83d6da58a"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_pair_morphology_attribution",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_pair_morphology_attribution.studies_minimal_single_p_pair_morphology_attribution_records_benchmarks_minimal_single_p_pair_morphology_attribution_v1_json",
+      "registered_identity": {
+        "bytes": 10177,
+        "sha256": "d2c2c3240655cdb644e04c2240c97d4c2cb2c578491241cec56bf9a83d6da58a",
+        "source_ref": "sha256:d2c2c3240655cdb644e04c2240c97d4c2cb2c578491241cec56bf9a83d6da58a"
+      },
+      "role": "registered_contract"
     },
     {
       "availability": "materialized",
@@ -135307,7 +135341,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3966,
+  "registered_record_count": 3967,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -135328,7 +135362,7 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 98,
+    "registered_contract": 99,
     "repair_contract": 34,
     "repair_lock": 20,
     "report": 105,
@@ -135341,7 +135375,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "7b66c0d0349281e4ed25480c9f15cb2d09b579781e9e91fad5f08ca55497fc02"
+      "sha256": "a4e52151ad9f61c73865d5063b7fb57b5df382825d207d30b3775ffb1dd4af3e"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",

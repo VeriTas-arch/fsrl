@@ -366,6 +366,9 @@ fail to close the dynamics.
     panels in 1/20 networks, while ranking diversity passed all 60 noisy panels. Fixed
     sigma=1/7 uncertainty therefore increased structured individualization but was
     insufficient to complete the frozen Liu phenotype.
+- [Pair-morphology attribution in frozen minimal single-P M2](minimal_single_p_pair_morphology_attribution/README.md) — `unresolved`
+  - **Finding:** Prospectively registered read-only attribution; implementation and
+    analysis pending.
 
 ## Minimal explanatory models
 
