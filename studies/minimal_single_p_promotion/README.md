@@ -25,8 +25,10 @@
 across 20 unfiltered fresh networks trained with the selected minimal single-P M2
 recipe?
 
-**Finding.** The prospective 20-network M2 solution-distribution protocol is frozen; no
-fresh model or evaluation outcome has yet been exposed.
+**Finding.** All 20 fresh M2 networks were trained and jointly locked before evaluation.
+Human-blind generic evaluation found 18/20 stable_constructive networks, no
+panel-variable network, and two nonconstructive networks (3041 and 3060); Liu outcomes
+remain unopened.
 
 **Claim boundary.** This study can characterize M2's fresh-network generic and Liu
 solution distribution without seed filtering. It cannot establish new human
@@ -47,6 +49,12 @@ main-model promotion; width reduction and fixed-eta tests are outside scope.
 - `artifact_lock` —
   [studies/minimal_single_p_promotion/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
   (`sha256:485f0e941e55`)
+- `frozen_result` —
+  [studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.generic.json](records/results/minimal_single_p_promotion_v1.generic.json)
+  (`sha256:7d9bbdd07e77`)
+- `report` —
+  [studies/minimal_single_p_promotion/records/reports/minimal_single_p_promotion_v1.generic.md](records/reports/minimal_single_p_promotion_v1.generic.md)
+  (`sha256:c967d006894c`)
 
 ## Provenance rule
 

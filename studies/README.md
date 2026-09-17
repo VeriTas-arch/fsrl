@@ -349,8 +349,10 @@ fail to close the dynamics.
     coherence in all three panels, so the registered outcome is mixed_boundary and the
     ladder stops before either width reduction.
 - [Fresh-cohort promotion test of the minimal single-P M2 recipe](minimal_single_p_promotion/README.md) — `frozen_contract`
-  - **Finding:** The prospective 20-network M2 solution-distribution protocol is frozen;
-    no fresh model or evaluation outcome has yet been exposed.
+  - **Finding:** All 20 fresh M2 networks were trained and jointly locked before
+    evaluation. Human-blind generic evaluation found 18/20 stable_constructive networks,
+    no panel-variable network, and two nonconstructive networks (3041 and 3060); Liu
+    outcomes remain unopened.
 
 ## Minimal explanatory models
 
