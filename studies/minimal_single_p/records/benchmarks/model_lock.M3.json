@@ -1,0 +1,401 @@
+{
+  "level": "M3",
+  "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+  "runs": {
+    "3031": {
+      "files": {
+        "model.pth": {
+          "bytes": 191565,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3031/model.pth",
+          "sha256": "cf0e5c9b78652753a9e6a830bdffe97f52aa9932c861706206a0ef0a48fae47b"
+        },
+        "result.json": {
+          "bytes": 4307,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3031/result.json",
+          "sha256": "9469f2b641d95d2ad23a89eafa65976bf46bf489570854211f272bb9775395fb"
+        },
+        "run.json": {
+          "bytes": 4577,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3031/run.json",
+          "sha256": "d1575980febe6365d489946577dc5d1699b4dab923b186ce39e02cc6900f5f08"
+        },
+        "train_log.jsonl": {
+          "bytes": 712610,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3031/train_log.jsonl",
+          "sha256": "bfe3ab87a8f038faeb3aaf68cbff28daf2738b587512bb0755fb171bb284c5e9"
+        }
+      },
+      "metadata": {
+        "checkpoint": {
+          "bytes": 191565,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3031/model.pth",
+          "sha256": "cf0e5c9b78652753a9e6a830bdffe97f52aa9932c861706206a0ef0a48fae47b"
+        },
+        "episode_exposures": 48000,
+        "final_model": {
+          "cue_projection.bias": "a1961c4745a3ac6affec2fb9ed6376f898ec4c790d4e72d5bd8a16c5dd675e9b",
+          "cue_projection.weight": "5fbcbac24cbcdbd1b7bd1000f7c675f751756e06929630166faa262de3c49b6d",
+          "evidence_weight": "0447aa5769c52bb8ccef5f76cca71420fe104794f86ffd8d2256d0bdba650e24",
+          "h2margin.bias": "be921025f95061c8ffd1f7d5c0282fae25470b424aefa2f3d79aa35b535cda71",
+          "h2margin.weight": "779d1a8e68e7557d71c5d4f6ca616e908bc7aefa0d08dbe3a97438331390108d",
+          "h2modulation.bias": "9e31d23ea90c4eaba9014e2a195e963408c7f65f22e8a37037fc0ebb1c670dcb",
+          "h2modulation.weight": "39c957b768864a693f04e2e8b5569d9f9dcc180afcd359ba4c8c82262a797eef",
+          "w": "a542aec9c48c6b0617ecb9cf33ad9527196b3df1103ce5aa6198e7f145912296"
+        },
+        "initial_model": {
+          "cue_projection.bias": "d7f39424e71e6df0ba7eabfc82bf94ddbb187de214be36abd797bcf81ebf05ec",
+          "cue_projection.weight": "473aae3751ee8b1b1d582b123be1755e0d6cf116e59ca22024fd22b4ebaa1b3f",
+          "evidence_weight": "6bd1aa60723556acdeaa9149f333b12a13dcf5f58006553a92c392547fdb39f0",
+          "h2margin.bias": "355eb0879f7cb27fe38c80655373f614727e417cacdc699c639715e44b04e93b",
+          "h2margin.weight": "1987235843a562553faf39429a564caebfa724aff4119518c0026e9bc59b9971",
+          "h2modulation.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "h2modulation.weight": "67042dfda5683aead81b6055d19c4dba238341f9dd82f49c0e7cc0c19c5f10d1",
+          "w": "bc2b3affb293d81a8c6176b2eeae68635be8ff0c47f30b4b80b7fe961d34334f"
+        },
+        "initial_shared": {
+          "cue_projection.bias": "d7f39424e71e6df0ba7eabfc82bf94ddbb187de214be36abd797bcf81ebf05ec",
+          "cue_projection.weight": "473aae3751ee8b1b1d582b123be1755e0d6cf116e59ca22024fd22b4ebaa1b3f",
+          "evidence_weight": "6bd1aa60723556acdeaa9149f333b12a13dcf5f58006553a92c392547fdb39f0",
+          "h2margin.bias": "355eb0879f7cb27fe38c80655373f614727e417cacdc699c639715e44b04e93b",
+          "h2margin.weight": "1987235843a562553faf39429a564caebfa724aff4119518c0026e9bc59b9971",
+          "w": "bc2b3affb293d81a8c6176b2eeae68635be8ff0c47f30b4b80b7fe961d34334f"
+        },
+        "level": "M3",
+        "optimizer_steps": {
+          "cue_projection.bias": 1500,
+          "cue_projection.weight": 1500,
+          "evidence_weight": 1500,
+          "h2margin.bias": 1500,
+          "h2margin.weight": 1500,
+          "h2modulation.bias": 1500,
+          "h2modulation.weight": 1500,
+          "w": 1500
+        },
+        "parameters": 47002,
+        "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "seed": 3031,
+        "source_commit": "7653a2cc670dd228fd6110813dc4323c8f143c61",
+        "stream_fingerprint": "59a6b3106ac1e0673ac7771efaf37f07b88e33539dd810c2dbd2ba6e60a2a99e",
+        "training_seconds": 45.833589461049996,
+        "warmup_seconds": 11.749390839948319
+      }
+    },
+    "3032": {
+      "files": {
+        "model.pth": {
+          "bytes": 191565,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3032/model.pth",
+          "sha256": "2cc948ea8d0c7ad85f5671ee6fedeb77deffe2d493f760300c2c244c3d23d799"
+        },
+        "result.json": {
+          "bytes": 4305,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3032/result.json",
+          "sha256": "f316e411df119070279c56cb1535ddeae022cd7e0762541ce4c30c0848aedc93"
+        },
+        "run.json": {
+          "bytes": 4577,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3032/run.json",
+          "sha256": "735d614097f3d185554ad198c3acd2fb22d07de04770480a35e2007a14107d7d"
+        },
+        "train_log.jsonl": {
+          "bytes": 710148,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3032/train_log.jsonl",
+          "sha256": "33595af9447e6dbf1e8e62f9549e224fe198c522f8d536d632655cee2f36917e"
+        }
+      },
+      "metadata": {
+        "checkpoint": {
+          "bytes": 191565,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3032/model.pth",
+          "sha256": "2cc948ea8d0c7ad85f5671ee6fedeb77deffe2d493f760300c2c244c3d23d799"
+        },
+        "episode_exposures": 48000,
+        "final_model": {
+          "cue_projection.bias": "73a92cbe30c4e6f48a544e11813e368473d0190baf111ce3a13d0716ff3dac3f",
+          "cue_projection.weight": "98abb0aa54c203c85eaed8d925f75de370aedd71f6dbf3454c962113b591bad6",
+          "evidence_weight": "77e039b2ed4c432ca052403b599e69c6858140aae1d28dd8a82d96876088cdf1",
+          "h2margin.bias": "5742da7a27c40f1f3a4735dcf86543fc59571c9c27b131f1b102588e851b7ee0",
+          "h2margin.weight": "0212eb203e7b12b6dbd79c72ddb793d8526297ba978c5ab873d1bcd60645376f",
+          "h2modulation.bias": "e5fec0fb9c088847e6834eb5586ef8e4ae290b3646cb893a381551e18da6cafb",
+          "h2modulation.weight": "834eefbc89f9aeb0bdce2f7136e44b30eea82cd9ed5a0b81237090355a253ff6",
+          "w": "207711ccda656b54a92fdb575b75478b011e41c5f12c79ce737ddd87c25a5789"
+        },
+        "initial_model": {
+          "cue_projection.bias": "a824e2bcc83d339b69ca53fabe0c353956fd3386dcd88e330096d1addaae0b1c",
+          "cue_projection.weight": "ad24da7593bcf3b0fdfe19d598be5d04efdc7412a16eca0e6439bf58b95b7909",
+          "evidence_weight": "375077c9449e3c7242df23a2b2462acdfa8995175a71e8b0662aa367d546d9a9",
+          "h2margin.bias": "365f0ed794df80de6f8b21b5d86846a21ee26fe9c4396f171fb3af8bfe220dd6",
+          "h2margin.weight": "c63bac99ccea0103bf0719781aa71574c0c86a331223b2f8b2faf4cde42bdf56",
+          "h2modulation.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "h2modulation.weight": "67042dfda5683aead81b6055d19c4dba238341f9dd82f49c0e7cc0c19c5f10d1",
+          "w": "73eb2e40842a905c91791b410ba0a700dcc3900c4f6955309e2c53dc703f70e4"
+        },
+        "initial_shared": {
+          "cue_projection.bias": "a824e2bcc83d339b69ca53fabe0c353956fd3386dcd88e330096d1addaae0b1c",
+          "cue_projection.weight": "ad24da7593bcf3b0fdfe19d598be5d04efdc7412a16eca0e6439bf58b95b7909",
+          "evidence_weight": "375077c9449e3c7242df23a2b2462acdfa8995175a71e8b0662aa367d546d9a9",
+          "h2margin.bias": "365f0ed794df80de6f8b21b5d86846a21ee26fe9c4396f171fb3af8bfe220dd6",
+          "h2margin.weight": "c63bac99ccea0103bf0719781aa71574c0c86a331223b2f8b2faf4cde42bdf56",
+          "w": "73eb2e40842a905c91791b410ba0a700dcc3900c4f6955309e2c53dc703f70e4"
+        },
+        "level": "M3",
+        "optimizer_steps": {
+          "cue_projection.bias": 1500,
+          "cue_projection.weight": 1500,
+          "evidence_weight": 1500,
+          "h2margin.bias": 1500,
+          "h2margin.weight": 1500,
+          "h2modulation.bias": 1500,
+          "h2modulation.weight": 1500,
+          "w": 1500
+        },
+        "parameters": 47002,
+        "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "seed": 3032,
+        "source_commit": "7653a2cc670dd228fd6110813dc4323c8f143c61",
+        "stream_fingerprint": "31192555d7bd68c1418775f262fbb38b98b7ed725cfb1d23e698a4c88d70ba71",
+        "training_seconds": 46.0041385369841,
+        "warmup_seconds": 0.0288255590130575
+      }
+    },
+    "3033": {
+      "files": {
+        "model.pth": {
+          "bytes": 191565,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3033/model.pth",
+          "sha256": "6177fac12fcffcd5a6db1ba9515b39409b108a544080c92fc0e2b818a519119f"
+        },
+        "result.json": {
+          "bytes": 4308,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3033/result.json",
+          "sha256": "38c05ac65466f6e1e4e32aedefaccde651b6f018c7be6c86e52f9ab09a7fb8e5"
+        },
+        "run.json": {
+          "bytes": 4577,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3033/run.json",
+          "sha256": "7f8c63d900edb165c884721ab6507307291f3ae0a574bd80baef293eaa69b7af"
+        },
+        "train_log.jsonl": {
+          "bytes": 712774,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3033/train_log.jsonl",
+          "sha256": "4467e0cf22cec86f95a2bee4eb4c0d519101082c54ff83510350ce30aabba209"
+        }
+      },
+      "metadata": {
+        "checkpoint": {
+          "bytes": 191565,
+          "path": "artifacts/runs/minimal_single_p_v1/training/M3/3033/model.pth",
+          "sha256": "6177fac12fcffcd5a6db1ba9515b39409b108a544080c92fc0e2b818a519119f"
+        },
+        "episode_exposures": 48000,
+        "final_model": {
+          "cue_projection.bias": "dd2d4bd410d5fa40eadcff18828e13ace237d9f6d9e5302c5edd7fc4bbc11012",
+          "cue_projection.weight": "06d3a6ec859162667f09515372d7ed55109fcd5c6d248f261fd038bf36df0068",
+          "evidence_weight": "aafcbfed77324904c33fd53f2fa2f67448aefb1034181435a36219502fe8c4ae",
+          "h2margin.bias": "372f7c56ce5e72d6fd61787597039caea6d2a5e86a5a94d362c1ef49bad6e4c6",
+          "h2margin.weight": "06f25a6bc14dc41218c0aa46add78919342ef27ca2aa0b13088bff6db9b54f3e",
+          "h2modulation.bias": "5a7122e38eb22110dbfb8206d0e0d61214639ca1ed22f8a98e195e9a7b16eb13",
+          "h2modulation.weight": "b3a6ee7e27247dec1cc45ccacf797de8d4048e47906ca0c23a86c5ea815d182a",
+          "w": "527a45ef749c9b0e1fd36edf31f5a7e37960e12dd2f93aaf76d2a7affffd69e7"
+        },
+        "initial_model": {
+          "cue_projection.bias": "d6e141a9954d116974a980f93a40c9702bbd1dd8de84b027a3c8b302c05d1799",
+          "cue_projection.weight": "fa745f19330363b3788e37b9b95f792b719c6a6ec5fc0ec2f5b9566ae6e3eee3",
+          "evidence_weight": "d48af6df61a5e2a85c4e8a0d2aa63e28eb4acca8a545898c56efc3c5e82b1378",
+          "h2margin.bias": "2e1a8d0bfaa7f971e65c707cd617118650954fa96914d2f6db9ebf62c26865bb",
+          "h2margin.weight": "2beaae8d658fdbfe94328b5b33c1e846d58694fb058eef0931c0030ee33cb0d4",
+          "h2modulation.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "h2modulation.weight": "67042dfda5683aead81b6055d19c4dba238341f9dd82f49c0e7cc0c19c5f10d1",
+          "w": "23c9dc28cc0dcdb811a967e33520616fd6d389ab5ceb19978c060fc98c0fb5c1"
+        },
+        "initial_shared": {
+          "cue_projection.bias": "d6e141a9954d116974a980f93a40c9702bbd1dd8de84b027a3c8b302c05d1799",
+          "cue_projection.weight": "fa745f19330363b3788e37b9b95f792b719c6a6ec5fc0ec2f5b9566ae6e3eee3",
+          "evidence_weight": "d48af6df61a5e2a85c4e8a0d2aa63e28eb4acca8a545898c56efc3c5e82b1378",
+          "h2margin.bias": "2e1a8d0bfaa7f971e65c707cd617118650954fa96914d2f6db9ebf62c26865bb",
+          "h2margin.weight": "2beaae8d658fdbfe94328b5b33c1e846d58694fb058eef0931c0030ee33cb0d4",
+          "w": "23c9dc28cc0dcdb811a967e33520616fd6d389ab5ceb19978c060fc98c0fb5c1"
+        },
+        "level": "M3",
+        "optimizer_steps": {
+          "cue_projection.bias": 1500,
+          "cue_projection.weight": 1500,
+          "evidence_weight": 1500,
+          "h2margin.bias": 1500,
+          "h2margin.weight": 1500,
+          "h2modulation.bias": 1500,
+          "h2modulation.weight": 1500,
+          "w": 1500
+        },
+        "parameters": 47002,
+        "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+        "runtime": {
+          "blas_thread_limit": 1,
+          "blas_threadpools": [
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.188.0"
+            },
+            {
+              "architecture": "Haswell",
+              "internal_api": "openblas",
+              "num_threads": 1,
+              "prefix": "libscipy_openblas",
+              "threading_layer": "pthreads",
+              "user_api": "blas",
+              "version": "0.3.31.dev"
+            }
+          ],
+          "compiler_threads": 1,
+          "cuda_available": true,
+          "cuda_version": "13.0",
+          "cudnn_allow_tf32": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": false,
+          "deterministic_algorithms": false,
+          "device_capability": [
+            12,
+            0
+          ],
+          "device_name": "NVIDIA GeForce RTX 5090",
+          "execution_schema_version": 2,
+          "float32_matmul_precision": "highest",
+          "matmul_allow_tf32": false,
+          "profile": {
+            "blas_threads": 1,
+            "compile": true,
+            "compile_backend": "inductor",
+            "compile_fullgraph": true,
+            "compile_mode": "default",
+            "cpu_threads": 1,
+            "device": "cuda",
+            "require_cuda": true
+          },
+          "torch_interop_threads": 1,
+          "torch_intraop_threads": 1,
+          "torch_version": "2.14.0+cu130"
+        },
+        "seed": 3033,
+        "source_commit": "7653a2cc670dd228fd6110813dc4323c8f143c61",
+        "stream_fingerprint": "29269bd7b8275063f4fb53e29396eb9335a340fc5e7d8fd672e83cf40d290d4f",
+        "training_seconds": 46.109234855975956,
+        "warmup_seconds": 0.02907025901367888
+      }
+    }
+  },
+  "schema_version": 1,
+  "scientific_outcomes_exposed": false,
+  "source_commit": "7653a2cc670dd228fd6110813dc4323c8f143c61",
+  "source_lock": {
+    "bytes": 106023,
+    "path": "studies/minimal_single_p/records/benchmarks/source_lock.json",
+    "sha256": "0dd06134350411f9e80b943b8bd743a1bceadce8e9ff14b7ff0df1ee58685356"
+  }
+}

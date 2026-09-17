@@ -73,6 +73,9 @@ prevalence.
 - `report` —
   [studies/minimal_single_p/records/reports/minimal_single_p_v1.M2.md](records/reports/minimal_single_p_v1.M2.md)
   (`sha256:2cf70b288bf8`)
+- `artifact_lock` —
+  [studies/minimal_single_p/records/benchmarks/model_lock.M3.json](records/benchmarks/model_lock.M3.json)
+  (`sha256:871e81d79d4f`)
 
 ## Provenance rule
 
