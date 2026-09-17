@@ -12,13 +12,17 @@ from fsrl.paths import RUNS_ROOT, STUDIES_ROOT
 STUDY = "historical_single_p_morphology_reaudit"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/historical_single_p_morphology_reaudit_v1.json"
-QUALIFICATION = RECORDS / "benchmarks/qualification.json"
-SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock.json"
+ORIGINAL_QUALIFICATION = RECORDS / "benchmarks/qualification.json"
+QUALIFICATION = RECORDS / "benchmarks/qualification_repair1.json"
+REPAIR = RECORDS / "benchmarks/implementation_repair1.json"
+ORIGINAL_SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock.json"
+SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock_repair1.json"
 RESULT = RECORDS / "results/historical_single_p_morphology_reaudit_v1.json"
 PAIR_TABLE = RECORDS / "results/historical_single_p_morphology_reaudit_v1.pairs.npz"
 REPORT = RECORDS / "reports/historical_single_p_morphology_reaudit_v1.md"
 RUNS = RUNS_ROOT / "historical_single_p_morphology_reaudit_v1"
 PROTOCOL_SHA256 = "bc99e6e55a6ec2800f74bb0cc932a988c9d371f05e6c26c9e4e2f0afe9c3d826"
+REPAIR_SHA256 = "ce96dc7ce224e40eed7845130e5330011592b99e0209afdefc2c39c763835ebd"
 
 
 def specification() -> dict:
@@ -52,9 +56,11 @@ def unit_directory(family: str, seed: int, panel: int, condition: str) -> Path:
 def _role(path: Path) -> str:
     if path == PROTOCOL:
         return "registered_contract"
-    if path == QUALIFICATION:
+    if path in {ORIGINAL_QUALIFICATION, QUALIFICATION}:
         return "validation_result"
-    if path == SOURCE_INPUT_LOCK:
+    if path == REPAIR:
+        return "repair_contract"
+    if path in {ORIGINAL_SOURCE_INPUT_LOCK, SOURCE_INPUT_LOCK}:
         return "execution_lock"
     if path == RESULT:
         return "frozen_result"
@@ -108,11 +114,15 @@ def register(
 
 
 __all__ = [
+    "ORIGINAL_QUALIFICATION",
+    "ORIGINAL_SOURCE_INPUT_LOCK",
     "PAIR_TABLE",
     "PROTOCOL",
     "PROTOCOL_SHA256",
     "QUALIFICATION",
     "RECORDS",
+    "REPAIR",
+    "REPAIR_SHA256",
     "REPORT",
     "RESULT",
     "RUNS",

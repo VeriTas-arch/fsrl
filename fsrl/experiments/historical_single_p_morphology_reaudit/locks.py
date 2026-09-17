@@ -14,6 +14,8 @@ from .protocol import (
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
+    REPAIR,
+    REPAIR_SHA256,
     SOURCE_INPUT_LOCK,
     register,
     specification,
@@ -63,6 +65,7 @@ def sources() -> list[dict]:
         REPO_ROOT / "fsrl/experiments/minimal_single_p_pair_morphology/methods.py",
         REPO_ROOT / "fsrl/infra/formal_runtime.py",
         PROTOCOL,
+        REPAIR,
         REPO_ROOT / "pyproject.toml",
         REPO_ROOT / ".envrc",
     ]
@@ -101,6 +104,8 @@ def write_source_input_lock() -> dict:
     commit = clean_pushed_commit()
     require_committed(QUALIFICATION)
     qualification = load_json(QUALIFICATION)
+    if file_sha256(REPAIR) != REPAIR_SHA256:
+        raise RuntimeError("historical morphology repair contract changed")
     current = sources()
     if not qualification["passed"] or qualification["sources"] != current:
         raise RuntimeError("historical morphology qualification did not pass")
@@ -110,6 +115,7 @@ def write_source_input_lock() -> dict:
         "source_commit": commit,
         "sources": current,
         "qualification": reference(QUALIFICATION),
+        "repair": reference(REPAIR),
         "parents": {
             name: reference(_parent(name)) for name in specification()["parents"]
         },
@@ -137,6 +143,8 @@ def validate_source_input_lock() -> dict:
     qualification = load_json(verify_reference(lock["qualification"]))
     if not qualification["passed"] or qualification["sources"] != lock["sources"]:
         raise RuntimeError("locked qualification differs")
+    if reference(REPAIR) != lock["repair"]:
+        raise RuntimeError("locked repair contract differs")
     for name, row in lock["parents"].items():
         if reference(_parent(name)) != row:
             raise RuntimeError(f"locked parent differs: {name}")

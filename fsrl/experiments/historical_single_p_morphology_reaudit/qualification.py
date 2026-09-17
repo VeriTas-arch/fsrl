@@ -18,7 +18,8 @@ from fsrl.infra.provenance import write_json_exclusive
 from fsrl.tasks.protocol import RankingProtocol
 
 from .decisions import constrained_unit, error_inflation, family_replicated, outcome
-from .protocol import QUALIFICATION, register
+from .locks import reference
+from .protocol import QUALIFICATION, REPAIR, REPAIR_SHA256, register
 
 
 def _protocol() -> RankingProtocol:
@@ -129,12 +130,15 @@ def run_qualification() -> dict:
     }
     payload = {
         "schema_version": 1,
+        "repair": reference(REPAIR),
         "checks": checks,
         "sources": sources(),
         "passed": all(checks.values()),
     }
     if not payload["passed"]:
         raise RuntimeError(f"historical morphology qualification failed: {checks}")
+    if payload["repair"]["sha256"] != REPAIR_SHA256:
+        raise RuntimeError("historical morphology repair identity differs")
     write_json_exclusive(QUALIFICATION, payload)
     register(finding="Synthetic qualification passed; source/input locking pending.")
     return payload

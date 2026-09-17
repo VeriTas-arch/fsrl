@@ -48,6 +48,17 @@ def _render(result: dict) -> str:
         )
     lines += [
         "",
+        "| historical family | failed qualitative rows across Ae units | A0 sampled bimodal mean | Ae minus A0 mean |",
+        "|---|---|---:|---:|",
+    ]
+    for name, row in aggregate["families"].items():
+        lines.append(
+            f"| {name} | `{row['qualitative_failure_counts']}` | "
+            f"{row['control_sampled_bimodal_pairs_mean']:.3f} | "
+            f"{row['sampled_bimodal_pair_difference_mean']:.3f} |"
+        )
+    lines += [
+        "",
         "| historical family | Ae stage distribution | mean latent bimodal pairs | mean sampled bimodal pairs | mean top-5 strong-error share |",
         "|---|---|---:|---:|---:|",
     ]

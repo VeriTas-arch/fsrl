@@ -200,6 +200,12 @@ def _unit(family, seed, panel, condition, lock, task, geometry):
     ) > 1e-12 or parity["hodge_relative_orthogonality_max"] > 1e-10:
         raise RuntimeError(f"historical numerical parity failed: {identity}")
     nine = all_nine(archived)
+    qualitative_rows = {
+        name: bool(row["qualitative"])
+        for name, row in archived["liu"]["routes"]["full"]["behavior"][
+            "historical_nine_rows"
+        ]["flags"].items()
+    }
     binding = evidence_binding(archived)
     competent = inherited_competence(archived)
     bad_pair = any(row["sampled_class"] in {0, 2} for row in pairs)
@@ -219,6 +225,7 @@ def _unit(family, seed, panel, condition, lock, task, geometry):
         "inherited_competence": competent,
         "evidence_binding": binding,
         "all_nine_qualitative": nine,
+        "qualitative_rows": qualitative_rows,
         "bad_sampled_pair": bad_pair,
         "constrained_morphology": constrained,
         "error_inflation": False,
@@ -304,6 +311,13 @@ def _aggregate(units, spec):
     }
     for row in primary:
         control = controls[(row["family"], row["seed"], row["panel"])]
+        row["control_sampled_bimodal_pairs"] = control["counts"][
+            "sampled_bimodal_pairs"
+        ]
+        row["sampled_bimodal_pair_difference"] = (
+            row["counts"]["sampled_bimodal_pairs"]
+            - row["control_sampled_bimodal_pairs"]
+        )
         row["error_inflation"] = error_inflation(
             sampled_bimodal=row["counts"]["sampled_bimodal_pairs"],
             control_sampled_bimodal=control["counts"]["sampled_bimodal_pairs"],
@@ -334,6 +348,22 @@ def _aggregate(units, spec):
                 for seed in family_spec["seeds"]
             ),
             "stage_counts": dict(sorted(Counter(row["stage"] for row in selected).items())),
+            "qualitative_failure_counts": dict(
+                sorted(
+                    Counter(
+                        name
+                        for row in selected
+                        for name, passed in row["qualitative_rows"].items()
+                        if not passed
+                    ).items()
+                )
+            ),
+            "control_sampled_bimodal_pairs_mean": float(
+                np.mean([row["control_sampled_bimodal_pairs"] for row in selected])
+            ),
+            "sampled_bimodal_pair_difference_mean": float(
+                np.mean([row["sampled_bimodal_pair_difference"] for row in selected])
+            ),
             "latent_bimodal_pairs_mean": float(
                 np.mean([row["counts"]["latent_bimodal_pairs"] for row in selected])
             ),
@@ -392,6 +422,14 @@ def analyze_all() -> dict:
                             )
                         )
         aggregate = _aggregate(units, spec)
+        known = {
+            "outcome": "no_current_standard_precedent",
+            "constrained_units": 0,
+            "all_nine_units": 0,
+            "error_inflation_units": 18,
+        }
+        if any(aggregate[key] != value for key, value in known.items()):
+            raise RuntimeError("reporting repair changed the known registered outcome")
         write_npz_exclusive(output / "pair_table.npz", _pair_table(units, geometry))
         result = {
             "schema_version": 1,
