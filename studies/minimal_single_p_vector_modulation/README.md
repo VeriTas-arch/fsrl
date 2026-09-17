@@ -26,8 +26,8 @@ observation process, and evaluation arrays fixed, does replacing the shared scal
 modulator with a postsynaptic-neuron-specific instantaneous vector recover constrained
 Liu morphology without damaging competence?
 
-**Finding.** Qualified three-seed vector-modulation development implementation;
-candidate training has not started and no outcome has been exposed.
+**Finding.** Qualified and source/input-locked three-seed vector-modulation development
+study; candidate training has not started and no outcome has been exposed.
 
 **Claim boundary.** P remains the only episode-persistent plastic state. This exposed
 three-seed development study tests heterogeneous write allocation, not confirmation,
@@ -41,6 +41,9 @@ biological implementation, or main-model promotion.
 - `validation_result` —
   [studies/minimal_single_p_vector_modulation/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:36283b49a9ed`)
+- `execution_lock` —
+  [studies/minimal_single_p_vector_modulation/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
+  (`sha256:ac053207f110`)
 
 ## Provenance rule
 
