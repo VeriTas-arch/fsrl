@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 4032,
+  "entry_count": 4033,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2257,
+    "json": 2258,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3932,
+    "already_conformant": 3933,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -44403,6 +44403,40 @@
         "source_ref": "sha256:a5ff0ce79ae6de9c145cd90cc30d3abf4e62638aa690326afe4ad3aacebf3c3b"
       },
       "role": "repair_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/jmic_a_v1/records/benchmarks/qualification.json",
+        "repository_path": "studies/jmic_a_v1/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 3722,
+        "sha256": "413eb32cb6ab34ed69492fcdcecc59de5cb93ec8485a6cf4af4b4ced3bb8551c"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "jmic_a_v1",
+        "kind": "study"
+      },
+      "record_id": "study.jmic_a_v1.studies_jmic_a_v1_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 3722,
+        "sha256": "413eb32cb6ab34ed69492fcdcecc59de5cb93ec8485a6cf4af4b4ced3bb8551c",
+        "source_ref": "sha256:413eb32cb6ab34ed69492fcdcecc59de5cb93ec8485a6cf4af4b4ced3bb8551c"
+      },
+      "role": "validation_result"
     },
     {
       "availability": "materialized",
@@ -137483,7 +137517,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 4030,
+  "registered_record_count": 4031,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -137511,7 +137545,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2738,
-    "validation_result": 48
+    "validation_result": 49
   },
   "schema_version": 2,
   "sources": {
