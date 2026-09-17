@@ -3,77 +3,37 @@
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
+
+STAGES = {
+    "qualify": ("qualification", "qualify"),
+    "qualify-repair1": ("qualification", "qualify_repair"),
+    "qualify-repair2": ("qualification", "qualify_repair2"),
+    "qualify-repair3": ("qualification", "qualify_repair3"),
+    "lock-source-inputs": ("locks", "write_source_input_lock"),
+    "lock-source-repair1": ("locks", "write_source_repair_lock"),
+    "lock-source-repair2": ("locks", "write_source_repair2_lock"),
+    "lock-source-repair3": ("locks", "write_source_repair3_lock"),
+    "train": ("training", "train_all"),
+    "lock-models": ("locks", "write_model_lock"),
+    "evaluate-generic": ("evaluation", "evaluate_generic_all"),
+    "report-generic": ("reporting", "report_generic"),
+    "evaluate-liu": ("evaluation", "evaluate_liu_all"),
+    "report": ("reporting", "report_final"),
+}
 
 
 def main(args=None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "stage",
-        choices=(
-            "qualify",
-            "qualify-repair1",
-            "qualify-repair2",
-            "lock-source-inputs",
-            "lock-source-repair1",
-            "lock-source-repair2",
-            "train",
-            "lock-models",
-            "evaluate-generic",
-            "report-generic",
-            "evaluate-liu",
-            "report",
-        ),
+        choices=tuple(STAGES),
     )
     stage = parser.parse_args(args).stage
-    if stage == "qualify":
-        from .qualification import qualify
-
-        result = qualify()
-    elif stage == "qualify-repair1":
-        from .qualification import qualify_repair
-
-        result = qualify_repair()
-    elif stage == "qualify-repair2":
-        from .qualification import qualify_repair2
-
-        result = qualify_repair2()
-    elif stage == "lock-source-inputs":
-        from .locks import write_source_input_lock
-
-        result = write_source_input_lock()
-    elif stage == "lock-source-repair1":
-        from .locks import write_source_repair_lock
-
-        result = write_source_repair_lock()
-    elif stage == "lock-source-repair2":
-        from .locks import write_source_repair2_lock
-
-        result = write_source_repair2_lock()
-    elif stage == "train":
-        from .training import train_all
-
-        result = train_all()
-    elif stage == "lock-models":
-        from .locks import write_model_lock
-
-        result = write_model_lock()
-    elif stage == "evaluate-generic":
-        from .evaluation import evaluate_generic_all
-
-        result = evaluate_generic_all()
-    elif stage == "report-generic":
-        from .reporting import report_generic
-
-        result = report_generic()
-    elif stage == "evaluate-liu":
-        from .evaluation import evaluate_liu_all
-
-        result = evaluate_liu_all()
-    else:
-        from .reporting import report_final
-
-        result = report_final()
+    module_name, function_name = STAGES[stage]
+    module = importlib.import_module(f"{__package__}.{module_name}")
+    result = getattr(module, function_name)()
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 

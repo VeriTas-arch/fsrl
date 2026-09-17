@@ -84,6 +84,88 @@ def _all_qualitative(result: dict) -> bool:
     return all(row["qualitative"] for row in flags.values())
 
 
+def _unit(seed, panel, condition, generic, result, m2_row) -> dict:
+    pairs = json.loads(
+        (liu_directory(seed, panel, condition) / "pairs.json").read_text()
+    )
+    all_nine = _all_qualitative(result)
+    binding = liu_evidence_binding(result)
+    bad_pair = any(row["sampled_class"] in {0, 2} for row in pairs)
+    morphology = result["morphology"]
+    constrained = (
+        all_nine
+        and binding
+        and morphology["latent_bimodal_pairs"] >= 15
+        and morphology["sampled_bimodal_pairs"] >= 15
+        and not bad_pair
+    )
+    return {
+        "seed": seed,
+        "panel": panel,
+        "condition": condition,
+        "generic_category": generic["streams"][str(seed)]["category"],
+        "all_nine_qualitative": all_nine,
+        "evidence_binding": binding,
+        "constrained_morphology": constrained,
+        "bad_sampled_pair": bad_pair,
+        "stage": morphology["stage"],
+        "M2_stage": m2_row["stage"],
+        "counts": {
+            key: morphology[key]
+            for key in (
+                "direction_present_pairs",
+                "strong_two_sided_pairs",
+                "latent_bimodal_pairs",
+                "sampled_bimodal_pairs",
+                "strong_error_subject_prevalence",
+                "strong_error_top5_share",
+            )
+        },
+        "by_distance": morphology["by_distance"],
+        "analytic": result["analytic"],
+    }
+
+
+def _append_pairs(columns, pairs, seed, panel, condition_index) -> None:
+    for row in pairs:
+        values = {
+            "seed": seed,
+            "panel": panel,
+            "condition": condition_index,
+            "pair_first": row["pair"][0],
+            "pair_second": row["pair"][1],
+            "symbolic_distance": row["symbolic_distance"],
+            **{
+                key: row[key]
+                for key in (
+                    "exact_mean",
+                    "fraction_wrong_direction",
+                    "fraction_strong_error",
+                    "fraction_strong_correct",
+                    "latent_class",
+                    "sampled_class",
+                )
+            },
+        }
+        for key, value in values.items():
+            columns[key].append(value)
+
+
+def _collect_units(generic, m2_units, pair_columns) -> list[dict]:
+    units = []
+    design = specification()["design"]
+    for seed in design["training_streams"]:
+        for panel in design["liu_panels"]:
+            for condition_index, condition in enumerate(design["liu_conditions"]):
+                directory = liu_directory(seed, panel, condition)
+                result = completed(directory)
+                pairs = json.loads((directory / "pairs.json").read_text())
+                m2_row = m2_units[(seed, panel, condition)]
+                units.append(_unit(seed, panel, condition, generic, result, m2_row))
+                _append_pairs(pair_columns, pairs, seed, panel, condition_index)
+    return units
+
+
 def report_final() -> dict:
     source, lock = validate_model_lock()
     generic = load_json(GENERIC_RESULT)
@@ -93,7 +175,6 @@ def report_final() -> dict:
     m2_units = {
         (row["seed"], row["panel"], row["condition"]): row for row in m2["units"]
     }
-    units = []
     pair_columns: dict[str, list] = {
         name: []
         for name in (
@@ -111,76 +192,7 @@ def report_final() -> dict:
             "sampled_class",
         )
     }
-    for seed in specification()["design"]["training_streams"]:
-        for panel in specification()["design"]["liu_panels"]:
-            for condition_index, condition in enumerate(
-                specification()["design"]["liu_conditions"]
-            ):
-                result = completed(liu_directory(seed, panel, condition))
-                pairs = json.loads(
-                    (liu_directory(seed, panel, condition) / "pairs.json").read_text()
-                )
-                all_nine = _all_qualitative(result)
-                binding = liu_evidence_binding(result)
-                bad_pair = any(row["sampled_class"] in {0, 2} for row in pairs)
-                morphology = result["morphology"]
-                constrained = (
-                    all_nine
-                    and binding
-                    and morphology["latent_bimodal_pairs"] >= 15
-                    and morphology["sampled_bimodal_pairs"] >= 15
-                    and not bad_pair
-                )
-                m2_row = m2_units[(seed, panel, condition)]
-                units.append(
-                    {
-                        "seed": seed,
-                        "panel": panel,
-                        "condition": condition,
-                        "generic_category": generic["streams"][str(seed)]["category"],
-                        "all_nine_qualitative": all_nine,
-                        "evidence_binding": binding,
-                        "constrained_morphology": constrained,
-                        "bad_sampled_pair": bad_pair,
-                        "stage": morphology["stage"],
-                        "M2_stage": m2_row["stage"],
-                        "counts": {
-                            key: morphology[key]
-                            for key in (
-                                "direction_present_pairs",
-                                "strong_two_sided_pairs",
-                                "latent_bimodal_pairs",
-                                "sampled_bimodal_pairs",
-                                "strong_error_subject_prevalence",
-                                "strong_error_top5_share",
-                            )
-                        },
-                        "by_distance": morphology["by_distance"],
-                        "analytic": result["analytic"],
-                    }
-                )
-                for row in pairs:
-                    values = {
-                        "seed": seed,
-                        "panel": panel,
-                        "condition": condition_index,
-                        "pair_first": row["pair"][0],
-                        "pair_second": row["pair"][1],
-                        "symbolic_distance": row["symbolic_distance"],
-                        **{
-                            key: row[key]
-                            for key in (
-                                "exact_mean",
-                                "fraction_wrong_direction",
-                                "fraction_strong_error",
-                                "fraction_strong_correct",
-                                "latent_class",
-                                "sampled_class",
-                            )
-                        },
-                    }
-                    for key, value in values.items():
-                        pair_columns[key].append(value)
+    units = _collect_units(generic, m2_units, pair_columns)
     noisy = [row for row in units if row["condition"] == "noisy"]
     competent_streams = {
         int(seed)

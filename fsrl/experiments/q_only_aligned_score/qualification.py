@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from fsrl.experiments.clean_single_p.batches import prepare_single_p
 from fsrl.experiments.pl_direct_training.task import make_task_generator
 from fsrl.experiments.training_strategy.batches import sample_episodes
-from fsrl.infra.provenance import load_json, write_json_exclusive
+from fsrl.infra.provenance import file_sha256, load_json, write_json_exclusive
 
 from .algebra import recurrence_and_kernel
 from .data import visible_batch
@@ -20,10 +20,16 @@ from .decisions import generic_category, generic_panel_passed, liu_evidence_bind
 from .locks import PARENT_PROMOTION_LOCK, sources
 from .model import QOnlyScore, physical_parameters
 from .protocol import (
+    PAIR_TABLE,
+    PARAMETERS,
     PROTOCOL_SHA256,
     QUALIFICATION,
     REPAIR2_QUALIFICATION,
+    REPAIR3,
+    REPAIR3_QUALIFICATION,
     REPAIR_QUALIFICATION,
+    REPORT,
+    RESULT,
     specification,
 )
 
@@ -283,4 +289,32 @@ def qualify_repair2() -> dict:
     return {"passed": True, "source_files": len(payload["sources"])}
 
 
-__all__ = ["qualify", "qualify_repair", "qualify_repair2"]
+def qualify_repair3() -> dict:
+    if REPAIR3_QUALIFICATION.exists():
+        raise RuntimeError("repair3 qualification record already exists")
+    contract = load_json(REPAIR3)
+    observed = {
+        "result": file_sha256(RESULT),
+        "pairs": file_sha256(PAIR_TABLE),
+        "parameters": file_sha256(PARAMETERS),
+        "report": file_sha256(REPORT),
+    }
+    if observed != contract["frozen_artifact_sha256"]:
+        raise RuntimeError("repair3 changed a frozen scientific artifact")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "passed": True,
+        "sources": sources(),
+        "repair_scope": "post-result engineering decomposition and test rename only",
+        "frozen_artifact_sha256": observed,
+        "scientific_evaluation_rerun": False,
+        "scientific_artifacts_unchanged": True,
+        "model_lock_unchanged": True,
+        "scientific_outcomes_exposed": True,
+    }
+    write_json_exclusive(REPAIR3_QUALIFICATION, payload)
+    return {"passed": True, "source_files": len(payload["sources"])}
+
+
+__all__ = ["qualify", "qualify_repair", "qualify_repair2", "qualify_repair3"]

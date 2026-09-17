@@ -41,6 +41,9 @@ ablation or main-model promotion.
 - `repair_contract` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/implementation_repair2.json](records/benchmarks/implementation_repair2.json)
   (`sha256:8c1c0ccd7b11`)
+- `repair_contract` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/implementation_repair3.json](records/benchmarks/implementation_repair3.json)
+  (`sha256:793b41be6789`)
 - `artifact_lock` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
   (`sha256:0ad97951155a`)
