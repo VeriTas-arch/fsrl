@@ -375,6 +375,9 @@ fail to close the dynamics.
   - **Finding:** Frozen aligned q-only comparator outcome: mixed_or_unidentified;
     post-result engineering repair3 qualified and source-locked with scientific
     artifacts byte-identical.
+- [Paired dense-alpha add-back to minimal single-P M2](minimal_single_p_alpha/README.md) — `unresolved`
+  - **Finding:** Prospectively registered M2-alpha one-factor study; implementation and
+    execution pending.
 
 ## Minimal explanatory models
 

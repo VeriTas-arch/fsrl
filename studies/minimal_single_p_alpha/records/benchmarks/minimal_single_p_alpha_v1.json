@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p_alpha",
+  "experiment_id": "minimal_single_p_alpha_v1",
+  "tier": "prospective paired one-factor successor study",
+  "authorization": "The user explicitly authorized execution of the reviewed M2-alpha experiment after the aligned q-only comparator closed without constrained rescue.",
+  "question": "Holding the frozen M2 architecture, generic training streams, optimization, observation process, and evaluation arrays fixed, does adding one trainable dense expression-gain matrix alpha recover constrained Liu morphology without error inflation?",
+  "claim_boundary": [
+    "M2-alpha differs from frozen M2 only by a trainable 200x200 slow matrix alpha in A(P)=alpha*P. Alpha is initialized exactly to one so the complete initial computation equals M2; it is not an episode state.",
+    "P remains the only episode-persistent plastic state. The study tests learned expression geometry under a paired complete recipe; it does not identify alpha and P separately because only their product is directly effective.",
+    "All twenty seeds are mandatory and paired to frozen M2 seeds 3041 through 3060. Shared initial tensors, all 1500 generic training batches, realized clean q, optimizer settings, update count, and final-only policy must be verified exactly before training.",
+    "Training is human-blind and clean-generic only. No Liu input, human row, distance label, morphology statistic, observation noise, auxiliary objective, regularizer, curriculum, alpha-specific learning rate, restart, or checkpoint selection enters optimization.",
+    "The exact frozen generic and clean/folded/noisy Liu arrays are reused by hash reference. Every trained network is evaluated; competence gates affect interpretation, never cohort inclusion.",
+    "Historical quantitative human-interval compatibility remains descriptive. Positive model evidence would support a computational expression-geometry role, not a human synaptic or neural implementation.",
+    "The study freezes one complete result and stops. No alpha initialization, learning-rate, regularization, width, timestep, or training-budget successor is authorized by any outcome."
+  ],
+  "parents": {
+    "M2_protocol": {"path": "studies/minimal_single_p_promotion/records/benchmarks/minimal_single_p_promotion_v1.json", "sha256": "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"},
+    "M2_source_lock": {"path": "studies/minimal_single_p_promotion/records/benchmarks/source_lock.json", "sha256": "f5f021b928dd95da9fd604297ee12cabf6886eb533f19f2cc1cfb1d6d78c74aa"},
+    "M2_model_lock": {"path": "studies/minimal_single_p_promotion/records/benchmarks/model_lock.json", "sha256": "485f0e941e552bff3f7c4548d3925e8075cd70ad71076aea62e65082e55c4a10"},
+    "M2_generic_result": {"path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.generic.json", "sha256": "7d9bbdd07e774b8ecc7d20910b5aa0fb46c3590db4c51ddb4aa15db2d2019c97"},
+    "M2_final_result": {"path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.json", "sha256": "8a1666ac2158cff41f8b94291289a5b3c51b8f4187bbcb44689d2945a7c25ff7"},
+    "observation_input_lock": {"path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/source_input_lock.json", "sha256": "fafb0baba3b458d93692fd53854730d0a240c35ac79297971565e7fb42dc7137"},
+    "observation_result": {"path": "studies/minimal_single_p_observation_uncertainty/records/results/minimal_single_p_observation_uncertainty_v1.json", "sha256": "8683e8c78fb28b03e936b28b268961f9e4ec3b387d1ab9da7847f0f030f82d61"},
+    "pair_morphology_result": {"path": "studies/minimal_single_p_pair_morphology_attribution/records/results/minimal_single_p_pair_morphology_attribution_v1.json", "sha256": "db0a50cd69fd1329ea918c9efe0a5a9348d9b704895b412a3c3b5b9c3ecdbc23"},
+    "q_only_protocol": {"path": "studies/q_only_aligned_score_comparator/records/benchmarks/q_only_aligned_score_comparator_v1.json", "sha256": "0971de6e4812cf4f21fd5e94ae119a96697fb8810ff77f5620d1c78de44104ab"},
+    "q_only_result": {"path": "studies/q_only_aligned_score_comparator/records/results/q_only_aligned_score_comparator_v1.json", "sha256": "ad93c4a3e0b2526daae44e1cdcbe1c512b715d40b5881d34ba6c67827a928636"}
+  },
+  "design": {
+    "network_seeds": [3041,3042,3043,3044,3045,3046,3047,3048,3049,3050,3051,3052,3053,3054,3055,3056,3057,3058,3059,3060],
+    "generic_panels": [1,2,3],
+    "liu_panels": [1,2,3],
+    "liu_conditions": ["clean","folded","noisy"],
+    "sampling_unit": "Network is the cohort sampling unit; its three panels remain nested and participants are never pooled across networks.",
+    "exposure_barrier": "Train and jointly lock all twenty final models before generic evaluation; freeze and commit all sixty generic units before any Liu evaluation; evaluate all 180 Liu units regardless of generic outcomes."
+  },
+  "model": {
+    "name": "M2-alpha",
+    "input_size": 32,
+    "hidden_size": 200,
+    "parameter_count": 87003,
+    "equations": [
+      "h'=tanh(W_x*x+b+(W_rec+alpha*P)*h)",
+      "m=u^T*h+c",
+      "P'=clip(P+m*E,-50,50)",
+      "E'=(1-eta_E)*E+eta_E*tanh(h'*h_old^T)",
+      "M=v^T*h_query+b_o"
+    ],
+    "alpha": "One unrestricted trainable 200x200 slow parameter initialized exactly to all ones after the canonical parent draw. It receives the same Adam learning rate and no regularizer.",
+    "dynamic_state": "P is the only episode-persistent plastic state; h and E reset per trial and P resets per episode; every query reads the same terminal P without writeback.",
+    "eta_E": "One learned scalar initialized at 0.7.",
+    "modulation_initialization": "Weight and bias exactly zero after the canonical draw.",
+    "support_microsteps": 4,
+    "query_microsteps": 2,
+    "P_clip": [-50.0,50.0],
+    "absent": ["L or another episode memory","normalized time","constant input channel","duplicate q","value or confidence head","blank rollout","terminal-P penalty","human-target or coherence loss"]
+  },
+  "training": {
+    "task": "Exact frozen M2 clean generic task and realized-q streams.",
+    "updates": 1500,
+    "batch_size": 32,
+    "learning_rate": 0.0001,
+    "optimizer": "One Adam group for all trainable tensors; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler or gradient clipping.",
+    "loss": "Mean softplus(-y*M) over all 28 generic queries.",
+    "selection": "Final checkpoint only; no early stopping, intermediate selection, restarts, continuation, or result-conditioned change.",
+    "diagnostics": ["query loss and accuracy","P and alpha*P Frobenius norms","alpha mean/std/Frobenius norm","effective-to-raw P norm ratio","P clamp fraction","global and alpha gradient norms","learned eta"],
+    "diagnostic_boundary": "Diagnostics are integrity and description only and cannot select, stop, repair, or tune a run."
+  },
+  "generic_evaluation": {
+    "inputs": "Exact three frozen M2 generic panels.",
+    "conditions": ["intact","P_off"],
+    "endpoints": ["learned competence","nonlearned competence","learned P-dependence","nonlearned P-dependence","Hodge coherence"],
+    "panel_gate": "All competence lower95>0.5, both P-dependence lower95>0, and coherence lower95>0.95.",
+    "network_categories": {"stable_constructive":"three panels pass","panel_variable":"one or two panels pass","nonconstructive":"zero panels pass"}
+  },
+  "liu_evaluation": {
+    "inputs": "Exact frozen clean, folded, and noisy arrays from the M2 observation study; sigma remains 1/7 where applicable.",
+    "behavior": "Reuse all nine qualitative rows, all nine descriptive quantitative interval classifiers, evidence binding, continuous summaries, and complete subject-level behavior.",
+    "morphology": ["direction-present pairs","strong two-sided pairs","latent and sampled bimodal pairs","strong-error subject prevalence","top-5 strong-error share","latent and sampled morphology by symbolic distance","gradient and residual Hodge changes"],
+    "constrained_unit": "A noisy unit is constrained only when its network is stable_constructive, evidence binding passes, all nine qualitative rows pass, latent_bimodal_pairs>=15, sampled_bimodal_pairs>=15, and no ordinary-unimodal or low-accuracy pair is introduced by the unchanged classifier.",
+    "error_inflation_unit": "A noisy unit is error-inflated when sampled bimodal pairs exceed its paired frozen M2 unit and either all-nine qualitative fails or an ordinary-unimodal/low-accuracy pair is present.",
+    "paired_reporting": "Report every M2-alpha minus M2 endpoint by seed, panel, condition, and symbolic-distance group. Network-cluster bootstrap keeps all three panels together and is descriptive, not a tuning gate."
+  },
+  "decision": {
+    "interpretable_unit": "The network is stable_constructive and the noisy unit has positive learned intact-minus-evidence-shuffle lower bound.",
+    "outcomes": {
+      "generic_inadequate": "Fewer than 40 of 60 noisy units are interpretable.",
+      "robust_constrained_rescue": "At least 40 of 60 noisy units are constrained.",
+      "error_inflation": "At least 40 of 60 noisy units are error-inflated.",
+      "partial_or_mixed": "Between 1 and 39 noisy units are constrained without another outcome reaching its threshold.",
+      "no_constrained_rescue": "Zero noisy units are constrained and no preceding outcome applies."
+    },
+    "precedence": ["generic_inadequate","robust_constrained_rescue","error_inflation","partial_or_mixed","no_constrained_rescue"],
+    "mechanism_control": "Only robust_constrained_rescue authorizes a separately frozen query-only amplitude-matched direct-P diagnostic. No other outcome authorizes further training or another alpha recipe.",
+    "promotion": "Main-model promotion is always false in this study. A robust rescue may authorize unchanged replication, not immediate promotion."
+  },
+  "qualification": {
+    "pairing": "For all twenty seeds, shared initial tensor hashes must equal parent M2, alpha must be exactly one, initial native outputs must equal M2, and all 30000 parent batch plus cumulative stream fingerprints must replay exactly.",
+    "equations": "Independent eager reference must match margin, modulation, h, E, P, loss, gradients, and one Adam update; verify P-before-E, clipping, resets, query no-write, alpha expression, and exact parameter count.",
+    "runtime": "Actual-shape eager/compiled CUDA forward, gradients, and one Adam step must agree at atol=1e-5 rtol=1e-4.",
+    "evaluation": "Synthetic fixtures cover generic categories, evidence binding, morphology classes, paired M2 lookup, all outcome labels and precedence before execution.",
+    "failure": "Any failed qualification blocks training. Repairs are append-only and cannot alter candidate, seeds, streams, objectives, inputs, thresholds, or exposure order."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime minimal-single-p-alpha <stage>",
+    "stages": ["qualify","lock-source-inputs","train","lock-models","evaluate-generic","report-generic","evaluate-liu","report"],
+    "runtime": "CUDA float32 without autocast or TF32; compiled fullgraph/default training and evaluation; one Torch/BLAS/compiler thread; float64 summaries.",
+    "runtime_root": "artifacts/runs/minimal_single_p_alpha_v1",
+    "freeze_points": [
+      "Commit and push this protocol before candidate implementation or outcome exposure.",
+      "Commit and push qualified implementation plus source/input/replay lock before seed3041 training.",
+      "Train all twenty models and commit/push one joint model lock before generic evaluation.",
+      "Evaluate all sixty generic units and commit/push their canonical result before Liu evaluation.",
+      "Evaluate all 180 Liu units, freeze one canonical result and concise report, commit/push, and stop."
+    ],
+    "retention": "Keep protocol, qualification, locks, canonical results, reports, compact pair/parameter tables, and all twenty final checkpoints until a separately authorized retention migration; reference parent artifacts without duplication."
+  }
+}
