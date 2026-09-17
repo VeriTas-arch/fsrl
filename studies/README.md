@@ -357,8 +357,8 @@ fail to close the dynamics.
     occurred in only 3/20, and no historical quantitative row passed across all three
     panels in any network.
 - [Acute observation uncertainty in frozen minimal single-P M2](minimal_single_p_observation_uncertainty/README.md) — `unresolved`
-  - **Finding:** Prospectively registered; implementation, qualification, and execution
-    pending.
+  - **Finding:** Implementation and synthetic CPU/CUDA qualification passed;
+    source/input lock and scientific evaluation pending.
 
 ## Minimal explanatory models
 

@@ -21,12 +21,12 @@
 
 ## Scientific role
 
-**Question.** Does a fixed support-observation uncertainty process restore stable
-individualized Liu behavior in frozen M2 networks while preserving coherent relational
-organization?
+**Question.** Does one fixed support-observation uncertainty process supply the missing
+stable individualized Liu phenotype while the frozen minimal single-P M2 computation
+preserves coherent relational organization?
 
-**Finding.** Prospectively registered; implementation, qualification, and execution
-pending.
+**Finding.** Implementation and synthetic CPU/CUDA qualification passed; source/input
+lock and scientific evaluation pending.
 
 **Claim boundary.** Frozen-checkpoint development intervention across all twenty M2
 networks and three inherited Liu panels, with clean, amplitude-matched sign-restored
@@ -38,6 +38,9 @@ fitting, checkpoint selection, or main-model promotion.
 - `registered_contract` —
   [studies/minimal_single_p_observation_uncertainty/records/benchmarks/minimal_single_p_observation_uncertainty_v1.json](records/benchmarks/minimal_single_p_observation_uncertainty_v1.json)
   (`sha256:a85c5aed1c7b`)
+- `validation_result` —
+  [studies/minimal_single_p_observation_uncertainty/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:3a5ce95d9860`)
 
 ## Provenance rule
 

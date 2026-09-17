@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3964,
+  "entry_count": 3965,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2206,
+    "json": 2207,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3864,
+    "already_conformant": 3865,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -60669,6 +60669,40 @@
         "source_ref": "sha256:a85c5aed1c7b9e0bab453322a0f5677e23f0d94a0359f9723ddf66c789eaea96"
       },
       "role": "registered_contract"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.validation_result",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/qualification.json",
+        "repository_path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/qualification.json"
+      },
+      "materialized_identity": {
+        "bytes": 109172,
+        "sha256": "3a5ce95d9860f64f24df552afc3b84aa681e678fd3e1e9313513302fddb127aa"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_observation_uncertainty",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_observation_uncertainty.studies_minimal_single_p_observation_uncertainty_records_benchmarks_qualification_json",
+      "registered_identity": {
+        "bytes": 109172,
+        "sha256": "3a5ce95d9860f64f24df552afc3b84aa681e678fd3e1e9313513302fddb127aa",
+        "source_ref": "sha256:3a5ce95d9860f64f24df552afc3b84aa681e678fd3e1e9313513302fddb127aa"
+      },
+      "role": "validation_result"
     },
     {
       "availability": "materialized",
@@ -135171,7 +135205,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3962,
+  "registered_record_count": 3963,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -135199,7 +135233,7 @@
     "source_context": 2,
     "superseded_repair_source": 1,
     "supporting_artifact": 2730,
-    "validation_result": 35
+    "validation_result": 36
   },
   "schema_version": 2,
   "sources": {
