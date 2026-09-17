@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p_observation_uncertainty",
+  "experiment_id": "minimal_single_p_observation_uncertainty_v1",
+  "tier": "prospective frozen-checkpoint development intervention",
+  "authorization": "The user approved execution of the frozen minimal-M2 plus minimal stochastic-observation completion experiment after reviewing the 20-network M2 solution distribution.",
+  "scientific_question": "Does one fixed support-observation uncertainty process supply the missing stable individualized Liu phenotype while the frozen minimal single-P M2 computation preserves coherent relational organization?",
+  "claim_boundary": [
+    "This is an acute model-level intervention on already trained M2 checkpoints. It tests functional sufficiency under the frozen model and cannot establish how the networks learned, how humans encode evidence, or a human neural mechanism.",
+    "The earlier 3/3 acute observation result belongs to a different 38-channel P-L architecture and is rationale only, not evidence about M2.",
+    "All twenty M2 networks and all three existing Liu panels are mandatory. No seed, panel, participant, relation, checkpoint, or condition may be selected or replaced from the new outcomes.",
+    "No network is trained or adapted. Architecture, eta, modulation, P dynamics, readout, response temperature, support history, query inputs, and choice seeds remain frozen.",
+    "One inherited sigma=1/7 is fixed prospectively. There is no dose grid, human fitting, threshold fitting, or result-conditioned continuation.",
+    "Historical human intervals and nine-row classifiers are exposed evaluation references. Quantitative interval membership is descriptive only and cannot select sigma, models, outcomes, or promotion.",
+    "A sign-restored folded condition is an oracle amplitude-matched control, not a proposed human observation mechanism.",
+    "The frozen 18 stable_constructive versus 2 nonconstructive split is an outcome-independent baseline stratification. The two-network stratum is descriptive and cannot support a population interaction claim.",
+    "The study reports a distribution of acute responses. It cannot promote a final main model or justify deleting checkpoints, changing M2, or adding observation-noise training."
+  ],
+  "parents": {
+    "M2_protocol": {
+      "path": "studies/minimal_single_p_promotion/records/benchmarks/minimal_single_p_promotion_v1.json",
+      "sha256": "4ed6486f3e1c944fd6680557c2f678834d25a687ca7ae7cf6138424d32d8c72f"
+    },
+    "M2_model_lock": {
+      "path": "studies/minimal_single_p_promotion/records/benchmarks/model_lock.json",
+      "sha256": "485f0e941e552bff3f7c4548d3925e8075cd70ad71076aea62e65082e55c4a10"
+    },
+    "M2_generic_result": {
+      "path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.generic.json",
+      "sha256": "7d9bbdd07e774b8ecc7d20910b5aa0fb46c3590db4c51ddb4aa15db2d2019c97"
+    },
+    "M2_clean_Liu_result": {
+      "path": "studies/minimal_single_p_promotion/records/results/minimal_single_p_promotion_v1.json",
+      "sha256": "8a1666ac2158cff41f8b94291289a5b3c51b8f4187bbcb44689d2945a7c25ff7"
+    },
+    "behavior_contract": {
+      "path": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432"
+    },
+    "historical_observation_protocol": {
+      "path": "studies/observation_uncertainty/records/benchmarks/protocol.json",
+      "sha256": "522a6f0eaab3923a04e4e644a8033fcb917fd85b0dcd37f63a3552756baf4b92"
+    },
+    "historical_observation_result": {
+      "path": "studies/observation_uncertainty/records/results/result.json",
+      "sha256": "c6ae9204807596b4224f3b203155383ef704621381094ed281b68ff4e7680e9f"
+    }
+  },
+  "design": {
+    "network_seeds": [3041, 3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050, 3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060],
+    "evaluation_panels": [1, 2, 3],
+    "subjects_per_panel": 77,
+    "conditions": ["clean", "folded", "noisy"],
+    "units": "Every network by panel by condition unit is evaluated. Participants remain nested in panels and are never pooled across networks.",
+    "pairing": "Within a panel, all conditions use the identical task, support cues, base q, queries, choices, and one shared epsilon array. Across networks, each condition uses the same frozen panel inputs.",
+    "baseline_strata": {
+      "stable_constructive": [3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050, 3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059],
+      "nonconstructive": [3041, 3060],
+      "provenance": "Frozen before this study by the parent three-panel generic result; not recomputed or altered from observation outcomes.",
+      "inference": "Primary reporting includes all twenty networks. Strata are descriptive effect-modifier summaries; no inferential comparison is claimed for the two-network nonconstructive stratum."
+    }
+  },
+  "architecture": {
+    "model": "Exactly the locked 32-channel H=200 M2 checkpoints with direct P expression, one learned scalar eta, one scalar modulation head, no alpha, no L, no normalized time, and no terminal-P penalty.",
+    "state_policy": "For each subject-condition support history, h and E reset per trial, P persists across support trials, and every query reads the same terminal P with fresh h/E and no writeback.",
+    "immutability": "All model tensor hashes must match the parent joint model lock before and after every evaluation unit."
+  },
+  "observation": {
+    "sigma": 0.14285714285714285,
+    "units": "One displayed rank-difference unit divided by n_items-1=7; inherited computational assumption, not estimated from Liu choices.",
+    "base": "q0 is the exact clean realized observation already frozen in the parent M2 Liu input.",
+    "noise": "For each panel, epsilon is one float64 numpy default_rng standard-normal array with the exact shape of local_evidence, seeded by 982000+100*panel. It is independent across actual support presentations and subjects and shared by folded and noisy.",
+    "clean": "Return the parent input arrays byte-equivalently; q_clean=q0.",
+    "noisy": "q_noisy=float32(float64(q0)+sigma*epsilon).",
+    "folded": "q_folded=float32(sign(displayed_signed_magnitude)*abs(float64(q0)+sigma*epsilon)). This exactly matches abs(q_noisy) while restoring the displayed relation direction.",
+    "routing": "Write the condition q only to the single M2 evidence input used by the legacy-shaped read-only adapter. Keep the corresponding legacy zq bookkeeping channel synchronized as trial_retention*q for inherited evidence interventions; M2 does not read that channel.",
+    "scope": "Support step zero only. Query inputs receive no added observation noise. Task labels, metadata, retention, pair identities, choice random numbers, and all other tensors are unchanged.",
+    "subject_stability": "A subject receives one fixed support epsilon history and therefore one fixed terminal P within a condition. Repeated query choices retain the inherited independent choice draws; no choice realization is copied to manufacture stability.",
+    "zero_and_pairing_checks": "Qualification must prove clean identity, sigma=0 identity, folded/noisy absolute-amplitude equality, folded displayed-sign restoration, same epsilon use, support-only mutation, deterministic regeneration, and no model access to the bookkeeping zq channel."
+  },
+  "evaluation": {
+    "liu": "Reuse the parent three frozen Liu panels, temperature 0.25, and existing intact, P_off, evidence_shuffle, query_shuffle structural no-op, and single-relation-removal analyses.",
+    "behavior_rows": [
+      "learned_accuracy",
+      "nonlearned_accuracy",
+      "symbolic_distance_effect",
+      "serial_position_effect",
+      "difficult_pair_bimodality",
+      "stable_within_subject_errors",
+      "self_consistent_vs_inconsistent_errors",
+      "hodge_reconstructed_subjective_ranking",
+      "inter_subject_ranking_diversity"
+    ],
+    "primary_missing_phenotypes": {
+      "difficult_pair_bimodality": "Existing qualitative classifier: at least 15 bimodal pairs and no ordinary-unimodal or low-accuracy pair. Continuous endpoint is the number of bimodal pairs.",
+      "stable_within_subject_errors": "Existing qualitative classifier: analysis-cohort prevalence of at least one pair wrong on at least 80 percent of trials is at least 0.80. Continuous endpoint is that prevalence.",
+      "inter_subject_ranking_diversity": "Existing qualitative classifier: mean pairwise Kendall tau among eligible non-correct Hodge rankings is below 0.80. Continuous endpoint is tau, with lower values indicating more diversity."
+    },
+    "preservation": {
+      "qualitative_rows": ["learned_accuracy", "nonlearned_accuracy", "symbolic_distance_effect", "serial_position_effect", "self_consistent_vs_inconsistent_errors", "hodge_reconstructed_subjective_ranking"],
+      "evidence_binding": "The intact-minus-evidence_shuffle learned probability participant bootstrap lower bound must be positive.",
+      "interpretation": "A panel is structured_complete only when all three primary qualitative flags and all six preservation qualitative flags pass and evidence binding is positive. Quantitative human-interval flags are reported but never gate structured completion."
+    },
+    "continuous_contrasts": "For each condition and network, average each primary continuous endpoint over the three panels without pooling participants. Across the twenty paired networks, report mean noisy-clean and noisy-folded differences with 2000 percentile bootstrap draws. Expected directions are positive for bimodal-pair count and stable-error prevalence and negative for Kendall tau.",
+    "bootstrap": {
+      "samples": 2000,
+      "interval": 0.95,
+      "network_seed_base": 983000,
+      "unit": "Paired resampling of twenty networks after within-network panel averaging; panels and participants are not treated as independent networks.",
+      "undefined": "A missing or nonfinite primary endpoint makes that network-condition endpoint undefined and blocks a registered direction-specific conclusion; it is never silently dropped."
+    },
+    "descriptive_quantitative": "Report all historical nine-row quantitative calibration flags and continuous summaries for every panel. They do not enter any outcome label."
+  },
+  "decision": {
+    "per_panel_structured_complete": "All nine historical qualitative flags pass and intact-minus-evidence_shuffle learned probability has a finite bootstrap lower bound above zero.",
+    "per_network_stable_complete": "All three panels are structured_complete in that condition.",
+    "direction_specific_continuous_support": "All three across-network noisy-minus-folded primary contrast intervals exclude zero in the registered expected direction.",
+    "clean_completion_support": "All three across-network noisy-minus-clean primary contrast intervals exclude zero in the registered expected direction.",
+    "outcomes": {
+      "no_acute_completion": "No network is stable_complete under noisy observation.",
+      "direction_specific_acute_completion": "At least one network is stable_complete under noisy observation, both clean_completion_support and direction_specific_continuous_support hold, and every noisy stable-complete panel satisfies preservation by construction.",
+      "acute_completion_without_direction_specificity": "At least one network is stable_complete under noisy observation, but the registered direction-specific outcome is not met. Report whether folded also completes and which continuous contrasts remain unidentified or inconsistent."
+    },
+    "no_promotion": "main_model_promoted is always false. A positive development result may motivate a separately frozen replication but cannot trigger training, sigma selection, or checkpoint cleanup."
+  },
+  "qualification": {
+    "fixtures": "Synthetic non-Liu arrays and M2 seeds outside 3041--3060. Qualification cannot evaluate any parent scientific checkpoint under folded or noisy observation.",
+    "operator": "Test every observation identity and mutation boundary, including exact clean identity, sigma-zero identity, amplitude equality, sign restoration away from exact zero, deterministic seeds, and unchanged query/label/metadata tensors.",
+    "adapter": "Reconfirm on synthetic eager and compiled CPU/CUDA fixtures that M2 native channel 31 and adapter channel 37 produce matching margins/states, and channel 34 changes alone cannot alter M2 outputs.",
+    "decisions": "Synthetic fixtures must cover structured completion, preservation failure, undefined endpoints, all outcome branches, paired-bootstrap directions, and exact network/panel/condition identities.",
+    "failure": "Any failed qualification blocks input/source locking and all scientific evaluation. Repairs after outcome exposure require a separate append-only repair contract and cannot change the scientific protocol."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime minimal-single-p-observation-uncertainty <stage>",
+    "stages": ["qualify", "lock-source-inputs", "evaluate", "report"],
+    "runtime": "CUDA float32 without autocast or TF32; inherited compiled M2 evaluation; one Torch/BLAS/compiler thread; float64 observation proposal and summaries.",
+    "runtime_root": "artifacts/runs/minimal_single_p_observation_uncertainty_v1",
+    "freeze_points": [
+      "Commit this protocol and initial study registration before implementing the operator or exposing any M2 observation outcome.",
+      "Commit the qualified implementation plus source/input lock, including every epsilon and encoded-condition fingerprint, before evaluating seed3041 panel1.",
+      "Evaluate all 180 network-panel-condition units without inspecting a partial scientific summary, freeze the canonical result and report, then stop."
+    ],
+    "retention": "Keep the protocol, qualification, source/input lock, canonical result, concise report, and sufficient per-unit artifacts. Reuse parent checkpoints by verified reference; do not duplicate or delete them."
+  }
+}

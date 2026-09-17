@@ -7,11 +7,11 @@
     "source_payloads": "byte_preserved"
   },
   "document_type": "fsrl.registered_record_catalog",
-  "entry_count": 3963,
+  "entry_count": 3964,
   "format_counts": {
     "csv": 1,
     "gzip_json": 2,
-    "json": 2205,
+    "json": 2206,
     "json_lines": 74,
     "json_schema": 1,
     "legacy_pytorch_state_dict": 1,
@@ -24,7 +24,7 @@
     "text": 3
   },
   "normalization_counts": {
-    "already_conformant": 3863,
+    "already_conformant": 3864,
     "historical_gzip_view": 99,
     "historical_pth_view": 1
   },
@@ -60635,6 +60635,40 @@
         "source_ref": "sha256:f5696a05b1f207435edee0458d8425f87d5d556d58be694bbc3ccc201083ac92"
       },
       "role": "frozen_result"
+    },
+    {
+      "availability": "materialized",
+      "document_type": "fsrl.record.registered_contract",
+      "format": {
+        "format": "json",
+        "legacy_format": false,
+        "media_type": "application/json",
+        "prospective_suffix": ".json"
+      },
+      "locator": {
+        "legacy_path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/minimal_single_p_observation_uncertainty_v1.json",
+        "repository_path": "studies/minimal_single_p_observation_uncertainty/records/benchmarks/minimal_single_p_observation_uncertainty_v1.json"
+      },
+      "materialized_identity": {
+        "bytes": 14187,
+        "sha256": "a85c5aed1c7b9e0bab453322a0f5677e23f0d94a0359f9723ddf66c789eaea96"
+      },
+      "normalization": {
+        "status": "already_conformant",
+        "target_format": "json"
+      },
+      "origin": "native",
+      "owner": {
+        "id": "minimal_single_p_observation_uncertainty",
+        "kind": "study"
+      },
+      "record_id": "study.minimal_single_p_observation_uncertainty.studies_minimal_single_p_observation_uncertainty_records_benchmarks_minimal_single_p_observation_uncertainty_v1_json",
+      "registered_identity": {
+        "bytes": 14187,
+        "sha256": "a85c5aed1c7b9e0bab453322a0f5677e23f0d94a0359f9723ddf66c789eaea96",
+        "source_ref": "sha256:a85c5aed1c7b9e0bab453322a0f5677e23f0d94a0359f9723ddf66c789eaea96"
+      },
+      "role": "registered_contract"
     },
     {
       "availability": "materialized",
@@ -135137,7 +135171,7 @@
       "role": "freeze_validation"
     }
   ],
-  "registered_record_count": 3961,
+  "registered_record_count": 3962,
   "retired_asset_count": 2,
   "role_counts": {
     "artifact_bundle": 1,
@@ -135158,7 +135192,7 @@
     "presentation_view": 1,
     "randomization_record": 8,
     "readiness_result": 10,
-    "registered_contract": 97,
+    "registered_contract": 98,
     "repair_contract": 34,
     "repair_lock": 20,
     "report": 104,
@@ -135171,7 +135205,7 @@
   "sources": {
     "registry": {
       "path": "studies/registry.toml",
-      "sha256": "a73dd49ed2a96792d5ddbdd07909de320f4be8074d8d343258d03147dc8587e9"
+      "sha256": "7b66c0d0349281e4ed25480c9f15cb2d09b579781e9e91fad5f08ca55497fc02"
     },
     "runtime_locator_migration": {
       "path": "studies/migrations/runtime-locators-v1.json",
