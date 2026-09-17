@@ -67,6 +67,9 @@ WORKFLOW_MODULES = {
         "fsrl.experiments.q_only_aligned_score.__main__"
     ),
     "minimal-single-p-alpha": ("fsrl.experiments.minimal_single_p_alpha.__main__"),
+    "minimal-single-p-vector-modulation": (
+        "fsrl.experiments.minimal_single_p_vector_modulation.__main__"
+    ),
     "historical-single-p-morphology-reaudit": (
         "fsrl.experiments.historical_single_p_morphology_reaudit.__main__"
     ),

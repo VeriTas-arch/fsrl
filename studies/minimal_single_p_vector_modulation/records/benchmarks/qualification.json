@@ -1,0 +1,400 @@
+{
+  "adapter_cpu": {
+    "errors": {
+      "P": 2.9802322387695312e-08,
+      "eligibility": 7.450580596923828e-08,
+      "hidden": 5.960464477539063e-08,
+      "margin": 8.940696716308594e-08,
+      "modulation": 2.9802322387695312e-08
+    },
+    "passed": true,
+    "tolerance": 1e-06
+  },
+  "adapter_cuda_compiled": {
+    "errors": {
+      "P": 2.9802322387695312e-08,
+      "eligibility": 1.043081283569336e-07,
+      "hidden": 1.7881393432617188e-07,
+      "margin": 4.470348358154297e-08,
+      "modulation": 3.725290298461914e-08
+    },
+    "passed": true,
+    "tolerance": 1e-05
+  },
+  "adapter_cuda_eager": {
+    "errors": {
+      "P": 4.470348358154297e-08,
+      "eligibility": 1.1920928955078125e-07,
+      "hidden": 1.7881393432617188e-07,
+      "margin": 2.9802322387695312e-08,
+      "modulation": 3.725290298461914e-08
+    },
+    "passed": true,
+    "tolerance": 1e-05
+  },
+  "compiled_update": {
+    "max_abs_error": 2.409182343399152e-06,
+    "passed": true
+  },
+  "decisions": {
+    "observed": {
+      "damage": "mixed_or_damaging",
+      "generic": "generic_inadequate",
+      "rescue": "candidate_rescue",
+      "unused": "vector_not_used",
+      "used": "used_without_rescue"
+    },
+    "passed": true
+  },
+  "equation": {
+    "gradient_max_abs_error": 0.0,
+    "output_max_abs_error": 0.0,
+    "parameter_max_abs_error": 0.0,
+    "passed": true
+  },
+  "geometry": {
+    "heterogeneous": {
+      "E_norm": {
+        "maximum": 2.260756492614746,
+        "mean": 0.7558728456497192,
+        "median": 0.36877867579460144
+      },
+      "R": {
+        "maximum": 0.9998915791511536,
+        "mean": 0.893602192401886,
+        "median": 0.9438186883926392
+      },
+      "U_norm": {
+        "maximum": 0.31789031624794006,
+        "mean": 0.0984271690249443,
+        "median": 0.036592938005924225
+      },
+      "active_fraction": 0.5,
+      "active_records": 20,
+      "actual_delta_norm": {
+        "maximum": 0.31789031624794006,
+        "mean": 0.0984271690249443,
+        "median": 0.03659294173121452
+      },
+      "c_star": {
+        "maximum": 0.07385678589344025,
+        "mean": 0.0009428788907825947,
+        "median": -0.0023242959287017584
+      },
+      "clamp_fraction": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "clipping_residual_ratio": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "modulation_mean": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "modulation_variance": {
+        "maximum": 0.021721238270401955,
+        "mean": 0.007493141107261181,
+        "median": 0.0037685821298509836
+      },
+      "negative_fraction": {
+        "maximum": 0.4444444477558136,
+        "mean": 0.444444477558136,
+        "median": 0.4444444477558136
+      },
+      "positive_fraction": {
+        "maximum": 0.4444444477558136,
+        "mean": 0.444444477558136,
+        "median": 0.4444444477558136
+      },
+      "records": 40,
+      "vector_used": true
+    },
+    "inactive": {
+      "E_norm": {
+        "maximum": 2.2003047466278076,
+        "mean": 0.75496506690979,
+        "median": 0.3665063679218292
+      },
+      "R": {
+        "maximum": null,
+        "mean": null,
+        "median": null
+      },
+      "U_norm": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "active_fraction": 0.0,
+      "active_records": 0,
+      "actual_delta_norm": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "c_star": {
+        "maximum": null,
+        "mean": null,
+        "median": null
+      },
+      "clamp_fraction": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "clipping_residual_ratio": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "modulation_mean": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "modulation_variance": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "negative_fraction": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "positive_fraction": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "records": 40,
+      "vector_used": false
+    },
+    "passed": true,
+    "scalar": {
+      "E_norm": {
+        "maximum": 2.226022243499756,
+        "mean": 0.7645090222358704,
+        "median": 0.36877867579460144
+      },
+      "R": {
+        "maximum": 2.5936521539423468e-14,
+        "mean": 7.089094444795571e-15,
+        "median": 6.774785505541444e-15
+      },
+      "U_norm": {
+        "maximum": 0.4452044665813446,
+        "mean": 0.1529017984867096,
+        "median": 0.07375573366880417
+      },
+      "active_fraction": 0.5,
+      "active_records": 20,
+      "actual_delta_norm": {
+        "maximum": 0.4452044665813446,
+        "mean": 0.1529017984867096,
+        "median": 0.07375573366880417
+      },
+      "c_star": {
+        "maximum": 0.20000003278255463,
+        "mean": 0.20000000298023224,
+        "median": 0.20000000298023224
+      },
+      "clamp_fraction": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "clipping_residual_ratio": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "modulation_mean": {
+        "maximum": 0.20000001788139343,
+        "mean": 0.20000001788139343,
+        "median": 0.20000001788139343
+      },
+      "modulation_variance": {
+        "maximum": 8.881784197001252e-16,
+        "mean": 1.498801109713741e-16,
+        "median": 0.0
+      },
+      "negative_fraction": {
+        "maximum": 0.0,
+        "mean": 0.0,
+        "median": 0.0
+      },
+      "positive_fraction": {
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0
+      },
+      "records": 40,
+      "vector_used": false
+    }
+  },
+  "gradient_symmetry_break": {
+    "all_rows_nonzero": true,
+    "finite": true,
+    "nonidentical_rows": true,
+    "passed": true,
+    "row_gradient_norm_std": 0.11062917113304138
+  },
+  "pairing": {
+    "parameter_count": 87002,
+    "passed": true,
+    "scalar_embedding_max_abs_error": 0.0,
+    "shared_tensor_hashes_equal": true,
+    "zero_vector_head": true
+  },
+  "passed": true,
+  "protocol_sha256": "11c11848906d9e4532f19d0cb223245b84c517e9ef16ef352ec13cbdef5d3bb9",
+  "runtime": {
+    "blas_thread_limit": 1,
+    "blas_threadpools": [
+      {
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.188.0"
+      }
+    ],
+    "compiler_threads": 1,
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "device_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA GeForce RTX 5090",
+    "execution_schema_version": 2,
+    "float32_matmul_precision": "highest",
+    "matmul_allow_tf32": false,
+    "profile": {
+      "blas_threads": 1,
+      "compile": true,
+      "compile_backend": "inductor",
+      "compile_fullgraph": true,
+      "compile_mode": "default",
+      "cpu_threads": 1,
+      "device": "cuda",
+      "require_cuda": true
+    },
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_version": "2.14.0+cu130"
+  },
+  "schema_version": 1,
+  "scientific_outcomes_exposed": false,
+  "sources": [
+    {
+      "bytes": 58,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/__init__.py",
+      "sha256": "64bfe0366adfbf9add93bbe7c29136e8b28b1d7b196642c156a571a23d987052"
+    },
+    {
+      "bytes": 1038,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/__main__.py",
+      "sha256": "2abf6ccceca767b2185c231652f277e88c45f124cd9e445051f780cc8029bfc2"
+    },
+    {
+      "bytes": 2766,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/adapter.py",
+      "sha256": "2dc8986af527220b262d334cec7d88cef53acaf88319096ae0e200b994f0359e"
+    },
+    {
+      "bytes": 1067,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/decisions.py",
+      "sha256": "4f0792910a5b6f15a718221a5099a8fc049efeaadd49395cc82b1f66532fc090"
+    },
+    {
+      "bytes": 4389,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/diagnostics.py",
+      "sha256": "7b70dce6f389eec90b8e7e729b5591f2a57ca1f3079fc26cd94bf3a1014cfa99"
+    },
+    {
+      "bytes": 9436,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/evaluation.py",
+      "sha256": "7bcecd18ede2343e15acd6d845e89a9c161ff0e2b8cf20fcc2eabf17f1313446"
+    },
+    {
+      "bytes": 10283,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/locks.py",
+      "sha256": "2f0001465d75251969582bce7b522320e1c039b4c21625f06244e4ebfbaa5a08"
+    },
+    {
+      "bytes": 2226,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/model.py",
+      "sha256": "62027e71bb02d56245b9b0ad7d682771ec4b9a1415138791ea1ad4eb7d00b308"
+    },
+    {
+      "bytes": 4075,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/protocol.py",
+      "sha256": "b7b8edb3c35501e12b71c72d9d2e0d73bba9c157f4fc337dc6f65bf73ce1b269"
+    },
+    {
+      "bytes": 14950,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/qualification.py",
+      "sha256": "40a3488203662c07cb30c3855460807830724d8ab687a7263ef4c3ca8e4f2f66"
+    },
+    {
+      "bytes": 12405,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/reporting.py",
+      "sha256": "580ba25e17705acc364415444fcdc7bb2283ed013e90b4edf91a89a24e50a807"
+    },
+    {
+      "bytes": 7314,
+      "path": "fsrl/experiments/minimal_single_p_vector_modulation/training.py",
+      "sha256": "4a4b1a3ab0820c0e4a8ae4cf76e775313d8da6b14f666871bfe77f397942fffb"
+    },
+    {
+      "bytes": 7704,
+      "path": "fsrl/infra/formal_runtime.py",
+      "sha256": "b5b90a256e586aeefda5834b31f68f6bf8767a5ad71c34bea6a00184590b8c6b"
+    },
+    {
+      "bytes": 11739,
+      "path": "studies/minimal_single_p_vector_modulation/records/benchmarks/minimal_single_p_vector_modulation_v1.json",
+      "sha256": "11c11848906d9e4532f19d0cb223245b84c517e9ef16ef352ec13cbdef5d3bb9"
+    },
+    {
+      "bytes": 0,
+      "path": "tests/experiments/minimal_single_p_vector_modulation/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3397,
+      "path": "tests/experiments/minimal_single_p_vector_modulation/test_vector_modulation.py",
+      "sha256": "317ba9c89563f36eca7cc9bbeb3ad63cf7aa074f1c1229c218a34463908961b0"
+    }
+  ],
+  "stream_replay": {
+    "3041": {
+      "all_batch_fingerprints_equal": true,
+      "steps": 1500,
+      "stream_fingerprint": "6fa4ee9a8995a735903340fd76d83c3d8916154a417e69f13aad63518da70782"
+    },
+    "3042": {
+      "all_batch_fingerprints_equal": true,
+      "steps": 1500,
+      "stream_fingerprint": "dbe49c17386c86d06c822a53310af174541b849999b93653eee95675b27fe113"
+    },
+    "3043": {
+      "all_batch_fingerprints_equal": true,
+      "steps": 1500,
+      "stream_fingerprint": "51c7b7592fa1394781b221fd11498bd3c5604573473453b7f471fc15b4990502"
+    }
+  }
+}
