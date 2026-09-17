@@ -367,7 +367,7 @@ fail to close the dynamics.
     sigma=1/7 uncertainty therefore increased structured individualization but was
     insufficient to complete the frozen Liu phenotype.
 - [Pair-morphology attribution in frozen minimal single-P M2](minimal_single_p_pair_morphology_attribution/README.md) — `unresolved`
-  - **Finding:** Synthetic qualification passed; source/input locking pending.
+  - **Finding:** Sources and all mandatory frozen artifacts locked; analysis pending.
 
 ## Minimal explanatory models
 

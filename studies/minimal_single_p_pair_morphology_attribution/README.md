@@ -25,7 +25,7 @@
 rankings into enough difficult-pair bimodality: direction formation, strong-margin
 formation, latent distribution shape, or finite ten-choice realization?
 
-**Finding.** Synthetic qualification passed; source/input locking pending.
+**Finding.** Sources and all mandatory frozen artifacts locked; analysis pending.
 
 **Claim boundary.** All 180 frozen M2 observation units are mandatory. The study replays
 existing choices and decomposes archived output geometry without training, model
@@ -47,6 +47,9 @@ equivalence is established.
 - `validation_result` —
   [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/qualification_repair1.json](records/benchmarks/qualification_repair1.json)
   (`sha256:5e56b7e18f6f`)
+- `execution_lock` —
+  [studies/minimal_single_p_pair_morphology_attribution/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
+  (`sha256:87e745a1b884`)
 
 ## Provenance rule
 
