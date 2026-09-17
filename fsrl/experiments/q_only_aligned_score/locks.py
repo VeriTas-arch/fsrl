@@ -17,7 +17,11 @@ from .protocol import (
     PROTOCOL,
     PROTOCOL_SHA256,
     QUALIFICATION,
+    REPAIR,
+    REPAIR_QUALIFICATION,
+    REPAIR_SHA256,
     SOURCE_INPUT_LOCK,
+    SOURCE_REPAIR_LOCK,
     specification,
     training_directory,
 )
@@ -79,7 +83,7 @@ def sources() -> list[dict]:
     package = REPO_ROOT / "fsrl/experiments/q_only_aligned_score"
     paths = list(package.rglob("*.py"))
     paths += list((REPO_ROOT / "tests/experiments/q_only_aligned_score").rglob("*.py"))
-    paths += [REPO_ROOT / "fsrl/infra/formal_runtime.py", PROTOCOL]
+    paths += [REPO_ROOT / "fsrl/infra/formal_runtime.py", PROTOCOL, REPAIR]
     return [reference(path) for path in sorted(set(paths))]
 
 
@@ -140,13 +144,31 @@ def validate_source_input_lock() -> dict:
     lock = load_json(SOURCE_INPUT_LOCK)
     if lock["protocol_sha256"] != PROTOCOL_SHA256:
         raise RuntimeError("source/input lock protocol differs")
-    if lock["sources"] != sources():
-        raise RuntimeError("aligned comparator source changed after locking")
-    for row in lock["sources"]:
+    current = sources()
+    active_sources = lock["sources"]
+    active_commit = lock["source_commit"]
+    if lock["sources"] != current:
+        if not SOURCE_REPAIR_LOCK.exists():
+            raise RuntimeError("aligned comparator source changed after locking")
+        repair = load_json(SOURCE_REPAIR_LOCK)
         if (
-            git_blob_sha256(REPO_ROOT, lock["source_commit"], row["path"])
-            != row["sha256"]
+            repair["parent_source_input_lock"] != reference(SOURCE_INPUT_LOCK)
+            or repair["repair"] != reference(REPAIR)
+            or file_sha256(REPAIR) != REPAIR_SHA256
+            or repair["sources"] != current
+            or repair["model_lock"] != reference(MODEL_LOCK)
         ):
+            raise RuntimeError("aligned comparator source repair lock differs")
+        repair_qualification = load_json(verify_reference(repair["qualification"]))
+        if (
+            not repair_qualification["passed"]
+            or repair_qualification["sources"] != current
+        ):
+            raise RuntimeError("aligned comparator repair qualification differs")
+        active_sources = repair["sources"]
+        active_commit = repair["source_commit"]
+    for row in active_sources:
+        if git_blob_sha256(REPO_ROOT, active_commit, row["path"]) != row["sha256"]:
             raise RuntimeError(f"source Git witness differs: {row['path']}")
     qualification = load_json(verify_reference(lock["qualification"]))
     if not qualification["passed"] or qualification["sources"] != lock["sources"]:
@@ -166,6 +188,30 @@ def validate_source_input_lock() -> dict:
     for row in parents["training_logs"].values():
         verify_reference(row)
     return lock
+
+
+def write_source_repair_lock() -> dict:
+    if file_sha256(REPAIR) != REPAIR_SHA256:
+        raise RuntimeError("aligned comparator repair contract changed")
+    commit = clean_commit()
+    current = sources()
+    qualification = load_json(REPAIR_QUALIFICATION)
+    if not qualification["passed"] or qualification["sources"] != current:
+        raise RuntimeError("repair qualification does not cover committed source")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "parent_source_input_lock": reference(SOURCE_INPUT_LOCK),
+        "repair": reference(REPAIR),
+        "qualification": reference(REPAIR_QUALIFICATION),
+        "model_lock": reference(MODEL_LOCK),
+        "source_commit": commit,
+        "sources": current,
+        "scientific_outcomes_exposed": False,
+        "model_lock_unchanged": True,
+    }
+    write_json_exclusive(SOURCE_REPAIR_LOCK, payload)
+    return {"source_commit": commit, "repair": REPAIR.name}
 
 
 def validate_training(seed: int) -> dict:
@@ -243,4 +289,5 @@ __all__ = [
     "verify_reference",
     "write_model_lock",
     "write_source_input_lock",
+    "write_source_repair_lock",
 ]

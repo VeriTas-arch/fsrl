@@ -13,7 +13,10 @@ STUDY = "q_only_aligned_score_comparator"
 RECORDS = STUDIES_ROOT / STUDY / "records"
 PROTOCOL = RECORDS / "benchmarks/q_only_aligned_score_comparator_v1.json"
 QUALIFICATION = RECORDS / "benchmarks/qualification.json"
+REPAIR = RECORDS / "benchmarks/implementation_repair1.json"
+REPAIR_QUALIFICATION = RECORDS / "benchmarks/qualification_repair1.json"
 SOURCE_INPUT_LOCK = RECORDS / "benchmarks/source_input_lock.json"
+SOURCE_REPAIR_LOCK = RECORDS / "benchmarks/source_repair1.json"
 MODEL_LOCK = RECORDS / "benchmarks/model_lock.json"
 GENERIC_RESULT = RECORDS / "results/q_only_aligned_score_comparator_v1.generic.json"
 RESULT = RECORDS / "results/q_only_aligned_score_comparator_v1.json"
@@ -23,6 +26,7 @@ REPORT = RECORDS / "reports/q_only_aligned_score_comparator_v1.md"
 GENERIC_REPORT = RECORDS / "reports/q_only_aligned_score_comparator_v1.generic.md"
 RUNS = RUNS_ROOT / "q_only_aligned_score_comparator_v1"
 PROTOCOL_SHA256 = "0971de6e4812cf4f21fd5e94ae119a96697fb8810ff77f5620d1c78de44104ab"
+REPAIR_SHA256 = "24c5ad60a74e01fd68253109fa9f0097351ac5a906f300a429f8e261058bd31f"
 
 
 def specification() -> dict:
@@ -48,9 +52,11 @@ def liu_directory(seed: int, panel: int, condition: str) -> Path:
 def _role(path: Path) -> str:
     if path == PROTOCOL:
         return "registered_contract"
-    if path == QUALIFICATION:
+    if path in {QUALIFICATION, REPAIR_QUALIFICATION}:
         return "validation_result"
-    if path in {SOURCE_INPUT_LOCK, MODEL_LOCK}:
+    if path == REPAIR:
+        return "repair_contract"
+    if path in {SOURCE_INPUT_LOCK, SOURCE_REPAIR_LOCK, MODEL_LOCK}:
         return "execution_lock" if path == SOURCE_INPUT_LOCK else "artifact_lock"
     if path in {GENERIC_RESULT, RESULT}:
         return "frozen_result"
@@ -111,10 +117,14 @@ __all__ = [
     "PROTOCOL_SHA256",
     "QUALIFICATION",
     "RECORDS",
+    "REPAIR",
+    "REPAIR_QUALIFICATION",
+    "REPAIR_SHA256",
     "REPORT",
     "RESULT",
     "RUNS",
     "SOURCE_INPUT_LOCK",
+    "SOURCE_REPAIR_LOCK",
     "generic_directory",
     "liu_directory",
     "register",

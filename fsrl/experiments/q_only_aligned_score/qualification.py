@@ -16,10 +16,15 @@ from fsrl.infra.provenance import load_json, write_json_exclusive
 
 from .algebra import recurrence_and_kernel
 from .data import visible_batch
-from .decisions import generic_category
+from .decisions import generic_category, generic_panel_passed
 from .locks import PARENT_PROMOTION_LOCK, sources
 from .model import QOnlyScore, physical_parameters
-from .protocol import PROTOCOL_SHA256, QUALIFICATION, specification
+from .protocol import (
+    PROTOCOL_SHA256,
+    QUALIFICATION,
+    REPAIR_QUALIFICATION,
+    specification,
+)
 
 
 def _fixture() -> tuple[torch.Tensor, ...]:
@@ -199,4 +204,47 @@ def qualify() -> dict:
     }
 
 
-__all__ = ["qualify"]
+def qualify_repair() -> dict:
+    if REPAIR_QUALIFICATION.exists():
+        raise RuntimeError("repair qualification record already exists")
+
+    def estimate(lower):
+        return {"bootstrap": {"lower": lower}}
+
+    passing = {
+        "competence": {"learned": estimate(0.6), "nonlearned": estimate(0.6)},
+        "state_dependence": {
+            "learned": estimate(0.1),
+            "nonlearned": estimate(0.1),
+        },
+        "evidence_binding": {
+            "learned": estimate(0.1),
+            "nonlearned": estimate(0.1),
+        },
+    }
+    failing = {
+        **passing,
+        "evidence_binding": {
+            "learned": estimate(0.0),
+            "nonlearned": estimate(0.1),
+        },
+    }
+    if not generic_panel_passed(passing) or generic_panel_passed(failing):
+        raise RuntimeError("repaired generic schema decision fixtures failed")
+    payload = {
+        "schema_version": 1,
+        "protocol_sha256": PROTOCOL_SHA256,
+        "passed": True,
+        "sources": sources(),
+        "repair_scope": "estimate.bootstrap.lower schema access only",
+        "passing_fixture": True,
+        "threshold_failure_fixture": True,
+        "parent_stream_replay_reused": True,
+        "model_lock_unchanged": True,
+        "scientific_outcomes_exposed": False,
+    }
+    write_json_exclusive(REPAIR_QUALIFICATION, payload)
+    return {"passed": True, "source_files": len(payload["sources"])}
+
+
+__all__ = ["qualify", "qualify_repair"]

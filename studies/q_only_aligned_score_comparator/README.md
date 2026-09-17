@@ -25,7 +25,8 @@
 simplest normalized linear error updater preserve generic competence while producing a
 less distance-restricted relation-level phenotype?
 
-**Finding.** Prospectively registered information-aligned comparator; execution pending.
+**Finding.** Generic evaluation paused before result write; implementation repair1
+qualified, source repair lock pending.
 
 **Claim boundary.** All twenty parent M2 training streams are replayed by frozen batch
 fingerprints, and all parent generic and Liu arrays are reused directly. S_q has only a
@@ -35,6 +36,9 @@ ablation or main-model promotion.
 
 ## Frozen records
 
+- `repair_contract` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/implementation_repair1.json](records/benchmarks/implementation_repair1.json)
+  (`sha256:24c5ad60a74e`)
 - `artifact_lock` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/model_lock.json](records/benchmarks/model_lock.json)
   (`sha256:0ad97951155a`)
@@ -44,6 +48,9 @@ ablation or main-model promotion.
 - `validation_result` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
   (`sha256:b75aa32e25ce`)
+- `validation_result` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/qualification_repair1.json](records/benchmarks/qualification_repair1.json)
+  (`sha256:8de33e06d277`)
 - `execution_lock` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
   (`sha256:646e7840d343`)

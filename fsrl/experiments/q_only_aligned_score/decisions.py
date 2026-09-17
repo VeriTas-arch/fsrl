@@ -5,7 +5,7 @@ from __future__ import annotations
 
 def generic_panel_passed(result: dict) -> bool:
     def lower(section: str, group: str) -> float | None:
-        return result[section][group]["interval"]["lower"]
+        return result[section][group]["bootstrap"]["lower"]
 
     values = [
         lower("competence", "learned"),

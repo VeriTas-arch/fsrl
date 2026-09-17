@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "study_id": "q_only_aligned_score_comparator",
+  "repair_id": "q_only_aligned_score_comparator_implementation_repair1",
+  "authorization": "Append-only implementation repair after the first generic unit stopped before writing any scientific result.",
+  "failure": "The generic decision reader requested estimate.interval.lower, but the unchanged summarize_subjects API returns estimate.bootstrap.lower. Evaluation stopped on seed3041 panel1 before result.json, raw.npz, or any summary was written.",
+  "allowed_change": "Read the already computed lower bound from bootstrap.lower, add an exact schema regression test, preserve the incomplete run manifest as attempt1, requalify the current source, and relock source provenance.",
+  "forbidden_change": "No equation, scalar fit, checkpoint, training stream, input, RNG seed, bootstrap draw, endpoint, threshold, panel, condition, outcome rule, or exposure order may change. The joint model lock remains byte-identical.",
+  "scientific_outcomes_exposed": false,
+  "model_lock_unchanged": true
+}

@@ -2,7 +2,10 @@ import numpy as np
 import torch
 
 from fsrl.experiments.q_only_aligned_score.algebra import recurrence_and_kernel
-from fsrl.experiments.q_only_aligned_score.decisions import generic_category
+from fsrl.experiments.q_only_aligned_score.decisions import (
+    generic_category,
+    generic_panel_passed,
+)
 from fsrl.experiments.q_only_aligned_score.model import QOnlyScore
 
 
@@ -28,3 +31,21 @@ def test_registered_generic_categories():
     assert generic_category(1) == "panel_variable"
     assert generic_category(2) == "panel_variable"
     assert generic_category(3) == "stable_competent"
+
+
+def test_generic_decision_reads_summarize_subjects_schema():
+    def estimate(lower):
+        return {"bootstrap": {"lower": lower}}
+
+    result = {
+        "competence": {"learned": estimate(0.6), "nonlearned": estimate(0.6)},
+        "state_dependence": {
+            "learned": estimate(0.1),
+            "nonlearned": estimate(0.1),
+        },
+        "evidence_binding": {
+            "learned": estimate(0.1),
+            "nonlearned": estimate(0.1),
+        },
+    }
+    assert generic_panel_passed(result)
