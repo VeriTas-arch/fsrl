@@ -372,8 +372,8 @@ fail to close the dynamics.
     interface outcome was complete_recipe_only; no training or model execution was
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `unresolved`
-  - **Finding:** Prospectively registered information-aligned comparator; implementation
-    and execution pending.
+  - **Finding:** Prospectively registered information-aligned comparator; execution
+    pending.
 
 ## Minimal explanatory models
 

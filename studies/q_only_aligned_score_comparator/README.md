@@ -25,12 +25,11 @@
 simplest normalized linear error updater preserve generic competence while producing a
 less distance-restricted relation-level phenotype?
 
-**Finding.** Prospectively registered information-aligned comparator; implementation and
-execution pending.
+**Finding.** Prospectively registered information-aligned comparator; execution pending.
 
 **Claim boundary.** All twenty parent M2 training streams are replayed by frozen batch
 fingerprints, and all parent generic and Liu arrays are reused directly. S_q has only a
-15-dimensional episode score state and two learned scalars. The study is a
+15-dimensional episode score state and two learned scalars. The result is a
 complete-recipe comparison under aligned exogenous information, not an operator-only
 ablation or main-model promotion.
 
@@ -39,6 +38,9 @@ ablation or main-model promotion.
 - `registered_contract` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/q_only_aligned_score_comparator_v1.json](records/benchmarks/q_only_aligned_score_comparator_v1.json)
   (`sha256:0971de6e4812`)
+- `validation_result` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/qualification.json](records/benchmarks/qualification.json)
+  (`sha256:b75aa32e25ce`)
 
 ## Provenance rule
 
