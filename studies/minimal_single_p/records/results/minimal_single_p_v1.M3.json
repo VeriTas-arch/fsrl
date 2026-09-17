@@ -1,0 +1,683 @@
+{
+  "claim_boundary": [
+    "This is a fixed three-seed development ladder. It identifies a simplification boundary along one prospectively ordered deletion path, not a globally minimal architecture or a population success rate.",
+    "The ladder is C0, M1, M2, M3, M5_H100, and M5_H50. Runtime P clipping at [-50,50], four support microsteps, and two query microsteps remain fixed by explicit user decision; no no-clipping M4 or microstep-reduction M6 result is estimated.",
+    "Only clean fixed-four-block generic relational training is used. No noisy-training arm, variable-horizon curriculum, prefix loss, human target, Liu summary, relation-type label, intervention label, or evaluation outcome enters optimization.",
+    "All 28 query labels supervise generic episodic relational competence. Competence is therefore learned under supervision; only organization not explicitly represented in the objective may be described as emergent under the registered task and observation prior.",
+    "The upstream p/z stable-omission scaffold generates realized q but neither p nor z enters the model. Any individualized behavior later observed is conditional on this structured observation process.",
+    "Human/Liu evaluation is prohibited in this development study. A separately frozen fresh cohort is required to estimate the selected recipe's solution distribution or human-facing phenotype.",
+    "No seed replacement, checkpoint selection, learning-rate scan, budget extension, result-dependent initialization, compensatory auxiliary loss, or continuation after a registered stop is permitted."
+  ],
+  "human_outcomes_exposed": false,
+  "level": "M3",
+  "locked_models": 3,
+  "model_lock": {
+    "bytes": 18239,
+    "path": "studies/minimal_single_p/records/benchmarks/model_lock.M3.json",
+    "sha256": "871e81d79d4fe7c1535e47d1d5c785defe5eccabd3a8a5b78ab5421dc472c71a"
+  },
+  "outcome": "mixed_boundary",
+  "protocol": {
+    "bytes": 14676,
+    "path": "studies/minimal_single_p/records/benchmarks/minimal_single_p_v1.json",
+    "sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e"
+  },
+  "schema_version": 1,
+  "seeds": {
+    "3031": {
+      "panels": {
+        "1": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.4108645935252351,
+                "mean": 0.4189707925118175,
+                "upper": 0.42683073800530963
+              },
+              "lower_quartile": 0.38153946338462996,
+              "mean": 0.4189886316453744,
+              "median": 0.4255037456841256,
+              "subjects": 256,
+              "upper_quartile": 0.46021918161597536
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.371342937693474,
+                "mean": 0.3799972695241387,
+                "upper": 0.38763283378729396
+              },
+              "lower_quartile": 0.34197115655836485,
+              "mean": 0.37986092782155484,
+              "median": 0.3866746906924664,
+              "subjects": 256,
+              "upper_quartile": 0.42657826603920174
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.9787071580784183,
+              "mean": 0.9807833682792343,
+              "upper": 0.9827212391923018
+            },
+            "lower_quartile": 0.9775816809520705,
+            "mean": 0.9807845936320707,
+            "median": 0.9858575351443364,
+            "subjects": 256,
+            "upper_quartile": 0.9905369350981842
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9120013585838055,
+                "mean": 0.9187323962557943,
+                "upper": 0.925234851367506
+              },
+              "lower_quartile": 0.8844561290701424,
+              "mean": 0.9188180840730745,
+              "median": 0.9337960339132165,
+              "subjects": 256,
+              "upper_quartile": 0.9598049029167464
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.8708981927348864,
+                "mean": 0.8787071890152469,
+                "upper": 0.8857954175849871
+              },
+              "lower_quartile": 0.8522471751987014,
+              "mean": 0.8785177810994342,
+              "median": 0.8885160697251749,
+              "subjects": 256,
+              "upper_quartile": 0.9228259825163531
+            }
+          },
+          "level": "M3",
+          "panel": 1,
+          "passed": true,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3031
+        },
+        "2": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.4201174493160283,
+                "mean": 0.42885594054404386,
+                "upper": 0.43800167193609985
+              },
+              "lower_quartile": 0.381457092434756,
+              "mean": 0.42875102372175633,
+              "median": 0.42912729536674377,
+              "subjects": 256,
+              "upper_quartile": 0.4822977776606253
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.37079539711510695,
+                "mean": 0.3789222398721118,
+                "upper": 0.3875019392178306
+              },
+              "lower_quartile": 0.342904084284386,
+              "mean": 0.3789997667573035,
+              "median": 0.3866909729270185,
+              "subjects": 256,
+              "upper_quartile": 0.42606647864514047
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.9783797611375294,
+              "mean": 0.9810087477566956,
+              "upper": 0.9831334881117019
+            },
+            "lower_quartile": 0.9758822352574661,
+            "mean": 0.9810300791174982,
+            "median": 0.9865649522169344,
+            "subjects": 256,
+            "upper_quartile": 0.9911728666638968
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9221622962637457,
+                "mean": 0.9291250699288837,
+                "upper": 0.9359238291853564
+              },
+              "lower_quartile": 0.9059386003129106,
+              "mean": 0.929002845750935,
+              "median": 0.9470960206775729,
+              "subjects": 256,
+              "upper_quartile": 0.9666318666860244
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.8727283404497476,
+                "mean": 0.8797477722751135,
+                "upper": 0.8868442336730495
+              },
+              "lower_quartile": 0.8490672855604682,
+              "mean": 0.8796818191619478,
+              "median": 0.8894448867582269,
+              "subjects": 256,
+              "upper_quartile": 0.9217002012164262
+            }
+          },
+          "level": "M3",
+          "panel": 2,
+          "passed": true,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3031
+        },
+        "3": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.4134220212544857,
+                "mean": 0.42322763848042405,
+                "upper": 0.43235845775209275
+              },
+              "lower_quartile": 0.3832798812875834,
+              "mean": 0.42321404805384705,
+              "median": 0.42770513773667285,
+              "subjects": 256,
+              "upper_quartile": 0.47593789663750097
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.36633665592095926,
+                "mean": 0.37513639487456435,
+                "upper": 0.3840727375017962
+              },
+              "lower_quartile": 0.3370261175847691,
+              "mean": 0.3752406692700013,
+              "median": 0.3867834545699853,
+              "subjects": 256,
+              "upper_quartile": 0.42430603735455
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.978342207897248,
+              "mean": 0.9804063715843417,
+              "upper": 0.9822894848244637
+            },
+            "lower_quartile": 0.9769168520192282,
+            "mean": 0.9803941559055351,
+            "median": 0.985871972680584,
+            "subjects": 256,
+            "upper_quartile": 0.9907271834954848
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9126666204783185,
+                "mean": 0.9200472727624357,
+                "upper": 0.9266769890252868
+              },
+              "lower_quartile": 0.8973721969263242,
+              "mean": 0.9199513838582474,
+              "median": 0.93500872485586,
+              "subjects": 256,
+              "upper_quartile": 0.9592248210111844
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.8689061021105541,
+                "mean": 0.8769209558693054,
+                "upper": 0.8846192529135547
+              },
+              "lower_quartile": 0.8447543479544791,
+              "mean": 0.8769524716313143,
+              "median": 0.8871916606731675,
+              "subjects": 256,
+              "upper_quartile": 0.9247968711351674
+            }
+          },
+          "level": "M3",
+          "panel": 3,
+          "passed": true,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3031
+        }
+      },
+      "passed": true
+    },
+    "3032": {
+      "panels": {
+        "1": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.11313969340411462,
+                "mean": 0.11941795131164168,
+                "upper": 0.12538560860399509
+              },
+              "lower_quartile": 0.08540781190328364,
+              "mean": 0.11936594817191132,
+              "median": 0.12039739594612545,
+              "subjects": 256,
+              "upper_quartile": 0.1526254360459468
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.09433478087067086,
+                "mean": 0.09863347489448702,
+                "upper": 0.10271518044036215
+              },
+              "lower_quartile": 0.07542131231477953,
+              "mean": 0.09862472328569716,
+              "median": 0.09857810844601986,
+              "subjects": 256,
+              "upper_quartile": 0.12283691309285193
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.8659367818732794,
+              "mean": 0.8772422998204263,
+              "upper": 0.8874445522309231
+            },
+            "lower_quartile": 0.8430094773760395,
+            "mean": 0.8772910692103115,
+            "median": 0.9021883503051829,
+            "subjects": 256,
+            "upper_quartile": 0.9411613851090818
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.6171160174110508,
+                "mean": 0.6216996529573462,
+                "upper": 0.6263569509903387
+              },
+              "lower_quartile": 0.5994115330314891,
+              "mean": 0.6217062308616854,
+              "median": 0.6225341982572847,
+              "subjects": 256,
+              "upper_quartile": 0.6499635930854489
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.5969480128869392,
+                "mean": 0.6006671051298068,
+                "upper": 0.6041464116848834
+              },
+              "lower_quartile": 0.5846673113375008,
+              "mean": 0.6007051975345824,
+              "median": 0.6044735579399221,
+              "subjects": 256,
+              "upper_quartile": 0.6206192052388086
+            }
+          },
+          "level": "M3",
+          "panel": 1,
+          "passed": false,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3032
+        },
+        "2": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.12274860677605408,
+                "mean": 0.12882340213989277,
+                "upper": 0.1347590974562852
+              },
+              "lower_quartile": 0.09519855381439699,
+              "mean": 0.12890052769371046,
+              "median": 0.13011234129814606,
+              "subjects": 256,
+              "upper_quartile": 0.16273577654580149
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.09526144663410492,
+                "mean": 0.09932040626457594,
+                "upper": 0.10337545922033475
+              },
+              "lower_quartile": 0.07701480323300203,
+              "mean": 0.09935994197990101,
+              "median": 0.099533501972639,
+              "subjects": 256,
+              "upper_quartile": 0.12258267665507737
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.8619602904544761,
+              "mean": 0.8733143385967964,
+              "upper": 0.8834586248082509
+            },
+            "lower_quartile": 0.8292978311489432,
+            "mean": 0.8734016343032006,
+            "median": 0.896196426750871,
+            "subjects": 256,
+            "upper_quartile": 0.9438682369140877
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.6183368361581486,
+                "mean": 0.6226169938896832,
+                "upper": 0.626906641404602
+              },
+              "lower_quartile": 0.5985874894697056,
+              "mean": 0.6226704667494164,
+              "median": 0.6236831686927582,
+              "subjects": 256,
+              "upper_quartile": 0.6487539021643154
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.5940120481153887,
+                "mean": 0.597735299914453,
+                "upper": 0.6012185206554148
+              },
+              "lower_quartile": 0.5792846688509737,
+              "mean": 0.5976926283544703,
+              "median": 0.5992433171996003,
+              "subjects": 256,
+              "upper_quartile": 0.6190953654487049
+            }
+          },
+          "level": "M3",
+          "panel": 2,
+          "passed": false,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3032
+        },
+        "3": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.109904640971588,
+                "mean": 0.11555327697091823,
+                "upper": 0.12139938841720609
+              },
+              "lower_quartile": 0.08406591653221546,
+              "mean": 0.11552008715402604,
+              "median": 0.11424784580964276,
+              "subjects": 256,
+              "upper_quartile": 0.1442854900119827
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.09280827560460715,
+                "mean": 0.09747630537642325,
+                "upper": 0.10169949003485691
+              },
+              "lower_quartile": 0.06918182784639644,
+              "mean": 0.09753150741421276,
+              "median": 0.09895196688508082,
+              "subjects": 256,
+              "upper_quartile": 0.1254259878204766
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.8631840548806468,
+              "mean": 0.8729819083954652,
+              "upper": 0.8824254853884695
+            },
+            "lower_quartile": 0.8428310579521818,
+            "mean": 0.8728982946288367,
+            "median": 0.8953539669623204,
+            "subjects": 256,
+            "upper_quartile": 0.9346587441092662
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.6152410366592044,
+                "mean": 0.6197387967931813,
+                "upper": 0.6244285597471538
+              },
+              "lower_quartile": 0.5987388532625189,
+              "mean": 0.6197456991217545,
+              "median": 0.624508461157284,
+              "subjects": 256,
+              "upper_quartile": 0.6444282968298553
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.5953845152988712,
+                "mean": 0.5992432864350686,
+                "upper": 0.6032192789553773
+              },
+              "lower_quartile": 0.5797883690631098,
+              "mean": 0.5993266943127141,
+              "median": 0.6037589989695533,
+              "subjects": 256,
+              "upper_quartile": 0.6194980117902859
+            }
+          },
+          "level": "M3",
+          "panel": 3,
+          "passed": false,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3032
+        }
+      },
+      "passed": false
+    },
+    "3033": {
+      "panels": {
+        "1": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.4108300053022965,
+                "mean": 0.418958933250552,
+                "upper": 0.426979509699043
+              },
+              "lower_quartile": 0.3740039036158357,
+              "mean": 0.4190048689972752,
+              "median": 0.4267211497746201,
+              "subjects": 256,
+              "upper_quartile": 0.4663096814392934
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.3694448204628856,
+                "mean": 0.37766503684792657,
+                "upper": 0.38588323320105883
+              },
+              "lower_quartile": 0.3443737898390081,
+              "mean": 0.37764644693951377,
+              "median": 0.3872925412509314,
+              "subjects": 256,
+              "upper_quartile": 0.4241941800591059
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.9774712232240649,
+              "mean": 0.9795773164936709,
+              "upper": 0.9814574533282832
+            },
+            "lower_quartile": 0.9755584797507815,
+            "mean": 0.9795727774815486,
+            "median": 0.985647523972425,
+            "subjects": 256,
+            "upper_quartile": 0.9893183600004791
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9129038373819932,
+                "mean": 0.9193073332087558,
+                "upper": 0.9256820990658671
+              },
+              "lower_quartile": 0.8890482167503986,
+              "mean": 0.9192716141065729,
+              "median": 0.9341402926986181,
+              "subjects": 256,
+              "upper_quartile": 0.9566704056919915
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.8705241529531802,
+                "mean": 0.8780964111596525,
+                "upper": 0.8856067094905453
+              },
+              "lower_quartile": 0.8478587257093378,
+              "mean": 0.8780638400724917,
+              "median": 0.8898174365476527,
+              "subjects": 256,
+              "upper_quartile": 0.9208804844087394
+            }
+          },
+          "level": "M3",
+          "panel": 1,
+          "passed": true,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3033
+        },
+        "2": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.4200416616878877,
+                "mean": 0.4280824031346275,
+                "upper": 0.43585016160623236
+              },
+              "lower_quartile": 0.3909746629564975,
+              "mean": 0.4281490767555248,
+              "median": 0.4370977149308567,
+              "subjects": 256,
+              "upper_quartile": 0.470986813490411
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.3740865080865839,
+                "mean": 0.3822405745182605,
+                "upper": 0.39041723606692336
+              },
+              "lower_quartile": 0.3437082673705219,
+              "mean": 0.38221554818198844,
+              "median": 0.39014937684712564,
+              "subjects": 256,
+              "upper_quartile": 0.4287310240366805
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.9787864087038902,
+              "mean": 0.9808228681861599,
+              "upper": 0.9827327263935789
+            },
+            "lower_quartile": 0.9776667566224976,
+            "mean": 0.9808241797338849,
+            "median": 0.9852937406962203,
+            "subjects": 256,
+            "upper_quartile": 0.9901869242205539
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.919018618101163,
+                "mean": 0.9260353125211791,
+                "upper": 0.9324369916965428
+              },
+              "lower_quartile": 0.9020633357426966,
+              "mean": 0.9259581908663826,
+              "median": 0.9392496698914694,
+              "subjects": 256,
+              "upper_quartile": 0.9649803733552047
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.8704119533588307,
+                "mean": 0.8779168514493544,
+                "upper": 0.8849239170424019
+              },
+              "lower_quartile": 0.8460654636629491,
+              "mean": 0.8779511779723908,
+              "median": 0.8919997941308369,
+              "subjects": 256,
+              "upper_quartile": 0.9219485285715239
+            }
+          },
+          "level": "M3",
+          "panel": 2,
+          "passed": true,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3033
+        },
+        "3": {
+          "P_dependence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.4119197729443063,
+                "mean": 0.4206398976548879,
+                "upper": 0.42915247554113717
+              },
+              "lower_quartile": 0.3736094329685352,
+              "mean": 0.42062451592006705,
+              "median": 0.42450540830689487,
+              "subjects": 256,
+              "upper_quartile": 0.4662638907879823
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.3698741490488285,
+                "mean": 0.37869086252055045,
+                "upper": 0.38752312935508965
+              },
+              "lower_quartile": 0.3420976260300642,
+              "mean": 0.3787714147939597,
+              "median": 0.3850658562822735,
+              "subjects": 256,
+              "upper_quartile": 0.4279403828904639
+            }
+          },
+          "coherence": {
+            "bootstrap": {
+              "lower": 0.9775912209694869,
+              "mean": 0.9796452073805108,
+              "upper": 0.9815560767425331
+            },
+            "lower_quartile": 0.9766739779230809,
+            "mean": 0.9796608787248473,
+            "median": 0.9841824823285139,
+            "subjects": 256,
+            "upper_quartile": 0.9897809682248286
+          },
+          "competence": {
+            "learned": {
+              "bootstrap": {
+                "lower": 0.9123432916846131,
+                "mean": 0.9193982873011571,
+                "upper": 0.925996076170806
+              },
+              "lower_quartile": 0.8959132159539426,
+              "mean": 0.9194329693647496,
+              "median": 0.9344211238329023,
+              "subjects": 256,
+              "upper_quartile": 0.9584562238157531
+            },
+            "nonlearned": {
+              "bootstrap": {
+                "lower": 0.8680545498573867,
+                "mean": 0.8760412144835437,
+                "upper": 0.8839620807513813
+              },
+              "lower_quartile": 0.84467328400603,
+              "mean": 0.8760175393740385,
+              "median": 0.8920356588759047,
+              "subjects": 256,
+              "upper_quartile": 0.9254830737538569
+            }
+          },
+          "level": "M3",
+          "panel": 3,
+          "passed": true,
+          "protocol_sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e",
+          "seed": 3033
+        }
+      },
+      "passed": true
+    }
+  },
+  "successor": null
+}

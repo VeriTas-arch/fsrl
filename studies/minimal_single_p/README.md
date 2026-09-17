@@ -15,7 +15,7 @@
 
 [Back to the study registry](../README.md)
 
-- **Status:** `supporting`
+- **Status:** `mixed`
 - **Review state:** `indexed`
 - **Study ID:** `minimal_single_p`
 
@@ -26,14 +26,17 @@ architecture and optimization while retaining generic relational competence, cau
 dependence on P, and globally coherent query structure without human-target fitting?
 
 **Finding.** C0, M1, and M2 each passed all three human-blind generic panels in all
-three development seeds. The terminal-P penalty and dense alpha are unnecessary for the
-registered functional gates, and M3 is authorized; later levels remain unexposed.
+three development seeds, establishing that the terminal-P penalty and dense alpha are
+unnecessary for these gates. M3 passed seeds 3031 and 3033 but seed 3032 failed
+coherence in all three panels, so the registered outcome is mixed_boundary and the
+ladder stops before either width reduction.
 
 **Claim boundary.** This protocol omits no-clipping M4 and microstep-reduction M6 by
 explicit user decision, retains P clipping and four-support/two-query microsteps, and
-forbids Liu or human evaluation during development. It can establish only a
-simplification boundary along the registered ladder, not global minimality or population
-prevalence.
+forbids Liu or human evaluation during development. The M3 result rejects only the
+registered eta=1 replacement as seed-robust under this protocol; it does not establish
+that eta must be learned. The study identifies M2 as the simplest level with 3/3
+development-seed support, not global minimality or population prevalence.
 
 ## Frozen records
 
@@ -76,6 +79,12 @@ prevalence.
 - `artifact_lock` —
   [studies/minimal_single_p/records/benchmarks/model_lock.M3.json](records/benchmarks/model_lock.M3.json)
   (`sha256:871e81d79d4f`)
+- `frozen_result` —
+  [studies/minimal_single_p/records/results/minimal_single_p_v1.M3.json](records/results/minimal_single_p_v1.M3.json)
+  (`sha256:f5696a05b1f2`)
+- `report` —
+  [studies/minimal_single_p/records/reports/minimal_single_p_v1.M3.md](records/reports/minimal_single_p_v1.M3.md)
+  (`sha256:ed15514c6deb`)
 
 ## Provenance rule
 

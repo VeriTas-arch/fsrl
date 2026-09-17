@@ -342,11 +342,12 @@ fail to close the dynamics.
     competence at B=1..7, and improved the registered B=1 CE endpoint without
     probability harm, but failed the B=7 CE-superiority gate. The frozen V1 outcome is
     horizon_tradeoff and is not admitted to confirmation.
-- [Subtractive simplification of the clean single-P learner](minimal_single_p/README.md) — `supporting`
+- [Subtractive simplification of the clean single-P learner](minimal_single_p/README.md) — `mixed`
   - **Finding:** C0, M1, and M2 each passed all three human-blind generic panels in all
-    three development seeds. The terminal-P penalty and dense alpha are unnecessary for
-    the registered functional gates, and M3 is authorized; later levels remain
-    unexposed.
+    three development seeds, establishing that the terminal-P penalty and dense alpha
+    are unnecessary for these gates. M3 passed seeds 3031 and 3033 but seed 3032 failed
+    coherence in all three panels, so the registered outcome is mixed_boundary and the
+    ladder stops before either width reduction.
 
 ## Minimal explanatory models
 
