@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "study_id": "historical_single_p_morphology_reaudit",
+  "repair_id": "historical_single_p_morphology_reaudit_implementation_repair1",
+  "trigger": "After the first complete analysis exposed no_current_standard_precedent, the closing completeness audit found that the runtime result serialized only all_nine_qualitative rather than the protocol-required identity and status of each of the nine qualitative rows.",
+  "known_outcome": {
+    "outcome": "no_current_standard_precedent",
+    "constrained_Ae_units": 0,
+    "all_nine_Ae_units": 0,
+    "error_inflation_Ae_units": 18
+  },
+  "permitted_change": [
+    "Serialize the existing archived nine-row qualitative booleans in every unit.",
+    "Aggregate primary-Ae qualitative failure counts separately for each historical family.",
+    "Serialize each Ae unit's already mandatory matched-A0 sampled-bimodal count and difference so that the registered error-inflation decision is directly inspectable.",
+    "Render those added sufficient statistics in the concise report."
+  ],
+  "forbidden_change": [
+    "No artifact, family, seed, panel, condition, participant, pair, or historical row may be added, removed, or selected.",
+    "No replay, probability, Beta classifier, Hodge calculation, threshold, competence, binding, constrained-morphology, error-inflation, family-replication, outcome, or precedence rule may change.",
+    "No training, checkpoint load, model inference, resampling, rescaling, tuning, or historical-record mutation is permitted."
+  ],
+  "acceptance": "A new synthetic qualification and source/input lock must be frozen before re-analysis. The repaired complete analysis must reproduce the known registered outcome and counts exactly while adding only the specified sufficient statistics.",
+  "retention": "Keep the original qualification and source/input lock as immutable pre-repair witnesses. Freeze repair-specific qualification and lock records alongside the final canonical result."
+}
