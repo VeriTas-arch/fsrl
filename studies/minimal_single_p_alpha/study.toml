@@ -6,7 +6,7 @@ order = 1310
 status = "unresolved"
 review_state = "indexed"
 question = "Holding the frozen M2 architecture, generic training streams, optimization, observation process, and evaluation arrays fixed, does adding one trainable dense expression-gain matrix alpha recover constrained Liu morphology without error inflation?"
-finding = "Qualified M2-alpha implementation: exact M2 initial computation, adapter/update parity, and 20/20 paired stream replay; execution lock pending."
+finding = "Qualified M2-alpha implementation and frozen source/input/replay lock; 20-seed paired training pending."
 boundary = "Alpha is a slow trainable expression gain initialized exactly to one; P remains the only episode-persistent plastic state. The paired complete-recipe result cannot identify alpha and P separately or establish a biological mechanism."
 
 [[records]]
@@ -26,3 +26,12 @@ role = "validation_result"
 sha256 = "aa406095814f792d6a52149665e20e92bb853f9452e73b5d5c74e1d74923e025"
 bytes = 8917
 source_ref = "sha256:aa406095814f792d6a52149665e20e92bb853f9452e73b5d5c74e1d74923e025"
+
+[[records]]
+path = "records/benchmarks/source_input_lock.json"
+legacy_path = "studies/minimal_single_p_alpha/records/benchmarks/source_input_lock.json"
+origin = "native"
+role = "execution_lock"
+sha256 = "c0baf1ab0aebd5b98fcfed1bd6aa4f9c0e834698478a41d4cbb4ccb53ee99606"
+bytes = 24537
+source_ref = "sha256:c0baf1ab0aebd5b98fcfed1bd6aa4f9c0e834698478a41d4cbb4ccb53ee99606"
