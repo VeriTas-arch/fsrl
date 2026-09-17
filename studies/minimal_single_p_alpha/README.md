@@ -26,8 +26,7 @@ optimization, observation process, and evaluation arrays fixed, does adding one
 trainable dense expression-gain matrix alpha recover constrained Liu morphology without
 error inflation?
 
-**Finding.** All 20 paired M2-alpha final checkpoints are jointly locked; generic
-evaluation pending.
+**Finding.** Generic M2-alpha freeze: 19/20 stable_constructive; Liu pending.
 
 **Claim boundary.** Alpha is a slow trainable expression gain initialized exactly to
 one; P remains the only episode-persistent plastic state. The paired complete-recipe
@@ -47,6 +46,12 @@ result cannot identify alpha and P separately or establish a biological mechanis
 - `execution_lock` —
   [studies/minimal_single_p_alpha/records/benchmarks/source_input_lock.json](records/benchmarks/source_input_lock.json)
   (`sha256:c0baf1ab0aeb`)
+- `report` —
+  [studies/minimal_single_p_alpha/records/reports/minimal_single_p_alpha_v1.generic.md](records/reports/minimal_single_p_alpha_v1.generic.md)
+  (`sha256:17264b30f560`)
+- `frozen_result` —
+  [studies/minimal_single_p_alpha/records/results/minimal_single_p_alpha_v1.generic.json](records/results/minimal_single_p_alpha_v1.generic.json)
+  (`sha256:4f8ca7fd408b`)
 
 ## Provenance rule
 
