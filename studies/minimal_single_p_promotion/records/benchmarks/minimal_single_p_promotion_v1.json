@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "study_id": "minimal_single_p_promotion",
+  "experiment_id": "minimal_single_p_promotion_v1",
+  "tier": "prospective candidate solution-distribution study",
+  "authorization": "The user requested that M2 become the selected minimal structural candidate and that the next program test its fresh-network solution distribution and Liu phenotype rather than continue deleting eta or introducing hand-set timescales.",
+  "scientific_question": "When the frozen M2 recipe is trained from 20 fresh initializations without seed selection, what distribution of generic coherent solutions and Liu behavioral phenotypes emerges?",
+  "claim_boundary": [
+    "This study evaluates only the frozen M2 recipe: a 32-channel H=200 single-P recurrent learner with direct P expression, one learned scalar eligibility timescale, a scalar modulation head initialized exactly at zero, no alpha, no L, no normalized time, and no terminal-P penalty.",
+    "Twenty fresh network seeds are mandatory. Every final checkpoint is jointly artifact-locked before any registered evaluation. No seed replacement, checkpoint selection, rerun selection, learning-rate change, curriculum, auxiliary loss, or result-conditioned continuation is permitted.",
+    "Optimization uses only generic relational labels. Liu inputs, human intervals, nine-row flags, relation-type labels, and evaluation outcomes never enter training.",
+    "The three generic panels are frozen and evaluated first. Their canonical result must be committed before Liu evaluation begins; generic success or failure does not select which networks enter Liu evaluation.",
+    "The three Liu panels per network preserve the existing 77-subject task, estimators, nine qualitative classifiers, and nine historical quantitative interval classifiers. Human references are historically exposed evaluation targets, not fresh human confirmation.",
+    "Participants are never pooled across networks or panels. Networks are the sampling unit for solution-distribution rates; within-panel participant bootstrap intervals retain their original meaning.",
+    "Variation across valid networks is a result, not a nuisance to optimize away. The study reports every network and every panel, including weak or nonintegrated solutions.",
+    "Historical quantitative interval membership is descriptive compatibility, not proof of model-human equality. A successful model intervention remains a model-level result, not a human neural mechanism.",
+    "The study can promote M2 from a generic structural candidate to a behaviorally characterized candidate. Final main-model promotion remains false here and still requires the separately frozen replication, simulation-stability, and biological-boundary requirements in main_model_admission_v1.",
+    "Width reduction, fixed eta values, M3 repair, noisy-observation training, timestep changes, M4, and M6 are outside scope."
+  ],
+  "parents": {
+    "minimal_single_p_protocol": {
+      "path": "studies/minimal_single_p/records/benchmarks/minimal_single_p_v1.json",
+      "sha256": "9136e5f877bcaf32737f4f20417a9edc1f77e25093c06d531dd36dd47d75cd5e"
+    },
+    "selected_M2_result": {
+      "path": "studies/minimal_single_p/records/results/minimal_single_p_v1.M2.json",
+      "sha256": "4054c5cfbf2def2683d0605c546f901cfe5ccb14ae775333b4969f209ec1b95f"
+    },
+    "main_model_admission": {
+      "path": "studies/main_model_admission/records/benchmarks/main_model_admission_v1.json",
+      "sha256": "15bfacda90d83ac2befd413f0bdbd6b14c54f830fe52a3c7b3ad7a20cef5546b"
+    },
+    "behavior_contract": {
+      "path": "studies/behavior_reproduction_map/records/benchmarks/model_behavior_reproduction_map_v1.json",
+      "sha256": "62f2176314b9471acd534e0e7a4bfb564159f794de00902148c7adaaba9d8432"
+    }
+  },
+  "design": {
+    "network_seeds": [
+      3041,
+      3042,
+      3043,
+      3044,
+      3045,
+      3046,
+      3047,
+      3048,
+      3049,
+      3050,
+      3051,
+      3052,
+      3053,
+      3054,
+      3055,
+      3056,
+      3057,
+      3058,
+      3059,
+      3060
+    ],
+    "evaluation_panels": [1, 2, 3],
+    "subjects_per_liu_panel": 77,
+    "training_arm": "clean generic only",
+    "exposure_barrier": "Train all 20 networks and commit one joint artifact lock before any generic or Liu evaluation. Evaluate and commit all generic panels before any Liu evaluation. Evaluate Liu for all 20 networks regardless of generic results.",
+    "sampling_unit": "The network is the unit for solution-distribution proportions. A network retains three separately frozen panels; participants are not pooled across networks or panels."
+  },
+  "architecture": {
+    "name": "M2",
+    "input_size": 32,
+    "input_channels": {
+      "0:15": "left item cue",
+      "15:30": "right item cue",
+      "30": "response-phase pulse",
+      "31": "one realized signed observation q; zero on queries"
+    },
+    "hidden_size": 200,
+    "parameter_count": 47003,
+    "equations": [
+      "h'=tanh(W_x x+b+(W_rec+P)h)",
+      "m=u^T h+c",
+      "P'=clip(P+mE,-50,50)",
+      "E'=(1-eta)E+eta*tanh(h'h_old^T)",
+      "M=v^T h_query+b_o"
+    ],
+    "eta": "One learned scalar initialized at 0.7.",
+    "modulation_initialization": "Weight and bias are exactly zero after the canonical direct parameter draw.",
+    "state_policy": "P persists across support trials and resets between episodes; h and E reset per trial; every query reads the same terminal P with fresh h/E and no P writeback.",
+    "support_trial_steps": 4,
+    "query_trial_steps": 2,
+    "P_clip": [-50.0, 50.0],
+    "absent": [
+      "L or another episode memory",
+      "alpha or another plastic-expression mask",
+      "normalized time",
+      "constant input channel",
+      "duplicate q",
+      "reward/action compatibility channels",
+      "value or confidence head",
+      "terminal-P penalty",
+      "human-target or coherence loss"
+    ]
+  },
+  "training": {
+    "task": "Generic N=8 graph-bucket-one connected ranking episodes with 7--10 support edges, four presentation blocks, stable omission, protected Liu graph signatures excluded, and all 28 unordered query pairs equally weighted.",
+    "observation": "One clean realized q from the inherited p/z scaffold; no added Gaussian observation noise.",
+    "updates": 1500,
+    "batch_size": 32,
+    "episode_exposures_per_model": 48000,
+    "learning_rate": 0.0001,
+    "optimizer": "One Adam parameter group for every trainable tensor; betas=(0.9,0.999), eps=1e-8, weight_decay=0, amsgrad=false; no scheduler and no gradient clipping.",
+    "loss": "Mean softplus(-y*M) over all generic queries; no auxiliary term.",
+    "selection": "Final update only; no early stopping, intermediate checkpoint selection, restart selection, result-conditioned continuation, or optimizer change.",
+    "diagnostics": [
+      "query loss and accuracy",
+      "P Frobenius norm",
+      "P clamp fraction",
+      "unclipped global gradient norm",
+      "learned eta"
+    ],
+    "diagnostic_boundary": "Training diagnostics establish integrity and describe dynamics. They cannot select, exclude, restart, or tune a network."
+  },
+  "frozen_inputs": {
+    "generic": "Three panels, each containing 256 graph-bucket-zero episodes under the clean four-block N=8 task. Generic RNG base is 961000+100*panel; realized-q observation seeds are 962000+100*panel+support_length.",
+    "liu": "Three disjoint 77-subject Liu-style N=8 panels using the existing public task and subject-encoding generator. Panel RNG bases are 971000+100*panel, with independently declared cue, support, subject-encoding, choice, order, query-shuffle, and evidence-shuffle seeds.",
+    "freeze": "Every input is serialized as deterministic typed NPZ with allow_pickle=false loading and exact hash references before training begins."
+  },
+  "generic_evaluation": {
+    "conditions": ["intact", "P_off"],
+    "temperature": 1.0,
+    "bootstrap_samples": 2000,
+    "endpoints": {
+      "competence": "Intact exact correct probability for learned and nonlearned pairs.",
+      "P_dependence": "Paired intact-minus-P_off exact correct probability for learned and nonlearned pairs.",
+      "coherence": "Gradient-energy fraction of the intact canonical complete-graph margin field.",
+      "eta": "Final learned scalar eta for each network."
+    },
+    "per_panel_core": "Learned and nonlearned competence lower95>0.5, learned and nonlearned P-dependence lower95>0, and coherence lower95>0.95.",
+    "per_network_categories": {
+      "stable_constructive": "All three panels pass the generic core.",
+      "panel_variable": "One or two panels pass.",
+      "nonconstructive": "No panel passes."
+    },
+    "distribution": "Report all endpoint values, eta values, category counts, category proportions, and Wilson 95% intervals across the 20 networks. No network-rate cutoff is fitted or used to select networks for Liu evaluation."
+  },
+  "liu_evaluation": {
+    "observation": "Use the frozen realized Liu q without added Gaussian observation noise.",
+    "temperature": 0.25,
+    "conditions": [
+      "intact",
+      "P_off",
+      "evidence_shuffle",
+      "query_shuffle",
+      "single-relation removal"
+    ],
+    "behavior_rows": [
+      "learned_accuracy",
+      "nonlearned_accuracy",
+      "symbolic_distance_effect",
+      "serial_position_effect",
+      "difficult_pair_bimodality",
+      "stable_within_subject_errors",
+      "self_consistent_vs_inconsistent_errors",
+      "hodge_reconstructed_subjective_ranking",
+      "inter_subject_ranking_diversity"
+    ],
+    "required_reporting": [
+      "all nine qualitative flags and all nine quantitative interval classifiers",
+      "continuous endpoint estimates and uncertainty",
+      "subjective-ranking and internal-order distributions",
+      "stable, self-consistent, and inconsistent error measures",
+      "symbolic-distance and serial-position summaries",
+      "learned, nonlearned, retained, and omitted performance",
+      "P-off, evidence-shuffle, query-shuffle, and relation-removal effects"
+    ],
+    "per_network_reporting": "For each network, report zero through three panels passing all-nine qualitative and all-nine quantitative criteria. Do not average policies or pool participants across panels.",
+    "distribution": "Report per-row and joint pass counts and Wilson 95% intervals across networks, plus the complete continuous solution distribution. Distinct coherent and weak/nonintegrated solutions remain visible."
+  },
+  "decision": {
+    "integrity": "Exactly 20 finite final M2 models, 1500 optimizer steps for every trainable tensor, complete training streams, correct identities and parameter counts, and one committed joint artifact lock are mandatory before evaluation.",
+    "generic_freeze": "All 60 generic network-panel units and the canonical generic distribution result must be complete and committed before Liu evaluation. Generic outcomes never select the Liu cohort.",
+    "existing_pilot_compatibility": "A network is compatible with the existing strict pilot gate only if all three panels pass generic core, evidence binding is positive, and all three Liu panels pass all nine qualitative and all nine quantitative historical classifiers. This flag is reported but does not erase continuous variation.",
+    "study_outcomes": {
+      "generic_recipe_failure": "No network is stable_constructive.",
+      "uniform_complete_pilot_compatibility": "All 20 networks satisfy the existing strict pilot-compatibility flag.",
+      "heterogeneous_solution_distribution": "Every other complete result; report the full category and phenotype distribution without treating heterogeneity as missing data."
+    },
+    "promotion": "main_model_promoted is always false in this study. A uniform complete result can authorize a separately frozen unchanged replication; a heterogeneous result remains a valid characterization of M2 solution diversity and cannot trigger seed filtering or post-result recipe repair."
+  },
+  "qualification": {
+    "fixtures": "Synthetic non-Liu seeds outside 3041--3060 and outside the three evaluation panels. Qualification may not load prior or prospective scientific checkpoints.",
+    "native_model": "Recheck M2 parameter count, alpha absence, learned eta presence, zero modulation initialization, P-before-E order, direct P expression, clipping, final-only optimization, and deterministic regeneration.",
+    "adapter": "The read-only legacy-shaped evaluation adapter must match native M2 margins, modulation, h, E, and P on eager and compiled CPU/CUDA fixtures, with alpha fixed to one only inside the adapter representation.",
+    "evaluation": "Synthetic fixtures verify generic P-off and Hodge summaries, exact nine-row identities, qualitative/quantitative flag extraction, per-network categories, Wilson intervals, and outcome precedence.",
+    "cuda": "Actual-shape eager and compiled CUDA forward, gradient, and one-Adam-step parity must pass within atol=1e-5 and rtol=1e-4.",
+    "failure": "Any failed qualification blocks source/input locking and training. An implementation-only repair is append-only and cannot alter seeds, architecture, optimization, panels, estimands, or outcomes."
+  },
+  "execution": {
+    "command": "direnv exec . python -m fsrl.infra.formal_runtime minimal-single-p-promotion <stage>",
+    "stages": [
+      "qualify",
+      "lock-source",
+      "train",
+      "lock-models",
+      "evaluate-generic",
+      "report-generic",
+      "evaluate-liu",
+      "report"
+    ],
+    "runtime": "CUDA float32 without autocast or TF32; compiled fullgraph/default training and evaluation; one Torch/BLAS/compiler thread; float64 summaries.",
+    "runtime_root": "artifacts/runs/minimal_single_p_promotion_v1",
+    "freeze_points": [
+      "Commit this protocol and study registration before implementing or exposing any outcome.",
+      "Commit the qualified implementation and source/input lock before training seed3041.",
+      "Train all 20 models and commit one joint model lock before any evaluation.",
+      "Evaluate all generic panels and commit the canonical generic result before any Liu evaluation.",
+      "Evaluate all Liu panels, freeze the canonical solution-distribution result and report, then stop."
+    ],
+    "retention": "Keep the protocol, qualification, locks, canonical generic/final results, reports, and all 20 final checkpoints until a separately authorized retention migration."
+  }
+}

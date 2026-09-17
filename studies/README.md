@@ -348,6 +348,9 @@ fail to close the dynamics.
     are unnecessary for these gates. M3 passed seeds 3031 and 3033 but seed 3032 failed
     coherence in all three panels, so the registered outcome is mixed_boundary and the
     ladder stops before either width reduction.
+- [Fresh-cohort promotion test of the minimal single-P M2 recipe](minimal_single_p_promotion/README.md) — `frozen_contract`
+  - **Finding:** The prospective 20-network M2 solution-distribution protocol is frozen;
+    no fresh model or evaluation outcome has yet been exposed.
 
 ## Minimal explanatory models
 
