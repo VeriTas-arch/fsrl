@@ -373,7 +373,8 @@ fail to close the dynamics.
     performed.
 - [Information-aligned q-only score comparator](q_only_aligned_score_comparator/README.md) — `mixed`
   - **Finding:** Frozen aligned q-only comparator outcome: mixed_or_unidentified;
-    post-result engineering repair3 qualified with scientific artifacts byte-identical.
+    post-result engineering repair3 qualified and source-locked with scientific
+    artifacts byte-identical.
 
 ## Minimal explanatory models
 

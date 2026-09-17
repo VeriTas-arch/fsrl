@@ -26,7 +26,8 @@ simplest normalized linear error updater preserve generic competence while produ
 less distance-restricted relation-level phenotype?
 
 **Finding.** Frozen aligned q-only comparator outcome: mixed_or_unidentified;
-post-result engineering repair3 qualified with scientific artifacts byte-identical.
+post-result engineering repair3 qualified and source-locked with scientific artifacts
+byte-identical.
 
 **Claim boundary.** All twenty parent M2 training streams are replayed by frozen batch
 fingerprints, and all parent generic and Liu arrays are reused directly. S_q has only a
@@ -72,6 +73,9 @@ ablation or main-model promotion.
 - `artifact_lock` —
   [studies/q_only_aligned_score_comparator/records/benchmarks/source_repair2.json](records/benchmarks/source_repair2.json)
   (`sha256:6419d21d2a9e`)
+- `artifact_lock` —
+  [studies/q_only_aligned_score_comparator/records/benchmarks/source_repair3.json](records/benchmarks/source_repair3.json)
+  (`sha256:b048402ba25e`)
 - `report` —
   [studies/q_only_aligned_score_comparator/records/reports/q_only_aligned_score_comparator_v1.generic.md](records/reports/q_only_aligned_score_comparator_v1.generic.md)
   (`sha256:b89b4cb49d41`)
